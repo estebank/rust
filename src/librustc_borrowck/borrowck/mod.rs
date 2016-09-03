@@ -1085,8 +1085,8 @@ impl<'a, 'tcx> BorrowckCtxt<'a, 'tcx> {
                     }
                 }
 
-                if let Some(span) = statement_scope_span(self.tcx, super_scope) {
-                    db.span_help(span,
+                if let Some(_) = statement_scope_span(self.tcx, super_scope) {
+                    db.span_help(error_span,
                                  "consider using a `let` binding to increase its lifetime");
                 }
             }
