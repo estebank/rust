@@ -8,12 +8,14 @@
 // option. This file may not be copied, modified, or distributed
 // except according to those terms.
 
-fn foo(x: i32) {
+fn foo(x: i32) { //~ NOTE required because of this return type
     |y| x + y
-//~^ ERROR: mismatched types
+    //~^ ERROR: mismatched types
+    //~| NOTE expected (), found closure
+    //~| NOTE expected type `()`
 }
 
 fn main() {
     let x = foo(5)(2);
-//~^ ERROR: expected function, found `()`
+    //~^ ERROR: expected function, found `()`
 }

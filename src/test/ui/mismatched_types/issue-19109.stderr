@@ -1,6 +1,8 @@
 error[E0308]: mismatched types
   --> $DIR/issue-19109.rs:14:5
    |
+13 | fn function(t: &mut Trait) {
+   |                            - required because of this return type
 14 |     t as *mut Trait
    |     ^^^^^^^^^^^^^^^ expected (), found *-ptr
    |

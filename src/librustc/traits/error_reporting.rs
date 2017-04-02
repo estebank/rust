@@ -887,7 +887,7 @@ impl<'a, 'gcx, 'tcx> InferCtxt<'a, 'gcx, 'tcx> {
                                         &obligation.cause.code);
     }
 
-    fn note_obligation_cause_code<T>(&self,
+    pub fn note_obligation_cause_code<T>(&self,
                                      err: &mut DiagnosticBuilder,
                                      predicate: &T,
                                      cause_code: &ObligationCauseCode<'tcx>)
@@ -943,6 +943,12 @@ impl<'a, 'gcx, 'tcx> InferCtxt<'a, 'gcx, 'tcx> {
             ObligationCauseCode::ReturnType => {
                 err.note("the return type of a function must have a \
                           statically known size");
+            }
+            ObligationCauseCode::ReturnTypeSpan(sp, opt_sp) => {
+                err.span_label(sp, &"required because of this return type");
+                if let Some(sp) = opt_sp {
+                    err.span_label(sp, &"consider adding a semicolon here");
+                }
             }
             ObligationCauseCode::AssignmentLhsSized => {
                 err.note("the left-hand-side of an assignment must have a statically known size");

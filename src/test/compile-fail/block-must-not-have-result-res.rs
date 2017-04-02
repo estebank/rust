@@ -11,8 +11,11 @@
 struct r;
 
 impl Drop for r {
-    fn drop(&mut self) {
-        true //~  ERROR mismatched types
+    fn drop(&mut self) {  //~ required because of this return type
+        true
+        //~^ ERROR: mismatched types
+        //~| NOTE: expected (), found bool
+        //~| NOTE: expected type `()`
     }
 }
 

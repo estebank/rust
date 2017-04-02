@@ -192,20 +192,26 @@ type DeferredCallResolutionHandler<'gcx, 'tcx> = Box<DeferredCallResolution<'gcx
 
 /// When type-checking an expression, we propagate downward
 /// whatever type hint we are able in the form of an `Expectation`.
-#[derive(Copy, Clone, Debug)]
+#[derive(Clone, Debug)]
 pub enum Expectation<'tcx> {
     /// We know nothing about what type this expression should have.
     NoExpectation,
 
     /// This expression should have the type given (or some subtype)
-    ExpectHasType(Ty<'tcx>),
+    ExpectHasType(Ty<'tcx>, ObligationCauseCode<'tcx>),
 
     /// This expression will be cast to the `Ty`
-    ExpectCastableToType(Ty<'tcx>),
+    ExpectCastableToType(Ty<'tcx>, ObligationCauseCode<'tcx>),
 
     /// This rvalue expression will be wrapped in `&` or `Box` and coerced
     /// to `&Ty` or `Box<Ty>`, respectively. `Ty` is `[A]` or `Trait`.
-    ExpectRvalueLikeUnsized(Ty<'tcx>),
+    ExpectRvalueLikeUnsized(Ty<'tcx>, ObligationCauseCode<'tcx>),
+}
+
+impl<'tcx> From<Ty<'tcx>> for Expectation<'tcx> {
+    fn from(ty: Ty<'tcx>) -> Expectation<'tcx> {
+        ExpectHasType(ty, ObligationCauseCode::MiscObligation)
+    }
 }
 
 impl<'a, 'gcx, 'tcx> Expectation<'tcx> {
@@ -227,16 +233,16 @@ impl<'a, 'gcx, 'tcx> Expectation<'tcx> {
     // 'else' branch.
     fn adjust_for_branches(&self, fcx: &FnCtxt<'a, 'gcx, 'tcx>) -> Expectation<'tcx> {
         match *self {
-            ExpectHasType(ety) => {
+            ExpectHasType(ref ety, ref c) => {
                 let ety = fcx.shallow_resolve(ety);
                 if !ety.is_ty_var() {
-                    ExpectHasType(ety)
+                    ExpectHasType(ety, c.clone())
                 } else {
                     NoExpectation
                 }
             }
-            ExpectRvalueLikeUnsized(ety) => {
-                ExpectRvalueLikeUnsized(ety)
+            ExpectRvalueLikeUnsized(ref ety, ref c) => {
+                ExpectRvalueLikeUnsized(ety, c.clone())
             }
             _ => NoExpectation
         }
@@ -264,9 +270,9 @@ impl<'a, 'gcx, 'tcx> Expectation<'tcx> {
     fn rvalue_hint(fcx: &FnCtxt<'a, 'gcx, 'tcx>, ty: Ty<'tcx>) -> Expectation<'tcx> {
         match fcx.tcx.struct_tail(ty).sty {
             ty::TySlice(_) | ty::TyStr | ty::TyDynamic(..) => {
-                ExpectRvalueLikeUnsized(ty)
+                ExpectRvalueLikeUnsized(ty, ObligationCauseCode::MiscObligation)
             }
-            _ => ExpectHasType(ty)
+            _ => ExpectHasType(ty, ObligationCauseCode::MiscObligation)
         }
     }
 
@@ -278,14 +284,14 @@ impl<'a, 'gcx, 'tcx> Expectation<'tcx> {
             NoExpectation => {
                 NoExpectation
             }
-            ExpectCastableToType(t) => {
-                ExpectCastableToType(fcx.resolve_type_vars_if_possible(&t))
+            ExpectCastableToType(t, c) => {
+                ExpectCastableToType(fcx.resolve_type_vars_if_possible(&t), c)
             }
-            ExpectHasType(t) => {
-                ExpectHasType(fcx.resolve_type_vars_if_possible(&t))
+            ExpectHasType(t, c) => {
+                ExpectHasType(fcx.resolve_type_vars_if_possible(&t), c)
             }
-            ExpectRvalueLikeUnsized(t) => {
-                ExpectRvalueLikeUnsized(fcx.resolve_type_vars_if_possible(&t))
+            ExpectRvalueLikeUnsized(t, c) => {
+                ExpectRvalueLikeUnsized(fcx.resolve_type_vars_if_possible(&t), c)
             }
         }
     }
@@ -293,15 +299,32 @@ impl<'a, 'gcx, 'tcx> Expectation<'tcx> {
     fn to_option(self, fcx: &FnCtxt<'a, 'gcx, 'tcx>) -> Option<Ty<'tcx>> {
         match self.resolve(fcx) {
             NoExpectation => None,
-            ExpectCastableToType(ty) |
-            ExpectHasType(ty) |
-            ExpectRvalueLikeUnsized(ty) => Some(ty),
+            ExpectCastableToType(ty, _) |
+            ExpectHasType(ty, _) |
+            ExpectRvalueLikeUnsized(ty, _) => Some(ty),
+        }
+    }
+
+    fn ty(&self) -> Option<Ty<'tcx>> {
+        match *self {
+            ExpectCastableToType(ty, _) |
+            ExpectHasType(ty, _) |
+            ExpectRvalueLikeUnsized(ty, _) => Some(ty),
+            _ => None,
+        }
+    }
+    fn code(&self) -> ObligationCauseCode<'tcx> {
+        match *self {
+            ExpectCastableToType(_, ref c) |
+            ExpectHasType(_, ref c) |
+            ExpectRvalueLikeUnsized(_, ref c) => c.clone(),
+            _ => ObligationCauseCode::MiscObligation,
         }
     }
 
     fn only_has_type(self, fcx: &FnCtxt<'a, 'gcx, 'tcx>) -> Option<Ty<'tcx>> {
         match self.resolve(fcx) {
-            ExpectHasType(ty) => Some(ty),
+            ExpectHasType(ty, _) => Some(ty),
             _ => None
         }
     }
@@ -441,6 +464,7 @@ pub struct FnCtxt<'a, 'gcx: 'a+'tcx, 'tcx: 'a> {
     err_count_on_creation: usize,
 
     ret_ty: Option<Ty<'tcx>>,
+    ret_span: Option<Span>,
 
     ps: RefCell<UnsafetyState>,
 
@@ -796,9 +820,11 @@ fn check_fn<'a, 'gcx, 'tcx>(inherited: &'a Inherited<'a, 'gcx, 'tcx>,
 
     fcx.require_type_is_sized(ret_ty, decl.output.span(), traits::ReturnType);
     fcx.ret_ty = fcx.instantiate_anon_types(&Some(ret_ty));
+    let ret_ty = fcx.ret_ty.unwrap();
+    fcx.ret_span = Some(decl.output.span());
     fn_sig = fcx.tcx.mk_fn_sig(
         fn_sig.inputs().iter().cloned(),
-        fcx.ret_ty.unwrap(),
+        ret_ty,
         fn_sig.variadic,
         fn_sig.unsafety,
         fn_sig.abi
@@ -823,7 +849,37 @@ fn check_fn<'a, 'gcx, 'tcx>(inherited: &'a Inherited<'a, 'gcx, 'tcx>,
 
     inherited.tables.borrow_mut().liberated_fn_sigs.insert(fn_id, fn_sig);
 
-    fcx.check_expr_coercable_to_type(&body.value, fcx.ret_ty.unwrap());
+    let semicolon_sp = if ret_ty.is_nil() {
+        if let hir::ExprBlock(ref block) = body.value.node {
+            if let Some(ref implicit_return) = block.expr {
+                match implicit_return.node {
+                    hir::ExprCall(..) |
+                    hir::ExprMethodCall(..) |
+                    hir::ExprIf(..) |
+                    hir::ExprWhile(..) |
+                    hir::ExprLoop(..) |
+                    hir::ExprMatch(..) |
+                    hir::ExprBlock(..) => {
+                        let sp = implicit_return.span.end_point();
+                        let sp = Span { lo: sp.hi, hi: sp.hi, expn_id: sp.expn_id };
+                        Some(sp)
+                    }
+                    _ => None
+                }
+            } else {
+                None
+            }
+        } else {
+            None
+        }
+    } else {
+        None
+    };
+    fcx.check_expr_coercable_to_type(
+        &body.value,
+        ExpectHasType(ret_ty,
+                      ObligationCauseCode::ReturnTypeSpan(fcx.ret_span.unwrap(),
+                                                          semicolon_sp)));
 
     fcx
 }
@@ -1427,6 +1483,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
             body_id: body_id,
             err_count_on_creation: inh.tcx.sess.err_count(),
             ret_ty: rty,
+            ret_span: None,
             ps: RefCell::new(UnsafetyState::function(hir::Unsafety::Normal,
                                                      ast::CRATE_NODE_ID)),
             diverges: Cell::new(Diverges::Maybe),
@@ -2478,7 +2535,9 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                 });
 
                 let checked_ty = self.check_expr_with_expectation(&arg,
-                                        expected.unwrap_or(ExpectHasType(formal_ty)));
+                                        expected.clone().unwrap_or(
+                                            ExpectHasType(formal_ty,
+                                                          ObligationCauseCode::MiscObligation)));
                 // 2. Coerce to the most detailed type that could be coerced
                 //    to, which is `expected_ty` if `rvalue_hint` returns an
                 //    `ExpectHasType(expected_ty)`, or the `formal_ty` otherwise.
@@ -2590,34 +2649,31 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
     fn check_expr_eq_type(&self,
                           expr: &'gcx hir::Expr,
                           expected: Ty<'tcx>) {
-        let ty = self.check_expr_with_hint(expr, expected);
+        let ty = self.check_expr_with_expectation(expr, expected);
         self.demand_eqtype(expr.span, expected, ty);
     }
 
     pub fn check_expr_has_type(&self,
                                expr: &'gcx hir::Expr,
                                expected: Ty<'tcx>) -> Ty<'tcx> {
-        let ty = self.check_expr_with_hint(expr, expected);
+        let ty = self.check_expr_with_expectation(expr, expected);
         self.demand_suptype(expr.span, expected, ty);
         ty
     }
 
-    fn check_expr_coercable_to_type(&self,
-                                    expr: &'gcx hir::Expr,
-                                    expected: Ty<'tcx>) -> Ty<'tcx> {
-        let ty = self.check_expr_with_hint(expr, expected);
+    fn check_expr_coercable_to_type<E>(&self, expr: &'gcx hir::Expr, expected: E) -> Ty<'tcx>
+        where E: Into<Expectation<'tcx>>
+    {
+        let expected = expected.into();
+        let ty = self.check_expr_with_expectation(expr, expected.clone());
         self.demand_coerce(expr, ty, expected);
         ty
     }
 
-    fn check_expr_with_hint(&self, expr: &'gcx hir::Expr,
-                            expected: Ty<'tcx>) -> Ty<'tcx> {
-        self.check_expr_with_expectation(expr, ExpectHasType(expected))
-    }
-
-    fn check_expr_with_expectation(&self,
-                                   expr: &'gcx hir::Expr,
-                                   expected: Expectation<'tcx>) -> Ty<'tcx> {
+    fn check_expr_with_expectation<E>(&self, expr: &'gcx hir::Expr, expected: E) -> Ty<'tcx>
+        where E: Into<Expectation<'tcx>>
+    {
+        let expected = expected.into();
         self.check_expr_with_expectation_and_lvalue_pref(expr, expected, NoPreference)
     }
 
@@ -2655,6 +2711,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                                            formal_ret: Ty<'tcx>,
                                            formal_args: &[Ty<'tcx>])
                                            -> Vec<Ty<'tcx>> {
+        let ty_opt = expected_ret.ty();
         let expected_args = expected_ret.only_has_type(self).and_then(|ret_ty| {
             self.fudge_regions_if_ok(&RegionVariableOrigin::Coercion(call_span), || {
                 // Attempt to apply a subtyping relationship between the formal
@@ -2679,7 +2736,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
         }).unwrap_or(vec![]);
         debug!("expected_inputs_for_expected_output(formal={:?} -> {:?}, expected={:?} -> {:?})",
                formal_args, formal_ret,
-               expected_args, expected_ret);
+               expected_args, ty_opt);
         expected_args
     }
 
@@ -2746,7 +2803,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
         self.diverges.set(Diverges::Maybe);
 
         let expected = expected.adjust_for_branches(self);
-        let then_ty = self.check_block_with_expected(then_blk, expected);
+        let then_ty = self.check_block_with_expected(then_blk, expected.clone());
         let then_diverges = self.diverges.get();
         self.diverges.set(Diverges::Maybe);
 
@@ -3104,7 +3161,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
 
             // Make sure to give a type to the field even if there's
             // an error, so we can continue typechecking
-            let ty = self.check_expr_with_hint(&field.expr, field_type_hint);
+            let ty = self.check_expr_with_expectation(&field.expr, field_type_hint);
             self.demand_coerce(&field.expr, ty, final_field_type);
         }
 
@@ -3286,7 +3343,10 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
         self.diverges.set(Diverges::Maybe);
         self.has_errors.set(false);
 
-        let ty = self.check_expr_kind(expr, expected, lvalue_pref);
+        debug!("expected is {:?}...", expected);
+        debug!("... type of {} is...", self.tcx.hir.node_to_string(expr.id));
+        let ty = self.check_expr_kind(expr, expected.clone(), lvalue_pref);
+        debug!("... {:?}", ty);
 
         // Warn for non-block expressions with diverging children.
         match expr.node {
@@ -3305,9 +3365,6 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
         // Combine the diverging and has_error flags.
         self.diverges.set(self.diverges.get() | old_diverges);
         self.has_errors.set(self.has_errors.get() | old_has_errors);
-
-        debug!("type of {} is...", self.tcx.hir.node_to_string(expr.id));
-        debug!("... {:?}, expected is {:?}", ty, expected);
 
         // Add adjustments to !-expressions
         if ty.is_never() {
@@ -3423,7 +3480,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                             // Lvalues may legitimately have unsized types.
                             // For example, dereferences of a fat pointer and
                             // the last field of a struct can be unsized.
-                            ExpectHasType(mt.ty)
+                            ExpectHasType(mt.ty, ObligationCauseCode::MiscObligation)
                         } else {
                             Expectation::rvalue_hint(self, mt.ty)
                         }
@@ -3493,7 +3550,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                 let cause;
                 if let Some(ref e) = *expr_opt {
                     // Recurse without `enclosing_loops` borrowed.
-                    e_ty = self.check_expr_with_hint(e, coerce_to);
+                    e_ty = self.check_expr_with_expectation(e, coerce_to);
                     cause = self.misc(e.span);
                     // Notably, the recursive call may alter coerce_to - must not keep using it!
                 } else {
@@ -3544,7 +3601,13 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                 struct_span_err!(self.tcx.sess, expr.span, E0572,
                                  "return statement outside of function body").emit();
             } else if let Some(ref e) = *expr_opt {
-                self.check_expr_coercable_to_type(&e, self.ret_ty.unwrap());
+                let expectation = match self.ret_span {
+                    Some(sp) => ExpectHasType(self.ret_ty.unwrap(),
+                                              ObligationCauseCode::ReturnTypeSpan(sp, None)),
+                    None => ExpectHasType(self.ret_ty.unwrap(),
+                                          ObligationCauseCode::MiscObligation),
+                };
+                self.check_expr_coercable_to_type(&e, expectation);
             } else {
                 match self.eq_types(false,
                                     &self.misc(expr.span),
@@ -3656,7 +3719,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
             // if appropriate.
             let t_cast = self.to_ty(t);
             let t_cast = self.resolve_type_vars_if_possible(&t_cast);
-            let t_expr = self.check_expr_with_expectation(e, ExpectCastableToType(t_cast));
+            let t_expr = self.check_expr_with_expectation(e, ExpectCastableToType(t_cast, ObligationCauseCode::MiscObligation));
             let t_cast = self.resolve_type_vars_if_possible(&t_cast);
 
             // Eagerly check for some obvious errors.
@@ -3693,7 +3756,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
             let coerce_to = uty.unwrap_or(unified);
 
             for (i, e) in args.iter().enumerate() {
-                let e_ty = self.check_expr_with_hint(e, coerce_to);
+                let e_ty = self.check_expr_with_expectation(e, coerce_to);
                 let cause = self.misc(e.span);
 
                 // Special-case the first element, as it has no "previous expressions".
@@ -3718,7 +3781,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                   .unwrap_or(0);
 
             let uty = match expected {
-                ExpectHasType(uty) => {
+                ExpectHasType(uty, _) => {
                     match uty.sty {
                         ty::TyArray(ty, _) | ty::TySlice(ty) => Some(ty),
                         _ => None
@@ -4022,7 +4085,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
 
     pub fn check_block_no_value(&self, blk: &'gcx hir::Block)  {
         let unit = self.tcx.mk_nil();
-        let ty = self.check_block_with_expected(blk, ExpectHasType(unit));
+        let ty = self.check_block_with_expected(blk, ExpectHasType(unit, ObligationCauseCode::MiscObligation));
         self.demand_suptype(blk.span, unit, ty);
     }
 
@@ -4059,7 +4122,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
                 let cause;
                 match blk.expr {
                     Some(ref e) => {
-                        e_ty = self.check_expr_with_hint(e, coerce_to);
+                        e_ty = self.check_expr_with_expectation(e, coerce_to);
                         cause = self.misc(e.span);
                     },
                     None => {
@@ -4094,27 +4157,27 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
             }
 
             let mut ty = match blk.expr {
-                Some(ref e) => self.check_expr_with_expectation(e, expected),
+                Some(ref e) => self.check_expr_with_expectation(e, expected.clone()),
                 None => self.tcx.mk_nil()
             };
 
             if self.diverges.get().always() {
-                if let ExpectHasType(ety) = expected {
+                if let ExpectHasType(ety, _) = expected {
                     // Avoid forcing a type (only `!` for now) in unreachable code.
                     // FIXME(aburka) do we need this special case? and should it be is_uninhabited?
                     if !ety.is_never() {
                         if let Some(ref e) = blk.expr {
                             // Coerce the tail expression to the right type.
-                            self.demand_coerce(e, ty, ety);
+                            self.demand_coerce(e, ty, expected);
                         }
                     }
                 }
 
                 ty = self.next_diverging_ty_var(TypeVariableOrigin::DivergingBlockExpr(blk.span));
-            } else if let ExpectHasType(ety) = expected {
+            } else if let ExpectHasType(ety, _) = expected {
                 if let Some(ref e) = blk.expr {
                     // Coerce the tail expression to the right type.
-                    self.demand_coerce(e, ty, ety);
+                    self.demand_coerce(e, ty, expected);
                 } else {
                     self.check_block_no_expr(blk, ty, ety);
                 }

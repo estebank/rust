@@ -122,6 +122,7 @@ pub enum ObligationCauseCode<'tcx> {
     StructInitializerSized,    // S { ... } must be Sized
     VariableType(ast::NodeId), // Type of each variable must be Sized
     ReturnType,                // Return type must be Sized
+    ReturnTypeSpan(Span, Option<Span>),      // Return type error, restriction at Span
     RepeatVec,                 // [T,..n] --> T must be Copy
 
     // Types of fields (other than the last) in a struct must be sized.

@@ -9,7 +9,7 @@
 // except according to those terms.
 
 
-use check::FnCtxt;
+use check::{FnCtxt, Expectation};
 use rustc::ty::Ty;
 use rustc::infer::{InferOk};
 use rustc::traits::ObligationCause;
@@ -67,23 +67,27 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
     }
 
     // Checks that the type of `expr` can be coerced to `expected`.
-    pub fn demand_coerce(&self, expr: &hir::Expr, checked_ty: Ty<'tcx>, expected: Ty<'tcx>) {
-        let expected = self.resolve_type_vars_with_obligations(expected);
-        if let Err(e) = self.try_coerce(expr, checked_ty, expected) {
+    pub fn demand_coerce<E>(&self, expr: &hir::Expr, checked_ty: Ty<'tcx>, expected: E)
+        where E: Into<Expectation<'tcx>>
+    {
+        let expected = expected.into();
+        let expected_ty = self.resolve_type_vars_with_obligations(expected.ty().unwrap());
+        if let Err(e) = self.try_coerce(expr, checked_ty, expected_ty) {
             let cause = self.misc(expr.span);
             let expr_ty = self.resolve_type_vars_with_obligations(checked_ty);
             let mode = probe::Mode::MethodCall;
             let suggestions = self.probe_for_return_type(syntax_pos::DUMMY_SP,
                                                          mode,
-                                                         expected,
+                                                         expected.ty().unwrap(),
                                                          checked_ty,
                                                          ast::DUMMY_NODE_ID);
-            let mut err = self.report_mismatched_types(&cause, expected, expr_ty, e);
+            let mut err = self.report_mismatched_types(&cause, &expected.ty().unwrap(), expr_ty, e);
             if suggestions.len() > 0 {
                 err.help(&format!("here are some functions which \
                                    might fulfill your needs:\n{}",
                                   self.get_best_match(&suggestions).join("\n")));
             };
+            self.note_obligation_cause_code(&mut err, &"", &expected.code());
             err.emit();
         }
     }

@@ -454,7 +454,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
             // us to give better error messages (pointing to a usually better
             // arm for inconsistent arms or to the whole match when a `()` type
             // is required).
-            Expectation::ExpectHasType(ety) if ety != self.tcx.mk_nil() => {
+            Expectation::ExpectHasType(ety, _) if ety != self.tcx.mk_nil() => {
                 ety
             }
             _ => result_ty
@@ -467,7 +467,7 @@ impl<'a, 'gcx, 'tcx> FnCtxt<'a, 'gcx, 'tcx> {
             }
 
             self.diverges.set(pats_diverge);
-            let arm_ty = self.check_expr_with_expectation(&arm.body, expected);
+            let arm_ty = self.check_expr_with_expectation(&arm.body, expected.clone());
             all_arms_diverge &= self.diverges.get();
 
             if result_ty.references_error() || arm_ty.references_error() {

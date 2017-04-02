@@ -10,7 +10,10 @@
 
 // Regression test for #13428
 
-fn foo() -> String {  //~ ERROR mismatched types
+fn foo() -> String {
+    //~^ ERROR mismatched types
+    //~| NOTE expected struct `std::string::String`, found ()
+    //~| NOTE expected type `std::string::String`
     format!("Hello {}",
             "world")
     // Put the trailing semicolon on its own line to test that the
@@ -18,7 +21,10 @@ fn foo() -> String {  //~ ERROR mismatched types
     ;   //~ HELP consider removing this semicolon
 }
 
-fn bar() -> String {  //~ ERROR mismatched types
+fn bar() -> String {
+    //~^ ERROR mismatched types
+    //~| NOTE expected struct `std::string::String`, found ()
+    //~| NOTE expected type `std::string::String`
     "foobar".to_string()
     ;   //~ HELP consider removing this semicolon
 }

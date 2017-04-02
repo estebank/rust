@@ -1,0 +1,124 @@
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:12:12
+   |
+11 | fn foo1() {
+   |           - required because of this return type
+12 |     return 1;
+   |            ^ expected (), found integral variable
+   |
+   = note: expected type `()`
+              found type `{integer}`
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:16:5
+   |
+15 | fn foo2() {
+   |           - required because of this return type
+16 |     2
+   |     ^ expected (), found integral variable
+   |
+   = note: expected type `()`
+              found type `{integer}`
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:20:5
+   |
+19 | fn foo3() {
+   |           - required because of this return type
+20 |     bar()
+   |     ^^^^^- consider adding a semicolon here
+   |     |
+   |     expected (), found usize
+   |
+   = note: expected type `()`
+              found type `usize`
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:25:9
+   |
+23 | fn foo4() {
+   |           - required because of this return type
+24 |     if true {
+25 |         3
+   |         ^ expected (), found integral variable
+...
+28 |     }
+   |      - consider adding a semicolon here
+   |
+   = note: expected type `()`
+              found type `{integer}`
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:27:9
+   |
+23 | fn foo4() {
+   |           - required because of this return type
+...
+27 |         4
+   |         ^ expected (), found integral variable
+28 |     }
+   |      - consider adding a semicolon here
+   |
+   = note: expected type `()`
+              found type `{integer}`
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:33:5
+   |
+31 |   fn foo6() {
+   |             - required because of this return type
+32 |     let x = Some(1);
+33 |       match x {
+   |  _____^ starting here...
+34 | |         Some(y) => 6,
+35 | |         None => 6,
+36 | |     }
+   | |     ^- consider adding a semicolon here
+   | |_____|
+   |       ...ending here: expected (), found integral variable
+   |
+   = note: expected type `()`
+              found type `{integer}`
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:41:9
+   |
+39 | fn foo7() {
+   |           - required because of this return type
+40 |     {
+41 |         7
+   |         ^ expected (), found integral variable
+42 |     }
+   |      - consider adding a semicolon here
+   |
+   = note: expected type `()`
+              found type `{integer}`
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:46:5
+   |
+45 | fn bar() -> usize {
+   |             ----- required because of this return type
+46 |     ""
+   |     ^^ expected usize, found reference
+   |
+   = note: expected type `usize`
+              found type `&'static str`
+   = help: here are some functions which might fulfill your needs:
+           - .len()
+
+error[E0308]: mismatched types
+  --> $DIR/unexpected-return-on-unit.rs:50:5
+   |
+49 | fn main() {
+   |           - required because of this return type
+50 |     bar()
+   |     ^^^^^- consider adding a semicolon here
+   |     |
+   |     expected (), found usize
+   |
+   = note: expected type `()`
+              found type `usize`
+
+error: aborting due to 9 previous errors
+

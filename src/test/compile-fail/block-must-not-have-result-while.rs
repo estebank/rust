@@ -10,9 +10,9 @@
 
 fn main() {
     while true {
-        true //~  ERROR mismatched types
-             //~| expected type `()`
-             //~| found type `bool`
-             //~| expected (), found bool
+        true
+        //~^ ERROR: mismatched types
+        //~| NOTE: expected (), found bool
+        //~| NOTE: expected type `()`
     }
 }

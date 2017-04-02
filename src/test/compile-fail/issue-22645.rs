@@ -21,7 +21,12 @@ impl<RHS: Scalar> Add <RHS> for Bob {
 }
 
 fn main() {
-  let b = Bob + 3.5;
-  b + 3 //~ ERROR E0277
-  //~^ ERROR: mismatched types
+    //~^ required because of this return type
+    let b = Bob + 3.5;
+    b + 3 //~ ERROR E0277
+    //~^ ERROR: mismatched types
+    //~| NOTE expected (), found
+    //~| NOTE expected type `()`
+    //~| NOTE the trait `Scalar` is not implemented for `{integer}`
+    //~| NOTE required because of the requirements on the impl of `std::ops::Add<{integer}>`
 }

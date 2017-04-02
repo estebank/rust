@@ -20,7 +20,7 @@ impl Bar for Foo<i32> {
 }
 
 impl<T> Foo<T> {
-    fn new<U>(u: U) -> Foo<U> {
+    fn new<U>(u: U) -> Foo<U> {  //~ NOTE required because of this return type
         Self {
         //~^ ERROR mismatched types
         //~| expected type parameter, found a different type parameter
