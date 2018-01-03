@@ -136,15 +136,25 @@ impl FromStr for ErrorFormat {
 pub enum ColorConfig {
     Auto,
     Always,
+    Tame,
     Never,
 }
 
 impl ColorConfig {
     fn use_color(&self) -> bool {
         match *self {
-            ColorConfig::Always => true,
+            ColorConfig::Always |
+            ColorConfig::Tame => true,
             ColorConfig::Never => false,
             ColorConfig::Auto => stderr_isatty(),
+        }
+    }
+    fn extra_colorful(&self) -> bool {
+        match *self {
+            ColorConfig::Always |
+            ColorConfig::Auto => stderr_isatty(),
+            ColorConfig::Tame |
+            ColorConfig::Never => false,
         }
     }
 }
@@ -164,6 +174,7 @@ impl FromStr for ColorConfig {
         match s {
             "" | "auto" => Ok(ColorConfig::Auto),
             "1" | "always" => Ok(ColorConfig::Always),
+            "tame" => Ok(ColorConfig::Tame),
             "never" => Ok(ColorConfig::Never),
             _ => Err(s.into()),
         }
@@ -174,6 +185,7 @@ pub struct EmitterWriter {
     dst: Destination,
     cm: Option<Rc<CodeMapper>>,
     short_message: bool,
+    extra_colorful: bool,
 }
 
 struct FileWithAnnotatedLines {
@@ -193,12 +205,14 @@ impl EmitterWriter {
                 dst,
                 cm: code_map,
                 short_message: short_message,
+                extra_colorful: color_config.extra_colorful(),
             }
         } else {
             EmitterWriter {
                 dst: Raw(Box::new(io::stderr())),
                 cm: code_map,
                 short_message: short_message,
+                extra_colorful: false,
             }
         }
     }
@@ -211,6 +225,7 @@ impl EmitterWriter {
             dst: Raw(dst),
             cm: code_map,
             short_message: short_message,
+            extra_colorful: false,
         }
     }
 
@@ -620,11 +635,13 @@ impl EmitterWriter {
                                style);
                 }
                 _ => {
-                    buffer.set_style_range(line_offset,
-                                           code_offset + annotation.start_col,
-                                           code_offset + annotation.end_col,
-                                           style,
-                                           annotation.is_primary);
+                    if self.extra_colorful {
+                        buffer.set_style_range(line_offset,
+                                               code_offset + annotation.start_col,
+                                               code_offset + annotation.end_col,
+                                               style,
+                                               annotation.is_primary);
+                    }
                }
             }
         }
@@ -979,10 +996,18 @@ impl EmitterWriter {
                         line_number += 1;
                         buffer.append(line_number, &padding, Style::NoStyle);
                     }
-                    buffer.append(line_number, line, style_or_override(*style, override_style));
+                    buffer.append(line_number, line, if self.extra_colorful {
+                        style_or_override(*style, override_style)
+                    } else {
+                        Style::NoStyle
+                    });
                 }
             } else {
-                buffer.append(line_number, text, style_or_override(*style, override_style));
+                buffer.append(line_number, text, if self.extra_colorful {
+                    style_or_override(*style, override_style)
+                } else {
+                    Style::NoStyle
+                });
             }
         }
     }
