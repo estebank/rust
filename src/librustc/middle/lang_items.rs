@@ -116,6 +116,15 @@ impl<'a, 'v, 'tcx> ItemLikeVisitor<'v> for LanguageItemCollector<'a, 'tcx> {
                                                "definition of an unknown language item: `{}`",
                                                value);
                 err.span_label(span, format!("definition of unknown language item `{}`", value));
+                if self.tcx.sess.teach(&err.get_code().unwrap()) {
+                    err.note(
+                        "The `lang` attribute is intended for marking special items that are \
+                        built-in to Rust itself. This includes special traits (like `Copy` and \
+                        `Sized`) that affect how the compiler behaves, as well as special \
+                        functions that may be automatically invoked (such as the handler for \
+                        out-of-bounds accesses when indexing a slice)."
+                    );
+                }
                 err.emit();
             }
         }

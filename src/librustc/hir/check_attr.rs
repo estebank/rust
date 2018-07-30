@@ -80,12 +80,27 @@ impl<'a, 'tcx> CheckAttrVisitor<'a, 'tcx> {
     /// Check if an `#[inline]` is applied to a function or a closure.
     fn check_inline(&self, attr: &hir::Attribute, span: &Span, target: Target) {
         if target != Target::Fn && target != Target::Closure {
-            struct_span_err!(self.tcx.sess,
-                             attr.span,
-                             E0518,
-                             "attribute should be applied to function or closure")
-                .span_label(*span, "not a function or closure")
-                .emit();
+            let mut err = struct_span_err!(
+                self.tcx.sess,
+                attr.span,
+                E0518,
+                "attribute should be applied to function or closure",
+            );
+            err.span_label(*span, "not a function or closure");
+            if self.tcx.sess.teach(&err.get_code().unwrap()) {
+                err.note(
+                    "This error indicates that an `#[inline(..)]` attribute was incorrectly placed \
+                     on something other than a function or method.\n\n\
+                     `#[inline]` hints the compiler whether or not to attempt to inline a method \
+                     or function. By default, the compiler does a pretty good job of figuring this \
+                     out itself, but if you feel the need for annotations, `#[inline(always)]` and \
+                     `#[inline(never)]` can override or force the compiler's decision.\n\n\
+                     If you wish to apply this attribute to all methods in an impl, manually \
+                     annotate each method; it is not possible to annotate the entire impl with an \
+                     `#[inline]` attribute.",
+                );
+            }
+            err.emit();
         }
     }
 
