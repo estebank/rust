@@ -140,7 +140,7 @@ pub(super) fn borrow_of_local_data<'tcx>(place: &Place<'tcx>) -> bool {
     match place {
         Place::Base(PlaceBase::Promoted(_)) |
         Place::Base(PlaceBase::Static(..)) => false,
-        Place::Base(PlaceBase::Local(..)) => true,
+        Place::Base(PlaceBase::Index(..)) | Place::Base(PlaceBase::Local(..)) => true,
         Place::Projection(box proj) => {
             match proj.elem {
                 // Reborrow of already borrowed data is ignored

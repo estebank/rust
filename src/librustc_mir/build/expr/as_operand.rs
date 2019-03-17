@@ -46,7 +46,7 @@ impl<'a, 'gcx, 'tcx> Builder<'a, 'gcx, 'tcx> {
         scope: Option<region::Scope>,
         expr: Expr<'tcx>,
     ) -> BlockAnd<Operand<'tcx>> {
-        debug!("expr_as_operand(block={:?}, expr={:?})", block, expr);
+        debug!("expr_as_operand(block={:?}, expr={:?}) {:?}", block, expr, expr.kind);
         let this = self;
 
         if let ExprKind::Scope {
@@ -60,6 +60,31 @@ impl<'a, 'gcx, 'tcx> Builder<'a, 'gcx, 'tcx> {
             return this.in_scope(region_scope, lint_level, block, |this| {
                 this.as_operand(block, scope, value)
             });
+        }
+        if let ExprKind::Literal {
+            literal,
+            user_ty,
+        } = &expr.kind {
+            debug!("literal {:?} {:?}", literal, user_ty);
+            match arg {
+                ExprRef::Hair(expr) => {
+                    debug!("exprref hair {:?}", expr.node);
+                }
+                ExprRef::Mirror(expr) => {
+                    debug!("exprref mirror {:?}", expr.kind);
+                }
+            }
+        }
+        if let ExprKind::Deref { arg } = &expr.kind {
+            debug!("deref arg {:?}", arg);
+            match arg {
+                ExprRef::Hair(expr) => {
+                    debug!("exprref hair {:?}", expr.node);
+                }
+                ExprRef::Mirror(expr) => {
+                    debug!("exprref mirror {:?}", expr.kind);
+                }
+            }
         }
 
         let category = Category::of(&expr.kind).unwrap();

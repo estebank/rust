@@ -453,6 +453,7 @@ impl<'a, 'b, 'gcx, 'tcx> TypeVerifier<'a, 'b, 'gcx, 'tcx> {
     ) -> PlaceTy<'tcx> {
         debug!("sanitize_place: {:?}", place);
         let place_ty = match *place {
+            Place::Base(PlaceBase::Index(index)) |
             Place::Base(PlaceBase::Local(index)) => PlaceTy::Ty {
                 ty: self.mir.local_decls[index].ty,
             },

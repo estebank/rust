@@ -407,6 +407,7 @@ impl<'a, 'tcx: 'a, Bx: BuilderMethods<'a, 'tcx>> FunctionCx<'a, 'tcx, Bx> {
         }
 
         let result = match *place {
+            mir::Place::Base(mir::PlaceBase::Index(_)) |
             mir::Place::Base(mir::PlaceBase::Local(_)) => bug!(), // handled above
             mir::Place::Base(mir::PlaceBase::Promoted(box (index, ty))) => {
                 let param_env = ty::ParamEnv::reveal_all();

@@ -133,7 +133,16 @@ impl<'a, 'tcx> euv::Delegate<'tcx> for CheckLoanCtxt<'a, 'tcx> {
                 euv::ClosureCapture(_) => MovedInCapture,
                 _ => MovedInUse,
             };
-            self.check_if_path_is_moved(borrow_id.local_id, borrow_span, moved_value_use_kind, &lp);
+            self.check_if_path_is_moved(
+                borrow_id.local_id,
+                borrow_span,
+                moved_value_use_kind,
+                &lp,
+                match cmt.note {
+                    mc::NoteIndex => true,
+                    _ => false,
+                },
+            );
         }
 
         self.check_for_conflicting_loans(borrow_id.local_id);
@@ -166,10 +175,16 @@ impl<'a, 'tcx> euv::Delegate<'tcx> for CheckLoanCtxt<'a, 'tcx> {
                     // In a case like `path += 1`, then path must be
                     // fully initialized, since we will read it before
                     // we write it.
-                    self.check_if_path_is_moved(assignee_cmt.hir_id.local_id,
-                                                assignment_span,
-                                                MovedInUse,
-                                                &lp);
+                    self.check_if_path_is_moved(
+                        assignee_cmt.hir_id.local_id,
+                        assignment_span,
+                        MovedInUse,
+                        &lp,
+                        match assignee_cmt.note {
+                            mc::NoteIndex => true,
+                            _ => false,
+                        },
+                    );
                 }
             }
         }
@@ -667,7 +682,16 @@ impl<'a, 'tcx> CheckLoanCtxt<'a, 'tcx> {
                 }
             };
 
-            self.check_if_path_is_moved(id, span, moved_value_use_kind, &lp);
+            self.check_if_path_is_moved(
+                id,
+                span,
+                moved_value_use_kind,
+                &lp,
+                match cmt.note {
+                    mc::NoteIndex => true,
+                    _ => false,
+                },
+            );
         }
     }
 
@@ -769,13 +793,16 @@ impl<'a, 'tcx> CheckLoanCtxt<'a, 'tcx> {
 
     /// Reports an error if `expr` (which should be a path)
     /// is using a moved/uninitialized value
-    fn check_if_path_is_moved(&self,
-                              id: hir::ItemLocalId,
-                              span: Span,
-                              use_kind: MovedValueUseKind,
-                              lp: &Rc<LoanPath<'tcx>>) {
-        debug!("check_if_path_is_moved(id={:?}, use_kind={:?}, lp={:?})",
-               id, use_kind, lp);
+    fn check_if_path_is_moved(
+        &self,
+        id: hir::ItemLocalId,
+        span: Span,
+        use_kind: MovedValueUseKind,
+        lp: &Rc<LoanPath<'tcx>>,
+        is_index: bool,
+    ) {
+        debug!("check_if_path_is_moved(id={:?}, use_kind={:?}, lp={:?}, {})",
+               id, use_kind, lp, is_index);
 
         // FIXME: if you find yourself tempted to cut and paste
         // the body below and then specializing the error reporting,
@@ -788,7 +815,9 @@ impl<'a, 'tcx> CheckLoanCtxt<'a, 'tcx> {
                 use_kind,
                 &lp,
                 the_move,
-                moved_lp);
+                moved_lp,
+                is_index,
+            );
             false
         });
     }
@@ -856,11 +885,13 @@ impl<'a, 'tcx> CheckLoanCtxt<'a, 'tcx> {
                 self.check_if_assigned_path_is_moved(id, span,
                                                      use_kind, lp_base);
             }
-            LpExtend(ref lp_base, _, LpInterior(_, InteriorElement)) |
-            LpExtend(ref lp_base, _, LpDeref(_)) => {
+            LpExtend(ref lp_base, _, LpInterior(_, InteriorElement)) => {
                 // assigning to `P[i]` requires `P` is initialized
+                self.check_if_path_is_moved(id, span, use_kind, lp_base, true);
+            }
+            LpExtend(ref lp_base, _, LpDeref(_)) => {
                 // assigning to `(*P)` requires `P` is initialized
-                self.check_if_path_is_moved(id, span, use_kind, lp_base);
+                self.check_if_path_is_moved(id, span, use_kind, lp_base, false);
             }
         }
     }

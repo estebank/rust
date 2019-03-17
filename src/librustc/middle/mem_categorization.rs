@@ -754,13 +754,13 @@ impl<'a, 'gcx, 'tcx> MemCategorizationContext<'a, 'gcx, 'tcx> {
 
     // Categorize an upvar, complete with invisible derefs of closure
     // environment and upvar reference as appropriate.
-    fn cat_upvar(&self,
-                 hir_id: hir::HirId,
-                 span: Span,
-                 var_id: ast::NodeId,
-                 fn_node_id: ast::NodeId)
-                 -> McResult<cmt_<'tcx>>
-    {
+    fn cat_upvar(
+        &self,
+        hir_id: hir::HirId,
+        span: Span,
+        var_id: ast::NodeId,
+        fn_node_id: ast::NodeId,
+    ) -> McResult<cmt_<'tcx>> {
         let fn_hir_id = self.tcx.hir().node_to_hir_id(fn_node_id);
 
         // An upvar can have up to 3 components. We translate first to a
@@ -872,15 +872,15 @@ impl<'a, 'gcx, 'tcx> MemCategorizationContext<'a, 'gcx, 'tcx> {
         Ok(ret)
     }
 
-    fn env_deref(&self,
-                 hir_id: hir::HirId,
-                 span: Span,
-                 upvar_id: ty::UpvarId,
-                 upvar_mutbl: MutabilityCategory,
-                 env_borrow_kind: ty::BorrowKind,
-                 cmt_result: cmt_<'tcx>)
-                 -> cmt_<'tcx>
-    {
+    fn env_deref(
+        &self,
+        hir_id: hir::HirId,
+        span: Span,
+        upvar_id: ty::UpvarId,
+        upvar_mutbl: MutabilityCategory,
+        env_borrow_kind: ty::BorrowKind,
+        cmt_result: cmt_<'tcx>,
+    ) -> cmt_<'tcx> {
         // Region of environment pointer
         let env_region = self.tcx.mk_region(ty::ReFree(ty::FreeRegion {
             // The environment of a closure is guaranteed to
@@ -1080,12 +1080,13 @@ impl<'a, 'gcx, 'tcx> MemCategorizationContext<'a, 'gcx, 'tcx> {
         Ok(ret)
     }
 
-    fn cat_index<N: HirNode>(&self,
-                             elt: &N,
-                             base_cmt: cmt<'tcx>,
-                             element_ty: Ty<'tcx>,
-                             context: InteriorOffsetKind)
-                             -> McResult<cmt_<'tcx>> {
+    fn cat_index<N: HirNode>(
+        &self,
+        elt: &N,
+        mut base_cmt: cmt<'tcx>,
+        element_ty: Ty<'tcx>,
+        context: InteriorOffsetKind,
+    ) -> McResult<cmt_<'tcx>> {
         //! Creates a cmt for an indexing operation (`[]`).
         //!
         //! One subtle aspect of indexing that may not be
@@ -1104,24 +1105,27 @@ impl<'a, 'gcx, 'tcx> MemCategorizationContext<'a, 'gcx, 'tcx> {
         //! - `base_cmt`: the cmt of `elt`
 
         let interior_elem = InteriorElement(context);
-        let ret = self.cat_imm_interior(elt, base_cmt, element_ty, interior_elem);
+        Rc::make_mut(&mut base_cmt).note = NoteIndex;
+        let ret = self.cat_imm_interior(elt, base_cmt, element_ty, interior_elem, true);
         debug!("cat_index ret {:?}", ret);
         return Ok(ret);
     }
 
-    pub fn cat_imm_interior<N:HirNode>(&self,
-                                       node: &N,
-                                       base_cmt: cmt<'tcx>,
-                                       interior_ty: Ty<'tcx>,
-                                       interior: InteriorKind)
-                                       -> cmt_<'tcx> {
+    pub fn cat_imm_interior<N:HirNode>(
+        &self,
+        node: &N,
+        base_cmt: cmt<'tcx>,
+        interior_ty: Ty<'tcx>,
+        interior: InteriorKind,
+        is_index: bool
+    ) -> cmt_<'tcx> {
         let ret = cmt_ {
             hir_id: node.hir_id(),
             span: node.span(),
             mutbl: base_cmt.mutbl.inherit(),
             cat: Categorization::Interior(base_cmt, interior),
             ty: interior_ty,
-            note: NoteNone
+            note: if is_index { NoteIndex } else { NoteNone },
         };
         debug!("cat_imm_interior ret={:?}", ret);
         ret
@@ -1301,7 +1305,7 @@ impl<'a, 'gcx, 'tcx> MemCategorizationContext<'a, 'gcx, 'tcx> {
                     let subpat_ty = self.pat_ty_adjusted(&subpat)?; // see (*2)
                     let interior = InteriorField(FieldIndex(i, Name::intern(&i.to_string())));
                     let subcmt = Rc::new(
-                        self.cat_imm_interior(pat, cmt.clone(), subpat_ty, interior));
+                        self.cat_imm_interior(pat, cmt.clone(), subpat_ty, interior, false));
                     self.cat_pattern_(subcmt, &subpat, op)?;
                 }
             }
@@ -1345,7 +1349,7 @@ impl<'a, 'gcx, 'tcx> MemCategorizationContext<'a, 'gcx, 'tcx> {
                     let subpat_ty = self.pat_ty_adjusted(&subpat)?; // see (*2)
                     let interior = InteriorField(FieldIndex(i, Name::intern(&i.to_string())));
                     let subcmt = Rc::new(
-                        self.cat_imm_interior(pat, cmt.clone(), subpat_ty, interior));
+                        self.cat_imm_interior(pat, cmt.clone(), subpat_ty, interior, false));
                     self.cat_pattern_(subcmt, &subpat, op)?;
                 }
             }

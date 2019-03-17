@@ -46,11 +46,12 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
         desired_action: InitializationRequiringAction,
         (moved_place, used_place, span): (&Place<'tcx>, &Place<'tcx>, Span),
         mpi: MovePathIndex,
+        is_index: bool,
     ) {
         debug!(
             "report_use_of_moved_or_uninitialized: context={:?} desired_action={:?} \
-             moved_place={:?} used_place={:?} span={:?} mpi={:?}",
-            context, desired_action, moved_place, used_place, span, mpi
+             moved_place={:?} used_place={:?} span={:?} mpi={:?}, is_index={}",
+            context, desired_action, moved_place, used_place, span, mpi, is_index,
         );
 
         let use_spans = self.move_spans(moved_place, context.loc)
@@ -1601,6 +1602,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
             Place::Base(PlaceBase::Promoted(_)) => {
                 buf.push_str("promoted");
             }
+            Place::Base(PlaceBase::Index(local)) |
             Place::Base(PlaceBase::Local(local)) => {
                 self.append_local_to_string(local, buf)?;
             }
@@ -1740,6 +1742,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
     /// End-user visible description of the `field`nth field of `base`
     fn describe_field(&self, base: &Place<'_>, field: Field) -> String {
         match *base {
+            Place::Base(PlaceBase::Index(local)) |
             Place::Base(PlaceBase::Local(local)) => {
                 let local = &self.mir.local_decls[local];
                 self.describe_field_from_ty(&local.ty, field)
@@ -1827,6 +1830,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
     fn classify_drop_access_kind(&self, place: &Place<'tcx>) -> StorageDeadOrDrop<'tcx> {
         let tcx = self.infcx.tcx;
         match place {
+            Place::Base(PlaceBase::Index(_)) |
             Place::Base(PlaceBase::Local(_)) |
             Place::Base(PlaceBase::Static(_)) |
             Place::Base(PlaceBase::Promoted(_)) => {

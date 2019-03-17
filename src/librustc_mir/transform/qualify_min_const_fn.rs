@@ -255,6 +255,7 @@ fn check_place(
     span: Span,
 ) -> McfResult {
     match place {
+        Place::Base(PlaceBase::Index(_)) |
         Place::Base(PlaceBase::Local(_)) => Ok(()),
         // promoteds are always fine, they are essentially constants
         Place::Base(PlaceBase::Promoted(_)) => Ok(()),

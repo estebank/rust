@@ -40,6 +40,7 @@ impl<'tcx> PlaceExt<'tcx> for Place<'tcx> {
             //
             // In particular, the variable cannot be mutated -- the "access checks" will fail --
             // so we don't have to worry about mutation while borrowed.
+            Place::Base(PlaceBase::Index(index)) |
             Place::Base(PlaceBase::Local(index)) => {
                 match locals_state_at_exit {
                     LocalsStateAtExit::AllAreInvalidated => false,
@@ -90,6 +91,7 @@ impl<'tcx> PlaceExt<'tcx> for Place<'tcx> {
                 Place::Projection(pi) => p = &pi.base,
                 Place::Base(PlaceBase::Promoted(_)) |
                 Place::Base(PlaceBase::Static(_)) => return None,
+                Place::Base(PlaceBase::Index(l)) |
                 Place::Base(PlaceBase::Local(l)) => return Some(*l),
             }
         }

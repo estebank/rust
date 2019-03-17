@@ -1911,6 +1911,9 @@ pub enum PlaceBase<'tcx> {
     /// local variable
     Local(Local),
 
+    /// local [] access
+    Index(Local),
+
     /// static or static mut variable
     Static(Box<Static<'tcx>>),
 
@@ -2035,8 +2038,13 @@ impl<'tcx> Place<'tcx> {
     pub fn local(&self) -> Option<Local> {
         match self {
             Place::Base(PlaceBase::Local(local)) |
+            Place::Base(PlaceBase::Index(local)) |
             Place::Projection(box Projection {
                 base: Place::Base(PlaceBase::Local(local)),
+                elem: ProjectionElem::Deref,
+            }) |
+            Place::Projection(box Projection {
+                base: Place::Base(PlaceBase::Index(local)),
                 elem: ProjectionElem::Deref,
             }) => Some(*local),
             _ => None,
@@ -2046,7 +2054,8 @@ impl<'tcx> Place<'tcx> {
     /// Finds the innermost `Local` from this `Place`.
     pub fn base_local(&self) -> Option<Local> {
         match self {
-            Place::Base(PlaceBase::Local(local)) => Some(*local),
+            Place::Base(PlaceBase::Local(local)) |
+            Place::Base(PlaceBase::Index(local)) => Some(*local),
             Place::Projection(box Projection { base, elem: _ }) => base.base_local(),
             Place::Base(PlaceBase::Promoted(..)) | Place::Base(PlaceBase::Static(..)) => None,
         }
@@ -2059,6 +2068,7 @@ impl<'tcx> Debug for Place<'tcx> {
 
         match *self {
             Base(PlaceBase::Local(id)) => write!(fmt, "{:?}", id),
+            Base(PlaceBase::Index(id)) => write!(fmt, "{:?}[]", id),
             Base(PlaceBase::Static(box self::Static { def_id, ty })) => write!(
                 fmt,
                 "({}: {:?})",

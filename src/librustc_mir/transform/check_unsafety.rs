@@ -297,6 +297,8 @@ impl<'a, 'tcx> Visitor<'tcx> for UnsafetyChecker<'a, 'tcx> {
                 }
                 self.source_info = old_source_info;
             }
+            &Place::Base(PlaceBase::Index(..)) => {
+            }
             &Place::Base(PlaceBase::Local(..)) => {
                 // locals are safe
             }

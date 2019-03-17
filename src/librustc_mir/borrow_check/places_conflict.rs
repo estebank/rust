@@ -338,7 +338,7 @@ fn unroll_place<'tcx, R>(
             op,
         ),
 
-        Place::Base(PlaceBase::Promoted(_)) |
+        Place::Base(PlaceBase::Promoted(_)) | Place::Base(PlaceBase::Index(_)) |
         Place::Base(PlaceBase::Local(_)) | Place::Base(PlaceBase::Static(_)) => {
             let list = PlaceComponents {
                 component: place,
@@ -360,6 +360,9 @@ fn place_element_conflict<'a, 'gcx: 'tcx, 'tcx>(
     bias: PlaceConflictBias,
 ) -> Overlap {
     match (elem1, elem2) {
+        (Place::Base(PlaceBase::Index(l1)), Place::Base(PlaceBase::Index(l2))) |
+        (Place::Base(PlaceBase::Index(l1)), Place::Base(PlaceBase::Local(l2))) |
+        (Place::Base(PlaceBase::Local(l1)), Place::Base(PlaceBase::Index(l2))) |
         (Place::Base(PlaceBase::Local(l1)), Place::Base(PlaceBase::Local(l2))) => {
             if l1 == l2 {
                 // the same local - base case, equal
@@ -402,6 +405,10 @@ fn place_element_conflict<'a, 'gcx: 'tcx, 'tcx>(
                 Overlap::Disjoint
             }
         }
+        (Place::Base(PlaceBase::Index(_)), Place::Base(PlaceBase::Promoted(_))) |
+        (Place::Base(PlaceBase::Promoted(_)), Place::Base(PlaceBase::Index(_))) |
+        (Place::Base(PlaceBase::Index(_)), Place::Base(PlaceBase::Static(_))) |
+        (Place::Base(PlaceBase::Static(_)), Place::Base(PlaceBase::Index(_))) |
         (Place::Base(PlaceBase::Local(_)), Place::Base(PlaceBase::Promoted(_))) |
         (Place::Base(PlaceBase::Promoted(_)), Place::Base(PlaceBase::Local(_))) |
         (Place::Base(PlaceBase::Promoted(_)), Place::Base(PlaceBase::Static(_))) |

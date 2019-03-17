@@ -186,6 +186,7 @@ trait Qualif {
 
     fn in_place(cx: &ConstCx<'_, 'tcx>, place: &Place<'tcx>) -> bool {
         match *place {
+            Place::Base(PlaceBase::Index(local)) |
             Place::Base(PlaceBase::Local(local)) => Self::in_local(cx, local),
             Place::Base(PlaceBase::Promoted(_)) => bug!("qualifying already promoted MIR"),
             Place::Base(PlaceBase::Static(ref static_)) => Self::in_static(cx, static_),
@@ -753,6 +754,7 @@ impl<'a, 'tcx> Checker<'a, 'tcx> {
         let index = loop {
             match dest {
                 // We treat all locals equal in constants
+                Place::Base(PlaceBase::Index(index)) |
                 Place::Base(PlaceBase::Local(index)) => break *index,
                 // projections are transparent for assignments
                 // we qualify the entire destination at once, even if just a field would have
@@ -919,6 +921,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Checker<'a, 'tcx> {
         self.super_place(place, context, location);
         match *place {
             Place::Base(PlaceBase::Local(_)) |
+            Place::Base(PlaceBase::Index(_)) |
             Place::Base(PlaceBase::Promoted(_)) => {}
             Place::Base(PlaceBase::Static(ref global)) => {
                 if self.tcx

@@ -616,12 +616,15 @@ impl<'a, 'tcx> BorrowckCtxt<'a, 'tcx> {
         self.report_bckerr(&err);
     }
 
-    pub fn report_use_of_moved_value(&self,
-                                     use_span: Span,
-                                     use_kind: MovedValueUseKind,
-                                     lp: &LoanPath<'tcx>,
-                                     the_move: &move_data::Move,
-                                     moved_lp: &LoanPath<'tcx>) {
+    pub fn report_use_of_moved_value(
+        &self,
+        use_span: Span,
+        use_kind: MovedValueUseKind,
+        lp: &LoanPath<'tcx>,
+        the_move: &move_data::Move,
+        moved_lp: &LoanPath<'tcx>,
+        is_index: bool,
+    ) {
         let (verb, verb_participle) = match use_kind {
             MovedInUse => ("use", "used"),
             MovedInCapture => ("capture", "captured"),
@@ -745,6 +748,12 @@ impl<'a, 'tcx> BorrowckCtxt<'a, 'tcx> {
                     format!("`{}`", self.loan_path_to_string(moved_lp))
                 },
                 moved_lp.ty));
+        }
+
+        if is_index {
+            err.note("you cannot have multiple mutable access to the same slice, but you can use \
+                      `slice.split_at_mut(split_index)` to get two disjoint mutable slices from \
+                      a single slice");
         }
 
         // Note: we used to suggest adding a `ref binding` or calling

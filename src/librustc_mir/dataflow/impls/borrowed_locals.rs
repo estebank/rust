@@ -92,6 +92,7 @@ struct BorrowedLocalsVisitor<'b, 'c: 'b> {
 
 fn find_local<'tcx>(place: &Place<'tcx>) -> Option<Local> {
     match *place {
+        Place::Base(PlaceBase::Index(l)) |
         Place::Base(PlaceBase::Local(l)) => Some(l),
         Place::Base(PlaceBase::Promoted(_)) |
         Place::Base(PlaceBase::Static(..)) => None,

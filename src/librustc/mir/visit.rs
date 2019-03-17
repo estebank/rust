@@ -733,7 +733,8 @@ macro_rules! make_mir_visitor {
                             context: PlaceContext<'tcx>,
                             location: Location) {
                 match place {
-                    Place::Base(PlaceBase::Local(local)) => {
+                    Place::Base(PlaceBase::Local(local)) |
+                    Place::Base(PlaceBase::Index(local)) => {
                         self.visit_local(local, context, location);
                     }
                     Place::Base(PlaceBase::Static(static_)) => {

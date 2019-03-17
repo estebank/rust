@@ -45,6 +45,7 @@ impl<'a, 'gcx, 'tcx> MirBorrowckCtxt<'a, 'gcx, 'tcx> {
         debug!("report_mutability_error: access_place_desc={:?}", access_place_desc);
 
         match the_place_err {
+            Place::Base(PlaceBase::Index(local)) |
             Place::Base(PlaceBase::Local(local)) => {
                 item_msg = format!("`{}`", access_place_desc.unwrap());
                 if let Place::Base(PlaceBase::Local(_)) = access_place {

@@ -158,7 +158,8 @@ impl<'tcx> Place<'tcx> {
         where D: HasLocalDecls<'tcx>
     {
         match *self {
-            Place::Base(PlaceBase::Local(index)) =>
+            Place::Base(PlaceBase::Local(index)) |
+            Place::Base(PlaceBase::Index(index)) =>
                 PlaceTy::Ty { ty: local_decls.local_decls()[index].ty },
             Place::Base(PlaceBase::Promoted(ref data)) => PlaceTy::Ty { ty: data.1 },
             Place::Base(PlaceBase::Static(ref data)) =>

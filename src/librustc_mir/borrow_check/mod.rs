@@ -1213,12 +1213,14 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                             // captures of a closure are copied/moved directly
                             // when generating MIR.
                             match operands[field.index()] {
-                                Operand::Move(Place::Base(PlaceBase::Local(local)))
-                                | Operand::Copy(Place::Base(PlaceBase::Local(local))) => {
+                                Operand::Move(Place::Base(PlaceBase::Local(local))) |
+                                Operand::Move(Place::Base(PlaceBase::Index(local))) |
+                                Operand::Copy(Place::Base(PlaceBase::Index(local))) |
+                                Operand::Copy(Place::Base(PlaceBase::Local(local))) => {
                                     self.used_mut.insert(local);
                                 }
-                                Operand::Move(ref place @ Place::Projection(_))
-                                | Operand::Copy(ref place @ Place::Projection(_)) => {
+                                Operand::Move(ref place @ Place::Projection(_)) |
+                                Operand::Copy(ref place @ Place::Projection(_)) => {
                                     if let Some(field) = place.is_upvar_field_projection(
                                             self.mir, &self.infcx.tcx) {
                                         self.used_mut_upvars.push(field);
@@ -1317,6 +1319,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                 let is_thread_local = self.is_place_thread_local(&root_place);
                 (true, is_thread_local)
             }
+            Place::Base(PlaceBase::Index(_)) |
             Place::Base(PlaceBase::Local(_)) => {
                 // Locals are always dropped at function exit, and if they
                 // have a destructor it would've been called already.
@@ -1443,6 +1446,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
         desired_action: InitializationRequiringAction,
         place_span: (&Place<'tcx>, Span),
         flow_state: &Flows<'cx, 'gcx, 'tcx>,
+        is_index: bool,
     ) {
         let maybe_uninits = &flow_state.uninits;
 
@@ -1481,7 +1485,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
         //
         // This code covers scenarios 1, 2, and 3.
 
-        debug!("check_if_full_path_is_moved place: {:?}", place_span.0);
+        debug!("check_if_full_path_is_moved place: {:?} - {}", place_span.0, is_index);
         match self.move_path_closest_to(place_span.0) {
             Ok((prefix, mpi)) => {
                 if maybe_uninits.contains(mpi) {
@@ -1490,6 +1494,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                         desired_action,
                         (prefix, place_span.0, place_span.1),
                         mpi,
+                        is_index,
                     );
                     return; // don't bother finding other problems.
                 }
@@ -1529,7 +1534,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
         //    must have been initialized for the use to be sound.
         // 6. Move of `a.b.c` then reinit of `a.b.c.d`, use of `a.b.c.d`
 
-        self.check_if_full_path_is_moved(context, desired_action, place_span, flow_state);
+        self.check_if_full_path_is_moved(context, desired_action, place_span, flow_state, false);
 
         // A move of any shallow suffix of `place` also interferes
         // with an attempt to use `place`. This is scenario 3 above.
@@ -1548,6 +1553,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                     desired_action,
                     (place_span.0, place_span.0, place_span.1),
                     child_mpi,
+                    false,
                 );
                 return; // don't bother finding other problems.
             }
@@ -1576,6 +1582,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
             last_prefix = prefix;
         }
         match *last_prefix {
+            Place::Base(PlaceBase::Index(_)) |
             Place::Base(PlaceBase::Local(_)) => panic!("should have move path for every Local"),
             Place::Projection(_) => panic!("PrefixSet::All meant don't stop for Projection"),
             Place::Base(PlaceBase::Promoted(_)) |
@@ -1603,18 +1610,29 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
         debug!("check_if_assigned_path_is_moved place: {:?}", place);
         // recur down place; dispatch to external checks when necessary
         let mut place = place;
+        let mut is_index = false;
         loop {
+            debug!("check_if_assigned_path_is_moved place: {:?}", place);
             match *place {
+                Place::Base(PlaceBase::Index(pl)) => {
+                    debug!("check_if_assigned_path_is_moved index place {:?}", pl);
+                    break;
+                }
+                Place::Base(PlaceBase::Local(pl)) => {
+                    debug!("check_if_assigned_path_is_moved local place {:?}", pl);
+                    break;
+                }
                 Place::Base(PlaceBase::Promoted(_)) |
-                Place::Base(PlaceBase::Local(_)) | Place::Base(PlaceBase::Static(_)) => {
+                Place::Base(PlaceBase::Static(_)) => {
                     // assigning to `x` does not require `x` be initialized.
                     break;
                 }
                 Place::Projection(ref proj) => {
                     let Projection { ref base, ref elem } = **proj;
+                    debug!("check_if_assigned_path_is_moved projection: {:?} {:?}", base, elem);
                     match *elem {
                         ProjectionElem::Index(_/*operand*/) |
-                        ProjectionElem::ConstantIndex { .. } |
+                        ProjectionElem::ConstantIndex { .. } => is_index = true,
                         // assigning to P[i] requires P to be valid.
                         ProjectionElem::Downcast(_/*adt_def*/, _/*variant_idx*/) =>
                         // assigning to (P->variant) is okay if assigning to `P` is okay
@@ -1626,7 +1644,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                         ProjectionElem::Deref => {
                             self.check_if_full_path_is_moved(
                                 context, InitializationRequiringAction::Use,
-                                (base, span), flow_state);
+                                (base, span), flow_state, is_index);
                             // (base initialized; no need to
                             // recur further)
                             break;
@@ -1764,6 +1782,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                     InitializationRequiringAction::PartialAssignment,
                     (prefix, base, span),
                     mpi,
+                    false,
                 );
             }
         }
@@ -1929,6 +1948,10 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
     ) {
         match root_place {
             RootPlace {
+                place: Place::Base(PlaceBase::Index(local)),
+                is_local_mutation_allowed,
+            } |
+            RootPlace {
                 place: Place::Base(PlaceBase::Local(local)),
                 is_local_mutation_allowed,
             } => {
@@ -1971,7 +1994,9 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
         place: &'d Place<'tcx>,
         is_local_mutation_allowed: LocalMutationIsAllowed,
     ) -> Result<RootPlace<'d, 'tcx>, &'d Place<'tcx>> {
+        debug!("is_mutable: {:?} {:?}", place, is_local_mutation_allowed);
         match *place {
+            Place::Base(PlaceBase::Index(local)) |
             Place::Base(PlaceBase::Local(local)) => {
                 let local = &self.mir.local_decls[local];
                 match local.mutability {
@@ -2009,6 +2034,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                 }
             }
             Place::Projection(ref proj) => {
+                debug!("is_mutable projection: {:?}", proj);
                 match proj.elem {
                     ProjectionElem::Deref => {
                         let base_ty = proj.base.ty(self.mir, self.infcx.tcx).to_ty(self.infcx.tcx);
@@ -2070,6 +2096,7 @@ impl<'cx, 'gcx, 'tcx> MirBorrowckCtxt<'cx, 'gcx, 'tcx> {
                     | ProjectionElem::Downcast(..) => {
                         let upvar_field_projection = place.is_upvar_field_projection(
                             self.mir, &self.infcx.tcx);
+                        debug!("is_mutable field/index/slice/downcast: {:?}", upvar_field_projection);
                         if let Some(field) = upvar_field_projection {
                             let decl = &self.mir.upvar_decls[field.index()];
                             debug!(

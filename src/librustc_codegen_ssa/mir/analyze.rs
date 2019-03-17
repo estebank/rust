@@ -103,17 +103,21 @@ impl<'mir, 'a: 'mir, 'tcx: 'a, Bx: BuilderMethods<'a, 'tcx>> Visitor<'tcx>
                     location: Location) {
         debug!("visit_assign(block={:?}, place={:?}, rvalue={:?})", block, place, rvalue);
 
-        if let mir::Place::Base(mir::PlaceBase::Local(index)) = *place {
-            self.assign(index, location);
-            if !self.fx.rvalue_creates_operand(rvalue) {
-                self.not_ssa(index);
+        match *place {
+            mir::Place::Base(mir::PlaceBase::Index(index)) |
+            mir::Place::Base(mir::PlaceBase::Local(index)) => {
+                self.assign(index, location);
+                if !self.fx.rvalue_creates_operand(rvalue) {
+                    self.not_ssa(index);
+                }
             }
-        } else {
-            self.visit_place(
-                place,
-                PlaceContext::MutatingUse(MutatingUseContext::Store),
-                location
-            );
+            _ => {
+                self.visit_place(
+                    place,
+                    PlaceContext::MutatingUse(MutatingUseContext::Store),
+                    location
+                );
+            }
         }
 
         self.visit_rvalue(rvalue, location);
