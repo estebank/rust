@@ -1,49 +1,1601 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+	<title>Friendly Ferris: Developing kind compiler errors</title>
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/white.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/zenburn.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+	<style>
+		@media only screen {
+			.primary-error {
+				color: rgb(185, 0, 0);
+				font-weight: bold !important;
+			}
+
+			.secondary-error {
+				color: rgb(0, 0, 139);
+				font-weight: bold !important;
+			}
+
+			.error-highlight {
+				font-weight: bold !important;
+			}
+
+			.old-highlight {
+				color: rgb(190, 0, 190);
+				font-weight: bold !important;
+			}
+
+			.old-note-error {
+				color: rgb(29, 151, 151);
+				font-weight: bold !important;
+			}
+
+			.note-error {
+				color: rgb(14, 126, 14);
+				font-weight: bold !important;
+			}
+
+			img {
+				border: none !important;
+				box-shadow: none !important;
+			}
+
+			.presentation-title {
+				position: absolute;
+				width: 100%;
+				height: 100%;
+			}
+
+			.presentation-title h1,
+			.presentation-title h2 {
+				text-transform: none;
+				text-shadow: white 3px 3px, white 3px -3px, white -3px 3px, white -3px -3px, white 0px 3px, white 0px -3px, white -3px 0px, white -3px 0px;
+			}
+
+			pre,
+			code {
+				box-shadow: none !important;
+			}
+
+			.example-highlight {
+				background-color: rgba(0, 255, 0, 0.7);
+				border: black 1px solid !important;
+			}
+
+			section.medium-code {
+				width: 100% !important;
+			}
+
+			section.medium-code pre {
+				height: 100% !important;
+				width: 100% !important;
+			}
+
+			section.medium-code code {
+				height: 100% !important;
+				max-height: 100% !important;
+				width: 100%;
+			}
+
+
+			section.long-code p {
+				top: -60px;
+				position: relative;
+			}
+
+			section.long-code pre {
+				top: -60px;
+				height: 100%;
+				width: auto;
+				font-size: 11pt;
+			}
+
+			section.long-code code {
+				max-height: 100%;
+			}
+
+			section.img-container {
+				margin: 0 !important;
+				padding: 0 !important;
+				height: 100%;
+			}
+
+			section.end-slide,
+			section.end-slide h1 {
+				color: white !important;
+				text-shadow: 3pt 3pt 5pt black,
+					-3pt 3pt 5pt black,
+					3pt -3pt 5pt black,
+					3pt 0 5pt black,
+					0 3pt 5pt black,
+					-3pt 0 5pt black,
+					0 -3pt 5pt black;
+			}
+
+			section.img-container img {
+				display: block;
+				margin: auto;
+				height: auto;
+				min-height: 400px;
+				min-width: 400px;
+				max-height: 100%;
+				width: auto;
+				max-width: 100%;
+			}
+
+			/* img {
+				max-width: 90% !important;
+				max-height: 60% !important;
+			} */
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+
+
+			<section>
+				<section data-background-image="img/rustc-tweets/crabs/DbThUs_V0AAEbRQ.png"
+					data-background-position="center" data-background-size="contain" data-background-repeat="no-repeat">
+					<div class="presentation-title">
+						<h1>Friendly Ferris</h1>
+						<h2>Developing kind compiler errors</h2>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+						<p>&nbsp;</p>
+					</div>
+					<aside class="notes">
+						For some time I had been hearing about this systems computer language that promised
+						efficient
+						and high-performance generated code with memory safety but without a Garbage Collector.
+					</aside>
+				</section>
+
+
+				<!-- <section class="img-container">
+				<img src="img/rustc-tweets/examples/Screen Shot 2019-01-23 at 4.46.05 PM.png">
+			</section>
+			<section class="img-container">
+				<img src="img/rustc-tweets/examples/Screen Shot 2019-01-23 at 5.30.52 PM.png">
+			</section> -->
+
+				<!-- <section> -->
+				<!-- <section data-background-image="img/rust-pics/IMG_20180908_124952.jpg">
+				</section> -->
+
+
+				<section data-background-image="img/rustc-tweets/Rust-lang-site.png" data-background-size="contain">
+					<aside class="notes">
+						In May of 2015 Rust 1.0 came out and I decided it was as good a time as any to jump in.
+					</aside>
+				</section>
+				<section>
+					<img src="img/rustc-tweets/crabs/DCobIwtW0AAm39A.png">
+					<aside class="notes">
+						It didn't go well.
+					</aside>
+				</section>
+				<section data-background-image="img/old-book.png" data-background-size="contain">
+					<aside class="notes">
+						I read through the book and the concepts seemed to make sense, but as soon as I tried to
+						apply
+						them in real code, I would get stuck. Even though the documentation was great, I found a
+						surprisingly steep learning curve.
+						Around this time is the first time I heard about "fighting the borrow checker".
+					</aside>
+				</section>
+				<section data-background-image="img/rust-pics/IMG_20180908_134501.jpg">
+					<aside class="notes">
+						I left it away for half a year and during the holidays, I decided to revisit this
+						interesting
+						little language that had given me so much grief.
+						This time it went much better, the concepts "clicked" and I could actually get some things
+						done,
+						although there were still moments when I was baffled by the borrow checker or other parts of
+						the
+						language.
+					</aside>
+				</section>
+				<section data-background-image="img/racer.png" data-background-size="contain">
+					<aside class="notes">
+						I contributed a couple of minor PRs to Racer. And around this time I had the first time when
+						I stared at the compiler output for half an hour trying to understand what it was telling me
+					</aside>
+				</section>
+				<section data-background-image="img/rustc-tweets/bad/Screen Shot 2019-01-23 at 5.59.52 PM.png"
+					data-background-size="contain">
+					<aside class="notes">
+						And around this time I had the first time when I stared at the compiler output for half an
+						hour
+						trying to understand what it was telling me. I cannot for the life of me remember what the
+						problem at the time was, I can only remember the frustration after finally figuring it out,
+						thinking "You know what the problem
+						is! Why didn't you point me in the right direction?".
+					</aside>
+				</section>
+				<section data-background-image="img/first-pr.png" data-background-size="contain">
+					<aside class="notes">
+						This made me think "`rustc` is a Rust program, maybe I can add the hint that would have
+						helped
+						me". The codebase was (and is) massive, but with a bit of grepping, I contributed some
+						smaller
+						diagnostic improvements that would help <em>me</em>. One thing led to another, and now I'm
+						part
+						of
+						the Compiler Team.
+						One thing I want to make clear is that I had <em>no</em> prior experience with compilers,
+						other
+						than having dabbled in learning about ASTs.
+					</aside>
+				</section>
+			</section>
+
+
+
+			<section>
+				<section data-background-image="img/stackofgood-0.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-1.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-2.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-3.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-4.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-5.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-6.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-7.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-8.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-9.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-10.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-11.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-12.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-13.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-14.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-15.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-16.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-17.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-18.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-19.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-20.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-21.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-22.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofgood-23.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+			</section>
+			<section>
+				<section data-background-image="img/stackofbad-0.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-1.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-2.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-3.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-4.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-5.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-6.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-7.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-8.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-9.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+				<section data-background-image="img/stackofbad-10.png" data-background-position="center"
+					data-background-size="contain" data-background-repeat="no-repeat"></section>
+			</section>
+			<section>
+				<img src="img/rustc-tweets/both/Screen Shot 2019-01-23 at 5.47.13 PM.png">
+				<img src="img/rustc-tweets/both/Screen Shot 2019-03-21 at 12.13.05 PM.png">
+			</section>
+
+
+			<section>
+				<section>
+					<img src="img/rustc-tweets/crabs/does_not_compile.svg">
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error[E0631]</span><span class="error-highlight">: type mismatch in closure arguments</span>
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:46:5
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     foo(
+							<span class="secondary-error">   |</span>     <span class="primary-error">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         |x: Foo<'_>, y| {
+							<span class="secondary-error">   |</span>         <span class="secondary-error">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span>
+							<span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+								</code></pre>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error example-highlight">error[E0631]</span><span class="error-highlight">: type mismatch in closure arguments</span>
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:46:5
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     foo(
+							<span class="secondary-error">   |</span>     <span class="primary-error">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         |x: Foo<'_>, y| {
+							<span class="secondary-error">   |</span>         <span class="secondary-error">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span>
+							<span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+											</code></pre>
+					<aside class="notes">
+						A qualifier for the error, it can be an error, a warning, a note, and optionally, an error
+						code.
+					</aside>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error[E0631]</span><span class="error-highlight">: <span class="example-highlight">type mismatch in closure arguments</span></span>
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:46:5
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     foo(
+							<span class="secondary-error">   |</span>     <span class="primary-error">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         |x: Foo<'_>, y| {
+							<span class="secondary-error">   |</span>         <span class="secondary-error">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span>
+							<span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+											</code></pre>
+					<aside class="notes">
+						Text message about the error, explaining in some way what the general problem is.
+					</aside>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error[E0631]</span><span class="error-highlight">: type mismatch in closure arguments</span>
+							<span class="secondary-error">  --></span> <span class="example-highlight">$DIR/expect-fn-supply-fn.rs:46:5</span>
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     foo(
+							<span class="secondary-error">   |</span>     <span class="primary-error">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         |x: Foo<'_>, y| {
+							<span class="secondary-error">   |</span>         <span class="secondary-error">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span>
+							<span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+											</code></pre>
+					<aside class="notes">
+						The path of the with the error, as well as the line number and column for the beginning of
+						the
+						primary span.
+					</aside>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error[E0631]</span><span class="error-highlight">: type mismatch in closure arguments</span>
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:46:5
+							<div class="example-highlight"><span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     foo(
+							<span class="secondary-error">   |</span>     <span class="primary-error">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         |x: Foo<'_>, y| {
+							<span class="secondary-error">   |</span>         <span class="secondary-error">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span></div><span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+											</code></pre>
+					<aside class="notes">
+						The path of the with the error, as well as the line number and column for the beginning of
+						the
+						primary span.
+					</aside>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error[E0631]</span><span class="error-highlight">: type mismatch in closure arguments</span>
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:46:5
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     <span class="example-highlight">foo(</span>
+							<span class="secondary-error">   |</span>     <span class="primary-error example-highlight">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         |x: Foo<'_>, y| {
+							<span class="secondary-error">   |</span>         <span class="secondary-error">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span>
+							<span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+											</code></pre>
+					<aside class="notes">
+						The primary span. Where the compiler has found the problem.
+					</aside>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error[E0631]</span><span class="error-highlight">: type mismatch in closure arguments</span>
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:46:5
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     foo(
+							<span class="secondary-error">   |</span>     <span class="primary-error">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         <span class="example-highlight">|x: Foo<'_>, y|</span> {
+							<span class="secondary-error">   |</span>         <span class="secondary-error example-highlight">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span>
+							<span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+											</code></pre>
+					<aside class="notes">
+						Optional secondary span. Places where the compiler either knows or has inferred the problem
+						might be
+						originated from, or places that we think you might care about to fix this problem.
+					</aside>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error[E0631]</span><span class="error-highlight">: type mismatch in closure arguments</span>
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:46:5
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span>     foo(
+							<span class="secondary-error">   |</span>     <span class="primary-error">^^^ expected signature of `fn(for<'r> fn(&'r u32), &i32) -> _`</span>
+							<span class="secondary-error">LL |</span>         |x: Foo<'_>, y| {
+							<span class="secondary-error">   |</span>         <span class="secondary-error">--------------- found signature of `for<'r> fn(fn(&'r u32), _) -> _`</span>
+							<span class="secondary-error">   |</span>
+							<div class="example-highlight"><span class="note-error">note</span>: required by `foo`
+							<span class="secondary-error">  --></span> $DIR/expect-fn-supply-fn.rs:6:1
+							<span class="secondary-error">   |</span>
+							<span class="secondary-error">LL |</span> <span class="note-error">/</span> fn foo<F>(_: F)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span>     where F: FnOnce(fn(&u32), &i32)
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> {
+							<span class="secondary-error">LL |</span> <span class="note-error">|</span> }
+							<span class="secondary-error">   |</span> <span class="note-error">|_^</span>
+							</div><br>
+										</code></pre>
+					<aside class="notes">
+						You can also have other "windows" into the code, with spans. These can be `note`s, `help` or
+						`warning`s.
+					</aside>
+				</section>
+			</section>
+
+
+			<section>
+				<section data-background-image="img/rust-pics/IMG_20180908_133848.jpg">
+					<aside class="notes">Compiler overall design and separation (~5 minutes)</aside>
+				</section>
+				<section>
+					<p>&nbsp;</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+					<aside class="notes">
+						Let's take this piece of code as an example, and explore what the copmiler will do with it.
+					</aside>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+					<aside class="notes">
+						Let's take this piece of code as an example, and explore what the copmiler will do with it.
+					</aside>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						<span class="example-highlight">fn</span> main() {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn <span class="example-highlight">main</span>() {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main<span class="example-highlight">(</span>) {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main(<span class="example-highlight">)</span> {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() <span class="example-highlight">{</span>
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    <span class="example-highlight">let</span> x = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let <span class="example-highlight">x</span> = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x <span class="example-highlight">=</span> 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = <span class="example-highlight">3</span>;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3<span class="example-highlight">;</span>
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    <span class="example-highlight">foo</span>(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo<span class="example-highlight">(</span>x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(<span class="example-highlight">x</span>);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x<span class="example-highlight">)</span>;
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x)<span class="example-highlight">;</span>
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Lexer</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x);
+						<span class="example-highlight">}</span>
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+					<pre><code class="rust" data-trim data-noescape>
+						token_tree_stream = Base(
+							Keyword(fn),
+							Ident(main),
+							Delimited(Paren, []),
+							Delimited(Brace, [
+								Keyword(let),
+								Ident(x),
+								Token(=),
+								Lit(3),
+								Token(;),
+								Ident(foo),
+								Delimited(Paren, [Ident(x)]),
+								Token(;),
+							]);
+					</code></pre>
+				</section>
+			</section>
+
+
+			<section>
+				<section>
+					<p>Parser</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="rust" data-trim data-noescape>
+					/// An expression
+					#[derive(Clone, RustcEncodable, RustcDecodable)]
+					pub struct Expr {
+						pub id: NodeId,
+						pub node: ExprKind,
+						pub span: Span,
+						pub attrs: ThinVec<Attribute>,
+					}
+					</code></pre>
+				</section>
+				<section class="long-code">
+					<pre><code class="rust" data-noescape data-trim>#[derive(Clone, RustcEncodable, RustcDecodable, Debug)]
+pub enum ExprKind {
+    Box(P&lt;Expr>),
+    Array(Vec&lt;P&lt;Expr>>),
+    Call(P&lt;Expr>, Vec&lt;P&lt;Expr>>),
+    MethodCall(PathSegment, Vec&lt;P&lt;Expr>>),
+    Tup(Vec&lt;P&lt;Expr>>),
+    Binary(BinOp, P&lt;Expr>, P&lt;Expr>),
+    Unary(UnOp, P&lt;Expr>),
+    Lit(Lit),
+    Cast(P&lt;Expr>, P&lt;Ty>),
+    Type(P&lt;Expr>, P&lt;Ty>),
+    If(P&lt;Expr>, P&lt;Block>, Option&lt;P&lt;Expr>>),
+    IfLet(Vec&lt;P&lt;Pat>>, P&lt;Expr>, P&lt;Block>, Option&lt;P&lt;Expr>>),
+    While(P&lt;Expr>, P&lt;Block>, Option&lt;Label>),
+    WhileLet(Vec&lt;P&lt;Pat>>, P&lt;Expr>, P&lt;Block>, Option&lt;Label>),
+    ForLoop(P&lt;Pat>, P&lt;Expr>, P&lt;Block>, Option&lt;Label>),
+    Loop(P&lt;Block>, Option&lt;Label>),
+    Match(P&lt;Expr>, Vec&lt;Arm>),
+    Closure(CaptureBy, IsAsync, Movability, P&lt;FnDecl>, P&lt;Expr>, Span),
+    Block(P&lt;Block>, Option&lt;Label>),
+    Async(CaptureBy, NodeId, P&lt;Block>),
+    TryBlock(P&lt;Block>),
+    Assign(P&lt;Expr>, P&lt;Expr>),
+    AssignOp(BinOp, P&lt;Expr>, P&lt;Expr>),
+    Field(P&lt;Expr>, Ident),
+    Index(P&lt;Expr>, P&lt;Expr>),
+    Range(Option&lt;P&lt;Expr>>, Option&lt;P&lt;Expr>>, RangeLimits),
+    Path(Option&lt;QSelf>, Path),
+    AddrOf(Mutability, P&lt;Expr>),
+    Break(Option&lt;Label>, Option&lt;P&lt;Expr>>),
+    Continue(Option&lt;Label>),
+    Ret(Option&lt;P&lt;Expr>>),
+    InlineAsm(P&lt;InlineAsm>),
+    Mac(Mac),
+    Struct(Path, Vec&lt;Field>, Option&lt;P&lt;Expr>>),
+    Repeat(P&lt;Expr>, AnonConst),
+    Paren(P&lt;Expr>),
+    Try(P&lt;Expr>),
+    Yield(Option&lt;P&lt;Expr>>),
+    /* ... */
+}
+				</code></pre>
+				</section>
+				<section>
+					<p>Parser</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3; // Lit
+						    foo(x);    // Call(Path(None, Path), Path(None, Path))
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Parser: statement</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    <span class="example-highlight">let x = 3;</span>
+						    foo(x);
+						}
+					</code></pre>
+				</section>
+				<section>
+					<p>Parser is confused: expression, not a statement</p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn foo() {
+						    let x = 3  // <-- !`;`
+						}
+					</code></pre>
+					<pre><code class="nohighlight" data-noescape data-trim>
+							<span class="primary-error">error</span><span class="error-highlight">: expected one of `.`, `;`, `?`, or an operator, found `}`</span>
+							<span class="secondary-error"> --></span> $DIR/file.rs:3:1
+							<span class="secondary-error">  |</span>
+							<span class="secondary-error">3 |</span>     let x = 3
+							<span class="secondary-error">  |</span>              <span class="secondary-error">- expected one of `.`, `;`, `?`, or an operator here</span>
+							<span class="secondary-error">4 |</span> }
+							<span class="secondary-error">  |</span> <span class="primary-error">^ unexpected token</span>
+						</code></pre>
+				</section>
+
+				<section class="img-container">
+					<p>Parser</p>
+					<img src="img/rustc-tweets/good/Screen Shot 2019-01-23 at 5.55.34 PM.png">
+				</section>
+
+				<section>
+					<p>Name resolution, macro expansion</p>
+
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error[E0425]</span><span class="error-highlight">: cannot find function `foo` in this scope</span>
+						<span class="secondary-error"> --></span> $DIR/file.rs:4:5
+						<span class="secondary-error">  |</span>
+						<span class="secondary-error">4 |</span>     foo(x);
+						<span class="secondary-error">  |</span>     <span class="primary-error">^^^ not found in this scope</span>
+						</code></pre>
+				</section>
+
+				<section>
+					<p>Lowering to HIR</p>
+					<pre><code class="rust" data-trim data-noescape>
+						if let Some(x) = foo {
+						    println!("x: {}", x);
+						} else {
+						    println!("Nada");
+						}
+					</code></pre>
+					<pre><code class="rust" data-trim data-noescape>
+						match foo {
+						    Some(x) => {
+						        println!("x: {}", x);
+						    }
+						    _ => {
+						        println!("Nada", x);
+						    }
+						}
+					</code></pre>
+				</section>
+
+				<section class="long-code">
+					<p>Lowering to HIR</p>
+					<p style="font-size: 75%;"><code>rustc file.rs -Z unpretty=hir,identified</code></p>
+					<pre><code class="rust" data-trim data-noescape>
+						fn main() {
+						    let x = 3;
+						    foo(x);
+						}
+					</code></pre>
+					<pre><code class="rust" data-trim data-noescape>
+fn main() ({
+   let x /*
+           pat hir_id: HirId { owner: DefIndex(0:3), local_id: 2 } hir local_id: 2
+           */ =
+       (3 /*
+           expr hir_id: HirId { owner: DefIndex(0:3), local_id: 3 } hir local_id: 3
+           */);
+   ((foo /*
+        expr hir_id: HirId { owner: DefIndex(0:3), local_id: 7 } hir local_id: 7
+        */)((x /*
+                expr hir_id: HirId { owner: DefIndex(0:3), local_id: 9 } hir local_id: 9
+                */)) /*
+       expr hir_id: HirId { owner: DefIndex(0:3), local_id: 10 } hir local_id: 10
+       */);
+} /*
+   block hir_id: HirId { owner: DefIndex(0:3), local_id: 11 } hir local_id: 11
+   */ /*
+   expr hir_id: HirId { owner: DefIndex(0:3), local_id: 12 } hir local_id: 12
+   */) /*
+hir_id: HirId { owner: DefIndex(0:3), local_id: 0 } hir local_id: 0 */
+					</code></pre>
+				</section>
+
+
+				<section>
+					<p>Type Checking</p>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error[E0308]</span><span class="error-highlight">: mismatched types</span>
+						<span class="secondary-error"> --></span> $DIR/file.rs:4:9
+						<span class="secondary-error">  |</span>
+						<span class="secondary-error">4 |</span>     foo(x);
+						<span class="secondary-error">  |</span>         <span class="primary-error">^ expected &str, found integer</span>
+						<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: expected type `<span class="error-highlight">&str</span>`
+						             found type `<span class="error-highlight">{integer}</span>`
+						</code></pre>
+					<img src="img/mismatch.jpg">
+				</section>
+
+				<section>
+					<p>Privacy Checking</p>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error[E0603]</span><span class="error-highlight">: function `foo` is private</span>
+						<span class="secondary-error"> --></span> $DIR/file.rs:4:9
+						<span class="secondary-error">  |</span>
+						<span class="secondary-error">4 |</span>     bar::foo(x);
+						<span class="secondary-error">  |</span>          <span class="primary-error">^^^</span>
+						</code></pre>
+				</section>
+
+				<section>
+					<p>Lifetime Analysis</p>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error[E0597]</span><span class="error-highlight">: `x` does not live long enough</span>
+						<span class="secondary-error"> --></span> $DIR/file.rs:4:6
+						<span class="secondary-error">  |</span>
+						<span class="secondary-error">4 |</span>     &x
+						<span class="secondary-error">  |</span>      <span class="primary-error">^ borrowed value does not live long enough</span>
+						<span class="secondary-error">5 |</span> }
+						<span class="secondary-error">  |</span> <span class="secondary-error">- borrowed value only lives until here</span>
+						<span class="note-error">note</span>: borrowed value must be valid for the lifetime 'a as defined on the function body at 1:8...
+						<span class="secondary-error"> --></span> $DIR/file.rs:1:8
+						<span class="secondary-error">  |</span>
+						<span class="secondary-error">1 |</span> fn bar&lt;'a>() -> &'a usize {
+						<span class="secondary-error">  |</span>        <span class="note-error">^^</span>
+						</code></pre>
+				</section>
+
+				<section class="img-container">
+					<img src="img/rustc-tweets/examples/Screen Shot 2019-01-26 at 5.46.05 PM.png">
+				</section>
+
+				<section data-background-image="img/DragonFull.png" data-background-size="contain">
+					<p>LLVM IL Code generation</p>
+					<p>LLVM Optimizations</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+					<p>&nbsp;</p>
+				</section>
+
+				<section>
+					<p>Linking</p>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error</span><span class="error-highlight">: linking with `cc` failed: signal: 4</span>
+						</code></pre>
+				</section>
+
+				<section>
+					<ul>
+						<li>Lexer</li>
+						<li>Parser</li>
+						<li>Macro Expansion</li>
+						<li>Name Resolution</li>
+						<li>HIR Lowering</li>
+						<li>Type Checking</li>
+						<li>Privacy Checking</li>
+						<li>Lifetime Analysis</li>
+						<li>LLVM IL Code Generation</li>
+						<li>LLVM Optimizations</li>
+						<li>Linking</li>
+					</ul>
+				</section>
+				<section class="medium-code">
+					<pre><code class="nohighlight" data-noescape>
+                          rustc_driver
+                        /      |       \
+                      /        |         \
+                    /          |           \
+                  /            v             \
+        rustc_codegen  rustc_borrowck   ...  rustc_metadata
+                  \            |            /
+                    \          |          /
+                      \        |        /
+                        \      v      /
+                            rustc
+                               |
+                               v
+                            syntax
+                            /    \
+                          /       \
+                   syntax_pos  syntax_ext
+</code></pre>
+				</section>
+
+			</section>
+
+			<section>
+				<section>
+					<p>Guiding principles</p>
+				</section>
+				<section class="img-container">
+					<p>Clear generic errors</p>
+					<img src="img/rustc-tweets/examples/Screen Shot 2019-01-26 at 5.57.43 PM.png">
+				</section>
+				<section>
+					<p>Clear generic errors</p>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error[E0308]</span>: <span class="error-highlight">mismatched types</span>
+<span class="secondary-error"> --></span> file.rs:3:9
+<span class="secondary-error">  |</span>
+<span class="secondary-error">3 |</span>     foo(&x);
+<span class="secondary-error">  |</span>         <span class="primary-error">^^ expected usize, found u32</span>
+<span class="secondary-error">  |</span>
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: expected type `<span class="error-highlight">&usize</span>`
+<span class="secondary-error">   </span> <span class="error-highlight">    </span>     found type `<span class="error-highlight">&u32</span>`
+
+<span class="primary-error">error:</span> aborting due to previous error
+</code></pre>
+				</section>
+
+				<section>
+					<p>Targeted errors for common problems</pj>
+				</section>
+				<section class="long-code">
+					<pre><code class="nohighlight" data-noescape>
+file.rs:1:1: 3:2 <span class="primary-error">error:</span> <span class="error-highlight">not all control paths return a value <span class="old-highlight">[E0308]</span></span>
+file.rs:1 pub fn foo() -> usize {
+file.rs:2     3;
+file.rs:3 }
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error[E0308]</span><span class="error-highlight">: mismatched types</span>
+						<span class="secondary-error"> --></span> file.rs:1:17
+						<span class="secondary-error">  |</span>
+						<span class="secondary-error">1 |</span> pub fn foo() -> usize {
+						<span class="secondary-error">  |</span>        <span class="secondary-error">---</span>      <span class="primary-error">^^^^^ expected usize, found ()</span>
+						<span class="secondary-error">  |</span>        <span class="secondary-error">|</span>
+						<span class="secondary-error">  |</span>        <span class="secondary-error">this function's body doesn't return</span>
+						<span class="secondary-error">2 |</span>     3;
+						<span class="secondary-error">  |</span>      <span class="secondary-error">- help: consider removing this semicolon</span>
+						<span class="secondary-error">  =</span> <span class="note-error">note</span>: expected type `usize`
+						             found type `()`
+					</code></pre>
+				</section>
+
+				<section class="img-container">
+					<img src="img/rustc-tweets/examples/Screen Shot 2019-01-23 at 5.54.53 PM.png">
+				</section>
+				<section class="long-code">
+					<pre><code data-trim data-noescape>
+trait T {
+    fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize;
+}
+
+struct S;
+
+impl T for S {
+    fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+        if true {
+            a
+        } else {
+            b
+        }
+    }
+}
+					</code></pre>
+				</section>
+				<section class="long-code">
+					<pre><code class="nohighlight" data-trim data-noescape>
+<span class="primary-error">error[E0312]</span>: <span class="error-highlight">lifetime of reference outlives lifetime of borrowed content...</span>
+<span class="secondary-error">  --></span> file.rs:12:13
+<span class="secondary-error">   |</span>
+<span class="secondary-error">12 |</span>             b
+<span class="secondary-error">   |</span>             <span class="primary-error">^</span>
+<span class="secondary-error">   |</span>
+<span class="note-error">note</span>: ...the reference is valid for the lifetime 'a as defined on the body at 8:67...
+<span class="secondary-error">  --></span> file.rs:8:68
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>       fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span> <span class="note-error"> ____________________________________________________________________^ starting here...</span>
+<span class="secondary-error">9  |</span> <span class="note-error">|</span>         if true {
+<span class="secondary-error">10 |</span> <span class="note-error">|</span>             a
+<span class="secondary-error">11 |</span> <span class="note-error">|</span>         } else {
+<span class="secondary-error">12 |</span> <span class="note-error">|</span>             b
+<span class="secondary-error">13 |</span> <span class="note-error">|</span>         }
+<span class="secondary-error">14 |</span> <span class="note-error">|</span>     }
+<span class="secondary-error">   |</span> <span class="note-error">|_____^ ...ending here</span>
+<span class="note-error">note</span>: ...but the borrowed content is only valid for the lifetime 'b as defined on the body at 8:67
+<span class="secondary-error">  --></span> file.rs:8:68
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>       fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span> <span class="note-error"> ____________________________________________________________________^ starting here...</span>
+<span class="secondary-error">9  |</span> <span class="note-error">|</span>         if true {
+<span class="secondary-error">10 |</span> <span class="note-error">|</span>             a
+<span class="secondary-error">11 |</span> <span class="note-error">|</span>         } else {
+<span class="secondary-error">12 |</span> <span class="note-error">|</span>             b
+<span class="secondary-error">13 |</span> <span class="note-error">|</span>         }
+<span class="secondary-error">14 |</span> <span class="note-error">|</span>     }
+<span class="secondary-error">   |</span> <span class="note-error">|_____^ ...ending here</span>
+					</code></pre>
+				</section>
+				<section class="long-code">
+					<pre><code class="nohighlight" data-trim data-noescape>
+<span class="primary-error">error[E0623]</span><span class="error-highlight">: lifetime mismatch</span>
+<span class="secondary-error">  --></span> file.rs:12:13
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>     fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span>                                            <span class="secondary-error">---------     ---------</span>
+<span class="secondary-error">   |</span>                                            <span class="secondary-error">|</span>
+<span class="secondary-error">   |</span>                                            <span class="secondary-error">this parameter and the return type are declared with different lifetimes...</span>
+<span class="secondary-error">...</span>
+<span class="secondary-error">12 |</span>             b
+<span class="secondary-error">   |</span>             <span class="primary-error">^ ...but data from `b` is returned here</span>
+					</code></pre>
+				</section>
+
+
+				<section class="long-code">
+					<pre><code data-trim data-noescape>
+trait T {
+    fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize;
+}
+
+struct S;
+
+impl T for S {
+    fn foo&lt;'a>(&self, a: &'a usize, b: &'a usize) -> &'a usize {
+        if true {
+            a
+        } else {
+            b
+        }
+    }
+}
+					</code></pre>
+				</section>
+
+				<section class="long-code">
+					<pre><code class="nohighlight" data-trim data-noescape>
+<span class="primary-error">error[E0495]</span>: <span class="error-highlight">cannot infer an appropriate lifetime for lifetime parameter 'a in generic type due to conflicting requirements</span>
+<span class="secondary-error">  --></span> file.rs:8:5
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>       fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span> <span class="primary-error"> _____^ starting here...</span>
+<span class="secondary-error">9  |</span> <span class="primary-error">|</span>         if true {
+<span class="secondary-error">10 |</span> <span class="primary-error">|</span>             a
+<span class="secondary-error">11 |</span> <span class="primary-error">|</span>         } else {
+<span class="secondary-error">12 |</span> <span class="primary-error">|</span>             b
+<span class="secondary-error">13 |</span> <span class="primary-error">|</span>         }
+<span class="secondary-error">14 |</span> <span class="primary-error">|</span>     }
+<span class="secondary-error">   |</span> <span class="primary-error">|_____^ ...ending here</span>
+<span class="note-error">note</span>: first, the lifetime cannot outlive the lifetime 'b as defined on the body at 8:63...
+<span class="secondary-error">  --></span> file.rs:8:68
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>       fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span> <span class="note-error"> ____________________________________________________________________^ starting here...</span>
+<span class="secondary-error">9  |</span> <span class="note-error">|</span>         if true {
+<span class="secondary-error">10 |</span> <span class="note-error">|</span>             a
+<span class="secondary-error">11 |</span> <span class="note-error">|</span>         } else {
+<span class="secondary-error">12 |</span> <span class="note-error">|</span>             b
+<span class="secondary-error">13 |</span> <span class="note-error">|</span>         }
+<span class="secondary-error">14 |</span> <span class="note-error">|</span>     }
+<span class="secondary-error">   |</span> <span class="note-error">|_____^ ...ending here</span>
+<span class="note-error">note</span>: ...so that method type is compatible with trait (expected fn(&S, &'a usize, &'b usize) -> &'a usize, found fn(&S, &usize, &usize) -> &usize)
+<span class="secondary-error">  --></span> file.rs:8:5
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>       fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span> <span class="note-error"> _____^ starting here...</span>
+<span class="secondary-error">9  |</span> <span class="note-error">|</span>         if true {
+<span class="secondary-error">10 |</span> <span class="note-error">|</span>             a
+<span class="secondary-error">11 |</span> <span class="note-error">|</span>         } else {
+<span class="secondary-error">12 |</span> <span class="note-error">|</span>             b
+<span class="secondary-error">13 |</span> <span class="note-error">|</span>         }
+<span class="secondary-error">14 |</span> <span class="note-error">|</span>     }
+<span class="secondary-error">   |</span> <span class="note-error">|_____^ ...ending here</span>
+<span class="note-error">note</span>: but, the lifetime must be valid for the lifetime 'a as defined on the body at 8:63...
+<span class="secondary-error">  --></span> file.rs:8:68
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>       fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span> <span class="note-error"> ____________________________________________________________________^ starting here...</span>
+<span class="secondary-error">9  |</span> <span class="note-error">|</span>         if true {
+<span class="secondary-error">10 |</span> <span class="note-error">|</span>             a
+<span class="secondary-error">11 |</span> <span class="note-error">|</span>         } else {
+<span class="secondary-error">12 |</span> <span class="note-error">|</span>             b
+<span class="secondary-error">13 |</span> <span class="note-error">|</span>         }
+<span class="secondary-error">14 |</span> <span class="note-error">|</span>     }
+<span class="secondary-error">   |</span> <span class="note-error">|_____^ ...ending here</span>
+<span class="note-error">note</span>: ...so that method type is compatible with trait (expected fn(&S, &'a usize, &'b usize) -> &'a usize, found fn(&S, &usize, &usize) -> &usize)
+<span class="secondary-error">  --></span> file.rs:8:5
+<span class="secondary-error">   |</span>
+<span class="secondary-error">8  |</span>       fn foo&lt;'a, 'b>(&self, a: &'a usize, b: &'b usize) -> &'a usize {
+<span class="secondary-error">   |</span> <span class="note-error"> _____^ starting here...</span>
+<span class="secondary-error">9  |</span> <span class="note-error">|</span>         if true {
+<span class="secondary-error">10 |</span> <span class="note-error">|</span>             a
+<span class="secondary-error">11 |</span> <span class="note-error">|</span>         } else {
+<span class="secondary-error">12 |</span> <span class="note-error">|</span>             b
+<span class="secondary-error">13 |</span> <span class="note-error">|</span>         }
+<span class="secondary-error">14 |</span> <span class="note-error">|</span>     }
+<span class="secondary-error">   |</span> <span class="note-error">|_____^ ...ending here</span>
+					</code></pre>
+				</section>
+
+				<section class="long-code">
+					<pre><code class="nohighlight" data-trim data-noescape>
+<span class="primary-error">error[E0495]</span><span class="error-highlight">: cannot infer an appropriate lifetime for lifetime parameter 'a in generic type due to conflicting requirements</span>
+<span class="secondary-error"> --></span> file.rs:8:5
+<span class="secondary-error">  |</span>
+<span class="secondary-error">8 |</span>     fn foo&lt;'a>(&self, a: &'a usize, b: &'a usize) -> &'a usize {
+<span class="secondary-error">  |</span>     <span class="primary-error">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="secondary-error">  |</span>
+<span class="secondary-error">note</span>: first, the lifetime cannot outlive the lifetime 'b as defined on the method body at 8:5...
+<span class="secondary-error"> --></span> file.rs:8:5
+<span class="secondary-error">  |</span>
+<span class="secondary-error">8 |</span>     fn foo&lt;'a>(&self, a: &'a usize, b: &'a usize) -> &'a usize {
+<span class="secondary-error">  |</span>     <span class="note-error">^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^</span>
+<span class="secondary-error">note</span>: ...but the lifetime must also be valid for the lifetime 'a as defined on the method body at 8:12...
+<span class="secondary-error"> --></span> file.rs:8:12
+<span class="secondary-error">  |</span>
+<span class="secondary-error">8 |</span>     fn foo&lt;'a>(&self, a: &'a usize, b: &'a usize) -> &'a usize {
+<span class="secondary-error">  |</span>            <span class="note-error">^^</span>
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: ...so that the method type is compatible with trait:
+          expected fn(&S, &'a usize, &'b usize) -> &'a usize
+             found fn(&S, &usize, &usize) -> &usize
+					</code></pre>
+				</section>
+
+				<section>
+					<p>Recovery from error states</p>
+				</section>
+				<section>
+					<p>Recovery from error states</p>
+					<ul>
+						<li>Lexer</li>
+						<li>Parser</li>
+						<li>Macro Expansion</li>
+						<li>Name Resolution</li>
+						<li>HIR Lowering</li>
+						<li>Type Checking</li>
+						<li>Privacy Checking</li>
+						<li>Lifetime Analysis</li>
+						<li>LLVM IL Code Generation</li>
+						<li>LLVM Optimizations</li>
+						<li>Linking</li>
+					</ul>
+				</section>
+				<section class="img-container">
+					<img style="min-height: 560px;"
+						src="img/rustc-tweets/examples/Screen Shot 2019-01-23 at 5.58.26 PM.png">
+				</section>
+				<section>
+					<pre><code>extern "C" fn foo(x: u8, ...) -> u8 { x }</code></pre>
+				</section>
+				<section>
+					<pre><code>extern "C" fn foo(x: u8, ...) -> u8 { x }</code></pre>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error</span><span class="error-highlight">: only foreign functions are allowed to be variadic</span>
+<span class="secondary-error">  --></span> $DIR/invalid-variadic-function.rs:11:26
+<span class="secondary-error">   |</span>
+<span class="secondary-error">11 |</span> extern "C" fn foo(x: u8, ...) -> u8 { x }
+<span class="secondary-error">   |</span>                          <span class="primary-error">^^^</span>
+					</code></pre>
+				</section>
+				<section data-background-image="img/variadic-continue.png" data-background-size="contain"></section>
+				<section>
+					<p>Hiding errors caused by earlier problems</p>
+				</section>
+				<section class="img-container">
+					<p>Hiding errors caused by earlier problems</p>
+					<img src="img/rustc-tweets/examples/Screen Shot 2019-01-23 at 5.55.12 PM.png">
+				</section>
+				<section>
+					<p>Hiding errors caused by earlier problems</p>
+					<pre><code class="rust">let (a, b, c) = (A::new(), A::new());</code></pre>
+				</section>
+				<section class="long-code">
+					<p>Hiding errors caused by earlier problems</p>
+					<pre><code class="rust">let (a, b, c) = (A::new(), A::new());</code></pre>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error[E0308]</span><span class="error-highlight">: mismatched types</span>
+						<span class="secondary-error">  --></span> file.rs:12:9
+						<span class="secondary-error">   |</span>
+						<span class="secondary-error">12 |</span> let (a, b, c) = (A::new(), A::new());
+						<span class="secondary-error">   |</span>     <span class="primary-error">^^^^^^^^^ expected a tuple with 2 elements, found one with 3 elements</span>
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: expected type `(A, A)`
+						              found type `(_, _, _)`
+
+						<span class="primary-error">error[E0277]</span><span class="error-highlight">: the trait bound `T: std::marker::Sized` is not satisfied</span>
+						<span class="secondary-error">  --></span> file.rs:12:10
+						<span class="secondary-error">   |</span>
+						<span class="secondary-error">12 |</span> let (a, b, c) = (A::new(), A::new());
+						<span class="secondary-error">   |</span>      <span class="primary-error">^ the trait `std::marker::Sized` is not implemented for `T`</span>
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: `T` does not have a constant size known at compile-time
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: all local variables must have a statically known size
+
+						<span class="primary-error">error[E0277]</span><span class="error-highlight">: the trait bound `T: std::marker::Sized` is not satisfied</span>
+						<span class="secondary-error">  --></span> file.rs:12:13
+						<span class="secondary-error">   |</span>
+						<span class="secondary-error">12 |</span> let (a, b, c) = (A::new(), A::new());
+						<span class="secondary-error">   |</span>         <span class="primary-error">^ the trait `std::marker::Sized` is not implemented for `T`</span>
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: `T` does not have a constant size known at compile-time
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: all local variables must have a statically known size
+
+						<span class="primary-error">error[E0277]</span><span class="error-highlight">: the trait bound `T: std::marker::Sized` is not satisfied</span>
+						<span class="secondary-error">  --></span> file.rs:12:16
+						<span class="secondary-error">   |</span>
+						<span class="secondary-error">12 |</span> let (a, b, c) = (A::new(), A::new());
+						<span class="secondary-error">   |</span>            <span class="primary-error">^ the trait `std::marker::Sized` is not implemented for `T`</span>
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: `T` does not have a constant size known at compile-time
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: all local variables must have a statically known size
+</code></pre>
+				</section>
+				<section class="long-code">
+					<p>Hiding errors caused by earlier problems</p>
+					<pre><code class="rust">let (a, b, c) = (A::new(), A::new());</code></pre>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error[E0308]</span><span class="error-highlight">: mismatched types</span>
+						<span class="secondary-error">  --></span> file.rs:12:9
+						<span class="secondary-error">   |</span>
+						<span class="secondary-error">12 |</span> let (a, b, c) = (A::new(), A::new());
+						<span class="secondary-error">   |</span>     <span class="primary-error">^^^^^^^^^ expected a tuple with 2 elements, found one with 3 elements</span>
+						<span class="secondary-error">   =</span> <span class="note-error">note</span>: expected type `(A, A)`
+						              found type `(_, _, _)`
+					</code></pre>
+				</section>
+				<section>
+					<ul>
+						<li>Clear generic errors</li>
+						<li>Targetted errors for common problems</li>
+						<li>Recovery from error states</li>
+						<li>Hiding errors caused by earlier problems</li>
+					</ul>
+				</section>
+				<section class="img-container">
+					<img src="img/rustc-tweets/good/Screen Shot 2019-01-23 at 5.47.22 PM.png">
+				</section>
+
+			</section>
+
+
+			<section>
+				<section class="img-container">
+					<img src="img/rustc-tweets/examples/Screen Shot 2019-01-26 at 5.20.48 PM.png">
+					<aside class="notes">
+						Importance of clear understandable diagnostics
+					</aside>
+				</section>
+				<section class="img-container">
+					<img style="min-height: 500px;"
+						src="img/rustc-tweets/examples/Screen Shot 2019-03-14 at 10.45.14 PM.png">
+				</section>
+				<section class="img-container">
+					<img style="min-height: 300px;"
+						src="img/rustc-tweets/examples/Screen Shot 2019-03-21 at 9.54.35 AM.png">
+				</section>
+				<section class="img-container">
+					<img src="img/rustc-tweets/good/Screen Shot 2019-01-23 at 5.29.39 PM.png">
+				</section>
+				<section class="img-container">
+					<img src="img/rustc-tweets/good/Screen Shot 2019-01-23 at 5.48.27 PM.png">
+				</section>
+				<section class="long-code">
+					<p>The compiler as teacher</p>
+					<pre><code class="nohighlight" data-noescape data-trim>
+						<span class="primary-error">error</span><span class="error-highlight">: crate name using dashes are not valid in `extern crate` statements</span>
+						<span class="secondary-error">  --></span> $DIR/bad-crate-name.rs:11:14
+						<span class="secondary-error">   |</span>
+						<span class="secondary-error">11 |</span> extern crate krate-name-here;
+						<span class="secondary-error">   |</span>              <span class="primary-error">^^^^^^^^^^^^^^^ dash-separated idents are not valid</span>
+						<span class="old-note-error">help</span>: if the original crate name uses dashes you need to use underscores in the code
+						<span class="secondary-error">   |</span>
+						<span class="secondary-error">11 |</span> extern crate krate_name_here;
+						<span class="secondary-error">   |</span>                   <span class="old-note-error">^    ^</span>
+					</code></pre>
+				</section>
+				<section class="img-container">
+					<img style="min-height: 300px;" src="img/this-is-fine.jpg">
+				</section>
+				<section class="img-container">
+					<img style="min-height: 500px;" src="img/this-is-not-fine.png">
+				</section>
+				<section class="img-container">
+					<img style="min-height: 500px;" src="img/this-is-really-fine.png">
+				</section>
+			</section>
+
+
+			<section>Evolution of diagnostics over time
+				<section>
+					<pre><code class="rust" data-trim data-noescape>
+						pub fn main() {
+						    let x: u32 = 42;
+						    foo(&x);
+						}
+						
+						fn foo&lt;'a>(x: &'a usize) -> &'a usize {
+						    println!("{}", x);
+						    x
+						}
+					</code></pre>
+				</section>
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+file.rs:3:9: 3:11 <span class="primary-error">error:</span> <span class="error-highlight">mismatched types:</span>
+<span class="error-highlight"> expected `&usize`,
+    found `&u32`
+(expected usize,
+    found u32)</span> <span class="old-highlight">[E0308]</span>
+file.rs:3     foo(&x);
+                  <span class="primary-error">^~</span>
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+file.rs:3:9: 3:11 <span class="primary-error">error:</span> <span class="error-highlight">mismatched types:</span>
+<span class="error-highlight"> expected `&usize`
+    found `&u32`</span> <span class="old-highlight">[E0308]</span>
+file.rs:3     foo(&x);
+                  <span class="primary-error">^~</span>
+file.rs:3:9: 3:11 <span class="old-note-error">help:</span> <span class="error-highlight">run `rustc --explain E0308` to see a detailed explanation</span>
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+file.rs:3:9: 3:11 <span class="primary-error">error:</span> <span class="error-highlight">mismatched types</span> <span class="old-highlight">[E0308]</span>
+file.rs:3 foo(<span class="primary-error">&x</span>);
+              <span class="primary-error">^~</span>
+file.rs:3:9: 3:11 <span class="old-note-error">help:</span> <span class="error-highlight">run `rustc --explain E0308` to see a detailed explanation</span>
+file.rs:3:9: 3:11 <span class="note-error">note:</span> <span class="error-highlight">expected type `&usize`</span>
+file.rs:3:9: 3:11 <span class="note-error">note:</span> <span class="error-highlight">found type `&u32`</span>
+
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+
+
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error[E0308]</span>: <span class="error-highlight">mismatched types</span>
+<span class="secondary-error"> --></span> file.rs:3:9
+<span class="secondary-error">  |</span>
+<span class="secondary-error">3 |</span>     foo(<span class="primary-error">&x</span>);
+<span class="secondary-error">  |</span>         <span class="primary-error">^^ expected usize, found u32</span>
+
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error[E0308]</span>: <span class="error-highlight">mismatched types</span>
+<span class="secondary-error"> --></span> file.rs:3:9
+<span class="secondary-error">  |</span>
+<span class="secondary-error">3 |</span>     foo(<span class="primary-error">&x</span>);
+<span class="secondary-error">  |</span>         <span class="primary-error">^^ expected usize, found u32</span>
+<span class="secondary-error">  |</span>
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: expected type `&usize`
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: found type `&u32`
+
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error[E0308]</span>: <span class="error-highlight">mismatched types</span>
+<span class="secondary-error"> --></span> file.rs:3:9
+<span class="secondary-error">  |</span>
+<span class="secondary-error">3 |</span>     foo(&x);
+<span class="secondary-error">  |</span>         <span class="primary-error">^^ expected usize, found u32</span>
+<span class="secondary-error">  |</span>
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: expected type `&usize`
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>:    found type `&u32`
+
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error[E0308]</span>: <span class="error-highlight">mismatched types</span>
+<span class="secondary-error"> --></span> file.rs:3:9
+<span class="secondary-error">  |</span>
+<span class="secondary-error">3 |</span>     foo(&x);
+<span class="secondary-error">  |</span>         <span class="primary-error">^^ expected usize, found u32</span>
+<span class="secondary-error">  |</span>
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: expected type `&usize`
+<span class="secondary-error">   </span> <span class="error-highlight">    </span>     found type `&u32`
+
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error[E0308]</span>: <span class="error-highlight">mismatched types</span>
+<span class="secondary-error"> --></span> file.rs:3:9
+<span class="secondary-error">  |</span>
+<span class="secondary-error">3 |</span>     foo(&x);
+<span class="secondary-error">  |</span>         <span class="primary-error">^^ expected usize, found u32</span>
+<span class="secondary-error">  |</span>
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: expected type `<span class="error-highlight">&usize</span>`
+<span class="secondary-error">   </span> <span class="error-highlight">    </span>     found type `<span class="error-highlight">&u32</span>`
+
+<span class="primary-error">error:</span> <span class="error-highlight">aborting due to previous error</span>
+</code></pre>
+				</section>
+				<section>
+					<pre><code class="nohighlight" data-noescape>
+<span class="primary-error">error[E0308]</span>: <span class="error-highlight">mismatched types</span>
+<span class="secondary-error"> --></span> file.rs:3:9
+<span class="secondary-error">  |</span>
+<span class="secondary-error">3 |</span>     foo(&x);
+<span class="secondary-error">  |</span>         <span class="primary-error">^^ expected usize, found u32</span>
+<span class="secondary-error">  |</span>
+<span class="secondary-error">  =</span> <span class="error-highlight">note</span>: expected type `<span class="error-highlight">&usize</span>`
+<span class="secondary-error">   </span> <span class="error-highlight">    </span>     found type `<span class="error-highlight">&u32</span>`
+
+<span class="primary-error">error:</span> aborting due to previous error
+</code></pre>
+				</section>
+			</section>
+
+
+
+
+			<section data-background-image="img/rust-pics/IMG_20180908_130916.jpg"></section>
+
+
+			<section data-background-image="img/forge.png" data-background-position="top" data-background-size="contain"
+				data-background-repeat="no-repeat">
+			</section>
+			<section>
+				<p>github.com/rust-lang/rust</p>
+				<p>forge.rust-lang.org</p>
+				<p>github.com/rust-lang/rfcs</p>
+				<p>internals.rust-lang.org</p>
+				<p>Mozilla IRC #rust</p>
+				<p>rust-lang.zulipchat.com</p>
+				<p>discord.gg/rust-lang</p>
+			</section>
+
+
+			<section data-background-image="img/rust-pics/IMG_20180908_124952.jpg">
+				<aside class="notes">
+					Recap and closing remarks: "The compiler is nothing more than another program. You can also peek
+					under the hood and change it." (~3 minutes)</aside>
+			</section>
+			<section class="end-slide" data-background-image="img/rust-pics/IMG_20180908_135045.jpg">
+				<h1>¡Gracias!</h1>
+				<p><img src="img/Twitter_Logo_Blue.png"
+						style="width: 1.5em; height: 1.5em; margin: 0 auto -22px auto; border-radius: 1.5em;">@ekuber
+				</p>
+				<p><img src="img/GitHub-Mark-120px-plus.png"
+						style="width: 1em; height: 1em; margin: 0 0.3em -10px auto; background-color: white; border-radius: 1em;">@estebank
+				</p>
+				<p>rustlatam@kuber.com.ar</p>
+				<!--p>github.com/estebank/rust-latam-2019</p-->
+			</section>
 		</div>
+	</div>
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+	<script src="lib/js/head.min.js"></script>
+	<script src="js/reveal.js"></script>
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			transition: 'none', // none/fade/slide/convex/concave/zoom
+			transitionSpeed: 'fast', // default/fast/slow
+			backgroundTransition: 'none',
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true, callback: function () { hljs.initHighlightingOnLoad(); } }
+			]
+		});
+	</script>
+</body>
+
 </html>
