@@ -6,6 +6,16 @@ LL |     for (n, mut m) in &tups {
    |          |
    |          both by-ref and by-move used
 
-error: aborting due to previous error
+error[E0507]: cannot move out of borrowed content
+  --> $DIR/for.rs:6:9
+   |
+LL |     for (n, mut m) in &tups {
+   |         ^^^^-----^
+   |         |   |
+   |         |   hint: to prevent move, use `ref m` or `ref mut m`
+   |         cannot move out of borrowed content
 
-For more information about this error, try `rustc --explain E0009`.
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0009, E0507.
+For more information about an error, try `rustc --explain E0009`.

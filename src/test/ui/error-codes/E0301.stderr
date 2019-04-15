@@ -4,6 +4,15 @@ error[E0301]: cannot mutably borrow in a pattern guard
 LL |         option if option.take().is_none() => {},
    |                   ^^^^^^ borrowed mutably in pattern guard
 
-error: aborting due to previous error
+error[E0596]: cannot borrow immutable local variable `option` as mutable
+  --> $DIR/E0301.rs:4:19
+   |
+LL |         option if option.take().is_none() => {},
+   |         ------    ^^^^^^ cannot borrow mutably
+   |         |
+   |         help: make this binding mutable: `mut option`
 
-For more information about this error, try `rustc --explain E0301`.
+error: aborting due to 2 previous errors
+
+Some errors occurred: E0301, E0596.
+For more information about an error, try `rustc --explain E0301`.
