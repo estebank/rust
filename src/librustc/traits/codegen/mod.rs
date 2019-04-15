@@ -153,8 +153,8 @@ impl<'a, 'gcx, 'tcx> InferCtxt<'a, 'gcx, 'tcx> {
         // contains unbound type parameters. It could be a slight
         // optimization to stop iterating early.
         if let Err(errors) = fulfill_cx.select_all_or_error(self) {
-            span_bug!(span, "Encountered errors `{:?}` resolving bounds after type-checking",
-                      errors);
+            debug!("Encountered errors `{:?}` resolving bounds after type-checking", errors);
+            self.report_fulfillment_errors(&errors, None, false);
         }
 
         let result = self.resolve_type_vars_if_possible(result);

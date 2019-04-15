@@ -1,3 +1,4 @@
+//~ ERROR can't compare `S` with `S`
 // https://github.com/rust-lang/rust/issues/53708
 
 struct S;
