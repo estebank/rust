@@ -209,6 +209,39 @@ enum ResolutionError<'a> {
     ConstParamDependentOnTypeParam,
 }
 
+#[derive(Clone, Copy)]
+enum CurrentScope {
+    Const,
+    Static,
+    Type,
+    Other,
+}
+
+impl CurrentScope {
+    fn is_other(&self) -> bool {
+        match self {
+            CurrentScope::Other => true,
+            _ => false,
+        }
+    }
+
+    fn description(&self) -> &'static str {
+        match self {
+            Self::Const => "`const` associated item",
+            Self::Static => "`static` associated item",
+            Self::Type => "associated type",
+            Self::Other => "outer function",
+        }
+    }
+
+    fn generic_param_resolution_error_message(&self) -> String {
+        match self {
+            Self::Other => format!("from {}", self.description()),
+            _ => format!("in {}", self.description()),
+        }
+    }
+}
+
 /// Combines an error with provided span and emits it.
 ///
 /// This takes the error provided, combines it with the span and any additional spans inside the
@@ -225,14 +258,21 @@ fn resolve_struct_error<'sess, 'a>(resolver: &'sess Resolver<'_>,
                                    -> DiagnosticBuilder<'sess> {
     match resolution_error {
         ResolutionError::GenericParamsFromOuterFunction(outer_res) => {
+            let msg = resolver.scope.generic_param_resolution_error_message();
             let mut err = struct_span_err!(resolver.session,
                 span,
                 E0401,
-                "can't use generic parameters from outer function",
+                "can't use generic parameters {}",
+                msg,
             );
-            err.span_label(span, format!("use of generic parameter from outer function"));
+            err.span_label(span, &format!("use of generic parameter {}", msg));
 
             let cm = resolver.session.source_map();
+            let type_param_extra_msg = if resolver.scope.is_other() {
+                "from outer function "
+            } else {
+                ""
+            };
             match outer_res {
                 Res::SelfTy(maybe_trait_defid, maybe_impl_defid) => {
                     if let Some(impl_span) = maybe_impl_defid.and_then(|def_id| {
@@ -256,12 +296,18 @@ fn resolve_struct_error<'sess, 'a>(resolver: &'sess Resolver<'_>,
                 },
                 Res::Def(DefKind::TyParam, def_id) => {
                     if let Some(span) = resolver.definitions.opt_span(def_id) {
-                        err.span_label(span, "type parameter from outer function");
+                        err.span_label(span, format!(
+                            "type parameter {}being used",
+                            type_param_extra_msg,
+                        ));
                     }
                 }
                 Res::Def(DefKind::ConstParam, def_id) => {
                     if let Some(span) = resolver.definitions.opt_span(def_id) {
-                        err.span_label(span, "const parameter from outer function");
+                        err.span_label(span, format!(
+                            "const parameter {}being used",
+                            type_param_extra_msg,
+                        ));
                     }
                 }
                 _ => {
@@ -273,7 +319,14 @@ fn resolve_struct_error<'sess, 'a>(resolver: &'sess Resolver<'_>,
             // Try to retrieve the span of the function signature and generate a new message with
             // a local type or const parameter.
             let sugg_msg = &format!("try using a local generic parameter instead");
-            if let Some((sugg_span, new_snippet)) = cm.generate_local_type_param_snippet(span) {
+            if !resolver.scope.is_other() {
+                err.help(&format!(
+                    "{} need a type instead of a generic parameter",
+                    resolver.scope.description(),
+                ));
+            } else if let Some(
+                (sugg_span, new_snippet),
+            ) = cm.generate_local_type_param_snippet(span) {
                 // Suggest the modification to the user
                 err.span_suggestion(
                     sugg_span,
@@ -282,6 +335,7 @@ fn resolve_struct_error<'sess, 'a>(resolver: &'sess Resolver<'_>,
                     Applicability::MachineApplicable,
                 );
             } else if let Some(sp) = cm.generate_fn_name_span(span) {
+                // FIXME: needs to use proper scope navigation to avoid errors like #45447
                 err.span_label(sp,
                     format!("try adding a local generic parameter in this method instead"));
             } else {
@@ -1705,6 +1759,8 @@ pub struct Resolver<'a> {
 
     /// Features enabled for this crate.
     active_features: FxHashSet<Symbol>,
+    /// Used for more accurate error when using type parameters in a associated items.
+    scope: CurrentScope,
 }
 
 /// Nothing really interesting here; it just provides memory for the rest of the crate.
@@ -2037,6 +2093,7 @@ impl<'a> Resolver<'a> {
                 features.declared_lib_features.iter().map(|(feat, ..)| *feat)
                     .chain(features.declared_lang_features.iter().map(|(feat, ..)| *feat))
                     .collect(),
+            scope: CurrentScope::Other,
         }
     }
 
@@ -2710,7 +2767,20 @@ impl<'a> Resolver<'a> {
 
         match item.node {
             ItemKind::Ty(_, ref generics) |
-            ItemKind::OpaqueTy(_, ref generics) |
+            ItemKind::OpaqueTy(_, ref generics) => {
+                let scope = self.scope;
+                self.scope = CurrentScope::Type;
+                self.with_current_self_item(item, |this| {
+                    this.with_generic_param_rib(HasGenericParams(generics, ItemRibKind), |this| {
+                        let item_def_id = this.definitions.local_def_id(item.id);
+                        this.with_self_rib(Res::SelfTy(Some(item_def_id), None), |this| {
+                            visit::walk_item(this, item)
+                        })
+                    })
+                });
+                self.scope = scope;
+            }
+
             ItemKind::Fn(_, _, ref generics, _) => {
                 self.with_generic_param_rib(
                     HasGenericParams(generics, ItemRibKind),
@@ -2795,6 +2865,12 @@ impl<'a> Resolver<'a> {
 
             ItemKind::Static(ref ty, _, ref expr) |
             ItemKind::Const(ref ty, ref expr) => {
+                let scope = self.scope;
+                self.scope = match item.node {
+                    ItemKind::Static(..) => CurrentScope::Static,
+                    ItemKind::Const(..) => CurrentScope::Const,
+                    _ => unreachable!(),
+                };
                 debug!("resolve_item ItemKind::Const");
                 self.with_item_rib(|this| {
                     this.visit_ty(ty);
@@ -2802,6 +2878,7 @@ impl<'a> Resolver<'a> {
                         this.visit_expr(expr);
                     });
                 });
+                self.scope = scope;
             }
 
             ItemKind::Use(ref use_tree) => {
