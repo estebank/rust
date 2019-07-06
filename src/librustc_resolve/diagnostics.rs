@@ -78,6 +78,39 @@ fn add_module_candidates(
     }
 }
 
+#[derive(Clone, Copy)]
+crate enum CurrentScope {
+    Const,
+    Static,
+    Type,
+    Other,
+}
+
+impl CurrentScope {
+    crate fn is_other(&self) -> bool {
+        match self {
+            CurrentScope::Other => true,
+            _ => false,
+        }
+    }
+
+    crate fn description(&self) -> &'static str {
+        match self {
+            Self::Const => "a `const`",
+            Self::Static => "a `static`",
+            Self::Type => "associated type",
+            Self::Other => "outer function",
+        }
+    }
+
+    crate fn generic_param_resolution_error_message(&self) -> String {
+        match self {
+            Self::Other => format!("from {}", self.description()),
+            _ => format!("in {}", self.description()),
+        }
+    }
+}
+
 impl<'a> Resolver<'a> {
     /// Handles error reporting for `smart_resolve_path_fragment` function.
     /// Creates base error and amends it with one short label and possibly some longer helps/notes.
