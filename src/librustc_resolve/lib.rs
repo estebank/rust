@@ -68,7 +68,7 @@ use smallvec::SmallVec;
 
 use diagnostics::{Suggestion, ImportSuggestion};
 use diagnostics::{
-    find_span_of_binding_until_next_binding, extend_span_to_previous_binding, CurrentScope,
+    find_span_of_binding_until_next_binding, extend_span_to_previous_binding, CurrentItemScope,
 };
 use resolve_imports::{ImportDirective, ImportDirectiveSubclass, NameResolution, ImportResolver};
 use macros::{InvocationData, LegacyBinding, LegacyScope};
@@ -215,19 +215,22 @@ enum ResolutionError<'a> {
 ///
 /// This takes the error provided, combines it with the span and any additional spans inside the
 /// error and emits it.
-fn resolve_error(resolver: &Resolver<'_>,
-                 span: Span,
-                 resolution_error: ResolutionError<'_>) {
+fn resolve_error(
+    resolver: &Resolver<'_>,
+    span: Span,
+    resolution_error: ResolutionError<'_>,
+) {
     resolve_struct_error(resolver, span, resolution_error).emit();
 }
 
-fn resolve_struct_error<'sess, 'a>(resolver: &'sess Resolver<'_>,
-                                   span: Span,
-                                   resolution_error: ResolutionError<'a>)
-                                   -> DiagnosticBuilder<'sess> {
+fn resolve_struct_error<'sess, 'a>(
+    resolver: &'sess Resolver<'_>,
+    span: Span,
+    resolution_error: ResolutionError<'a>,
+) -> DiagnosticBuilder<'sess> {
     match resolution_error {
         ResolutionError::GenericParamsFromOuterFunction(outer_res) => {
-            let msg = resolver.scope.generic_param_resolution_error_message();
+            let msg = resolver.current_item_scope.generic_param_resolution_error_message();
             let mut err = struct_span_err!(resolver.session,
                 span,
                 E0401,
@@ -237,7 +240,7 @@ fn resolve_struct_error<'sess, 'a>(resolver: &'sess Resolver<'_>,
             err.span_label(span, &format!("use of generic parameter {}", msg));
 
             let cm = resolver.session.source_map();
-            let type_param_extra_msg = if resolver.scope.is_other() {
+            let type_param_extra_msg = if resolver.current_item_scope.is_other() {
                 "from outer function "
             } else {
                 ""
@@ -288,10 +291,10 @@ fn resolve_struct_error<'sess, 'a>(resolver: &'sess Resolver<'_>,
             // Try to retrieve the span of the function signature and generate a new message with
             // a local type or const parameter.
             let sugg_msg = &format!("try using a local generic parameter instead");
-            if !resolver.scope.is_other() {
+            if !resolver.current_item_scope.is_other() {
                 err.help(&format!(
                     "{} need a type instead of a generic parameter",
-                    resolver.scope.description(),
+                    resolver.current_item_scope.description(),
                 ));
             } else if let Some(
                 (sugg_span, new_snippet),
@@ -1729,7 +1732,9 @@ pub struct Resolver<'a> {
     /// Features enabled for this crate.
     active_features: FxHashSet<Symbol>,
     /// Used for more accurate error when using type parameters in a associated items.
-    scope: CurrentScope,
+    current_item_scope: CurrentItemScope,
+
+    current_item: Option<(Span, )>,
 }
 
 /// Nothing really interesting here; it just provides memory for the rest of the crate.
@@ -2062,7 +2067,8 @@ impl<'a> Resolver<'a> {
                 features.declared_lib_features.iter().map(|(feat, ..)| *feat)
                     .chain(features.declared_lang_features.iter().map(|(feat, ..)| *feat))
                     .collect(),
-            scope: CurrentScope::Other,
+            current_item_scope: CurrentItemScope::Other,
+            current_item: None,
         }
     }
 
@@ -2737,8 +2743,11 @@ impl<'a> Resolver<'a> {
         match item.node {
             ItemKind::Ty(_, ref generics) |
             ItemKind::OpaqueTy(_, ref generics) => {
-                let scope = self.scope;
-                self.scope = CurrentScope::Type;
+                let scope = self.current_item_scope;
+                self.current_item_scope = match self.current_item {
+                    Some((_span,)) => CurrentItemScope::AssocType,
+                    None => CurrentItemScope::Type,
+                };
                 self.with_current_self_item(item, |this| {
                     this.with_generic_param_rib(HasGenericParams(generics, ItemRibKind), |this| {
                         let item_def_id = this.definitions.local_def_id(item.id);
@@ -2747,10 +2756,11 @@ impl<'a> Resolver<'a> {
                         })
                     })
                 });
-                self.scope = scope;
+                self.current_item_scope = scope;
             }
 
             ItemKind::Fn(_, _, ref generics, _) => {
+                self.current_item = Some((item.span, ));
                 self.with_generic_param_rib(
                     HasGenericParams(generics, ItemRibKind),
                     |this| visit::walk_item(this, item)
@@ -2834,10 +2844,12 @@ impl<'a> Resolver<'a> {
 
             ItemKind::Static(ref ty, _, ref expr) |
             ItemKind::Const(ref ty, ref expr) => {
-                let scope = self.scope;
-                self.scope = match item.node {
-                    ItemKind::Static(..) => CurrentScope::Static,
-                    ItemKind::Const(..) => CurrentScope::Const,
+                let scope = self.current_item_scope;
+                self.current_item_scope = match (&item.node, &self.current_item) {
+                    (ItemKind::Static(..), Some(_)) => CurrentItemScope::AssocStatic,
+                    (ItemKind::Const(..), Some(_)) => CurrentItemScope::AssocConst,
+                    (ItemKind::Static(..), None) => CurrentItemScope::Static,
+                    (ItemKind::Const(..), None) => CurrentItemScope::Const,
                     _ => unreachable!(),
                 };
                 debug!("resolve_item ItemKind::Const");
@@ -2847,7 +2859,7 @@ impl<'a> Resolver<'a> {
                         this.visit_expr(expr);
                     });
                 });
-                self.scope = scope;
+                self.current_item_scope = scope;
             }
 
             ItemKind::Use(ref use_tree) => {

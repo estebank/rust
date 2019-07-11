@@ -79,26 +79,32 @@ fn add_module_candidates(
 }
 
 #[derive(Clone, Copy)]
-crate enum CurrentScope {
+crate enum CurrentItemScope {
+    AssocConst,
+    AssocStatic,
+    AssocType,
     Const,
     Static,
     Type,
     Other,
 }
 
-impl CurrentScope {
+impl CurrentItemScope {
     crate fn is_other(&self) -> bool {
         match self {
-            CurrentScope::Other => true,
+            Self::Other => true,
             _ => false,
         }
     }
 
     crate fn description(&self) -> &'static str {
         match self {
-            Self::Const => "a `const`",
-            Self::Static => "a `static`",
-            Self::Type => "associated type",
+            Self::AssocConst => "`const` associated item",
+            Self::AssocStatic => "`static` associated item",
+            Self::AssocType => "associated type",
+            Self::Const => "`const`",
+            Self::Static => "`static`",
+            Self::Type => "`type` alias",
             Self::Other => "outer function",
         }
     }
