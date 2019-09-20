@@ -1691,7 +1691,7 @@ pub fn emit_unclosed_delims(unclosed_delims: &mut Vec<UnmatchedBrace>, handler: 
             err.span_label(sp, "close delimiter possibly meant for this");
         }
         if let Some(sp) = unmatched.unclosed_span {
-            err.span_label(sp, "un-closed delimiter");
+            err.span_label(sp, "unclosed delimiter");
         }
         err.emit();
     }

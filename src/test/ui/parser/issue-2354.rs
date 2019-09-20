@@ -1,4 +1,4 @@
-fn foo() { //~ NOTE un-closed delimiter
+fn foo() { //~ NOTE unclosed delimiter
 //~^ ERROR `main` function not found
 //~^^ NOTE main function must be defined
 //~^^^ NOTE you have one or more functions
@@ -15,4 +15,4 @@ fn bar() {
 }
 
 fn main() {} //~ NOTE here is a function named `main`
-             //~ ERROR this file contains an un-closed delimiter
+             //~ ERROR this file contains an unclosed delimiter

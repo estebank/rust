@@ -11,7 +11,7 @@ use crate::ptr::P;
 use crate::symbol::{kw, sym};
 use crate::ThinVec;
 use crate::util::parser::AssocOp;
-use errors::{Applicability, DiagnosticBuilder, DiagnosticId};
+use errors::{Applicability, DiagnosticBuilder, DiagnosticId, FatalError};
 use rustc_data_structures::fx::FxHashSet;
 use syntax_pos::{Span, DUMMY_SP, MultiSpan, SpanSnippetError};
 use log::{debug, trace};
@@ -317,7 +317,13 @@ impl<'a> Parser<'a> {
             TokenType::Token(t) => Some(t.clone()),
             _ => None,
         }).collect::<Vec<_>>(), err) {
-            Err(e) => err = e,
+            Err(e) => {
+                err = e;
+                if self.unclosed_delims.len() > 0 {
+                    err.emit();
+                    FatalError.raise();
+                }
+            }
             Ok(recovered) => {
                 return Ok(recovered);
             }
@@ -822,7 +828,13 @@ impl<'a> Parser<'a> {
         let mut err = self.struct_span_err(sp, &msg);
         let label_exp = format!("expected `{}`", token_str);
         match self.recover_closing_delimiter(&[t.clone()], err) {
-            Err(e) => err = e,
+            Err(e) => {
+                err = e;
+                if self.unclosed_delims.len() > 0 {
+                    err.emit();
+                    FatalError.raise();
+                }
+            }
             Ok(recovered) => {
                 return Ok(recovered);
             }

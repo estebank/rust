@@ -4,6 +4,7 @@ use crate::print::pprust::token_to_string;
 use crate::parse::lexer::{StringReader, UnmatchedBrace};
 use crate::parse::token::{self, Token};
 use crate::parse::PResult;
+use crate::errors::FatalError;
 use crate::tokenstream::{DelimSpan, IsJoint::{self, *}, TokenStream, TokenTree, TreeAndJoint};
 
 impl<'a> StringReader<'a> {
@@ -71,11 +72,11 @@ impl<'a> TokenTreesReader<'a> {
         let sm = self.string_reader.sess.source_map();
         match self.token.kind {
             token::Eof => {
-                let msg = "this file contains an un-closed delimiter";
+                let msg = "this file contains an unclosed delimiter";
                 let mut err = self.string_reader.sess.span_diagnostic
                     .struct_span_err(self.token.span, msg);
                 for &(_, sp) in &self.open_braces {
-                    err.span_label(sp, "un-closed delimiter");
+                    err.span_label(sp, "unclosed delimiter");
                 }
 
                 if let Some((delim, _)) = self.open_braces.last() {
@@ -99,7 +100,12 @@ impl<'a> TokenTreesReader<'a> {
                         );
                     }
                 }
-                Err(err)
+                err.span_label(self.token.span, "reached the end of the file");
+                err.emit();
+                // There are common unclosed braces errors that devolve in lots of unrelated
+                // parsing errors. Give up and consume as much as possible to avoid overwhelming
+                // the user. (#63690)
+                FatalError.raise();
             },
             token::OpenDelim(delim) => {
                 // The span for beginning of the delimited section

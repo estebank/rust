@@ -347,7 +347,7 @@ pub fn maybe_file_to_stream(
                     db.span_label(sp, "close delimiter possibly meant for this");
                 }
                 if let Some(sp) = unmatched.unclosed_span {
-                    db.span_label(sp, "un-closed delimiter");
+                    db.span_label(sp, "unclosed delimiter");
                 }
                 db.buffer(&mut buffer);
             }

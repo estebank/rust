@@ -4,7 +4,7 @@ error: incorrect close delimiter: `}`
 LL | pub fn new() -> Result<Value, ()> {
    |                                   - close delimiter possibly meant for this
 LL |     Ok(Value {
-   |       - un-closed delimiter
+   |       - unclosed delimiter
 LL |     }
 LL | }
    | ^ incorrect close delimiter

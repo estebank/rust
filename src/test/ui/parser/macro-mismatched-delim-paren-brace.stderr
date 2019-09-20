@@ -8,7 +8,7 @@ error: incorrect close delimiter: `}`
   --> $DIR/macro-mismatched-delim-paren-brace.rs:4:5
    |
 LL |     foo! (
-   |          - un-closed delimiter
+   |          - unclosed delimiter
 LL |         bar, "baz", 1, 2.0
 LL |     }
    |     ^ incorrect close delimiter

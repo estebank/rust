@@ -2,7 +2,7 @@ error: incorrect close delimiter: `)`
   --> $DIR/token-error-correct-2.rs:6:5
    |
 LL |     if foo {
-   |            - un-closed delimiter
+   |            - unclosed delimiter
 LL |
 LL |     )
    |     ^ incorrect close delimiter
