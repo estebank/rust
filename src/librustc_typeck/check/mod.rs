@@ -3559,10 +3559,11 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         expect_args
     }
 
-    pub fn check_struct_path(&self,
+    pub fn check_struct_path(
+        &self,
                              qpath: &QPath,
-                             hir_id: hir::HirId)
-                             -> Option<(&'tcx ty::VariantDef,  Ty<'tcx>)> {
+        hir_id: hir::HirId,
+    ) -> Option<(&'tcx ty::VariantDef,  Ty<'tcx>)> {
         let path_span = match *qpath {
             QPath::Resolved(_, ref path) => path.span,
             QPath::TypeRelative(ref qself, _) => qself.span

@@ -22,8 +22,8 @@ error[E0308]: mismatched types
 LL |         'c' ..= 100 => { }
    |         ^^^^^^^^^^^ expected integer, found char
    |
-   = note: expected type `{integer}`
-              found type `char`
+   = note: expected type `char`
+              found type `{integer}`
 
 error: aborting due to 3 previous errors
 

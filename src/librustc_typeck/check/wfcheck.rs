@@ -565,14 +565,8 @@ fn check_where_clauses<'tcx, 'fcx>(
     let predicates = fcx.normalize_associated_types_in(span, &predicates);
 
     debug!("check_where_clauses: predicates={:?}", predicates.predicates);
-    let wf_obligations =
-        predicates.predicates
-                    .iter()
-                    .flat_map(|p| ty::wf::predicate_obligations(fcx,
-                                                                fcx.param_env,
-                                                                fcx.body_id,
-                                                                p,
-                                                                span));
+    let wf_obligations = predicates.predicates.iter()
+        .flat_map(|p| ty::wf::predicate_obligations(fcx, fcx.param_env, fcx.body_id, p, span));
 
     for obligation in wf_obligations.chain(default_obligations) {
         debug!("next obligation cause: {:?}", obligation.cause);

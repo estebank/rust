@@ -62,8 +62,8 @@ error[E0308]: mismatched types
 LL |     let Ok(ref a) | Err(ref mut a): Result<&u8, &mut u8> = Ok(&0);
    |                         ^^^^^^^^^ types differ in mutability
    |
-   = note: expected type `&&u8`
-              found type `&mut &mut u8`
+   = note: expected type `&mut &mut u8`
+              found type `&&u8`
 
 error[E0308]: mismatched types
   --> $DIR/inconsistent-modes.rs:16:31
@@ -71,8 +71,8 @@ error[E0308]: mismatched types
 LL |     let Ok((ref a, b)) | Err((ref mut a, ref b)) = Ok((0, &0));
    |                               ^^^^^^^^^ types differ in mutability
    |
-   = note: expected type `&{integer}`
-              found type `&mut _`
+   = note: expected type `&mut _`
+              found type `&{integer}`
 
 error: aborting due to 9 previous errors
 

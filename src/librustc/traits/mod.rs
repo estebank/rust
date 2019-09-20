@@ -464,9 +464,11 @@ pub type Selection<'tcx> = Vtable<'tcx, PredicateObligation<'tcx>>;
 #[derive(Clone,Debug)]
 pub enum SelectionError<'tcx> {
     Unimplemented,
-    OutputTypeParameterMismatch(ty::PolyTraitRef<'tcx>,
-                                ty::PolyTraitRef<'tcx>,
-                                ty::error::TypeError<'tcx>),
+    OutputTypeParameterMismatch(
+        ty::PolyTraitRef<'tcx>,
+        ty::PolyTraitRef<'tcx>,
+        ty::error::TypeError<'tcx>,
+    ),
     TraitNotObjectSafe(DefId),
     ConstEvalFailure(ErrorHandled),
     Overflow,

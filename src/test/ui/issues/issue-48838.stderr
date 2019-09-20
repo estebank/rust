@@ -4,8 +4,8 @@ error[E0308]: mismatched types
 LL |     Square = |x| x,
    |              ^^^^^ expected isize, found closure
    |
-   = note: expected type `isize`
-              found type `[closure@$DIR/issue-48838.rs:2:14: 2:19]`
+   = note: expected type `[closure@$DIR/issue-48838.rs:2:14: 2:19]`
+              found type `isize`
 
 error: aborting due to previous error
 

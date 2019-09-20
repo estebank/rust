@@ -6,8 +6,8 @@ LL |     match x {
 LL |         Some(field) =>
    |         ^^^^^^^^^^^ expected enum `Whatever`, found enum `std::option::Option`
    |
-   = note: expected type `Whatever`
-              found type `std::option::Option<_>`
+   = note: expected type `std::option::Option<_>`
+              found type `Whatever`
 
 error: aborting due to previous error
 

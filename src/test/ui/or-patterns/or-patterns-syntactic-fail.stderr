@@ -115,8 +115,8 @@ LL |     let recovery_witness: String = 0;
    |                                    expected struct `std::string::String`, found integer
    |                                    help: try using a conversion method: `0.to_string()`
    |
-   = note: expected type `std::string::String`
-              found type `{integer}`
+   = note: expected type `{integer}`
+              found type `std::string::String`
 
 error: aborting due to 16 previous errors
 

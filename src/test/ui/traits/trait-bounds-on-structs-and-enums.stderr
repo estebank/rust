@@ -1,13 +1,14 @@
 error[E0277]: the trait bound `T: Trait` is not satisfied
   --> $DIR/trait-bounds-on-structs-and-enums.rs:13:9
    |
+LL | trait Trait {}
+   | -------------- consider adding a `where T: Trait` bound
+LL | 
 LL | struct Foo<T:Trait> {
    | ------------------- required by `Foo`
 ...
 LL | impl<T> Foo<T> {
    |         ^^^^^^ the trait `Trait` is not implemented for `T`
-   |
-   = help: consider adding a `where T: Trait` bound
 
 error[E0277]: the trait bound `isize: Trait` is not satisfied
   --> $DIR/trait-bounds-on-structs-and-enums.rs:19:5
@@ -30,24 +31,26 @@ LL |     Quux(Bar<usize>),
 error[E0277]: the trait bound `U: Trait` is not satisfied
   --> $DIR/trait-bounds-on-structs-and-enums.rs:27:5
    |
+LL | trait Trait {}
+   | -------------- consider adding a `where U: Trait` bound
+LL | 
 LL | struct Foo<T:Trait> {
    | ------------------- required by `Foo`
 ...
 LL |     b: Foo<U>,
    |     ^^^^^^^^^ the trait `Trait` is not implemented for `U`
-   |
-   = help: consider adding a `where U: Trait` bound
 
 error[E0277]: the trait bound `V: Trait` is not satisfied
   --> $DIR/trait-bounds-on-structs-and-enums.rs:31:21
    |
+LL | trait Trait {}
+   | -------------- consider adding a `where V: Trait` bound
+...
 LL | enum Bar<T:Trait> {
    | ----------------- required by `Bar`
 ...
 LL |     EvenMoreBadness(Bar<V>),
    |                     ^^^^^^ the trait `Trait` is not implemented for `V`
-   |
-   = help: consider adding a `where V: Trait` bound
 
 error[E0277]: the trait bound `i32: Trait` is not satisfied
   --> $DIR/trait-bounds-on-structs-and-enums.rs:35:5

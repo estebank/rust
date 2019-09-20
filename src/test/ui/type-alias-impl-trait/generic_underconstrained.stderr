@@ -7,10 +7,11 @@ LL | type Underconstrained<T: Trait> = impl 'static;
 error[E0277]: the trait bound `T: Trait` is not satisfied
   --> $DIR/generic_underconstrained.rs:6:1
    |
+LL | trait Trait {}
+   | -------------- consider adding a `where T: Trait` bound
 LL | type Underconstrained<T: Trait> = impl 'static;
    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Trait` is not implemented for `T`
    |
-   = help: consider adding a `where T: Trait` bound
    = note: the return type of a function must have a statically known size
 
 error: aborting due to 2 previous errors

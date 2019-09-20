@@ -157,8 +157,7 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
                 .collect()
     }
 
-    /// Pushes the obligations required for `trait_ref` to be WF into
-    /// `self.out`.
+    /// Pushes the obligations required for `trait_ref` to be WF into `self.out`.
     fn compute_trait_ref(&mut self, trait_ref: &ty::TraitRef<'tcx>, elaborate: Elaborate) {
         let obligations = self.nominal_obligations(trait_ref.def_id, trait_ref.substs);
 
@@ -431,27 +430,27 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
         return true;
     }
 
-    fn nominal_obligations(&mut self,
-                           def_id: DefId,
-                           substs: SubstsRef<'tcx>)
-                           -> Vec<traits::PredicateObligation<'tcx>>
-    {
-        let predicates =
-            self.infcx.tcx.predicates_of(def_id)
-                          .instantiate(self.infcx.tcx, substs);
+    fn nominal_obligations(
+        &mut self,
+        def_id: DefId,
+        substs: SubstsRef<'tcx>,
+    ) -> Vec<traits::PredicateObligation<'tcx>> {
+        let predicates = self.infcx.tcx
+            .predicates_of(def_id)
+            .instantiate(self.infcx.tcx, substs);
         let cause = self.cause(traits::ItemObligation(def_id));
         predicates.predicates
-                  .into_iter()
-                  .map(|pred| traits::Obligation::new(cause.clone(),
-                                                      self.param_env,
-                                                      pred))
-                  .filter(|pred| !pred.has_escaping_bound_vars())
-                  .collect()
+            .into_iter()
+            .map(|pred| traits::Obligation::new(cause.clone(), self.param_env, pred))
+            .filter(|pred| !pred.has_escaping_bound_vars())
+            .collect()
     }
 
-    fn from_object_ty(&mut self, ty: Ty<'tcx>,
-                      data: ty::Binder<&'tcx ty::List<ty::ExistentialPredicate<'tcx>>>,
-                      region: ty::Region<'tcx>) {
+    fn from_object_ty(
+        &mut self, ty: Ty<'tcx>,
+        data: ty::Binder<&'tcx ty::List<ty::ExistentialPredicate<'tcx>>>,
+        region: ty::Region<'tcx>,
+    ) {
         // Imagine a type like this:
         //
         //     trait Foo { }
@@ -493,10 +492,11 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
             for implicit_bound in implicit_bounds {
                 let cause = self.cause(traits::ObjectTypeBound(ty, explicit_bound));
                 let outlives = ty::Binder::dummy(
-                    ty::OutlivesPredicate(explicit_bound, implicit_bound));
-                self.out.push(traits::Obligation::new(cause,
-                                                      self.param_env,
-                                                      outlives.to_predicate()));
+                    ty::OutlivesPredicate(explicit_bound, implicit_bound),
+                );
+                self.out.push(
+                    traits::Obligation::new(cause, self.param_env, outlives.to_predicate()),
+                );
             }
         }
     }

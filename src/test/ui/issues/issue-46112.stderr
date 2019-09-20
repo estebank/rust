@@ -7,8 +7,8 @@ LL | fn main() { test(Ok(())); }
    |                     expected enum `std::option::Option`, found ()
    |                     help: try using a variant of the expected type: `Some(())`
    |
-   = note: expected type `std::option::Option<()>`
-              found type `()`
+   = note: expected type `()`
+              found type `std::option::Option<()>`
 
 error: aborting due to previous error
 

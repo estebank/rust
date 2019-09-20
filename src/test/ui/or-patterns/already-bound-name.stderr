@@ -96,8 +96,8 @@ error[E0308]: mismatched types
 LL |     let B(A(a, _) | B(a)) | A(a, A(a, _) | B(a)) = B(B(1));
    |                               ^ expected integer, found enum `E`
    |
-   = note: expected type `{integer}`
-              found type `E<{integer}>`
+   = note: expected type `E<{integer}>`
+              found type `{integer}`
 
 error: aborting due to 15 previous errors
 

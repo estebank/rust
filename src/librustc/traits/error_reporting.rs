@@ -40,10 +40,12 @@ use syntax::symbol::{sym, kw};
 use syntax_pos::{DUMMY_SP, Span, ExpnKind};
 
 impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
-    pub fn report_fulfillment_errors(&self,
+    pub fn report_fulfillment_errors(
+        &self,
                                      errors: &[FulfillmentError<'tcx>],
                                      body_id: Option<hir::BodyId>,
-                                     fallback_has_occurred: bool) {
+        fallback_has_occurred: bool,
+    ) {
         #[derive(Debug)]
         struct ErrorDescriptor<'tcx> {
             predicate: ty::Predicate<'tcx>,

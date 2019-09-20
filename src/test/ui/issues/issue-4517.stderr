@@ -4,8 +4,8 @@ error[E0308]: mismatched types
 LL |     bar(foo);
    |         ^^^ expected usize, found array of 4 elements
    |
-   = note: expected type `usize`
-              found type `[u8; 4]`
+   = note: expected type `[u8; 4]`
+              found type `usize`
 
 error: aborting due to previous error
 
