@@ -5,7 +5,7 @@ LL | fn is_iterator_of<A, I: Iterator<Item=A>>(_: &I) {}
    | ------------------------------------------------ required by `is_iterator_of`
 ...
 LL |     is_iterator_of::<Option<T>, _>(&adapter);
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected type parameter, found enum `std::option::Option`
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected type parameter `T`, found enum `std::option::Option`
    |
    = note: expected type `T`
               found type `std::option::Option<T>`
