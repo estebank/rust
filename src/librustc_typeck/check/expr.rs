@@ -36,8 +36,7 @@ use rustc::ty::adjustment::{
     Adjust, Adjustment, AllowTwoPhase, AutoBorrow, AutoBorrowMutability,
 };
 use rustc::ty::{AdtKind, Visibility};
-use rustc::ty::Ty;
-use rustc::ty::TypeFoldable;
+use rustc::ty::{DefIdTree, Ty, TypeFoldable};
 use rustc::ty::subst::InternalSubsts;
 use rustc::traits::{self, ObligationCauseCode};
 
@@ -783,6 +782,12 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         let method = match self.lookup_method(rcvr_t, segment, span, expr, rcvr) {
             Ok(method) => {
                 self.write_method_call(expr.hir_id, method);
+                let parent = self.tcx.parent(method.def_id);
+                info!("check_method_call {:?} {:?} {:?} {:?}", &rcvr_t.sty, parent, Some(method.def_id), self.tcx.lang_items().clone_trait());
+                if let (ty::Ref(..), true) = (&rcvr_t.sty, parent == self.tcx.lang_items().clone_trait()) {
+                    self.tcx.sess.span_warn(span, &format!("check_method_call {:?} {:?}", rcvr_t, method.def_id));
+                }
+                // hereMethodCallee 
                 Ok(method)
             }
             Err(error) => {
