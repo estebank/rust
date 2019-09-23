@@ -118,45 +118,50 @@ LL |         <Foo>::trait_unstable(&foo);
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:68:13
    |
 LL |         foo.method_unstable_text();
    |             ^^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:70:9
    |
 LL |         Foo::method_unstable_text(&foo);
    |         ^^^^^^^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:72:9
    |
 LL |         <Foo>::method_unstable_text(&foo);
    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:74:13
    |
 LL |         foo.trait_unstable_text();
    |             ^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:76:9
    |
 LL |         <Foo>::trait_unstable_text(&foo);
    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
 error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:131:13
@@ -206,21 +211,23 @@ LL |         <Foo>::trait_unstable(&foo);
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:141:13
    |
 LL |         foo.trait_unstable_text();
    |             ^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:143:9
    |
 LL |         <Foo>::trait_unstable_text(&foo);
    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
 error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:154:13
@@ -246,13 +253,14 @@ LL |         foo.trait_unstable();
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': text
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/lint-stability-2.rs:159:13
    |
 LL |         foo.trait_unstable_text();
    |             ^^^^^^^^^^^^^^^^^^^
    |
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: text
 
 error: aborting due to 32 previous errors
 

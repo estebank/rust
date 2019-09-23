@@ -7,7 +7,7 @@ LL |     unstable();
    = note: for more information, see https://github.com/rust-lang/rust/issues/1
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
 
-error[E0658]: use of unstable library feature 'unstable_test_feature': message
+error[E0658]: use of unstable library feature 'unstable_test_feature'
   --> $DIR/stability-attribute-issue.rs:10:5
    |
 LL |     unstable_msg();
@@ -15,6 +15,7 @@ LL |     unstable_msg();
    |
    = note: for more information, see https://github.com/rust-lang/rust/issues/2
    = help: add `#![feature(unstable_test_feature)]` to the crate attributes to enable
+   = note: message
 
 error: aborting due to 2 previous errors
 

@@ -1,4 +1,4 @@
-error[E0658]: use of unstable library feature 'custom_test_frameworks': custom test frameworks are an unstable feature
+error[E0658]: use of unstable library feature 'custom_test_frameworks'
   --> $DIR/feature-gate-custom_test_frameworks.rs:3:3
    |
 LL | #[test_case]
@@ -6,6 +6,7 @@ LL | #[test_case]
    |
    = note: for more information, see https://github.com/rust-lang/rust/issues/50297
    = help: add `#![feature(custom_test_frameworks)]` to the crate attributes to enable
+   = note: custom test frameworks are an unstable feature
 
 error[E0658]: custom test frameworks are an unstable feature
   --> $DIR/feature-gate-custom_test_frameworks.rs:1:1

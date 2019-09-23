@@ -17,7 +17,7 @@ use syntax::symbol::{Symbol, sym};
 use syntax_pos::{Span, MultiSpan};
 use syntax::ast::{Attribute, CRATE_NODE_ID};
 use syntax::errors::Applicability;
-use syntax::feature_gate::{GateIssue, emit_feature_err};
+use syntax::feature_gate::{GateIssue, emit_feature_err, feature_err};
 use syntax::attr::{self, Stability, Deprecation, RustcDeprecation};
 use crate::ty::{self, TyCtxt};
 use crate::util::nodemap::{FxHashSet, FxHashMap};
@@ -483,10 +483,7 @@ pub fn provide(providers: &mut Providers<'_>) {
 pub fn report_unstable(
     sess: &Session, feature: Symbol, reason: Option<Symbol>, issue: u32, is_soft: bool, span: Span
 ) {
-    let msg = match reason {
-        Some(r) => format!("use of unstable library feature '{}': {}", feature, r),
-        None => format!("use of unstable library feature '{}'", &feature)
-    };
+    let msg = format!("use of unstable library feature '{}'", feature);
 
     let msp: MultiSpan = span.into();
     let cm = &sess.parse_sess.source_map();
@@ -507,11 +504,21 @@ pub fn report_unstable(
     let fresh = sess.one_time_diagnostics.borrow_mut().insert(error_id);
     if fresh {
         if is_soft {
-            sess.buffer_lint(lint::builtin::SOFT_UNSTABLE, CRATE_NODE_ID, span, &msg);
+            let diag = match reason {
+                Some(r) => BuiltinLintDiagnostics::UnstableFeature(format!("{}", r)),
+                None => BuiltinLintDiagnostics::Normal,
+            };
+            sess.buffer_lint_with_diagnostic(
+                lint::builtin::SOFT_UNSTABLE, CRATE_NODE_ID, span, &msg, diag,
+            );
         } else {
-            emit_feature_err(
+            let mut err = feature_err(
                 &sess.parse_sess, feature, span, GateIssue::Library(Some(issue)), &msg
             );
+            if let Some(note) = reason {
+                err.note(&note.as_str());
+            }
+            err.emit();
         }
     }
 }

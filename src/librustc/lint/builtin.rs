@@ -486,6 +486,7 @@ pub enum BuiltinLintDiagnostics {
     NestedImplTrait { outer_impl_trait_span: Span, inner_impl_trait_span: Span },
     RedundantImport(Vec<(Span, bool)>, ast::Ident),
     DeprecatedMacro(Option<Symbol>, Span),
+    UnstableFeature(String),
 }
 
 pub(crate) fn add_elided_lifetime_in_path_suggestion(
@@ -613,6 +614,9 @@ impl BuiltinLintDiagnostics {
             }
             BuiltinLintDiagnostics::DeprecatedMacro(suggestion, span) =>
                 stability::deprecation_suggestion(db, suggestion, span),
+            BuiltinLintDiagnostics::UnstableFeature(note) => {
+                db.note(&note);
+            }
         }
     }
 }
