@@ -709,8 +709,10 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                         self.suggest_semicolon_removal(&obligation, &mut err, span, &trait_ref);
 
                         // Try to report a help message
-                        if !trait_ref.has_infer_types() &&
-                            self.predicate_can_apply(obligation.param_env, trait_ref) {
+                        if !trait_ref.has_infer_types() && self.predicate_can_apply(
+                            obligation.param_env,
+                            trait_ref,
+                        ) {
                             // If a where-clause may be useful, remind the
                             // user that they can add it.
                             //
@@ -718,8 +720,26 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                             // these notes will often be of the form
                             //     "the type `T` can't be frobnicated"
                             // which is somewhat confusing.
-                            err.help(&format!("consider adding a `where {}` bound",
-                                              trait_ref.to_predicate()));
+                            let trait_ty = trait_ref.self_ty();
+                            err.note(&format!("{:?} {:?} {}", trait_ty, trait_ty.kind,
+                                    trait_ref.skip_binder().input_types()
+                                        .map(|ty| format!(" + {}", ty))
+                                        .collect::<String>(),
+                            ));
+
+                            if let ty::Opaque(def_id, _substs) = trait_ty.kind {
+                                err.span_label(self.tcx.def_span(def_id), &format!(
+                                    "help: further constrain this type: {}{}",
+                                    trait_ty,
+                                    trait_ref.skip_binder().input_types()
+                                        .map(|ty| format!(" + {}", ty))
+                                        .collect::<String>(),
+                                ));
+
+                            } else {
+                                err.help(&format!("consider adding a `where {}` bound",
+                                                trait_ref.to_predicate()));
+                            }
                         } else if !have_alt_message {
                             // Can't show anything else useful, try to find similar impls.
                             let impl_candidates = self.find_similar_impl_candidates(trait_ref);
