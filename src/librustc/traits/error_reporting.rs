@@ -1135,11 +1135,6 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 return;
             }
             let trait_ref = self.resolve_vars_if_possible(trait_ref);
-            if trait_ref.has_infer_types() {
-                // Do not ICE while trying to find if a reborrow would succeed on a trait with
-                // unresolved bindings.
-                return;
-            }
 
             if let ty::Ref(region, t_type, mutability) = trait_ref.skip_binder().self_ty().kind {
                 let trait_type = match mutability {
@@ -1147,8 +1142,19 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     hir::Mutability::MutImmutable => self.tcx.mk_mut_ref(region, t_type),
                 };
 
-                let substs = self.tcx.mk_substs_trait(&trait_type, &[]);
+                let substs = self.tcx.mk_substs_trait(
+                    &trait_type,
+                    &trait_ref.skip_binder().substs[1..],
+                );
                 let new_trait_ref = ty::TraitRef::new(trait_ref.skip_binder().def_id, substs);
+                // Keep original bindings around.
+                let new_trait_ref = trait_ref.map_bound_ref(|_| new_trait_ref);
+
+                if new_trait_ref.has_escaping_bound_vars() {
+                    // Calling `to_predicate()` with unresolved bindings is invalid.
+                    return;
+                }
+
                 let new_obligation = Obligation::new(
                     ObligationCause::dummy(),
                     obligation.param_env,
