@@ -48,6 +48,7 @@ use syntax_pos::{
     Span,
     SpanSnippetError,
 };
+pub use snippet::Style;
 
 pub type PResult<'a, T> = Result<T, DiagnosticBuilder<'a>>;
 
