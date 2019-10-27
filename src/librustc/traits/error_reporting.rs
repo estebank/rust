@@ -774,6 +774,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                             &mut err,
                             &trait_ref,
                             points_at_arg,
+                            have_alt_message,
                         ) {
                             self.note_obligation_cause(&mut err, obligation);
                             err.emit();
@@ -1316,6 +1317,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
         err: &mut DiagnosticBuilder<'tcx>,
         trait_ref: &ty::Binder<ty::TraitRef<'tcx>>,
         points_at_arg: bool,
+        has_custom_message: bool,
     ) -> bool {
         if !points_at_arg {
             return false;
@@ -1344,14 +1346,16 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     // original type obligation, not the last one that failed, which is arbitrary.
                     // Because of this, we modify the error to refer to the original obligation and
                     // return early in the caller.
-                    err.message = vec![(
-                        format!(
-                            "the trait bound `{}: {}` is not satisfied",
-                            found,
-                            obligation.parent_trait_ref.skip_binder(),
-                        ),
-                        Style::NoStyle,
-                    )];
+                    let msg = format!(
+                        "the trait bound `{}: {}` is not satisfied",
+                        found,
+                        obligation.parent_trait_ref.skip_binder(),
+                    );
+                    if has_custom_message {
+                        err.note(&msg);
+                    } else {
+                        err.message = vec![(msg, Style::NoStyle)];
+                    }
                     if snippet.starts_with('&') {
                         // This is already a literal borrow and the obligation is failing
                         // somewhere else in the obligation chain. Do not suggest non-sense.
