@@ -636,11 +636,11 @@ impl<'hir> Map<'hir> {
         result
     }
 
-    /// Similar to `get_parent`; returns the parent HIR Id, or just `hir_id` if there
+    /// Similar to `get_parent_item`; returns the parent HIR Id, or just `hir_id` if there
     /// is no parent. Note that the parent may be `CRATE_HIR_ID`, which is not itself
     /// present in the map, so passing the return value of `get_parent_node` to
     /// `get` may in fact panic.
-    /// This function returns the immediate parent in the HIR, whereas `get_parent`
+    /// This function returns the immediate parent in the HIR, whereas `get_parent_item`
     /// returns the enclosing item. Note that this might not be the actual parent
     /// node in the HIR -- some kinds of nodes are not in the map and these will
     /// never appear as the parent node. Thus, you can always walk the parent nodes

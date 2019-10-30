@@ -2036,11 +2036,13 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
         }
     }
 
-    fn note_obligation_cause_code<T>(&self,
-                                     err: &mut DiagnosticBuilder<'_>,
-                                     predicate: &T,
-                                     cause_code: &ObligationCauseCode<'tcx>,
-                                     obligated_types: &mut Vec<&ty::TyS<'tcx>>)
+    fn note_obligation_cause_code<T>(
+        &self,
+        err: &mut DiagnosticBuilder<'_>,
+        predicate: &T,
+        cause_code: &ObligationCauseCode<'tcx>,
+        obligated_types: &mut Vec<&ty::TyS<'tcx>>,
+    )
         where T: fmt::Display
     {
         let tcx = self.tcx;
@@ -2125,8 +2127,18 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     }
                 }
             }
-            ObligationCauseCode::VariableType(_) => {
+            ObligationCauseCode::VariableType(hir_id) => {
                 err.note("all local variables must have a statically known size");
+                if let Some(Node::Local(hir::Local {
+                    ty: Some(ty), ..
+                })) = self.tcx.hir().find(self.tcx.hir().get_parent_node(hir_id)) {
+                    err.span_label(
+                        ty.span,
+                        "consider using `Box` for a trait object instead \
+                         (https://doc.rust-lang.org/book/ch17-02-trait-objects.html)",
+                    );
+                }
+
                 if !self.tcx.features().unsized_locals {
                     err.help("unsized locals are gated as an unstable feature");
                 }

@@ -8,6 +8,7 @@ use crate::ty::print::Print;
 use syntax::source_map::DesugaringKind;
 use syntax_pos::Span;
 use errors::{Applicability, DiagnosticBuilder};
+use log::debug;
 
 struct FindLocalByTypeVisitor<'a, 'tcx> {
     infcx: &'a InferCtxt<'a, 'tcx>,
@@ -25,6 +26,7 @@ impl<'a, 'tcx> FindLocalByTypeVisitor<'a, 'tcx> {
         target_ty: Ty<'tcx>,
         hir_map: &'a hir::map::Map<'tcx>,
     ) -> Self {
+        debug!("FindLocalByTypeVisitor target_ty={:?} ({:?})", target_ty, target_ty.kind);
         Self {
             infcx,
             target_ty,
@@ -43,7 +45,9 @@ impl<'a, 'tcx> FindLocalByTypeVisitor<'a, 'tcx> {
         match ty_opt {
             Some(ty) => {
                 let ty = self.infcx.resolve_vars_if_possible(&ty);
+                debug!("node_matches_type ty={:?} ({:?})", ty, ty.kind);
                 if ty.walk().any(|inner_ty| {
+                    debug!("node_matches_type inner_ty={:?} ({:?})", inner_ty, inner_ty.kind);
                     inner_ty == self.target_ty || match (&inner_ty.kind, &self.target_ty.kind) {
                         (&Infer(TyVar(a_vid)), &Infer(TyVar(b_vid))) => {
                             self.infcx
@@ -54,6 +58,7 @@ impl<'a, 'tcx> FindLocalByTypeVisitor<'a, 'tcx> {
                         _ => false,
                     }
                 }) {
+                    debug!("returning some");
                     Some(ty)
                 } else {
                     None
@@ -70,6 +75,7 @@ impl<'a, 'tcx> Visitor<'tcx> for FindLocalByTypeVisitor<'a, 'tcx> {
     }
 
     fn visit_local(&mut self, local: &'tcx Local) {
+        debug!("visit_local {:?}", local);
         if let (None, Some(ty)) = (self.found_local_pattern, self.node_matches_type(local.hir_id)) {
             self.found_local_pattern = Some(&*local.pat);
             self.found_ty = Some(ty);
@@ -79,6 +85,7 @@ impl<'a, 'tcx> Visitor<'tcx> for FindLocalByTypeVisitor<'a, 'tcx> {
 
     fn visit_body(&mut self, body: &'tcx Body) {
         for param in &body.params {
+            debug!("visit_body param {:?}", param);
             if let (None, Some(ty)) = (
                 self.found_arg_pattern,
                 self.node_matches_type(param.hir_id),
@@ -91,11 +98,13 @@ impl<'a, 'tcx> Visitor<'tcx> for FindLocalByTypeVisitor<'a, 'tcx> {
     }
 
     fn visit_expr(&mut self, expr: &'tcx Expr) {
-        if let (ExprKind::Closure(_, _fn_decl, _id, _sp, _), Some(_)) = (
-            &expr.kind,
-            self.node_matches_type(expr.hir_id),
-        ) {
-            self.found_closure = Some(&expr.kind);
+        debug!("visit_expr {:?} ({:?})", expr, expr.kind);
+        if self.node_matches_type(expr.hir_id).is_some() {
+            match expr.kind {
+                ExprKind::Closure(..) => self.found_closure = Some(&expr.kind),
+                ExprKind::MethodCall(..) => self.found_method_call = Some(&expr.kind),
+                _ => {}
+            }
         }
         intravisit::walk_expr(self, expr);
     }
