@@ -40,6 +40,7 @@ impl TypoSuggestion {
 }
 
 /// A free importable items suggested in case of resolution failure.
+#[derive(Debug)]
 crate struct ImportSuggestion {
     pub did: Option<DefId>,
     pub path: Path,
@@ -485,15 +486,15 @@ impl<'a> Resolver<'a> {
         }
     }
 
-    fn lookup_import_candidates_from_module<FilterFn>(&mut self,
-                                          lookup_ident: Ident,
-                                          namespace: Namespace,
-                                          start_module: Module<'a>,
-                                          crate_name: Ident,
-                                          filter_fn: FilterFn)
-                                          -> Vec<ImportSuggestion>
-        where FilterFn: Fn(Res) -> bool
-    {
+    fn lookup_import_candidates_from_module(
+        &mut self,
+        lookup_ident: Ident,
+        namespace: Namespace,
+        start_module: Module<'a>,
+        crate_name: Ident,
+        filter_fn: impl Fn(Res) -> bool,
+    ) -> Vec<ImportSuggestion> {
+        debug!("lookup_import_candidates_from_module ident={:?} ns={:?}", lookup_ident, namespace);
         let mut candidates = Vec::new();
         let mut seen_modules = FxHashSet::default();
         let not_local_module = crate_name.name != kw::Crate;
@@ -505,6 +506,7 @@ impl<'a> Resolver<'a> {
             // We have to visit module children in deterministic order to avoid
             // instabilities in reported imports (#43552).
             in_module.for_each_child(self, |this, ident, ns, name_binding| {
+                debug!("lookup_import_candidates_from_module ident={:?} ns={:?} name_binding={:?}", ident, ns, name_binding);
                 // avoid imports entirely
                 if name_binding.is_import() && !name_binding.is_extern_crate() { return; }
                 // avoid non-importable candidates as well
@@ -580,11 +582,12 @@ impl<'a> Resolver<'a> {
     ///
     /// N.B., the method does not look into imports, but this is not a problem,
     /// since we report the definitions (thus, the de-aliased imports).
-    crate fn lookup_import_candidates<FilterFn>(
-        &mut self, lookup_ident: Ident, namespace: Namespace, filter_fn: FilterFn
-    ) -> Vec<ImportSuggestion>
-        where FilterFn: Fn(Res) -> bool
-    {
+    crate fn lookup_import_candidates(
+        &mut self,
+        lookup_ident: Ident,
+        namespace: Namespace,
+        filter_fn: impl Fn(Res) -> bool,
+    ) -> Vec<ImportSuggestion> {
         let mut suggestions = self.lookup_import_candidates_from_module(
             lookup_ident, namespace, self.graph_root, Ident::with_dummy_span(kw::Crate), &filter_fn
         );

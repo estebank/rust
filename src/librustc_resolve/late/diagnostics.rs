@@ -159,6 +159,7 @@ impl<'a> LateResolutionVisitor<'a, '_> {
 
         // Try to lookup name in more relaxed fashion for better error reporting.
         let ident = path.last().unwrap().ident;
+        // FIXME: lookup `new` method
         let candidates = self.r.lookup_import_candidates(ident, ns, is_expected)
             .drain(..)
             .filter(|ImportSuggestion { did, .. }| {
@@ -465,6 +466,7 @@ impl<'a> LateResolutionVisitor<'a, '_> {
                     let accessible_ctor =
                         self.r.is_accessible_from(ctor_vis, self.parent_scope.module);
                     if is_expected(ctor_def) && !accessible_ctor {
+                        // HERE!
                         err.span_label(
                             span,
                             format!("constructor is not visible here due to private fields"),

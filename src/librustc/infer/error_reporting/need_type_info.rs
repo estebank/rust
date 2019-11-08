@@ -17,6 +17,11 @@ struct FindLocalByTypeVisitor<'a, 'tcx> {
     found_arg_pattern: Option<&'tcx Pat>,
     found_ty: Option<Ty<'tcx>>,
     found_closure: Option<&'tcx ExprKind>,
+<<<<<<< Updated upstream
+=======
+    found_method_call: Option<&'tcx ExprKind>,
+    found_const_array_size: Option<&'tcx hir::Ty>,
+>>>>>>> Stashed changes
 }
 
 impl<'a, 'tcx> FindLocalByTypeVisitor<'a, 'tcx> {
@@ -33,6 +38,11 @@ impl<'a, 'tcx> FindLocalByTypeVisitor<'a, 'tcx> {
             found_arg_pattern: None,
             found_ty: None,
             found_closure: None,
+<<<<<<< Updated upstream
+=======
+            found_method_call: None,
+            found_const_array_size: None,
+>>>>>>> Stashed changes
         }
     }
 
@@ -89,6 +99,20 @@ impl<'a, 'tcx> Visitor<'tcx> for FindLocalByTypeVisitor<'a, 'tcx> {
         }
         intravisit::walk_body(self, body);
     }
+
+    // fn visit_ty(&mut self, hir_ty: &'tcx hir::Ty) {
+    //     debug!("visit_ty hir_ty={:?}", hir_ty);
+    //     match hir_ty.kind {
+    //         hir::TyKind::Array(_, c) => {
+    //             let ty = self.node_matches_type(c.hir_id);
+    //             debug!("visit_ty array c={:?} ty={:?}", c, ty);
+    //             if ty.is_some() {
+    //                 self.found_const_array_size = Some(&hir_ty);
+    //             }
+    //         }
+    //         _ => {}
+    //     }
+    // }
 
     fn visit_expr(&mut self, expr: &'tcx Expr) {
         if let (ExprKind::Closure(_, _fn_decl, _id, _sp, _), Some(_)) = (
@@ -332,6 +356,23 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 format!("consider giving this pattern {}", suffix)
             };
             err.span_label(pattern.span, msg);
+<<<<<<< Updated upstream
+=======
+        } else if let Some(ExprKind::MethodCall(segment, ..)) = local_visitor.found_method_call {
+            if let Ok(snippet) = self.tcx.sess.source_map().span_to_snippet(segment.ident.span) {
+                if segment.args.is_none() {
+                    err.span_suggestion(
+                        segment.ident.span,
+                        "consider specifying the type argument in the method call",
+                        // FIXME: we don't know how many type arguments should be set here.
+                        format!("{}::<_>", snippet),
+                        Applicability::HasPlaceholders,
+                    );
+                }
+            }
+        } else if let Some(hir_ty) = local_visitor.found_const_array_size {
+            err.span_label(hir_ty.span, "associated consts are not allowed ");
+>>>>>>> Stashed changes
         }
         // Instead of the following:
         // error[E0282]: type annotations needed

@@ -1506,14 +1506,15 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         );
     }
 
-    fn smart_resolve_path_fragment(&mut self,
-                                   id: NodeId,
-                                   qself: Option<&QSelf>,
-                                   path: &[Segment],
-                                   span: Span,
-                                   source: PathSource<'_>,
-                                   crate_lint: CrateLint)
-                                   -> PartialRes {
+    fn smart_resolve_path_fragment(
+        &mut self,
+        id: NodeId,
+        qself: Option<&QSelf>,
+        path: &[Segment],
+        span: Span,
+        source: PathSource<'_>,
+        crate_lint: CrateLint,
+    ) -> PartialRes {
         let ns = source.namespace();
         let is_expected = &|res| source.is_expected(res);
 

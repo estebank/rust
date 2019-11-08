@@ -2071,8 +2071,8 @@ impl<'a> Resolver<'a> {
                         let is_mod = |res| {
                             match res { Res::Def(DefKind::Mod, _) => true, _ => false }
                         };
-                        let mut candidates =
-                            self.lookup_import_candidates(ident, TypeNS, is_mod);
+                        let mut candidates = self.lookup_import_candidates(ident, TypeNS, is_mod);
+                        debug!("resolve_path_with_ribs candidates={:?}", candidates);
                         candidates.sort_by_cached_key(|c| {
                             (c.path.segments.len(), pprust::path_to_string(&c.path))
                         });
