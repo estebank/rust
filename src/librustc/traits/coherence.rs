@@ -524,7 +524,9 @@ fn ty_is_non_local_constructor<'tcx>(
 ) -> Option<Ty<'tcx>> {
     debug!("ty_is_non_local_constructor({:?})", ty);
 
+    let ty = ty.peel_alias();
     match ty.kind {
+        ty::Alias(..) => unreachable!(),
         ty::Bool |
         ty::Char |
         ty::Int(..) |

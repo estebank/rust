@@ -323,7 +323,7 @@ impl Printer<'tcx> for SymbolMangler<'tcx> {
         ty: Ty<'tcx>,
     ) -> Result<Self::Type, Self::Error> {
         // Basic types, never cached (single-character).
-        let basic_type = match ty.kind {
+        let basic_type = match ty.kind.peel_alias() {
             ty::Bool => "b",
             ty::Char => "c",
             ty::Str => "e",
@@ -360,7 +360,8 @@ impl Printer<'tcx> for SymbolMangler<'tcx> {
         }
         let start = self.out.len();
 
-        match ty.kind {
+        match ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             // Basic types, handled above.
             ty::Bool | ty::Char | ty::Str |
             ty::Int(_) | ty::Uint(_) | ty::Float(_) |
@@ -376,7 +377,7 @@ impl Printer<'tcx> for SymbolMangler<'tcx> {
                     hir::MutImmutable => "R",
                     hir::MutMutable => "Q",
                 });
-                if *r != ty::ReErased {
+                if **r != ty::ReErased {
                     self = r.print(self)?;
                 }
                 self = ty.print(self)?;
@@ -409,17 +410,17 @@ impl Printer<'tcx> for SymbolMangler<'tcx> {
             }
 
             // Mangle all nominal types as paths.
-            ty::Adt(&ty::AdtDef { did: def_id, .. }, substs) |
-            ty::FnDef(def_id, substs) |
-            ty::Opaque(def_id, substs) |
-            ty::Projection(ty::ProjectionTy { item_def_id: def_id, substs }) |
-            ty::UnnormalizedProjection(ty::ProjectionTy { item_def_id: def_id, substs }) |
-            ty::Closure(def_id, substs) |
-            ty::Generator(def_id, substs, _) => {
-                self = self.print_def_path(def_id, substs)?;
+            ty::Adt(&ty::AdtDef { did: ref def_id, .. }, substs) |
+            ty::FnDef(ref def_id, substs) |
+            ty::Opaque(ref def_id, substs) |
+            ty::Projection(ty::ProjectionTy { item_def_id: ref def_id, substs }) |
+            ty::UnnormalizedProjection(ty::ProjectionTy { item_def_id: ref def_id, substs }) |
+            ty::Closure(ref def_id, substs) |
+            ty::Generator(ref def_id, substs, _) => {
+                self = self.print_def_path(*def_id, substs)?;
             }
             ty::Foreign(def_id) => {
-                self = self.print_def_path(def_id, &[])?;
+                self = self.print_def_path(*def_id, &[])?;
             }
 
             ty::FnPtr(sig) => {

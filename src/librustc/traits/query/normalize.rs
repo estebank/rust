@@ -87,6 +87,7 @@ impl<'cx, 'tcx> TypeFolder<'tcx> for QueryNormalizer<'cx, 'tcx> {
     }
 
     fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        let ty = ty.peel_alias();
         let ty = ty.super_fold_with(self);
         match ty.kind {
             ty::Opaque(def_id, substs) if !substs.has_escaping_bound_vars() => {

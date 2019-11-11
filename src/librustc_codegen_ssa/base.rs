@@ -127,7 +127,7 @@ pub fn unsized_info<'tcx, Cx: CodegenMethods<'tcx>>(
 ) -> Cx::Value {
     let (source, target) =
         cx.tcx().struct_lockstep_tails_erasing_lifetimes(source, target, cx.param_env());
-    match (&source.kind, &target.kind) {
+    match (&source.kind.peel_alias(), &target.kind.peel_alias()) {
         (&ty::Array(_, len), &ty::Slice(_)) => {
             cx.const_usize(len.eval_usize(cx.tcx(), ty::ParamEnv::reveal_all()))
         }
@@ -157,6 +157,9 @@ pub fn unsize_thin_ptr<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
     dst_ty: Ty<'tcx>,
 ) -> (Bx::Value, Bx::Value) {
     debug!("unsize_thin_ptr: {:?} => {:?}", src_ty, dst_ty);
+    // let src_ty = src_ty.peel_alias();
+    // let dst_ty = src_ty.peel_alias();
+    // debug!("unsize_thin_ptr after peel alias: {:?} => {:?}", src_ty, dst_ty);
     match (&src_ty.kind, &dst_ty.kind) {
         (&ty::Ref(_, a, _),
          &ty::Ref(_, b, _)) |
@@ -184,9 +187,11 @@ pub fn unsize_thin_ptr<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
                 assert_eq!(src_layout.size, src_f.size);
 
                 let dst_f = dst_layout.field(bx.cx(), i);
-                assert_ne!(src_f.ty, dst_f.ty);
+                let src_ty = src_f.ty.peel_alias();
+                let dst_ty = dst_f.ty.peel_alias();
+                assert_ne!(src_ty, dst_ty);
                 assert_eq!(result, None);
-                result = Some(unsize_thin_ptr(bx, src, src_f.ty, dst_f.ty));
+                result = Some(unsize_thin_ptr(bx, src, src_ty, dst_ty));
             }
             let (lldata, llextra) = result.unwrap();
             // HACK(eddyb) have to bitcast pointers until LLVM removes pointee types.
@@ -208,7 +213,7 @@ pub fn coerce_unsized_into<'a, 'tcx, Bx: BuilderMethods<'a, 'tcx>>(
 ) {
     let src_ty = src.layout.ty;
     let dst_ty = dst.layout.ty;
-    match (&src_ty.kind, &dst_ty.kind) {
+    match (&src_ty.kind.peel_alias(), &dst_ty.kind.peel_alias()) {
         (&ty::Ref(..), &ty::Ref(..)) |
         (&ty::Ref(..), &ty::RawPtr(..)) |
         (&ty::RawPtr(..), &ty::RawPtr(..)) => {

@@ -899,6 +899,8 @@ fn find_vtable_types_for_unsizing<'tcx>(
         }
     };
 
+    let source_ty = source_ty.peel_alias();
+    let target_ty = target_ty.peel_alias();
     match (&source_ty.kind, &target_ty.kind) {
         (&ty::Ref(_, a, _),
          &ty::Ref(_, b, _)) |

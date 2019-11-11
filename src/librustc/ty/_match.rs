@@ -59,25 +59,20 @@ impl TypeRelation<'tcx> for Match<'tcx> {
                a, b);
         if a == b { return Ok(a); }
 
-        match (&a.kind, &b.kind) {
-            (_, &ty::Infer(ty::FreshTy(_))) |
-            (_, &ty::Infer(ty::FreshIntTy(_))) |
-            (_, &ty::Infer(ty::FreshFloatTy(_))) => {
+        match (a.kind.peel_alias(), b.kind.peel_alias()) {
+            (_, ty::Infer(ty::FreshTy(_))) |
+            (_, ty::Infer(ty::FreshIntTy(_))) |
+            (_, ty::Infer(ty::FreshFloatTy(_))) => {
                 Ok(a)
             }
 
-            (&ty::Infer(_), _) |
-            (_, &ty::Infer(_)) => {
+            (ty::Infer(_), _) | (_, ty::Infer(_)) => {
                 Err(TypeError::Sorts(relate::expected_found(self, &a, &b)))
             }
 
-            (&ty::Error, _) | (_, &ty::Error) => {
-                Ok(self.tcx().types.err)
-            }
+            (ty::Error, _) | (_, ty::Error) => Ok(self.tcx().types.err),
 
-            _ => {
-                relate::super_relate_tys(self, a, b)
-            }
+            _ => relate::super_relate_tys(self, a, b),
         }
     }
 

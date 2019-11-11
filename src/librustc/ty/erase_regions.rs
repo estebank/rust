@@ -42,6 +42,7 @@ impl TypeFolder<'tcx> for RegionEraserVisitor<'tcx> {
     }
 
     fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        let ty = ty.peel_alias();
         if ty.has_local_value() {
             ty.super_fold_with(self)
         } else {

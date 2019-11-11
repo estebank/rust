@@ -415,12 +415,12 @@ pub trait PrettyPrinter<'tcx>:
             // impl on `Foo`, but fallback to `<Foo>::bar` if self-type is
             // anything other than a simple path.
             match self_ty.kind {
+                ty::Alias(..) |
                 ty::Adt(..) | ty::Foreign(_) |
                 ty::Bool | ty::Char | ty::Str |
                 ty::Int(_) | ty::Uint(_) | ty::Float(_) => {
                     return self_ty.print(self);
                 }
-
                 _ => {}
             }
         }
@@ -464,6 +464,12 @@ pub trait PrettyPrinter<'tcx>:
         define_scoped_cx!(self);
 
         match ty.kind {
+            ty::Alias(_ty, name) => {
+                p!(write("type {}", name))
+                // self.pretty_print_type(&ty);
+                // self.pretty_print_type(&ty);
+                // p!(write(")"));
+            }
             ty::Bool => p!(write("bool")),
             ty::Char => p!(write("char")),
             ty::Int(t) => p!(write("{}", t.name_str())),

@@ -544,7 +544,8 @@ impl<'a, 'tcx> TypeFolder<'tcx> for SubstFolder<'a, 'tcx> {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
-        if !t.needs_subst() {
+        // let t = t.peel_alias();
+        if !t.peel_alias().needs_subst() {
             return t;
         }
 

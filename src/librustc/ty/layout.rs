@@ -518,7 +518,8 @@ impl<'tcx> LayoutCx<'tcx, TyCtxt<'tcx>> {
         };
         debug_assert!(!ty.has_infer_types());
 
-        Ok(match ty.kind {
+        Ok(match ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             // Basic scalars.
             ty::Bool => {
                 tcx.intern_layout(LayoutDetails::scalar(self, Scalar {
@@ -533,10 +534,10 @@ impl<'tcx> LayoutCx<'tcx, TyCtxt<'tcx>> {
                 }))
             }
             ty::Int(ity) => {
-                scalar(Int(Integer::from_attr(dl, attr::SignedInt(ity)), true))
+                scalar(Int(Integer::from_attr(dl, attr::SignedInt(*ity)), true))
             }
             ty::Uint(ity) => {
-                scalar(Int(Integer::from_attr(dl, attr::UnsignedInt(ity)), false))
+                scalar(Int(Integer::from_attr(dl, attr::UnsignedInt(*ity)), false))
             }
             ty::Float(fty) => scalar(match fty {
                 ast::FloatTy::F32 => F32,
@@ -568,7 +569,7 @@ impl<'tcx> LayoutCx<'tcx, TyCtxt<'tcx>> {
                     data_ptr.valid_range = 1..=*data_ptr.valid_range.end();
                 }
 
-                let pointee = tcx.normalize_erasing_regions(param_env, pointee);
+                let pointee = tcx.normalize_erasing_regions(param_env, *pointee);
                 if pointee.is_sized(tcx.at(DUMMY_SP), param_env) {
                     return Ok(tcx.intern_layout(LayoutDetails::scalar(self, data_ptr)));
                 }
@@ -673,10 +674,10 @@ impl<'tcx> LayoutCx<'tcx, TyCtxt<'tcx>> {
                 tcx.intern_layout(unit)
             }
 
-            ty::Generator(def_id, substs, _) => self.generator_layout(ty, def_id, substs)?,
+            ty::Generator(def_id, substs, _) => self.generator_layout(ty, *def_id, substs)?,
 
             ty::Closure(def_id, ref substs) => {
-                let tys = substs.as_closure().upvar_tys(def_id, tcx);
+                let tys = substs.as_closure().upvar_tys(*def_id, tcx);
                 univariant(&tys.map(|ty| self.layout_of(ty)).collect::<Result<Vec<_>, _>>()?,
                     &ReprOptions::default(),
                     StructKind::AlwaysSized)?
@@ -2083,7 +2084,8 @@ where
             }))
         };
 
-        cx.layout_of(match this.ty.kind {
+        cx.layout_of(match this.ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Bool |
             ty::Char |
             ty::Int(_) |
@@ -2153,13 +2155,13 @@ where
 
             // Tuples, generators and closures.
             ty::Closure(def_id, ref substs) => {
-                substs.as_closure().upvar_tys(def_id, tcx).nth(i).unwrap()
+                substs.as_closure().upvar_tys(*def_id, tcx).nth(i).unwrap()
             }
 
             ty::Generator(def_id, ref substs, _) => {
                 match this.variants {
                     Variants::Single { index } => {
-                        substs.as_generator().state_tys(def_id, tcx)
+                        substs.as_generator().state_tys(*def_id, tcx)
                             .nth(index.as_usize()).unwrap()
                             .nth(i).unwrap()
                     }
@@ -2167,7 +2169,7 @@ where
                         if i == discr_index {
                             return discr_layout(discr);
                         }
-                        substs.as_generator().prefix_tys(def_id, tcx).nth(i).unwrap()
+                        substs.as_generator().prefix_tys(*def_id, tcx).nth(i).unwrap()
                     }
                 }
             }

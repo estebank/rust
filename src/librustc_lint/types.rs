@@ -442,11 +442,12 @@ impl<'a, 'tcx> LateLintPass<'a, 'tcx> for TypeLimits {
                             })
         }
 
-        fn check_limits(cx: &LateContext<'_, '_>,
-                        binop: hir::BinOp,
-                        l: &hir::Expr,
-                        r: &hir::Expr)
-                        -> bool {
+        fn check_limits(
+            cx: &LateContext<'_, '_>,
+            binop: hir::BinOp,
+            l: &hir::Expr,
+            r: &hir::Expr,
+        ) -> bool {
             let (lit, expr, swap) = match (&l.kind, &r.kind) {
                 (&hir::ExprKind::Lit(_), _) => (l, r, true),
                 (_, &hir::ExprKind::Lit(_)) => (r, l, false),
@@ -617,7 +618,9 @@ impl<'a, 'tcx> ImproperCTypesVisitor<'a, 'tcx> {
             return FfiSafe;
         }
 
+        let ty = ty.peel_alias();
         match ty.kind {
+            ty::Alias(..) => unreachable!(),
             ty::Adt(def, substs) => {
                 if def.is_phantom_data() {
                     return FfiPhantom(ty);

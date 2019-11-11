@@ -2543,7 +2543,7 @@ pub enum ItemKind {
     /// Module-level inline assembly (from `global_asm!`).
     GlobalAsm(P<GlobalAsm>),
     /// A type alias, e.g., `type Foo = Bar<u8>`.
-    TyAlias(P<Ty>, Generics),
+    TyAlias(P<Ty>, Generics, Ident),
     /// An opaque `impl Trait` type alias, e.g., `type Foo = impl Bar;`.
     OpaqueTy(OpaqueTy),
     /// An enum definition, e.g., `enum Foo<A, B> {C<A>, D<B>}`.
@@ -2601,7 +2601,7 @@ impl ItemKind {
     pub fn generics(&self) -> Option<&Generics> {
         Some(match *self {
             ItemKind::Fn(_, ref generics, _) |
-            ItemKind::TyAlias(_, ref generics) |
+            ItemKind::TyAlias(_, ref generics, _) |
             ItemKind::OpaqueTy(OpaqueTy { ref generics, impl_trait_fn: None, .. }) |
             ItemKind::Enum(_, ref generics) |
             ItemKind::Struct(_, ref generics) |

@@ -2334,7 +2334,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             source, target
         );
 
-        let may_apply = match (&source.kind, &target.kind) {
+        let may_apply = match (source.kind.peel_alias(), target.kind.peel_alias()) {
             // Trait+Kx+'a -> Trait+Ky+'b (upcasts).
             (&ty::Dynamic(ref data_a, ..), &ty::Dynamic(ref data_b, ..)) => {
                 // Upcasts permit two things:
@@ -2572,8 +2572,9 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
         let self_ty = self.infcx
             .shallow_resolve(obligation.predicate.skip_binder().self_ty());
 
-        match self_ty.kind {
+        match self_ty.kind.peel_alias() {
             ty::Infer(ty::IntVar(_))
+            | ty::Alias(..)
             | ty::Infer(ty::FloatVar(_))
             | ty::Uint(_)
             | ty::Int(_)
@@ -2638,7 +2639,8 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
 
         use self::BuiltinImplConditions::{Ambiguous, None, Where};
 
-        match self_ty.kind {
+        match self_ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Infer(ty::IntVar(_))
             | ty::Infer(ty::FloatVar(_))
             | ty::FnDef(..)
@@ -2678,7 +2680,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             ty::Closure(def_id, substs) => {
                 // (*) binder moved here
                 Where(ty::Binder::bind(
-                    substs.as_closure().upvar_tys(def_id, self.tcx()).collect(),
+                    substs.as_closure().upvar_tys(*def_id, self.tcx()).collect(),
                 ))
             }
 
@@ -2720,7 +2722,8 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
     /// Zed<i32> where enum Zed { A(T), B(u32) } -> [i32, u32]
     /// ```
     fn constituent_types_for_ty(&self, t: Ty<'tcx>) -> Vec<Ty<'tcx>> {
-        match t.kind {
+        match t.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Uint(_)
             | ty::Int(_)
             | ty::Bool
@@ -2763,14 +2766,14 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             }
 
             ty::Closure(def_id, ref substs) => substs.as_closure()
-                .upvar_tys(def_id, self.tcx())
+                .upvar_tys(*def_id, self.tcx())
                 .collect(),
 
             ty::Generator(def_id, ref substs, _) => {
-                let witness = substs.as_generator().witness(def_id, self.tcx());
+                let witness = substs.as_generator().witness(*def_id, self.tcx());
                 substs
                     .as_generator()
-                    .upvar_tys(def_id, self.tcx())
+                    .upvar_tys(*def_id, self.tcx())
                     .chain(iter::once(witness))
                     .collect()
             }
@@ -2791,7 +2794,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                 // We can resolve the `impl Trait` to its concrete type,
                 // which enforces a DAG between the functions requiring
                 // the auto trait bounds in question.
-                vec![self.tcx().type_of(def_id).subst(self.tcx(), substs)]
+                vec![self.tcx().type_of(*def_id).subst(self.tcx(), substs)]
             }
         }
     }
@@ -3467,9 +3470,9 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
         );
 
         let mut nested = vec![];
-        match (&source.kind, &target.kind) {
+        match (source.kind.peel_alias(), target.kind.peel_alias()) {
             // Trait+Kx+'a -> Trait+Ky+'b (upcasts).
-            (&ty::Dynamic(ref data_a, r_a), &ty::Dynamic(ref data_b, r_b)) => {
+            (ty::Dynamic(ref data_a, r_a), ty::Dynamic(ref data_b, r_b)) => {
                 // See assemble_candidates_for_unsizing for more info.
                 let existential_predicates = data_a.map_bound(|data_a| {
                     let iter =
@@ -3517,7 +3520,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                     obligation.cause.body_id,
                     ObjectCastObligation(target),
                 );
-                let outlives = ty::OutlivesPredicate(r_a, r_b);
+                let outlives = ty::OutlivesPredicate(*r_a, *r_b);
                 nested.push(Obligation::with_depth(
                     cause,
                     obligation.recursion_depth + 1,
@@ -3527,7 +3530,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             }
 
             // T -> Trait.
-            (_, &ty::Dynamic(ref data, r)) => {
+            (_, ty::Dynamic(ref data, r)) => {
                 let mut object_dids = data.auto_traits()
                     .chain(data.principal_def_id());
                 if let Some(did) = object_dids.find(|did| !tcx.is_object_safe(*did)) {
@@ -3569,23 +3572,23 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
 
                 // If the type is `Foo+'a`, ensures that the type
                 // being cast to `Foo+'a` outlives `'a`:
-                let outlives = ty::OutlivesPredicate(source, r);
+                let outlives = ty::OutlivesPredicate(source, *r);
                 nested.push(predicate_to_obligation(
                     ty::Binder::dummy(outlives).to_predicate(),
                 ));
             }
 
             // [T; n] -> [T].
-            (&ty::Array(a, _), &ty::Slice(b)) => {
+            (ty::Array(a, _), ty::Slice(b)) => {
                 let InferOk { obligations, .. } = self.infcx
                     .at(&obligation.cause, obligation.param_env)
-                    .eq(b, a)
+                    .eq(*b, *a)
                     .map_err(|_| Unimplemented)?;
                 nested.extend(obligations);
             }
 
             // Struct<T> -> Struct<U>.
-            (&ty::Adt(def, substs_a), &ty::Adt(_, substs_b)) => {
+            (ty::Adt(def, substs_a), ty::Adt(_, substs_b)) => {
                 let fields = def.all_fields()
                     .map(|f| tcx.type_of(f.did))
                     .collect::<Vec<_>>();
@@ -3658,7 +3661,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             }
 
             // (.., T) -> (.., U).
-            (&ty::Tuple(tys_a), &ty::Tuple(tys_b)) => {
+            (ty::Tuple(tys_a), ty::Tuple(tys_b)) => {
                 assert_eq!(tys_a.len(), tys_b.len());
 
                 // The last field of the tuple has to exist.

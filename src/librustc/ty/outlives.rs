@@ -60,16 +60,17 @@ impl<'tcx> TyCtxt<'tcx> {
         // with `collect()` because of the need to sometimes skip subtrees
         // in the `subtys` iterator (e.g., when encountering a
         // projection).
-        match ty.kind {
+        match ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Closure(def_id, ref substs) => {
-                for upvar_ty in substs.as_closure().upvar_tys(def_id, *self) {
+                for upvar_ty in substs.as_closure().upvar_tys(*def_id, *self) {
                     self.compute_components(upvar_ty, out);
                 }
             }
 
             ty::Generator(def_id, ref substs, _) => {
                 // Same as the closure case
-                for upvar_ty in substs.as_generator().upvar_tys(def_id, *self) {
+                for upvar_ty in substs.as_generator().upvar_tys(*def_id, *self) {
                     self.compute_components(upvar_ty, out);
                 }
 
@@ -83,7 +84,7 @@ impl<'tcx> TyCtxt<'tcx> {
             // OutlivesTypeParameterEnv -- the actual checking that `X:'a`
             // is implied by the environment is done in regionck.
             ty::Param(p) => {
-                out.push(Component::Param(p));
+                out.push(Component::Param(*p));
             }
 
             // For projections, we prefer to generate an obligation like
@@ -118,7 +119,7 @@ impl<'tcx> TyCtxt<'tcx> {
             // So, if we encounter an inference variable, just record
             // the unresolved variable as a component.
             ty::Infer(infer_ty) => {
-                out.push(Component::UnresolvedInferenceVariable(infer_ty));
+                out.push(Component::UnresolvedInferenceVariable(*infer_ty));
             }
 
             // Most types do not introduce any region binders, nor

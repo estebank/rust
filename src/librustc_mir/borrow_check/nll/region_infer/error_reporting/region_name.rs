@@ -521,6 +521,7 @@ impl<'tcx> RegionInferenceContext<'tcx> {
             &mut vec![(argument_ty, argument_hir_ty)];
 
         while let Some((ty, hir_ty)) = search_stack.pop() {
+            let ty = ty.peel_alias();
             match (&ty.kind, &hir_ty.kind) {
                 // Check if the `argument_ty` is `&'X ..` where `'X`
                 // is the region we are looking for -- if so, and we have a `&T`

@@ -277,7 +277,8 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
         /// returns the fuzzy category of a given type, or None
         /// if the type can be equated to any type.
         fn type_category(t: Ty<'_>) -> Option<u32> {
-            match t.kind {
+            match t.kind.peel_alias() {
+                ty::Alias(..) => unreachable!(),
                 ty::Bool => Some(0),
                 ty::Char => Some(1),
                 ty::Str => Some(2),
@@ -307,7 +308,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
         }
 
         match (type_category(a), type_category(b)) {
-            (Some(cat_a), Some(cat_b)) => match (&a.kind, &b.kind) {
+            (Some(cat_a), Some(cat_b)) => match (a.kind.peel_alias(), b.kind.peel_alias()) {
                 (&ty::Adt(def_a, _), &ty::Adt(def_b, _)) => def_a == def_b,
                 _ => cat_a == cat_b
             },
@@ -1130,7 +1131,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     kind: hir::ItemKind::Fn(_, generics, _), span, ..
                 }) |
                 hir::Node::Item(hir::Item {
-                    kind: hir::ItemKind::TyAlias(_, generics), span, ..
+                    kind: hir::ItemKind::TyAlias(_, generics, _), span, ..
                 }) |
                 hir::Node::Item(hir::Item {
                     kind: hir::ItemKind::TraitAlias(generics, _), span, ..
@@ -1978,6 +1979,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
             fn tcx<'b>(&'b self) -> TyCtxt<'tcx> { self.infcx.tcx }
 
             fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+                let ty = ty.peel_alias();
                 if let ty::Param(ty::ParamTy {name, .. }) = ty.kind {
                     let infcx = self.infcx;
                     self.var_map.entry(ty).or_insert_with(||

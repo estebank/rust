@@ -25,7 +25,8 @@ impl ClauseVisitor<'a, 'tcx> {
     }
 
     fn visit_ty(&mut self, ty: Ty<'tcx>) {
-        match ty.kind {
+        match ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Projection(data) => {
                 self.round.extend(
                     self.tcx.program_clauses_for(data.item_def_id)
@@ -54,7 +55,7 @@ impl ClauseVisitor<'a, 'tcx> {
             ty::Generator(def_id, ..) |
             ty::Opaque(def_id, ..) => {
                 self.round.extend(
-                    self.tcx.program_clauses_for(def_id)
+                    self.tcx.program_clauses_for(*def_id)
                         .iter()
                         .filter(|c| c.category() == ProgramClauseCategory::ImpliedBound)
                         .cloned()

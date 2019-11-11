@@ -370,7 +370,8 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
         let mut subtys = ty0.walk();
         let param_env = self.param_env;
         while let Some(ty) = subtys.next() {
-            match ty.kind {
+            match ty.kind.peel_alias() {
+                ty::Alias(..) => unreachable!(),
                 ty::Bool |
                 ty::Char |
                 ty::Int(..) |
@@ -393,7 +394,7 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
 
                 ty::Array(subty, len) => {
                     self.require_sized(subty, traits::SliceOrArrayElem);
-                    self.compute_array_len(*len);
+                    self.compute_array_len(**len);
                 }
 
                 ty::Tuple(ref tys) => {
@@ -410,7 +411,7 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
 
                 ty::Projection(data) => {
                     subtys.skip_current_subtree(); // subtree handled by compute_projection
-                    self.compute_projection(data);
+                    self.compute_projection(*data);
                 }
 
                 ty::UnnormalizedProjection(..) => bug!("only used with chalk-engine"),
@@ -422,7 +423,7 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
                 }
 
                 ty::FnDef(did, substs) => {
-                    let obligations = self.nominal_obligations(did, substs);
+                    let obligations = self.nominal_obligations(*did, substs);
                     self.out.extend(obligations);
                 }
 
@@ -481,7 +482,7 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
                     // anyway, except via auto trait matching (which
                     // only inspects the upvar types).
                     subtys.skip_current_subtree(); // subtree handled by compute_projection
-                    for upvar_ty in substs.as_closure().upvar_tys(def_id, self.infcx.tcx) {
+                    for upvar_ty in substs.as_closure().upvar_tys(*def_id, self.infcx.tcx) {
                         self.compute(upvar_ty);
                     }
                 }
@@ -497,8 +498,8 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
                     // of whatever returned this exact `impl Trait`.
 
                     // for named opaque `impl Trait` types we still need to check them
-                    if super::is_impl_trait_defn(self.infcx.tcx, did).is_none() {
-                        let obligations = self.nominal_obligations(did, substs);
+                    if super::is_impl_trait_defn(self.infcx.tcx, *did).is_none() {
+                        let obligations = self.nominal_obligations(*did, substs);
                         self.out.extend(obligations);
                     }
                 }
@@ -508,7 +509,7 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
                     //
                     // Here, we defer WF checking due to higher-ranked
                     // regions. This is perhaps not ideal.
-                    self.from_object_ty(ty, data, r);
+                    self.from_object_ty(ty, *data, r);
 
                     // FIXME(#27579) RFC also considers adding trait
                     // obligations that don't refer to Self and

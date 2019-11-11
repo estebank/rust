@@ -258,6 +258,8 @@ impl<'mir, 'tcx, M: Machine<'mir, 'tcx>> InterpCx<'mir, 'tcx, M> {
         let (src_pointee_ty, dest_pointee_ty) =
             self.tcx.struct_lockstep_tails_erasing_lifetimes(source_ty, dest_ty, self.param_env);
 
+        let src_pointee_ty = src_pointee_ty.peel_alias();
+        let dest_pointee_ty = dest_pointee_ty.peel_alias();
         match (&src_pointee_ty.kind, &dest_pointee_ty.kind) {
             (&ty::Array(_, length), &ty::Slice(_)) => {
                 let ptr = self.read_immediate(src)?.to_scalar()?;
@@ -294,7 +296,9 @@ impl<'mir, 'tcx, M: Machine<'mir, 'tcx>> InterpCx<'mir, 'tcx, M> {
         dest: PlaceTy<'tcx, M::PointerTag>,
     ) -> InterpResult<'tcx> {
         trace!("Unsizing {:?} into {:?}", src, dest);
-        match (&src.layout.ty.kind, &dest.layout.ty.kind) {
+        let src_ty = src.layout.ty.peel_alias();
+        let dest_ty = dest.layout.ty.peel_alias();
+        match (&src_ty.kind, &dest_ty.kind) {
             (&ty::Ref(_, s, _), &ty::Ref(_, d, _)) |
             (&ty::Ref(_, s, _), &ty::RawPtr(TypeAndMut { ty: d, .. })) |
             (&ty::RawPtr(TypeAndMut { ty: s, .. }),

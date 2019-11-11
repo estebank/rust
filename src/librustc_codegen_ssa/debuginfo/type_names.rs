@@ -32,7 +32,8 @@ pub fn push_debuginfo_type_name<'tcx>(
     // .natvis visualizers (and perhaps other existing native debuggers?)
     let cpp_like_names = tcx.sess.target.target.options.is_like_msvc;
 
-    match t.kind {
+    match t.kind.peel_alias() {
+        ty::Alias(..) => unreachable!(),
         ty::Bool => output.push_str("bool"),
         ty::Char => output.push_str("char"),
         ty::Str => output.push_str("str"),
@@ -40,14 +41,14 @@ pub fn push_debuginfo_type_name<'tcx>(
         ty::Int(int_ty) => output.push_str(int_ty.name_str()),
         ty::Uint(uint_ty) => output.push_str(uint_ty.name_str()),
         ty::Float(float_ty) => output.push_str(float_ty.name_str()),
-        ty::Foreign(def_id) => push_item_name(tcx, def_id, qualified, output),
+        ty::Foreign(def_id) => push_item_name(tcx, *def_id, qualified, output),
         ty::Adt(def, substs) => {
             push_item_name(tcx, def.did, qualified, output);
             push_type_params(tcx, substs, output, visited);
         },
         ty::Tuple(component_types) => {
             output.push('(');
-            for &component_type in component_types {
+            for &component_type in component_types.iter() {
                 push_debuginfo_type_name(tcx, component_type.expect_ty(), true, output, visited);
                 output.push_str(", ");
             }
@@ -189,13 +190,13 @@ pub fn push_debuginfo_type_name<'tcx>(
         ty::Closure(def_id, ..) => {
             output.push_str(&format!(
                 "closure-{}",
-                tcx.def_key(def_id).disambiguated_data.disambiguator
+                tcx.def_key(*def_id).disambiguated_data.disambiguator
             ));
         }
         ty::Generator(def_id, ..) => {
             output.push_str(&format!(
                 "generator-{}",
-                tcx.def_key(def_id).disambiguated_data.disambiguator
+                tcx.def_key(*def_id).disambiguated_data.disambiguator
             ));
         }
         ty::Error |

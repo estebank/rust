@@ -33,7 +33,19 @@ LL | use std::collections::HashMap;
 LL | use std::collections::hash_map::HashMap;
    |
 
-error: aborting due to 3 previous errors
+error[E0091]: type parameter `K` is unused
+  --> $DIR/use_suggestion_placement.rs:27:15
+   |
+LL |     type Dict<K, V> = HashMap<K, V>;
+   |               ^ unused type parameter
 
-Some errors have detailed explanations: E0412, E0425.
-For more information about an error, try `rustc --explain E0412`.
+error[E0091]: type parameter `V` is unused
+  --> $DIR/use_suggestion_placement.rs:27:18
+   |
+LL |     type Dict<K, V> = HashMap<K, V>;
+   |                  ^ unused type parameter
+
+error: aborting due to 5 previous errors
+
+Some errors have detailed explanations: E0091, E0412, E0425.
+For more information about an error, try `rustc --explain E0091`.

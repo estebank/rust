@@ -343,7 +343,9 @@ impl<'cx, 'tcx> TypeFolder<'tcx> for Canonicalizer<'cx, 'tcx> {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+        let t = t.peel_alias(); // < HERE
         match t.kind {
+            ty::Alias(..) => unreachable!(),
             ty::Infer(ty::TyVar(vid)) => {
                 debug!("canonical: type var found with vid {:?}", vid);
                 match self.infcx.unwrap().probe_ty_var(vid) {

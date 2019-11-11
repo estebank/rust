@@ -549,7 +549,7 @@ where
             b = self.infcx.shallow_resolve(b);
         }
 
-        match (&a.kind, &b.kind) {
+        match (a.kind.peel_alias(), b.kind.peel_alias()) {
             (_, &ty::Infer(ty::TyVar(vid))) => {
                 if D::forbid_inference_vars() {
                     // Forbid inference variables in the RHS.

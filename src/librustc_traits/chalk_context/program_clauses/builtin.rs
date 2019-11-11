@@ -49,7 +49,7 @@ crate fn assemble_builtin_unsize_impls<'tcx>(
     target: Ty<'tcx>,
     clauses: &mut Vec<Clause<'tcx>>,
 ) {
-    match (&source.kind, &target.kind) {
+    match (&source.kind.peel_alias(), &target.kind.peel_alias()) {
         (ty::Dynamic(data_a, ..), ty::Dynamic(data_b, ..)) => {
             if data_a.principal_def_id() != data_b.principal_def_id()
                 || data_b.auto_traits().any(|b| data_a.auto_traits().all(|a| a != b))
@@ -130,7 +130,9 @@ crate fn assemble_builtin_sized_impls<'tcx>(
         clauses.push(Clause::ForAll(ty::Binder::bind(clause)));
     };
 
-    match &ty.kind {
+    let ty = ty.peel_alias();
+    match ty.kind {
+        ty::Alias(..) => unreachable!(),
         // Non parametric primitive types.
         ty::Bool |
         ty::Char |
@@ -143,13 +145,13 @@ crate fn assemble_builtin_sized_impls<'tcx>(
         ty::Never => push_builtin_impl(ty, &[]),
 
         // These ones are always `Sized`.
-        &ty::Array(_, length) => {
+        ty::Array(_, length) => {
             push_builtin_impl(tcx.mk_ty(ty::Array(generic_types::bound(tcx, 0), length)), &[]);
         }
         ty::RawPtr(ptr) => {
             push_builtin_impl(generic_types::raw_ptr(tcx, ptr.mutbl), &[]);
         }
-        &ty::Ref(_, _, mutbl) => {
+        ty::Ref(_, _, mutbl) => {
             push_builtin_impl(generic_types::ref_ty(tcx, mutbl), &[]);
         }
         ty::FnPtr(fn_ptr) => {
@@ -163,18 +165,18 @@ crate fn assemble_builtin_sized_impls<'tcx>(
             );
             push_builtin_impl(fn_ptr, &[]);
         }
-        &ty::FnDef(def_id, ..) => {
+        ty::FnDef(def_id, ..) => {
             push_builtin_impl(generic_types::fn_def(tcx, def_id), &[]);
         }
-        &ty::Closure(def_id, ..) => {
+        ty::Closure(def_id, ..) => {
             push_builtin_impl(generic_types::closure(tcx, def_id), &[]);
         }
-        &ty::Generator(def_id, ..) => {
+        ty::Generator(def_id, ..) => {
             push_builtin_impl(generic_types::generator(tcx, def_id), &[]);
         }
 
         // `Sized` if the last type is `Sized` (because else we will get a WF error anyway).
-        &ty::Tuple(type_list) => {
+        ty::Tuple(type_list) => {
             let type_list = generic_types::type_list(tcx, type_list.len());
             push_builtin_impl(tcx.mk_ty(ty::Tuple(type_list)), &type_list);
         }
@@ -233,8 +235,9 @@ crate fn assemble_builtin_copy_clone_impls<'tcx>(
         // Bind innermost bound vars that may exist in `ty` and `nested`.
         clauses.push(Clause::ForAll(ty::Binder::bind(clause)));
     };
-
-    match &ty.kind {
+    let ty = ty.peel_alias();
+    match ty.kind {
+        ty::Alias(..) => unreachable!(),
         // Implementations provided in libcore.
         ty::Bool |
         ty::Char |
@@ -251,18 +254,18 @@ crate fn assemble_builtin_copy_clone_impls<'tcx>(
         ty::Error => push_builtin_impl(ty, &[]),
 
         // These implement `Copy`/`Clone` if their element types do.
-        &ty::Array(_, length) => {
+        ty::Array(_, length) => {
             let element_ty = generic_types::bound(tcx, 0);
             push_builtin_impl(
                 tcx.mk_ty(ty::Array(element_ty, length)),
                 &[GenericArg::from(element_ty)],
             );
         }
-        &ty::Tuple(type_list) => {
+        ty::Tuple(type_list) => {
             let type_list = generic_types::type_list(tcx, type_list.len());
             push_builtin_impl(tcx.mk_ty(ty::Tuple(type_list)), &**type_list);
         }
-        &ty::Closure(def_id, ..) => {
+        ty::Closure(def_id, ..) => {
             let closure_ty = generic_types::closure(tcx, def_id);
             let upvar_tys: Vec<_> = match &closure_ty.kind {
                 ty::Closure(_, substs) => {
@@ -288,7 +291,7 @@ crate fn assemble_builtin_copy_clone_impls<'tcx>(
             );
             push_builtin_impl(fn_ptr, &[]);
         }
-        &ty::FnDef(def_id, ..) => {
+        ty::FnDef(def_id, ..) => {
             push_builtin_impl(generic_types::fn_def(tcx, def_id), &[]);
         }
 

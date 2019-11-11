@@ -846,7 +846,7 @@ impl Visitor<'tcx> for Checker<'tcx> {
             hir::ItemKind::Union(..) if !self.tcx.features().untagged_unions => {
                 let def_id = self.tcx.hir().local_def_id(item.hir_id);
                 let adt_def = self.tcx.adt_def(def_id);
-                let ty = self.tcx.type_of(def_id);
+                let ty = self.tcx.type_of(def_id).peel_alias();
 
                 if adt_def.has_dtor(self.tcx) {
                     emit_feature_err(&self.tcx.sess.parse_sess,

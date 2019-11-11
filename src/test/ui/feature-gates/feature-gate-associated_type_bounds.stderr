@@ -139,7 +139,13 @@ LL |     let _: impl Tr1<As1: Copy> = S1;
    |
    = help: add `#![feature(impl_trait_in_bindings)]` to the crate attributes to enable
 
-error: aborting due to 16 previous errors
+error[E0091]: type parameter `T` is unused
+  --> $DIR/feature-gate-associated_type_bounds.rs:40:16
+   |
+LL | type _TaWhere1<T> where T: Iterator<Item: Copy> = T;
+   |                ^ unused type parameter
 
-Some errors have detailed explanations: E0562, E0658.
-For more information about an error, try `rustc --explain E0562`.
+error: aborting due to 17 previous errors
+
+Some errors have detailed explanations: E0091, E0562, E0658.
+For more information about an error, try `rustc --explain E0091`.

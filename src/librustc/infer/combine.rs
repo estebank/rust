@@ -70,41 +70,41 @@ impl<'infcx, 'tcx> InferCtxt<'infcx, 'tcx> {
     {
         let a_is_expected = relation.a_is_expected();
 
-        match (&a.kind, &b.kind) {
+        match (&a.kind.peel_alias(), &b.kind.peel_alias()) {
             // Relate integral variables to other types
             (&ty::Infer(ty::IntVar(a_id)), &ty::Infer(ty::IntVar(b_id))) => {
                 self.int_unification_table
                     .borrow_mut()
-                    .unify_var_var(a_id, b_id)
+                    .unify_var_var(*a_id, *b_id)
                     .map_err(|e| int_unification_error(a_is_expected, e))?;
                 Ok(a)
             }
             (&ty::Infer(ty::IntVar(v_id)), &ty::Int(v)) => {
-                self.unify_integral_variable(a_is_expected, v_id, IntType(v))
+                self.unify_integral_variable(a_is_expected, *v_id, IntType(*v))
             }
             (&ty::Int(v), &ty::Infer(ty::IntVar(v_id))) => {
-                self.unify_integral_variable(!a_is_expected, v_id, IntType(v))
+                self.unify_integral_variable(!a_is_expected, *v_id, IntType(*v))
             }
             (&ty::Infer(ty::IntVar(v_id)), &ty::Uint(v)) => {
-                self.unify_integral_variable(a_is_expected, v_id, UintType(v))
+                self.unify_integral_variable(a_is_expected, *v_id, UintType(*v))
             }
             (&ty::Uint(v), &ty::Infer(ty::IntVar(v_id))) => {
-                self.unify_integral_variable(!a_is_expected, v_id, UintType(v))
+                self.unify_integral_variable(!a_is_expected, *v_id, UintType(*v))
             }
 
             // Relate floating-point variables to other types
             (&ty::Infer(ty::FloatVar(a_id)), &ty::Infer(ty::FloatVar(b_id))) => {
                 self.float_unification_table
                     .borrow_mut()
-                    .unify_var_var(a_id, b_id)
+                    .unify_var_var(*a_id, *b_id)
                     .map_err(|e| float_unification_error(relation.a_is_expected(), e))?;
                 Ok(a)
             }
             (&ty::Infer(ty::FloatVar(v_id)), &ty::Float(v)) => {
-                self.unify_float_variable(a_is_expected, v_id, v)
+                self.unify_float_variable(a_is_expected, *v_id, *v)
             }
             (&ty::Float(v), &ty::Infer(ty::FloatVar(v_id))) => {
-                self.unify_float_variable(!a_is_expected, v_id, v)
+                self.unify_float_variable(!a_is_expected, *v_id, *v)
             }
 
             // All other cases of inference are errors

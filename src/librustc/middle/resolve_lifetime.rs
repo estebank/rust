@@ -490,7 +490,7 @@ impl<'a, 'tcx> Visitor<'tcx> for LifetimeContext<'a, 'tcx> {
                 // items. Doing anything on this node is irrelevant, as we currently don't need
                 // it.
             }
-            hir::ItemKind::TyAlias(_, ref generics)
+            hir::ItemKind::TyAlias(_, ref generics, _)
             | hir::ItemKind::OpaqueTy(hir::OpaqueTy {
                 impl_trait_fn: None,
                 ref generics,
@@ -1271,7 +1271,7 @@ fn compute_object_lifetime_defaults(tcx: TyCtxt<'_>) -> HirIdMap<Vec<ObjectLifet
                 impl_trait_fn: None,
                 ..
             })
-            | hir::ItemKind::TyAlias(_, ref generics)
+            | hir::ItemKind::TyAlias(_, ref generics, _)
             | hir::ItemKind::Trait(_, _, ref generics, ..) => {
                 let result = object_lifetime_defaults_for_item(tcx, generics);
 

@@ -168,6 +168,7 @@ pub trait TypeFolder<'tcx>: Sized {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+        // let t = t.peel_alias();
         t.super_fold_with(self)
     }
 
@@ -224,6 +225,7 @@ where
         }
 
     fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        // let ty = ty.peel_alias();
         let t = ty.super_fold_with(self);
         (self.ty_op)(t)
     }
@@ -475,6 +477,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for BoundVarReplacer<'a, 'tcx> {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+        let t = t.peel_alias();
         match t.kind {
             ty::Bound(debruijn, bound_ty) => {
                 if debruijn == self.current_index {
@@ -778,6 +781,7 @@ impl TypeFolder<'tcx> for Shifter<'tcx> {
     }
 
     fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        let ty = ty.peel_alias();
         match ty.kind {
             ty::Bound(debruijn, bound_ty) => {
                 if self.amount == 0 || debruijn < self.current_index {

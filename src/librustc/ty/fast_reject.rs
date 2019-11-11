@@ -59,12 +59,13 @@ pub fn simplify_type(
     ty: Ty<'_>,
     can_simplify_params: bool,
 ) -> Option<SimplifiedType> {
-    match ty.kind {
+    match ty.kind.peel_alias() {
+        ty::Alias(..) => unreachable!(),
         ty::Bool => Some(BoolSimplifiedType),
         ty::Char => Some(CharSimplifiedType),
-        ty::Int(int_type) => Some(IntSimplifiedType(int_type)),
-        ty::Uint(uint_type) => Some(UintSimplifiedType(uint_type)),
-        ty::Float(float_type) => Some(FloatSimplifiedType(float_type)),
+        ty::Int(int_type) => Some(IntSimplifiedType(*int_type)),
+        ty::Uint(uint_type) => Some(UintSimplifiedType(*uint_type)),
+        ty::Float(float_type) => Some(FloatSimplifiedType(*float_type)),
         ty::Adt(def, _) => Some(AdtSimplifiedType(def.did)),
         ty::Str => Some(StrSimplifiedType),
         ty::Array(..) | ty::Slice(_) => Some(ArraySimplifiedType),
@@ -85,10 +86,10 @@ pub fn simplify_type(
         }
         ty::FnDef(def_id, _) |
         ty::Closure(def_id, _) => {
-            Some(ClosureSimplifiedType(def_id))
+            Some(ClosureSimplifiedType(*def_id))
         }
         ty::Generator(def_id, _, _) => {
-            Some(GeneratorSimplifiedType(def_id))
+            Some(GeneratorSimplifiedType(*def_id))
         }
         ty::GeneratorWitness(ref tys) => {
             Some(GeneratorWitnessSimplifiedType(tys.skip_binder().len()))
@@ -114,10 +115,10 @@ pub fn simplify_type(
             }
         }
         ty::Opaque(def_id, _) => {
-            Some(OpaqueSimplifiedType(def_id))
+            Some(OpaqueSimplifiedType(*def_id))
         }
         ty::Foreign(def_id) => {
-            Some(ForeignSimplifiedType(def_id))
+            Some(ForeignSimplifiedType(*def_id))
         }
         ty::Placeholder(..) | ty::Bound(..) | ty::Infer(_) | ty::Error => None,
     }

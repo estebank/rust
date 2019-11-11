@@ -40,9 +40,7 @@ impl<'a, 'tcx> Iterator for Autoderef<'a, 'tcx> {
     fn next(&mut self) -> Option<Self::Item> {
         let tcx = self.infcx.tcx;
 
-        debug!("autoderef: steps={:?}, cur_ty={:?}",
-               self.steps,
-               self.cur_ty);
+        debug!("autoderef: steps={:?}, cur_ty={:?}", self.steps, self.cur_ty);
         if self.at_start {
             self.at_start = false;
             debug!("autoderef stage #0 is {:?}", self.cur_ty);
@@ -116,14 +114,16 @@ impl<'a, 'tcx> Autoderef<'a, 'tcx> {
         // <cur_ty as Deref>
         let trait_ref = TraitRef {
             def_id: tcx.lang_items().deref_trait()?,
-            substs: tcx.mk_substs_trait(self.cur_ty, &[]),
+            substs: tcx.mk_substs_trait(self.cur_ty.peel_alias(), &[]),
         };
 
         let cause = traits::ObligationCause::misc(self.span, self.body_id);
 
-        let obligation = traits::Obligation::new(cause.clone(),
-                                                 self.param_env,
-                                                 trait_ref.to_predicate());
+        let obligation = traits::Obligation::new(
+            cause.clone(),
+            self.param_env,
+            trait_ref.to_predicate(),
+        );
         if !self.infcx.predicate_may_hold(&obligation) {
             debug!("overloaded_deref_ty: cannot match obligation");
             return None;
@@ -138,18 +138,17 @@ impl<'a, 'tcx> Autoderef<'a, 'tcx> {
                 trait_ref,
                 Ident::from_str("Target"),
             ),
-            cause);
+            cause,
+        );
         if let Err(e) = fulfillcx.select_where_possible(&self.infcx) {
             // This shouldn't happen, except for evaluate/fulfill mismatches,
             // but that's not a reason for an ICE (`predicate_may_hold` is conservative
             // by design).
-            debug!("overloaded_deref_ty: encountered errors {:?} while fulfilling",
-                   e);
+            debug!("overloaded_deref_ty: encountered errors {:?} while fulfilling", e);
             return None;
         }
         let obligations = fulfillcx.pending_obligations();
-        debug!("overloaded_deref_ty({:?}) = ({:?}, {:?})",
-               ty, normalized_ty, obligations);
+        debug!("overloaded_deref_ty({:?}) = ({:?}, {:?})", ty, normalized_ty, obligations);
         self.obligations.extend(obligations);
 
         Some(self.infcx.resolve_vars_if_possible(&normalized_ty))
@@ -267,11 +266,12 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         Autoderef::new(self, self.param_env, self.body_id, span, base_ty)
     }
 
-    pub fn try_overloaded_deref(&self,
-                                span: Span,
-                                base_ty: Ty<'tcx>,
-                                needs: Needs)
-                                -> Option<InferOk<'tcx, MethodCallee<'tcx>>> {
+    pub fn try_overloaded_deref(
+        &self,
+        span: Span,
+        base_ty: Ty<'tcx>,
+        needs: Needs,
+    ) -> Option<InferOk<'tcx, MethodCallee<'tcx>>> {
         self.try_overloaded_place_op(span, base_ty, &[], needs, PlaceOp::Deref)
     }
 }

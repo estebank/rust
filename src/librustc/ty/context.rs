@@ -2021,7 +2021,8 @@ macro_rules! sty_debug_print {
                 let shards = tcx.interners.type_.lock_shards();
                 let types = shards.iter().flat_map(|shard| shard.keys());
                 for &Interned(t) in types {
-                    let variant = match t.kind {
+                    let variant = match t.kind.peel_alias() {
+                        ty::Alias(..) => unreachable!(),
                         ty::Bool | ty::Char | ty::Int(..) | ty::Uint(..) |
                             ty::Float(..) | ty::Str | ty::Never => continue,
                         ty::Error => /* unimportant */ continue,

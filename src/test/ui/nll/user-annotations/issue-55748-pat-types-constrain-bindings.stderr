@@ -1,29 +1,30 @@
-error: lifetime may not live long enough
-  --> $DIR/issue-55748-pat-types-constrain-bindings.rs:35:5
+error[E0308]: mismatched types
+  --> $DIR/issue-55748-pat-types-constrain-bindings.rs:18:54
    |
-LL | fn coupled_regions_lhs<'a>(_x: &'a u32, s: &'static u32) -> &'static u32 {
-   |                        -- lifetime `'a` defined here
-...
-LL |     y
-   |     ^ returning this value requires that `'a` must outlive `'static`
+LL |     let ((mut y, mut _z),): (PairUncoupled<u32>,) = ((s, &_x),); // ok
+   |                                                      ^^^^^^^^ expected u32, found reference
+   |
+   = note: expected type `type PairUncoupled`
+              found type `(&'static u32, &&'a u32)`
 
-error: lifetime may not live long enough
-  --> $DIR/issue-55748-pat-types-constrain-bindings.rs:49:5
+error[E0308]: mismatched types
+  --> $DIR/issue-55748-pat-types-constrain-bindings.rs:29:51
    |
-LL | fn coupled_types_lhs<'a>(_x: &'a u32, s: &'static u32) -> &'static u32 {
-   |                      -- lifetime `'a` defined here
-...
-LL |     y
-   |     ^ returning this value requires that `'a` must outlive `'static`
+LL |     let ((y, _z),): (PairCoupledRegions<u32>,) = ((s, &_x),);
+   |                                                   ^^^^^^^^ expected u32, found reference
+   |
+   = note: expected type `type PairCoupledRegions`
+              found type `(&'static u32, &&'a u32)`
 
-error: lifetime may not live long enough
-  --> $DIR/issue-55748-pat-types-constrain-bindings.rs:62:5
+error[E0308]: mismatched types
+  --> $DIR/issue-55748-pat-types-constrain-bindings.rs:43:50
    |
-LL | fn coupled_wilds_lhs<'a>(_x: &'a u32, s: &'static u32) -> &'static u32 {
-   |                      -- lifetime `'a` defined here
-...
-LL |     y
-   |     ^ returning this value requires that `'a` must outlive `'static`
+LL |     let ((y, _z),): (PairCoupledTypes<&u32>,) = ((s, &_x),);
+   |                                                  ^^^^^^^^ expected u32, found reference
+   |
+   = note: expected type `type PairCoupledTypes`
+              found type `(&'static u32, &&'a u32)`
 
 error: aborting due to 3 previous errors
 
+For more information about this error, try `rustc --explain E0308`.

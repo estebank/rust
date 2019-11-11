@@ -186,6 +186,9 @@ impl<'tcx> fmt::Display for TypeError<'tcx> {
 impl<'tcx> ty::TyS<'tcx> {
     pub fn sort_string(&self, tcx: TyCtxt<'_>) -> Cow<'static, str> {
         match self.kind {
+            ty::Alias(ty, name) => {
+                format!("{} ({})", name, ty.sort_string(tcx)).into()
+            }
             ty::Bool | ty::Char | ty::Int(_) |
             ty::Uint(_) | ty::Float(_) | ty::Str | ty::Never => self.to_string().into(),
             ty::Tuple(ref tys) if tys.is_empty() => self.to_string().into(),
@@ -276,7 +279,7 @@ impl<'tcx> TyCtxt<'tcx> {
                                  `.await`ing on both of them");
                     }
                 }
-                match (&values.expected.kind, &values.found.kind) {
+                match (values.expected.kind.peel_alias(), values.found.kind.peel_alias()) {
                     (ty::Float(_), ty::Infer(ty::IntVar(_))) => if let Ok( // Issue #53280
                         snippet,
                     ) = self.sess.source_map().span_to_snippet(sp) {

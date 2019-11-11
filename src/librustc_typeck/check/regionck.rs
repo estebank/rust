@@ -714,23 +714,23 @@ impl<'a, 'tcx> RegionCtxt<'a, 'tcx> {
 
     fn walk_cast(&mut self, cast_expr: &hir::Expr, from_ty: Ty<'tcx>, to_ty: Ty<'tcx>) {
         debug!("walk_cast(from_ty={:?}, to_ty={:?})", from_ty, to_ty);
-        match (&from_ty.kind, &to_ty.kind) {
+        match (from_ty.kind.peel_alias(), to_ty.kind.peel_alias()) {
             /*From:*/
-            (&ty::Ref(from_r, from_ty, _), /*To:  */ &ty::Ref(to_r, to_ty, _)) => {
+            (ty::Ref(from_r, from_ty, _), /*To:  */ ty::Ref(to_r, to_ty, _)) => {
                 // Target cannot outlive source, naturally.
                 self.sub_regions(infer::Reborrow(cast_expr.span), to_r, from_r);
                 self.walk_cast(cast_expr, from_ty, to_ty);
             }
 
             /*From:*/
-            (_, /*To:  */ &ty::Dynamic(.., r)) => {
+            (_, /*To:  */ ty::Dynamic(.., r)) => {
                 // When T is existentially quantified as a trait
                 // `Foo+'to`, it must outlive the region bound `'to`.
                 self.type_must_outlive(infer::RelateObjectBound(cast_expr.span), from_ty, r);
             }
 
             /*From:*/
-            (&ty::Adt(from_def, _), /*To:  */ &ty::Adt(to_def, _))
+            (ty::Adt(from_def, _), /*To:  */ ty::Adt(to_def, _))
                 if from_def.is_box() && to_def.is_box() =>
             {
                 self.walk_cast(cast_expr, from_ty.boxed_ty(), to_ty.boxed_ty());

@@ -73,6 +73,7 @@ impl TypeFolder<'tcx> for NormalizeAfterErasingRegionsFolder<'tcx> {
     }
 
     fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        let ty = ty.peel_alias();
         self.tcx.normalize_ty_after_erasing_regions(self.param_env.and(ty))
     }
 }

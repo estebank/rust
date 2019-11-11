@@ -22,6 +22,13 @@ error[E0562]: `impl Trait` not allowed outside of function and inherent method r
 LL | type Type<T: Iterable<Item = impl Foo>> = T;
    |                              ^^^^^^^^
 
-error: aborting due to 4 previous errors
+error[E0091]: type parameter `T` is unused
+  --> $DIR/issue-47715.rs:24:11
+   |
+LL | type Type<T: Iterable<Item = impl Foo>> = T;
+   |           ^ unused type parameter
 
-For more information about this error, try `rustc --explain E0562`.
+error: aborting due to 5 previous errors
+
+Some errors have detailed explanations: E0091, E0562.
+For more information about an error, try `rustc --explain E0091`.

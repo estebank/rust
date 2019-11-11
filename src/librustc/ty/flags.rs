@@ -64,7 +64,8 @@ impl FlagComputation {
 
     #[allow(rustc::usage_of_ty_tykind)]
     fn add_kind(&mut self, kind: &ty::TyKind<'_>) {
-        match kind {
+        match kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             &ty::Bool |
             &ty::Char |
             &ty::Int(_) |

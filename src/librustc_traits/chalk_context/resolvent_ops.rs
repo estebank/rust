@@ -211,6 +211,8 @@ impl TypeRelation<'tcx> for AnswerSubstitutor<'cx, 'tcx> {
     fn tys(&mut self, a: Ty<'tcx>, b: Ty<'tcx>) -> RelateResult<'tcx, Ty<'tcx>> {
         let b = self.infcx.shallow_resolve(b);
         debug!("AnswerSubstitutor::tys(a = {:?}, b = {:?})", a, b);
+        let a = a.peel_alias();
+        let b = b.peel_alias();
 
         if let &ty::Bound(debruijn, bound_ty) = &a.kind {
             // Free bound var

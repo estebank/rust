@@ -338,6 +338,7 @@ impl LoweringContext<'_> {
             ItemKind::TyAlias(ref t, ref generics) => hir::ItemKind::TyAlias(
                 self.lower_ty(t, ImplTraitContext::disallowed()),
                 self.lower_generics(generics, ImplTraitContext::disallowed()),
+                *ident,
             ),
             ItemKind::OpaqueTy(ref b, ref generics) => hir::ItemKind::OpaqueTy(
                 hir::OpaqueTy {

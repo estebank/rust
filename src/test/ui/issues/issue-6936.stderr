@@ -38,6 +38,15 @@ LL |     mod Bar {}
    |
    = note: `Bar` must be defined only once in the type namespace of this module
 
-error: aborting due to 4 previous errors
+error[E0118]: no base type found for inherent implementation
+  --> $DIR/issue-6936.rs:30:10
+   |
+LL |     impl Foo {} // ok
+   |          ^^^ impl requires a base type
+   |
+   = note: either implement a trait on it or create a newtype to wrap it instead
 
-For more information about this error, try `rustc --explain E0428`.
+error: aborting due to 5 previous errors
+
+Some errors have detailed explanations: E0118, E0428.
+For more information about an error, try `rustc --explain E0118`.

@@ -33,7 +33,7 @@ impl DefPathBasedNames<'tcx> {
     // When being used for codegen purposes, `debug` should be set to `false`
     // in order to catch unexpected types that should never end up in a type name.
     pub fn push_type_name(&self, t: Ty<'tcx>, output: &mut String, debug: bool) {
-        match t.kind {
+        match t.kind.peel_alias() {
             ty::Bool => output.push_str("bool"),
             ty::Char => output.push_str("char"),
             ty::Str => output.push_str("str"),
@@ -47,7 +47,7 @@ impl DefPathBasedNames<'tcx> {
             }
             ty::Tuple(component_types) => {
                 output.push('(');
-                for &component_type in component_types {
+                for &component_type in component_types.iter() {
                     self.push_type_name(component_type.expect_ty(), output, debug);
                     output.push_str(", ");
                 }
@@ -97,7 +97,7 @@ impl DefPathBasedNames<'tcx> {
                     output.push_str("dyn '_");
                 }
             }
-            ty::Foreign(did) => self.push_def_path(did, output),
+            ty::Foreign(did) => self.push_def_path(*did, output),
             ty::FnDef(..) | ty::FnPtr(_) => {
                 let sig = t.fn_sig(self.tcx);
                 output.push_str(sig.unsafety().prefix_str());
@@ -140,12 +140,13 @@ impl DefPathBasedNames<'tcx> {
             }
             ty::Generator(def_id,  substs, _)
             | ty::Closure(def_id, substs) => {
-                self.push_def_path(def_id, output);
-                let generics = self.tcx.generics_of(self.tcx.closure_base_def_id(def_id));
+                self.push_def_path(*def_id, output);
+                let generics = self.tcx.generics_of(self.tcx.closure_base_def_id(*def_id));
                 let substs = substs.truncate_to(self.tcx, generics);
                 self.push_generic_params(substs, iter::empty(), output, debug);
             }
             ty::Error
+            | ty::Alias(..)
             | ty::Bound(..)
             | ty::Infer(_)
             | ty::Placeholder(..)

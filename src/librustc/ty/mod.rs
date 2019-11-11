@@ -2509,7 +2509,8 @@ impl<'tcx> AdtDef {
     }
 
     fn sized_constraint_for_ty(&self, tcx: TyCtxt<'tcx>, ty: Ty<'tcx>) -> Vec<Ty<'tcx>> {
-        let result = match ty.kind {
+        let result = match ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             Bool | Char | Int(..) | Uint(..) | Float(..) |
             RawPtr(..) | Ref(..) | FnDef(..) | FnPtr(_) |
             Array(..) | Closure(..) | Generator(..) | Never => {

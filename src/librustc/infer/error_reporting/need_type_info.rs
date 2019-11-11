@@ -44,12 +44,15 @@ impl<'a, 'tcx> FindLocalByTypeVisitor<'a, 'tcx> {
             Some(ty) => {
                 let ty = self.infcx.resolve_vars_if_possible(&ty);
                 if ty.walk().any(|inner_ty| {
-                    inner_ty == self.target_ty || match (&inner_ty.kind, &self.target_ty.kind) {
-                        (&Infer(TyVar(a_vid)), &Infer(TyVar(b_vid))) => {
+                    inner_ty.peel_alias() == self.target_ty.peel_alias() || match (
+                        inner_ty.kind.peel_alias(),
+                        self.target_ty.kind.peel_alias(),
+                    ) {
+                        (Infer(TyVar(a_vid)), Infer(TyVar(b_vid))) => {
                             self.infcx
                                 .type_variables
                                 .borrow_mut()
-                                .sub_unified(a_vid, b_vid)
+                                .sub_unified(*a_vid, *b_vid)
                         }
                         _ => false,
                     }

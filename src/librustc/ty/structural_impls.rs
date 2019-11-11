@@ -1027,7 +1027,22 @@ impl<'tcx> TypeFoldable<'tcx> for interpret::GlobalId<'tcx> {
 
 impl<'tcx> TypeFoldable<'tcx> for Ty<'tcx> {
     fn super_fold_with<F: TypeFolder<'tcx>>(&self, folder: &mut F) -> Self {
-        let kind = match self.kind {
+        // let self_ty = self.peel_alias();
+        let self_ty = self;
+        let kind = match self_ty.kind {
+            ty::Alias(ty, name) => ty::Alias(ty.fold_with(folder), name),
+            // ty::Alias(..) => {
+            //     unreachable!()
+                // let peeled_kind = self.kind.peel_alias();
+                // let folded_ty = ty.super_fold_with(folder);
+                // let kind = &folded_ty.kind;
+                // // return ty;
+                // return if ty.kind == *kind {
+                //     self
+                // } else {
+                //     folder.tcx().mk_ty(kind.clone())
+                // };
+            // }
             ty::RawPtr(tm) => ty::RawPtr(tm.fold_with(folder)),
             ty::Array(typ, sz) => ty::Array(typ.fold_with(folder), sz.fold_with(folder)),
             ty::Slice(typ) => ty::Slice(typ.fold_with(folder)),
@@ -1035,18 +1050,13 @@ impl<'tcx> TypeFoldable<'tcx> for Ty<'tcx> {
             ty::Dynamic(ref trait_ty, ref region) =>
                 ty::Dynamic(trait_ty.fold_with(folder), region.fold_with(folder)),
             ty::Tuple(ts) => ty::Tuple(ts.fold_with(folder)),
-            ty::FnDef(def_id, substs) => {
-                ty::FnDef(def_id, substs.fold_with(folder))
-            }
+            ty::FnDef(def_id, substs) => ty::FnDef(def_id, substs.fold_with(folder)),
             ty::FnPtr(f) => ty::FnPtr(f.fold_with(folder)),
             ty::Ref(ref r, ty, mutbl) => {
                 ty::Ref(r.fold_with(folder), ty.fold_with(folder), mutbl)
             }
             ty::Generator(did, substs, movability) => {
-                ty::Generator(
-                    did,
-                    substs.fold_with(folder),
-                    movability)
+                ty::Generator(did, substs.fold_with(folder), movability)
             }
             ty::GeneratorWitness(types) => ty::GeneratorWitness(types.fold_with(folder)),
             ty::Closure(did, substs) => ty::Closure(did, substs.fold_with(folder)),
@@ -1068,11 +1078,11 @@ impl<'tcx> TypeFoldable<'tcx> for Ty<'tcx> {
             ty::Bound(..) |
             ty::Placeholder(..) |
             ty::Never |
-            ty::Foreign(..) => return self,
+            ty::Foreign(..) => return self_ty,
         };
 
-        if self.kind == kind {
-            self
+        if self_ty.kind == kind {
+            self_ty
         } else {
             folder.tcx().mk_ty(kind)
         }
@@ -1083,7 +1093,9 @@ impl<'tcx> TypeFoldable<'tcx> for Ty<'tcx> {
     }
 
     fn super_visit_with<V: TypeVisitor<'tcx>>(&self, visitor: &mut V) -> bool {
-        match self.kind {
+        match self.kind.peel_alias() {
+            // ty::Alias(ty, _) => ty.super_visit_with(visitor),
+            ty::Alias(..) => unreachable!(),
             ty::RawPtr(ref tm) => tm.visit_with(visitor),
             ty::Array(typ, sz) => typ.visit_with(visitor) || sz.visit_with(visitor),
             ty::Slice(typ) => typ.visit_with(visitor),

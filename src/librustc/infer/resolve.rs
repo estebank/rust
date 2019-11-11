@@ -29,6 +29,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for OpportunisticVarResolver<'a, 'tcx> {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+        // let t = t.peel_alias();
         if !t.has_infer_types() && !t.has_infer_consts() {
             t // micro-optimize -- if there is nothing in this type that this fold affects...
         } else {
@@ -66,6 +67,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for OpportunisticTypeAndRegionResolver<'a, 'tcx>
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+        let t = t.peel_alias();
         if !t.needs_infer() {
             t // micro-optimize -- if there is nothing in this type that this fold affects...
         } else {
@@ -182,6 +184,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for FullTypeResolver<'a, 'tcx> {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+        let t = t.peel_alias();
         if !t.needs_infer() && !ty::keep_local(&t) {
             t // micro-optimize -- if there is nothing in this type that this fold affects...
               // ^ we need to have the `keep_local` check to un-default

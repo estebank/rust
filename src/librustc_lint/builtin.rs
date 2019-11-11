@@ -1115,7 +1115,7 @@ impl TypeAliasBounds {
 impl<'a, 'tcx> LateLintPass<'a, 'tcx> for TypeAliasBounds {
     fn check_item(&mut self, cx: &LateContext<'_, '_>, item: &hir::Item) {
         let (ty, type_alias_generics) = match item.kind {
-            hir::ItemKind::TyAlias(ref ty, ref generics) => (&*ty, generics),
+            hir::ItemKind::TyAlias(ref ty, ref generics, _) => (&*ty, generics),
             _ => return,
         };
         let mut suggested_changing_assoc_types = false;

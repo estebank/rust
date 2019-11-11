@@ -1658,6 +1658,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for ShallowResolver<'a, 'tcx> {
     }
 
     fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        let ty = ty.peel_alias();
         self.shallow_resolve(ty)
     }
 

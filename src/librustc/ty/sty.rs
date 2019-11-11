@@ -204,9 +204,21 @@ pub enum TyKind<'tcx> {
     /// A type variable used during type checking.
     Infer(InferTy),
 
+    Alias(Ty<'tcx>, Symbol),
+
     /// A placeholder for a type which could not be computed; this is
     /// propagated to avoid useless error messages.
     Error,
+}
+
+impl TyKind<'_> {
+    pub fn peel_alias(&self) -> &Self {
+        let mut kind = self;
+        while let TyKind::Alias(t, _) = kind {
+            kind = &t.kind;
+        }
+        kind
+    }
 }
 
 // `TyKind` is used a lot. Make sure it doesn't unintentionally get bigger.
@@ -2137,7 +2149,8 @@ impl<'tcx> TyS<'tcx> {
     /// types reachable from this type via `walk_tys`). This ignores late-bound
     /// regions binders.
     pub fn push_regions(&self, out: &mut SmallVec<[ty::Region<'tcx>; 4]>) {
-        match self.kind {
+        match self.kind.peel_alias() {
+            Alias(..) => unreachable!(),
             Ref(region, _, _) => {
                 out.push(region);
             }
@@ -2216,7 +2229,8 @@ impl<'tcx> TyS<'tcx> {
     /// Returning true means the type is known to be sized. Returning
     /// `false` means nothing -- could be sized, might not be.
     pub fn is_trivially_sized(&self, tcx: TyCtxt<'tcx>) -> bool {
-        match self.kind {
+        match self.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Infer(ty::IntVar(_)) | ty::Infer(ty::FloatVar(_)) |
             ty::Uint(_) | ty::Int(_) | ty::Bool | ty::Float(_) |
             ty::FnDef(..) | ty::FnPtr(_) | ty::RawPtr(..) |
@@ -2248,6 +2262,42 @@ impl<'tcx> TyS<'tcx> {
             ty::Infer(ty::FreshFloatTy(_)) =>
                 bug!("is_trivially_sized applied to unexpected type: {:?}", self),
         }
+    }
+
+    pub fn peel_alias(&self) -> Ty<'_> {
+        let mut self_ty = self;
+        while let Alias(ty, _) = self_ty.kind {
+            self_ty = ty;
+        }
+        // loop {
+        //     Bool | Char | Int(_) | Uint(_) | Float(_) | Str | Never | Param(ParamTy) | Error => {
+        //         break;
+        //     }
+        //     Adt(&'tcx AdtDef, SubstsRef<'tcx>) => {
+
+        //     }
+        //     Foreign(DefId) |
+        //     FnDef(DefId, SubstsRef<'tcx>),
+
+        //     Array(Ty<'tcx>, &'tcx ty::Const<'tcx>),
+        //     Slice(Ty<'tcx>),
+        //     RawPtr(TypeAndMut<'tcx>),
+        //     Ref(Region<'tcx>, Ty<'tcx>, hir::Mutability),
+        //     FnPtr(PolyFnSig<'tcx>),
+        //     Dynamic(Binder<&'tcx List<ExistentialPredicate<'tcx>>>, ty::Region<'tcx>),
+        //     Closure(DefId, SubstsRef<'tcx>),
+        //     Generator(DefId, SubstsRef<'tcx>, hir::GeneratorMovability),
+        //     GeneratorWitness(Binder<&'tcx List<Ty<'tcx>>>),
+        //     Tuple(SubstsRef<'tcx>),
+        //     Projection(ProjectionTy<'tcx>),
+        //     UnnormalizedProjection(ProjectionTy<'tcx>),
+        //     Opaque(DefId, SubstsRef<'tcx>),
+        //     Bound(ty::DebruijnIndex, BoundTy),
+        //     Placeholder(ty::PlaceholderType),
+        //     Infer(InferTy),
+        //     Alias(Ty<'tcx>, Symbol),
+        // }
+        self_ty
     }
 }
 

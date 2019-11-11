@@ -370,8 +370,8 @@ impl<'tcx> TyCtxt<'tcx> {
     {
         let (mut a, mut b) = (source, target);
         loop {
-            match (&a.kind, &b.kind) {
-                (&Adt(a_def, a_substs), &Adt(b_def, b_substs))
+            match (a.kind.peel_alias(), b.kind.peel_alias()) {
+                (Adt(a_def, a_substs), Adt(b_def, b_substs))
                         if a_def == b_def && a_def.is_struct() => {
                     if let Some(f) = a_def.non_enum_variant().fields.last() {
                         a = f.ty(self, a_substs);
@@ -380,7 +380,7 @@ impl<'tcx> TyCtxt<'tcx> {
                         break;
                     }
                 },
-                (&Tuple(a_tys), &Tuple(b_tys))
+                (Tuple(a_tys), Tuple(b_tys))
                         if a_tys.len() == b_tys.len() => {
                     if let Some(a_last) = a_tys.last() {
                         a = a_last.expect_ty();
@@ -743,6 +743,7 @@ impl<'tcx> TyCtxt<'tcx> {
             }
 
             fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+                // let t = t.peel_alias();
                 if let ty::Opaque(def_id, substs) = t.kind {
                     self.expand_opaque_ty(def_id, substs).unwrap_or(t)
                 } else if t.has_projections() {
@@ -783,7 +784,7 @@ impl<'tcx> ty::TyS<'tcx> {
         param_env: ty::ParamEnv<'tcx>,
         span: Span,
     ) -> bool {
-        tcx.at(span).is_copy_raw(param_env.and(self))
+        tcx.at(span).is_copy_raw(param_env.and(self.peel_alias()))
     }
 
     /// Checks whether values of this type `T` have a size known at
@@ -793,7 +794,7 @@ impl<'tcx> ty::TyS<'tcx> {
     /// strange rules like `<T as Foo<'static>>::Bar: Sized` that
     /// actually carry lifetime requirements.
     pub fn is_sized(&'tcx self, tcx_at: TyCtxtAt<'tcx>, param_env: ty::ParamEnv<'tcx>) -> bool {
-        tcx_at.is_sized_raw(param_env.and(self))
+        tcx_at.is_sized_raw(param_env.and(self.peel_alias()))
     }
 
     /// Checks whether values of this type `T` implement the `Freeze`
@@ -809,7 +810,7 @@ impl<'tcx> ty::TyS<'tcx> {
         param_env: ty::ParamEnv<'tcx>,
         span: Span,
     ) -> bool {
-        tcx.at(span).is_freeze_raw(param_env.and(self))
+        tcx.at(span).is_freeze_raw(param_env.and(self.peel_alias()))
     }
 
     /// If `ty.needs_drop(...)` returns `true`, then `ty` is definitely
@@ -822,12 +823,12 @@ impl<'tcx> ty::TyS<'tcx> {
     /// Note that this method is used to check eligible types in unions.
     #[inline]
     pub fn needs_drop(&'tcx self, tcx: TyCtxt<'tcx>, param_env: ty::ParamEnv<'tcx>) -> bool {
-        tcx.needs_drop_raw(param_env.and(self)).0
+        tcx.needs_drop_raw(param_env.and(self.peel_alias())).0
     }
 
     pub fn same_type(a: Ty<'tcx>, b: Ty<'tcx>) -> bool {
-        match (&a.kind, &b.kind) {
-            (&Adt(did_a, substs_a), &Adt(did_b, substs_b)) => {
+        match (a.kind.peel_alias(), b.kind.peel_alias()) {
+            (Adt(did_a, substs_a), Adt(did_b, substs_b)) => {
                 if did_a != did_b {
                     return false;
                 }
@@ -861,6 +862,7 @@ impl<'tcx> ty::TyS<'tcx> {
             representable_cache: &mut FxHashMap<Ty<'tcx>, Representability>,
             ty: Ty<'tcx>,
         ) -> Representability {
+            let ty = ty.peel_alias();
             match ty.kind {
                 Tuple(..) => {
                     // Find non representable
@@ -904,6 +906,7 @@ impl<'tcx> ty::TyS<'tcx> {
         }
 
         fn same_struct_or_enum<'tcx>(ty: Ty<'tcx>, def: &'tcx ty::AdtDef) -> bool {
+            let ty = ty.peel_alias();
             match ty.kind {
                 Adt(ty_def, _) => {
                      ty_def == def
@@ -921,6 +924,7 @@ impl<'tcx> ty::TyS<'tcx> {
             representable_cache: &mut FxHashMap<Ty<'tcx>, Representability>,
             ty: Ty<'tcx>,
         ) -> Representability {
+            let ty = ty.peel_alias();
             debug!("is_type_structurally_recursive: {:?} {:?}", ty, sp);
             if let Some(representability) = representable_cache.get(ty) {
                 debug!("is_type_structurally_recursive: {:?} {:?} - (cached) {:?}",
@@ -1073,7 +1077,8 @@ fn needs_drop_raw<'tcx>(tcx: TyCtxt<'tcx>, query: ty::ParamEnvAnd<'tcx, Ty<'tcx>
 
     assert!(!ty.needs_infer());
 
-    NeedsDrop(match ty.kind {
+    NeedsDrop(match ty.kind.peel_alias() {
+        ty::Alias(..) => unreachable!(),
         // Fast-path for primitive types
         ty::Infer(ty::FreshIntTy(_)) | ty::Infer(ty::FreshFloatTy(_)) |
         ty::Bool | ty::Int(_) | ty::Uint(_) | ty::Float(_) | ty::Never |
@@ -1118,7 +1123,7 @@ fn needs_drop_raw<'tcx>(tcx: TyCtxt<'tcx>, query: ty::ParamEnvAnd<'tcx, Ty<'tcx>
         ty::Array(ty, _) | ty::Slice(ty) => needs_drop(ty),
 
         ty::Closure(def_id, ref substs) => {
-            substs.as_closure().upvar_tys(def_id, tcx).any(needs_drop)
+            substs.as_closure().upvar_tys(*def_id, tcx).any(needs_drop)
         }
 
         // Pessimistically assume that all generators will require destructors

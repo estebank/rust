@@ -26,7 +26,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                                expected: Ty<'tcx>,
                                actual: Ty<'tcx>) -> Option<DiagnosticBuilder<'tcx>> {
         let cause = &self.misc(sp);
-        match self.at(cause, self.param_env).sup(expected, actual) {
+        match self.at(cause, self.param_env).sup(expected.peel_alias(), actual.peel_alias()) {
             Ok(InferOk { obligations, value: () }) => {
                 self.register_predicates(obligations);
                 None
@@ -54,7 +54,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                                      cause: &ObligationCause<'tcx>,
                                      expected: Ty<'tcx>,
                                      actual: Ty<'tcx>) -> Option<DiagnosticBuilder<'tcx>> {
-        match self.at(cause, self.param_env).eq(expected, actual) {
+        match self.at(cause, self.param_env).eq(expected.peel_alias(), actual.peel_alias()) {
             Ok(InferOk { obligations, value: () }) => {
                 self.register_predicates(obligations);
                 None
@@ -102,12 +102,13 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     // N.B., this code relies on `self.diverges` to be accurate. In
     // particular, assignments to `!` will be permitted if the
     // diverges flag is currently "always".
-    pub fn demand_coerce_diag(&self,
-                              expr: &hir::Expr,
-                              checked_ty: Ty<'tcx>,
-                              expected: Ty<'tcx>,
-                              allow_two_phase: AllowTwoPhase)
-                              -> (Ty<'tcx>, Option<DiagnosticBuilder<'tcx>>) {
+    pub fn demand_coerce_diag(
+        &self,
+        expr: &hir::Expr,
+        checked_ty: Ty<'tcx>,
+        expected: Ty<'tcx>,
+        allow_two_phase: AllowTwoPhase,
+    ) -> (Ty<'tcx>, Option<DiagnosticBuilder<'tcx>>) {
         let expected = self.resolve_vars_with_obligations(expected);
 
         let e = match self.try_coerce(expr, checked_ty, expected, allow_two_phase) {
@@ -119,17 +120,19 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         let cause = self.misc(expr.span);
         let expr_ty = self.resolve_vars_with_obligations(checked_ty);
         let mut err = self.report_mismatched_types(&cause, expected, expr_ty, e);
+        let peeled_expected = expected.peel_alias();
+        let expr_ty = expr_ty.peel_alias();
 
-        if self.is_assign_to_bool(expr, expected) {
+        if self.is_assign_to_bool(expr, peeled_expected) {
             // Error reported in `check_assign` so avoid emitting error again.
             err.delay_as_bug();
             return (expected, None)
         }
 
-        self.suggest_compatible_variants(&mut err, expr, expected, expr_ty);
-        self.suggest_ref_or_into(&mut err, expr, expected, expr_ty);
-        self.suggest_boxing_when_appropriate(&mut err, expr, expected, expr_ty);
-        self.suggest_missing_await(&mut err, expr, expected, expr_ty);
+        self.suggest_compatible_variants(&mut err, expr, peeled_expected, expr_ty);
+        self.suggest_ref_or_into(&mut err, expr, peeled_expected, expr_ty);
+        self.suggest_boxing_when_appropriate(&mut err, expr, peeled_expected, expr_ty);
+        self.suggest_missing_await(&mut err, expr, peeled_expected, expr_ty);
 
         (expected, Some(err))
     }
@@ -360,10 +363,10 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         // `ExprKind::DropTemps` is semantically irrelevant for these suggestions.
         let expr = expr.peel_drop_temps();
 
-        match (&expr.kind, &expected.kind, &checked_ty.kind) {
-            (_, &ty::Ref(_, exp, _), &ty::Ref(_, check, _)) => match (&exp.kind, &check.kind) {
+        match (&expr.kind, &expected.kind.peel_alias(), &checked_ty.kind.peel_alias()) {
+            (_, &ty::Ref(_, exp, _), &ty::Ref(_, check, _)) => match (&exp.kind.peel_alias(), &check.kind.peel_alias()) {
                 (&ty::Str, &ty::Array(arr, _)) |
-                (&ty::Str, &ty::Slice(arr)) if arr == self.tcx.types.u8 => {
+                (&ty::Str, &ty::Slice(arr)) if arr == &self.tcx.types.u8 => {
                     if let hir::ExprKind::Lit(_) = expr.kind {
                         if let Ok(src) = cm.span_to_snippet(sp) {
                             if src.starts_with("b\"") {
@@ -375,7 +378,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                 },
                 (&ty::Array(arr, _), &ty::Str) |
-                (&ty::Slice(arr), &ty::Str) if arr == self.tcx.types.u8 => {
+                (&ty::Slice(arr), &ty::Str) if arr == &self.tcx.types.u8 => {
                     if let hir::ExprKind::Lit(_) = expr.kind {
                         if let Ok(src) = cm.span_to_snippet(sp) {
                             if src.starts_with("\"") {
@@ -451,7 +454,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         })) = self.tcx.hir().find(
                             self.tcx.hir().get_parent_node(expr.hir_id),
                         ) {
-                            if mutability == hir::Mutability::MutMutable {
+                            if mutability == &hir::Mutability::MutMutable {
                                 // Found the following case:
                                 // fn foo(opt: &mut Option<String>){ opt = None }
                                 //                                   ---   ^^^^
@@ -485,7 +488,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 }
             },
             (hir::ExprKind::AddrOf(_, ref expr), _, &ty::Ref(_, checked, _)) if {
-                self.infcx.can_sub(self.param_env, checked, &expected).is_ok() && !is_macro
+                self.infcx.can_sub(self.param_env, *checked, &expected).is_ok() && !is_macro
             } => {
                 // We have `&T`, check if what was expected was `T`. If so,
                 // we may want to suggest removing a `&`.
@@ -704,8 +707,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 );
             };
 
-            match (&expected_ty.kind, &checked_ty.kind) {
-                (&ty::Int(ref exp), &ty::Int(ref found)) => {
+            match (expected_ty.kind.peel_alias(), checked_ty.kind.peel_alias()) {
+                (ty::Int(ref exp), ty::Int(ref found)) => {
                     let is_fallible = match (found.bit_width(), exp.bit_width()) {
                         (Some(found), Some(exp)) if found > exp => true,
                         (None, _) | (_, None) => true,
@@ -714,7 +717,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     suggest_to_change_suffix_or_into(err, is_fallible);
                     true
                 }
-                (&ty::Uint(ref exp), &ty::Uint(ref found)) => {
+                (ty::Uint(ref exp), ty::Uint(ref found)) => {
                     let is_fallible = match (found.bit_width(), exp.bit_width()) {
                         (Some(found), Some(exp)) if found > exp => true,
                         (None, _) | (_, None) => true,
@@ -723,11 +726,11 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     suggest_to_change_suffix_or_into(err, is_fallible);
                     true
                 }
-                (&ty::Int(_), &ty::Uint(_)) | (&ty::Uint(_), &ty::Int(_)) => {
+                (ty::Int(_), ty::Uint(_)) | (ty::Uint(_), ty::Int(_)) => {
                     suggest_to_change_suffix_or_into(err, true);
                     true
                 }
-                (&ty::Float(ref exp), &ty::Float(ref found)) => {
+                (ty::Float(ref exp), ty::Float(ref found)) => {
                     if found.bit_width() < exp.bit_width() {
                         suggest_to_change_suffix_or_into(err, false);
                     } else if literal_is_ty_suffixed(expr) {
@@ -747,7 +750,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                     true
                 }
-                (&ty::Uint(_), &ty::Float(_)) | (&ty::Int(_), &ty::Float(_)) => {
+                (ty::Uint(_), ty::Float(_)) | (ty::Int(_), ty::Float(_)) => {
                     if literal_is_ty_suffixed(expr) {
                         err.span_suggestion(
                             expr.span,
@@ -770,7 +773,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                     true
                 }
-                (&ty::Float(ref exp), &ty::Uint(ref found)) => {
+                (ty::Float(ref exp), ty::Uint(ref found)) => {
                     // if `found` is `None` (meaning found is `usize`), don't suggest `.into()`
                     if exp.bit_width() > found.bit_width().unwrap_or(256) {
                         err.span_suggestion(
@@ -804,7 +807,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     }
                     true
                 }
-                (&ty::Float(ref exp), &ty::Int(ref found)) => {
+                (ty::Float(ref exp), ty::Int(ref found)) => {
                     // if `found` is `None` (meaning found is `isize`), don't suggest `.into()`
                     if exp.bit_width() > found.bit_width().unwrap_or(256) {
                         err.span_suggestion(

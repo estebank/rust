@@ -128,14 +128,16 @@ where
 {
     fn visit_ty(&mut self, ty: Ty<'tcx>) -> bool {
         let tcx = self.def_id_visitor.tcx();
+        let ty = ty.peel_alias();
         // InternalSubsts are not visited here because they are visited below in `super_visit_with`.
         match ty.kind {
-            ty::Adt(&ty::AdtDef { did: def_id, .. }, ..) |
-            ty::Foreign(def_id) |
-            ty::FnDef(def_id, ..) |
-            ty::Closure(def_id, ..) |
-            ty::Generator(def_id, ..) => {
-                if self.def_id_visitor.visit_def_id(def_id, "type", &ty) {
+            ty::Alias(..) => unreachable!(),
+            ty::Adt(&ty::AdtDef { did: ref def_id, .. }, ..) |
+            ty::Foreign(ref def_id) |
+            ty::FnDef(ref def_id, ..) |
+            ty::Closure(ref def_id, ..) |
+            ty::Generator(ref def_id, ..) => {
+                if self.def_id_visitor.visit_def_id(*def_id, "type", &ty) {
                     return true;
                 }
                 if self.def_id_visitor.shallow() {
@@ -145,7 +147,7 @@ where
                 // Something like `fn() -> Priv {my_func}` is considered a private type even if
                 // `my_func` is public, so we need to visit signatures.
                 if let ty::FnDef(..) = ty.kind {
-                    if tcx.fn_sig(def_id).visit_with(self) {
+                    if tcx.fn_sig(*def_id).visit_with(self) {
                         return true;
                     }
                 }
@@ -153,7 +155,7 @@ where
                 // Something like `fn() {my_method}` type of the method
                 // `impl Pub<Priv> { pub fn my_method() {} }` is considered a private type,
                 // so we need to visit the self type additionally.
-                if let Some(assoc_item) = tcx.opt_associated_item(def_id) {
+                if let Some(assoc_item) = tcx.opt_associated_item(*def_id) {
                     if let ty::ImplContainer(impl_def_id) = assoc_item.container {
                         if tcx.type_of(impl_def_id).visit_with(self) {
                             return true;

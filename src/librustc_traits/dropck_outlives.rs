@@ -167,6 +167,7 @@ fn dtorck_constraint_for_ty<'tcx>(
         "dtorck_constraint_for_ty({:?}, {:?}, {:?}, {:?})",
         span, for_ty, depth, ty
     );
+    let ty = ty.peel_alias();
 
     if depth >= *tcx.sess.recursion_limit.get() {
         constraints.overflows.push(ty);
@@ -178,6 +179,7 @@ fn dtorck_constraint_for_ty<'tcx>(
     }
 
     match ty.kind {
+        ty::Alias(..) => unreachable!(),
         ty::Bool
         | ty::Char
         | ty::Int(_)

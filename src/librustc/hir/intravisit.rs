@@ -503,7 +503,7 @@ pub fn walk_item<'v, V: Visitor<'v>>(visitor: &mut V, item: &'v Item) {
         ItemKind::GlobalAsm(_) => {
             visitor.visit_id(item.hir_id);
         }
-        ItemKind::TyAlias(ref ty, ref generics) => {
+        ItemKind::TyAlias(ref ty, ref generics, _) => {
             visitor.visit_id(item.hir_id);
             visitor.visit_ty(ty);
             visitor.visit_generics(generics)

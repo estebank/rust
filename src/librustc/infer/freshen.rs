@@ -146,6 +146,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for TypeFreshener<'a, 'tcx> {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
+        let t = t.peel_alias();
         if !t.needs_infer() && !t.has_erasable_regions() &&
             !(t.has_closure_types() && self.infcx.in_progress_tables.is_some()) {
             return t;
@@ -154,30 +155,33 @@ impl<'a, 'tcx> TypeFolder<'tcx> for TypeFreshener<'a, 'tcx> {
         let tcx = self.infcx.tcx;
 
         match t.kind {
+            ty::Alias(..) => unreachable!(),
             ty::Infer(ty::TyVar(v)) => {
                 let opt_ty = self.infcx.type_variables.borrow_mut().probe(v).known();
-                self.freshen_ty(
-                    opt_ty,
-                    ty::TyVar(v),
-                    ty::FreshTy)
+                let opt_ty = opt_ty.map(|t| t.peel_alias());
+                self.freshen_ty(opt_ty, ty::TyVar(v), ty::FreshTy)
             }
 
             ty::Infer(ty::IntVar(v)) => {
                 self.freshen_ty(
-                    self.infcx.int_unification_table.borrow_mut()
-                                                    .probe_value(v)
-                                                    .map(|v| v.to_type(tcx)),
+                    self.infcx.int_unification_table
+                        .borrow_mut()
+                        .probe_value(v)
+                        .map(|v| v.to_type(tcx).peel_alias()),
                     ty::IntVar(v),
-                    ty::FreshIntTy)
+                    ty::FreshIntTy,
+                )
             }
 
             ty::Infer(ty::FloatVar(v)) => {
                 self.freshen_ty(
-                    self.infcx.float_unification_table.borrow_mut()
-                                                      .probe_value(v)
-                                                      .map(|v| v.to_type(tcx)),
+                    self.infcx.float_unification_table
+                        .borrow_mut()
+                        .probe_value(v)
+                        .map(|v| v.to_type(tcx).peel_alias()),
                     ty::FloatVar(v),
-                    ty::FreshFloatTy)
+                    ty::FreshFloatTy,
+                )
             }
 
             ty::Infer(ty::FreshTy(ct)) |

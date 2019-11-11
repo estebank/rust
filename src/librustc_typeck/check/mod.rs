@@ -3841,10 +3841,11 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         expect_args
     }
 
-    pub fn check_struct_path(&self,
-                             qpath: &QPath,
-                             hir_id: hir::HirId)
-                             -> Option<(&'tcx ty::VariantDef,  Ty<'tcx>)> {
+    pub fn check_struct_path(
+        &self,
+        qpath: &QPath,
+        hir_id: hir::HirId,
+    ) -> Option<(&'tcx ty::VariantDef,  Ty<'tcx>)> {
         let path_span = match *qpath {
             QPath::Resolved(_, ref path) => path.span,
             QPath::TypeRelative(ref qself, _) => qself.span
@@ -3904,20 +3905,20 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
     // Finish resolving a path in a struct expression or pattern `S::A { .. }` if necessary.
     // The newly resolved definition is written into `type_dependent_defs`.
-    fn finish_resolving_struct_path(&self,
-                                    qpath: &QPath,
-                                    path_span: Span,
-                                    hir_id: hir::HirId)
-                                    -> (Res, Ty<'tcx>)
-    {
+    fn finish_resolving_struct_path(
+        &self,
+        qpath: &QPath,
+        path_span: Span,
+        hir_id: hir::HirId,
+    ) -> (Res, Ty<'tcx>) {
         match *qpath {
             QPath::Resolved(ref maybe_qself, ref path) => {
                 let self_ty = maybe_qself.as_ref().map(|qself| self.to_ty(qself));
-                let ty = AstConv::res_to_ty(self, self_ty, path, true);
+                let ty = AstConv::res_to_ty(self, self_ty, path, true).peel_alias();
                 (path.res, ty)
             }
             QPath::TypeRelative(ref qself, ref segment) => {
-                let ty = self.to_ty(qself);
+                let ty = self.to_ty(qself).peel_alias();
 
                 let res = if let hir::TyKind::Path(QPath::Resolved(_, ref path)) = qself.kind {
                     path.res
@@ -3933,7 +3934,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                     segment,
                     true,
                 );
-                let ty = result.map(|(ty, _, _)| ty).unwrap_or(self.tcx().types.err);
+                let ty = result.map(|(ty, _, _)| ty).unwrap_or(self.tcx().types.err).peel_alias();
                 let result = result.map(|(_, kind, def_id)| (kind, def_id));
 
                 // Write back the new resolution.
@@ -3946,21 +3947,23 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
     /// Resolves an associated value path into a base type and associated constant, or method
     /// resolution. The newly resolved definition is written into `type_dependent_defs`.
-    pub fn resolve_ty_and_res_ufcs<'b>(&self,
-                                       qpath: &'b QPath,
-                                       hir_id: hir::HirId,
-                                       span: Span)
-                                       -> (Res, Option<Ty<'tcx>>, &'b [hir::PathSegment])
-    {
+    pub fn resolve_ty_and_res_ufcs<'b>(
+        &self,
+        qpath: &'b QPath,
+        hir_id: hir::HirId,
+        span: Span,
+    ) -> (Res, Option<Ty<'tcx>>, &'b [hir::PathSegment]) {
         debug!("resolve_ty_and_res_ufcs: qpath={:?} hir_id={:?} span={:?}", qpath, hir_id, span);
         let (ty, qself, item_segment) = match *qpath {
             QPath::Resolved(ref opt_qself, ref path) => {
-                return (path.res,
-                        opt_qself.as_ref().map(|qself| self.to_ty(qself)),
-                        &path.segments[..]);
+                return (
+                    path.res,
+                    opt_qself.as_ref().map(|qself| self.to_ty(qself).peel_alias()),
+                    &path.segments[..],
+                );
             }
             QPath::TypeRelative(ref qself, ref segment) => {
-                (self.to_ty(qself), qself, segment)
+                (self.to_ty(qself).peel_alias(), qself, segment)
             }
         };
         if let Some(&cached_result) = self.tables.borrow().type_dependent_defs().get(hir_id) {

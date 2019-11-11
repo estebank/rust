@@ -256,7 +256,8 @@ impl<'a, 'tcx> ConstraintContext<'a, 'tcx> {
                ty,
                variance);
 
-        match ty.kind {
+        match ty.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Bool | ty::Char | ty::Int(_) | ty::Uint(_) | ty::Float(_) |
             ty::Str | ty::Never | ty::Foreign(..) => {
                 // leaf type -- noop
@@ -271,7 +272,11 @@ impl<'a, 'tcx> ConstraintContext<'a, 'tcx> {
             ty::Ref(region, ty, mutbl) => {
                 let contra = self.contravariant(variance);
                 self.add_constraints_from_region(current, region, contra);
-                self.add_constraints_from_mt(current, &ty::TypeAndMut { ty, mutbl }, variance);
+                self.add_constraints_from_mt(
+                    current,
+                    &ty::TypeAndMut { ty, mutbl: *mutbl },
+                    variance,
+                );
             }
 
             ty::Array(typ, _) => {
@@ -287,7 +292,7 @@ impl<'a, 'tcx> ConstraintContext<'a, 'tcx> {
             }
 
             ty::Tuple(subtys) => {
-                for &subty in subtys {
+                for &subty in subtys.iter() {
                     self.add_constraints_from_ty(current, subty.expect_ty(), variance);
                 }
             }
@@ -328,7 +333,7 @@ impl<'a, 'tcx> ConstraintContext<'a, 'tcx> {
             }
 
             ty::FnPtr(sig) => {
-                self.add_constraints_from_sig(current, sig, variance);
+                self.add_constraints_from_sig(current, *sig, variance);
             }
 
             ty::Error => {

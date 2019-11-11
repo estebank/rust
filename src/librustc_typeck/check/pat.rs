@@ -58,6 +58,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         discrim_span: Option<Span>,
     ) {
         debug!("check_pat(pat={:?},expected={:?},def_bm={:?})", pat, expected, def_bm);
+        let expected = expected.peel_alias();
 
         let path_resolution = match &pat.kind {
             PatKind::Path(qpath) => Some(self.resolve_ty_and_res_ufcs(qpath, pat.hir_id, pat.span)),
@@ -213,7 +214,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             PatKind::Slice(..) => true,
             PatKind::Lit(ref lt) => {
                 let ty = self.check_expr(lt);
-                match ty.kind {
+                match ty.kind.peel_alias() {
                     ty::Ref(..) => false,
                     _ => true,
                 }
@@ -262,7 +263,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         //
         // See the examples in `ui/match-defbm*.rs`.
         let mut pat_adjustments = vec![];
-        while let ty::Ref(_, inner_ty, inner_mutability) = expected.kind {
+        while let ty::Ref(_, inner_ty, inner_mutability) = expected.kind.peel_alias() {
             debug!("inspecting {:?}", expected);
 
             debug!("current discriminant is Ref, inserting implicit deref");
@@ -275,7 +276,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 // (depending on whether we observe `&` or `&mut`).
                 ty::BindByValue(_) |
                 // When `ref mut`, stay a `ref mut` (on `&mut`) or downgrade to `ref` (on `&`).
-                ty::BindByReference(hir::Mutability::MutMutable) => inner_mutability,
+                ty::BindByReference(hir::Mutability::MutMutable) => *inner_mutability,
                 // Once a `ref`, always a `ref`.
                 // This is because a `& &mut` cannot mutate the underlying value.
                 ty::BindByReference(m @ hir::Mutability::MutImmutable) => m,
@@ -301,7 +302,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     ) -> Ty<'tcx> {
         // We've already computed the type above (when checking for a non-ref pat),
         // so avoid computing it again.
-        let ty = self.node_ty(lt.hir_id);
+        let ty = self.node_ty(lt.hir_id).peel_alias();
 
         // Byte string patterns behave the same way as array patterns
         // They can denote both statically and dynamically-sized byte arrays.
@@ -353,8 +354,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         expected: Ty<'tcx>,
         discrim_span: Option<Span>,
     ) -> Option<Ty<'tcx>> {
-        let lhs_ty = self.check_expr(begin);
-        let rhs_ty = self.check_expr(end);
+        let lhs_ty = self.check_expr(begin).peel_alias();
+        let rhs_ty = self.check_expr(end).peel_alias();
 
         // Check that both end-points are of numeric or char type.
         let numeric_or_char = |ty: Ty<'_>| {
@@ -430,7 +431,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
         debug!("check_pat_ident: pat.hir_id={:?} bm={:?}", pat.hir_id, bm);
 
-        let local_ty = self.local_ty(pat.span, pat.hir_id).decl_ty;
+        let local_ty = self.local_ty(pat.span, pat.hir_id).decl_ty.peel_alias();
         let eq_ty = match bm {
             ty::BindByReference(mutbl) => {
                 // If the binding is like `ref x | ref const x | ref mut x`

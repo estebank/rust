@@ -606,7 +606,7 @@ impl<'hir> Map<'hir> {
                 Node::Item(ref item) => {
                     match item.kind {
                         ItemKind::Fn(_, ref generics, _) |
-                        ItemKind::TyAlias(_, ref generics) |
+                        ItemKind::TyAlias(_, ref generics, _) |
                         ItemKind::Enum(_, ref generics) |
                         ItemKind::Struct(_, ref generics) |
                         ItemKind::Union(_, ref generics) |

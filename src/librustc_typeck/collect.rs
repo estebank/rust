@@ -294,7 +294,7 @@ fn type_param_predicates(
             match item.kind {
                 ItemKind::Fn(.., ref generics, _)
                 | ItemKind::Impl(_, _, _, ref generics, ..)
-                | ItemKind::TyAlias(_, ref generics)
+                | ItemKind::TyAlias(_, ref generics, _)
                 | ItemKind::OpaqueTy(OpaqueTy {
                     ref generics,
                     impl_trait_fn: None,
@@ -946,7 +946,7 @@ fn generics_of(tcx: TyCtxt<'_>, def_id: DefId) -> &ty::Generics {
                     generics
                 }
 
-                ItemKind::TyAlias(_, ref generics)
+                ItemKind::TyAlias(_, ref generics, _)
                 | ItemKind::Enum(_, ref generics)
                 | ItemKind::Struct(_, ref generics)
                 | ItemKind::OpaqueTy(hir::OpaqueTy { ref generics, .. })
@@ -1261,8 +1261,11 @@ fn type_of(tcx: TyCtxt<'_>, def_id: DefId) -> Ty<'_> {
                         icx.to_ty(ty)
                     }
                 },
-                ItemKind::TyAlias(ref ty, _)
-                | ItemKind::Impl(.., ref ty, _) => icx.to_ty(ty),
+                ItemKind::TyAlias(ref ty, _, name) => {
+                    let ty = icx.to_ty(ty);
+                    icx.tcx.mk_ty(ty::Alias(ty, name.name))
+                }
+                ItemKind::Impl(.., ref ty, _) => icx.to_ty(ty),
                 ItemKind::Fn(..) => {
                     let substs = InternalSubsts::identity_for_item(tcx, def_id);
                     tcx.mk_fn_def(def_id, substs)
@@ -1627,7 +1630,7 @@ fn find_opaque_ty_constraints(tcx: TyCtxt<'_>, def_id: DefId) -> Ty<'_> {
                         // concrete type equality, as it is possible to obtain the same type just
                         // by passing matching parameters to a function.
                         (ty::Param(_), ty::Param(_)) => true,
-                        _ => t == p,
+                        _ => t.peel_alias() == p.peel_alias(),
                     });
                     if !iter_eq || ty.next().is_some() || p_ty.next().is_some() {
                         debug!("find_opaque_ty_constraints: span={:?}", span);
@@ -2080,7 +2083,7 @@ fn explicit_predicates_of(
                     generics
                 }
                 ItemKind::Fn(.., ref generics, _)
-                | ItemKind::TyAlias(_, ref generics)
+                | ItemKind::TyAlias(_, ref generics, _)
                 | ItemKind::Enum(_, ref generics)
                 | ItemKind::Struct(_, ref generics)
                 | ItemKind::Union(_, ref generics) => generics,

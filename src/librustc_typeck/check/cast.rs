@@ -93,7 +93,8 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             return Ok(Some(PointerKind::Thin));
         }
 
-        Ok(match t.kind {
+        Ok(match t.kind.peel_alias() {
+            ty::Alias(..) => unreachable!(),
             ty::Slice(_) | ty::Str => Some(PointerKind::Length),
             ty::Dynamic(ref tty, ..) =>
                 Some(PointerKind::Vtable(tty.principal_def_id())),
@@ -116,7 +117,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             // We should really try to normalize here.
             ty::Projection(ref pi) => Some(PointerKind::OfProjection(pi)),
             ty::UnnormalizedProjection(..) => bug!("only used with chalk-engine"),
-            ty::Opaque(def_id, substs) => Some(PointerKind::OfOpaque(def_id, substs)),
+            ty::Opaque(def_id, substs) => Some(PointerKind::OfOpaque(*def_id, substs)),
             ty::Param(ref p) => Some(PointerKind::OfParam(p)),
             // Insufficient type information.
             ty::Placeholder(..) | ty::Bound(..) | ty::Infer(_) => None,

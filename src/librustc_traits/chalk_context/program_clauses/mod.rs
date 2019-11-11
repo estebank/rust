@@ -176,7 +176,8 @@ impl ChalkInferenceContext<'cx, 'tcx> {
                 //   associated type (rule `WellFormed-AssocTy`)
                 // * custom rules for built-in types
                 // * the type definition otherwise (rule `WellFormed-Type`)
-                let clauses = match ty.kind {
+                let clauses = match ty.kind.peel_alias() {
+                    ty::Alias(..) => unreachable!(),
                     ty::Projection(data) => {
                         self.infcx.tcx.program_clauses_for(data.item_def_id)
                     }
@@ -230,9 +231,9 @@ impl ChalkInferenceContext<'cx, 'tcx> {
                     ),
 
                     // WF if `sub_ty` outlives `region`.
-                    ty::Ref(_, _, mutbl) => wf_clause_for_ref(self.infcx.tcx, mutbl),
+                    ty::Ref(_, _, mutbl) => wf_clause_for_ref(self.infcx.tcx, *mutbl),
 
-                    ty::FnDef(def_id, ..) => wf_clause_for_fn_def(self.infcx.tcx, def_id),
+                    ty::FnDef(def_id, ..) => wf_clause_for_fn_def(self.infcx.tcx, *def_id),
 
                     ty::Dynamic(..) => {
                         // FIXME: no rules yet for trait objects
@@ -248,7 +249,7 @@ impl ChalkInferenceContext<'cx, 'tcx> {
                     ty::Closure(def_id, ..) |
                     ty::Generator(def_id, ..) |
                     ty::Opaque(def_id, ..) => {
-                        self.infcx.tcx.program_clauses_for(def_id)
+                        self.infcx.tcx.program_clauses_for(*def_id)
                     }
 
                     // Artificially trigger an ambiguity.

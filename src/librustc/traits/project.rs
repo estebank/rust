@@ -335,6 +335,7 @@ impl<'a, 'b, 'tcx> TypeFolder<'tcx> for AssocTypeNormalizer<'a, 'b, 'tcx> {
         // Instead of normalizing `<T as Foo<&'a>>::A` here, we'll
         // normalize it when we instantiate those bound regions (which
         // should occur eventually).
+        let ty = ty.peel_alias();
 
         let ty = ty.super_fold_with(self);
         match ty.kind {

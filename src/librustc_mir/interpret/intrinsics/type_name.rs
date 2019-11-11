@@ -34,6 +34,7 @@ impl<'tcx> Printer<'tcx> for AbsolutePathPrinter<'tcx> {
     fn print_type(mut self, ty: Ty<'tcx>) -> Result<Self::Type, Self::Error> {
         match ty.kind {
             // Types without identity.
+            | ty::Alias(..)
             | ty::Bool
             | ty::Char
             | ty::Int(_)

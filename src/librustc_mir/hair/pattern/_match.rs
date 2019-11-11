@@ -281,6 +281,8 @@ impl LiteralExpander<'tcx> {
         crty: Ty<'tcx>,
     ) -> ConstValue<'tcx> {
         debug!("fold_const_value_deref {:?} {:?} {:?}", val, rty, crty);
+        let rty = rty.peel_alias();
+        let crty = crty.peel_alias();
         match (val, &crty.kind, &rty.kind) {
             // the easy case, deref a reference
             (ConstValue::Scalar(Scalar::Ptr(p)), x, y) if x == y => {
@@ -309,7 +311,7 @@ impl LiteralExpander<'tcx> {
 impl PatternFolder<'tcx> for LiteralExpander<'tcx> {
     fn fold_pattern(&mut self, pat: &Pat<'tcx>) -> Pat<'tcx> {
         debug!("fold_pattern {:?} {:?} {:?}", pat, pat.ty.kind, pat.kind);
-        match (&pat.ty.kind, &*pat.kind) {
+        match (&pat.ty.kind.peel_alias(), &*pat.kind) {
             (
                 &ty::Ref(_, rty, _),
                 &PatKind::Constant {

@@ -148,6 +148,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for InferenceFudger<'a, 'tcx> {
     }
 
     fn fold_ty(&mut self, ty: Ty<'tcx>) -> Ty<'tcx> {
+        // let ty = ty.peel_alias();
         match ty.kind {
             ty::Infer(ty::InferTy::TyVar(vid)) => {
                 if self.type_vars.0.contains(&vid) {
