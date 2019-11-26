@@ -147,6 +147,12 @@ pub struct Parser<'a> {
     pub last_type_ascription: Option<(Span, bool /* likely path typo */)>,
     /// If present, this `Parser` is not parsing Rust code but rather a macro call.
     subparser_name: Option<&'static str>,
+    suggestion_spans: SuggestionSpans,
+}
+
+#[derive(Clone)]
+struct SuggestionSpans {
+    valid_adt: Vec<Span>,
 }
 
 impl<'a> Drop for Parser<'a> {
@@ -389,6 +395,9 @@ impl<'a> Parser<'a> {
             last_unexpected_token_span: None,
             last_type_ascription: None,
             subparser_name,
+            suggestion_spans: SuggestionSpans {
+                valid_adt: Vec::new(),
+            },
         };
 
         parser.token = parser.next_tok();

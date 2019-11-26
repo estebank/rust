@@ -285,6 +285,13 @@ impl TokenKind {
             _ => None
         }
     }
+
+    pub fn is_doc_comment(&self) -> bool {
+        match self {
+            TokenKind::DocComment(_) => true,
+            _ => false,
+        }
+    }
 }
 
 impl Token {

@@ -268,6 +268,23 @@ impl<'a> DiagnosticBuilder<'a> {
         self
     }
 
+    pub fn multipart_suggestion_hidden(
+        &mut self,
+        msg: &str,
+        suggestion: Vec<(Span, String)>,
+        applicability: Applicability,
+    ) -> &mut Self {
+        if !self.0.allow_suggestions {
+            return self
+        }
+        self.0.diagnostic.multipart_suggestion_hidden(
+            msg,
+            suggestion,
+            applicability,
+        );
+        self
+    }
+
     pub fn span_suggestion(
         &mut self,
         sp: Span,

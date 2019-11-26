@@ -1,26 +1,34 @@
-error: `enum` definition cannot be nested inside `enum`
+error: enum cannot be nested inside `enum`
   --> $DIR/nested-enum.rs:2:5
    |
+LL | enum Foo {
+   |      --- can't be nested inside this
 LL |     enum Bar { Baz },
-   |     ^^^^------------
-   |     |
-   |     help: consider creating a new `enum` definition instead of nesting
+   |     ^^^^^^^^^^^^^^^^ can't be nested inside `enum`
+   |
+   = help: move this enum outside the `enum` definition
 
-error: `struct` definition cannot be nested inside `enum`
+error: struct cannot be nested inside `enum`
   --> $DIR/nested-enum.rs:3:5
    |
+LL | enum Foo {
+   |      --- can't be nested inside this
+LL |     enum Bar { Baz },
 LL |     struct Quux { field: u8 },
-   |     ^^^^^^-------------------
-   |     |
-   |     help: consider creating a new `struct` definition instead of nesting
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^ can't be nested inside `enum`
+   |
+   = help: move this struct outside the `enum` definition
 
-error: `union` definition cannot be nested inside `enum`
+error: union cannot be nested inside `enum`
   --> $DIR/nested-enum.rs:4:5
    |
+LL | enum Foo {
+   |      --- can't be nested inside this
+...
 LL |     union Wibble { field: u8 },
-   |     ^^^^^---------------------
-   |     |
-   |     help: consider creating a new `union` definition instead of nesting
+   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ can't be nested inside `enum`
+   |
+   = help: move this union outside the `enum` definition
 
 error: aborting due to 3 previous errors
 

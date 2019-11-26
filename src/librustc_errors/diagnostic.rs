@@ -311,7 +311,7 @@ impl Diagnostic {
         self
     }
 
-    /// Prints out a message with for a multipart suggestion without showing the suggested code.
+    /// Creates a multipart suggestion without showing the suggested code or the message.
     ///
     /// This is intended to be used for suggestions that are obvious in what the changes need to
     /// be from the message, showing the span label inline would be visually unpleasant
@@ -332,6 +332,31 @@ impl Diagnostic {
             }],
             msg: msg.to_owned(),
             style: SuggestionStyle::CompletelyHidden,
+            applicability,
+        });
+        self
+    }
+
+    /// Prints out a message with for a multipart suggestion without showing the suggested code.
+    ///
+    /// This is intended to be used for suggestions that would be visually hard to read but are
+    /// easy to understand given the message. This way tools can apply the structured suggestion,
+    /// while the CLI output is clean.
+    pub fn multipart_suggestion_hidden(
+        &mut self,
+        msg: &str,
+        suggestion: Vec<(Span, String)>,
+        applicability: Applicability,
+    ) -> &mut Self {
+        self.suggestions.push(CodeSuggestion {
+            substitutions: vec![Substitution {
+                parts: suggestion
+                    .into_iter()
+                    .map(|(span, snippet)| SubstitutionPart { snippet, span })
+                    .collect(),
+            }],
+            msg: msg.to_owned(),
+            style: SuggestionStyle::HideCodeAlways,
             applicability,
         });
         self

@@ -1,0 +1,17 @@
+{"message":"enum cannot be nested inside `enum`","code":null,"level":"error","spans":[{"file_name":"$DIR/nested-enum-2.rs","byte_start":168,"byte_end":184,"line_start":5,"line_end":5,"column_start":5,"column_end":21,"is_primary":true,"text":[{"text":"    enum Bar { Baz },
+","suggestion_applicability":"MaybeIncorrect","expansion":null}],"children":[],"rendered":null}],"rendered":"$DIR/nested-enum-2.rs:5:5: error: enum cannot be nested inside `enum`
+"}
+{"message":"struct cannot be nested inside `enum`","code":null,"level":"error","spans":[{"file_name":"$DIR/nested-enum-2.rs","byte_start":236,"byte_end":261,"line_start":6,"line_end":6,"column_start":5,"column_end":30,"is_primary":true,"text":[{"text":"    struct Quux { field: u8 },
+","suggestion_applicability":"MaybeIncorrect","expansion":null}],"children":[],"rendered":null}],"rendered":"$DIR/nested-enum-2.rs:6:5: error: struct cannot be nested inside `enum`
+"}
+{"message":"union cannot be nested inside `enum`","code":null,"level":"error","spans":[{"file_name":"$DIR/nested-enum-2.rs","byte_start":315,"byte_end":341,"line_start":7,"line_end":7,"column_start":5,"column_end":31,"is_primary":true,"text":[{"text":"    union Wibble { field: u8 },
+","suggestion_applicability":"MaybeIncorrect","expansion":null}],"children":[],"rendered":null}],"rendered":"$DIR/nested-enum-2.rs:7:5: error: union cannot be nested inside `enum`
+"}
+{"message":"struct cannot be nested inside `enum`","code":null,"level":"error","spans":[{"file_name":"$DIR/nested-enum-2.rs","byte_start":403,"byte_end":428,"line_start":9,"line_end":9,"column_start":5,"column_end":30,"is_primary":true,"text":[{"text":"    struct Trop { field: u8 }
+","suggestion_applicability":"MaybeIncorrect","expansion":null}],"children":[],"rendered":null}],"rendered":"$DIR/nested-enum-2.rs:9:5: error: struct cannot be nested inside `enum`
+"}
+{"message":"function cannot be nested inside `struct`","code":null,"level":"error","spans":[{"file_name":"$DIR/nested-enum-2.rs","byte_start":495,"byte_end":506,"line_start":13,"line_end":13,"column_start":5,"column_end":16,"is_primary":true,"text":[{"text":"    fn foo() {},
+","suggestion_applicability":"MaybeIncorrect","expansion":null}],"children":[],"rendered":null}],"rendered":"$DIR/nested-enum-2.rs:13:5: error: function cannot be nested inside `struct`
+"}
+{"message":"aborting due to 5 previous errors","code":null,"level":"error","spans":[],"children":[],"rendered":"error: aborting due to 5 previous errors
+"}

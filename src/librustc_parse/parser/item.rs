@@ -9,7 +9,6 @@ use syntax::ast::{PathSegment, IsAuto, Constness, IsAsync, Unsafety, Defaultness
 use syntax::ast::{Visibility, VisibilityKind, Mutability, FnHeader, ForeignItem, ForeignItemKind};
 use syntax::ast::{Ty, TyKind, Generics, TraitRef, EnumDef, VariantData, StructField};
 use syntax::ast::{Mac, MacDelimiter, Block, BindingMode, FnDecl, FnSig, SelfKind, Param};
-use syntax::print::pprust;
 use syntax::ptr::P;
 use syntax::ThinVec;
 use syntax::token;
@@ -40,11 +39,13 @@ impl<'a> Parser<'a> {
         attributes_allowed: bool,
     ) -> PResult<'a, Option<P<Item>>> {
         let mut unclosed_delims = vec![];
+        self.suggestion_spans.valid_adt.push(self.token.span.shrink_to_lo());
         let (ret, tokens) = self.collect_tokens(|this| {
             let item = this.parse_item_implementation(attrs, macros_allowed, attributes_allowed);
             unclosed_delims.append(&mut this.unclosed_delims);
             item
         })?;
+        self.suggestion_spans.valid_adt.pop();
         self.unclosed_delims.append(&mut unclosed_delims);
 
         // Once we've parsed an item and recorded the tokens we got while
@@ -491,9 +492,12 @@ impl<'a> Parser<'a> {
     }
 
     /// Parses a macro invocation inside a `trait`, `impl` or `extern` block.
-    fn parse_assoc_macro_invoc(&mut self, item_kind: &str, vis: Option<&Visibility>,
-                               at_end: &mut bool) -> PResult<'a, Option<Mac>>
-    {
+    fn parse_assoc_macro_invoc(
+        &mut self,
+        item_kind: &str,
+        vis: Option<&Visibility>,
+        at_end: &mut bool,
+    ) -> PResult<'a, Option<Mac>> {
         if self.token.is_path_start() &&
                 !(self.is_async_fn() && self.token.span.rust_2015()) {
             let prev_span = self.prev_span;
@@ -532,9 +536,11 @@ impl<'a> Parser<'a> {
         }
     }
 
-    fn missing_assoc_item_kind_err(&self, item_type: &str, prev_span: Span)
-                                   -> DiagnosticBuilder<'a>
-    {
+    fn missing_assoc_item_kind_err(
+        &self,
+        item_type: &str,
+        prev_span: Span,
+    ) -> DiagnosticBuilder<'a> {
         let expected_kinds = if item_type == "extern" {
             "missing `fn`, `type`, or `static`"
         } else {
@@ -1326,7 +1332,7 @@ impl<'a> Parser<'a> {
         generics.where_clause = self.parse_where_clause()?;
         self.expect(&token::OpenDelim(token::Brace))?;
 
-        let enum_definition = self.parse_enum_def(&generics).map_err(|e| {
+        let enum_definition = self.parse_enum_def(&generics, id.span).map_err(|e| {
             self.recover_stmt();
             self.eat(&token::CloseDelim(token::Brace));
             e
@@ -1335,24 +1341,25 @@ impl<'a> Parser<'a> {
     }
 
     /// Parses the part of an enum declaration following the `{`.
-    fn parse_enum_def(&mut self, _generics: &Generics) -> PResult<'a, EnumDef> {
+    fn parse_enum_def(&mut self, _generics: &Generics, span: Span) -> PResult<'a, EnumDef> {
         let mut variants = Vec::new();
         // FIXME: Consider using `parse_delim_comma_seq`.
-        // We could then remove eating comma in `recover_nested_adt_item`.
+        // We could then remove eating comma in `recover_invalid_nested_item`.
         while self.token != token::CloseDelim(token::Brace) {
             let variant_attrs = self.parse_outer_attributes()?;
             let vlo = self.token.span;
 
             let vis = self.parse_visibility(FollowedByType::No)?;
-            if !self.recover_nested_adt_item(kw::Enum)? {
+            if let Err(mut err) = self.recover_invalid_nested_item(kw::Enum, span) {
                 // Item already parsed, we need to skip this variant.
+                err.emit();
                 continue
             }
             let ident = self.parse_ident()?;
 
             let struct_def = if self.check(&token::OpenDelim(token::Brace)) {
                 // Parse a struct variant.
-                let (fields, recovered) = self.parse_record_struct_body()?;
+                let (fields, recovered) = self.parse_record_struct_body(ident.span)?;
                 VariantData::Struct(fields, recovered)
             } else if self.check(&token::OpenDelim(token::Paren)) {
                 VariantData::Tuple(
@@ -1432,7 +1439,7 @@ impl<'a> Parser<'a> {
                 VariantData::Unit(DUMMY_NODE_ID)
             } else {
                 // If we see: `struct Foo<T> where T: Copy { ... }`
-                let (fields, recovered) = self.parse_record_struct_body()?;
+                let (fields, recovered) = self.parse_record_struct_body(class_name.span)?;
                 VariantData::Struct(fields, recovered)
             }
         // No `where` so: `struct Foo<T>;`
@@ -1440,7 +1447,7 @@ impl<'a> Parser<'a> {
             VariantData::Unit(DUMMY_NODE_ID)
         // Record-style struct definition
         } else if self.token == token::OpenDelim(token::Brace) {
-            let (fields, recovered) = self.parse_record_struct_body()?;
+            let (fields, recovered) = self.parse_record_struct_body(class_name.span)?;
             VariantData::Struct(fields, recovered)
         // Tuple-style struct definition with optional where-clause.
         } else if self.token == token::OpenDelim(token::Paren) {
@@ -1469,10 +1476,10 @@ impl<'a> Parser<'a> {
 
         let vdata = if self.token.is_keyword(kw::Where) {
             generics.where_clause = self.parse_where_clause()?;
-            let (fields, recovered) = self.parse_record_struct_body()?;
+            let (fields, recovered) = self.parse_record_struct_body(class_name.span)?;
             VariantData::Struct(fields, recovered)
         } else if self.token == token::OpenDelim(token::Brace) {
-            let (fields, recovered) = self.parse_record_struct_body()?;
+            let (fields, recovered) = self.parse_record_struct_body(class_name.span)?;
             VariantData::Struct(fields, recovered)
         } else {
             let token_str = self.this_token_descr();
@@ -1492,12 +1499,13 @@ impl<'a> Parser<'a> {
 
     fn parse_record_struct_body(
         &mut self,
+        struct_ident_span: Span,
     ) -> PResult<'a, (Vec<StructField>, /* recovered */ bool)> {
         let mut fields = Vec::new();
         let mut recovered = false;
         if self.eat(&token::OpenDelim(token::Brace)) {
             while self.token != token::CloseDelim(token::Brace) {
-                let field = self.parse_struct_decl_field().map_err(|e| {
+                let field = self.parse_struct_decl_field(struct_ident_span).map_err(|e| {
                     self.consume_block(token::Brace, ConsumeClosingDelim::No);
                     recovered = true;
                     e
@@ -1543,20 +1551,27 @@ impl<'a> Parser<'a> {
     }
 
     /// Parses an element of a struct declaration.
-    fn parse_struct_decl_field(&mut self) -> PResult<'a, StructField> {
+    fn parse_struct_decl_field(&mut self, struct_ident_span: Span) -> PResult<'a, StructField> {
         let attrs = self.parse_outer_attributes()?;
         let lo = self.token.span;
         let vis = self.parse_visibility(FollowedByType::No)?;
-        self.parse_single_struct_field(lo, vis, attrs)
+        self.parse_single_struct_field(lo, vis, attrs, struct_ident_span)
     }
 
     /// Parses a structure field declaration.
-    fn parse_single_struct_field(&mut self,
-                                     lo: Span,
-                                     vis: Visibility,
-                                     attrs: Vec<Attribute> )
-                                     -> PResult<'a, StructField> {
+    fn parse_single_struct_field(
+        &mut self,
+        lo: Span,
+        vis: Visibility,
+        attrs: Vec<Attribute>,
+        struct_ident_span: Span,
+    ) -> PResult<'a, StructField> {
         let mut seen_comma: bool = false;
+        if !self.look_ahead(1, |t| [
+            token::Comma, token::Colon, token::CloseDelim(token::Brace), token::Semi
+        ].contains(&t.kind) | t.kind.is_doc_comment()) {
+            self.recover_invalid_nested_item(kw::Struct, struct_ident_span)?;
+        }
         let a_var = self.parse_name_and_ty(lo, vis, attrs)?;
         if self.token == token::Comma {
             seen_comma = true;
@@ -1751,42 +1766,84 @@ impl<'a> Parser<'a> {
 
     /// Checks if current token is one of tokens which cannot be nested like `kw::Enum`. In case
     /// it is, we try to parse the item and report error about nested types.
-    fn recover_nested_adt_item(&mut self, keyword: Symbol) -> PResult<'a, bool> {
-        if self.token.is_keyword(kw::Enum) ||
-            self.token.is_keyword(kw::Struct) ||
-            self.token.is_keyword(kw::Union)
-        {
-            let kw_token = self.token.clone();
-            let kw_str = pprust::token_to_string(&kw_token);
-            let item = self.parse_item()?;
-            self.eat(&token::Comma);
-
-            self.struct_span_err(
-                kw_token.span,
-                &format!("`{}` definition cannot be nested inside `{}`", kw_str, keyword),
-            ).span_suggestion(
-                item.unwrap().span,
-                &format!("consider creating a new `{}` definition instead of nesting", kw_str),
-                String::new(),
-                Applicability::MaybeIncorrect,
-            ).emit();
-            // We successfully parsed the item but we must inform the caller about nested problem.
-            return Ok(false)
+    fn recover_invalid_nested_item(&mut self, keyword: Symbol, span: Span) -> PResult<'a, ()> {
+        use ItemKind::*;
+        if !self.unclosed_delims.is_empty() {
+            // We don't want to suggest moving an item outside of an element with an unclosed
+            // brace. In lieu of a more complex solution, we just ignore and sidestep this case.
+            return Ok(());
         }
-        Ok(true)
+        let snapshot = self.clone();
+        let lo = self.prev_span.shrink_to_hi();
+        match self.parse_item() {
+            Ok(Some(item)) => {
+                self.eat(&token::Comma);
+                // Account for the possible comma and indentation.
+                let remove_span = lo.to(self.prev_span);
+
+                // We successfully parsed the item but we must inform the caller about nested problem.
+                let mut err = self.struct_span_err(item.span, &format!(
+                    "{} cannot be nested inside `{}`",
+                    item.kind.descriptive_variant(),
+                    keyword,
+                ));
+                err.span_label(item.span, &format!("can't be nested inside `{}`", keyword));
+                err.span_label(span, "can't be nested inside this");
+                match keyword {
+                    kw::Struct |
+                    kw::Union |
+                    kw::Enum => match item.kind {
+                        ExternCrate(_) | Use(_) | Static(..) | Const(..) | Fn(..) | Mod(_) |
+                        ForeignMod(_) | TyAlias(..) | Enum(..) | Struct(..) | Union(..) |
+                        Trait(..) | TraitAlias(..) | Impl(..) | MacroDef(_) => {
+                            if let (
+                                Ok(ref snippet),
+                                // We want the previous to last, as the last is the current item.
+                                Some(sugg_span),
+                            ) = (
+                                self.span_to_snippet(item.span),
+                                self.suggestion_spans.valid_adt.iter().last(),
+                            ) {
+                                err.multipart_suggestion_hidden(
+                                    &format!(
+                                        "move this {} outside the `{}` definition",
+                                        item.kind.descriptive_variant(),
+                                        keyword,
+                                    ),
+                                    vec![
+                                        (remove_span, String::new()),
+                                        // FIXME: the resulting indentation of the moved item will
+                                        //        be incorrect.
+                                        (*sugg_span, format!("{}\n", snippet)),
+                                    ],
+                                    Applicability::MaybeIncorrect,
+                                );
+                            }
+                        }
+                        GlobalAsm(_) | Mac(_) => {}
+                    }
+                    _ => {}
+                }
+                Err(err)
+            }
+            Ok(None) => Ok(()),
+            Err(mut err) => {
+                err.cancel();
+                mem::replace(self, snapshot);
+                Ok(())
+            }
+        }
     }
 
-    fn mk_item(&self, span: Span, ident: Ident, kind: ItemKind, vis: Visibility,
-               attrs: Vec<Attribute>) -> P<Item> {
-        P(Item {
-            ident,
-            attrs,
-            id: DUMMY_NODE_ID,
-            kind,
-            vis,
-            span,
-            tokens: None,
-        })
+    fn mk_item(
+        &self,
+        span: Span,
+        ident: Ident,
+        kind: ItemKind,
+        vis: Visibility,
+        attrs: Vec<Attribute>,
+    ) -> P<Item> {
+        P(Item { ident, attrs, id: DUMMY_NODE_ID, kind, vis, span, tokens: None })
     }
 }
 
