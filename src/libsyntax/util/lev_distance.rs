@@ -1,5 +1,6 @@
 use std::cmp;
 use crate::symbol::Symbol;
+use unicode_skeleton::{confusable, UnicodeSkeleton};
 
 #[cfg(test)]
 mod tests;
@@ -43,51 +44,52 @@ pub fn lev_distance(a: &str, b: &str) -> usize {
 ///
 /// Besides Levenshtein, we use case insensitive comparison to improve accuracy on an edge case with
 /// a lower(upper)case letters mismatch.
-pub fn find_best_match_for_name<'a, T>(iter_names: T,
-                                       lookup: &str,
-                                       dist: Option<usize>) -> Option<Symbol>
-    where T: Iterator<Item = &'a Symbol> {
+pub fn find_best_match_for_name<'a, T>(
+    iter_names: T,
+    lookup: &str,
+    dist: Option<usize>,
+) -> Option<Symbol>
+    where T: Iterator<Item = &'a Symbol>
+{
     let max_dist = dist.map_or_else(|| cmp::max(lookup.len(), 3) / 3, |d| d);
 
-    let (case_insensitive_match, levenstein_match, is_confusable) = iter_names
+    let (case_insensitive_match, levenstein_match) = iter_names
         .filter_map(|&name| {
             let dist = lev_distance(lookup, &name.as_str());
-            let is_confusable = unicode_skeleton::confusable(lookup, name.as_str().chars());
-            if dist <= max_dist || is_confusable {
-                Some((name, dist, is_confusable))
+            let is_confusable = confusable(lookup, name.as_str().chars());
+            let dist = if is_confusable {
+                lev_distance(
+                    &lookup.skeleton_chars().collect::<String>(),
+                    &name.as_str().skeleton_chars().collect::<String>(),
+                )
+            } else {
+                dist
+            };
+
+            if dist <= max_dist {
+                Some((name, dist))
             } else {
                 None
             }
         })
         // Here we are collecting the next structure:
         // (case_insensitive_match, (levenstein_match, levenstein_distance))
-        .fold((None, None, None), |result, (candidate, dist, is_confusable)| {
-            (
-                if candidate.as_str().to_uppercase() == lookup.to_uppercase() {
-                    Some(candidate)
-                } else {
-                    result.0
-                },
-                match result.1 {
-                    None => Some((candidate, dist)),
-                    Some((c, d)) => Some(if dist < d { (candidate, dist) } else { (c, d) }),
-                },
-                match (is_confusable, result.2) {
-                    (false, Some((c, d))) => Some((c, d)),
-                    (false, None) => None,
-                    (true, None) => Some((candidate, dist)),
-                    (true, Some((c, d))) => Some(if dist < d { (candidate, dist) } else { (c, d) }),
-                }
-            )
-        });
+        .fold((None, None), |result, (candidate, dist)| (
+            if candidate.as_str().to_uppercase() == lookup.to_uppercase() {
+                Some(candidate)
+            } else {
+                result.0
+            },
+            match result.1 {
+                None => Some((candidate, dist)),
+                Some((c, d)) => Some(if dist < d { (candidate, dist) } else { (c, d) }),
+            },
+        ));
 
-    if let Some(candidate) = case_insensitive_match {
-        Some(candidate) // exact case insensitive match has a higher priority
-    } else if let Some((candidate, _)) = is_confusable {
-        Some(candidate)
-    } else if let Some((candidate, _)) = levenstein_match {
-        Some(candidate)
-    } else {
-        None
+    match (case_insensitive_match, levenstein_match) {
+        // Exact case insensitive match has a higher priority.
+        (Some(candidate), _) => Some(candidate),
+        (None, Some((candidate, _))) => Some(candidate),
+        _ => None,
     }
 }
