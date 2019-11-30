@@ -28,7 +28,7 @@ use rustc::infer::canonical::{Canonical, QueryResponse};
 use rustc::infer::canonical::{OriginalQueryValues};
 use rustc::middle::stability;
 use syntax::ast;
-use syntax::util::lev_distance::{lev_distance, find_best_match_for_name};
+use syntax::util::lev_distance::{find_best_match_for_name, skeleton_aware_lev_distance};
 use syntax_pos::{DUMMY_SP, Span, symbol::Symbol};
 use std::iter;
 use std::mem;
@@ -1633,7 +1633,7 @@ impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
                 let max_dist = max(name.as_str().len(), 3) / 3;
                 self.tcx.associated_items(def_id)
                     .filter(|x| {
-                        let dist = lev_distance(&*name.as_str(), &x.ident.as_str());
+                        let dist = skeleton_aware_lev_distance(&*name.as_str(), &x.ident.as_str());
                         Namespace::from(x.kind) == Namespace::Value && dist > 0
                             && dist <= max_dist
                     })

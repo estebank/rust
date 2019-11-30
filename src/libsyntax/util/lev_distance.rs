@@ -1,6 +1,6 @@
 use std::cmp;
 use crate::symbol::Symbol;
-use unicode_skeleton::{confusable, UnicodeSkeleton};
+pub use unicode_skeleton::{confusable, UnicodeSkeleton};
 
 #[cfg(test)]
 mod tests;
@@ -36,6 +36,25 @@ pub fn lev_distance(a: &str, b: &str) -> usize {
     dcol[t_last + 1]
 }
 
+/// Finds the Levenshtein distance between two strings. If the two strings contain characters that
+/// could be confused in an unicode context, we return the Levenshtein distance of the `skeleton`s
+/// of both strings instead.
+pub fn skeleton_aware_lev_distance(a: &str, b: &str) -> usize {
+    if confusable(a, b) { // skeleton(a) == skeleton(b)
+        // `lev_distance(skeleton(a), skeleton(b))` would always be 0, this is an attempt at giving
+        // a more expected result.
+        cmp::min(lev_distance(
+            a,
+            &b.skeleton_chars().collect::<String>(),
+        ), lev_distance(
+            &a.skeleton_chars().collect::<String>(),
+            b,
+        ))
+    } else {
+        lev_distance(a, b)
+    }
+}
+
 /// Finds the best match for a given word in the given iterator
 ///
 /// As a loose rule to avoid the obviously incorrect suggestions, it takes
@@ -55,17 +74,7 @@ pub fn find_best_match_for_name<'a, T>(
 
     let (case_insensitive_match, levenstein_match) = iter_names
         .filter_map(|&name| {
-            let dist = lev_distance(lookup, &name.as_str());
-            let is_confusable = confusable(lookup, name.as_str().chars());
-            let dist = if is_confusable {
-                lev_distance(
-                    &lookup.skeleton_chars().collect::<String>(),
-                    &name.as_str().skeleton_chars().collect::<String>(),
-                )
-            } else {
-                dist
-            };
-
+            let dist = skeleton_aware_lev_distance(lookup, &name.as_str());
             if dist <= max_dist {
                 Some((name, dist))
             } else {
