@@ -1,6 +1,6 @@
 use std::cmp;
 use crate::symbol::Symbol;
-pub use unicode_skeleton::{confusable, UnicodeSkeleton};
+use unicode_skeleton::{confusable, UnicodeSkeleton};
 
 #[cfg(test)]
 mod tests;
@@ -40,16 +40,16 @@ pub fn lev_distance(a: &str, b: &str) -> usize {
 /// could be confused in an unicode context, we return the Levenshtein distance of the `skeleton`s
 /// of both strings instead.
 pub fn skeleton_aware_lev_distance(a: &str, b: &str) -> usize {
-    if confusable(a, b) { // skeleton(a) == skeleton(b)
+    if a != b && confusable(a, b) { // skeleton(a) == skeleton(b)
         // `lev_distance(skeleton(a), skeleton(b))` would always be 0, this is an attempt at giving
         // a more expected result.
-        cmp::min(lev_distance(
-            a,
-            &b.skeleton_chars().collect::<String>(),
-        ), lev_distance(
-            &a.skeleton_chars().collect::<String>(),
-            b,
-        ))
+        cmp::min(
+            cmp::min(
+                lev_distance(a, &b.skeleton_chars().collect::<String>()),
+                lev_distance(&a.skeleton_chars().collect::<String>(), b),
+            ),
+            lev_distance(a, b),
+        )
     } else {
         lev_distance(a, b)
     }

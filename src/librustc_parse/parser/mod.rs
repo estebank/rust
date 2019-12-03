@@ -38,6 +38,9 @@ use std::{cmp, mem, slice};
 use std::path::PathBuf;
 
 use rustc_error_codes::*;
+use rustc_data_structures::fx::{FxHashMap, FxHashSet};
+use unicode_script::tables::{get_script, Script};
+use unicode_skeleton::UnicodeSkeleton;
 
 bitflags::bitflags! {
     struct Restrictions: u8 {
@@ -147,11 +150,53 @@ pub struct Parser<'a> {
     pub last_type_ascription: Option<(Span, bool /* likely path typo */)>,
     /// If present, this `Parser` is not parsing Rust code but rather a macro call.
     subparser_name: Option<&'static str>,
+
+    idents: FxHashMap<Symbol, FxHashSet<Symbol>>,
+    idents_introduction_spans: FxHashMap<Symbol, Span>,
 }
 
 impl<'a> Drop for Parser<'a> {
     fn drop(&mut self) {
         emit_unclosed_delims(&mut self.unclosed_delims, &self.sess);
+
+        // Emit lint for confusable idents where `a != b && skeleton(a) == skeleton(b)`.
+        for (_, idents) in &self.idents {
+            if idents.len() > 1 {
+                let mut spans = vec![];
+                for ident in idents {
+                    if let Some(span) = self.idents_introduction_spans.get(ident) {
+                        spans.push(*span);
+                    }
+                }
+                self.sess.buffer_lint(
+                    syntax::early_buffered_lints::BufferedEarlyLintId::ConfusableIdents,
+                    spans,
+                    ast::CRATE_NODE_ID,
+                    &format!(
+                        "multiple similar looking idents: {}",
+                        idents.iter().map(|i| format!("`{}`", i)).collect::<Vec<_>>().join(", "),
+                    ),
+                );
+            }
+            for ident in &idents {
+                let script = get_script(ident);
+                if uncommon_codepoints(ident) {
+                    if let Some(span) = self.idents_introduction_spans.get(ident) {
+                        self.sess.buffer_lint(
+                            syntax::early_buffered_lints::BufferedEarlyLintId::ConfusableIdents,
+                            span,
+                            ast::CRATE_NODE_ID,
+                            &format!(
+                                "uncommon unicode script {} in identifier `{}`",
+                                script,
+                                ident,
+                            ),
+                        );
+                    }
+                }
+            }
+        }
+        debug!("Parser idents {:?}", self.idents);
     }
 }
 
@@ -389,6 +434,8 @@ impl<'a> Parser<'a> {
             last_unexpected_token_span: None,
             last_type_ascription: None,
             subparser_name,
+            idents: FxHashMap::default(),
+            idents_introduction_spans: FxHashMap::default(),
         };
 
         parser.token = parser.next_tok();
@@ -495,6 +542,12 @@ impl<'a> Parser<'a> {
     fn parse_ident_common(&mut self, recover: bool) -> PResult<'a, ast::Ident> {
         match self.token.kind {
             token::Ident(name, _) => {
+                let skeleton = Symbol::intern(&*name.as_str().skeleton_chars().collect::<String>());
+                let entry = self.idents.entry(skeleton).or_default();
+                if !entry.contains(&name) {
+                    self.idents_introduction_spans.insert(name, self.token.span);
+                }
+                entry.insert(name);
                 if self.token.is_reserved_ident() {
                     let mut err = self.expected_ident_found();
                     if recover {

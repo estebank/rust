@@ -27,7 +27,13 @@ use crate::hir::def_id::{CrateNum, LOCAL_CRATE};
 use crate::hir::intravisit;
 use crate::hir;
 use crate::lint::builtin::BuiltinLintDiagnostics;
-use crate::lint::builtin::parser::{ILL_FORMED_ATTRIBUTE_INPUT, META_VARIABLE_MISUSE};
+use crate::lint::builtin::parser::{
+    CONFUSABLE_IDENTS,
+    ILL_FORMED_ATTRIBUTE_INPUT,
+    META_VARIABLE_MISUSE,
+    MIXED_SCRIPT_CONFUSABLES,
+    UNCOMMON_CODEPOINTS,
+};
 use crate::lint::builtin::parser::INCOMPLETE_INCLUDE;
 use crate::session::{Session, DiagnosticMessageId};
 use crate::ty::TyCtxt;
@@ -111,6 +117,9 @@ impl Lint {
             BufferedEarlyLintId::IllFormedAttributeInput => ILL_FORMED_ATTRIBUTE_INPUT,
             BufferedEarlyLintId::MetaVariableMisuse => META_VARIABLE_MISUSE,
             BufferedEarlyLintId::IncompleteInclude => INCOMPLETE_INCLUDE,
+            BufferedEarlyLintId::ConfusableIdents => CONFUSABLE_IDENTS,
+            BufferedEarlyLintId::UncommonCodepoints => UNCOMMON_CODEPOINTS,
+            BufferedEarlyLintId::MixedScriptConfusables => MIXED_SCRIPT_CONFUSABLES,
         }
     }
 

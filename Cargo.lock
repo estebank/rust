@@ -3813,6 +3813,8 @@ dependencies = [
  "smallvec 1.0.0",
  "syntax",
  "syntax_pos",
+ "unicode-script",
+ "unicode_skeleton",
 ]
 
 [[package]]
@@ -4472,6 +4474,7 @@ dependencies = [
  "serialize",
  "smallvec 1.0.0",
  "syntax_pos",
+ "unicode-script",
  "unicode_skeleton",
 ]
 
@@ -5011,6 +5014,12 @@ name = "unicode-normalization"
 version = "0.1.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "6a0180bc61fc5a987082bfa111f4cc95c4caff7f9799f3e46df09163a937aa25"
+
+[[package]]
+name = "unicode-script"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "09f03ad95feb4fde244d79985bfd79eb34ff2702fedb441d2ba3f4ff813efd19"
 
 [[package]]
 name = "unicode-segmentation"

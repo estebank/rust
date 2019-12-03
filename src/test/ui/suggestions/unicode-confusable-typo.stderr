@@ -13,6 +13,17 @@ error[E0425]: cannot find value `u` in this scope
 LL |     let _ = u;
    |             ^ help: a local variable with a similar name exists: `ü`
 
+warning: multiple similar looking idents: `Rust`, `ℝ𝓊𝓈𝓉`
+  --> $DIR/unicode-confusable-typo.rs:7:13
+   |
+LL | struct ℝ𝓊𝓈𝓉;
+   |        ^^^^
+...
+LL |     let ü = Rust;
+   |             ^^^^
+   |
+   = note: `#[warn(confusable_idents)]` on by default
+
 error: aborting due to 2 previous errors
 
 For more information about this error, try `rustc --explain E0425`.

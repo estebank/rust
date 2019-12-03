@@ -12,6 +12,9 @@ pub enum BufferedEarlyLintId {
     IllFormedAttributeInput,
     MetaVariableMisuse,
     IncompleteInclude,
+    ConfusableIdents,
+    UncommonCodepoints,
+    MixedScriptConfusables,
 }
 
 /// Stores buffered lint info which can later be passed to `librustc`.
