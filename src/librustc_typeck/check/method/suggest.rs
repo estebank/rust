@@ -14,7 +14,7 @@ use rustc::infer::type_variable::{TypeVariableOrigin, TypeVariableOriginKind};
 use rustc::traits::Obligation;
 use rustc::ty::{self, Ty, TyCtxt, ToPolyTraitRef, ToPredicate, TypeFoldable};
 use rustc::ty::print::with_crate_prefix;
-use syntax_pos::{Span, FileName};
+use syntax_pos::{Span, FileName, MultiSpan};
 use syntax::{ast, source_map};
 use syntax::util::lev_distance;
 
@@ -90,6 +90,9 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             // Dynamic limit to avoid hiding just one candidate, which is silly.
             let limit = if sources.len() == 5 { 5 } else { 4 };
 
+            let mut labels = vec![];
+            let mut annotated_note_spans = vec![];
+
             for (idx, source) in sources.iter().take(limit).enumerate() {
                 match *source {
                     CandidateSource::ImplSource(impl_did) => {
@@ -140,8 +143,9 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         };
                         if let Some(note_span) = note_span {
                             // We have a span pointing to the method. Show note with snippet.
-                            err.span_note(self.tcx.sess.source_map().def_span(note_span),
-                                          &note_str);
+                            let span = self.tcx.sess.source_map().def_span(note_span);
+                            annotated_note_spans.push(span);
+                            labels.push((span, note_str));
                         } else {
                             err.note(&note_str);
                         }
@@ -185,17 +189,19 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         let item_span = self.tcx.sess.source_map()
                             .def_span(self.tcx.def_span(item.def_id));
                         let idx = if sources.len() > 1 {
-                            span_note!(err,
-                                       item_span,
-                                       "candidate #{} is defined in the trait `{}`",
-                                       idx + 1,
-                                       self.tcx.def_path_str(trait_did));
+                            annotated_note_spans.push(item_span);
+                            labels.push((item_span, format!(
+                                "candidate #{} is defined in the trait `{}`",
+                                idx + 1,
+                                self.tcx.def_path_str(trait_did),
+                            )));
                             Some(idx + 1)
                         } else {
-                            span_note!(err,
-                                       item_span,
-                                       "the candidate is defined in the trait `{}`",
-                                       self.tcx.def_path_str(trait_did));
+                            annotated_note_spans.push(item_span);
+                            labels.push((item_span, format!(
+                                "the candidate is defined in the trait `{}`",
+                                self.tcx.def_path_str(trait_did),
+                            )));
                             None
                         };
                         let path = self.tcx.def_path_str(trait_did);
@@ -212,6 +218,17 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         );
                     }
                 }
+            }
+            if !annotated_note_spans.is_empty() {
+                let mut annotated_note_span = MultiSpan::from_spans(annotated_note_spans);
+                let len = labels.len();
+                for (span, label) in labels {
+                    annotated_note_span.push_span_label(span, label);
+                }
+                err.span_note(annotated_note_span, &format!(
+                    "candidate{} defined here:",
+                    pluralize!(len),
+                ));
             }
             if sources.len() > limit {
                 err.note(&format!("and {} others", sources.len() - limit));

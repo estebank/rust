@@ -4,16 +4,13 @@ error[E0034]: multiple applicable items in scope
 LL |     t.foo();
    |       ^^^ multiple `foo` found
    |
-note: candidate #1 is defined in the trait `A`
+note: candidates defined here:
   --> $DIR/method-ambig-two-traits-from-bounds.rs:1:11
    |
 LL | trait A { fn foo(&self); }
-   |           ^^^^^^^^^^^^^^
-note: candidate #2 is defined in the trait `B`
-  --> $DIR/method-ambig-two-traits-from-bounds.rs:2:11
-   |
+   |           ^^^^^^^^^^^^^^ candidate #1 is defined in the trait `A`
 LL | trait B { fn foo(&self); }
-   |           ^^^^^^^^^^^^^^
+   |           ^^^^^^^^^^^^^^ candidate #2 is defined in the trait `B`
 help: disambiguate the method call for candidate #1
    |
 LL |     A::foo(t);

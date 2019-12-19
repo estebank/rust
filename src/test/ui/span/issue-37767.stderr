@@ -4,16 +4,14 @@ error[E0034]: multiple applicable items in scope
 LL |     a.foo()
    |       ^^^ multiple `foo` found
    |
-note: candidate #1 is defined in the trait `A`
+note: candidates defined here:
   --> $DIR/issue-37767.rs:2:5
    |
 LL |     fn foo(&mut self) {}
-   |     ^^^^^^^^^^^^^^^^^
-note: candidate #2 is defined in the trait `B`
-  --> $DIR/issue-37767.rs:6:5
-   |
+   |     ^^^^^^^^^^^^^^^^^ candidate #1 is defined in the trait `A`
+...
 LL |     fn foo(&mut self) {}
-   |     ^^^^^^^^^^^^^^^^^
+   |     ^^^^^^^^^^^^^^^^^ candidate #2 is defined in the trait `B`
 help: disambiguate the method call for candidate #1
    |
 LL |     A::foo(&a)
@@ -29,16 +27,14 @@ error[E0034]: multiple applicable items in scope
 LL |     a.foo()
    |       ^^^ multiple `foo` found
    |
-note: candidate #1 is defined in the trait `C`
+note: candidates defined here:
   --> $DIR/issue-37767.rs:14:5
    |
 LL |     fn foo(&self) {}
-   |     ^^^^^^^^^^^^^
-note: candidate #2 is defined in the trait `D`
-  --> $DIR/issue-37767.rs:18:5
-   |
+   |     ^^^^^^^^^^^^^ candidate #1 is defined in the trait `C`
+...
 LL |     fn foo(&self) {}
-   |     ^^^^^^^^^^^^^
+   |     ^^^^^^^^^^^^^ candidate #2 is defined in the trait `D`
 help: disambiguate the method call for candidate #1
    |
 LL |     C::foo(&a)
@@ -54,16 +50,14 @@ error[E0034]: multiple applicable items in scope
 LL |     a.foo()
    |       ^^^ multiple `foo` found
    |
-note: candidate #1 is defined in the trait `E`
+note: candidates defined here:
   --> $DIR/issue-37767.rs:26:5
    |
 LL |     fn foo(self) {}
-   |     ^^^^^^^^^^^^
-note: candidate #2 is defined in the trait `F`
-  --> $DIR/issue-37767.rs:30:5
-   |
+   |     ^^^^^^^^^^^^ candidate #1 is defined in the trait `E`
+...
 LL |     fn foo(self) {}
-   |     ^^^^^^^^^^^^
+   |     ^^^^^^^^^^^^ candidate #2 is defined in the trait `F`
 help: disambiguate the method call for candidate #1
    |
 LL |     E::foo(a)

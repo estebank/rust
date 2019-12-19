@@ -7,16 +7,14 @@ LL |     x.foo();
    |     | multiple `foo` found
    |     help: disambiguate the method call for candidate #2: `T::foo(&x)`
    |
-note: candidate #1 is defined in an impl for the type `dyn T`
+note: candidates defined here:
   --> $DIR/issue-18446.rs:9:5
    |
-LL |     fn foo(&self) {}
-   |     ^^^^^^^^^^^^^
-note: candidate #2 is defined in the trait `T`
-  --> $DIR/issue-18446.rs:5:5
-   |
 LL |     fn foo(&self);
-   |     ^^^^^^^^^^^^^^
+   |     ^^^^^^^^^^^^^^ candidate #2 is defined in the trait `T`
+...
+LL |     fn foo(&self) {}
+   |     ^^^^^^^^^^^^^ candidate #1 is defined in an impl for the type `dyn T`
 
 error: aborting due to previous error
 

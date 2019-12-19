@@ -11,11 +11,11 @@ LL |     x.default_hello();
    |     help: use associated function syntax instead: `GenericAssocMethod::<i32>::default_hello`
    |
    = note: found the following associated functions; to be used as methods, functions must have a `self` parameter
-note: the candidate is defined in an impl for the type `GenericAssocMethod<_>`
+note: candidate defined here:
   --> $DIR/suggest-assoc-fn-call-with-turbofish.rs:4:5
    |
 LL |     fn default_hello() {}
-   |     ^^^^^^^^^^^^^^^^^^
+   |     ^^^^^^^^^^^^^^^^^^ the candidate is defined in an impl for the type `GenericAssocMethod<_>`
 
 error: aborting due to previous error
 
