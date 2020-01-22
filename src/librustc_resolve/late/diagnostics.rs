@@ -51,7 +51,7 @@ fn import_candidate_to_enum_paths(suggestion: &ImportSuggestion) -> (String, Str
     (variant_path_string, enum_path_string)
 }
 
-impl<'a> LateResolutionVisitor<'a, '_> {
+impl<'a> LateResolutionVisitor<'a, '_, '_> {
     /// Handles error reporting for `smart_resolve_path_fragment` function.
     /// Creates base error and amends it with one short label and possibly some longer helps/notes.
     pub(crate) fn smart_resolve_report_errors(

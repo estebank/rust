@@ -4,6 +4,22 @@ error[E0433]: failed to resolve: use of undeclared type or module `dyn`
 LL | type A1 = dyn::dyn;
    |           ^^^ use of undeclared type or module `dyn`
 
+error[E0412]: cannot find type `dyn` in this scope
+  --> $DIR/dyn-trait-compatibility.rs:5:15
+   |
+LL | type A2 = dyn<dyn, dyn>;
+   |        -      ^^^ not found in this scope
+   |        |
+   |        help: you might be missing a type parameter: `<dyn>`
+
+error[E0412]: cannot find type `dyn` in this scope
+  --> $DIR/dyn-trait-compatibility.rs:5:20
+   |
+LL | type A2 = dyn<dyn, dyn>;
+   |        -           ^^^ not found in this scope
+   |        |
+   |        help: you might be missing a type parameter: `<dyn>`
+
 error[E0433]: failed to resolve: use of undeclared type or module `dyn`
   --> $DIR/dyn-trait-compatibility.rs:9:23
    |
@@ -21,18 +37,6 @@ error[E0412]: cannot find type `dyn` in this scope
    |
 LL | type A2 = dyn<dyn, dyn>;
    |           ^^^ not found in this scope
-
-error[E0412]: cannot find type `dyn` in this scope
-  --> $DIR/dyn-trait-compatibility.rs:5:15
-   |
-LL | type A2 = dyn<dyn, dyn>;
-   |               ^^^ not found in this scope
-
-error[E0412]: cannot find type `dyn` in this scope
-  --> $DIR/dyn-trait-compatibility.rs:5:20
-   |
-LL | type A2 = dyn<dyn, dyn>;
-   |                    ^^^ not found in this scope
 
 error[E0412]: cannot find type `dyn` in this scope
   --> $DIR/dyn-trait-compatibility.rs:9:11

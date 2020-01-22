@@ -7,13 +7,14 @@
 
 use RibKind::*;
 
+use crate::diagnostics::show_candidates;
 use crate::{path_names_to_string, BindingError, CrateLint, LexicalScopeBinding};
 use crate::{Module, ModuleOrUniformRoot, NameBindingKind, ParentScope, PathResult};
-use crate::{ResolutionError, Resolver, Segment, UseError};
+use crate::{ResolutionError, Resolver, Segment, UseError, UsePlacementFinder};
 
 use rustc::{bug, lint, span_bug};
 use rustc_data_structures::fx::{FxHashMap, FxHashSet};
-use rustc_errors::DiagnosticId;
+use rustc_errors::{Applicability, DiagnosticId};
 use rustc_hir::def::Namespace::{self, *};
 use rustc_hir::def::{self, CtorKind, DefKind, PartialRes, PerNS};
 use rustc_hir::def_id::{DefId, CRATE_DEF_INDEX};
@@ -323,7 +324,7 @@ impl<'a> PathSource<'a> {
 }
 
 #[derive(Default)]
-struct DiagnosticMetadata {
+struct DiagnosticMetadata<'tcx> {
     /// The current trait's associated types' ident, used for diagnostic suggestions.
     current_trait_assoc_types: Vec<Ident>,
 
@@ -332,6 +333,9 @@ struct DiagnosticMetadata {
 
     /// The current self item if inside an ADT (used for better errors).
     current_self_item: Option<NodeId>,
+
+    /// The current trait (used to suggest).
+    current_item: Option<&'tcx Item>,
 
     /// The current enclosing function (used for better errors).
     current_function: Option<Span>,
@@ -347,7 +351,7 @@ struct DiagnosticMetadata {
     current_let_binding: Option<(Span, Option<Span>, Option<Span>)>,
 }
 
-struct LateResolutionVisitor<'a, 'b> {
+struct LateResolutionVisitor<'a, 'b, 'tcx> {
     r: &'b mut Resolver<'a>,
 
     /// The module that represents the current item scope.
@@ -364,13 +368,17 @@ struct LateResolutionVisitor<'a, 'b> {
     current_trait_ref: Option<(Module<'a>, TraitRef)>,
 
     /// Fields used to add information to diagnostic errors.
-    diagnostic_metadata: DiagnosticMetadata,
+    diagnostic_metadata: DiagnosticMetadata<'tcx>,
+
+    krate: &'b Crate,
 }
 
 /// Walks the whole crate in DFS order, visiting each item, resolving names as it goes.
-impl<'a, 'tcx> Visitor<'tcx> for LateResolutionVisitor<'a, '_> {
+impl<'a, 'tcx> Visitor<'tcx> for LateResolutionVisitor<'a, '_, 'tcx> {
     fn visit_item(&mut self, item: &'tcx Item) {
+        let prev = replace(&mut self.diagnostic_metadata.current_item, Some(item));
         self.resolve_item(item);
+        self.diagnostic_metadata.current_item = prev;
     }
     fn visit_arm(&mut self, arm: &'tcx Arm) {
         self.resolve_arm(arm);
@@ -538,7 +546,7 @@ impl<'a, 'tcx> Visitor<'tcx> for LateResolutionVisitor<'a, '_> {
         debug!("visit_generic_arg({:?})", arg);
         match arg {
             GenericArg::Type(ref ty) => {
-                // We parse const arguments as path types as we cannot distiguish them durring
+                // We parse const arguments as path types as we cannot distiguish them during
                 // parsing. We try to resolve that ambiguity by attempting resolution the type
                 // namespace first, and if that fails we try again in the value namespace. If
                 // resolution in the value namespace succeeds, we have an generic const argument on
@@ -556,25 +564,40 @@ impl<'a, 'tcx> Visitor<'tcx> for LateResolutionVisitor<'a, '_> {
                             )
                             .is_some()
                         };
+                        let in_type_ns = check_ns(TypeNS);
+                        let in_value_ns = check_ns(ValueNS);
 
-                        if !check_ns(TypeNS) && check_ns(ValueNS) {
-                            // This must be equivalent to `visit_anon_const`, but we cannot call it
-                            // directly due to visitor lifetimes so we have to copy-paste some code.
-                            self.with_constant_rib(|this| {
-                                this.smart_resolve_path(
-                                    ty.id,
-                                    qself.as_ref(),
-                                    path,
-                                    PathSource::Expr(None),
-                                );
+                        match (self.diagnostic_metadata.current_item, in_type_ns, in_value_ns) {
+                            (_, false, true) => {
+                                // This must be equivalent to `visit_anon_const`, but we cannot call it
+                                // directly due to visitor lifetimes so we have to copy-paste some code.
+                                self.with_constant_rib(|this| {
+                                    this.smart_resolve_path(
+                                        ty.id,
+                                        qself.as_ref(),
+                                        path,
+                                        PathSource::Expr(None),
+                                    );
 
-                                if let Some(ref qself) = *qself {
-                                    this.visit_ty(&qself.ty);
-                                }
-                                this.visit_path(path, ty.id);
-                            });
+                                    if let Some(ref qself) = *qself {
+                                        this.visit_ty(&qself.ty);
+                                    }
+                                    this.visit_path(path, ty.id);
+                                });
 
-                            return;
+                                return;
+                            }
+                            (Some(Item { kind: ItemKind::Fn(..), ident, .. }), false, false)
+                                if ident.name == sym::main =>
+                            {
+                                // Ignore `fn main()` as we don't want to suggest `fn main<T>()`
+                            }
+                            (Some(Item { kind, .. }), false, false) => {
+                                // Likely missing type parameter.
+                                report_missing_type_error(self, kind, path);
+                                return;
+                            }
+                            _ => {}
                         }
                     }
                 }
@@ -587,8 +610,45 @@ impl<'a, 'tcx> Visitor<'tcx> for LateResolutionVisitor<'a, '_> {
     }
 }
 
-impl<'a, 'b> LateResolutionVisitor<'a, '_> {
-    fn new(resolver: &'b mut Resolver<'a>) -> LateResolutionVisitor<'a, 'b> {
+fn report_missing_type_error(
+    this: &mut LateResolutionVisitor<'_, '_, '_>,
+    kind: &ItemKind,
+    path: &Path,
+) {
+    let (mut err, candidates) = this.smart_resolve_report_errors(
+        &Segment::from_path(path),
+        path.span,
+        PathSource::Type,
+        None,
+    );
+    if !candidates.is_empty() {
+        let def_id = this.parent_scope.module.normal_ancestor_id;
+        let node_id = this.r.definitions.as_local_node_id(def_id).unwrap();
+        let (span, found_use) = UsePlacementFinder::check(this.krate, node_id);
+        show_candidates(&mut err, span, &candidates, false, found_use);
+    }
+    if let Some(generics) = kind.generics() {
+        let msg = "you might be missing a type parameter";
+        let (span, sugg) = if let [.., param] = &generics.params[..] {
+            let span =
+                if let [.., bound] = &param.bounds[..] { bound.span() } else { param.ident.span };
+            (span, format!(", {}", path.segments[0].ident))
+        } else {
+            (generics.span, format!("<{}>", path.segments[0].ident))
+        };
+        // Do not suggest if this is coming from macro expansion.
+        if span.ctxt().outer_expn_data().is_root() {
+            err.span_suggestion(span.shrink_to_hi(), msg, sugg, Applicability::MaybeIncorrect);
+        }
+    }
+    err.emit();
+}
+
+impl<'a, 'b, 'tcx> LateResolutionVisitor<'a, 'b, 'tcx> {
+    fn new(
+        resolver: &'b mut Resolver<'a>,
+        krate: &'b Crate,
+    ) -> LateResolutionVisitor<'a, 'b, 'tcx> {
         // During late resolution we only track the module component of the parent scope,
         // although it may be useful to track other components as well for diagnostics.
         let graph_root = resolver.graph_root;
@@ -605,6 +665,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
             label_ribs: Vec::new(),
             current_trait_ref: None,
             diagnostic_metadata: DiagnosticMetadata::default(),
+            krate,
         }
     }
 
@@ -724,7 +785,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         None
     }
 
-    fn resolve_adt(&mut self, item: &Item, generics: &Generics) {
+    fn resolve_adt(&mut self, item: &'tcx Item, generics: &'tcx Generics) {
         debug!("resolve_adt");
         self.with_current_self_item(item, |this| {
             this.with_generic_param_rib(generics, ItemRibKind(HasGenericParams::Yes), |this| {
@@ -778,7 +839,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         }
     }
 
-    fn resolve_item(&mut self, item: &Item) {
+    fn resolve_item(&mut self, item: &'tcx Item) {
         let name = item.ident.name;
         debug!("(resolving item) resolving {} ({:?})", name, item.kind);
 
@@ -1024,16 +1085,15 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         let mut new_id = None;
         if let Some(trait_ref) = opt_trait_ref {
             let path: Vec<_> = Segment::from_path(&trait_ref.path);
-            let res = self
-                .smart_resolve_path_fragment(
-                    trait_ref.ref_id,
-                    None,
-                    &path,
-                    trait_ref.path.span,
-                    PathSource::Trait(AliasPossibility::No),
-                    CrateLint::SimplePath(trait_ref.ref_id),
-                )
-                .base_res();
+            let res = self.smart_resolve_path_fragment(
+                trait_ref.ref_id,
+                None,
+                &path,
+                trait_ref.path.span,
+                PathSource::Trait(AliasPossibility::No),
+                CrateLint::SimplePath(trait_ref.ref_id),
+            );
+            let res = res.base_res();
             if res != Res::Err {
                 new_id = Some(res.def_id());
                 let span = trait_ref.path.span;
@@ -1070,11 +1130,11 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
 
     fn resolve_implementation(
         &mut self,
-        generics: &Generics,
-        opt_trait_reference: &Option<TraitRef>,
-        self_type: &Ty,
+        generics: &'tcx Generics,
+        opt_trait_reference: &'tcx Option<TraitRef>,
+        self_type: &'tcx Ty,
         item_id: NodeId,
-        impl_items: &[AssocItem],
+        impl_items: &'tcx [AssocItem],
     ) {
         debug!("resolve_implementation");
         // If applicable, create a rib for the type parameters.
@@ -1179,7 +1239,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         }
     }
 
-    fn resolve_params(&mut self, params: &[Param]) {
+    fn resolve_params(&mut self, params: &'tcx [Param]) {
         let mut bindings = smallvec![(PatBoundCtx::Product, Default::default())];
         for Param { pat, ty, .. } in params {
             self.resolve_pattern(pat, PatternSource::FnParam, &mut bindings);
@@ -1188,7 +1248,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         }
     }
 
-    fn resolve_local(&mut self, local: &Local) {
+    fn resolve_local(&mut self, local: &'tcx Local) {
         // Resolve the type.
         walk_list!(self, visit_ty, &local.ty);
 
@@ -1307,7 +1367,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
     }
 
     /// Check the consistency of the outermost or-patterns.
-    fn check_consistent_bindings_top(&mut self, pat: &Pat) {
+    fn check_consistent_bindings_top(&mut self, pat: &'tcx Pat) {
         pat.walk(&mut |pat| match pat.kind {
             PatKind::Or(ref ps) => {
                 self.check_consistent_bindings(ps);
@@ -1317,7 +1377,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         })
     }
 
-    fn resolve_arm(&mut self, arm: &Arm) {
+    fn resolve_arm(&mut self, arm: &'tcx Arm) {
         self.with_rib(ValueNS, NormalRibKind, |this| {
             this.resolve_pattern_top(&arm.pat, PatternSource::Match);
             walk_list!(this, visit_expr, &arm.guard);
@@ -1326,14 +1386,14 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
     }
 
     /// Arising from `source`, resolve a top level pattern.
-    fn resolve_pattern_top(&mut self, pat: &Pat, pat_src: PatternSource) {
+    fn resolve_pattern_top(&mut self, pat: &'tcx Pat, pat_src: PatternSource) {
         let mut bindings = smallvec![(PatBoundCtx::Product, Default::default())];
         self.resolve_pattern(pat, pat_src, &mut bindings);
     }
 
     fn resolve_pattern(
         &mut self,
-        pat: &Pat,
+        pat: &'tcx Pat,
         pat_src: PatternSource,
         bindings: &mut SmallVec<[(PatBoundCtx, FxHashSet<Ident>); 1]>,
     ) {
@@ -1544,7 +1604,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         id: NodeId,
         qself: Option<&QSelf>,
         path: &Path,
-        source: PathSource<'_>,
+        source: PathSource<'tcx>,
     ) {
         self.smart_resolve_path_fragment(
             id,
@@ -1562,7 +1622,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         qself: Option<&QSelf>,
         path: &[Segment],
         span: Span,
-        source: PathSource<'_>,
+        source: PathSource<'tcx>,
         crate_lint: CrateLint,
     ) -> PartialRes {
         let ns = source.namespace();
@@ -1838,11 +1898,11 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         }
     }
 
-    fn resolve_labeled_block(&mut self, label: Option<Label>, id: NodeId, block: &Block) {
+    fn resolve_labeled_block(&mut self, label: Option<Label>, id: NodeId, block: &'tcx Block) {
         self.with_resolved_label(label, id, |this| this.visit_block(block));
     }
 
-    fn resolve_block(&mut self, block: &Block) {
+    fn resolve_block(&mut self, block: &'tcx Block) {
         debug!("(resolving block) entering block");
         // Move down in the graph, if there's an anonymous module rooted here.
         let orig_module = self.parent_scope.module;
@@ -1885,7 +1945,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         debug!("(resolving block) leaving block");
     }
 
-    fn resolve_expr(&mut self, expr: &Expr, parent: Option<&Expr>) {
+    fn resolve_expr(&mut self, expr: &'tcx Expr, parent: Option<&'tcx Expr>) {
         // First, record candidate traits for this expression if it could
         // result in the invocation of a method call.
 
@@ -2023,7 +2083,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
         }
     }
 
-    fn record_candidate_traits_for_expr_if_necessary(&mut self, expr: &Expr) {
+    fn record_candidate_traits_for_expr_if_necessary(&mut self, expr: &'tcx Expr) {
         match expr.kind {
             ExprKind::Field(_, ident) => {
                 // FIXME(#6890): Even though you can't treat a method like a
@@ -2166,7 +2226,7 @@ impl<'a, 'b> LateResolutionVisitor<'a, '_> {
 
 impl<'a> Resolver<'a> {
     pub(crate) fn late_resolve_crate(&mut self, krate: &Crate) {
-        let mut late_resolution_visitor = LateResolutionVisitor::new(self);
+        let mut late_resolution_visitor = LateResolutionVisitor::new(self, krate);
         visit::walk_crate(&mut late_resolution_visitor, krate);
         for (id, span) in late_resolution_visitor.diagnostic_metadata.unused_labels.iter() {
             self.lint_buffer.buffer_lint(lint::builtin::UNUSED_LABELS, *id, *span, "unused label");
