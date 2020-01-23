@@ -4,13 +4,13 @@ error[E0432]: unresolved import `core`
 LL | use core::default;
    |     ^^^^ maybe a missing crate `core`?
 
-error[E0433]: failed to resolve: maybe a missing crate `core`?
-  --> $DIR/feature-gate-extern_absolute_paths.rs:4:19
+error[E0425]: cannot find function, tuple struct or tuple variant `Default` in `core::default`
+  --> $DIR/feature-gate-extern_absolute_paths.rs:4:34
    |
 LL |     let _: u8 = ::core::default::Default();
-   |                   ^^^^ maybe a missing crate `core`?
+   |                                  ^^^^^^^ not found in `core::default`
 
 error: aborting due to 2 previous errors
 
-Some errors have detailed explanations: E0432, E0433.
-For more information about an error, try `rustc --explain E0432`.
+Some errors have detailed explanations: E0425, E0432.
+For more information about an error, try `rustc --explain E0425`.

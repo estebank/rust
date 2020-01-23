@@ -1,9 +1,14 @@
-error[E0433]: failed to resolve: use of undeclared type or module `foo`
-  --> $DIR/export-fully-qualified.rs:6:20
+error[E0425]: cannot find function `baz` in `foo`
+  --> $DIR/export-fully-qualified.rs:6:25
    |
 LL |     pub fn bar() { foo::baz(); }
-   |                    ^^^ use of undeclared type or module `foo`
+   |                         ^^^ not found in `foo`
+   |
+help: possible candidate is found in another module, you can import it into scope
+   |
+LL |     use foo::baz;
+   |
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0433`.
+For more information about this error, try `rustc --explain E0425`.

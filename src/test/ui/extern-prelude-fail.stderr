@@ -4,13 +4,13 @@ error[E0432]: unresolved import `extern_prelude`
 LL |     use extern_prelude::S;
    |         ^^^^^^^^^^^^^^ maybe a missing crate `extern_prelude`?
 
-error[E0433]: failed to resolve: maybe a missing crate `extern_prelude`?
-  --> $DIR/extern-prelude-fail.rs:8:15
+error[E0425]: cannot find value `S` in `extern_prelude`
+  --> $DIR/extern-prelude-fail.rs:8:31
    |
 LL |     let s = ::extern_prelude::S;
-   |               ^^^^^^^^^^^^^^ maybe a missing crate `extern_prelude`?
+   |                               ^ not found in `extern_prelude`
 
 error: aborting due to 2 previous errors
 
-Some errors have detailed explanations: E0432, E0433.
-For more information about an error, try `rustc --explain E0432`.
+Some errors have detailed explanations: E0425, E0432.
+For more information about an error, try `rustc --explain E0425`.

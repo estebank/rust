@@ -6,14 +6,14 @@ LL |         assert_eq!(0, 0);
    |
    = note: this error originates in a macro outside of the current crate (in Nightly builds, run with -Z external-macro-backtrace for more info)
 
-error[E0433]: failed to resolve: use of undeclared type or module `Vec`
-  --> $DIR/no_implicit_prelude.rs:11:9
+error[E0425]: cannot find function `new` in `Vec`
+  --> $DIR/no_implicit_prelude.rs:11:14
    |
 LL |     fn f() { ::bar::m!(); }
    |              ------------ in this macro invocation
 ...
 LL |         Vec::new();
-   |         ^^^ use of undeclared type or module `Vec`
+   |              ^^^ not found in `Vec`
 
 error[E0599]: no method named `clone` found for unit type `()` in the current scope
   --> $DIR/no_implicit_prelude.rs:12:12
@@ -30,5 +30,5 @@ LL |         ().clone()
 
 error: aborting due to 3 previous errors
 
-Some errors have detailed explanations: E0433, E0599.
-For more information about an error, try `rustc --explain E0433`.
+Some errors have detailed explanations: E0425, E0599.
+For more information about an error, try `rustc --explain E0425`.

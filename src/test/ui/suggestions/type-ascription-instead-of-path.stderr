@@ -3,6 +3,11 @@ error[E0433]: failed to resolve: use of undeclared type or module `io`
    |
 LL |     std:io::stdin();
    |         ^^ use of undeclared type or module `io`
+   |
+help: similar paths exist
+   |
+LL |     std:std::iostd::os::unix::io::stdin();
+   |         ^^^^^^^^^^^^^^^^^
 
 error[E0423]: expected value, found crate `std`
   --> $DIR/type-ascription-instead-of-path.rs:2:5

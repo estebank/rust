@@ -1,21 +1,39 @@
-error[E0433]: failed to resolve: use of undeclared type or module `env`
-  --> $DIR/builtin-prelude-no-accidents.rs:5:5
+error[E0425]: cannot find value `current_dir` in `env`
+  --> $DIR/builtin-prelude-no-accidents.rs:5:10
    |
 LL |     env::current_dir;
-   |     ^^^ use of undeclared type or module `env`
+   |          ^^^^^^^^^^^ not found in `env`
+   |
+help: possible candidate is found in another module, you can import it into scope
+   |
+LL | use std::env::current_dir;
+   |
 
-error[E0433]: failed to resolve: use of undeclared type or module `panic`
-  --> $DIR/builtin-prelude-no-accidents.rs:6:14
+error[E0412]: cannot find type `PanicInfo` in `panic`
+  --> $DIR/builtin-prelude-no-accidents.rs:6:21
    |
 LL |     type A = panic::PanicInfo;
-   |              ^^^^^ use of undeclared type or module `panic`
+   |                     ^^^^^^^^^ not found in `panic`
+   |
+help: possible candidate is found in another module, you can import it into scope
+   |
+LL | use std::panic::PanicInfo;
+   |
 
-error[E0433]: failed to resolve: use of undeclared type or module `vec`
-  --> $DIR/builtin-prelude-no-accidents.rs:7:14
+error[E0412]: cannot find type `Vec` in `vec`
+  --> $DIR/builtin-prelude-no-accidents.rs:7:19
    |
 LL |     type B = vec::Vec<u8>;
-   |              ^^^ use of undeclared type or module `vec`
+   |                   ^^^ not found in `vec`
+   |
+help: possible candidates are found in other modules, you can import them into scope
+   |
+LL | use std::prelude::v1::Vec;
+   |
+LL | use std::vec::Vec;
+   |
 
 error: aborting due to 3 previous errors
 
-For more information about this error, try `rustc --explain E0433`.
+Some errors have detailed explanations: E0412, E0425.
+For more information about an error, try `rustc --explain E0412`.

@@ -16,22 +16,36 @@ LL |         use my_core;
 LL | a!();
    | ----- in this macro invocation
 
-error[E0433]: failed to resolve: use of undeclared type or module `my_core`
-  --> $DIR/extern-prelude-from-opaque-fail.rs:11:18
+error[E0425]: cannot find function `drop` in `my_core::mem`
+  --> $DIR/extern-prelude-from-opaque-fail.rs:11:32
    |
 LL |         fn f() { my_core::mem::drop(0); }
-   |                  ^^^^^^^ use of undeclared type or module `my_core`
+   |                                ^^^^ not found in `my_core::mem`
 ...
 LL | a!();
    | ----- in this macro invocation
+   |
+   = note: possible candidates are found in other modules, you can import them into scope:
+           my_core::mem::drop
+           my_core::prelude::v1::drop
+           std::prelude::v1::drop
 
-error[E0433]: failed to resolve: use of undeclared type or module `my_core`
-  --> $DIR/extern-prelude-from-opaque-fail.rs:24:14
+error[E0425]: cannot find function `drop` in `my_core::mem`
+  --> $DIR/extern-prelude-from-opaque-fail.rs:24:28
    |
 LL |     fn f() { my_core::mem::drop(0); }
-   |              ^^^^^^^ use of undeclared type or module `my_core`
+   |                            ^^^^ not found in `my_core::mem`
+   |
+help: possible candidates are found in other modules, you can import them into scope
+   |
+LL |     use my_core::mem::drop;
+   |
+LL |     use my_core::prelude::v1::drop;
+   |
+LL |     use std::prelude::v1::drop;
+   |
 
 error: aborting due to 4 previous errors
 
-Some errors have detailed explanations: E0432, E0433.
-For more information about an error, try `rustc --explain E0432`.
+Some errors have detailed explanations: E0425, E0432.
+For more information about an error, try `rustc --explain E0425`.

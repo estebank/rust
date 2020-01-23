@@ -1,9 +1,14 @@
-error[E0433]: failed to resolve: use of undeclared type or module `a`
-  --> $DIR/macro-inner-attributes.rs:17:5
+error[E0425]: cannot find function `bar` in `a`
+  --> $DIR/macro-inner-attributes.rs:17:8
    |
 LL |     a::bar();
-   |     ^ use of undeclared type or module `a`
+   |        ^^^ not found in `a`
+   |
+help: possible candidate is found in another module, you can import it into scope
+   |
+LL | use b::bar;
+   |
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0433`.
+For more information about this error, try `rustc --explain E0425`.

@@ -1,15 +1,15 @@
-error[E0433]: failed to resolve: use of undeclared type or module `nope`
-  --> $DIR/conflicting-impl-with-err.rs:4:11
+error[E0412]: cannot find type `Thing` in `nope`
+  --> $DIR/conflicting-impl-with-err.rs:4:17
    |
 LL | impl From<nope::Thing> for Error {
-   |           ^^^^ use of undeclared type or module `nope`
+   |                 ^^^^^ not found in `nope`
 
-error[E0433]: failed to resolve: use of undeclared type or module `nope`
-  --> $DIR/conflicting-impl-with-err.rs:5:16
+error[E0412]: cannot find type `Thing` in `nope`
+  --> $DIR/conflicting-impl-with-err.rs:5:22
    |
 LL |     fn from(_: nope::Thing) -> Self {
-   |                ^^^^ use of undeclared type or module `nope`
+   |                      ^^^^^ not found in `nope`
 
 error: aborting due to 2 previous errors
 
-For more information about this error, try `rustc --explain E0433`.
+For more information about this error, try `rustc --explain E0412`.

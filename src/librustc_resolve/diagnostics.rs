@@ -43,6 +43,7 @@ impl TypoSuggestion {
 }
 
 /// A free importable items suggested in case of resolution failure.
+#[derive(Debug)]
 crate struct ImportSuggestion {
     pub did: Option<DefId>,
     pub path: Path,
@@ -249,8 +250,7 @@ impl<'a> Resolver<'a> {
                     self.session,
                     span,
                     E0409,
-                    "variable `{}` is bound in inconsistent \
-                                ways within the same match arm",
+                    "variable `{}` is bound in inconsistent ways within the same match arm",
                     variable_name
                 );
                 err.span_label(span, "bound in different ways");
@@ -321,19 +321,25 @@ impl<'a> Resolver<'a> {
                     self.session,
                     span,
                     E0431,
-                    "`self` import can only appear in an import list with \
-                                                a non-empty prefix"
+                    "`self` import can only appear in an import list with a non-empty prefix"
                 );
                 err.span_label(span, "can only appear in an import list with a non-empty prefix");
                 err
             }
-            ResolutionError::FailedToResolve { label, suggestion } => {
+            ResolutionError::FailedToResolve { label, suggestion, import_suggestions } => {
                 let mut err =
                     struct_span_err!(self.session, span, E0433, "failed to resolve: {}", &label);
                 err.span_label(span, label);
 
                 if let Some((suggestions, msg, applicability)) = suggestion {
                     err.multipart_suggestion(&msg, suggestions, applicability);
+                }
+                if !import_suggestions.is_empty() {
+                    err.span_suggestions(
+                        "asdf",
+                        import_suggestions,
+                        Applicability::MaybeIncorrect,
+                    );
                 }
 
                 err
@@ -384,8 +390,7 @@ impl<'a> Resolver<'a> {
                     self.session,
                     span,
                     E0128,
-                    "type parameters with a default cannot use \
-                                                forward declared identifiers"
+                    "type parameters with a default cannot use forward declared identifiers"
                 );
                 err.span_label(
                     span,

@@ -1,9 +1,16 @@
-error[E0433]: failed to resolve: use of undeclared type or module `bar`
-  --> $DIR/export2.rs:2:18
+error[E0425]: cannot find function `x` in `bar`
+  --> $DIR/export2.rs:2:23
    |
 LL |     pub fn x() { bar::x(); }
-   |                  ^^^ use of undeclared type or module `bar`
+   |                       ^ not found in `bar`
+   |
+help: possible candidates are found in other modules, you can import them into scope
+   |
+LL |     use bar::x;
+   |
+LL |     use foo::x;
+   |
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0433`.
+For more information about this error, try `rustc --explain E0425`.

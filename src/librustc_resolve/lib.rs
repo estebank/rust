@@ -2195,6 +2195,21 @@ impl<'a> Resolver<'a> {
                             return PathResult::NonModule(PartialRes::new(Res::Err));
                         }
                     } else if i == 0 {
+                        // let candidates = self
+                        //     .lookup_import_candidates(ident, TypeNS, |_| true)
+                        //     .drain(..)
+                        //     .map(|candidate| (ident.span, pprust::path_to_string(&candidate.path)))
+                        //     .collect::<Vec<_>>();
+                        // let msg = if candidates.len() == 1 {
+                        //     "a similar path exists"
+                        // } else {
+                        //     "similar paths exist"
+                        // };
+                        // let sugg = Some((
+                        //     candidates,
+                        //     msg.to_string(),
+                        //     Applicability::MaybeIncorrect,
+                        // ));
                         (format!("use of undeclared type or module `{}`", ident), None)
                     } else {
                         (format!("could not find `{}` in `{}`", ident, path[i - 1].ident), None)

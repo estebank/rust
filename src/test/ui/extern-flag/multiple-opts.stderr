@@ -1,9 +1,9 @@
-error[E0433]: failed to resolve: use of undeclared type or module `somedep`
-  --> $DIR/multiple-opts.rs:19:5
+error[E0425]: cannot find function `somefun` in `somedep`
+  --> $DIR/multiple-opts.rs:19:14
    |
 LL |     somedep::somefun();
-   |     ^^^^^^^ use of undeclared type or module `somedep`
+   |              ^^^^^^^ not found in `somedep`
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0433`.
+For more information about this error, try `rustc --explain E0425`.

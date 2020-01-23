@@ -1,8 +1,8 @@
-error[E0433]: failed to resolve: could not find `imp` in `sys`
-  --> $DIR/issue-38857.rs:7:23
+error[E0422]: cannot find struct, variant or union type `StdioPipes` in `std::sys::imp::process::process_common`
+  --> $DIR/issue-38857.rs:7:53
    |
 LL |     let a = std::sys::imp::process::process_common::StdioPipes { ..panic!() };
-   |                       ^^^ could not find `imp` in `sys`
+   |                                                     ^^^^^^^^^^ not found in `std::sys::imp::process::process_common`
 
 error[E0603]: module `sys` is private
   --> $DIR/issue-38857.rs:7:18
@@ -18,5 +18,5 @@ LL | mod sys;
 
 error: aborting due to 2 previous errors
 
-Some errors have detailed explanations: E0433, E0603.
-For more information about an error, try `rustc --explain E0433`.
+Some errors have detailed explanations: E0422, E0603.
+For more information about an error, try `rustc --explain E0422`.

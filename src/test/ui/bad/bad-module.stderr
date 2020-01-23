@@ -1,15 +1,15 @@
-error[E0433]: failed to resolve: use of undeclared type or module `thing`
-  --> $DIR/bad-module.rs:2:15
+error[E0425]: cannot find function `len` in `thing`
+  --> $DIR/bad-module.rs:2:22
    |
 LL |     let foo = thing::len(Vec::new());
-   |               ^^^^^ use of undeclared type or module `thing`
+   |                      ^^^ not found in `thing`
 
-error[E0433]: failed to resolve: use of undeclared type or module `foo`
-  --> $DIR/bad-module.rs:5:15
+error[E0425]: cannot find function `baz` in `foo::bar`
+  --> $DIR/bad-module.rs:5:25
    |
 LL |     let foo = foo::bar::baz();
-   |               ^^^ use of undeclared type or module `foo`
+   |                         ^^^ not found in `foo::bar`
 
 error: aborting due to 2 previous errors
 
-For more information about this error, try `rustc --explain E0433`.
+For more information about this error, try `rustc --explain E0425`.
