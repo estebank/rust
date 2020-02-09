@@ -1431,7 +1431,7 @@ impl<'l, 'tcx> Visitor<'l> for DumpVisitor<'l, 'tcx> {
                 self.process_struct_lit(ex, path, fields, adt.variant_of_res(res), base)
             }
             ast::ExprKind::MethodCall(ref seg, ref args) => self.process_method_call(ex, seg, args),
-            ast::ExprKind::Field(ref sub_ex, _) => {
+            ast::ExprKind::Field(ref sub_ex, ..) => {
                 self.visit_expr(&sub_ex);
 
                 if let Some(field_data) = self.save_ctxt.get_expr_data(ex) {

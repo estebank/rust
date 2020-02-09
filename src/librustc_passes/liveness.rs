@@ -984,7 +984,7 @@ impl<'a, 'tcx> Liveness<'a, 'tcx> {
                 self.access_path(expr.hir_id, path, succ, ACC_READ | ACC_USE)
             }
 
-            hir::ExprKind::Field(ref e, _) => self.propagate_through_expr(&e, succ),
+            hir::ExprKind::Field(ref e, ..) => self.propagate_through_expr(&e, succ),
 
             hir::ExprKind::Closure(..) => {
                 debug!(
@@ -1254,7 +1254,7 @@ impl<'a, 'tcx> Liveness<'a, 'tcx> {
 
         match expr.kind {
             hir::ExprKind::Path(_) => succ,
-            hir::ExprKind::Field(ref e, _) => self.propagate_through_expr(&e, succ),
+            hir::ExprKind::Field(ref e, ..) => self.propagate_through_expr(&e, succ),
             _ => self.propagate_through_expr(expr, succ),
         }
     }

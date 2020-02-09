@@ -1344,7 +1344,7 @@ impl<'a> State<'a> {
                 self.word_space("=");
                 self.print_expr_maybe_paren(&rhs, prec);
             }
-            hir::ExprKind::Field(ref expr, ident) => {
+            hir::ExprKind::Field(ref expr, ident, _) => {
                 self.print_expr_maybe_paren(expr, parser::PREC_POSTFIX);
                 self.s.word(".");
                 self.print_ident(ident);
@@ -2315,7 +2315,7 @@ fn contains_exterior_struct_lit(value: &hir::Expr<'_>) -> bool {
         hir::ExprKind::Unary(_, ref x)
         | hir::ExprKind::Cast(ref x, _)
         | hir::ExprKind::Type(ref x, _)
-        | hir::ExprKind::Field(ref x, _)
+        | hir::ExprKind::Field(ref x, ..)
         | hir::ExprKind::Index(ref x, _) => {
             // `&X { y: 1 }, X { y: 1 }.y`
             contains_exterior_struct_lit(&x)

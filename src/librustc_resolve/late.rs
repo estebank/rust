@@ -2004,7 +2004,7 @@ impl<'a, 'b, 'ast> LateResolutionVisitor<'a, 'b, 'ast> {
             ExprKind::Block(ref block, label) => self.resolve_labeled_block(label, block.id, block),
 
             // Equivalent to `visit::walk_expr` + passing some context to children.
-            ExprKind::Field(ref subexpression, _) => {
+            ExprKind::Field(ref subexpression, ..) => {
                 self.resolve_expr(subexpression, Some(expr));
             }
             ExprKind::MethodCall(ref segment, ref arguments) => {
@@ -2055,7 +2055,7 @@ impl<'a, 'b, 'ast> LateResolutionVisitor<'a, 'b, 'ast> {
 
     fn record_candidate_traits_for_expr_if_necessary(&mut self, expr: &'ast Expr) {
         match expr.kind {
-            ExprKind::Field(_, ident) => {
+            ExprKind::Field(_, ident, _) => {
                 // FIXME(#6890): Even though you can't treat a method like a
                 // field, we need to add any trait methods we find that match
                 // the field name so that we can do some nice error reporting

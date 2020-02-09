@@ -354,7 +354,7 @@ impl<'a, 'tcx> MemCategorizationContext<'a, 'tcx> {
                 }
             }
 
-            hir::ExprKind::Field(ref base, _) => {
+            hir::ExprKind::Field(ref base, ..) => {
                 let base = self.cat_expr(&base)?;
                 debug!("cat_expr(cat_field): id={} expr={:?} base={:?}", expr.hir_id, expr, base);
                 Ok(self.cat_projection(expr, base, expr_ty))

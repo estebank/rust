@@ -1396,7 +1396,7 @@ impl Expr<'_> {
 
             ExprKind::Unary(UnOp::UnDeref, _) => true,
 
-            ExprKind::Field(ref base, _) | ExprKind::Index(ref base, _) => {
+            ExprKind::Field(ref base, ..) | ExprKind::Index(ref base, _) => {
                 allow_projections_from(base) || base.is_place_expr(allow_projections_from)
             }
 
@@ -1588,7 +1588,8 @@ pub enum ExprKind<'hir> {
     /// E.g., `a += 1`.
     AssignOp(BinOp, &'hir Expr<'hir>, &'hir Expr<'hir>),
     /// Access of a named (e.g., `obj.foo`) or unnamed (e.g., `obj.0`) struct or tuple field.
-    Field(&'hir Expr<'hir>, Ident),
+    /// The optional `Span` points at an *invalid* type parameter in the field expression.
+    Field(&'hir Expr<'hir>, Ident, Option<Span>),
     /// An indexing operation (`foo[2]`).
     Index(&'hir Expr<'hir>, &'hir Expr<'hir>),
 

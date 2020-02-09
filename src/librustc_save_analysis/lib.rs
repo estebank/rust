@@ -514,7 +514,7 @@ impl<'l, 'tcx> SaveContext<'l, 'tcx> {
             return None;
         }
         match expr.kind {
-            ast::ExprKind::Field(ref sub_ex, ident) => {
+            ast::ExprKind::Field(ref sub_ex, ident, _) => {
                 let sub_ex_hir_id = self.tcx.hir().node_to_hir_id(sub_ex.id);
                 let hir_node = match self.tcx.hir().find(sub_ex_hir_id) {
                     Some(Node::Expr(expr)) => expr,

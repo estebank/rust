@@ -277,7 +277,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             ExprKind::Struct(ref qpath, fields, ref base_expr) => {
                 self.check_expr_struct(expr, expected, qpath, fields, base_expr)
             }
-            ExprKind::Field(ref base, field) => self.check_field(expr, needs, &base, field),
+            ExprKind::Field(ref base, field, _) => self.check_field(expr, needs, &base, field),
             ExprKind::Index(ref base, ref idx) => self.check_expr_index(base, idx, needs, expr),
             ExprKind::Yield(ref value, ref src) => self.check_expr_yield(value, expr, src),
             hir::ExprKind::Err => tcx.types.err,
@@ -1440,6 +1440,15 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         display
     }
 
+    fn complain_about_invalid_type_params(&self, args: Option<Span>) {
+        if let Some(args) = args {
+            self.tcx
+                .sess
+                .struct_span_err(args, "field expressions may not have generic arguments")
+                .emit();
+        }
+    }
+
     // Check field access expressions
     fn check_field(
         &self,
@@ -1452,6 +1461,10 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         let expr_t = self.structurally_resolved_type(base.span, expr_t);
         let mut private_candidate = None;
         let mut autoderef = self.autoderef(expr.span, expr_t);
+        let invalid_args = match &expr.kind {
+            ExprKind::Field(_, _, Some(args)) => Some(*args),
+            _ => None,
+        };
         while let Some((base_t, _)) = autoderef.next() {
             match base_t.kind {
                 ty::Adt(base_def, substs) if !base_def.is_enum() => {
@@ -1471,6 +1484,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                             autoderef.finalize(self);
 
                             self.tcx.check_stability(field.did, Some(expr.hir_id), expr.span);
+                            self.complain_about_invalid_type_params(invalid_args);
                             return field_ty;
                         }
                         private_candidate = Some((base_def.did, field_ty));
@@ -1486,6 +1500,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                                 autoderef.finalize(self);
 
                                 self.write_field_index(expr.hir_id, index);
+                                self.complain_about_invalid_type_params(invalid_args);
                                 return field_ty.expect_ty();
                             }
                         }
@@ -1501,8 +1516,14 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             return field_ty;
         }
 
+        let method_exists = self.method_exists(field, expr_t, expr.hir_id, true);
+        if let (false, ExprKind::Field(_, _, Some(_))) = (method_exists, &expr.kind) {
+            // Only complain about incorrect field expressions with type parameters like
+            // `foo.bar::<baz>` when `bar` isn't a valid method.
+            self.complain_about_invalid_type_params(invalid_args);
+        }
         if field.name == kw::Invalid {
-        } else if self.method_exists(field, expr_t, expr.hir_id, true) {
+        } else if method_exists {
             self.ban_take_value_of_method(expr, expr_t, field);
         } else if !expr_t.is_primitive_ty() {
             self.ban_nonexisting_field(field, base, expr, expr_t);

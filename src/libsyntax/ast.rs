@@ -1224,7 +1224,8 @@ pub enum ExprKind {
     /// E.g., `a += 1`.
     AssignOp(BinOp, P<Expr>, P<Expr>),
     /// Access of a named (e.g., `obj.foo`) or unnamed (e.g., `obj.0`) struct field.
-    Field(P<Expr>, Ident),
+    /// The optional `Span` points at an *invalid* type parameter in the field expression.
+    Field(P<Expr>, Ident, Option<Span>),
     /// An indexing operation (e.g., `foo[2]`).
     Index(P<Expr>, P<Expr>),
     /// A range (e.g., `1..2`, `1..`, `..2`, `1..=2`, `..=2`).

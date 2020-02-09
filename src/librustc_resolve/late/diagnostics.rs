@@ -415,7 +415,7 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
         let is_expected = &|res| source.is_expected(res);
 
         let path_sep = |err: &mut DiagnosticBuilder<'_>, expr: &Expr| match expr.kind {
-            ExprKind::Field(_, ident) => {
+            ExprKind::Field(_, ident, _) => {
                 err.span_suggestion(
                     expr.span,
                     "use the path separator to refer to an item",

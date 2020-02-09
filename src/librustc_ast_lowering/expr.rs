@@ -129,7 +129,9 @@ impl<'hir> LoweringContext<'_, 'hir> {
                 self.lower_expr(el),
                 self.lower_expr(er),
             ),
-            ExprKind::Field(ref el, ident) => hir::ExprKind::Field(self.lower_expr(el), ident),
+            ExprKind::Field(ref el, ident, args) => {
+                hir::ExprKind::Field(self.lower_expr(el), ident, args)
+            }
             ExprKind::Index(ref el, ref er) => {
                 hir::ExprKind::Index(self.lower_expr(el), self.lower_expr(er))
             }

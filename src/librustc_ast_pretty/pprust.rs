@@ -2025,7 +2025,7 @@ impl<'a> State<'a> {
                 self.word_space("=");
                 self.print_expr_maybe_paren(rhs, prec);
             }
-            ast::ExprKind::Field(ref expr, ident) => {
+            ast::ExprKind::Field(ref expr, ident, _) => {
                 self.print_expr_maybe_paren(expr, parser::PREC_POSTFIX);
                 self.s.word(".");
                 self.print_ident(ident);

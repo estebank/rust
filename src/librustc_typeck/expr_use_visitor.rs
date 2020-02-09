@@ -168,7 +168,7 @@ impl<'a, 'tcx> ExprUseVisitor<'a, 'tcx> {
                 self.select_from_expr(base);
             }
 
-            hir::ExprKind::Field(ref base, _) => {
+            hir::ExprKind::Field(ref base, ..) => {
                 // base.f
                 self.select_from_expr(base);
             }

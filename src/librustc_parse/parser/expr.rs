@@ -786,7 +786,7 @@ impl<'a> Parser<'a> {
     ) -> P<Expr> {
         let span = self.token.span;
         self.bump();
-        let field = ExprKind::Field(base, Ident::new(field, span));
+        let field = ExprKind::Field(base, Ident::new(field, span), None);
         self.expect_no_suffix(span, "a tuple index", suffix);
         self.mk_expr(lo.to(span), field, AttrVec::new())
     }
@@ -825,16 +825,12 @@ impl<'a> Parser<'a> {
             Ok(self.mk_expr(span, ExprKind::MethodCall(segment, args), AttrVec::new()))
         } else {
             // Field access `expr.f`
-            if let Some(args) = segment.args {
-                self.struct_span_err(
-                    args.span(),
-                    "field expressions may not have generic arguments",
-                )
-                .emit();
-            }
-
             let span = lo.to(self.prev_span);
-            Ok(self.mk_expr(span, ExprKind::Field(self_arg, segment.ident), AttrVec::new()))
+            Ok(self.mk_expr(
+                span,
+                ExprKind::Field(self_arg, segment.ident, segment.args.map(|args| args.span())),
+                AttrVec::new(),
+            ))
         }
     }
 

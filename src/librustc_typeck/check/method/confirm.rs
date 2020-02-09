@@ -423,7 +423,7 @@ impl<'a, 'tcx> ConfirmContext<'a, 'tcx> {
 
         loop {
             match exprs.last().unwrap().kind {
-                hir::ExprKind::Field(ref expr, _)
+                hir::ExprKind::Field(ref expr, ..)
                 | hir::ExprKind::Index(ref expr, _)
                 | hir::ExprKind::Unary(hir::UnOp::UnDeref, ref expr) => exprs.push(&expr),
                 _ => break,

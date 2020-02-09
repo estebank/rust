@@ -1187,7 +1187,7 @@ pub fn noop_visit_expr<T: MutVisitor>(Expr { kind, id, span, attrs }: &mut Expr,
             vis.visit_expr(el);
             vis.visit_expr(er);
         }
-        ExprKind::Field(el, ident) => {
+        ExprKind::Field(el, ident, _) => {
             vis.visit_expr(el);
             vis.visit_ident(ident);
         }

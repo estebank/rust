@@ -773,7 +773,7 @@ pub fn walk_expr<'a, V: Visitor<'a>>(visitor: &mut V, expression: &'a Expr) {
             visitor.visit_expr(left_expression);
             visitor.visit_expr(right_expression);
         }
-        ExprKind::Field(ref subexpression, ident) => {
+        ExprKind::Field(ref subexpression, ident, _) => {
             visitor.visit_expr(subexpression);
             visitor.visit_ident(ident);
         }
