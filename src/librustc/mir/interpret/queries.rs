@@ -9,11 +9,11 @@ use rustc_span::Span;
 impl<'tcx> TyCtxt<'tcx> {
     /// Evaluates a constant without providing any substitutions. This is useful to evaluate consts
     /// that can't take any generic arguments like statics, const items or enum discriminants. If a
-    /// generic parameter is used within the constant `ErrorHandled::ToGeneric` will be returned.
+    /// generic parameter is used within the constant `ErrorHandled::TooGeneric` will be returned.
     pub fn const_eval_poly(self, def_id: DefId) -> ConstEvalResult<'tcx> {
         // In some situations def_id will have substitutions within scope, but they aren't allowed
         // to be used. So we can't use `Instance::mono`, instead we feed unresolved substitutions
-        // into `const_eval` which will return `ErrorHandled::ToGeneric` if any of them are
+        // into `const_eval` which will return `ErrorHandled::TooGeneric` if any of them are
         // encountered.
         let substs = InternalSubsts::identity_for_item(self, def_id);
         let instance = ty::Instance::new(def_id, substs);

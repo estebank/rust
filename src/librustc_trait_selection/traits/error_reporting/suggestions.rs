@@ -158,6 +158,10 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
             ty::Projection(projection) => (false, Some(projection)),
             _ => return,
         };
+        if self.in_const_context.get() {
+            err.note("associated types can't be used in `const` contexts like array length");
+            return;
+        }
 
         let suggest_restriction =
             |generics: &hir::Generics<'_>, msg, err: &mut DiagnosticBuilder<'_>| {

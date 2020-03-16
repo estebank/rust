@@ -291,8 +291,8 @@ pub fn const_eval_raw_provider<'tcx>(
 
     if def_id.is_local()
         && tcx.has_typeck_tables(def_id)
-        && tcx.typeck_tables_of(def_id).tainted_by_errors
-    {
+        && tcx.const_typeck_tables_of(def_id).tainted_by_errors {
+    // debug!("const_eval_raw after typeck_tables_of");
         return Err(ErrorHandled::Reported);
     }
 
