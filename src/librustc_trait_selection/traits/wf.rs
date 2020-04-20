@@ -234,13 +234,21 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
 
         let extend = |obligation: traits::PredicateObligation<'tcx>| {
             let mut cause = cause.clone();
-            if let Some(parent_trait_ref) = obligation.predicate.to_opt_poly_trait_ref() {
-                let derived_cause = traits::DerivedObligationCause {
-                    parent_trait_ref,
-                    parent_code: Rc::new(obligation.cause.code.clone()),
+            let parent_code =
+                if let Some(parent_trait_ref) = obligation.predicate.to_opt_poly_trait_ref() {
+                    let derived_cause = traits::DerivedObligationCause {
+                        parent_trait_ref,
+                        parent_code: Rc::new(obligation.cause.code.clone()),
+                    };
+                    Rc::new(traits::DerivedObligation(derived_cause))
+                } else {
+                    Rc::new(obligation.cause.code.clone())
                 };
-                cause.code = traits::ObligationCauseCode::DerivedObligation(derived_cause);
-            }
+            let derived_cause = traits::DerivedObligationCause {
+                parent_trait_ref: ty::Binder::bind(*trait_ref),
+                parent_code,
+            };
+            cause.code = traits::ObligationCauseCode::DerivedObligation(derived_cause);
             extend_cause_with_original_assoc_item_obligation(
                 tcx,
                 trait_ref,
@@ -257,7 +265,7 @@ impl<'a, 'tcx> WfPredicates<'a, 'tcx> {
             let implied_obligations = implied_obligations.map(extend);
             self.out.extend(implied_obligations);
         } else {
-            self.out.extend(obligations);
+            self.out.extend(obligations.into_iter().map(extend));
         }
 
         self.out.extend(trait_ref.substs.types().filter(|ty| !ty.has_escaping_bound_vars()).map(
