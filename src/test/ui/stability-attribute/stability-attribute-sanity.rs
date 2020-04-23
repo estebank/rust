@@ -63,7 +63,7 @@ fn multiple3() { }
 #[rustc_const_unstable(feature = "c", issue = "none")]
 #[rustc_const_unstable(feature = "d", issue = "none")] //~ ERROR multiple stability levels
 pub const fn multiple4() { }
-//~^ ERROR Invalid stability or deprecation version found
+//~^ ERROR invalid stability or deprecation version found
 
 #[rustc_deprecated(since = "a", reason = "text")]
 fn deprecated_without_unstable_or_stable() { }

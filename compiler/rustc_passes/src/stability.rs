@@ -75,6 +75,7 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
         item_sp: Span,
         kind: AnnotationKind,
         inherit_deprecation: InheritDeprecation,
+        inherit_from_parent: bool,
         visit_children: F,
     ) where
         F: FnOnce(&mut Self),
@@ -167,7 +168,7 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
             if kind == AnnotationKind::Prohibited
                 || (kind == AnnotationKind::Container && stab.level.is_stable() && is_deprecated)
             {
-                self.tcx.sess.span_err(item_sp, "This stability annotation is useless");
+                self.tcx.sess.span_err(item_sp, "this stability annotation is useless");
             }
 
             debug!("annotate: found {:?}", stab);
@@ -187,8 +188,7 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
                             Ordering::Less => {
                                 self.tcx.sess.span_err(
                                     item_sp,
-                                    "An API can't be stabilized \
-                                                                 after it is deprecated",
+                                    "an API can't be stabilized after it is deprecated",
                                 );
                                 break;
                             }
@@ -198,11 +198,9 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
                     } else {
                         // Act like it isn't less because the question is now nonsensical,
                         // and this makes us not do anything else interesting.
-                        self.tcx.sess.span_err(
-                            item_sp,
-                            "Invalid stability or deprecation \
-                                                         version found",
-                        );
+                        self.tcx
+                            .sess
+                            .span_err(item_sp, "invalid stability or deprecation version found");
                         break;
                     }
                 }
@@ -215,7 +213,7 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
         if stab.is_none() {
             debug!("annotate: stab not found, parent = {:?}", self.parent_stab);
             if let Some(stab) = self.parent_stab {
-                if inherit_deprecation.yes() && stab.level.is_unstable() {
+                if inherit_deprecation.yes() && stab.level.is_unstable() || inherit_from_parent {
                     self.index.stab_map.insert(hir_id, stab);
                 }
             }
@@ -342,6 +340,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
                         i.span,
                         AnnotationKind::Required,
                         InheritDeprecation::Yes,
+                        true,
                         |_| {},
                     )
                 }
@@ -349,7 +348,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
             _ => {}
         }
 
-        self.annotate(i.hir_id, &i.attrs, i.span, kind, InheritDeprecation::Yes, |v| {
+        self.annotate(i.hir_id, &i.attrs, i.span, kind, InheritDeprecation::Yes, false, |v| {
             intravisit::walk_item(v, i)
         });
         self.in_trait_impl = orig_in_trait_impl;
@@ -362,6 +361,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
             ti.span,
             AnnotationKind::Required,
             InheritDeprecation::Yes,
+            false,
             |v| {
                 intravisit::walk_trait_item(v, ti);
             },
@@ -371,7 +371,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
     fn visit_impl_item(&mut self, ii: &'tcx hir::ImplItem<'tcx>) {
         let kind =
             if self.in_trait_impl { AnnotationKind::Prohibited } else { AnnotationKind::Required };
-        self.annotate(ii.hir_id, &ii.attrs, ii.span, kind, InheritDeprecation::Yes, |v| {
+        self.annotate(ii.hir_id, &ii.attrs, ii.span, kind, InheritDeprecation::Yes, false, |v| {
             intravisit::walk_impl_item(v, ii);
         });
     }
@@ -383,6 +383,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
             var.span,
             AnnotationKind::Required,
             InheritDeprecation::Yes,
+            true,
             |v| {
                 if let Some(ctor_hir_id) = var.data.ctor_hir_id() {
                     v.annotate(
@@ -391,6 +392,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
                         var.span,
                         AnnotationKind::Required,
                         InheritDeprecation::Yes,
+                        false,
                         |_| {},
                     );
                 }
@@ -407,6 +409,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
             s.span,
             AnnotationKind::Required,
             InheritDeprecation::Yes,
+            true,
             |v| {
                 intravisit::walk_struct_field(v, s);
             },
@@ -420,6 +423,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
             i.span,
             AnnotationKind::Required,
             InheritDeprecation::Yes,
+            false,
             |v| {
                 intravisit::walk_foreign_item(v, i);
             },
@@ -433,6 +437,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
             md.span,
             AnnotationKind::Required,
             InheritDeprecation::Yes,
+            false,
             |_| {},
         );
     }
@@ -446,7 +451,7 @@ impl<'a, 'tcx> Visitor<'tcx> for Annotator<'a, 'tcx> {
             _ => AnnotationKind::Prohibited,
         };
 
-        self.annotate(p.hir_id, &p.attrs, p.span, kind, InheritDeprecation::No, |v| {
+        self.annotate(p.hir_id, &p.attrs, p.span, kind, InheritDeprecation::No, false, |v| {
             intravisit::walk_generic_param(v, p);
         });
     }
@@ -613,6 +618,7 @@ fn new_index(tcx: TyCtxt<'tcx>) -> Index<'tcx> {
             krate.item.span,
             AnnotationKind::Required,
             InheritDeprecation::Yes,
+            false,
             |v| intravisit::walk_crate(v, krate),
         );
     }
