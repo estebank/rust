@@ -223,13 +223,31 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
         if candidates.is_empty() && is_expected(Res::Def(DefKind::Enum, crate_def_id)) {
             let enum_candidates =
                 self.r.lookup_import_candidates(ident, ns, &self.parent_scope, is_enum_variant);
-            let mut enum_candidates = enum_candidates
-                .iter()
-                .map(|suggestion| import_candidate_to_enum_paths(&suggestion))
-                .collect::<Vec<_>>();
-            enum_candidates.sort();
 
             if !enum_candidates.is_empty() {
+                if let (PathSource::Type, Some(Expr { kind: ExprKind::Type(expr, ty), .. })) =
+                    (source, self.diagnostic_metadata.current_expr)
+                {
+                    if self
+                        .r
+                        .session
+                        .parse_sess
+                        .type_ascription_path_suggestions
+                        .borrow()
+                        .contains(&expr.span.between(ty.span))
+                    {
+                        // Already reported this issue on the lhs of the type ascription.
+                        err.delay_as_bug();
+                        return (err, candidates);
+                    }
+                }
+
+                let mut enum_candidates = enum_candidates
+                    .iter()
+                    .map(|suggestion| import_candidate_to_enum_paths(&suggestion))
+                    .collect::<Vec<_>>();
+                enum_candidates.sort();
+
                 // Contextualize for E0412 "cannot find type", but don't belabor the point
                 // (that it's a variant) for E0573 "expected type, found variant".
                 let preamble = if res.is_none() {
@@ -484,10 +502,21 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
             match source {
                 PathSource::Expr(Some(
                     parent @ Expr { kind: ExprKind::Field(..) | ExprKind::MethodCall(..), .. },
-                )) => {
-                    path_sep(err, &parent);
-                }
-                PathSource::Expr(None) if followed_by_brace => {
+                )) if path_sep(err, &parent) => {}
+                PathSource::Expr(
+                    None
+                    | Some(Expr {
+                        kind:
+                            ExprKind::Path(..)
+                            | ExprKind::Binary(..)
+                            | ExprKind::Unary(..)
+                            | ExprKind::If(..)
+                            | ExprKind::While(..)
+                            | ExprKind::ForLoop(..)
+                            | ExprKind::Match(..),
+                        ..
+                    }),
+                ) if followed_by_brace => {
                     if let Some(sp) = closing_brace {
                         err.multipart_suggestion(
                             "surround the struct literal with parentheses",
@@ -508,11 +537,7 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                         );
                     }
                 }
-                PathSource::Expr(
-                    None | Some(Expr { kind: ExprKind::Call(..) | ExprKind::Path(..), .. }),
-                )
-                | PathSource::TupleStruct(_)
-                | PathSource::Pat => {
+                PathSource::Expr(_) | PathSource::TupleStruct(_) | PathSource::Pat => {
                     let span = match &source {
                         PathSource::Expr(Some(Expr {
                             span, kind: ExprKind::Call(_, _), ..
@@ -609,7 +634,7 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                         );
                     }
                 } else {
-                    err.note("did you mean to use one of the enum's variants?");
+                    err.note("you might have meant to use one of the enum's variants");
                 }
             }
             (Res::Def(DefKind::Struct, def_id), _) if ns == ValueNS => {
