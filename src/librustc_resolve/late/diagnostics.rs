@@ -20,6 +20,7 @@ use rustc_span::symbol::{kw, sym, Ident};
 use rustc_span::Span;
 
 use log::debug;
+use std::ops::Deref;
 
 type Res = def::Res<ast::NodeId>;
 
@@ -612,6 +613,53 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
             (Res::Def(DefKind::Mod, _), PathSource::Expr(Some(parent))) => {
                 if !path_sep(err, &parent) {
                     return false;
+                }
+            }
+            (
+                Res::Def(DefKind::Enum, def_id),
+                PathSource::Expr(Some(Expr { kind: ExprKind::Type(expr, ty), .. })),
+            ) => {
+                match (expr.deref(), ty.deref()) {
+                    (
+                        Expr { kind: ExprKind::Path(..), .. },
+                        Ty { kind: TyKind::Path(None, path), .. },
+                    ) if path.segments.len() == 1 => {
+                        if let Some(variants) = self.collect_enum_variants(def_id) {
+                            if variants
+                                .into_iter()
+                                .filter(|variant| {
+                                    variant.segments[variant.segments.len() - 1].ident
+                                        == path.segments[0].ident
+                                })
+                                .next()
+                                .is_some()
+                            {
+                                err.delay_as_bug();
+                                let sp = expr.span.between(ty.span);
+                                if self
+                                    .r
+                                    .session
+                                    .parse_sess
+                                    .type_ascription_path_suggestions
+                                    .borrow()
+                                    .contains(&sp)
+                                {
+                                    // We already suggested changing `:` into `::` during parsing.
+                                    return false;
+                                }
+                                let mut err =
+                                    self.r.session.struct_span_err(sp, "expected `::`, found `:`");
+                                err.span_suggestion(
+                                    sp,
+                                    "write a path separator instead",
+                                    "::".to_string(),
+                                    Applicability::MachineApplicable,
+                                );
+                                err.emit();
+                            }
+                        }
+                    }
+                    _ => {}
                 }
             }
             (
