@@ -936,6 +936,22 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                                     Applicability::MaybeIncorrect,
                                 );
                                 show_label = false;
+                                if self
+                                    .r
+                                    .session
+                                    .parse_sess
+                                    .type_ascription_path_suggestions
+                                    .borrow()
+                                    .contains(&colon_sp)
+                                {
+                                    err.delay_as_bug();
+                                }
+                                self.r
+                                    .session
+                                    .parse_sess
+                                    .type_ascription_path_suggestions
+                                    .borrow_mut()
+                                    .insert(colon_sp);
                             }
                             if let Ok(base_snippet) = base_snippet {
                                 let mut sp = after_colon_sp;
