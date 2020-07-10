@@ -8,13 +8,13 @@ LL |     println!("{}", std::mem:size_of::<BTreeMap<u32, u32>>());
    |
    = note: `#![feature(type_ascription)]` lets you annotate an expression with a type: `<expr>: <type>`
 
-error[E0423]: expected function, found module `std::mem`
+error[E0423]: expected value, found module `std::mem`
   --> $DIR/issue-54516.rs:4:20
    |
 LL |     println!("{}", std::mem:size_of::<BTreeMap<u32, u32>>());
    |                    ^^^^^^^^- help: maybe you meant to write a path separator here: `::`
    |                    |
-   |                    not a function
+   |                    not a value
 
 error[E0412]: cannot find type `size_of` in this scope
   --> $DIR/issue-54516.rs:4:29
