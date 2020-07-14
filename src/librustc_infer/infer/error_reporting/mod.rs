@@ -1008,9 +1008,76 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 let mut values = (DiagnosticStyledString::new(), DiagnosticStyledString::new());
                 let path1 = self.tcx.def_path_str(def1.did);
                 let path2 = self.tcx.def_path_str(def2.did);
-                if def1.did == def2.did {
-                    // Easy case. Replace same types with `_` to shorten the output and highlight
-                    // the differing ones.
+                if def1.did != def2.did {
+                    // Check for case:
+                    //     let x: Foo<Bar<Qux> = foo::<Bar<Qux>>();
+                    //     Foo<Bar<Qux>
+                    //         ------- this type argument is exactly the same as the other type
+                    //     Bar<Qux>
+                    if self
+                        .cmp_type_arg(
+                            &mut values.0,
+                            &mut values.1,
+                            path1.clone(),
+                            sub_no_defaults_1,
+                            path2.clone(),
+                            &t2,
+                        )
+                        .is_some()
+                    {
+                        return values;
+                    }
+                    // Check for case:
+                    //     let x: Bar<Qux> = y:<Foo<Bar<Qux>>>();
+                    //     Bar<Qux>
+                    //     Foo<Bar<Qux>>
+                    //         ------- this type argument is exactly the same as the other type
+                    if self
+                        .cmp_type_arg(
+                            &mut values.1,
+                            &mut values.0,
+                            path2.clone(),
+                            sub_no_defaults_2,
+                            path1.clone(),
+                            &t1,
+                        )
+                        .is_some()
+                    {
+                        return values;
+                    }
+                }
+
+                fn lifetime_display(lifetime: Region<'_>) -> String {
+                    let s = lifetime.to_string();
+                    if s.is_empty() { "'_".to_string() } else { s }
+                }
+
+                // We can't find anything in common, highlight relevant part of type path and the
+                // type arguments.
+                //     let x: foo::bar::Baz<Qux> = y:<foo::bar::Bar<Zar>>();
+                //     foo::bar::Baz<Qux>
+                //     foo::bar::Bar<Zar>
+                //               -------- this part of the path is different
+
+                let min_len = path1.len().min(path2.len());
+
+                const SEPARATOR: &str = "::";
+                let separator_len = SEPARATOR.len();
+                let split_idx: usize = path1
+                    .split(SEPARATOR)
+                    .zip(path2.split(SEPARATOR))
+                    .take_while(|(mod1_str, mod2_str)| mod1_str == mod2_str)
+                    .map(|(mod_str, _)| mod_str.len() + separator_len)
+                    .sum();
+
+                debug!(
+                    "cmp: separator_len={}, split_idx={}, min_len={}",
+                    separator_len, split_idx, min_len
+                );
+
+                if split_idx >= min_len {
+                    // Paths are identical. We'll replace same type parameters with `_` to shorten
+                    // the output and highlight the differing ones.
                     //     let x: Foo<Bar, Qux> = y::<Foo<Quz, Qux>>();
                     //     Foo<Bar, _>
                     //     Foo<Quz, _>
@@ -1019,33 +1086,65 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     //         highlighted in output
                     values.0.push_normal(path1);
                     values.1.push_normal(path2);
+                } else {
+                    let (common, uniq1) = path1.split_at(split_idx);
+                    let (_, uniq2) = path2.split_at(split_idx);
+                    debug!("cmp: common={}, uniq1={}, uniq2={}", common, uniq1, uniq2);
 
-                    // Avoid printing out default generic parameters that are common to both
-                    // types.
-                    let len1 = sub_no_defaults_1.len();
-                    let len2 = sub_no_defaults_2.len();
-                    let common_len = cmp::min(len1, len2);
-                    let remainder1: Vec<_> = sub1.types().skip(common_len).collect();
-                    let remainder2: Vec<_> = sub2.types().skip(common_len).collect();
-                    let common_default_params = remainder1
-                        .iter()
-                        .rev()
-                        .zip(remainder2.iter().rev())
-                        .filter(|(a, b)| a == b)
-                        .count();
-                    let len = sub1.len() - common_default_params;
-                    let consts_offset = len - sub1.consts().count();
+                    values.0.push_normal(common);
+                    values.0.push_highlighted(uniq1);
+                    values.1.push_normal(common);
+                    values.1.push_highlighted(uniq2);
+                }
 
-                    // Only draw `<...>` if there're lifetime/type arguments.
-                    if len > 0 {
-                        values.0.push_normal("<");
-                        values.1.push_normal("<");
-                    }
+                let len1 = sub_no_defaults_1.len();
+                let len2 = sub_no_defaults_2.len();
+                let common_len = cmp::min(len1, len2);
+                let remainder1: Vec<_> = sub1.types().skip(common_len).collect();
+                let remainder2: Vec<_> = sub2.types().skip(common_len).collect();
+                let common_default_params = remainder1
+                    .iter()
+                    .rev()
+                    .zip(remainder2.iter().rev())
+                    .filter(|(a, b)| a == b)
+                    .count();
 
-                    fn lifetime_display(lifetime: Region<'_>) -> String {
-                        let s = lifetime.to_string();
-                        if s.is_empty() { "'_".to_string() } else { s }
-                    }
+                if def1.did != def2.did {
+                    let push_args =
+                        |value: &mut DiagnosticStyledString,
+                         sub: &ty::List<ty::subst::GenericArg<'_>>| {
+                            let region_count = sub.regions().count();
+                            let type_count = sub.types().count();
+                            let len = sub.len();
+
+                            // Only draw `<...>` if there're lifetime/type arguments.
+                            if len > 0 {
+                                value.push_normal("<");
+                            }
+                            let lt = sub
+                                .regions()
+                                .map(|l| lifetime_display(l))
+                                .collect::<Vec<_>>()
+                                .join(", ");
+                            value.push_normal(lt);
+                            if region_count < len - 1 && region_count != 0 {
+                                value.push_normal(", ");
+                            }
+                            let ty = sub.types().map(|_| "_").collect::<Vec<_>>().join(", ");
+                            value.push_normal(ty);
+                            if region_count + type_count < len - 1 && region_count + type_count != 0 {
+                                value.push_normal(", ");
+                            }
+                            let consts = sub.consts().map(|_| "_").collect::<Vec<_>>().join(", ");
+                            value.push_normal(consts);
+                            if len > 0 {
+                                value.push_normal(">");
+                            }
+                        };
+                    push_args(&mut values.0, sub1);
+                    push_args(&mut values.1, sub2);
+                    values
+                } else {
                     // At one point we'd like to elide all lifetimes here, they are irrelevant for
                     // all diagnostics that use this output
                     //
@@ -1055,6 +1154,15 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     //         |   |
                     //         |   elided as they were the same
                     //         not elided, they were different, but irrelevant
+                    let len = sub1.len() - common_default_params;
+
+                    if len > 0 {
+                        values.0.push_normal("<");
+                        values.1.push_normal("<");
+                    }
+
+                    // Avoid printing out default generic parameters that are common to both
+                    // types.
                     let lifetimes = sub1.regions().zip(sub2.regions());
                     for (i, lifetimes) in lifetimes.enumerate() {
                         let l1 = lifetime_display(lifetimes.0);
@@ -1077,6 +1185,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     //         ^ elided type as this type argument was the same in both sides
                     let type_arguments = sub1.types().zip(sub2.types());
                     let regions_len = sub1.regions().count();
+                    let consts_offset = len - sub1.consts().count();
                     let num_display_types = consts_offset - regions_len;
                     for (i, (ta1, ta2)) in type_arguments.take(num_display_types).enumerate() {
                         let i = i + regions_len;
@@ -1113,86 +1222,6 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                         values.1.push_normal(">");
                     }
                     values
-                } else {
-                    // Check for case:
-                    //     let x: Foo<Bar<Qux> = foo::<Bar<Qux>>();
-                    //     Foo<Bar<Qux>
-                    //         ------- this type argument is exactly the same as the other type
-                    //     Bar<Qux>
-                    if self
-                        .cmp_type_arg(
-                            &mut values.0,
-                            &mut values.1,
-                            path1.clone(),
-                            sub_no_defaults_1,
-                            path2.clone(),
-                            &t2,
-                        )
-                        .is_some()
-                    {
-                        return values;
-                    }
-                    // Check for case:
-                    //     let x: Bar<Qux> = y:<Foo<Bar<Qux>>>();
-                    //     Bar<Qux>
-                    //     Foo<Bar<Qux>>
-                    //         ------- this type argument is exactly the same as the other type
-                    if self
-                        .cmp_type_arg(
-                            &mut values.1,
-                            &mut values.0,
-                            path2,
-                            sub_no_defaults_2,
-                            path1,
-                            &t1,
-                        )
-                        .is_some()
-                    {
-                        return values;
-                    }
-
-                    // We can't find anything in common, highlight relevant part of type path.
-                    //     let x: foo::bar::Baz<Qux> = y:<foo::bar::Bar<Zar>>();
-                    //     foo::bar::Baz<Qux>
-                    //     foo::bar::Bar<Zar>
-                    //               -------- this part of the path is different
-
-                    let t1_str = t1.to_string();
-                    let t2_str = t2.to_string();
-                    let min_len = t1_str.len().min(t2_str.len());
-
-                    const SEPARATOR: &str = "::";
-                    let separator_len = SEPARATOR.len();
-                    let split_idx: usize = t1_str
-                        .split(SEPARATOR)
-                        .zip(t2_str.split(SEPARATOR))
-                        .take_while(|(mod1_str, mod2_str)| mod1_str == mod2_str)
-                        .map(|(mod_str, _)| mod_str.len() + separator_len)
-                        .sum();
-
-                    debug!(
-                        "cmp: separator_len={}, split_idx={}, min_len={}",
-                        separator_len, split_idx, min_len
-                    );
-
-                    if split_idx >= min_len {
-                        // paths are identical, highlight everything
-                        (
-                            DiagnosticStyledString::highlighted(t1_str),
-                            DiagnosticStyledString::highlighted(t2_str),
-                        )
-                    } else {
-                        let (common, uniq1) = t1_str.split_at(split_idx);
-                        let (_, uniq2) = t2_str.split_at(split_idx);
-                        debug!("cmp: common={}, uniq1={}, uniq2={}", common, uniq1, uniq2);
-
-                        values.0.push_normal(common);
-                        values.0.push_highlighted(uniq1);
-                        values.1.push_normal(common);
-                        values.1.push_highlighted(uniq2);
-
-                        values
-                    }
                 }
             }
 

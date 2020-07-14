@@ -6,7 +6,7 @@ LL |   match t {
 LL |     Some(k) => match k {
    |     ^^^^^^^ expected enum `std::result::Result`, found enum `std::option::Option`
    |
-   = note: expected enum `std::result::Result<_, {integer}>`
+   = note: expected enum `std::result::Result<_, _>`
               found enum `std::option::Option<_>`
 
 error[E0308]: mismatched types
@@ -18,7 +18,7 @@ LL |   match t {
 LL |     None => ()
    |     ^^^^ expected enum `std::result::Result`, found enum `std::option::Option`
    |
-   = note: expected enum `std::result::Result<_, {integer}>`
+   = note: expected enum `std::result::Result<_, _>`
               found enum `std::option::Option<_>`
 
 error: aborting due to 2 previous errors

@@ -82,7 +82,7 @@ error[E0308]: mismatched types
 LL |     want::<Foo<usize>>(f);
    |                        ^ expected struct `Foo`, found struct `foo`
    |
-   = note: expected struct `Foo<usize>`
+   = note: expected struct `Foo<_, _, _>`
               found struct `foo`
 
 error[E0308]: mismatched types
@@ -91,7 +91,7 @@ error[E0308]: mismatched types
 LL |     want::<Foo<usize, B>>(f);
    |                           ^ expected struct `Foo`, found struct `foo`
    |
-   = note: expected struct `Foo<usize, B>`
+   = note: expected struct `Foo<_, _, _>`
               found struct `foo`
 
 error[E0308]: mismatched types
@@ -118,7 +118,7 @@ error[E0308]: mismatched types
 LL |     want::<Foo<bar>>(f);
    |                      ^ expected struct `Foo`, found struct `foo`
    |
-   = note: expected struct `Foo<bar>`
+   = note: expected struct `Foo<_, _, _>`
               found struct `foo`
 
 error[E0308]: mismatched types
@@ -127,7 +127,7 @@ error[E0308]: mismatched types
 LL |     want::<Foo<bar, B>>(f);
    |                         ^ expected struct `Foo`, found struct `foo`
    |
-   = note: expected struct `Foo<bar, B>`
+   = note: expected struct `Foo<_, _, _>`
               found struct `foo`
 
 error[E0308]: mismatched types
@@ -155,7 +155,7 @@ LL |     want::<bar>(f);
    |                 ^ expected struct `bar`, found struct `Foo`
    |
    = note: expected struct `bar`
-              found struct `Foo<foo>`
+              found struct `Foo<_, _, _>`
 
 error[E0308]: mismatched types
   --> $DIR/type-mismatch.rs:42:24
@@ -248,7 +248,7 @@ LL |     want::<bar>(f);
    |                 ^ expected struct `bar`, found struct `Foo`
    |
    = note: expected struct `bar`
-              found struct `Foo<foo, B>`
+              found struct `Foo<_, _, _>`
 
 error[E0308]: mismatched types
   --> $DIR/type-mismatch.rs:55:24
@@ -341,7 +341,7 @@ LL |     want::<bar>(f);
    |                 ^ expected struct `bar`, found struct `Foo`
    |
    = note: expected struct `bar`
-              found struct `Foo<foo, B, A>`
+              found struct `Foo<_, _, _>`
 
 error[E0308]: mismatched types
   --> $DIR/type-mismatch.rs:68:24

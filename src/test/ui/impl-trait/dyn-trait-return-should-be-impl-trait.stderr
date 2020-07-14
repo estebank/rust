@@ -147,7 +147,7 @@ LL |         return Struct;
    |                expected struct `std::boxed::Box`, found struct `Struct`
    |                help: store this in the heap by calling `Box::new`: `Box::new(Struct)`
    |
-   = note: expected struct `std::boxed::Box<(dyn Trait + 'static)>`
+   = note: expected struct `std::boxed::Box<_>`
               found struct `Struct`
    = note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
 
@@ -211,7 +211,7 @@ LL |         Struct
    |         expected struct `std::boxed::Box`, found struct `Struct`
    |         help: store this in the heap by calling `Box::new`: `Box::new(Struct)`
    |
-   = note: expected struct `std::boxed::Box<(dyn Trait + 'static)>`
+   = note: expected struct `std::boxed::Box<_>`
               found struct `Struct`
    = note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
 

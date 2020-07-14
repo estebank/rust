@@ -19,7 +19,7 @@ LL |     let Ok(0): Option<u8> = 42u8;
    |         |
    |         expected enum `std::option::Option`, found enum `std::result::Result`
    |
-   = note: expected enum `std::option::Option<u8>`
+   = note: expected enum `std::option::Option<_>`
               found enum `std::result::Result<_, _>`
 
 error[E0308]: mismatched types
@@ -30,7 +30,7 @@ LL |     let Ok(0): Option<u8>;
    |         |
    |         expected enum `std::option::Option`, found enum `std::result::Result`
    |
-   = note: expected enum `std::option::Option<u8>`
+   = note: expected enum `std::option::Option<_>`
               found enum `std::result::Result<_, _>`
 
 error[E0308]: mismatched types
