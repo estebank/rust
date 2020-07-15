@@ -17,7 +17,7 @@ use rustc_hir::PrimTy;
 use rustc_session::config::nightly_options;
 use rustc_span::hygiene::MacroKind;
 use rustc_span::symbol::{kw, sym, Ident};
-use rustc_span::Span;
+use rustc_span::{BytePos, Span};
 
 use log::debug;
 use std::ops::Deref;
@@ -226,8 +226,8 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                 self.r.lookup_import_candidates(ident, ns, &self.parent_scope, is_enum_variant);
 
             if !enum_candidates.is_empty() {
-                if let (PathSource::Type, Some(Expr { kind: ExprKind::Type(expr, ty), .. })) =
-                    (source, self.diagnostic_metadata.current_expr)
+                if let (PathSource::Type, Some(span)) =
+                    (source, self.diagnostic_metadata.current_type_ascription.last())
                 {
                     if self
                         .r
@@ -235,7 +235,7 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                         .parse_sess
                         .type_ascription_path_suggestions
                         .borrow()
-                        .contains(&expr.span.between(ty.span))
+                        .contains(span)
                     {
                         // Already reported this issue on the lhs of the type ascription.
                         err.delay_as_bug();
@@ -666,6 +666,24 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                 Res::Def(DefKind::Enum, def_id),
                 PathSource::TupleStruct(_) | PathSource::Expr(..),
             ) => {
+                if self
+                    .diagnostic_metadata
+                    .current_type_ascription
+                    .last()
+                    .map(|sp| {
+                        self.r
+                            .session
+                            .parse_sess
+                            .type_ascription_path_suggestions
+                            .borrow()
+                            .contains(&sp)
+                    })
+                    .unwrap_or(false)
+                {
+                    err.delay_as_bug();
+                    // We already suggested changing `:` into `::` during parsing.
+                    return false;
+                }
                 if let Some(variants) = self.collect_enum_variants(def_id) {
                     if !variants.is_empty() {
                         let msg = if variants.len() == 1 {
@@ -903,93 +921,79 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
     fn type_ascription_suggestion(&self, err: &mut DiagnosticBuilder<'_>, base_span: Span) {
         let sm = self.r.session.source_map();
         let base_snippet = sm.span_to_snippet(base_span);
-        if let Some(sp) = self.diagnostic_metadata.current_type_ascription.last() {
-            let mut sp = *sp;
-            loop {
-                // Try to find the `:`; bail on first non-':' / non-whitespace.
-                sp = sm.next_point(sp);
-                if let Ok(snippet) = sm.span_to_snippet(sp.to(sm.next_point(sp))) {
-                    let line_sp = sm.lookup_char_pos(sp.hi()).line;
-                    let line_base_sp = sm.lookup_char_pos(base_span.lo()).line;
-                    if snippet == ":" {
-                        let mut show_label = true;
-                        if line_sp != line_base_sp {
-                            err.span_suggestion_short(
-                                sp,
-                                "did you mean to use `;` here instead?",
-                                ";".to_string(),
+        if let Some(&sp) = self.diagnostic_metadata.current_type_ascription.last() {
+            if let Ok(snippet) = sm.span_to_snippet(sp) {
+                let len = snippet.trim_end().len() as u32;
+                if snippet.trim() == ":" {
+                    let colon_sp =
+                        sp.with_lo(sp.lo() + BytePos(len - 1)).with_hi(sp.lo() + BytePos(len));
+                    let mut show_label = true;
+                    if sm.is_multiline(sp) {
+                        err.span_suggestion_short(
+                            colon_sp,
+                            "maybe you meant to write `;` here",
+                            ";".to_string(),
+                            Applicability::MaybeIncorrect,
+                        );
+                    } else {
+                        let after_colon_sp =
+                            self.get_colon_suggestion_span(colon_sp.shrink_to_hi());
+                        if snippet.len() == 1 {
+                            // `foo:bar`
+                            err.span_suggestion(
+                                colon_sp,
+                                "maybe you meant to write a path separator here",
+                                "::".to_string(),
                                 Applicability::MaybeIncorrect,
                             );
-                        } else {
-                            let colon_sp = self.get_colon_suggestion_span(sp);
-                            let after_colon_sp =
-                                self.get_colon_suggestion_span(colon_sp.shrink_to_hi());
-                            if !sm
-                                .span_to_snippet(after_colon_sp)
-                                .map(|s| s == " ")
-                                .unwrap_or(false)
+                            show_label = false;
+                            if self
+                                .r
+                                .session
+                                .parse_sess
+                                .type_ascription_path_suggestions
+                                .borrow()
+                                .contains(&colon_sp)
                             {
-                                err.span_suggestion(
-                                    colon_sp,
-                                    "maybe you meant to write a path separator here",
-                                    "::".to_string(),
-                                    Applicability::MaybeIncorrect,
-                                );
-                                show_label = false;
-                                if self
-                                    .r
-                                    .session
-                                    .parse_sess
-                                    .type_ascription_path_suggestions
-                                    .borrow()
-                                    .contains(&colon_sp)
-                                {
-                                    err.delay_as_bug();
-                                }
-                                self.r
-                                    .session
-                                    .parse_sess
-                                    .type_ascription_path_suggestions
-                                    .borrow_mut()
-                                    .insert(colon_sp);
+                                err.delay_as_bug();
                             }
-                            if let Ok(base_snippet) = base_snippet {
-                                let mut sp = after_colon_sp;
-                                for _ in 0..100 {
-                                    // Try to find an assignment
-                                    sp = sm.next_point(sp);
-                                    let snippet = sm.span_to_snippet(sp.to(sm.next_point(sp)));
-                                    match snippet {
-                                        Ok(ref x) if x.as_str() == "=" => {
-                                            err.span_suggestion(
-                                                base_span,
-                                                "maybe you meant to write an assignment here",
-                                                format!("let {}", base_snippet),
-                                                Applicability::MaybeIncorrect,
-                                            );
-                                            show_label = false;
-                                            break;
-                                        }
-                                        Ok(ref x) if x.as_str() == "\n" => break,
-                                        Err(_) => break,
-                                        Ok(_) => {}
+                            self.r
+                                .session
+                                .parse_sess
+                                .type_ascription_path_suggestions
+                                .borrow_mut()
+                                .insert(colon_sp);
+                        }
+                        if let Ok(base_snippet) = base_snippet {
+                            let mut sp = after_colon_sp;
+                            for _ in 0..100 {
+                                // Try to find an assignment
+                                sp = sm.next_point(sp);
+                                let snippet = sm.span_to_snippet(sp.to(sm.next_point(sp)));
+                                match snippet {
+                                    Ok(ref x) if x.as_str() == "=" => {
+                                        err.span_suggestion(
+                                            base_span,
+                                            "maybe you meant to write an assignment here",
+                                            format!("let {}", base_snippet),
+                                            Applicability::MaybeIncorrect,
+                                        );
+                                        show_label = false;
+                                        break;
                                     }
+                                    Ok(ref x) if x.as_str() == "\n" => break,
+                                    Err(_) => break,
+                                    Ok(_) => {}
                                 }
                             }
                         }
-                        if show_label {
-                            err.span_label(
-                                base_span,
-                                "expecting a type here because of type ascription",
-                            );
-                        }
-                        break;
-                    } else if !snippet.trim().is_empty() {
-                        debug!("tried to find type ascription `:` token, couldn't find it");
-                        break;
                     }
-                } else {
-                    break;
+                    if show_label {
+                        err.span_label(
+                            base_span,
+                            "expecting a type here because of type ascription",
+                        );
+                    }
                 }
             }
         }

@@ -368,9 +368,6 @@ struct DiagnosticMetadata<'ast> {
     /// The current enclosing function (used for better errors).
     current_function: Option<(FnKind<'ast>, Span)>,
 
-    /// Keeps track of the parent `Expr` when visiting an expression in `visit_expr`.
-    current_expr: Option<&'ast Expr>,
-
     /// A list of labels as of yet unused. Labels will be removed from this map when
     /// they are used (in a `break` or `continue` statement)
     unused_labels: FxHashMap<NodeId, Span>,
@@ -422,10 +419,7 @@ impl<'a, 'ast> Visitor<'ast> for LateResolutionVisitor<'a, '_, 'ast> {
         });
     }
     fn visit_expr(&mut self, expr: &'ast Expr) {
-        let prev = self.diagnostic_metadata.current_expr;
-        self.diagnostic_metadata.current_expr = Some(expr);
-        self.resolve_expr(expr, prev);
-        self.diagnostic_metadata.current_expr = prev;
+        self.resolve_expr(expr, None);
     }
     fn visit_local(&mut self, local: &'ast Local) {
         let local_spans = match local.pat.kind {
@@ -2169,8 +2163,10 @@ impl<'a, 'b, 'ast> LateResolutionVisitor<'a, 'b, 'ast> {
                     self.resolve_expr(argument, None);
                 }
             }
-            ExprKind::Type(ref type_expr, _) => {
-                self.diagnostic_metadata.current_type_ascription.push(type_expr.span);
+            ExprKind::Type(ref type_expr, ref ty) => {
+                self.diagnostic_metadata
+                    .current_type_ascription
+                    .push(type_expr.span.between(ty.span));
                 visit::walk_expr(self, expr);
                 self.diagnostic_metadata.current_type_ascription.pop();
             }

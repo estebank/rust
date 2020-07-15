@@ -1,5 +1,5 @@
 error: expected type, found reserved keyword `box`
-  --> $DIR/issue-47666.rs:2:25
+  --> $DIR/issue-47666.rs:3:25
    |
 LL |     let _ = Option:Some(vec![0, 1]);
    |                   -     ^^^^^^^^^^
