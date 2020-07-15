@@ -236,9 +236,6 @@ impl<'a> PathSource<'a> {
                         }
                         msg
                     }
-                    // This is a guess that `self` corresponds to the lhs.
-                    // This triggers on the lhs of `std::mem:size_of::<u32>();`.
-                    ExprKind::Type(..) => "value",
                     _ => "function",
                 },
                 _ => "value",
