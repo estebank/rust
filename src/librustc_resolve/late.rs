@@ -365,6 +365,9 @@ struct DiagnosticMetadata<'ast> {
     /// The current enclosing function (used for better errors).
     current_function: Option<(FnKind<'ast>, Span)>,
 
+    /// Keeps track of the parent `Expr` when visiting an expression in `visit_expr`.
+    current_expr: Option<&'ast Expr>,
+
     /// A list of labels as of yet unused. Labels will be removed from this map when
     /// they are used (in a `break` or `continue` statement)
     unused_labels: FxHashMap<NodeId, Span>,
@@ -416,7 +419,10 @@ impl<'a, 'ast> Visitor<'ast> for LateResolutionVisitor<'a, '_, 'ast> {
         });
     }
     fn visit_expr(&mut self, expr: &'ast Expr) {
-        self.resolve_expr(expr, None);
+        let prev = self.diagnostic_metadata.current_expr;
+        self.diagnostic_metadata.current_expr = Some(expr);
+        self.resolve_expr(expr, prev);
+        self.diagnostic_metadata.current_expr = prev;
     }
     fn visit_local(&mut self, local: &'ast Local) {
         let local_spans = match local.pat.kind {

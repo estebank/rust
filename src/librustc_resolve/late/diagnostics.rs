@@ -20,6 +20,7 @@ use rustc_span::symbol::{kw, sym, Ident};
 use rustc_span::{BytePos, Span};
 
 use log::debug;
+use std::ops::Deref;
 
 type Res = def::Res<ast::NodeId>;
 
@@ -147,8 +148,31 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                     .map_or(String::new(), |res| format!("{} ", res.descr()));
                 (mod_prefix, format!("`{}`", Segment::names_to_string(mod_path)))
             };
+            let message =
+                format!("cannot find {} `{}` in {}{}", expected, item_str, mod_prefix, mod_str);
+            let colon_span = match self.diagnostic_metadata.current_expr {
+                Some(Expr { kind: ExprKind::Type(expr, ty), .. }) => {
+                    Some(expr.span.between(ty.span))
+                }
+                _ => None,
+            };
+            if let Some(span) = colon_span {
+                if self
+                    .r
+                    .session
+                    .parse_sess
+                    .type_ascription_path_suggestions
+                    .borrow()
+                    .contains(&span)
+                {
+                    let mut err = self.r.session.struct_span_err(item_span, &message);
+                    err.delay_as_bug();
+                    // Already reported this issue on the lhs of the type ascription.
+                    return (err, vec![]);
+                }
+            }
             (
-                format!("cannot find {} `{}` in {}{}", expected, item_str, mod_prefix, mod_str),
+                message,
                 if path_str == "async" && expected.starts_with("struct") {
                     "`async` blocks are only allowed in the 2018 edition".to_string()
                 } else {
@@ -607,6 +631,59 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                     } else {
                         err.help(msg);
                     }
+                }
+            }
+            (
+                Res::Def(DefKind::Enum, def_id),
+                PathSource::Expr(Some(Expr { kind: ExprKind::Type(expr, ty), .. })),
+            ) => {
+                match (expr.deref(), ty.deref()) {
+                    (
+                        Expr { kind: ExprKind::Path(..), .. },
+                        Ty { kind: TyKind::Path(None, path), .. },
+                    ) if path.segments.len() == 1 => {
+                        if let Some(variants) = self.collect_enum_variants(def_id) {
+                            if variants
+                                .into_iter()
+                                .filter(|variant| {
+                                    variant.segments[variant.segments.len() - 1].ident
+                                        == path.segments[0].ident
+                                })
+                                .next()
+                                .is_some()
+                            {
+                                err.delay_as_bug();
+                                let sp = expr.span.between(ty.span);
+                                if self
+                                    .r
+                                    .session
+                                    .parse_sess
+                                    .type_ascription_path_suggestions
+                                    .borrow()
+                                    .contains(&sp)
+                                {
+                                    // We already suggested changing `:` into `::` during parsing.
+                                    return false;
+                                }
+                                self.r
+                                    .session
+                                    .parse_sess
+                                    .type_ascription_path_suggestions
+                                    .borrow_mut()
+                                    .insert(sp);
+                                let mut err =
+                                    self.r.session.struct_span_err(sp, "expected `::`, found `:`");
+                                err.span_suggestion(
+                                    sp,
+                                    "write a path separator instead",
+                                    "::".to_string(),
+                                    Applicability::MachineApplicable,
+                                );
+                                err.emit();
+                            }
+                        }
+                    }
+                    _ => {}
                 }
             }
             (Res::Def(DefKind::Mod, _), PathSource::Expr(Some(parent))) => {

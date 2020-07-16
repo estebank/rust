@@ -1,5 +1,25 @@
+error: expected type, found `2`
+  --> $DIR/issue-47666.rs:8:19
+   |
+LL |     let _ = Foo:B(2);
+   |                -  ^ expected type
+   |                |
+   |                help: maybe write a path separator here: `::`
+   |
+   = note: `#![feature(type_ascription)]` lets you annotate an expression with a type: `<expr>: <type>`
+
+error: expected one of `!`, `(`, `.`, `::`, `;`, `<`, or `?`, found `{`
+  --> $DIR/issue-47666.rs:11:19
+   |
+LL |     let _ = Foo:C { x: 1 };
+   |                -  ^ expected one of 7 possible tokens
+   |                |
+   |                help: maybe write a path separator here: `::`
+   |
+   = note: `#![feature(type_ascription)]` lets you annotate an expression with a type: `<expr>: <type>`
+
 error: expected type, found reserved keyword `box`
-  --> $DIR/issue-47666.rs:3:25
+  --> $DIR/issue-47666.rs:4:25
    |
 LL |     let _ = Option:Some(vec![0, 1]);
    |                   -     ^^^^^^^^^^
@@ -12,5 +32,11 @@ LL |     let _ = Option:Some(vec![0, 1]);
    = note: `#![feature(type_ascription)]` lets you annotate an expression with a type: `<expr>: <type>`
    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error: aborting due to previous error
+error: expected `::`, found `:`
+  --> $DIR/issue-47666.rs:7:16
+   |
+LL |     let _ = Foo:A;
+   |                ^ help: write a path separator instead: `::`
+
+error: aborting due to 4 previous errors
 

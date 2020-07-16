@@ -1,6 +1,20 @@
 // run-rustfix
+#![allow(dead_code)]
 fn main() {
     let _ = Option::Some(vec![0, 1]); //~ ERROR expected type, found
 }
+fn qux() {
+    let _ = Foo::A; //~ ERROR expected `::`, found `:`
+    let _ = Foo::B(2); //~ ERROR expected type
+}
+fn bar() {
+    let _ = Foo::C { x: 1 }; //~ ERROR expected one of
+}
 
-// This case isn't currently being handled gracefully due to the macro invocation.
+enum Foo {
+    A,
+    B(i32),
+    C {
+        x: i32,
+    },
+}
