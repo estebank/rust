@@ -1,5 +1,5 @@
 error: casts cannot be followed by a function call
-  --> $DIR/issue-54516.rs:4:20
+  --> $DIR/issue-54516.rs:5:20
    |
 LL |     println!("{}", std::mem:size_of::<BTreeMap<u32, u32>>());
    |                    ^^^^^^^^-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
