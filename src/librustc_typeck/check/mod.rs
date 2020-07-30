@@ -2487,11 +2487,12 @@ fn fn_sig_suggestion(
                         format!("_: {:?}", ty)
                     }
                 }
+                ty::Param(_) => format!("_: Self::{:?}", ty),
                 _ => {
                     if assoc.fn_has_self_parameter && i == 0 {
                         format!("self: {:?}", ty)
                     } else {
-                        format!("_: {:?}", ty)
+                        format!("_: {:?} {:?}", ty, ty.kind)
                     }
                 }
             })

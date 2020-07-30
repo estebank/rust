@@ -8,6 +8,8 @@ LL |     let x: Vec<dyn Trait + Sized> = Vec::new();
    |                    |       trait alias used in trait object type (additional use)
    |                    first non-auto trait
    |                    trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0277]: the size for values of type `dyn Trait` cannot be known at compilation time
   --> $DIR/bad-sized.rs:4:12

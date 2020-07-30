@@ -1696,7 +1696,7 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
     {
         let tcx = self.tcx;
         match *cause_code {
-            ObligationCauseCode::ExprAssignable
+            ObligationCauseCode::ExprAssignable(_)
             | ObligationCauseCode::MatchExpressionArm { .. }
             | ObligationCauseCode::Pattern { .. }
             | ObligationCauseCode::IfExpression { .. }
@@ -1928,12 +1928,20 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                     parent_trait_ref.skip_binder().self_ty()
                 ));
                 let parent_predicate = parent_trait_ref.without_const().to_predicate(tcx);
-                self.note_obligation_cause_code(
-                    err,
-                    &parent_predicate,
-                    &data.parent_code,
-                    obligated_types,
-                );
+                let (depth, root) = data.depth();
+                if self.tcx.sess.recursion_limit().value_within_limit(depth) {
+                    self.note_obligation_cause_code(
+                        err,
+                        &parent_predicate,
+                        &data.parent_code,
+                        obligated_types,
+                    );
+                } else {
+                    // This is a recursive obligation somehow, the intermediate steps are not
+                    // really relevant, they are only noise. Show only the first and last.
+                    err.note("...intermediate obligations hidden...");
+                    self.note_obligation_cause_code(err, &parent_predicate, root, obligated_types);
+                }
             }
             ObligationCauseCode::DerivedObligation(ref data) => {
                 let parent_trait_ref = self.resolve_vars_if_possible(&data.parent_trait_ref);

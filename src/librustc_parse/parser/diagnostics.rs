@@ -1,5 +1,7 @@
 use super::ty::AllowPlus;
-use super::{BlockMode, Parser, PathStyle, SemiColonMode, SeqSep, TokenExpectType, TokenType};
+use super::{
+    BlockMode, Parser, PathStyle, Restrictions, SemiColonMode, SeqSep, TokenExpectType, TokenType,
+};
 
 use rustc_ast::ast::{self, BinOpKind, BindingMode, BlockCheckMode, Expr, ExprKind, Item, Param};
 use rustc_ast::ast::{AttrVec, ItemKind, Mutability, Pat, PatKind, PathSegment, QSelf, Ty, TyKind};
@@ -1550,6 +1552,36 @@ impl<'a> Parser<'a> {
                 break;
             }
             self.bump();
+        }
+    }
+
+    pub(super) fn bare_struct_literal_body(&mut self) -> Option<P<Expr>> {
+        debug!("bare_struct_literal_body {}", self.is_certainly_not_a_block(false));
+        if self.token.kind == token::OpenDelim(token::Brace)
+            && self.is_certainly_not_a_block(false)
+            && !self.restrictions.contains(Restrictions::NO_STRUCT_LITERAL)
+        {
+            // We've parsed `{` and we see `ident:`. This might be a struct literal missing the
+            // preceding struct path.
+            let snapshot = self.clone();
+            let mut ident = Ident::invalid();
+            ident.span = self.token.span.shrink_to_lo(); // Point right before the `{`.
+            match self.parse_struct_expr(ast::Path::from_ident(ident), AttrVec::new(), false) {
+                Ok(literal) => {
+                    debug!("bare_struct_literal_body ok {:?}", literal);
+                    *self = snapshot; // We will have to consume the block later.
+                    Some(literal)
+                }
+                Err(mut err) => {
+                    debug!("bare_struct_literal_body err");
+                    err.cancel();
+                    *self = snapshot;
+                    None
+                }
+            }
+        } else {
+            debug!("bare_struct_literal_body nope");
+            None
         }
     }
 

@@ -6,10 +6,10 @@ LL | impl m1::X for X {
    |
    = help: implement the missing item: `const CONSTANT: u32 = 42;`
    = help: implement the missing item: `type Type = Type;`
-   = help: implement the missing item: `fn method(&self, _: std::string::String) -> <Self as m1::X>::Type { todo!() }`
-   = help: implement the missing item: `fn method2(self: std::boxed::Box<Self>, _: std::string::String) -> <Self as m1::X>::Type { todo!() }`
-   = help: implement the missing item: `fn method3(_: &Self, _: std::string::String) -> <Self as m1::X>::Type { todo!() }`
-   = help: implement the missing item: `fn method4(&self, _: &Self) -> <Self as m1::X>::Type { todo!() }`
+   = help: implement the missing item: `fn method(&self, _: std::string::String Adt(std::string::String, [])) -> <Self as m1::X>::Type { todo!() }`
+   = help: implement the missing item: `fn method2(self: std::boxed::Box<Self>, _: std::string::String Adt(std::string::String, [])) -> <Self as m1::X>::Type { todo!() }`
+   = help: implement the missing item: `fn method3(_: &Self, _: std::string::String Adt(std::string::String, [])) -> <Self as m1::X>::Type { todo!() }`
+   = help: implement the missing item: `fn method4(&self, _: &Self Ref(ReLateBound(DebruijnIndex(0), BrAnon(1)), Self, Not)) -> <Self as m1::X>::Type { todo!() }`
    = help: implement the missing item: `fn method5(self: &std::boxed::Box<Self>) -> <Self as m1::X>::Type { todo!() }`
 
 error: aborting due to previous error

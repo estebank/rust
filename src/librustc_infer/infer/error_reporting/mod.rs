@@ -318,7 +318,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
             debug!("report_region_errors: error = {:?}", error);
 
             if !self.try_report_nice_region_error(&error) {
-                match error.clone() {
+                match error {
                     // These errors could indicate all manner of different
                     // problems with many different solutions. Rather
                     // than generate a "one size fits all" error, what we
@@ -1681,6 +1681,10 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
         bound_kind: GenericKind<'tcx>,
         sub: Region<'tcx>,
     ) -> DiagnosticBuilder<'a> {
+        debug!(
+            "construct_generic_bound_failure {:?} {:?} {:?} {:?}",
+            span, origin, bound_kind, sub
+        );
         let hir = &self.tcx.hir();
         // Attempt to obtain the span of the parameter so we can
         // suggest adding an explicit lifetime bound to it.
@@ -2103,7 +2107,7 @@ impl<'tcx> ObligationCauseExt<'tcx> for ObligationCause<'tcx> {
         match self.code {
             CompareImplMethodObligation { .. } => "method type is compatible with trait",
             CompareImplTypeObligation { .. } => "associated type is compatible with trait",
-            ExprAssignable => "expression is assignable",
+            ExprAssignable(_) => "expression is assignable",
             MatchExpressionArm(box MatchExpressionArmCause { source, .. }) => match source {
                 hir::MatchSource::IfLetDesugar { .. } => "`if let` arms have compatible types",
                 _ => "`match` arms have compatible types",

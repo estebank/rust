@@ -8,6 +8,8 @@ LL | type Foo<Rhs> = dyn Add<Rhs> + Sub<Rhs> + X<Rhs> + Y<Rhs>;
    |                     |          trait alias used in trait object type (additional use)
    |                     first non-auto trait
    |                     trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0191]: the value of the associated types `A` (from trait `Y`), `Output` (from trait `std::ops::Add`), `Output` (from trait `std::ops::Mul`), `Output` (from trait `std::ops::Sub`) must be specified
   --> $DIR/missing-associated-types.rs:12:21
@@ -37,6 +39,8 @@ LL | type Bar<Rhs> = dyn Add<Rhs> + Sub<Rhs> + X<Rhs> + Z<Rhs>;
    |                     |          trait alias used in trait object type (additional use)
    |                     first non-auto trait
    |                     trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0191]: the value of the associated types `A` (from trait `Z`), `B` (from trait `Z`), `Output` (from trait `std::ops::Add`), `Output` (from trait `std::ops::Div`), `Output` (from trait `std::ops::Div`), `Output` (from trait `std::ops::Mul`), `Output` (from trait `std::ops::Sub`) must be specified
   --> $DIR/missing-associated-types.rs:15:21
@@ -73,6 +77,8 @@ LL | type Baz<Rhs> = dyn Add<Rhs> + Sub<Rhs> + Y<Rhs>;
    |                     |          trait alias used in trait object type (additional use)
    |                     first non-auto trait
    |                     trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0191]: the value of the associated types `A` (from trait `Y`), `Output` (from trait `std::ops::Add`), `Output` (from trait `std::ops::Sub`) must be specified
   --> $DIR/missing-associated-types.rs:18:21
@@ -101,6 +107,8 @@ LL | type Bat<Rhs> = dyn Add<Rhs> + Sub<Rhs> + Fine<Rhs>;
    |                     |          trait alias used in trait object type (additional use)
    |                     first non-auto trait
    |                     trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0191]: the value of the associated types `Output` (from trait `std::ops::Add`), `Output` (from trait `std::ops::Sub`) must be specified
   --> $DIR/missing-associated-types.rs:21:21

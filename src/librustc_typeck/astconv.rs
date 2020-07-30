@@ -1663,6 +1663,7 @@ impl<'o, 'tcx> dyn AstConv<'tcx> + 'o {
                 "additional use",
             );
             first_trait.label_with_exp_info(&mut err, "first non-auto trait", "first use");
+            err.help("consider creating a new trait with all of these trais as super-traits");
             err.emit();
         }
 

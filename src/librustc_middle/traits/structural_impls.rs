@@ -186,7 +186,7 @@ impl<'a, 'tcx> Lift<'tcx> for traits::ObligationCauseCode<'a> {
                     trait_item_def_id,
                 })
             }
-            super::ExprAssignable => Some(super::ExprAssignable),
+            super::ExprAssignable(expr) => Some(super::ExprAssignable(expr)),
             super::MatchExpressionArm(box super::MatchExpressionArmCause {
                 arm_span,
                 source,

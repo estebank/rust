@@ -271,7 +271,7 @@ pub enum ObligationCauseCode<'tcx> {
 
     /// Checking that this expression can be assigned where it needs to be
     // FIXME(eddyb) #11161 is the original Expr required?
-    ExprAssignable,
+    ExprAssignable(Option<hir::HirId>),
 
     /// Computing common supertype in the arms of a match expression
     MatchExpressionArm(Box<MatchExpressionArmCause<'tcx>>),
@@ -369,6 +369,26 @@ pub struct DerivedObligationCause<'tcx> {
 
     /// The parent trait had this cause.
     pub parent_code: Rc<ObligationCauseCode<'tcx>>,
+}
+
+impl<'tcx> DerivedObligationCause<'tcx> {
+    pub fn depth(&self) -> (usize, &ObligationCauseCode<'tcx>) {
+        use std::borrow::Borrow;
+        let mut depth = 0;
+        let mut current_parent_code = self.parent_code.borrow();
+        loop {
+            match &current_parent_code {
+                BuiltinDerivedObligation(data)
+                | ImplDerivedObligation(data)
+                | DerivedObligation(data) => {
+                    current_parent_code = data.parent_code.borrow();
+                    depth += 1;
+                }
+                _ => break,
+            }
+        }
+        (depth, current_parent_code)
+    }
 }
 
 #[derive(Clone, Debug, TypeFoldable)]

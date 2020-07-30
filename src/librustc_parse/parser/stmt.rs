@@ -79,7 +79,9 @@ impl<'a> Parser<'a> {
         }
 
         let expr = if self.check(&token::OpenDelim(token::Brace)) {
-            self.parse_struct_expr(path, AttrVec::new())?
+            let expr = self.parse_struct_expr(path, AttrVec::new(), true)?;
+            // self.expect(&token::CloseDelim(token::Brace))?;
+            expr
         } else {
             let hi = self.prev_token.span;
             self.mk_expr(lo.to(hi), ExprKind::Path(None, path), AttrVec::new())
@@ -316,28 +318,54 @@ impl<'a> Parser<'a> {
     ) -> PResult<'a, (Vec<Attribute>, P<Block>)> {
         maybe_whole!(self, NtBlock, |x| (Vec::new(), x));
 
+        let maybe_struct_lit = self.bare_struct_literal_body();
         if !self.eat(&token::OpenDelim(token::Brace)) {
             return self.error_block_no_opening_brace();
         }
+        let attrs = self.parse_inner_attributes()?;
+        let recover = maybe_struct_lit.is_none();
+        let tail = match (maybe_struct_lit, self.parse_block_tail(lo, blk_mode, recover)) {
+            // This can happen on blocks that have a single tail expression which is a type
+            // ascription: `{ foo: var }` which is *valid* (nightly) syntax.
+            (Some(_), Ok(tail))
+            // The common case for valid code.
+            | (None, Ok(tail)) => tail,
+            // It didn't look like a struct literal's body, just return the error.
+            (None, Err(err)) => return Err(err),
+            // Somebody forgot to add the name of the struct :)
+            (Some(literal), Err(mut err)) => {
+                err.cancel();
+                self.consume_block(token::Brace, crate::parser::diagnostics::ConsumeClosingDelim::No);
+                let mut err = self.struct_span_err(literal.span, "struct literal body");
+                err.multipart_suggestion(
+                    "provide the struct literal name before the body",
+                    vec![(literal.span.shrink_to_lo(), "{ Name ".to_string()), (literal.span.shrink_to_hi(), " }".to_string())],
+                    Applicability::HasPlaceholders,
+                );
+                err.emit();
+                self.mk_block(vec![], blk_mode, literal.span)
+            }
+        };
 
-        Ok((self.parse_inner_attributes()?, self.parse_block_tail(lo, blk_mode)?))
+        Ok((attrs, tail))
     }
 
     /// Parses the rest of a block expression or function body.
     /// Precondition: already parsed the '{'.
-    fn parse_block_tail(&mut self, lo: Span, s: BlockCheckMode) -> PResult<'a, P<Block>> {
+    fn parse_block_tail(&mut self, lo: Span, s: BlockCheckMode, recover: bool) -> PResult<'a, P<Block>> {
         let mut stmts = vec![];
         while !self.eat(&token::CloseDelim(token::Brace)) {
             if self.token == token::Eof {
                 break;
             }
-            let stmt = match self.parse_full_stmt() {
-                Err(mut err) => {
+            let stmt = match self.parse_full_stmt(recover) {
+                Err(mut err) if recover => {
                     self.maybe_annotate_with_ascription(&mut err, false);
                     err.emit();
                     self.recover_stmt_(SemiColonMode::Ignore, BlockMode::Ignore);
                     Some(self.mk_stmt_err(self.token.span))
                 }
+                Err(err) => return Err(err),
                 Ok(stmt) => stmt,
             };
             if let Some(stmt) = stmt {
@@ -351,7 +379,7 @@ impl<'a> Parser<'a> {
     }
 
     /// Parses a statement, including the trailing semicolon.
-    pub fn parse_full_stmt(&mut self) -> PResult<'a, Option<Stmt>> {
+    pub fn parse_full_stmt(&mut self, recover: bool) -> PResult<'a, Option<Stmt>> {
         // Skip looking for a trailing semicolon when we have an interpolated statement.
         maybe_whole!(self, NtStmt, |x| Some(x));
 
@@ -386,6 +414,9 @@ impl<'a> Parser<'a> {
                                 Applicability::MaybeIncorrect,
                             );
                         }
+                    }
+                    if !recover {
+                        return Err(e);
                     }
                     e.emit();
                     self.recover_stmt();

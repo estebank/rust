@@ -1820,10 +1820,23 @@ impl<'a, 'tcx> InferCtxtPrivExt<'tcx> for InferCtxt<'a, 'tcx> {
         obligated_types: &mut Vec<&ty::TyS<'tcx>>,
         cause_code: &ObligationCauseCode<'tcx>,
     ) -> bool {
-        if let ObligationCauseCode::BuiltinDerivedObligation(ref data) = cause_code {
+        debug!("is_recursive_obligation {:?}", cause_code);
+        if let ObligationCauseCode::BuiltinDerivedObligation(ref data)
+        | ObligationCauseCode::ImplDerivedObligation(ref data) = cause_code
+        {
             let parent_trait_ref = self.resolve_vars_if_possible(&data.parent_trait_ref);
+            let ty = parent_trait_ref.skip_binder().self_ty();
 
-            if obligated_types.iter().any(|ot| ot == &parent_trait_ref.skip_binder().self_ty()) {
+            debug!("is_recursive_obligation {:?}", ty);
+
+            if obligated_types.iter().any(|ot| {
+                debug!("is_recursive_obligation {:?}", ot);
+                ot == &ty
+                    || match ot.kind {
+                        ty::Ref(_, ty, _) => ot == &ty,
+                        _ => false,
+                    }
+            }) {
                 return true;
             }
         }

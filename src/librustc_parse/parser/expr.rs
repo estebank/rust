@@ -1147,6 +1147,7 @@ impl<'a> Parser<'a> {
             (self.prev_token.span, ExprKind::MacCall(mac))
         } else if self.check(&token::OpenDelim(token::Brace)) {
             if let Some(expr) = self.maybe_parse_struct_expr(&path, &attrs) {
+                // self.expect(&token::CloseDelim(token::Brace))?;
                 return expr;
             } else {
                 (path.span, ExprKind::Path(None, path))
@@ -1943,7 +1944,7 @@ impl<'a> Parser<'a> {
             ))
     }
 
-    fn is_certainly_not_a_block(&self) -> bool {
+    pub(super) fn is_certainly_not_a_block(&self, certain: bool) -> bool {
         self.look_ahead(1, |t| t.is_ident())
             && (
                 // `{ ident, ` cannot start a block.
@@ -1952,8 +1953,9 @@ impl<'a> Parser<'a> {
                         && (
                             // `{ ident: token, ` cannot start a block.
                             self.look_ahead(4, |t| t == &token::Comma) ||
-                // `{ ident: ` cannot start a block unless it's a type ascription `ident: Type`.
-                self.look_ahead(3, |t| !t.can_begin_type())
+                            // `{ ident: ` cannot start a block unless it's a type ascription
+                            // `ident: Type`.
+                            (!certain || self.look_ahead(3, |t| !t.can_begin_type()))
                         )
             )
     }
@@ -1964,9 +1966,10 @@ impl<'a> Parser<'a> {
         attrs: &AttrVec,
     ) -> Option<PResult<'a, P<Expr>>> {
         let struct_allowed = !self.restrictions.contains(Restrictions::NO_STRUCT_LITERAL);
-        if struct_allowed || self.is_certainly_not_a_block() {
+        if struct_allowed || self.is_certainly_not_a_block(true) {
             // This is a struct literal, but we don't can't accept them here.
-            let expr = self.parse_struct_expr(path.clone(), attrs.clone());
+            let expr = self.parse_struct_expr(path.clone(), attrs.clone(), true);
+            // self.expect(&token::CloseDelim(token::Brace)).map_err(|mut err| err.emit()).ok()?;
             if let (Ok(expr), false) = (&expr, struct_allowed) {
                 self.error_struct_lit_not_allowed_here(path.span, expr.span);
             }
@@ -1989,8 +1992,9 @@ impl<'a> Parser<'a> {
         &mut self,
         pth: ast::Path,
         mut attrs: AttrVec,
+        recover: bool,
     ) -> PResult<'a, P<Expr>> {
-        self.bump();
+        self.bump(); // `{`
         let mut fields = Vec::new();
         let mut base = None;
         let mut recover_async = false;
@@ -2009,6 +2013,7 @@ impl<'a> Parser<'a> {
                 let exp_span = self.prev_token.span;
                 match self.parse_expr() {
                     Ok(e) => base = Some(e),
+                    Err(e) if !recover => return Err(e),
                     Err(mut e) => {
                         e.emit();
                         self.recover_stmt();
@@ -2021,6 +2026,7 @@ impl<'a> Parser<'a> {
             let recovery_field = self.find_struct_error_after_field_looking_code();
             let parsed_field = match self.parse_field() {
                 Ok(f) => Some(f),
+                Err(e) if !recover => return Err(e),
                 Err(mut e) => {
                     if pth == kw::Async {
                         async_block_err(&mut e, pth.span);
@@ -2049,6 +2055,7 @@ impl<'a> Parser<'a> {
                         fields.push(f);
                     }
                 }
+                Err(e) if !recover => return Err(e),
                 Err(mut e) => {
                     if pth == kw::Async {
                         async_block_err(&mut e, pth.span);

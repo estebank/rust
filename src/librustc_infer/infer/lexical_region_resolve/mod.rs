@@ -62,6 +62,7 @@ pub fn resolve<'tcx>(
 
 /// Contains the result of lexical region resolution. Offers methods
 /// to lookup up the final value of a region variable.
+#[derive(Debug)]
 pub struct LexicalRegionResolutions<'tcx> {
     values: IndexVec<RegionVid, VarValue<'tcx>>,
     error_region: ty::Region<'tcx>,
@@ -570,8 +571,16 @@ impl<'cx, 'tcx> LexicalResolver<'cx, 'tcx> {
         var_data: &mut LexicalRegionResolutions<'tcx>,
         errors: &mut Vec<RegionResolutionError<'tcx>>,
     ) {
+        debug!("collect_errors: var_data={:?}", var_data);
         for (constraint, origin) in &self.data.constraints {
             debug!("collect_errors: constraint={:?} origin={:?}", constraint, origin);
+            if let SubregionOrigin::Subtype(type_trace) = origin {
+                if let crate::traits::ObligationCauseCode::ExprAssignable(Some(hir_id)) =
+                    type_trace.cause.code
+                {
+                    debug!("qwer {:?}", self.tcx().hir().find(hir_id));
+                }
+            }
             match *constraint {
                 Constraint::RegSubVar(..) | Constraint::VarSubVar(..) => {
                     // Expansion will ensure that these constraints hold. Ignore.

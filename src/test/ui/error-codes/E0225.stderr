@@ -8,6 +8,8 @@ LL |     let _: Box<dyn std::io::Read + std::io::Write>;
    |                    |               trait alias used in trait object type (additional use)
    |                    first non-auto trait
    |                    trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/E0225.rs:8:20
@@ -22,6 +24,8 @@ LL |     let _: Box<dyn Foo>;
    |                    |
    |                    trait alias used in trait object type (additional use)
    |                    trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error: aborting due to 2 previous errors
 

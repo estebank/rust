@@ -11,6 +11,8 @@ LL | type _T00 = dyn _0 + _0;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:19:22
@@ -27,6 +29,8 @@ LL | type _T01 = dyn _1 + _0;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:22:22
@@ -46,6 +50,8 @@ LL | type _T02 = dyn _1 + _1;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:25:23
@@ -60,6 +66,8 @@ LL | type _T03 = dyn Obj + _1;
    |                 |
    |                 first non-auto trait
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:28:22
@@ -75,6 +83,8 @@ LL | type _T04 = dyn _1 + Obj;
    |                 |    additional non-auto trait
    |                 |    trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:37:17
@@ -97,6 +107,8 @@ LL | type _T10 = dyn _2 + _3;
    |                 |
    |                 trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:40:22
@@ -113,6 +125,8 @@ LL | type _T11 = dyn _3 + _2;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:43:23
@@ -128,6 +142,8 @@ LL | type _T12 = dyn Obj + _2;
    |                 |
    |                 first non-auto trait
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:46:17
@@ -150,6 +166,8 @@ LL | type _T13 = dyn _2 + Obj;
    |                 |
    |                 trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:49:22
@@ -166,6 +184,8 @@ LL | type _T14 = dyn _1 + _3;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:52:22
@@ -182,6 +202,8 @@ LL | type _T15 = dyn _3 + _1;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:55:22
@@ -200,6 +222,8 @@ LL | type _T16 = dyn _1 + _4;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:58:22
@@ -218,6 +242,8 @@ LL | type _T17 = dyn _4 + _1;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:65:22
@@ -232,6 +258,8 @@ LL | type _T20 = dyn _5 + _5;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:68:23
@@ -244,6 +272,8 @@ LL | type _T21 = dyn Obj + _5;
    |                 |
    |                 first non-auto trait
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:71:22
@@ -257,6 +287,8 @@ LL | type _T22 = dyn _5 + Obj;
    |                 |    additional non-auto trait
    |                 |    trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:74:36
@@ -270,6 +302,8 @@ LL | type _T23 = dyn _5 + Send + Sync + Obj;
    |                 |                  additional non-auto trait
    |                 |                  trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:81:17
@@ -290,6 +324,8 @@ LL | type _T30 = dyn _6;
    |                 |
    |                 trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:84:17
@@ -310,6 +346,8 @@ LL | type _T31 = dyn _6 + Send;
    |                 |
    |                 trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:87:24
@@ -330,6 +368,8 @@ LL | type _T32 = dyn Send + _6;
    |                        |
    |                        trait alias used in trait object type (additional use)
    |                        trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:95:22
@@ -348,6 +388,8 @@ LL | type _T40 = dyn _8 + Obj;
    |                 |    additional non-auto trait
    |                 |    trait alias used in trait object type (additional use)
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:98:23
@@ -365,6 +407,8 @@ LL | type _T41 = dyn Obj + _8;
    |                 |
    |                 first non-auto trait
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:101:22
@@ -386,6 +430,8 @@ LL | type _T42 = dyn _8 + _4;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:104:22
@@ -407,6 +453,8 @@ LL | type _T43 = dyn _4 + _8;
    |                 --   ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:107:36
@@ -428,6 +476,8 @@ LL | type _T44 = dyn _4 + Send + Sync + _8;
    |                 --                 ^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:117:22
@@ -440,6 +490,8 @@ LL | type _T50 = dyn _9 + _10;
    |                 --   ^^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error[E0225]: only auto traits can be used as additional traits in a trait object
   --> $DIR/trait-alias-no-duplicates.rs:123:23
@@ -452,6 +504,8 @@ LL | type _T60 = dyn _11 + _12;
    |                 ---   ^^^ trait alias used in trait object type (additional use)
    |                 |
    |                 trait alias used in trait object type (first use)
+   |
+   = help: consider creating a new trait with all of these trais as super-traits
 
 error: aborting due to 27 previous errors
 
