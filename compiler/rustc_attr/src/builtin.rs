@@ -23,6 +23,7 @@ enum AttrError {
     NonIdentFeature,
     MissingFeature,
     MultipleStabilityLevels,
+    NotBareInherit,
     UnsupportedLiteral(&'static str, /* is_bytestr */ bool),
 }
 
@@ -49,6 +50,9 @@ fn handle_errors(sess: &ParseSess, span: Span, error: AttrError) {
         }
         AttrError::MultipleStabilityLevels => {
             struct_span_err!(diag, span, E0544, "multiple stability levels").emit();
+        }
+        AttrError::NotBareInherit => {
+            struct_span_err!(diag, span, E0541, "`inherit` should be a single word").emit();
         }
         AttrError::UnsupportedLiteral(msg, is_bytestr) => {
             let mut err = struct_span_err!(diag, span, E0565, "{}", msg);
@@ -159,7 +163,7 @@ pub struct ConstStability {
 pub enum StabilityLevel {
     // Reason for the current stability level and the relevant rust-lang issue
     Unstable { reason: Option<Symbol>, issue: Option<NonZeroU32>, is_soft: bool },
-    Stable { since: Symbol },
+    Stable { since: Symbol, inherit: bool },
 }
 
 impl StabilityLevel {
@@ -168,6 +172,9 @@ impl StabilityLevel {
     }
     pub fn is_stable(&self) -> bool {
         matches!(self, StabilityLevel::Stable { .. })
+    }
+    pub fn could_inherit(&self) -> bool {
+        if let StabilityLevel::Stable { inherit, .. } = *self { inherit } else { false }
     }
 }
 
@@ -393,6 +400,7 @@ where
 
                     let mut feature = None;
                     let mut since = None;
+                    let mut inherit = false;
                     for meta in metas {
                         match meta {
                             NestedMetaItem::MetaItem(mi) => match mi.name_or_empty() {
@@ -406,13 +414,24 @@ where
                                         continue 'outer;
                                     }
                                 }
+                                sym::inherit => {
+                                    inherit = true;
+                                    if !matches!(mi.kind, MetaItemKind::Word) {
+                                        handle_errors(
+                                            &sess.parse_sess,
+                                            meta.span(),
+                                            AttrError::NotBareInherit,
+                                        );
+                                        continue 'outer;
+                                    }
+                                }
                                 _ => {
                                     handle_errors(
                                         &sess.parse_sess,
                                         meta.span(),
                                         AttrError::UnknownMetaItem(
                                             pprust::path_to_string(&mi.path),
-                                            &["since", "note"],
+                                            &["since", "note", "inherit"],
                                         ),
                                     );
                                     continue 'outer;
@@ -431,7 +450,7 @@ where
 
                     match (feature, since) {
                         (Some(feature), Some(since)) => {
-                            let level = Stable { since };
+                            let level = Stable { since, inherit };
                             if sym::stable == meta_name {
                                 stab = Some(Stability { level, feature });
                             } else {

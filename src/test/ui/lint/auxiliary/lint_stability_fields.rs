@@ -1,7 +1,7 @@
 #![feature(staged_api)]
 #![stable(feature = "rust1", since = "1.0.0")]
 
-#[stable(feature = "rust1", since = "1.0.0")]
+#[stable(feature = "rust1", since = "1.0.0", inherit)]
 pub struct Stable {
     pub inherit: u8,
     #[unstable(feature = "unstable_test_feature", issue = "none")]
@@ -13,14 +13,14 @@ pub struct Stable {
     pub override3: u8,
 }
 
-#[stable(feature = "rust1", since = "1.0.0")]
+#[stable(feature = "rust1", since = "1.0.0", inherit)]
 pub struct Stable2(#[stable(feature = "rust2", since = "2.0.0")] pub u8,
                    #[unstable(feature = "unstable_test_feature", issue = "none")] pub u8,
                    #[unstable(feature = "unstable_test_feature", issue = "none")]
                    #[rustc_deprecated(since = "1.0.0", reason = "text")] pub u8,
                    pub u8);
 
-#[stable(feature = "rust1", since = "1.0.0")]
+#[stable(feature = "rust1", since = "1.0.0", inherit)]
 pub enum Stable3 {
     Inherit(u8),
     InheritOverride(#[stable(feature = "rust2", since = "2.0.0")] u8),

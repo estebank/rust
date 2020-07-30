@@ -3676,7 +3676,7 @@ fn render_impl(
         }
         write!(w, "<a href=\"#{}\" class=\"anchor\"></a>", id);
         let since = i.impl_item.stability.as_ref().and_then(|s| match s.level {
-            StabilityLevel::Stable { since } => Some(since.as_str()),
+            StabilityLevel::Stable { since, .. } => Some(since.as_str()),
             StabilityLevel::Unstable { .. } => None,
         });
         render_stability_since_raw(w, since.as_deref(), outer_version);

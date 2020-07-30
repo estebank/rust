@@ -116,12 +116,13 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
         }
 
         if self.tcx.features().staged_api {
-            if let Some(..) = attrs.iter().find(|a| self.tcx.sess.check_name(a, sym::deprecated)) {
-                self.tcx.sess.span_err(
-                    item_sp,
-                    "`#[deprecated]` cannot be used in staged API; \
-                                                use `#[rustc_deprecated]` instead",
-                );
+            if let Some(a) = attrs.iter().find(|a| self.tcx.sess.check_name(a, sym::deprecated)) {
+                self.tcx
+                    .sess
+                    .struct_span_err(a.span, "`#[deprecated]` cannot be used in staged API")
+                    .span_label(a.span, "use `#[rustc_deprecated]` instead")
+                    .span_label(item_sp, "")
+                    .emit();
             }
         } else {
             self.recurse_with_stability_attrs(
@@ -176,7 +177,7 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
 
             // Check if deprecated_since < stable_since. If it is,
             // this is *almost surely* an accident.
-            if let (&Some(dep_since), &attr::Stable { since: stab_since }) =
+            if let (&Some(dep_since), &attr::Stable { since: stab_since, .. }) =
                 (&depr.as_ref().and_then(|(d, _)| d.since), &stab.level)
             {
                 // Explicit version of iter::order::lt to handle parse errors properly
@@ -213,7 +214,9 @@ impl<'a, 'tcx> Annotator<'a, 'tcx> {
         if stab.is_none() {
             debug!("annotate: stab not found, parent = {:?}", self.parent_stab);
             if let Some(stab) = self.parent_stab {
-                if inherit_deprecation.yes() && stab.level.is_unstable() || inherit_from_parent {
+                if (inherit_deprecation.yes() && stab.level.is_unstable())
+                    || (stab.level.could_inherit() && inherit_from_parent)
+                {
                     self.index.stab_map.insert(hir_id, stab);
                 }
             }

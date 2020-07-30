@@ -1,0 +1,8 @@
+error: field has missing stability attribute
+  --> $DIR/stability-attribute-issue-2.rs:5:17
+   |
+LL | pub struct A<T>(pub T);
+   |                 ^^^^^
+
+error: aborting due to previous error
+
