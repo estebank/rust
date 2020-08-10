@@ -1,5 +1,5 @@
 error: expected type, found `2`
-  --> $DIR/issue-47666.rs:7:19
+  --> $DIR/issue-47666.rs:8:19
    |
 LL |     let _ = Foo:B(2);
    |                -  ^ expected type
@@ -9,7 +9,7 @@ LL |     let _ = Foo:B(2);
    = note: `#![feature(type_ascription)]` lets you annotate an expression with a type: `<expr>: <type>`
 
 error: expected one of `!`, `(`, `.`, `::`, `;`, `<`, or `?`, found `{`
-  --> $DIR/issue-47666.rs:10:19
+  --> $DIR/issue-47666.rs:11:19
    |
 LL |     let _ = Foo:C { x: 1 };
    |                -  ^ expected one of 7 possible tokens
@@ -19,7 +19,7 @@ LL |     let _ = Foo:C { x: 1 };
    = note: `#![feature(type_ascription)]` lets you annotate an expression with a type: `<expr>: <type>`
 
 error: expected type, found reserved keyword `box`
-  --> $DIR/issue-47666.rs:2:25
+  --> $DIR/issue-47666.rs:4:25
    |
 LL |     let _ = Option:Some(vec![0, 1]);
    |                   -     ^^^^^^^^^^
@@ -33,40 +33,13 @@ LL |     let _ = Option:Some(vec![0, 1]);
    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error[E0423]: expected value, found enum `Foo`
-  --> $DIR/issue-47666.rs:5:13
+  --> $DIR/issue-47666.rs:7:13
    |
 LL |     let _ = Foo:A;
-   |             ^^^
-   |
-help: try using one of the enum's variants
-   |
-LL |     let _ = Foo::A:A;
-   |             ^^^^^^
-LL |     let _ = Foo::B:A;
-   |             ^^^^^^
-LL |     let _ = Foo::C:A;
-   |             ^^^^^^
+   |             ^^^- help: maybe you meant to write a path separator here: `::`
+   |             |
+   |             not a value
 
-error[E0412]: cannot find type `A` in this scope
-  --> $DIR/issue-47666.rs:5:17
-   |
-LL |     let _ = Foo:A;
-   |                 ^ not found in this scope
-   |
-help: there is an enum variant `Foo::A`; try using the variant's enum
-   |
-LL |     let _ = Foo:Foo;
-   |                 ^^^
-help: maybe you meant to write a path separator here
-   |
-LL |     let _ = Foo::A;
-   |                ^^
-help: you might be missing a type parameter
-   |
-LL | fn bar<A>() {
-   |       ^^^
+error: aborting due to 4 previous errors
 
-error: aborting due to 5 previous errors
-
-Some errors have detailed explanations: E0412, E0423.
-For more information about an error, try `rustc --explain E0412`.
+For more information about this error, try `rustc --explain E0423`.

@@ -379,6 +379,9 @@ struct DiagnosticMetadata<'ast> {
 
     /// Only used for better errors on `let <pat>: <expr, not type>;`.
     current_let_binding: Option<(Span, Option<Span>, Option<Span>)>,
+
+    /// Keeps track of the parent `Expr` when visiting an expression in `visit_expr`.
+    current_expr: Option<&'ast Expr>,
 }
 
 struct LateResolutionVisitor<'a, 'b, 'ast> {
@@ -431,7 +434,10 @@ impl<'a, 'ast> Visitor<'ast> for LateResolutionVisitor<'a, '_, 'ast> {
         });
     }
     fn visit_expr(&mut self, expr: &'ast Expr) {
-        self.resolve_expr(expr, None);
+        let prev = self.diagnostic_metadata.current_expr;
+        self.diagnostic_metadata.current_expr = Some(expr);
+        self.resolve_expr(expr, prev);
+        self.diagnostic_metadata.current_expr = prev;
     }
     fn visit_local(&mut self, local: &'ast Local) {
         let local_spans = match local.pat.kind {

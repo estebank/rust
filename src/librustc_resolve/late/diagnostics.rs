@@ -20,6 +20,7 @@ use rustc_span::symbol::{kw, sym, Ident};
 use rustc_span::{BytePos, Span};
 
 use log::debug;
+use std::ops::Deref;
 
 type Res = def::Res<ast::NodeId>;
 
@@ -147,8 +148,36 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
                     .map_or(String::new(), |res| format!("{} ", res.descr()));
                 (mod_prefix, format!("`{}`", Segment::names_to_string(mod_path)))
             };
+            let message =
+                format!("cannot find {} `{}` in {}{}", expected, item_str, mod_prefix, mod_str);
+            let colon_span = match self.diagnostic_metadata.current_expr {
+                // Very specific for `std::mem:size_of::<u32>()` case.
+                Some(Expr { kind: ExprKind::Call(expr, _), .. }) => match expr.deref() {
+                    Expr { kind: ExprKind::Type(expr, ty), .. } => Some(expr.span.between(ty.span)),
+                    _ => None,
+                },
+                Some(Expr { kind: ExprKind::Type(expr, ty), .. }) => {
+                    Some(expr.span.between(ty.span))
+                }
+                _ => None,
+            };
+            if let Some(span) = colon_span {
+                if self
+                    .r
+                    .session
+                    .parse_sess
+                    .type_ascription_path_suggestions
+                    .borrow()
+                    .contains(&span)
+                {
+                    let mut err = self.r.session.struct_span_err(item_span, &message);
+                    err.delay_as_bug();
+                    // Already reported this issue on the lhs of the type ascription.
+                    return (err, vec![]);
+                }
+            }
             (
-                format!("cannot find {} `{}` in {}{}", expected, item_str, mod_prefix, mod_str),
+                message,
                 if path_str == "async" && expected.starts_with("struct") {
                     "`async` blocks are only allowed in the 2018 edition".to_string()
                 } else {
@@ -616,7 +645,10 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
             }
             (
                 Res::Def(DefKind::Enum, def_id),
-                PathSource::TupleStruct(_) | PathSource::Expr(..),
+                PathSource::TupleStruct(_)
+                | PathSource::Expr(
+                    None | Some(Expr { kind: ExprKind::Path(..) | ExprKind::Call(..), .. }),
+                ),
             ) => {
                 if self
                     .diagnostic_metadata

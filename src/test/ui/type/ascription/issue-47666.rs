@@ -1,9 +1,10 @@
+// run-rustfix
+#![allow(dead_code)]
 fn main() {
     let _ = Option:Some(vec![0, 1]); //~ ERROR expected type, found
 }
 fn bar() {
     let _ = Foo:A; //~ ERROR expected value, found enum `Foo`
-    //~^ ERROR cannot find type `A` in this scope
     let _ = Foo:B(2); //~ ERROR expected type
 }
 fn baz() {
