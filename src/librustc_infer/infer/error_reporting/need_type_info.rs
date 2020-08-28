@@ -370,7 +370,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
             error_code,
         );
 
-        let suffix = match local_visitor.found_node_ty {
+        let (suffix, sugg_ty) = match local_visitor.found_node_ty {
             Some(ty::TyS { kind: ty::Closure(_, substs), .. }) => {
                 let fn_sig = substs.as_closure().sig();
                 let ret = fn_sig.output().skip_binder().to_string();
@@ -403,20 +403,33 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 // This suggestion is incomplete, as the user will get further type inference
                 // errors due to the `_` placeholders and the introduction of `Box`, but it does
                 // nudge them in the right direction.
-                format!("a boxed closure type like `Box<dyn Fn({}) -> {}>`", args, ret)
+                (
+                    format!("a boxed closure type like `Box<dyn Fn({}) -> {}>`", args, ret),
+                    format!("Box<dyn Fn({}) -> {}>", args, ret),
+                )
             }
             Some(ty) if is_named_and_not_impl_trait(ty) && name == "_" => {
                 let ty = ty_to_string(ty);
-                format!("the explicit type `{}`, with the type parameters specified", ty)
+                (
+                    format!("the explicit type `{}`, with the type parameters specified", ty),
+                    ty.to_string(),
+                )
             }
             Some(ty) if is_named_and_not_impl_trait(ty) && ty.to_string() != name => {
                 let ty = ty_to_string(ty);
-                format!(
-                    "the explicit type `{}`, where the type parameter `{}` is specified",
-                    ty, name,
+                (
+                    format!(
+                        "the explicit type `{}`, where the type parameter `{}` is specified",
+                        ty, name,
+                    ),
+                    ty.to_string(),
                 )
             }
-            _ => "a type".to_string(),
+            _ if turbofish_suggestions.len() == 1 => (
+                format!("the explicit type `{}`", turbofish_suggestions[0]),
+                turbofish_suggestions[0].clone(),
+            ),
+            _ => ("a type".to_string(), "Type".to_string()),
         };
 
         if let Some(e) = local_visitor.found_exact_method_call {
@@ -471,18 +484,49 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 format!("consider giving this closure parameter {}", suffix),
             );
         } else if let Some(pattern) = local_visitor.found_local_pattern {
-            let msg = if let Some(simple_ident) = pattern.simple_ident() {
-                match pattern.span.desugaring_kind() {
-                    None => format!("consider giving `{}` {}", simple_ident, suffix),
-                    Some(DesugaringKind::ForLoop(_)) => {
-                        "the element type for this iterator is not specified".to_string()
-                    }
-                    _ => format!("this needs {}", suffix),
-                }
+            if let (hir::Node::Local(local), None) = (
+                self.tcx.hir().get(self.tcx.hir().get_parent_node(pattern.hir_id)),
+                pattern.span.desugaring_kind(),
+            ) {
+                let (span, prefix) = match local.ty {
+                    Some(ty) => (ty.span, ""),
+                    None => (local.pat.span.shrink_to_hi(), ": "),
+                };
+                let msg = format!("consider giving this binding {}", suffix);
+                match &turbofish_suggestions[..] {
+                    [] => err.span_suggestion_verbose(
+                        span,
+                        &msg,
+                        format!("{}{}", prefix, sugg_ty),
+                        Applicability::HasPlaceholders,
+                    ),
+                    [ty] => err.span_suggestion_verbose(
+                        span,
+                        &msg,
+                        format!("{}{}", prefix, ty),
+                        Applicability::MachineApplicable,
+                    ),
+                    _ => err.span_suggestions(
+                        span,
+                        &msg,
+                        turbofish_suggestions.into_iter().map(|ty| format!("{}{}", prefix, ty)),
+                        Applicability::MaybeIncorrect,
+                    ),
+                };
             } else {
-                format!("consider giving this pattern {}", suffix)
-            };
-            err.span_label(pattern.span, msg);
+                let msg = if let Some(simple_ident) = pattern.simple_ident() {
+                    match pattern.span.desugaring_kind() {
+                        None => format!("consider giving `{}` {}", simple_ident, suffix),
+                        Some(DesugaringKind::ForLoop(_)) => {
+                            "the element type for this iterator is not specified".to_string()
+                        }
+                        _ => format!("this needs {}", suffix),
+                    }
+                } else {
+                    format!("consider giving this pattern {}", suffix)
+                };
+                err.span_label(pattern.span, msg);
+            }
         } else if let Some(e) = local_visitor.found_method_call {
             if let ExprKind::MethodCall(segment, ..) = &e.kind {
                 // Suggest specifying type params or point out the return type of the call:

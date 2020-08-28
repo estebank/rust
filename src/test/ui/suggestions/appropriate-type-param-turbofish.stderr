@@ -59,31 +59,58 @@ error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:14:43
    |
 LL |         let _ = vec![1, 2, 3].into_iter().collect();
-   |             -                             ^^^^^^^ cannot infer type for type parameter `B` declared on the associated function `collect`
-   |             |
-   |             consider giving this pattern a type
+   |                                           ^^^^^^^ cannot infer type for type parameter `B` declared on the associated function `collect`
    |
    = note: cannot satisfy `_: std::iter::FromIterator<i32>`
+help: consider giving this binding a type
+   |
+LL |         let _: std::vec::Vec<_> = vec![1, 2, 3].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^
+LL |         let _: std::collections::HashSet<_, _> = vec![1, 2, 3].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::path::PathBuf = vec![1, 2, 3].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::boxed::Box<[_]> = vec![1, 2, 3].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^^
+     and 8 other candidates
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:17:49
    |
 LL |         let _ = vec!["a", "b", "c"].into_iter().collect();
-   |             -                                   ^^^^^^^ cannot infer type for type parameter `B` declared on the associated function `collect`
-   |             |
-   |             consider giving this pattern a type
+   |                                                 ^^^^^^^ cannot infer type for type parameter `B` declared on the associated function `collect`
    |
    = note: cannot satisfy `_: std::iter::FromIterator<&str>`
+help: consider giving this binding a type
+   |
+LL |         let _: std::vec::Vec<_> = vec!["a", "b", "c"].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^
+LL |         let _: std::string::String = vec!["a", "b", "c"].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::collections::HashSet<_, _> = vec!["a", "b", "c"].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::path::PathBuf = vec!["a", "b", "c"].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^
+     and 10 other candidates
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:20:49
    |
 LL |         let _ = vec!['a', 'b', 'c'].into_iter().collect();
-   |             -                                   ^^^^^^^ cannot infer type for type parameter `B` declared on the associated function `collect`
-   |             |
-   |             consider giving this pattern a type
+   |                                                 ^^^^^^^ cannot infer type for type parameter `B` declared on the associated function `collect`
    |
    = note: cannot satisfy `_: std::iter::FromIterator<char>`
+help: consider giving this binding a type
+   |
+LL |         let _: std::vec::Vec<_> = vec!['a', 'b', 'c'].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^
+LL |         let _: std::string::String = vec!['a', 'b', 'c'].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::collections::HashSet<_, _> = vec!['a', 'b', 'c'].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::path::PathBuf = vec!['a', 'b', 'c'].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^
+     and 10 other candidates
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:38:5
@@ -107,11 +134,13 @@ LL | fn x<X: T>() -> X {
    |         - required by this bound in `x`
 ...
 LL |     let _ = x();
-   |         -   ^ cannot infer type for type parameter `X` declared on the function `x`
-   |         |
-   |         consider giving this pattern a type
+   |             ^ cannot infer type for type parameter `X` declared on the function `x`
    |
    = note: cannot satisfy `_: T`
+help: consider giving this binding the explicit type `S`
+   |
+LL |     let _: S = x();
+   |          ^^^
 help: consider specifying the type argument in the function call
    |
 LL |     let _ = x::<S>();

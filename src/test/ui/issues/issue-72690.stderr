@@ -53,34 +53,39 @@ error[E0283]: type annotations needed for `std::string::String`
    |
 LL |     String::from("x".as_ref());
    |     ^^^^^^^^^^^^ cannot infer type for struct `std::string::String`
-LL |     let _ = String::from("x");
-   |         - consider giving this pattern a type
    |
    = note: cannot satisfy `std::string::String: std::convert::From<&_>`
    = note: required by `std::convert::From::from`
+help: consider giving this binding the explicit type `std::string::String`
+   |
+LL |     let _: std::string::String = String::from("x");
+   |          ^^^^^^^^^^^^^^^^^^^^^
 
 error[E0283]: type annotations needed for `std::string::String`
   --> $DIR/issue-72690.rs:47:5
    |
-LL |     let _ = String::from("x");
-   |         - consider giving this pattern a type
 LL |     String::from("x".as_ref());
    |     ^^^^^^^^^^^^ cannot infer type for struct `std::string::String`
    |
    = note: cannot satisfy `std::string::String: std::convert::From<&_>`
    = note: required by `std::convert::From::from`
+help: consider giving this binding the explicit type `std::string::String`
+   |
+LL |     let _: std::string::String = String::from("x");
+   |          ^^^^^^^^^^^^^^^^^^^^^
 
 error[E0283]: type annotations needed for `std::string::String`
   --> $DIR/issue-72690.rs:55:5
    |
-LL |     let _ = String::from("x");
-   |         - consider giving this pattern a type
-...
 LL |     String::from("x".as_ref());
    |     ^^^^^^^^^^^^ cannot infer type for struct `std::string::String`
    |
    = note: cannot satisfy `std::string::String: std::convert::From<&_>`
    = note: required by `std::convert::From::from`
+help: consider giving this binding the explicit type `std::string::String`
+   |
+LL |     let _: std::string::String = String::from("x");
+   |          ^^^^^^^^^^^^^^^^^^^^^
 
 error: aborting due to 9 previous errors
 
