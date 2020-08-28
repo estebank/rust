@@ -270,6 +270,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
         span: Span,
         ty: Ty<'tcx>,
         error_code: TypeAnnotationNeeded,
+        turbofish_suggestions: Vec<String>,
     ) -> DiagnosticBuilder<'tcx> {
         let ty = self.resolve_vars_if_possible(&ty);
         let (name, name_sp, descr, parent_name, parent_descr) = self.extract_type_name(&ty, None);
@@ -446,7 +447,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 //    |             this method call resolves to `std::option::Option<&T>`
                 //    |
                 //    = note: type must be known at this point
-                self.annotate_method_call(segment, e, &mut err);
+                self.annotate_method_call(segment, e, &mut err, turbofish_suggestions);
             }
         } else if let Some(pattern) = local_visitor.found_arg_pattern {
             // We don't want to show the default label for closures.
@@ -510,7 +511,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 //    |             this method call resolves to `std::option::Option<&T>`
                 //    |
                 //    = note: type must be known at this point
-                self.annotate_method_call(segment, e, &mut err);
+                self.annotate_method_call(segment, e, &mut err, turbofish_suggestions);
             }
         }
         // Instead of the following:
@@ -584,29 +585,49 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
         segment: &hir::PathSegment<'_>,
         e: &Expr<'_>,
         err: &mut DiagnosticBuilder<'_>,
+        turbofish_suggestions: Vec<String>,
     ) {
         if let (Some(typeck_results), None) = (self.in_progress_typeck_results, &segment.args) {
             let borrow = typeck_results.borrow();
             if let Some((DefKind::AssocFn, did)) = borrow.type_dependent_def(e.hir_id) {
                 let generics = self.tcx.generics_of(did);
                 if !generics.params.is_empty() {
-                    err.span_suggestion_verbose(
-                        segment.ident.span.shrink_to_hi(),
-                        &format!(
-                            "consider specifying the type argument{} in the method call",
-                            pluralize!(generics.params.len()),
-                        ),
-                        format!(
-                            "::<{}>",
-                            generics
-                                .params
-                                .iter()
-                                .map(|p| p.name.to_string())
-                                .collect::<Vec<String>>()
-                                .join(", ")
-                        ),
-                        Applicability::HasPlaceholders,
+                    let msg = format!(
+                        "consider specifying the type argument{} in the method call",
+                        pluralize!(generics.params.len()),
                     );
+                    if turbofish_suggestions.is_empty() {
+                        err.span_suggestion_verbose(
+                            segment.ident.span.shrink_to_hi(),
+                            &msg,
+                            format!(
+                                "::<{}>",
+                                generics
+                                    .params
+                                    .iter()
+                                    .map(|p| p.name.to_string())
+                                    .collect::<Vec<String>>()
+                                    .join(", ")
+                            ),
+                            Applicability::HasPlaceholders,
+                        );
+                    } else {
+                        if turbofish_suggestions.len() == 1 {
+                            err.span_suggestion_verbose(
+                                segment.ident.span.shrink_to_hi(),
+                                &msg,
+                                format!("::<{}>", turbofish_suggestions[0]),
+                                Applicability::MaybeIncorrect,
+                            );
+                        } else {
+                            err.span_suggestions(
+                                segment.ident.span.shrink_to_hi(),
+                                &msg,
+                                turbofish_suggestions.into_iter().map(|ty| format!("::<{}>", ty)),
+                                Applicability::MaybeIncorrect,
+                            );
+                        }
+                    }
                 } else {
                     let sig = self.tcx.fn_sig(did);
                     let bound_output = sig.output();

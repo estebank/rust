@@ -653,7 +653,13 @@ impl<'cx, 'tcx> Resolver<'cx, 'tcx> {
     fn report_type_error(&self, t: Ty<'tcx>) {
         if !self.tcx.sess.has_errors() {
             self.infcx
-                .need_type_info_err(Some(self.body.id()), self.span.to_span(self.tcx), t, E0282)
+                .need_type_info_err(
+                    Some(self.body.id()),
+                    self.span.to_span(self.tcx),
+                    t,
+                    E0282,
+                    vec![],
+                )
                 .emit();
         }
     }
