@@ -4,7 +4,7 @@ use super::{
 };
 
 use crate::autoderef::Autoderef;
-use crate::infer::type_variable::{TypeVariableOrigin, TypeVariableOriginKind};
+// use crate::infer::type_variable::{TypeVariableOrigin, TypeVariableOriginKind};
 use crate::infer::{InferCtxt, InferOk};
 use crate::traits::{self, normalize_projection_type};
 
@@ -17,7 +17,9 @@ use rustc_hir::def_id::DefId;
 use rustc_hir::intravisit::Visitor;
 use rustc_hir::lang_items::LangItem;
 use rustc_hir::{AsyncGeneratorKind, GeneratorKind, Node};
-use rustc_middle::ty::subst::{GenericArgKind, Subst};
+// use rustc_middle::ty::subst::{GenericArgKind, Subst};
+use rustc_middle::ty::subst::Subst;
+// use rustc_middle::ty::subst::InternalSubsts;
 use rustc_middle::ty::{
     self, suggest_constraining_type_param, AdtKind, DefIdTree, Infer, InferTy, ToPredicate, Ty,
     TyCtxt, TypeFoldable, WithConstness,
@@ -337,57 +339,109 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
     ) -> Vec<String> {
         let mut turbofish_suggestions = FxHashSet::default();
         self.tcx.for_each_relevant_impl(data.trait_ref.def_id, self_ty, |impl_def_id| {
-            let param_env = ty::ParamEnv::empty();
-            let param_env = param_env.subst(self.tcx, data.trait_ref.substs);
-            let ty = self.next_ty_var(TypeVariableOrigin {
-                kind: TypeVariableOriginKind::NormalizeProjectionType,
-                span: DUMMY_SP,
-            });
+            // let param_env = obligation.param_env;
+            // let param_env = param_env.subst(self.tcx, data.trait_ref.substs);
+            self.probe(|_| {
 
-            let impl_substs = self.fresh_substs_for_item(obligation.cause.span, impl_def_id);
-            let trait_ref = self.tcx.impl_trait_ref(impl_def_id).unwrap();
-            let trait_ref = trait_ref.subst(self.tcx, impl_substs);
+                let selcx = &mut SelectionContext::new(&self);
+                let target_substs = self.fresh_substs_for_item(DUMMY_SP, impl_def_id);
+                let (_target_trait_ref, obligations) = crate::traits::util::impl_trait_ref_and_oblig(selcx, obligation.param_env, impl_def_id, target_substs);
+                // debug!("zxcv {:?} {:?} {:?}", target_substs, target_trait_ref, obligations.collect::<Vec<_>>());
+                // for o in obligations {
+                //     self.predicate_must_hold_modulo_regions(&o)
+                // }
+                let impl_substs = self.fresh_substs_for_item(obligation.cause.span, impl_def_id);
+                // // let impl_substs = self.tcx.mk_substs_trait(self_ty, &data.trait_ref.substs[..]);//&[]);
+                // let impl_substs = self.tcx.mk_substs_trait(self_ty, &impl_substs[1..]);//&[]);
+        //         let impl_substs = 
+        // InternalSubsts::for_item(self.tcx, impl_def_id, |param, _| {
+        //     debug!("param {:?} {:?}", param, param.name);
+        //     if param.name == kw::SelfUpper {
+        //     self_ty.into()
+        // } else {
+        //     self.var_for_def(obligation.cause.span, param)
+        // }});
+        //         let impl_substs = self.tcx.mk_substs_trait(self_ty, impl_substs);
+        //         debug!("tyui {:?}", impl_substs);
+                // let icx = ItemCtxt::new(tcx, def_id);
 
-            // Require the type the impl is implemented on to match
-            // our type, and ignore the impl if there was a mismatch.
-            let cause = traits::ObligationCause::dummy();
-            let eq_result = self.at(&cause, param_env).eq(trait_ref.self_ty(), ty);
-            if let Ok(InferOk { value: (), obligations }) = eq_result {
-                // FIXME: ignoring `obligations` might cause false positives.
-                drop(obligations);
+                // let hir_id = tcx.hir().local_def_id_to_hir_id(def_id.expect_local());
+                // match tcx.hir().expect_item(hir_id).kind {
+                //     hir::ItemKind::Impl { ref of_trait, .. } => of_trait.as_ref().map(|ast_trait_ref| {
+                //         let selfty = tcx.type_of(def_id);
+                //         AstConv::instantiate_mono_trait_ref(&icx, ast_trait_ref, selfty)
+                //     }),
+                //     _ => bug!(),
+                // }
+                let trait_ref = self.tcx.impl_trait_ref(impl_def_id).unwrap();
+                // let trait_ref = self.tcx.impl_trait_ref_with_self(impl_def_id, self_ty).unwrap();
+                let trait_ref = trait_ref.subst(self.tcx, impl_substs);
+                let _ =trait_ref;
+                // let ty = self.next_ty_var(TypeVariableOrigin {
+                //     kind: TypeVariableOriginKind::MiscVariable,
+                //     span: obligation.cause.span,
+                // });
 
-                let can_impl = match self.evaluate_obligation(&Obligation::new(
-                    cause,
-                    obligation.param_env,
-                    trait_ref.without_const().to_predicate(self.tcx),
-                )) {
-                    Ok(eval_result) => eval_result.may_apply(),
-                    Err(traits::OverflowError) => true, // overflow doesn't mean yes *or* no
-                };
-                if can_impl
-                    && data.trait_ref.substs.iter().zip(trait_ref.substs.iter()).all(|(l, r)| {
-                        // FIXME: ideally we would use `can_coerce` here instead, but `typeck`
-                        // comes *after* in the dependency graph.
-                        match (l.unpack(), r.unpack()) {
-                            (GenericArgKind::Type(left_ty), GenericArgKind::Type(right_ty)) => {
-                                match (&left_ty.peel_refs().kind, &right_ty.peel_refs().kind) {
-                                    (Infer(_), _) | (_, Infer(_)) => true,
-                                    (left_kind, right_kind) => left_kind == right_kind,
-                                }
-                            }
-                            (GenericArgKind::Lifetime(_), GenericArgKind::Lifetime(_))
-                            | (GenericArgKind::Const(_), GenericArgKind::Const(_)) => true,
-                            _ => false,
-                        }
-                    })
-                    && !matches!(trait_ref.self_ty().kind, ty::Infer(_))
-                {
-                    turbofish_suggestions.insert(trait_ref.self_ty());
+                // Require the type the impl is implemented on to match
+                // our type, and ignore the impl if there was a mismatch.
+                let cause = traits::ObligationCause::dummy();
+                debug!("qwer {:?} {:?}", data.trait_ref, trait_ref);
+                let eq_result = self.at(&cause, obligation.param_env).eq(_target_trait_ref.self_ty(), self_ty);
+
+                for o in obligations {
+                    let x = self.evaluate_obligation(&o); 
+                    debug!("tyui {:?} {:?}", o, x);
                 }
-            }
+                if let Ok(InferOk { value: (), obligations }) = eq_result {
+                    // FIXME: ignoring `obligations` might cause false positives.
+                    // drop(obligations); // These obligations are *always* empty!?
+                    match self.evaluate_obligation(&Obligation::new(
+                        cause.clone(),
+                        obligation.param_env,
+                        _target_trait_ref.without_const().to_predicate(self.tcx),
+                    )) {
+                        Ok(eval_result) => {
+                            debug!("asdf {:?} {:?}", eval_result, obligations);
+                            // FIXME: cases that are marked as `EvaluatedToAmbig` should be further
+                            // filtered based on the extra obligations, but I don't know how to get
+                            // those obligations at this time.
+                            if eval_result.may_apply() && !matches!(trait_ref.self_ty().kind, ty::Infer(_)) {
+                                turbofish_suggestions.insert(trait_ref.self_ty());
+                            }
+                        },
+                        _ => {}
+                    };
+                }
+                use rustc_infer::traits::TraitEngine;
+                // if !self.predicate_may_hold(&obligation) {
+                //     debug!("overloaded_deref_ty: cannot match obligation");
+                //     return None;
+                // }
+        
+                let mut fulfillcx = traits::FulfillmentContext::new_in_snapshot();
+                fulfillcx.register_predicate_obligation(self, Obligation::new(
+                        cause,
+                        obligation.param_env,
+                        _target_trait_ref.without_const().to_predicate(self.tcx),
+                    ));
+                // let normalized_ty = fulfillcx.normalize_projection_type(
+                //     &self,
+                //     obligation.param_env,
+                //     ty::ProjectionTy::from_ref_and_name(
+                //         self.tcx,
+                //         trait_ref,
+                //         Ident::with_dummy_span(sym::Target),
+                //     ),
+                //     cause,
+                // );
+                let x = fulfillcx.select_where_possible(&self);
+                debug!("a {:?}", x);
+                let obligations = fulfillcx.pending_obligations();
+                debug!("obligations {:?}", obligations);
+            });
         });
         // Sort types by always suggesting `Vec<_>` and `String` first, as they are the
-        // most likely desired types.
+        // most likely desired types when using `collect`.
         let mut turbofish_suggestions = turbofish_suggestions.into_iter().collect::<Vec<_>>();
         turbofish_suggestions.sort_by(|left, right| {
             let vec_type = self.tcx.get_diagnostic_item(sym::vec_type);

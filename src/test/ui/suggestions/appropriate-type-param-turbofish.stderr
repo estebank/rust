@@ -9,13 +9,98 @@ help: consider specifying the type argument in the method call
    |
 LL |         vec![1, 2, 3].into_iter().collect::<std::vec::Vec<_>>();
    |                                          ^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::string::String>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::collections::HashMap<_, _, _>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec![1, 2, 3].into_iter().collect::<std::collections::HashSet<_, _>>();
    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec![1, 2, 3].into_iter().collect::<std::path::PathBuf>();
    |                                          ^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::sys_common::wtf8::Wtf8Buf>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::option::Option<_>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::result::Result<_, _>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec![1, 2, 3].into_iter().collect::<std::boxed::Box<[_]>>();
    |                                          ^^^^^^^^^^^^^^^^^^^^^^^^
-     and 8 other candidates
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::borrow::Cow<'_, str>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::borrow::Cow<'_, [_]>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::borrow::Cow<'_, str>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::collections::BinaryHeap<_>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::collections::BTreeMap<_, _>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::collections::LinkedList<_>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::collections::VecDeque<_>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::rc::Rc<[_]>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::sync::Arc<[_]>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<std::collections::BTreeSet<_>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<hashbrown::map::HashMap<_, _, _>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<hashbrown::set::HashSet<_, _>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<gimli::read::cfi::RegisterRuleMap<_>>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<gimli::read::abbrev::Attributes>();
+   |                                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec![1, 2, 3].into_iter().collect::<()>();
+   |                                          ^^^^^^
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:6:41
@@ -28,13 +113,98 @@ help: consider specifying the type argument in the method call
    |
 LL |         vec!["a", "b", "c"].into_iter().collect::<std::vec::Vec<_>>();
    |                                                ^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec!["a", "b", "c"].into_iter().collect::<std::string::String>();
    |                                                ^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::collections::HashMap<_, _, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec!["a", "b", "c"].into_iter().collect::<std::collections::HashSet<_, _>>();
    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec!["a", "b", "c"].into_iter().collect::<std::path::PathBuf>();
    |                                                ^^^^^^^^^^^^^^^^^^^^^^
-     and 10 other candidates
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::sys_common::wtf8::Wtf8Buf>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::option::Option<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::result::Result<_, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::boxed::Box<[_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::borrow::Cow<'_, [_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::borrow::Cow<'_, str>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::borrow::Cow<'_, str>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::collections::BinaryHeap<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::collections::BTreeMap<_, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::collections::LinkedList<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::collections::VecDeque<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::rc::Rc<[_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::sync::Arc<[_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<std::collections::BTreeSet<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<hashbrown::map::HashMap<_, _, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<hashbrown::set::HashSet<_, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<gimli::read::cfi::RegisterRuleMap<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<gimli::read::abbrev::Attributes>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!["a", "b", "c"].into_iter().collect::<()>();
+   |                                                ^^^^^^
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:9:41
@@ -47,13 +217,98 @@ help: consider specifying the type argument in the method call
    |
 LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::vec::Vec<_>>();
    |                                                ^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::string::String>();
    |                                                ^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::collections::HashMap<_, _, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::collections::HashSet<_, _>>();
    |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
 LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::path::PathBuf>();
    |                                                ^^^^^^^^^^^^^^^^^^^^^^
-     and 10 other candidates
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::sys_common::wtf8::Wtf8Buf>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::option::Option<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::result::Result<_, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::boxed::Box<[_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::borrow::Cow<'_, str>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::borrow::Cow<'_, [_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::borrow::Cow<'_, str>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::collections::BinaryHeap<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::collections::BTreeMap<_, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::collections::LinkedList<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::collections::VecDeque<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::rc::Rc<[_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::sync::Arc<[_]>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<std::collections::BTreeSet<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<hashbrown::map::HashMap<_, _, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<hashbrown::set::HashSet<_, _>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<gimli::read::cfi::RegisterRuleMap<_>>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<gimli::read::abbrev::Attributes>();
+   |                                                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+help: consider specifying the type argument in the method call
+   |
+LL |         vec!['a', 'b', 'c'].into_iter().collect::<()>();
+   |                                                ^^^^^^
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:14:43
@@ -66,13 +321,13 @@ help: consider giving this binding a type
    |
 LL |         let _: std::vec::Vec<_> = vec![1, 2, 3].into_iter().collect();
    |              ^^^^^^^^^^^^^^^^^^
+LL |         let _: std::string::String = vec![1, 2, 3].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::collections::HashMap<_, _, _> = vec![1, 2, 3].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 LL |         let _: std::collections::HashSet<_, _> = vec![1, 2, 3].into_iter().collect();
    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-LL |         let _: std::path::PathBuf = vec![1, 2, 3].into_iter().collect();
-   |              ^^^^^^^^^^^^^^^^^^^^
-LL |         let _: std::boxed::Box<[_]> = vec![1, 2, 3].into_iter().collect();
-   |              ^^^^^^^^^^^^^^^^^^^^^^
-     and 8 other candidates
+     and 20 other candidates
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:17:49
@@ -87,11 +342,11 @@ LL |         let _: std::vec::Vec<_> = vec!["a", "b", "c"].into_iter().collect()
    |              ^^^^^^^^^^^^^^^^^^
 LL |         let _: std::string::String = vec!["a", "b", "c"].into_iter().collect();
    |              ^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::collections::HashMap<_, _, _> = vec!["a", "b", "c"].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 LL |         let _: std::collections::HashSet<_, _> = vec!["a", "b", "c"].into_iter().collect();
    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-LL |         let _: std::path::PathBuf = vec!["a", "b", "c"].into_iter().collect();
-   |              ^^^^^^^^^^^^^^^^^^^^
-     and 10 other candidates
+     and 20 other candidates
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:20:49
@@ -106,11 +361,11 @@ LL |         let _: std::vec::Vec<_> = vec!['a', 'b', 'c'].into_iter().collect()
    |              ^^^^^^^^^^^^^^^^^^
 LL |         let _: std::string::String = vec!['a', 'b', 'c'].into_iter().collect();
    |              ^^^^^^^^^^^^^^^^^^^^^
+LL |         let _: std::collections::HashMap<_, _, _> = vec!['a', 'b', 'c'].into_iter().collect();
+   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 LL |         let _: std::collections::HashSet<_, _> = vec!['a', 'b', 'c'].into_iter().collect();
    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-LL |         let _: std::path::PathBuf = vec!['a', 'b', 'c'].into_iter().collect();
-   |              ^^^^^^^^^^^^^^^^^^^^
-     and 10 other candidates
+     and 20 other candidates
 
 error[E0283]: type annotations needed
   --> $DIR/appropriate-type-param-turbofish.rs:38:5

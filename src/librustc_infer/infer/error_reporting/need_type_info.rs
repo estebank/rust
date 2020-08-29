@@ -656,20 +656,22 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                             Applicability::HasPlaceholders,
                         );
                     } else {
-                        if turbofish_suggestions.len() == 1 {
+                        // if turbofish_suggestions.len() == 1 {
+                        for ty in turbofish_suggestions {
                             err.span_suggestion_verbose(
                                 segment.ident.span.shrink_to_hi(),
                                 &msg,
-                                format!("::<{}>", turbofish_suggestions[0]),
+                                format!("::<{}>", ty),
+                                // format!("::<{}>", turbofish_suggestions[0]),
                                 Applicability::MaybeIncorrect,
                             );
-                        } else {
-                            err.span_suggestions(
-                                segment.ident.span.shrink_to_hi(),
-                                &msg,
-                                turbofish_suggestions.into_iter().map(|ty| format!("::<{}>", ty)),
-                                Applicability::MaybeIncorrect,
-                            );
+                        // } else {
+                        //     err.span_suggestions(
+                        //         segment.ident.span.shrink_to_hi(),
+                        //         &msg,
+                        //         turbofish_suggestions.into_iter().map(|ty| format!("::<{}>", ty)),
+                        //         Applicability::MaybeIncorrect,
+                        //     );
                         }
                     }
                 } else {

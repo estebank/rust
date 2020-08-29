@@ -10,8 +10,10 @@ LL |     foo(42);
    = note: cannot satisfy `_: std::convert::Into<std::string::String>`
 help: consider specifying the type argument in the function call
    |
-LL |     foo::<T>(42);
-   |        ^^^^^
+LL |     foo::<gimli::read::cfi::Pointer>(42);
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+LL |     foo::<gimli::read::endian_slice::EndianSlice<'_, _>>(42);
+   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 error: aborting due to previous error
 
