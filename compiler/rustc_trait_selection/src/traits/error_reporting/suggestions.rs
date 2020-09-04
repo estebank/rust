@@ -1786,8 +1786,8 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                 }
             }
             ObligationCauseCode::VariableType(hir_id) => {
-                let parent_node = self.tcx.hir().get_parent_node(hir_id);
-                match self.tcx.hir().find(parent_node) {
+                let parent_node = tcx.hir().get_parent_node(hir_id);
+                match tcx.hir().find(parent_node) {
                     Some(Node::Local(hir::Local {
                         init: Some(hir::Expr { kind: hir::ExprKind::Index(_, _), span, .. }),
                         ..
@@ -1816,7 +1816,7 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                         err.note("all local variables must have a statically known size");
                     }
                 }
-                if !self.tcx.features().unsized_locals {
+                if !tcx.features().unsized_locals {
                     err.help("unsized locals are gated as an unstable feature");
                 }
             }
@@ -1833,7 +1833,7 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                     err.note("all function arguments must have a statically known size");
                 }
                 if tcx.sess.opts.unstable_features.is_nightly_build()
-                    && !self.tcx.features().unsized_locals
+                    && !tcx.features().unsized_locals
                 {
                     err.help("unsized locals are gated as an unstable feature");
                 }
