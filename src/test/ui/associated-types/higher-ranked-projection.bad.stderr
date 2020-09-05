@@ -1,11 +1,17 @@
 error[E0308]: mismatched types
   --> $DIR/higher-ranked-projection.rs:25:5
    |
+LL | fn foo<U, T>(_t: T)
+   |    --- required by a bound in this
+LL |     where for<'a> &'a T: Mirror<Image=U>
+   |                                 ------- required by this bound in `foo`
+...
 LL |     foo(());
    |     ^^^ one type is more general than the other
    |
    = note: expected type `&'a ()`
               found type `&()`
+   = note: asdf
 
 error: aborting due to previous error
 

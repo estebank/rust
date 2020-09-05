@@ -1,12 +1,19 @@
-error[E0308]: mismatched types
+error[E0495]: cannot infer an appropriate lifetime due to conflicting requirements
   --> $DIR/issue-57611-trait-alias.rs:17:16
    |
 LL |     type Bar = impl Baz<Self, Self>;
-   |                ^^^^^^^^^^^^^^^^^^^^ one type is more general than the other
+   |                ^^^^^^^^^^^^^^^^^^^^
    |
-   = note: expected type `std::ops::FnOnce<(&X,)>`
-              found type `std::ops::FnOnce<(&X,)>`
+   = note: first, the lifetime cannot outlive any other region...
+   = note: ...but the lifetime must also be valid for any other region...
+note: ...so that the types are compatible
+  --> $DIR/issue-57611-trait-alias.rs:17:16
+   |
+LL |     type Bar = impl Baz<Self, Self>;
+   |                ^^^^^^^^^^^^^^^^^^^^
+   = note: expected `std::ops::FnOnce<(&X,)>`
+              found `std::ops::FnOnce<(&X,)>`
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0308`.
+For more information about this error, try `rustc --explain E0495`.

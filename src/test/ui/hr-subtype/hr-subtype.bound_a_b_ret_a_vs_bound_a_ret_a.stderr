@@ -1,17 +1,28 @@
-error[E0308]: mismatched types
+error[E0495]: cannot infer an appropriate lifetime for lifetime parameter 'a in generic type due to conflicting requirements
   --> $DIR/hr-subtype.rs:45:26
    |
 LL |               gimme::<$t1>(None::<$t2>);
-   |                            ^^^^^^^^^^^ one type is more general than the other
+   |                            ^^^^^^^^^^^
 ...
 LL | / check! { bound_a_b_ret_a_vs_bound_a_ret_a: (for<'a,'b> fn(&'a u32, &'b u32) -> &'a u32,
 LL | | for<'a>    fn(&'a u32, &'a u32) -> &'a u32) }
    | |_____________________________________________- in this macro invocation
    |
-   = note: expected enum `std::option::Option<for<'a, 'b> fn(&'a u32, &'b u32) -> &'a u32>`
-              found enum `std::option::Option<for<'a> fn(&'a u32, &'a u32) -> &'a u32>`
+   = note: first, the lifetime cannot outlive any other region...
+   = note: ...but the lifetime must also be valid for any other region...
+note: ...so that the expression is assignable
+  --> $DIR/hr-subtype.rs:45:26
+   |
+LL |               gimme::<$t1>(None::<$t2>);
+   |                            ^^^^^^^^^^^
+...
+LL | / check! { bound_a_b_ret_a_vs_bound_a_ret_a: (for<'a,'b> fn(&'a u32, &'b u32) -> &'a u32,
+LL | | for<'a>    fn(&'a u32, &'a u32) -> &'a u32) }
+   | |_____________________________________________- in this macro invocation
+   = note: expected `std::option::Option<for<'a, 'b> fn(&'a u32, &'b u32) -> &'a u32>`
+              found `std::option::Option<for<'a> fn(&'a u32, &'a u32) -> &'a u32>`
    = note: this error originates in a macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0308`.
+For more information about this error, try `rustc --explain E0495`.

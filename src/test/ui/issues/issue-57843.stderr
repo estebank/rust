@@ -1,12 +1,19 @@
-error[E0308]: mismatched types
+error[E0495]: cannot infer an appropriate lifetime due to conflicting requirements
   --> $DIR/issue-57843.rs:23:9
    |
 LL |     Foo(Box::new(|_| ()));
-   |         ^^^^^^^^^^^^^^^^ one type is more general than the other
+   |         ^^^^^^^^^^^^^^^^
    |
-   = note: expected type `std::ops::FnOnce<(&'a bool,)>`
-              found type `std::ops::FnOnce<(&bool,)>`
+   = note: first, the lifetime cannot outlive any other region...
+   = note: ...but the lifetime must also be valid for any other region...
+note: ...so that the types are compatible
+  --> $DIR/issue-57843.rs:23:9
+   |
+LL |     Foo(Box::new(|_| ()));
+   |         ^^^^^^^^^^^^^^^^
+   = note: expected `std::ops::FnOnce<(&'a bool,)>`
+              found `std::ops::FnOnce<(&bool,)>`
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0308`.
+For more information about this error, try `rustc --explain E0495`.

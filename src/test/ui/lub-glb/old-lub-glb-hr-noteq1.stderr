@@ -1,18 +1,27 @@
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/old-lub-glb-hr-noteq1.rs:11:14
+error[E0495]: cannot infer an appropriate lifetime for lifetime parameter 'a in generic type due to conflicting requirements
+  --> $DIR/old-lub-glb-hr-noteq1.rs:9:13
    |
 LL |       let z = match 22 {
-   |  _____________-
+   |  _____________^
 LL | |         0 => x,
-   | |              - this is found to be of type `for<'a, 'b> fn(&'a u8, &'b u8) -> &'a u8`
 LL | |         _ => y,
-   | |              ^ one type is more general than the other
 LL | |     };
-   | |_____- `match` arms have incompatible types
+   | |_____^
    |
-   = note: expected fn pointer `for<'a, 'b> fn(&'a u8, &'b u8) -> &'a u8`
-              found fn pointer `for<'a> fn(&'a u8, &'a u8) -> &'a u8`
+   = note: first, the lifetime cannot outlive any other region...
+   = note: ...but the lifetime must also be valid for any other region...
+note: ...so that the `match` arms have compatible types
+  --> $DIR/old-lub-glb-hr-noteq1.rs:9:13
+   |
+LL |       let z = match 22 {
+   |  _____________^
+LL | |         0 => x,
+LL | |         _ => y,
+LL | |     };
+   | |_____^
+   = note: expected `for<'a, 'b> fn(&'a u8, &'b u8) -> &'a u8`
+              found `for<'a> fn(&'a u8, &'a u8) -> &'a u8`
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0308`.
+For more information about this error, try `rustc --explain E0495`.

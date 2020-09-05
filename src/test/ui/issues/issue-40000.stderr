@@ -1,12 +1,19 @@
-error[E0308]: mismatched types
+error[E0495]: cannot infer an appropriate lifetime due to conflicting requirements
   --> $DIR/issue-40000.rs:6:9
    |
 LL |     foo(bar);
-   |         ^^^ one type is more general than the other
+   |         ^^^
    |
-   = note: expected trait object `dyn for<'r> std::ops::Fn(&'r i32)`
-              found trait object `dyn std::ops::Fn(&i32)`
+   = note: first, the lifetime cannot outlive any other region...
+   = note: ...but the lifetime must also be valid for any other region...
+note: ...so that the types are compatible
+  --> $DIR/issue-40000.rs:6:9
+   |
+LL |     foo(bar);
+   |         ^^^
+   = note: expected `dyn for<'r> std::ops::Fn(&'r i32)`
+              found `dyn std::ops::Fn(&i32)`
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0308`.
+For more information about this error, try `rustc --explain E0495`.

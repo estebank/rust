@@ -1,12 +1,19 @@
-error[E0308]: mismatched types
+error[E0495]: cannot infer an appropriate lifetime due to conflicting requirements
   --> $DIR/rfc1623.rs:24:8
    |
 LL |     f: &id,
-   |        ^^^ one type is more general than the other
+   |        ^^^
    |
-   = note: expected type `std::ops::FnOnce<(&'a Foo<'b>,)>`
-              found type `std::ops::FnOnce<(&Foo<'_>,)>`
+   = note: first, the lifetime cannot outlive any other region...
+   = note: ...but the lifetime must also be valid for any other region...
+note: ...so that the types are compatible
+  --> $DIR/rfc1623.rs:24:8
+   |
+LL |     f: &id,
+   |        ^^^
+   = note: expected `std::ops::FnOnce<(&'a Foo<'b>,)>`
+              found `std::ops::FnOnce<(&Foo<'_>,)>`
 
 error: aborting due to previous error
 
-For more information about this error, try `rustc --explain E0308`.
+For more information about this error, try `rustc --explain E0495`.

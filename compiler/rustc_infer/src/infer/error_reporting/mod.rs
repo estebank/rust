@@ -354,7 +354,11 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                         sup_origin,
                         sup_r,
                     ) => {
-                        if sub_r.is_placeholder() {
+                        if sub_r.is_placeholder() && sup_r.is_placeholder() {
+                            self.report_placeholder_failure(sub_origin, sub_r, sup_r)
+                                .note("asdf")
+                                .emit();
+                        } else if sub_r.is_placeholder() {
                             self.report_placeholder_failure(sub_origin, sub_r, sup_r).emit();
                         } else if sup_r.is_placeholder() {
                             self.report_placeholder_failure(sup_origin, sub_r, sup_r).emit();
@@ -1696,6 +1700,25 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
             }
         };
         self.note_type_err(&mut diag, &trace.cause, None, Some(trace.values), terr);
+        match trace.cause.code {
+            ObligationCauseCode::BindingObligation(item_def_id, span) => {
+                let item_name = self.tcx.def_path_str(item_def_id);
+                let msg = format!("required by this bound in `{}`", item_name);
+                if let Some(ident) = self.tcx.opt_item_name(item_def_id) {
+                    let sm = self.tcx.sess.source_map();
+                    let same_line =
+                        match (sm.lookup_line(ident.span.hi()), sm.lookup_line(span.lo())) {
+                            (Ok(l), Ok(r)) => l.line == r.line,
+                            _ => true,
+                        };
+                    if !ident.span.overlaps(span) && !same_line {
+                        diag.span_label(ident.span, "required by a bound in this");
+                    }
+                }
+                diag.span_label(span, &msg);
+            }
+            _ => {}
+        }
         diag
     }
 
