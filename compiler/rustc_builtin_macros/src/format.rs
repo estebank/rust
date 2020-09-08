@@ -10,7 +10,7 @@ use rustc_errors::{pluralize, Applicability, DiagnosticBuilder};
 use rustc_expand::base::{self, *};
 use rustc_parse_format as parse;
 use rustc_span::symbol::{sym, Ident, Symbol};
-use rustc_span::{MultiSpan, Span};
+use rustc_span::{MultiSpan, Span, ExpnKind, DesugaringKind};
 
 use std::borrow::Cow;
 use std::collections::hash_map::Entry;
@@ -558,6 +558,9 @@ impl<'a, 'b> Context<'a, 'b> {
                             } else {
                                 self.fmtsp
                             };
+                            let mut expn = sp.ctxt().outer_expn().expn_data();
+                            expn.kind = ExpnKind::Desugaring(DesugaringKind::FormatPiece);
+                            let sp = sp.fresh_expansion(expn);
                             let mut err = self.ecx.struct_span_err(sp, &msg[..]);
 
                             if capture_feature_enabled && !self.is_literal {

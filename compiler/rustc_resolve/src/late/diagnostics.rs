@@ -18,7 +18,7 @@ use rustc_hir::PrimTy;
 use rustc_session::config::nightly_options;
 use rustc_span::hygiene::MacroKind;
 use rustc_span::symbol::{kw, sym, Ident, Symbol};
-use rustc_span::{BytePos, Span, DUMMY_SP};
+use rustc_span::{BytePos, Span, DUMMY_SP, ExpnKind, DesugaringKind};
 
 use tracing::debug;
 
@@ -175,6 +175,10 @@ impl<'a> LateResolutionVisitor<'a, '_, '_> {
 
         let code = source.error_code(res.is_some());
         let mut err = self.r.session.struct_span_err_with_code(base_span, &base_msg, code);
+
+        if let ExpnKind::Desugaring(DesugaringKind::FormatPiece) = base_span.ctxt().outer_expn().expn_data().kind {
+            err.note(&format!("looking for {} `{}` as an implicit local binding in this formatting string because `#![feature(format_args_capture)]` is enabled", expected, item_str));
+        }
 
         match (source, self.diagnostic_metadata.in_if_condition) {
             (PathSource::Expr(_), Some(Expr { span, kind: ExprKind::Assign(..), .. })) => {
