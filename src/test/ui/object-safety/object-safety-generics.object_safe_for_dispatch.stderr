@@ -12,6 +12,11 @@ LL |     t
    = help: consider moving `bar` to another trait
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Bar>` for `&T`
    = note: required by cast to type `&dyn Bar`
+note: &T as &dyn Bar
+  --> $DIR/object-safety-generics.rs:20:5
+   |
+LL |     t
+   |     ^
 
 error[E0038]: the trait `Bar` cannot be made into an object
   --> $DIR/object-safety-generics.rs:26:5
@@ -27,6 +32,11 @@ LL |     t as &dyn Bar
    = help: consider moving `bar` to another trait
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Bar>` for `&T`
    = note: required by cast to type `&dyn Bar`
+note: &T as &dyn Bar
+  --> $DIR/object-safety-generics.rs:26:5
+   |
+LL |     t as &dyn Bar
+   |     ^
 
 error: aborting due to 2 previous errors
 

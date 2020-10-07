@@ -11,6 +11,11 @@ LL |     let _: &dyn Tr = &St;
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Tr>` for `&St`
    = note: required by cast to type `&dyn Tr`
+note: &St as &dyn Tr
+  --> $DIR/trait-object-safety.rs:15:22
+   |
+LL |     let _: &dyn Tr = &St;
+   |                      ^^^
 help: consider turning `foo` into a method by giving it a `&self` argument or constraining it so it does not apply to trait objects
    |
 LL |     fn foo() where Self: Sized;

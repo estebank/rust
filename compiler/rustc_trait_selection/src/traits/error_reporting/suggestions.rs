@@ -660,6 +660,7 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
         let param_env = obligation.param_env;
         let trait_ref = trait_ref.skip_binder();
 
+        debug!("suggest_add_reference_to_arg {:?} {:?} {:?} {:?} {:?}", obligation, obligation.cause, trait_ref, points_at_arg, has_custom_message);
         if let ObligationCauseCode::ImplDerivedObligation(obligation) = &obligation.cause.code {
             // Try to apply the original trait binding obligation by borrowing.
             let self_ty = trait_ref.self_ty();
@@ -1695,6 +1696,7 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
         T: fmt::Display,
     {
         let tcx = self.tcx;
+        debug!("note_obligation_cause_code {} {:?}", predicate, cause_code);
         match *cause_code {
             ObligationCauseCode::ExprAssignable
             | ObligationCauseCode::MatchExpressionArm { .. }
@@ -1759,14 +1761,47 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                     err.note(&msg);
                 }
             }
-            ObligationCauseCode::ObjectCastObligation(object_ty) => {
+            ObligationCauseCode::ObjectCastObligation { target, ref derived_from} => {
                 err.note(&format!(
                     "required for the cast to the object type `{}`",
-                    self.ty_to_string(object_ty)
+                    self.ty_to_string(target),
                 ));
+                let parent_predicate = derived_from.parent_trait_ref.without_const().to_predicate(tcx);
+                if !self.is_recursive_obligation(obligated_types, &derived_from.parent_code) {
+                    // #74711: avoid a stack overflow
+                    ensure_sufficient_stack(|| {
+                        self.note_obligation_cause_code(
+                            err,
+                            &parent_predicate,
+                            &derived_from.parent_code,
+                            obligated_types,
+                        )
+                    });
+                }
             }
-            ObligationCauseCode::Coercion { source: _, target } => {
+            ObligationCauseCode::Coercion { source, target, span } => {
                 err.note(&format!("required by cast to type `{}`", self.ty_to_string(target)));
+                err.span_note(span, &format!("{:?} as {:?}", source, target));
+            // let mut selcx = SelectionContext::new(self);
+
+            // let cleaned_pred =
+            //     pred.fold_with(&mut ParamToVarFolder { infcx: self, var_map: Default::default() });
+
+            // let cleaned_pred = super::project::normalize(
+            //     &mut selcx,
+            //     param_env,
+            //     ObligationCause::dummy(),
+            //     &cleaned_pred,
+            // )
+            // .value;
+
+            // let obligation = Obligation::new(
+            //     ObligationCause::dummy(),
+            //     param_env,
+            //     cleaned_pred.without_const().to_predicate(selcx.tcx()),
+            // );
+
+            // self.predicate_may_hold(&obligation)
             }
             ObligationCauseCode::RepeatVec(suggest_const_in_array_repeat_expressions) => {
                 err.note(

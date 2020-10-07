@@ -7,6 +7,13 @@ LL |     let u: &dyn Foo = t;
    |                       ^ doesn't have a size known at compile-time
    |
    = note: required for the cast to the object type `dyn Foo`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Foo>` for `&T`
+   = note: required by cast to type `&dyn Foo`
+note: &T as &dyn Foo
+  --> $DIR/dst-object-from-unsized-type.rs:8:23
+   |
+LL |     let u: &dyn Foo = t;
+   |                       ^
 
 error[E0277]: the size for values of type `T` cannot be known at compilation time
   --> $DIR/dst-object-from-unsized-type.rs:13:23
@@ -17,6 +24,13 @@ LL |     let v: &dyn Foo = t as &dyn Foo;
    |                       ^ doesn't have a size known at compile-time
    |
    = note: required for the cast to the object type `dyn Foo`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Foo>` for `&T`
+   = note: required by cast to type `&dyn Foo`
+note: &T as &dyn Foo
+  --> $DIR/dst-object-from-unsized-type.rs:13:23
+   |
+LL |     let v: &dyn Foo = t as &dyn Foo;
+   |                       ^
 
 error[E0277]: the size for values of type `str` cannot be known at compilation time
   --> $DIR/dst-object-from-unsized-type.rs:18:28
@@ -26,6 +40,13 @@ LL |     let _: &[&dyn Foo] = &["hi"];
    |
    = help: the trait `Sized` is not implemented for `str`
    = note: required for the cast to the object type `dyn Foo`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Foo>` for `&str`
+   = note: required by cast to type `&dyn Foo`
+note: &'static str as &dyn Foo
+  --> $DIR/dst-object-from-unsized-type.rs:18:28
+   |
+LL |     let _: &[&dyn Foo] = &["hi"];
+   |                            ^^^^
 
 error[E0277]: the size for values of type `[u8]` cannot be known at compilation time
   --> $DIR/dst-object-from-unsized-type.rs:23:23
@@ -35,6 +56,13 @@ LL |     let _: &dyn Foo = x as &dyn Foo;
    |
    = help: the trait `Sized` is not implemented for `[u8]`
    = note: required for the cast to the object type `dyn Foo`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Foo>` for `&[u8]`
+   = note: required by cast to type `&dyn Foo`
+note: &[u8] as &dyn Foo
+  --> $DIR/dst-object-from-unsized-type.rs:23:23
+   |
+LL |     let _: &dyn Foo = x as &dyn Foo;
+   |                       ^
 
 error: aborting due to 4 previous errors
 

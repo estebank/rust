@@ -587,8 +587,12 @@ impl SyntaxContext {
     pub fn hygienic_eq(self, other: SyntaxContext, expn_id: ExpnId) -> bool {
         HygieneData::with(|data| {
             let mut self_normalized = data.normalize_to_macros_2_0(self);
+            info!("hygienic_eq 1 {:?}", self_normalized);
             data.adjust(&mut self_normalized, expn_id);
-            self_normalized == data.normalize_to_macros_2_0(other)
+            info!("hygienic_eq 2 {:?}", self_normalized);
+            let x = data.normalize_to_macros_2_0(other);
+            info!("hygienic_eq 3 {:?}", x);
+            self_normalized == x
         })
     }
 

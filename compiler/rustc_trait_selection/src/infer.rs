@@ -175,6 +175,7 @@ impl<'tcx> OutlivesEnvironmentExt<'tcx> for OutlivesEnvironment<'tcx> {
         for &ty in fn_sig_tys {
             let ty = infcx.resolve_vars_if_possible(&ty);
             debug!("add_implied_bounds: ty = {}", ty);
+
             let implied_bounds = infcx.implied_outlives_bounds(self.param_env, body_id, ty, span);
             self.add_outlives_bounds(Some(infcx), implied_bounds)
         }

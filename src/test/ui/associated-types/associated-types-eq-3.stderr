@@ -29,6 +29,13 @@ LL |     baz(&a);
    |         ^^ expected struct `Bar`, found `usize`
    |
    = note: required for the cast to the object type `dyn Foo<A = Bar>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Foo<A = Bar>>` for `&isize`
+   = note: required by cast to type `&dyn Foo<A = Bar>`
+note: &isize as &dyn Foo<A = Bar>
+  --> $DIR/associated-types-eq-3.rs:41:9
+   |
+LL |     baz(&a);
+   |         ^^
 
 error: aborting due to 3 previous errors
 

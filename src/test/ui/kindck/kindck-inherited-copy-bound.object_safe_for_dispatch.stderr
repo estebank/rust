@@ -22,6 +22,11 @@ LL |     let z = &x as &dyn Foo;
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Foo>` for `&Box<i32>`
    = note: required by cast to type `&dyn Foo`
+note: &std::boxed::Box<i32> as &dyn Foo
+  --> $DIR/kindck-inherited-copy-bound.rs:28:13
+   |
+LL |     let z = &x as &dyn Foo;
+   |             ^^
 
 error: aborting due to 2 previous errors
 

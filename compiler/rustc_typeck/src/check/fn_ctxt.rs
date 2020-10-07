@@ -1023,6 +1023,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         tuple_arguments: TupleArgumentsFlag,
         def_span: Option<Span>,
     ) {
+        debug!("check_argument_types {:?} {:?} {:?} {:?} {:?}", sp, expr, fn_inputs, expected_arg_tys, args);
         let tcx = self.tcx;
         // Grab the argument types, supplying fresh type variables
         // if the wrong number of arguments were supplied
@@ -1036,11 +1037,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
         let expected_arg_count = fn_inputs.len();
 
-        let param_count_error = |expected_count: usize,
-                                 arg_count: usize,
-                                 error_code: &str,
-                                 c_variadic: bool,
-                                 sugg_unit: bool| {
+        let param_count_error = |expected_count: usize, arg_count: usize, error_code: &str, c_variadic: bool, sugg_unit: bool| {
             let (span, start_span, args) = match &expr.kind {
                 hir::ExprKind::Call(hir::Expr { span, .. }, args) => (*span, *span, &args[..]),
                 hir::ExprKind::MethodCall(path_segment, span, args, _) => (
@@ -1202,6 +1199,10 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             // the call. This helps coercions.
             if check_closures {
                 self.select_obligations_where_possible(false, |errors| {
+                    debug!("select_obligations_where_possible errors {:?}", errors);
+                    for error in errors.iter() {
+                        debug!("select_obligations_where_possible error {:?}", error.obligation.cause);
+                    }
                     self.point_at_type_arg_instead_of_call_if_possible(errors, expr);
                     self.point_at_arg_instead_of_call_if_possible(
                         errors,
@@ -1485,13 +1486,19 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         self.save_and_restore_in_snapshot_flag(|_| {
                             let mut fulfill = TraitEngine::new(self.tcx);
                             for obligation in ok.obligations {
+                                debug!("expected_inputs_for_expected_output obligation {:?}", obligation);
                                 fulfill.register_predicate_obligation(self, obligation);
                             }
-                            fulfill.select_where_possible(self)
+                            let x = fulfill.select_where_possible(self);
+                            debug!("expected_inputs_for_expected_output {:?}", x);
+                            x
                         })
                         .map_err(|_| ())?;
                     }
-                    Err(_) => return Err(()),
+                    Err(e) => {
+                        debug!("expected_inputs_for_expected_output error {:?}", e);
+                        return Err(());
+                    }
                 }
 
                 // Record all the argument types, with the substitutions
@@ -2058,7 +2065,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     fn suggest_fn_call(
         &self,
         err: &mut DiagnosticBuilder<'_>,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         expected: Ty<'tcx>,
         found: Ty<'tcx>,
     ) -> bool {
@@ -2071,7 +2078,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
         let sig = self.replace_bound_vars_with_fresh_vars(expr.span, infer::FnCall, &sig).0;
         let sig = self.normalize_associated_types_in(expr.span, &sig);
-        if self.can_coerce(sig.output(), expected) {
+        if self.can_coerce(expr, sig.output(), expected) {
             let (mut sugg_call, applicability) = if sig.inputs().is_empty() {
                 (String::new(), Applicability::MachineApplicable)
             } else {
@@ -2188,7 +2195,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub fn suggest_deref_ref_or_into(
         &self,
         err: &mut DiagnosticBuilder<'_>,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         expected: Ty<'tcx>,
         found: Ty<'tcx>,
         expected_ty_expr: Option<&'tcx hir::Expr<'tcx>>,
@@ -2252,7 +2259,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(super) fn suggest_boxing_when_appropriate(
         &self,
         err: &mut DiagnosticBuilder<'_>,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         expected: Ty<'tcx>,
         found: Ty<'tcx>,
     ) {
@@ -2265,7 +2272,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         }
         let boxed_found = self.tcx.mk_box(found);
         if let (true, Ok(snippet)) = (
-            self.can_coerce(boxed_found, expected),
+            self.can_coerce(expr, boxed_found, expected),
             self.sess().source_map().span_to_snippet(expr.span),
         ) {
             err.span_suggestion(
@@ -2332,7 +2339,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub(super) fn suggest_calling_boxed_future_when_appropriate(
         &self,
         err: &mut DiagnosticBuilder<'_>,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         expected: Ty<'tcx>,
         found: Ty<'tcx>,
     ) -> bool {
@@ -2352,7 +2359,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         let boxed_found = self.tcx.mk_box(found);
         let new_found = self.tcx.mk_lang_item(boxed_found, LangItem::Pin).unwrap();
         if let (true, Ok(snippet)) = (
-            self.can_coerce(new_found, expected),
+            self.can_coerce(expr, new_found, expected),
             self.sess().source_map().span_to_snippet(expr.span),
         ) {
             match found.kind() {

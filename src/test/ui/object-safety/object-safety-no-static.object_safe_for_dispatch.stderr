@@ -11,6 +11,11 @@ LL |     let b: Box<dyn Foo> = Box::new(Bar);
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<Box<dyn Foo>>` for `Box<Bar>`
    = note: required by cast to type `Box<dyn Foo>`
+note: std::boxed::Box<Bar> as std::boxed::Box<dyn Foo>
+  --> $DIR/object-safety-no-static.rs:22:27
+   |
+LL |     let b: Box<dyn Foo> = Box::new(Bar);
+   |                           ^^^^^^^^^^^^^
 help: consider turning `foo` into a method by giving it a `&self` argument or constraining it so it does not apply to trait objects
    |
 LL |     fn foo() where Self: Sized {}

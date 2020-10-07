@@ -25,6 +25,11 @@ LL |         Some(()) => &S,
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Trait>` for `&S`
    = note: required by cast to type `&dyn Trait`
+note: &S as &dyn Trait
+  --> $DIR/wf-unsafe-trait-obj-match.rs:26:21
+   |
+LL |         Some(()) => &S,
+   |                     ^^
 
 error[E0038]: the trait `Trait` cannot be made into an object
   --> $DIR/wf-unsafe-trait-obj-match.rs:25:25
@@ -39,6 +44,11 @@ LL |     let t: &dyn Trait = match opt() {
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Trait>` for `&R`
    = note: required by cast to type `&dyn Trait`
+note: &R as &dyn Trait
+  --> $DIR/wf-unsafe-trait-obj-match.rs:27:17
+   |
+LL |         None => &R,
+   |                 ^^
 
 error: aborting due to 3 previous errors
 

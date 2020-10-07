@@ -7,6 +7,13 @@ LL |     let s: Box<dyn Trait<isize>> = Box::new(Struct { person: "Fred" });
    = help: the following implementations were found:
              <Struct as Trait<&'static str>>
    = note: required for the cast to the object type `dyn Trait<isize>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<Box<dyn Trait<isize>>>` for `Box<Struct>`
+   = note: required by cast to type `Box<dyn Trait<isize>>`
+note: std::boxed::Box<Struct> as std::boxed::Box<dyn Trait<isize>>
+  --> $DIR/trait-coercion-generic-bad.rs:16:36
+   |
+LL |     let s: Box<dyn Trait<isize>> = Box::new(Struct { person: "Fred" });
+   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 error: aborting due to previous error
 

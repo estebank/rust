@@ -11,6 +11,11 @@ LL |     t
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Bar>` for `&T`
    = note: required by cast to type `&dyn Bar`
+note: &T as &dyn Bar
+  --> $DIR/object-safety-sized.rs:14:5
+   |
+LL |     t
+   |     ^
 
 error: aborting due to previous error
 

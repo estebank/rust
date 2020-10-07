@@ -124,7 +124,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 self.ret_coercion_impl_trait.map(|ty| (self.body_id.owner, ty)),
             ) {
                 (Expectation::ExpectHasType(expected), Some((id, ty)))
-                    if self.in_tail_expr && self.can_coerce(arm_ty, expected) =>
+                    if self.in_tail_expr && self.can_coerce(arm.body, arm_ty, expected) =>
                 {
                     let impl_trait_ret_ty = self.infcx.instantiate_opaque_types(
                         id,

@@ -195,8 +195,12 @@ impl<'tcx> Ancestors<'tcx> {
         let trait_def_id = self.trait_def_id;
         let mut finalizing_node = None;
 
+        debug!("leaf_def {:?} {:?} {:?}", self.specialization_graph.has_errored, trait_item_name, trait_item_kind);
         self.find_map(|node| {
+            debug!("leaf_def node {:?}", node);
+            debug!("{:?}", tcx.associated_items(node.def_id()).in_definition_order().collect::<Vec<_>>());
             if let Some(item) = node.item(tcx, trait_item_name, trait_item_kind, trait_def_id) {
+                debug!("leaf_def item {:?}", item);
                 if finalizing_node.is_none() {
                     let is_specializable = item.defaultness.is_default()
                         || tcx.impl_defaultness(node.def_id()).is_default();

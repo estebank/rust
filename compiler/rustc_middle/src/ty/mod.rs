@@ -3030,6 +3030,7 @@ impl<'tcx> TyCtxt<'tcx> {
         // We could use `Ident::eq` here, but we deliberately don't. The name
         // comparison fails frequently, and we want to avoid the expensive
         // `normalize_to_macros_2_0()` calls required for the span comparison whenever possible.
+        info!("hygienic_eq def {:?} {:?} use {:?} {:?} - {:?}", def_name, def_name.span.ctxt(), use_name, use_name.span.ctxt(), self.expansion_that_defined(def_parent_def_id));
         use_name.name == def_name.name
             && use_name
                 .span

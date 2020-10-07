@@ -5,6 +5,13 @@ LL |     let _: &dyn I32Iterator<Item = u32> = &vec![42].into_iter();
    |                                           ^^^^^^^^^^^^^^^^^^^^^ expected `i32`, found `u32`
    |
    = note: required for the cast to the object type `dyn Iterator<Item = u32, Item = i32>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Iterator<Item = u32, Item = i32>>` for `&std::vec::IntoIter<u32>`
+   = note: required by cast to type `&dyn Iterator<Item = u32, Item = i32>`
+note: &std::vec::IntoIter<{integer}> as &dyn std::iter::Iterator<Item = u32, Item = i32>
+  --> $DIR/associated-types-overridden-binding-2.rs:6:43
+   |
+LL |     let _: &dyn I32Iterator<Item = u32> = &vec![42].into_iter();
+   |                                           ^^^^^^^^^^^^^^^^^^^^^
 
 error: aborting due to previous error
 

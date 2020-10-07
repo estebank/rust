@@ -14,7 +14,7 @@ use rustc_middle::ty::subst::{GenericArg, GenericArgKind, Subst, SubstsRef};
 use rustc_middle::ty::{self, Ty};
 use rustc_middle::ty::{ToPolyTraitRef, ToPredicate, WithConstness};
 use rustc_span::def_id::DefId;
-
+use std::rc::Rc;
 use crate::traits::project::{self, normalize_with_depth};
 use crate::traits::select::TraitObligationExt;
 use crate::traits::util;
@@ -22,6 +22,7 @@ use crate::traits::util::{closure_trait_ref_and_return_type, predicate_for_trait
 use crate::traits::ImplSource;
 use crate::traits::Normalized;
 use crate::traits::OutputTypeParameterMismatch;
+use crate::traits::DerivedObligationCause;
 use crate::traits::Selection;
 use crate::traits::TraitNotObjectSafe;
 use crate::traits::{BuiltinDerivedObligation, ImplDerivedObligation};
@@ -587,7 +588,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
         let target = obligation.predicate.skip_binder().trait_ref.substs.type_at(1);
         let target = self.infcx.shallow_resolve(target);
 
-        debug!("confirm_builtin_unsize_candidate(source={:?}, target={:?})", source, target);
+        debug!("confirm_builtin_unsize_candidate(source={:?}, target={:?}, obligation={:?} {:?})", source, target, obligation, obligation.cause);
 
         let mut nested = vec![];
         match (source.kind(), target.kind()) {
@@ -614,11 +615,16 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                     .map_err(|_| Unimplemented)?;
                 nested.extend(obligations);
 
+                let derived_cause = DerivedObligationCause {
+                    parent_trait_ref: obligation.predicate.to_poly_trait_ref(),
+                    parent_code: Rc::new(obligation.cause.code.clone()),
+                };
                 // Register one obligation for 'a: 'b.
                 let cause = ObligationCause::new(
                     obligation.cause.span,
                     obligation.cause.body_id,
-                    ObjectCastObligation(target),
+                    ObjectCastObligation { target, derived_from: Box::new(derived_cause) },
+                    // Add obligation as a parent obligation. We won't have the `&Box<T>` but at least we'll have the `Box<T>`
                 );
                 let outlives = ty::OutlivesPredicate(r_a, r_b);
                 nested.push(Obligation::with_depth(
@@ -635,11 +641,14 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                 if let Some(did) = object_dids.find(|did| !tcx.is_object_safe(*did)) {
                     return Err(TraitNotObjectSafe(did));
                 }
-
+                let derived_cause = DerivedObligationCause {
+                    parent_trait_ref: obligation.predicate.to_poly_trait_ref(),
+                    parent_code: Rc::new(obligation.cause.code.clone()),
+                };
                 let cause = ObligationCause::new(
                     obligation.cause.span,
                     obligation.cause.body_id,
-                    ObjectCastObligation(target),
+                    ObjectCastObligation { target, derived_from: Box::new(derived_cause) },
                 );
 
                 let predicate_to_obligation = |predicate| {

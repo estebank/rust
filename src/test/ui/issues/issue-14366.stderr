@@ -6,6 +6,13 @@ LL |     let _x = "test" as &dyn (::std::any::Any);
    |
    = help: the trait `Sized` is not implemented for `str`
    = note: required for the cast to the object type `dyn Any`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Any>` for `&str`
+   = note: required by cast to type `&(dyn Any + 'static)`
+note: &'static str as &(dyn std::any::Any + 'static)
+  --> $DIR/issue-14366.rs:2:14
+   |
+LL |     let _x = "test" as &dyn (::std::any::Any);
+   |              ^^^^^^
 
 error: aborting due to previous error
 

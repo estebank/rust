@@ -5,6 +5,13 @@ LL | fn wrong_kind(){}
    | ^^^^^^^^^^^^^^^^^ the trait `Testable` is not implemented for `TestDescAndFn`
    |
    = note: required for the cast to the object type `dyn Testable`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Testable>` for `&TestDescAndFn`
+   = note: required by cast to type `&dyn Testable`
+note: &test::TestDescAndFn as &dyn example_runner::Testable
+  --> $DIR/mismatch.rs:9:1
+   |
+LL | fn wrong_kind(){}
+   | ^^^^^^^^^^^^^^^^^
    = note: this error originates in an attribute macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to previous error

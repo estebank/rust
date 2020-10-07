@@ -21,7 +21,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub fn emit_coerce_suggestions(
         &self,
         err: &mut DiagnosticBuilder<'_>,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         expr_ty: Ty<'tcx>,
         expected: Ty<'tcx>,
         expected_ty_expr: Option<&'tcx hir::Expr<'tcx>>,
@@ -103,7 +103,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
     pub fn demand_coerce(
         &self,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         checked_ty: Ty<'tcx>,
         expected: Ty<'tcx>,
         expected_ty_expr: Option<&'tcx hir::Expr<'tcx>>,
@@ -124,7 +124,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     // diverges flag is currently "always".
     pub fn demand_coerce_diag(
         &self,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         checked_ty: Ty<'tcx>,
         expected: Ty<'tcx>,
         expected_ty_expr: Option<&'tcx hir::Expr<'tcx>>,
@@ -182,7 +182,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     fn suggest_compatible_variants(
         &self,
         err: &mut DiagnosticBuilder<'_>,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         expected: Ty<'tcx>,
         expr_ty: Ty<'tcx>,
     ) {
@@ -198,7 +198,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 .filter_map(|variant| {
                     let sole_field = &variant.fields[0];
                     let sole_field_ty = sole_field.ty(self.tcx, substs);
-                    if self.can_coerce(expr_ty, sole_field_ty) {
+                    if self.can_coerce(expr, expr_ty, sole_field_ty) {
                         let variant_path = self.tcx.def_path_str(variant.def_id);
                         // FIXME #56861: DRYer prelude filtering
                         Some(variant_path.trim_start_matches("std::prelude::v1::").to_string())
@@ -388,7 +388,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// `&mut`!".
     pub fn check_ref(
         &self,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         checked_ty: Ty<'tcx>,
         expected: Ty<'tcx>,
     ) -> Option<(Span, &'static str, String, Applicability)> {
@@ -459,7 +459,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         self.tcx.mk_imm_ref(self.tcx.mk_region(ty::ReStatic), checked_ty)
                     }
                 };
-                if self.can_coerce(ref_ty, expected) {
+                if self.can_coerce(expr, ref_ty, expected) {
                     let mut sugg_sp = sp;
                     if let hir::ExprKind::MethodCall(ref segment, sp, ref args, _) = expr.kind {
                         let clone_trait = self.tcx.require_lang_item(LangItem::Clone, Some(sp));
@@ -674,7 +674,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     pub fn check_for_cast(
         &self,
         err: &mut DiagnosticBuilder<'_>,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         checked_ty: Ty<'tcx>,
         expected_ty: Ty<'tcx>,
         expected_ty_expr: Option<&'tcx hir::Expr<'tcx>>,

@@ -49,6 +49,7 @@ pub fn check_legal_trait_for_method_call(
     }
 }
 
+#[derive(Debug)]
 enum CallStep<'tcx> {
     Builtin(Ty<'tcx>),
     DeferredClosure(ty::FnSig<'tcx>),
@@ -72,7 +73,9 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         while result.is_none() && autoderef.next().is_some() {
             result = self.try_overloaded_call_step(call_expr, callee_expr, arg_exprs, &autoderef);
         }
-        self.register_predicates(autoderef.into_obligations());
+        let x = autoderef.into_obligations();
+        debug!("check_call {:?} {:?}", result, x);
+        self.register_predicates(x);
 
         let output = match result {
             None => {
@@ -93,8 +96,10 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             }
         };
 
+        debug!("before wf");
         // we must check that return type of called functions is WF:
         self.register_wf_obligation(output.into(), call_expr.span, traits::MiscObligation);
+        debug!("after wf");
 
         output
     }
@@ -419,6 +424,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             fn_sig.output(),
             fn_sig.inputs(),
         );
+        debug!("confirm_builtin_call args={:?}", expected_arg_tys);
         self.check_argument_types(
             call_expr.span,
             call_expr,
@@ -429,6 +435,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             TupleArgumentsFlag::DontTupleArguments,
             def_span,
         );
+        debug!("confirm_builtin_call check_argument_types");
 
         fn_sig.output()
     }

@@ -8,6 +8,13 @@ LL |     let a = A {v: box B{v: None} as Box<dyn Foo + Send>};
    = note: required because it appears within the type `Option<Rc<RefCell<A>>>`
    = note: required because it appears within the type `B`
    = note: required for the cast to the object type `dyn Foo + Send`
+   = note: required because of the requirements on the impl of `CoerceUnsized<Box<dyn Foo + Send>>` for `Box<B>`
+   = note: required by cast to type `Box<dyn Foo + Send>`
+note: std::boxed::Box<B> as std::boxed::Box<dyn Foo + std::marker::Send>
+  --> $DIR/issue-7013.rs:26:19
+   |
+LL |     let a = A {v: box B{v: None} as Box<dyn Foo + Send>};
+   |                   ^^^^^^^^^^^^^^
 
 error: aborting due to previous error
 

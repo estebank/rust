@@ -7,6 +7,13 @@ LL |         &mut *(ptr as *mut dyn Fn())
    = help: the trait `Fn<()>` is not implemented for `()`
    = note: wrap the `()` in a closure with no arguments: `|| { /* code */ }`
    = note: required for the cast to the object type `dyn Fn()`
+   = note: required because of the requirements on the impl of `CoerceUnsized<*mut dyn Fn()>` for `*mut ()`
+   = note: required by cast to type `*mut dyn Fn()`
+note: *mut () as *mut dyn std::ops::Fn()
+  --> $DIR/issue-22034.rs:8:16
+   |
+LL |         &mut *(ptr as *mut dyn Fn())
+   |                ^^^
 
 error: aborting due to previous error
 

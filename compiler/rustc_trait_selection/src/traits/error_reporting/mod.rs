@@ -1215,7 +1215,7 @@ impl<'a, 'tcx> InferCtxtPrivExt<'tcx> for InferCtxt<'a, 'tcx> {
                 let is_normalized_ty_expected = match &obligation.cause.code {
                     ObligationCauseCode::ItemObligation(_)
                     | ObligationCauseCode::BindingObligation(_, _)
-                    | ObligationCauseCode::ObjectCastObligation(_) => false,
+                    | ObligationCauseCode::ObjectCastObligation { .. } => false,
                     _ => true,
                 };
 

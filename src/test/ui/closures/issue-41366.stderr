@@ -8,6 +8,13 @@ LL |     (&|_| ()) as &dyn for<'x> Fn(<u32 as T<'x>>::V);
    |     expected signature of `fn(<u32 as T<'x>>::V) -> _`
    |
    = note: required for the cast to the object type `dyn for<'x> Fn(<u32 as T<'x>>::V)`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn for<'x> Fn(<u32 as T<'x>>::V)>` for `&[closure@$DIR/issue-41366.rs:10:7: 10:13]`
+   = note: required by cast to type `&dyn for<'x> Fn(<u32 as T<'x>>::V)`
+note: &[closure@$DIR/issue-41366.rs:10:7: 10:13] as &dyn for<'x> std::ops::Fn(<u32 as T<'x>>::V)
+  --> $DIR/issue-41366.rs:10:5
+   |
+LL |     (&|_| ()) as &dyn for<'x> Fn(<u32 as T<'x>>::V);
+   |     ^^^^^^^^^
 
 error: aborting due to previous error
 

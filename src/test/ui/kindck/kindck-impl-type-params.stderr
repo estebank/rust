@@ -6,6 +6,13 @@ LL |     let a = &t as &dyn Gettable<T>;
    |
    = note: required because of the requirements on the impl of `Gettable<T>` for `S<T>`
    = note: required for the cast to the object type `dyn Gettable<T>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Gettable<T>>` for `&S<T>`
+   = note: required by cast to type `&dyn Gettable<T>`
+note: &S<T> as &dyn Gettable<T>
+  --> $DIR/kindck-impl-type-params.rs:18:13
+   |
+LL |     let a = &t as &dyn Gettable<T>;
+   |             ^^
 help: consider restricting type parameter `T`
    |
 LL | fn f<T: Send>(val: T) {
@@ -19,6 +26,13 @@ LL |     let a = &t as &dyn Gettable<T>;
    |
    = note: required because of the requirements on the impl of `Gettable<T>` for `S<T>`
    = note: required for the cast to the object type `dyn Gettable<T>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Gettable<T>>` for `&S<T>`
+   = note: required by cast to type `&dyn Gettable<T>`
+note: &S<T> as &dyn Gettable<T>
+  --> $DIR/kindck-impl-type-params.rs:18:13
+   |
+LL |     let a = &t as &dyn Gettable<T>;
+   |             ^^
 help: consider restricting type parameter `T`
    |
 LL | fn f<T: Copy>(val: T) {
@@ -32,6 +46,13 @@ LL |     let a: &dyn Gettable<T> = &t;
    |
    = note: required because of the requirements on the impl of `Gettable<T>` for `S<T>`
    = note: required for the cast to the object type `dyn Gettable<T>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Gettable<T>>` for `&S<T>`
+   = note: required by cast to type `&dyn Gettable<T>`
+note: &S<T> as &dyn Gettable<T>
+  --> $DIR/kindck-impl-type-params.rs:25:31
+   |
+LL |     let a: &dyn Gettable<T> = &t;
+   |                               ^^
 help: consider restricting type parameter `T`
    |
 LL | fn g<T: Send>(val: T) {
@@ -45,6 +66,13 @@ LL |     let a: &dyn Gettable<T> = &t;
    |
    = note: required because of the requirements on the impl of `Gettable<T>` for `S<T>`
    = note: required for the cast to the object type `dyn Gettable<T>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Gettable<T>>` for `&S<T>`
+   = note: required by cast to type `&dyn Gettable<T>`
+note: &S<T> as &dyn Gettable<T>
+  --> $DIR/kindck-impl-type-params.rs:25:31
+   |
+LL |     let a: &dyn Gettable<T> = &t;
+   |                               ^^
 help: consider restricting type parameter `T`
    |
 LL | fn g<T: Copy>(val: T) {
@@ -66,6 +94,13 @@ LL |     let a = t as Box<dyn Gettable<String>>;
    |
    = note: required because of the requirements on the impl of `Gettable<String>` for `S<String>`
    = note: required for the cast to the object type `dyn Gettable<String>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<Box<dyn Gettable<String>>>` for `Box<S<String>>`
+   = note: required by cast to type `Box<dyn Gettable<String>>`
+note: std::boxed::Box<S<std::string::String>> as std::boxed::Box<dyn Gettable<std::string::String>>
+  --> $DIR/kindck-impl-type-params.rs:38:13
+   |
+LL |     let a = t as Box<dyn Gettable<String>>;
+   |             ^
 
 error[E0277]: the trait bound `Foo: Copy` is not satisfied
   --> $DIR/kindck-impl-type-params.rs:46:37
@@ -75,6 +110,13 @@ LL |     let a: Box<dyn Gettable<Foo>> = t;
    |
    = note: required because of the requirements on the impl of `Gettable<Foo>` for `S<Foo>`
    = note: required for the cast to the object type `dyn Gettable<Foo>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<Box<dyn Gettable<Foo>>>` for `Box<S<Foo>>`
+   = note: required by cast to type `Box<dyn Gettable<Foo>>`
+note: std::boxed::Box<S<foo3::Foo>> as std::boxed::Box<dyn Gettable<foo3::Foo>>
+  --> $DIR/kindck-impl-type-params.rs:46:37
+   |
+LL |     let a: Box<dyn Gettable<Foo>> = t;
+   |                                     ^
 
 error: aborting due to 7 previous errors
 

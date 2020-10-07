@@ -27,6 +27,11 @@ LL |     let test: &mut dyn Bar = &mut thing;
    = help: consider moving `foo` to another trait
    = note: required because of the requirements on the impl of `CoerceUnsized<&mut dyn Bar>` for `&mut Thing`
    = note: required by cast to type `&mut dyn Bar`
+note: &mut Thing as &mut dyn Bar
+  --> $DIR/issue-19538.rs:17:30
+   |
+LL |     let test: &mut dyn Bar = &mut thing;
+   |                              ^^^^^^^^^^
 
 error: aborting due to 2 previous errors
 

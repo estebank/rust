@@ -16,6 +16,13 @@ LL |     let f3: &Fat<dyn Bar> = f2;
    |                             ^^ the trait `Bar` is not implemented for `Foo`
    |
    = note: required for the cast to the object type `dyn Bar`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&Fat<dyn Bar>>` for `&Fat<Foo>`
+   = note: required by cast to type `&Fat<dyn Bar>`
+note: &Fat<Foo> as &Fat<dyn Bar>
+  --> $DIR/dst-bad-coerce1.rs:22:29
+   |
+LL |     let f3: &Fat<dyn Bar> = f2;
+   |                             ^^
 
 error[E0308]: mismatched types
   --> $DIR/dst-bad-coerce1.rs:28:27
@@ -35,6 +42,13 @@ LL |     let f3: &(dyn Bar,) = f2;
    |                           ^^ the trait `Bar` is not implemented for `Foo`
    |
    = note: required for the cast to the object type `dyn Bar`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&(dyn Bar,)>` for `&(Foo,)`
+   = note: required by cast to type `&(dyn Bar,)`
+note: &(Foo,) as &(dyn Bar,)
+  --> $DIR/dst-bad-coerce1.rs:34:27
+   |
+LL |     let f3: &(dyn Bar,) = f2;
+   |                           ^^
 
 error: aborting due to 4 previous errors
 

@@ -768,7 +768,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             let mut err = self.demand_suptype_diag(expr.span, expected_ty, actual_ty).unwrap();
             let lhs_ty = self.check_expr(&lhs);
             let rhs_ty = self.check_expr(&rhs);
-            if self.can_coerce(lhs_ty, rhs_ty) {
+            if self.can_coerce(lhs, lhs_ty, rhs_ty) {
                 if !lhs.is_syntactic_place_expr() {
                     // Do not suggest `if let x = y` as `==` is way more likely to be the intention.
                     if let hir::Node::Expr(hir::Expr {

@@ -143,7 +143,7 @@ impl<'f, 'tcx> Coerce<'f, 'tcx> {
             .and_then(|InferOk { value: ty, obligations }| success(f(ty), ty, obligations))
     }
 
-    fn coerce(&self, a: Ty<'tcx>, b: Ty<'tcx>) -> CoerceResult<'tcx> {
+    fn coerce(&self, expr: &hir::Expr<'tcx>, a: Ty<'tcx>, b: Ty<'tcx>) -> CoerceResult<'tcx> {
         let a = self.shallow_resolve(a);
         debug!("Coerce.tys({:?} => {:?})", a, b);
 
@@ -179,7 +179,8 @@ impl<'f, 'tcx> Coerce<'f, 'tcx> {
         // NOTE: this is wrapped in a `commit_if_ok` because it creates
         // a "spurious" type variable, and we don't want to have that
         // type variable in memory if the coercion fails.
-        let unsize = self.commit_if_ok(|_| self.coerce_unsized(a, b));
+        let unsize = self.commit_if_ok(|_| self.coerce_unsized(expr, a, b));
+        debug!("coerce: unsize {:?}", unsize);
         match unsize {
             Ok(_) => {
                 debug!("coerce: unsize successful");
@@ -438,8 +439,8 @@ impl<'f, 'tcx> Coerce<'f, 'tcx> {
     // &[T; n] or &mut [T; n] -> &[T]
     // or &mut [T; n] -> &mut [T]
     // or &Concrete -> &Trait, etc.
-    fn coerce_unsized(&self, mut source: Ty<'tcx>, mut target: Ty<'tcx>) -> CoerceResult<'tcx> {
-        debug!("coerce_unsized(source={:?}, target={:?})", source, target);
+    fn coerce_unsized(&self, expr: &hir::Expr<'tcx>, mut source: Ty<'tcx>, mut target: Ty<'tcx>) -> CoerceResult<'tcx> {
+        debug!("coerce_unsized(source={:?}, target={:?}, expr={:?})", source, target, expr);
 
         source = self.shallow_resolve(source);
         target = self.shallow_resolve(target);
@@ -553,7 +554,7 @@ impl<'f, 'tcx> Coerce<'f, 'tcx> {
         let cause = ObligationCause::new(
             self.cause.span,
             self.body_id,
-            ObligationCauseCode::Coercion { source, target },
+            ObligationCauseCode::Coercion { source, target, span: expr.span },
         );
 
         // Use a FIFO queue for this custom fulfillment procedure.
@@ -572,6 +573,8 @@ impl<'f, 'tcx> Coerce<'f, 'tcx> {
             coerce_source,
             &[coerce_target.into()]
         )];
+
+        debug!("coerce_unsized queue={:?}", queue);
 
         let mut has_unsized_tuple_coercion = false;
 
@@ -637,6 +640,7 @@ impl<'f, 'tcx> Coerce<'f, 'tcx> {
 
                 // Object safety violations or miscellaneous.
                 Err(err) => {
+                    debug!("coerce_unsized Err {:?}", err);
                     self.report_selection_error(&obligation, &err, false, false);
                     // Treat this like an obligation and follow through
                     // with the unsizing - the lack of a coercion should
@@ -836,7 +840,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     /// The expressions *must not* have any pre-existing adjustments.
     pub fn try_coerce(
         &self,
-        expr: &hir::Expr<'_>,
+        expr: &hir::Expr<'tcx>,
         expr_ty: Ty<'tcx>,
         target: Ty<'tcx>,
         allow_two_phase: AllowTwoPhase,
@@ -846,7 +850,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
 
         let cause = self.cause(expr.span, ObligationCauseCode::ExprAssignable);
         let coerce = Coerce::new(self, cause, allow_two_phase);
-        let ok = self.commit_if_ok(|_| coerce.coerce(source, target))?;
+        let ok = self.commit_if_ok(|_| coerce.coerce(expr, source, target))?;
 
         let (adjustments, _) = self.register_infer_ok_obligations(ok);
         self.apply_adjustments(expr, adjustments);
@@ -854,14 +858,14 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
     }
 
     /// Same as `try_coerce()`, but without side-effects.
-    pub fn can_coerce(&self, expr_ty: Ty<'tcx>, target: Ty<'tcx>) -> bool {
+    pub fn can_coerce(&self, expr: &hir::Expr<'tcx>, expr_ty: Ty<'tcx>, target: Ty<'tcx>) -> bool {
         let source = self.resolve_vars_with_obligations(expr_ty);
         debug!("coercion::can({:?} -> {:?})", source, target);
 
         let cause = self.cause(rustc_span::DUMMY_SP, ObligationCauseCode::ExprAssignable);
         // We don't ever need two-phase here since we throw out the result of the coercion
         let coerce = Coerce::new(self, cause, AllowTwoPhase::No);
-        self.probe(|_| coerce.coerce(source, target)).is_ok()
+        self.probe(|_| coerce.coerce(expr, source, target)).is_ok()
     }
 
     /// Given a type and a target type, this function will calculate and return
@@ -887,7 +891,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         cause: &ObligationCause<'tcx>,
         exprs: &[E],
         prev_ty: Ty<'tcx>,
-        new: &hir::Expr<'_>,
+        new: &hir::Expr<'tcx>,
         new_ty: Ty<'tcx>,
     ) -> RelateResult<'tcx, Ty<'tcx>>
     where
@@ -1001,7 +1005,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         // but only if the new expression has no coercion already applied to it.
         let mut first_error = None;
         if !self.typeck_results.borrow().adjustments().contains_key(new.hir_id) {
-            let result = self.commit_if_ok(|_| coerce.coerce(new_ty, prev_ty));
+            let result = self.commit_if_ok(|_| coerce.coerce(new, new_ty, prev_ty));
             match result {
                 Ok(ok) => {
                     let (adjustments, target) = self.register_infer_ok_obligations(ok);
@@ -1051,7 +1055,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             }
         }
 
-        match self.commit_if_ok(|_| coerce.coerce(prev_ty, new_ty)) {
+        match self.commit_if_ok(|_| coerce.coerce(new, prev_ty, new_ty)) {
             Err(_) => {
                 // Avoid giving strange errors on failed attempts.
                 if let Some(e) = first_error {

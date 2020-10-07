@@ -115,6 +115,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             let sized_conditions = self.sized_conditions(obligation);
             self.assemble_builtin_bound_candidates(sized_conditions, &mut candidates)?;
         } else if lang_items.unsize_trait() == Some(def_id) {
+            debug!("assemble_candidates {:?}", obligation.cause);
             self.assemble_candidates_for_unsizing(obligation, &mut candidates);
         } else {
             if lang_items.clone_trait() == Some(def_id) {
@@ -587,6 +588,8 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
         };
 
         if may_apply {
+            // keep obligation around?
+            debug!("assemble_candidates_for_unsizing {:?}", obligation.cause);
             candidates.vec.push(BuiltinUnsizeCandidate);
         }
     }

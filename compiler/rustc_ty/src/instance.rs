@@ -129,12 +129,21 @@ fn resolve_associated_item<'tcx>(
 
             let trait_def_id = tcx.trait_id_of_impl(impl_data.impl_def_id).unwrap();
             let trait_def = tcx.trait_def(trait_def_id);
-            let leaf_def = trait_def
-                .ancestors(tcx, impl_data.impl_def_id)?
-                .leaf_def(tcx, trait_item.ident, trait_item.kind)
-                .unwrap_or_else(|| {
-                    bug!("{:?} not found in {:?}", trait_item, impl_data.impl_def_id);
-                });
+            let leaf_def = match trait_def.ancestors(tcx, impl_data.impl_def_id)?.leaf_def(
+                tcx,
+                trait_item.ident,
+                trait_item.kind,
+            ) {
+                Some(def) => def,
+                None => {
+                    // tcx.sess.delay_span_bug(
+                    //     trait_item.ident.span,
+                    //     &format!("{:?} not found in {:?}", trait_item, impl_data.impl_def_id),
+                    // );
+                    // return Err(ErrorReported);
+                    return Ok(None);
+                }
+            };
 
             let substs = tcx.infer_ctxt().enter(|infcx| {
                 let param_env = param_env.with_reveal_all_normalized(tcx);

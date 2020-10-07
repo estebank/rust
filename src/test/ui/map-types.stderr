@@ -5,6 +5,13 @@ LL |     let y: Box<dyn Map<usize, isize>> = Box::new(x);
    |                                         ^^^^^^^^^^^ the trait `Map<usize, isize>` is not implemented for `Box<dyn Map<isize, isize>>`
    |
    = note: required for the cast to the object type `dyn Map<usize, isize>`
+   = note: required because of the requirements on the impl of `CoerceUnsized<Box<dyn Map<usize, isize>>>` for `Box<Box<dyn Map<isize, isize>>>`
+   = note: required by cast to type `Box<dyn Map<usize, isize>>`
+note: std::boxed::Box<std::boxed::Box<dyn Map<isize, isize>>> as std::boxed::Box<dyn Map<usize, isize>>
+  --> $DIR/map-types.rs:17:41
+   |
+LL |     let y: Box<dyn Map<usize, isize>> = Box::new(x);
+   |                                         ^^^^^^^^^^^
 
 error: aborting due to previous error
 

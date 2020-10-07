@@ -8,6 +8,13 @@ LL |     x: Error
    = note: add `#[derive(Debug)]` or manually implement `Debug`
    = note: required because of the requirements on the impl of `Debug` for `&Error`
    = note: required for the cast to the object type `dyn Debug`
+   = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Debug>` for `&&Error`
+   = note: required by cast to type `&dyn Debug`
+note: &&Error as &dyn std::fmt::Debug
+  --> $DIR/derives-span-Debug-struct.rs:8:5
+   |
+LL |     x: Error
+   |     ^^^^^^^^
    = note: this error originates in a derive macro (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to previous error

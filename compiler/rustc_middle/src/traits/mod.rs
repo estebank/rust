@@ -190,7 +190,7 @@ pub enum ObligationCauseCode<'tcx> {
     /// also implement all supertraits of `X`.
     ItemObligation(DefId),
 
-    /// Like `ItemObligation`, but with extra detail on the source of the obligation.
+    /// Like `ItemObligation`, but with /Bindextra detail on the source of the obligation.
     BindingObligation(DefId, Span),
 
     /// A type like `&'a T` is WF only if `T: 'a`.
@@ -200,12 +200,17 @@ pub enum ObligationCauseCode<'tcx> {
     ObjectTypeBound(Ty<'tcx>, ty::Region<'tcx>),
 
     /// Obligation incurred due to an object cast.
-    ObjectCastObligation(/* Object type */ Ty<'tcx>),
+    ObjectCastObligation {
+        // source: Ty<'tcx>,
+        target: Ty<'tcx>,
+        derived_from: Box<DerivedObligationCause<'tcx>>,
+    },
 
     /// Obligation incurred due to a coercion.
     Coercion {
         source: Ty<'tcx>,
         target: Ty<'tcx>,
+        span: Span,
     },
 
     /// Various cases where expressions must be `Sized` / `Copy` / etc.

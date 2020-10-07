@@ -11,6 +11,11 @@ LL |     let t: &dyn Trait = &S;
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Trait>` for `&S`
    = note: required by cast to type `&dyn Trait`
+note: &S as &dyn Trait
+  --> $DIR/wf-convert-unsafe-trait-obj.rs:16:25
+   |
+LL |     let t: &dyn Trait = &S;
+   |                         ^^
 
 error[E0038]: the trait `Trait` cannot be made into an object
   --> $DIR/wf-convert-unsafe-trait-obj.rs:17:17
@@ -25,6 +30,11 @@ LL |     takes_trait(&S);
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Trait>` for `&S`
    = note: required by cast to type `&dyn Trait`
+note: &S as &dyn Trait
+  --> $DIR/wf-convert-unsafe-trait-obj.rs:17:17
+   |
+LL |     takes_trait(&S);
+   |                 ^^
 
 error[E0038]: the trait `Trait` cannot be made into an object
   --> $DIR/wf-convert-unsafe-trait-obj.rs:15:5
@@ -39,6 +49,11 @@ LL |     &S as &dyn Trait;
    |
    = note: required because of the requirements on the impl of `CoerceUnsized<&dyn Trait>` for `&S`
    = note: required by cast to type `&dyn Trait`
+note: &S as &dyn Trait
+  --> $DIR/wf-convert-unsafe-trait-obj.rs:15:5
+   |
+LL |     &S as &dyn Trait;
+   |     ^^
 
 error: aborting due to 3 previous errors
 
