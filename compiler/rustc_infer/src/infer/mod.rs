@@ -303,7 +303,9 @@ pub struct InferCtxt<'a, 'tcx> {
 
     /// the set of predicates on which errors have been reported, to
     /// avoid reporting the same error twice.
-    pub reported_trait_errors: RefCell<FxHashMap<Span, Vec<ty::Predicate<'tcx>>>>,
+    pub reported_trait_errors: RefCell<FxHashMap<Span, Vec<(ty::Predicate<'tcx>, hir::HirId)>>>,
+
+    pub reported_object_safety_errors: RefCell<FxHashSet<(DefId, hir::HirId)>>,
 
     pub reported_closure_mismatch: RefCell<FxHashSet<(Span, Option<Span>)>>,
 
@@ -590,6 +592,7 @@ impl<'tcx> InferCtxtBuilder<'tcx> {
             selection_cache: Default::default(),
             evaluation_cache: Default::default(),
             reported_trait_errors: Default::default(),
+            reported_object_safety_errors: Default::default(),
             reported_closure_mismatch: Default::default(),
             tainted_by_errors_flag: Cell::new(false),
             err_count_on_creation: tcx.sess.err_count(),

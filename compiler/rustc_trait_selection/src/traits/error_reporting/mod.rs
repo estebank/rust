@@ -81,6 +81,16 @@ pub trait InferCtxtExt<'tcx> {
     ) -> DiagnosticBuilder<'tcx>;
 }
 
+#[derive(Debug)]
+struct ErrorDescriptor<'tcx> {
+    /// `ty::Predicate<'tcx>` to potentially deduplicate
+    predicate: ty::Predicate<'tcx>,
+    /// Used to deduplicate object-safety errors to only one per `impl` block
+    hir_id: hir::HirId,
+    /// `None` if this is an old error
+    index: Option<usize>,
+}
+
 impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
     fn report_fulfillment_errors(
         &self,
@@ -88,11 +98,7 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
         body_id: Option<hir::BodyId>,
         fallback_has_occurred: bool,
     ) {
-        #[derive(Debug)]
-        struct ErrorDescriptor<'tcx> {
-            predicate: ty::Predicate<'tcx>,
-            index: Option<usize>, // None if this is an old error
-        }
+        debug!("report_fulfillment_errors {:?} {:?}", errors, body_id);
 
         let mut error_map: FxHashMap<_, Vec<_>> = self
             .reported_trait_errors
@@ -103,7 +109,11 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                     span,
                     predicates
                         .iter()
-                        .map(|&predicate| ErrorDescriptor { predicate, index: None })
+                        .map(|&(predicate, hir_id)| ErrorDescriptor {
+                            predicate,
+                            hir_id,
+                            index: None,
+                        })
                         .collect(),
                 )
             })
@@ -118,16 +128,25 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                 span = expn_data.call_site;
             }
 
-            error_map.entry(span).or_default().push(ErrorDescriptor {
-                predicate: error.obligation.predicate,
-                index: Some(index),
-            });
+            let mut include = true;
+            if let ty::PredicateAtom::ObjectSafe(def_id) = error.obligation.predicate.skip_binders_unchecked() {
+                include = !self.reported_object_safety_errors
+                    .borrow_mut()
+                    .insert((def_id, error.obligation.cause.body_id));
+            }
+            if include {
+                error_map.entry(span).or_default().push(ErrorDescriptor {
+                    predicate: error.obligation.predicate,
+                    hir_id: error.obligation.cause.body_id,
+                    index: Some(index),
+                });
+            }
 
             self.reported_trait_errors
                 .borrow_mut()
                 .entry(span)
                 .or_default()
-                .push(error.obligation.predicate);
+                .push((error.obligation.predicate, error.obligation.cause.body_id));
         }
 
         // We do this in 2 passes because we want to display errors in order, though
@@ -148,9 +167,8 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
                             continue;
                         }
 
-                        if self.error_implies(error2.predicate, error.predicate)
-                            && !(error2.index >= error.index
-                                && self.error_implies(error.predicate, error2.predicate))
+                        if self.error_implies(error2, error)
+                            && !(error2.index >= error.index && self.error_implies(error, &error2))
                         {
                             info!("skipping {:?} (implied by {:?})", error, error2);
                             is_suppressed[index] = true;
@@ -983,7 +1001,7 @@ impl<'a, 'tcx> InferCtxtExt<'tcx> for InferCtxt<'a, 'tcx> {
 trait InferCtxtPrivExt<'tcx> {
     // returns if `cond` not occurring implies that `error` does not occur - i.e., that
     // `error` occurring implies that `cond` occurs.
-    fn error_implies(&self, cond: ty::Predicate<'tcx>, error: ty::Predicate<'tcx>) -> bool;
+    fn error_implies(&self, cond: &ErrorDescriptor<'tcx>, error: &ErrorDescriptor<'tcx>) -> bool;
 
     fn report_fulfillment_error(
         &self,
@@ -1073,16 +1091,36 @@ trait InferCtxtPrivExt<'tcx> {
 impl<'a, 'tcx> InferCtxtPrivExt<'tcx> for InferCtxt<'a, 'tcx> {
     // returns if `cond` not occurring implies that `error` does not occur - i.e., that
     // `error` occurring implies that `cond` occurs.
-    fn error_implies(&self, cond: ty::Predicate<'tcx>, error: ty::Predicate<'tcx>) -> bool {
-        if cond == error {
+    fn error_implies(&self, cond: &ErrorDescriptor<'tcx>, error: &ErrorDescriptor<'tcx>) -> bool {
+        debug!("error_implies {:?} {:?}", cond, error);
+
+        if cond.predicate == error.predicate {
             return true;
         }
 
         // FIXME: It should be possible to deal with `ForAll` in a cleaner way.
-        let bound_error = error.bound_atom();
-        let (cond, error) = match (cond.skip_binders(), bound_error.skip_binder()) {
+        let bound_error = error.predicate.bound_atom();
+        let (cond, error) = match (cond.predicate.skip_binders(), bound_error.skip_binder()) {
             (ty::PredicateAtom::Trait(..), ty::PredicateAtom::Trait(error, _)) => {
-                (cond, bound_error.rebind(error))
+                (cond.predicate, bound_error.rebind(error))
+            }
+            (ty::PredicateAtom::ObjectSafe(a), ty::PredicateAtom::ObjectSafe(b)) => {
+                let hir_id_a  = if let Some(hir::Node::Item(_)) = self.tcx.hir().find(error.hir_id) {
+                    debug!("1");
+                    error.hir_id
+                } else {
+                    debug!("2");
+                    self.tcx.hir().get_parent_item(error.hir_id)
+                };
+                let hir_id_b  = if let Some(hir::Node::Item(_)) = self.tcx.hir().find(cond.hir_id) {
+                    debug!("3");
+                    cond.hir_id
+                } else {
+                    debug!("4");
+                    self.tcx.hir().get_parent_item(cond.hir_id)
+                };
+                debug!("{:?} {:?} {:?} {:?}", hir_id_a, hir_id_b, a, b);
+                return hir_id_a == hir_id_b && a == b;
             }
             _ => {
                 // FIXME: make this work in other cases too.
@@ -1115,7 +1153,6 @@ impl<'a, 'tcx> InferCtxtPrivExt<'tcx> for InferCtxt<'a, 'tcx> {
         body_id: Option<hir::BodyId>,
         fallback_has_occurred: bool,
     ) {
-        debug!("report_fulfillment_error({:?})", error);
         match error.code {
             FulfillmentErrorCode::CodeSelectionError(ref selection_error) => {
                 self.report_selection_error(
