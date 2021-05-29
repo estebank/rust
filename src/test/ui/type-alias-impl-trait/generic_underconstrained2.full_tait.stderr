@@ -22,6 +22,7 @@ LL | #![cfg_attr(full_tait, feature(type_alias_impl_trait))]
 error[E0277]: `U` doesn't implement `Debug`
   --> $DIR/generic_underconstrained2.rs:12:33
    |
+<<<<<<< HEAD
 LL | type Underconstrained<T: std::fmt::Debug> = impl 'static;
    |                          --------------- required by this bound in `Underconstrained`
 ...
@@ -32,10 +33,25 @@ help: consider restricting type parameter `U`
    |
 LL | fn underconstrained<U: std::fmt::Debug>(_: U) -> Underconstrained<U> {
    |                      +++++++++++++++++
+=======
+LL | fn underconstrained<U>(_: U) -> Underconstrained<U> {
+   |                                 ^^^^^^^^^^^^^^^^^^^ `U` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+   |
+note: required by a bound in `Underconstrained`
+  --> $DIR/generic_underconstrained2.rs:8:26
+   |
+LL | type Underconstrained<T: std::fmt::Debug> = impl 'static;
+   |                          ^^^^^^^^^^^^^^^ required by this bound in `Underconstrained`
+help: consider restricting type parameter `U`
+   |
+LL | fn underconstrained<U: std::fmt::Debug>(_: U) -> Underconstrained<U> {
+   |                      ^^^^^^^^^^^^^^^^^
+>>>>>>> 48360d1bd86 (Tweak assoc type obligation spans)
 
 error[E0277]: `V` doesn't implement `Debug`
   --> $DIR/generic_underconstrained2.rs:21:43
    |
+<<<<<<< HEAD
 LL | type Underconstrained2<T: std::fmt::Debug> = impl 'static;
    |                           --------------- required by this bound in `Underconstrained2`
 ...
@@ -46,6 +62,20 @@ help: consider restricting type parameter `V`
    |
 LL | fn underconstrained2<U, V: std::fmt::Debug>(_: U, _: V) -> Underconstrained2<V> {
    |                          +++++++++++++++++
+=======
+LL | fn underconstrained2<U, V>(_: U, _: V) -> Underconstrained2<V> {
+   |                                           ^^^^^^^^^^^^^^^^^^^^ `V` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+   |
+note: required by a bound in `Underconstrained2`
+  --> $DIR/generic_underconstrained2.rs:17:27
+   |
+LL | type Underconstrained2<T: std::fmt::Debug> = impl 'static;
+   |                           ^^^^^^^^^^^^^^^ required by this bound in `Underconstrained2`
+help: consider restricting type parameter `V`
+   |
+LL | fn underconstrained2<U, V: std::fmt::Debug>(_: U, _: V) -> Underconstrained2<V> {
+   |                          ^^^^^^^^^^^^^^^^^
+>>>>>>> 48360d1bd86 (Tweak assoc type obligation spans)
 
 error: aborting due to 4 previous errors; 1 warning emitted
 

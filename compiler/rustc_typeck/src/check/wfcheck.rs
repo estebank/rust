@@ -19,7 +19,7 @@ use rustc_middle::ty::{
 };
 use rustc_session::parse::feature_err;
 use rustc_span::symbol::{sym, Ident, Symbol};
-use rustc_span::Span;
+use rustc_span::{Span, DUMMY_SP};
 use rustc_trait_selection::opaque_types::may_define_opaque_type;
 use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
 use rustc_trait_selection::traits::{self, ObligationCause, ObligationCauseCode, WellFormedLoc};
@@ -272,8 +272,13 @@ pub fn check_impl_item(tcx: TyCtxt<'_>, def_id: LocalDefId) {
         hir::ImplItemKind::Fn(ref sig, _) => Some(sig),
         _ => None,
     };
+    let span = match impl_item.kind {
+        // Constrain binding and overflow error spans to `<Ty>` in `type foo = <Ty>`.
+        hir::ImplItemKind::TyAlias(ty) if ty.span != DUMMY_SP => ty.span,
+        _ => impl_item.span,
+    };
 
-    check_associated_item(tcx, impl_item.hir_id(), impl_item.span, method_sig);
+    check_associated_item(tcx, impl_item.hir_id(), span, method_sig);
 }
 
 fn check_param_wf(tcx: TyCtxt<'_>, param: &hir::GenericParam<'_>) {
