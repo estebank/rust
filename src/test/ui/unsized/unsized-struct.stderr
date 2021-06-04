@@ -6,7 +6,7 @@ LL | fn foo2<T: ?Sized>() { not_sized::<Foo<T>>() }
    |         |
    |         this type parameter needs to be `std::marker::Sized`
    |
-note: type parameters introduce an implicit `Sized` obligation
+note: type parameters have an implicit `Sized` obligation
   --> $DIR/unsized-struct.rs:4:12
    |
 LL | struct Foo<T> { data: T }
@@ -18,6 +18,10 @@ LL | struct Foo<T> { data: T }
    |            ^          - ...if indirection were used here: `Box<T>`
    |            |
    |            this could be changed to `T: ?Sized`...
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+   |
+LL | fn foo2<T>() { not_sized::<Foo<T>>() }
+   |         --
 
 error[E0277]: the size for values of type `T` cannot be known at compilation time
   --> $DIR/unsized-struct.rs:13:24
@@ -27,16 +31,21 @@ LL | fn bar2<T: ?Sized>() { is_sized::<Bar<T>>() }
    |         |
    |         this type parameter needs to be `std::marker::Sized`
    |
+   = note: Trait(PolyTraitRef { bound_generic_params: [], trait_ref: TraitRef { path: Path { span: $DIR/unsized-struct.rs:1:15: 1:20 (#0), res: Def(Trait, DefId(2:2845 ~ core[ed10]::marker::Sized)), segments: [PathSegment { ident: Sized#0, hir_id: Some(HirId { owner: DefId(0:3 ~ unsized_struct[d547]::is_sized), local_id: 3 }), res: Some(Def(Trait, DefId(2:2845 ~ core[ed10]::marker::Sized))), args: None, infer_args: false }] }, hir_ref_id: HirId { owner: DefId(0:3 ~ unsized_struct[d547]::is_sized), local_id: 4 } }, span: $DIR/unsized-struct.rs:1:15: 1:20 (#0) }, None)
 note: required because it appears within the type `Bar<T>`
   --> $DIR/unsized-struct.rs:11:8
    |
 LL | struct Bar<T: ?Sized> { data: T }
    |        ^^^
-note: type parameters introduce an implicit `Sized` obligation
+note: type parameters have an implicit `Sized` obligation
   --> $DIR/unsized-struct.rs:1:13
    |
 LL | fn is_sized<T:Sized>() { }
    |             ^ required by this bound in `is_sized`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+   |
+LL | fn bar2<T>() { is_sized::<Bar<T>>() }
+   |         --
 
 error: aborting due to 2 previous errors
 

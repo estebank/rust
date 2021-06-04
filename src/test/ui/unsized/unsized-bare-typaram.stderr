@@ -6,11 +6,16 @@ LL | fn foo<T: ?Sized>() { bar::<T>() }
    |        |
    |        this type parameter needs to be `std::marker::Sized`
    |
-note: type parameters introduce an implicit `Sized` obligation
+   = note: Trait(PolyTraitRef { bound_generic_params: [], trait_ref: TraitRef { path: Path { span: $DIR/unsized-bare-typaram.rs:1:11: 1:16 (#0), res: Def(Trait, DefId(2:2845 ~ core[ed10]::marker::Sized)), segments: [PathSegment { ident: Sized#0, hir_id: Some(HirId { owner: DefId(0:3 ~ unsized_bare_typaram[c59a]::bar), local_id: 3 }), res: Some(Def(Trait, DefId(2:2845 ~ core[ed10]::marker::Sized))), args: None, infer_args: false }] }, hir_ref_id: HirId { owner: DefId(0:3 ~ unsized_bare_typaram[c59a]::bar), local_id: 4 } }, span: $DIR/unsized-bare-typaram.rs:1:11: 1:16 (#0) }, None)
+note: type parameters have an implicit `Sized` obligation
   --> $DIR/unsized-bare-typaram.rs:1:8
    |
 LL | fn bar<T: Sized>() { }
    |        ^ required by this bound in `bar`
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
+   |
+LL | fn foo<T>() { bar::<T>() }
+   |        --
 
 error: aborting due to previous error
 
