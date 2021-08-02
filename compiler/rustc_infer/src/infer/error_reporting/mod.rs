@@ -69,7 +69,7 @@ use rustc_middle::ty::error::TypeError;
 use rustc_middle::ty::{
     self,
     subst::{GenericArgKind, Subst, SubstsRef},
-    Region, Ty, TyCtxt, TypeFoldable,
+    DefIdTree, Region, Ty, TyCtxt, TypeFoldable,
 };
 use rustc_span::{sym, BytePos, DesugaringKind, MultiSpan, Pos, Span};
 use rustc_target::spec::abi;
@@ -1439,9 +1439,9 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
             values = None;
         }
         struct OpaqueTypesVisitor<'tcx> {
-            types: FxHashMap<TyCategory, FxHashSet<Span>>,
-            expected: FxHashMap<TyCategory, FxHashSet<Span>>,
-            found: FxHashMap<TyCategory, FxHashSet<Span>>,
+            types: FxHashMap<TyCategory, FxHashSet<DefId>>,
+            expected: FxHashMap<TyCategory, FxHashSet<DefId>>,
+            found: FxHashMap<TyCategory, FxHashSet<DefId>>,
             ignore_span: Span,
             tcx: TyCtxt<'tcx>,
         }
@@ -1479,42 +1479,68 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                 &self,
                 err: &mut DiagnosticBuilder<'_>,
                 target: &str,
-                types: &FxHashMap<TyCategory, FxHashSet<Span>>,
+                types: &FxHashMap<TyCategory, FxHashSet<DefId>>,
             ) {
                 for (key, values) in types.iter() {
                     let count = values.len();
                     let kind = key.descr();
                     let mut returned_async_output_error = false;
-                    for &sp in values {
+                    for &def_id in values {
+                        let sp = self.tcx.def_span(def_id);
+                        let (fn_name, fn_desc, fn_span) = match self.tcx.parent(def_id) {
+                            Some(def_id) => (
+                                format!("`{}`", self.tcx.def_path_str(def_id)),
+                                format!("the async function `{}`", self.tcx.def_path_str(def_id)),
+                                Some(
+                                    self.tcx
+                                        .hir()
+                                        .get_if_local(def_id)
+                                        .and_then(|node| node.ident())
+                                        .map_or_else(
+                                            || self.tcx.def_span(def_id),
+                                            |ident| ident.span,
+                                        ),
+                                ),
+                            ),
+                            None => (
+                                "the async function".to_string(),
+                                "an async function".to_string(),
+                                None,
+                            ),
+                        };
                         if sp.is_desugaring(DesugaringKind::Async) && !returned_async_output_error {
                             if &[sp] != err.span.primary_spans() {
                                 let mut span: MultiSpan = sp.into();
-                                span.push_span_label(
-                                    sp,
-                                    format!(
-                                        "checked the `Output` of this `async fn`, {}{} {}{}",
-                                        if count > 1 { "one of the " } else { "" },
-                                        target,
-                                        kind,
-                                        pluralize!(count),
-                                    ),
-                                );
+                                if let Some(fn_span) = fn_span {
+                                    span.push_span_label(
+                                        fn_span,
+                                        "async functions return futures".to_string(),
+                                    );
+                                    span.push_span_label(
+                                        sp,
+                                        format!(
+                                            "the desugared version of {} returns `impl Future<Output = {}>`",
+                                            fn_name,
+                                            if let Ok(snippet) = self.tcx.sess.source_map().span_to_snippet(sp) {
+                                                snippet
+                                            } else {
+                                                "{async return type}".to_string()
+                                            }
+                                        ),
+                                    );
+                                } else {
+                                    span.push_span_label(
+                                        sp,
+                                        format!("{} returns a future", fn_desc,),
+                                    );
+                                }
                                 err.span_note(
                                     span,
-                                    "while checking the return type of the `async fn`",
+                                    &format!("while checking the return type of {}", fn_desc),
                                 );
                             } else {
-                                err.span_label(
-                                    sp,
-                                    format!(
-                                        "checked the `Output` of this `async fn`, {}{} {}{}",
-                                        if count > 1 { "one of the " } else { "" },
-                                        target,
-                                        kind,
-                                        pluralize!(count),
-                                    ),
-                                );
-                                err.note("while checking the return type of the `async fn`");
+                                err.span_label(sp, format!("{} returns a future", fn_desc));
+                                err.note(&format!("while checking the return type of {}", fn_name));
                             }
                             returned_async_output_error = true;
                         } else {
@@ -1552,7 +1578,7 @@ impl<'a, 'tcx> InferCtxt<'a, 'tcx> {
                     //    = note: expected unit type `()`
                     //                 found closure `[closure@$DIR/issue-20862.rs:2:5: 2:14 x:_]`
                     if !self.ignore_span.overlaps(span) {
-                        self.types.entry(kind).or_default().insert(span);
+                        self.types.entry(kind).or_default().insert(def_id);
                     }
                 }
                 t.super_visit_with(self)
@@ -2539,7 +2565,7 @@ impl<'tcx> ObligationCauseExt<'tcx> for ObligationCause<'tcx> {
 
 /// This is a bare signal of what kind of type we're dealing with. `ty::TyKind` tracks
 /// extra information about each type, but we only care about the category.
-#[derive(Clone, Copy, PartialEq, Eq, Hash)]
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
 pub enum TyCategory {
     Closure,
     Opaque,

@@ -56,8 +56,9 @@ async fn struct_() -> Struct {
 }
 
 async fn tuple() -> Tuple {
-    //~^ NOTE checked the `Output` of this `async fn`, expected opaque type
-    //~| NOTE while checking the return type of the `async fn`
+    //~^ NOTE while checking the return type of the async function `tuple`
+    //~| NOTE async functions return futures
+    //~| NOTE the desugared version of `tuple` returns `impl Future<Output = Tuple>`
     //~| NOTE in this expansion of desugaring of `async` block or function
     Tuple(1i32)
 }
