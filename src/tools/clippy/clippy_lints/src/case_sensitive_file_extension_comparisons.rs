@@ -5,7 +5,7 @@ use rustc_hir::{Expr, ExprKind, PathSegment};
 use rustc_lint::{LateContext, LateLintPass};
 use rustc_middle::ty;
 use rustc_session::{declare_lint_pass, declare_tool_lint};
-use rustc_span::{source_map::Spanned, symbol::sym, Span};
+use rustc_span::{source_map::Spanned, Span};
 
 declare_clippy_lint! {
     /// ### What it does
@@ -56,7 +56,7 @@ fn check_case_sensitive_file_extension_comparison(ctx: &LateContext<'_>, expr: &
                     return Some(span);
                 },
                 ty::Adt(def, _) => {
-                    if ctx.tcx.is_diagnostic_item(sym::String, def.did()) {
+                    if Some(def.did()) == ctx.tcx.lang_items().string() {
                         return Some(span);
                     }
                 },
