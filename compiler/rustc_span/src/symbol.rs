@@ -605,6 +605,7 @@ symbols! {
         deref,
         deref_method,
         deref_mut,
+        deref_patterns,
         deref_target,
         derive,
         derive_default_enum,
