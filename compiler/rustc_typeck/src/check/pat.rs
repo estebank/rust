@@ -420,14 +420,19 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             }
         }
 
-        if self.tcx.features().deref_patterns && let hir::ExprKind::Lit(Spanned { node: ast::LitKind::Str(..), .. }) = lt.kind {
-            let tcx = self.tcx;
+        if self.tcx.features().deref_patterns
+            && let Ok(deref_pure) = self.tcx.lang_items().require(hir::LangItem::DerefPure)
+        {
             let expected = self.resolve_vars_if_possible(expected);
-            pat_ty = match expected.kind() {
-                ty::Adt(def, _) if Some(def.did()) == tcx.lang_items().string() => expected,
-                ty::Str => tcx.mk_static_str(),
-                _ => pat_ty,
-            };
+            // FIXME: this should be an obligation check for <Ty as Deref<Target=Ty>>.
+            if self.tcx.find_map_relevant_impl(deref_pure, expected, Some).is_some()
+                // FIXME: This shouldn't be needed! It is to avoid breaking current inference
+                // behavior, which means that the code as written will not work with container
+                // types, like Box.
+                && !expected.needs_infer()
+            {
+                pat_ty = expected;
+            }
         }
 
         // Somewhat surprising: in this case, the subtyping relation goes the

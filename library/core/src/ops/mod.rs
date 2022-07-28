@@ -163,6 +163,9 @@ pub use self::bit::{BitAndAssign, BitOrAssign, BitXorAssign, ShlAssign, ShrAssig
 #[stable(feature = "rust1", since = "1.0.0")]
 pub use self::deref::{Deref, DerefMut};
 
+#[unstable(feature = "deref_patterns", issue = "none")]
+pub use self::deref::DerefPure;
+
 #[unstable(feature = "receiver_trait", issue = "none")]
 pub use self::deref::Receiver;
 

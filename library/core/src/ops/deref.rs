@@ -197,3 +197,10 @@ impl<T: ?Sized> Receiver for &T {}
 
 #[unstable(feature = "receiver_trait", issue = "none")]
 impl<T: ?Sized> Receiver for &mut T {}
+
+/// Indicates that the `Deref` implementation is "pure", meaning side-effect free and suitable
+/// to be called in patterns.
+// #[unstable(feature = "deref_patterns", issue = "none")]
+#[cfg_attr(not(bootstrap), lang = "deref_pure_trait")]
+#[unstable(feature = "deref_patterns", issue = "none")]
+pub unsafe trait DerefPure: Deref {}

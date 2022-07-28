@@ -2414,6 +2414,9 @@ impl ops::Deref for String {
     }
 }
 
+#[unstable(feature = "deref_patterns", issue = "none")]
+unsafe impl ops::DerefPure for String {}
+
 #[stable(feature = "derefmut_for_string", since = "1.3.0")]
 impl ops::DerefMut for String {
     #[inline]

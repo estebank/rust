@@ -252,18 +252,22 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
 
             TestKind::Eq { value, ty } => {
                 let tcx = self.tcx;
-                if let ty::Adt(def, _) = ty.kind() && Some(def.did()) == tcx.lang_items().string() {
-                    if !tcx.features().deref_patterns {
-                        bug!("matching on `String` went through without enabling deref_patterns");
-                    }
+                if tcx.features().deref_patterns
+                    && let Ok(deref_pure) = tcx.lang_items().require(LangItem::DerefPure)
+                    // FIXME: this should be an obligation check for <Ty as Deref<Target=Ty>>, but
+                    // this is good enough for String.
+                    && let Some(_) = tcx.find_map_relevant_impl(deref_pure, ty, Some)
+                {
                     let re_erased = tcx.lifetimes.re_erased;
-                    let ref_string = self.temp(tcx.mk_imm_ref(re_erased, ty), test.span);
-                    let ref_str_ty = tcx.mk_imm_ref(re_erased, tcx.types.str_);
-                    let ref_str = self.temp(ref_str_ty, test.span);
+                    let ref_source = self.temp(tcx.mk_imm_ref(re_erased, ty), test.span);
+                    let target_ty = value.ty();
+                    let destination = self.temp(target_ty, test.span);
                     let deref = tcx.require_lang_item(LangItem::Deref, None);
+                    // FIXME: change this to work for any DerefPure type, not just String. Namely,
+                    // we need to actually account for the right params for container types here.
                     let method = trait_method(tcx, deref, sym::deref, ty, &[]);
                     let eq_block = self.cfg.start_new_block();
-                    self.cfg.push_assign(block, source_info, ref_string, Rvalue::Ref(re_erased, BorrowKind::Shared, place));
+                    self.cfg.push_assign(block, source_info, ref_source, Rvalue::Ref(re_erased, BorrowKind::Shared, place));
                     self.cfg.terminate(
                         block,
                         source_info,
@@ -273,15 +277,15 @@ impl<'a, 'tcx> Builder<'a, 'tcx> {
                                 user_ty: None,
                                 literal: method,
                             })),
-                            args: vec![Operand::Move(ref_string)],
-                            destination: ref_str,
+                            args: vec![Operand::Move(ref_source)],
+                            destination,
                             target: Some(eq_block),
                             cleanup: None,
                             from_hir_call: false,
                             fn_span: source_info.span
                         }
                     );
-                    self.non_scalar_compare(eq_block, make_target_blocks, source_info, value, ref_str, ref_str_ty);
+                    self.non_scalar_compare(eq_block, make_target_blocks, source_info, value, destination, target_ty);
                     return;
                 }
                 if !ty.is_scalar() {

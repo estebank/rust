@@ -109,6 +109,7 @@
 #![feature(const_eval_select)]
 #![feature(const_pin)]
 #![feature(cstr_from_bytes_until_nul)]
+#![feature(deref_patterns)]
 #![feature(dispatch_from_dyn)]
 #![feature(exact_size_is_empty)]
 #![feature(extend_one)]
