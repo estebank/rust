@@ -435,7 +435,7 @@ fn check_fn_args<'cx, 'tcx: 'cx>(
                                 substs.type_at(0),
                             ),
                         ),
-                        _ if Some(adt.did()) == cx.tcx.lang_items().string() => (
+                        Some(sym::String) => (
                             [("clone", ".to_owned()"), ("as_str", "")].as_slice(),
                             DerefTy::Str,
                         ),
