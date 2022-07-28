@@ -18,7 +18,7 @@ use core::marker::{PhantomData, Unpin, Unsize};
 #[cfg(not(no_global_oom_handling))]
 use core::mem::size_of_val;
 use core::mem::{self, align_of_val_raw};
-use core::ops::{CoerceUnsized, Deref, DispatchFromDyn, Receiver};
+use core::ops::{CoerceUnsized, Deref, DerefPure, DispatchFromDyn, Receiver};
 use core::panic::{RefUnwindSafe, UnwindSafe};
 use core::pin::Pin;
 use core::ptr::{self, NonNull};
@@ -1381,6 +1381,9 @@ impl<T: ?Sized> Deref for Arc<T> {
         &self.inner().data
     }
 }
+
+#[unstable(feature = "deref_patterns", issue = "none")]
+unsafe impl<T: ?Sized> DerefPure for Arc<T> {}
 
 #[unstable(feature = "receiver_trait", issue = "none")]
 impl<T: ?Sized> Receiver for Arc<T> {}

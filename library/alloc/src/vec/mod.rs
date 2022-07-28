@@ -2533,6 +2533,9 @@ impl<T, A: Allocator> ops::Deref for Vec<T, A> {
     }
 }
 
+#[unstable(feature = "deref_patterns", issue = "none")]
+unsafe impl<T, A: Allocator> ops::DerefPure for Vec<T, A> {}
+
 #[stable(feature = "rust1", since = "1.0.0")]
 impl<T, A: Allocator> ops::DerefMut for Vec<T, A> {
     #[inline]

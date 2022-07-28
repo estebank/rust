@@ -1521,6 +1521,9 @@ impl<T: ?Sized> Deref for Rc<T> {
     }
 }
 
+#[unstable(feature = "deref_patterns", issue = "none")]
+unsafe impl<T: ?Sized> core::ops::DerefPure for Rc<T> {}
+
 #[unstable(feature = "receiver_trait", issue = "none")]
 impl<T: ?Sized> Receiver for Rc<T> {}
 

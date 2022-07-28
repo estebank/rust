@@ -160,7 +160,7 @@ use core::iter::{FusedIterator, Iterator};
 use core::marker::{Destruct, Unpin, Unsize};
 use core::mem;
 use core::ops::{
-    CoerceUnsized, Deref, DerefMut, DispatchFromDyn, Generator, GeneratorState, Receiver,
+    CoerceUnsized, Deref, DerefMut, DerefPure, DispatchFromDyn, Generator, GeneratorState, Receiver,
 };
 use core::pin::Pin;
 use core::ptr::{self, Unique};
@@ -1850,6 +1850,9 @@ impl<T: ?Sized, A: Allocator> const Deref for Box<T, A> {
         &**self
     }
 }
+
+#[unstable(feature = "deref_patterns", issue = "none")]
+unsafe impl<T: ?Sized, A: Allocator> DerefPure for Box<T, A> {}
 
 #[stable(feature = "rust1", since = "1.0.0")]
 #[rustc_const_unstable(feature = "const_box", issue = "92521")]
