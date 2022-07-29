@@ -13,7 +13,7 @@ use rustc_hir::{HirId, Pat, PatKind};
 use rustc_infer::infer;
 use rustc_infer::infer::type_variable::{TypeVariableOrigin, TypeVariableOriginKind};
 use rustc_middle::middle::stability::EvalResult;
-use rustc_middle::ty::{self, Adt, BindingMode, Ty, TypeVisitable};
+use rustc_middle::ty::{self, Adt, BindingMode, ToPredicate, Ty, TypeVisitable};
 use rustc_session::lint::builtin::NON_EXHAUSTIVE_OMITTED_PATTERNS;
 use rustc_span::hygiene::DesugaringKind;
 use rustc_span::lev_distance::find_best_match_for_name;
@@ -21,7 +21,8 @@ use rustc_span::source_map::{Span, Spanned};
 use rustc_span::symbol::{kw, sym, Ident};
 use rustc_span::{BytePos, DUMMY_SP};
 use rustc_trait_selection::autoderef::Autoderef;
-use rustc_trait_selection::traits::{ObligationCause, Pattern};
+use rustc_trait_selection::traits::query::evaluate_obligation::InferCtxtExt;
+use rustc_trait_selection::traits::{self, ObligationCause, Pattern};
 use ty::VariantDef;
 
 use std::cmp;
@@ -424,14 +425,35 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             && let Ok(deref_pure) = self.tcx.lang_items().require(hir::LangItem::DerefPure)
         {
             let expected = self.resolve_vars_if_possible(expected);
-            // FIXME: this should be an obligation check for <Ty as Deref<Target=Ty>>.
-            if self.tcx.find_map_relevant_impl(deref_pure, expected, Some).is_some()
-                // FIXME: This shouldn't be needed! It is to avoid breaking current inference
-                // behavior, which means that the code as written will not work with container
-                // types, like Box.
-                && !expected.needs_infer()
-            {
-                pat_ty = expected;
+            // `expected` is the type of the `match`ed value. If it `impl DerefPure`, `expected` and
+            // `pat_ty` don't match, and `<expected as Deref>::Target = pat_ty` holds, we will
+            // accept it.
+            if self.tcx.find_map_relevant_impl(deref_pure, expected, Some).is_some() {
+                // `<Expected as core::ops::Deref>::Target`
+                let item_def_id= self.tcx.require_lang_item(hir::LangItem::DerefTarget, None);
+                let substs = self.tcx.mk_substs_trait(expected, &[]);
+                let projection_ty = ty::ProjectionTy { item_def_id, substs };
+
+                let mk_obligation = |ty| traits::Obligation {
+                    cause: ObligationCause::misc(span, self.body_id),
+                    param_env: self.param_env,
+                    recursion_depth: 0,
+                    predicate: ty::Binder::dummy(ty::ProjectionPredicate {
+                        projection_ty,
+                        term: ty::Term::Ty(ty),
+                    }).to_predicate(self.tcx),
+                };
+                let o = mk_obligation(pat_ty);
+                let mut holds = self.infcx.predicate_must_hold_modulo_regions(&o);
+                if let ty::Ref(_, ty, _) = pat_ty.kind() && !holds {
+                    // impl Deref for String {
+                    //     type Target = str;
+                    // ^ Because of this, when we have a string literal, we need to remove one &.
+                    holds |= self.infcx.predicate_must_hold_modulo_regions(&mk_obligation(*ty));
+                };
+                if holds {
+                    pat_ty = expected;
+                }
             }
         }
 
