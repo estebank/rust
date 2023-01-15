@@ -553,7 +553,8 @@ impl<'v> ast_visit::Visitor<'v> for StatCollector<'v> {
                 Slice,
                 Rest,
                 Paren,
-                MacCall
+                MacCall,
+                Ascription
             ]
         );
         ast_visit::walk_pat(self, p)
@@ -579,6 +580,7 @@ impl<'v> ast_visit::Visitor<'v> for StatCollector<'v> {
             [
                 Slice,
                 Array,
+                AnonEnum,
                 Ptr,
                 Ref,
                 BareFn,

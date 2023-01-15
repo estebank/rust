@@ -2,89 +2,212 @@ error: expected one of `@` or `|`, found `:`
   --> $DIR/issue-87086-colon-path-sep.rs:17:12
    |
 LL |         Foo:Bar => {}
-   |            ^
+   |            ^--- specifying the type of a pattern isn't supported
    |            |
    |            expected one of `@` or `|`
-   |            help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         Foo::Bar => {}
+   |            ~~
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `{`, or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:23:17
+  --> $DIR/issue-87086-colon-path-sep.rs:25:17
    |
 LL |         qux::Foo:Bar => {}
-   |                 ^
+   |                 ^--- specifying the type of a pattern isn't supported
    |                 |
    |                 expected one of 8 possible tokens
-   |                 help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         qux::Foo::Bar => {}
+   |                 ~~
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:29:12
+  --> $DIR/issue-87086-colon-path-sep.rs:34:12
    |
 LL |         qux:Foo::Baz => {}
-   |            ^
+   |            ^-------- specifying the type of a pattern isn't supported
    |            |
    |            expected one of `@` or `|`
-   |            help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         qux::Foo::Baz => {}
+   |            ~~
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:35:12
+  --> $DIR/issue-87086-colon-path-sep.rs:42:12
    |
 LL |         qux: Foo::Baz if true => {}
-   |            ^
+   |            ^ -------- specifying the type of a pattern isn't supported
    |            |
    |            expected one of `@` or `|`
-   |            help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         qux::Foo::Baz if true => {}
+   |            ~~
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:40:15
+  --> $DIR/issue-87086-colon-path-sep.rs:49:15
    |
 LL |     if let Foo:Bar = f() {
-   |               ^
+   |               ^--- specifying the type of a pattern isn't supported
    |               |
    |               expected one of `@` or `|`
-   |               help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |     if let Foo::Bar = f() {
+   |               ~~
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:48:16
+  --> $DIR/issue-87086-colon-path-sep.rs:59:16
    |
 LL |         ref qux: Foo::Baz => {}
-   |                ^
+   |                ^ -------- specifying the type of a pattern isn't supported
    |                |
    |                expected one of `@` or `|`
-   |                help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         ref qux::Foo::Baz => {}
+   |                ~~
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:57:16
+  --> $DIR/issue-87086-colon-path-sep.rs:70:16
    |
 LL |         mut qux: Foo::Baz => {}
-   |                ^
+   |                ^ -------- specifying the type of a pattern isn't supported
    |                |
    |                expected one of `@` or `|`
-   |                help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         mut qux::Foo::Baz => {}
+   |                ~~
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:68:12
+  --> $DIR/issue-87086-colon-path-sep.rs:83:12
    |
 LL |         Foo:Bar::Baz => {}
-   |            ^
+   |            ^-------- specifying the type of a pattern isn't supported
    |            |
    |            expected one of `@` or `|`
-   |            help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         Foo::Bar::Baz => {}
+   |            ~~
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:75:12
+  --> $DIR/issue-87086-colon-path-sep.rs:90:12
    |
 LL |         Foo:Bar => {}
-   |            ^
+   |            ^--- specifying the type of a pattern isn't supported
    |            |
    |            expected one of `@` or `|`
-   |            help: maybe write a path separator here: `::`
+   |
+help: maybe write a path separator here
+   |
+LL |         Foo::Bar => {}
+   |            ~~
 
-error[E0433]: failed to resolve: `Bar` is a variant, not a module
-  --> $DIR/issue-87086-colon-path-sep.rs:68:13
+error[E0433]: failed to resolve: use of undeclared type `Bar`
+  --> $DIR/issue-87086-colon-path-sep.rs:83:13
    |
 LL |         Foo:Bar::Baz => {}
-   |             ^^^ `Bar` is a variant, not a module
+   |             ^^^ use of undeclared type `Bar`
 
-error: aborting due to 10 previous errors
+error[E0412]: cannot find type `Bar` in this scope
+  --> $DIR/issue-87086-colon-path-sep.rs:17:13
+   |
+LL |         Foo:Bar => {}
+   |             ^^^ not found in this scope
+   |
+help: there is an enum variant `Foo::Bar`; try using the variant's enum
+   |
+LL |         Foo:Foo => {}
+   |             ~~~
 
-For more information about this error, try `rustc --explain E0433`.
+error[E0412]: cannot find type `Bar` in this scope
+  --> $DIR/issue-87086-colon-path-sep.rs:25:18
+   |
+LL |         qux::Foo:Bar => {}
+   |                  ^^^ not found in this scope
+   |
+help: there is an enum variant `Foo::Bar`; try using the variant's enum
+   |
+LL |         qux::Foo:Foo => {}
+   |                  ~~~
+
+error[E0532]: expected unit struct, unit variant or constant, found enum `qux::Foo`
+  --> $DIR/issue-87086-colon-path-sep.rs:25:9
+   |
+LL |         qux::Foo:Bar => {}
+   |         ^^^^^^^^ not a unit struct, unit variant or constant
+
+error[E0573]: expected type, found variant `Foo::Baz`
+  --> $DIR/issue-87086-colon-path-sep.rs:34:13
+   |
+LL |         qux:Foo::Baz => {}
+   |             ^^^^^^^^
+   |             |
+   |             not a type
+   |             help: try using the variant's enum: `Foo`
+
+error[E0573]: expected type, found variant `Foo::Baz`
+  --> $DIR/issue-87086-colon-path-sep.rs:42:14
+   |
+LL |         qux: Foo::Baz if true => {}
+   |              ^^^^^^^^
+   |              |
+   |              not a type
+   |              help: try using the variant's enum: `Foo`
+
+error[E0412]: cannot find type `Bar` in this scope
+  --> $DIR/issue-87086-colon-path-sep.rs:49:16
+   |
+LL |     if let Foo:Bar = f() {
+   |                ^^^ not found in this scope
+   |
+help: there is an enum variant `Foo::Bar`; try using the variant's enum
+   |
+LL |     if let Foo:Foo = f() {
+   |                ~~~
+
+error[E0573]: expected type, found variant `Foo::Baz`
+  --> $DIR/issue-87086-colon-path-sep.rs:59:18
+   |
+LL |         ref qux: Foo::Baz => {}
+   |                  ^^^^^^^^
+   |                  |
+   |                  not a type
+   |                  help: try using the variant's enum: `Foo`
+
+error[E0573]: expected type, found variant `Foo::Baz`
+  --> $DIR/issue-87086-colon-path-sep.rs:70:18
+   |
+LL |         mut qux: Foo::Baz => {}
+   |                  ^^^^^^^^
+   |                  |
+   |                  not a type
+   |                  help: try using the variant's enum: `Foo`
+
+error[E0412]: cannot find type `Bar` in this scope
+  --> $DIR/issue-87086-colon-path-sep.rs:90:13
+   |
+LL |         Foo:Bar => {}
+   |             ^^^ not found in this scope
+   |
+help: there is an enum variant `Foo::Bar`; try using the variant's enum
+   |
+LL |         Foo:Foo => {}
+   |             ~~~
+
+error: aborting due to 19 previous errors
+
+Some errors have detailed explanations: E0412, E0433, E0532, E0573.
+For more information about an error, try `rustc --explain E0412`.

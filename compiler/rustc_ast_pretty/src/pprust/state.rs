@@ -1041,6 +1041,9 @@ impl<'a> State<'a> {
                 }
                 self.pclose();
             }
+            ast::TyKind::AnonEnum(elts) => {
+                self.strsep("|", false, Inconsistent, elts, |s, ty| s.print_type(ty));
+            }
             ast::TyKind::Paren(typ) => {
                 self.popen();
                 self.print_type(typ);
@@ -1524,6 +1527,11 @@ impl<'a> State<'a> {
                 self.pclose();
             }
             PatKind::MacCall(m) => self.print_mac(m),
+            PatKind::Ascription(pat, ty) => {
+                self.print_pat(pat);
+                self.word_nbsp(":");
+                self.print_type(ty);
+            }
         }
         self.ann.post(self, AnnNode::Pat(pat))
     }

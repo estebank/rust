@@ -603,7 +603,7 @@ impl Pat {
 
         match &self.kind {
             // Walk into the pattern associated with `Ident` (if any).
-            PatKind::Ident(_, _, Some(p)) => p.walk(it),
+            PatKind::Ascription(p, _) | PatKind::Ident(_, _, Some(p)) => p.walk(it),
 
             // Walk into each field of struct.
             PatKind::Struct(_, _, fields, _) => fields.iter().for_each(|field| field.pat.walk(it)),
@@ -773,6 +773,8 @@ pub enum PatKind {
 
     /// A macro pattern; pre-expansion.
     MacCall(P<MacCall>),
+
+    Ascription(P<Pat>, P<Ty>),
 }
 
 #[derive(Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Debug, Copy)]
@@ -2096,6 +2098,9 @@ pub enum TyKind {
     Err,
     /// Placeholder for a `va_list`.
     CVarArgs,
+    /// Placeholder for "anonymous enums", which don't exist, but keeping their
+    /// information around lets us produce better diagnostics.
+    AnonEnum(Vec<P<Ty>>),
 }
 
 impl TyKind {

@@ -470,7 +470,7 @@ pub fn noop_visit_ty<T: MutVisitor>(ty: &mut P<Ty>, vis: &mut T) {
             vis.visit_fn_decl(decl);
             vis.visit_span(decl_span);
         }
-        TyKind::Tup(tys) => visit_vec(tys, |ty| vis.visit_ty(ty)),
+        TyKind::AnonEnum(tys) | TyKind::Tup(tys) => visit_vec(tys, |ty| vis.visit_ty(ty)),
         TyKind::Paren(ty) => vis.visit_ty(ty),
         TyKind::Path(qself, path) => {
             vis.visit_qself(qself);
@@ -1246,6 +1246,10 @@ pub fn noop_visit_pat<T: MutVisitor>(pat: &mut P<Pat>, vis: &mut T) {
         }
         PatKind::Paren(inner) => vis.visit_pat(inner),
         PatKind::MacCall(mac) => vis.visit_mac_call(mac),
+        PatKind::Ascription(p, t) => {
+            vis.visit_pat(p);
+            vis.visit_ty(t);
+        }
     }
     vis.visit_span(span);
     visit_lazy_tts(tokens, vis);

@@ -400,8 +400,8 @@ pub fn walk_ty<'a, V: Visitor<'a>>(visitor: &mut V, typ: &'a Ty) {
             walk_list!(visitor, visit_lifetime, opt_lifetime, LifetimeCtxt::Ref);
             visitor.visit_ty(&mutable_type.ty)
         }
-        TyKind::Tup(tuple_element_types) => {
-            walk_list!(visitor, visit_ty, tuple_element_types);
+        TyKind::AnonEnum(tys) | TyKind::Tup(tys) => {
+            walk_list!(visitor, visit_ty, tys);
         }
         TyKind::BareFn(function_declaration) => {
             walk_list!(visitor, visit_generic_param, &function_declaration.generic_params);
@@ -547,6 +547,10 @@ pub fn walk_pat<'a, V: Visitor<'a>>(visitor: &mut V, pattern: &'a Pat) {
             walk_list!(visitor, visit_pat, elems);
         }
         PatKind::MacCall(mac) => visitor.visit_mac_call(mac),
+        PatKind::Ascription(p, t) => {
+            visitor.visit_pat(p);
+            visitor.visit_ty(t);
+        }
     }
 }
 
