@@ -765,6 +765,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             | ty::Closure(..)
             | ty::Generator(..)
             | ty::Tuple(_)
+            | ty::AnonEnum(_)
             | ty::GeneratorWitness(_) => {
                 // These are built-in, and cannot have a custom `impl const Destruct`.
                 candidates.vec.push(ConstDestructCandidate(None));
@@ -831,6 +832,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             | ty::Param(_)
             | ty::Bound(_, _)
             | ty::Error(_)
+            | ty::AnonEnum(_)
             | ty::Infer(_)
             | ty::Placeholder(_) => {}
         }

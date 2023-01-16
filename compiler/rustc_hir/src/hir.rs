@@ -1008,6 +1008,9 @@ impl<'hir> Pat<'hir> {
             Slice(before, slice, after) => {
                 before.iter().chain(slice).chain(after.iter()).all(|p| p.walk_short_(it))
             }
+            Ascription(pat, _ty) => {
+                pat.walk_short_(it)
+            }
         }
     }
 
@@ -1035,6 +1038,9 @@ impl<'hir> Pat<'hir> {
             TupleStruct(_, s, _) | Tuple(s, _) | Or(s) => s.iter().for_each(|p| p.walk_(it)),
             Slice(before, slice, after) => {
                 before.iter().chain(slice).chain(after.iter()).for_each(|p| p.walk_(it))
+            }
+            Ascription(pat, _ty) => {
+                pat.walk_(it);
             }
         }
     }
@@ -1122,6 +1128,8 @@ impl fmt::Debug for DotDotPos {
 pub enum PatKind<'hir> {
     /// Represents a wildcard pattern (i.e., `_`).
     Wild,
+
+    Ascription(&'hir Pat<'hir>, &'hir Ty<'hir>),
 
     /// A fresh binding `ref mut binding @ OPT_SUBPATTERN`.
     /// The `HirId` is the canonical ID for the variable being bound,
@@ -2622,6 +2630,8 @@ pub enum TyKind<'hir> {
     Infer,
     /// Placeholder for a type that has failed to be defined.
     Err,
+    /// Placeholder for `A | B | C | D | ...`.
+    AnonEnum(&'hir [Ty<'hir>]),
 }
 
 #[derive(Debug, HashStable_Generic)]

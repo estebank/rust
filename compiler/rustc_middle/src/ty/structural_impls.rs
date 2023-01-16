@@ -635,6 +635,7 @@ impl<'tcx> TypeSuperFoldable<'tcx> for Ty<'tcx> {
                 representation,
             ),
             ty::Tuple(ts) => ty::Tuple(ts.try_fold_with(folder)?),
+            ty::AnonEnum(ts) => ty::AnonEnum(ts.try_fold_with(folder)?),
             ty::FnDef(def_id, substs) => ty::FnDef(def_id, substs.try_fold_with(folder)?),
             ty::FnPtr(f) => ty::FnPtr(f.try_fold_with(folder)?),
             ty::Ref(r, ty, mutbl) => {
@@ -681,6 +682,7 @@ impl<'tcx> TypeSuperVisitable<'tcx> for Ty<'tcx> {
                 reg.visit_with(visitor)
             }
             ty::Tuple(ts) => ts.visit_with(visitor),
+            ty::AnonEnum(ts) => ts.visit_with(visitor),
             ty::FnDef(_, substs) => substs.visit_with(visitor),
             ty::FnPtr(ref f) => f.visit_with(visitor),
             ty::Ref(r, ty, _) => {

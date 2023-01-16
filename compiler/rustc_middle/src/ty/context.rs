@@ -1455,6 +1455,7 @@ impl<'tcx> TyCtxt<'tcx> {
                     Dynamic,
                     Closure,
                     Tuple,
+                    AnonEnum,
                     Bound,
                     Param,
                     Infer,
@@ -1866,6 +1867,10 @@ impl<'tcx> TyCtxt<'tcx> {
 
     pub fn mk_tup<I: InternAs<Ty<'tcx>, Ty<'tcx>>>(self, iter: I) -> I::Output {
         iter.intern_with(|ts| self.mk_ty(Tuple(self.intern_type_list(&ts))))
+    }
+
+    pub fn mk_anon_enum<I: InternAs<Ty<'tcx>, Ty<'tcx>>>(self, iter: I) -> I::Output {
+        iter.intern_with(|ts| self.mk_ty(AnonEnum(self.intern_type_list(&ts))))
     }
 
     #[inline]

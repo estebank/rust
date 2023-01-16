@@ -674,6 +674,12 @@ pub trait PrettyPrinter<'tcx>:
                 }
                 p!(")")
             }
+            ty::AnonEnum(tys) => {
+                for ty in tys {
+                    p!(print(ty));
+                    p!(write("|"));
+                }
+            }
             ty::FnDef(def_id, substs) => {
                 let sig = self.tcx().bound_fn_sig(def_id).subst(self.tcx(), substs);
                 p!(print(sig), " {{", print_value_path(def_id, substs), "}}");

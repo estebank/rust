@@ -1607,6 +1607,7 @@ fn assemble_candidates_from_impls<'cx, 'tcx>(
                         | ty::GeneratorWitness(..)
                         | ty::Never
                         | ty::Tuple(..)
+                        | ty::AnonEnum(_)
                         // Integers and floats always have `u8` as their discriminant.
                         | ty::Infer(ty::InferTy::IntVar(_) | ty::InferTy::FloatVar(..)) => true,
 
@@ -1654,6 +1655,7 @@ fn assemble_candidates_from_impls<'cx, 'tcx>(
                         | ty::Closure(..)
                         | ty::Generator(..)
                         | ty::GeneratorWitness(..)
+                        | ty::AnonEnum(_)
                         | ty::Never
                         // Extern types have unit metadata, according to RFC 2850
                         | ty::Foreign(_)

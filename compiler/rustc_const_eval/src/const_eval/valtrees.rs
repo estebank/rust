@@ -124,6 +124,10 @@ pub(crate) fn const_to_valtree_inner<'tcx>(
             branches(ecx, place, elem_tys.len(), None, num_nodes)
         }
 
+        ty::AnonEnum(elem_tys) => {
+            branches(ecx, place, elem_tys.len(), None, num_nodes)
+        }
+
         ty::Adt(def, _) => {
             if def.is_union() {
                 return Err(ValTreeCreationError::NonSupportedType);
@@ -276,7 +280,7 @@ pub fn valtree_to_const_value<'tcx>(
                 "ValTrees for Bool, Int, Uint, Float or Char should have the form ValTree::Leaf"
             ),
         },
-        ty::Ref(_, _, _) | ty::Tuple(_) | ty::Array(_, _) | ty::Adt(..) => {
+        ty::Ref(_, _, _) | ty::Tuple(_) | ty::Array(_, _) | ty::Adt(..) | ty::AnonEnum(_) => {
             let mut place = match ty.kind() {
                 ty::Ref(_, inner_ty, _) => {
                     // Need to create a place for the pointee to fill for Refs

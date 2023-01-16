@@ -554,6 +554,12 @@ impl<'tcx> WfPredicates<'tcx> {
                     }
                 }
 
+                ty::AnonEnum(tys) => {
+                    for elem in tys {
+                        self.require_sized(elem, traits::MiscObligation);
+                    }
+                }
+
                 ty::RawPtr(_) => {
                     // Simple cases that are WF if their type args are WF.
                 }

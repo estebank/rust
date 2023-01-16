@@ -281,6 +281,7 @@ fn characteristic_def_id_of_type_cached<'a>(
         | ty::Error(_)
         | ty::GeneratorWitness(..)
         | ty::Never
+        | ty::AnonEnum(_)
         | ty::Float(_) => None,
     }
 }

@@ -21,6 +21,9 @@ fn sized_constraint_for_ty<'tcx>(
             vec![ty]
         }
 
+        //AnonEnum(tys) => tys.iter().map(|ty| sized_constraint_for_ty(tcx, adtdef, ty)).collect(),
+        AnonEnum(_) => panic!(),
+
         Tuple(ref tys) => match tys.last() {
             None => vec![],
             Some(&ty) => sized_constraint_for_ty(tcx, adtdef, ty),

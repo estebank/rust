@@ -82,6 +82,7 @@ pub(crate) fn eval_nullary_intrinsic<'tcx>(
             ty::Adt(ref adt, _) => {
                 ConstValue::from_machine_usize(adt.variants().len() as u64, &tcx)
             }
+            ty::AnonEnum(tys) => ConstValue::from_machine_usize(tys.len() as u64, &tcx),
             ty::Alias(..) | ty::Param(_) | ty::Placeholder(_) | ty::Infer(_) => {
                 throw_inval!(TooGeneric)
             }

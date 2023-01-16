@@ -347,6 +347,10 @@ impl<'tcx> LowerInto<'tcx, chalk_ir::Ty<RustInterner<'tcx>>> for Ty<'tcx> {
             ty::Tuple(types) => {
                 chalk_ir::TyKind::Tuple(types.len(), types.as_substs().lower_into(interner))
             }
+            ty::AnonEnum(_) => {
+                // FIXME
+                panic!()
+            }
             ty::Alias(ty::Projection, ty::AliasTy { def_id, substs, .. }) => {
                 chalk_ir::TyKind::Alias(chalk_ir::AliasTy::Projection(chalk_ir::ProjectionTy {
                     associated_ty_id: chalk_ir::AssocTypeId(def_id),

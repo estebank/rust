@@ -289,6 +289,12 @@ fn layout_of_uncached<'tcx>(
             )?
         }
 
+        ty::AnonEnum(tys) => univariant(
+            &tys.iter().map(|k| cx.layout_of(k)).collect::<Result<Vec<_>, _>>()?,
+            &ReprOptions::default(),
+            StructKind::AlwaysSized,
+        )?,
+
         // SIMD vector types.
         ty::Adt(def, substs) if def.repr().simd() => {
             if !def.is_struct() {

@@ -2391,14 +2391,14 @@ impl<'a> Parser<'a> {
                     inner_err.cancel();
                 }
                 Ok(ty) => {
-                    let Err(mut err) = self.expected_one_of_not_found(&[], &[]) else {
-                        return first_pat;
-                    };
-                    err.span_label(ty.span, "specifying the type of a pattern isn't supported");
+                    // let Err(mut err) = self.expected_one_of_not_found(&[], &[]) else {
+                    //     return first_pat;
+                    // };
+                    // err.span_label(ty.span, "specifying the type of a pattern isn't supported");
                     self.restore_snapshot(snapshot_type);
                     let span = first_pat.span.to(ty.span);
                     first_pat = self.mk_pat(span, PatKind::Ascription(orig, ty));
-                    err.emit();
+                    // err.emit();
                 }
             }
             return first_pat;
@@ -2494,18 +2494,24 @@ impl<'a> Parser<'a> {
                         self.restore_snapshot(snapshot_pat);
                     }
                 }
+                let mut cancel = false;
                 match snapshot_type.parse_ty() {
                     Err(inner_err) => {
                         inner_err.cancel();
                     }
                     Ok(ty) => {
-                        err.span_label(ty.span, "specifying the type of a pattern isn't supported");
+                        // err.span_label(ty.span, "specifying the type of a pattern isn't supported");
                         self.restore_snapshot(snapshot_type);
                         let span = first_pat.span.to(ty.span);
                         first_pat = self.mk_pat(span, PatKind::Ascription(orig, ty));
+                        cancel = true;
                     }
                 }
-                err.emit();
+                if cancel {
+                    err.cancel();
+                } else {
+                    err.emit();
+                }
             }
             _ => {
                 // Carry on as if we had not done anything. This should be unreachable.

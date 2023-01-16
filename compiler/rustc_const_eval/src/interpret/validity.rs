@@ -588,6 +588,7 @@ impl<'rt, 'mir, 'tcx: 'mir, M: Machine<'mir, 'tcx>> ValidityVisitor<'rt, 'mir, '
             // check them by visiting their fields/variants.
             ty::Adt(..)
             | ty::Tuple(..)
+            | ty::AnonEnum(_)
             | ty::Array(..)
             | ty::Slice(..)
             | ty::Str

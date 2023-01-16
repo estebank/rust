@@ -416,6 +416,34 @@ pub fn super_relate_tys<'tcx, R: TypeRelation<'tcx>>(
 
         (&ty::Error(guar), _) | (_, &ty::Error(guar)) => Ok(tcx.ty_error_with_guaranteed(guar)),
 
+        (ty::AnonEnum(a_tys), ty::AnonEnum(b_tys)) => {
+            if a_tys.iter().zip(b_tys.iter()).all(|(a, b)| super_relate_tys(relation, a, b).is_ok()) {
+                info!(?a, "1");
+                return Ok(a);
+            }
+            Err(TypeError::Sorts(expected_found(relation, a, b)))
+        }
+
+        // (ty::AnonEnum(tys), _) => {
+        //     for t in *tys {
+        //         if super_relate_tys(relation, t, b).is_ok() {
+        //             info!(?a, "2");
+        //             return Ok(a);
+        //         }
+        //     }
+        //     Err(TypeError::Sorts(expected_found(relation, a, b)))
+        // }
+
+        (_, ty::AnonEnum(tys)) => {
+            for t in *tys {
+                if super_relate_tys(relation, a, t).is_ok() {
+                    info!(?b, "3");
+                    return Ok(b);
+                }
+            }
+            Err(TypeError::Sorts(expected_found(relation, a, b)))
+        }
+
         (&ty::Never, _)
         | (&ty::Char, _)
         | (&ty::Bool, _)

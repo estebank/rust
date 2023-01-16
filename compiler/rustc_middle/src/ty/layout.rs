@@ -747,6 +747,8 @@ where
 
                 ty::Tuple(tys) => TyMaybeWithLayout::Ty(tys[i]),
 
+                ty::AnonEnum(tys) => TyMaybeWithLayout::Ty(tys[i]),
+
                 // ADTs.
                 ty::Adt(def, substs) => {
                     match this.variants {

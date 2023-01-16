@@ -445,6 +445,7 @@ impl<'a, 'tcx> ExprUseVisitor<'a, 'tcx> {
                     PatKind::Or(_)
                     | PatKind::Box(_)
                     | PatKind::Slice(..)
+                    | PatKind::Ascription(..)
                     | PatKind::Ref(..)
                     | PatKind::Wild => {
                         // If the PatKind is Or, Box, Slice or Ref, the decision is made later

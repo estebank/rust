@@ -105,7 +105,10 @@ impl<'a, 'hir> LoweringContext<'a, 'hir> {
                     // return inner to be processed in next loop
                     PatKind::Paren(inner) => pattern = inner,
                     PatKind::MacCall(_) => panic!("{:?} shouldn't exist here", pattern.span),
-                    PatKind::Ascription(..) => break hir::PatKind::Wild,
+                    PatKind::Ascription(pat, ty) => break hir::PatKind::Ascription(
+                        self.lower_pat(pat),
+                        self.lower_ty(ty, &ImplTraitContext::Disallowed(ImplTraitPosition::Variable)),
+                    ),
                 }
             };
 

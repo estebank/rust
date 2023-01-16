@@ -138,6 +138,10 @@ fn push_debuginfo_type_name<'tcx>(
                 output.push(')');
             }
         }
+        ty::AnonEnum(_) => {
+            // FIXME
+            panic!()
+        }
         ty::RawPtr(ty::TypeAndMut { ty: inner_type, mutbl }) => {
             if cpp_like_debuginfo {
                 match mutbl {

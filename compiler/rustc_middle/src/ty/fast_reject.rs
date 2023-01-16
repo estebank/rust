@@ -110,6 +110,7 @@ pub fn simplify_type<'tcx>(
         ty::GeneratorWitness(tys) => Some(GeneratorWitnessSimplifiedType(tys.skip_binder().len())),
         ty::Never => Some(NeverSimplifiedType),
         ty::Tuple(tys) => Some(TupleSimplifiedType(tys.len())),
+        ty::AnonEnum(_) => None,
         ty::FnPtr(f) => Some(FunctionSimplifiedType(f.skip_binder().inputs().len())),
         ty::Placeholder(..) => Some(PlaceholderSimplifiedType),
         ty::Param(_) => match treat_params {
@@ -202,6 +203,7 @@ impl DeepRejectCtxt {
             | ty::Ref(..)
             | ty::Never
             | ty::Tuple(..)
+            | ty::AnonEnum(..)
             | ty::FnPtr(..)
             | ty::Foreign(..) => {}
             ty::FnDef(..)
@@ -255,6 +257,15 @@ impl DeepRejectCtxt {
                 }
                 _ => false,
             },
+            ty::AnonEnum(variants) => {
+                // FIXME
+                for variant in variants {
+                    if self.types_may_unify(variant, impl_ty) {
+                        return true;
+                    }
+                }
+                false
+            }
             ty::RawPtr(obl) => match k {
                 ty::RawPtr(imp) => obl.mutbl == imp.mutbl && self.types_may_unify(obl.ty, imp.ty),
                 _ => false,

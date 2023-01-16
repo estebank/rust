@@ -2052,6 +2052,10 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                 obligation.predicate.rebind(tys.last().map_or_else(Vec::new, |&last| vec![last])),
             ),
 
+            ty::AnonEnum(tys) => Where(
+                obligation.predicate.rebind(tys.last().map_or_else(Vec::new, |&last| vec![last])),
+            ),
+
             ty::Adt(def, substs) => {
                 let sized_crit = def.sized_constraint(self.tcx());
                 // (*) binder moved here
@@ -2112,6 +2116,11 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             | ty::Ref(_, _, hir::Mutability::Mut) => None,
 
             ty::Tuple(tys) => {
+                // (*) binder moved here
+                Where(obligation.predicate.rebind(tys.iter().collect()))
+            }
+
+            ty::AnonEnum(tys) => {
                 // (*) binder moved here
                 Where(obligation.predicate.rebind(tys.iter().collect()))
             }
@@ -2230,6 +2239,11 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             ty::Array(element_ty, _) | ty::Slice(element_ty) => t.rebind(vec![element_ty]),
 
             ty::Tuple(ref tys) => {
+                // (T1, ..., Tn) -- meets any bound that all of T1...Tn meet
+                t.rebind(tys.iter().collect())
+            }
+
+            ty::AnonEnum(ref tys) => {
                 // (T1, ..., Tn) -- meets any bound that all of T1...Tn meet
                 t.rebind(tys.iter().collect())
             }

@@ -452,6 +452,7 @@ impl<'cx, 'tcx> TypeFolder<'tcx> for Canonicalizer<'cx, 'tcx> {
             | ty::Dynamic(..)
             | ty::Never
             | ty::Tuple(..)
+            | ty::AnonEnum(..)
             | ty::Alias(..)
             | ty::Foreign(..)
             | ty::Param(..) => {

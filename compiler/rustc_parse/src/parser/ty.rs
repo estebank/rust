@@ -371,12 +371,12 @@ impl<'a> Parser<'a> {
                     RecoverAnonEnum::No,
                 )?);
             }
-            let mut err = self.struct_span_err(pipes, "anonymous `enum`s are not supported");
-            for ty in &types {
-                err.span_label(ty.span, "");
-            }
-            err.help("create a named `enum` instead");
-            err.emit();
+            // let mut err = self.struct_span_err(pipes, "anonymous `enum`s are not supported");
+            // for ty in &types {
+            //     err.span_label(ty.span, "");
+            // }
+            // err.help("create a named `enum` instead");
+            // err.emit();
             return Ok(self.mk_ty(lo.to(self.prev_token.span), TyKind::AnonEnum(types)));
         }
         if allow_qpath_recovery { self.maybe_recover_from_bad_qpath(ty) } else { Ok(ty) }

@@ -194,6 +194,7 @@ fn push_inner<'tcx>(stack: &mut TypeWalkerStack<'tcx>, parent: GenericArg<'tcx>)
                 stack.extend(substs.iter().rev());
             }
             ty::Tuple(ts) => stack.extend(ts.as_substs().iter().rev()),
+            ty::AnonEnum(ts) => stack.extend(ts.as_substs().iter().rev()),
             ty::GeneratorWitness(ts) => {
                 stack.extend(ts.skip_binder().iter().rev().map(|ty| ty.into()));
             }

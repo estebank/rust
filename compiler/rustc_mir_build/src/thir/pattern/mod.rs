@@ -247,6 +247,25 @@ impl<'a, 'tcx> PatCtxt<'a, 'tcx> {
 
             hir::PatKind::Lit(value) => self.lower_lit(value),
 
+            hir::PatKind::Ascription(pat, as_ty) => {
+                // FIXME
+                let pat = self.lower_pattern(pat);
+                info!("{pat:?} {as_ty:?} {ty:?}");
+                // PatKind::AscribeUserType { ascription: ty, subpattern: pat }
+                // let annotation = CanonicalUserTypeAnnotation {
+                //     user_ty: Box::new(ty),
+                //     span,
+                //     inferred_ty: self.typeck_results().node_type(pat.hir_id),
+                // };
+                // PatKind::AscribeUserType {
+                //     subpattern: pat,
+                //     ascription: Ascription {
+                //         annotation,
+                //         variance: ty::Variance::Contravariant,
+                //     },
+                // }
+                PatKind::Deref { subpattern: pat }
+            }
             hir::PatKind::Range(ref lo_expr, ref hi_expr, end) => {
                 let (lo_expr, hi_expr) = (lo_expr.as_deref(), hi_expr.as_deref());
                 let lo_span = lo_expr.map_or(pat.span, |e| e.span);

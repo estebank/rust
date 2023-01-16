@@ -182,6 +182,13 @@ fn dtorck_constraint_for_ty<'tcx>(
             Ok::<_, NoSolution>(())
         })?,
 
+        ty::AnonEnum(tys) => rustc_data_structures::stack::ensure_sufficient_stack(|| {
+            for ty in tys.iter() {
+                dtorck_constraint_for_ty(tcx, span, for_ty, depth + 1, ty, constraints)?;
+            }
+            Ok::<_, NoSolution>(())
+        })?,
+
         ty::Closure(_, substs) => {
             if !substs.as_closure().is_valid() {
                 // By the time this code runs, all type variables ought to

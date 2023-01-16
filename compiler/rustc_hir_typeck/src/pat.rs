@@ -177,6 +177,12 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 }
                 expected
             }
+            PatKind::Ascription(pat, ty) =>{
+                // FIXME allow expected to lower to ty.
+                info!(?expected, ?ty);
+                self.check_pat(pat, expected, def_bm, ti);
+                expected
+            }
             PatKind::Tuple(elements, ddpos) => {
                 self.check_pat_tuple(pat.span, elements, ddpos, expected, def_bm, ti)
             }
@@ -313,6 +319,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
             // Also, we can have a subpattern `binding @ pat`.
             // Each side of the `@` should be treated independently (like with OR-patterns).
             | PatKind::Binding(..)
+            | PatKind::Ascription(..)
             // An OR-pattern just propagates to each individual alternative.
             // This is maximally flexible, allowing e.g., `Some(mut x) | &Some(mut x)`.
             // In that example, `Some(mut x)` results in `Peel` whereas `&Some(mut x)` in `Reset`.
@@ -729,6 +736,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                         | PatKind::Box(..)
                         | PatKind::Ref(..)
                         | PatKind::Lit(..)
+                        | PatKind::Ascription(..)
                         | PatKind::Range(..) => break 'block None,
                     },
 

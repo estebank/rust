@@ -205,6 +205,7 @@ impl<'a, 'tcx> TypeFolder<'tcx> for TypeFreshener<'a, 'tcx> {
             | ty::Dynamic(..)
             | ty::Never
             | ty::Tuple(..)
+            | ty::AnonEnum(_)
             | ty::Alias(..)
             | ty::Foreign(..)
             | ty::Param(..)

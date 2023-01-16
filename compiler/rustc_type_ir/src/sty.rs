@@ -166,6 +166,9 @@ pub enum TyKind<I: Interner> {
     /// A tuple type. For example, `(i32, bool)`.
     Tuple(I::ListTy),
 
+    /// An anonymous enum type. For example, `i32 | bool`.
+    AnonEnum(I::ListTy),
+
     /// A projection or opaque type. Both of these types
     Alias(AliasKind, I::AliasTy),
 
@@ -241,6 +244,7 @@ const fn tykind_discriminant<I: Interner>(value: &TyKind<I>) -> usize {
         Placeholder(_) => 23,
         Infer(_) => 24,
         Error(_) => 25,
+        AnonEnum(_) => 26,
     }
 }
 
@@ -274,6 +278,7 @@ impl<I: Interner> Clone for TyKind<I> {
             Placeholder(p) => Placeholder(p.clone()),
             Infer(t) => Infer(t.clone()),
             Error(e) => Error(e.clone()),
+            AnonEnum(t) => AnonEnum(t.clone()),
         }
     }
 }
@@ -422,6 +427,7 @@ impl<I: Interner> hash::Hash for TyKind<I> {
             }
             GeneratorWitness(g) => g.hash(state),
             Tuple(t) => t.hash(state),
+            AnonEnum(t) => t.hash(state),
             Alias(i, p) => {
                 i.hash(state);
                 p.hash(state);
@@ -463,6 +469,7 @@ impl<I: Interner> fmt::Debug for TyKind<I> {
             GeneratorWitness(g) => f.debug_tuple_field1_finish("GeneratorWitness", g),
             Never => f.write_str("Never"),
             Tuple(t) => f.debug_tuple_field1_finish("Tuple", t),
+            AnonEnum(t) => f.debug_tuple_field1_finish("AnonEnum", t),
             Alias(i, a) => f.debug_tuple_field2_finish("Alias", i, a),
             Param(p) => f.debug_tuple_field1_finish("Param", p),
             Bound(d, b) => f.debug_tuple_field2_finish("Bound", d, b),
@@ -561,6 +568,9 @@ where
             }),
             Never => e.emit_enum_variant(disc, |_| {}),
             Tuple(substs) => e.emit_enum_variant(disc, |e| {
+                substs.encode(e);
+            }),
+            AnonEnum(substs) => e.emit_enum_variant(disc, |e| {
                 substs.encode(e);
             }),
             Alias(k, p) => e.emit_enum_variant(disc, |e| {
@@ -744,6 +754,9 @@ where
             }
             Never => {}
             Tuple(substs) => {
+                substs.hash_stable(__hcx, __hasher);
+            }
+            AnonEnum(substs) => {
                 substs.hash_stable(__hcx, __hasher);
             }
             Alias(k, p) => {

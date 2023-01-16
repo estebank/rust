@@ -323,6 +323,9 @@ impl<'a> State<'a> {
                 }
                 self.pclose();
             }
+            hir::TyKind::AnonEnum(elts) => {
+                self.strsep("|", false, Inconsistent, elts, |s, ty| s.print_type(ty));
+            }
             hir::TyKind::BareFn(f) => {
                 self.print_ty_fn(f.abi, f.unsafety, f.decl, None, f.generic_params, f.param_names);
             }
@@ -1754,6 +1757,11 @@ impl<'a> State<'a> {
                     self.word("@");
                     self.print_pat(p);
                 }
+            }
+            PatKind::Ascription(pat, ty) => {
+                self.print_pat(pat);
+                self.word_nbsp(":");
+                self.print_type(ty);
             }
             PatKind::TupleStruct(ref qpath, elts, ddpos) => {
                 self.print_qpath(qpath, true);

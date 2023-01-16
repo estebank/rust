@@ -210,6 +210,10 @@ impl FlagComputation {
                 self.add_tys(types);
             }
 
+            &ty::AnonEnum(types) => {
+                self.add_tys(types);
+            }
+
             &ty::FnDef(_, substs) => {
                 self.add_substs(substs);
             }

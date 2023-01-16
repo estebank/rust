@@ -114,6 +114,27 @@ impl<'tcx> InferCtxt<'tcx> {
                 self.unify_float_variable(!a_is_expected, v_id, v)
             }
 
+            (&ty::Infer(_), ty::AnonEnum(tys)) => {
+                for t in *tys {
+                    if self.super_combine_tys(relation, a, t).is_ok() {
+                        info!(?b, "asdf");
+                        return Ok(b);
+                    }
+                }
+                Err(TypeError::Sorts(ty::relate::expected_found(relation, a, b)))
+            }
+
+            // FIXME: we need to change this in the MIR so that we don't get bad assignment
+            // in compiler/rustc_borrowck/src/type_check/mod.rs:1187
+            (ty::AnonEnum(tys), &ty::Infer(_)) => {
+                for t in *tys {
+                    if self.super_combine_tys(relation, t, b).is_ok() {
+                        return Ok(a);
+                    }
+                }
+                Err(TypeError::Sorts(ty::relate::expected_found(relation, a, b)))
+            }
+
             // All other cases of inference are errors
             (&ty::Infer(_), _) | (_, &ty::Infer(_)) => {
                 Err(TypeError::Sorts(ty::relate::expected_found(relation, a, b)))

@@ -285,7 +285,7 @@ impl<'v> hir_visit::Visitor<'v> for StatCollector<'v> {
     fn visit_pat(&mut self, p: &'v hir::Pat<'v>) {
         record_variants!(
             (self, p, p.kind, Id::Node(p.hir_id), hir, Pat, PatKind),
-            [Wild, Binding, Struct, TupleStruct, Or, Path, Tuple, Box, Ref, Lit, Range, Slice]
+            [Wild, Ascription, Binding, Struct, TupleStruct, Or, Path, Tuple, Box, Ref, Lit, Range, Slice]
         );
         hir_visit::walk_pat(self, p)
     }
@@ -333,6 +333,7 @@ impl<'v> hir_visit::Visitor<'v> for StatCollector<'v> {
                 TraitObject,
                 Typeof,
                 Infer,
+                AnonEnum,
                 Err
             ]
         );

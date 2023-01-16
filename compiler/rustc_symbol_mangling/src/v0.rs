@@ -437,6 +437,15 @@ impl<'tcx> Printer<'tcx> for &mut SymbolMangler<'tcx> {
                 self.push("E");
             }
 
+            // FIXME
+            ty::AnonEnum(tys) => {
+                self.push("X");
+                for ty in tys.iter() {
+                    self = ty.print(self)?;
+                }
+                self.push("Y");
+            }
+
             // Mangle all nominal types as paths.
             ty::Adt(ty::AdtDef(Interned(&ty::AdtDefData { did: def_id, .. }, _)), substs)
             | ty::FnDef(def_id, substs)

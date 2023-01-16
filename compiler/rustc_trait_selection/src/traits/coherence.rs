@@ -659,6 +659,8 @@ impl<'tcx> TypeVisitor<'tcx> for OrphanChecker<'tcx> {
             | ty::RawPtr(..)
             | ty::Never
             | ty::Tuple(..)
+            // FIXME: Do we want to allow `impl Trait for u32 | f64 {}`?
+            | ty::AnonEnum(..)
             | ty::Alias(ty::Projection, ..) => self.found_non_local_ty(ty),
 
             ty::Param(..) => self.found_param_ty(ty),

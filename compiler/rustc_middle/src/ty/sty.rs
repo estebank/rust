@@ -2147,6 +2147,12 @@ impl<'tcx> Ty<'tcx> {
                 tcx.mk_projection(assoc_items[0], tcx.intern_substs(&[self.into()]))
             }
 
+            // FIXME
+            ty::AnonEnum(tys) => match tys.len() {
+                0..=255 => tcx.types.u8,
+                _ => tcx.types.u64,
+            },
+
             ty::Bool
             | ty::Char
             | ty::Int(_)
@@ -2202,6 +2208,7 @@ impl<'tcx> Ty<'tcx> {
             | ty::Array(..)
             | ty::Closure(..)
             | ty::Never
+            | ty::AnonEnum(_)
             | ty::Error(_)
             // Extern types have metadata = ().
             | ty::Foreign(..)
@@ -2294,6 +2301,8 @@ impl<'tcx> Ty<'tcx> {
 
             ty::Tuple(tys) => tys.iter().all(|ty| ty.is_trivially_sized(tcx)),
 
+            ty::AnonEnum(tys) => tys.iter().all(|ty| ty.is_trivially_sized(tcx)),
+
             ty::Adt(def, _substs) => def.sized_constraint(tcx).0.is_empty(),
 
             ty::Alias(..) | ty::Param(_) => false,
@@ -2337,6 +2346,8 @@ impl<'tcx> Ty<'tcx> {
             ty::Tuple(field_tys) => {
                 field_tys.len() <= 3 && field_tys.iter().all(Self::is_trivially_pure_clone_copy)
             }
+
+            ty::AnonEnum(field_tys) => field_tys.iter().all(Self::is_trivially_pure_clone_copy),
 
             // Sometimes traits aren't implemented for every ABI or arity,
             // because we can't be generic over everything yet.

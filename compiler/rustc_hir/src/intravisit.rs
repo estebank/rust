@@ -636,6 +636,10 @@ pub fn walk_pat<'v, V: Visitor<'v>>(visitor: &mut V, pattern: &'v Pat<'v>) {
         PatKind::Tuple(tuple_elements, _) => {
             walk_list!(visitor, visit_pat, tuple_elements);
         }
+        PatKind::Ascription(pat, ty) => {
+            visitor.visit_pat(pat);
+            visitor.visit_ty(ty);
+        }
         PatKind::Box(ref subpattern) | PatKind::Ref(ref subpattern, _) => {
             visitor.visit_pat(subpattern)
         }
@@ -815,8 +819,8 @@ pub fn walk_ty<'v, V: Visitor<'v>>(visitor: &mut V, typ: &'v Ty<'v>) {
             visitor.visit_ty(mutable_type.ty)
         }
         TyKind::Never => {}
-        TyKind::Tup(tuple_element_types) => {
-            walk_list!(visitor, visit_ty, tuple_element_types);
+        TyKind::AnonEnum(tys) | TyKind::Tup(tys) => {
+            walk_list!(visitor, visit_ty, tys);
         }
         TyKind::BareFn(ref function_declaration) => {
             walk_list!(visitor, visit_generic_param, function_declaration.generic_params);

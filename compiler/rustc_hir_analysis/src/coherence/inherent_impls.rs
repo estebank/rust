@@ -219,6 +219,7 @@ impl<'tcx> InherentCollect<'tcx> {
             | ty::RawPtr(_)
             | ty::Ref(..)
             | ty::Never
+            | ty::AnonEnum(_)
             | ty::FnPtr(_)
             | ty::Tuple(..) => {
                 self.check_primitive_impl(item.owner_id.def_id, self_ty, items, ty.span)

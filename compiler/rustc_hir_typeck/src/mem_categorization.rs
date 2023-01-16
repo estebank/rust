@@ -725,6 +725,10 @@ impl<'a, 'tcx> MemCategorizationContext<'a, 'tcx> {
                 }
             }
 
+            PatKind::Ascription(pat, _) => {
+                self.cat_pattern_(place_with_id, pat, op)?;
+            }
+
             PatKind::Or(pats) => {
                 for pat in pats {
                     self.cat_pattern_(place_with_id.clone(), pat, op)?;

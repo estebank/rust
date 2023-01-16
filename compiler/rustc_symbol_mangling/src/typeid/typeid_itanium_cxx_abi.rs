@@ -562,6 +562,11 @@ fn encode_ty<'tcx>(
             typeid.push_str(&s);
         }
 
+        ty::AnonEnum(_tys) => {
+            // FIXME
+            panic!()
+        }
+
         ty::Foreign(def_id) => {
             // <length><name>, where <name> is <unscoped-name>
             let mut s = String::new();
@@ -720,6 +725,11 @@ fn transform_ty<'tcx>(tcx: TyCtxt<'tcx>, ty: Ty<'tcx>, options: TransformTyOptio
             } else {
                 ty = tcx.mk_adt(*adt_def, transform_substs(tcx, substs, options));
             }
+        }
+
+        ty::AnonEnum(_tys) => {
+            // FIXME
+            panic!()
         }
 
         ty::FnDef(def_id, substs) => {

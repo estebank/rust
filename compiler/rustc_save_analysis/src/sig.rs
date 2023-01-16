@@ -192,6 +192,19 @@ impl<'hir> Sig for hir::Ty<'hir> {
                 text.push(')');
                 Ok(Signature { text, defs, refs })
             }
+            hir::TyKind::AnonEnum(ts) => {
+                let mut text = "".to_owned();
+                let mut defs = vec![];
+                let mut refs = vec![];
+                for t in ts {
+                    let nested = t.make(offset + text.len(), id, scx)?;
+                    text.push_str(&nested.text);
+                    text.push('|');
+                    defs.extend(nested.defs.into_iter());
+                    refs.extend(nested.refs.into_iter());
+                }
+                Ok(Signature { text, defs, refs })
+            }
             hir::TyKind::BareFn(ref f) => {
                 let mut text = String::new();
                 if !f.generic_params.is_empty() {

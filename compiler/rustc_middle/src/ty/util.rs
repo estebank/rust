@@ -935,6 +935,7 @@ impl<'tcx> Ty<'tcx> {
             | ty::Infer(_)
             | ty::Alias(..)
             | ty::Param(_)
+            | ty::AnonEnum(_)
             | ty::Placeholder(_) => false,
         }
     }
@@ -974,6 +975,7 @@ impl<'tcx> Ty<'tcx> {
             | ty::Infer(_)
             | ty::Alias(..)
             | ty::Param(_)
+            | ty::AnonEnum(_)
             | ty::Placeholder(_) => false,
         }
     }
@@ -1077,7 +1079,7 @@ impl<'tcx> Ty<'tcx> {
             //
             // Because this function is "shallow", we return `true` for these composites regardless
             // of the type(s) contained within.
-            ty::Ref(..) | ty::Array(..) | ty::Slice(_) | ty::Tuple(..) => true,
+            ty::Ref(..) | ty::Array(..) | ty::Slice(_) | ty::Tuple(..) | ty::AnonEnum(_) => true,
 
             // Raw pointers use bitwise comparison.
             ty::RawPtr(_) | ty::FnPtr(_) => true,
@@ -1204,6 +1206,7 @@ pub fn needs_drop_components<'tcx>(
         ty::Dynamic(..) | ty::Error(_) => Err(AlwaysRequiresDrop),
 
         ty::Slice(ty) => needs_drop_components(*ty, target_layout),
+
         ty::Array(elem_ty, size) => {
             match needs_drop_components(*elem_ty, target_layout) {
                 Ok(v) if v.is_empty() => Ok(v),
@@ -1219,8 +1222,15 @@ pub fn needs_drop_components<'tcx>(
                 },
             }
         }
+
         // If any field needs drop, then the whole tuple does.
         ty::Tuple(fields) => fields.iter().try_fold(SmallVec::new(), move |mut acc, elem| {
+            acc.extend(needs_drop_components(elem, target_layout)?);
+            Ok(acc)
+        }),
+
+        // If any field needs drop, then the whole enum does.
+        ty::AnonEnum(fields) => fields.iter().try_fold(SmallVec::new(), move |mut acc, elem| {
             acc.extend(needs_drop_components(elem, target_layout)?);
             Ok(acc)
         }),
@@ -1269,6 +1279,7 @@ pub fn is_trivially_const_drop(ty: Ty<'_>) -> bool {
         ty::Array(ty, _) | ty::Slice(ty) => is_trivially_const_drop(ty),
 
         ty::Tuple(tys) => tys.iter().all(|ty| is_trivially_const_drop(ty)),
+        ty::AnonEnum(tys) => tys.iter().all(|ty| is_trivially_const_drop(ty)),
     }
 }
 
