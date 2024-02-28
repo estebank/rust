@@ -1908,20 +1908,25 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
                             ct_op: |ct| ct.normalize(self.tcx, ty::ParamEnv::empty()),
                         },
                     );
-                    err.highlighted_help(vec![
-                        StringPart::normal(format!("the trait `{}` ", cand.print_trait_sugared())),
-                        StringPart::highlighted("is"),
-                        StringPart::normal(" implemented for `"),
-                        StringPart::highlighted(cand.self_ty().to_string()),
-                        StringPart::normal("`"),
-                    ]);
+                    if !cand.references_error() {
+                        err.highlighted_help(vec![
+                            StringPart::normal(format!(
+                                "the trait `{}` ",
+                                cand.print_trait_sugared()
+                            )),
+                            StringPart::highlighted("is"),
+                            StringPart::normal(" implemented for `"),
+                            StringPart::highlighted(cand.self_ty().to_string()),
+                            StringPart::normal("`"),
+                        ]);
 
-                    if let [TypeError::Sorts(exp_found)] = &terrs[..] {
-                        let exp_found = self.resolve_vars_if_possible(*exp_found);
-                        err.help(format!(
-                            "for that trait implementation, expected `{}`, found `{}`",
-                            exp_found.expected, exp_found.found
-                        ));
+                        if let [TypeError::Sorts(exp_found)] = &terrs[..] {
+                            let exp_found = self.resolve_vars_if_possible(*exp_found);
+                            err.help(format!(
+                                "for that trait implementation, expected `{}`, found `{}`",
+                                exp_found.expected, exp_found.found
+                            ));
+                        }
                     }
 
                     true
@@ -1932,7 +1937,8 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
         }
 
         let other = if other { "other " } else { "" };
-        let report = |candidates: Vec<TraitRef<'tcx>>, err: &mut Diag<'_>| {
+        let report = |mut candidates: Vec<TraitRef<'tcx>>, err: &mut Diag<'_>| {
+            candidates.retain(|tr| !tr.references_error());
             if candidates.is_empty() {
                 return false;
             }
