@@ -88,13 +88,13 @@ LL | struct TwoStrs(str, str) where str: Sized;
    = help: see issue #48214
    = help: add `#![feature(trivial_bounds)]` to the crate attributes to enable
 
-error[E0277]: the size for values of type `Dst<(dyn A + 'static)>` cannot be known at compilation time
+error[E0277]: the size for values of type `(dyn A + 'static)` cannot be known at compilation time
   --> $DIR/feature-gate-trivial_bounds.rs:55:26
    |
 LL | fn unsized_local() where Dst<dyn A>: Sized {
    |                          ^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Dst<(dyn A + 'static)>`, the trait `Sized` is not implemented for `Dst<dyn A>`, which is required by `Dst<(dyn A + 'static)>: Sized`
+   = help: within `Dst<(dyn A + 'static)>`, the trait `Sized` is not implemented for `dyn A`, which is required by `Dst<(dyn A + 'static)>: Sized`
 note: required because it appears within the type `Dst<(dyn A + 'static)>`
   --> $DIR/feature-gate-trivial_bounds.rs:48:8
    |

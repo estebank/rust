@@ -79,7 +79,7 @@ LL | trait Z<'a, T: ?Sized>
 LL |     for<'b> <T as Z<'b, u16>>::W: Clone,
    |                                   ^^^^^ required by this bound in `Z`
 
-error[E0277]: the trait `Clone` is not implemented for `str`
+error[E0277]: the trait `Clone` is not implemented for `<u16 as Z<'_, u16>>::W`
   --> $DIR/hr-associated-type-bound-param-2.rs:22:10
    |
 LL |     1u16.h("abc");

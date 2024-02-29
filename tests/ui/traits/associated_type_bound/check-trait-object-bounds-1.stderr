@@ -2,13 +2,9 @@ error[E0277]: the trait `X` is not implemented for `dyn X<Y = str>`
   --> $DIR/check-trait-object-bounds-1.rs:12:9
    |
 LL |     f::<dyn X<Y = str>>();
-   |         ^^^^^^^^^^^^^^ the trait `X` is not implemented for `dyn X<Y = str>`
+   |         ^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `str`
    |
-help: this trait has no implementations, consider adding one
-  --> $DIR/check-trait-object-bounds-1.rs:3:1
-   |
-LL | trait X {
-   | ^^^^^^^
+   = help: the trait `Clone` is implemented for `String`
 note: required by a bound in `f`
   --> $DIR/check-trait-object-bounds-1.rs:7:9
    |

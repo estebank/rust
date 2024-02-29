@@ -1,10 +1,10 @@
-error[E0277]: `Foo` cannot be sent between threads safely
+error[E0277]: `*const u8` cannot be sent between threads safely
   --> $DIR/E0277-2.rs:16:15
    |
 LL |     is_send::<Foo>();
-   |               ^^^ `Foo` cannot be sent between threads safely
+   |               ^^^ `*const u8` cannot be sent between threads safely
    |
-   = help: within `Foo`, the trait `Send` is not implemented for `Foo`, which is required by `Foo: Send`
+   = help: within `Foo`, the trait `Send` is not implemented for `*const u8`, which is required by `Foo: Send`
 note: required because it appears within the type `Baz`
   --> $DIR/E0277-2.rs:9:8
    |

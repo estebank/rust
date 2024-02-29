@@ -6,15 +6,17 @@ LL |     None { value: (), ..Default::default() }.await;
    |
    = note: all struct fields are already assigned
 
-error[E0277]: the trait `IntoFuture` is not implemented for `Option<_>`
+error[E0277]: `Option<_>` is not a future
   --> $DIR/drop-track-bad-field-in-fru.rs:6:46
    |
 LL |     None { value: (), ..Default::default() }.await;
    |                                             -^^^^^
    |                                             ||
-   |                                             |the trait `IntoFuture` is not implemented for `Option<_>`, which is required by `Option<_>: IntoFuture`
+   |                                             |`Option<_>` is not a future
    |                                             help: remove the `.await`
    |
+   = help: the trait `Future` is not implemented for `Option<_>`, which is required by `Option<_>: IntoFuture`
+   = note: Option<_> must be a future or must implement `IntoFuture` to be awaited
    = note: required for `Option<_>` to implement `IntoFuture`
 
 error: aborting due to 2 previous errors

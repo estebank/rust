@@ -9,6 +9,6 @@ impl From<usize> for TargetStruct {
 }
 
 fn main() {
-    let a = 3;
+    let a = &3;
     let _b: TargetStruct = (*a).into(); //~ ERROR trait `From<&{integer}>` is not implemented for `TargetStruct`
 }

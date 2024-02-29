@@ -1,97 +1,121 @@
-error[E0277]: the trait `IntoIterator` is not implemented for `{integer}`
+error[E0277]: `{integer}` is not an iterator
   --> $DIR/integral.rs:2:14
    |
 LL |     for _ in 42 {}
-   |              ^^ the trait `IntoIterator` is not implemented for `{integer}`, which is required by `{integer}: IntoIterator`
+   |              ^^ `{integer}` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `{integer}`, which is required by `{integer}: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `{integer}` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `u8`
+error[E0277]: `u8` is not an iterator
   --> $DIR/integral.rs:4:14
    |
 LL |     for _ in 42 as u8 {}
-   |              ^^^^^^^^ the trait `IntoIterator` is not implemented for `u8`, which is required by `u8: IntoIterator`
+   |              ^^^^^^^^ `u8` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `u8`, which is required by `u8: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `u8` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `i8`
+error[E0277]: `i8` is not an iterator
   --> $DIR/integral.rs:6:14
    |
 LL |     for _ in 42 as i8 {}
-   |              ^^^^^^^^ the trait `IntoIterator` is not implemented for `i8`, which is required by `i8: IntoIterator`
+   |              ^^^^^^^^ `i8` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `i8`, which is required by `i8: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `i8` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `u16`
+error[E0277]: `u16` is not an iterator
   --> $DIR/integral.rs:8:14
    |
 LL |     for _ in 42 as u16 {}
-   |              ^^^^^^^^^ the trait `IntoIterator` is not implemented for `u16`, which is required by `u16: IntoIterator`
+   |              ^^^^^^^^^ `u16` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `u16`, which is required by `u16: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `u16` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `i16`
+error[E0277]: `i16` is not an iterator
   --> $DIR/integral.rs:10:14
    |
 LL |     for _ in 42 as i16 {}
-   |              ^^^^^^^^^ the trait `IntoIterator` is not implemented for `i16`, which is required by `i16: IntoIterator`
+   |              ^^^^^^^^^ `i16` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `i16`, which is required by `i16: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `i16` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `u32`
+error[E0277]: `u32` is not an iterator
   --> $DIR/integral.rs:12:14
    |
 LL |     for _ in 42 as u32 {}
-   |              ^^^^^^^^^ the trait `IntoIterator` is not implemented for `u32`, which is required by `u32: IntoIterator`
+   |              ^^^^^^^^^ `u32` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `u32`, which is required by `u32: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `u32` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `i32`
+error[E0277]: `i32` is not an iterator
   --> $DIR/integral.rs:14:14
    |
 LL |     for _ in 42 as i32 {}
-   |              ^^^^^^^^^ the trait `IntoIterator` is not implemented for `i32`, which is required by `i32: IntoIterator`
+   |              ^^^^^^^^^ `i32` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `i32`, which is required by `i32: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `i32` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `u64`
+error[E0277]: `u64` is not an iterator
   --> $DIR/integral.rs:16:14
    |
 LL |     for _ in 42 as u64 {}
-   |              ^^^^^^^^^ the trait `IntoIterator` is not implemented for `u64`, which is required by `u64: IntoIterator`
+   |              ^^^^^^^^^ `u64` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `u64`, which is required by `u64: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `u64` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `i64`
+error[E0277]: `i64` is not an iterator
   --> $DIR/integral.rs:18:14
    |
 LL |     for _ in 42 as i64 {}
-   |              ^^^^^^^^^ the trait `IntoIterator` is not implemented for `i64`, which is required by `i64: IntoIterator`
+   |              ^^^^^^^^^ `i64` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `i64`, which is required by `i64: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `i64` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `usize`
+error[E0277]: `usize` is not an iterator
   --> $DIR/integral.rs:20:14
    |
 LL |     for _ in 42 as usize {}
-   |              ^^^^^^^^^^^ the trait `IntoIterator` is not implemented for `usize`, which is required by `usize: IntoIterator`
+   |              ^^^^^^^^^^^ `usize` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `usize`, which is required by `usize: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `usize` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `isize`
+error[E0277]: `isize` is not an iterator
   --> $DIR/integral.rs:22:14
    |
 LL |     for _ in 42 as isize {}
-   |              ^^^^^^^^^^^ the trait `IntoIterator` is not implemented for `isize`, which is required by `isize: IntoIterator`
+   |              ^^^^^^^^^^^ `isize` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `isize`, which is required by `isize: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `isize` to implement `IntoIterator`
 
-error[E0277]: the trait `IntoIterator` is not implemented for `{float}`
+error[E0277]: `{float}` is not an iterator
   --> $DIR/integral.rs:24:14
    |
 LL |     for _ in 42.0 {}
-   |              ^^^^ the trait `IntoIterator` is not implemented for `{float}`, which is required by `{float}: IntoIterator`
+   |              ^^^^ `{float}` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `{float}`, which is required by `{float}: IntoIterator`
+   = note: if you want to iterate between `start` until a value `end`, use the exclusive range syntax `start..end` or the inclusive range syntax `start..=end`
    = note: required for `{float}` to implement `IntoIterator`
 
 error: aborting due to 12 previous errors

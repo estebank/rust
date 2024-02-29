@@ -4,7 +4,8 @@ error: coroutine cannot be sent between threads safely
 LL |     require_send(send_gen);
    |     ^^^^^^^^^^^^^^^^^^^^^^ coroutine is not `Send`
    |
-   = help: the trait `Send` is not implemented for `{test1::{closure#0}}`, which is required by `{test1::{closure#0} upvar_tys=() witness={test1::{closure#0}}}: Send`
+   = help: the trait `Sync` is not implemented for `RefCell<i32>`, which is required by `{test1::{closure#0} upvar_tys=() witness={test1::{closure#0}}}: Send`
+   = note: if you want to do aliasing and mutation between multiple threads, use `std::sync::RwLock` instead
 note: coroutine is not `Send` as this value is used across a yield
   --> $DIR/coroutine-print-verbose-1.rs:35:9
    |
@@ -18,13 +19,14 @@ note: required by a bound in `require_send`
 LL | fn require_send(_: impl Send) {}
    |                         ^^^^ required by this bound in `require_send`
 
-error[E0277]: `{test2::{closure#0}}` cannot be sent between threads safely
+error[E0277]: `RefCell<i32>` cannot be shared between threads safely
   --> $DIR/coroutine-print-verbose-1.rs:56:5
    |
 LL |     require_send(send_gen);
-   |     ^^^^^^^^^^^^^^^^^^^^^^ `{test2::{closure#0}}` cannot be sent between threads safely
+   |     ^^^^^^^^^^^^^^^^^^^^^^ `RefCell<i32>` cannot be shared between threads safely
    |
-   = help: the trait `Send` is not implemented for `{test2::{closure#0}}`, which is required by `{test2::{closure#0} upvar_tys=() witness={test2::{closure#0}}}: Send`
+   = help: the trait `Sync` is not implemented for `RefCell<i32>`, which is required by `{test2::{closure#0} upvar_tys=() witness={test2::{closure#0}}}: Send`
+   = note: if you want to do aliasing and mutation between multiple threads, use `std::sync::RwLock` instead
    = note: required for `Arc<RefCell<i32>>` to implement `Send`
 note: required because it's used within this coroutine
   --> $DIR/coroutine-print-verbose-1.rs:42:5

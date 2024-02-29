@@ -1,4 +1,4 @@
-error[E0277]: the trait `IntoIterator` is not implemented for `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>`
+error[E0277]: `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>` is not an iterator
   --> $DIR/suggest-remove-refs-3.rs:6:19
    |
 LL |       for (i, _) in & & &
@@ -6,8 +6,9 @@ LL |       for (i, _) in & & &
 LL | |         & &v
 LL | |         .iter()
 LL | |         .enumerate() {
-   | |____________________^ the trait `IntoIterator` is not implemented for `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>`, which is required by `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>: IntoIterator`
+   | |____________________^ `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>`, which is required by `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>: IntoIterator`
    = note: required for `&&&&&Enumerate<std::slice::Iter<'_, {integer}>>` to implement `IntoIterator`
 help: consider removing 5 leading `&`-references
    |

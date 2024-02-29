@@ -39,7 +39,7 @@ error[E0277]: the trait `Clone` is not implemented for `Vec<T>`
   --> $DIR/defaults-suitability.rs:28:23
    |
 LL |     type Bar: Clone = Vec<T>;
-   |                       ^^^^^^ the trait `Clone` is not implemented for `Vec<T>`, which is required by `Vec<T>: Clone`
+   |                       ^^^^^^ the trait `Clone` is not implemented for `T`, which is required by `Vec<T>: Clone`
    |
    = note: required for `Vec<T>` to implement `Clone`
 note: required by a bound in `Foo::Bar`
@@ -47,10 +47,10 @@ note: required by a bound in `Foo::Bar`
    |
 LL |     type Bar: Clone = Vec<T>;
    |               ^^^^^ required by this bound in `Foo::Bar`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `T`
    |
-LL | trait Foo<T> where Vec<T>: Clone {
-   |              +++++++++++++++++++
+LL | trait Foo<T: std::clone::Clone> {
+   |            +++++++++++++++++++
 
 error[E0277]: the trait `Foo<Self>` is not implemented for `()`
   --> $DIR/defaults-suitability.rs:34:29
@@ -88,7 +88,7 @@ error[E0277]: the trait `Clone` is not implemented for `Vec<<Self as Foo2<T>>::B
   --> $DIR/defaults-suitability.rs:65:23
    |
 LL |     type Bar: Clone = Vec<Self::Baz>;
-   |                       ^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `Vec<<Self as Foo2<T>>::Baz>`, which is required by `Vec<<Self as Foo2<T>>::Baz>: Clone`
+   |                       ^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `<Self as Foo2<T>>::Baz`, which is required by `Vec<<Self as Foo2<T>>::Baz>: Clone`
    |
    = note: required for `Vec<<Self as Foo2<T>>::Baz>` to implement `Clone`
 note: required by a bound in `Foo2::Bar`
@@ -96,16 +96,16 @@ note: required by a bound in `Foo2::Bar`
    |
 LL |     type Bar: Clone = Vec<Self::Baz>;
    |               ^^^^^ required by this bound in `Foo2::Bar`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider further restricting the associated type
    |
-LL | trait Foo2<T> where Vec<<Self as Foo2<T>>::Baz>: Clone {
-   |               ++++++++++++++++++++++++++++++++++++++++
+LL | trait Foo2<T> where <Self as Foo2<T>>::Baz: Clone {
+   |               +++++++++++++++++++++++++++++++++++
 
 error[E0277]: the trait `Clone` is not implemented for `Vec<<Self as Foo25<T>>::Baz>`
   --> $DIR/defaults-suitability.rs:74:23
    |
 LL |     type Bar: Clone = Vec<Self::Baz>;
-   |                       ^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `Vec<<Self as Foo25<T>>::Baz>`, which is required by `Vec<<Self as Foo25<T>>::Baz>: Clone`
+   |                       ^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `<Self as Foo25<T>>::Baz`, which is required by `Vec<<Self as Foo25<T>>::Baz>: Clone`
    |
    = note: required for `Vec<<Self as Foo25<T>>::Baz>` to implement `Clone`
 note: required by a bound in `Foo25::Bar`
@@ -113,10 +113,10 @@ note: required by a bound in `Foo25::Bar`
    |
 LL |     type Bar: Clone = Vec<Self::Baz>;
    |               ^^^^^ required by this bound in `Foo25::Bar`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider further restricting the associated type
    |
-LL | trait Foo25<T: Clone> where Vec<<Self as Foo25<T>>::Baz>: Clone {
-   |                       +++++++++++++++++++++++++++++++++++++++++
+LL | trait Foo25<T: Clone> where <Self as Foo25<T>>::Baz: Clone {
+   |                       ++++++++++++++++++++++++++++++++++++
 
 error[E0277]: the trait `Clone` is not implemented for `T`
   --> $DIR/defaults-suitability.rs:87:16

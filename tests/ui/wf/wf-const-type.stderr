@@ -16,7 +16,7 @@ LL + #[derive(Copy)]
 LL | struct NotCopy;
    |
 
-error[E0277]: the trait `Copy` is not implemented for `NotCopy`
+error[E0277]: the trait `Copy` is not implemented for `Option<NotCopy>`
   --> $DIR/wf-const-type.rs:10:50
    |
 LL | const FOO: IsCopy<Option<NotCopy>> = IsCopy { t: None };

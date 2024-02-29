@@ -2,11 +2,9 @@ error[E0277]: the trait `DispatchFromDyn<&&U>` is not implemented for `&&T`
   --> $DIR/issue-71036.rs:11:1
    |
 LL | impl<'a, T: ?Sized + Unsize<U>, U: ?Sized> DispatchFromDyn<Foo<'a, U>> for Foo<'a, T> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `DispatchFromDyn<&&U>` is not implemented for `&&T`, which is required by `&'a &'a T: DispatchFromDyn<&'a &'a U>`
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Unsize<&U>` is not implemented for `&T`, which is required by `&'a &'a T: DispatchFromDyn<&'a &'a U>`
    |
-   = help: the following other types implement trait `DispatchFromDyn<T>`:
-             <&'a T as DispatchFromDyn<&'a U>>
-             <&'a mut T as DispatchFromDyn<&'a mut U>>
+   = note: all implementations of `Unsize` are provided automatically by the compiler, see <https://doc.rust-lang.org/stable/std/marker/trait.Unsize.html> for more information
    = note: required for `&'a &'a T` to implement `DispatchFromDyn<&'a &'a U>`
 
 error: aborting due to 1 previous error

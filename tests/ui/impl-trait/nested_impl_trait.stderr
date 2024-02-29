@@ -42,71 +42,25 @@ LL | fn bad_in_fn_syntax(x: fn() -> impl Into<impl Debug>) {}
    |
    = note: `impl Trait` is only allowed in arguments and return types of functions and methods
 
-error[E0391]: cycle detected when computing type of `bad_in_ret_position::{opaque#0}`
-  --> $DIR/nested_impl_trait.rs:6:46
-   |
-LL | fn bad_in_ret_position(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                              ^^^^^^^^^^^^^^^^^^^^^
-   |
-note: ...which requires computing type of opaque `bad_in_ret_position::{opaque#0}`...
-  --> $DIR/nested_impl_trait.rs:6:46
-   |
-LL | fn bad_in_ret_position(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                              ^^^^^^^^^^^^^^^^^^^^^
-note: ...which requires type-checking `bad_in_ret_position`...
-  --> $DIR/nested_impl_trait.rs:6:1
-   |
-LL | fn bad_in_ret_position(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   = note: ...which again requires computing type of `bad_in_ret_position::{opaque#0}`, completing the cycle
-note: cycle used when checking that `bad_in_ret_position::{opaque#0}` is well-formed
-  --> $DIR/nested_impl_trait.rs:6:46
-   |
-LL | fn bad_in_ret_position(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                              ^^^^^^^^^^^^^^^^^^^^^
-   = note: see https://rustc-dev-guide.rust-lang.org/overview.html#queries and https://rustc-dev-guide.rust-lang.org/query.html for more information
-
 error[E0277]: the trait `Into<impl Debug>` is not implemented for `impl Into<u32>`
   --> $DIR/nested_impl_trait.rs:6:46
    |
 LL | fn bad_in_ret_position(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                              ^^^^^^^^^^^^^^^^^^^^^ the trait `Into<impl Debug>` is not implemented for `impl Into<u32>`, which is required by `impl Into<u32>: Into<impl Debug>`
+   |                                              ^^^^^^^^^^^^^^^^^^^^^ the trait `From<impl Into<u32>>` is not implemented for `impl Debug`, which is required by `impl Into<u32>: Into<impl Debug>`
    |
+   = help: the trait `Into<U>` is implemented for `T`
    = note: required for `impl Into<u32>` to implement `Into<impl Debug>`
-
-error[E0391]: cycle detected when computing type of `<impl at $DIR/nested_impl_trait.rs:18:1: 18:7>::bad::{opaque#0}`
-  --> $DIR/nested_impl_trait.rs:19:34
-   |
-LL |     fn bad(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                  ^^^^^^^^^^^^^^^^^^^^^
-   |
-note: ...which requires computing type of opaque `<impl at $DIR/nested_impl_trait.rs:18:1: 18:7>::bad::{opaque#0}`...
-  --> $DIR/nested_impl_trait.rs:19:34
-   |
-LL |     fn bad(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                  ^^^^^^^^^^^^^^^^^^^^^
-note: ...which requires type-checking `<impl at $DIR/nested_impl_trait.rs:18:1: 18:7>::bad`...
-  --> $DIR/nested_impl_trait.rs:19:5
-   |
-LL |     fn bad(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   = note: ...which again requires computing type of `<impl at $DIR/nested_impl_trait.rs:18:1: 18:7>::bad::{opaque#0}`, completing the cycle
-note: cycle used when checking that `<impl at $DIR/nested_impl_trait.rs:18:1: 18:7>::bad::{opaque#0}` is well-formed
-  --> $DIR/nested_impl_trait.rs:19:34
-   |
-LL |     fn bad(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                  ^^^^^^^^^^^^^^^^^^^^^
-   = note: see https://rustc-dev-guide.rust-lang.org/overview.html#queries and https://rustc-dev-guide.rust-lang.org/query.html for more information
 
 error[E0277]: the trait `Into<impl Debug>` is not implemented for `impl Into<u32>`
   --> $DIR/nested_impl_trait.rs:19:34
    |
 LL |     fn bad(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                  ^^^^^^^^^^^^^^^^^^^^^ the trait `Into<impl Debug>` is not implemented for `impl Into<u32>`, which is required by `impl Into<u32>: Into<impl Debug>`
+   |                                  ^^^^^^^^^^^^^^^^^^^^^ the trait `From<impl Into<u32>>` is not implemented for `impl Debug`, which is required by `impl Into<u32>: Into<impl Debug>`
    |
+   = help: the trait `Into<U>` is implemented for `T`
    = note: required for `impl Into<u32>` to implement `Into<impl Debug>`
 
-error: aborting due to 9 previous errors
+error: aborting due to 7 previous errors
 
-Some errors have detailed explanations: E0277, E0391, E0562, E0666.
+Some errors have detailed explanations: E0277, E0562, E0666.
 For more information about an error, try `rustc --explain E0277`.

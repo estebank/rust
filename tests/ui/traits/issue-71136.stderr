@@ -5,11 +5,15 @@ LL | #[derive(Clone)]
    |          ----- in this derive macro expansion
 LL | struct FooHolster {
 LL |     the_foos: Vec<Foo>,
-   |     ^^^^^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `Vec<Foo>`, which is required by `Vec<Foo>: Clone`
+   |     ^^^^^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `Foo`, which is required by `Vec<Foo>: Clone`
    |
-   = help: the trait `Clone` is implemented for `Vec<T, A>`
    = note: required for `Vec<Foo>` to implement `Clone`
    = note: this error originates in the derive macro `Clone` (in Nightly builds, run with -Z macro-backtrace for more info)
+help: consider annotating `Foo` with `#[derive(Clone)]`
+   |
+LL + #[derive(Clone)]
+LL | struct Foo(u8);
+   |
 
 error: aborting due to 1 previous error
 

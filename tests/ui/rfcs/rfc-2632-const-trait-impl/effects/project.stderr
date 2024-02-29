@@ -22,7 +22,7 @@ help: consider further restricting `Self`
 LL | pub trait Uwu: Owo + Uwu {
    |                    +++++
 
-error[E0277]: the trait `Uwu` is not implemented for `Self`
+error[E0277]: the trait `Sized` is not implemented for `<Self as Uwu>::T`
   --> $DIR/project.rs:12:16
    |
 LL | pub trait Uwu: Owo {

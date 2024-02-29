@@ -1,9 +1,10 @@
-error[E0277]: the trait `IntoIterator` is not implemented for `MyStruct`
+error[E0277]: `MyStruct` is not an iterator
   --> $DIR/for-loop-bogosity.rs:17:14
    |
 LL |     for x in bogus {
-   |              ^^^^^ the trait `IntoIterator` is not implemented for `MyStruct`, which is required by `MyStruct: IntoIterator`
+   |              ^^^^^ `MyStruct` is not an iterator
    |
+   = help: the trait `Iterator` is not implemented for `MyStruct`, which is required by `MyStruct: IntoIterator`
    = note: required for `MyStruct` to implement `IntoIterator`
 
 error: aborting due to 1 previous error

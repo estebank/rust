@@ -8,8 +8,18 @@ error[E0277]: the trait `IntoIterator` is not implemented for `std::ops::Range<b
   --> $DIR/range-1.rs:9:14
    |
 LL |     for i in false..true {}
-   |              ^^^^^^^^^^^ the trait `IntoIterator` is not implemented for `std::ops::Range<bool>`, which is required by `std::ops::Range<bool>: IntoIterator`
+   |              ^^^^^^^^^^^ the trait `Step` is not implemented for `bool`, which is required by `std::ops::Range<bool>: IntoIterator`
    |
+   = help: the following other types implement trait `Step`:
+             char
+             isize
+             i8
+             i16
+             i32
+             i64
+             i128
+             usize
+           and 8 others
    = note: required for `std::ops::Range<bool>` to implement `Iterator`
    = note: required for `std::ops::Range<bool>` to implement `IntoIterator`
 

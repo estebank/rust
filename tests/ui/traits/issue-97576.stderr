@@ -2,13 +2,9 @@ error[E0277]: the trait `Into<String>` is not implemented for `impl ToString`
   --> $DIR/issue-97576.rs:8:22
    |
 LL |             bar: bar.into(),
-   |                      ^^^^ the trait `Into<String>` is not implemented for `impl ToString`, which is required by `impl ToString: Into<_>`
+   |                      ^^^^ the trait `From<impl ToString>` is not implemented for `String`, which is required by `impl ToString: Into<_>`
    |
    = note: required for `impl ToString` to implement `Into<String>`
-help: consider further restricting this bound
-   |
-LL |     pub fn new(bar: impl ToString + std::convert::Into<std::string::String>) -> Self {
-   |                                   +++++++++++++++++++++++++++++++++++++++++
 
 error: aborting due to 1 previous error
 

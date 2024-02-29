@@ -15,13 +15,15 @@ LL - fn check<T: Iterator, U: ?Sized>() {
 LL + fn check<T: Iterator, U>() {
    |
 
-error[E0277]: the size for values of type `Misc<U>` cannot be known at compilation time
+error[E0277]: the size for values of type `U` cannot be known at compilation time
   --> $DIR/suggest-where-clause.rs:10:20
    |
+LL | fn check<T: Iterator, U: ?Sized>() {
+   |                       - this type parameter needs to be `Sized`
+...
 LL |     mem::size_of::<Misc<U>>();
    |                    ^^^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Misc<U>`, the trait `Sized` is not implemented for `Misc<U>`, which is required by `Misc<U>: Sized`
 note: required because it appears within the type `Misc<U>`
   --> $DIR/suggest-where-clause.rs:3:8
    |
@@ -29,10 +31,11 @@ LL | struct Misc<T:?Sized>(T);
    |        ^^^^
 note: required by an implicit `Sized` bound in `std::mem::size_of`
   --> $SRC_DIR/core/src/mem/mod.rs:LL:COL
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider removing the `?Sized` bound to make the type parameter `Sized`
    |
-LL | fn check<T: Iterator, U: ?Sized>() where Misc<U>: Sized {
-   |                                    ++++++++++++++++++++
+LL - fn check<T: Iterator, U: ?Sized>() {
+LL + fn check<T: Iterator, U>() {
+   |
 
 error[E0277]: the trait `From<T>` is not implemented for `u64`
   --> $DIR/suggest-where-clause.rs:15:6

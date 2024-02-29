@@ -314,13 +314,13 @@ help: the `Box` type always has a statically known size and allocates its conten
 LL |     VT{u: isize, x: Box<<&'static [i32] as Deref>::Target>},
    |                     ++++                                 +
 
-error[E0277]: the size for values of type `Path1` cannot be known at compilation time
+error[E0277]: the size for values of type `(dyn PathHelper1 + 'static)` cannot be known at compilation time
   --> $DIR/unsized-enum2.rs:43:8
    |
 LL |     VI(Path1),
    |        ^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Path1`, the trait `Sized` is not implemented for `Path1`, which is required by `Path1: Sized`
+   = help: within `Path1`, the trait `Sized` is not implemented for `dyn PathHelper1`, which is required by `Path1: Sized`
 note: required because it appears within the type `Path1`
   --> $DIR/unsized-enum2.rs:16:8
    |
@@ -337,13 +337,13 @@ help: the `Box` type always has a statically known size and allocates its conten
 LL |     VI(Box<Path1>),
    |        ++++     +
 
-error[E0277]: the size for values of type `Path2` cannot be known at compilation time
+error[E0277]: the size for values of type `(dyn PathHelper2 + 'static)` cannot be known at compilation time
   --> $DIR/unsized-enum2.rs:45:11
    |
 LL |     VJ{x: Path2},
    |           ^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Path2`, the trait `Sized` is not implemented for `Path2`, which is required by `Path2: Sized`
+   = help: within `Path2`, the trait `Sized` is not implemented for `dyn PathHelper2`, which is required by `Path2: Sized`
 note: required because it appears within the type `Path2`
   --> $DIR/unsized-enum2.rs:17:8
    |
@@ -360,13 +360,13 @@ help: the `Box` type always has a statically known size and allocates its conten
 LL |     VJ{x: Box<Path2>},
    |           ++++     +
 
-error[E0277]: the size for values of type `Path3` cannot be known at compilation time
+error[E0277]: the size for values of type `(dyn PathHelper3 + 'static)` cannot be known at compilation time
   --> $DIR/unsized-enum2.rs:47:15
    |
 LL |     VK(isize, Path3),
    |               ^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Path3`, the trait `Sized` is not implemented for `Path3`, which is required by `Path3: Sized`
+   = help: within `Path3`, the trait `Sized` is not implemented for `dyn PathHelper3`, which is required by `Path3: Sized`
 note: required because it appears within the type `Path3`
   --> $DIR/unsized-enum2.rs:18:8
    |
@@ -383,13 +383,13 @@ help: the `Box` type always has a statically known size and allocates its conten
 LL |     VK(isize, Box<Path3>),
    |               ++++     +
 
-error[E0277]: the size for values of type `Path4` cannot be known at compilation time
+error[E0277]: the size for values of type `(dyn PathHelper4 + 'static)` cannot be known at compilation time
   --> $DIR/unsized-enum2.rs:49:21
    |
 LL |     VL{u: isize, x: Path4},
    |                     ^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Path4`, the trait `Sized` is not implemented for `Path4`, which is required by `Path4: Sized`
+   = help: within `Path4`, the trait `Sized` is not implemented for `dyn PathHelper4`, which is required by `Path4: Sized`
 note: required because it appears within the type `Path4`
   --> $DIR/unsized-enum2.rs:19:8
    |

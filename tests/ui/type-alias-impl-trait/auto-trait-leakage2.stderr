@@ -1,15 +1,15 @@
-error[E0277]: `Foo` cannot be sent between threads safely
+error[E0277]: `Rc<u32>` cannot be sent between threads safely
   --> $DIR/auto-trait-leakage2.rs:21:13
    |
 LL |     type Foo = impl std::fmt::Debug;
    |                -------------------- within this `Foo`
 ...
 LL |     is_send(m::foo());
-   |     ------- ^^^^^^^^ `Foo` cannot be sent between threads safely
+   |     ------- ^^^^^^^^ `Rc<u32>` cannot be sent between threads safely
    |     |
    |     required by a bound introduced by this call
    |
-   = help: within `Foo`, the trait `Send` is not implemented for `Foo`, which is required by `Foo: Send`
+   = help: within `Foo`, the trait `Send` is not implemented for `Rc<u32>`, which is required by `Foo: Send`
 note: required because it appears within the type `Foo`
   --> $DIR/auto-trait-leakage2.rs:7:16
    |

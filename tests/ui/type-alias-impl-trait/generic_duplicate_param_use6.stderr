@@ -1,42 +1,38 @@
-error[E0277]: `(T, T)` doesn't implement `Debug`
+error[E0277]: `T` doesn't implement `Debug`
   --> $DIR/generic_duplicate_param_use6.rs:11:5
    |
 LL |     (t, t)
-   |     ^^^^^^ `(T, T)` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+   |     ^^^^^^ `T` cannot be formatted using `{:?}` because it doesn't implement `Debug`
    |
-   = help: the trait `Debug` is not implemented for `(T, T)`, which is required by `(T, T): Debug`
    = note: required for `(T, T)` to implement `Debug`
-help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `T`
    |
-LL | type Two<T, U> = impl Debug (T, T): Debug;
-   |                             +++++++++++++
+LL | type Two<T: std::fmt::Debug, U> = impl Debug;
+   |           +++++++++++++++++
 
-error[E0277]: `(U, T)` doesn't implement `Debug`
+error[E0277]: `U` doesn't implement `Debug`
   --> $DIR/generic_duplicate_param_use6.rs:16:5
    |
 LL |     (u, t)
-   |     ^^^^^^ `(U, T)` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+   |     ^^^^^^ `U` cannot be formatted using `{:?}` because it doesn't implement `Debug`
    |
-   = help: the trait `Debug` is not implemented for `(U, T)`, which is required by `(U, T): Debug`
    = note: required for `(U, T)` to implement `Debug`
-help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `U`
    |
-LL | type Two<T, U> = impl Debug (U, T): Debug;
-   |                             +++++++++++++
+LL | type Two<T, U: std::fmt::Debug> = impl Debug;
+   |              +++++++++++++++++
 
-error[E0277]: `(U, T)` doesn't implement `Debug`
+error[E0277]: `T` doesn't implement `Debug`
   --> $DIR/generic_duplicate_param_use6.rs:16:5
    |
 LL |     (u, t)
-   |     ^^^^^^ `(U, T)` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+   |     ^^^^^^ `T` cannot be formatted using `{:?}` because it doesn't implement `Debug`
    |
-   = help: the trait `Debug` is not implemented for `(U, T)`, which is required by `(U, T): Debug`
    = note: required for `(U, T)` to implement `Debug`
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
-help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `T`
    |
-LL | type Two<T, U> = impl Debug (U, T): Debug;
-   |                             +++++++++++++
+LL | type Two<T: std::fmt::Debug, U> = impl Debug;
+   |           +++++++++++++++++
 
 error: aborting due to 3 previous errors
 

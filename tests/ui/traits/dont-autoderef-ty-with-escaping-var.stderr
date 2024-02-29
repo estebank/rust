@@ -8,8 +8,13 @@ error[E0277]: the trait `RefFoo<i32>` is not implemented for `i32`
   --> $DIR/dont-autoderef-ty-with-escaping-var.rs:17:6
    |
 LL |     <i32 as RefFoo<i32>>::ref_foo(unknown);
-   |      ^^^ the trait `RefFoo<i32>` is not implemented for `i32`, which is required by `i32: RefFoo<i32>`
+   |      ^^^ the trait `Foo<'_, i32>` is not implemented for `&mut Vec<&u32>`, which is required by `i32: RefFoo<i32>`
    |
+help: this trait has no implementations, consider adding one
+  --> $DIR/dont-autoderef-ty-with-escaping-var.rs:3:1
+   |
+LL | trait Foo<'x, T> {}
+   | ^^^^^^^^^^^^^^^^
 note: required for `i32` to implement `RefFoo<i32>`
   --> $DIR/dont-autoderef-ty-with-escaping-var.rs:9:9
    |

@@ -1,10 +1,10 @@
-error[E0277]: `{async block@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}` cannot be sent between threads safely
+error[E0277]: `*mut ()` cannot be shared between threads safely
   --> $DIR/issue-70935-complex-spans.rs:15:23
    |
 LL | fn foo(x: NotSync) -> impl Future + Send {
-   |                       ^^^^^^^^^^^^^^^^^^ `{async block@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}` cannot be sent between threads safely
+   |                       ^^^^^^^^^^^^^^^^^^ `*mut ()` cannot be shared between threads safely
    |
-   = help: within `NotSync`, the trait `Send` is not implemented for `{async block@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}`, which is required by `{async block@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}: Send`
+   = help: within `NotSync`, the trait `Sync` is not implemented for `*mut ()`, which is required by `{async block@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}: Send`
 note: required because it appears within the type `PhantomData<*mut ()>`
   --> $SRC_DIR/core/src/marker.rs:LL:COL
 note: required because it appears within the type `NotSync`
@@ -36,13 +36,13 @@ LL | |         }).await;
 LL | |     }
    | |_____^
 
-error[E0277]: `{coroutine witness@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}` cannot be sent between threads safely
+error[E0277]: `*mut ()` cannot be shared between threads safely
   --> $DIR/issue-70935-complex-spans.rs:15:23
    |
 LL | fn foo(x: NotSync) -> impl Future + Send {
-   |                       ^^^^^^^^^^^^^^^^^^ `{coroutine witness@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}` cannot be sent between threads safely
+   |                       ^^^^^^^^^^^^^^^^^^ `*mut ()` cannot be shared between threads safely
    |
-   = help: within `NotSync`, the trait `Send` is not implemented for `{coroutine witness@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}`, which is required by `{async block@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}: Send`
+   = help: within `NotSync`, the trait `Sync` is not implemented for `*mut ()`, which is required by `{async block@$DIR/issue-70935-complex-spans.rs:18:5: 22:6}: Send`
 note: required because it appears within the type `PhantomData<*mut ()>`
   --> $SRC_DIR/core/src/marker.rs:LL:COL
 note: required because it appears within the type `NotSync`
@@ -73,6 +73,7 @@ LL | |             foo(x.clone());
 LL | |         }).await;
 LL | |     }
    | |_____^
+   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: aborting due to 2 previous errors
 

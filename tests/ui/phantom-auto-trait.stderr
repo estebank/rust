@@ -1,8 +1,8 @@
-error[E0277]: the trait `Zen` is not implemented for `Guard<'_, T>`
+error[E0277]: `T` cannot be shared between threads safely
   --> $DIR/phantom-auto-trait.rs:21:12
    |
 LL |     is_zen(x)
-   |     ------ ^ the trait `Zen` is not implemented for `Guard<'_, T>`, which is required by `Guard<'_, T>: Zen`
+   |     ------ ^ `T` cannot be shared between threads safely
    |     |
    |     required by a bound introduced by this call
    |
@@ -23,16 +23,16 @@ note: required by a bound in `is_zen`
    |
 LL | fn is_zen<T: Zen>(_: T) {}
    |              ^^^ required by this bound in `is_zen`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `T`
    |
-LL | fn not_sync<T>(x: Guard<T>) where Guard<'_, T>: Zen {
-   |                             +++++++++++++++++++++++
+LL | fn not_sync<T: std::marker::Sync>(x: Guard<T>) {
+   |              +++++++++++++++++++
 
-error[E0277]: the trait `Zen` is not implemented for `Nested<Guard<'_, T>>`
+error[E0277]: `T` cannot be shared between threads safely
   --> $DIR/phantom-auto-trait.rs:26:12
    |
 LL |     is_zen(x)
-   |     ------ ^ the trait `Zen` is not implemented for `Nested<Guard<'_, T>>`, which is required by `Nested<Guard<'_, T>>: Zen`
+   |     ------ ^ `T` cannot be shared between threads safely
    |     |
    |     required by a bound introduced by this call
    |
@@ -58,10 +58,10 @@ note: required by a bound in `is_zen`
    |
 LL | fn is_zen<T: Zen>(_: T) {}
    |              ^^^ required by this bound in `is_zen`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `T`
    |
-LL | fn nested_not_sync<T>(x: Nested<Guard<T>>) where Nested<Guard<'_, T>>: Zen {
-   |                                            +++++++++++++++++++++++++++++++
+LL | fn nested_not_sync<T: std::marker::Sync>(x: Nested<Guard<T>>) {
+   |                     +++++++++++++++++++
 
 error: aborting due to 2 previous errors
 

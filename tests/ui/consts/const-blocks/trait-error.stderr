@@ -2,9 +2,8 @@ error[E0277]: the trait `Copy` is not implemented for `Foo<String>`
   --> $DIR/trait-error.rs:5:6
    |
 LL |     [Foo(String::new()); 4];
-   |      ^^^^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `Foo<String>`, which is required by `Foo<String>: Copy`
+   |      ^^^^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `String`, which is required by `Foo<String>: Copy`
    |
-   = help: the trait `Copy` is implemented for `Foo<T>`
 note: required for `Foo<String>` to implement `Copy`
   --> $DIR/trait-error.rs:1:10
    |

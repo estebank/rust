@@ -50,7 +50,7 @@ help: consider restricting type parameter `K`
 LL | pub struct AABB<K: std::marker::Copy> {
    |                  +++++++++++++++++++
 
-error[E0277]: the trait `Copy` is not implemented for `K`
+error[E0277]: the trait `Debug` is not implemented for `Vector2<K>`
   --> $DIR/missing-bound-in-derive-copy-impl.rs:11:5
    |
 LL | #[derive(Debug, Copy, Clone)]
@@ -88,7 +88,7 @@ help: consider restricting type parameter `K`
 LL | pub struct AABB<K: std::fmt::Debug> {
    |                  +++++++++++++++++
 
-error[E0277]: the trait `Copy` is not implemented for `K`
+error[E0277]: the trait `Clone` is not implemented for `Vector2<K>`
   --> $DIR/missing-bound-in-derive-copy-impl.rs:11:5
    |
 LL | #[derive(Debug, Copy, Clone)]
@@ -125,7 +125,7 @@ help: consider restricting type parameter `K`
 LL | pub struct AABB<K: std::fmt::Debug> {
    |                  +++++++++++++++++
 
-error[E0277]: the trait `Copy` is not implemented for `K`
+error[E0277]: the trait `Clone` is not implemented for `Vector2<K>`
   --> $DIR/missing-bound-in-derive-copy-impl.rs:17:5
    |
 LL | #[derive(Debug, Copy, Clone)]

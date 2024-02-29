@@ -11,26 +11,25 @@ error[E0277]: the trait `Copy` is not implemented for `(S, T)` in `(S, T)`
   --> $DIR/issue-55872-1.rs:12:29
    |
 LL |     fn foo<T: Default>() -> Self::E {
-   |                             ^^^^^^^ within `(S, T)`, the trait `Copy` is not implemented for `(S, T)`, which is required by `(S, T): Copy`
+   |                             ^^^^^^^ within `(S, T)`, the trait `Copy` is not implemented for `S`, which is required by `(S, T): Copy`
    |
    = note: required because it appears within the type `(S, T)`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider further restricting this bound
    |
-LL | impl<S: Default> Bar for S where (S, T): Copy {
-   |                            ++++++++++++++++++
+LL | impl<S: Default + std::marker::Copy> Bar for S {
+   |                 +++++++++++++++++++
 
 error[E0277]: the trait `Copy` is not implemented for `(S, T)` in `(S, T)`
   --> $DIR/issue-55872-1.rs:12:29
    |
 LL |     fn foo<T: Default>() -> Self::E {
-   |                             ^^^^^^^ within `(S, T)`, the trait `Copy` is not implemented for `(S, T)`, which is required by `(S, T): Copy`
+   |                             ^^^^^^^ within `(S, T)`, the trait `Copy` is not implemented for `T`, which is required by `(S, T): Copy`
    |
    = note: required because it appears within the type `(S, T)`
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider further restricting this bound
    |
-LL | impl<S: Default> Bar for S where (S, T): Copy {
-   |                            ++++++++++++++++++
+LL |     fn foo<T: Default + std::marker::Copy>() -> Self::E {
+   |                       +++++++++++++++++++
 
 error: aborting due to 3 previous errors
 

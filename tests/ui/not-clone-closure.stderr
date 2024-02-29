@@ -5,17 +5,18 @@ LL |     let hello = move || {
    |                 ------- within this `{closure@$DIR/not-clone-closure.rs:7:17: 7:24}`
 ...
 LL |     let hello = hello.clone();
-   |                       ^^^^^ within `{closure@$DIR/not-clone-closure.rs:7:17: 7:24}`, the trait `Clone` is not implemented for closure `{closure@$DIR/not-clone-closure.rs:7:17: 7:24}`, which is required by `{closure@$DIR/not-clone-closure.rs:7:17: 7:24}: Clone`
+   |                       ^^^^^ within `{closure@$DIR/not-clone-closure.rs:7:17: 7:24}`, the trait `Clone` is not implemented for `S`, which is required by `{closure@$DIR/not-clone-closure.rs:7:17: 7:24}: Clone`
    |
 note: required because it's used within this closure
   --> $DIR/not-clone-closure.rs:7:17
    |
 LL |     let hello = move || {
    |                 ^^^^^^^
-help: use parentheses to call this closure
+help: consider annotating `S` with `#[derive(Clone)]`
    |
-LL |     let hello = hello().clone();
-   |                      ++
+LL + #[derive(Clone)]
+LL | struct S(i32);
+   |
 
 error: aborting due to 1 previous error
 

@@ -2,7 +2,7 @@ error[E0277]: the trait `T1` is not implemented for `Wrapper<Burrito<Q>>`
   --> $DIR/blame-trait-error.rs:53:46
    |
 LL |     want(Wrapper { value: Burrito { filling: q } });
-   |     ----                                     ^ the trait `T1` is not implemented for `Wrapper<Burrito<Q>>`, which is required by `Wrapper<Burrito<Q>>: T1`
+   |     ----                                     ^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<Burrito<Q>>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -25,19 +25,20 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where Wrapper<Burrito<Q>>: T1 {
-   |                     +++++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
-error[E0277]: the trait `T1` is not implemented for `Option<()>`
+error[E0277]: `()` is not an iterator
   --> $DIR/blame-trait-error.rs:56:15
    |
 LL |     want(Some(()));
-   |     ----      ^^ the trait `T1` is not implemented for `Option<()>`, which is required by `Option<()>: T1`
+   |     ----      ^^ `()` is not an iterator
    |     |
    |     required by a bound introduced by this call
    |
+   = help: the trait `Iterator` is not implemented for `()`, which is required by `Option<()>: T1`
    = help: the trait `T1` is implemented for `Option<It>`
 note: required for `Option<()>` to implement `T1`
   --> $DIR/blame-trait-error.rs:21:20
@@ -52,11 +53,11 @@ note: required by a bound in `want`
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
 
-error[E0277]: the trait `T1` is not implemented for `Option<Q>`
+error[E0277]: `Q` is not an iterator
   --> $DIR/blame-trait-error.rs:59:15
    |
 LL |     want(Some(q));
-   |     ----      ^ the trait `T1` is not implemented for `Option<Q>`, which is required by `Option<Q>: T1`
+   |     ----      ^ `Q` is not an iterator
    |     |
    |     required by a bound introduced by this call
    |
@@ -72,16 +73,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where Option<Q>: T1 {
-   |                     +++++++++++++++++++
+LL | fn example<Q: std::iter::Iterator>(q: Q) {
+   |             +++++++++++++++++++++
 
-error[E0277]: the trait `T1` is not implemented for `&Option<Q>`
+error[E0277]: `Q` is not an iterator
   --> $DIR/blame-trait-error.rs:62:16
    |
 LL |     want(&Some(q));
-   |     ----       ^ the trait `T1` is not implemented for `&Option<Q>`, which is required by `&Option<Q>: T1`
+   |     ----       ^ `Q` is not an iterator
    |     |
    |     required by a bound introduced by this call
    |
@@ -99,16 +100,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &Option<Q>: T1 {
-   |                     ++++++++++++++++++++
+LL | fn example<Q: std::iter::Iterator>(q: Q) {
+   |             +++++++++++++++++++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleTuple<Q>`
   --> $DIR/blame-trait-error.rs:65:45
    |
 LL |     want(&ExampleTuple::ExampleTupleVariant(q));
-   |     ----                                    ^ the trait `T1` is not implemented for `&ExampleTuple<Q>`, which is required by `&ExampleTuple<Q>: T1`
+   |     ----                                    ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleTuple<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -124,16 +125,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleTuple<Q>: T1 {
-   |                     ++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleTuple<Q>`
   --> $DIR/blame-trait-error.rs:68:31
    |
 LL |     want(&ExampleTupleVariant(q));
-   |     ----                      ^ the trait `T1` is not implemented for `&ExampleTuple<Q>`, which is required by `&ExampleTuple<Q>: T1`
+   |     ----                      ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleTuple<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -149,16 +150,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleTuple<Q>: T1 {
-   |                     ++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleTuple<Q>`
   --> $DIR/blame-trait-error.rs:71:50
    |
 LL |     want(&ExampleOtherTuple::ExampleTupleVariant(q));
-   |     ----                                         ^ the trait `T1` is not implemented for `&ExampleTuple<Q>`, which is required by `&ExampleTuple<Q>: T1`
+   |     ----                                         ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleTuple<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -174,16 +175,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleTuple<Q>: T1 {
-   |                     ++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleTuple<Q>`
   --> $DIR/blame-trait-error.rs:74:44
    |
 LL |     want(&ExampleDifferentTupleVariantName(q));
-   |     ----                                   ^ the trait `T1` is not implemented for `&ExampleTuple<Q>`, which is required by `&ExampleTuple<Q>: T1`
+   |     ----                                   ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleTuple<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -199,16 +200,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleTuple<Q>: T1 {
-   |                     ++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleTuple<Q>`
   --> $DIR/blame-trait-error.rs:77:45
    |
 LL |     want(&ExampleYetAnotherTupleVariantName(q));
-   |     ----                                    ^ the trait `T1` is not implemented for `&ExampleTuple<Q>`, which is required by `&ExampleTuple<Q>: T1`
+   |     ----                                    ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleTuple<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -224,16 +225,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleTuple<Q>: T1 {
-   |                     ++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleStruct<Q>`
   --> $DIR/blame-trait-error.rs:80:56
    |
 LL |     want(&ExampleStruct::ExampleStructVariant { field: q });
-   |     ---- required by a bound introduced by this call   ^ the trait `T1` is not implemented for `&ExampleStruct<Q>`, which is required by `&ExampleStruct<Q>: T1`
+   |     ---- required by a bound introduced by this call   ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleStruct<Q>: T1`
    |
 note: required for `ExampleStruct<Q>` to implement `T1`
   --> $DIR/blame-trait-error.rs:45:9
@@ -247,16 +248,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleStruct<Q>: T1 {
-   |                     +++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleStruct<Q>`
   --> $DIR/blame-trait-error.rs:83:41
    |
 LL |     want(&ExampleStructVariant { field: q });
-   |     ----                                ^ the trait `T1` is not implemented for `&ExampleStruct<Q>`, which is required by `&ExampleStruct<Q>: T1`
+   |     ----                                ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleStruct<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -272,16 +273,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleStruct<Q>: T1 {
-   |                     +++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleStruct<Q>`
   --> $DIR/blame-trait-error.rs:86:61
    |
 LL |     want(&ExampleOtherStruct::ExampleStructVariant { field: q });
-   |     ---- required by a bound introduced by this call        ^ the trait `T1` is not implemented for `&ExampleStruct<Q>`, which is required by `&ExampleStruct<Q>: T1`
+   |     ---- required by a bound introduced by this call        ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleStruct<Q>: T1`
    |
 note: required for `ExampleStruct<Q>` to implement `T1`
   --> $DIR/blame-trait-error.rs:45:9
@@ -295,16 +296,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleStruct<Q>: T1 {
-   |                     +++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleStruct<Q>`
   --> $DIR/blame-trait-error.rs:89:54
    |
 LL |     want(&ExampleDifferentStructVariantName { field: q });
-   |     ---- required by a bound introduced by this call ^ the trait `T1` is not implemented for `&ExampleStruct<Q>`, which is required by `&ExampleStruct<Q>: T1`
+   |     ---- required by a bound introduced by this call ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleStruct<Q>: T1`
    |
 note: required for `ExampleStruct<Q>` to implement `T1`
   --> $DIR/blame-trait-error.rs:45:9
@@ -318,16 +319,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleStruct<Q>: T1 {
-   |                     +++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleStruct<Q>`
   --> $DIR/blame-trait-error.rs:92:55
    |
 LL |     want(&ExampleYetAnotherStructVariantName { field: q });
-   |     ---- required by a bound introduced by this call  ^ the trait `T1` is not implemented for `&ExampleStruct<Q>`, which is required by `&ExampleStruct<Q>: T1`
+   |     ---- required by a bound introduced by this call  ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleStruct<Q>: T1`
    |
 note: required for `ExampleStruct<Q>` to implement `T1`
   --> $DIR/blame-trait-error.rs:45:9
@@ -341,16 +342,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleStruct<Q>: T1 {
-   |                     +++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleActuallyTupleStruct<Q>`
   --> $DIR/blame-trait-error.rs:95:38
    |
 LL |     want(&ExampleActuallyTupleStruct(q, 0));
-   |     ----                             ^ the trait `T1` is not implemented for `&ExampleActuallyTupleStruct<Q>`, which is required by `&ExampleActuallyTupleStruct<Q>: T1`
+   |     ----                             ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleActuallyTupleStruct<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -366,16 +367,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleActuallyTupleStruct<Q>: T1 {
-   |                     ++++++++++++++++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error[E0277]: the trait `T1` is not implemented for `&ExampleActuallyTupleStruct<Q>`
   --> $DIR/blame-trait-error.rs:98:43
    |
 LL |     want(&ExampleActuallyTupleStructOther(q, 0));
-   |     ----                                  ^ the trait `T1` is not implemented for `&ExampleActuallyTupleStruct<Q>`, which is required by `&ExampleActuallyTupleStruct<Q>: T1`
+   |     ----                                  ^ the trait `T3` is not implemented for `Q`, which is required by `&ExampleActuallyTupleStruct<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -391,10 +392,10 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+help: consider restricting type parameter `Q`
    |
-LL | fn example<Q>(q: Q) where &ExampleActuallyTupleStruct<Q>: T1 {
-   |                     ++++++++++++++++++++++++++++++++++++++++
+LL | fn example<Q: T3>(q: Q) {
+   |             ++++
 
 error: aborting due to 16 previous errors
 
