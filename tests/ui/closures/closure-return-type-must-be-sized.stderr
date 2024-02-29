@@ -7,13 +7,14 @@ LL |     a::foo::<fn() -> dyn A>();
    = help: within `fn() -> dyn A`, the trait `Sized` is not implemented for `dyn A`, which is required by `fn() -> dyn A: FnOnce()`
    = note: required because it appears within the type `fn() -> dyn A`
 
-error[E0277]: the size for values of type `dyn A` cannot be known at compilation time
+error[E0277]: expected a `FnOnce()` closure, found `fn() -> dyn A`
   --> $DIR/closure-return-type-must-be-sized.rs:55:14
    |
 LL |     a::bar::<fn() -> dyn A, _>();
-   |              ^^^^^^^^^^^^^ doesn't have a size known at compile-time
+   |              ^^^^^^^^^^^^^ expected an `FnOnce()` closure, found `fn() -> dyn A`
    |
-   = help: within `fn() -> dyn A`, the trait `Sized` is not implemented for `dyn A`, which is required by `fn() -> dyn A: FnOnce()`
+   = help: within `fn() -> dyn A`, the trait `FnOnce<()>` is not implemented for `fn() -> dyn A`, which is required by `fn() -> dyn A: FnOnce()`
+   = note: wrap the `fn() -> dyn A` in a closure with no arguments: `|| { /* code */ }`
    = note: required because it appears within the type `fn() -> dyn A`
 note: required by a bound in `a::bar`
   --> $DIR/closure-return-type-must-be-sized.rs:14:19
@@ -39,13 +40,14 @@ LL |     b::foo::<fn() -> dyn A>();
    = help: within `fn() -> dyn A`, the trait `Sized` is not implemented for `dyn A`, which is required by `fn() -> dyn A: FnOnce()`
    = note: required because it appears within the type `fn() -> dyn A`
 
-error[E0277]: the size for values of type `dyn A` cannot be known at compilation time
+error[E0277]: expected a `Fn()` closure, found `fn() -> dyn A`
   --> $DIR/closure-return-type-must-be-sized.rs:62:14
    |
 LL |     b::bar::<fn() -> dyn A, _>();
-   |              ^^^^^^^^^^^^^ doesn't have a size known at compile-time
+   |              ^^^^^^^^^^^^^ expected an `Fn()` closure, found `fn() -> dyn A`
    |
-   = help: within `fn() -> dyn A`, the trait `Sized` is not implemented for `dyn A`, which is required by `fn() -> dyn A: Fn()`
+   = help: within `fn() -> dyn A`, the trait `Fn<()>` is not implemented for `fn() -> dyn A`, which is required by `fn() -> dyn A: Fn()`
+   = note: wrap the `fn() -> dyn A` in a closure with no arguments: `|| { /* code */ }`
    = note: required because it appears within the type `fn() -> dyn A`
 note: required by a bound in `b::bar`
   --> $DIR/closure-return-type-must-be-sized.rs:28:19
@@ -71,13 +73,14 @@ LL |     c::foo::<fn() -> dyn A>();
    = help: within `fn() -> dyn A`, the trait `Sized` is not implemented for `dyn A`, which is required by `fn() -> dyn A: FnOnce()`
    = note: required because it appears within the type `fn() -> dyn A`
 
-error[E0277]: the size for values of type `dyn A` cannot be known at compilation time
+error[E0277]: expected a `FnMut()` closure, found `fn() -> dyn A`
   --> $DIR/closure-return-type-must-be-sized.rs:69:14
    |
 LL |     c::bar::<fn() -> dyn A, _>();
-   |              ^^^^^^^^^^^^^ doesn't have a size known at compile-time
+   |              ^^^^^^^^^^^^^ expected an `FnMut()` closure, found `fn() -> dyn A`
    |
-   = help: within `fn() -> dyn A`, the trait `Sized` is not implemented for `dyn A`, which is required by `fn() -> dyn A: FnMut()`
+   = help: within `fn() -> dyn A`, the trait `FnMut<()>` is not implemented for `fn() -> dyn A`, which is required by `fn() -> dyn A: FnMut()`
+   = note: wrap the `fn() -> dyn A` in a closure with no arguments: `|| { /* code */ }`
    = note: required because it appears within the type `fn() -> dyn A`
 note: required by a bound in `c::bar`
   --> $DIR/closure-return-type-must-be-sized.rs:42:19

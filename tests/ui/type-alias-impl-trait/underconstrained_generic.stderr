@@ -1,8 +1,8 @@
-error[E0277]: the trait `Trait` is not implemented for `T`
+error[E0277]: the trait `ProofForConversion<T>` is not implemented for `()`
   --> $DIR/underconstrained_generic.rs:22:5
    |
 LL |     ()
-   |     ^^ the trait `Trait` is not implemented for `T`, which is required by `(): ProofForConversion<T>`
+   |     ^^ the trait `ProofForConversion<T>` is not implemented for `()`, which is required by `(): ProofForConversion<T>`
    |
 note: required for `()` to implement `ProofForConversion<T>`
   --> $DIR/underconstrained_generic.rs:13:16
@@ -11,10 +11,10 @@ LL | impl<X: Trait> ProofForConversion<X> for () {
    |         -----  ^^^^^^^^^^^^^^^^^^^^^     ^^
    |         |
    |         unsatisfied trait bound introduced here
-help: consider restricting type parameter `T`
+help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | type Converter<T: Trait> = impl ProofForConversion<T>;
-   |                 +++++++
+LL | type Converter<T> = impl ProofForConversion<T> (): ProofForConversion<T>;
+   |                                                +++++++++++++++++++++++++
 
 error: aborting due to 1 previous error
 

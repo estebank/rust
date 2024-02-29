@@ -1,14 +1,16 @@
-error[E0277]: `?` couldn't convert the error to `TryFromSliceError`
+error[E0277]: the `?` operator can only be used on `Result`s in a function that returns `Result`
   --> $DIR/try-block-bad-type.rs:7:16
    |
+LL | pub fn main() {
+   | ------------- this function returns a `Result`
+LL |     let res: Result<u32, std::array::TryFromSliceError> = try {
 LL |         Err("")?;
-   |         -------^ the trait `From<&str>` is not implemented for `TryFromSliceError`, which is required by `Result<u32, TryFromSliceError>: FromResidual<Result<Infallible, &str>>`
-   |         |
-   |         this can't be annotated with `?` because it has type `Result<_, &str>`
+   |                ^ this `?` produces `Result<Infallible, &str>`, which is incompatible with `Result<u32, TryFromSliceError>`
    |
-   = note: the question mark operation (`?`) implicitly performs a conversion on the error value using the `From` trait
-   = help: the trait `From<Infallible>` is implemented for `TryFromSliceError`
-   = help: for that trait implementation, expected `Infallible`, found `&str`
+   = help: the trait `FromResidual<Result<Infallible, &str>>` is not implemented for `Result<u32, TryFromSliceError>`, which is required by `Result<u32, TryFromSliceError>: FromResidual<Result<Infallible, &str>>`
+   = help: the following other types implement trait `FromResidual<R>`:
+             <Result<T, F> as FromResidual<Yeet<E>>>
+             <Result<T, F> as FromResidual<Result<Infallible, E>>>
    = note: required for `Result<u32, TryFromSliceError>` to implement `FromResidual<Result<Infallible, &str>>`
 
 error[E0271]: type mismatch resolving `<Result<i32, i32> as Try>::Output == &str`

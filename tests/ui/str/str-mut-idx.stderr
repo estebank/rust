@@ -28,11 +28,10 @@ error[E0277]: the type `str` cannot be indexed by `usize`
   --> $DIR/str-mut-idx.rs:7:7
    |
 LL |     s[1usize] = bot();
-   |       ^^^^^^ string indices are ranges of `usize`
+   |       ^^^^^^ `str` cannot be indexed by `usize`
    |
-   = help: the trait `SliceIndex<str>` is not implemented for `usize`, which is required by `str: Index<_>`
-   = help: the trait `SliceIndex<[_]>` is implemented for `usize`
-   = help: for that trait implementation, expected `[_]`, found `str`
+   = help: the trait `Index<usize>` is not implemented for `str`, which is required by `str: Index<_>`
+   = help: the trait `Index<I>` is implemented for `str`
    = note: required for `str` to implement `Index<usize>`
 
 error[E0277]: the type `str` cannot be indexed by `{integer}`
@@ -71,9 +70,10 @@ error[E0277]: the type `str` cannot be indexed by `char`
   --> $DIR/str-mut-idx.rs:13:7
    |
 LL |     s['c'];
-   |       ^^^ string indices are ranges of `usize`
+   |       ^^^ `str` cannot be indexed by `char`
    |
-   = help: the trait `SliceIndex<str>` is not implemented for `char`, which is required by `str: Index<_>`
+   = help: the trait `Index<char>` is not implemented for `str`, which is required by `str: Index<_>`
+   = help: the trait `Index<I>` is implemented for `str`
    = note: required for `str` to implement `Index<char>`
 
 error: aborting due to 6 previous errors

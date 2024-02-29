@@ -8,6 +8,7 @@ LL |     ()
    |     -- return type was inferred to be `()` here
    |
    = help: the trait `Foo<()>` is implemented for `()`
+   = help: for that trait implementation, expected `()`, found `FooX`
 
 error: aborting due to 1 previous error
 

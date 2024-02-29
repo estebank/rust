@@ -1,9 +1,10 @@
-error[E0277]: the trait `Clone` is not implemented for `T`
+error[E0277]: can't compare `Struct<T>` with `Struct<T>`
   --> $DIR/derive-clone-for-eq.rs:4:17
    |
 LL | #[derive(Clone, Eq)]
-   |                 ^^ the trait `Clone` is not implemented for `T`, which is required by `Struct<T>: PartialEq`
+   |                 ^^ no implementation for `Struct<T> == Struct<T>`
    |
+   = help: the trait `PartialEq` is not implemented for `Struct<T>`, which is required by `Struct<T>: PartialEq`
 note: required for `Struct<T>` to implement `PartialEq`
   --> $DIR/derive-clone-for-eq.rs:7:19
    |
@@ -14,10 +15,15 @@ LL | impl<T: Clone, U> PartialEq<U> for Struct<T>
 note: required by a bound in `Eq`
   --> $SRC_DIR/core/src/cmp.rs:LL:COL
    = note: this error originates in the derive macro `Eq` (in Nightly builds, run with -Z macro-backtrace for more info)
-help: consider restricting type parameter `T`
+help: consider annotating `Struct<T>` with `#[derive(PartialEq)]`
    |
-LL | pub struct Struct<T: std::clone::Clone>(T);
-   |                    +++++++++++++++++++
+LL + #[derive(PartialEq)]
+LL | pub struct Struct<T>(T);
+   |
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
+   |
+LL | pub struct Struct<T>(T) where Struct<T>: PartialEq;
+   |                         ++++++++++++++++++++++++++
 
 error: aborting due to 1 previous error
 

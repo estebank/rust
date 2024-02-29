@@ -1,14 +1,9 @@
-error[E0277]: the trait `Foo<&mut ()>` is not implemented for `&mut ()`
+error[E0277]: the trait `FuncInput<'_, &mut ()>` is not implemented for `&mut ()`
   --> $DIR/issue-101020.rs:31:22
    |
 LL |     (&mut EmptyIter).consume(());
-   |                      ^^^^^^^ the trait `Foo<&mut ()>` is not implemented for `&mut ()`, which is required by `for<'a> &'a mut (): FuncInput<'a, &'a mut ()>`
+   |                      ^^^^^^^ the trait `FuncInput<'_, &mut ()>` is not implemented for `&mut ()`, which is required by `for<'a> &'a mut (): FuncInput<'a, &'a mut ()>`
    |
-help: this trait has no implementations, consider adding one
-  --> $DIR/issue-101020.rs:28:1
-   |
-LL | trait Foo<T> {}
-   | ^^^^^^^^^^^^
 note: required for `&'a mut ()` to implement `for<'a> FuncInput<'a, &'a mut ()>`
   --> $DIR/issue-101020.rs:27:20
    |

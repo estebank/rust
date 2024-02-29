@@ -1,8 +1,8 @@
-error[E0277]: `PhantomPinned` cannot be unpinned
+error[E0277]: `Sleep` cannot be unpinned
   --> $DIR/pin-needed-to-poll-2.rs:43:18
    |
 LL |         Pin::new(&mut self.sleep).poll(cx)
-   |         -------- ^^^^^^^^^^^^^^^ within `Sleep`, the trait `Unpin` is not implemented for `PhantomPinned`, which is required by `Sleep: Unpin`
+   |         -------- ^^^^^^^^^^^^^^^ within `Sleep`, the trait `Unpin` is not implemented for `Sleep`, which is required by `Sleep: Unpin`
    |         |
    |         required by a bound introduced by this call
    |

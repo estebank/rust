@@ -19,12 +19,13 @@ note: required by a bound in `Ord`
   --> $SRC_DIR/core/src/cmp.rs:LL:COL
    = note: this error originates in the derive macro `AddImpl` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0277]: can't compare `T` with `T`
+error[E0277]: can't compare `PriorityQueue<T>` with `PriorityQueue<T>`
   --> $DIR/issue-104884-trait-impl-sugg-err.rs:13:22
    |
 LL | #[derive(PartialOrd, AddImpl)]
-   |                      ^^^^^^^ no implementation for `T < T` and `T > T`
+   |                      ^^^^^^^ no implementation for `PriorityQueue<T> < PriorityQueue<T>` and `PriorityQueue<T> > PriorityQueue<T>`
    |
+   = help: the trait `PartialOrd` is not implemented for `PriorityQueue<T>`, which is required by `PriorityQueue<T>: PartialOrd`
 note: required for `PriorityQueue<T>` to implement `PartialOrd`
   --> $DIR/issue-104884-trait-impl-sugg-err.rs:13:10
    |

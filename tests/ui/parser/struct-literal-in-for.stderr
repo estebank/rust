@@ -14,16 +14,15 @@ LL |         x: 3
 LL ~     }).hi() {
    |
 
-error[E0277]: `bool` is not an iterator
+error[E0277]: the trait `IntoIterator` is not implemented for `bool`
   --> $DIR/struct-literal-in-for.rs:12:14
    |
 LL |       for x in Foo {
    |  ______________^
 LL | |         x: 3
 LL | |     }.hi() {
-   | |__________^ `bool` is not an iterator
+   | |__________^ the trait `IntoIterator` is not implemented for `bool`, which is required by `bool: IntoIterator`
    |
-   = help: the trait `Iterator` is not implemented for `bool`, which is required by `bool: IntoIterator`
    = note: required for `bool` to implement `IntoIterator`
 
 error: aborting due to 2 previous errors

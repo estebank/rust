@@ -1,8 +1,8 @@
-error[E0277]: the trait `UpperHex` is not implemented for `str`
+error[E0277]: the trait `UpperHex` is not implemented for `&str`
   --> $DIR/ifmt-unimpl.rs:2:21
    |
 LL |     format!("{:X}", "3");
-   |              ----   ^^^ the trait `UpperHex` is not implemented for `str`, which is required by `&str: UpperHex`
+   |              ----   ^^^ the trait `UpperHex` is not implemented for `&str`, which is required by `&str: UpperHex`
    |              |
    |              required by a bound introduced by this call
    |

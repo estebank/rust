@@ -1,37 +1,40 @@
-error[E0277]: `T` doesn't implement `Debug`
+error[E0277]: `(T, i8)` doesn't implement `Debug`
   --> $DIR/not_a_defining_use.rs:10:5
    |
 LL |     (t, 5i8)
-   |     ^^^^^^^^ `T` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+   |     ^^^^^^^^ `(T, i8)` cannot be formatted using `{:?}` because it doesn't implement `Debug`
    |
+   = help: the trait `Debug` is not implemented for `(T, i8)`, which is required by `(T, i8): Debug`
    = note: required for `(T, i8)` to implement `Debug`
-help: consider restricting type parameter `T`
+help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | type Two<T: std::fmt::Debug, U> = impl Debug;
-   |           +++++++++++++++++
+LL | type Two<T, U> = impl Debug (T, i8): Debug;
+   |                             ++++++++++++++
 
-error[E0277]: the trait `Bar` is not implemented for `U`
+error[E0277]: the size for values of type `(T, <U as Bar>::Blub)` cannot be known at compilation time
   --> $DIR/not_a_defining_use.rs:25:5
    |
 LL |     (t, <U as Bar>::FOO)
-   |     ^^^^^^^^^^^^^^^^^^^^ the trait `Bar` is not implemented for `U`
+   |     ^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
    |
-help: consider restricting type parameter `U`
+   = help: the trait `Sized` is not implemented for `(T, <U as Bar>::Blub)`
+help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | type Two<T, U: Bar> = impl Debug;
-   |              +++++
+LL | type Two<T, U> = impl Debug (T, <U as Bar>::Blub): Sized;
+   |                             ++++++++++++++++++++++++++++
 
-error[E0277]: `T` doesn't implement `Debug`
+error[E0277]: `(T, <U as Bar>::Blub)` doesn't implement `Debug`
   --> $DIR/not_a_defining_use.rs:25:5
    |
 LL |     (t, <U as Bar>::FOO)
-   |     ^^^^^^^^^^^^^^^^^^^^ `T` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+   |     ^^^^^^^^^^^^^^^^^^^^ `(T, <U as Bar>::Blub)` cannot be formatted using `{:?}` because it doesn't implement `Debug`
    |
+   = help: the trait `Debug` is not implemented for `(T, <U as Bar>::Blub)`, which is required by `(T, _): Debug`
    = note: required for `(T, _)` to implement `Debug`
-help: consider restricting type parameter `T`
+help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | type Two<T: std::fmt::Debug, U> = impl Debug;
-   |           +++++++++++++++++
+LL | type Two<T, U> = impl Debug (T, <U as Bar>::Blub): Debug;
+   |                             ++++++++++++++++++++++++++++
 
 error: aborting due to 3 previous errors
 

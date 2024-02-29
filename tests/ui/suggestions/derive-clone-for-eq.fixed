@@ -2,7 +2,8 @@
 // https://github.com/rust-lang/rust/issues/79076
 
 #[derive(Clone, Eq)] //~ ERROR [E0277]
-pub struct Struct<T: std::clone::Clone>(T);
+#[derive(PartialEq)]
+pub struct Struct<T>(T) where Struct<T>: PartialEq;
 
 impl<T: Clone, U> PartialEq<U> for Struct<T>
 where

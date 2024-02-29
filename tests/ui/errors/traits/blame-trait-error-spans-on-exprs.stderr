@@ -1,8 +1,8 @@
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Wrapper<Burrito<Q>>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:81:60
    |
 LL |     want(Wrapper { value: Burrito { spicy: false, filling: q } });
-   |     ---- required by a bound introduced by this call       ^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<Burrito<Q>>: T1`
+   |     ---- required by a bound introduced by this call       ^ the trait `T1` is not implemented for `Wrapper<Burrito<Q>>`, which is required by `Wrapper<Burrito<Q>>: T1`
    |
 note: required for `Burrito<Q>` to implement `T2`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:22:13
@@ -23,16 +23,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Wrapper<Burrito<Q>>: T1 {
+   |                     +++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Wrapper<BurritoKinds<Q>>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:85:84
    |
 LL |     want(Wrapper { value: BurritoKinds::SmallBurrito { spicy: true, small_filling: q } });
-   |     ---- required by a bound introduced by this call                               ^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<BurritoKinds<Q>>: T1`
+   |     ---- required by a bound introduced by this call                               ^ the trait `T1` is not implemented for `Wrapper<BurritoKinds<Q>>`, which is required by `Wrapper<BurritoKinds<Q>>: T1`
    |
 note: required for `BurritoKinds<Q>` to implement `T2`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:32:13
@@ -53,16 +53,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Wrapper<BurritoKinds<Q>>: T1 {
+   |                     ++++++++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Wrapper<Taco<Q>>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:89:39
    |
 LL |     want(Wrapper { value: Taco(false, q) });
-   |     ----                              ^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<Taco<Q>>: T1`
+   |     ----                              ^ the trait `T1` is not implemented for `Wrapper<Taco<Q>>`, which is required by `Wrapper<Taco<Q>>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -85,16 +85,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Wrapper<Taco<Q>>: T1 {
+   |                     ++++++++++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Wrapper<TacoKinds<Q>>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:93:53
    |
 LL |     want(Wrapper { value: TacoKinds::OneTaco(false, q) });
-   |     ----                                            ^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<TacoKinds<Q>>: T1`
+   |     ----                                            ^ the trait `T1` is not implemented for `Wrapper<TacoKinds<Q>>`, which is required by `Wrapper<TacoKinds<Q>>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -117,16 +117,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Wrapper<TacoKinds<Q>>: T1 {
+   |                     +++++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Wrapper<GenericBurrito<NotSpicy, Q>>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:97:74
    |
 LL |     want(Wrapper { value: GenericBurrito { spiciness: NotSpicy, filling: q } });
-   |     ---- required by a bound introduced by this call                     ^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<GenericBurrito<NotSpicy, Q>>: T1`
+   |     ---- required by a bound introduced by this call                     ^ the trait `T1` is not implemented for `Wrapper<GenericBurrito<NotSpicy, Q>>`, which is required by `Wrapper<GenericBurrito<NotSpicy, Q>>: T1`
    |
 note: required for `GenericBurrito<NotSpicy, Q>` to implement `T2`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:47:16
@@ -147,16 +147,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Wrapper<GenericBurrito<NotSpicy, Q>>: T1 {
+   |                     ++++++++++++++++++++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T2` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `(i32, Q)`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:101:14
    |
 LL |     want((3, q));
-   |     ----     ^ the trait `T2` is not implemented for `Q`, which is required by `({integer}, Q): T1`
+   |     ----     ^ the trait `T1` is not implemented for `(i32, Q)`, which is required by `({integer}, Q): T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -172,16 +172,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T2>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where (i32, Q): T1 {
+   |                     ++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Wrapper<(i32, Q)>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:105:31
    |
 LL |     want(Wrapper { value: (3, q) });
-   |     ----                      ^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<({integer}, Q)>: T1`
+   |     ----                      ^ the trait `T1` is not implemented for `Wrapper<(i32, Q)>`, which is required by `Wrapper<({integer}, Q)>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -204,16 +204,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Wrapper<(i32, Q)>: T1 {
+   |                     +++++++++++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `((i32, Q), i32)`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:109:15
    |
 LL |     want(((3, q), 5));
-   |     ----      ^ the trait `T3` is not implemented for `Q`, which is required by `(({integer}, Q), {integer}): T1`
+   |     ----      ^ the trait `T1` is not implemented for `((i32, Q), i32)`, which is required by `(({integer}, Q), {integer}): T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -236,16 +236,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where ((i32, Q), i32): T1 {
+   |                     +++++++++++++++++++++++++
 
-error[E0277]: the trait `T1` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `DoubleWrapper<Q>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:112:49
    |
 LL |     want(DoubleWrapper { item: Wrapper { value: q } });
-   |     ----                                        ^ the trait `T1` is not implemented for `Q`, which is required by `DoubleWrapper<Q>: T1`
+   |     ----                                        ^ the trait `T1` is not implemented for `DoubleWrapper<Q>`, which is required by `DoubleWrapper<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -261,16 +261,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T1>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where DoubleWrapper<Q>: T1 {
+   |                     ++++++++++++++++++++++++++
 
-error[E0277]: the trait `T1` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `DoubleWrapper<DoubleWrapper<Q>>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:115:88
    |
 LL |     want(DoubleWrapper { item: Wrapper { value: DoubleWrapper { item: Wrapper { value: q } } } });
-   |     ---- required by a bound introduced by this call                                   ^ the trait `T1` is not implemented for `Q`, which is required by `DoubleWrapper<DoubleWrapper<Q>>: T1`
+   |     ---- required by a bound introduced by this call                                   ^ the trait `T1` is not implemented for `DoubleWrapper<DoubleWrapper<Q>>`, which is required by `DoubleWrapper<DoubleWrapper<Q>>: T1`
    |
 note: required for `DoubleWrapper<Q>` to implement `T1`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:72:13
@@ -286,16 +286,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T1>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where DoubleWrapper<DoubleWrapper<Q>>: T1 {
+   |                     +++++++++++++++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Wrapper<GenericBurrito<Q, Q>>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:119:27
    |
 LL |     want(Wrapper { value: AliasBurrito { spiciness: q, filling: q } });
-   |     ----                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `T3` is not implemented for `Q`, which is required by `Wrapper<GenericBurrito<Q, Q>>: T1`
+   |     ----                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `T1` is not implemented for `Wrapper<GenericBurrito<Q, Q>>`, which is required by `Wrapper<GenericBurrito<Q, Q>>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -318,16 +318,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Wrapper<GenericBurrito<Q, Q>>: T1 {
+   |                     +++++++++++++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T1` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Two<Two<(), Q>, ()>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:122:35
    |
 LL |     want(Two { a: Two { a: (), b: q }, b: () });
-   |     ----                          ^ the trait `T1` is not implemented for `Q`, which is required by `Two<Two<(), Q>, ()>: T1`
+   |     ----                          ^ the trait `T1` is not implemented for `Two<Two<(), Q>, ()>`, which is required by `Two<Two<(), Q>, ()>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -343,18 +343,18 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T1>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Two<Two<(), Q>, ()>: T1 {
+   |                     +++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T1` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `Two<Two<(), Two<Two<(), Q>, ()>>, ()>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:128:59
    |
 LL |     want(
    |     ---- required by a bound introduced by this call
 LL |         Two { a: Two { a: (), b: Two { a: Two { a: (), b: q }, b: () } }, b: () },
-   |                                                           ^ the trait `T1` is not implemented for `Q`, which is required by `Two<Two<(), Two<Two<(), Q>, ()>>, ()>: T1`
+   |                                                           ^ the trait `T1` is not implemented for `Two<Two<(), Two<Two<(), Q>, ()>>, ()>`, which is required by `Two<Two<(), Two<Two<(), Q>, ()>>, ()>: T1`
    |
 note: required for `Two<Two<(), Q>, ()>` to implement `T1`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:66:19
@@ -370,16 +370,16 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T1>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where Two<Two<(), Two<Two<(), Q>, ()>>, ()>: T1 {
+   |                     +++++++++++++++++++++++++++++++++++++++++++++++
 
-error[E0277]: the trait `T3` is not implemented for `Q`
+error[E0277]: the trait `T1` is not implemented for `&Burrito<Q>`
   --> $DIR/blame-trait-error-spans-on-exprs.rs:133:44
    |
 LL |     want(&Burrito { spicy: false, filling: q });
-   |     ----                                   ^ the trait `T3` is not implemented for `Q`, which is required by `&Burrito<Q>: T1`
+   |     ----                                   ^ the trait `T1` is not implemented for `&Burrito<Q>`, which is required by `&Burrito<Q>: T1`
    |     |
    |     required by a bound introduced by this call
    |
@@ -402,10 +402,10 @@ note: required by a bound in `want`
    |
 LL | fn want<V: T1>(_x: V) {}
    |            ^^ required by this bound in `want`
-help: consider restricting type parameter `Q`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | fn example<Q: T3>(q: Q) {
-   |             ++++
+LL | fn example<Q>(q: Q) where &Burrito<Q>: T1 {
+   |                     +++++++++++++++++++++
 
 error: aborting due to 14 previous errors
 

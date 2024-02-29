@@ -9,6 +9,7 @@ LL |     Bar
    |
    = help: the trait `PartialEq<(Foo, i32)>` is not implemented for `Bar`
    = help: the trait `PartialEq<(Bar, i32)>` is implemented for `Bar`
+   = help: for that trait implementation, expected `Bar`, found `Foo`
 
 error: aborting due to 1 previous error
 

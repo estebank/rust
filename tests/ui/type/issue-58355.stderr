@@ -1,10 +1,11 @@
-error[E0277]: the size for values of type `dyn ToString` cannot be known at compilation time
+error[E0277]: expected a `Fn()` closure, found `fn() -> dyn ToString`
   --> $DIR/issue-58355.rs:5:14
    |
 LL |     x = Some(Box::new(callback));
-   |              ^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
+   |              ^^^^^^^^^^^^^^^^^^ expected an `Fn()` closure, found `fn() -> dyn ToString`
    |
-   = help: within `fn() -> dyn ToString`, the trait `Sized` is not implemented for `dyn ToString`, which is required by `fn() -> dyn ToString: Fn()`
+   = help: within `fn() -> dyn ToString`, the trait `Fn<()>` is not implemented for `fn() -> dyn ToString`, which is required by `fn() -> dyn ToString: Fn()`
+   = note: wrap the `fn() -> dyn ToString` in a closure with no arguments: `|| { /* code */ }`
    = note: required because it appears within the type `fn() -> dyn ToString`
    = note: required for the cast from `Box<fn() -> dyn ToString>` to `Box<dyn Fn() -> (dyn ToString + 'static)>`
 

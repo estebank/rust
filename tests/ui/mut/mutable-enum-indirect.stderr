@@ -1,12 +1,12 @@
-error[E0277]: `NoSync` cannot be shared between threads safely
+error[E0277]: `&Foo` cannot be shared between threads safely
   --> $DIR/mutable-enum-indirect.rs:17:9
    |
 LL |     bar(&x);
-   |     --- ^^ `NoSync` cannot be shared between threads safely
+   |     --- ^^ `&Foo` cannot be shared between threads safely
    |     |
    |     required by a bound introduced by this call
    |
-   = help: within `&Foo`, the trait `Sync` is not implemented for `NoSync`, which is required by `&Foo: Sync`
+   = help: within `&Foo`, the trait `Sync` is not implemented for `&Foo`, which is required by `&Foo: Sync`
 note: required because it appears within the type `Foo`
   --> $DIR/mutable-enum-indirect.rs:11:6
    |

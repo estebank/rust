@@ -1,18 +1,18 @@
-error[E0277]: the trait `Copy` is not implemented for `T`
+error[E0277]: the trait `Setup` is not implemented for `dyn Setup<From = T>`
   --> $DIR/issue-27675-unchecked-bounds.rs:15:12
    |
 LL |     copy::<dyn Setup<From=T>>(t)
-   |            ^^^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `T`
+   |            ^^^^^^^^^^^^^^^^^ the trait `Setup` is not implemented for `dyn Setup<From = T>`
    |
 note: required by a bound in `copy`
   --> $DIR/issue-27675-unchecked-bounds.rs:10:12
    |
 LL | fn copy<U: Setup + ?Sized>(from: &U::From) -> U::From {
    |            ^^^^^ required by this bound in `copy`
-help: consider restricting type parameter `T`
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | pub fn copy_any<T: std::marker::Copy>(t: &T) -> T {
-   |                  +++++++++++++++++++
+LL | pub fn copy_any<T>(t: &T) -> T where dyn Setup<From = T>: Setup {
+   |                                ++++++++++++++++++++++++++++++++
 
 error: aborting due to 1 previous error
 

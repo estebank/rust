@@ -1,8 +1,8 @@
-error[E0277]: the trait `Eq<i32>` is not implemented for `<Self as Foo>::Bar<()>`
+error[E0277]: the trait `Baz<Self>` is not implemented for `i32`
   --> $DIR/assume-gat-normalization-for-nested-goals.rs:6:30
    |
 LL |     type Bar<T>: Baz<Self> = i32;
-   |                              ^^^ the trait `Eq<i32>` is not implemented for `<Self as Foo>::Bar<()>`, which is required by `i32: Baz<Self>`
+   |                              ^^^ the trait `Baz<Self>` is not implemented for `i32`, which is required by `i32: Baz<Self>`
    |
 note: required for `i32` to implement `Baz<Self>`
   --> $DIR/assume-gat-normalization-for-nested-goals.rs:13:23
@@ -14,10 +14,10 @@ note: required by a bound in `Foo::Bar`
    |
 LL |     type Bar<T>: Baz<Self> = i32;
    |                  ^^^^^^^^^ required by this bound in `Foo::Bar`
-help: consider further restricting the associated type
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | trait Foo where <Self as Foo>::Bar<()>: Eq<i32> {
-   |           +++++++++++++++++++++++++++++++++++++
+LL | trait Foo where i32: Baz<Self> {
+   |           ++++++++++++++++++++
 
 error: aborting due to 1 previous error
 

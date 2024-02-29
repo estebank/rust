@@ -404,7 +404,8 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
                     return self.report_const_param_not_wf(ty, &obligation).emit();
                 }
 
-                let bound_predicate = obligation.predicate.kind();
+                // let bound_predicate = obligation.predicate.kind();
+                let bound_predicate = root_obligation.predicate.kind();
                 match bound_predicate.skip_binder() {
                     ty::PredicateKind::Clause(ty::ClauseKind::Trait(trait_predicate)) => {
                         let trait_predicate = bound_predicate.rebind(trait_predicate);
@@ -472,8 +473,19 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
                             (message, notes, append_const_msg)
                         };
 
+                        let pred = match root_obligation.predicate.kind().skip_binder() {
+                            // ty::PredicateKind::Clause(ty::ClauseKind::Trait(trait_predicate)) => {
+                            //     // Let's use the root obligation as the main message, as we care
+                            //     // about the most general case ("X doesn't implement Pattern<'_>")
+                            //     // over the most specific case that happened to fail
+                            //     // ("char doesn't implement Fn(&mut char)").
+                            //     let trait_predicate = bound_predicate.rebind(trait_predicate);
+                            //     self.resolve_vars_if_possible(trait_predicate)
+                            // }
+                            _ => trait_predicate,
+                        };
                         let err_msg = self.get_standard_error_message(
-                            &trait_predicate,
+                            &pred,
                             message,
                             predicate_is_const,
                             append_const_msg,

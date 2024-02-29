@@ -1,11 +1,11 @@
-error[E0277]: the trait `Borrow<&str>` is not implemented for `String`
+error[E0277]: the type `HashMap<String, String>` cannot be indexed by `&&str`
   --> $DIR/point-at-index-for-obligation-failure.rs:5:9
    |
 LL |         &s
-   |         ^^ the trait `Borrow<&str>` is not implemented for `String`, which is required by `HashMap<String, String>: Index<&_>`
+   |         ^^ `HashMap<String, String>` cannot be indexed by `&&str`
    |
-   = help: the trait `Borrow<str>` is implemented for `String`
-   = help: for that trait implementation, expected `str`, found `&str`
+   = help: the trait `Index<&&str>` is not implemented for `HashMap<String, String>`, which is required by `HashMap<String, String>: Index<&_>`
+   = help: the trait `Index<&Q>` is implemented for `HashMap<K, V, S>`
    = note: required for `HashMap<String, String>` to implement `Index<&&str>`
 
 error: aborting due to 1 previous error

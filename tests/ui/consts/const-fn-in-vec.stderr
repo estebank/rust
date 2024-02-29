@@ -1,9 +1,10 @@
-error[E0277]: the trait `Copy` is not implemented for `String`
+error[E0277]: the trait `Copy` is not implemented for `Option<String>`
   --> $DIR/const-fn-in-vec.rs:1:47
    |
 LL | static _MAYBE_STRINGS: [Option<String>; 5] = [None; 5];
-   |                                               ^^^^ the trait `Copy` is not implemented for `String`, which is required by `Option<String>: Copy`
+   |                                               ^^^^ the trait `Copy` is not implemented for `Option<String>`, which is required by `Option<String>: Copy`
    |
+   = help: the trait `Copy` is implemented for `Option<T>`
    = note: required for `Option<String>` to implement `Copy`
    = note: the `Copy` trait is required because this value will be copied for each element of the array
    = help: create an inline `const` block, see RFC #2920 <https://github.com/rust-lang/rfcs/pull/2920> for more information
@@ -27,12 +28,13 @@ LL ~     const ARRAY_REPEAT_VALUE: String = String::new();
 LL ~     let _strings: [String; 5] = [ARRAY_REPEAT_VALUE; 5];
    |
 
-error[E0277]: the trait `Copy` is not implemented for `String`
+error[E0277]: the trait `Copy` is not implemented for `Option<String>`
   --> $DIR/const-fn-in-vec.rs:9:48
    |
 LL |     let _maybe_strings: [Option<String>; 5] = [None; 5];
-   |                                                ^^^^ the trait `Copy` is not implemented for `String`, which is required by `Option<String>: Copy`
+   |                                                ^^^^ the trait `Copy` is not implemented for `Option<String>`, which is required by `Option<String>: Copy`
    |
+   = help: the trait `Copy` is implemented for `Option<T>`
    = note: required for `Option<String>` to implement `Copy`
    = note: the `Copy` trait is required because this value will be copied for each element of the array
    = help: create an inline `const` block, see RFC #2920 <https://github.com/rust-lang/rfcs/pull/2920> for more information

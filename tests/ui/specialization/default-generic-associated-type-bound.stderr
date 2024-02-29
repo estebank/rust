@@ -8,22 +8,23 @@ LL | #![feature(specialization)]
    = help: consider using `min_specialization` instead, which is more stable and complete
    = note: `#[warn(incomplete_features)]` on by default
 
-error[E0277]: can't compare `T` with `T`
+error[E0277]: can't compare `&'a T` with `&'a T`
   --> $DIR/default-generic-associated-type-bound.rs:17:26
    |
 LL |     default type U<'a> = &'a T;
-   |                          ^^^^^ no implementation for `T == T`
+   |                          ^^^^^ no implementation for `&'a T == &'a T`
    |
+   = help: the trait `PartialEq` is not implemented for `&T`, which is required by `&'a T: PartialEq`
    = note: required for `&'a T` to implement `PartialEq`
 note: required by a bound in `X::U`
   --> $DIR/default-generic-associated-type-bound.rs:7:17
    |
 LL |     type U<'a>: PartialEq<&'a Self> where Self: 'a;
    |                 ^^^^^^^^^^^^^^^^^^^ required by this bound in `X::U`
-help: consider further restricting this bound
+help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
    |
-LL | impl<T: 'static + std::cmp::PartialEq> X for T {
-   |                 +++++++++++++++++++++
+LL | impl<T: 'static> X for T where &'a T: PartialEq {
+   |                          ++++++++++++++++++++++
 
 error: aborting due to 1 previous error; 1 warning emitted
 

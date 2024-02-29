@@ -2,23 +2,24 @@ error[E0277]: the type `[i32]` cannot be indexed by `i32`
   --> $DIR/slice-index.rs:8:7
    |
 LL |     x[1i32];
-   |       ^^^^ slice indices are of type `usize` or ranges of `usize`
+   |       ^^^^ `[i32]` cannot be indexed by `i32`
    |
-   = help: the trait `SliceIndex<[i32]>` is not implemented for `i32`, which is required by `[i32]: Index<_>`
-   = help: the trait `SliceIndex<[i32]>` is implemented for `usize`
-   = help: for that trait implementation, expected `usize`, found `i32`
+   = help: the trait `Index<i32>` is not implemented for `[i32]`, which is required by `[i32]: Index<_>`
+   = help: the following other types implement trait `Index<Idx>`:
+             [T; N]
+             [T]
    = note: required for `[i32]` to implement `Index<i32>`
 
 error[E0277]: the type `[i32]` cannot be indexed by `RangeTo<i32>`
   --> $DIR/slice-index.rs:9:7
    |
 LL |     x[..1i32];
-   |       ^^^^^^ slice indices are of type `usize` or ranges of `usize`
+   |       ^^^^^^ `[i32]` cannot be indexed by `RangeTo<i32>`
    |
-   = help: the trait `SliceIndex<[i32]>` is not implemented for `RangeTo<i32>`, which is required by `[i32]: Index<_>`
-   = help: the following other types implement trait `SliceIndex<T>`:
-             <RangeTo<usize> as SliceIndex<str>>
-             <RangeTo<usize> as SliceIndex<[T]>>
+   = help: the trait `Index<RangeTo<i32>>` is not implemented for `[i32]`, which is required by `[i32]: Index<_>`
+   = help: the following other types implement trait `Index<Idx>`:
+             [T; N]
+             [T]
    = note: required for `[i32]` to implement `Index<RangeTo<i32>>`
 
 error: aborting due to 2 previous errors

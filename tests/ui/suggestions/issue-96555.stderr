@@ -1,13 +1,11 @@
-error[E0277]: `()` is not a future
+error[E0277]: the trait `IntoFuture` is not implemented for `()`
   --> $DIR/issue-96555.rs:4:13
    |
 LL |     m::f1().await;
-   |     ------- ^^^^^ `()` is not a future
+   |     ------- ^^^^^ the trait `IntoFuture` is not implemented for `()`, which is required by `(): IntoFuture`
    |     |
    |     this call returns `()`
    |
-   = help: the trait `Future` is not implemented for `()`, which is required by `(): IntoFuture`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
    = note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
    |
@@ -19,16 +17,14 @@ help: alternatively, consider making `fn f1` asynchronous
 LL |     pub async fn f1() {}
    |         +++++
 
-error[E0277]: `()` is not a future
+error[E0277]: the trait `IntoFuture` is not implemented for `()`
   --> $DIR/issue-96555.rs:5:13
    |
 LL |     m::f2().await;
-   |     ------- ^^^^^ `()` is not a future
+   |     ------- ^^^^^ the trait `IntoFuture` is not implemented for `()`, which is required by `(): IntoFuture`
    |     |
    |     this call returns `()`
    |
-   = help: the trait `Future` is not implemented for `()`, which is required by `(): IntoFuture`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
    = note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
    |
@@ -40,16 +36,14 @@ help: alternatively, consider making `fn f2` asynchronous
 LL |     pub(crate) async fn f2() {}
    |                +++++
 
-error[E0277]: `()` is not a future
+error[E0277]: the trait `IntoFuture` is not implemented for `()`
   --> $DIR/issue-96555.rs:6:13
    |
 LL |     m::f3().await;
-   |     ------- ^^^^^ `()` is not a future
+   |     ------- ^^^^^ the trait `IntoFuture` is not implemented for `()`, which is required by `(): IntoFuture`
    |     |
    |     this call returns `()`
    |
-   = help: the trait `Future` is not implemented for `()`, which is required by `(): IntoFuture`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
    = note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
    |

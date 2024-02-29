@@ -15,13 +15,13 @@ help: consider relaxing the implicit `Sized` restriction
 LL | fn assert_sized<T: ?Sized>() {}
    |                  ++++++++
 
-error[E0277]: the size for values of type `A` cannot be known at compilation time
+error[E0277]: the size for values of type `Foo` cannot be known at compilation time
   --> $DIR/extern-types-unsized.rs:25:20
    |
 LL |     assert_sized::<Foo>();
    |                    ^^^ doesn't have a size known at compile-time
    |
-   = help: within `Foo`, the trait `Sized` is not implemented for `A`, which is required by `Foo: Sized`
+   = help: within `Foo`, the trait `Sized` is not implemented for `Foo`, which is required by `Foo: Sized`
 note: required because it appears within the type `Foo`
   --> $DIR/extern-types-unsized.rs:9:8
    |
@@ -37,13 +37,13 @@ help: consider relaxing the implicit `Sized` restriction
 LL | fn assert_sized<T: ?Sized>() {}
    |                  ++++++++
 
-error[E0277]: the size for values of type `A` cannot be known at compilation time
+error[E0277]: the size for values of type `Bar<A>` cannot be known at compilation time
   --> $DIR/extern-types-unsized.rs:28:20
    |
 LL |     assert_sized::<Bar<A>>();
    |                    ^^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Bar<A>`, the trait `Sized` is not implemented for `A`, which is required by `Bar<A>: Sized`
+   = help: within `Bar<A>`, the trait `Sized` is not implemented for `Bar<A>`, which is required by `Bar<A>: Sized`
 note: required because it appears within the type `Bar<A>`
   --> $DIR/extern-types-unsized.rs:14:8
    |
@@ -59,13 +59,13 @@ help: consider relaxing the implicit `Sized` restriction
 LL | fn assert_sized<T: ?Sized>() {}
    |                  ++++++++
 
-error[E0277]: the size for values of type `A` cannot be known at compilation time
+error[E0277]: the size for values of type `Bar<Bar<A>>` cannot be known at compilation time
   --> $DIR/extern-types-unsized.rs:31:20
    |
 LL |     assert_sized::<Bar<Bar<A>>>();
    |                    ^^^^^^^^^^^ doesn't have a size known at compile-time
    |
-   = help: within `Bar<Bar<A>>`, the trait `Sized` is not implemented for `A`, which is required by `Bar<Bar<A>>: Sized`
+   = help: within `Bar<Bar<A>>`, the trait `Sized` is not implemented for `Bar<Bar<A>>`, which is required by `Bar<Bar<A>>: Sized`
 note: required because it appears within the type `Bar<A>`
   --> $DIR/extern-types-unsized.rs:14:8
    |
