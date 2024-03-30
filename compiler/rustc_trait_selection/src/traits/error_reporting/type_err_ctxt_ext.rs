@@ -124,7 +124,7 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
         });
 
         for (index, error) in errors.iter().enumerate() {
-            error_map.entry(error.span(self.tcx)).or_default().push(ErrorDescriptor {
+            error_map.entry(error.span()).or_default().push(ErrorDescriptor {
                 predicate: error.obligation.predicate,
                 index: Some(index),
             });
@@ -170,7 +170,7 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
                     reported = Some(guar);
                     self.reported_trait_errors
                         .borrow_mut()
-                        .entry(error.span(self.tcx))
+                        .entry(error.span())
                         .or_insert_with(|| (vec![], guar))
                         .0
                         .push(error.obligation.predicate);
@@ -627,15 +627,14 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
 
                         if let ObligationCauseCode::Coercion { source, target } =
                             *obligation.cause.code().peel_derives()
+                            && Some(trait_ref.def_id()) == self.tcx.lang_items().sized_trait()
                         {
-                            if Some(trait_ref.def_id()) == self.tcx.lang_items().sized_trait() {
-                                self.suggest_borrowing_for_object_cast(
-                                    &mut err,
-                                    root_obligation,
-                                    source,
-                                    target,
-                                );
-                            }
+                            self.suggest_borrowing_for_object_cast(
+                                &mut err,
+                                root_obligation,
+                                source,
+                                target,
+                            );
                         }
 
                         let UnsatisfiedConst(unsatisfied_const) = self
@@ -1488,7 +1487,7 @@ impl<'tcx> TypeErrCtxt<'_, 'tcx> {
                     error.obligation.clone(),
                     &error.root_obligation,
                     selection_error,
-                    error.span(self.tcx),
+                    error.span(),
                 ),
             FulfillmentErrorCode::ProjectionError(ref e) => {
                 self.report_projection_error(&error.obligation, e)
