@@ -1,0 +1,54 @@
+AliasTy { args: [], def_id: DefId(0:440 ~ anstyle[cecd]::color::{impl#0}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:442 ~ anstyle[cecd]::color::{impl#0}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:444 ~ anstyle[cecd]::color::{impl#0}::render_underline::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:447 ~ anstyle[cecd]::color::{impl#6}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:450 ~ anstyle[cecd]::color::{impl#6}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:455 ~ anstyle[cecd]::color::{impl#7}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:457 ~ anstyle[cecd]::color::{impl#7}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:461 ~ anstyle[cecd]::color::{impl#10}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:463 ~ anstyle[cecd]::color::{impl#10}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:474 ~ anstyle[cecd]::effect::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:486 ~ anstyle[cecd]::reset::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:490 ~ anstyle[cecd]::style::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:495 ~ anstyle[cecd]::style::{impl#0}::render_reset::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:440 ~ anstyle[1b68]::color::{impl#0}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:442 ~ anstyle[1b68]::color::{impl#0}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:444 ~ anstyle[1b68]::color::{impl#0}::render_underline::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:447 ~ anstyle[1b68]::color::{impl#6}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:450 ~ anstyle[1b68]::color::{impl#6}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:455 ~ anstyle[1b68]::color::{impl#7}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:457 ~ anstyle[1b68]::color::{impl#7}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:461 ~ anstyle[1b68]::color::{impl#10}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:463 ~ anstyle[1b68]::color::{impl#10}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:474 ~ anstyle[1b68]::effect::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:486 ~ anstyle[1b68]::reset::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:490 ~ anstyle[1b68]::style::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:495 ~ anstyle[1b68]::style::{impl#0}::render_reset::{opaque#0}) }
+AliasTy { args: [impl FnMut(ParseNestedMeta) -> Result<()>/#0], def_id: DefId(0:13344 ~ syn[7a71]::meta::parser::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:1346 ~ rayon_core[128d]::job::{impl#2}::id::{opaque#0}) }
+AliasTy { args: [I/#0, T/#1], def_id: DefId(0:1175 ~ rustc_index[7237]::slice::{impl#0}::indices::{opaque#0}) }
+AliasTy { args: [ReLateParam(DefId(0:440 ~ rustc_query_system[4720]::dep_graph::serialized::{impl#0}::edge_targets_from), BrNamed(DefId(0:1971 ~ rustc_query_system[4720]::dep_graph::serialized::{impl#0}::edge_targets_from::'_), '_))], def_id: DefId(0:1972 ~ rustc_query_system[4720]::dep_graph::serialized::{impl#0}::edge_targets_from::{opaque#0}) }
+AliasTy { args: [DefId(0:5993 ~ rustc_middle[072a]::ty::adt::{impl#7}::'tcx)_'tcx/#0, DefId(0:5993 ~ rustc_middle[072a]::ty::adt::{impl#7}::'tcx)_'tcx/#0], def_id: DefId(0:45842 ~ rustc_middle[072a]::ty::adt::{impl#7}::all_fields::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:3669 ~ rustc_expand[100a]::proc_macro::exec_strategy::{opaque#0}) }
+AliasTy { args: [DefId(0:586 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::'p)_'p/#0, Cx/#1, ReLateParam(DefId(0:592 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::rows), BrNamed(DefId(0:1483 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::rows::'_), '_)), DefId(0:586 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::'p)_'p/#0], def_id: DefId(0:1484 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::rows::{opaque#0}) }
+AliasTy { args: [DefId(0:586 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::'p)_'p/#0, Cx/#1, DefId(0:586 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::'p)_'p/#0, ReLateParam(DefId(0:594 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::heads), BrNamed(DefId(0:1491 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::heads::'_), '_))], def_id: DefId(0:1492 ~ rustc_pattern_analysis[8326]::usefulness::{impl#14}::heads::{opaque#0}) }
+AliasTy { args: [DefId(0:2945 ~ rustc_infer[154b]::infer::snapshot::undo_log::{impl#3}::'tcx)_'tcx/#0, ReLateParam(DefId(0:2947 ~ rustc_infer[154b]::infer::snapshot::undo_log::{impl#3}::region_constraints_in_snapshot), BrNamed(DefId(0:8539 ~ rustc_infer[154b]::infer::snapshot::undo_log::{impl#3}::region_constraints_in_snapshot::'_), '_)), DefId(0:2945 ~ rustc_infer[154b]::infer::snapshot::undo_log::{impl#3}::'tcx)_'tcx/#0], def_id: DefId(0:8541 ~ rustc_infer[154b]::infer::snapshot::undo_log::{impl#3}::region_constraints_in_snapshot::{opaque#0}) }
+AliasTy { args: [DefId(0:2374 ~ rustc_codegen_ssa[3799]::mir::locals::{impl#2}::'tcx)_'tcx/#0, V/#1, DefId(0:2374 ~ rustc_codegen_ssa[3799]::mir::locals::{impl#2}::'tcx)_'tcx/#0], def_id: DefId(0:7166 ~ rustc_codegen_ssa[3799]::mir::locals::{impl#2}::indices::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:440 ~ anstyle[b6f5]::color::{impl#0}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:442 ~ anstyle[b6f5]::color::{impl#0}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:444 ~ anstyle[b6f5]::color::{impl#0}::render_underline::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:447 ~ anstyle[b6f5]::color::{impl#6}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:450 ~ anstyle[b6f5]::color::{impl#6}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:455 ~ anstyle[b6f5]::color::{impl#7}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:457 ~ anstyle[b6f5]::color::{impl#7}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:461 ~ anstyle[b6f5]::color::{impl#10}::render_fg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:463 ~ anstyle[b6f5]::color::{impl#10}::render_bg::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:474 ~ anstyle[b6f5]::effect::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:486 ~ anstyle[b6f5]::reset::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:490 ~ anstyle[b6f5]::style::{impl#0}::render::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:495 ~ anstyle[b6f5]::style::{impl#0}::render_reset::{opaque#0}) }
+AliasTy { args: [impl FnMut(ParseNestedMeta) -> Result<()>/#0], def_id: DefId(0:11849 ~ syn[6649]::meta::parser::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:15 ~ issue_64848[7873]::foo::{opaque#0}) }
+AliasTy { args: [], def_id: DefId(0:10 ~ issue_65934[8681]::unit::{opaque#0}) }
+AliasTy { args: [A/#0], def_id: DefId(0:34 ~ issue_67684[c084]::expr::{opaque#0}) }
+AliasTy { args: [A/#0], def_id: DefId(0:34 ~ issue_67684[c084]::expr::{opaque#0}) }

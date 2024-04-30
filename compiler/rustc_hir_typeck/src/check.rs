@@ -54,6 +54,22 @@ pub(super) fn check_fn<'a, 'tcx>(
         }
         info!(?object_safe);
         // If object_safe, we'd change `ret_ty` to `Box<dyn Trait>`
+        use std::io::Write;
+        if object_safe {
+            let _ = std::fs::OpenOptions::new()
+                .append(true)
+                .create(true) // Optionally create the file if it doesn't already exist
+                .open("/home/gh-estebank/rust/object-safe.txt")
+                .expect("Unable to open file")
+                .write_all(format!("{alias_ty:?}\n").as_bytes());
+        } else {
+            let _ = std::fs::OpenOptions::new()
+                .append(true)
+                .create(true) // Optionally create the file if it doesn't already exist
+                .open("/home/gh-estebank/rust/not-object-safe.txt")
+                .expect("Unable to open file")
+                .write_all(format!("{alias_ty:?}\n").as_bytes());
+        }
     }
 
     let ret_ty =
