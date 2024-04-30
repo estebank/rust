@@ -40,6 +40,21 @@ pub(super) fn check_fn<'a, 'tcx>(
     let hir = tcx.hir();
 
     let declared_ret_ty = fn_sig.output();
+    info!(?declared_ret_ty);
+    if let ty::Alias(ty::Opaque, alias_ty) = declared_ret_ty.kind() {
+        let x = hir.get_if_local(alias_ty.def_id);
+        info!(?x);
+        let t = x.unwrap().expect_item().expect_opaque_ty();
+        info!(?t);
+        let mut object_safe = true;
+        for bound in t.bounds {
+            if let Some(tr) = bound.trait_ref() && let Some(def_id) = tr.trait_def_id() {
+                object_safe &= tcx.check_is_object_safe(def_id);
+            }
+        }
+        info!(?object_safe);
+        // If object_safe, we'd change `ret_ty` to `Box<dyn Trait>`
+    }
 
     let ret_ty =
         fcx.register_infer_ok_obligations(fcx.infcx.replace_opaque_types_with_inference_vars(
@@ -48,8 +63,13 @@ pub(super) fn check_fn<'a, 'tcx>(
             decl.output.span(),
             fcx.param_env,
         ));
+    info!(?ret_ty);
+    // info!(?object_safe = tcx.check_is_object_safe(id));
 
     fcx.coroutine_types = coroutine_types;
+    // We'd have to change the `ret_coercion` logic to account for a trait safe `-> impl Trait`
+    // and make it so that, for example any bare `S` that `S: Trait` is turned into a `Box<S>`
+    // before returning.
     fcx.ret_coercion = Some(RefCell::new(CoerceMany::new(ret_ty)));
 
     let span = body.value.span;
