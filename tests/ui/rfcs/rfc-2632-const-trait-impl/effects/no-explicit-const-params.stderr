@@ -11,29 +11,35 @@ error[E0107]: function takes 0 generic arguments but 1 generic argument was supp
   --> $DIR/no-explicit-const-params.rs:22:5
    |
 LL |     foo::<false>();
-   |     ^^^--------- help: remove these generics
-   |     |
-   |     expected 0 generic arguments
+   |     ^^^ expected 0 generic arguments
    |
 note: function defined here, with 0 generic parameters
   --> $DIR/no-explicit-const-params.rs:3:10
    |
 LL | const fn foo() {}
    |          ^^^
+help: remove these generics
+   |
+LL -     foo::<false>();
+LL +     foo();
+   |
 
 error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
   --> $DIR/no-explicit-const-params.rs:24:12
    |
 LL |     <() as Bar<false>>::bar();
-   |            ^^^------- help: remove these generics
-   |            |
-   |            expected 0 generic arguments
+   |            ^^^ expected 0 generic arguments
    |
 note: trait defined here, with 0 generic parameters
   --> $DIR/no-explicit-const-params.rs:6:7
    |
 LL | trait Bar {
    |       ^^^
+help: remove these generics
+   |
+LL -     <() as Bar<false>>::bar();
+LL +     <() as Bar>::bar();
+   |
 
 error[E0308]: mismatched types
   --> $DIR/no-explicit-const-params.rs:24:5
@@ -48,29 +54,35 @@ error[E0107]: function takes 0 generic arguments but 1 generic argument was supp
   --> $DIR/no-explicit-const-params.rs:15:5
    |
 LL |     foo::<true>();
-   |     ^^^-------- help: remove these generics
-   |     |
-   |     expected 0 generic arguments
+   |     ^^^ expected 0 generic arguments
    |
 note: function defined here, with 0 generic parameters
   --> $DIR/no-explicit-const-params.rs:3:10
    |
 LL | const fn foo() {}
    |          ^^^
+help: remove these generics
+   |
+LL -     foo::<true>();
+LL +     foo();
+   |
 
 error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
   --> $DIR/no-explicit-const-params.rs:17:12
    |
 LL |     <() as Bar<true>>::bar();
-   |            ^^^------ help: remove these generics
-   |            |
-   |            expected 0 generic arguments
+   |            ^^^ expected 0 generic arguments
    |
 note: trait defined here, with 0 generic parameters
   --> $DIR/no-explicit-const-params.rs:6:7
    |
 LL | trait Bar {
    |       ^^^
+help: remove these generics
+   |
+LL -     <() as Bar<true>>::bar();
+LL +     <() as Bar>::bar();
+   |
 
 error: aborting due to 5 previous errors; 1 warning emitted
 

@@ -38,13 +38,23 @@ error: expected `,`, or `}`, found `field2`
   --> $DIR/struct-default-values-and-missing-field-separator.rs:18:16
    |
 LL |     field1: i32
-   |                ^ help: try adding a comma: `,`
+   |                ^
+   |
+help: try adding a comma
+   |
+LL |     field1: i32,
+   |                +
 
 error: expected `,`, or `}`, found `field3`
   --> $DIR/struct-default-values-and-missing-field-separator.rs:19:14
    |
 LL |     field2: E
-   |              ^ help: try adding a comma: `,`
+   |              ^
+   |
+help: try adding a comma
+   |
+LL |     field2: E,
+   |              +
 
 error: default values on `struct` fields aren't supported
   --> $DIR/struct-default-values-and-missing-field-separator.rs:20:16

@@ -5,7 +5,6 @@ LL |     impl Test for &Local {}
    |     ^^^^^----^^^^^------
    |          |        |
    |          |        `&'_ Local` is not local
-   |          |        help: remove `&` to make the `impl` local
    |          `Test` is not local
    |
    = note: `impl` may be usable in bounds, etc. from outside the expression, which might e.g. make something constructible that previously wasn't, because it's still on a publicly-visible type
@@ -19,6 +18,11 @@ LL |     struct Local {}
    |     ------------ may need to be moved as well
    = note: this lint may become deny-by-default in the edition 2024 and higher, see the tracking issue <https://github.com/rust-lang/rust/issues/120363>
    = note: `#[warn(non_local_definitions)]` on by default
+help: remove `&` to make the `impl` local
+   |
+LL -     impl Test for &Local {}
+LL +     impl Test for Local {}
+   |
 
 warning: 1 warning emitted
 

@@ -2,57 +2,69 @@ error[E0107]: function takes 0 generic arguments but 1 generic argument was supp
   --> $DIR/no-explicit-const-params-cross-crate.rs:14:5
    |
 LL |     foo::<false>();
-   |     ^^^--------- help: remove these generics
-   |     |
-   |     expected 0 generic arguments
+   |     ^^^ expected 0 generic arguments
    |
 note: function defined here, with 0 generic parameters
   --> $DIR/auxiliary/cross-crate.rs:3:14
    |
 LL | pub const fn foo() {}
    |              ^^^
+help: remove these generics
+   |
+LL -     foo::<false>();
+LL +     foo();
+   |
 
 error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
   --> $DIR/no-explicit-const-params-cross-crate.rs:16:12
    |
 LL |     <() as Bar<false>>::bar();
-   |            ^^^------- help: remove these generics
-   |            |
-   |            expected 0 generic arguments
+   |            ^^^ expected 0 generic arguments
    |
 note: trait defined here, with 0 generic parameters
   --> $DIR/auxiliary/cross-crate.rs:6:11
    |
 LL | pub trait Bar {
    |           ^^^
+help: remove these generics
+   |
+LL -     <() as Bar<false>>::bar();
+LL +     <() as Bar>::bar();
+   |
 
 error[E0107]: function takes 0 generic arguments but 1 generic argument was supplied
   --> $DIR/no-explicit-const-params-cross-crate.rs:7:5
    |
 LL |     foo::<true>();
-   |     ^^^-------- help: remove these generics
-   |     |
-   |     expected 0 generic arguments
+   |     ^^^ expected 0 generic arguments
    |
 note: function defined here, with 0 generic parameters
   --> $DIR/auxiliary/cross-crate.rs:3:14
    |
 LL | pub const fn foo() {}
    |              ^^^
+help: remove these generics
+   |
+LL -     foo::<true>();
+LL +     foo();
+   |
 
 error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
   --> $DIR/no-explicit-const-params-cross-crate.rs:9:12
    |
 LL |     <() as Bar<true>>::bar();
-   |            ^^^------ help: remove these generics
-   |            |
-   |            expected 0 generic arguments
+   |            ^^^ expected 0 generic arguments
    |
 note: trait defined here, with 0 generic parameters
   --> $DIR/auxiliary/cross-crate.rs:6:11
    |
 LL | pub trait Bar {
    |           ^^^
+help: remove these generics
+   |
+LL -     <() as Bar<true>>::bar();
+LL +     <() as Bar>::bar();
+   |
 
 error: aborting due to 4 previous errors
 

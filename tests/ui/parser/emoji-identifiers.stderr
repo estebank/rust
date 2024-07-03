@@ -90,7 +90,12 @@ LL | fn i_like_to_😅_a_lot() -> 👀 {
    | ----------------------------- similarly named function `i_like_to_😅_a_lot` defined here
 ...
 LL |     let _ = i_like_to_😄_a_lot() ➖ 4;
-   |             ^^^^^^^^^^^^^^^^^^ help: a function with a similar name exists: `i_like_to_😅_a_lot`
+   |             ^^^^^^^^^^^^^^^^^^
+   |
+help: a function with a similar name exists
+   |
+LL |     let _ = i_like_to_😅_a_lot() ➖ 4;
+   |             ~~~~~~~~~~~~~~~~~~
 
 error: aborting due to 10 previous errors
 

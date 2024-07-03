@@ -974,7 +974,7 @@ impl<'a, G: EmissionGuarantee> Diag<'a, G> {
             msg,
             suggestion,
             applicability,
-            SuggestionStyle::ShowCode,
+            SuggestionStyle::ShowAlways,
         );
         self
     } }

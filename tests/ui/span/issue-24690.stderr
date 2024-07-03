@@ -15,15 +15,24 @@ warning: variable `theTwo` should have a snake case name
   --> $DIR/issue-24690.rs:12:9
    |
 LL |     let theTwo = 2;
-   |         ^^^^^^ help: convert the identifier to snake case: `the_two`
+   |         ^^^^^^
    |
    = note: `#[warn(non_snake_case)]` on by default
+help: convert the identifier to snake case
+   |
+LL |     let the_two = 2;
+   |         ~~~~~~~
 
 warning: variable `theOtherTwo` should have a snake case name
   --> $DIR/issue-24690.rs:13:9
    |
 LL |     let theOtherTwo = 2;
-   |         ^^^^^^^^^^^ help: convert the identifier to snake case: `the_other_two`
+   |         ^^^^^^^^^^^
+   |
+help: convert the identifier to snake case
+   |
+LL |     let the_other_two = 2;
+   |         ~~~~~~~~~~~~~
 
 warning: 3 warnings emitted
 

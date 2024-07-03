@@ -156,13 +156,23 @@ error: malformed `target_feature` attribute input
   --> $DIR/invalid-attribute.rs:25:18
    |
 LL | #[target_feature(bar)]
-   |                  ^^^ help: must be of the form: `enable = ".."`
+   |                  ^^^
+   |
+help: must be of the form
+   |
+LL | #[target_feature(enable = "..")]
+   |                  ~~~~~~~~~~~~~
 
 error: malformed `target_feature` attribute input
   --> $DIR/invalid-attribute.rs:27:18
    |
 LL | #[target_feature(disable = "baz")]
-   |                  ^^^^^^^^^^^^^^^ help: must be of the form: `enable = ".."`
+   |                  ^^^^^^^^^^^^^^^
+   |
+help: must be of the form
+   |
+LL | #[target_feature(enable = "..")]
+   |                  ~~~~~~~~~~~~~
 
 error[E0658]: `#[target_feature(..)]` can only be applied to `unsafe` functions
   --> $DIR/invalid-attribute.rs:31:1
