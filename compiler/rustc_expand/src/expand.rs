@@ -1274,25 +1274,33 @@ impl InvocationCollectorNode for P<ast::Item> {
         res
     }
     fn declared_names(&self) -> Vec<Ident> {
-        if let ItemKind::Use(ut) = &self.kind {
-            fn collect_use_tree_leaves(ut: &ast::UseTree, idents: &mut Vec<Ident>) {
-                match &ut.kind {
-                    ast::UseTreeKind::Glob => {}
-                    ast::UseTreeKind::Simple(_) => idents.push(ut.ident()),
-                    ast::UseTreeKind::Nested { items, .. } => {
-                        for (ut, _) in items {
-                            collect_use_tree_leaves(ut, idents);
+        struct ItemNameVisitor(Vec<Ident>);
+        impl Visitor<'_> for ItemNameVisitor {
+            fn visit_item(&mut self, i: &ast::Item) {
+                if let ItemKind::Use(ut) = &i.kind {
+                    fn collect_use_tree_leaves(ut: &ast::UseTree, idents: &mut Vec<Ident>) {
+                        match &ut.kind {
+                            ast::UseTreeKind::Glob => {}
+                            ast::UseTreeKind::Simple(_) => idents.push(ut.ident()),
+                            ast::UseTreeKind::Nested { items, .. } => {
+                                for (ut, _) in items {
+                                    collect_use_tree_leaves(ut, idents);
+                                }
+                            }
                         }
                     }
-                }
-            }
 
-            let mut idents = Vec::new();
-            collect_use_tree_leaves(ut, &mut idents);
-            return idents;
+                    collect_use_tree_leaves(ut, &mut self.0);
+                } else {
+                    self.0.push(i.ident);
+                }
+                visit::walk_item(self, i);
+            }
         }
 
-        vec![self.ident]
+        let mut v = ItemNameVisitor(vec![]);
+        v.visit_item(self);
+        v.0
     }
 }
 
