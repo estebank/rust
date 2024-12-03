@@ -273,6 +273,7 @@ impl<'tcx> CheckAttrVisitor<'tcx> {
                     | sym::prelude_import
                     | sym::panic_handler
                     | sym::allow_internal_unsafe
+                    | sym::rustc_cfg_placeholder // Inert, it's a placeholder in the AST.
                     | sym::fundamental
                     | sym::lang
                     | sym::needs_allocator
