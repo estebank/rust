@@ -523,6 +523,7 @@ impl<'tcx> CheckAttrVisitor<'tcx> {
             // conditional compilation
             sym::cfg,
             sym::cfg_attr,
+            sym::rustc_cfg_placeholder,
             // testing (allowed here so better errors can be generated in `rustc_builtin_macros::test`)
             sym::test,
             sym::ignore,
