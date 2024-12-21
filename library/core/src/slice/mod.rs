@@ -4942,7 +4942,8 @@ where
 }
 
 #[stable(feature = "rust1", since = "1.0.0")]
-impl<T> Default for &[T] {
+#[rustc_const_unstable(feature = "const_default", issue = "none")]
+impl<T> const Default for &[T] {
     /// Creates an empty slice.
     fn default() -> Self {
         &[]
@@ -4950,7 +4951,8 @@ impl<T> Default for &[T] {
 }
 
 #[stable(feature = "mut_slice_default", since = "1.5.0")]
-impl<T> Default for &mut [T] {
+#[rustc_const_unstable(feature = "const_default", issue = "none")]
+impl<T> const Default for &mut [T] {
     /// Creates a mutable empty slice.
     fn default() -> Self {
         &mut []
