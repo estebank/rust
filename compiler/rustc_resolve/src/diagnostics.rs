@@ -1045,6 +1045,7 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
                                 false,
                                 false,
                                 None,
+                                None,
                             ) else {
                                 continue;
                             };

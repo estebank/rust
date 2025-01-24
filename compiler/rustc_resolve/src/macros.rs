@@ -13,7 +13,8 @@ use rustc_data_structures::intern::Interned;
 use rustc_data_structures::sync::Lrc;
 use rustc_errors::{Applicability, StashKey};
 use rustc_expand::base::{
-    DeriveResolution, Indeterminate, ResolverExpand, SyntaxExtension, SyntaxExtensionKind,
+    Annotatable, DeriveResolution, Indeterminate, ResolverExpand, SyntaxExtension,
+    SyntaxExtensionKind,
 };
 use rustc_expand::compile_declarative_macro;
 use rustc_expand::expand::{
