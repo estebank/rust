@@ -107,6 +107,7 @@
 #![feature(bstr_internals)]
 #![feature(clone_to_uninit)]
 #![feature(coerce_unsized)]
+#![feature(const_default)]
 #![feature(const_eval_select)]
 #![feature(const_heap)]
 #![feature(const_trait_impl)]
