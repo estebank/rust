@@ -1,5 +1,7 @@
 //@ run-pass
-#![feature(const_trait_impl, ptr_alignment_type, ascii_char, f16, f128, sync_unsafe_cell)]
+#![feature(
+    const_default, const_trait_impl, ptr_alignment_type, ascii_char, f16, f128, sync_unsafe_cell,
+)]
 #![allow(dead_code)]
 // core::default
 const UNIT: () = Default::default();
