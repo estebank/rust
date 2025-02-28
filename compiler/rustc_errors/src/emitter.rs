@@ -2117,12 +2117,29 @@ impl HumanEmitter {
                         "- ",
                         Style::Removal,
                     );
+                    let column_width = self.column_width(max_line_num_len + 1);
+                    let code = normalize_whitespace(&file_lines.file.get_line(line - 1).unwrap());
+                    let (code, ellipsis) = if code.chars().count() > column_width - 3 {
+                        (&code[..column_width - 3], true)
+                    } else {
+                        (&code, false)
+                    };
                     buffer.puts(
                         row_num - 1 + line - line_start,
                         max_line_num_len + 3,
-                        &normalize_whitespace(&file_lines.file.get_line(line - 1).unwrap()),
+                        code,
                         Style::Removal,
                     );
+                    if ellipsis {
+                        let placeholder = self.margin();
+                        let padding = str_width(placeholder);
+                        buffer.puts(
+                            row_num - 1 + line - line_start,
+                            max_line_num_len + 3 + column_width - padding,
+                            placeholder,
+                            Style::LineNumber,
+                        );
+                    }
                 }
                 row_num += line_end - line_start;
             }
@@ -2598,7 +2615,23 @@ impl HumanEmitter {
                 let line = normalize_whitespace(
                     &file_lines.file.get_line(line_to_remove.line_index).unwrap(),
                 );
+                let column_width = self.column_width(max_line_num_len + 1);
+                let (line, ellipsis) = if line.chars().count() > column_width - 3 {
+                    (&line[..column_width - 3], true)
+                } else {
+                    (&line, false)
+                };
                 buffer.puts(*row_num - 1, max_line_num_len + 3, &line, Style::NoStyle);
+                if ellipsis {
+                    let placeholder = self.margin();
+                    let padding = str_width(placeholder);
+                    buffer.puts(
+                        *row_num - 1,
+                        max_line_num_len + 3 + column_width - padding,
+                        placeholder,
+                        Style::LineNumber,
+                    );
+                }
                 *row_num += 1;
             }
             // If the last line is exactly equal to the line we need to add, we can skip both of
