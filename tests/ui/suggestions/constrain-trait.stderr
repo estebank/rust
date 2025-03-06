@@ -1,21 +1,27 @@
-error[E0599]: no method named `get_a` found for reference `&Self` in the current scope
+error[E0599]: the method `get_a` exists for reference `&Self`, but its trait bounds were not satisfied
   --> $DIR/constrain-trait.rs:16:31
    |
 LL |         println!("{:?}", self.get_a());
-   |                               ^^^^^ method not found in `&Self`
+   |                               ^^^^^ method cannot be called on `&Self` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `Self: GetString`
+           `&Self: GetString`
    = help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `get_a`, perhaps you need to add another supertrait for it:
    |
 LL | trait UseString: std::fmt::Debug + GetString {
    |                                  +++++++++++
 
-error[E0599]: no method named `get_a` found for reference `&Self` in the current scope
+error[E0599]: the method `get_a` exists for reference `&Self`, but its trait bounds were not satisfied
   --> $DIR/constrain-trait.rs:22:31
    |
 LL |         println!("{:?}", self.get_a());
-   |                               ^^^^^ method not found in `&Self`
+   |                               ^^^^^ method cannot be called on `&Self` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `Self: GetString`
+           `&Self: GetString`
    = help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `get_a`, perhaps you need to add a supertrait for it:
    |

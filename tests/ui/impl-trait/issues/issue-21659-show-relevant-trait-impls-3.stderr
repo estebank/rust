@@ -1,12 +1,19 @@
-error[E0599]: no method named `foo` found for struct `Bar` in the current scope
+error[E0599]: the method `foo` exists for struct `Bar`, but its trait bounds were not satisfied
   --> $DIR/issue-21659-show-relevant-trait-impls-3.rs:20:8
    |
 LL | struct Bar;
-   | ---------- method `foo` not found for this struct
+   | ---------- method `foo` not found for this struct because it doesn't satisfy `Bar: Foo<_>`
 ...
 LL |     f1.foo(1usize);
-   |        ^^^ method not found in `Bar`
+   |        ^^^ method cannot be called on `Bar` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `Bar: Foo<_>`
+note: the trait `Foo` must be implemented
+  --> $DIR/issue-21659-show-relevant-trait-impls-3.rs:1:1
+   |
+LL | trait Foo<A> {
+   | ^^^^^^^^^^^^
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `Foo` defines an item `foo`, perhaps you need to implement it
   --> $DIR/issue-21659-show-relevant-trait-impls-3.rs:1:1

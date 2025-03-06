@@ -7,12 +7,14 @@ LL | fn cant_return_str() -> str {
    = help: the trait `Sized` is not implemented for `str`
    = note: the return type of a function must have a statically known size
 
-error[E0599]: no method named `test` found for type `i32` in the current scope
+error[E0599]: the method `test` exists for type `i32`, but its trait bounds were not satisfied
   --> $DIR/trivial-bounds-leak.rs:24:10
    |
 LL |     3i32.test();
-   |          ^^^^ method not found in `i32`
+   |          ^^^^ method cannot be called on `i32` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `i32: Foo`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `Foo` defines an item `test`, perhaps you need to implement it
   --> $DIR/trivial-bounds-leak.rs:4:1

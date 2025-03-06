@@ -1,9 +1,13 @@
-error[E0599]: no associated item named `ID` found for type `i32` in the current scope
+error[E0599]: the associated item `ID` exists for type `i32`, but its trait bounds were not satisfied
   --> $DIR/associated-const-no-item.rs:5:23
    |
 LL | const X: i32 = <i32>::ID;
-   |                       ^^ associated item not found in `i32`
+   |                       ^^ associated item cannot be called on `i32` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `i32: Foo`
+           `&i32: Foo`
+           `&mut i32: Foo`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `Foo` defines an item `ID`, perhaps you need to implement it
   --> $DIR/associated-const-no-item.rs:1:1

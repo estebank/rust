@@ -28,6 +28,7 @@ LL |     once::<&str>("str").fuse().filter(|a: &str| true).count();
            which is required by `Filter<Fuse<std::iter::Once<&str>>, {closure@$DIR/issue-36053-2.rs:7:39: 7:48}>: Iterator`
            `{closure@$DIR/issue-36053-2.rs:7:39: 7:48}: FnMut<(&&str,)>`
            which is required by `Filter<Fuse<std::iter::Once<&str>>, {closure@$DIR/issue-36053-2.rs:7:39: 7:48}>: Iterator`
+           `&Filter<Fuse<std::iter::Once<&str>>, {closure@$DIR/issue-36053-2.rs:7:39: 7:48}>: Iterator`
            `Filter<Fuse<std::iter::Once<&str>>, {closure@$DIR/issue-36053-2.rs:7:39: 7:48}>: Iterator`
            which is required by `&mut Filter<Fuse<std::iter::Once<&str>>, {closure@$DIR/issue-36053-2.rs:7:39: 7:48}>: Iterator`
 

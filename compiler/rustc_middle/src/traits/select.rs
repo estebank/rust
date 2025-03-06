@@ -208,7 +208,7 @@ pub enum EvaluationResult {
     /// stack results.
     EvaluatedToAmbigStackDependent,
     /// Evaluation failed.
-    EvaluatedToErr,
+    EvaluatedToErr(u32),
 }
 
 impl EvaluationResult {
@@ -232,7 +232,7 @@ impl EvaluationResult {
             | EvaluatedToAmbig
             | EvaluatedToAmbigStackDependent => true,
 
-            EvaluatedToErr => false,
+            EvaluatedToErr(_) => false,
         }
     }
 
@@ -244,7 +244,7 @@ impl EvaluationResult {
             | EvaluatedToOk
             | EvaluatedToOkModuloRegions
             | EvaluatedToAmbig
-            | EvaluatedToErr => false,
+            | EvaluatedToErr(_) => false,
         }
     }
 }

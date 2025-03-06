@@ -10,11 +10,16 @@ note: required by a bound in `Foo::Out`
 LL |     type Out: Default + ToString + ?Sized = dyn ToString;
    |               ^^^^^^^ required by this bound in `Foo::Out`
 
-error[E0599]: no function or associated item named `default` found for trait object `(dyn ToString + 'static)` in the current scope
+error[E0599]: the function or associated item `default` exists for trait object `dyn ToString`, but its trait bounds were not satisfied
   --> $DIR/issue-43924.rs:14:39
    |
 LL |     assert_eq!(<() as Foo<u32>>::Out::default().to_string(), "false");
-   |                                       ^^^^^^^ function or associated item not found in `dyn ToString`
+   |                                       ^^^^^^^ function or associated item cannot be called on `dyn ToString` due to unsatisfied trait bounds
+   |
+   = note: the following trait bounds were not satisfied:
+           `(dyn ToString + 'static): Default`
+           `&(dyn ToString + 'static): Default`
+           `&mut (dyn ToString + 'static): Default`
 
 error: aborting due to 2 previous errors
 

@@ -22,9 +22,13 @@ LL |     (&a).cmp(&b)
    |
    = note: the following trait bounds were not satisfied:
            `T: Ord`
+           `&T: Iterator`
+           `T: Ord`
            which is required by `&T: Ord`
+           `&&T: Iterator`
            `&T: Iterator`
            which is required by `&mut &T: Iterator`
+           `T: Iterator`
            `T: Iterator`
            which is required by `&mut T: Iterator`
    = help: items from traits can only be used if the type parameter is bounded by the trait
@@ -43,9 +47,13 @@ LL |     a.cmp(&b)
    |
    = note: the following trait bounds were not satisfied:
            `T: Ord`
+           `&T: Iterator`
+           `T: Ord`
            which is required by `&T: Ord`
+           `&&T: Iterator`
            `&T: Iterator`
            which is required by `&mut &T: Iterator`
+           `T: Iterator`
            `T: Iterator`
            which is required by `&mut T: Iterator`
    = help: items from traits can only be used if the type parameter is bounded by the trait
@@ -70,8 +78,12 @@ LL |     x.cmp(&x);
            which is required by `Box<dyn T>: Iterator`
            `dyn T: Ord`
            which is required by `Box<dyn T>: Ord`
+           `&Box<dyn T>: Iterator`
            `Box<dyn T>: Iterator`
            which is required by `&mut Box<dyn T>: Iterator`
+           `dyn T: Iterator`
+           `dyn T: Ord`
+           `&dyn T: Iterator`
            `dyn T: Iterator`
            which is required by `&mut dyn T: Iterator`
    = help: items from traits can only be used if the trait is implemented and in scope

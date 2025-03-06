@@ -61,6 +61,8 @@ LL | |      .take()
    |
    = note: the following trait bounds were not satisfied:
            `Foo: Iterator`
+           `&Foo: Iterator`
+           `Foo: Iterator`
            which is required by `&mut Foo: Iterator`
 note: the trait `Iterator` must be implemented
   --> $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL

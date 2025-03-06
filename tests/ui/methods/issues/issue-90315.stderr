@@ -171,6 +171,8 @@ LL |     let _res = b.take(1)..a;
    |
    = note: the following trait bounds were not satisfied:
            `usize: Iterator`
+           `&usize: Iterator`
+           `usize: Iterator`
            which is required by `&mut usize: Iterator`
 
 error[E0689]: can't call method `take` on ambiguous numeric type `{integer}`

@@ -4,12 +4,17 @@ error[E0425]: cannot find value `oops` in this scope
 LL |     let arc = std::sync::Arc::new(oops);
    |                                   ^^^^ not found in this scope
 
-error[E0599]: no method named `bar` found for struct `Arc<{closure@$DIR/fn-help-with-err.rs:18:36: 18:38}>` in the current scope
+error[E0599]: the method `bar` exists for struct `Arc<{closure@fn-help-with-err.rs:18:36}>`, but its trait bounds were not satisfied
   --> $DIR/fn-help-with-err.rs:19:10
    |
+LL |     let arc2 = std::sync::Arc::new(|| Foo);
+   |                                    -- doesn't satisfy `_: Bar`
 LL |     arc2.bar();
-   |          ^^^ method not found in `Arc<{closure@fn-help-with-err.rs:18:36}>`
+   |          ^^^ method cannot be called on `Arc<{closure@fn-help-with-err.rs:18:36}>` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `Arc<{closure@$DIR/fn-help-with-err.rs:18:36: 18:38}>: Bar`
+           `{closure@$DIR/fn-help-with-err.rs:18:36: 18:38}: Bar`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `Bar` defines an item `bar`, perhaps you need to implement it
   --> $DIR/fn-help-with-err.rs:5:1

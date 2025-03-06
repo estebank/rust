@@ -101,7 +101,7 @@ impl<'tcx> InferCtxt<'tcx> {
             recursion_depth: 0,
             predicate: trait_ref.upcast(self.tcx),
         };
-        self.evaluate_obligation(&obligation).unwrap_or(traits::EvaluationResult::EvaluatedToErr)
+        self.evaluate_obligation(&obligation).unwrap_or(traits::EvaluationResult::EvaluatedToErr(0))
     }
 
     /// Returns `Some` if a type implements a trait shallowly, without side-effects,

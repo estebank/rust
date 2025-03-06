@@ -1600,6 +1600,13 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
                 if segment.ident.name == kw::Empty {
                     span_bug!(rcvr.span, "empty method name")
                 } else {
+                    if let ty::Adt(def, _) = rcvr_t.kind() {
+                        let t = self.tcx.at(expr.span).type_of(def.did()).instantiate_identity();
+                        tracing::info!(?t);
+                        let x =
+                            self.lookup_method(t, segment, segment.ident.span, expr, rcvr, args);
+                        tracing::info!("{x:#?}")
+                    }
                     Err(self.report_method_error(expr.hir_id, rcvr_t, error, expected, false))
                 }
             }

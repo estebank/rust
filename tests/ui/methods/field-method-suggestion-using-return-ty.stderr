@@ -1,23 +1,35 @@
-error[E0599]: no method named `as_mut` found for reference `&Wrapper<Option<i32>>` in the current scope
+error[E0599]: the method `as_mut` exists for reference `&Wrapper<Option<i32>>`, but its trait bounds were not satisfied
   --> $DIR/field-method-suggestion-using-return-ty.rs:5:14
    |
+LL | struct Wrapper<T>(T);
+   | ----------------- doesn't satisfy `Wrapper<Option<i32>>: AsMut<_>`
+...
 LL |         self.as_mut()
-   |              ^^^^^^ method not found in `&Wrapper<Option<i32>>`
+   |              ^^^^^^ method cannot be called on `&Wrapper<Option<i32>>` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `&Wrapper<Option<i32>>: AsMut<_>`
+           `Wrapper<Option<i32>>: AsMut<_>`
+note: the trait `AsMut` must be implemented
+  --> $SRC_DIR/core/src/convert/mod.rs:LL:COL
    = help: items from traits can only be used if the trait is implemented and in scope
    = note: the following trait defines an item `as_mut`, perhaps you need to implement it:
            candidate #1: `AsMut`
-help: one of the expressions' fields has a method of the same name
-   |
-LL |         self.0.as_mut()
-   |              ++
 
-error[E0599]: no method named `as_mut` found for reference `&Wrapper<Option<i32>>` in the current scope
+error[E0599]: the method `as_mut` exists for reference `&Wrapper<Option<i32>>`, but its trait bounds were not satisfied
   --> $DIR/field-method-suggestion-using-return-ty.rs:12:14
    |
+LL | struct Wrapper<T>(T);
+   | ----------------- doesn't satisfy `Wrapper<Option<i32>>: AsMut<_>`
+...
 LL |         self.as_mut()
-   |              ^^^^^^ method not found in `&Wrapper<Option<i32>>`
+   |              ^^^^^^ method cannot be called on `&Wrapper<Option<i32>>` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `&Wrapper<Option<i32>>: AsMut<_>`
+           `Wrapper<Option<i32>>: AsMut<_>`
+note: the trait `AsMut` must be implemented
+  --> $SRC_DIR/core/src/convert/mod.rs:LL:COL
    = help: items from traits can only be used if the trait is implemented and in scope
    = note: the following trait defines an item `as_mut`, perhaps you need to implement it:
            candidate #1: `AsMut`

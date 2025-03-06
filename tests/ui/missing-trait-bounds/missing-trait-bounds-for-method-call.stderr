@@ -17,6 +17,8 @@ LL | impl<T: Default + Bar> Bar for Foo<T> {}
    |         |         |
    |         |         unsatisfied trait bound introduced here
    |         unsatisfied trait bound introduced here
+   = note: the following trait bounds were not satisfied:
+           `&Foo<T>: Bar`
 help: consider restricting the type parameters to satisfy the trait bounds
    |
 LL | struct Foo<T> where T: Bar, T: Default {
@@ -38,6 +40,8 @@ LL | impl<T: Default + Bar> Bar for Fin<T> {}
    |         ^^^^^^^        ---     ------
    |         |
    |         unsatisfied trait bound introduced here
+   = note: the following trait bounds were not satisfied:
+           `&Fin<T>: Bar`
 help: consider restricting the type parameter to satisfy the trait bound
    |
 LL | struct Fin<T> where T: Bar, T: Default {

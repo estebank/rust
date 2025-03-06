@@ -33,6 +33,8 @@ LL |     let _ = <T as Bop>::Bar::default();
    = note: the following trait bounds were not satisfied:
            `T: Sized`
            which is required by `<T as Bop>::Bar: Default`
+           `&<T as Bop>::Bar: Default`
+           `&mut <T as Bop>::Bar: Default`
 help: consider restricting the type parameter to satisfy the trait bound
    |
 LL | fn bop<T: Bop + ?Sized>() where T: Sized {

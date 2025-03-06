@@ -13,7 +13,7 @@ error[E0599]: no method named `method` found for type parameter `T` in the curre
 LL | pub fn in_ty_param<T: Fn() -> dyn std::fmt::Debug> (t: T) {
    |                    - method `method` not found for this type parameter
 LL |     t.method();
-   |       ^^^^^^ method not found in `T`
+   |       ^^^^^^ method cannot be called on `T` due to unsatisfied trait bounds
    |
    = help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `method`, perhaps you need to restrict type parameter `T` with it:

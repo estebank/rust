@@ -539,7 +539,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
 
             match self.infcx.leak_check(outer_universe, Some(snapshot)) {
                 Ok(()) => {}
-                Err(_) => return Ok(EvaluatedToErr),
+                Err(_) => return Ok(EvaluatedToErr(4)),
             }
 
             if self.infcx.opaque_types_added_in_snapshot(snapshot) {
@@ -571,10 +571,10 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
         for mut obligation in predicates {
             obligation.set_depth_from_parent(stack.depth());
             let eval = self.evaluate_predicate_recursively(stack, obligation.clone())?;
-            if let EvaluatedToErr = eval {
+            if let EvaluatedToErr(_) = eval {
                 // fast-path - EvaluatedToErr is the top of the lattice,
                 // so we don't need to look on the other predicates.
-                return Ok(EvaluatedToErr);
+                return Ok(EvaluatedToErr(5));
             } else {
                 result = cmp::max(result, eval);
             }
@@ -603,8 +603,9 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             None => self.check_recursion_limit(&obligation, &obligation)?,
         }
 
-        ensure_sufficient_stack(|| {
+        let x = ensure_sufficient_stack(|| {
             let bound_predicate = obligation.predicate.kind();
+            tracing::info!(?bound_predicate, "zxcv");
             match bound_predicate.skip_binder() {
                 ty::PredicateKind::Clause(ty::ClauseKind::Trait(t)) => {
                     let t = bound_predicate.rebind(t);
@@ -623,7 +624,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                                 self.evaluate_predicates_recursively(previous_stack, nested)
                             }
                             Err(effects::EvaluationFailure::Ambiguous) => Ok(EvaluatedToAmbig),
-                            Err(effects::EvaluationFailure::NoSolution) => Ok(EvaluatedToErr),
+                            Err(effects::EvaluationFailure::NoSolution) => Ok(EvaluatedToErr(6)),
                         }
                     })
                 }
@@ -635,7 +636,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                         Ok(Ok(InferOk { obligations, .. })) => {
                             self.evaluate_predicates_recursively(previous_stack, obligations)
                         }
-                        Ok(Err(_)) => Ok(EvaluatedToErr),
+                        Ok(Err(_)) => Ok(EvaluatedToErr(7)),
                         Err(..) => Ok(EvaluatedToAmbig),
                     }
                 }
@@ -647,7 +648,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                         Ok(Ok(InferOk { obligations, .. })) => {
                             self.evaluate_predicates_recursively(previous_stack, obligations)
                         }
-                        Ok(Err(_)) => Ok(EvaluatedToErr),
+                        Ok(Err(_)) => Ok(EvaluatedToErr(8)),
                         Err(..) => Ok(EvaluatedToAmbig),
                     }
                 }
@@ -760,7 +761,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                     if self.tcx().is_dyn_compatible(trait_def_id) {
                         Ok(EvaluatedToOk)
                     } else {
-                        Ok(EvaluatedToErr)
+                        Ok(EvaluatedToErr(9))
                     }
                 }
 
@@ -827,7 +828,9 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                         }
                         ProjectAndUnifyResult::FailedNormalization => Ok(EvaluatedToAmbig),
                         ProjectAndUnifyResult::Recursive => Ok(EvaluatedToAmbigStackDependent),
-                        ProjectAndUnifyResult::MismatchedProjectionTypes(_) => Ok(EvaluatedToErr),
+                        ProjectAndUnifyResult::MismatchedProjectionTypes(_) => {
+                            Ok(EvaluatedToErr(10))
+                        }
                     }
                 }
 
@@ -840,8 +843,8 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                     ) {
                         Ok(()) => Ok(EvaluatedToOk),
                         Err(NotConstEvaluatable::MentionsInfer) => Ok(EvaluatedToAmbig),
-                        Err(NotConstEvaluatable::MentionsParam) => Ok(EvaluatedToErr),
-                        Err(_) => Ok(EvaluatedToErr),
+                        Err(NotConstEvaluatable::MentionsParam) => Ok(EvaluatedToErr(11)),
+                        Err(_) => Ok(EvaluatedToErr(12)),
                     }
                 }
 
@@ -929,20 +932,24 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                                     previous_stack,
                                     inf_ok.into_obligations(),
                                 ),
-                                Err(_) => Ok(EvaluatedToErr),
+                                Err(_) => Ok(EvaluatedToErr(13)),
                             }
                         }
                         (Err(EvaluateConstErr::InvalidConstParamTy(..)), _)
-                        | (_, Err(EvaluateConstErr::InvalidConstParamTy(..))) => Ok(EvaluatedToErr),
+                        | (_, Err(EvaluateConstErr::InvalidConstParamTy(..))) => {
+                            Ok(EvaluatedToErr(14))
+                        }
                         (Err(EvaluateConstErr::EvaluationFailure(..)), _)
-                        | (_, Err(EvaluateConstErr::EvaluationFailure(..))) => Ok(EvaluatedToErr),
+                        | (_, Err(EvaluateConstErr::EvaluationFailure(..))) => {
+                            Ok(EvaluatedToErr(15))
+                        }
                         (Err(EvaluateConstErr::HasGenericsOrInfers), _)
                         | (_, Err(EvaluateConstErr::HasGenericsOrInfers)) => {
                             if c1.has_non_region_infer() || c2.has_non_region_infer() {
                                 Ok(EvaluatedToAmbig)
                             } else {
                                 // Two different constants using generic parameters ~> error.
-                                Ok(EvaluatedToErr)
+                                Ok(EvaluatedToErr(16))
                             }
                         }
                     }
@@ -986,11 +993,12 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                             previous_stack,
                             inf_ok.into_obligations(),
                         ),
-                        Err(_) => Ok(EvaluatedToErr),
+                        Err(_) => Ok(EvaluatedToErr(17)),
                     }
                 }
             }
-        })
+        });
+        x
     }
 
     #[instrument(skip(self, previous_stack), level = "debug", ret)]
@@ -1048,7 +1056,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             // normalize these obligations before evaluating.
             // so we will try to normalize the obligation and evaluate again.
             // we will replace it with new solver in the future.
-            if EvaluationResult::EvaluatedToErr == result
+            if let EvaluationResult::EvaluatedToErr(_) = result
                 && fresh_trait_pred.has_aliases()
                 && fresh_trait_pred.is_global()
             {
@@ -1216,7 +1224,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
             Ok(Some(c)) => self.evaluate_candidate(stack, &c),
             Ok(None) => Ok(EvaluatedToAmbig),
             Err(Overflow(OverflowError::Canonical)) => Err(OverflowError::Canonical),
-            Err(..) => Ok(EvaluatedToErr),
+            Err(..) => Ok(EvaluatedToErr(20)),
         }
     }
 
@@ -1264,7 +1272,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
                         selection.nested_obligations().into_iter(),
                     )
                 }
-                Err(..) => Ok(EvaluatedToErr),
+                Err(..) => Ok(EvaluatedToErr(21)),
             }
         })?;
 
@@ -1697,7 +1705,7 @@ impl<'cx, 'tcx> SelectionContext<'cx, 'tcx> {
         self.evaluation_probe(|this| {
             match this.match_where_clause_trait_ref(stack.obligation, where_clause_trait_ref) {
                 Ok(obligations) => this.evaluate_predicates_recursively(stack.list(), obligations),
-                Err(()) => Ok(EvaluatedToErr),
+                Err(()) => Ok(EvaluatedToErr(22)),
             }
         })
     }
@@ -2951,6 +2959,7 @@ impl<'o, 'tcx> TraitObligationStack<'o, 'tcx> {
 /// provisional results added from the subtree that encountered the
 /// error. When we pop the node at `reached_depth` from the stack, we
 /// can commit all the things that remain in the provisional cache.
+#[derive(Debug)]
 struct ProvisionalEvaluationCache<'tcx> {
     /// next "depth first number" to issue -- just a counter
     dfn: Cell<usize>,
@@ -3128,7 +3137,7 @@ impl<'tcx> ProvisionalEvaluationCache<'tcx> {
     }
 }
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug)]
 struct TraitObligationStackList<'o, 'tcx> {
     cache: &'o ProvisionalEvaluationCache<'tcx>,
     head: Option<&'o TraitObligationStack<'o, 'tcx>>,

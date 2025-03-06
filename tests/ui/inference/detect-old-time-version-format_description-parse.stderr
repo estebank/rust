@@ -9,6 +9,25 @@ LL |     Some(items.into())
    |
    = note: this is an inference error on crate `time` caused by an API change in Rust 1.80.0; update `time` to version `>=0.3.35` by calling `cargo update`
 
-error: aborting due to 1 previous error
+error[E0277]: the trait bound `A: Allocator` is not satisfied
+  --> $DIR/detect-old-time-version-format_description-parse.rs:11:10
+   |
+LL |     Some(items.into())
+   |          ^^^^^^^^^^^^ the trait `Allocator` is not implemented for `A`
+   |
+note: required by a bound in `Box`
+  --> $SRC_DIR/alloc/src/boxed.rs:LL:COL
 
-For more information about this error, try `rustc --explain E0282`.
+error[E0277]: the size for values of type `A` cannot be known at compilation time
+  --> $DIR/detect-old-time-version-format_description-parse.rs:11:10
+   |
+LL |     Some(items.into())
+   |          ^^^^^^^^^^^^ doesn't have a size known at compile-time
+   |
+note: required by an implicit `Sized` bound in `Box`
+  --> $SRC_DIR/alloc/src/boxed.rs:LL:COL
+
+error: aborting due to 3 previous errors
+
+Some errors have detailed explanations: E0277, E0282.
+For more information about an error, try `rustc --explain E0277`.

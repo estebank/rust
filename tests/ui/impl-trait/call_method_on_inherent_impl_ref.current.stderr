@@ -1,12 +1,11 @@
-error[E0599]: no method named `my_debug` found for opaque type `impl Debug` in the current scope
+error[E0599]: the method `my_debug` exists for opaque type `impl Debug`, but its trait bounds were not satisfied
   --> $DIR/call_method_on_inherent_impl_ref.rs:19:11
    |
-LL |     fn my_debug(&self);
-   |        -------- the method is available for `&impl Debug` here
-...
 LL |         x.my_debug();
-   |           ^^^^^^^^ method not found in `impl Debug`
+   |           ^^^^^^^^ method cannot be called on `impl Debug` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `impl Debug: MyDebug`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `MyDebug` defines an item `my_debug`, perhaps you need to implement it
   --> $DIR/call_method_on_inherent_impl_ref.rs:4:1

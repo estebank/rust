@@ -60,6 +60,22 @@ LL -     let z = x.foo();
 LL +     let z = X::foo(x);
    |
 
+error[E0277]: the size for values of type `MISC` cannot be known at compilation time
+  --> $DIR/method-deref-to-same-trait-object-with-separate-params.rs:122:13
+   |
+LL |     let z = x.foo();
+   |             ^^^^^^^ doesn't have a size known at compile-time
+   |
+note: required by an implicit `Sized` bound in `Smaht`
+  --> $DIR/method-deref-to-same-trait-object-with-separate-params.rs:15:33
+   |
+LL |     pub struct Smaht<T: ?Sized, MISC>(pub Box<T>, pub PhantomData<MISC>);
+   |                                 ^^^^ required by the implicit `Sized` requirement on this type parameter in `Smaht`
+help: consider relaxing the implicit `Sized` restriction
+   |
+LL |     pub struct Smaht<T: ?Sized, MISC: ?Sized>(pub Box<T>, pub PhantomData<MISC>);
+   |                                     ++++++++
+
 error[E0308]: mismatched types
   --> $DIR/method-deref-to-same-trait-object-with-separate-params.rs:139:24
    |
@@ -84,7 +100,7 @@ LL |     let _seetype: () = z;
    |                   |
    |                   expected due to this
 
-error: aborting due to 6 previous errors; 1 warning emitted
+error: aborting due to 7 previous errors; 1 warning emitted
 
-Some errors have detailed explanations: E0034, E0308.
+Some errors have detailed explanations: E0034, E0277, E0308.
 For more information about an error, try `rustc --explain E0034`.

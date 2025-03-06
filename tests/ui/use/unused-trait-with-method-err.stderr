@@ -1,12 +1,19 @@
-error[E0599]: no method named `uwu` found for struct `Foo` in the current scope
+error[E0599]: the method `uwu` exists for struct `Foo`, but its trait bounds were not satisfied
   --> $DIR/unused-trait-with-method-err.rs:15:9
    |
 LL | struct Foo;
-   | ---------- method `uwu` not found for this struct
+   | ---------- method `uwu` not found for this struct because it doesn't satisfy `Foo: Bar`
 ...
 LL |     Foo.uwu();
-   |         ^^^ method not found in `Foo`
+   |         ^^^ method cannot be called on `Foo` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `Foo: Bar`
+note: the trait `Bar` must be implemented
+  --> $DIR/unused-trait-with-method-err.rs:7:5
+   |
+LL |     pub trait Bar {
+   |     ^^^^^^^^^^^^^
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `Bar` defines an item `uwu`, perhaps you need to implement it
   --> $DIR/unused-trait-with-method-err.rs:7:5

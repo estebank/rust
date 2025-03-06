@@ -1,24 +1,28 @@
-error[E0599]: no method named `test_mut` found for struct `Vec<{integer}>` in the current scope
+error[E0599]: the method `test_mut` exists for struct `Vec<{integer}>`, but its trait bounds were not satisfied
   --> $DIR/auto-ref-slice-plus-ref.rs:7:7
    |
 LL |     a.test_mut();
    |       ^^^^^^^^
    |
+   = note: the following trait bounds were not satisfied:
+           `Vec<{integer}>: MyIter`
+           `[{integer}]: MyIter`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `MyIter` defines an item `test_mut`, perhaps you need to implement it
   --> $DIR/auto-ref-slice-plus-ref.rs:14:1
    |
 LL | trait MyIter {
    | ^^^^^^^^^^^^
-help: there is a method `get_mut` with a similar name, but with different arguments
-  --> $SRC_DIR/core/src/slice/mod.rs:LL:COL
 
-error[E0599]: no method named `test` found for struct `Vec<{integer}>` in the current scope
+error[E0599]: the method `test` exists for struct `Vec<{integer}>`, but its trait bounds were not satisfied
   --> $DIR/auto-ref-slice-plus-ref.rs:8:7
    |
 LL |     a.test();
-   |       ^^^^ method not found in `Vec<{integer}>`
+   |       ^^^^ method cannot be called on `Vec<{integer}>` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `Vec<{integer}>: MyIter`
+           `[{integer}]: MyIter`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `MyIter` defines an item `test`, perhaps you need to implement it
   --> $DIR/auto-ref-slice-plus-ref.rs:14:1
@@ -26,12 +30,15 @@ note: `MyIter` defines an item `test`, perhaps you need to implement it
 LL | trait MyIter {
    | ^^^^^^^^^^^^
 
-error[E0599]: no method named `test` found for array `[{integer}; 1]` in the current scope
+error[E0599]: the method `test` exists for array `[{integer}; 1]`, but its trait bounds were not satisfied
   --> $DIR/auto-ref-slice-plus-ref.rs:10:11
    |
 LL |     ([1]).test();
-   |           ^^^^ method not found in `[{integer}; 1]`
+   |           ^^^^ method cannot be called on `[{integer}; 1]` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `[{integer}; 1]: MyIter`
+           `[{integer}]: MyIter`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `MyIter` defines an item `test`, perhaps you need to implement it
   --> $DIR/auto-ref-slice-plus-ref.rs:14:1
@@ -39,12 +46,16 @@ note: `MyIter` defines an item `test`, perhaps you need to implement it
 LL | trait MyIter {
    | ^^^^^^^^^^^^
 
-error[E0599]: no method named `test` found for reference `&[{integer}; 1]` in the current scope
+error[E0599]: the method `test` exists for reference `&[{integer}; 1]`, but its trait bounds were not satisfied
   --> $DIR/auto-ref-slice-plus-ref.rs:11:12
    |
 LL |     (&[1]).test();
-   |            ^^^^ method not found in `&[{integer}; 1]`
+   |            ^^^^ method cannot be called on `&[{integer}; 1]` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `[{integer}; 1]: MyIter`
+           `&[{integer}; 1]: MyIter`
+           `[{integer}]: MyIter`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `MyIter` defines an item `test`, perhaps you need to implement it
   --> $DIR/auto-ref-slice-plus-ref.rs:14:1

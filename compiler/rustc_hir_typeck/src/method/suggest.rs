@@ -583,6 +583,7 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         }
     }
 
+    #[tracing::instrument(skip(self), level = "info")]
     fn report_no_match_method_error(
         &self,
         mut span: Span,
@@ -743,6 +744,30 @@ impl<'a, 'tcx> FnCtxt<'a, 'tcx> {
         if short_ty_str.len() < ty_str.len() && ty_str.len() > 10 {
             ty_str = short_ty_str;
         }
+
+        // if let ty::Adt(def, _) = rcvr_ty.kind() {
+        //     let ty = self.tcx.at(span).type_of(def.did()).instantiate_identity();
+        //     let autoderef = self.autoderef(span, ty).silence_errors();
+        //     // let candidate_found = autoderef.any(|(ty, _)| {
+        //     //     if let ty::Adt(adt_def, _) = ty.kind() {
+        //     //         self.tcx
+        //     //             .inherent_impls(adt_def.did())
+        //     //             .into_iter()
+        //     //             .any(|def_id| self.associated_value(*def_id, item_name).is_some())
+        //     //     } else {
+        //     //         false
+        //     //     }
+        //     // });
+        //     for x in autoderef {
+        //         err.note(format!("{x:#?}"));
+        //     }
+        //     // let has_deref = autoderef.step_count() > 0;
+        //     // if !candidate_found && !has_deref && unsatisfied_predicates.is_empty() {
+        //     //     if let Some((path_string, _)) = ty_str.split_once('<') {
+        //     //         ty_str_reported = path_string.to_string();
+        //     //     }
+        //     // }
+        // }
 
         if rcvr_ty.references_error() {
             err.downgrade_to_delayed_bug();

@@ -1,9 +1,12 @@
-error[E0599]: no method named `f` found for fn pointer `fn(&u8)` in the current scope
+error[E0599]: the method `f` exists for fn pointer `fn(&u8)`, but its trait bounds were not satisfied
   --> $DIR/issue-57362-1.rs:20:7
    |
 LL |     a.f();
-   |       ^ method not found in `fn(&u8)`
+   |       ^ method cannot be called on `fn(&u8)` due to unsatisfied trait bounds
    |
+   = note: the following trait bounds were not satisfied:
+           `&fn(&u8): Trait`
+           `&mut fn(&u8): Trait`
    = help: items from traits can only be used if the trait is implemented and in scope
 note: `Trait` defines an item `f`, perhaps you need to implement it
   --> $DIR/issue-57362-1.rs:8:1

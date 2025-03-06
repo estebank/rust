@@ -1757,6 +1757,7 @@ impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
     ) -> traits::SelectionResult<'tcx, traits::Selection<'tcx>> {
         let obligation =
             traits::Obligation::new(self.tcx, self.misc(self.span), self.param_env, trait_ref);
+        // HERE elaborate  the obligation to get the failed ones.
         traits::SelectionContext::new(self).select(&obligation)
     }
 
@@ -1891,10 +1892,13 @@ impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
                         infer::FnCall,
                         poly_trait_ref,
                     );
+                    tracing::info!(?trait_ref, "asdf");
                     let trait_ref = ocx.normalize(cause, self.param_env, trait_ref);
+                    tracing::info!(?trait_ref, "2asdf");
                     (xform_self_ty, xform_ret_ty) =
                         self.xform_self_ty(probe.item, trait_ref.self_ty(), trait_ref.args);
                     xform_self_ty = ocx.normalize(cause, self.param_env, xform_self_ty);
+                    tracing::info!(?xform_self_ty);
                     match self_ty.kind() {
                         // HACK: opaque types will match anything for which their bounds hold.
                         // Thus we need to prevent them from trying to match the `&_` autoref
@@ -1944,6 +1948,12 @@ impl<'a, 'tcx> ProbeContext<'a, 'tcx> {
                                     ));
                                 }
                             }
+                        } else {
+                            possibly_unsatisfied_predicates.push((
+                                self.resolve_vars_if_possible(obligation.predicate),
+                                None,
+                                Some(obligation.cause),
+                            ))
                         }
                     }
 

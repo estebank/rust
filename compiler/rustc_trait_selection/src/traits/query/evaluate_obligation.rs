@@ -74,7 +74,7 @@ impl<'tcx> InferCtxt<'tcx> {
                 let mut result = EvaluationResult::EvaluatedToOk;
                 for error in ocx.select_all_or_error() {
                     if error.is_true_error() {
-                        return Ok(EvaluationResult::EvaluatedToErr);
+                        return Ok(EvaluationResult::EvaluatedToErr(1));
                     } else {
                         result = result.max(EvaluationResult::EvaluatedToAmbig);
                     }
@@ -116,10 +116,10 @@ impl<'tcx> InferCtxt<'tcx> {
                             r,
                         )
                     }
-                    OverflowError::Error(_) => EvaluationResult::EvaluatedToErr,
+                    OverflowError::Error(_) => EvaluationResult::EvaluatedToErr(2),
                 })
             }
-            Err(OverflowError::Error(_)) => EvaluationResult::EvaluatedToErr,
+            Err(OverflowError::Error(_)) => EvaluationResult::EvaluatedToErr(3),
         }
     }
 }

@@ -10,6 +10,7 @@ LL |     let _j = i.clone();
    = note: the following trait bounds were not satisfied:
            `R: Clone`
            which is required by `Box<R>: Clone`
+           `R: Clone`
 help: consider annotating `R` with `#[derive(Clone)]`
    |
 LL + #[derive(Clone)]

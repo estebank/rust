@@ -5,7 +5,7 @@ LL | fn foo<T>(value: T) {
    |        - method `method` not found for this type parameter
 ...
 LL |     value.method();
-   |           ^^^^^^ method not found in `T`
+   |           ^^^^^^ method cannot be called on `T` due to unsatisfied trait bounds
    |
    = help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `method`, perhaps you need to restrict type parameter `T` with it:
@@ -20,7 +20,7 @@ LL | fn foo<T>(value: T) {
    |        - method `method2` not found for this type parameter
 ...
 LL |     value.method2();
-   |           ^^^^^^^ method not found in `T`
+   |           ^^^^^^^ method cannot be called on `T` due to unsatisfied trait bounds
    |
    = help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `method2`, perhaps you need to restrict type parameter `T` with it:
@@ -35,7 +35,7 @@ LL | fn bar(value: impl Copy) {
    |               --------- method `method` not found for this type parameter
 ...
 LL |     value.method();
-   |           ^^^^^^ method not found in `impl Copy`
+   |           ^^^^^^ method cannot be called on `impl Copy` due to unsatisfied trait bounds
    |
    = help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `method`, perhaps you need to restrict type parameter `impl Copy` with it:
@@ -50,7 +50,7 @@ LL | fn bar(value: impl Copy) {
    |               --------- method `method2` not found for this type parameter
 ...
 LL |     value.method2();
-   |           ^^^^^^^ method not found in `impl Copy`
+   |           ^^^^^^^ method cannot be called on `impl Copy` due to unsatisfied trait bounds
    |
    = help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `method2`, perhaps you need to restrict type parameter `impl Copy` with it:

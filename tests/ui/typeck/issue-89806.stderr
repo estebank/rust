@@ -1,8 +1,11 @@
-error[E0599]: no method named `as_ref` found for type `u8` in the current scope
+error[E0599]: the method `as_ref` exists for type `u8`, but its trait bounds were not satisfied
   --> $DIR/issue-89806.rs:2:9
    |
 LL |     0u8.as_ref();
-   |         ^^^^^^ method not found in `u8`
+   |         ^^^^^^ method cannot be called on `u8` due to unsatisfied trait bounds
+   |
+   = note: the following trait bounds were not satisfied:
+           `u8: AsRef<_>`
 
 error: aborting due to 1 previous error
 
