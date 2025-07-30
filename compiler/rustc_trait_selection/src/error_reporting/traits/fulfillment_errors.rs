@@ -269,6 +269,27 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                             (err_msg, None)
                         };
 
+                        let mut expr_finder = FindExprBySpan::new(span, self.tcx);
+
+                        let hir_id = self.tcx.local_def_id_to_hir_id(obligation.cause.body_id);
+                        match self.tcx.hir_node(hir_id) {
+                            hir::Node::Item(item) => expr_finder.visit_item(item),
+                            hir::Node::TraitItem(item) => expr_finder.visit_trait_item(item),
+                            hir::Node::ImplItem(item) => expr_finder.visit_impl_item(item),
+                            _ => {}
+                        }
+                        if let Some(ty) = expr_finder.ty_result {
+                            let self_ty = main_trait_predicate.skip_binder().self_ty();
+                            let mut tyfinder = FindType { ty: self_ty, spans: vec![] };
+                            tyfinder.visit_ty(unsafe { std::mem::transmute(ty) });
+                            if let [sp] = tyfinder.spans[..]
+                                && !sp.from_expansion()
+                                && !span.from_expansion()
+                            {
+                                span = sp;
+                            }
+                        }
+
                         let mut err = struct_span_code_err!(self.dcx(), span, E0277, "{}", err_msg);
                         *err.long_ty_path() = long_ty_file;
 
@@ -3359,5 +3380,22 @@ impl<'a, 'tcx> TypeErrCtxt<'a, 'tcx> {
                 )
             }
         }
+    }
+}
+
+struct FindType<'tcx> {
+    ty: Ty<'tcx>,
+    spans: Vec<Span>,
+}
+
+impl<'v> Visitor<'v> for FindType<'v> {
+    fn visit_path(&mut self, path: &hir::Path<'v>, _: hir::HirId) {
+        match (path.res, self.ty.kind()) {
+            (hir::def::Res::Def(_kind, def_id), ty::Adt(def, _)) if def_id == def.did() => {
+                self.spans.push(path.span);
+            }
+            _ => {}
+        }
+        hir::intravisit::walk_path(self, path)
     }
 }

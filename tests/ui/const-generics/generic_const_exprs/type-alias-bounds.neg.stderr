@@ -1,8 +1,8 @@
 error[E0277]: the trait bound `String: Copy` is not satisfied
-  --> $DIR/type-alias-bounds.rs:23:12
+  --> $DIR/type-alias-bounds.rs:23:29
    |
 LL |     let _: AliasConstUnused<String>;
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `String`
+   |                             ^^^^^^ the trait `Copy` is not implemented for `String`
    |
 note: required by a bound in `ct_unused_0::AliasConstUnused`
   --> $DIR/type-alias-bounds.rs:20:30
@@ -29,10 +29,10 @@ LL |     type AliasConstUnused where String: Copy = I32<{ 0; 0 }>;
    |                                         ^^^^ required by this bound in `AliasConstUnused`
 
 error[E0277]: the trait bound `String: Copy` is not satisfied
-  --> $DIR/type-alias-bounds.rs:40:12
+  --> $DIR/type-alias-bounds.rs:40:26
    |
 LL |     let _: AliasFnUnused<String>;
-   |            ^^^^^^^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `String`
+   |                          ^^^^^^ the trait `Copy` is not implemented for `String`
    |
 note: required by a bound in `AliasFnUnused`
   --> $DIR/type-alias-bounds.rs:37:27
@@ -41,10 +41,10 @@ LL |     type AliasFnUnused<T: Copy> = (T, I32<{ code() }>);
    |                           ^^^^ required by this bound in `AliasFnUnused`
 
 error[E0277]: the trait bound `String: Copy` is not satisfied
-  --> $DIR/type-alias-bounds.rs:58:12
+  --> $DIR/type-alias-bounds.rs:58:32
    |
 LL |     let _: AliasAssocConstUsed<String>;
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `String`
+   |                                ^^^^^^ the trait `Copy` is not implemented for `String`
    |
 note: required by a bound in `AliasAssocConstUsed`
   --> $DIR/type-alias-bounds.rs:56:41
@@ -53,10 +53,10 @@ LL |     type AliasAssocConstUsed<T: Trait + Copy> = I32<{ T::DATA }>;
    |                                         ^^^^ required by this bound in `AliasAssocConstUsed`
 
 error[E0277]: the trait bound `String: Copy` is not satisfied
-  --> $DIR/type-alias-bounds.rs:66:12
+  --> $DIR/type-alias-bounds.rs:66:24
    |
 LL |     let _: AliasFnUsed<String>;
-   |            ^^^^^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `String`
+   |                        ^^^^^^ the trait `Copy` is not implemented for `String`
    |
 note: required by a bound in `AliasFnUsed`
   --> $DIR/type-alias-bounds.rs:63:33

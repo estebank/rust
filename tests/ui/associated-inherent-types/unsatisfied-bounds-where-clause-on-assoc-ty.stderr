@@ -1,8 +1,8 @@
 error[E0277]: the trait bound `String: Copy` is not satisfied
-  --> $DIR/unsatisfied-bounds-where-clause-on-assoc-ty.rs:13:12
+  --> $DIR/unsatisfied-bounds-where-clause-on-assoc-ty.rs:13:16
    |
 LL |     let _: S::<String>::X;
-   |            ^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `String`
+   |                ^^^^^^ the trait `Copy` is not implemented for `String`
    |
 note: required by a bound in `S<T>::X`
   --> $DIR/unsatisfied-bounds-where-clause-on-assoc-ty.rs:9:12

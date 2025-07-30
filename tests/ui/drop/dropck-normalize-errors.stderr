@@ -48,10 +48,10 @@ LL |     type Decoder: ?Sized;
    |                 ++++++++
 
 error[E0277]: the trait bound `NonImplementedStruct: NonImplementedTrait` is not satisfied
-  --> $DIR/dropck-normalize-errors.rs:27:22
+  --> $DIR/dropck-normalize-errors.rs:27:23
    |
 LL |     non_implemented: <NonImplementedStruct as NonImplementedTrait>::Assoc,
-   |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `NonImplementedTrait` is not implemented for `NonImplementedStruct`
+   |                       ^^^^^^^^^^^^^^^^^^^^ the trait `NonImplementedTrait` is not implemented for `NonImplementedStruct`
    |
 help: this trait has no implementations, consider adding one
   --> $DIR/dropck-normalize-errors.rs:7:1

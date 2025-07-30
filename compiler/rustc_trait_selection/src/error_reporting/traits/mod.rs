@@ -69,7 +69,7 @@ impl<'hir> FindExprBySpan<'hir> {
 }
 
 impl<'v> Visitor<'v> for FindExprBySpan<'v> {
-    type NestedFilter = rustc_middle::hir::nested_filter::OnlyBodies;
+    type NestedFilter = rustc_middle::hir::nested_filter::All;
 
     fn maybe_tcx(&mut self) -> Self::MaybeTyCtxt {
         self.tcx
