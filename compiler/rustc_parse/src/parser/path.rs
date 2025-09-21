@@ -20,6 +20,7 @@ use crate::errors::{
     PathFoundAttributeInParams, PathFoundCVariadicParams, PathSingleColon, PathTripleColon,
 };
 use crate::exp;
+use crate::parser::ty::RecoverAnonEnum;
 use crate::parser::{
     CommaRecoveryMode, ExprKind, FnContext, FnParseMode, RecoverColon, RecoverComma,
 };
@@ -406,6 +407,7 @@ impl<'a> Parser<'a> {
                             context: FnContext::Free,
                             req_name: |_| false,
                             req_body: false,
+                            fn_ptr: false,
                         };
                         let param = p.parse_param_general(&mode, false, false);
                         param.map(move |param| {
@@ -447,8 +449,12 @@ impl<'a> Parser<'a> {
                         Err(error) => return Err(error),
                     };
                     let inputs_span = lo.to(self.prev_token.span);
-                    let output =
-                        self.parse_ret_ty(AllowPlus::No, RecoverQPath::No, RecoverReturnSign::No)?;
+                    let output = self.parse_ret_ty(
+                        AllowPlus::No,
+                        RecoverQPath::No,
+                        RecoverReturnSign::No,
+                        RecoverAnonEnum::No,
+                    )?;
                     let span = ident.span.to(self.prev_token.span);
                     ParenthesizedArgs { span, inputs, inputs_span, output }.into()
                 };

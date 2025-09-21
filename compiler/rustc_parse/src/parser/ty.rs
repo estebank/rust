@@ -6,6 +6,7 @@ use rustc_ast::{
     Pinnedness, PolyTraitRef, PreciseCapturingArg, TraitBoundModifiers, TraitObjectSyntax, Ty,
     TyKind, UnsafeBinderTy,
 };
+use rustc_ast_pretty::pprust;
 use rustc_data_structures::stack::ensure_sufficient_stack;
 use rustc_errors::{Applicability, Diag, PResult};
 use rustc_span::{ErrorGuaranteed, Ident, Span, kw, sym};
@@ -33,13 +34,20 @@ pub(super) enum AllowPlus {
     No,
 }
 
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 pub(super) enum RecoverQPath {
     Yes,
     No,
 }
 
+#[derive(Clone, Copy)]
 pub(super) enum RecoverQuestionMark {
+    Yes,
+    No,
+}
+
+#[derive(PartialEq, Clone, Copy)]
+pub(super) enum RecoverAnonEnum {
     Yes,
     No,
 }
@@ -76,7 +84,7 @@ impl RecoverReturnSign {
 }
 
 // Is `...` (`CVarArgs`) legal at this level of type parsing?
-#[derive(PartialEq)]
+#[derive(PartialEq, Clone, Copy)]
 enum AllowCVariadic {
     Yes,
     No,
@@ -124,6 +132,7 @@ impl<'a> Parser<'a> {
                 RecoverReturnSign::Yes,
                 None,
                 RecoverQuestionMark::Yes,
+                RecoverAnonEnum::No,
             )
         })
     }
@@ -139,6 +148,7 @@ impl<'a> Parser<'a> {
             RecoverReturnSign::Yes,
             Some(ty_params),
             RecoverQuestionMark::Yes,
+            RecoverAnonEnum::No,
         )
     }
 
@@ -153,6 +163,7 @@ impl<'a> Parser<'a> {
             RecoverReturnSign::Yes,
             None,
             RecoverQuestionMark::Yes,
+            RecoverAnonEnum::Yes,
         )?;
 
         // Recover a trailing `= EXPR` if present.
@@ -193,6 +204,7 @@ impl<'a> Parser<'a> {
             RecoverReturnSign::Yes,
             None,
             RecoverQuestionMark::Yes,
+            RecoverAnonEnum::No,
         )
     }
 
@@ -206,6 +218,7 @@ impl<'a> Parser<'a> {
             RecoverReturnSign::Yes,
             None,
             RecoverQuestionMark::No,
+            RecoverAnonEnum::No,
         )
     }
 
@@ -217,6 +230,7 @@ impl<'a> Parser<'a> {
             RecoverReturnSign::Yes,
             None,
             RecoverQuestionMark::No,
+            RecoverAnonEnum::No,
         )
     }
 
@@ -230,6 +244,7 @@ impl<'a> Parser<'a> {
             RecoverReturnSign::OnlyFatArrow,
             None,
             RecoverQuestionMark::Yes,
+            RecoverAnonEnum::No,
         )
     }
 
@@ -239,6 +254,7 @@ impl<'a> Parser<'a> {
         allow_plus: AllowPlus,
         recover_qpath: RecoverQPath,
         recover_return_sign: RecoverReturnSign,
+        recover_anon_enum: RecoverAnonEnum,
     ) -> PResult<'a, FnRetTy> {
         let lo = self.prev_token.span;
         Ok(if self.eat(exp!(RArrow)) {
@@ -250,6 +266,7 @@ impl<'a> Parser<'a> {
                 recover_return_sign,
                 None,
                 RecoverQuestionMark::Yes,
+                recover_anon_enum,
             )?;
             FnRetTy::Ty(ty)
         } else if recover_return_sign.can_recover(&self.token.kind) {
@@ -267,6 +284,7 @@ impl<'a> Parser<'a> {
                 recover_return_sign,
                 None,
                 RecoverQuestionMark::Yes,
+                RecoverAnonEnum::No,
             )?;
             FnRetTy::Ty(ty)
         } else {
@@ -282,6 +300,7 @@ impl<'a> Parser<'a> {
         recover_return_sign: RecoverReturnSign,
         ty_generics: Option<&Generics>,
         recover_question_mark: RecoverQuestionMark,
+        recover_anon_enum: RecoverAnonEnum,
     ) -> PResult<'a, Box<Ty>> {
         let allow_qpath_recovery = recover_qpath == RecoverQPath::Yes;
         maybe_recover_from_interpolated_ty_qpath!(self, allow_qpath_recovery);
@@ -316,7 +335,7 @@ impl<'a> Parser<'a> {
         let lo = self.token.span;
         let mut impl_dyn_multi = false;
         let kind = if self.check(exp!(OpenParen)) {
-            self.parse_ty_tuple_or_parens(lo, allow_plus)?
+            self.parse_ty_tuple_or_parens(lo, allow_plus, recover_anon_enum)?
         } else if self.eat(exp!(Bang)) {
             // Never type `!`
             TyKind::Never
@@ -444,6 +463,46 @@ impl<'a> Parser<'a> {
         if let RecoverQuestionMark::Yes = recover_question_mark {
             ty = self.maybe_recover_from_question_mark(ty);
         }
+        if RecoverAnonEnum::Yes == recover_anon_enum
+            && self.check_noexpect(&token::Or)
+            && self.look_ahead(1, |t| t.can_begin_type())
+        {
+            let mut pipes = vec![self.token.span];
+            let mut types = vec![ty];
+            loop {
+                if !self.eat(exp!(Or)) {
+                    break;
+                }
+                pipes.push(self.prev_token.span);
+                types.push(self.parse_ty_common(
+                    allow_plus,
+                    allow_c_variadic,
+                    recover_qpath,
+                    recover_return_sign,
+                    ty_generics,
+                    recover_question_mark,
+                    RecoverAnonEnum::No,
+                )?);
+            }
+            let mut err = self.dcx().struct_span_err(pipes, "anonymous enums are not supported");
+            for ty in &types {
+                err.span_label(ty.span, "");
+            }
+            err.help(format!(
+                "create a named `enum` and use it here instead:\nenum Name {{\n{}\n}}",
+                types
+                    .iter()
+                    .enumerate()
+                    .map(|(i, t)| format!(
+                        "    Variant{}({}),",
+                        i + 1, // Lets not confuse people with zero-indexing :)
+                        pprust::to_string(|s| s.print_type(&t)),
+                    ))
+                    .collect::<Vec<_>>()
+                    .join("\n"),
+            ));
+            return Ok(self.mk_ty(lo.to(self.prev_token.span), TyKind::Err(err.emit())));
+        }
         if allow_qpath_recovery { self.maybe_recover_from_bad_qpath(ty) } else { Ok(ty) }
     }
 
@@ -463,10 +522,23 @@ impl<'a> Parser<'a> {
     /// Parses either:
     /// - `(TYPE)`, a parenthesized type.
     /// - `(TYPE,)`, a tuple with a single field of type TYPE.
-    fn parse_ty_tuple_or_parens(&mut self, lo: Span, allow_plus: AllowPlus) -> PResult<'a, TyKind> {
+    fn parse_ty_tuple_or_parens(
+        &mut self,
+        lo: Span,
+        allow_plus: AllowPlus,
+        recover_anon_enum: RecoverAnonEnum,
+    ) -> PResult<'a, TyKind> {
         let mut trailing_plus = false;
         let (ts, trailing) = self.parse_paren_comma_seq(|p| {
-            let ty = p.parse_ty()?;
+            let ty = p.parse_ty_common(
+                AllowPlus::Yes,
+                AllowCVariadic::No,
+                RecoverQPath::Yes,
+                RecoverReturnSign::Yes,
+                None,
+                RecoverQuestionMark::Yes,
+                recover_anon_enum,
+            )?;
             trailing_plus = p.prev_token == TokenKind::Plus;
             Ok(ty)
         })?;
@@ -806,6 +878,7 @@ impl<'a> Parser<'a> {
             req_name: |_| false,
             context: FnContext::Free,
             req_body: false,
+            fn_ptr: true,
         };
         let decl = self.parse_fn_decl(&mode, AllowPlus::No, recover_return_sign)?;
 
@@ -1364,7 +1437,12 @@ impl<'a> Parser<'a> {
         self.bump();
         let args_lo = self.token.span;
         let snapshot = self.create_snapshot_for_diagnostic();
-        let mode = FnParseMode { req_name: |_| false, context: FnContext::Free, req_body: false };
+        let mode = FnParseMode {
+            req_name: |_| false,
+            context: FnContext::Free,
+            req_body: false,
+            fn_ptr: false,
+        };
         match self.parse_fn_decl(&mode, AllowPlus::No, RecoverReturnSign::OnlyFatArrow) {
             Ok(decl) => {
                 self.dcx().emit_err(ExpectedFnPathFoundFnKeyword { fn_token_span });
@@ -1455,11 +1533,21 @@ impl<'a> Parser<'a> {
 
         // Parse `(T, U) -> R`.
         let inputs_lo = self.token.span;
-        let mode = FnParseMode { req_name: |_| false, context: FnContext::Free, req_body: false };
+        let mode = FnParseMode {
+            req_name: |_| false,
+            context: FnContext::Free,
+            req_body: false,
+            fn_ptr: false,
+        };
         let inputs: ThinVec<_> =
             self.parse_fn_params(&mode)?.into_iter().map(|input| input.ty).collect();
         let inputs_span = inputs_lo.to(self.prev_token.span);
-        let output = self.parse_ret_ty(AllowPlus::No, RecoverQPath::No, RecoverReturnSign::No)?;
+        let output = self.parse_ret_ty(
+            AllowPlus::No,
+            RecoverQPath::No,
+            RecoverReturnSign::No,
+            RecoverAnonEnum::No,
+        )?;
         let args = ast::ParenthesizedArgs {
             span: fn_path_segment.span().to(self.prev_token.span),
             inputs,

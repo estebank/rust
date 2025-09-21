@@ -23,6 +23,7 @@ use super::{
     Recovered, Trailing, UsePreAttrPos,
 };
 use crate::errors::{self, FnPointerCannotBeAsync, FnPointerCannotBeConst, MacroExpandsToAdtField};
+use crate::parser::ty::RecoverAnonEnum;
 use crate::{exp, fluent_generated as fluent};
 
 impl<'a> Parser<'a> {
@@ -116,8 +117,12 @@ impl<'a> Parser<'a> {
 
 impl<'a> Parser<'a> {
     pub fn parse_item(&mut self, force_collect: ForceCollect) -> PResult<'a, Option<Box<Item>>> {
-        let fn_parse_mode =
-            FnParseMode { req_name: |_| true, context: FnContext::Free, req_body: true };
+        let fn_parse_mode = FnParseMode {
+            req_name: |_| true,
+            context: FnContext::Free,
+            req_body: true,
+            fn_ptr: false,
+        };
         self.parse_item_(fn_parse_mode, force_collect).map(|i| i.map(Box::new))
     }
 
@@ -976,8 +981,12 @@ impl<'a> Parser<'a> {
         &mut self,
         force_collect: ForceCollect,
     ) -> PResult<'a, Option<Option<Box<AssocItem>>>> {
-        let fn_parse_mode =
-            FnParseMode { req_name: |_| true, context: FnContext::Impl, req_body: true };
+        let fn_parse_mode = FnParseMode {
+            req_name: |_| true,
+            context: FnContext::Impl,
+            req_body: true,
+            fn_ptr: false,
+        };
         self.parse_assoc_item(fn_parse_mode, force_collect)
     }
 
@@ -989,6 +998,7 @@ impl<'a> Parser<'a> {
             req_name: |edition| edition >= Edition::Edition2018,
             context: FnContext::Trait,
             req_body: false,
+            fn_ptr: false,
         };
         self.parse_assoc_item(fn_parse_mode, force_collect)
     }
@@ -1266,8 +1276,12 @@ impl<'a> Parser<'a> {
         &mut self,
         force_collect: ForceCollect,
     ) -> PResult<'a, Option<Option<Box<ForeignItem>>>> {
-        let fn_parse_mode =
-            FnParseMode { req_name: |_| true, context: FnContext::Free, req_body: false };
+        let fn_parse_mode = FnParseMode {
+            req_name: |_| true,
+            context: FnContext::Free,
+            req_body: false,
+            fn_ptr: false,
+        };
         Ok(self.parse_item_(fn_parse_mode, force_collect)?.map(
             |Item { attrs, id, span, vis, kind, tokens }| {
                 let kind = match ForeignItemKind::try_from(kind) {
@@ -2141,8 +2155,12 @@ impl<'a> Parser<'a> {
                 let inherited_vis =
                     Visibility { span: DUMMY_SP, kind: VisibilityKind::Inherited, tokens: None };
                 // We use `parse_fn` to get a span for the function
-                let fn_parse_mode =
-                    FnParseMode { req_name: |_| true, context: FnContext::Free, req_body: true };
+                let fn_parse_mode = FnParseMode {
+                    req_name: |_| true,
+                    context: FnContext::Free,
+                    req_body: true,
+                    fn_ptr: false,
+                };
                 match self.parse_fn(
                     &mut AttrVec::new(),
                     fn_parse_mode,
@@ -2432,6 +2450,8 @@ pub(crate) struct FnParseMode {
     /// definition or extern block. Within an impl block or a module, it should
     /// always be set to true.
     pub(super) req_body: bool,
+    /// If this flag is set to `true`, then we're parsing a fn pointer type.
+    pub(super) fn_ptr: bool,
 }
 
 /// The context in which a function is parsed.
@@ -2538,6 +2558,7 @@ impl<'a> Parser<'a> {
                         AllowPlus::Yes,
                         RecoverQPath::Yes,
                         RecoverReturnSign::Yes,
+                        RecoverAnonEnum::Yes,
                     ) {
                         Ok(ty_span) => ty_span.span().shrink_to_hi(),
                         Err(parse_error) => {
@@ -2986,7 +3007,12 @@ impl<'a> Parser<'a> {
     ) -> PResult<'a, Box<FnDecl>> {
         Ok(Box::new(FnDecl {
             inputs: self.parse_fn_params(fn_parse_mode)?,
-            output: self.parse_ret_ty(ret_allow_plus, RecoverQPath::Yes, recover_return_sign)?,
+            output: self.parse_ret_ty(
+                ret_allow_plus,
+                RecoverQPath::Yes,
+                recover_return_sign,
+                if fn_parse_mode.fn_ptr { RecoverAnonEnum::No } else { RecoverAnonEnum::Yes },
+            )?,
         }))
     }
 

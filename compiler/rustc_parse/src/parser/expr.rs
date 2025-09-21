@@ -38,6 +38,7 @@ use super::{
     AttrWrapper, BlockMode, ClosureSpans, ExpTokenPair, ForceCollect, Parser, PathStyle,
     Restrictions, SemiColonMode, SeqSep, TokenType, Trailing, UsePreAttrPos,
 };
+use crate::parser::ty::RecoverAnonEnum;
 use crate::{errors, exp, maybe_recover_from_interpolated_ty_qpath};
 
 #[derive(Debug)]
@@ -2576,8 +2577,12 @@ impl<'a> Parser<'a> {
             args
         };
         let arg_span = self.prev_token.span.with_lo(arg_start);
-        let output =
-            self.parse_ret_ty(AllowPlus::Yes, RecoverQPath::Yes, RecoverReturnSign::Yes)?;
+        let output = self.parse_ret_ty(
+            AllowPlus::Yes,
+            RecoverQPath::Yes,
+            RecoverReturnSign::Yes,
+            RecoverAnonEnum::No,
+        )?;
 
         Ok((Box::new(FnDecl { inputs, output }), arg_span))
     }
