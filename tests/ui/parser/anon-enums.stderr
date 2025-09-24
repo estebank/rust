@@ -22,64 +22,18 @@ LL | fn foo(x: bool | i32) -> i32 | f64 {
                Variant2(f64),
            }
 
-error: expected one of `!`, `,`, `.`, `::`, `?`, `{`, `}`, or an operator, found `=>`
-  --> $DIR/anon-enums.rs:8:16
+error: expected one of `@` or `|`, found `:`
+  --> $DIR/anon-enums.rs:8:10
    |
-LL |     match x {
-   |           - while parsing this struct
 LL |         x: i32 => x,
-   |               -^^ expected one of 8 possible tokens
-   |               |
-   |               help: try adding a comma: `,`
-
-error: expected identifier, found keyword `true`
-  --> $DIR/anon-enums.rs:9:9
+   |          ^ --- specifying the type of a pattern isn't supported
+   |          |
+   |          expected one of `@` or `|`
    |
-LL |     match x {
-   |           - while parsing this struct
-LL |         x: i32 => x,
-LL |         true => 42.,
-   |         ^^^^ expected identifier, found keyword
-
-error: expected identifier, found keyword `false`
-  --> $DIR/anon-enums.rs:10:9
+help: maybe write a path separator here
    |
-LL |     match x {
-   |           - while parsing this struct
-...
-LL |         false => 0.333,
-   |         ^^^^^ expected identifier, found keyword
-
-error: struct literals are not allowed here
-  --> $DIR/anon-enums.rs:7:11
-   |
-LL |       match x {
-   |  ___________^
-LL | |         x: i32 => x,
-LL | |         true => 42.,
-LL | |         false => 0.333,
-LL | |     }
-   | |_____^
-   |
-help: surround the struct literal with parentheses
-   |
-LL ~     match (x {
-LL |         x: i32 => x,
-LL |         true => 42.,
-LL |         false => 0.333,
-LL ~     })
-   |
-
-error: expected one of `.`, `?`, `{`, or an operator, found `}`
-  --> $DIR/anon-enums.rs:12:1
-   |
-LL |     match x {
-   |     ----- while parsing this `match` expression
-...
-LL |     }
-   |      - expected one of `.`, `?`, `{`, or an operator
-LL | }
-   | ^ unexpected token
+LL |         x::i32 => x,
+   |          ~~
 
 error: anonymous enums are not supported
   --> $DIR/anon-enums.rs:14:17
@@ -105,64 +59,18 @@ LL | fn bar(x: (bool | i32)) -> (i32 | f64) {
                Variant2(f64),
            }
 
-error: expected one of `!`, `,`, `.`, `::`, `?`, `{`, `}`, or an operator, found `=>`
-  --> $DIR/anon-enums.rs:18:16
+error: expected one of `@` or `|`, found `:`
+  --> $DIR/anon-enums.rs:18:10
    |
-LL |     match x {
-   |           - while parsing this struct
 LL |         x: i32 => x,
-   |               -^^ expected one of 8 possible tokens
-   |               |
-   |               help: try adding a comma: `,`
-
-error: expected identifier, found keyword `true`
-  --> $DIR/anon-enums.rs:19:9
+   |          ^ --- specifying the type of a pattern isn't supported
+   |          |
+   |          expected one of `@` or `|`
    |
-LL |     match x {
-   |           - while parsing this struct
-LL |         x: i32 => x,
-LL |         true => 42.,
-   |         ^^^^ expected identifier, found keyword
-
-error: expected identifier, found keyword `false`
-  --> $DIR/anon-enums.rs:20:9
+help: maybe write a path separator here
    |
-LL |     match x {
-   |           - while parsing this struct
-...
-LL |         false => 0.333,
-   |         ^^^^^ expected identifier, found keyword
-
-error: struct literals are not allowed here
-  --> $DIR/anon-enums.rs:17:11
-   |
-LL |       match x {
-   |  ___________^
-LL | |         x: i32 => x,
-LL | |         true => 42.,
-LL | |         false => 0.333,
-LL | |     }
-   | |_____^
-   |
-help: surround the struct literal with parentheses
-   |
-LL ~     match (x {
-LL |         x: i32 => x,
-LL |         true => 42.,
-LL |         false => 0.333,
-LL ~     })
-   |
-
-error: expected one of `.`, `?`, `{`, or an operator, found `}`
-  --> $DIR/anon-enums.rs:22:1
-   |
-LL |     match x {
-   |     ----- while parsing this `match` expression
-...
-LL |     }
-   |      - expected one of `.`, `?`, `{`, or an operator
-LL | }
-   | ^ unexpected token
+LL |         x::i32 => x,
+   |          ~~
 
 error: expected one of `...`, `..=`, `..`, or `|`, found `:`
   --> $DIR/anon-enums.rs:26:11
@@ -222,5 +130,5 @@ help: maybe write a path separator here
 LL |         x::i32 => (),
    |          ~~
 
-error: aborting due to 20 previous errors
+error: aborting due to 12 previous errors
 
