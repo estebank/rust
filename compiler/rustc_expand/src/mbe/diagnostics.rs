@@ -222,13 +222,15 @@ impl<'dcx> CollectTrackerAndEmitter<'dcx, '_> {
 
 pub(super) fn emit_frag_parse_err(
     mut e: Diag<'_>,
-    parser: &Parser<'_>,
+    parser: &mut Parser<'_>,
     orig_parser: &mut Parser<'_>,
     site_span: Span,
     arm_span: Span,
     kind: AstFragmentKind,
+    bindings: Vec<Ident>,
 ) -> ErrorGuaranteed {
     // FIXME(davidtwco): avoid depending on the error message text
+    tracing::info!(?bindings);
     if parser.token == token::Eof
         && let DiagMessage::Str(message) = &e.messages[0].0
         && message.ends_with(", found `<eof>`")
@@ -285,6 +287,12 @@ pub(super) fn emit_frag_parse_err(
         },
         _ => annotate_err_with_kind(&mut e, kind, site_span),
     };
+    if parser.token.kind == token::Dollar {
+        // parser.bump();
+        // if let token::Ident(name, _) = parser.token.kind {
+        //     e.note(format!("{name:?} {bindings:?}"));
+        // }
+    }
     e.emit()
 }
 

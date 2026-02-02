@@ -15,6 +15,20 @@ pub(crate) struct CfgAttrNoAttributes;
 pub(crate) struct NoSyntaxVarsExprRepeat {
     #[primary_span]
     pub span: Span,
+    #[subdiagnostic]
+    pub typo: Option<VarTypoSuggestion>,
+}
+
+#[derive(Subdiagnostic)]
+#[multipart_suggestion(
+    expand_expr_repeat_no_syntax_vars_typo,
+    applicability = "maybe-incorrect",
+    style = "verbose"
+)]
+pub(crate) struct VarTypoSuggestion {
+    #[suggestion_part(code = "{name}")]
+    pub span: Span,
+    pub name: Symbol,
 }
 
 #[derive(Diagnostic)]

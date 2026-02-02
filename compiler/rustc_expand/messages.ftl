@@ -37,6 +37,8 @@ expand_explain_doc_comment_outer =
 expand_expr_repeat_no_syntax_vars =
     attempted to repeat an expression containing no syntax variables matched as repeating at this depth
 
+expand_expr_repeat_no_syntax_vars_typo = there's a macro argument with a similar name
+
 expand_feature_not_allowed =
     the feature `{$name}` is not in the list of allowed features
 

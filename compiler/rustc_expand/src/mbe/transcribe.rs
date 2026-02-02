@@ -18,7 +18,7 @@ use smallvec::{SmallVec, smallvec};
 
 use crate::errors::{
     CountRepetitionMisplaced, MacroVarStillRepeating, MetaVarsDifSeqMatchers, MustRepeatOnce,
-    MveUnrecognizedVar, NoSyntaxVarsExprRepeat,
+    MveUnrecognizedVar, NoSyntaxVarsExprRepeat, VarTypoSuggestion,
 };
 use crate::mbe::macro_parser::NamedMatch;
 use crate::mbe::macro_parser::NamedMatch::*;
@@ -246,7 +246,7 @@ pub(super) fn transcribe<'a>(
         match tree {
             // Replace the sequence with its expansion.
             seq @ mbe::TokenTree::Sequence(_, seq_rep) => {
-                transcribe_sequence(&mut tscx, seq, seq_rep)?;
+                transcribe_sequence(&mut tscx, seq, seq_rep, interp)?;
             }
 
             // Replace the meta-var with the matched token tree from the invocation.
@@ -293,6 +293,8 @@ fn transcribe_sequence<'tx, 'itp>(
     tscx: &mut TranscrCtx<'tx, 'itp>,
     seq: &mbe::TokenTree,
     seq_rep: &'itp mbe::SequenceRepetition,
+    // Used only for better diagnostics in the face of typos.
+    interp: &FxHashMap<MacroRulesNormalizedIdent, NamedMatch>,
 ) -> PResult<'tx, ()> {
     let dcx = tscx.psess.dcx();
 
@@ -301,7 +303,21 @@ fn transcribe_sequence<'tx, 'itp>(
     // macro writer has made a mistake.
     match lockstep_iter_size(seq, tscx.interp, &tscx.repeats) {
         LockstepIterSize::Unconstrained => {
-            return Err(dcx.create_err(NoSyntaxVarsExprRepeat { span: seq.span() }));
+            #[allow(rustc::potential_query_instability)]
+            let macro_arg_names: Vec<Symbol> = interp.keys().map(|k| k.symbol()).collect();
+            let mut meta_vars = vec![];
+            seq.meta_vars(&mut meta_vars);
+            let mut typo = None;
+            for ident in meta_vars {
+                if let Some(name) = rustc_span::edit_distance::find_best_match_for_name(
+                    &macro_arg_names[..],
+                    ident.name,
+                    None,
+                ) {
+                    typo = Some(VarTypoSuggestion { span: ident.span, name })
+                }
+            }
+            return Err(dcx.create_err(NoSyntaxVarsExprRepeat { span: seq.span(), typo }));
         }
 
         LockstepIterSize::Contradiction(msg) => {

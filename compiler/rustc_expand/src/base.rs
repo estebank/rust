@@ -278,7 +278,8 @@ impl<'cx> MacroExpanderResult<'cx> {
         // Emit the SEMICOLON_IN_EXPRESSIONS_FROM_MACROS deprecation lint.
         let is_local = true;
 
-        let parser = ParserAnyMacro::from_tts(cx, tts, site_span, arm_span, is_local, macro_ident);
+        let parser =
+            ParserAnyMacro::from_tts(cx, tts, site_span, arm_span, is_local, macro_ident, vec![]);
         ExpandResult::Ready(Box::new(parser))
     }
 }
