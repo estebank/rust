@@ -205,16 +205,17 @@ LL |     let _ = Foo::<{ baz::<'b>(&()) }>;
    = note: lifetime parameters may not be used in const expressions
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/const-arg-in-const-arg.rs:16:23
+error[E0284]: type annotations needed
+  --> $DIR/const-arg-in-const-arg.rs:16:17
    |
 LL |     let _: [u8; bar::<N>()];
-   |                       ^
+   |                 ^^^^^^^^ cannot infer the value of the const parameter `N` declared on the function `bar`
    |
-help: if this generic argument was intended as a const parameter, surround it with braces
+note: required by a const generic parameter in `bar`
+  --> $DIR/const-arg-in-const-arg.rs:9:14
    |
-LL |     let _: [u8; bar::<{ N }>()];
-   |                       +   +
+LL | const fn bar<const N: usize>() -> usize { N }
+   |              ^^^^^^^^^^^^^^ required by this const generic parameter in `bar`
 
 error[E0794]: cannot specify lifetime arguments explicitly if late bound lifetime parameters are present
   --> $DIR/const-arg-in-const-arg.rs:18:23
@@ -256,16 +257,17 @@ LL |     let _ = [0; foo::<T>()];
    |
    = note: this may fail depending on what value the parameter takes
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/const-arg-in-const-arg.rs:27:23
+error[E0284]: type annotations needed
+  --> $DIR/const-arg-in-const-arg.rs:27:17
    |
 LL |     let _ = [0; bar::<N>()];
-   |                       ^
+   |                 ^^^^^^^^ cannot infer the value of the const parameter `N` declared on the function `bar`
    |
-help: if this generic argument was intended as a const parameter, surround it with braces
+note: required by a const generic parameter in `bar`
+  --> $DIR/const-arg-in-const-arg.rs:9:14
    |
-LL |     let _ = [0; bar::<{ N }>()];
-   |                       +   +
+LL | const fn bar<const N: usize>() -> usize { N }
+   |              ^^^^^^^^^^^^^^ required by this const generic parameter in `bar`
 
 error[E0794]: cannot specify lifetime arguments explicitly if late bound lifetime parameters are present
   --> $DIR/const-arg-in-const-arg.rs:29:23
@@ -291,16 +293,17 @@ note: the late bound lifetime parameter is introduced here
 LL | const fn faz<'a>(_: &'a ()) -> usize { 13 }
    |              ^^
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/const-arg-in-const-arg.rs:36:24
+error[E0284]: type annotations needed
+  --> $DIR/const-arg-in-const-arg.rs:36:18
    |
 LL |     let _: Foo<{ bar::<N>() }>;
-   |                        ^
+   |                  ^^^^^^^^ cannot infer the value of the const parameter `N` declared on the function `bar`
    |
-help: if this generic argument was intended as a const parameter, surround it with braces
+note: required by a const generic parameter in `bar`
+  --> $DIR/const-arg-in-const-arg.rs:9:14
    |
-LL |     let _: Foo<{ bar::<{ N }>() }>;
-   |                        +   +
+LL | const fn bar<const N: usize>() -> usize { N }
+   |              ^^^^^^^^^^^^^^ required by this const generic parameter in `bar`
 
 error[E0794]: cannot specify lifetime arguments explicitly if late bound lifetime parameters are present
   --> $DIR/const-arg-in-const-arg.rs:38:24
@@ -326,16 +329,17 @@ note: the late bound lifetime parameter is introduced here
 LL | const fn faz<'a>(_: &'a ()) -> usize { 13 }
    |              ^^
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/const-arg-in-const-arg.rs:45:27
+error[E0284]: type annotations needed
+  --> $DIR/const-arg-in-const-arg.rs:45:21
    |
 LL |     let _ = Foo::<{ bar::<N>() }>;
-   |                           ^
+   |                     ^^^^^^^^ cannot infer the value of the const parameter `N` declared on the function `bar`
    |
-help: if this generic argument was intended as a const parameter, surround it with braces
+note: required by a const generic parameter in `bar`
+  --> $DIR/const-arg-in-const-arg.rs:9:14
    |
-LL |     let _ = Foo::<{ bar::<{ N }>() }>;
-   |                           +   +
+LL | const fn bar<const N: usize>() -> usize { N }
+   |              ^^^^^^^^^^^^^^ required by this const generic parameter in `bar`
 
 error[E0794]: cannot specify lifetime arguments explicitly if late bound lifetime parameters are present
   --> $DIR/const-arg-in-const-arg.rs:47:27
@@ -363,5 +367,5 @@ LL | const fn faz<'a>(_: &'a ()) -> usize { 13 }
 
 error: aborting due to 37 previous errors
 
-Some errors have detailed explanations: E0747, E0794.
-For more information about an error, try `rustc --explain E0747`.
+Some errors have detailed explanations: E0284, E0794.
+For more information about an error, try `rustc --explain E0284`.

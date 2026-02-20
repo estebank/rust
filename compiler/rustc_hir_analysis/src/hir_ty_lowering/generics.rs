@@ -6,7 +6,7 @@ use rustc_errors::{
 };
 use rustc_hir::def::{DefKind, Res};
 use rustc_hir::def_id::DefId;
-use rustc_hir::{self as hir, GenericArg};
+use rustc_hir::{self as hir, GenericArg, QPath, TyKind};
 use rustc_middle::ty::{
     self, GenericArgsRef, GenericParamDef, GenericParamDefKind, IsSuggestable, Ty,
 };
@@ -43,6 +43,16 @@ fn generic_arg_mismatch_err(
         arg.descr(),
         param.kind.descr(),
     );
+
+    if let GenericArg::Type(ty, ..) = arg
+        && let TyKind::Path(qpath) = &ty.kind
+        && let QPath::Resolved(_, path) = qpath
+    {
+        let res = path.res;
+        if matches!(res, Res::Err) {
+            return err.delay_as_bug();
+        }
+    }
 
     let add_braces_suggestion = |arg: &GenericArg<'_>, err: &mut Diag<'_>| {
         let suggestions = vec![
