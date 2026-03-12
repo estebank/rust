@@ -2,7 +2,7 @@ error: generic `Self` types are currently not permitted in anonymous constants
   --> $DIR/selftyalias-containing-param.rs:7:37
    |
 LL |     fn foo() -> [(); const { let _: Self = loop {}; 1 }] {
-   |                                     ^^^^
+   |                                     ^^^^ cannot perform const operation using `Self`
    |
 note: not a concrete type
   --> $DIR/selftyalias-containing-param.rs:6:22

@@ -44,7 +44,7 @@ use rustc_middle::ty::{
 use rustc_middle::{bug, span_bug};
 use rustc_session::lint::builtin::AMBIGUOUS_ASSOCIATED_ITEMS;
 use rustc_session::parse::feature_err;
-use rustc_span::{DUMMY_SP, Ident, Span, kw, sym};
+use rustc_span::{DUMMY_SP, Ident, Span, Symbol, kw, sym};
 use rustc_trait_selection::infer::InferCtxtExt;
 use rustc_trait_selection::traits::wf::object_region_bounds;
 use rustc_trait_selection::traits::{self, FulfillmentError};
@@ -384,7 +384,7 @@ struct ForbidMCGParamUsesFolder<'tcx> {
 }
 
 impl<'tcx> ForbidMCGParamUsesFolder<'tcx> {
-    fn error(&self) -> ErrorGuaranteed {
+    fn error(&self, name: Option<Symbol>) -> ErrorGuaranteed {
         let msg = if self.is_self_alias {
             "generic `Self` types are currently not permitted in anonymous constants"
         } else if self.tcx.features().opaque_generic_const_args() {
@@ -407,13 +407,25 @@ impl<'tcx> ForbidMCGParamUsesFolder<'tcx> {
                 diag.span_note(impl_.self_ty.span, "not a concrete type");
             }
         }
+        diag.span_label(
+            self.span,
+            match name {
+                _ if self.is_self_alias => {
+                    "cannot perform const operation using `Self`".to_string()
+                }
+                Some(name) => format!("cannot perform const operation using `{name}`"),
+                None => "cannot perform const operation using this".to_string(),
+            },
+        );
         if self.tcx.features().min_generic_const_args() {
             if !self.tcx.features().opaque_generic_const_args() {
                 diag.help("add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items");
             } else {
                 diag.help("consider factoring the expression into a `type const` item and use it as the const argument instead");
             }
-        };
+        } else {
+            diag.help("add `#![feature(generic_const_exprs)]` to allow generic const expressions");
+        }
         diag.emit()
     }
 }
@@ -424,22 +436,22 @@ impl<'tcx> ty::TypeFolder<TyCtxt<'tcx>> for ForbidMCGParamUsesFolder<'tcx> {
     }
 
     fn fold_ty(&mut self, t: Ty<'tcx>) -> Ty<'tcx> {
-        if matches!(t.kind(), ty::Param(..)) {
-            return Ty::new_error(self.tcx, self.error());
+        if let ty::Param(param) = t.kind() {
+            return Ty::new_error(self.tcx, self.error(Some(param.name)));
         }
         t.super_fold_with(self)
     }
 
     fn fold_const(&mut self, c: Const<'tcx>) -> Const<'tcx> {
-        if matches!(c.kind(), ty::ConstKind::Param(..)) {
-            return Const::new_error(self.tcx, self.error());
+        if let ty::ConstKind::Param(param) = c.kind() {
+            return Const::new_error(self.tcx, self.error(Some(param.name)));
         }
         c.super_fold_with(self)
     }
 
     fn fold_region(&mut self, r: ty::Region<'tcx>) -> ty::Region<'tcx> {
         if matches!(r.kind(), ty::RegionKind::ReEarlyParam(..) | ty::RegionKind::ReLateParam(..)) {
-            return ty::Region::new_error(self.tcx, self.error());
+            return ty::Region::new_error(self.tcx, self.error(None));
         }
         r
     }
@@ -456,7 +468,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
     ) -> Result<(), ErrorGuaranteed> {
         let tcx = self.tcx();
         let parent_def_id = self.item_def_id();
-        if let Res::Def(DefKind::ConstParam, _) = res
+        if let Res::Def(DefKind::ConstParam, def_id) = res
             && tcx.def_kind(parent_def_id) == DefKind::AnonConst
             && let ty::AnonConstKind::MCG = tcx.anon_const_kind(parent_def_id)
         {
@@ -466,7 +478,7 @@ impl<'tcx> dyn HirTyLowerer<'tcx> + '_ {
                 span,
                 is_self_alias: false,
             };
-            return Err(folder.error());
+            return Err(folder.error(Some(self.tcx().item_name(def_id))));
         }
         Ok(())
     }

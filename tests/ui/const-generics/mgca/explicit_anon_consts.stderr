@@ -38,7 +38,7 @@ error: generic parameters may not be used in const operations
   --> $DIR/explicit_anon_consts.rs:42:51
    |
 LL | type const ITEM3<const N: usize>: usize = const { N };
-   |                                                   ^
+   |                                                   ^ cannot perform const operation using `N`
    |
    = help: add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items
 
@@ -46,7 +46,7 @@ error: generic parameters may not be used in const operations
   --> $DIR/explicit_anon_consts.rs:60:31
    |
 LL |     T3: Trait<ASSOC = const { N }>,
-   |                               ^
+   |                               ^ cannot perform const operation using `N`
    |
    = help: add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items
 
@@ -54,7 +54,7 @@ error: generic parameters may not be used in const operations
   --> $DIR/explicit_anon_consts.rs:69:58
    |
 LL | struct Default3<const N: usize, const M: usize = const { N }>;
-   |                                                          ^
+   |                                                          ^ cannot perform const operation using `N`
    |
    = help: add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items
 
@@ -62,7 +62,7 @@ error: generic parameters may not be used in const operations
   --> $DIR/explicit_anon_consts.rs:28:27
    |
 LL |     let _3 = [(); const { N }];
-   |                           ^
+   |                           ^ cannot perform const operation using `N`
    |
    = help: add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items
 
@@ -70,7 +70,7 @@ error: generic parameters may not be used in const operations
   --> $DIR/explicit_anon_consts.rs:33:26
    |
 LL |     let _6: [(); const { N }] = todo!();
-   |                          ^
+   |                          ^ cannot perform const operation using `N`
    |
    = help: add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items
 
@@ -78,7 +78,7 @@ error: generic parameters may not be used in const operations
   --> $DIR/explicit_anon_consts.rs:11:41
    |
 LL | type Adt3<const N: usize> = Foo<const { N }>;
-   |                                         ^
+   |                                         ^ cannot perform const operation using `N`
    |
    = help: add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items
 
@@ -86,7 +86,7 @@ error: generic parameters may not be used in const operations
   --> $DIR/explicit_anon_consts.rs:19:42
    |
 LL | type Arr3<const N: usize> = [(); const { N }];
-   |                                          ^
+   |                                          ^ cannot perform const operation using `N`
    |
    = help: add `#![feature(opaque_generic_const_args)]` to allow generic expressions as the RHS of const items
 

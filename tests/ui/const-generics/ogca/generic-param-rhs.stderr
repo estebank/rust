@@ -2,7 +2,7 @@ error: generic parameters in const blocks are only allowed as the direct value o
   --> $DIR/generic-param-rhs.rs:6:19
    |
 LL |     foo::<const { N + 1 }>();
-   |                   ^
+   |                   ^ cannot perform const operation using `N`
    |
    = help: consider factoring the expression into a `type const` item and use it as the const argument instead
 

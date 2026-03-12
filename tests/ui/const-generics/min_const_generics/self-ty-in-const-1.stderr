@@ -11,13 +11,14 @@ error: generic `Self` types are currently not permitted in anonymous constants
   --> $DIR/self-ty-in-const-1.rs:12:41
    |
 LL |     fn t3() -> [u8; std::mem::size_of::<Self>()] {}
-   |                                         ^^^^
+   |                                         ^^^^ cannot perform const operation using `Self`
    |
 note: not a concrete type
   --> $DIR/self-ty-in-const-1.rs:11:9
    |
 LL | impl<T> Bar<T> {
    |         ^^^^^^
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: aborting due to 2 previous errors
 
