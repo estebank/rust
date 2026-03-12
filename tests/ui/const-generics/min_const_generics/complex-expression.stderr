@@ -8,7 +8,7 @@ LL | struct Break0<const N: usize>([u8; { N + 1 }]);
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/complex-expression.rs:13:40
+  --> $DIR/complex-expression.rs:14:40
    |
 LL | struct Break1<const N: usize>([u8; { { N } }]);
    |                                        ^ cannot perform const operation using `N`
@@ -17,7 +17,7 @@ LL | struct Break1<const N: usize>([u8; { { N } }]);
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/complex-expression.rs:17:17
+  --> $DIR/complex-expression.rs:19:17
    |
 LL |     let _: [u8; N + 1];
    |                 ^ cannot perform const operation using `N`
@@ -26,7 +26,7 @@ LL |     let _: [u8; N + 1];
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/complex-expression.rs:22:17
+  --> $DIR/complex-expression.rs:25:17
    |
 LL |     let _ = [0; N + 1];
    |                 ^ cannot perform const operation using `N`
@@ -35,7 +35,7 @@ LL |     let _ = [0; N + 1];
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/complex-expression.rs:26:45
+  --> $DIR/complex-expression.rs:31:45
    |
 LL | struct BreakTy0<T>(T, [u8; { size_of::<*mut T>() }]);
    |                                             ^ cannot perform const operation using `T`
@@ -44,7 +44,7 @@ LL | struct BreakTy0<T>(T, [u8; { size_of::<*mut T>() }]);
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/complex-expression.rs:29:47
+  --> $DIR/complex-expression.rs:35:47
    |
 LL | struct BreakTy1<T>(T, [u8; { { size_of::<*mut T>() } }]);
    |                                               ^ cannot perform const operation using `T`
@@ -53,7 +53,7 @@ LL | struct BreakTy1<T>(T, [u8; { { size_of::<*mut T>() } }]);
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/complex-expression.rs:33:32
+  --> $DIR/complex-expression.rs:40:32
    |
 LL |     let _: [u8; size_of::<*mut T>() + 1];
    |                                ^ cannot perform const operation using `T`
@@ -61,8 +61,72 @@ LL |     let _: [u8; size_of::<*mut T>() + 1];
    = note: type parameters may not be used in const expressions
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
+error: generic parameters may not be used in const operations
+  --> $DIR/complex-expression.rs:10:38
+   |
+LL | struct Break0<const N: usize>([u8; { N + 1 }]);
+   |                                      ^ cannot perform const operation using `N`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: generic parameters may not be used in const operations
+  --> $DIR/complex-expression.rs:14:40
+   |
+LL | struct Break1<const N: usize>([u8; { { N } }]);
+   |                                        ^ cannot perform const operation using `N`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: generic parameters may not be used in const operations
+  --> $DIR/complex-expression.rs:31:45
+   |
+LL | struct BreakTy0<T>(T, [u8; { size_of::<*mut T>() }]);
+   |                                             ^ cannot perform const operation using `T`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: generic parameters may not be used in const operations
+  --> $DIR/complex-expression.rs:35:47
+   |
+LL | struct BreakTy1<T>(T, [u8; { { size_of::<*mut T>() } }]);
+   |                                               ^ cannot perform const operation using `T`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: generic parameters may not be used in const operations
+  --> $DIR/complex-expression.rs:19:17
+   |
+LL |     let _: [u8; N + 1];
+   |                 ^ cannot perform const operation using `N`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: constant expression depends on a generic parameter
+  --> $DIR/complex-expression.rs:25:17
+   |
+LL |     let _ = [0; N + 1];
+   |                 ^^^^^
+   |
+   = note: this may fail depending on what value the parameter takes
+
+error: constant expression depends on a generic parameter
+  --> $DIR/complex-expression.rs:25:13
+   |
+LL |     let _ = [0; N + 1];
+   |             ^^^^^^^^^^
+   |
+   = note: this may fail depending on what value the parameter takes
+
+error: generic parameters may not be used in const operations
+  --> $DIR/complex-expression.rs:40:32
+   |
+LL |     let _: [u8; size_of::<*mut T>() + 1];
+   |                                ^ cannot perform const operation using `T`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
 warning: cannot use constants which depend on generic parameters in types
-  --> $DIR/complex-expression.rs:38:17
+  --> $DIR/complex-expression.rs:46:17
    |
 LL |     let _ = [0; size_of::<*mut T>() + 1];
    |                 ^^^^^^^^^^^^^^^^^^^^^^^
@@ -71,5 +135,5 @@ LL |     let _ = [0; size_of::<*mut T>() + 1];
    = note: for more information, see issue #76200 <https://github.com/rust-lang/rust/issues/76200>
    = note: `#[warn(const_evaluatable_unchecked)]` (part of `#[warn(future_incompatible)]`) on by default
 
-error: aborting due to 7 previous errors; 1 warning emitted
+error: aborting due to 15 previous errors; 1 warning emitted
 

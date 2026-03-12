@@ -29,21 +29,29 @@ fn test<const N: usize>() {
 
     let _: foo!(N);
     let _: foo!({ N });
-    let _: foo!({{ N }}); //~ ERROR generic parameters may not
+    let _: foo!({{ N }});
+    //~^ ERROR generic parameters may not
+    //~| ERROR generic parameters may not
     let _: foo!(Q);
     let _: foo!(m::P);
     let _: bar!(N);
-    let _: bar!({ N }); //~ ERROR generic parameters may not
+    let _: bar!({ N });
+    //~^ ERROR generic parameters may not
+    //~| ERROR generic parameters may not
     let _: bar!(Q);
     let _: bar!(m::P);
     let _: baz!(N);
     let _: baz!({ N });
-    let _: baz!({{ N }}); //~ ERROR generic parameters may not
+    let _: baz!({{ N }});
+    //~^ ERROR generic parameters may not
+    //~| ERROR generic parameters may not
     let _: baz!(Q);
     let _: baz!({ m::P });
     let _: baz!(m::P); //~ ERROR expressions must be enclosed in braces
     let _: biz!(N);
-    let _: biz!({ N }); //~ ERROR generic parameters may not
+    let _: biz!({ N });
+    //~^ ERROR generic parameters may not
+    //~| ERROR generic parameters may not
     let _: biz!(Q);
     let _: biz!(m::P);
     let _: foo!(3);

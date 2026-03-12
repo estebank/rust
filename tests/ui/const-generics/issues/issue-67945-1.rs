@@ -9,9 +9,11 @@ struct Bug<S> {
     A: [(); {
         let x: S = MaybeUninit::uninit();
         //[min]~^ ERROR generic parameters may not be used in const operations
-        //[full]~^^ ERROR mismatched types
+        //[min]~| ERROR generic parameters may not be used in const operations
+        //[full]~^^^ ERROR mismatched types
         let b = &*(&x as *const _ as *const S);
         //[min]~^ ERROR generic parameters may not be used in const operations
+        //[min]~| ERROR generic parameters may not be used in const operations
         0
     }],
 }

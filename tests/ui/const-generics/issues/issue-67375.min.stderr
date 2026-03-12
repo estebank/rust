@@ -16,6 +16,14 @@ LL | struct Bug<T> {
    = help: consider removing `T`, referring to it in a field, or using a marker such as `PhantomData`
    = help: if you intended `T` to be a const parameter, use `const T: /* Type */` instead
 
-error: aborting due to 2 previous errors
+error: generic parameters may not be used in const operations
+  --> $DIR/issue-67375.rs:7:25
+   |
+LL |     inner: [(); { [|_: &T| {}; 0].len() }],
+   |                         ^ cannot perform const operation using `T`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: aborting due to 3 previous errors
 
 For more information about this error, try `rustc --explain E0392`.

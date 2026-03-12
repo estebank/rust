@@ -1,5 +1,5 @@
 error: expressions must be enclosed in braces to be used as const generic arguments
-  --> $DIR/macro_rules-braces.rs:44:17
+  --> $DIR/macro_rules-braces.rs:50:17
    |
 LL |     let _: baz!(m::P);
    |                 ^^^^
@@ -10,7 +10,7 @@ LL |     let _: baz!({ m::P });
    |                 +      +
 
 error: expressions must be enclosed in braces to be used as const generic arguments
-  --> $DIR/macro_rules-braces.rs:64:17
+  --> $DIR/macro_rules-braces.rs:72:17
    |
 LL |     let _: baz!(10 + 7);
    |                 ^^^^^^
@@ -30,7 +30,7 @@ LL |     let _: foo!({{ N }});
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/macro_rules-braces.rs:36:19
+  --> $DIR/macro_rules-braces.rs:38:19
    |
 LL |     let _: bar!({ N });
    |                   ^ cannot perform const operation using `N`
@@ -39,7 +39,7 @@ LL |     let _: bar!({ N });
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/macro_rules-braces.rs:41:20
+  --> $DIR/macro_rules-braces.rs:45:20
    |
 LL |     let _: baz!({{ N }});
    |                    ^ cannot perform const operation using `N`
@@ -48,7 +48,7 @@ LL |     let _: baz!({{ N }});
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
 error: generic parameters may not be used in const operations
-  --> $DIR/macro_rules-braces.rs:46:19
+  --> $DIR/macro_rules-braces.rs:52:19
    |
 LL |     let _: biz!({ N });
    |                   ^ cannot perform const operation using `N`
@@ -56,5 +56,37 @@ LL |     let _: biz!({ N });
    = help: const parameters may only be used as standalone arguments here, i.e. `N`
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
-error: aborting due to 6 previous errors
+error: generic parameters may not be used in const operations
+  --> $DIR/macro_rules-braces.rs:32:20
+   |
+LL |     let _: foo!({{ N }});
+   |                    ^ cannot perform const operation using `N`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: generic parameters may not be used in const operations
+  --> $DIR/macro_rules-braces.rs:38:19
+   |
+LL |     let _: bar!({ N });
+   |                   ^ cannot perform const operation using `N`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: generic parameters may not be used in const operations
+  --> $DIR/macro_rules-braces.rs:45:20
+   |
+LL |     let _: baz!({{ N }});
+   |                    ^ cannot perform const operation using `N`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: generic parameters may not be used in const operations
+  --> $DIR/macro_rules-braces.rs:52:19
+   |
+LL |     let _: biz!({ N });
+   |                   ^ cannot perform const operation using `N`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: aborting due to 10 previous errors
 

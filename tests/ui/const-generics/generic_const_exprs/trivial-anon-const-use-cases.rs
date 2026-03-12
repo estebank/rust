@@ -13,7 +13,8 @@ impl<const S: usize> X<S> {
 struct Y<const S: usize> {
     stuff: [u8; { S + 1 }], // `S + 1` is NOT a valid const expression in this context.
     //[min]~^ ERROR generic parameters may not be used in const operations
-    //[full]~^^ ERROR unconstrained generic constant
+    //[min]~^^ ERROR generic parameters may not be used in const operations
+    //[full]~^^^ ERROR unconstrained generic constant
 }
 
 fn main() {}

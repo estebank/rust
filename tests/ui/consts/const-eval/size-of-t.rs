@@ -7,6 +7,8 @@ fn foo<T>() {
     let _arr: [u8; size_of::<T>()];
     //~^ ERROR generic parameters may not be used in const operations
     //~| NOTE cannot perform const operation
+    //~| ERROR generic parameters may not be used in const operations
+    //~| NOTE cannot perform const operation
     //~| NOTE type parameters may not be used in const expressions
 }
 

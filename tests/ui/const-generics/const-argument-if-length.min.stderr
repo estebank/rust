@@ -7,6 +7,14 @@ LL |     pad: [u8; is_zst::<T>()],
    = note: type parameters may not be used in const expressions
    = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
 
+error: generic parameters may not be used in const operations
+  --> $DIR/const-argument-if-length.rs:18:24
+   |
+LL |     pad: [u8; is_zst::<T>()],
+   |                        ^ cannot perform const operation using `T`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
 error[E0277]: the size for values of type `T` cannot be known at compilation time
   --> $DIR/const-argument-if-length.rs:16:12
    |
@@ -47,6 +55,6 @@ LL - pub const fn is_zst<T: ?Sized>() -> usize {
 LL + pub const fn is_zst<T>() -> usize {
    |
 
-error: aborting due to 3 previous errors
+error: aborting due to 4 previous errors
 
 For more information about this error, try `rustc --explain E0277`.

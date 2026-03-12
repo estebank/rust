@@ -5,6 +5,7 @@ fn sof<T>() -> T { unimplemented!() }
 fn test<T>() {
     let _: [u8; sof::<T>()];
     //~^ ERROR generic parameters may not be used in const operations
+    //~| ERROR generic parameters may not be used in const operations
 }
 
 fn main() {}

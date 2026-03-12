@@ -8,6 +8,7 @@
 struct ArithArrayLen<const N: usize>([u32; 0 + N]);
 //[full]~^ ERROR unconstrained generic constant
 //[min]~^^ ERROR generic parameters may not be used in const operations
+//[min]~| ERROR generic parameters may not be used in const operations
 
 #[cfg(full)]
 use std::marker::ConstParamTy;
@@ -23,6 +24,7 @@ struct B<const CFG: Config> {
     arr: [u8; CFG.arr_size],
     //[full]~^ ERROR overly complex generic constant
     //[min]~^^ ERROR generic parameters may not be used in const operations
+    //[min]~| ERROR generic parameters may not be used in const operations
 }
 
 const C: Config = Config { arr_size: 5 };

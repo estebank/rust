@@ -13,6 +13,7 @@ struct Bug<T>
 where
     T: Trait<{ std::intrinsics::type_name::<T>() }>,
     //[min]~^ ERROR generic parameters may not be used in const operations
+    //[min]~| ERROR generic parameters may not be used in const operations
 {
     t: T,
 }

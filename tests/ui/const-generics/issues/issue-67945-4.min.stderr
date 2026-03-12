@@ -16,6 +16,14 @@ LL | struct Bug<S> {
    = help: consider removing `S`, referring to it in a field, or using a marker such as `PhantomData`
    = help: if you intended `S` to be a const parameter, use `const S: /* Type */` instead
 
-error: aborting due to 2 previous errors
+error: generic parameters may not be used in const operations
+  --> $DIR/issue-67945-4.rs:10:27
+   |
+LL |         let x: Option<Box<S>> = None;
+   |                           ^ cannot perform const operation using `S`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: aborting due to 3 previous errors
 
 For more information about this error, try `rustc --explain E0392`.

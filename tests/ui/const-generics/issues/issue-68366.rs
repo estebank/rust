@@ -12,7 +12,8 @@ struct Collatz<const N: Option<usize>>;
 impl <const N: usize> Collatz<{Some(N)}> {}
 //~^ ERROR the const parameter
 //[min]~^^ ERROR generic parameters may not be used in const operations
-//[full]~^^^ ERROR overly complex
+//[min]~| ERROR generic parameters may not be used in const operations
+//[full]~^^^^ ERROR overly complex
 
 struct Foo;
 

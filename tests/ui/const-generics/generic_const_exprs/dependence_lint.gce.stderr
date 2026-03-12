@@ -21,7 +21,7 @@ LL | fn foo<T>() where [(); size_of::<*mut T>()]: {
    |             ++++++++++++++++++++++++++++++++
 
 error: overly complex generic constant
-  --> $DIR/dependence_lint.rs:18:9
+  --> $DIR/dependence_lint.rs:19:9
    |
 LL |     [0; if false { size_of::<T>() } else { 3 }]; // lint on stable, error with gce
    |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ control flow is not supported in generic constants
@@ -40,7 +40,7 @@ LL | fn foo<T>() where [(); size_of::<*mut T>()]: {
    |             ++++++++++++++++++++++++++++++++
 
 error: overly complex generic constant
-  --> $DIR/dependence_lint.rs:22:17
+  --> $DIR/dependence_lint.rs:23:17
    |
 LL |     let _: [u8; if true { size_of::<T>() } else { 3 }]; // error on stable, error with gce
    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ control flow is not supported in generic constants

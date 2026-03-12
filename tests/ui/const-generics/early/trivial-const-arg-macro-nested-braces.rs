@@ -3,6 +3,7 @@ macro_rules! y {
     () => {
         { N }
         //~^ ERROR: generic parameters may not be used in const operations
+        //~| ERROR: generic parameters may not be used in const operations
     };
 }
 

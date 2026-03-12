@@ -1566,7 +1566,11 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
                                     let _: ErrorGuaranteed = self.report_error(span, error);
                                 }
 
-                                return Res::Err;
+                                if let NoConstantGenericsReason::NonTrivialConstArg = cause {
+                                    // Avoid resolve errors for the const.
+                                } else {
+                                    return Res::Err;
+                                }
                             }
 
                             continue;
@@ -1663,7 +1667,11 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
                                     self.report_error(span, error);
                                 }
 
-                                return Res::Err;
+                                if let NoConstantGenericsReason::NonTrivialConstArg = cause {
+                                    // Avoid resolve errors about the const.
+                                } else {
+                                    return Res::Err;
+                                }
                             }
 
                             continue;

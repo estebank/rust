@@ -14,7 +14,8 @@ impl Foo for Def {
 
 pub fn test<A: Foo, B: Foo>() {
     let _array: [u32; <A as Foo>::Y];
-    //~^ ERROR generic parameters may not be used
+    //~^ ERROR: generic parameters may not be used
+    //~| ERROR: generic parameters may not be used
 }
 
 fn main() {}

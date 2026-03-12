@@ -23,5 +23,13 @@ help: add `#![feature(unsized_const_params)]` to the crate attributes to enable 
 LL + #![feature(unsized_const_params)]
    |
 
-error: aborting due to 2 previous errors
+error: generic parameters may not be used in const operations
+  --> $DIR/intrinsics-type_name-as-const-argument.rs:14:45
+   |
+LL |     T: Trait<{ std::intrinsics::type_name::<T>() }>,
+   |                                             ^ cannot perform const operation using `T`
+   |
+   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+
+error: aborting due to 3 previous errors
 

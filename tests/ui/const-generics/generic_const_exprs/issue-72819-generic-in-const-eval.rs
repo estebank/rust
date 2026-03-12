@@ -7,6 +7,7 @@
 struct Arr<const N: usize>
 where Assert::<{N < usize::MAX / 2}>: IsTrue,
 //[min]~^ ERROR generic parameters may not be used in const operations
+//[min]~| ERROR generic parameters may not be used in const operations
 {
 }
 

@@ -4,8 +4,7 @@ error: overly complex generic constant
 LL |       A: [(); {
    |  _____________^
 LL | |         let x: Option<Box<S>> = None;
-LL | |
-LL | |         0
+...  |
 LL | |     }],
    | |_____^ blocks are not supported in generic constants
    |

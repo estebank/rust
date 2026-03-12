@@ -14,14 +14,16 @@ fn foo<T>() {
     //[full]~| WARNING this was previously accepted
     let _: [u8; size_of::<*mut T>()]; // error on stable, error with gce
     //[full]~^ ERROR generic parameters may not be used
-    //[gce]~^^ ERROR unconstrained generic
+    //[full]~| ERROR generic parameters may not be used
+    //[gce]~^^^ ERROR unconstrained generic
     [0; if false { size_of::<T>() } else { 3 }]; // lint on stable, error with gce
     //[gce]~^ ERROR overly complex
     //[full]~^^ WARNING cannot use constants
     //[full]~| WARNING this was previously accepted
     let _: [u8; if true { size_of::<T>() } else { 3 }]; // error on stable, error with gce
     //[full]~^ ERROR generic parameters may not be used
-    //[gce]~^^ ERROR overly complex
+    //[full]~| ERROR generic parameters may not be used
+    //[gce]~^^^ ERROR overly complex
 }
 
 fn main() {}
