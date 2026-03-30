@@ -1104,6 +1104,7 @@ impl<'ast, 'ra, 'tcx> LateResolutionVisitor<'_, 'ast, 'ra, 'tcx> {
         (false, suggested_candidates, candidates)
     }
 
+    #[tracing::instrument(level = "info", skip(self), ret)]
     fn lookup_doc_alias_name(&mut self, path: &[Segment], ns: Namespace) -> Option<(DefId, Ident)> {
         let find_doc_alias_name = |r: &mut Resolver<'ra, '_>, m: Module<'ra>, item_name: Symbol| {
             for resolution in r.resolutions(m).borrow().values() {
@@ -1112,11 +1113,18 @@ impl<'ast, 'ra, 'tcx> LateResolutionVisitor<'_, 'ast, 'ra, 'tcx> {
                 else {
                     continue;
                 };
-                if did.is_local() {
-                    // We don't record the doc alias name in the local crate
-                    // because the people who write doc alias are usually not
-                    // confused by them.
-                    continue;
+                if let Some(local) = did.as_local() {
+                //     // We don't record the doc alias name in the local crate
+                //     // because the people who write doc alias are usually not
+                //     // confused by them.
+                    // continue;
+                    if let Some(aliases) = r.doc_aliases.get(&local)
+                        && aliases.contains(&item_name)
+                    {
+                        return Some(did);
+                    } else {
+                        continue;
+                    }
                 }
                 if let Some(d) = hir::find_attr!(r.tcx, did, Doc(d) => d)
                     && d.aliases.contains_key(&item_name)

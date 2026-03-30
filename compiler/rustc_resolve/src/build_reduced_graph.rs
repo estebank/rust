@@ -875,6 +875,20 @@ impl<'a, 'ra, 'tcx> BuildReducedGraphVisitor<'a, 'ra, 'tcx> {
             ItemKind::Fn(box Fn { ident, .. }) => {
                 self.r.define_local(parent, ident, ValueNS, res, vis, sp, expansion);
 
+                if !item.attrs.is_empty() {
+                    tracing::info!("{:#?}", item.attrs);
+                    let x = AttributeParser::parse_limited(
+                        self.r.tcx.sess,
+                        &item.attrs,
+                        sym::doc,
+                        item.span,
+                        item.id,
+                        None,
+                    );
+                    tracing::info!("{x:#?}");
+                    let aliases = Default::default();
+                    self.r.doc_aliases.insert(local_def_id, aliases);
+                }
                 // Functions introducing procedural macros reserve a slot
                 // in the macro namespace as well (see #52225).
                 self.define_macro(item);
@@ -1405,6 +1419,13 @@ impl<'a, 'ra, 'tcx> Visitor<'a> for BuildReducedGraphVisitor<'a, 'ra, 'tcx> {
                     }
                     _ => visit::walk_item(self, item),
                 }
+                if !item.attrs.is_empty() {
+
+                }
+                // for attr in &item.attrs {
+                //     // if let ast::AttrKind
+
+                // }
                 match item.kind {
                     ItemKind::Mod(..) if self.contains_macro_use(&item.attrs) => {
                         self.parent_scope.macro_rules

@@ -1404,6 +1404,8 @@ pub struct Resolver<'ra, 'tcx> {
 
     mods_with_parse_errors: FxHashSet<DefId> = default::fx_hash_set(),
 
+    doc_aliases: FxHashMap<LocalDefId, Vec<Symbol>> = default::fx_hash_map(),
+
     /// Whether `Resolver::register_macros_for_all_crates` has been called once already, as we
     /// don't need to run it more than once.
     all_crate_macros_already_registered: bool = false,
