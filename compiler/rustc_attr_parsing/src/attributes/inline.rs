@@ -36,28 +36,18 @@ impl<S: Stage> SingleAttributeParser<S> for InlineParser {
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
         match args {
             ArgParser::NoArgs => Some(AttributeKind::Inline(InlineAttr::Hint, cx.attr_span)),
-            ArgParser::List(list) => {
-                let Some(l) = list.single() else {
-                    cx.expected_single_argument(list.span);
-                    return None;
-                };
-
-                match l.meta_item().and_then(|i| i.path().word_sym()) {
-                    Some(sym::always) => {
+            ArgParser::List(_) => {
+                match cx.expect_single_ident_list(args, &[sym::always, sym::never]) {
+                    Ok(sym::always) => {
                         Some(AttributeKind::Inline(InlineAttr::Always, cx.attr_span))
                     }
-                    Some(sym::never) => {
-                        Some(AttributeKind::Inline(InlineAttr::Never, cx.attr_span))
-                    }
-                    _ => {
-                        cx.expected_specific_argument(l.span(), &[sym::always, sym::never]);
-                        return None;
-                    }
+                    Ok(sym::never) => Some(AttributeKind::Inline(InlineAttr::Never, cx.attr_span)),
+                    _ => None,
                 }
             }
             ArgParser::NameValue(_) => {
                 cx.warn_ill_formed_attribute_input(ILL_FORMED_ATTRIBUTE_INPUT);
-                return None;
+                None
             }
         }
     }

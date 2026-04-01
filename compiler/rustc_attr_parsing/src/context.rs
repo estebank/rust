@@ -543,6 +543,29 @@ impl<'f, 'sess: 'f, S: Stage> AcceptContext<'f, 'sess, S> {
         )
     }
 
+    pub(crate) fn expect_single_ident_list(
+        &self,
+        args: &ArgParser,
+        valid: &[Symbol],
+    ) -> Result<Symbol, ErrorGuaranteed> {
+        let Some(list) = args.list() else {
+            return Err(self.expected_list(self.attr_span, args));
+        };
+        let Some(single) = list.single() else {
+            return Err(self.expected_single_argument(list.span));
+        };
+        let Some(item) = single.meta_item() else {
+            return Err(self.expected_single_argument(list.span));
+        };
+        let Some(word) = item.path().word() else {
+            return Err(self.expected_single_argument(list.span));
+        };
+        if !valid.contains(&word.name) {
+            return Err(self.expected_specific_argument(single.span(), valid));
+        }
+        Ok(word.name)
+    }
+
     pub(crate) fn expected_list(&self, span: Span, args: &ArgParser) -> ErrorGuaranteed {
         let span = match args {
             ArgParser::NoArgs => span,

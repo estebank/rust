@@ -23,26 +23,12 @@ impl<S: Stage> SingleAttributeParser<S> for OptimizeParser {
     const TEMPLATE: AttributeTemplate = template!(List: &["size", "speed", "none"]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(list) = args.list() else {
-            cx.expected_list(cx.attr_span, args);
-            return None;
+        let res = match cx.expect_single_ident_list(args, &[sym::size, sym::speed, sym::none]) {
+            Ok(sym::size) => OptimizeAttr::Size,
+            Ok(sym::speed) => OptimizeAttr::Speed,
+            Ok(sym::none) => OptimizeAttr::DoNotOptimize,
+            _ => return None,
         };
-
-        let Some(single) = list.single() else {
-            cx.expected_single_argument(list.span);
-            return None;
-        };
-
-        let res = match single.meta_item().and_then(|i| i.path().word().map(|i| i.name)) {
-            Some(sym::size) => OptimizeAttr::Size,
-            Some(sym::speed) => OptimizeAttr::Speed,
-            Some(sym::none) => OptimizeAttr::DoNotOptimize,
-            _ => {
-                cx.expected_specific_argument(single.span(), &[sym::size, sym::speed, sym::none]);
-                OptimizeAttr::Default
-            }
-        };
-
         Some(AttributeKind::Optimize(res, cx.attr_span))
     }
 }
@@ -381,14 +367,14 @@ impl<S: Stage> AttributeParser<S> for UsedParser {
         |group: &mut Self, cx, args| {
             let used_by = match args {
                 ArgParser::NoArgs => UsedBy::Default,
-                ArgParser::List(list) => {
-                    let Some(l) = list.single() else {
-                        cx.expected_single_argument(list.span);
+                ArgParser::List(_) => {
+                    let Ok(symbol) =
+                        cx.expect_single_ident_list(args, &[sym::compiler, sym::linker])
+                    else {
                         return;
                     };
-
-                    match l.meta_item().and_then(|i| i.path().word_sym()) {
-                        Some(sym::compiler) => {
+                    match symbol {
+                        sym::compiler => {
                             if !cx.features().used_with_arg() {
                                 feature_err(
                                     &cx.sess(),
@@ -400,7 +386,7 @@ impl<S: Stage> AttributeParser<S> for UsedParser {
                             }
                             UsedBy::Compiler
                         }
-                        Some(sym::linker) => {
+                        sym::linker => {
                             if !cx.features().used_with_arg() {
                                 feature_err(
                                     &cx.sess(),
@@ -412,10 +398,7 @@ impl<S: Stage> AttributeParser<S> for UsedParser {
                             }
                             UsedBy::Linker
                         }
-                        _ => {
-                            cx.expected_specific_argument(l.span(), &[sym::compiler, sym::linker]);
-                            return;
-                        }
+                        _ => return,
                     }
                 }
                 ArgParser::NameValue(_) => return,
