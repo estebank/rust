@@ -53,7 +53,7 @@ impl<S: Stage> SingleAttributeParser<S> for ShouldPanicParser {
             span: cx.attr_span,
             reason: match args {
                 ArgParser::NoArgs => None,
-                ArgParser::NameValue(_) => Some(cx.expect_single_str(args, None)?.0),
+                ArgParser::NameValue(_) => Some(cx.expect_single_str(args, sym::should_panic)?.0),
                 ArgParser::List(list) => {
                     let Some(single) = list.single() else {
                         cx.expected_single_argument(list.span);
@@ -91,19 +91,7 @@ impl<S: Stage> SingleAttributeParser<S> for ReexportTestHarnessMainParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "name");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(
-                args.span().unwrap_or(cx.inner_span),
-                Some(sym::reexport_test_harness_main),
-            );
-            return None;
-        };
-
-        let Some(name) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
-
+        let (name, _) = cx.expect_single_str(args, sym::reexport_test_harness_main)?;
         Some(AttributeKind::ReexportTestHarnessMain(name))
     }
 }
@@ -125,33 +113,12 @@ impl<S: Stage> SingleAttributeParser<S> for RustcAbiParser {
     ]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(args) = args.list() else {
-            cx.expected_specific_argument_and_list(cx.attr_span, &[sym::assert_eq, sym::debug]);
-            return None;
+        let symbol = cx.expect_single_ident(args, &[sym::assert_eq, sym::debug]);
+        let kind: RustcAbiAttrKind = match symbol {
+            Ok(sym::assert_eq) => RustcAbiAttrKind::AssertEq,
+            Ok(sym::debug) => RustcAbiAttrKind::Debug,
+            _ => return None,
         };
-
-        let Some(arg) = args.single() else {
-            cx.expected_single_argument(cx.attr_span);
-            return None;
-        };
-
-        let fail_incorrect_argument =
-            |span| cx.expected_specific_argument(span, &[sym::assert_eq, sym::debug]);
-
-        let Some(arg) = arg.meta_item() else {
-            fail_incorrect_argument(args.span);
-            return None;
-        };
-
-        let kind: RustcAbiAttrKind = match arg.path().word_sym() {
-            Some(sym::assert_eq) => RustcAbiAttrKind::AssertEq,
-            Some(sym::debug) => RustcAbiAttrKind::Debug,
-            None | Some(_) => {
-                fail_incorrect_argument(arg.span());
-                return None;
-            }
-        };
-
         Some(AttributeKind::RustcAbi { attr_span: cx.attr_span, kind })
     }
 }
@@ -221,21 +188,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcTestMarkerParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "test_path");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(name_value) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, Some(sym::rustc_test_marker));
-            return None;
-        };
-
-        let Some(value_str) = name_value.value_as_str() else {
-            cx.expected_string_literal(name_value.value_span, None);
-            return None;
-        };
-
-        if value_str.as_str().trim().is_empty() {
-            cx.expected_non_empty_string_literal(name_value.value_span);
-            return None;
-        }
-
+        let (value_str, _) = cx.expect_single_non_empty_str(args, sym::rustc_test_marker)?;
         Some(AttributeKind::RustcTestMarker(value_str))
     }
 }

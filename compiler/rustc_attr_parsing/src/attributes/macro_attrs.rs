@@ -175,32 +175,13 @@ impl<S: Stage> SingleAttributeParser<S> for CollapseDebugInfoParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::MacroDef)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(list) = args.list() else {
-            cx.expected_list(cx.attr_span, args);
-            return None;
-        };
-        let Some(single) = list.single() else {
-            cx.expected_single_argument(list.span);
-            return None;
-        };
-        let Some(mi) = single.meta_item() else {
-            cx.unexpected_literal(single.span());
-            return None;
-        };
-        if let Err(err) = mi.args().no_args() {
-            cx.expected_no_args(err);
-        }
-        let path = mi.path().word_sym();
+        let path = cx.expect_single_ident(args, &[sym::yes, sym::no, sym::external]);
         let info = match path {
-            Some(sym::yes) => CollapseMacroDebuginfo::Yes,
-            Some(sym::no) => CollapseMacroDebuginfo::No,
-            Some(sym::external) => CollapseMacroDebuginfo::External,
-            _ => {
-                cx.expected_specific_argument(mi.span(), &[sym::yes, sym::no, sym::external]);
-                return None;
-            }
+            Ok(sym::yes) => CollapseMacroDebuginfo::Yes,
+            Ok(sym::no) => CollapseMacroDebuginfo::No,
+            Ok(sym::external) => CollapseMacroDebuginfo::External,
+            _ => return None,
         };
-
         Some(AttributeKind::CollapseDebugInfo(info))
     }
 }

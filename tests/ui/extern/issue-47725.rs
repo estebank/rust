@@ -24,6 +24,7 @@ extern "C" {
 //~| HELP remove the attribute
 //~| HELP can be applied to
 //~| NOTE for more information, visit
+//~| NOTE expected this to be of the form `link_name = "..."`
 extern "C" {
     fn bar() -> u32;
 }

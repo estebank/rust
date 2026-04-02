@@ -128,12 +128,11 @@ impl<S: Stage> SingleAttributeParser<S> for DeprecatedParser {
                     }
                 }
             }
-            ArgParser::NameValue(v) => {
-                let Some(value) = v.value_as_ident() else {
-                    cx.expected_string_literal(v.value_span, Some(v.value_as_lit()));
-                    return None;
-                };
-                note = Some(value);
+            ArgParser::NameValue(_) => {
+                let (name, span) = cx.expect_single_str(args, sym::deprecated)?;
+                if name != sym::empty {
+                    note = Some(Ident::new(name, span));
+                }
             }
         }
 

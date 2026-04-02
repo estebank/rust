@@ -34,22 +34,21 @@ impl<S: Stage> SingleAttributeParser<S> for InlineParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        match args {
-            ArgParser::NoArgs => Some(AttributeKind::Inline(InlineAttr::Hint, cx.attr_span)),
+        let kind = match args {
+            ArgParser::NoArgs => InlineAttr::Hint,
             ArgParser::List(_) => {
-                match cx.expect_single_ident_list(args, &[sym::always, sym::never]) {
-                    Ok(sym::always) => {
-                        Some(AttributeKind::Inline(InlineAttr::Always, cx.attr_span))
-                    }
-                    Ok(sym::never) => Some(AttributeKind::Inline(InlineAttr::Never, cx.attr_span)),
-                    _ => None,
+                match cx.expect_single_ident_or_no_args(args, &[sym::always, sym::never]) {
+                    Ok(sym::always) => InlineAttr::Always,
+                    Ok(sym::never) => InlineAttr::Never,
+                    _ => return None,
                 }
             }
             ArgParser::NameValue(_) => {
                 cx.warn_ill_formed_attribute_input(ILL_FORMED_ATTRIBUTE_INPUT);
-                None
+                return None;
             }
-        }
+        };
+        Some(AttributeKind::Inline(kind, cx.attr_span))
     }
 }
 
@@ -81,7 +80,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcForceInlineParser {
 
                 Some(reason)
             }
-            ArgParser::NameValue(_) => Some(cx.expect_single_str(args, None)?.0),
+            ArgParser::NameValue(_) => Some(cx.expect_single_str(args, sym::rustc_force_inline)?.0),
         };
 
         Some(AttributeKind::Inline(

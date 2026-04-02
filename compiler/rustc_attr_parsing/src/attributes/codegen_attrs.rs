@@ -23,7 +23,7 @@ impl<S: Stage> SingleAttributeParser<S> for OptimizeParser {
     const TEMPLATE: AttributeTemplate = template!(List: &["size", "speed", "none"]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let res = match cx.expect_single_ident_list(args, &[sym::size, sym::speed, sym::none]) {
+        let res = match cx.expect_single_ident(args, &[sym::size, sym::speed, sym::none]) {
             Ok(sym::size) => OptimizeAttr::Size,
             Ok(sym::speed) => OptimizeAttr::Speed,
             Ok(sym::none) => OptimizeAttr::DoNotOptimize,
@@ -68,7 +68,7 @@ impl<S: Stage> SingleAttributeParser<S> for CoverageParser {
     const TEMPLATE: AttributeTemplate = template!(OneOf: &[sym::off, sym::on]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let kind = match cx.expect_single_ident_list(args, &[sym::on, sym::off]) {
+        let kind = match cx.expect_single_ident(args, &[sym::on, sym::off]) {
             Ok(sym::off) => CoverageAttrKind::Off,
             Ok(sym::on) => CoverageAttrKind::On,
             _ => return None,
@@ -96,14 +96,7 @@ impl<S: Stage> SingleAttributeParser<S> for ExportNameParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "name");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        let Some(name) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
+        let (name, _) = cx.expect_single_str(args, sym::export_name)?;
         if name.as_str().contains('\0') {
             // `#[export_name = ...]` will be converted to a null-terminated string,
             // so it may not contain any null characters.
@@ -344,7 +337,7 @@ impl<S: Stage> AttributeParser<S> for UsedParser {
                 ArgParser::NoArgs => UsedBy::Default,
                 ArgParser::List(_) => {
                     let Ok(symbol) =
-                        cx.expect_single_ident_list(args, &[sym::compiler, sym::linker])
+                        cx.expect_single_ident_or_no_args(args, &[sym::compiler, sym::linker])
                     else {
                         return;
                     };

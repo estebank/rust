@@ -32,7 +32,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkNameParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        Some(LinkName { name: cx.expect_single_str(args, None)?.0, span: cx.attr_span })
+        Some(LinkName { name: cx.expect_single_str(args, sym::link_name)?.0, span: cx.attr_span })
     }
 }
 
@@ -469,7 +469,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkSectionParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let name = cx.expect_single_str(args, None)?.0;
+        let name = cx.expect_single_str(args, sym::link_section)?.0;
         if name.as_str().contains('\0') {
             // `#[link_section = ...]` will be converted to a null-terminated string,
             // so it may not contain any null characters.
@@ -590,7 +590,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkageParser {
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
         let value = cx.expect_single_str_allowlist(
             args,
-            Some(sym::linkage),
+            sym::linkage,
             &[
                 sym::available_externally,
                 sym::common,

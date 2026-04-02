@@ -18,9 +18,7 @@ error[E0539]: malformed `rustc_abi` attribute input
   --> $DIR/debug.rs:74:1
    |
 LL | #[rustc_abi("assert_eq")]
-   | ^^^^^^^^^^^-------------^
-   |            |
-   |            valid arguments are `assert_eq` or `debug`
+   | ^^^^^^^^^^^^^^^^^^^^^^^^^ this attribute is only valid with either `assert_eq` or `debug` as an argument
    |
 help: try changing it to one of the following valid forms of the attribute
    |

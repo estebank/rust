@@ -196,7 +196,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcLintOptDenyFieldAccessParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Field)]);
     const TEMPLATE: AttributeTemplate = template!(Word);
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let lint_message = cx.expect_single_str(args, None)?.0;
+        let lint_message = cx.expect_single_str(args, sym::rustc_inherit_overflow_checks)?.0;
         Some(AttributeKind::RustcLintOptDenyFieldAccess { lint_message })
     }
 }
@@ -583,7 +583,9 @@ impl<S: Stage> SingleAttributeParser<S> for RustcSimdMonomorphizeLaneLimitParser
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "N");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        Some(AttributeKind::RustcSimdMonomorphizeLaneLimit(cx.expect_limit_int(args)?))
+        Some(AttributeKind::RustcSimdMonomorphizeLaneLimit(
+            cx.expect_limit_int(args, sym::rustc_simd_monomorphize_lane_limit)?,
+        ))
     }
 }
 
@@ -621,14 +623,7 @@ impl<S: Stage> SingleAttributeParser<S> for LangParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "name");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        let Some(name) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
+        let (name, _) = cx.expect_single_str(args, sym::lang)?;
         let Some(lang_item) = LangItem::from_name(name) else {
             cx.emit_err(UnknownLangItem { span: cx.attr_span, name });
             return None;
@@ -995,16 +990,9 @@ impl<S: Stage> SingleAttributeParser<S> for RustcIfThisChangedParser {
         }
         match args {
             ArgParser::NoArgs => Some(AttributeKind::RustcIfThisChanged(cx.attr_span, None)),
-            ArgParser::List(list) => {
-                let Some(item) = list.single() else {
-                    cx.expected_single_argument(list.span);
-                    return None;
-                };
-                let Some(ident) = item.meta_item().and_then(|item| item.ident()) else {
-                    cx.expected_identifier(item.span());
-                    return None;
-                };
-                Some(AttributeKind::RustcIfThisChanged(cx.attr_span, Some(ident.name)))
+            ArgParser::List(_) => {
+                let name = cx.expect_any_ident(args).ok()?;
+                Some(AttributeKind::RustcIfThisChanged(cx.attr_span, Some(name)))
             }
             ArgParser::NameValue(_) => {
                 cx.expected_list_or_no_args(cx.inner_span);
@@ -1146,14 +1134,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcDiagnosticItemParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "name");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        let Some(value) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
+        let (value, _) = cx.expect_single_str(args, sym::rustc_diagnostic_item)?;
         Some(AttributeKind::RustcDiagnosticItem(value))
     }
 }
@@ -1250,16 +1231,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcReservationImplParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "reservation message");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(args.span().unwrap_or(cx.attr_span), None);
-            return None;
-        };
-
-        let Some(value_str) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
-
+        let (value_str, _) = cx.expect_single_str(args, sym::rustc_reservation_impl)?;
         Some(AttributeKind::RustcReservationImpl(cx.attr_span, value_str))
     }
 }
@@ -1282,16 +1254,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcDocPrimitiveParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "primitive name");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(args.span().unwrap_or(cx.attr_span), None);
-            return None;
-        };
-
-        let Some(value_str) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
-
+        let (value_str, _) = cx.expect_single_str(args, sym::rustc_doc_primitive)?;
         Some(AttributeKind::RustcDocPrimitive(cx.attr_span, value_str))
     }
 }

@@ -13,6 +13,6 @@ impl<S: Stage> SingleAttributeParser<S> for PathParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        Some(AttributeKind::Path(cx.expect_single_str(args, None)?.0, cx.attr_span))
+        Some(AttributeKind::Path(cx.expect_single_str(args, sym::path)?.0, cx.attr_span))
     }
 }

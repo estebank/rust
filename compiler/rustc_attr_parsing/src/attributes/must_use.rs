@@ -30,7 +30,7 @@ impl<S: Stage> SingleAttributeParser<S> for MustUseParser {
             span: cx.attr_span,
             reason: match args {
                 ArgParser::NoArgs => None,
-                ArgParser::NameValue(_) => Some(cx.expect_single_str(args, None)?.0),
+                ArgParser::NameValue(_) => Some(cx.expect_single_str(args, sym::must_use)?.0),
                 ArgParser::List(list) => {
                     cx.expected_nv_or_no_args(list.span);
                     return None;

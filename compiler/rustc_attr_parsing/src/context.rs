@@ -621,6 +621,7 @@ impl<'f, 'sess: 'f, S: Stage> AcceptContext<'f, 'sess, S> {
                 possibilities,
                 strings: false,
                 list: false,
+                no_args: false,
             },
         )
     }
@@ -632,12 +633,30 @@ impl<'f, 'sess: 'f, S: Stage> AcceptContext<'f, 'sess, S> {
         span: Span,
         possibilities: &[Symbol],
     ) -> ErrorGuaranteed {
+        self.expected_specific_argument_and_list_inner(span, possibilities, false)
+    }
+
+    pub(crate) fn expected_specific_argument_and_list_or_no_argument(
+        &self,
+        span: Span,
+        possibilities: &[Symbol],
+    ) -> ErrorGuaranteed {
+        self.expected_specific_argument_and_list_inner(span, possibilities, true)
+    }
+
+    pub(crate) fn expected_specific_argument_and_list_inner(
+        &self,
+        span: Span,
+        possibilities: &[Symbol],
+        no_args: bool,
+    ) -> ErrorGuaranteed {
         self.emit_parse_error(
             span,
             AttributeParseErrorReason::ExpectedSpecificArgument {
                 possibilities,
                 strings: false,
                 list: true,
+                no_args,
             },
         )
     }
@@ -654,6 +673,7 @@ impl<'f, 'sess: 'f, S: Stage> AcceptContext<'f, 'sess, S> {
                 possibilities,
                 strings: true,
                 list: false,
+                no_args: false,
             },
         )
     }

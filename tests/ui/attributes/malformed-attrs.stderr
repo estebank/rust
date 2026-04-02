@@ -155,7 +155,9 @@ error[E0539]: malformed `export_name` attribute input
   --> $DIR/malformed-attrs.rs:29:1
    |
 LL | #[unsafe(export_name)]
-   | ^^^^^^^^^^^^^^^^^^^^^^
+   | ^^^^^^^^^-----------^^
+   |          |
+   |          expected this to be of the form `export_name = "..."`
    |
 help: must be of the form
    |
@@ -206,7 +208,9 @@ error[E0539]: malformed `rustc_macro_transparency` attribute input
   --> $DIR/malformed-attrs.rs:43:1
    |
 LL | #[rustc_macro_transparency]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   | ^^------------------------^
+   |   |
+   |   expected this to be of the form `rustc_macro_transparency = "..."`
    |
 help: try changing it to one of the following valid forms of the attribute
    |
@@ -351,7 +355,9 @@ error[E0539]: malformed `export_name` attribute input
   --> $DIR/malformed-attrs.rs:68:1
    |
 LL | #[export_name()]
-   | ^^^^^^^^^^^^^^^^
+   | ^^-------------^
+   |   |
+   |   expected this to be of the form `export_name = "..."`
    |
 help: must be of the form
    |
@@ -359,13 +365,11 @@ LL - #[export_name()]
 LL + #[export_name = "name"]
    |
 
-error[E0805]: malformed `used` attribute input
+error[E0539]: malformed `used` attribute input
   --> $DIR/malformed-attrs.rs:70:1
    |
 LL | #[used()]
-   | ^^^^^^--^
-   |       |
-   |       expected a single argument here
+   | ^^^^^^^^^ this attribute is only valid with either `compiler`, `linker` as an argument or no arguments
    |
 help: try changing it to one of the following valid forms of the attribute
    |
@@ -389,7 +393,9 @@ error[E0539]: malformed `crate_name` attribute input
   --> $DIR/malformed-attrs.rs:73:1
    |
 LL | #[crate_name]
-   | ^^^^^^^^^^^^^
+   | ^^----------^
+   |   |
+   |   expected this to be of the form `crate_name = "..."`
    |
 help: must be of the form
    |
@@ -433,7 +439,9 @@ error[E0539]: malformed `link_name` attribute input
   --> $DIR/malformed-attrs.rs:86:1
    |
 LL | #[link_name]
-   | ^^^^^^^^^^^^
+   | ^^---------^
+   |   |
+   |   expected this to be of the form `link_name = "..."`
    |
    = note: for more information, visit <https://doc.rust-lang.org/reference/items/external-blocks.html#the-link_name-attribute>
 help: must be of the form
@@ -445,7 +453,9 @@ error[E0539]: malformed `link_section` attribute input
   --> $DIR/malformed-attrs.rs:90:1
    |
 LL | #[link_section]
-   | ^^^^^^^^^^^^^^^
+   | ^^------------^
+   |   |
+   |   expected this to be of the form `link_section = "..."`
    |
    = note: for more information, visit <https://doc.rust-lang.org/reference/abi.html#the-link_section-attribute>
 help: must be of the form
@@ -706,7 +716,9 @@ error[E0539]: malformed `linkage` attribute input
   --> $DIR/malformed-attrs.rs:175:5
    |
 LL |     #[linkage]
-   |     ^^^^^^^^^^ expected this to be of the form `linkage = "..."`
+   |     ^^-------^
+   |       |
+   |       expected this to be of the form `linkage = "..."`
 
 error[E0539]: malformed `debugger_visualizer` attribute input
   --> $DIR/malformed-attrs.rs:190:1
@@ -988,7 +1000,7 @@ LL |     #[coroutine = 63] || {}
 
 error: aborting due to 75 previous errors; 8 warnings emitted
 
-Some errors have detailed explanations: E0308, E0463, E0539, E0565, E0658, E0805.
+Some errors have detailed explanations: E0308, E0463, E0539, E0565, E0658.
 For more information about an error, try `rustc --explain E0308`.
 Future incompatibility report: Future breakage diagnostic:
 error: valid forms for the attribute are `#[inline(always)]`, `#[inline(never)]`, and `#[inline]`

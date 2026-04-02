@@ -14,23 +14,16 @@ impl<S: Stage> SingleAttributeParser<S> for RustcMacroTransparencyParser {
         template!(NameValueStr: ["transparent", "semiopaque", "opaque"]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        match nv.value_as_str() {
-            Some(sym::transparent) => Some(Transparency::Transparent),
-            Some(sym::semiopaque) => Some(Transparency::SemiOpaque),
-            Some(sym::opaque) => Some(Transparency::Opaque),
-            Some(_) => {
-                cx.expected_specific_argument_strings(
-                    nv.value_span,
-                    &[sym::transparent, sym::semiopaque, sym::opaque],
-                );
-                None
-            }
-            None => None,
-        }
-        .map(AttributeKind::RustcMacroTransparency)
+        let name = cx.expect_single_str_allowlist(
+            args,
+            sym::rustc_macro_transparency,
+            &[sym::transparent, sym::semiopaque, sym::opaque],
+        );
+        Some(AttributeKind::RustcMacroTransparency(match name {
+            Some(sym::transparent) => Transparency::Transparent,
+            Some(sym::semiopaque) => Transparency::SemiOpaque,
+            Some(sym::opaque) => Transparency::Opaque,
+            _ => return None,
+        }))
     }
 }

@@ -15,7 +15,7 @@ impl<S: Stage> SingleAttributeParser<S> for CrateNameParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let (name, name_span) = cx.expect_single_str(args, None)?;
+        let (name, name_span) = cx.expect_single_str(args, sym::crate_name)?;
         Some(AttributeKind::CrateName { name, name_span, attr_span: cx.attr_span })
     }
 }
@@ -37,7 +37,7 @@ impl<S: Stage> CombineAttributeParser<S> for CrateTypeParser {
         args: &ArgParser,
     ) -> impl IntoIterator<Item = Self::Item> {
         let ArgParser::NameValue(n) = args else {
-            cx.expected_name_value(cx.attr_span, None);
+            cx.expected_name_value(cx.attr_span, Some(sym::crate_type));
             return None;
         };
 
@@ -79,7 +79,7 @@ impl<S: Stage> SingleAttributeParser<S> for RecursionLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let limit = cx.expect_limit_int(args)?;
+        let limit = cx.expect_limit_int(args, sym::recursion_limit)?;
         Some(AttributeKind::RecursionLimit { limit, attr_span: cx.attr_span })
     }
 }
@@ -93,7 +93,7 @@ impl<S: Stage> SingleAttributeParser<S> for MoveSizeLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let limit = cx.expect_limit_int(args)?;
+        let limit = cx.expect_limit_int(args, sym::move_size_limit)?;
         Some(AttributeKind::MoveSizeLimit { limit, attr_span: cx.attr_span })
     }
 }
@@ -107,7 +107,7 @@ impl<S: Stage> SingleAttributeParser<S> for TypeLengthLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let limit = cx.expect_limit_int(args)?;
+        let limit = cx.expect_limit_int(args, sym::type_length_limit)?;
         Some(AttributeKind::TypeLengthLimit { limit, attr_span: cx.attr_span })
     }
 }
@@ -121,7 +121,7 @@ impl<S: Stage> SingleAttributeParser<S> for PatternComplexityLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let limit = cx.expect_limit_int(args)?;
+        let limit = cx.expect_limit_int(args, sym::pattern_complexity_limit)?;
         Some(AttributeKind::PatternComplexityLimit { limit, attr_span: cx.attr_span })
     }
 }
@@ -171,23 +171,16 @@ impl<S: Stage> SingleAttributeParser<S> for WindowsSubsystemParser {
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: ["windows", "console"], "https://doc.rust-lang.org/reference/runtime.html#the-windows_subsystem-attribute");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(
-                args.span().unwrap_or(cx.inner_span),
-                Some(sym::windows_subsystem),
-            );
-            return None;
+        let kind = cx.expect_single_str_allowlist(
+            args,
+            sym::windows_subsystem,
+            &[sym::console, sym::windows],
+        )?;
+        let kind = match kind {
+            sym::console => WindowsSubsystemKind::Console,
+            sym::windows => WindowsSubsystemKind::Windows,
+            _ => return None,
         };
-
-        let kind = match nv.value_as_str() {
-            Some(sym::console) => WindowsSubsystemKind::Console,
-            Some(sym::windows) => WindowsSubsystemKind::Windows,
-            Some(_) | None => {
-                cx.expected_specific_argument_strings(nv.value_span, &[sym::console, sym::windows]);
-                return None;
-            }
-        };
-
         Some(AttributeKind::WindowsSubsystem(kind, cx.attr_span))
     }
 }

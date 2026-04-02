@@ -50,13 +50,11 @@ LL - #[coverage = true]
 LL + #[coverage(on)]
    |
 
-error[E0805]: malformed `coverage` attribute input
+error[E0539]: malformed `coverage` attribute input
   --> $DIR/bad-syntax.rs:23:1
    |
 LL | #[coverage()]
-   | ^^^^^^^^^^--^
-   |           |
-   |           expected a single argument here
+   | ^^^^^^^^^^^^^ this attribute is only valid with either `on` or `off` as an argument
    |
 help: try changing it to one of the following valid forms of the attribute
    |
@@ -65,13 +63,11 @@ LL | #[coverage(off)]
 LL | #[coverage(on)]
    |            ++
 
-error[E0805]: malformed `coverage` attribute input
+error[E0539]: malformed `coverage` attribute input
   --> $DIR/bad-syntax.rs:26:1
    |
 LL | #[coverage(off, off)]
-   | ^^^^^^^^^^----------^
-   |           |
-   |           expected a single argument here
+   | ^^^^^^^^^^^^^^^^^^^^^ this attribute is only valid with either `on` or `off` as an argument
    |
 help: try changing it to one of the following valid forms of the attribute
    |
@@ -82,13 +78,11 @@ LL - #[coverage(off, off)]
 LL + #[coverage(on)]
    |
 
-error[E0805]: malformed `coverage` attribute input
+error[E0539]: malformed `coverage` attribute input
   --> $DIR/bad-syntax.rs:29:1
    |
 LL | #[coverage(off, on)]
-   | ^^^^^^^^^^---------^
-   |           |
-   |           expected a single argument here
+   | ^^^^^^^^^^^^^^^^^^^^ this attribute is only valid with either `on` or `off` as an argument
    |
 help: try changing it to one of the following valid forms of the attribute
    |
@@ -116,13 +110,11 @@ LL - #[coverage(bogus)]
 LL + #[coverage(on)]
    |
 
-error[E0805]: malformed `coverage` attribute input
+error[E0539]: malformed `coverage` attribute input
   --> $DIR/bad-syntax.rs:35:1
    |
 LL | #[coverage(bogus, off)]
-   | ^^^^^^^^^^------------^
-   |           |
-   |           expected a single argument here
+   | ^^^^^^^^^^^^^^^^^^^^^^^ this attribute is only valid with either `on` or `off` as an argument
    |
 help: try changing it to one of the following valid forms of the attribute
    |
@@ -133,13 +125,11 @@ LL - #[coverage(bogus, off)]
 LL + #[coverage(on)]
    |
 
-error[E0805]: malformed `coverage` attribute input
+error[E0539]: malformed `coverage` attribute input
   --> $DIR/bad-syntax.rs:38:1
    |
 LL | #[coverage(off, bogus)]
-   | ^^^^^^^^^^------------^
-   |           |
-   |           expected a single argument here
+   | ^^^^^^^^^^^^^^^^^^^^^^^ this attribute is only valid with either `on` or `off` as an argument
    |
 help: try changing it to one of the following valid forms of the attribute
    |
@@ -164,5 +154,4 @@ LL + #[coverage(off)]
 
 error: aborting due to 11 previous errors
 
-Some errors have detailed explanations: E0539, E0805.
-For more information about an error, try `rustc --explain E0539`.
+For more information about this error, try `rustc --explain E0539`.

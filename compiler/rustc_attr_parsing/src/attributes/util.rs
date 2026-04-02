@@ -87,32 +87,62 @@ impl<S: Stage> AcceptContext<'_, '_, S> {
         None
     }
 
-    pub(crate) fn expect_limit_int(&self, args: &ArgParser) -> Option<Limit> {
+    pub(crate) fn expect_limit_int(&self, args: &ArgParser, name: Symbol) -> Option<Limit> {
         let ArgParser::NameValue(nv) = args else {
-            self.expected_name_value(self.attr_span, None);
+            self.expected_name_value(self.inner_span, Some(name));
             return None;
         };
         self.parse_limit_int(nv)
     }
 
-    pub(crate) fn expect_single_ident_list(
+    pub(crate) fn expect_any_ident(&self, args: &ArgParser) -> Result<Symbol, ErrorGuaranteed> {
+        self.expect_single_ident_inner(args, None, false)
+    }
+
+    pub(crate) fn expect_single_ident(
         &self,
         args: &ArgParser,
         valid: &[Symbol],
     ) -> Result<Symbol, ErrorGuaranteed> {
+        self.expect_single_ident_inner(args, Some(valid), false)
+    }
+
+    pub(crate) fn expect_single_ident_or_no_args(
+        &self,
+        args: &ArgParser,
+        valid: &[Symbol],
+    ) -> Result<Symbol, ErrorGuaranteed> {
+        self.expect_single_ident_inner(args, Some(valid), true)
+    }
+
+    fn expect_single_ident_inner(
+        &self,
+        args: &ArgParser,
+        valid: Option<&[Symbol]>,
+        no_args: bool,
+    ) -> Result<Symbol, ErrorGuaranteed> {
+        let error = || match valid {
+            Some(valid) if no_args => {
+                self.expected_specific_argument_and_list_or_no_argument(self.attr_span, valid)
+            }
+            Some(valid) => self.expected_specific_argument_and_list(self.attr_span, valid),
+            None => self.expected_single_argument(args.span().unwrap_or(self.inner_span)),
+        };
         let Some(list) = args.list() else {
-            return Err(self.expected_specific_argument_and_list(self.attr_span, valid));
+            return Err(error());
         };
         let Some(single) = list.single() else {
-            return Err(self.expected_single_argument(list.span));
+            return Err(error());
         };
         let Some(item) = single.meta_item() else {
-            return Err(self.expected_single_argument(list.span));
+            return Err(error());
         };
         let Some(word) = item.path().word() else {
-            return Err(self.expected_specific_argument_and_list(self.attr_span, valid));
+            return Err(error());
         };
-        if !valid.contains(&word.name) {
+        if let Some(valid) = valid
+            && !valid.contains(&word.name)
+        {
             return Err(self.expected_specific_argument(single.span(), valid));
         }
         Ok(word.name)
@@ -121,28 +151,49 @@ impl<S: Stage> AcceptContext<'_, '_, S> {
     pub(crate) fn expect_single_str(
         &self,
         args: &ArgParser,
-        expected_name: Option<Symbol>,
+        expected_name: Symbol,
+    ) -> Option<(Symbol, Span)> {
+        self.expect_single_str_inner(args, expected_name, true)
+    }
+
+    pub(crate) fn expect_single_non_empty_str(
+        &self,
+        args: &ArgParser,
+        expected_name: Symbol,
+    ) -> Option<(Symbol, Span)> {
+        self.expect_single_str_inner(args, expected_name, false)
+    }
+
+    fn expect_single_str_inner(
+        &self,
+        args: &ArgParser,
+        expected_name: Symbol,
+        allow_empty: bool,
     ) -> Option<(Symbol, Span)> {
         let Some(nv) = args.name_value() else {
-            self.expected_name_value(self.attr_span, expected_name);
+            self.expected_name_value(self.inner_span, Some(expected_name));
             return None;
         };
-        let Some(name) = nv.value_as_str() else {
+        let Some(value) = nv.value_as_str() else {
             self.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
             return None;
         };
-        Some((name, nv.value_span))
+        if !allow_empty && value.as_str().trim().is_empty() {
+            self.expected_non_empty_string_literal(nv.value_span);
+            return None;
+        }
+        Some((value, nv.value_span))
     }
 
     pub(crate) fn expect_single_str_allowlist(
         &self,
         args: &ArgParser,
-        expected_name: Option<Symbol>,
+        expected_name: Symbol,
         expected: &[Symbol],
     ) -> Option<Symbol> {
         let (value, value_span) = self.expect_single_str(args, expected_name)?;
         if !expected.contains(&value) {
-            self.expected_specific_argument(value_span, expected);
+            self.expected_specific_argument_strings(value_span, expected);
             return None;
         }
         Some(value)

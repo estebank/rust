@@ -571,6 +571,8 @@ pub(crate) enum AttributeParseErrorReason<'a> {
         strings: bool,
         /// Should we tell the user to write a list when they didn't?
         list: bool,
+        /// Mention that no arguments are also allowed.
+        no_args: bool,
     },
     ExpectedIdentifier,
 }
@@ -692,18 +694,29 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AttributeParseError<'_> {
                 possibilities,
                 strings,
                 list: false,
+                no_args,
             } => {
                 let quote = if strings { '"' } else { '`' };
+                let or_no_args = if no_args { " or no arguments" } else { "" };
+                let or = if no_args { "," } else { " or" };
                 match possibilities {
                     &[] => {}
                     &[x] => {
                         diag.span_label(
                             self.span,
-                            format!("the only valid argument here is {quote}{x}{quote}"),
+                            format!(
+                                "the only valid argument here is {quote}{x}{quote}{or_no_args}"
+                            ),
                         );
                     }
                     [first, second] => {
-                        diag.span_label(self.span, format!("valid arguments are {quote}{first}{quote} or {quote}{second}{quote}"));
+                        diag.span_label(
+                            self.span,
+                            format!(
+                                "valid arguments are {quote}{first}{quote}{or} \
+                                 {quote}{second}{quote}",
+                            ),
+                        );
                     }
                     [first @ .., second_to_last, last] => {
                         let mut res = String::new();
@@ -711,7 +724,7 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AttributeParseError<'_> {
                             res.push_str(&format!("{quote}{i}{quote}, "));
                         }
                         res.push_str(&format!(
-                            "{quote}{second_to_last}{quote} or {quote}{last}{quote}"
+                            "{quote}{second_to_last}{quote}{or} {quote}{last}{quote}{or_no_args}",
                         ));
 
                         diag.span_label(self.span, format!("valid arguments are {res}"));
@@ -722,20 +735,30 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AttributeParseError<'_> {
                 possibilities,
                 strings,
                 list: true,
+                no_args,
             } => {
                 let quote = if strings { '"' } else { '`' };
+                let or_no_args = if no_args { " or no arguments" } else { "" };
+                let or = if no_args { "," } else { " or" };
                 match possibilities {
                     &[] => {}
                     &[x] => {
                         diag.span_label(
                             self.span,
                             format!(
-                                "this {description} is only valid with {quote}{x}{quote} as an argument"
+                                "this {description} is only valid with {quote}{x}{quote} as an \
+                                 argument{or_no_args}"
                             ),
                         );
                     }
                     [first, second] => {
-                        diag.span_label(self.span, format!("this {description} is only valid with either {quote}{first}{quote} or {quote}{second}{quote} as an argument"));
+                        diag.span_label(
+                            self.span,
+                            format!(
+                                "this {description} is only valid with either {quote}{first}{quote}\
+                                 {or} {quote}{second}{quote} as an argument{or_no_args}",
+                            ),
+                        );
                     }
                     [first @ .., second_to_last, last] => {
                         let mut res = String::new();
@@ -743,10 +766,16 @@ impl<'a, G: EmissionGuarantee> Diagnostic<'a, G> for AttributeParseError<'_> {
                             res.push_str(&format!("{quote}{i}{quote}, "));
                         }
                         res.push_str(&format!(
-                            "{quote}{second_to_last}{quote} or {quote}{last}{quote}"
+                            "{quote}{second_to_last}{quote}{or} {quote}{last}{quote}{or_no_args}"
                         ));
 
-                        diag.span_label(self.span, format!("this {description} is only valid with one of the following arguments: {res}"));
+                        diag.span_label(
+                            self.span,
+                            format!(
+                                "this {description} is only valid with one of the following \
+                                 arguments: {res}",
+                            ),
+                        );
                     }
                 }
             }
