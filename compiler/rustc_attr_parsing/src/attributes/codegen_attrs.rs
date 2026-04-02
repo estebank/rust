@@ -68,33 +68,11 @@ impl<S: Stage> SingleAttributeParser<S> for CoverageParser {
     const TEMPLATE: AttributeTemplate = template!(OneOf: &[sym::off, sym::on]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(args) = args.list() else {
-            cx.expected_specific_argument_and_list(cx.attr_span, &[sym::on, sym::off]);
-            return None;
+        let kind = match cx.expect_single_ident_list(args, &[sym::on, sym::off]) {
+            Ok(sym::off) => CoverageAttrKind::Off,
+            Ok(sym::on) => CoverageAttrKind::On,
+            _ => return None,
         };
-
-        let Some(arg) = args.single() else {
-            cx.expected_single_argument(args.span);
-            return None;
-        };
-
-        let fail_incorrect_argument =
-            |span| cx.expected_specific_argument(span, &[sym::on, sym::off]);
-
-        let Some(arg) = arg.meta_item() else {
-            fail_incorrect_argument(args.span);
-            return None;
-        };
-
-        let kind = match arg.path().word_sym() {
-            Some(sym::off) => CoverageAttrKind::Off,
-            Some(sym::on) => CoverageAttrKind::On,
-            None | Some(_) => {
-                fail_incorrect_argument(arg.span());
-                return None;
-            }
-        };
-
         Some(AttributeKind::Coverage(cx.attr_span, kind))
     }
 }
@@ -206,10 +184,7 @@ pub(crate) struct NakedParser {
 impl<S: Stage> AttributeParser<S> for NakedParser {
     const ATTRIBUTES: AcceptMapping<Self, S> =
         &[(&[sym::naked], template!(Word), |this, cx, args| {
-            if let Err(span) = args.no_args() {
-                cx.expected_no_args(span);
-                return;
-            }
+            let Some(()) = cx.expect_no_args(args) else { return };
 
             if let Some(earlier) = this.span {
                 let span = cx.attr_span;

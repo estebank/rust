@@ -262,7 +262,7 @@ error[E0539]: malformed `optimize` attribute input
   --> $DIR/malformed-attrs.rs:56:1
    |
 LL | #[optimize]
-   | ^^^^^^^^^^^ expected this to be a list
+   | ^^^^^^^^^^^ this attribute is only valid with one of the following arguments: `size`, `speed` or `none`
    |
 help: try changing it to one of the following valid forms of the attribute
    |

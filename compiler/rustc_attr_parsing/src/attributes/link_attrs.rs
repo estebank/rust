@@ -9,7 +9,6 @@ use rustc_span::kw;
 use rustc_target::spec::{Arch, BinaryFormat};
 
 use super::prelude::*;
-use super::util::parse_single_integer;
 use crate::attributes::cfg::parse_cfg_entry;
 use crate::session_diagnostics::{
     AsNeededCompatibility, BundleNeedsStatic, EmptyLinkName, ExportSymbolsNeedsStatic,
@@ -33,16 +32,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkNameParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        let Some(name) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
-
-        Some(LinkName { name, span: cx.attr_span })
+        Some(LinkName { name: cx.expect_single_str(args, None)?.0, span: cx.attr_span })
     }
 }
 
@@ -479,14 +469,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkSectionParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        let Some(name) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
+        let name = cx.expect_single_str(args, None)?.0;
         if name.as_str().contains('\0') {
             // `#[link_section = ...]` will be converted to a null-terminated string,
             // so it may not contain any null characters.
@@ -551,7 +534,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkOrdinalParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let ordinal = parse_single_integer(cx, args)?;
+        let ordinal = cx.parse_single_integer(args)?;
 
         // According to the table at
         // https://docs.microsoft.com/en-us/windows/win32/debug/pe-format#import-header, the
@@ -605,15 +588,21 @@ impl<S: Stage> SingleAttributeParser<S> for LinkageParser {
     ]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(name_value) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, Some(sym::linkage));
-            return None;
-        };
-
-        let Some(value) = name_value.value_as_str() else {
-            cx.expected_string_literal(name_value.value_span, Some(name_value.value_as_lit()));
-            return None;
-        };
+        let value = cx.expect_single_str_allowlist(
+            args,
+            Some(sym::linkage),
+            &[
+                sym::available_externally,
+                sym::common,
+                sym::extern_weak,
+                sym::external,
+                sym::internal,
+                sym::linkonce,
+                sym::linkonce_odr,
+                sym::weak,
+                sym::weak_odr,
+            ],
+        )?;
 
         // Use the names from src/llvm/docs/LangRef.rst here. Most types are only
         // applicable to variable declarations and may not really make sense for
@@ -633,24 +622,7 @@ impl<S: Stage> SingleAttributeParser<S> for LinkageParser {
             sym::linkonce_odr => Linkage::LinkOnceODR,
             sym::weak => Linkage::WeakAny,
             sym::weak_odr => Linkage::WeakODR,
-
-            _ => {
-                cx.expected_specific_argument(
-                    name_value.value_span,
-                    &[
-                        sym::available_externally,
-                        sym::common,
-                        sym::extern_weak,
-                        sym::external,
-                        sym::internal,
-                        sym::linkonce,
-                        sym::linkonce_odr,
-                        sym::weak,
-                        sym::weak_odr,
-                    ],
-                );
-                return None;
-            }
+            _ => return None,
         };
 
         Some(AttributeKind::Linkage(linkage, cx.attr_span))

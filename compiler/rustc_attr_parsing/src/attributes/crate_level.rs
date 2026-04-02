@@ -15,17 +15,8 @@ impl<S: Stage> SingleAttributeParser<S> for CrateNameParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let ArgParser::NameValue(n) = args else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-
-        let Some(name) = n.value_as_str() else {
-            cx.expected_string_literal(n.value_span, Some(n.value_as_lit()));
-            return None;
-        };
-
-        Some(AttributeKind::CrateName { name, name_span: n.value_span, attr_span: cx.attr_span })
+        let (name, name_span) = cx.expect_single_str(args, None)?;
+        Some(AttributeKind::CrateName { name, name_span, attr_span: cx.attr_span })
     }
 }
 
@@ -88,16 +79,8 @@ impl<S: Stage> SingleAttributeParser<S> for RecursionLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let ArgParser::NameValue(nv) = args else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-
-        Some(AttributeKind::RecursionLimit {
-            limit: cx.parse_limit_int(nv)?,
-            attr_span: cx.attr_span,
-            limit_span: nv.value_span,
-        })
+        let limit = cx.expect_limit_int(args)?;
+        Some(AttributeKind::RecursionLimit { limit, attr_span: cx.attr_span })
     }
 }
 
@@ -110,16 +93,8 @@ impl<S: Stage> SingleAttributeParser<S> for MoveSizeLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let ArgParser::NameValue(nv) = args else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-
-        Some(AttributeKind::MoveSizeLimit {
-            limit: cx.parse_limit_int(nv)?,
-            attr_span: cx.attr_span,
-            limit_span: nv.value_span,
-        })
+        let limit = cx.expect_limit_int(args)?;
+        Some(AttributeKind::MoveSizeLimit { limit, attr_span: cx.attr_span })
     }
 }
 
@@ -132,16 +107,8 @@ impl<S: Stage> SingleAttributeParser<S> for TypeLengthLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let ArgParser::NameValue(nv) = args else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-
-        Some(AttributeKind::TypeLengthLimit {
-            limit: cx.parse_limit_int(nv)?,
-            attr_span: cx.attr_span,
-            limit_span: nv.value_span,
-        })
+        let limit = cx.expect_limit_int(args)?;
+        Some(AttributeKind::TypeLengthLimit { limit, attr_span: cx.attr_span })
     }
 }
 
@@ -154,16 +121,8 @@ impl<S: Stage> SingleAttributeParser<S> for PatternComplexityLimitParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Crate)]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let ArgParser::NameValue(nv) = args else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-
-        Some(AttributeKind::PatternComplexityLimit {
-            limit: cx.parse_limit_int(nv)?,
-            attr_span: cx.attr_span,
-            limit_span: nv.value_span,
-        })
+        let limit = cx.expect_limit_int(args)?;
+        Some(AttributeKind::PatternComplexityLimit { limit, attr_span: cx.attr_span })
     }
 }
 

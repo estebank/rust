@@ -11,7 +11,6 @@ use rustc_session::errors;
 use rustc_span::Symbol;
 
 use super::prelude::*;
-use super::util::parse_single_integer;
 use crate::session_diagnostics::{
     AttributeRequiresOpt, CguFieldsMissing, RustcScalableVectorCountOutOfRange, UnknownLangItem,
 };
@@ -109,8 +108,10 @@ impl<S: Stage> SingleAttributeParser<S> for RustcLayoutScalarValidRangeStartPars
     const TEMPLATE: AttributeTemplate = template!(List: &["start"]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        parse_single_integer(cx, args)
-            .map(|n| AttributeKind::RustcLayoutScalarValidRangeStart(Box::new(n), cx.attr_span))
+        Some(AttributeKind::RustcLayoutScalarValidRangeStart(
+            Box::new(cx.parse_single_integer(args)?),
+            cx.attr_span,
+        ))
     }
 }
 
@@ -123,8 +124,10 @@ impl<S: Stage> SingleAttributeParser<S> for RustcLayoutScalarValidRangeEndParser
     const TEMPLATE: AttributeTemplate = template!(List: &["end"]);
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        parse_single_integer(cx, args)
-            .map(|n| AttributeKind::RustcLayoutScalarValidRangeEnd(Box::new(n), cx.attr_span))
+        Some(AttributeKind::RustcLayoutScalarValidRangeEnd(
+            Box::new(cx.parse_single_integer(args)?),
+            cx.attr_span,
+        ))
     }
 }
 
@@ -193,18 +196,8 @@ impl<S: Stage> SingleAttributeParser<S> for RustcLintOptDenyFieldAccessParser {
     const ALLOWED_TARGETS: AllowedTargets = AllowedTargets::AllowList(&[Allow(Target::Field)]);
     const TEMPLATE: AttributeTemplate = template!(Word);
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(arg) = args.list().and_then(MetaItemListParser::single) else {
-            cx.expected_single_argument(cx.attr_span);
-            return None;
-        };
-
-        let MetaItemOrLitParser::Lit(MetaItemLit { kind: LitKind::Str(lint_message, _), .. }) = arg
-        else {
-            cx.expected_string_literal(arg.span(), arg.lit());
-            return None;
-        };
-
-        Some(AttributeKind::RustcLintOptDenyFieldAccess { lint_message: *lint_message })
+        let lint_message = cx.expect_single_str(args, None)?.0;
+        Some(AttributeKind::RustcLintOptDenyFieldAccess { lint_message })
     }
 }
 
@@ -590,11 +583,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcSimdMonomorphizeLaneLimitParser
     const TEMPLATE: AttributeTemplate = template!(NameValueStr: "N");
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let ArgParser::NameValue(nv) = args else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        Some(AttributeKind::RustcSimdMonomorphizeLaneLimit(cx.parse_limit_int(nv)?))
+        Some(AttributeKind::RustcSimdMonomorphizeLaneLimit(cx.expect_limit_int(args)?))
     }
 }
 
@@ -614,7 +603,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcScalableVectorParser {
             });
         }
 
-        let n = parse_single_integer(cx, args)?;
+        let n = cx.parse_single_integer(args)?;
         let Ok(n) = n.try_into() else {
             cx.emit_err(RustcScalableVectorCountOutOfRange { span: cx.attr_span, n });
             return None;
@@ -1209,10 +1198,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcSymbolNameParser {
     const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
     const TEMPLATE: AttributeTemplate = template!(Word);
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        if let Err(span) = args.no_args() {
-            cx.expected_no_args(span);
-            return None;
-        }
+        cx.expect_no_args(args)?;
         Some(AttributeKind::RustcSymbolName(cx.attr_span))
     }
 }
@@ -1233,10 +1219,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcDefPathParser {
     const ON_DUPLICATE: OnDuplicate<S> = OnDuplicate::Error;
     const TEMPLATE: AttributeTemplate = template!(Word);
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        if let Err(span) = args.no_args() {
-            cx.expected_no_args(span);
-            return None;
-        }
+        cx.expect_no_args(args)?;
         Some(AttributeKind::RustcDefPath(cx.attr_span))
     }
 }

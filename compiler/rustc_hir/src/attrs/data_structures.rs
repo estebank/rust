@@ -1124,7 +1124,6 @@ pub enum AttributeKind {
     /// Represents `#[move_size_limit]`
     MoveSizeLimit {
         attr_span: Span,
-        limit_span: Span,
         limit: Limit,
     },
 
@@ -1210,7 +1209,6 @@ pub enum AttributeKind {
     /// Represents `#[pattern_complexity_limit]`
     PatternComplexityLimit {
         attr_span: Span,
-        limit_span: Span,
         limit: Limit,
     },
 
@@ -1242,7 +1240,6 @@ pub enum AttributeKind {
     /// Represents [`#[recursion_limit]`](https://doc.rust-lang.org/reference/attributes/limits.html#the-recursion_limit-attribute)
     RecursionLimit {
         attr_span: Span,
-        limit_span: Span,
         limit: Limit,
     },
 
@@ -1630,7 +1627,6 @@ pub enum AttributeKind {
     /// Represents `#[type_length_limit]`
     TypeLengthLimit {
         attr_span: Span,
-        limit_span: Span,
         limit: Limit,
     },
 

@@ -162,10 +162,7 @@ impl DocParser {
 
         match path.word_sym() {
             Some(sym::no_crate_inject) => {
-                if let Err(span) = args.no_args() {
-                    expected_no_args(cx, span);
-                    return;
-                }
+                let Some(()) = cx.expect_no_args(args) else { return };
 
                 if let Some(used_span) = self.attribute.no_crate_inject {
                     let unused_span = path.span();
@@ -297,11 +294,7 @@ impl DocParser {
         args: &ArgParser,
         inline: DocInline,
     ) {
-        if let Err(span) = args.no_args() {
-            expected_no_args(cx, span);
-            return;
-        }
-
+        let Some(()) = cx.expect_no_args(args) else { return };
         self.attribute.inline.push((inline, path.span()));
     }
 
@@ -449,10 +442,7 @@ impl DocParser {
 
         macro_rules! no_args {
             ($ident: ident) => {{
-                if let Err(span) = args.no_args() {
-                    expected_no_args(cx, span);
-                    return;
-                }
+                let Some(()) = cx.expect_no_args(args) else { return };
 
                 // FIXME: It's errorring when the attribute is passed multiple times on the command
                 // line.
@@ -468,10 +458,7 @@ impl DocParser {
         }
         macro_rules! no_args_and_not_crate_level {
             ($ident: ident) => {{
-                if let Err(span) = args.no_args() {
-                    expected_no_args(cx, span);
-                    return;
-                }
+                let Some(()) = cx.expect_no_args(args) else { return };
                 let span = path.span();
                 if !check_attr_not_crate_level(cx, span, sym::$ident) {
                     return;
@@ -481,10 +468,7 @@ impl DocParser {
         }
         macro_rules! no_args_and_crate_level {
             ($ident: ident) => {{
-                if let Err(span) = args.no_args() {
-                    expected_no_args(cx, span);
-                    return;
-                }
+                let Some(()) = cx.expect_no_args(args) else { return };
                 let span = path.span();
                 if !check_attr_crate_level(cx, span) {
                     return;

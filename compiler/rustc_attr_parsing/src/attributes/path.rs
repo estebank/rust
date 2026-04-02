@@ -13,15 +13,6 @@ impl<S: Stage> SingleAttributeParser<S> for PathParser {
     );
 
     fn convert(cx: &mut AcceptContext<'_, '_, S>, args: &ArgParser) -> Option<AttributeKind> {
-        let Some(nv) = args.name_value() else {
-            cx.expected_name_value(cx.attr_span, None);
-            return None;
-        };
-        let Some(path) = nv.value_as_str() else {
-            cx.expected_string_literal(nv.value_span, Some(nv.value_as_lit()));
-            return None;
-        };
-
-        Some(AttributeKind::Path(path, cx.attr_span))
+        Some(AttributeKind::Path(cx.expect_single_str(args, None)?.0, cx.attr_span))
     }
 }

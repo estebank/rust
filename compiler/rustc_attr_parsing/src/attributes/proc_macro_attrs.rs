@@ -88,10 +88,7 @@ fn parse_derive_like<S: Stage>(
         cx.expected_identifier(trait_ident.span);
         return None;
     }
-    if let Err(e) = trait_attr.args().no_args() {
-        cx.expected_no_args(e);
-        return None;
-    };
+    cx.expect_no_args(trait_attr.args())?;
 
     // Parse optional attributes
     let mut attributes = ThinVec::new();

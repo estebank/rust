@@ -81,14 +81,7 @@ impl<S: Stage> SingleAttributeParser<S> for RustcForceInlineParser {
 
                 Some(reason)
             }
-            ArgParser::NameValue(v) => {
-                let Some(reason) = v.value_as_str() else {
-                    cx.expected_string_literal(v.value_span, Some(v.value_as_lit()));
-                    return None;
-                };
-
-                Some(reason)
-            }
+            ArgParser::NameValue(_) => Some(cx.expect_single_str(args, None)?.0),
         };
 
         Some(AttributeKind::Inline(
