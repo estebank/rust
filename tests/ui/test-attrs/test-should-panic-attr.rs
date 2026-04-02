@@ -42,3 +42,12 @@ fn test4() {
 fn test5() {
     panic!();
 }
+
+#[test]
+#[should_panic("foo")]
+//~^ ERROR malformed `should_panic` attribute input
+//~| NOTE expected this to be of the form `expected = "..."`
+//~| NOTE for more information, visit
+fn test6() {
+    panic!();
+}
