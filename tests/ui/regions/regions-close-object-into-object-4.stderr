@@ -1,86 +1,38 @@
-error[E0310]: the parameter type `U` may not live long enough
-  --> $DIR/regions-close-object-into-object-4.rs:9:5
-   |
-LL |     Box::new(B(&*v)) as Box<dyn X>
-   |     ^^^^^^^^
-   |     |
-   |     the parameter type `U` must be valid for the static lifetime...
-   |     ...so that the type `U` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `U` may not live long enough
+ at $DIR/regions-close-object-into-object-4.rs:9:5: the parameter type `U` must be valid for the static lifetime...
+  on line 9: ...so that the type `U` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn i<'a, T, U: 'static>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'static> {
-   |              +++++++++
+ on line 8, column 13, add `: 'static`
 
-error[E0310]: the parameter type `U` may not live long enough
-  --> $DIR/regions-close-object-into-object-4.rs:9:5
-   |
-LL |     Box::new(B(&*v)) as Box<dyn X>
-   |     ^^^^^^^^^^^^^^^^
-   |     |
-   |     the parameter type `U` must be valid for the static lifetime...
-   |     ...so that the type `U` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `U` may not live long enough
+ at $DIR/regions-close-object-into-object-4.rs:9:5: the parameter type `U` must be valid for the static lifetime...
+  on line 9: ...so that the type `U` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn i<'a, T, U: 'static>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'static> {
-   |              +++++++++
+ on line 8, column 13, add `: 'static`
 
-error[E0310]: the parameter type `U` may not live long enough
-  --> $DIR/regions-close-object-into-object-4.rs:9:5
-   |
-LL |     Box::new(B(&*v)) as Box<dyn X>
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |
-   |     the parameter type `U` must be valid for the static lifetime...
-   |     ...so that the type `U` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `U` may not live long enough
+ at $DIR/regions-close-object-into-object-4.rs:9:5: the parameter type `U` must be valid for the static lifetime...
+  on line 9: ...so that the type `U` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn i<'a, T, U: 'static>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'static> {
-   |              +++++++++
+ on line 8, column 13, add `: 'static`
 
 error: lifetime may not live long enough
-  --> $DIR/regions-close-object-into-object-4.rs:9:5
-   |
-LL | fn i<'a, T, U>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'static> {
-   |      -- lifetime `'a` defined here
-LL |     Box::new(B(&*v)) as Box<dyn X>
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'a` must outlive `'static`
-   |
+ at $DIR/regions-close-object-into-object-4.rs:9:5: returning this value requires that `'a` must outlive `'static`
+  on line 8, column 6: lifetime `'a` defined here
 help: consider changing the trait object's explicit `'static` bound to the lifetime of argument `v`
-   |
-LL - fn i<'a, T, U>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'static> {
-LL + fn i<'a, T, U>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'a> {
-   |
+ on line 8, column 51, replace with `'a`
 help: alternatively, add an explicit `'static` bound to this reference
-   |
-LL - fn i<'a, T, U>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'static> {
-LL + fn i<'a, T, U>(v: Box<(dyn A<U> + 'static)>) -> Box<dyn X + 'static> {
-   |
+ on line 8, column 18, replace with `Box<(dyn A<U> + 'static)>`
 
-error[E0515]: cannot return value referencing local data `*v`
-  --> $DIR/regions-close-object-into-object-4.rs:9:5
-   |
-LL |     Box::new(B(&*v)) as Box<dyn X>
-   |     ^^^^^^^^^^^---^^^^^^^^^^^^^^^^
-   |     |          |
-   |     |          `*v` is borrowed here
-   |     returns a value referencing data owned by the current function
+error E0515: cannot return value referencing local data `*v`
+ at $DIR/regions-close-object-into-object-4.rs:9:5: returns a value referencing data owned by the current function
+  on line 9, column 16: `*v` is borrowed here
 
-error[E0310]: the parameter type `U` may not live long enough
-  --> $DIR/regions-close-object-into-object-4.rs:9:14
-   |
-LL |     Box::new(B(&*v)) as Box<dyn X>
-   |              ^^^^^^
-   |              |
-   |              the parameter type `U` must be valid for the static lifetime...
-   |              ...so that the type `U` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `U` may not live long enough
+ at $DIR/regions-close-object-into-object-4.rs:9:14: the parameter type `U` must be valid for the static lifetime...
+  on line 9, column 14: ...so that the type `U` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn i<'a, T, U: 'static>(v: Box<dyn A<U>+'a>) -> Box<dyn X + 'static> {
-   |              +++++++++
+ on line 8, column 13, add `: 'static`
 
 error: aborting due to 6 previous errors
 

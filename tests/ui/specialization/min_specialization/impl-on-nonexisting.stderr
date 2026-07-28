@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `NonExistent` in this scope
-  --> $DIR/impl-on-nonexisting.rs:4:16
-   |
-LL | impl Trait for NonExistent {}
-   |                ^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `NonExistent` in this scope
+ at $DIR/impl-on-nonexisting.rs:4:16: not found in this scope
 
 error: aborting due to 1 previous error
 

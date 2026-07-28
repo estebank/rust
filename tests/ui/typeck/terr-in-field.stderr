@@ -1,16 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/terr-in-field.rs:15:14
-   |
-LL |     want_foo(b);
-   |     -------- ^ expected `Foo`, found `Bar`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/terr-in-field.rs:15:14: expected `Foo`, found `Bar`
+  on line 15: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/terr-in-field.rs:13:4
-   |
-LL | fn want_foo(f: Foo) {}
-   |    ^^^^^^^^ ------
+ at $DIR/terr-in-field.rs:13:4
 
 error: aborting due to 1 previous error
 

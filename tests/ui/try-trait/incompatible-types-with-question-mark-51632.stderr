@@ -1,23 +1,13 @@
-error[E0308]: `?` operator has incompatible types
-  --> $DIR/incompatible-types-with-question-mark-51632.rs:9:5
-   |
-LL | fn forbidden_narratives() -> Result<isize, ()> {
-   |                              ----------------- expected `Result<isize, ()>` because of return type
-LL |     missing_discourses()?
-   |     ^^^^^^^^^^^^^^^^^^^^^ expected `Result<isize, ()>`, found `isize`
-   |
-   = note: `?` operator cannot convert from `isize` to `Result<isize, ()>`
-   = note: expected enum `Result<isize, ()>`
-              found type `isize`
+error E0308: `?` operator has incompatible types
+ at $DIR/incompatible-types-with-question-mark-51632.rs:9:5: expected `Result<isize, ()>`, found `isize`
+  on line 8, column 30: expected `Result<isize, ()>` because of return type
+note: `?` operator cannot convert from `isize` to `Result<isize, ()>`
+note: expected enum `Result<isize, ()>`
+         found type `isize`
 help: try removing this `?`
-   |
-LL -     missing_discourses()?
-LL +     missing_discourses()
-   |
+ on line 9, column 24
 help: try wrapping the expression in `Ok`
-   |
-LL |     Ok(missing_discourses()?)
-   |     +++                     +
+ on line 9, column 4, add `Ok(`
 
 error: aborting due to 1 previous error
 

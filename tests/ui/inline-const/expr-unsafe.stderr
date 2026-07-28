@@ -1,14 +1,7 @@
 warning: unnecessary `unsafe` block
-  --> $DIR/expr-unsafe.rs:11:13
-   |
-LL |             unsafe {}
-   |             ^^^^^^ unnecessary `unsafe` block
-   |
+ at $DIR/expr-unsafe.rs:11:13: unnecessary `unsafe` block
 note: the lint level is defined here
-  --> $DIR/expr-unsafe.rs:3:9
-   |
-LL | #![warn(unused_unsafe)]
-   |         ^^^^^^^^^^^^^
+ at $DIR/expr-unsafe.rs:3:9
 
 warning: 1 warning emitted
 

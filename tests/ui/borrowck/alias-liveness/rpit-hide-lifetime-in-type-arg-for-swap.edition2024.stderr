@@ -1,10 +1,6 @@
-error[E0515]: cannot return value referencing local variable `x`
-  --> $DIR/rpit-hide-lifetime-in-type-arg-for-swap.rs:33:5
-   |
-LL |     hide(&lock, &mut res).swap(hide(&lock, &mut &x));
-   |                                                 -- `x` is borrowed here
-LL |     res
-   |     ^^^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing local variable `x`
+ at $DIR/rpit-hide-lifetime-in-type-arg-for-swap.rs:33:5: returns a value referencing data owned by the current function
+  on line 32, column 49: `x` is borrowed here
 
 error: aborting due to 1 previous error
 

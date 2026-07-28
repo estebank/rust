@@ -1,22 +1,12 @@
 error: cannot determine resolution for the import
-  --> $DIR/shadow-glob-module-resolution-4.rs:13:5
-   |
-LL | use b::C as e;
-   |     ^^^^^^^^^
+ at $DIR/shadow-glob-module-resolution-4.rs:13:5
 
 error: cannot determine resolution for the import
-  --> $DIR/shadow-glob-module-resolution-4.rs:13:5
-   |
-LL | use b::C as e;
-   |     ^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/shadow-glob-module-resolution-4.rs:13:5
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0432]: unresolved import `b::C`
-  --> $DIR/shadow-glob-module-resolution-4.rs:13:5
-   |
-LL | use b::C as e;
-   |     ^^^^^^^^^
+error E0432: unresolved import `b::C`
+ at $DIR/shadow-glob-module-resolution-4.rs:13:5
 
 error: aborting due to 3 previous errors
 

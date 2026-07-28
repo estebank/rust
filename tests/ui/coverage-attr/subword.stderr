@@ -1,70 +1,38 @@
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/subword.rs:8:3
-   |
-LL | #[coverage(yes(milord))]
-   |   ^^^^^^^^^-----------^
-   |            |
-   |            valid arguments are `on` or `off`
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/subword.rs:8:3
+  on line 8, column 12: valid arguments are `on` or `off`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(yes(milord))]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(yes(milord))]
-LL + #[coverage(on)]
-   |
+ on line 8, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/subword.rs:11:3
-   |
-LL | #[coverage(no(milord))]
-   |   ^^^^^^^^^----------^
-   |            |
-   |            valid arguments are `on` or `off`
-   |
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(no(milord))]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(no(milord))]
-LL + #[coverage(on)]
-   |
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/subword.rs:14:3
-   |
-LL | #[coverage(yes = "milord")]
-   |   ^^^^^^^^^--------------^
-   |            |
-   |            valid arguments are `on` or `off`
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/subword.rs:11:3
+  on line 11, column 12: valid arguments are `on` or `off`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(yes = "milord")]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(yes = "milord")]
-LL + #[coverage(on)]
-   |
+ on line 11, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/subword.rs:17:3
-   |
-LL | #[coverage(no = "milord")]
-   |   ^^^^^^^^^-------------^
-   |            |
-   |            valid arguments are `on` or `off`
-   |
+
+error E0539: malformed `coverage` attribute input
+ at $DIR/subword.rs:14:3
+  on line 14, column 12: valid arguments are `on` or `off`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(no = "milord")]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(no = "milord")]
-LL + #[coverage(on)]
-   |
+ on line 14, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
+
+error E0539: malformed `coverage` attribute input
+ at $DIR/subword.rs:17:3
+  on line 17, column 12: valid arguments are `on` or `off`
+help: try changing it to one of the following valid forms of the attribute
+ on line 17, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: aborting due to 4 previous errors
 

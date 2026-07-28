@@ -1,8 +1,5 @@
-error[E0515]: cannot return reference to local variable `local`
-  --> $DIR/issue-47470.rs:15:9
-   |
-LL |         &local
-   |         ^^^^^^ returns a reference to data owned by the current function
+error E0515: cannot return reference to local variable `local`
+ at $DIR/issue-47470.rs:15:9: returns a reference to data owned by the current function
 
 error: aborting due to 1 previous error
 

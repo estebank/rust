@@ -1,24 +1,12 @@
-error[E0533]: expected value, found struct variant `Homura::Madoka`
-  --> $DIR/issue-19452.rs:10:18
-   |
-LL |     let homura = Homura::Madoka;
-   |                  ^^^^^^^^^^^^^^ not a value
-   |
+error E0533: expected value, found struct variant `Homura::Madoka`
+ at $DIR/issue-19452.rs:10:18: not a value
 help: you might have meant to create a new value of the struct
-   |
-LL |     let homura = Homura::Madoka { age: /* value */ };
-   |                                 ++++++++++++++++++++
+ on line 10, column 31, add ` { age: /* value */ }`
 
-error[E0533]: expected value, found struct variant `issue_19452_aux::Homura::Madoka`
-  --> $DIR/issue-19452.rs:13:18
-   |
-LL |     let homura = issue_19452_aux::Homura::Madoka;
-   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not a value
-   |
+error E0533: expected value, found struct variant `issue_19452_aux::Homura::Madoka`
+ at $DIR/issue-19452.rs:13:18: not a value
 help: you might have meant to create a new value of the struct
-   |
-LL |     let homura = issue_19452_aux::Homura::Madoka { age: /* value */ };
-   |                                                  ++++++++++++++++++++
+ on line 13, column 48, add ` { age: /* value */ }`
 
 error: aborting due to 2 previous errors
 

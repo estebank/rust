@@ -1,106 +1,38 @@
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-then-neeing-semi.rs:28:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |
-LL | |         async_dummy();
-   | |         -------------- expected because of this
-...  |
-LL | |         async_dummy()
-   | |         ^^^^^^^^^^^^^ expected `()`, found future
-...  |
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-then-neeing-semi.rs:28:9: expected `()`, found future
+  on line 23, column 13 to line 32, column 6: `if` and `else` have incompatible types
+  on line 25: expected because of this
 note: calling an async function returns a future
-  --> $DIR/if-then-neeing-semi.rs:28:9
-   |
-LL |         async_dummy()
-   |         ^^^^^^^^^^^^^
+ at $DIR/if-then-neeing-semi.rs:28:9
 help: consider `await`ing on the `Future`
-   |
-LL |         async_dummy().await
-   |                      ++++++
+ on line 28, column 21, add `.await`
 help: consider removing this semicolon
-   |
-LL -         async_dummy();
-LL +         async_dummy()
-   |
+ on line 25, column 21
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-then-neeing-semi.rs:41:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |
-LL | |         async_dummy();
-   | |         -------------- expected because of this
-...  |
-LL | |         async_dummy2()
-   | |         ^^^^^^^^^^^^^^ expected `()`, found future
-...  |
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-then-neeing-semi.rs:41:9: expected `()`, found future
+  on line 36, column 13 to line 45, column 6: `if` and `else` have incompatible types
+  on line 38: expected because of this
 note: calling an async function returns a future
-  --> $DIR/if-then-neeing-semi.rs:41:9
-   |
-LL |         async_dummy2()
-   |         ^^^^^^^^^^^^^^
+ at $DIR/if-then-neeing-semi.rs:41:9
 help: consider `await`ing on the `Future`
-   |
-LL |         async_dummy2().await
-   |                       ++++++
+ on line 41, column 22, add `.await`
 help: consider removing this semicolon and boxing the expressions
-   |
-LL ~         Box::new(async_dummy())
-LL |
-LL |     } else {
-LL ~         Box::new(async_dummy2())
-   |
+ on line 38, column 8, add `Box::new(`
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-then-neeing-semi.rs:54:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |
-LL | |         async_dummy()
-   | |         ------------- expected because of this
-...  |
-LL | |         async_dummy2()
-   | |         ^^^^^^^^^^^^^^ expected future, found a different future
-...  |
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
-   |
-   = note: distinct uses of `impl Trait` result in different opaque types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-then-neeing-semi.rs:54:9: expected future, found a different future
+  on line 49, column 13 to line 57, column 6: `if` and `else` have incompatible types
+  on line 51: expected because of this
+note: distinct uses of `impl Trait` result in different opaque types
 help: consider `await`ing on both `Future`s
-   |
-LL ~         async_dummy().await
-LL |
-LL |     } else {
-LL ~         async_dummy2().await
-   |
+ on line 51, column 21, add `.await`
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-then-neeing-semi.rs:13:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |
-LL | |         dummy();
-   | |         --------
-   | |         |      |
-   | |         |      help: consider removing this semicolon
-   | |         expected because of this
-...  |
-LL | |         dummy()
-   | |         ^^^^^^^ expected `()`, found `i32`
-LL | |
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-then-neeing-semi.rs:13:9: expected `()`, found `i32`
+  on line 8, column 13 to line 15, column 6: `if` and `else` have incompatible types
+  on line 10: expected because of this
+  on line 10, column 16: help: consider removing this semicolon
 
 error: aborting due to 4 previous errors
 

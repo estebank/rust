@@ -1,69 +1,37 @@
 error: missing fragment specifier
-  --> $DIR/macro-missing-fragment.rs:4:20
-   |
-LL |     ( $( any_token $field_rust_type )* ) => {};
-   |                    ^^^^^^^^^^^^^^^^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/macro-missing-fragment.rs:4:20
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: try adding a specifier here
-   |
-LL |     ( $( any_token $field_rust_type:spec )* ) => {};
-   |                                    +++++
+ on line 4, column 35, add `:spec`
 
 error: missing fragment specifier
-  --> $DIR/macro-missing-fragment.rs:9:7
-   |
-LL |     ( $name ) => {};
-   |       ^^^^^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/macro-missing-fragment.rs:9:7
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: try adding a specifier here
-   |
-LL |     ( $name:spec ) => {};
-   |            +++++
+ on line 9, column 11, add `:spec`
 
 error: missing fragment specifier
-  --> $DIR/macro-missing-fragment.rs:13:7
-   |
-LL |     ( $name ) => {};
-   |       ^^^^^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/macro-missing-fragment.rs:13:7
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: try adding a specifier here
-   |
-LL |     ( $name:spec ) => {};
-   |            +++++
+ on line 13, column 11, add `:spec`
 
 error: missing fragment specifier
-  --> $DIR/macro-missing-fragment.rs:17:13
-   |
-LL |     ( $test:$tt ) => {};
-   |             ^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/macro-missing-fragment.rs:17:13
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: fragment specifiers should not be prefixed with `$`
-   |
-LL -     ( $test:$tt ) => {};
-LL +     ( $test:tt ) => {};
-   |
+ on line 17, column 12
 
 error: missing fragment specifier
-  --> $DIR/macro-missing-fragment.rs:21:15
-   |
-LL |     ( $($test:$tt),* ) => {};
-   |               ^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/macro-missing-fragment.rs:21:15
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: fragment specifiers should not be prefixed with `$`
-   |
-LL -     ( $($test:$tt),* ) => {};
-LL +     ( $($test:tt),* ) => {};
-   |
+ on line 21, column 14
 
 error: aborting due to 5 previous errors
 

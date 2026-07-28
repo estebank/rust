@@ -1,44 +1,20 @@
 error: `become` requires a function call
-  --> $DIR/become-uncallable.rs:7:12
-   |
-LL |     become 1;
-   |     -------^
-   |     |
-   |     help: try using `return` instead: `return`
-   |
+ at $DIR/become-uncallable.rs:7:12
+  on line 7: help: try using `return` instead: `return`
 note: not a function call
-  --> $DIR/become-uncallable.rs:7:12
-   |
-LL |     become 1;
-   |            ^
+ at $DIR/become-uncallable.rs:7:12
 
 error: `become` requires a function call
-  --> $DIR/become-uncallable.rs:11:12
-   |
-LL |     become { h() };
-   |     -------^^^^^^^
-   |     |
-   |     help: try using `return` instead: `return`
-   |
+ at $DIR/become-uncallable.rs:11:12
+  on line 11: help: try using `return` instead: `return`
 note: not a function call
-  --> $DIR/become-uncallable.rs:11:12
-   |
-LL |     become { h() };
-   |            ^^^^^^^
+ at $DIR/become-uncallable.rs:11:12
 
 error: `become` requires a function call
-  --> $DIR/become-uncallable.rs:15:12
-   |
-LL |     become *&g();
-   |     -------^^^^^
-   |     |
-   |     help: try using `return` instead: `return`
-   |
+ at $DIR/become-uncallable.rs:15:12
+  on line 15: help: try using `return` instead: `return`
 note: not a function call
-  --> $DIR/become-uncallable.rs:15:12
-   |
-LL |     become *&g();
-   |            ^^^^^
+ at $DIR/become-uncallable.rs:15:12
 
 error: aborting due to 3 previous errors
 

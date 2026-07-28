@@ -1,50 +1,28 @@
-error[E0670]: `async fn` is not permitted in Rust 2015
-  --> $DIR/unexpected-type-issue-120601.rs:10:1
-   |
-LL | async fn foo() -> Result<(), ()> {
-   | ^^^^^ to use `async fn`, switch to Rust 2018 or later
-   |
-   = help: pass `--edition 2024` to `rustc`
-   = note: for more on editions, read https://doc.rust-lang.org/edition-guide
+error E0670: `async fn` is not permitted in Rust 2015
+ at $DIR/unexpected-type-issue-120601.rs:10:1: to use `async fn`, switch to Rust 2018 or later
+help: pass `--edition 2024` to `rustc`
+note: for more on editions, read https://doc.rust-lang.org/edition-guide
 
-error[E0670]: `async fn` is not permitted in Rust 2015
-  --> $DIR/unexpected-type-issue-120601.rs:16:1
-   |
-LL | async fn tuple() -> Tuple {
-   | ^^^^^ to use `async fn`, switch to Rust 2018 or later
-   |
-   = help: pass `--edition 2024` to `rustc`
-   = note: for more on editions, read https://doc.rust-lang.org/edition-guide
+error E0670: `async fn` is not permitted in Rust 2015
+ at $DIR/unexpected-type-issue-120601.rs:16:1: to use `async fn`, switch to Rust 2018 or later
+help: pass `--edition 2024` to `rustc`
+note: for more on editions, read https://doc.rust-lang.org/edition-guide
 
-error[E0670]: `async fn` is not permitted in Rust 2015
-  --> $DIR/unexpected-type-issue-120601.rs:21:1
-   |
-LL | async fn match_() {
-   | ^^^^^ to use `async fn`, switch to Rust 2018 or later
-   |
-   = help: pass `--edition 2024` to `rustc`
-   = note: for more on editions, read https://doc.rust-lang.org/edition-guide
+error E0670: `async fn` is not permitted in Rust 2015
+ at $DIR/unexpected-type-issue-120601.rs:21:1: to use `async fn`, switch to Rust 2018 or later
+help: pass `--edition 2024` to `rustc`
+note: for more on editions, read https://doc.rust-lang.org/edition-guide
 
-error[E0308]: mismatched types
-  --> $DIR/unexpected-type-issue-120601.rs:23:9
-   |
-LL |     match tuple() {
-   |           ------- this expression has type `impl Future<Output = Tuple>`
-LL |         Tuple(_) => {}
-   |         ^^^^^^^^ expected future, found `Tuple`
-   |
-   = note: expected opaque type `impl Future<Output = Tuple>`
-                   found struct `Tuple`
+error E0425: cannot find function, tuple struct or tuple variant `Unstable2` in this scope
+ at $DIR/unexpected-type-issue-120601.rs:11:5: not found in this scope
+
+error E0308: mismatched types
+ at $DIR/unexpected-type-issue-120601.rs:23:9: expected future, found `Tuple`
+  on line 22, column 11: this expression has type `impl Future<Output = Tuple>`
+note: expected opaque type `impl Future<Output = Tuple>`
+              found struct `Tuple`
 help: consider `await`ing on the `Future`
-   |
-LL |     match tuple().await {
-   |                  ++++++
-
-error[E0425]: cannot find function, tuple struct or tuple variant `Unstable2` in this scope
-  --> $DIR/unexpected-type-issue-120601.rs:11:5
-   |
-LL |     Unstable2(())
-   |     ^^^^^^^^^ not found in this scope
+ on line 22, column 17, add `.await`
 
 error: aborting due to 5 previous errors
 

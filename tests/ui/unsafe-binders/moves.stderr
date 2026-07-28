@@ -1,42 +1,20 @@
-error[E0382]: use of moved value: `base`
-  --> $DIR/moves.rs:14:14
-   |
-LL |         let base = NotCopy::default();
-   |             ---- move occurs because `base` has type `ManuallyDrop<NotCopyInner>`, which does not implement the `Copy` trait
-LL |         let binder: unsafe<> NotCopy = wrap_binder!(base);
-   |                                                     ---- value moved here
-LL |         drop(base);
-   |              ^^^^ value used here after move
-   |
+error E0382: use of moved value: `base`
+ at $DIR/moves.rs:14:14: value used here after move
+  on line 12, column 13: move occurs because `base` has type `ManuallyDrop<NotCopyInner>`, which does not implement the `Copy` trait
+  on line 13, column 53: value moved here
 note: if `NotCopyInner` implemented `Clone`, you could clone the value
-  --> $DIR/moves.rs:7:1
-   |
-LL | struct NotCopyInner;
-   | ^^^^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let binder: unsafe<> NotCopy = wrap_binder!(base);
-   |                                                     ---- you could clone this value
+ at $DIR/moves.rs:7:1: consider implementing `Clone` for this type
+  on line 13, column 53: you could clone this value
 
-error[E0382]: use of moved value: `binder`
-  --> $DIR/moves.rs:23:14
-   |
-LL |         drop(unwrap_binder!(binder));
-   |              ---------------------- value moved here
-LL |         drop(unwrap_binder!(binder));
-   |              ^^^^^^^^^^^^^^^^^^^^^^ value used here after move
-   |
-   = note: move occurs because `binder` has type `ManuallyDrop<NotCopyInner>`, which does not implement the `Copy` trait
+error E0382: use of moved value: `binder`
+ at $DIR/moves.rs:23:14: value used here after move
+  on line 22, column 14: value moved here
+note: move occurs because `binder` has type `ManuallyDrop<NotCopyInner>`, which does not implement the `Copy` trait
 
-error[E0382]: use of moved value: `binder.0`
-  --> $DIR/moves.rs:35:14
-   |
-LL |         drop(unwrap_binder!(binder).0);
-   |              ------------------------ value moved here
-...
-LL |         drop(unwrap_binder!(binder).0);
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^ value used here after move
-   |
-   = note: move occurs because `binder.0` has type `ManuallyDrop<NotCopyInner>`, which does not implement the `Copy` trait
+error E0382: use of moved value: `binder.0`
+ at $DIR/moves.rs:35:14: value used here after move
+  on line 32, column 14: value moved here
+note: move occurs because `binder.0` has type `ManuallyDrop<NotCopyInner>`, which does not implement the `Copy` trait
 
 error: aborting due to 3 previous errors
 

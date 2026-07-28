@@ -1,11 +1,6 @@
-error[E0515]: cannot return reference to temporary value
-  --> $DIR/issue-17718-constants-not-static.rs:5:30
-   |
-LL | fn foo() -> &'static usize { &id(FOO) }
-   |                              ^-------
-   |                              ||
-   |                              |temporary value created here
-   |                              returns a reference to data owned by the current function
+error E0515: cannot return reference to temporary value
+ at $DIR/issue-17718-constants-not-static.rs:5:30: returns a reference to data owned by the current function
+  on line 5, column 31: temporary value created here
 
 error: aborting due to 1 previous error
 

@@ -1,22 +1,12 @@
-error[E0308]: mismatched types
-  --> $DIR/terr-sorts.rs:12:14
-   |
-LL |     want_foo(b);
-   |     -------- ^ expected `Foo`, found `Box<Foo>`
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected struct `Foo`
-              found struct `Box<Foo>`
+error E0308: mismatched types
+ at $DIR/terr-sorts.rs:12:14: expected `Foo`, found `Box<Foo>`
+  on line 12: arguments to this function are incorrect
+note: expected struct `Foo`
+         found struct `Box<Foo>`
 note: function defined here
-  --> $DIR/terr-sorts.rs:10:4
-   |
-LL | fn want_foo(f: Foo) {}
-   |    ^^^^^^^^ ------
+ at $DIR/terr-sorts.rs:10:4
 help: consider unboxing the value
-   |
-LL |     want_foo(*b);
-   |              +
+ on line 12, column 13, add `*`
 
 error: aborting due to 1 previous error
 

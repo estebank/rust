@@ -1,19 +1,9 @@
 error: unnecessary parentheses around assigned value
-  --> $DIR/unused-parens-trailing-space-issue-158583.rs:3:14
-   |
-LL |     let _x = (3 + 6);
-   |              ^     ^
-   |
+ at $DIR/unused-parens-trailing-space-issue-158583.rs:3:14
 note: the lint level is defined here
-  --> $DIR/unused-parens-trailing-space-issue-158583.rs:2:12
-   |
-LL |     #[deny(unused_parens)]
-   |            ^^^^^^^^^^^^^
+ at $DIR/unused-parens-trailing-space-issue-158583.rs:2:12
 help: remove these parentheses
-   |
-LL -     let _x = (3 + 6);
-LL +     let _x = 3 + 6;
-   |
+ on line 3, column 13
 
 error: aborting due to 1 previous error
 

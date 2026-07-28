@@ -1,36 +1,18 @@
 error: lifetime may not live long enough
-  --> $DIR/regions-addr-of-upvar-self.rs:9:20
-   |
-LL |         let _f = || {
-   |                  -- lifetime `'1` represents this closure's body
-LL |             let p: &'static mut usize = &mut self.food;
-   |                    ^^^^^^^^^^^^^^^^^^ type annotation requires that `'1` must outlive `'static`
-   |
-   = note: closure implements `FnMut`, so references to captured variables can't escape the closure
+ at $DIR/regions-addr-of-upvar-self.rs:9:20: type annotation requires that `'1` must outlive `'static`
+  on line 8, column 18: lifetime `'1` represents this closure's body
+note: closure implements `FnMut`, so references to captured variables can't escape the closure
 
 error: lifetime may not live long enough
-  --> $DIR/regions-addr-of-upvar-self.rs:9:20
-   |
-LL |     pub fn chase_cat(&mut self) {
-   |                      - let's call the lifetime of this reference `'1`
-LL |         let _f = || {
-LL |             let p: &'static mut usize = &mut self.food;
-   |                    ^^^^^^^^^^^^^^^^^^ type annotation requires that `'1` must outlive `'static`
+ at $DIR/regions-addr-of-upvar-self.rs:9:20: type annotation requires that `'1` must outlive `'static`
+  on line 7, column 22: let's call the lifetime of this reference `'1`
 
-error[E0597]: `self` does not live long enough
-  --> $DIR/regions-addr-of-upvar-self.rs:9:46
-   |
-LL |     pub fn chase_cat(&mut self) {
-   |                      --------- binding `self` declared here
-LL |         let _f = || {
-   |                  -- value captured here
-LL |             let p: &'static mut usize = &mut self.food;
-   |                    ------------------        ^^^^^^^^^ borrowed value does not live long enough
-   |                    |
-   |                    type annotation requires that `self` is borrowed for `'static`
-...
-LL |     }
-   |      - `self` dropped here while still borrowed
+error E0597: `self` does not live long enough
+ at $DIR/regions-addr-of-upvar-self.rs:9:46: borrowed value does not live long enough
+  on line 7, column 22: binding `self` declared here
+  on line 8, column 18: value captured here
+  on line 9, column 20: type annotation requires that `self` is borrowed for `'static`
+  on line 15, column 6: `self` dropped here while still borrowed
 
 error: aborting due to 3 previous errors
 

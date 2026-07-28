@@ -1,15 +1,8 @@
-error[E0067]: invalid left-hand side of assignment
-  --> $DIR/assign-non-lval-needs-deref.rs:15:16
-   |
-LL |     (&mut Foo) += ();
-   |     ---------- ^^
-   |     |
-   |     cannot assign to this expression
-   |
+error E0067: invalid left-hand side of assignment
+ at $DIR/assign-non-lval-needs-deref.rs:15:16
+  on line 15: cannot assign to this expression
 help: consider dereferencing the left-hand side of this operation
-   |
-LL |     *(&mut Foo) += ();
-   |     +
+ on line 15, column 4, add `*`
 
 error: aborting due to 1 previous error
 

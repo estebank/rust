@@ -1,20 +1,10 @@
-error[E0379]: functions in traits cannot be declared const
-  --> $DIR/issue-54954.rs:5:5
-   |
-LL |     const fn const_val<T: Sized>() -> usize {
-   |     ^^^^^-
-   |     |
-   |     functions in traits cannot be const
-   |     help: remove the `const`
+error E0379: functions in traits cannot be declared const
+ at $DIR/issue-54954.rs:5:5: functions in traits cannot be const
+  on line 5: help: remove the `const`
 
-error[E0790]: cannot call associated function on trait without specifying the corresponding `impl` type
-  --> $DIR/issue-54954.rs:1:24
-   |
-LL | const ARR_LEN: usize = Tt::const_val::<[i8; 123]>();
-   |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot call associated function of trait
-...
-LL |     const fn const_val<T: Sized>() -> usize {
-   |     --------------------------------------- `Tt::const_val` defined here
+error E0790: cannot call associated function on trait without specifying the corresponding `impl` type
+ at $DIR/issue-54954.rs:1:24: cannot call associated function of trait
+  on line 5: `Tt::const_val` defined here
 
 error: aborting due to 2 previous errors
 

@@ -1,10 +1,6 @@
-error[E0308]: mismatched types
-  --> $DIR/keyword-false-as-identifier.rs:2:9
-   |
-LL |     let false = 22;
-   |         ^^^^^   -- this expression has type `{integer}`
-   |         |
-   |         expected integer, found `bool`
+error E0308: mismatched types
+ at $DIR/keyword-false-as-identifier.rs:2:9: expected integer, found `bool`
+  on line 2, column 17: this expression has type `{integer}`
 
 error: aborting due to 1 previous error
 

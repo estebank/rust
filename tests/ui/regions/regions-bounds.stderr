@@ -1,26 +1,14 @@
 error: lifetime may not live long enough
-  --> $DIR/regions-bounds.rs:9:12
-   |
-LL | fn a_fn1<'a,'b>(e: TupleStruct<'a>) -> TupleStruct<'b> {
-   |          -- -- lifetime `'b` defined here
-   |          |
-   |          lifetime `'a` defined here
-LL |     return e;
-   |            ^ function was supposed to return data with lifetime `'b` but it is returning data with lifetime `'a`
-   |
-   = help: consider adding the following bound: `'a: 'b`
+ at $DIR/regions-bounds.rs:9:12: function was supposed to return data with lifetime `'b` but it is returning data with lifetime `'a`
+  on line 8, column 10: lifetime `'a` defined here
+  on line 8, column 13: lifetime `'b` defined here
+help: consider adding the following bound: `'a: 'b`
 
 error: lifetime may not live long enough
-  --> $DIR/regions-bounds.rs:14:12
-   |
-LL | fn a_fn3<'a,'b>(e: Struct<'a>) -> Struct<'b> {
-   |          -- -- lifetime `'b` defined here
-   |          |
-   |          lifetime `'a` defined here
-LL |     return e;
-   |            ^ function was supposed to return data with lifetime `'b` but it is returning data with lifetime `'a`
-   |
-   = help: consider adding the following bound: `'a: 'b`
+ at $DIR/regions-bounds.rs:14:12: function was supposed to return data with lifetime `'b` but it is returning data with lifetime `'a`
+  on line 13, column 10: lifetime `'a` defined here
+  on line 13, column 13: lifetime `'b` defined here
+help: consider adding the following bound: `'a: 'b`
 
 error: aborting due to 2 previous errors
 

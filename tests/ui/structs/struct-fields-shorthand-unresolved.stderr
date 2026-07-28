@@ -1,14 +1,7 @@
-error[E0425]: cannot find value `y` in this scope
-  --> $DIR/struct-fields-shorthand-unresolved.rs:10:9
-   |
-LL |         y
-   |         ^
-   |
+error E0425: cannot find value `y` in this scope
+ at $DIR/struct-fields-shorthand-unresolved.rs:10:9
 help: a local variable with a similar name exists
-   |
-LL -         y
-LL +         x
-   |
+ on line 10, column 8, replace with `x`
 
 error: aborting due to 1 previous error
 

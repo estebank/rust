@@ -1,111 +1,50 @@
-error[E0277]: `()` doesn't implement `std::fmt::Display`
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:14:20
-   |
-LL |         42;
-   |           - help: remove this semicolon
-...
-LL |     println!("{}", x);
-   |               --   ^ `()` cannot be formatted with the default formatter
-   |               |
-   |               required by this formatting parameter
-   |
-   = help: the trait `std::fmt::Display` is not implemented for `()`
-   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+error E0277: `()` doesn't implement `std::fmt::Display`
+ at $DIR/binding-assigned-block-without-tail-expression.rs:14:20: `()` cannot be formatted with the default formatter
+  on line 5, column 11: help: remove this semicolon
+  on line 14, column 15: required by this formatting parameter
+help: the trait `std::fmt::Display` is not implemented for `()`
+note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
 
-error[E0277]: `()` doesn't implement `std::fmt::Display`
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:15:20
-   |
-LL |     let y = {};
-   |             -- this empty block is missing a tail expression
-...
-LL |     println!("{}", y);
-   |               --   ^ `()` cannot be formatted with the default formatter
-   |               |
-   |               required by this formatting parameter
-   |
-   = help: the trait `std::fmt::Display` is not implemented for `()`
-   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+error E0277: `()` doesn't implement `std::fmt::Display`
+ at $DIR/binding-assigned-block-without-tail-expression.rs:15:20: `()` cannot be formatted with the default formatter
+  on line 7, column 13: this empty block is missing a tail expression
+  on line 15, column 15: required by this formatting parameter
+help: the trait `std::fmt::Display` is not implemented for `()`
+note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
 
-error[E0277]: `()` doesn't implement `std::fmt::Display`
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:16:20
-   |
-LL |         "hi";
-   |             - help: remove this semicolon
-...
-LL |     println!("{}", z);
-   |               --   ^ `()` cannot be formatted with the default formatter
-   |               |
-   |               required by this formatting parameter
-   |
-   = help: the trait `std::fmt::Display` is not implemented for `()`
-   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+error E0277: `()` doesn't implement `std::fmt::Display`
+ at $DIR/binding-assigned-block-without-tail-expression.rs:16:20: `()` cannot be formatted with the default formatter
+  on line 9, column 13: help: remove this semicolon
+  on line 16, column 15: required by this formatting parameter
+help: the trait `std::fmt::Display` is not implemented for `()`
+note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
 
-error[E0277]: `()` doesn't implement `std::fmt::Display`
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:17:20
-   |
-LL |       let s = {
-   |  _____________-
-LL | |         S;
-LL | |     };
-   | |_____- this block is missing a tail expression
-...
-LL |       println!("{}", s);
-   |                 --   ^ `()` cannot be formatted with the default formatter
-   |                 |
-   |                 required by this formatting parameter
-   |
-   = help: the trait `std::fmt::Display` is not implemented for `()`
-   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+error E0277: `()` doesn't implement `std::fmt::Display`
+ at $DIR/binding-assigned-block-without-tail-expression.rs:17:20: `()` cannot be formatted with the default formatter
+  on line 11, column 13 to line 13, column 6: this block is missing a tail expression
+  on line 17, column 15: required by this formatting parameter
+help: the trait `std::fmt::Display` is not implemented for `()`
+note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
 
-error[E0308]: mismatched types
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:18:18
-   |
-LL |         42;
-   |           - help: remove this semicolon
-...
-LL |     let _: i32 = x;
-   |            ---   ^ expected `i32`, found `()`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/binding-assigned-block-without-tail-expression.rs:18:18: expected `i32`, found `()`
+  on line 5, column 11: help: remove this semicolon
+  on line 18, column 12: expected due to this
 
-error[E0308]: mismatched types
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:19:18
-   |
-LL |     let y = {};
-   |             -- this empty block is missing a tail expression
-...
-LL |     let _: i32 = y;
-   |            ---   ^ expected `i32`, found `()`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/binding-assigned-block-without-tail-expression.rs:19:18: expected `i32`, found `()`
+  on line 7, column 13: this empty block is missing a tail expression
+  on line 19, column 12: expected due to this
 
-error[E0308]: mismatched types
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:20:18
-   |
-LL |       let z = {
-   |  _____________-
-LL | |         "hi";
-LL | |     };
-   | |_____- this block is missing a tail expression
-...
-LL |       let _: i32 = z;
-   |              ---   ^ expected `i32`, found `()`
-   |              |
-   |              expected due to this
+error E0308: mismatched types
+ at $DIR/binding-assigned-block-without-tail-expression.rs:20:18: expected `i32`, found `()`
+  on line 8, column 13 to line 10, column 6: this block is missing a tail expression
+  on line 20, column 12: expected due to this
 
-error[E0308]: mismatched types
-  --> $DIR/binding-assigned-block-without-tail-expression.rs:21:18
-   |
-LL |       let s = {
-   |  _____________-
-LL | |         S;
-LL | |     };
-   | |_____- this block is missing a tail expression
-...
-LL |       let _: i32 = s;
-   |              ---   ^ expected `i32`, found `()`
-   |              |
-   |              expected due to this
+error E0308: mismatched types
+ at $DIR/binding-assigned-block-without-tail-expression.rs:21:18: expected `i32`, found `()`
+  on line 11, column 13 to line 13, column 6: this block is missing a tail expression
+  on line 21, column 12: expected due to this
 
 error: aborting due to 8 previous errors
 

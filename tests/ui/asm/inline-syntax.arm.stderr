@@ -1,90 +1,40 @@
 error: unknown directive
-   |
 note: instantiated into assembly here
-  --> <inline asm>:1:1
-   |
-LL | .intel_syntax noprefix
-   | ^
+ at <inline asm>:1:1
 
 error: unknown directive
-   |
 note: instantiated into assembly here
-  --> <inline asm>:1:1
-   |
-LL | .intel_syntax noprefix
-   | ^
+ at <inline asm>:1:1
 
 error: unknown directive
-  --> $DIR/inline-syntax.rs:21:15
-   |
-LL |         asm!(".intel_syntax noprefix", "nop");
-   |               ^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/inline-syntax.rs:21:15
 note: instantiated into assembly here
-  --> <inline asm>:1:2
-   |
-LL |     .intel_syntax noprefix
-   |     ^
+ at <inline asm>:1:2
 
 error: unknown directive
-  --> $DIR/inline-syntax.rs:24:15
-   |
-LL |         asm!(".intel_syntax aaa noprefix", "nop");
-   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/inline-syntax.rs:24:15
 note: instantiated into assembly here
-  --> <inline asm>:1:2
-   |
-LL |     .intel_syntax aaa noprefix
-   |     ^
+ at <inline asm>:1:2
 
 error: unknown directive
-  --> $DIR/inline-syntax.rs:27:15
-   |
-LL |         asm!(".att_syntax noprefix", "nop");
-   |               ^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/inline-syntax.rs:27:15
 note: instantiated into assembly here
-  --> <inline asm>:1:2
-   |
-LL |     .att_syntax noprefix
-   |     ^
+ at <inline asm>:1:2
 
 error: unknown directive
-  --> $DIR/inline-syntax.rs:30:15
-   |
-LL |         asm!(".att_syntax bbb noprefix", "nop");
-   |               ^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/inline-syntax.rs:30:15
 note: instantiated into assembly here
-  --> <inline asm>:1:2
-   |
-LL |     .att_syntax bbb noprefix
-   |     ^
+ at <inline asm>:1:2
 
 error: unknown directive
-  --> $DIR/inline-syntax.rs:33:15
-   |
-LL |         asm!(".intel_syntax noprefix; nop");
-   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/inline-syntax.rs:33:15
 note: instantiated into assembly here
-  --> <inline asm>:1:2
-   |
-LL |     .intel_syntax noprefix; nop
-   |     ^
+ at <inline asm>:1:2
 
 error: unknown directive
-  --> $DIR/inline-syntax.rs:39:13
-   |
-LL |             .intel_syntax noprefix
-   |             ^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/inline-syntax.rs:39:13
 note: instantiated into assembly here
-  --> <inline asm>:2:13
-   |
-LL |             .intel_syntax noprefix
-   |             ^
+ at <inline asm>:2:13
 
 error: aborting due to 8 previous errors
 

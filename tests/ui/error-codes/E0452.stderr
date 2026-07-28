@@ -1,48 +1,25 @@
-error[E0452]: malformed lint attribute input
-  --> $DIR/E0452.rs:1:10
-   |
-LL | #![allow(foo = "")]
-   |          ^^^^^^^^ bad attribute argument
+error E0452: malformed lint attribute input
+ at $DIR/E0452.rs:1:10: bad attribute argument
 
-error[E0452]: malformed lint attribute input
-  --> $DIR/E0452.rs:1:10
-   |
-LL | #![allow(foo = "")]
-   |          ^^^^^^^^ bad attribute argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0452: malformed lint attribute input
+ at $DIR/E0452.rs:1:10: bad attribute argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0452]: malformed lint attribute input
-  --> $DIR/E0452.rs:1:10
-   |
-LL | #![allow(foo = "")]
-   |          ^^^^^^^^ bad attribute argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0452: malformed lint attribute input
+ at $DIR/E0452.rs:1:10: bad attribute argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0452]: malformed lint attribute input
-  --> $DIR/E0452.rs:1:10
-   |
-LL | #![allow(foo = "")]
-   |          ^^^^^^^^ bad attribute argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0452: malformed lint attribute input
+ at $DIR/E0452.rs:1:10: bad attribute argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0452]: malformed lint attribute input
-  --> $DIR/E0452.rs:1:10
-   |
-LL | #![allow(foo = "")]
-   |          ^^^^^^^^ bad attribute argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0452: malformed lint attribute input
+ at $DIR/E0452.rs:1:10: bad attribute argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0452]: malformed lint attribute input
-  --> $DIR/E0452.rs:1:10
-   |
-LL | #![allow(foo = "")]
-   |          ^^^^^^^^ bad attribute argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0452: malformed lint attribute input
+ at $DIR/E0452.rs:1:10: bad attribute argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: aborting due to 6 previous errors
 

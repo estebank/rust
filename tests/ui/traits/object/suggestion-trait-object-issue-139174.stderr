@@ -1,38 +1,20 @@
-error[E0404]: expected trait, found builtin type `usize`
-  --> $DIR/suggestion-trait-object-issue-139174.rs:3:36
-   |
-LL | fn f<'a>(x: Box<dyn Fn() -> Option<usize + 'a>>) -> usize {
-   |                                    ^^^^^ not a trait
+error E0404: expected trait, found builtin type `usize`
+ at $DIR/suggestion-trait-object-issue-139174.rs:3:36: not a trait
 
-error[E0404]: expected trait, found builtin type `usize`
-  --> $DIR/suggestion-trait-object-issue-139174.rs:9:32
-   |
-LL | fn create_adder<'a>(x: i32) -> usize + 'a {
-   |                                ^^^^^ not a trait
+error E0404: expected trait, found builtin type `usize`
+ at $DIR/suggestion-trait-object-issue-139174.rs:9:32: not a trait
 
-error[E0404]: expected trait, found builtin type `usize`
-  --> $DIR/suggestion-trait-object-issue-139174.rs:16:8
-   |
-LL |     x: usize + 'a,
-   |        ^^^^^ not a trait
+error E0404: expected trait, found builtin type `usize`
+ at $DIR/suggestion-trait-object-issue-139174.rs:16:8: not a trait
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggestion-trait-object-issue-139174.rs:3:36
-   |
-LL | fn f<'a>(x: Box<dyn Fn() -> Option<usize + 'a>>) -> usize {
-   |                                    ^^^^^^^^^^
+error E0782: expected a type, found a trait
+ at $DIR/suggestion-trait-object-issue-139174.rs:3:36
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggestion-trait-object-issue-139174.rs:9:32
-   |
-LL | fn create_adder<'a>(x: i32) -> usize + 'a {
-   |                                ^^^^^^^^^^
+error E0782: expected a type, found a trait
+ at $DIR/suggestion-trait-object-issue-139174.rs:9:32
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggestion-trait-object-issue-139174.rs:16:8
-   |
-LL |     x: usize + 'a,
-   |        ^^^^^^^^^^
+error E0782: expected a type, found a trait
+ at $DIR/suggestion-trait-object-issue-139174.rs:16:8
 
 error: aborting due to 6 previous errors
 

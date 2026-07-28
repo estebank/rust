@@ -1,13 +1,7 @@
-error[E0539]: malformed `cfi_encoding` attribute input
-  --> $DIR/invalid-attr-encoding.rs:10:3
-   |
-LL | #[cfi_encoding]
-   |   ^^^^^^^^^^^^ expected this to be of the form `cfi_encoding = "..."`
-   |
+error E0539: malformed `cfi_encoding` attribute input
+ at $DIR/invalid-attr-encoding.rs:10:3: expected this to be of the form `cfi_encoding = "..."`
 help: must be of the form
-   |
-LL | #[cfi_encoding = "encoding"]
-   |                ++++++++++++
+ on line 10, column 2, replace with `cfi_encoding = "encoding"`
 
 error: aborting due to 1 previous error
 

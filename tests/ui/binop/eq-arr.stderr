@@ -1,21 +1,11 @@
-error[E0369]: binary operation `==` cannot be applied to type `[X; 3]`
-  --> $DIR/eq-arr.rs:5:17
-   |
-LL |     let eq = xs == [X, X, X];
-   |              -- ^^ --------- [X; 3]
-   |              |
-   |              [X; 3]
-   |
+error E0369: binary operation `==` cannot be applied to type `[X; 3]`
+ at $DIR/eq-arr.rs:5:17
+  on line 5, column 14: [X; 3]
+  on line 5, column 20: [X; 3]
 note: an implementation of `PartialEq` might be missing for `X`
-  --> $DIR/eq-arr.rs:2:5
-   |
-LL |     struct X;
-   |     ^^^^^^^^ must implement `PartialEq`
+ at $DIR/eq-arr.rs:2:5: must implement `PartialEq`
 help: consider annotating `X` with `#[derive(PartialEq)]`
-   |
-LL +     #[derive(PartialEq)]
-LL |     struct X;
-   |
+ on line 2, column 1, add `    #[derive(PartialEq)]`
 
 error: aborting due to 1 previous error
 

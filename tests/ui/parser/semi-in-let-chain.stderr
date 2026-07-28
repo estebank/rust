@@ -1,50 +1,21 @@
 error: expected `{`, found `;`
-  --> $DIR/semi-in-let-chain.rs:6:23
-   |
-LL |         && let () = ();
-   |                       ^ expected `{`
-   |
+ at $DIR/semi-in-let-chain.rs:6:23: expected `{`
 note: you likely meant to continue parsing the let-chain starting here
-  --> $DIR/semi-in-let-chain.rs:7:9
-   |
-LL |         && let () = ()
-   |         ^^^^^^
+ at $DIR/semi-in-let-chain.rs:7:9
 help: consider removing this semicolon to parse the `let` as part of the same chain
-   |
-LL -         && let () = ();
-LL +         && let () = ()
-   |
+ on line 6, column 22
 
 error: expected `{`, found `;`
-  --> $DIR/semi-in-let-chain.rs:14:20
-   |
-LL |         && () == ();
-   |                    ^ expected `{`
-   |
+ at $DIR/semi-in-let-chain.rs:14:20: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/semi-in-let-chain.rs:13:8
-   |
-LL |       if let () = ()
-   |  ________^
-LL | |         && () == ();
-   | |___________________^
+ at $DIR/semi-in-let-chain.rs:13:8 to 14:20
 
 error: expected `{`, found `;`
-  --> $DIR/semi-in-let-chain.rs:22:20
-   |
-LL |         && () == ();
-   |                    ^ expected `{`
-   |
+ at $DIR/semi-in-let-chain.rs:22:20: expected `{`
 note: you likely meant to continue parsing the let-chain starting here
-  --> $DIR/semi-in-let-chain.rs:23:9
-   |
-LL |         && let () = ()
-   |         ^^^^^^
+ at $DIR/semi-in-let-chain.rs:23:9
 help: consider removing this semicolon to parse the `let` as part of the same chain
-   |
-LL -         && () == ();
-LL +         && () == ()
-   |
+ on line 22, column 19
 
 error: aborting due to 3 previous errors
 

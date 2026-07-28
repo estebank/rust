@@ -1,22 +1,12 @@
-error[E0382]: borrow of moved value: `message`
-  --> $DIR/liveness-use-after-send.rs:16:20
-   |
-LL | fn test00_start(ch: Chan<Box<isize>>, message: Box<isize>, _count: Box<isize>) {
-   |                                       ------- move occurs because `message` has type `Box<isize>`, which does not implement the `Copy` trait
-LL |     send(ch, message);
-   |              ------- value moved here
-LL |     println!("{}", message);
-   |                    ^^^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `message`
+ at $DIR/liveness-use-after-send.rs:16:20: value borrowed here after move
+  on line 14, column 39: move occurs because `message` has type `Box<isize>`, which does not implement the `Copy` trait
+  on line 15, column 14: value moved here
 note: consider changing this parameter type in function `send` to borrow instead if owning the value isn't necessary
-  --> $DIR/liveness-use-after-send.rs:3:54
-   |
-LL | fn send<T:Send + std::fmt::Debug>(ch: Chan<T>, data: T) {
-   |    ---- in this function                             ^ this parameter takes ownership of the value
+ at $DIR/liveness-use-after-send.rs:3:54: this parameter takes ownership of the value
+  on line 3, column 4: in this function
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     send(ch, message.clone());
-   |                     ++++++++
+ on line 15, column 20, add `.clone()`
 
 error: aborting due to 1 previous error
 

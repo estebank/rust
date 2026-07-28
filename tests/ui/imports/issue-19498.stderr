@@ -1,46 +1,23 @@
-error[E0255]: the name `A` is defined multiple times
-  --> $DIR/issue-19498.rs:5:1
-   |
-LL | use self::A;
-   |     ------- previous import of the module `A` here
-LL | use self::B;
-LL | mod A {}
-   | ^^^^^ `A` redefined here
-   |
-   = note: `A` must be defined only once in the type namespace of this module
+error E0255: the name `A` is defined multiple times
+ at $DIR/issue-19498.rs:5:1: `A` redefined here
+  on line 3, column 5: previous import of the module `A` here
+note: `A` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use self::A as OtherA;
-   |             +++++++++
+ on line 3, column 11, add ` as OtherA`
 
-error[E0255]: the name `B` is defined multiple times
-  --> $DIR/issue-19498.rs:7:1
-   |
-LL | use self::B;
-   |     ------- previous import of the module `B` here
-...
-LL | pub mod B {}
-   | ^^^^^^^^^ `B` redefined here
-   |
-   = note: `B` must be defined only once in the type namespace of this module
+error E0255: the name `B` is defined multiple times
+ at $DIR/issue-19498.rs:7:1: `B` redefined here
+  on line 4, column 5: previous import of the module `B` here
+note: `B` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use self::B as OtherB;
-   |             +++++++++
+ on line 4, column 11, add ` as OtherB`
 
-error[E0255]: the name `D` is defined multiple times
-  --> $DIR/issue-19498.rs:11:5
-   |
-LL |     use crate::C::D;
-   |         ----------- previous import of the module `D` here
-LL |     mod D {}
-   |     ^^^^^ `D` redefined here
-   |
-   = note: `D` must be defined only once in the type namespace of this module
+error E0255: the name `D` is defined multiple times
+ at $DIR/issue-19498.rs:11:5: `D` redefined here
+  on line 10, column 9: previous import of the module `D` here
+note: `D` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL |     use crate::C::D as OtherD;
-   |                     +++++++++
+ on line 10, column 19, add ` as OtherD`
 
 error: aborting due to 3 previous errors
 

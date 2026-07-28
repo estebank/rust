@@ -1,74 +1,35 @@
 error: unknown byte escape: `f`
-  --> $DIR/byte-literals.rs:3:21
-   |
-LL | static FOO: u8 = b'\f';
-   |                     ^ unknown byte escape
-   |
-   = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
+ at $DIR/byte-literals.rs:3:21: unknown byte escape
+help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
 help: if you meant to write a form feed, use a hex escape
-   |
-LL - static FOO: u8 = b'\f';
-LL + static FOO: u8 = b'\x0C';
-   |
+ on line 3, column 20, replace with `x0C`
 
 error: unknown byte escape: `f`
-  --> $DIR/byte-literals.rs:6:8
-   |
-LL |     b'\f';
-   |        ^ unknown byte escape
-   |
-   = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
+ at $DIR/byte-literals.rs:6:8: unknown byte escape
+help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
 help: if you meant to write a form feed, use a hex escape
-   |
-LL -     b'\f';
-LL +     b'\x0C';
-   |
+ on line 6, column 7, replace with `x0C`
 
 error: invalid character in numeric character escape: `Z`
-  --> $DIR/byte-literals.rs:7:10
-   |
-LL |     b'\x0Z';
-   |          ^ invalid character in numeric character escape
+ at $DIR/byte-literals.rs:7:10: invalid character in numeric character escape
 
 error: byte constant must be escaped: `\t`
-  --> $DIR/byte-literals.rs:8:7
-   |
-LL |     b'    ';
-   |       ^^^^
-   |
+ at $DIR/byte-literals.rs:8:7
 help: escape the character
-   |
-LL |     b'\t';
-   |       ++
+ on line 8, column 6, add `\t`
 
 error: byte constant must be escaped: `'`
-  --> $DIR/byte-literals.rs:9:7
-   |
-LL |     b''';
-   |       ^
-   |
+ at $DIR/byte-literals.rs:9:7
 help: escape the character
-   |
-LL |     b'\'';
-   |       +
+ on line 9, column 6, replace with `\'`
 
 error: non-ASCII character in byte literal
-  --> $DIR/byte-literals.rs:10:7
-   |
-LL |     b'é';
-   |       ^ must be ASCII
-   |
+ at $DIR/byte-literals.rs:10:7: must be ASCII
 help: if you meant to use the unicode code point for 'é', use a \xHH escape
-   |
-LL -     b'é';
-LL +     b'\xE9';
-   |
+ on line 10, column 6, replace with `\xE9`
 
-error[E0763]: unterminated byte constant
-  --> $DIR/byte-literals.rs:11:6
-   |
-LL |     b'a
-   |      ^^^^
+error E0763: unterminated byte constant
+ at $DIR/byte-literals.rs:11:6
 
 error: aborting due to 7 previous errors
 

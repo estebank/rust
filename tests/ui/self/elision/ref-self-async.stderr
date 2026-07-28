@@ -1,107 +1,51 @@
 error: lifetime may not live long enough
-  --> $DIR/ref-self-async.rs:23:9
-   |
-LL |     async fn ref_self(&self, f: &u32) -> &u32 {
-   |                       -         - let's call the lifetime of this reference `'1`
-   |                       |
-   |                       let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-self-async.rs:23:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 22, column 23: let's call the lifetime of this reference `'2`
+  on line 22, column 33: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn ref_self<'a>(&self, f: &'a u32) -> &'a u32 {
-   |                      ++++            ++          ++
+ on line 22, column 21, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-self-async.rs:30:9
-   |
-LL |     async fn ref_Self(self: &Self, f: &u32) -> &u32 {
-   |                             -         - let's call the lifetime of this reference `'1`
-   |                             |
-   |                             let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-self-async.rs:30:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 29, column 29: let's call the lifetime of this reference `'2`
+  on line 29, column 39: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn ref_Self<'a>(self: &Self, f: &'a u32) -> &'a u32 {
-   |                      ++++                  ++          ++
+ on line 29, column 21, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-self-async.rs:35:9
-   |
-LL |     async fn box_ref_Self(self: Box<&Self>, f: &u32) -> &u32 {
-   |                                     -          - let's call the lifetime of this reference `'1`
-   |                                     |
-   |                                     let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-self-async.rs:35:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 34, column 37: let's call the lifetime of this reference `'2`
+  on line 34, column 48: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn box_ref_Self<'a>(self: Box<&Self>, f: &'a u32) -> &'a u32 {
-   |                          ++++                       ++          ++
+ on line 34, column 25, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-self-async.rs:40:9
-   |
-LL |     async fn pin_ref_Self(self: Pin<&Self>, f: &u32) -> &u32 {
-   |                                     -          - let's call the lifetime of this reference `'1`
-   |                                     |
-   |                                     let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-self-async.rs:40:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 39, column 37: let's call the lifetime of this reference `'2`
+  on line 39, column 48: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn pin_ref_Self<'a>(self: Pin<&Self>, f: &'a u32) -> &'a u32 {
-   |                          ++++                       ++          ++
+ on line 39, column 25, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-self-async.rs:45:9
-   |
-LL |     async fn box_box_ref_Self(self: Box<Box<&Self>>, f: &u32) -> &u32 {
-   |                                             -           - let's call the lifetime of this reference `'1`
-   |                                             |
-   |                                             let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-self-async.rs:45:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 44, column 45: let's call the lifetime of this reference `'2`
+  on line 44, column 57: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn box_box_ref_Self<'a>(self: Box<Box<&Self>>, f: &'a u32) -> &'a u32 {
-   |                              ++++                            ++          ++
+ on line 44, column 29, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-self-async.rs:50:9
-   |
-LL |     async fn box_pin_ref_Self(self: Box<Pin<&Self>>, f: &u32) -> &u32 {
-   |                                             -           - let's call the lifetime of this reference `'1`
-   |                                             |
-   |                                             let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-self-async.rs:50:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 49, column 45: let's call the lifetime of this reference `'2`
+  on line 49, column 57: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn box_pin_ref_Self<'a>(self: Box<Pin<&Self>>, f: &'a u32) -> &'a u32 {
-   |                              ++++                            ++          ++
+ on line 49, column 29, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-self-async.rs:55:9
-   |
-LL |     async fn wrap_ref_Self_Self(self: Wrap<&Self, Self>, f: &u8) -> &u8 {
-   |                                            -                - let's call the lifetime of this reference `'1`
-   |                                            |
-   |                                            let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-self-async.rs:55:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 54, column 44: let's call the lifetime of this reference `'2`
+  on line 54, column 61: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn wrap_ref_Self_Self<'a>(self: Wrap<&Self, Self>, f: &'a u8) -> &'a u8 {
-   |                                ++++                              ++         ++
+ on line 54, column 31, add `<'a>`
 
 error: aborting due to 7 previous errors
 

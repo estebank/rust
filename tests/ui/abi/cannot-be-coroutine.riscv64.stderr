@@ -1,35 +1,15 @@
 error: functions with the "riscv-interrupt-m" ABI cannot be `async`
-  --> $DIR/cannot-be-coroutine.rs:50:1
-   |
-LL | async extern "riscv-interrupt-m" fn riscv_m() {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/cannot-be-coroutine.rs:50:1
 help: remove the `async` keyword from this definition
-   |
-LL - async extern "riscv-interrupt-m" fn riscv_m() {
-LL + extern "riscv-interrupt-m" fn riscv_m() {
-   |
+ on line 50, column 1
 
 error: functions with the "riscv-interrupt-s" ABI cannot be `async`
-  --> $DIR/cannot-be-coroutine.rs:54:1
-   |
-LL | async extern "riscv-interrupt-s" fn riscv_s() {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/cannot-be-coroutine.rs:54:1
 help: remove the `async` keyword from this definition
-   |
-LL - async extern "riscv-interrupt-s" fn riscv_s() {
-LL + extern "riscv-interrupt-s" fn riscv_s() {
-   |
+ on line 54, column 1
 
 error: requires `ResumeTy` lang_item
-  --> $DIR/cannot-be-coroutine.rs:38:19
-   |
-LL |   async fn vanilla(){
-   |  ___________________^
-LL | |
-LL | | }
-   | |_^
+ at $DIR/cannot-be-coroutine.rs:38:19 to 40:2
 
 error: aborting due to 3 previous errors
 

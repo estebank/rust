@@ -1,10 +1,6 @@
-error[E0433]: cannot find module or crate `somedep` in this scope
-  --> $DIR/multiple-opts.rs:19:5
-   |
-LL |     somedep::somefun();
-   |     ^^^^^^^ use of unresolved module or unlinked crate `somedep`
-   |
-   = help: you might be missing a crate named `somedep`
+error E0433: cannot find module or crate `somedep` in this scope
+ at $DIR/multiple-opts.rs:19:5: use of unresolved module or unlinked crate `somedep`
+help: you might be missing a crate named `somedep`
 
 error: aborting due to 1 previous error
 

@@ -1,11 +1,6 @@
-error[E0195]: lifetime parameters or bounds on method `foo` do not match the trait declaration
-  --> $DIR/lifetime-mismatch.rs:10:17
-   |
-LL |     async fn foo<'a>(&self);
-   |                 ---- lifetimes in impl do not match this method in trait
-...
-LL |     async fn foo(&self) {}
-   |                 ^ lifetimes do not match method in trait
+error E0195: lifetime parameters or bounds on method `foo` do not match the trait declaration
+ at $DIR/lifetime-mismatch.rs:10:17: lifetimes do not match method in trait
+  on line 5, column 17: lifetimes in impl do not match this method in trait
 
 error: aborting due to 1 previous error
 

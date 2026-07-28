@@ -1,25 +1,13 @@
-error[E0806]: function `other` has a type that is incompatible with the declaration of `#[foo]`
-  --> $DIR/wrong_ret_ty.rs:17:18
-   |
-LL | fn other(_x: u64) {
-   |                  ^ expected `u64`, found `()`
-   |
+error E0806: function `other` has a type that is incompatible with the declaration of `#[foo]`
+ at $DIR/wrong_ret_ty.rs:17:18: expected `u64`, found `()`
 note: expected this because of this attribute
-  --> $DIR/wrong_ret_ty.rs:16:1
-   |
-LL | #[foo]
-   | ^^^^^^
+ at $DIR/wrong_ret_ty.rs:16:1
 note: type in declaration
-  --> $DIR/wrong_ret_ty.rs:13:28
-   |
-LL |     safe fn bar(x: u64) -> u64;
-   |                            ^^^
-   = note: expected signature `fn(_) -> u64`
-              found signature `fn(_) -> ()`
+ at $DIR/wrong_ret_ty.rs:13:28
+note: expected signature `fn(_) -> u64`
+         found signature `fn(_) -> ()`
 help: change the output type to match the declaration
-   |
-LL | fn other(_x: u64) -> u64 {
-   |                   ++++++
+ on line 17, column 17, add ` -> u64`
 
 error: aborting due to 1 previous error
 

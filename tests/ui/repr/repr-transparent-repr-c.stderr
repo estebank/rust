@@ -1,29 +1,17 @@
-error[E0690]: transparent struct needs at most one non-trivial field, but has 2
-  --> $DIR/repr-transparent-repr-c.rs:16:1
-   |
-LL | pub struct T5(Sized, ReprC1Zst);
-   | ^^^^^^^^^^^^^ -----  --------- this field contains `ReprC1Zst`, which is a `#[repr(C)]` type, so it is not guaranteed to be zero-sized on all targets
-   | |             |
-   | |             this field has non-zero size
-   | needs at most one non-trivial field, but has 2
+error E0690: transparent struct needs at most one non-trivial field, but has 2
+ at $DIR/repr-transparent-repr-c.rs:16:1: needs at most one non-trivial field, but has 2
+  on line 16, column 15: this field has non-zero size
+  on line 16, column 22: this field contains `ReprC1Zst`, which is a `#[repr(C)]` type, so it is not guaranteed to be zero-sized on all targets
 
-error[E0690]: transparent struct needs at most one non-trivial field, but has 2
-  --> $DIR/repr-transparent-repr-c.rs:20:1
-   |
-LL | pub struct T6(ReprC1Zst, Sized);
-   | ^^^^^^^^^^^^^ ---------  ----- this field has non-zero size
-   | |             |
-   | |             this field contains `ReprC1Zst`, which is a `#[repr(C)]` type, so it is not guaranteed to be zero-sized on all targets
-   | needs at most one non-trivial field, but has 2
+error E0690: transparent struct needs at most one non-trivial field, but has 2
+ at $DIR/repr-transparent-repr-c.rs:20:1: needs at most one non-trivial field, but has 2
+  on line 20, column 15: this field contains `ReprC1Zst`, which is a `#[repr(C)]` type, so it is not guaranteed to be zero-sized on all targets
+  on line 20, column 26: this field has non-zero size
 
-error[E0690]: transparent struct needs at most one non-trivial field, but has 2
-  --> $DIR/repr-transparent-repr-c.rs:24:1
-   |
-LL | pub struct T7(T1, [Sized; 0]); // still wrong, even when the repr(C) is hidden inside another type
-   | ^^^^^^^^^^^^^ --  ---------- this field requires alignment
-   | |             |
-   | |             this field contains `ReprC1Zst`, which is a `#[repr(C)]` type, so it is not guaranteed to be zero-sized on all targets
-   | needs at most one non-trivial field, but has 2
+error E0690: transparent struct needs at most one non-trivial field, but has 2
+ at $DIR/repr-transparent-repr-c.rs:24:1: needs at most one non-trivial field, but has 2
+  on line 24, column 15: this field contains `ReprC1Zst`, which is a `#[repr(C)]` type, so it is not guaranteed to be zero-sized on all targets
+  on line 24, column 19: this field requires alignment
 
 error: aborting due to 3 previous errors
 

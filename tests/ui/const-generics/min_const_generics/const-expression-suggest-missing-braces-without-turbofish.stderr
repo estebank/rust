@@ -1,140 +1,65 @@
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:6:8
-   |
-LL |     foo<BAR + 3>();
-   |        ^       ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:6:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<BAR + 3>();
-   |        ++
+ on line 6, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:9:8
-   |
-LL |     foo<BAR + BAR>();
-   |        ^         ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:9:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<BAR + BAR>();
-   |        ++
+ on line 9, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:12:8
-   |
-LL |     foo<3 + 3>();
-   |        ^     ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:12:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<3 + 3>();
-   |        ++
+ on line 12, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:15:8
-   |
-LL |     foo<BAR - 3>();
-   |        ^       ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:15:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<BAR - 3>();
-   |        ++
+ on line 15, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:18:8
-   |
-LL |     foo<BAR - BAR>();
-   |        ^         ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:18:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<BAR - BAR>();
-   |        ++
+ on line 18, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:21:8
-   |
-LL |     foo<100 - BAR>();
-   |        ^         ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:21:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<100 - BAR>();
-   |        ++
+ on line 21, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:24:8
-   |
-LL |     foo<bar<i32>()>();
-   |        ^   ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:24:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<bar<i32>()>();
-   |        ++
+ on line 24, column 7, add `::`
 
 error: expected one of `;` or `}`, found `>`
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:24:19
-   |
-LL |     foo<bar<i32>()>();
-   |                   ^ expected one of `;` or `}`
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:24:19: expected one of `;` or `}`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:28:8
-   |
-LL |     foo<bar::<i32>()>();
-   |        ^            ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:28:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<bar::<i32>()>();
-   |        ++
+ on line 28, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:31:8
-   |
-LL |     foo<bar::<i32>() + BAR>();
-   |        ^                  ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:31:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<bar::<i32>() + BAR>();
-   |        ++
+ on line 31, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:34:8
-   |
-LL |     foo<bar::<i32>() - BAR>();
-   |        ^                  ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:34:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<bar::<i32>() - BAR>();
-   |        ++
+ on line 34, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:37:8
-   |
-LL |     foo<BAR - bar::<i32>()>();
-   |        ^                  ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:37:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<BAR - bar::<i32>()>();
-   |        ++
+ on line 37, column 7, add `::`
 
 error: comparison operators cannot be chained
-  --> $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:40:8
-   |
-LL |     foo<BAR - bar::<i32>()>();
-   |        ^                  ^
-   |
+ at $DIR/const-expression-suggest-missing-braces-without-turbofish.rs:40:8
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |     foo::<BAR - bar::<i32>()>();
-   |        ++
+ on line 40, column 7, add `::`
 
 error: aborting due to 13 previous errors
 

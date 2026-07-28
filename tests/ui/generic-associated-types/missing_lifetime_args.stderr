@@ -1,54 +1,25 @@
-error[E0107]: missing generics for associated type `X::Y`
-  --> $DIR/missing_lifetime_args.rs:11:32
-   |
-LL | fn foo<'c, 'd>(_arg: Box<dyn X<Y = (&'c u32, &'d u32)>>) {}
-   |                                ^ expected 2 lifetime arguments
-   |
+error E0107: missing generics for associated type `X::Y`
+ at $DIR/missing_lifetime_args.rs:11:32: expected 2 lifetime arguments
 note: associated type defined here, with 2 lifetime parameters: `'a`, `'b`
-  --> $DIR/missing_lifetime_args.rs:2:10
-   |
-LL |     type Y<'a, 'b>;
-   |          ^ --  --
+ at $DIR/missing_lifetime_args.rs:2:10
 help: add missing lifetime arguments
-   |
-LL | fn foo<'c, 'd>(_arg: Box<dyn X<Y<'_, '_> = (&'c u32, &'d u32)>>) {}
-   |                                 ++++++++
+ on line 11, column 32, add `<'_, '_>`
 
-error[E0107]: struct takes 3 lifetime arguments but 2 lifetime arguments were supplied
-  --> $DIR/missing_lifetime_args.rs:14:26
-   |
-LL | fn bar<'a, 'b, 'c>(_arg: Foo<'a, 'b>) {}
-   |                          ^^^ --  -- supplied 2 lifetime arguments
-   |                          |
-   |                          expected 3 lifetime arguments
-   |
+error E0107: struct takes 3 lifetime arguments but 2 lifetime arguments were supplied
+ at $DIR/missing_lifetime_args.rs:14:26: expected 3 lifetime arguments
+  on line 14, column 34: supplied 2 lifetime arguments
 note: struct defined here, with 3 lifetime parameters: `'a`, `'b`, `'c`
-  --> $DIR/missing_lifetime_args.rs:5:8
-   |
-LL | struct Foo<'a, 'b, 'c> {
-   |        ^^^ --  --  --
+ at $DIR/missing_lifetime_args.rs:5:8
 help: add missing lifetime argument
-   |
-LL | fn bar<'a, 'b, 'c>(_arg: Foo<'a, 'b, 'a>) {}
-   |                                    ++++
+ on line 14, column 35, add `, 'a`
 
-error[E0107]: struct takes 3 lifetime arguments but 1 lifetime argument was supplied
-  --> $DIR/missing_lifetime_args.rs:17:16
-   |
-LL | fn f<'a>(_arg: Foo<'a>) {}
-   |                ^^^ -- supplied 1 lifetime argument
-   |                |
-   |                expected 3 lifetime arguments
-   |
+error E0107: struct takes 3 lifetime arguments but 1 lifetime argument was supplied
+ at $DIR/missing_lifetime_args.rs:17:16: expected 3 lifetime arguments
+  on line 17, column 20: supplied 1 lifetime argument
 note: struct defined here, with 3 lifetime parameters: `'a`, `'b`, `'c`
-  --> $DIR/missing_lifetime_args.rs:5:8
-   |
-LL | struct Foo<'a, 'b, 'c> {
-   |        ^^^ --  --  --
+ at $DIR/missing_lifetime_args.rs:5:8
 help: add missing lifetime arguments
-   |
-LL | fn f<'a>(_arg: Foo<'a, 'a, 'a>) {}
-   |                      ++++++++
+ on line 17, column 21, add `, 'a, 'a`
 
 error: aborting due to 3 previous errors
 

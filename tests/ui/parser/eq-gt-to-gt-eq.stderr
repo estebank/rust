@@ -1,125 +1,53 @@
 error: expected `{`, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:8:10
-   |
-LL |     if a => b {}
-   |          ^^ expected `{`
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:8:10: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/eq-gt-to-gt-eq.rs:8:8
-   |
-LL |     if a => b {}
-   |        ^
+ at $DIR/eq-gt-to-gt-eq.rs:8:8
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     if a => b {}
-LL +     if a >= b {}
-   |
+ on line 8, column 9, replace with `>=`
 
 error: expected `{`, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:13:10
-   |
-LL |     if a => 1 {}
-   |          ^^ expected `{`
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:13:10: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/eq-gt-to-gt-eq.rs:13:8
-   |
-LL |     if a => 1 {}
-   |        ^
+ at $DIR/eq-gt-to-gt-eq.rs:13:8
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     if a => 1 {}
-LL +     if a >= 1 {}
-   |
+ on line 13, column 9, replace with `>=`
 
 error: expected `{`, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:18:10
-   |
-LL |     if 1 => a {}
-   |          ^^ expected `{`
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:18:10: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/eq-gt-to-gt-eq.rs:18:8
-   |
-LL |     if 1 => a {}
-   |        ^
+ at $DIR/eq-gt-to-gt-eq.rs:18:8
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     if 1 => a {}
-LL +     if 1 >= a {}
-   |
+ on line 18, column 9, replace with `>=`
 
 error: expected `{`, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:24:10
-   |
-LL |     if a => b && a != b {}
-   |          ^^ expected `{`
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:24:10: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/eq-gt-to-gt-eq.rs:24:8
-   |
-LL |     if a => b && a != b {}
-   |        ^
+ at $DIR/eq-gt-to-gt-eq.rs:24:8
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     if a => b && a != b {}
-LL +     if a >= b && a != b {}
-   |
+ on line 24, column 9, replace with `>=`
 
 error: expected `{`, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:30:20
-   |
-LL |     if a != b && a => b {}
-   |                    ^^ expected `{`
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:30:20: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/eq-gt-to-gt-eq.rs:30:8
-   |
-LL |     if a != b && a => b {}
-   |        ^^^^^^^^^^^
+ at $DIR/eq-gt-to-gt-eq.rs:30:8
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     if a != b && a => b {}
-LL +     if a != b && a >= b {}
-   |
+ on line 30, column 19, replace with `>=`
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `else`, `{`, or an operator, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:36:15
-   |
-LL |     let _ = a => b;
-   |               ^^ expected one of 8 possible tokens
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:36:15: expected one of 8 possible tokens
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     let _ = a => b;
-LL +     let _ = a >= b;
-   |
+ on line 36, column 14, replace with `>=`
 
 error: expected one of `!`, `.`, `::`, `?`, `{`, or an operator, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:42:13
-   |
-LL |     match a => b {
-   |     -----   ^^ expected one of `!`, `.`, `::`, `?`, `{`, or an operator
-   |     |
-   |     while parsing this `match` expression
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:42:13: expected one of `!`, `.`, `::`, `?`, `{`, or an operator
+  on line 42: while parsing this `match` expression
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     match a => b {
-LL +     match a >= b {
-   |
+ on line 42, column 12, replace with `>=`
 
 error: expected one of `!`, `)`, `,`, `.`, `::`, `?`, `{`, or an operator, found `=>`
-  --> $DIR/eq-gt-to-gt-eq.rs:50:34
-   |
-LL |     let _ = [a].iter().any(|x| x => &b);
-   |                                  ^^ expected one of 8 possible tokens
-   |
+ at $DIR/eq-gt-to-gt-eq.rs:50:34: expected one of 8 possible tokens
 help: you might have meant to write a "greater than or equal to" comparison
-   |
-LL -     let _ = [a].iter().any(|x| x => &b);
-LL +     let _ = [a].iter().any(|x| x >= &b);
-   |
+ on line 50, column 33, replace with `>=`
 
 error: aborting due to 8 previous errors
 

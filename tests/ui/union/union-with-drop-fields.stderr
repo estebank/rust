@@ -1,38 +1,20 @@
-error[E0740]: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
-  --> $DIR/union-with-drop-fields.rs:8:5
-   |
-LL |     a: String,
-   |     ^^^^^^^^^
-   |
-   = note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
+error E0740: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
+ at $DIR/union-with-drop-fields.rs:8:5
+note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
 help: wrap the field type in `ManuallyDrop<...>`
-   |
-LL |     a: std::mem::ManuallyDrop<String>,
-   |        +++++++++++++++++++++++      +
+ on line 8, column 7, add `std::mem::ManuallyDrop<`
 
-error[E0740]: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
-  --> $DIR/union-with-drop-fields.rs:16:5
-   |
-LL |     a: S,
-   |     ^^^^
-   |
-   = note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
+error E0740: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
+ at $DIR/union-with-drop-fields.rs:16:5
+note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
 help: wrap the field type in `ManuallyDrop<...>`
-   |
-LL |     a: std::mem::ManuallyDrop<S>,
-   |        +++++++++++++++++++++++ +
+ on line 16, column 7, add `std::mem::ManuallyDrop<`
 
-error[E0740]: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
-  --> $DIR/union-with-drop-fields.rs:21:5
-   |
-LL |     a: T,
-   |     ^^^^
-   |
-   = note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
+error E0740: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
+ at $DIR/union-with-drop-fields.rs:21:5
+note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
 help: wrap the field type in `ManuallyDrop<...>`
-   |
-LL |     a: std::mem::ManuallyDrop<T>,
-   |        +++++++++++++++++++++++ +
+ on line 21, column 7, add `std::mem::ManuallyDrop<`
 
 error: aborting due to 3 previous errors
 

@@ -1,57 +1,27 @@
 error: format argument must be a string literal
-  --> $DIR/suggest-inline-args.rs:13:15
-   |
-LL |     eprintln!({stderr});
-   |               ^^^^^^^^
-   |
+ at $DIR/suggest-inline-args.rs:13:15
 help: quote your inlined format argument to use as string literal
-   |
-LL |     eprintln!("{stderr}");
-   |               +        +
+ on line 13, column 14, add `"`
 
 error: format argument must be a string literal
-  --> $DIR/suggest-inline-args.rs:16:15
-   |
-LL |     eprintln!({1});
-   |               ^^^
-   |
+ at $DIR/suggest-inline-args.rs:16:15
 help: you might be missing a string literal to format with
-   |
-LL |     eprintln!("{}", {1});
-   |               +++++
+ on line 16, column 14, add `"{}", `
 
 error: format argument must be a string literal
-  --> $DIR/suggest-inline-args.rs:19:15
-   |
-LL |     eprintln!({foo::bar()});
-   |               ^^^^^^^^^^^^
-   |
+ at $DIR/suggest-inline-args.rs:19:15
 help: you might be missing a string literal to format with
-   |
-LL |     eprintln!("{}", {foo::bar()});
-   |               +++++
+ on line 19, column 14, add `"{}", `
 
 error: format argument must be a string literal
-  --> $DIR/suggest-inline-args.rs:22:15
-   |
-LL |     eprintln!({bar()});
-   |               ^^^^^^^
-   |
+ at $DIR/suggest-inline-args.rs:22:15
 help: you might be missing a string literal to format with
-   |
-LL |     eprintln!("{}", {bar()});
-   |               +++++
+ on line 22, column 14, add `"{}", `
 
 error: format argument must be a string literal
-  --> $DIR/suggest-inline-args.rs:25:15
-   |
-LL |     eprintln!({1; 2});
-   |               ^^^^^^
-   |
+ at $DIR/suggest-inline-args.rs:25:15
 help: you might be missing a string literal to format with
-   |
-LL |     eprintln!("{}", {1; 2});
-   |               +++++
+ on line 25, column 14, add `"{}", `
 
 error: aborting due to 5 previous errors
 

@@ -1,19 +1,11 @@
 error: reached the recursion limit while computing the size of `Thing<T>`
-  --> $DIR/recursive-size-skeleton.rs:20:27
-   |
-LL |     let _: i32 = unsafe { transmute(value) };
-   |                           ^^^^^^^^^
-   |
-   = help: consider increasing the recursion limit by adding a `#![recursion_limit = "256"]`
+ at $DIR/recursive-size-skeleton.rs:20:27
+help: consider increasing the recursion limit by adding a `#![recursion_limit = "256"]`
 
-error[E0512]: cannot transmute between types of different sizes, or dependently-sized types
-  --> $DIR/recursive-size-skeleton.rs:20:27
-   |
-LL |     let _: i32 = unsafe { transmute(value) };
-   |                           ^^^^^^^^^
-   |
-   = note: source type: `Thing<T>` (the type has an unknown layout)
-   = note: target type: `i32` (32 bits)
+error E0512: cannot transmute between types of different sizes, or dependently-sized types
+ at $DIR/recursive-size-skeleton.rs:20:27
+note: source type: `Thing<T>` (the type has an unknown layout)
+note: target type: `i32` (32 bits)
 
 error: aborting due to 2 previous errors
 

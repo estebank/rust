@@ -1,47 +1,23 @@
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/issue-55872-1.rs:12:15
-   |
-LL |     fn foo<T>() -> Self::E;
-   |     ----------------------- definition of `foo` from trait
-...
-LL |     fn foo<T: Default>() -> Self::E {
-   |               ^^^^^^^ impl has extra requirement `T: Default`
+error E0276: impl has stricter requirements than trait
+ at $DIR/issue-55872-1.rs:12:15: impl has extra requirement `T: Default`
+  on line 6: definition of `foo` from trait
 
-error[E0277]: the trait bound `S: Copy` is not satisfied in `(S, T)`
-  --> $DIR/issue-55872-1.rs:12:29
-   |
-LL |     fn foo<T: Default>() -> Self::E {
-   |                             ^^^^^^^ within `(S, T)`, the trait `Copy` is not implemented for `S`
-...
-LL |         (S::default(), T::default())
-   |         ---------------------------- return type was inferred to be `(S, T)` here
-   |
-   = note: required because it appears within the type `(S, T)`
+error E0277: the trait bound `S: Copy` is not satisfied in `(S, T)`
+ at $DIR/issue-55872-1.rs:12:29: within `(S, T)`, the trait `Copy` is not implemented for `S`
+  on line 17: return type was inferred to be `(S, T)` here
+note: required because it appears within the type `(S, T)`
 help: consider further restricting type parameter `S` with trait `Copy`
-   |
-LL | impl<S: Default + std::marker::Copy> Bar for S {
-   |                 +++++++++++++++++++
+ on line 9, column 15, add ` + std::marker::Copy`
 
-error[E0277]: the trait bound `T: Copy` is not satisfied in `(S, T)`
-  --> $DIR/issue-55872-1.rs:12:29
-   |
-LL |     fn foo<T: Default>() -> Self::E {
-   |                             ^^^^^^^ within `(S, T)`, the trait `Copy` is not implemented for `T`
-...
-LL |         (S::default(), T::default())
-   |         ---------------------------- return type was inferred to be `(S, T)` here
-   |
-   = note: required because it appears within the type `(S, T)`
+error E0277: the trait bound `T: Copy` is not satisfied in `(S, T)`
+ at $DIR/issue-55872-1.rs:12:29: within `(S, T)`, the trait `Copy` is not implemented for `T`
+  on line 17: return type was inferred to be `(S, T)` here
+note: required because it appears within the type `(S, T)`
 help: consider further restricting type parameter `T` with trait `Copy`
-   |
-LL |     fn foo<T: Default + std::marker::Copy>() -> Self::E {
-   |                       +++++++++++++++++++
+ on line 12, column 21, add ` + std::marker::Copy`
 
 error: type parameter `T` is part of concrete type but not used in parameter list for the `impl Trait` type alias
-  --> $DIR/issue-55872-1.rs:12:29
-   |
-LL |     fn foo<T: Default>() -> Self::E {
-   |                             ^^^^^^^
+ at $DIR/issue-55872-1.rs:12:29
 
 error: aborting due to 4 previous errors
 

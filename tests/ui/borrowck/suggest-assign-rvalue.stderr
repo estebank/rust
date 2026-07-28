@@ -1,127 +1,60 @@
-error[E0381]: used binding `chaenomeles` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:14:11
-   |
-LL |     let chaenomeles;
-   |         ----------- binding declared here but left uninitialized
-LL |     apple(chaenomeles);
-   |           ^^^^^^^^^^^ `chaenomeles` used here but it isn't initialized
-   |
+error E0381: used binding `chaenomeles` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:14:11: `chaenomeles` used here but it isn't initialized
+  on line 13, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let chaenomeles = 42;
-   |                     ++++
+ on line 13, column 19, add ` = 42`
 
-error[E0381]: used binding `my_float` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:23:30
-   |
-LL |     let my_float: f32;
-   |         -------- binding declared here but left uninitialized
-LL |     println!("my_float: {}", my_float);
-   |                              ^^^^^^^^ `my_float` used here but it isn't initialized
-   |
+error E0381: used binding `my_float` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:23:30: `my_float` used here but it isn't initialized
+  on line 22, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let my_float: f32 = 3.14159;
-   |                       +++++++++
+ on line 22, column 21, add ` = 3.14159`
 
-error[E0381]: used binding `demo` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:26:28
-   |
-LL |     let demo: Demo;
-   |         ---- binding declared here but left uninitialized
-LL |     println!("demo: {:?}", demo);
-   |                            ^^^^ `demo` used here but it isn't initialized
-   |
+error E0381: used binding `demo` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:26:28: `demo` used here but it isn't initialized
+  on line 25, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let demo: Demo = Default::default();
-   |                    ++++++++++++++++++++
+ on line 25, column 18, add ` = Default::default()`
 
-error[E0381]: used binding `demo_no` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:30:31
-   |
-LL |     let demo_no: DemoNoDef;
-   |         ------- binding declared here but left uninitialized
-LL |     println!("demo_no: {:?}", demo_no);
-   |                               ^^^^^^^ `demo_no` used here but it isn't initialized
-   |
+error E0381: used binding `demo_no` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:30:31: `demo_no` used here but it isn't initialized
+  on line 29, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let demo_no: DemoNoDef = /* value */;
-   |                            +++++++++++++
+ on line 29, column 26, add ` = /* value */`
 
-error[E0381]: used binding `arr` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:34:27
-   |
-LL |     let arr: [i32; 5];
-   |         --- binding declared here but left uninitialized
-LL |     println!("arr: {:?}", arr);
-   |                           ^^^ `arr` used here but it isn't initialized
-   |
+error E0381: used binding `arr` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:34:27: `arr` used here but it isn't initialized
+  on line 33, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let arr: [i32; 5] = [42; 5];
-   |                       +++++++++
+ on line 33, column 21, add ` = [42; 5]`
 
-error[E0381]: used binding `foo` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:37:27
-   |
-LL |     let foo: Vec<&str>;
-   |         --- binding declared here but left uninitialized
-LL |     println!("foo: {:?}", foo);
-   |                           ^^^ `foo` used here but it isn't initialized
-   |
+error E0381: used binding `foo` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:37:27: `foo` used here but it isn't initialized
+  on line 36, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let foo: Vec<&str> = vec![];
-   |                        ++++++++
+ on line 36, column 22, add ` = vec![]`
 
-error[E0381]: used binding `my_string` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:41:31
-   |
-LL |     let my_string: String;
-   |         --------- binding declared here but left uninitialized
-LL |     println!("my_string: {}", my_string);
-   |                               ^^^^^^^^^ `my_string` used here but it isn't initialized
-   |
+error E0381: used binding `my_string` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:41:31: `my_string` used here but it isn't initialized
+  on line 40, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let my_string: String = Default::default();
-   |                           ++++++++++++++++++++
+ on line 40, column 25, add ` = Default::default()`
 
-error[E0381]: used binding `my_int` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:45:28
-   |
-LL |     let my_int: &i32;
-   |         ------ binding declared here but left uninitialized
-LL |     println!("my_int: {}", *my_int);
-   |                            ^^^^^^^ `*my_int` used here but it isn't initialized
-   |
+error E0381: used binding `my_int` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:45:28: `*my_int` used here but it isn't initialized
+  on line 44, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let my_int: &i32 = &42;
-   |                      +++++
+ on line 44, column 20, add ` = &42`
 
-error[E0381]: used binding `hello` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:49:27
-   |
-LL |     let hello: &str;
-   |         ----- binding declared here but left uninitialized
-LL |     println!("hello: {}", hello);
-   |                           ^^^^^ `hello` used here but it isn't initialized
-   |
+error E0381: used binding `hello` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:49:27: `hello` used here but it isn't initialized
+  on line 48, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let hello: &str = "";
-   |                     ++++
+ on line 48, column 19, add ` = ""`
 
-error[E0381]: used binding `never` isn't initialized
-  --> $DIR/suggest-assign-rvalue.rs:53:27
-   |
-LL |     let never: !;
-   |         ----- binding declared here but left uninitialized
-LL |     println!("never: {}", never);
-   |                           ^^^^^ `never` used here but it isn't initialized
+error E0381: used binding `never` isn't initialized
+ at $DIR/suggest-assign-rvalue.rs:53:27: `never` used here but it isn't initialized
+  on line 52, column 9: binding declared here but left uninitialized
 
 error: aborting due to 10 previous errors
 

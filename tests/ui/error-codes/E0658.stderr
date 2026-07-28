@@ -1,11 +1,7 @@
-error[E0658]: use of unstable library feature `core_intrinsics`: intrinsics are unlikely to ever be stabilized, instead they should be used through stabilized interfaces in the rest of the standard library
-  --> $DIR/E0658.rs:1:5
-   |
-LL | use std::intrinsics;
-   |     ^^^^^^^^^^^^^^^
-   |
-   = help: add `#![feature(core_intrinsics)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: use of unstable library feature `core_intrinsics`: intrinsics are unlikely to ever be stabilized, instead they should be used through stabilized interfaces in the rest of the standard library
+ at $DIR/E0658.rs:1:5
+help: add `#![feature(core_intrinsics)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error: aborting due to 1 previous error
 

@@ -1,23 +1,11 @@
-error[E0505]: cannot move out of `a.x` because it is borrowed
-  --> $DIR/borrowck-move-subcomponent.rs:15:14
-   |
-LL |   let a : S = S { x : Box::new(1) };
-   |       - binding `a` declared here
-LL |   let pb = &a;
-   |            -- borrow of `a` occurs here
-LL |   let S { x: ax } = a;
-   |              ^^ move out of `a.x` occurs here
-LL |   f(pb);
-   |     -- borrow later used here
-   |
+error E0505: cannot move out of `a.x` because it is borrowed
+ at $DIR/borrowck-move-subcomponent.rs:15:14: move out of `a.x` occurs here
+  on line 13, column 7: binding `a` declared here
+  on line 14, column 12: borrow of `a` occurs here
+  on line 16, column 5: borrow later used here
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/borrowck-move-subcomponent.rs:6:1
-   |
-LL | struct S {
-   | ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |   let pb = &a;
-   |             - you could clone this value
+ at $DIR/borrowck-move-subcomponent.rs:6:1: consider implementing `Clone` for this type
+  on line 14, column 13: you could clone this value
 
 error: aborting due to 1 previous error
 

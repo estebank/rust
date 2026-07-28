@@ -65,8 +65,7 @@ dependencies = [
 [[package]]
 name = "annotate-snippets"
 version = "0.12.16"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f211a51805bc641f3ad5b7664c77d2547af685cc33b4cd8d31964027a46f13f1"
+source = "git+https://github.com/estebank/annotate-snippets-rs.git?branch=no-graphics#c9a82dd84be0a57f818dda1d9ca6b0980a6388e3"
 dependencies = [
  "anstyle",
  "memchr",

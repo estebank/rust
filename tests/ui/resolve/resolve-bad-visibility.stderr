@@ -1,37 +1,19 @@
-error[E0577]: expected module, found enum `::E`
-  --> $DIR/resolve-bad-visibility.rs:5:8
-   |
-LL | pub(in E) struct S;
-   |        ^ not a module
+error E0577: expected module, found enum `::E`
+ at $DIR/resolve-bad-visibility.rs:5:8: not a module
 
-error[E0577]: expected module, found trait `::Tr`
-  --> $DIR/resolve-bad-visibility.rs:6:8
-   |
-LL | pub(in Tr) struct Z;
-   |        ^^ not a module
+error E0577: expected module, found trait `::Tr`
+ at $DIR/resolve-bad-visibility.rs:6:8: not a module
 
-error[E0742]: visibilities can only be restricted to ancestor modules
-  --> $DIR/resolve-bad-visibility.rs:7:8
-   |
-LL | pub(in std::vec) struct F;
-   |        ^^^^^^^^
+error E0742: visibilities can only be restricted to ancestor modules
+ at $DIR/resolve-bad-visibility.rs:7:8
 
-error[E0433]: cannot find module or crate `nonexistent` in the crate root
-  --> $DIR/resolve-bad-visibility.rs:8:8
-   |
-LL | pub(in nonexistent) struct G;
-   |        ^^^^^^^^^^^ use of unresolved module or unlinked crate `nonexistent`
-   |
+error E0433: cannot find module or crate `nonexistent` in the crate root
+ at $DIR/resolve-bad-visibility.rs:8:8: use of unresolved module or unlinked crate `nonexistent`
 help: you might be missing a crate named `nonexistent`, add it to your project and import it in your code
-   |
-LL + extern crate nonexistent;
-   |
+ on line 2, column 1, add `extern crate nonexistent;`
 
-error[E0742]: visibilities can only be restricted to ancestor modules
-  --> $DIR/resolve-bad-visibility.rs:9:8
-   |
-LL | pub(in too_soon) struct H;
-   |        ^^^^^^^^
+error E0742: visibilities can only be restricted to ancestor modules
+ at $DIR/resolve-bad-visibility.rs:9:8
 
 error: aborting due to 5 previous errors
 

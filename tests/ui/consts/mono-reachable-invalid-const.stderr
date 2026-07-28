@@ -1,28 +1,15 @@
-error[E0080]: index out of bounds: the length is 1 but the index is 1
-  --> $DIR/mono-reachable-invalid-const.rs:8:9
-   |
-LL |         ["oops"][b];
-   |         ^^^^^^^^^^^ evaluation of `Bar::<0>::ASSERT` failed here
+error E0080: index out of bounds: the length is 1 but the index is 1
+ at $DIR/mono-reachable-invalid-const.rs:8:9: evaluation of `Bar::<0>::ASSERT` failed here
 
 note: erroneous constant encountered
-  --> $DIR/mono-reachable-invalid-const.rs:13:19
-   |
-LL |         let val = Self::ASSERT;
-   |                   ^^^^^^^^^^^^
+ at $DIR/mono-reachable-invalid-const.rs:13:19
 
 note: erroneous constant encountered
-  --> $DIR/mono-reachable-invalid-const.rs:13:19
-   |
-LL |         let val = Self::ASSERT;
-   |                   ^^^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/mono-reachable-invalid-const.rs:13:19
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 note: the above error was encountered while instantiating `fn Bar::<0>::assert`
-  --> $DIR/mono-reachable-invalid-const.rs:21:5
-   |
-LL |     Bar::<0>::assert();
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/mono-reachable-invalid-const.rs:21:5
 
 error: aborting due to 1 previous error
 

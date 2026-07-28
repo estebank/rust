@@ -1,30 +1,14 @@
-error[E0282]: type annotations needed
-  --> $DIR/hidden-type-is-opaque-2.rs:10:17
-   |
-LL |     Thunk::new(|mut cont| {
-   |                 ^^^^^^^^
-LL |
-LL |         cont.reify_as();
-   |         ---- type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/hidden-type-is-opaque-2.rs:10:17
+  on line 12: type must be known at this point
 help: consider giving this closure parameter an explicit type
-   |
-LL |     Thunk::new(|mut cont: /* Type */| {
-   |                         ++++++++++++
+ on line 10, column 24, add `: /* Type */`
 
-error[E0282]: type annotations needed
-  --> $DIR/hidden-type-is-opaque-2.rs:21:17
-   |
-LL |     Thunk::new(|mut cont| {
-   |                 ^^^^^^^^
-LL |
-LL |         cont.reify_as();
-   |         ---- type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/hidden-type-is-opaque-2.rs:21:17
+  on line 23: type must be known at this point
 help: consider giving this closure parameter an explicit type
-   |
-LL |     Thunk::new(|mut cont: /* Type */| {
-   |                         ++++++++++++
+ on line 21, column 24, add `: /* Type */`
 
 error: aborting due to 2 previous errors
 

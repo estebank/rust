@@ -1,17 +1,9 @@
-error[E0161]: cannot move a value of type `[i32]`
-  --> $DIR/issue-115203.rs:5:12
-   |
-LL |     match [a[..]] {
-   |            ^^^^^ the size of `[i32]` cannot be statically determined
+error E0161: cannot move a value of type `[i32]`
+ at $DIR/issue-115203.rs:5:12: the size of `[i32]` cannot be statically determined
 
-error[E0508]: cannot move out of type `[i32]`, a non-copy slice
-  --> $DIR/issue-115203.rs:5:12
-   |
-LL |     match [a[..]] {
-   |            ^^^^^
-   |            |
-   |            cannot move out of here
-   |            move occurs because value has type `[i32]`, which does not implement the `Copy` trait
+error E0508: cannot move out of type `[i32]`, a non-copy slice
+ at $DIR/issue-115203.rs:5:12: cannot move out of here
+  on line 5, column 12: move occurs because value has type `[i32]`, which does not implement the `Copy` trait
 
 error: aborting due to 2 previous errors
 

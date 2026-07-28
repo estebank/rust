@@ -1,46 +1,22 @@
-error[E0529]: expected an array or slice, found `Vec<i32>`
-  --> $DIR/issue-91328.rs:10:12
-   |
-LL |         Ok([a, b]) => a + b,
-   |            ^^^^^^ pattern cannot match with input type `Vec<i32>`
-   |
+error E0529: expected an array or slice, found `Vec<i32>`
+ at $DIR/issue-91328.rs:10:12: pattern cannot match with input type `Vec<i32>`
 help: consider using `as_deref` here
-   |
-LL |     match r.as_deref() {
-   |            +++++++++++
+ on line 8, column 11, add `.as_deref()`
 
-error[E0529]: expected an array or slice, found `Vec<i32>`
-  --> $DIR/issue-91328.rs:20:14
-   |
-LL |         Some([a, b]) => a + b,
-   |              ^^^^^^ pattern cannot match with input type `Vec<i32>`
-   |
+error E0529: expected an array or slice, found `Vec<i32>`
+ at $DIR/issue-91328.rs:20:14: pattern cannot match with input type `Vec<i32>`
 help: consider using `as_deref` here
-   |
-LL |     match o.as_deref() {
-   |            +++++++++++
+ on line 18, column 11, add `.as_deref()`
 
-error[E0529]: expected an array or slice, found `Vec<i32>`
-  --> $DIR/issue-91328.rs:30:9
-   |
-LL |         [a, b] => a + b,
-   |         ^^^^^^ pattern cannot match with input type `Vec<i32>`
-   |
+error E0529: expected an array or slice, found `Vec<i32>`
+ at $DIR/issue-91328.rs:30:9: pattern cannot match with input type `Vec<i32>`
 help: consider slicing here
-   |
-LL |     match v[..] {
-   |            ++++
+ on line 28, column 11, add `[..]`
 
-error[E0529]: expected an array or slice, found `Box<[i32; 2]>`
-  --> $DIR/issue-91328.rs:40:14
-   |
-LL |         Some([a, b]) => a + b,
-   |              ^^^^^^ pattern cannot match with input type `Box<[i32; 2]>`
-   |
+error E0529: expected an array or slice, found `Box<[i32; 2]>`
+ at $DIR/issue-91328.rs:40:14: pattern cannot match with input type `Box<[i32; 2]>`
 help: consider using `as_deref` here
-   |
-LL |     match a.as_deref() {
-   |            +++++++++++
+ on line 38, column 11, add `.as_deref()`
 
 error: aborting due to 4 previous errors
 

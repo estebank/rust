@@ -1,98 +1,41 @@
-error[E0599]: the method `insert` exists for struct `HashSet<Value>`, but its trait bounds were not satisfied
-  --> $DIR/issue-91550.rs:8:8
-   |
-LL | struct Value(u32);
-   | ------------ doesn't satisfy `Value: Eq` or `Value: Hash`
-...
-LL |     hs.insert(Value(0));
-   |        ^^^^^^
-   |
-   = note: the following trait bounds were not satisfied:
-           `Value: Eq`
-           `Value: Hash`
+error E0599: the method `insert` exists for struct `HashSet<Value>`, but its trait bounds were not satisfied
+ at $DIR/issue-91550.rs:8:8
+  on line 4: doesn't satisfy `Value: Eq` or `Value: Hash`
+note: the following trait bounds were not satisfied:
+      `Value: Eq`
+      `Value: Hash`
 help: consider annotating `Value` with `#[derive(Eq, Hash, PartialEq)]`
-   |
-LL + #[derive(Eq, Hash, PartialEq)]
-LL | struct Value(u32);
-   |
+ on line 4, column 1, add `#[derive(Eq, Hash, PartialEq)]`
 
-error[E0599]: the method `use_eq` exists for struct `Object<NoDerives>`, but its trait bounds were not satisfied
-  --> $DIR/issue-91550.rs:26:9
-   |
-LL | pub struct NoDerives;
-   | -------------------- doesn't satisfy `NoDerives: Eq`
-LL |
-LL | struct Object<T>(T);
-   | ---------------- method `use_eq` not found for this struct
-...
-LL |     foo.use_eq();
-   |         ^^^^^^ method cannot be called on `Object<NoDerives>` due to unsatisfied trait bounds
-   |
+error E0599: the method `use_eq` exists for struct `Object<NoDerives>`, but its trait bounds were not satisfied
+ at $DIR/issue-91550.rs:26:9: method cannot be called on `Object<NoDerives>` due to unsatisfied trait bounds
+  on line 12: doesn't satisfy `NoDerives: Eq`
+  on line 14: method `use_eq` not found for this struct
 note: trait bound `NoDerives: Eq` was not satisfied
-  --> $DIR/issue-91550.rs:15:9
-   |
-LL | impl<T: Eq> Object<T> {
-   |         ^^  ---------
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/issue-91550.rs:15:9: unsatisfied trait bound introduced here
 help: consider annotating `NoDerives` with `#[derive(Eq, PartialEq)]`
-   |
-LL + #[derive(Eq, PartialEq)]
-LL | pub struct NoDerives;
-   |
+ on line 12, column 1, add `#[derive(Eq, PartialEq)]`
 
-error[E0599]: the method `use_ord` exists for struct `Object<NoDerives>`, but its trait bounds were not satisfied
-  --> $DIR/issue-91550.rs:27:9
-   |
-LL | pub struct NoDerives;
-   | -------------------- doesn't satisfy `NoDerives: Ord`
-LL |
-LL | struct Object<T>(T);
-   | ---------------- method `use_ord` not found for this struct
-...
-LL |     foo.use_ord();
-   |         ^^^^^^^ method cannot be called on `Object<NoDerives>` due to unsatisfied trait bounds
-   |
+error E0599: the method `use_ord` exists for struct `Object<NoDerives>`, but its trait bounds were not satisfied
+ at $DIR/issue-91550.rs:27:9: method cannot be called on `Object<NoDerives>` due to unsatisfied trait bounds
+  on line 12: doesn't satisfy `NoDerives: Ord`
+  on line 14: method `use_ord` not found for this struct
 note: trait bound `NoDerives: Ord` was not satisfied
-  --> $DIR/issue-91550.rs:18:9
-   |
-LL | impl<T: Ord> Object<T> {
-   |         ^^^  ---------
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/issue-91550.rs:18:9: unsatisfied trait bound introduced here
 help: consider annotating `NoDerives` with `#[derive(Eq, Ord, PartialEq, PartialOrd)]`
-   |
-LL + #[derive(Eq, Ord, PartialEq, PartialOrd)]
-LL | pub struct NoDerives;
-   |
+ on line 12, column 1, add `#[derive(Eq, Ord, PartialEq, PartialOrd)]`
 
-error[E0599]: the method `use_ord_and_partial_ord` exists for struct `Object<NoDerives>`, but its trait bounds were not satisfied
-  --> $DIR/issue-91550.rs:28:9
-   |
-LL | pub struct NoDerives;
-   | -------------------- doesn't satisfy `NoDerives: Ord` or `NoDerives: PartialOrd`
-LL |
-LL | struct Object<T>(T);
-   | ---------------- method `use_ord_and_partial_ord` not found for this struct
-...
-LL |     foo.use_ord_and_partial_ord();
-   |         ^^^^^^^^^^^^^^^^^^^^^^^ method cannot be called on `Object<NoDerives>` due to unsatisfied trait bounds
-   |
+error E0599: the method `use_ord_and_partial_ord` exists for struct `Object<NoDerives>`, but its trait bounds were not satisfied
+ at $DIR/issue-91550.rs:28:9: method cannot be called on `Object<NoDerives>` due to unsatisfied trait bounds
+  on line 12: doesn't satisfy `NoDerives: Ord` or `NoDerives: PartialOrd`
+  on line 14: method `use_ord_and_partial_ord` not found for this struct
 note: the following trait bounds were not satisfied:
       `NoDerives: Ord`
       `NoDerives: PartialOrd`
-  --> $DIR/issue-91550.rs:21:9
-   |
-LL | impl<T: Ord + PartialOrd> Object<T> {
-   |         ^^^   ^^^^^^^^^^  ---------
-   |         |     |
-   |         |     unsatisfied trait bound introduced here
-   |         unsatisfied trait bound introduced here
+ at $DIR/issue-91550.rs:21:9: unsatisfied trait bound introduced here
+  on line 21, column 15: unsatisfied trait bound introduced here
 help: consider annotating `NoDerives` with `#[derive(Eq, Ord, PartialEq, PartialOrd)]`
-   |
-LL + #[derive(Eq, Ord, PartialEq, PartialOrd)]
-LL | pub struct NoDerives;
-   |
+ on line 12, column 1, add `#[derive(Eq, Ord, PartialEq, PartialOrd)]`
 
 error: aborting due to 4 previous errors
 

@@ -1,19 +1,10 @@
-error[E0496]: lifetime name `'s` shadows a lifetime name that is already in scope
-  --> $DIR/shadow.rs:4:12
-   |
-LL | impl<'s> Foo<&'s u8> {
-   |      -- first declared here
-LL |     fn bar<'s>(&self, x: &'s u8) {}
-   |            ^^ lifetime `'s` already in scope
+error E0496: lifetime name `'s` shadows a lifetime name that is already in scope
+ at $DIR/shadow.rs:4:12: lifetime `'s` already in scope
+  on line 3, column 6: first declared here
 
-error[E0496]: lifetime name `'s` shadows a lifetime name that is already in scope
-  --> $DIR/shadow.rs:5:19
-   |
-LL | impl<'s> Foo<&'s u8> {
-   |      -- first declared here
-LL |     fn bar<'s>(&self, x: &'s u8) {}
-LL |     fn baz(x: for<'s> fn(&'s u32)) {}
-   |                   ^^ lifetime `'s` already in scope
+error E0496: lifetime name `'s` shadows a lifetime name that is already in scope
+ at $DIR/shadow.rs:5:19: lifetime `'s` already in scope
+  on line 3, column 6: first declared here
 
 error: aborting due to 2 previous errors
 

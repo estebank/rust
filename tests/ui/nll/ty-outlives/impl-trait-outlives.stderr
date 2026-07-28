@@ -1,30 +1,14 @@
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/impl-trait-outlives.rs:11:5
-   |
-LL | fn no_region<'a, T>(x: Box<T>) -> impl Debug + 'a
-   |              -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-...
-LL |     x
-   |     ^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/impl-trait-outlives.rs:11:5: ...so that the type `T` will meet its required lifetime bounds
+  on line 7, column 14: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     T: Debug + 'a,
-   |              ++++
+ on line 9, column 12, add ` + 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/impl-trait-outlives.rs:26:5
-   |
-LL | fn wrong_region<'a, 'b, T>(x: Box<T>) -> impl Debug + 'a
-   |                 -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-...
-LL |     x
-   |     ^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/impl-trait-outlives.rs:26:5: ...so that the type `T` will meet its required lifetime bounds
+  on line 22, column 17: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     T: 'b + Debug + 'a,
-   |                   ++++
+ on line 24, column 17, add ` + 'a`
 
 error: aborting due to 2 previous errors
 

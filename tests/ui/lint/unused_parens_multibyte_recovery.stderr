@@ -1,12 +1,8 @@
 error: this file contains an unclosed delimiter
-  --> $DIR/unused_parens_multibyte_recovery.rs:7:17
-   |
-LL | fn f(){(print!(á
-   |       --      - ^
-   |       ||      |
-   |       ||      unclosed delimiter
-   |       |unclosed delimiter
-   |       unclosed delimiter
+ at $DIR/unused_parens_multibyte_recovery.rs:7:17
+  on line 7, column 7: unclosed delimiter
+  on line 7, column 8: unclosed delimiter
+  on line 7, column 15: unclosed delimiter
 
 error: aborting due to 1 previous error
 

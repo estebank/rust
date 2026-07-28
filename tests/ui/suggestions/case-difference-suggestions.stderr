@@ -1,194 +1,82 @@
-error[E0425]: cannot find value `Hello` in this scope
-  --> $DIR/case-difference-suggestions.rs:5:20
-   |
-LL |     println!("{}", Hello);
-   |                    ^^^^^
-   |
+error E0425: cannot find value `Hello` in this scope
+ at $DIR/case-difference-suggestions.rs:5:20
 help: a local variable with a similar name exists
-   |
-LL -     println!("{}", Hello);
-LL +     println!("{}", hello);
-   |
+ on line 5, column 19, replace with `hello`
 
-error[E0425]: cannot find value `myvariable` in this scope
-  --> $DIR/case-difference-suggestions.rs:9:20
-   |
-LL |     println!("{}", myvariable);
-   |                    ^^^^^^^^^^
-   |
+error E0425: cannot find value `myvariable` in this scope
+ at $DIR/case-difference-suggestions.rs:9:20
 help: a local variable with a similar name exists (notice the capitalization)
-   |
-LL -     println!("{}", myvariable);
-LL +     println!("{}", myVariable);
-   |
+ on line 9, column 19, replace with `myVariable`
 
-error[E0425]: cannot find value `User_Name` in this scope
-  --> $DIR/case-difference-suggestions.rs:13:20
-   |
-LL |     println!("{}", User_Name);
-   |                    ^^^^^^^^^
-   |
+error E0425: cannot find value `User_Name` in this scope
+ at $DIR/case-difference-suggestions.rs:13:20
 help: a local variable with a similar name exists
-   |
-LL -     println!("{}", User_Name);
-LL +     println!("{}", user_name);
-   |
+ on line 13, column 19, replace with `user_name`
 
-error[E0425]: cannot find value `foo` in this scope
-  --> $DIR/case-difference-suggestions.rs:17:20
-   |
-LL |     println!("{}", foo);
-   |                    ^^^
-   |
+error E0425: cannot find value `foo` in this scope
+ at $DIR/case-difference-suggestions.rs:17:20
 help: a local variable with a similar name exists (notice the capitalization)
-   |
-LL -     println!("{}", foo);
-LL +     println!("{}", FOO);
-   |
+ on line 17, column 19, replace with `FOO`
 
-error[E0425]: cannot find value `FFOO` in this scope
-  --> $DIR/case-difference-suggestions.rs:22:20
-   |
-LL |     println!("{}", FFOO);
-   |                    ^^^^
-   |
+error E0425: cannot find value `FFOO` in this scope
+ at $DIR/case-difference-suggestions.rs:22:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", FFOO);
-LL +     println!("{}", FFO0);
-   |
+ on line 22, column 19, replace with `FFO0`
 
-error[E0425]: cannot find value `list` in this scope
-  --> $DIR/case-difference-suggestions.rs:25:20
-   |
-LL |     println!("{}", list);
-   |                    ^^^^
-   |
+error E0425: cannot find value `list` in this scope
+ at $DIR/case-difference-suggestions.rs:25:20
 help: a local variable with a similar name exists
-   |
-LL -     println!("{}", list);
-LL +     println!("{}", l1st);
-   |
+ on line 25, column 19, replace with `l1st`
 
-error[E0425]: cannot find value `SS` in this scope
-  --> $DIR/case-difference-suggestions.rs:28:20
-   |
-LL |     println!("{}", SS);
-   |                    ^^
-   |
+error E0425: cannot find value `SS` in this scope
+ at $DIR/case-difference-suggestions.rs:28:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", SS);
-LL +     println!("{}", S5);
-   |
+ on line 28, column 19, replace with `S5`
 
-error[E0425]: cannot find value `a55` in this scope
-  --> $DIR/case-difference-suggestions.rs:31:20
-   |
-LL |     println!("{}", a55);
-   |                    ^^^
-   |
+error E0425: cannot find value `a55` in this scope
+ at $DIR/case-difference-suggestions.rs:31:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", a55);
-LL +     println!("{}", aS5);
-   |
+ on line 31, column 19, replace with `aS5`
 
-error[E0425]: cannot find value `BB` in this scope
-  --> $DIR/case-difference-suggestions.rs:34:20
-   |
-LL |     println!("{}", BB);
-   |                    ^^
-   |
+error E0425: cannot find value `BB` in this scope
+ at $DIR/case-difference-suggestions.rs:34:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", BB);
-LL +     println!("{}", B8);
-   |
+ on line 34, column 19, replace with `B8`
 
-error[E0425]: cannot find value `gg` in this scope
-  --> $DIR/case-difference-suggestions.rs:37:20
-   |
-LL |     println!("{}", gg);
-   |                    ^^
-   |
+error E0425: cannot find value `gg` in this scope
+ at $DIR/case-difference-suggestions.rs:37:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", gg);
-LL +     println!("{}", g9);
-   |
+ on line 37, column 19, replace with `g9`
 
-error[E0425]: cannot find value `old` in this scope
-  --> $DIR/case-difference-suggestions.rs:40:20
-   |
-LL |     println!("{}", old);
-   |                    ^^^
-   |
+error E0425: cannot find value `old` in this scope
+ at $DIR/case-difference-suggestions.rs:40:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", old);
-LL +     println!("{}", o1d);
-   |
+ on line 40, column 19, replace with `o1d`
 
-error[E0425]: cannot find value `newl` in this scope
-  --> $DIR/case-difference-suggestions.rs:43:20
-   |
-LL |     println!("{}", newl);
-   |                    ^^^^
-   |
+error E0425: cannot find value `newl` in this scope
+ at $DIR/case-difference-suggestions.rs:43:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", newl);
-LL +     println!("{}", new1);
-   |
+ on line 43, column 19, replace with `new1`
 
-error[E0425]: cannot find value `app1e` in this scope
-  --> $DIR/case-difference-suggestions.rs:46:20
-   |
-LL |     println!("{}", app1e);
-   |                    ^^^^^
-   |
+error E0425: cannot find value `app1e` in this scope
+ at $DIR/case-difference-suggestions.rs:46:20
 help: a local variable with a similar name exists (notice the digit/letter confusion)
-   |
-LL -     println!("{}", app1e);
-LL +     println!("{}", apple);
-   |
+ on line 46, column 19, replace with `apple`
 
-error[E0425]: cannot find value `A` in this scope
-  --> $DIR/case-difference-suggestions.rs:49:20
-   |
-LL |     println!("{}", A);
-   |                    ^
-   |
+error E0425: cannot find value `A` in this scope
+ at $DIR/case-difference-suggestions.rs:49:20
 help: a local variable with a similar name exists
-   |
-LL -     println!("{}", A);
-LL +     println!("{}", a);
-   |
+ on line 49, column 19, replace with `a`
 
-error[E0425]: cannot find value `world1U` in this scope
-  --> $DIR/case-difference-suggestions.rs:52:20
-   |
-LL |     println!("{}", world1U);
-   |                    ^^^^^^^
-   |
+error E0425: cannot find value `world1U` in this scope
+ at $DIR/case-difference-suggestions.rs:52:20
 help: a local variable with a similar name exists (notice the capitalization and digit/letter confusion)
-   |
-LL -     println!("{}", world1U);
-LL +     println!("{}", worldlu);
-   |
+ on line 52, column 19, replace with `worldlu`
 
-error[E0425]: cannot find value `myv4r1able` in this scope
-  --> $DIR/case-difference-suggestions.rs:55:20
-   |
-LL |     println!("{}", myv4r1able);
-   |                    ^^^^^^^^^^
-   |
+error E0425: cannot find value `myv4r1able` in this scope
+ at $DIR/case-difference-suggestions.rs:55:20
 help: a local variable with a similar name exists (notice the capitalization and digit/letter confusion)
-   |
-LL -     println!("{}", myv4r1able);
-LL +     println!("{}", myV4rlable);
-   |
+ on line 55, column 19, replace with `myV4rlable`
 
 error: aborting due to 16 previous errors
 

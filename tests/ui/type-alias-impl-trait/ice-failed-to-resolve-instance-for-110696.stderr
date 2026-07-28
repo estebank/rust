@@ -1,30 +1,13 @@
-error[E0207]: the type parameter `T` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/ice-failed-to-resolve-instance-for-110696.rs:43:6
-   |
-LL | impl<T: MyFrom<Phantom2<DummyT<U>>>, U> MyIndex<DummyT<T>> for Scope<U> {
-   |      ^ unconstrained type parameter
-   |
+error E0207: the type parameter `T` is not constrained by the impl trait, self type, or predicates
+ at $DIR/ice-failed-to-resolve-instance-for-110696.rs:43:6: unconstrained type parameter
 help: use the type parameter `T` in the `Scope` type and use it in the type definition
-   |
-LL ~ struct Scope<T, T>(Phantom2<DummyT<T>>);
-LL |
-...
-LL |
-LL ~ impl<T: MyFrom<Phantom2<DummyT<U>>>, U> MyIndex<DummyT<T>> for Scope<U, T> {
-   |
+ on line 26, column 14, add `, T`
 
 error: item does not constrain `DummyT::{opaque#0}`
-  --> $DIR/ice-failed-to-resolve-instance-for-110696.rs:30:8
-   |
-LL |     fn new() -> Self {
-   |        ^^^
-   |
-   = note: consider removing `#[define_opaque]` or adding an empty `#[define_opaque()]`
+ at $DIR/ice-failed-to-resolve-instance-for-110696.rs:30:8
+note: consider removing `#[define_opaque]` or adding an empty `#[define_opaque()]`
 note: this opaque type is supposed to be constrained
-  --> $DIR/ice-failed-to-resolve-instance-for-110696.rs:20:18
-   |
-LL | type DummyT<T> = impl F;
-   |                  ^^^^^^
+ at $DIR/ice-failed-to-resolve-instance-for-110696.rs:20:18
 
 error: aborting due to 2 previous errors
 

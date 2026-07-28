@@ -1,77 +1,37 @@
-error[E0255]: the name `Add` is defined multiple times
-  --> $DIR/issue-24081.rs:9:1
-   |
-LL | use std::ops::Add;
-   |     ------------- previous import of the trait `Add` here
-...
-LL | type Add = bool;
-   | ^^^^^^^^^^^^^^^^ `Add` redefined here
-   |
-   = note: `Add` must be defined only once in the type namespace of this module
+error E0255: the name `Add` is defined multiple times
+ at $DIR/issue-24081.rs:9:1: `Add` redefined here
+  on line 3, column 5: previous import of the trait `Add` here
+note: `Add` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use std::ops::Add as OtherAdd;
-   |                   +++++++++++
+ on line 3, column 17, add ` as OtherAdd`
 
-error[E0255]: the name `Sub` is defined multiple times
-  --> $DIR/issue-24081.rs:11:1
-   |
-LL | use std::ops::Sub;
-   |     ------------- previous import of the trait `Sub` here
-...
-LL | struct Sub { x: f32 }
-   | ^^^^^^^^^^ `Sub` redefined here
-   |
-   = note: `Sub` must be defined only once in the type namespace of this module
+error E0255: the name `Sub` is defined multiple times
+ at $DIR/issue-24081.rs:11:1: `Sub` redefined here
+  on line 4, column 5: previous import of the trait `Sub` here
+note: `Sub` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use std::ops::Sub as OtherSub;
-   |                   +++++++++++
+ on line 4, column 17, add ` as OtherSub`
 
-error[E0255]: the name `Mul` is defined multiple times
-  --> $DIR/issue-24081.rs:13:1
-   |
-LL | use std::ops::Mul;
-   |     ------------- previous import of the trait `Mul` here
-...
-LL | enum Mul { A, B }
-   | ^^^^^^^^ `Mul` redefined here
-   |
-   = note: `Mul` must be defined only once in the type namespace of this module
+error E0255: the name `Mul` is defined multiple times
+ at $DIR/issue-24081.rs:13:1: `Mul` redefined here
+  on line 5, column 5: previous import of the trait `Mul` here
+note: `Mul` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use std::ops::Mul as OtherMul;
-   |                   +++++++++++
+ on line 5, column 17, add ` as OtherMul`
 
-error[E0255]: the name `Div` is defined multiple times
-  --> $DIR/issue-24081.rs:15:1
-   |
-LL | use std::ops::Div;
-   |     ------------- previous import of the trait `Div` here
-...
-LL | mod Div { }
-   | ^^^^^^^ `Div` redefined here
-   |
-   = note: `Div` must be defined only once in the type namespace of this module
+error E0255: the name `Div` is defined multiple times
+ at $DIR/issue-24081.rs:15:1: `Div` redefined here
+  on line 6, column 5: previous import of the trait `Div` here
+note: `Div` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use std::ops::Div as OtherDiv;
-   |                   +++++++++++
+ on line 6, column 17, add ` as OtherDiv`
 
-error[E0255]: the name `Rem` is defined multiple times
-  --> $DIR/issue-24081.rs:17:1
-   |
-LL | use std::ops::Rem;
-   |     ------------- previous import of the trait `Rem` here
-...
-LL | trait Rem {  }
-   | ^^^^^^^^^ `Rem` redefined here
-   |
-   = note: `Rem` must be defined only once in the type namespace of this module
+error E0255: the name `Rem` is defined multiple times
+ at $DIR/issue-24081.rs:17:1: `Rem` redefined here
+  on line 7, column 5: previous import of the trait `Rem` here
+note: `Rem` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use std::ops::Rem as OtherRem;
-   |                   +++++++++++
+ on line 7, column 17, add ` as OtherRem`
 
 error: aborting due to 5 previous errors
 

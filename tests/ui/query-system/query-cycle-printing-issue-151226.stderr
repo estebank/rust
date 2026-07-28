@@ -1,13 +1,8 @@
-error[E0072]: recursive type `A` has infinite size
-  --> $DIR/query-cycle-printing-issue-151226.rs:1:1
-   |
-LL | struct A<T>(std::sync::OnceLock<Self>);
-   | ^^^^^^^^^^^ ------------------------- recursive without indirection
-   |
+error E0072: recursive type `A` has infinite size
+ at $DIR/query-cycle-printing-issue-151226.rs:1:1
+  on line 1, column 13: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL | struct A<T>(Box<std::sync::OnceLock<Self>>);
-   |             ++++                         +
+ on line 1, column 12, add `Box<`
 
 error: aborting due to 1 previous error
 

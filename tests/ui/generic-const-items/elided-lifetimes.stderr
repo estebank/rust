@@ -1,25 +1,13 @@
-error[E0637]: `&` without an explicit lifetime name cannot be used here
-  --> $DIR/elided-lifetimes.rs:8:5
-   |
-LL |     &T: Copy;
-   |     ^ explicit lifetime name needed here
-   |
+error E0637: `&` without an explicit lifetime name cannot be used here
+ at $DIR/elided-lifetimes.rs:8:5: explicit lifetime name needed here
 help: consider introducing a higher-ranked lifetime here
-   |
-LL |     for<'a> &'a T: Copy;
-   |     +++++++  ++
+ on line 8, column 4, add `for<'a> `
 
-error[E0637]: `&` without an explicit lifetime name cannot be used here
-  --> $DIR/elided-lifetimes.rs:10:18
-   |
-LL | const I<const S: &str>: &str = "";
-   |                  ^ explicit lifetime name needed here
+error E0637: `&` without an explicit lifetime name cannot be used here
+ at $DIR/elided-lifetimes.rs:10:18: explicit lifetime name needed here
 
-error[E0637]: `'_` cannot be used here
-  --> $DIR/elided-lifetimes.rs:13:18
-   |
-LL | const B<T: Trait<'_>>: () = ();
-   |                  ^^ `'_` is a reserved lifetime name
+error E0637: `'_` cannot be used here
+ at $DIR/elided-lifetimes.rs:13:18: `'_` is a reserved lifetime name
 
 error: aborting due to 3 previous errors
 

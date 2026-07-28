@@ -1,13 +1,7 @@
-error[E0261]: use of undeclared lifetime name `'d`
-  --> $DIR/issue-109299.rs:6:12
-   |
-LL | impl Lexer<'d> {
-   |            ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'d`
+ at $DIR/issue-109299.rs:6:12: undeclared lifetime
 help: consider introducing lifetime `'d` here
-   |
-LL | impl<'d> Lexer<'d> {
-   |     ++++
+ on line 6, column 4, add `<'d>`
 
 error: aborting due to 1 previous error
 

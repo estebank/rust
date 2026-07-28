@@ -1,8 +1,5 @@
-error[E0432]: unresolved import `f::f`
-  --> $DIR/issue-108529.rs:2:8
-   |
-LL | use f::f::f;
-   |        ^ expected type, found associated function `f` in `f`
+error E0432: unresolved import `f::f`
+ at $DIR/issue-108529.rs:2:8: expected type, found associated function `f` in `f`
 
 error: aborting due to 1 previous error
 

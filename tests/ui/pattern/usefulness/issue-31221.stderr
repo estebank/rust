@@ -1,40 +1,19 @@
 error: unreachable pattern
-  --> $DIR/issue-31221.rs:18:9
-   |
-LL |         Var3 => (),
-   |         ---- matches any value
-LL |         Var2 => (),
-   |         ^^^^ no value can reach this
-   |
+ at $DIR/issue-31221.rs:18:9: no value can reach this
+  on line 17: matches any value
 note: the lint level is defined here
-  --> $DIR/issue-31221.rs:4:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-31221.rs:4:9
 
 error: unreachable pattern
-  --> $DIR/issue-31221.rs:24:9
-   |
-LL |         &Var3 => (),
-   |         ----- matches any value
-LL |         &Var2 => (),
-   |         ^^^^^ no value can reach this
+ at $DIR/issue-31221.rs:24:9: no value can reach this
+  on line 23: matches any value
 
 error: unreachable pattern
-  --> $DIR/issue-31221.rs:31:9
-   |
-LL |         anything => ()
-   |         ^^^^^^^^ no value can reach this
-   |
+ at $DIR/issue-31221.rs:31:9: no value can reach this
 note: multiple earlier patterns match some of the same values
-  --> $DIR/issue-31221.rs:31:9
-   |
-LL |         (Var1, b) => (),
-   |         --------- matches some of the same values
-LL |         (c, d) => (),
-   |         ------ matches some of the same values
-LL |         anything => ()
-   |         ^^^^^^^^ collectively making this unreachable
+ at $DIR/issue-31221.rs:31:9: collectively making this unreachable
+  on line 29: matches some of the same values
+  on line 30: matches some of the same values
 
 error: aborting due to 3 previous errors
 

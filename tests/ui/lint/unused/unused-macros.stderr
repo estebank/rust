@@ -1,37 +1,17 @@
 error: unused macro definition: `unused`
-  --> $DIR/unused-macros.rs:6:14
-   |
-LL | macro_rules! unused {
-   |              ^^^^^^
-   |
+ at $DIR/unused-macros.rs:6:14
 note: the lint level is defined here
-  --> $DIR/unused-macros.rs:1:9
-   |
-LL | #![deny(unused_macros)]
-   |         ^^^^^^^^^^^^^
+ at $DIR/unused-macros.rs:1:9
 
 error: unused macro definition: `m`
-  --> $DIR/unused-macros.rs:13:22
-   |
-LL |         macro_rules! m {
-   |                      ^
-...
-LL | create_macro!();
-   | --------------- in this macro invocation
-   |
-   = note: this error originates in the macro `create_macro` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/unused-macros.rs:13:22
+  on line 18: in this macro invocation
+note: this error originates in the macro `create_macro` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: unused macro definition: `unused`
-  --> $DIR/unused-macros.rs:26:18
-   |
-LL |     macro_rules! unused {
-   |                  ^^^^^^
-   |
+ at $DIR/unused-macros.rs:26:18
 note: the lint level is defined here
-  --> $DIR/unused-macros.rs:25:12
-   |
-LL |     #[deny(unused_macros)]
-   |            ^^^^^^^^^^^^^
+ at $DIR/unused-macros.rs:25:12
 
 error: aborting due to 3 previous errors
 

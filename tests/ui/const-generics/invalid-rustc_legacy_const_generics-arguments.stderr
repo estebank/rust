@@ -1,151 +1,71 @@
-error[E0539]: malformed `rustc_legacy_const_generics` attribute input
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:12:3
-   |
-LL | #[rustc_legacy_const_generics(a)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^-^
-   |                               |
-   |                               expected an integer literal here
-   |
+error E0539: malformed `rustc_legacy_const_generics` attribute input
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:12:3
+  on line 12, column 31: expected an integer literal here
 help: must be of the form
-   |
-LL - #[rustc_legacy_const_generics(a)]
-LL + #[rustc_legacy_const_generics(N)]
-   |
+ on line 12, column 2, replace with `rustc_legacy_const_generics(N)`
 
-error[E0539]: malformed `rustc_legacy_const_generics` attribute input
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:15:3
-   |
-LL | #[rustc_legacy_const_generics(1, a, 2, b)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-^^^^^^^
-   |                                  |
-   |                                  expected an integer literal here
-   |
+error E0539: malformed `rustc_legacy_const_generics` attribute input
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:15:3
+  on line 15, column 34: expected an integer literal here
 help: must be of the form
-   |
-LL - #[rustc_legacy_const_generics(1, a, 2, b)]
-LL + #[rustc_legacy_const_generics(N)]
-   |
+ on line 15, column 2, replace with `rustc_legacy_const_generics(N)`
 
-error[E0539]: malformed `rustc_legacy_const_generics` attribute input
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:15:3
-   |
-LL | #[rustc_legacy_const_generics(1, a, 2, b)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-^
-   |                                        |
-   |                                        expected an integer literal here
-   |
+error E0539: malformed `rustc_legacy_const_generics` attribute input
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:15:3
+  on line 15, column 40: expected an integer literal here
 help: must be of the form
-   |
-LL - #[rustc_legacy_const_generics(1, a, 2, b)]
-LL + #[rustc_legacy_const_generics(N)]
-   |
+ on line 15, column 2, replace with `rustc_legacy_const_generics(N)`
 
 error: the `rustc_legacy_const_generics` attribute cannot be used on structs
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:20:3
-   |
-LL | #[rustc_legacy_const_generics(0)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = help: the `rustc_legacy_const_generics` attribute can only be applied to functions
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:20:3
+help: the `rustc_legacy_const_generics` attribute can only be applied to functions
 
 error: suffixed literals are not allowed in attributes
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:23:31
-   |
-LL | #[rustc_legacy_const_generics(0usize)]
-   |                               ^^^^^^
-   |
-   = help: instead of using a suffixed literal (`1u8`, `1.0f32`, etc.), use an unsuffixed version (`1`, `1.0`, etc.)
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:23:31
+help: instead of using a suffixed literal (`1u8`, `1.0f32`, etc.), use an unsuffixed version (`1`, `1.0`, etc.)
 
-error[E0539]: malformed `rustc_legacy_const_generics` attribute input
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:23:3
-   |
-LL | #[rustc_legacy_const_generics(0usize)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^------^
-   |                               |
-   |                               expected an integer literal here
-   |
+error E0539: malformed `rustc_legacy_const_generics` attribute input
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:23:3
+  on line 23, column 31: expected an integer literal here
 help: must be of the form
-   |
-LL - #[rustc_legacy_const_generics(0usize)]
-LL + #[rustc_legacy_const_generics(N)]
-   |
+ on line 23, column 2, replace with `rustc_legacy_const_generics(N)`
 
 error: the `rustc_legacy_const_generics` attribute cannot be used on foreign functions
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:29:7
-   |
-LL |     #[rustc_legacy_const_generics(1)]
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = help: the `rustc_legacy_const_generics` attribute can only be applied to functions
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:29:7
+help: the `rustc_legacy_const_generics` attribute can only be applied to functions
 
 error: the `rustc_legacy_const_generics` attribute cannot be used on inherent methods
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:37:7
-   |
-LL |     #[rustc_legacy_const_generics(0)]
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = help: the `rustc_legacy_const_generics` attribute can only be applied to functions
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:37:7
+help: the `rustc_legacy_const_generics` attribute can only be applied to functions
 
-error[E0539]: malformed `rustc_legacy_const_generics` attribute input
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:41:3
-   |
-LL | #[rustc_legacy_const_generics]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected this to be a list
-   |
+error E0539: malformed `rustc_legacy_const_generics` attribute input
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:41:3: expected this to be a list
 help: must be of the form
-   |
-LL | #[rustc_legacy_const_generics(N)]
-   |                              +++
+ on line 41, column 2, replace with `rustc_legacy_const_generics(N)`
 
-error[E0539]: malformed `rustc_legacy_const_generics` attribute input
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:44:3
-   |
-LL | #[rustc_legacy_const_generics = 1]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^---
-   |                               |
-   |                               expected this to be a list
-   |
+error E0539: malformed `rustc_legacy_const_generics` attribute input
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:44:3
+  on line 44, column 31: expected this to be a list
 help: must be of the form
-   |
-LL - #[rustc_legacy_const_generics = 1]
-LL + #[rustc_legacy_const_generics(N)]
-   |
+ on line 44, column 2, replace with `rustc_legacy_const_generics(N)`
 
 error: #[rustc_legacy_const_generics] must have one index for each generic parameter
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:3:1
-   |
-LL | #[rustc_legacy_const_generics(0)]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-LL | fn foo1() {}
-   |        - generic parameters
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:3:1
+  on line 4, column 8: generic parameters
 
 error: index exceeds number of arguments
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:6:31
-   |
-LL | #[rustc_legacy_const_generics(1)]
-   |                               ^ there is only 1 argument
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:6:31: there is only 1 argument
 
 error: index exceeds number of arguments
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:9:31
-   |
-LL | #[rustc_legacy_const_generics(2)]
-   |                               ^ there are only 2 arguments
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:9:31: there are only 2 arguments
 
 error: #[rustc_legacy_const_generics] functions must only have const generics
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:33:1
-   |
-LL | #[rustc_legacy_const_generics(0)]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-LL | fn foo8<X>() {}
-   |         - non-const generic parameter
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:33:1
+  on line 34, column 9: non-const generic parameter
 
-error[E0044]: foreign items may not have const parameters
-  --> $DIR/invalid-rustc_legacy_const_generics-arguments.rs:30:5
-   |
-LL |     fn foo7<const X: usize>();
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ can't have const parameters
-   |
-   = help: replace the const parameters with concrete consts
+error E0044: foreign items may not have const parameters
+ at $DIR/invalid-rustc_legacy_const_generics-arguments.rs:30:5: can't have const parameters
+help: replace the const parameters with concrete consts
 
 error: aborting due to 15 previous errors
 

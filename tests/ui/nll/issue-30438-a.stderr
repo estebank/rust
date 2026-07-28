@@ -1,11 +1,6 @@
-error[E0515]: cannot return reference to temporary value
-  --> $DIR/issue-30438-a.rs:12:16
-   |
-LL |         return &Test { s: &self.s};
-   |                ^------------------
-   |                ||
-   |                |temporary value created here
-   |                returns a reference to data owned by the current function
+error E0515: cannot return reference to temporary value
+ at $DIR/issue-30438-a.rs:12:16: returns a reference to data owned by the current function
+  on line 12, column 17: temporary value created here
 
 error: aborting due to 1 previous error
 

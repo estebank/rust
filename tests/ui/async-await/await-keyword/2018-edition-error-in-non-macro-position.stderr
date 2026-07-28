@@ -1,81 +1,38 @@
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error-in-non-macro-position.rs:6:13
-   |
-LL |     pub mod await {
-   |             ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error-in-non-macro-position.rs:6:13: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL |     pub mod r#await {
-   |             ++
+ on line 6, column 12, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error-in-non-macro-position.rs:7:20
-   |
-LL |         pub struct await;
-   |                    ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error-in-non-macro-position.rs:7:20: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL |         pub struct r#await;
-   |                    ++
+ on line 7, column 19, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error-in-non-macro-position.rs:10:22
-   |
-LL | use self::outer_mod::await::await;
-   |                      ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error-in-non-macro-position.rs:10:22: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL | use self::outer_mod::r#await::await;
-   |                      ++
+ on line 10, column 21, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error-in-non-macro-position.rs:10:29
-   |
-LL | use self::outer_mod::await::await;
-   |                             ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error-in-non-macro-position.rs:10:29: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL | use self::outer_mod::await::r#await;
-   |                             ++
+ on line 10, column 28, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error-in-non-macro-position.rs:13:14
-   |
-LL | struct Foo { await: () }
-   |        ---   ^^^^^ expected identifier, found keyword
-   |        |
-   |        while parsing this struct
-   |
+ at $DIR/2018-edition-error-in-non-macro-position.rs:13:14: expected identifier, found keyword
+  on line 13, column 8: while parsing this struct
 help: escape `await` to use it as an identifier
-   |
-LL | struct Foo { r#await: () }
-   |              ++
+ on line 13, column 13, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error-in-non-macro-position.rs:16:15
-   |
-LL | impl Foo { fn await() {} }
-   |               ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error-in-non-macro-position.rs:16:15: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL | impl Foo { fn r#await() {} }
-   |               ++
+ on line 16, column 14, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error-in-non-macro-position.rs:19:14
-   |
-LL | macro_rules! await {
-   |              ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error-in-non-macro-position.rs:19:14: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL | macro_rules! r#await {
-   |              ++
+ on line 19, column 13, add `r#`
 
 error: aborting due to 7 previous errors
 

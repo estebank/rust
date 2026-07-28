@@ -1,16 +1,8 @@
-error[E0502]: cannot borrow `self.thing` as mutable because it is also borrowed as immutable
-  --> $DIR/issue-51268.rs:15:9
-   |
-LL |           self.thing.bar(|| {
-   |           ^          --- -- immutable borrow occurs here
-   |           |          |
-   |  _________|          immutable borrow later used by call
-   | |
-LL | |
-LL | |             &self.number;
-   | |              ----------- first borrow occurs due to use of `self` in closure
-LL | |         });
-   | |__________^ mutable borrow occurs here
+error E0502: cannot borrow `self.thing` as mutable because it is also borrowed as immutable
+ at $DIR/issue-51268.rs:15:9 to 18:11: mutable borrow occurs here
+  on line 15, column 20: immutable borrow later used by call
+  on line 15, column 24: immutable borrow occurs here
+  on line 17, column 14: first borrow occurs due to use of `self` in closure
 
 error: aborting due to 1 previous error
 

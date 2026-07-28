@@ -1,16 +1,8 @@
-error[E0576]: cannot find associated type `X` in trait `A`
-  --> $DIR/issue-22037.rs:3:33
-   |
-LL |     type Output;
-   |     ------------ associated type `Output` defined here
-LL |     fn a(&self) -> <Self as A>::X;
-   |                                 ^ not found in `A`
-   |
+error E0576: cannot find associated type `X` in trait `A`
+ at $DIR/issue-22037.rs:3:33: not found in `A`
+  on line 2: associated type `Output` defined here
 help: maybe you meant this associated type
-   |
-LL -     fn a(&self) -> <Self as A>::X;
-LL +     fn a(&self) -> <Self as A>::Output;
-   |
+ on line 3, column 32, replace with `Output`
 
 error: aborting due to 1 previous error
 

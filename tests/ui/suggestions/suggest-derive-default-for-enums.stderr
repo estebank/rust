@@ -1,24 +1,10 @@
-error[E0599]: the method `bar` exists for enum `MyEnum`, but its trait bounds were not satisfied
-  --> $DIR/suggest-derive-default-for-enums.rs:13:7
-   |
-LL | enum MyEnum {
-   | ----------- method `bar` not found for this enum because it doesn't satisfy `MyEnum: Default` or `MyEnum: Foo`
-...
-LL |     x.bar();
-   |       ^^^ method cannot be called on `MyEnum` due to unsatisfied trait bounds
-   |
+error E0599: the method `bar` exists for enum `MyEnum`, but its trait bounds were not satisfied
+ at $DIR/suggest-derive-default-for-enums.rs:13:7: method cannot be called on `MyEnum` due to unsatisfied trait bounds
+  on line 2: method `bar` not found for this enum because it doesn't satisfy `MyEnum: Default` or `MyEnum: Foo`
 note: trait bound `MyEnum: Default` was not satisfied
-  --> $DIR/suggest-derive-default-for-enums.rs:9:9
-   |
-LL | impl<T: Default> Foo for T {}
-   |         ^^^^^^^  ---     -
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/suggest-derive-default-for-enums.rs:9:9: unsatisfied trait bound introduced here
 help: consider annotating `MyEnum` with `#[derive(Default)]`
-   |
-LL + #[derive(Default)]
-LL | enum MyEnum {
-   |
+ on line 2, column 1, add `#[derive(Default)]`
 
 error: aborting due to 1 previous error
 

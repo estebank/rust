@@ -1,29 +1,14 @@
-error[E0310]: the parameter type `A` may not live long enough
-  --> $DIR/regions-close-over-type-parameter-1.rs:11:5
-   |
-LL |     Box::new(v) as Box<dyn SomeTrait + 'static>
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |
-   |     the parameter type `A` must be valid for the static lifetime...
-   |     ...so that the type `A` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `A` may not live long enough
+ at $DIR/regions-close-over-type-parameter-1.rs:11:5: the parameter type `A` must be valid for the static lifetime...
+  on line 11: ...so that the type `A` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn make_object1<A: SomeTrait + 'static>(v: A) -> Box<dyn SomeTrait + 'static> {
-   |                              +++++++++
+ on line 10, column 28, add ` + 'static`
 
-error[E0309]: the parameter type `A` may not live long enough
-  --> $DIR/regions-close-over-type-parameter-1.rs:20:5
-   |
-LL | fn make_object3<'a, 'b, A: SomeTrait + 'a>(v: A) -> Box<dyn SomeTrait + 'b> {
-   |                     -- the parameter type `A` must be valid for the lifetime `'b` as defined here...
-LL |     Box::new(v) as Box<dyn SomeTrait + 'b>
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ ...so that the type `A` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `A` may not live long enough
+ at $DIR/regions-close-over-type-parameter-1.rs:20:5: ...so that the type `A` will meet its required lifetime bounds
+  on line 19, column 21: the parameter type `A` must be valid for the lifetime `'b` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL | fn make_object3<'a, 'b, A: SomeTrait + 'a + 'b>(v: A) -> Box<dyn SomeTrait + 'b> {
-   |                                           ++++
+ on line 19, column 41, add ` + 'b`
 
 error: aborting due to 2 previous errors
 

@@ -1,71 +1,34 @@
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/if-let-typo.rs:4:13
-   |
-LL |     if Some(x) = foo {}
-   |             ^ not found in this scope
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/if-let-typo.rs:4:13: not found in this scope
 help: you might have meant to use pattern matching
-   |
-LL |     if let Some(x) = foo {}
-   |        +++
+ on line 4, column 7, add `let `
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/if-let-typo.rs:10:8
-   |
-LL |     if x = 5 {}
-   |        ^ not found in this scope
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/if-let-typo.rs:10:8: not found in this scope
 help: you might have meant to use pattern matching
-   |
-LL |     if let x = 5 {}
-   |        +++
+ on line 10, column 7, add `let `
 
-error[E0308]: mismatched types
-  --> $DIR/if-let-typo.rs:4:8
-   |
-LL |     if Some(x) = foo {}
-   |        ^^^^^^^^^^^^^ expected `bool`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/if-let-typo.rs:4:8: expected `bool`, found `()`
 help: consider adding `let`
-   |
-LL |     if let Some(x) = foo {}
-   |        +++
+ on line 4, column 7, add `let `
 
-error[E0308]: mismatched types
-  --> $DIR/if-let-typo.rs:6:8
-   |
-LL |     if Some(foo) = bar {}
-   |        ^^^^^^^^^^^^^^^ expected `bool`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/if-let-typo.rs:6:8: expected `bool`, found `()`
 help: consider adding `let`
-   |
-LL |     if let Some(foo) = bar {}
-   |        +++
+ on line 6, column 7, add `let `
 
-error[E0308]: mismatched types
-  --> $DIR/if-let-typo.rs:7:8
-   |
-LL |     if 3 = foo {}
-   |        ^^^^^^^ expected `bool`, found `()`
+error E0308: mismatched types
+ at $DIR/if-let-typo.rs:7:8: expected `bool`, found `()`
 
-error[E0070]: invalid left-hand side of assignment
-  --> $DIR/if-let-typo.rs:8:16
-   |
-LL |     if Some(3) = foo {}
-   |             -  ^
-   |             |
-   |             cannot assign to this expression
+error E0070: invalid left-hand side of assignment
+ at $DIR/if-let-typo.rs:8:16
+  on line 8, column 13: cannot assign to this expression
 
-error[E0308]: mismatched types
-  --> $DIR/if-let-typo.rs:8:8
-   |
-LL |     if Some(3) = foo {}
-   |        ^^^^^^^^^^^^^ expected `bool`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/if-let-typo.rs:8:8: expected `bool`, found `()`
 help: consider adding `let`
-   |
-LL |     if let Some(3) = foo {}
-   |        +++
+ on line 8, column 7, add `let `
 
 error: aborting due to 7 previous errors
 

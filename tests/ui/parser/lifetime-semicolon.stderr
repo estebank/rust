@@ -1,14 +1,7 @@
 error: expected one of `,` or `>`, found `;`
-  --> $DIR/lifetime-semicolon.rs:7:31
-   |
-LL | fn foo<'a, 'b>(_x: &mut Foo<'a; 'b>) {}
-   |                               ^ expected one of `,` or `>`
-   |
+ at $DIR/lifetime-semicolon.rs:7:31: expected one of `,` or `>`
 help: use a comma to separate type parameters
-   |
-LL - fn foo<'a, 'b>(_x: &mut Foo<'a; 'b>) {}
-LL + fn foo<'a, 'b>(_x: &mut Foo<'a, 'b>) {}
-   |
+ on line 7, column 30, replace with `, `
 
 error: aborting due to 1 previous error
 

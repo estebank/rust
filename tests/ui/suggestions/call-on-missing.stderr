@@ -1,73 +1,34 @@
-error[E0599]: no method named `bar` found for fn item `fn() -> Foo {foo}` in the current scope
-  --> $DIR/call-on-missing.rs:12:9
-   |
-LL |     foo.bar();
-   |         ^^^ method not found in `fn() -> Foo {foo}`
-   |
+error E0599: no method named `bar` found for fn item `fn() -> Foo {foo}` in the current scope
+ at $DIR/call-on-missing.rs:12:9: method not found in `fn() -> Foo {foo}`
 help: use parentheses to call this function
-   |
-LL |     foo().bar();
-   |        ++
+ on line 12, column 7, add `()`
 
-error[E0609]: no field `i` on type `fn() -> Foo {foo}`
-  --> $DIR/call-on-missing.rs:16:9
-   |
-LL |     foo.i;
-   |         ^ unknown field
-   |
+error E0609: no field `i` on type `fn() -> Foo {foo}`
+ at $DIR/call-on-missing.rs:16:9: unknown field
 help: use parentheses to call this function
-   |
-LL |     foo().i;
-   |        ++
+ on line 16, column 7, add `()`
 
-error[E0599]: no method named `bar` found for struct `Box<dyn Fn() -> Foo>` in the current scope
-  --> $DIR/call-on-missing.rs:22:14
-   |
-LL |     callable.bar();
-   |              ^^^ method not found in `Box<dyn Fn() -> Foo>`
-   |
+error E0599: no method named `bar` found for struct `Box<dyn Fn() -> Foo>` in the current scope
+ at $DIR/call-on-missing.rs:22:14: method not found in `Box<dyn Fn() -> Foo>`
 help: use parentheses to call this trait object
-   |
-LL |     callable().bar();
-   |             ++
+ on line 22, column 12, add `()`
 
-error[E0609]: no field `i` on type `Box<dyn Fn() -> Foo>`
-  --> $DIR/call-on-missing.rs:26:14
-   |
-LL |     callable.i;
-   |              ^ unknown field
-   |
+error E0609: no field `i` on type `Box<dyn Fn() -> Foo>`
+ at $DIR/call-on-missing.rs:26:14: unknown field
 help: use parentheses to call this trait object
-   |
-LL |     callable().i;
-   |             ++
+ on line 26, column 12, add `()`
 
-error[E0599]: no method named `bar` found for type parameter `T` in the current scope
-  --> $DIR/call-on-missing.rs:32:7
-   |
-LL | fn type_param<T: Fn() -> Foo>(t: T) {
-   |               - method `bar` not found for this type parameter
-LL |     t.bar();
-   |       ^^^ method not found in `T`
-   |
+error E0599: no method named `bar` found for type parameter `T` in the current scope
+ at $DIR/call-on-missing.rs:32:7: method not found in `T`
+  on line 31, column 15: method `bar` not found for this type parameter
 help: use parentheses to call this type parameter
-   |
-LL |     t().bar();
-   |      ++
+ on line 32, column 5, add `()`
 
-error[E0609]: no field `i` on type `T`
-  --> $DIR/call-on-missing.rs:36:7
-   |
-LL | fn type_param<T: Fn() -> Foo>(t: T) {
-   |               - type parameter 'T' declared here
-...
-LL |     t.i;
-   |       ^ unknown field
-   |
+error E0609: no field `i` on type `T`
+ at $DIR/call-on-missing.rs:36:7: unknown field
+  on line 31, column 15: type parameter 'T' declared here
 help: use parentheses to call this type parameter
-   |
-LL |     t().i;
-   |      ++
+ on line 36, column 5, add `()`
 
 error: aborting due to 6 previous errors
 

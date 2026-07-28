@@ -1,14 +1,8 @@
-error[E0080]: evaluation panicked: explicit panic
-  --> $DIR/interpret-in-const-called-fn.rs:8:19
-   |
-LL |     const C: () = panic!();
-   |                   ^^^^^^^^ evaluation of `Fail::<i32>::C` failed here
+error E0080: evaluation panicked: explicit panic
+ at $DIR/interpret-in-const-called-fn.rs:8:19: evaluation of `Fail::<i32>::C` failed here
 
 note: erroneous constant encountered
-  --> $DIR/interpret-in-const-called-fn.rs:18:9
-   |
-LL |         Fail::<T>::C;
-   |         ^^^^^^^^^^^^
+ at $DIR/interpret-in-const-called-fn.rs:18:9
 
 error: aborting due to 1 previous error
 

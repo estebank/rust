@@ -1,19 +1,11 @@
-error[E0308]: mismatched types
-  --> $DIR/return-type.rs:10:5
-   |
-LL |     foo(4 as usize)
-   |     ^^^^^^^^^^^^^^^ expected `()`, found `S<usize>`
-   |
-   = note: expected unit type `()`
-                 found struct `S<usize>`
+error E0308: mismatched types
+ at $DIR/return-type.rs:10:5: expected `()`, found `S<usize>`
+note: expected unit type `()`
+            found struct `S<usize>`
 help: consider using a semicolon here
-   |
-LL |     foo(4 as usize);
-   |                    +
+ on line 10, column 19, add `;`
 help: try adding a return type
-   |
-LL | fn bar() -> S<usize> {
-   |          +++++++++++
+ on line 9, column 8, add ` -> S<usize>`
 
 error: aborting due to 1 previous error
 

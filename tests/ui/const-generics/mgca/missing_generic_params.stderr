@@ -1,8 +1,5 @@
 error: function items cannot be used as const args
-  --> $DIR/missing_generic_params.rs:13:21
-   |
-LL | impl Trait for [(); N] {}
-   |                     ^
+ at $DIR/missing_generic_params.rs:13:21
 
 error: aborting due to 1 previous error
 

@@ -1,8 +1,5 @@
 error: empty glob delegation is not supported
-  --> $DIR/empty-glob.rs:7:5
-   |
-LL |     reuse Trait::*;
-   |     ^^^^^^^^^^^^^^^
+ at $DIR/empty-glob.rs:7:5
 
 error: aborting due to 1 previous error
 

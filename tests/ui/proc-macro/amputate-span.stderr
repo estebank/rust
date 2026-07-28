@@ -1,24 +1,12 @@
-error[E0433]: cannot find type `Command` in this scope
-  --> $DIR/amputate-span.rs:49:5
-   |
-LL |     Command::new("git");
-   |     ^^^^^^^ use of undeclared type `Command`
-   |
+error E0433: cannot find type `Command` in this scope
+ at $DIR/amputate-span.rs:49:5: use of undeclared type `Command`
 help: consider importing this struct
-   |
-LL + use std::process::Command;
-   |
+ on line 46, column 1, add `use std::process::Command;`
 
-error[E0433]: cannot find type `Command` in this scope
-  --> $DIR/amputate-span.rs:63:9
-   |
-LL |         Command::new("git");
-   |         ^^^^^^^ use of undeclared type `Command`
-   |
+error E0433: cannot find type `Command` in this scope
+ at $DIR/amputate-span.rs:63:9: use of undeclared type `Command`
 help: consider importing this struct
-   |
-LL +     use std::process::Command;
-   |
+ on line 60, column 4, add `use std::process::Command;`
 
 error: aborting due to 2 previous errors
 

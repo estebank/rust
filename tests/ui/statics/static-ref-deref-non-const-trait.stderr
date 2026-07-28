@@ -1,22 +1,12 @@
-error[E0015]: cannot perform non-const deref coercion on `A` in statics
-  --> $DIR/static-ref-deref-non-const-trait.rs:6:24
-   |
-LL | static S: &'static B = &A;
-   |                        ^^
-   |
-   = note: attempting to deref into `B`
+error E0015: cannot perform non-const deref coercion on `A` in statics
+ at $DIR/static-ref-deref-non-const-trait.rs:6:24
+note: attempting to deref into `B`
 note: deref defined here
-  --> $DIR/static-ref-deref-non-const-trait.rs:12:5
-   |
-LL |     type Target = B;
-   |     ^^^^^^^^^^^
+ at $DIR/static-ref-deref-non-const-trait.rs:12:5
 note: impl defined here, but it is not `const`
-  --> $DIR/static-ref-deref-non-const-trait.rs:11:1
-   |
-LL | impl Deref for A {
-   | ^^^^^^^^^^^^^^^^
-   = note: calls in statics are limited to constant functions, tuple structs and tuple variants
-   = note: consider wrapping this expression in `std::sync::LazyLock::new(|| ...)`
+ at $DIR/static-ref-deref-non-const-trait.rs:11:1
+note: calls in statics are limited to constant functions, tuple structs and tuple variants
+note: consider wrapping this expression in `std::sync::LazyLock::new(|| ...)`
 
 error: aborting due to 1 previous error
 

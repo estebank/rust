@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `N`
-  --> $DIR/issue-98629.rs:7:1
-   |
-LL |     const N: usize;
-   |     -------------- `N` from trait
-...
-LL | const impl Trait for i32 {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^ missing `N` in implementation
+error E0046: not all trait items implemented, missing: `N`
+ at $DIR/issue-98629.rs:7:1: missing `N` in implementation
+  on line 4: `N` from trait
 
 error: aborting due to 1 previous error
 

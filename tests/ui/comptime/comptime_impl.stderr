@@ -1,32 +1,16 @@
 error: the `rustc_comptime` attribute cannot be used on trait impl blocks
-  --> $DIR/comptime_impl.rs:16:3
-   |
-LL | #[rustc_comptime]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `rustc_comptime` attribute can be applied to functions and inherent impl blocks
+ at $DIR/comptime_impl.rs:16:3
+help: the `rustc_comptime` attribute can be applied to functions and inherent impl blocks
 
-error[E0277]: the trait bound `Bar: const Foo` is not satisfied
-  --> $DIR/comptime_impl.rs:29:9
-   |
-LL |     Bar.foo();
-   |         ^^^
-   |
+error E0277: the trait bound `Bar: const Foo` is not satisfied
+ at $DIR/comptime_impl.rs:29:9
 help: make the `impl` of trait `Foo` `const`
-   |
-LL | impl const Foo for Bar {
-   |      +++++
+ on line 18, column 5, add `const `
 
-error[E0277]: the trait bound `Bar: const Foo` is not satisfied
-  --> $DIR/comptime_impl.rs:31:9
-   |
-LL |     Bar.bar();
-   |         ^^^
-   |
+error E0277: the trait bound `Bar: const Foo` is not satisfied
+ at $DIR/comptime_impl.rs:31:9
 help: make the `impl` of trait `Foo` `const`
-   |
-LL | impl const Foo for Bar {
-   |      +++++
+ on line 18, column 5, add `const `
 
 error: aborting due to 3 previous errors
 

@@ -1,40 +1,20 @@
-error[E0204]: the trait `Copy` cannot be implemented for this type
-  --> $DIR/E0204.rs:5:15
-   |
-LL |     foo: Vec<u32>,
-   |     ------------- this field does not implement `Copy`
-...
-LL | impl Copy for Foo { }
-   |               ^^^
+error E0204: the trait `Copy` cannot be implemented for this type
+ at $DIR/E0204.rs:5:15
+  on line 2: this field does not implement `Copy`
 
-error[E0204]: the trait `Copy` cannot be implemented for this type
-  --> $DIR/E0204.rs:8:8
-   |
-LL | #[derive(Copy)]
-   |          ---- in this derive macro expansion
-LL | struct Foo2<'a> {
-   |        ^^^^
-LL |     ty: &'a mut bool,
-   |     ---------------- this field does not implement `Copy`
+error E0204: the trait `Copy` cannot be implemented for this type
+ at $DIR/E0204.rs:8:8
+  on line 7, column 10: in this derive macro expansion
+  on line 9: this field does not implement `Copy`
 
-error[E0204]: the trait `Copy` cannot be implemented for this type
-  --> $DIR/E0204.rs:17:15
-   |
-LL |     Bar { x: Vec<u32> },
-   |           ----------- this field does not implement `Copy`
-...
-LL | impl Copy for EFoo { }
-   |               ^^^^
+error E0204: the trait `Copy` cannot be implemented for this type
+ at $DIR/E0204.rs:17:15
+  on line 13, column 11: this field does not implement `Copy`
 
-error[E0204]: the trait `Copy` cannot be implemented for this type
-  --> $DIR/E0204.rs:20:6
-   |
-LL | #[derive(Copy)]
-   |          ---- in this derive macro expansion
-LL | enum EFoo2<'a> {
-   |      ^^^^^
-LL |     Bar(&'a mut bool),
-   |         ------------ this field does not implement `Copy`
+error E0204: the trait `Copy` cannot be implemented for this type
+ at $DIR/E0204.rs:20:6
+  on line 19, column 10: in this derive macro expansion
+  on line 21, column 9: this field does not implement `Copy`
 
 error: aborting due to 4 previous errors
 

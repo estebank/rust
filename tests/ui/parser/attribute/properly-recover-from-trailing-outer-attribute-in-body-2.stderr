@@ -1,26 +1,13 @@
 error: expected `;`, found `#`
-  --> $DIR/properly-recover-from-trailing-outer-attribute-in-body-2.rs:6:13
-   |
-LL |         #[cfg()]
-   |         -------- only `;` terminated statements or tail expressions are allowed after this attribute
-LL |         $foo
-   |             ^ expected `;` here
-LL |
-LL |         #[cfg(false)]
-   |         - unexpected token
-...
-LL |     the_macro!( (); (); );
-   |     --------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `the_macro` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/properly-recover-from-trailing-outer-attribute-in-body-2.rs:6:13: expected `;` here
+  on line 5: only `;` terminated statements or tail expressions are allowed after this attribute
+  on line 8: unexpected token
+  on line 14: in this macro invocation
+note: this error originates in the macro `the_macro` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: add `;` here
-   |
-LL |         $foo;
-   |             +
+ on line 6, column 12, add `;`
 help: alternatively, consider surrounding the expression with a block
-   |
-LL |     the_macro!( { () }; (); );
-   |                 +    +
+ on line 14, column 16, add `{ `
 
 error: aborting due to 1 previous error
 

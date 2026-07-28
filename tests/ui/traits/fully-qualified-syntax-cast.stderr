@@ -1,8 +1,5 @@
-error[E0404]: expected trait, found builtin type `str`
-  --> $DIR/fully-qualified-syntax-cast.rs:10:18
-   |
-LL |         <Self as str>::trim(self);
-   |                  ^^^ not a trait
+error E0404: expected trait, found builtin type `str`
+ at $DIR/fully-qualified-syntax-cast.rs:10:18: not a trait
 
 error: aborting due to 1 previous error
 

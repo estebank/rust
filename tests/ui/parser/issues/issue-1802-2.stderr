@@ -1,8 +1,5 @@
-error[E0768]: no valid digits found for number
-  --> $DIR/issue-1802-2.rs:5:16
-   |
-LL |     log(error, 0b);
-   |                ^^
+error E0768: no valid digits found for number
+ at $DIR/issue-1802-2.rs:5:16
 
 error: aborting due to 1 previous error
 

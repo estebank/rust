@@ -1,32 +1,16 @@
-error[E0382]: use of partially moved value: `s`
-  --> $DIR/move-in-pattern-mut.rs:18:9
-   |
-LL |     if let Some(mut x) = s {
-   |                 ----- value partially moved here
-...
-LL |     foo(s);
-   |         ^ value used here after partial move
-   |
-   = note: partial move occurs because value has type `S`, which does not implement the `Copy` trait
+error E0382: use of partially moved value: `s`
+ at $DIR/move-in-pattern-mut.rs:18:9: value used here after partial move
+  on line 15, column 17: value partially moved here
+note: partial move occurs because value has type `S`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     if let Some(ref mut x) = s {
-   |                 +++
+ on line 15, column 16, add `ref `
 
-error[E0382]: use of partially moved value: `e`
-  --> $DIR/move-in-pattern-mut.rs:22:9
-   |
-LL |     let E::V { s: mut x } = e;
-   |                   ----- value partially moved here
-LL |     x = S;
-LL |     bar(e);
-   |         ^ value used here after partial move
-   |
-   = note: partial move occurs because value has type `S`, which does not implement the `Copy` trait
+error E0382: use of partially moved value: `e`
+ at $DIR/move-in-pattern-mut.rs:22:9: value used here after partial move
+  on line 20, column 19: value partially moved here
+note: partial move occurs because value has type `S`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let E::V { s: ref mut x } = e;
-   |                   +++
+ on line 20, column 18, add `ref `
 
 error: aborting due to 2 previous errors
 

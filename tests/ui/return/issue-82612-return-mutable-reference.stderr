@@ -1,23 +1,12 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-82612-return-mutable-reference.rs:18:13
-   |
-LL | /         if index < self.values.len() {
-LL | |             let value = unsafe { self.values.get_unchecked_mut(index) };
-LL | |             value.get_or_insert_with(func)
-   | |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `()`, found `&mut V`
-LL | |         }
-   | |_________- `if` expressions without `else` arms expect their inner expression to be `()`
-   |
-   = note:      expected unit type `()`
-           found mutable reference `&mut V`
+error E0308: mismatched types
+ at $DIR/issue-82612-return-mutable-reference.rs:18:13: expected `()`, found `&mut V`
+  on line 16 to line 19: `if` expressions without `else` arms expect their inner expression to be `()`
+note:      expected unit type `()`
+      found mutable reference `&mut V`
 help: consider using a semicolon here
-   |
-LL |             value.get_or_insert_with(func);
-   |                                           +
+ on line 18, column 42, add `;`
 help: you might have meant to return this value
-   |
-LL |             return value.get_or_insert_with(func);
-   |             ++++++                               +
+ on line 18, column 12, add `return `
 
 error: aborting due to 1 previous error
 

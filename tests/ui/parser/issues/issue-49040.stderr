@@ -1,20 +1,10 @@
 error: expected item, found `;`
-  --> $DIR/issue-49040.rs:1:28
-   |
-LL | #![allow(unused_variables)];
-   |                            ^
-   |
+ at $DIR/issue-49040.rs:1:28
 help: remove this semicolon
-   |
-LL - #![allow(unused_variables)];
-LL + #![allow(unused_variables)]
-   |
+ on line 1, column 27
 
-error[E0601]: `main` function not found in crate `issue_49040`
-  --> $DIR/issue-49040.rs:2:12
-   |
-LL | fn foo() {}
-   |            ^ consider adding a `main` function to `$DIR/issue-49040.rs`
+error E0601: `main` function not found in crate `issue_49040`
+ at $DIR/issue-49040.rs:2:12: consider adding a `main` function to `$DIR/issue-49040.rs`
 
 error: aborting due to 2 previous errors
 

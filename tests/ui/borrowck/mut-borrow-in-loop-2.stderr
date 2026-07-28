@@ -1,17 +1,9 @@
-error[E0382]: use of moved value: `value`
-  --> $DIR/mut-borrow-in-loop-2.rs:30:23
-   |
-LL | fn this_does_not<'a, R>(value: &'a mut Events<R>) {
-   |                         ----- move occurs because `value` has type `&mut Events<R>`, which does not implement the `Copy` trait
-LL |     for _ in 0..3 {
-   |     ------------- inside of this loop
-LL |         Other::handle(value);
-   |                       ^^^^^ value moved here, in previous iteration of loop
-   |
+error E0382: use of moved value: `value`
+ at $DIR/mut-borrow-in-loop-2.rs:30:23: value moved here, in previous iteration of loop
+  on line 28, column 25: move occurs because `value` has type `&mut Events<R>`, which does not implement the `Copy` trait
+  on line 29: inside of this loop
 help: consider creating a fresh reborrow of `value` here
-   |
-LL |         Other::handle(&mut *value);
-   |                       ++++++
+ on line 30, column 22, add `&mut *`
 
 error: aborting due to 1 previous error
 

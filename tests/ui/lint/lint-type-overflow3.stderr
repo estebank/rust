@@ -1,118 +1,62 @@
 warning: use of a double negation
-  --> $DIR/lint-type-overflow3.rs:11:17
-   |
-LL |     let x: i8 = --128;
-   |                 ^^^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
-   = note: `#[warn(double_negations)]` on by default
+ at $DIR/lint-type-overflow3.rs:11:17
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
+note: `#[warn(double_negations)]` on by default
 help: add parentheses for clarity
-   |
-LL |     let x: i8 = -(-128);
-   |                  +    +
+ on line 11, column 17, add `(`
 
 warning: use of a double negation
-  --> $DIR/lint-type-overflow3.rs:13:18
-   |
-LL |     let x: i8 = ---128;
-   |                  ^^^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
+ at $DIR/lint-type-overflow3.rs:13:18
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
 help: add parentheses for clarity
-   |
-LL |     let x: i8 = --(-128);
-   |                   +    +
+ on line 13, column 18, add `(`
 
 warning: use of a double negation
-  --> $DIR/lint-type-overflow3.rs:15:19
-   |
-LL |     let x: i8 = ----128;
-   |                   ^^^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
+ at $DIR/lint-type-overflow3.rs:15:19
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
 help: add parentheses for clarity
-   |
-LL |     let x: i8 = ---(-128);
-   |                    +    +
+ on line 15, column 19, add `(`
 
 warning: use of a double negation
-  --> $DIR/lint-type-overflow3.rs:17:20
-   |
-LL |     let x: i8 = -----128;
-   |                    ^^^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
+ at $DIR/lint-type-overflow3.rs:17:20
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
 help: add parentheses for clarity
-   |
-LL |     let x: i8 = ----(-128);
-   |                     +    +
+ on line 17, column 20, add `(`
 
 warning: use of a double negation
-  --> $DIR/lint-type-overflow3.rs:19:21
-   |
-LL |     let x: i8 = ------128;
-   |                     ^^^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
+ at $DIR/lint-type-overflow3.rs:19:21
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
 help: add parentheses for clarity
-   |
-LL |     let x: i8 = -----(-128);
-   |                      +    +
+ on line 19, column 21, add `(`
 
 error: this arithmetic operation will overflow
-  --> $DIR/lint-type-overflow3.rs:11:17
-   |
-LL |     let x: i8 = --128;
-   |                 ^^^^^ attempt to negate `i8::MIN`, which would overflow
-   |
+ at $DIR/lint-type-overflow3.rs:11:17: attempt to negate `i8::MIN`, which would overflow
 note: the lint level is defined here
-  --> $DIR/lint-type-overflow3.rs:5:31
-   |
-LL | #![deny(overflowing_literals, arithmetic_overflow)]
-   |                               ^^^^^^^^^^^^^^^^^^^
+ at $DIR/lint-type-overflow3.rs:5:31
 
 error: this arithmetic operation will overflow
-  --> $DIR/lint-type-overflow3.rs:13:18
-   |
-LL |     let x: i8 = ---128;
-   |                  ^^^^^ attempt to negate `i8::MIN`, which would overflow
+ at $DIR/lint-type-overflow3.rs:13:18: attempt to negate `i8::MIN`, which would overflow
 
 error: this arithmetic operation will overflow
-  --> $DIR/lint-type-overflow3.rs:15:19
-   |
-LL |     let x: i8 = ----128;
-   |                   ^^^^^ attempt to negate `i8::MIN`, which would overflow
+ at $DIR/lint-type-overflow3.rs:15:19: attempt to negate `i8::MIN`, which would overflow
 
 error: this arithmetic operation will overflow
-  --> $DIR/lint-type-overflow3.rs:17:20
-   |
-LL |     let x: i8 = -----128;
-   |                    ^^^^^ attempt to negate `i8::MIN`, which would overflow
+ at $DIR/lint-type-overflow3.rs:17:20: attempt to negate `i8::MIN`, which would overflow
 
 error: this arithmetic operation will overflow
-  --> $DIR/lint-type-overflow3.rs:19:21
-   |
-LL |     let x: i8 = ------128;
-   |                     ^^^^^ attempt to negate `i8::MIN`, which would overflow
+ at $DIR/lint-type-overflow3.rs:19:21: attempt to negate `i8::MIN`, which would overflow
 
 error: literal out of range for `i8`
-  --> $DIR/lint-type-overflow3.rs:8:17
-   |
-LL |     let x: i8 = 128;
-   |                 ^^^
-   |
-   = note: the literal `128` does not fit into the type `i8` whose range is `-128..=127`
-   = help: consider using the type `u8` instead
+ at $DIR/lint-type-overflow3.rs:8:17
+note: the literal `128` does not fit into the type `i8` whose range is `-128..=127`
+help: consider using the type `u8` instead
 note: the lint level is defined here
-  --> $DIR/lint-type-overflow3.rs:5:9
-   |
-LL | #![deny(overflowing_literals, arithmetic_overflow)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lint-type-overflow3.rs:5:9
 
 error: aborting due to 6 previous errors; 5 warnings emitted
 

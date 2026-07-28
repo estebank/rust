@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `NoOverlap` for type `W<_>`
-  --> $DIR/ambiguous-pass.rs:18:1
-   |
-LL | impl<T: Trait> NoOverlap for T {}
-   | ------------------------------ first implementation here
-LL |
-LL | impl<T: Trait<Assoc = ()>> NoOverlap for W<T> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `W<_>`
+error E0119: conflicting implementations of trait `NoOverlap` for type `W<_>`
+ at $DIR/ambiguous-pass.rs:18:1: conflicting implementation for `W<_>`
+  on line 16: first implementation here
 
 error: aborting due to 1 previous error
 

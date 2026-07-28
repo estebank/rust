@@ -1,14 +1,8 @@
-error[E0503]: cannot use `x` because it was mutably borrowed
-  --> $DIR/unboxed-closures-borrow-conflict.rs:9:14
-   |
-LL |     let f = || x += 1;
-   |             -- - borrow occurs due to use of `x` in closure
-   |             |
-   |             `x` is borrowed here
-LL |     let _y = x;
-   |              ^ use of borrowed `x`
-LL |     f;
-   |     - borrow later used here
+error E0503: cannot use `x` because it was mutably borrowed
+ at $DIR/unboxed-closures-borrow-conflict.rs:9:14: use of borrowed `x`
+  on line 8, column 13: `x` is borrowed here
+  on line 8, column 16: borrow occurs due to use of `x` in closure
+  on line 10: borrow later used here
 
 error: aborting due to 1 previous error
 

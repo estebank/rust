@@ -1,21 +1,10 @@
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/hrtb-implied-3.rs:19:5
-   |
-LL | fn fails(iter: &str) {
-   |          ----  - let's call the lifetime of this reference `'1`
-   |          |
-   |          `iter` is a reference that is only valid in the function body
-LL |     trivial_bound(iter);
-   |     ^^^^^^^^^^^^^^^^^^^
-   |     |
-   |     `iter` escapes the function body here
-   |     argument requires that `'1` must outlive `'static`
-   |
+error E0521: borrowed data escapes outside of function
+ at $DIR/hrtb-implied-3.rs:19:5: `iter` escapes the function body here
+  on line 19: argument requires that `'1` must outlive `'static`
+  on line 18, column 10: `iter` is a reference that is only valid in the function body
+  on line 18, column 16: let's call the lifetime of this reference `'1`
 note: due to a current limitation of the type system, this implies a `'static` lifetime
-  --> $DIR/hrtb-implied-3.rs:14:5
-   |
-LL |     for<'a> I::Item<'a>: Sized,
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/hrtb-implied-3.rs:14:5
 
 error: aborting due to 1 previous error
 

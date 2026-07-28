@@ -1,120 +1,56 @@
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:23:18
-   |
-LL | type A = fn() -> impl A +;
-   |                  ^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:23:18
 help: try adding parentheses
-   |
-LL | type A = fn() -> (impl A +);
-   |                  +        +
+ on line 23, column 17, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:25:18
-   |
-LL | type A = fn() -> impl A + B;
-   |                  ^^^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:25:18
 help: try adding parentheses
-   |
-LL | type A = fn() -> (impl A + B);
-   |                  +          +
+ on line 25, column 17, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:27:18
-   |
-LL | type A = fn() -> dyn A + B;
-   |                  ^^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:27:18
 help: try adding parentheses
-   |
-LL | type A = fn() -> (dyn A + B);
-   |                  +         +
+ on line 27, column 17, add `(`
 
-error[E0178]: expected a path on the left-hand side of `+`
-  --> $DIR/impl-trait-plus-priority.rs:29:10
-   |
-LL | type A = fn() -> A + B;
-   |          ^^^^^^^^^----
-   |          |
-   |          perhaps you forgot parentheses?
+error E0178: expected a path on the left-hand side of `+`
+ at $DIR/impl-trait-plus-priority.rs:29:10
+  on line 29, column 10: perhaps you forgot parentheses?
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:32:18
-   |
-LL | type A = Fn() -> impl A +;
-   |                  ^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:32:18
 help: try adding parentheses
-   |
-LL | type A = Fn() -> (impl A +);
-   |                  +        +
+ on line 32, column 17, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:34:18
-   |
-LL | type A = Fn() -> impl A + B;
-   |                  ^^^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:34:18
 help: try adding parentheses
-   |
-LL | type A = Fn() -> (impl A + B);
-   |                  +          +
+ on line 34, column 17, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:36:18
-   |
-LL | type A = Fn() -> dyn A + B;
-   |                  ^^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:36:18
 help: try adding parentheses
-   |
-LL | type A = Fn() -> (dyn A + B);
-   |                  +         +
+ on line 36, column 17, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:40:11
-   |
-LL | type A = &impl A +;
-   |           ^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:40:11
 help: try adding parentheses
-   |
-LL | type A = &(impl A +);
-   |           +        +
+ on line 40, column 10, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:42:11
-   |
-LL | type A = &impl A + B;
-   |           ^^^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:42:11
 help: try adding parentheses
-   |
-LL | type A = &(impl A + B);
-   |           +          +
+ on line 42, column 10, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-trait-plus-priority.rs:44:11
-   |
-LL | type A = &dyn A + B;
-   |           ^^^^^^^^^
-   |
+ at $DIR/impl-trait-plus-priority.rs:44:11
 help: try adding parentheses
-   |
-LL | type A = &(dyn A + B);
-   |           +         +
+ on line 44, column 10, add `(`
 
-error[E0178]: expected a path on the left-hand side of `+`
-  --> $DIR/impl-trait-plus-priority.rs:46:10
-   |
-LL | type A = &A + B;
-   |          ^^
-   |
+error E0178: expected a path on the left-hand side of `+`
+ at $DIR/impl-trait-plus-priority.rs:46:10
 help: try adding parentheses
-   |
-LL | type A = &(A + B);
-   |           +     +
+ on line 46, column 10, add `(`
 
 error: aborting due to 11 previous errors
 

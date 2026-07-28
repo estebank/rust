@@ -1,58 +1,29 @@
 error: constant expression depends on a generic parameter
-  --> $DIR/issue-62504.rs:18:25
-   |
-LL |         ArrayHolder([0; Self::SIZE])
-   |                         ^^^^^^^^^^
-   |
-   = note: this may fail depending on what value the parameter takes
+ at $DIR/issue-62504.rs:18:25
+note: this may fail depending on what value the parameter takes
 
-error[E0308]: mismatched types
-  --> $DIR/issue-62504.rs:18:21
-   |
-LL |         ArrayHolder([0; Self::SIZE])
-   |         ----------- ^^^^^^^^^^^^^^^ expected an array with a size of X, found one with a size of Self::SIZE
-   |         |
-   |         arguments to this struct are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/issue-62504.rs:18:21: expected an array with a size of X, found one with a size of Self::SIZE
+  on line 18: arguments to this struct are incorrect
 note: tuple struct defined here
-  --> $DIR/issue-62504.rs:14:8
-   |
-LL | struct ArrayHolder<const X: usize>([u32; X]);
-   |        ^^^^^^^^^^^
+ at $DIR/issue-62504.rs:14:8
 
-error[E0284]: type annotations needed for `ArrayHolder<_>`
-  --> $DIR/issue-62504.rs:26:9
-   |
-LL |     let mut array = ArrayHolder::new();
-   |         ^^^^^^^^^   ----------- type must be known at this point
-   |
+error E0284: type annotations needed for `ArrayHolder<_>`
+ at $DIR/issue-62504.rs:26:9
+  on line 26, column 21: type must be known at this point
 note: required by a const generic parameter in `ArrayHolder`
-  --> $DIR/issue-62504.rs:14:20
-   |
-LL | struct ArrayHolder<const X: usize>([u32; X]);
-   |                    ^^^^^^^^^^^^^^ required by this const generic parameter in `ArrayHolder`
+ at $DIR/issue-62504.rs:14:20: required by this const generic parameter in `ArrayHolder`
 help: consider giving `array` an explicit type, where the value of const parameter `X` is specified
-   |
-LL |     let mut array: ArrayHolder<X> = ArrayHolder::new();
-   |                  ++++++++++++++++
+ on line 26, column 17, add `: ArrayHolder<X>`
 
-error[E0284]: type annotations needed for `ArrayHolder<_>`
-  --> $DIR/issue-62504.rs:26:9
-   |
-LL |     let mut array = ArrayHolder::new();
-   |         ^^^^^^^^^   ------------------ type must be known at this point
-   |
+error E0284: type annotations needed for `ArrayHolder<_>`
+ at $DIR/issue-62504.rs:26:9
+  on line 26, column 21: type must be known at this point
 note: required by a const generic parameter in `ArrayHolder::<X>::new`
-  --> $DIR/issue-62504.rs:16:6
-   |
-LL | impl<const X: usize> ArrayHolder<X> {
-   |      ^^^^^^^^^^^^^^ required by this const generic parameter in `ArrayHolder::<X>::new`
-LL |     pub const fn new() -> Self {
-   |                  --- required by a bound in this associated function
+ at $DIR/issue-62504.rs:16:6: required by this const generic parameter in `ArrayHolder::<X>::new`
+  on line 17, column 18: required by a bound in this associated function
 help: consider giving `array` an explicit type, where the value of const parameter `X` is specified
-   |
-LL |     let mut array: ArrayHolder<X> = ArrayHolder::new();
-   |                  ++++++++++++++++
+ on line 26, column 17, add `: ArrayHolder<X>`
 
 error: aborting due to 4 previous errors
 

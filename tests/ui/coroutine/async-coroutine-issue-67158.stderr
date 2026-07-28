@@ -1,8 +1,5 @@
-error[E0727]: `async` coroutines are not yet supported
-  --> $DIR/async-coroutine-issue-67158.rs:5:13
-   |
-LL |     async { yield print!(":C") };
-   |             ^^^^^^^^^^^^^^^^^^
+error E0727: `async` coroutines are not yet supported
+ at $DIR/async-coroutine-issue-67158.rs:5:13
 
 error: aborting due to 1 previous error
 

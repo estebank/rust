@@ -1,35 +1,15 @@
 error: lifetime may not live long enough
-  --> $DIR/ret-impl-trait-one.rs:10:85
-   |
-LL |   async fn async_ret_impl_trait3<'a, 'b>(a: &'a u8, b: &'b u8) -> impl Trait<'a> + 'b {
-   |  ________________________________--__--_______________________________________________^
-   | |                                |   |
-   | |                                |   lifetime `'b` defined here
-   | |                                lifetime `'a` defined here
-LL | |
-LL | |     (a, b)
-LL | | }
-   | |_^ function was supposed to return data with lifetime `'b` but it is returning data with lifetime `'a`
-   |
-   = help: consider adding the following bound: `'a: 'b`
+ at $DIR/ret-impl-trait-one.rs:10:85 to 13:2: function was supposed to return data with lifetime `'b` but it is returning data with lifetime `'a`
+  on line 10, column 32: lifetime `'a` defined here
+  on line 10, column 36: lifetime `'b` defined here
+help: consider adding the following bound: `'a: 'b`
 
-error[E0700]: hidden type for `impl Trait<'a>` captures lifetime that does not appear in bounds
-  --> $DIR/ret-impl-trait-one.rs:16:80
-   |
-LL |   async fn async_ret_impl_trait1<'a, 'b>(a: &'a u8, b: &'b u8) -> impl Trait<'a> {
-   |  ____________________________________--___________________________--------------_^
-   | |                                    |                            |
-   | |                                    |                            opaque type defined here
-   | |                                    hidden type `(&'a u8, &'b u8)` captures the lifetime `'b` as defined here
-LL | |
-LL | |     (a, b)
-LL | | }
-   | |_^
-   |
+error E0700: hidden type for `impl Trait<'a>` captures lifetime that does not appear in bounds
+ at $DIR/ret-impl-trait-one.rs:16:80 to 19:2
+  on line 16, column 36: hidden type `(&'a u8, &'b u8)` captures the lifetime `'b` as defined here
+  on line 16, column 65: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'b`
-   |
-LL | async fn async_ret_impl_trait1<'a, 'b>(a: &'a u8, b: &'b u8) -> impl Trait<'a> + use<'a, 'b> {
-   |                                                                                +++++++++++++
+ on line 16, column 78, add ` + use<'a, 'b>`
 
 error: aborting due to 2 previous errors
 

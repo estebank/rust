@@ -1,389 +1,181 @@
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:11:28
-   |
-LL |                 type Frc = Frc<{}>::Arc;;
-   |                            ^^^---- help: remove the unnecessary generics
-   |                            |
-   |                            expected 0 generic arguments
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:11:28: expected 0 generic arguments
+  on line 11, column 31: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:11:22
-   |
-LL |                 type Frc = Frc<{}>::Arc;;
-   |                      ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:11:22
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:11:28
-   |
-LL |                 type Frc = Frc<{}>::Arc;;
-   |                            ^^^^^^^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:11:28
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:11:17
-   |
-LL |                 type Frc = Frc<{}>::Arc;;
-   |                 ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:11:17
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:15:24
-   |
-LL |               type Frc = Frc<
-   |  ________________________^^^-
-   | |                        |
-   | |                        expected 0 generic arguments
-...  |
-LL | |                 },
-LL | |             >::Arc;;
-   | |_____________- help: remove the unnecessary generics
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:15:24: expected 0 generic arguments
+  on line 15, column 27 to line 86, column 14: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:15:18
-   |
-LL |             type Frc = Frc<
-   |                  ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:15:18
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:15:24
-   |
-LL |               type Frc = Frc<
-   |  ________________________^
-...  |
-LL | |                 },
-LL | |             >::Arc;;
-   | |_____________^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:15:24 to 86:14
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:15:13
-   |
-LL |             type Frc = Frc<
-   |             ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:15:13
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:23:36
-   |
-LL |                         type Frc = Frc<{}>::Arc;;
-   |                                    ^^^---- help: remove the unnecessary generics
-   |                                    |
-   |                                    expected 0 generic arguments
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:23:36: expected 0 generic arguments
+  on line 23, column 39: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:23:30
-   |
-LL |                         type Frc = Frc<{}>::Arc;;
-   |                              ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:23:30
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:23:36
-   |
-LL |                         type Frc = Frc<{}>::Arc;;
-   |                                    ^^^^^^^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:23:36
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:23:25
-   |
-LL |                         type Frc = Frc<{}>::Arc;;
-   |                         ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:23:25
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:27:32
-   |
-LL |                       type Frc = Frc<
-   |  ________________________________^^^-
-   | |                                |
-   | |                                expected 0 generic arguments
-...  |
-LL | |                         },
-LL | |                     >::Arc;;
-   | |_____________________- help: remove the unnecessary generics
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:27:32: expected 0 generic arguments
+  on line 27, column 35 to line 84, column 22: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:27:26
-   |
-LL |                     type Frc = Frc<
-   |                          ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:27:26
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:27:32
-   |
-LL |                       type Frc = Frc<
-   |  ________________________________^
-...  |
-LL | |                         },
-LL | |                     >::Arc;;
-   | |_____________________^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:27:32 to 84:22
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:27:21
-   |
-LL |                     type Frc = Frc<
-   |                     ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:27:21
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:35:44
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^---- help: remove the unnecessary generics
-   |                                  |
-   |                                  expected 0 generic arguments
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:35:44: expected 0 generic arguments
+  on line 35, column 47: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:35:38
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                            ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:35:38
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:35:44
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^^^^^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:35:44
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:35:33
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                       ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:35:33
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:39:40
-   |
-LL |   ...                   type Frc = Frc<
-   |  __________________________________^^^-
-   | |                                  |
-   | |                                  expected 0 generic arguments
-...  |
-LL | | ...                       },
-LL | | ...                   >::Arc;;
-   | |_______________________- help: remove the unnecessary generics
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:39:40: expected 0 generic arguments
+  on line 39, column 43 to line 82, column 30: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:39:34
-   |
-LL | ...                   type Frc = Frc<
-   |                            ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:39:34
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:39:40
-   |
-LL |   ...                   type Frc = Frc<
-   |  __________________________________^
-...  |
-LL | | ...                       },
-LL | | ...                   >::Arc;;
-   | |_______________________^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:39:40 to 82:30
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:39:29
-   |
-LL | ...                   type Frc = Frc<
-   |                       ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:39:29
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:47:52
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^---- help: remove the unnecessary generics
-   |                                  |
-   |                                  expected 0 generic arguments
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:47:52: expected 0 generic arguments
+  on line 47, column 55: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:47:46
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                            ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:47:46
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:47:52
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^^^^^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:47:52
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:47:41
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                       ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:47:41
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:51:48
-   |
-LL |   ...                   type Frc = Frc<
-   |  __________________________________^^^-
-   | |                                  |
-   | |                                  expected 0 generic arguments
-...  |
-LL | | ...                       },
-LL | | ...                   >::Arc;;
-   | |_______________________- help: remove the unnecessary generics
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:51:48: expected 0 generic arguments
+  on line 51, column 51 to line 80, column 38: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:51:42
-   |
-LL | ...                   type Frc = Frc<
-   |                            ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:51:42
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:51:48
-   |
-LL |   ...                   type Frc = Frc<
-   |  __________________________________^
-...  |
-LL | | ...                       },
-LL | | ...                   >::Arc;;
-   | |_______________________^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:51:48 to 80:38
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:51:37
-   |
-LL | ...                   type Frc = Frc<
-   |                       ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:51:37
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:60:64
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^---- help: remove the unnecessary generics
-   |                                  |
-   |                                  expected 0 generic arguments
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:60:64: expected 0 generic arguments
+  on line 60, column 67: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:60:58
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                            ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:60:58
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:60:64
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^^^^^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:60:64
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:60:53
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                       ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:60:53
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:65:56
-   |
-LL |   ...                   type Frc = Frc<
-   |  __________________________________^^^-
-   | |                                  |
-   | |                                  expected 0 generic arguments
-...  |
-LL | | ...                       },
-LL | | ...                   >::Arc;;
-   | |_______________________- help: remove the unnecessary generics
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:65:56: expected 0 generic arguments
+  on line 65, column 59 to line 78, column 46: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:65:50
-   |
-LL | ...                   type Frc = Frc<
-   |                            ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:65:50
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:65:56
-   |
-LL |   ...                   type Frc = Frc<
-   |  __________________________________^
-...  |
-LL | | ...                       },
-LL | | ...                   >::Arc;;
-   | |_______________________^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:65:56 to 78:46
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:65:45
-   |
-LL | ...                   type Frc = Frc<
-   |                       ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:65:45
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0107]: type alias takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:74:64
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^---- help: remove the unnecessary generics
-   |                                  |
-   |                                  expected 0 generic arguments
-   |
+error E0107: type alias takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:74:64: expected 0 generic arguments
+  on line 74, column 67: help: remove the unnecessary generics
 note: type alias defined here, with 0 generic parameters
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:74:58
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                            ^^^
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:74:58
 
-error[E0391]: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:74:64
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                                  ^^^^^^^
-   |
-   = note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
-   = note: type aliases cannot be recursive
-   = help: consider using a struct, enum, or union instead to break the cycle
-   = help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
+error E0391: cycle detected when expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc`
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:74:64
+note: ...which immediately requires expanding type alias `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` again
+note: type aliases cannot be recursive
+help: consider using a struct, enum, or union instead to break the cycle
+help: see <https://doc.rust-lang.org/reference/types.html#recursive-types> for more information
 note: cycle used when checking that `main::KooArc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc::{constant#0}::Frc` is well-formed
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:74:53
-   |
-LL | ...                   type Frc = Frc<{}>::Arc;;
-   |                       ^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:74:53
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
-error[E0433]: cannot find type `Frc` in this scope
-  --> $DIR/nested-type-alias-cycle-issue-129911.rs:4:19
-   |
-LL |     type KooArc = Frc<
-   |                   ^^^ use of undeclared type `Frc`
+error E0433: cannot find type `Frc` in this scope
+ at $DIR/nested-type-alias-cycle-issue-129911.rs:4:19: use of undeclared type `Frc`
 
 error: aborting due to 23 previous errors
 

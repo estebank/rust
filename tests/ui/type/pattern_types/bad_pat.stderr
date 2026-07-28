@@ -1,52 +1,26 @@
-error[E0586]: inclusive range with no end
-  --> $DIR/bad_pat.rs:6:43
-   |
-LL | type NonNullU32_2 = pattern_type!(u32 is 1..=);
-   |                                           ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/bad_pat.rs:6:43
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - type NonNullU32_2 = pattern_type!(u32 is 1..=);
-LL + type NonNullU32_2 = pattern_type!(u32 is 1..);
-   |
+ on line 6, column 42, replace with `..`
 
-error[E0586]: inclusive range with no end
-  --> $DIR/bad_pat.rs:8:40
-   |
-LL | type Positive2 = pattern_type!(i32 is 0..=);
-   |                                        ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/bad_pat.rs:8:40
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - type Positive2 = pattern_type!(i32 is 0..=);
-LL + type Positive2 = pattern_type!(i32 is 0..);
-   |
+ on line 8, column 39, replace with `..`
 
 error: pattern not supported in pattern types
-  --> $DIR/bad_pat.rs:10:33
-   |
-LL | type Wild = pattern_type!(() is _);
-   |                                 ^
+ at $DIR/bad_pat.rs:10:33
 
 error: pattern not supported in pattern types
-  --> $DIR/bad_pat.rs:14:43
-   |
-LL | type NonNull = pattern_type!(*const () is not null);
-   |                                           ^^^
+ at $DIR/bad_pat.rs:14:43
 
 error: expected one of `@` or `|`, found `null`
-  --> $DIR/bad_pat.rs:14:47
-   |
-LL | type NonNull = pattern_type!(*const () is not null);
-   |                                               ^^^^ expected one of `@` or `|`
+ at $DIR/bad_pat.rs:14:47: expected one of `@` or `|`
 
 error: expected `null`, found `nil`
-  --> $DIR/bad_pat.rs:18:45
-   |
-LL | type NonNull2 = pattern_type!(*const () is !nil);
-   |                                             ^^^ expected `null`
+ at $DIR/bad_pat.rs:18:45: expected `null`
 
 error: aborting due to 6 previous errors
 

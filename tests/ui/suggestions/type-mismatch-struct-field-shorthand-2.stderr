@@ -1,36 +1,17 @@
-error[E0308]: mismatched types
-  --> $DIR/type-mismatch-struct-field-shorthand-2.rs:5:19
-   |
-LL |     let _ = RGB { r, g, c };
-   |                   ^ expected `f64`, found `f32`
-   |
+error E0308: mismatched types
+ at $DIR/type-mismatch-struct-field-shorthand-2.rs:5:19: expected `f64`, found `f32`
 help: you can convert an `f32` to an `f64`
-   |
-LL |     let _ = RGB { r: r.into(), g, c };
-   |                   ++  +++++++
+ on line 5, column 18, add `r: `
 
-error[E0308]: mismatched types
-  --> $DIR/type-mismatch-struct-field-shorthand-2.rs:5:22
-   |
-LL |     let _ = RGB { r, g, c };
-   |                      ^ expected `f64`, found `f32`
-   |
+error E0308: mismatched types
+ at $DIR/type-mismatch-struct-field-shorthand-2.rs:5:22: expected `f64`, found `f32`
 help: you can convert an `f32` to an `f64`
-   |
-LL |     let _ = RGB { r, g: g.into(), c };
-   |                      ++  +++++++
+ on line 5, column 21, add `g: `
 
-error[E0560]: struct `RGB` has no field named `c`
-  --> $DIR/type-mismatch-struct-field-shorthand-2.rs:5:25
-   |
-LL |     let _ = RGB { r, g, c };
-   |                         ^ unknown field
-   |
+error E0560: struct `RGB` has no field named `c`
+ at $DIR/type-mismatch-struct-field-shorthand-2.rs:5:25: unknown field
 help: a field with a similar name exists
-   |
-LL -     let _ = RGB { r, g, c };
-LL +     let _ = RGB { r, g, b };
-   |
+ on line 5, column 24, replace with `b`
 
 error: aborting due to 3 previous errors
 

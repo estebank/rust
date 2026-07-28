@@ -1,25 +1,12 @@
 error: expected one of `+`, `,`, or `>`, found `)`
-  --> $DIR/bad-turbofish-hints-issue-121901.rs:3:40
-   |
-LL | type One = for<'a> fn(Box<dyn Send + 'a);
-   |                                        ^ expected one of `+`, `,`, or `>`
-   |
+ at $DIR/bad-turbofish-hints-issue-121901.rs:3:40: expected one of `+`, `,`, or `>`
 help: you might have meant to end the type parameters here
-   |
-LL | type One = for<'a> fn(Box<dyn Send + 'a>);
-   |                                        +
+ on line 3, column 39, add `>`
 
 error: unmatched angle bracket
-  --> $DIR/bad-turbofish-hints-issue-121901.rs:5:41
-   |
-LL | type Two = for<'a> fn(Box<dyn Send + 'a>>);
-   |                                         ^
-   |
+ at $DIR/bad-turbofish-hints-issue-121901.rs:5:41
 help: remove extra angle bracket
-   |
-LL - type Two = for<'a> fn(Box<dyn Send + 'a>>);
-LL + type Two = for<'a> fn(Box<dyn Send + 'a>);
-   |
+ on line 5, column 40
 
 error: aborting due to 2 previous errors
 

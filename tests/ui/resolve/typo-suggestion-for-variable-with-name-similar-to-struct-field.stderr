@@ -1,123 +1,53 @@
-error[E0425]: cannot find value `config` in this scope
-  --> $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:7:16
-   |
-LL |     config: String,
-   |     ------ a field by that name exists in `Self`
-...
-LL |         Self { config }
-   |                ^^^^^^
-   |
+error E0425: cannot find value `config` in this scope
+ at $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:7:16
+  on line 2: a field by that name exists in `Self`
 help: a local variable with a similar name exists
-   |
-LL -         Self { config }
-LL +         Self { cofig }
-   |
+ on line 7, column 15, replace with `cofig`
 
-error[E0425]: cannot find value `config` in this scope
-  --> $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:11:20
-   |
-LL |     config: String,
-   |     ------ a field by that name exists in `Self`
-...
-LL |         println!("{config}");
-   |                    ^^^^^^
-   |
+error E0425: cannot find value `config` in this scope
+ at $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:11:20
+  on line 2: a field by that name exists in `Self`
 help: a local variable with a similar name exists
-   |
-LL -         println!("{config}");
-LL +         println!("{cofig}");
-   |
+ on line 11, column 19, replace with `cofig`
 
-error[E0425]: cannot find value `config` in this scope
-  --> $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:15:20
-   |
-LL |         println!("{config}");
-   |                    ^^^^^^
-   |
+error E0425: cannot find value `config` in this scope
+ at $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:15:20
 help: you might have meant to use the available field
-   |
-LL |         println!("{self.config}");
-   |                    +++++
+ on line 15, column 19, add `self.`
 help: a local variable with a similar name exists
-   |
-LL -         println!("{config}");
-LL +         println!("{cofig}");
-   |
+ on line 15, column 19, replace with `cofig`
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:33:9
-   |
-LL |         bah;
-   |         ^^^
-...
-LL | fn ba() {}
-   | ------- similarly named function `ba` defined here
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:33:9
+  on line 42: similarly named function `ba` defined here
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 33, column 8, add `Self::`
 help: a function with a similar name exists
-   |
-LL -         bah;
-LL +         ba;
-   |
+ on line 33, column 8, replace with `ba`
 
-error[E0425]: cannot find value `BAR` in this scope
-  --> $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:35:9
-   |
-LL |         BAR;
-   |         ^^^
-...
-LL | const BARR: u32 = 3;
-   | -------------------- similarly named constant `BARR` defined here
-   |
+error E0425: cannot find value `BAR` in this scope
+ at $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:35:9
+  on line 43: similarly named constant `BARR` defined here
 help: you might have meant to use the associated `const`
-   |
-LL |         Self::BAR;
-   |         ++++++
+ on line 35, column 8, add `Self::`
 help: a constant with a similar name exists
-   |
-LL |         BARR;
-   |            +
+ on line 35, column 8, replace with `BARR`
 
-error[E0425]: cannot find type `Baz` in this scope
-  --> $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:37:18
-   |
-LL |         let foo: Baz = "".to_string();
-   |                  ^^^
-...
-LL | type Bar = String;
-   | ------------------ similarly named type alias `Bar` defined here
-   |
+error E0425: cannot find type `Baz` in this scope
+ at $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:37:18
+  on line 44: similarly named type alias `Bar` defined here
 help: you might have meant to use the associated type
-   |
-LL |         let foo: Self::Baz = "".to_string();
-   |                  ++++++
+ on line 37, column 17, add `Self::`
 help: a type alias with a similar name exists
-   |
-LL -         let foo: Baz = "".to_string();
-LL +         let foo: Bar = "".to_string();
-   |
+ on line 37, column 17, replace with `Bar`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:31:9
-   |
-LL |         baz();
-   |         ^^^
-...
-LL | fn ba() {}
-   | ------- similarly named function `ba` defined here
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/typo-suggestion-for-variable-with-name-similar-to-struct-field.rs:31:9
+  on line 42: similarly named function `ba` defined here
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 31, column 8, add `self.`
 help: a function with a similar name exists
-   |
-LL -         baz();
-LL +         ba();
-   |
+ on line 31, column 8, replace with `ba`
 
 error: aborting due to 7 previous errors
 

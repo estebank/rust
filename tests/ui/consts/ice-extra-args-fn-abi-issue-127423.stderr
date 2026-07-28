@@ -1,37 +1,18 @@
 error: lifetimes cannot use keyword names
-  --> $DIR/ice-extra-args-fn-abi-issue-127423.rs:5:18
-   |
-LL | const fn add(a: &'self isize) -> usize {
-   |                  ^^^^^
+ at $DIR/ice-extra-args-fn-abi-issue-127423.rs:5:18
 
-error[E0261]: use of undeclared lifetime name `'self`
-  --> $DIR/ice-extra-args-fn-abi-issue-127423.rs:5:18
-   |
-LL | const fn add(a: &'self isize) -> usize {
-   |                  ^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'self`
+ at $DIR/ice-extra-args-fn-abi-issue-127423.rs:5:18: undeclared lifetime
 help: consider introducing lifetime `'self` here
-   |
-LL | const fn add<'self>(a: &'self isize) -> usize {
-   |             +++++++
+ on line 5, column 12, add `<'self>`
 
-error[E0425]: cannot find value `Qux` in this scope
-  --> $DIR/ice-extra-args-fn-abi-issue-127423.rs:8:5
-   |
-LL |     Qux + y
-   |     ^^^ not found in this scope
+error E0425: cannot find value `Qux` in this scope
+ at $DIR/ice-extra-args-fn-abi-issue-127423.rs:8:5: not found in this scope
 
-error[E0425]: cannot find value `y` in this scope
-  --> $DIR/ice-extra-args-fn-abi-issue-127423.rs:8:11
-   |
-LL |     Qux + y
-   |           ^
-   |
+error E0425: cannot find value `y` in this scope
+ at $DIR/ice-extra-args-fn-abi-issue-127423.rs:8:11
 help: a local variable with a similar name exists
-   |
-LL -     Qux + y
-LL +     Qux + a
-   |
+ on line 8, column 10, replace with `a`
 
 error: aborting due to 4 previous errors
 

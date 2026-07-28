@@ -1,61 +1,33 @@
 error: free constant item without body
-  --> $DIR/unsized-anon-const-err-2.rs:9:1
-   |
-LL | const A: [u8];
-   | ^^^^^^^^^^^^^-
-   |              |
-   |              help: provide a definition for the constant: `= <expr>;`
+ at $DIR/unsized-anon-const-err-2.rs:9:1
+  on line 9, column 14: help: provide a definition for the constant: `= <expr>;`
 
-error[E0277]: the size for values of type `[u8]` cannot be known at compilation time
-  --> $DIR/unsized-anon-const-err-2.rs:9:10
-   |
-LL | const A: [u8];
-   |          ^^^^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `[u8]`
-   = note: statics and constants must have a statically known size
+error E0277: the size for values of type `[u8]` cannot be known at compilation time
+ at $DIR/unsized-anon-const-err-2.rs:9:10: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `[u8]`
+note: statics and constants must have a statically known size
 
-error[E0277]: the size for values of type `[u8]` cannot be known at compilation time
-  --> $DIR/unsized-anon-const-err-2.rs:13:31
-   |
-LL | impl<const N: i32> Copy for S<A> {}
-   |                               ^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `[u8]`
-   = note: statics and constants must have a statically known size
+error E0277: the size for values of type `[u8]` cannot be known at compilation time
+ at $DIR/unsized-anon-const-err-2.rs:13:31: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `[u8]`
+note: statics and constants must have a statically known size
 
-error[E0277]: the size for values of type `[u8]` cannot be known at compilation time
-  --> $DIR/unsized-anon-const-err-2.rs:16:33
-   |
-LL | impl<const M: usize> Copy for S<A> {}
-   |                                 ^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `[u8]`
-   = note: statics and constants must have a statically known size
+error E0277: the size for values of type `[u8]` cannot be known at compilation time
+ at $DIR/unsized-anon-const-err-2.rs:16:33: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `[u8]`
+note: statics and constants must have a statically known size
 
-error[E0207]: the const parameter `N` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/unsized-anon-const-err-2.rs:13:6
-   |
-LL | impl<const N: i32> Copy for S<A> {}
-   |     -^^^^^^^^^^^^-
-   |     ||
-   |     |unconstrained const parameter
-   |     help: remove the unused type parameter `N`
-   |
-   = note: expressions using a const parameter must map each value to a distinct output value
-   = note: proving the result of expressions other than the parameter are unique is not supported
+error E0207: the const parameter `N` is not constrained by the impl trait, self type, or predicates
+ at $DIR/unsized-anon-const-err-2.rs:13:6: unconstrained const parameter
+  on line 13, column 5: help: remove the unused type parameter `N`
+note: expressions using a const parameter must map each value to a distinct output value
+note: proving the result of expressions other than the parameter are unique is not supported
 
-error[E0207]: the const parameter `M` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/unsized-anon-const-err-2.rs:16:6
-   |
-LL | impl<const M: usize> Copy for S<A> {}
-   |     -^^^^^^^^^^^^^^-
-   |     ||
-   |     |unconstrained const parameter
-   |     help: remove the unused type parameter `M`
-   |
-   = note: expressions using a const parameter must map each value to a distinct output value
-   = note: proving the result of expressions other than the parameter are unique is not supported
+error E0207: the const parameter `M` is not constrained by the impl trait, self type, or predicates
+ at $DIR/unsized-anon-const-err-2.rs:16:6: unconstrained const parameter
+  on line 16, column 5: help: remove the unused type parameter `M`
+note: expressions using a const parameter must map each value to a distinct output value
+note: proving the result of expressions other than the parameter are unique is not supported
 
 error: aborting due to 6 previous errors
 

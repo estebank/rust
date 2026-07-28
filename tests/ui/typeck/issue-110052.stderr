@@ -1,15 +1,10 @@
-error[E0223]: ambiguous associated type
-  --> $DIR/issue-110052.rs:6:30
-   |
-LL |     for<'iter> dyn Validator<<&'iter I>::Item>:,
-   |                              ^^^^^^^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/issue-110052.rs:6:30
 help: use fully-qualified syntax
-   |
-LL |     for<'iter> dyn Validator<<&'iter I as IntoAsyncIterator>::Item>:,
-   |                                        ++++++++++++++++++++
-LL |     for<'iter> dyn Validator<<&'iter I as IntoIterator>::Item>:,
-   |                                        +++++++++++++++
+ on line 6, column 29, replace with one of
+  <&'iter I as IntoAsyncIterator>::
+  <&'iter I as IntoIterator>::
+
 
 error: aborting due to 1 previous error
 

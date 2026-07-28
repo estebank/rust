@@ -1,30 +1,13 @@
-error[E0275]: overflow evaluating the requirement `<(T,) as Grault>::A == _`
-  --> $DIR/impl-wf-cycle-1.rs:15:1
-   |
-LL | / impl<T: Grault> Grault for (T,)
-LL | |
-LL | | where
-LL | |     Self::A: Baz,
-LL | |     Self::B: Fiz,
-   | |_________________^
-LL |   {
-LL |       type A = ();
-   |       ------ associated type `<(T,) as Grault>::A` is specified here
-   |
+error E0275: overflow evaluating the requirement `<(T,) as Grault>::A == _`
+ at $DIR/impl-wf-cycle-1.rs:15:1 to 19:18
+  on line 21: associated type `<(T,) as Grault>::A` is specified here
 note: required for `(T,)` to implement `Grault`
-  --> $DIR/impl-wf-cycle-1.rs:15:17
-   |
-LL | impl<T: Grault> Grault for (T,)
-   |                 ^^^^^^     ^^^^
-...
-LL |     Self::A: Baz,
-   |              --- unsatisfied trait bound introduced here
-   = note: 1 redundant requirement hidden
-   = note: required for `(T,)` to implement `Grault`
+ at $DIR/impl-wf-cycle-1.rs:15:17
+  on line 18, column 14: unsatisfied trait bound introduced here
+note: 1 redundant requirement hidden
+note: required for `(T,)` to implement `Grault`
 help: associated type for the current `impl` cannot be restricted in `where` clauses, remove this bound
-   |
-LL -     Self::A: Baz,
-   |
+ on line 18, column 4
 
 error: aborting due to 1 previous error
 

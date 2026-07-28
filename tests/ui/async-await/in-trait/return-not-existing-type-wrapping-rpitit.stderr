@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `Missing` in this scope
-  --> $DIR/return-not-existing-type-wrapping-rpitit.rs:7:25
-   |
-LL |     fn bar() -> Wrapper<Missing<impl Sized>>;
-   |                         ^^^^^^^ not found in this scope
+error E0425: cannot find type `Missing` in this scope
+ at $DIR/return-not-existing-type-wrapping-rpitit.rs:7:25: not found in this scope
 
 error: aborting due to 1 previous error
 

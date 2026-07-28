@@ -1,24 +1,12 @@
-error[E0425]: cannot find type `T` in this scope
-  --> $DIR/gvn-nonsensical-coroutine-layout.rs:6:14
-   |
-LL |     TestSome(T),
-   |              ^ not found in this scope
-   |
+error E0425: cannot find type `T` in this scope
+ at $DIR/gvn-nonsensical-coroutine-layout.rs:6:14: not found in this scope
 help: you might be missing a type parameter
-   |
-LL | pub enum Request<T> {
-   |                 +++
+ on line 5, column 16, add `<T>`
 
-error[E0574]: expected struct, variant or union type, found enum `Request`
-  --> $DIR/gvn-nonsensical-coroutine-layout.rs:12:36
-   |
-LL |         static instance: Request = Request { bar: 17 };
-   |                                    ^^^^^^^ not a struct, variant or union type
-   |
+error E0574: expected struct, variant or union type, found enum `Request`
+ at $DIR/gvn-nonsensical-coroutine-layout.rs:12:36: not a struct, variant or union type
 help: consider importing this struct instead
-   |
-LL + use std::error::Request;
-   |
+ on line 5, column 1, add `use std::error::Request;`
 
 error: aborting due to 2 previous errors
 

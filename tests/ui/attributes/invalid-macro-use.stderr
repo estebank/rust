@@ -1,145 +1,75 @@
-error[E0469]: imported macro not found
-  --> $DIR/invalid-macro-use.rs:53:13
-   |
-LL | #[macro_use(a)]
-   |             ^
+error E0469: imported macro not found
+ at $DIR/invalid-macro-use.rs:53:13
 
-error[E0469]: imported macro not found
-  --> $DIR/invalid-macro-use.rs:55:13
-   |
-LL | #[macro_use(b)]
-   |             ^
+error E0469: imported macro not found
+ at $DIR/invalid-macro-use.rs:55:13
 
-error[E0539]: malformed `macro_use` attribute input
-  --> $DIR/invalid-macro-use.rs:4:3
-   |
-LL | #[macro_use = 5]
-   |   ^^^^^^^^^^---
-   |             |
-   |             expected a list or no arguments here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
+error E0539: malformed `macro_use` attribute input
+ at $DIR/invalid-macro-use.rs:4:3
+  on line 4, column 13: expected a list or no arguments here
+note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[macro_use = 5]
-LL + #[macro_use]
-   |
-LL - #[macro_use = 5]
-LL + #[macro_use(name1, name2, ...)]
-   |
+ on line 4, column 2, replace with one of
+  macro_use
+  macro_use(name1, name2, ...)
 
-error[E0565]: malformed `macro_use` attribute input
-  --> $DIR/invalid-macro-use.rs:10:3
-   |
-LL | #[macro_use(5)]
-   |   ^^^^^^^^^^-^
-   |             |
-   |             expected a valid identifier here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[macro_use(5)]
-LL + #[macro_use]
-   |
-LL - #[macro_use(5)]
-LL + #[macro_use(name1, name2, ...)]
-   |
 
-error[E0565]: malformed `macro_use` attribute input
-  --> $DIR/invalid-macro-use.rs:16:3
-   |
-LL | #[macro_use(a = "b")]
-   |   ^^^^^^^^^^^^-----^
-   |               |
-   |               didn't expect any arguments here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
+error E0565: malformed `macro_use` attribute input
+ at $DIR/invalid-macro-use.rs:10:3
+  on line 10, column 13: expected a valid identifier here
+note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[macro_use(a = "b")]
-LL + #[macro_use]
-   |
-LL - #[macro_use(a = "b")]
-LL + #[macro_use(name1, name2, ...)]
-   |
+ on line 10, column 2, replace with one of
+  macro_use
+  macro_use(name1, name2, ...)
 
-error[E0565]: malformed `macro_use` attribute input
-  --> $DIR/invalid-macro-use.rs:22:3
-   |
-LL | #[macro_use(a(b))]
-   |   ^^^^^^^^^^^---^
-   |              |
-   |              didn't expect any arguments here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[macro_use(a(b))]
-LL + #[macro_use]
-   |
-LL - #[macro_use(a(b))]
-LL + #[macro_use(name1, name2, ...)]
-   |
 
-error[E0565]: malformed `macro_use` attribute input
-  --> $DIR/invalid-macro-use.rs:28:3
-   |
-LL | #[macro_use(a::b)]
-   |   ^^^^^^^^^^----^
-   |             |
-   |             expected a valid identifier here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
+error E0565: malformed `macro_use` attribute input
+ at $DIR/invalid-macro-use.rs:16:3
+  on line 16, column 15: didn't expect any arguments here
+note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[macro_use(a::b)]
-LL + #[macro_use]
-   |
-LL - #[macro_use(a::b)]
-LL + #[macro_use(name1, name2, ...)]
-   |
+ on line 16, column 2, replace with one of
+  macro_use
+  macro_use(name1, name2, ...)
+
+
+error E0565: malformed `macro_use` attribute input
+ at $DIR/invalid-macro-use.rs:22:3
+  on line 22, column 14: didn't expect any arguments here
+note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
+help: try changing it to one of the following valid forms of the attribute
+ on line 22, column 2, replace with one of
+  macro_use
+  macro_use(name1, name2, ...)
+
+
+error E0565: malformed `macro_use` attribute input
+ at $DIR/invalid-macro-use.rs:28:3
+  on line 28, column 13: expected a valid identifier here
+note: for more information, visit <https://doc.rust-lang.org/reference/macros-by-example.html#the-macro_use-attribute>
+help: try changing it to one of the following valid forms of the attribute
+ on line 28, column 2, replace with one of
+  macro_use
+  macro_use(name1, name2, ...)
+
 
 error: unused attribute
-  --> $DIR/invalid-macro-use.rs:34:1
-   |
-LL | #[macro_use(a)]
-   | ^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/invalid-macro-use.rs:34:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/invalid-macro-use.rs:36:1
-   |
-LL | #[macro_use]
-   | ^^^^^^^^^^^^
+ at $DIR/invalid-macro-use.rs:36:1
 note: the lint level is defined here
-  --> $DIR/invalid-macro-use.rs:1:9
-   |
-LL | #![deny(unused_attributes)]
-   |         ^^^^^^^^^^^^^^^^^
+ at $DIR/invalid-macro-use.rs:1:9
 
 error: unused attribute
-  --> $DIR/invalid-macro-use.rs:42:1
-   |
-LL | #[macro_use(a)]
-   | ^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/invalid-macro-use.rs:42:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/invalid-macro-use.rs:40:1
-   |
-LL | #[macro_use]
-   | ^^^^^^^^^^^^
+ at $DIR/invalid-macro-use.rs:40:1
 
 error: unused attribute
-  --> $DIR/invalid-macro-use.rs:48:1
-   |
-LL | #[macro_use]
-   | ^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/invalid-macro-use.rs:48:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/invalid-macro-use.rs:46:1
-   |
-LL | #[macro_use]
-   | ^^^^^^^^^^^^
+ at $DIR/invalid-macro-use.rs:46:1
 
 error: aborting due to 10 previous errors
 

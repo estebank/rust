@@ -1,21 +1,10 @@
-error[E0477]: the type `&'s Texture` does not fulfill the required lifetime
-  --> $DIR/issue-92033.rs:20:28
-   |
-LL |     type TextureIter<'a>: Iterator<Item = &'a Texture>
-   |     -------------------------------------------------- definition of `TextureIter` from trait
-...
-LL |     type TextureIter<'a> = std::option::IntoIter<&'a Texture>;
-   |                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+error E0477: the type `&'s Texture` does not fulfill the required lifetime
+ at $DIR/issue-92033.rs:20:28
+  on line 4: definition of `TextureIter` from trait
 note: type must outlive the lifetime `'a` as defined here
-  --> $DIR/issue-92033.rs:20:22
-   |
-LL |     type TextureIter<'a> = std::option::IntoIter<&'a Texture>;
-   |                      ^^
+ at $DIR/issue-92033.rs:20:22
 help: copy the `where` clause predicates from the trait
-   |
-LL |     type TextureIter<'a> = std::option::IntoIter<&'a Texture> where Self: 'a;
-   |                                                               ++++++++++++++
+ on line 20, column 61, add ` where Self: 'a`
 
 error: aborting due to 1 previous error
 

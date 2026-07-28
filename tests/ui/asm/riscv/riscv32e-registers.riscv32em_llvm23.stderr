@@ -1,194 +1,82 @@
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:57:11
-   |
-LL |     asm!("li x16, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:57:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x16, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:61:11
-   |
-LL |     asm!("li x17, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:61:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x17, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:65:11
-   |
-LL |     asm!("li x18, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:65:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x18, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:69:11
-   |
-LL |     asm!("li x19, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:69:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x19, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:73:11
-   |
-LL |     asm!("li x20, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:73:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x20, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:77:11
-   |
-LL |     asm!("li x21, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:77:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x21, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:81:11
-   |
-LL |     asm!("li x22, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:81:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x22, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:85:11
-   |
-LL |     asm!("li x23, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:85:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x23, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:89:11
-   |
-LL |     asm!("li x24, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:89:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x24, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:93:11
-   |
-LL |     asm!("li x25, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:93:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x25, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:97:11
-   |
-LL |     asm!("li x26, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:97:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x26, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:101:11
-   |
-LL |     asm!("li x27, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:101:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x27, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:105:11
-   |
-LL |     asm!("li x28, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:105:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x28, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:109:11
-   |
-LL |     asm!("li x29, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:109:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x29, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:113:11
-   |
-LL |     asm!("li x30, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:113:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x30, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: invalid operand for instruction
-  --> $DIR/riscv32e-registers.rs:117:11
-   |
-LL |     asm!("li x31, 0");
-   |           ^^^^^^^^^
-   |
+ at $DIR/riscv32e-registers.rs:117:11
 note: instantiated into assembly here
-  --> <inline asm>:1:5
-   |
-LL |     li x31, 0
-   |        ^
+ at <inline asm>:1:5
 
 error: aborting due to 16 previous errors
 

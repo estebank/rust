@@ -1,8 +1,5 @@
-error[E0741]: using function pointers as const generic parameters is forbidden
-  --> $DIR/issue-72352.rs:8:42
-   |
-LL | unsafe fn unsafely_do_the_thing<const F: fn(&CStr) -> usize>(ptr: *const c_char) -> usize {
-   |                                          ^^^^^^^^^^^^^^^^^^
+error E0741: using function pointers as const generic parameters is forbidden
+ at $DIR/issue-72352.rs:8:42
 
 error: aborting due to 1 previous error
 

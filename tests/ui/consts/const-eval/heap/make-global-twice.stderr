@@ -1,8 +1,5 @@
-error[E0080]: attempting to call `const_make_global` twice on the same allocation ALLOC$ID
-  --> $DIR/make-global-twice.rs:13:5
-   |
-LL |     intrinsics::const_make_global(ptr);
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `Y` failed here
+error E0080: attempting to call `const_make_global` twice on the same allocation ALLOC$ID
+ at $DIR/make-global-twice.rs:13:5: evaluation of `Y` failed here
 
 error: aborting due to 1 previous error
 

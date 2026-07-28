@@ -1,38 +1,20 @@
-error[E0308]: mismatched types
-  --> $DIR/ice-self-mismatch-const-generics.rs:11:9
-   |
-LL | impl<T> GenericStruct<0, T> {
-   |         ------------------- this is the type of the `Self` literal
-LL |     pub fn new(thing: T) -> GenericStruct<1, T> {
-   |                             ------------------- expected `GenericStruct<1, T>` because of return type
-LL |         Self { thing }
-   |         ^^^^^^^^^^^^^^ expected `1`, found `0`
-   |
-   = note: expected struct `GenericStruct<1, _>`
-              found struct `GenericStruct<0, _>`
+error E0308: mismatched types
+ at $DIR/ice-self-mismatch-const-generics.rs:11:9: expected `1`, found `0`
+  on line 9, column 9: this is the type of the `Self` literal
+  on line 10, column 29: expected `GenericStruct<1, T>` because of return type
+note: expected struct `GenericStruct<1, _>`
+         found struct `GenericStruct<0, _>`
 help: use the type name directly
-   |
-LL -         Self { thing }
-LL +         GenericStruct::<1, T> { thing }
-   |
+ on line 11, column 8, replace with `GenericStruct::<1, T>`
 
-error[E0308]: mismatched types
-  --> $DIR/ice-self-mismatch-const-generics.rs:20:9
-   |
-LL | impl<T> GenericStruct2<0, T> {
-   |         -------------------- this is the type of the `Self` literal
-LL |     pub fn new(thing: T) -> GenericStruct2<1, T> {
-   |                             -------------------- expected `GenericStruct2<1, T>` because of return type
-LL |         Self { 0: thing }
-   |         ^^^^^^^^^^^^^^^^^ expected `1`, found `0`
-   |
-   = note: expected struct `GenericStruct2<1, _>`
-              found struct `GenericStruct2<0, _>`
+error E0308: mismatched types
+ at $DIR/ice-self-mismatch-const-generics.rs:20:9: expected `1`, found `0`
+  on line 18, column 9: this is the type of the `Self` literal
+  on line 19, column 29: expected `GenericStruct2<1, T>` because of return type
+note: expected struct `GenericStruct2<1, _>`
+         found struct `GenericStruct2<0, _>`
 help: use the type name directly
-   |
-LL -         Self { 0: thing }
-LL +         GenericStruct2::<1, T> { 0: thing }
-   |
+ on line 20, column 8, replace with `GenericStruct2::<1, T>`
 
 error: aborting due to 2 previous errors
 

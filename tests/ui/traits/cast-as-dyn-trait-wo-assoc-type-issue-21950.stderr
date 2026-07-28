@@ -1,30 +1,14 @@
-error[E0191]: the value of the associated type `Output` in `Add` must be specified
-  --> $DIR/cast-as-dyn-trait-wo-assoc-type-issue-21950.rs:27:25
-   |
-LL |     type Output;
-   |     ----------- `Output` defined here
-...
-LL |     let x = &10 as &dyn Add;
-   |                         ^^^
-   |
+error E0191: the value of the associated type `Output` in `Add` must be specified
+ at $DIR/cast-as-dyn-trait-wo-assoc-type-issue-21950.rs:27:25
+  on line 8: `Output` defined here
 help: specify the associated type
-   |
-LL |     let x = &10 as &dyn Add<Output = /* Type */>;
-   |                            +++++++++++++++++++++
+ on line 27, column 24, replace with `Add<Output = /* Type */>`
 
-error[E0191]: the value of the associated type `Assoc` in `Meow` must be specified
-  --> $DIR/cast-as-dyn-trait-wo-assoc-type-issue-21950.rs:32:17
-   |
-LL |     type Assoc;
-   |     ---------- `Assoc` defined here
-...
-LL |     let _: &dyn Meow<> = &cat;
-   |                 ^^^^^^
-   |
+error E0191: the value of the associated type `Assoc` in `Meow` must be specified
+ at $DIR/cast-as-dyn-trait-wo-assoc-type-issue-21950.rs:32:17
+  on line 16: `Assoc` defined here
 help: specify the associated type
-   |
-LL |     let _: &dyn Meow<Assoc = /* Type */> = &cat;
-   |                      ++++++++++++++++++
+ on line 32, column 16, replace with `Meow<Assoc = /* Type */>`
 
 error: aborting due to 2 previous errors
 

@@ -1,26 +1,12 @@
-error[E0425]: cannot find type `Foo` in this scope
-  --> $DIR/issue-35075.rs:3:12
-   |
-LL |     inner: Foo<T>
-   |            ^^^ not found in this scope
-   |
+error E0425: cannot find type `Foo` in this scope
+ at $DIR/issue-35075.rs:3:12: not found in this scope
 help: there is an enum variant `Baz::Foo`; try using the variant's enum
-   |
-LL -     inner: Foo<T>
-LL +     inner: Baz
-   |
+ on line 3, column 11, replace with `Baz`
 
-error[E0425]: cannot find type `Foo` in this scope
-  --> $DIR/issue-35075.rs:7:9
-   |
-LL |     Foo(Foo<T>)
-   |         ^^^ not found in this scope
-   |
+error E0425: cannot find type `Foo` in this scope
+ at $DIR/issue-35075.rs:7:9: not found in this scope
 help: there is an enum variant `Baz::Foo`; try using the variant's enum
-   |
-LL -     Foo(Foo<T>)
-LL +     Foo(Baz)
-   |
+ on line 7, column 8, replace with `Baz`
 
 error: aborting due to 2 previous errors
 

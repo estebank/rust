@@ -1,17 +1,7 @@
 error: pattern requires `..` due to inaccessible fields
-  --> $DIR/inaccessible-private-fields-trailing-comma-149787.rs:19:9
-   |
-LL |       let m::S {
-   |  _________^
-LL | |
-LL | |         visible,
-LL | |     } = m::S::new();
-   | |_____^
-   |
+ at $DIR/inaccessible-private-fields-trailing-comma-149787.rs:19:9 to 22:6
 help: ignore the inaccessible and unused fields
-   |
-LL |         visible, ..
-   |                  ++
+ on line 21, column 16, add ` ..`
 
 error: aborting due to 1 previous error
 

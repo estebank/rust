@@ -1,11 +1,6 @@
-error[E0191]: the value of the associated type `Item` in `Iterator` must be specified
-  --> $DIR/associated-type-shadowed-from-non-local-supertrait.rs:8:27
-   |
-LL |     type Item;
-   |     --------- `Iterator::Item` shadowed here, consider renaming it
-...
-LL | impl<T> Clone for Box<dyn NewIter<Item = T>> {
-   |                           ^^^^^^^^^^^^^^^^^ associated type `Item` must be specified
+error E0191: the value of the associated type `Item` in `Iterator` must be specified
+ at $DIR/associated-type-shadowed-from-non-local-supertrait.rs:8:27: associated type `Item` must be specified
+  on line 5: `Iterator::Item` shadowed here, consider renaming it
 
 error: aborting due to 1 previous error
 

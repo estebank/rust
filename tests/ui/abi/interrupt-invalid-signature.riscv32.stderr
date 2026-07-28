@@ -1,80 +1,38 @@
 error: invalid signature for `extern "riscv-interrupt-m"` function
-  --> $DIR/interrupt-invalid-signature.rs:49:43
-   |
-LL | extern "riscv-interrupt-m" fn riscv_m_arg(_byte: u8) {}
-   |                                           ^^^^^^^^^
-   |
-   = note: functions with the "riscv-interrupt-m" ABI cannot have any parameters or return type
+ at $DIR/interrupt-invalid-signature.rs:49:43
+note: functions with the "riscv-interrupt-m" ABI cannot have any parameters or return type
 help: remove the parameters and return type
-   |
-LL - extern "riscv-interrupt-m" fn riscv_m_arg(_byte: u8) {}
-LL + extern "riscv-interrupt-m" fn riscv_m_arg() {}
-   |
+ on line 49, column 26, replace with ` fn riscv_m_arg()`
 
 error: invalid signature for `extern "riscv-interrupt-s"` function
-  --> $DIR/interrupt-invalid-signature.rs:53:43
-   |
-LL | extern "riscv-interrupt-s" fn riscv_s_arg(_byte: u8) {}
-   |                                           ^^^^^^^^^
-   |
-   = note: functions with the "riscv-interrupt-s" ABI cannot have any parameters or return type
+ at $DIR/interrupt-invalid-signature.rs:53:43
+note: functions with the "riscv-interrupt-s" ABI cannot have any parameters or return type
 help: remove the parameters and return type
-   |
-LL - extern "riscv-interrupt-s" fn riscv_s_arg(_byte: u8) {}
-LL + extern "riscv-interrupt-s" fn riscv_s_arg() {}
-   |
+ on line 53, column 26, replace with ` fn riscv_s_arg()`
 
 error: invalid signature for `extern "riscv-interrupt-m"` function
-  --> $DIR/interrupt-invalid-signature.rs:71:48
-   |
-LL | extern "riscv-interrupt-m" fn riscv_m_ret() -> u8 {
-   |                                                ^^
-   |
-   = note: functions with the "riscv-interrupt-m" ABI cannot have any parameters or return type
+ at $DIR/interrupt-invalid-signature.rs:71:48
+note: functions with the "riscv-interrupt-m" ABI cannot have any parameters or return type
 help: remove the parameters and return type
-   |
-LL - extern "riscv-interrupt-m" fn riscv_m_ret() -> u8 {
-LL + extern "riscv-interrupt-m" fn riscv_m_ret() {
-   |
+ on line 71, column 26, replace with ` fn riscv_m_ret()`
 
 error: invalid signature for `extern "riscv-interrupt-s"` function
-  --> $DIR/interrupt-invalid-signature.rs:77:48
-   |
-LL | extern "riscv-interrupt-s" fn riscv_s_ret() -> u8 {
-   |                                                ^^
-   |
-   = note: functions with the "riscv-interrupt-s" ABI cannot have any parameters or return type
+ at $DIR/interrupt-invalid-signature.rs:77:48
+note: functions with the "riscv-interrupt-s" ABI cannot have any parameters or return type
 help: remove the parameters and return type
-   |
-LL - extern "riscv-interrupt-s" fn riscv_s_ret() -> u8 {
-LL + extern "riscv-interrupt-s" fn riscv_s_ret() {
-   |
+ on line 77, column 26, replace with ` fn riscv_s_ret()`
 
 error: invalid signature for `extern "riscv-interrupt-m"` function
-  --> $DIR/interrupt-invalid-signature.rs:117:50
-   |
-LL | fn riscv_m_ptr(_f: extern "riscv-interrupt-m" fn(u8) -> u8) {
-   |                                                  ^^     ^^
-   |
-   = note: functions with the "riscv-interrupt-m" ABI cannot have any parameters or return type
+ at $DIR/interrupt-invalid-signature.rs:117:50
+note: functions with the "riscv-interrupt-m" ABI cannot have any parameters or return type
 help: remove the parameters and return type
-   |
-LL - fn riscv_m_ptr(_f: extern "riscv-interrupt-m" fn(u8) -> u8) {
-LL + fn riscv_m_ptr(_f: extern "riscv-interrupt-m" fn()) {
-   |
+ on line 117, column 45, replace with ` fn()`
 
 error: invalid signature for `extern "riscv-interrupt-s"` function
-  --> $DIR/interrupt-invalid-signature.rs:122:50
-   |
-LL | fn riscv_s_ptr(_f: extern "riscv-interrupt-s" fn(u8) -> u8) {
-   |                                                  ^^     ^^
-   |
-   = note: functions with the "riscv-interrupt-s" ABI cannot have any parameters or return type
+ at $DIR/interrupt-invalid-signature.rs:122:50
+note: functions with the "riscv-interrupt-s" ABI cannot have any parameters or return type
 help: remove the parameters and return type
-   |
-LL - fn riscv_s_ptr(_f: extern "riscv-interrupt-s" fn(u8) -> u8) {
-LL + fn riscv_s_ptr(_f: extern "riscv-interrupt-s" fn()) {
-   |
+ on line 122, column 45, replace with ` fn()`
 
 error: aborting due to 6 previous errors
 

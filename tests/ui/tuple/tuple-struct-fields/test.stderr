@@ -1,16 +1,9 @@
 error: expected one of `)` or `,`, found `(`
-  --> $DIR/test.rs:4:26
-   |
-LL |     struct S2(pub((foo)) ());
-   |                         -^ expected one of `)` or `,`
-   |                         |
-   |                         help: missing `,`
+ at $DIR/test.rs:4:26: expected one of `)` or `,`
+  on line 4, column 25: help: missing `,`
 
-error[E0425]: cannot find type `foo` in this scope
-  --> $DIR/test.rs:4:20
-   |
-LL |     struct S2(pub((foo)) ());
-   |                    ^^^ not found in this scope
+error E0425: cannot find type `foo` in this scope
+ at $DIR/test.rs:4:20: not found in this scope
 
 error: aborting due to 2 previous errors
 

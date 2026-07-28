@@ -1,8 +1,5 @@
-error[E0603]: tuple struct constructor `A` is private
-  --> $DIR/issue-111220-2-tuple-struct-fields-projection.rs:27:13
-   |
-LL |         let Self(a) = self;
-   |             ^^^^^^^
+error E0603: tuple struct constructor `A` is private
+ at $DIR/issue-111220-2-tuple-struct-fields-projection.rs:27:13
 
 error: aborting due to 1 previous error
 

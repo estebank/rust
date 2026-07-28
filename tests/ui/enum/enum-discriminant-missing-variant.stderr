@@ -1,16 +1,8 @@
-error[E0599]: no variant, associated function, or constant named `A` found for enum `SomeEnum` in the current scope
-  --> $DIR/enum-discriminant-missing-variant.rs:3:19
-   |
-LL | pub enum SomeEnum {
-   | ----------------- variant, associated function, or constant `A` not found for this enum
-LL |     B = SomeEnum::A,
-   |                   ^ variant, associated function, or constant not found in `SomeEnum`
-   |
+error E0599: no variant, associated function, or constant named `A` found for enum `SomeEnum` in the current scope
+ at $DIR/enum-discriminant-missing-variant.rs:3:19: variant, associated function, or constant not found in `SomeEnum`
+  on line 2: variant, associated function, or constant `A` not found for this enum
 help: there is a variant with a similar name
-   |
-LL -     B = SomeEnum::A,
-LL +     B = SomeEnum::B,
-   |
+ on line 3, column 18, replace with `B`
 
 error: aborting due to 1 previous error
 

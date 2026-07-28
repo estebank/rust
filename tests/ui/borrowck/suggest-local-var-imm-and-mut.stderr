@@ -1,20 +1,12 @@
-error[E0502]: cannot borrow `*self` as mutable because it is also borrowed as immutable
-  --> $DIR/suggest-local-var-imm-and-mut.rs:12:22
-   |
-LL |             self.foo(self.bar());
-   |             ---- --- ^^^^^^^^^^ mutable borrow occurs here
-   |             |    |
-   |             |    immutable borrow later used by call
-   |             immutable borrow occurs here
+error E0502: cannot borrow `*self` as mutable because it is also borrowed as immutable
+ at $DIR/suggest-local-var-imm-and-mut.rs:12:22: mutable borrow occurs here
+  on line 12: immutable borrow occurs here
+  on line 12, column 18: immutable borrow later used by call
 
-error[E0502]: cannot borrow `*self` as mutable because it is also borrowed as immutable
-  --> $DIR/suggest-local-var-imm-and-mut.rs:24:29
-   |
-LL |             Self::foo(self, Self::bar(self));
-   |             --------- ----  ^^^^^^^^^^^^^^^ mutable borrow occurs here
-   |             |         |
-   |             |         immutable borrow occurs here
-   |             immutable borrow later used by call
+error E0502: cannot borrow `*self` as mutable because it is also borrowed as immutable
+ at $DIR/suggest-local-var-imm-and-mut.rs:24:29: mutable borrow occurs here
+  on line 24: immutable borrow later used by call
+  on line 24, column 23: immutable borrow occurs here
 
 error: aborting due to 2 previous errors
 

@@ -1,35 +1,20 @@
-error[E0308]: mismatched types
-  --> $DIR/return-impl-trait.rs:15:5
-   |
-LL | fn bar<T: Trait + std::marker::Sync>() -> T
-   |        -                                  -
-   |        |                                  |
-   |        |                                  expected `T` because of return type
-   |        expected this type parameter       help: consider using an impl return type: `impl Trait + std::marker::Sync + Send`
-...
-LL |     ()
-   |     ^^ expected type parameter `T`, found `()`
-   |
-   = note: expected type parameter `T`
-                   found unit type `()`
-   = note: the caller chooses a type for `T` which can be different from `()`
+error E0308: mismatched types
+ at $DIR/return-impl-trait.rs:15:5: expected type parameter `T`, found `()`
+  on line 11, column 8: expected this type parameter
+  on line 11, column 43: expected `T` because of return type
+  on line 11, column 43: help: consider using an impl return type: `impl Trait + std::marker::Sync + Send`
+note: expected type parameter `T`
+              found unit type `()`
+note: the caller chooses a type for `T` which can be different from `()`
 
-error[E0308]: mismatched types
-  --> $DIR/return-impl-trait.rs:23:5
-   |
-LL | fn other_bounds<T>() -> T
-   |                 -       -
-   |                 |       |
-   |                 |       expected `T` because of return type
-   |                 |       help: consider using an impl return type: `impl Trait`
-   |                 expected this type parameter
-...
-LL |     ()
-   |     ^^ expected type parameter `T`, found `()`
-   |
-   = note: expected type parameter `T`
-                   found unit type `()`
-   = note: the caller chooses a type for `T` which can be different from `()`
+error E0308: mismatched types
+ at $DIR/return-impl-trait.rs:23:5: expected type parameter `T`, found `()`
+  on line 18, column 17: expected this type parameter
+  on line 18, column 25: expected `T` because of return type
+  on line 18, column 25: help: consider using an impl return type: `impl Trait`
+note: expected type parameter `T`
+              found unit type `()`
+note: the caller chooses a type for `T` which can be different from `()`
 
 error: aborting due to 2 previous errors
 

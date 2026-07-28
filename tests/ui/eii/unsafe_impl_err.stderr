@@ -1,24 +1,12 @@
 error: `#[foo]` is unsafe to implement
-  --> $DIR/unsafe_impl_err.rs:17:1
-   |
-LL | #[foo]
-   | ^^^^^^
-   |
+ at $DIR/unsafe_impl_err.rs:17:1
 help: wrap the attribute in `unsafe(...)`
-   |
-LL | #[unsafe(foo)]
-   |   +++++++   +
+ on line 17, column 2, add `unsafe(`
 
 error: `#[baz]` is unsafe to implement
-  --> $DIR/unsafe_impl_err.rs:26:1
-   |
-LL | #[baz]
-   | ^^^^^^
-   |
+ at $DIR/unsafe_impl_err.rs:26:1
 help: wrap the attribute in `unsafe(...)`
-   |
-LL | #[unsafe(baz)]
-   |   +++++++   +
+ on line 26, column 2, add `unsafe(`
 
 error: aborting due to 2 previous errors
 

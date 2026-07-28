@@ -1,8 +1,5 @@
-error[E0404]: expected trait, found trait alias `DefaultAlias`
-  --> $DIR/impl.rs:5:6
-   |
-LL | impl DefaultAlias for () {}
-   |      ^^^^^^^^^^^^ not a trait
+error E0404: expected trait, found trait alias `DefaultAlias`
+ at $DIR/impl.rs:5:6: not a trait
 
 error: aborting due to 1 previous error
 

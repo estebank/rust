@@ -1,13 +1,7 @@
 error: expected identifier, found reserved keyword `macro`
-  --> $DIR/macro-keyword.rs:1:4
-   |
-LL | fn macro() {
-   |    ^^^^^ expected identifier, found reserved keyword
-   |
+ at $DIR/macro-keyword.rs:1:4: expected identifier, found reserved keyword
 help: escape `macro` to use it as an identifier
-   |
-LL | fn r#macro() {
-   |    ++
+ on line 1, column 3, add `r#`
 
 error: aborting due to 1 previous error
 

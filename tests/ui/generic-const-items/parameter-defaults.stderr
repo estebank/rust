@@ -1,36 +1,20 @@
 error: defaults for generic parameters are not allowed here
-  --> $DIR/parameter-defaults.rs:10:12
-   |
-LL | const NONE<T = ()>: Option<T> = None::<T>;
-   |            ^^^^^^
+ at $DIR/parameter-defaults.rs:10:12
 
 error: defaults for generic parameters are not allowed here
-  --> $DIR/parameter-defaults.rs:14:16
-   |
-LL |     const NADA<T = ()>: Option<T> = None::<T>;
-   |                ^^^^^^
+ at $DIR/parameter-defaults.rs:14:16
 
-error[E0282]: type annotations needed for `Option<_>`
-  --> $DIR/parameter-defaults.rs:20:18
-   |
-LL | fn body0() { let _ = NONE; }
-   |                  ^   ---- type must be known at this point
-   |
+error E0282: type annotations needed for `Option<_>`
+ at $DIR/parameter-defaults.rs:20:18
+  on line 20, column 22: type must be known at this point
 help: consider giving this pattern a type, where the type for type parameter `T` is specified
-   |
-LL | fn body0() { let _: Option<T> = NONE; }
-   |                   +++++++++++
+ on line 20, column 18, add `: Option<T>`
 
-error[E0282]: type annotations needed for `Option<_>`
-  --> $DIR/parameter-defaults.rs:21:18
-   |
-LL | fn body1() { let _ = Host::NADA; }
-   |                  ^   ---------- type must be known at this point
-   |
+error E0282: type annotations needed for `Option<_>`
+ at $DIR/parameter-defaults.rs:21:18
+  on line 21, column 22: type must be known at this point
 help: consider giving this pattern a type, where the type for type parameter `T` is specified
-   |
-LL | fn body1() { let _: Option<T> = Host::NADA; }
-   |                   +++++++++++
+ on line 21, column 18, add `: Option<T>`
 
 error: aborting due to 4 previous errors
 

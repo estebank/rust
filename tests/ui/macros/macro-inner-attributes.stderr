@@ -1,21 +1,10 @@
-error[E0433]: cannot find module or crate `a` in this scope
-  --> $DIR/macro-inner-attributes.rs:17:5
-   |
-LL |     a::bar();
-   |     ^ use of unresolved module or unlinked crate `a`
-   |
+error E0433: cannot find module or crate `a` in this scope
+ at $DIR/macro-inner-attributes.rs:17:5: use of unresolved module or unlinked crate `a`
 note: found an item that was configured out
-  --> $DIR/macro-inner-attributes.rs:7:7
-   |
-LL | test!(a,
-   |       ^
-LL |       #[cfg(false)],
-   |             ----- the item is gated here
+ at $DIR/macro-inner-attributes.rs:7:7
+  on line 8, column 13: the item is gated here
 help: there is a crate or module with a similar name
-   |
-LL -     a::bar();
-LL +     b::bar();
-   |
+ on line 17, column 4, replace with `b`
 
 error: aborting due to 1 previous error
 

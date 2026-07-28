@@ -1,30 +1,14 @@
-error[E0191]: the value of the associated type `Bop` in `Foo` must be specified
-  --> $DIR/assoc_type_bounds_sized_others.rs:12:16
-   |
-LL |     type Bop;
-   |     -------- `Bop` defined here
-...
-LL | fn foo(_: &dyn Foo) {}
-   |                ^^^
-   |
+error E0191: the value of the associated type `Bop` in `Foo` must be specified
+ at $DIR/assoc_type_bounds_sized_others.rs:12:16
+  on line 9: `Bop` defined here
 help: specify the associated type
-   |
-LL | fn foo(_: &dyn Foo<Bop = /* Type */>) {}
-   |                   ++++++++++++++++++
+ on line 12, column 15, replace with `Foo<Bop = /* Type */>`
 
-error[E0191]: the value of the associated type `Bop` in `Bar` must be specified
-  --> $DIR/assoc_type_bounds_sized_others.rs:22:16
-   |
-LL |     type Bop;
-   |     -------- `Bop` defined here
-...
-LL | fn bar(_: &dyn Bar) {}
-   |                ^^^
-   |
+error E0191: the value of the associated type `Bop` in `Bar` must be specified
+ at $DIR/assoc_type_bounds_sized_others.rs:22:16
+  on line 16: `Bop` defined here
 help: specify the associated type
-   |
-LL | fn bar(_: &dyn Bar<Bop = /* Type */>) {}
-   |                   ++++++++++++++++++
+ on line 22, column 15, replace with `Bar<Bop = /* Type */>`
 
 error: aborting due to 2 previous errors
 

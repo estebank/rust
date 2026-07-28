@@ -1,64 +1,30 @@
-error[E0425]: cannot find type `FromOutside` in this scope
-  --> $DIR/generate-mod.rs:35:13
-   |
-LL |     type A = $FromOutside;
-   |              ------------ due to this macro variable
-...
-LL |     genmod!(FromOutside, Outer);
-   |             ^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `FromOutside` in this scope
+ at $DIR/generate-mod.rs:35:13: not found in this scope
+  on line 6, column 14: due to this macro variable
 
-error[E0425]: cannot find type `Outer` in this scope
-  --> $DIR/generate-mod.rs:35:26
-   |
-LL |     struct $Outer;
-   |            ------ due to this macro variable
-...
-LL |     genmod!(FromOutside, Outer);
-   |                          ^^^^^ not found in this scope
+error E0425: cannot find type `Outer` in this scope
+ at $DIR/generate-mod.rs:35:26: not found in this scope
+  on line 7, column 12: due to this macro variable
 
-error[E0425]: cannot find type `FromOutside` in this scope
-  --> $DIR/generate-mod.rs:19:18
-   |
-LL |         type A = FromOutside;
-   |                  ^^^^^^^^^^^ not found in this scope
-...
-LL |     genmod_transparent!();
-   |     --------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `genmod_transparent` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0425: cannot find type `FromOutside` in this scope
+ at $DIR/generate-mod.rs:19:18: not found in this scope
+  on line 41: in this macro invocation
+note: this error originates in the macro `genmod_transparent` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0425]: cannot find type `Outer` in this scope
-  --> $DIR/generate-mod.rs:20:22
-   |
-LL |         type Inner = Outer;
-   |                      ^^^^^ not found in this scope
-...
-LL |     genmod_transparent!();
-   |     --------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `genmod_transparent` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0425: cannot find type `Outer` in this scope
+ at $DIR/generate-mod.rs:20:22: not found in this scope
+  on line 41: in this macro invocation
+note: this error originates in the macro `genmod_transparent` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0425]: cannot find type `FromOutside` in this scope
-  --> $DIR/generate-mod.rs:28:18
-   |
-LL |         type A = FromOutside;
-   |                  ^^^^^^^^^^^ not found in this scope
-...
-LL |     genmod_legacy!();
-   |     ---------------- in this macro invocation
-   |
-   = note: this error originates in the macro `genmod_legacy` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0425: cannot find type `FromOutside` in this scope
+ at $DIR/generate-mod.rs:28:18: not found in this scope
+  on line 46: in this macro invocation
+note: this error originates in the macro `genmod_legacy` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0425]: cannot find type `Outer` in this scope
-  --> $DIR/generate-mod.rs:29:22
-   |
-LL |         type Inner = Outer;
-   |                      ^^^^^ not found in this scope
-...
-LL |     genmod_legacy!();
-   |     ---------------- in this macro invocation
-   |
-   = note: this error originates in the macro `genmod_legacy` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0425: cannot find type `Outer` in this scope
+ at $DIR/generate-mod.rs:29:22: not found in this scope
+  on line 46: in this macro invocation
+note: this error originates in the macro `genmod_legacy` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 6 previous errors
 

@@ -1,33 +1,18 @@
 error: expected `{`, found `)`
-  --> $DIR/ice-in-tokenstream-for-contracts-issue-140683.rs:8:18
-   |
-LL |     fn b() {(loop)}
-   |              ----^ expected `{`
-   |              |
-   |              while parsing this `loop` expression
+ at $DIR/ice-in-tokenstream-for-contracts-issue-140683.rs:8:18: expected `{`
+  on line 8, column 14: while parsing this `loop` expression
 
 error: expected `{`, found `)`
-  --> $DIR/ice-in-tokenstream-for-contracts-issue-140683.rs:8:18
-   |
-LL |     fn b() {(loop)}
-   |              ----^ expected `{`
-   |              |
-   |              while parsing this `loop` expression
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/ice-in-tokenstream-for-contracts-issue-140683.rs:8:18: expected `{`
+  on line 8, column 14: while parsing this `loop` expression
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0277]: expected an `Fn(&_)` closure, found `()`
-  --> $DIR/ice-in-tokenstream-for-contracts-issue-140683.rs:7:5
-   |
-LL |     #[core::contracts::ensures]
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |
-   |     expected an `Fn(&_)` closure, found `()`
-   |     required by a bound introduced by this call
-   |
-   = help: the trait `for<'a> Fn(&'a _)` is not implemented for `()`
+error E0277: expected an `Fn(&_)` closure, found `()`
+ at $DIR/ice-in-tokenstream-for-contracts-issue-140683.rs:7:5: expected an `Fn(&_)` closure, found `()`
+  on line 7: required by a bound introduced by this call
+help: the trait `for<'a> Fn(&'a _)` is not implemented for `()`
 note: required by a bound in `build_check_ensures`
-  --> $SRC_DIR/core/src/contracts.rs:LL:COL
+ at $SRC_DIR/core/src/contracts.rs:LL:COL
 
 error: aborting due to 3 previous errors
 

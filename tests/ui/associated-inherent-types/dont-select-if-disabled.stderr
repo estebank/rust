@@ -1,24 +1,13 @@
-error[E0223]: ambiguous associated type
-  --> $DIR/dont-select-if-disabled.rs:13:10
-   |
-LL | struct S(S::P);
-   |          ^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/dont-select-if-disabled.rs:13:10
 help: if there were a trait named `Example` with associated type `P` implemented for `S`, you could use the fully-qualified path
-   |
-LL - struct S(S::P);
-LL + struct S(<S as Example>::P);
-   |
+ on line 13, column 9, replace with `<S as Example>::`
 
-error[E0658]: inherent associated types are unstable
-  --> $DIR/dont-select-if-disabled.rs:15:10
-   |
-LL | impl S { type P = (); }
-   |          ^^^^^^^^^^^^
-   |
-   = note: see issue #8995 <https://github.com/rust-lang/rust/issues/8995> for more information
-   = help: add `#![feature(inherent_associated_types)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: inherent associated types are unstable
+ at $DIR/dont-select-if-disabled.rs:15:10
+note: see issue #8995 <https://github.com/rust-lang/rust/issues/8995> for more information
+help: add `#![feature(inherent_associated_types)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error: aborting due to 2 previous errors
 

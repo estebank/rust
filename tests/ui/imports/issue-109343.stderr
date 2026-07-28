@@ -1,13 +1,7 @@
-error[E0432]: unresolved import `unresolved`
-  --> $DIR/issue-109343.rs:5:9
-   |
-LL | pub use unresolved::f;
-   |         ^^^^^^^^^^ use of unresolved module or unlinked crate `unresolved`
-   |
+error E0432: unresolved import `unresolved`
+ at $DIR/issue-109343.rs:5:9: use of unresolved module or unlinked crate `unresolved`
 help: you might be missing a crate named `unresolved`, add it to your project and import it in your code
-   |
-LL + extern crate unresolved;
-   |
+ on line 4, column 1, add `extern crate unresolved;`
 
 error: aborting due to 1 previous error
 

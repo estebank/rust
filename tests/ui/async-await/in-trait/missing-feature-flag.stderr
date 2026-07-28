@@ -1,28 +1,14 @@
-error[E0046]: not all trait items implemented, missing: `foo`
-  --> $DIR/missing-feature-flag.rs:11:1
-   |
-LL |     async fn foo(_: T) -> &'static str;
-   |     ----------------------------------- `foo` from trait
-...
-LL | impl<T> MyTrait<T> for MyStruct {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `foo` in implementation
+error E0046: not all trait items implemented, missing: `foo`
+ at $DIR/missing-feature-flag.rs:11:1: missing `foo` in implementation
+  on line 8: `foo` from trait
 
-error[E0308]: mismatched types
-  --> $DIR/missing-feature-flag.rs:15:42
-   |
-LL |     async fn foo(_: i32) -> &'static str {}
-   |                                          ^^ expected `&str`, found `()`
+error E0308: mismatched types
+ at $DIR/missing-feature-flag.rs:15:42: expected `&str`, found `()`
 
-error[E0520]: `foo` specializes an item from a parent `impl`, but that item is not marked `default`
-  --> $DIR/missing-feature-flag.rs:15:5
-   |
-LL | impl<T> MyTrait<T> for MyStruct {}
-   | ------------------------------- parent `impl` is here
-...
-LL |     async fn foo(_: i32) -> &'static str {}
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot specialize default item `foo`
-   |
-   = note: to specialize, `foo` in the parent `impl` must be marked `default`
+error E0520: `foo` specializes an item from a parent `impl`, but that item is not marked `default`
+ at $DIR/missing-feature-flag.rs:15:5: cannot specialize default item `foo`
+  on line 11: parent `impl` is here
+note: to specialize, `foo` in the parent `impl` must be marked `default`
 
 error: aborting due to 3 previous errors
 

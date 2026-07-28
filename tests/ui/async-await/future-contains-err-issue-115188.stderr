@@ -1,8 +1,5 @@
-error[E0063]: missing field `t` in initializer of `Wrapper<_>`
-  --> $DIR/future-contains-err-issue-115188.rs:7:13
-   |
-LL |     let y = Wrapper { };
-   |             ^^^^^^^ missing `t`
+error E0063: missing field `t` in initializer of `Wrapper<_>`
+ at $DIR/future-contains-err-issue-115188.rs:7:13: missing `t`
 
 error: aborting due to 1 previous error
 

@@ -1,30 +1,16 @@
-error[E0277]: the size for values of type `[u8]` cannot be known at compilation time
-  --> $DIR/no-unsized-arguments.rs:40:42
-   |
-LL |     extern "tail" fn unsized_argument(x: [u8]) -> u8 {
-   |                                          ^^^^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `[u8]`
+error E0277: the size for values of type `[u8]` cannot be known at compilation time
+ at $DIR/no-unsized-arguments.rs:40:42: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `[u8]`
 help: function arguments must have a statically known size, borrowed slices always have a known size
-   |
-LL |     extern "tail" fn unsized_argument(x: &[u8]) -> u8 {
-   |                                          +
+ on line 40, column 41, add `&`
 
 error: unsized arguments cannot be used in a tail call
-  --> $DIR/no-unsized-arguments.rs:33:5
-   |
-LL |     become unsized_argument(b);
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: unsized argument of type `[u8]`
+ at $DIR/no-unsized-arguments.rs:33:5
+note: unsized argument of type `[u8]`
 
 error: unsized arguments cannot be used in a tail call
-  --> $DIR/no-unsized-arguments.rs:48:5
-   |
-LL |     become unsized_argument(*b);
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: unsized argument of type `[u8]`
+ at $DIR/no-unsized-arguments.rs:48:5
+note: unsized argument of type `[u8]`
 
 error: aborting due to 3 previous errors
 

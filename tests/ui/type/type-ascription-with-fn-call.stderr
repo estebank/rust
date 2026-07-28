@@ -1,14 +1,7 @@
 error: statements are terminated with a semicolon
-  --> $DIR/type-ascription-with-fn-call.rs:3:10
-   |
-LL |     f()  :
-   |          ^
-   |
+ at $DIR/type-ascription-with-fn-call.rs:3:10
 help: use a semicolon instead
-   |
-LL -     f()  :
-LL +     f()  ;
-   |
+ on line 3, column 9, replace with `;`
 
 error: aborting due to 1 previous error
 

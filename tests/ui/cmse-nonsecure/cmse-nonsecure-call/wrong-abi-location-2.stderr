@@ -1,10 +1,5 @@
-error[E0781]: the `"cmse-nonsecure-call"` ABI is only allowed on function pointers
-  --> $DIR/wrong-abi-location-2.rs:11:1
-   |
-LL | / extern "cmse-nonsecure-call" {
-LL | |     fn test();
-LL | | }
-   | |_^
+error E0781: the `"cmse-nonsecure-call"` ABI is only allowed on function pointers
+ at $DIR/wrong-abi-location-2.rs:11:1 to 13:2
 
 error: aborting due to 1 previous error
 

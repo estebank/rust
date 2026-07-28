@@ -1,32 +1,16 @@
-error[E0565]: malformed `non_exhaustive` attribute input
-  --> $DIR/invalid-attribute.rs:1:3
-   |
-LL | #[non_exhaustive(anything)]
-   |   ^^^^^^^^^^^^^^----------
-   |                 |
-   |                 didn't expect any arguments here
-   |
+error E0565: malformed `non_exhaustive` attribute input
+ at $DIR/invalid-attribute.rs:1:3
+  on line 1, column 17: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[non_exhaustive(anything)]
-LL + #[non_exhaustive]
-   |
+ on line 1, column 2, replace with `non_exhaustive`
 
 error: the `non_exhaustive` attribute cannot be used on traits
-  --> $DIR/invalid-attribute.rs:5:3
-   |
-LL | #[non_exhaustive]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `non_exhaustive` attribute can be applied to data types and enum variants
+ at $DIR/invalid-attribute.rs:5:3
+help: the `non_exhaustive` attribute can be applied to data types and enum variants
 
 error: the `non_exhaustive` attribute cannot be used on unions
-  --> $DIR/invalid-attribute.rs:9:3
-   |
-LL | #[non_exhaustive]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `non_exhaustive` attribute can be applied to enum variants, enums, and structs
+ at $DIR/invalid-attribute.rs:9:3
+help: the `non_exhaustive` attribute can be applied to enum variants, enums, and structs
 
 error: aborting due to 3 previous errors
 

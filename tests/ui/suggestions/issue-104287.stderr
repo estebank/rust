@@ -1,28 +1,13 @@
-error[E0107]: method takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-104287.rs:10:5
-   |
-LL |     foo::<()>(x);
-   |     ^^^------ help: remove the unnecessary generics
-   |     |
-   |     expected 0 generic arguments
-   |
+error E0107: method takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-104287.rs:10:5: expected 0 generic arguments
+  on line 10, column 8: help: remove the unnecessary generics
 note: method defined here, with 0 generic parameters
-  --> $DIR/issue-104287.rs:6:8
-   |
-LL |     fn foo(&self) {}
-   |        ^^^
+ at $DIR/issue-104287.rs:6:8
 
-error[E0425]: cannot find function `foo` in this scope
-  --> $DIR/issue-104287.rs:10:5
-   |
-LL |     foo::<()>(x);
-   |     ^^^ not found in this scope
-   |
+error E0425: cannot find function `foo` in this scope
+ at $DIR/issue-104287.rs:10:5: not found in this scope
 help: use the `.` operator to call the method `foo` on `&S`
-   |
-LL -     foo::<()>(x);
-LL +     x.foo();
-   |
+ on line 10, column 4
 
 error: aborting due to 2 previous errors
 

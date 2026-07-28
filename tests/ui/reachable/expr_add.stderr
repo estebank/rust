@@ -1,17 +1,8 @@
 error: unreachable expression
-  --> $DIR/expr_add.rs:17:13
-   |
-LL |     let x = Foo + return;
-   |             ^^^^^^------
-   |             |     |
-   |             |     any code following this expression is unreachable
-   |             unreachable expression
-   |
+ at $DIR/expr_add.rs:17:13: unreachable expression
+  on line 17, column 19: any code following this expression is unreachable
 note: the lint level is defined here
-  --> $DIR/expr_add.rs:3:9
-   |
-LL | #![deny(unreachable_code)]
-   |         ^^^^^^^^^^^^^^^^
+ at $DIR/expr_add.rs:3:9
 
 error: aborting due to 1 previous error
 

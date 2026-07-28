@@ -1,14 +1,7 @@
 error: expected one of `!`, `(`, `+`, `::`, `<`, `where`, or `{`, found keyword `for`
-  --> $DIR/hrdt.rs:7:11
-   |
-LL |     Where for<'a> F: Fn(&'a (u8, u16)) -> &'a u8,
-   |           ^^^ expected one of 7 possible tokens
-   |
+ at $DIR/hrdt.rs:7:11: expected one of 7 possible tokens
 help: write keyword `where` in lowercase (notice the capitalization)
-   |
-LL -     Where for<'a> F: Fn(&'a (u8, u16)) -> &'a u8,
-LL +     where for<'a> F: Fn(&'a (u8, u16)) -> &'a u8,
-   |
+ on line 7, column 4, replace with `where`
 
 error: aborting due to 1 previous error
 

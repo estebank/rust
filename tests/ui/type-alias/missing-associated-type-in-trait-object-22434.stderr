@@ -1,16 +1,8 @@
-error[E0191]: the value of the associated type `A` in `Foo` must be specified
-  --> $DIR/missing-associated-type-in-trait-object-22434.rs:6:23
-   |
-LL |     type A;
-   |     ------ `A` defined here
-...
-LL | type I<'a> = &'a (dyn Foo + 'a);
-   |                       ^^^
-   |
+error E0191: the value of the associated type `A` in `Foo` must be specified
+ at $DIR/missing-associated-type-in-trait-object-22434.rs:6:23
+  on line 3: `A` defined here
 help: specify the associated type
-   |
-LL | type I<'a> = &'a (dyn Foo<A = /* Type */> + 'a);
-   |                          ++++++++++++++++
+ on line 6, column 22, replace with `Foo<A = /* Type */>`
 
 error: aborting due to 1 previous error
 

@@ -1,35 +1,17 @@
-error[E0107]: missing generics for associated type `C::DType`
-  --> $DIR/issue-81712-cyclic-traits.rs:14:19
-   |
-LL |     type CType: C<DType = Self>;
-   |                   ^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for associated type `C::DType`
+ at $DIR/issue-81712-cyclic-traits.rs:14:19: expected 1 generic argument
 note: associated type defined here, with 1 generic parameter: `T`
-  --> $DIR/issue-81712-cyclic-traits.rs:11:10
-   |
-LL |     type DType<T>: D<T, CType = Self>;
-   |          ^^^^^ -
+ at $DIR/issue-81712-cyclic-traits.rs:11:10
 help: add missing generic argument
-   |
-LL |     type CType: C<DType<T> = Self>;
-   |                        +++
+ on line 14, column 23, add `<T>`
 
-error[E0107]: missing generics for associated type `C::DType`
-  --> $DIR/issue-81712-cyclic-traits.rs:14:19
-   |
-LL |     type CType: C<DType = Self>;
-   |                   ^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for associated type `C::DType`
+ at $DIR/issue-81712-cyclic-traits.rs:14:19: expected 1 generic argument
 note: associated type defined here, with 1 generic parameter: `T`
-  --> $DIR/issue-81712-cyclic-traits.rs:11:10
-   |
-LL |     type DType<T>: D<T, CType = Self>;
-   |          ^^^^^ -
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/issue-81712-cyclic-traits.rs:11:10
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: add missing generic argument
-   |
-LL |     type CType: C<DType<T> = Self>;
-   |                        +++
+ on line 14, column 23, add `<T>`
 
 error: aborting due to 2 previous errors
 

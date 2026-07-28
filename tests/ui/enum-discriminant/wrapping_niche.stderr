@@ -63,10 +63,7 @@ error: layout_of(UnsignedAroundZero) = Layout {
            unadjusted_abi_align: Align(2 bytes),
            randomization_seed: 2648004449468912780,
        }
-  --> $DIR/wrapping_niche.rs:8:1
-   |
-LL | enum UnsignedAroundZero {
-   | ^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/wrapping_niche.rs:8:1
 
 error: layout_of(SignedAroundZero) = Layout {
            size: Size(2 bytes),
@@ -133,10 +130,7 @@ error: layout_of(SignedAroundZero) = Layout {
            unadjusted_abi_align: Align(2 bytes),
            randomization_seed: 10738146848450213996,
        }
-  --> $DIR/wrapping_niche.rs:17:1
-   |
-LL | enum SignedAroundZero {
-   | ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/wrapping_niche.rs:17:1
 
 error: aborting due to 2 previous errors
 

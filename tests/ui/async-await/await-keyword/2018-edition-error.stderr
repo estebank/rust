@@ -1,63 +1,30 @@
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error.rs:5:13
-   |
-LL |     pub mod await {
-   |             ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error.rs:5:13: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL |     pub mod r#await {
-   |             ++
+ on line 5, column 12, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error.rs:6:20
-   |
-LL |         pub struct await;
-   |                    ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error.rs:6:20: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL |         pub struct r#await;
-   |                    ++
+ on line 6, column 19, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error.rs:9:22
-   |
-LL | use self::outer_mod::await::await;
-   |                      ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error.rs:9:22: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL | use self::outer_mod::r#await::await;
-   |                      ++
+ on line 9, column 21, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error.rs:9:29
-   |
-LL | use self::outer_mod::await::await;
-   |                             ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error.rs:9:29: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL | use self::outer_mod::await::r#await;
-   |                             ++
+ on line 9, column 28, add `r#`
 
 error: expected identifier, found keyword `await`
-  --> $DIR/2018-edition-error.rs:12:14
-   |
-LL | macro_rules! await { () => {}; }
-   |              ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/2018-edition-error.rs:12:14: expected identifier, found keyword
 help: escape `await` to use it as an identifier
-   |
-LL | macro_rules! r#await { () => {}; }
-   |              ++
+ on line 12, column 13, add `r#`
 
 error: expected expression, found `)`
-  --> $DIR/2018-edition-error.rs:15:12
-   |
-LL |     await!();
-   |            ^ expected expression
+ at $DIR/2018-edition-error.rs:15:12: expected expression
 
 error: aborting due to 6 previous errors
 

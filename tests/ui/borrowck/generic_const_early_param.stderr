@@ -1,30 +1,15 @@
-error[E0262]: invalid lifetime parameter name: `'static`
-  --> $DIR/generic_const_early_param.rs:3:20
-   |
-LL | struct DataWrapper<'static> {
-   |                    ^^^^^^^ 'static is a reserved lifetime name
+error E0262: invalid lifetime parameter name: `'static`
+ at $DIR/generic_const_early_param.rs:3:20: 'static is a reserved lifetime name
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/generic_const_early_param.rs:5:12
-   |
-LL |     data: &'a [u8; Self::SIZE],
-   |            ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/generic_const_early_param.rs:5:12: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | struct DataWrapper<'a, 'static> {
-   |                    +++
+ on line 3, column 19, add `'a, `
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/generic_const_early_param.rs:9:18
-   |
-LL | impl DataWrapper<'a> {
-   |                  ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/generic_const_early_param.rs:9:18: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | impl<'a> DataWrapper<'a> {
-   |     ++++
+ on line 9, column 4, add `<'a>`
 
 error: aborting due to 3 previous errors
 

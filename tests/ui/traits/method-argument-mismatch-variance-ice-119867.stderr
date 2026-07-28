@@ -1,23 +1,11 @@
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for associated functions
-  --> $DIR/method-argument-mismatch-variance-ice-119867.rs:8:23
-   |
-LL |     fn deserialize(s: _) {}
-   |                       ^ not allowed in type signatures
-   |
+error E0121: the placeholder `_` is not allowed within types on item signatures for associated functions
+ at $DIR/method-argument-mismatch-variance-ice-119867.rs:8:23: not allowed in type signatures
 help: try replacing `_` with the type in the corresponding trait method signature
-   |
-LL -     fn deserialize(s: _) {}
-LL +     fn deserialize(s: &ArchivedVec<T>) {}
-   |
+ on line 8, column 22, replace with `&ArchivedVec<T>`
 
-error[E0186]: method `deserialize` has a `&self` declaration in the trait, but not in the impl
-  --> $DIR/method-argument-mismatch-variance-ice-119867.rs:8:5
-   |
-LL |     fn deserialize(&self);
-   |     ---------------------- `&self` used in trait
-...
-LL |     fn deserialize(s: _) {}
-   |     ^^^^^^^^^^^^^^^^^^^^ expected `&self` in impl
+error E0186: method `deserialize` has a `&self` declaration in the trait, but not in the impl
+ at $DIR/method-argument-mismatch-variance-ice-119867.rs:8:5: expected `&self` in impl
+  on line 2: `&self` used in trait
 
 error: aborting due to 2 previous errors
 

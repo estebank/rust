@@ -1,19 +1,10 @@
-error[E0401]: can't use generic parameters from outer item
-  --> $DIR/issue-98432.rs:5:34
-   |
-LL | impl<T> Struct<T> {
-   |      - type parameter from outer item
-LL |     const CONST: fn() = || {
-LL |         struct _Obligation where T:;
-   |                -----------       ^ use of generic parameter from outer item
-   |                |
-   |                generic parameter used in this inner struct
-   |
-   = note: nested items are independent from their parent item for everything except for privacy and name resolution
+error E0401: can't use generic parameters from outer item
+ at $DIR/issue-98432.rs:5:34: use of generic parameter from outer item
+  on line 3, column 6: type parameter from outer item
+  on line 5, column 16: generic parameter used in this inner struct
+note: nested items are independent from their parent item for everything except for privacy and name resolution
 help: try introducing a local generic parameter here
-   |
-LL |         struct _Obligation<T> where T:;
-   |                           +++
+ on line 5, column 26, add `<T>`
 
 error: aborting due to 1 previous error
 

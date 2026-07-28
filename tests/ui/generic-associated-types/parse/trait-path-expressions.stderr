@@ -1,21 +1,11 @@
 error: expected expression, found `)`
-  --> $DIR/trait-path-expressions.rs:6:39
-   |
-LL |   fn f1<'a>(arg : Box<dyn X< 1 = 32 >>) {}
-   |                              -        ^ expected expression
-   |                              |
-   |                              while parsing a const generic argument starting here
+ at $DIR/trait-path-expressions.rs:6:39: expected expression
+  on line 6, column 30: while parsing a const generic argument starting here
 
 error: expected one of `,`, `:`, or `>`, found `=`
-  --> $DIR/trait-path-expressions.rs:16:36
-   |
-LL |   fn f2<'a>(arg : Box<dyn X< { 1 } = 32 >>) {}
-   |                                    ^ expected one of `,`, `:`, or `>`
-   |
+ at $DIR/trait-path-expressions.rs:16:36: expected one of `,`, `:`, or `>`
 help: you might have meant to end the type parameters here
-   |
-LL |   fn f2<'a>(arg : Box<dyn X< { 1 }> = 32 >>) {}
-   |                                   +
+ on line 16, column 34, add `>`
 
 error: aborting due to 2 previous errors
 

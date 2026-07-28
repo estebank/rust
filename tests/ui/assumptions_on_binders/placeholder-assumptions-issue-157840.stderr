@@ -1,13 +1,7 @@
-error[E0277]: the trait bound `(): Trait<fn(for<'a> fn(<T as Proj<'a>>::Assoc))>` is not satisfied
-  --> $DIR/placeholder-assumptions-issue-157840.rs:12:9
-   |
-LL |     (): Trait<<T as Proj<'a>>::Assoc>,
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Trait<fn(for<'a> fn(<T as Proj<'a>>::Assoc))>` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Trait<fn(for<'a> fn(<T as Proj<'a>>::Assoc))>` is not satisfied
+ at $DIR/placeholder-assumptions-issue-157840.rs:12:9: the trait `Trait<fn(for<'a> fn(<T as Proj<'a>>::Assoc))>` is not implemented for `()`
 help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
-   |
-LL |     (): Trait<<T as Proj<'a>>::Assoc>, (): Trait<fn(for<'a> fn(<T as Proj<'a>>::Assoc))>
-   |                                        +++++++++++++++++++++++++++++++++++++++++++++++++
+ on line 12, column 37, replace with `, (): Trait<fn(for<'a> fn(<T as Proj<'a>>::Assoc))>`
 
 error: aborting due to 1 previous error
 

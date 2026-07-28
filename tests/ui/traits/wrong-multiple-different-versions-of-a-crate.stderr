@@ -1,21 +1,10 @@
-error[E0277]: the trait bound `MyStruct: crate1::Trait` is not satisfied
-  --> $DIR/wrong-multiple-different-versions-of-a-crate.rs:11:17
-   |
-LL |     crate1::foo(MyStruct);
-   |     ----------- ^^^^^^^^ unsatisfied trait bound
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: the trait bound `MyStruct: crate1::Trait` is not satisfied
+ at $DIR/wrong-multiple-different-versions-of-a-crate.rs:11:17: unsatisfied trait bound
+  on line 11: required by a bound introduced by this call
 help: the trait `crate1::Trait` is not implemented for `MyStruct`
-  --> $DIR/wrong-multiple-different-versions-of-a-crate.rs:8:1
-   |
-LL | struct MyStruct;
-   | ^^^^^^^^^^^^^^^
+ at $DIR/wrong-multiple-different-versions-of-a-crate.rs:8:1
 note: required by a bound in `foo`
-  --> $DIR/auxiliary/crate1.rs:5:23
-   |
-LL | pub fn foo(_arg: impl Trait) {}
-   |                       ^^^^^ required by this bound in `foo`
+ at $DIR/auxiliary/crate1.rs:5:23: required by this bound in `foo`
 
 error: aborting due to 1 previous error
 

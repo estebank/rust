@@ -1,13 +1,8 @@
-error[E0521]: borrowed data escapes outside of closure
-  --> $DIR/issue-78262.rs:12:26
-   |
-LL |     let f = |x: &dyn TT| x.func();
-   |              -  -        ^^^^^^^^
-   |              |  |        |
-   |              |  |        `x` escapes the closure body here
-   |              |  |        argument requires that `'1` must outlive `'static`
-   |              |  let's call the lifetime of this reference `'1`
-   |              `x` is a reference that is only valid in the closure body
+error E0521: borrowed data escapes outside of closure
+ at $DIR/issue-78262.rs:12:26: `x` escapes the closure body here
+  on line 12, column 26: argument requires that `'1` must outlive `'static`
+  on line 12, column 14: `x` is a reference that is only valid in the closure body
+  on line 12, column 17: let's call the lifetime of this reference `'1`
 
 error: aborting due to 1 previous error
 

@@ -1,18 +1,10 @@
-error[E0118]: no nominal type found for inherent implementation
-  --> $DIR/private-in-public-ill-formed.rs:14:5
-   |
-LL |     impl <Priv as PrivTr>::AssocAlias {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ impl requires a nominal type
-   |
-   = note: either implement a trait on it or create a newtype to wrap it instead
+error E0118: no nominal type found for inherent implementation
+ at $DIR/private-in-public-ill-formed.rs:14:5: impl requires a nominal type
+note: either implement a trait on it or create a newtype to wrap it instead
 
-error[E0118]: no nominal type found for inherent implementation
-  --> $DIR/private-in-public-ill-formed.rs:31:5
-   |
-LL |     impl <Priv as PrivTr>::AssocAlias {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ impl requires a nominal type
-   |
-   = note: either implement a trait on it or create a newtype to wrap it instead
+error E0118: no nominal type found for inherent implementation
+ at $DIR/private-in-public-ill-formed.rs:31:5: impl requires a nominal type
+note: either implement a trait on it or create a newtype to wrap it instead
 
 error: aborting due to 2 previous errors
 

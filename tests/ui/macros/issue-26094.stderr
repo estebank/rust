@@ -1,17 +1,8 @@
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/issue-26094.rs:10:17
-   |
-LL |         $other(None)
-   |                ---- unexpected argument of type `Option<_>`
-...
-LL |     some_macro!(some_function);
-   |                 ^^^^^^^^^^^^^
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/issue-26094.rs:10:17
+  on line 3, column 16: unexpected argument of type `Option<_>`
 note: function defined here
-  --> $DIR/issue-26094.rs:7:4
-   |
-LL | fn some_function() {}
-   |    ^^^^^^^^^^^^^
+ at $DIR/issue-26094.rs:7:4
 
 error: aborting due to 1 previous error
 

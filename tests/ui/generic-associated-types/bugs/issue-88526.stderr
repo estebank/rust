@@ -1,25 +1,12 @@
-error[E0207]: the type parameter `I` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-88526.rs:25:13
-   |
-LL | impl<'q, Q, I, F> A for TestB<Q, F>
-   |             ^--
-   |             |
-   |             unconstrained type parameter
-   |             help: remove the unused type parameter `I`
+error E0207: the type parameter `I` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-88526.rs:25:13: unconstrained type parameter
+  on line 25, column 13: help: remove the unused type parameter `I`
 
-error[E0309]: the parameter type `F` may not live long enough
-  --> $DIR/issue-88526.rs:16:5
-   |
-LL |     type I<'a> = &'a F;
-   |     ^^^^^^^--^
-   |     |      |
-   |     |      the parameter type `F` must be valid for the lifetime `'a` as defined here...
-   |     ...so that the reference type `&'a F` does not outlive the data it points at
-   |
+error E0309: the parameter type `F` may not live long enough
+ at $DIR/issue-88526.rs:16:5: ...so that the reference type `&'a F` does not outlive the data it points at
+  on line 16, column 12: the parameter type `F` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     type I<'a> = &'a F where F: 'a;
-   |                        +++++++++++
+ on line 16, column 22, add ` where F: 'a`
 
 error: aborting due to 2 previous errors
 

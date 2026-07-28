@@ -1,30 +1,17 @@
-error[E0644]: closure/coroutine type that references itself
-  --> $DIR/cyclic_type_ice.rs:3:7
-   |
-LL |     f(f);
-   |       ^ recursive type with infinite-size name
-   |
-   = note: closures cannot capture themselves or take themselves as argument;
-           this error may be the result of a recent compiler bug-fix,
-           see issue #46062 <https://github.com/rust-lang/rust/issues/46062>
-           for more information
+error E0644: closure/coroutine type that references itself
+ at $DIR/cyclic_type_ice.rs:3:7: recursive type with infinite-size name
+note: closures cannot capture themselves or take themselves as argument;
+      this error may be the result of a recent compiler bug-fix,
+      see issue #46062 <https://github.com/rust-lang/rust/issues/46062>
+      for more information
 
-error[E0057]: this function takes 2 arguments but 1 argument was supplied
-  --> $DIR/cyclic_type_ice.rs:3:5
-   |
-LL |     f(f);
-   |     ^--- argument #2 is missing
-   |
+error E0057: this function takes 2 arguments but 1 argument was supplied
+ at $DIR/cyclic_type_ice.rs:3:5
+  on line 3, column 6: argument #2 is missing
 note: closure defined here
-  --> $DIR/cyclic_type_ice.rs:2:13
-   |
-LL |     let f = |_, _| ();
-   |             ^^^^^^
+ at $DIR/cyclic_type_ice.rs:2:13
 help: provide the argument
-   |
-LL -     f(f);
-LL +     f(/* _ */, /* _ */);
-   |
+ on line 3, column 5, replace with `(/* _ */, /* _ */)`
 
 error: aborting due to 2 previous errors
 

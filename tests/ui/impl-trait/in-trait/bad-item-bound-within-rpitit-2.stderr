@@ -1,32 +1,16 @@
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/bad-item-bound-within-rpitit-2.rs:4:20
-   |
-LL |     fn bar<'other: 'a>() -> impl Sized + 'a {}
-   |                    ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/bad-item-bound-within-rpitit-2.rs:4:20: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL |     fn bar<'a, 'other: 'a>() -> impl Sized + 'a {}
-   |            +++
+ on line 4, column 11, add `'a, `
 help: consider introducing lifetime `'a` here
-   |
-LL | trait Foo<'a> {
-   |          ++++
+ on line 3, column 9, add `<'a>`
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/bad-item-bound-within-rpitit-2.rs:4:42
-   |
-LL |     fn bar<'other: 'a>() -> impl Sized + 'a {}
-   |                                          ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/bad-item-bound-within-rpitit-2.rs:4:42: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL |     fn bar<'a, 'other: 'a>() -> impl Sized + 'a {}
-   |            +++
+ on line 4, column 11, add `'a, `
 help: consider introducing lifetime `'a` here
-   |
-LL | trait Foo<'a> {
-   |          ++++
+ on line 3, column 9, add `<'a>`
 
 error: aborting due to 2 previous errors
 

@@ -1,18 +1,10 @@
-error[E0308]: mismatched types
-  --> $DIR/attribute-spans-preserved.rs:7:23
-   |
-LL | #[ foo ( let y: u32 = "z"; ) ]
-   |                 ---   ^^^ expected `u32`, found `&str`
-   |                 |
-   |                 expected due to this
+error E0308: mismatched types
+ at $DIR/attribute-spans-preserved.rs:7:23: expected `u32`, found `&str`
+  on line 7, column 17: expected due to this
 
-error[E0308]: mismatched types
-  --> $DIR/attribute-spans-preserved.rs:8:23
-   |
-LL | #[ bar { let x: u32 = "y"; } ]
-   |                 ---   ^^^ expected `u32`, found `&str`
-   |                 |
-   |                 expected due to this
+error E0308: mismatched types
+ at $DIR/attribute-spans-preserved.rs:8:23: expected `u32`, found `&str`
+  on line 8, column 17: expected due to this
 
 error: aborting due to 2 previous errors
 

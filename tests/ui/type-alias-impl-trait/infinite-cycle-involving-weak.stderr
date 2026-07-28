@@ -1,8 +1,5 @@
-error[E0720]: cannot resolve opaque type
-  --> $DIR/infinite-cycle-involving-weak.rs:6:13
-   |
-LL | fn foo() -> T {
-   |             ^
+error E0720: cannot resolve opaque type
+ at $DIR/infinite-cycle-involving-weak.rs:6:13
 
 error: aborting due to 1 previous error
 

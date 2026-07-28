@@ -1,8 +1,5 @@
-error[E0282]: type annotations needed
-  --> $DIR/ambiguity-in-closure-arg.rs:6:44
-   |
-LL |     unsafe { std::mem::transmute::<_, ()>(|o_b: Unconstrained<_>| {}) };
-   |                                            ^^^^^^^^^^^^^^^^^^^^^ cannot infer type
+error E0282: type annotations needed
+ at $DIR/ambiguity-in-closure-arg.rs:6:44: cannot infer type
 
 error: aborting due to 1 previous error
 

@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `Foo` for type `u8`
-  --> $DIR/specialization-feature-gate-overlap.rs:13:1
-   |
-LL | impl<T> Foo for T {
-   | ----------------- first implementation here
-...
-LL | impl Foo for u8 {
-   | ^^^^^^^^^^^^^^^ conflicting implementation for `u8`
+error E0119: conflicting implementations of trait `Foo` for type `u8`
+ at $DIR/specialization-feature-gate-overlap.rs:13:1: conflicting implementation for `u8`
+  on line 9: first implementation here
 
 error: aborting due to 1 previous error
 

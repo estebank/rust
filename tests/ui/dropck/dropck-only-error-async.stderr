@@ -1,14 +1,8 @@
-error[E0277]: the trait bound `User: AuthUser` is not satisfied
-  --> $DIR/dropck-only-error-async.rs:28:5
-   |
-LL |     auth: AuthSession<User::AuthnBackend>,
-   |     ^^^^ the trait `AuthUser` is not implemented for `User`
+error E0277: the trait bound `User: AuthUser` is not satisfied
+ at $DIR/dropck-only-error-async.rs:28:5: the trait `AuthUser` is not implemented for `User`
 
-error[E0277]: the trait bound `User: AuthUser` is not satisfied
-  --> $DIR/dropck-only-error-async.rs:28:5
-   |
-LL |     auth: AuthSession<User::AuthnBackend>,
-   |     ^^^^ the trait `AuthUser` is not implemented for `User`
+error E0277: the trait bound `User: AuthUser` is not satisfied
+ at $DIR/dropck-only-error-async.rs:28:5: the trait `AuthUser` is not implemented for `User`
 
 error: aborting due to 2 previous errors
 

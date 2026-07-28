@@ -1,36 +1,18 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/sugg-mut-for-binding-issue-137486.rs:9:18
-   |
-LL |     ref_s = &mut String::from("world");
-   |                  ^^^^^^^^^^^^^^^^^^^^^- temporary value is freed at the end of this statement
-   |                  |
-   |                  creates a temporary value which is freed while still in use
-LL |
-LL |     print!("r1 = {}", ref_s);
-   |                       ----- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/sugg-mut-for-binding-issue-137486.rs:9:18: creates a temporary value which is freed while still in use
+  on line 9, column 39: temporary value is freed at the end of this statement
+  on line 11, column 23: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let mut binding = String::from("world");
-LL ~     ref_s = &mut binding;
-   |
+ on line 9, add `let mut binding = String::from("world");
+    `
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/sugg-mut-for-binding-issue-137486.rs:18:18
-   |
-LL |     ref_s = &mut Pin::new(&mut val2);
-   |                  ^^^^^^^^^^^^^^^^^^^- temporary value is freed at the end of this statement
-   |                  |
-   |                  creates a temporary value which is freed while still in use
-LL |
-LL |     print!("r1 = {}", ref_s);
-   |                       ----- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/sugg-mut-for-binding-issue-137486.rs:18:18: creates a temporary value which is freed while still in use
+  on line 18, column 37: temporary value is freed at the end of this statement
+  on line 20, column 23: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let mut binding = Pin::new(&mut val2);
-LL ~     ref_s = &mut binding;
-   |
+ on line 18, add `let mut binding = Pin::new(&mut val2);
+    `
 
 error: aborting due to 2 previous errors
 

@@ -1,14 +1,8 @@
-error[E0507]: cannot move out of `s` which is behind a shared reference
-  --> $DIR/access-mode-in-closures.rs:8:15
-   |
-LL |         match *s { S(v) => v }
-   |               ^^     - data moved here because `v` has type `Vec<isize>`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of `s` which is behind a shared reference
+ at $DIR/access-mode-in-closures.rs:8:15
+  on line 8, column 22: data moved here because `v` has type `Vec<isize>`, which does not implement the `Copy` trait
 help: consider removing the dereference here
-   |
-LL -         match *s { S(v) => v }
-LL +         match s { S(v) => v }
-   |
+ on line 8, column 14
 
 error: aborting due to 1 previous error
 

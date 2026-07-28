@@ -1,60 +1,28 @@
-error[E0107]: associated type takes 1 lifetime argument but 0 lifetime arguments were supplied
-  --> $DIR/issue-85347.rs:3:42
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-   |                                          ^^^ expected 1 lifetime argument
-   |
+error E0107: associated type takes 1 lifetime argument but 0 lifetime arguments were supplied
+ at $DIR/issue-85347.rs:3:42: expected 1 lifetime argument
 note: associated type defined here, with 1 lifetime parameter: `'a`
-  --> $DIR/issue-85347.rs:3:10
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-   |          ^^^ --
+ at $DIR/issue-85347.rs:3:10
 help: add missing lifetime argument
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<'a, Target = Self>>;
-   |                                              +++
+ on line 3, column 45, add `'a, `
 
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-85347.rs:3:46
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-   |                                              ^^^^^^^^^^^^^ associated item constraint not allowed here
-   |
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-85347.rs:3:46: associated item constraint not allowed here
 help: consider removing this associated item binding
-   |
-LL -     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-LL +     type Bar<'a>: Deref<Target = <Self>::Bar>;
-   |
+ on line 3, column 44
 
-error[E0107]: associated type takes 1 lifetime argument but 0 lifetime arguments were supplied
-  --> $DIR/issue-85347.rs:3:42
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-   |                                          ^^^ expected 1 lifetime argument
-   |
+error E0107: associated type takes 1 lifetime argument but 0 lifetime arguments were supplied
+ at $DIR/issue-85347.rs:3:42: expected 1 lifetime argument
 note: associated type defined here, with 1 lifetime parameter: `'a`
-  --> $DIR/issue-85347.rs:3:10
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-   |          ^^^ --
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/issue-85347.rs:3:10
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: add missing lifetime argument
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<'a, Target = Self>>;
-   |                                              +++
+ on line 3, column 45, add `'a, `
 
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-85347.rs:3:46
-   |
-LL |     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-   |                                              ^^^^^^^^^^^^^ associated item constraint not allowed here
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-85347.rs:3:46: associated item constraint not allowed here
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: consider removing this associated item binding
-   |
-LL -     type Bar<'a>: Deref<Target = <Self>::Bar<Target = Self>>;
-LL +     type Bar<'a>: Deref<Target = <Self>::Bar>;
-   |
+ on line 3, column 44
 
 error: aborting due to 4 previous errors
 

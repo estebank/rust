@@ -1,15 +1,8 @@
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/check_place_is_initialized.rs:10:15
-   |
-LL |     let x: Void;
-   |         - binding declared here but left uninitialized
-LL |     match x { ! }
-   |               ^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/check_place_is_initialized.rs:10:15: `x` used here but it isn't initialized
+  on line 9, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: Void = /* value */;
-   |                 +++++++++++++
+ on line 9, column 15, add ` = /* value */`
 
 error: aborting due to 1 previous error
 

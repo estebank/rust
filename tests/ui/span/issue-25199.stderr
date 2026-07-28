@@ -1,16 +1,8 @@
-error[E0597]: `container` does not live long enough
-  --> $DIR/issue-25199.rs:71:27
-   |
-LL |     let container = Container::new();
-   |         --------- binding `container` declared here
-LL |     let test = Test{test: &container};
-   |                           ^^^^^^^^^^ borrowed value does not live long enough
-...
-LL | }
-   | -
-   | |
-   | `container` dropped here while still borrowed
-   | borrow might be used here, when `container` is dropped and runs the destructor for type `Container<'_>`
+error E0597: `container` does not live long enough
+ at $DIR/issue-25199.rs:71:27: borrowed value does not live long enough
+  on line 70, column 9: binding `container` declared here
+  on line 75: `container` dropped here while still borrowed
+  on line 75: borrow might be used here, when `container` is dropped and runs the destructor for type `Container<'_>`
 
 error: aborting due to 1 previous error
 

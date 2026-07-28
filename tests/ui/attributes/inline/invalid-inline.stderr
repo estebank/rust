@@ -1,42 +1,24 @@
-error[E0805]: malformed `inline` attribute input
-  --> $DIR/invalid-inline.rs:3:3
-   |
-LL | #[inline(please,no)]
-   |   ^^^^^^-----------
-   |         |
-   |         expected a single argument here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
+error E0805: malformed `inline` attribute input
+ at $DIR/invalid-inline.rs:3:3
+  on line 3, column 9: expected a single argument here
+note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[inline(please,no)]
-LL + #[inline]
-   |
-LL - #[inline(please,no)]
-LL + #[inline(always)]
-   |
-LL - #[inline(please,no)]
-LL + #[inline(never)]
-   |
+ on line 3, column 2, replace with one of
+  inline
+  inline(always)
+  inline(never)
 
-error[E0805]: malformed `inline` attribute input
-  --> $DIR/invalid-inline.rs:7:3
-   |
-LL | #[inline()]
-   |   ^^^^^^--
-   |         |
-   |         expected an argument here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
+
+error E0805: malformed `inline` attribute input
+ at $DIR/invalid-inline.rs:7:3
+  on line 7, column 9: expected an argument here
+note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[inline()]
-LL + #[inline]
-   |
-LL | #[inline(always)]
-   |          ++++++
-LL | #[inline(never)]
-   |          +++++
+ on line 7, column 2, replace with one of
+  inline
+  inline(always)
+  inline(never)
+
 
 error: aborting due to 2 previous errors
 

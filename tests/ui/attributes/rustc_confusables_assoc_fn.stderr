@@ -1,32 +1,14 @@
-error[E0599]: no associated function or constant named `bar` found for struct `S` in the current scope
-  --> $DIR/rustc_confusables_assoc_fn.rs:14:8
-   |
-LL | struct S;
-   | -------- associated function or constant `bar` not found for this struct
-...
-LL |     S::bar();
-   |        ^^^ associated function or constant not found in `S`
-   |
+error E0599: no associated function or constant named `bar` found for struct `S` in the current scope
+ at $DIR/rustc_confusables_assoc_fn.rs:14:8: associated function or constant not found in `S`
+  on line 3: associated function or constant `bar` not found for this struct
 help: you might have meant to use `foo`
-   |
-LL -     S::bar();
-LL +     S::foo();
-   |
+ on line 14, column 7, replace with `foo`
 
-error[E0599]: no method named `baz` found for struct `S` in the current scope
-  --> $DIR/rustc_confusables_assoc_fn.rs:19:7
-   |
-LL | struct S;
-   | -------- method `baz` not found for this struct
-...
-LL |     s.baz(10);
-   |       ^^^
-   |
+error E0599: no method named `baz` found for struct `S` in the current scope
+ at $DIR/rustc_confusables_assoc_fn.rs:19:7
+  on line 3: method `baz` not found for this struct
 help: you might have meant to use `qux`
-   |
-LL -     s.baz(10);
-LL +     s.qux(10);
-   |
+ on line 19, column 6, replace with `qux`
 
 error: aborting due to 2 previous errors
 

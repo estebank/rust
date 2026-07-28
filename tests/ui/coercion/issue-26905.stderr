@@ -1,16 +1,7 @@
-error[E0375]: implementing `CoerceUnsized` does not allow multiple fields to be coerced
-  --> $DIR/issue-26905.rs:16:40
-   |
-LL | impl<T: ?Sized + Unsize<U>, U: ?Sized> CoerceUnsized<MyRc<U>> for MyRc<T>{ }
-   |                                        ^^^^^^^^^^^^^^^^^^^^^^
-   |
+error E0375: implementing `CoerceUnsized` does not allow multiple fields to be coerced
+ at $DIR/issue-26905.rs:16:40
 note: the trait `CoerceUnsized` may only be implemented when a single field is being coerced
-  --> $DIR/issue-26905.rs:12:5
-   |
-LL |     _ptr: *const T,
-   |     ^^^^^^^^^^^^^^
-LL |     _boo: NotPhantomData<T>,
-   |     ^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-26905.rs:12:5
 
 error: aborting due to 1 previous error
 

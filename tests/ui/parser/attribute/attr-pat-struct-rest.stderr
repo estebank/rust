@@ -1,10 +1,6 @@
 error: expected identifier, found `..`
-  --> $DIR/attr-pat-struct-rest.rs:6:27
-   |
-LL |     let S { #[cfg(false)] .. } = S {};
-   |         -                 ^^ expected identifier
-   |         |
-   |         while parsing the fields for this pattern
+ at $DIR/attr-pat-struct-rest.rs:6:27: expected identifier
+  on line 6, column 9: while parsing the fields for this pattern
 
 error: aborting due to 1 previous error
 

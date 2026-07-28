@@ -1,32 +1,17 @@
 error: homogeneous_aggregate: Ok(Homogeneous(Reg { kind: Float, size: Size(4 bytes) }))
-  --> $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:53:1
-   |
-LL | pub type Test1 = BaseCase;
-   | ^^^^^^^^^^^^^^
+ at $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:53:1
 
 error: homogeneous_aggregate: Ok(Homogeneous(Reg { kind: Float, size: Size(4 bytes) }))
-  --> $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:57:1
-   |
-LL | pub type Test2 = WithPhantomData;
-   | ^^^^^^^^^^^^^^
+ at $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:57:1
 
 error: homogeneous_aggregate: Ok(Homogeneous(Reg { kind: Float, size: Size(4 bytes) }))
-  --> $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:61:1
-   |
-LL | pub type Test3 = WithEmptyRustStruct;
-   | ^^^^^^^^^^^^^^
+ at $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:61:1
 
 error: homogeneous_aggregate: Ok(Homogeneous(Reg { kind: Float, size: Size(4 bytes) }))
-  --> $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:65:1
-   |
-LL | pub type Test4 = WithTransitivelyEmptyRustStruct;
-   | ^^^^^^^^^^^^^^
+ at $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:65:1
 
 error: homogeneous_aggregate: Ok(Homogeneous(Reg { kind: Float, size: Size(4 bytes) }))
-  --> $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:69:1
-   |
-LL | pub type Test5 = WithEmptyRustEnum;
-   | ^^^^^^^^^^^^^^
+ at $DIR/homogeneous-aggr-zero-sized-repr-rust.rs:69:1
 
 error: aborting due to 5 previous errors
 

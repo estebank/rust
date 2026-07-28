@@ -1,22 +1,11 @@
-error[E0106]: missing lifetime specifier
-  --> $DIR/ice-unsized-struct-const-eval-123154.rs:4:16
-   |
-LL |     pub data: [&usize]
-   |                ^ expected named lifetime parameter
-   |
+error E0106: missing lifetime specifier
+ at $DIR/ice-unsized-struct-const-eval-123154.rs:4:16: expected named lifetime parameter
 help: consider introducing a named lifetime parameter
-   |
-LL ~ struct AA<'a> {
-LL ~     pub data: [&'a usize]
-   |
+ on line 3, column 9, add `<'a>`
 
-error[E0308]: mismatched types
-  --> $DIR/ice-unsized-struct-const-eval-123154.rs:9:23
-   |
-LL |     const fn new() -> Self { }
-   |              ---      ^^^^ expected `AA`, found `()`
-   |              |
-   |              implicitly returns `()` as its body has no tail or `return` expression
+error E0308: mismatched types
+ at $DIR/ice-unsized-struct-const-eval-123154.rs:9:23: expected `AA`, found `()`
+  on line 9, column 14: implicitly returns `()` as its body has no tail or `return` expression
 
 error: aborting due to 2 previous errors
 

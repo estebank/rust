@@ -1,101 +1,53 @@
-error[E0594]: cannot assign to `x`, as it is a captured variable in a `Fn` closure
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:29:21
-   |
-LL |     fn assoc_func(&self, _f: impl Fn()) -> usize {
-   |                              --------- change this to accept `FnMut` instead of `Fn`
-...
-LL |     let mut x = ();
-   |         ----- `x` declared here, outside the closure
-LL |     s.assoc_func(|| x = ());
-   |       --------------^^^^^^-
-   |       |          |  |
-   |       |          |  cannot assign
-   |       |          in this closure
-   |       expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `x`, as it is a captured variable in a `Fn` closure
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:29:21: cannot assign
+  on line 18, column 30: change this to accept `FnMut` instead of `Fn`
+  on line 28, column 9: `x` declared here, outside the closure
+  on line 29, column 7: expects `Fn` instead of `FnMut`
+  on line 29, column 18: in this closure
 
-error[E0594]: cannot assign to `x`, as it is a captured variable in a `Fn` closure
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:31:13
-   |
-LL | fn func(_f: impl Fn()) -> usize {
-   |             --------- change this to accept `FnMut` instead of `Fn`
-...
-LL |     let mut x = ();
-   |         ----- `x` declared here, outside the closure
-...
-LL |     func(|| x = ())
-   |     ---- -- ^^^^^^ cannot assign
-   |     |    |
-   |     |    in this closure
-   |     expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `x`, as it is a captured variable in a `Fn` closure
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:31:13: cannot assign
+  on line 23, column 13: change this to accept `FnMut` instead of `Fn`
+  on line 28, column 9: `x` declared here, outside the closure
+  on line 31: expects `Fn` instead of `FnMut`
+  on line 31, column 10: in this closure
 
 error: lifetime may not live long enough
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:46:18
-   |
-LL |         take(|_| to_fn(|_| self.counter += 1));
-   |              --- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'2`
-   |              | |
-   |              | return type of closure `aux::Map<{closure@...}>` contains a lifetime `'2`
-   |              lifetime `'1` represents this closure's body
-   |
-   = note: closure implements `Fn`, so references to captured variables can't escape the closure
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:46:18: returning this value requires that `'1` must outlive `'2`
+  on line 46, column 14: lifetime `'1` represents this closure's body
+  on line 46, column 16: return type of closure `aux::Map<{closure@...}>` contains a lifetime `'2`
+note: closure implements `Fn`, so references to captured variables can't escape the closure
 
-error[E0596]: cannot borrow `self` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:46:24
-   |
-LL |         take(|_| to_fn(|_| self.counter += 1));
-   |         ---- ---       ^^^ ------------ mutable borrow occurs due to use of `self` in closure
-   |         |    |         |
-   |         |    |         cannot borrow as mutable
-   |         |    in this closure
-   |         expects `Fn` instead of `FnMut`
-...
-LL | fn take<F, U>(_: F)
-   |                  - change this to accept `FnMut` instead of `Fn`
+error E0596: cannot borrow `self` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:46:24: cannot borrow as mutable
+  on line 46: expects `Fn` instead of `FnMut`
+  on line 46, column 14: in this closure
+  on line 46, column 28: mutable borrow occurs due to use of `self` in closure
+  on line 62, column 18: change this to accept `FnMut` instead of `Fn`
 
-error[E0594]: cannot assign to `self.counter`, as `Fn` closures cannot mutate their captured variables
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:46:28
-   |
-LL |         take(|_| to_fn(|_| self.counter += 1));
-   |                  ----- --- ^^^^^^^^^^^^^^^^^ cannot assign
-   |                  |     |
-   |                  |     in this closure
-   |                  expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `self.counter`, as `Fn` closures cannot mutate their captured variables
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:46:28: cannot assign
+  on line 46, column 18: expects `Fn` instead of `FnMut`
+  on line 46, column 24: in this closure
 
 error: lifetime may not live long enough
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:54:24
-   |
-LL |         P.flat_map(|_| P.map(|_| self.counter += 1));
-   |                    --- ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ returning this value requires that `'1` must outlive `'2`
-   |                    | |
-   |                    | return type of closure `aux::Map<{closure@...}>` contains a lifetime `'2`
-   |                    lifetime `'1` represents this closure's body
-   |
-   = note: closure implements `Fn`, so references to captured variables can't escape the closure
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:54:24: returning this value requires that `'1` must outlive `'2`
+  on line 54, column 20: lifetime `'1` represents this closure's body
+  on line 54, column 22: return type of closure `aux::Map<{closure@...}>` contains a lifetime `'2`
+note: closure implements `Fn`, so references to captured variables can't escape the closure
 help: consider adding 'move' keyword before the nested closure
-   |
-LL |         P.flat_map(|_| P.map(move |_| self.counter += 1));
-   |                              ++++
+ on line 54, column 29, add `move `
 
-error[E0596]: cannot borrow `self` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:54:30
-   |
-LL |         P.flat_map(|_| P.map(|_| self.counter += 1));
-   |           -------------------^^^--------------------
-   |           |        |         |   |
-   |           |        |         |   mutable borrow occurs due to use of `self` in closure
-   |           |        |         cannot borrow as mutable
-   |           |        in this closure
-   |           expects `Fn` instead of `FnMut`
+error E0596: cannot borrow `self` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:54:30: cannot borrow as mutable
+  on line 54, column 11: expects `Fn` instead of `FnMut`
+  on line 54, column 20: in this closure
+  on line 54, column 34: mutable borrow occurs due to use of `self` in closure
 
-error[E0594]: cannot assign to `self.counter`, as `Fn` closures cannot mutate their captured variables
-  --> $DIR/wrong-closure-arg-suggestion-125325.rs:54:34
-   |
-LL |         P.flat_map(|_| P.map(|_| self.counter += 1));
-   |                          --------^^^^^^^^^^^^^^^^^-
-   |                          |   |   |
-   |                          |   |   cannot assign
-   |                          |   in this closure
-   |                          expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `self.counter`, as `Fn` closures cannot mutate their captured variables
+ at $DIR/wrong-closure-arg-suggestion-125325.rs:54:34: cannot assign
+  on line 54, column 26: expects `Fn` instead of `FnMut`
+  on line 54, column 30: in this closure
 
 error: aborting due to 8 previous errors
 

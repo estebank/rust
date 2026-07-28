@@ -1,18 +1,10 @@
-error[E0390]: cannot define inherent `impl` for primitive types
-  --> $DIR/E0390.rs:5:1
-   |
-LL | impl *mut Foo {}
-   | ^^^^^^^^^^^^^
-   |
-   = help: consider using an extension trait instead
+error E0390: cannot define inherent `impl` for primitive types
+ at $DIR/E0390.rs:5:1
+help: consider using an extension trait instead
 
-error[E0390]: cannot define inherent `impl` for primitive types
-  --> $DIR/E0390.rs:7:1
-   |
-LL | impl fn(Foo) {}
-   | ^^^^^^^^^^^^
-   |
-   = help: consider using an extension trait instead
+error E0390: cannot define inherent `impl` for primitive types
+ at $DIR/E0390.rs:7:1
+help: consider using an extension trait instead
 
 error: aborting due to 2 previous errors
 

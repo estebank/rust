@@ -1,77 +1,34 @@
-error[E0502]: cannot borrow `*list` as mutable because it is also borrowed as immutable
-  --> $DIR/clone-on-ref.rs:7:5
-   |
-LL |     for v in list.iter() {
-   |              ---- immutable borrow occurs here
-LL |         cloned_items.push(v.clone())
-   |                             ------- this call doesn't do anything, the result is still `&T` because `T` doesn't implement `Clone`
-LL |     }
-LL |     list.push(T::default());
-   |     ^^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
-LL |
-LL |     drop(cloned_items);
-   |          ------------ immutable borrow later used here
-   |
+error E0502: cannot borrow `*list` as mutable because it is also borrowed as immutable
+ at $DIR/clone-on-ref.rs:7:5: mutable borrow occurs here
+  on line 4, column 14: immutable borrow occurs here
+  on line 5, column 29: this call doesn't do anything, the result is still `&T` because `T` doesn't implement `Clone`
+  on line 9, column 10: immutable borrow later used here
 help: consider further restricting type parameter `T` with trait `Clone`
-   |
-LL | fn foo<T: Default + Clone>(list: &mut Vec<T>) {
-   |                   +++++++
+ on line 2, column 17, add ` + Clone`
 
-error[E0505]: cannot move out of `x` because it is borrowed
-  --> $DIR/clone-on-ref.rs:14:10
-   |
-LL | fn bar<T: std::fmt::Display>(x: T) {
-   |                              - binding `x` declared here
-LL |     let a = &x;
-   |             -- borrow of `x` occurs here
-LL |     let b = a.clone();
-   |               ------- this call doesn't do anything, the result is still `&T` because `T` doesn't implement `Clone`
-LL |     drop(x);
-   |          ^ move out of `x` occurs here
-LL |
-LL |     println!("{b}");
-   |                - borrow later used here
-   |
+error E0505: cannot move out of `x` because it is borrowed
+ at $DIR/clone-on-ref.rs:14:10: move out of `x` occurs here
+  on line 11, column 30: binding `x` declared here
+  on line 12, column 13: borrow of `x` occurs here
+  on line 13, column 15: this call doesn't do anything, the result is still `&T` because `T` doesn't implement `Clone`
+  on line 16, column 16: borrow later used here
 help: if `T` implemented `Clone`, you could clone the value
-  --> $DIR/clone-on-ref.rs:11:8
-   |
-LL | fn bar<T: std::fmt::Display>(x: T) {
-   |        ^ consider constraining this type parameter with `Clone`
-LL |     let a = &x;
-   |              - you could clone this value
+ at $DIR/clone-on-ref.rs:11:8: consider constraining this type parameter with `Clone`
+  on line 12, column 14: you could clone this value
 help: consider further restricting type parameter `T` with trait `Clone`
-   |
-LL | fn bar<T: std::fmt::Display + Clone>(x: T) {
-   |                             +++++++
+ on line 11, column 27, add ` + Clone`
 
-error[E0505]: cannot move out of `x` because it is borrowed
-  --> $DIR/clone-on-ref.rs:23:10
-   |
-LL | fn qux(x: A) {
-   |        - binding `x` declared here
-LL |     let a = &x;
-   |             -- borrow of `x` occurs here
-LL |     let b = a.clone();
-   |               ------- this call doesn't do anything, the result is still `&A` because `A` doesn't implement `Clone`
-LL |     drop(x);
-   |          ^ move out of `x` occurs here
-LL |
-LL |     println!("{b:?}");
-   |                - borrow later used here
-   |
+error E0505: cannot move out of `x` because it is borrowed
+ at $DIR/clone-on-ref.rs:23:10: move out of `x` occurs here
+  on line 20, column 8: binding `x` declared here
+  on line 21, column 13: borrow of `x` occurs here
+  on line 22, column 15: this call doesn't do anything, the result is still `&A` because `A` doesn't implement `Clone`
+  on line 25, column 16: borrow later used here
 note: if `A` implemented `Clone`, you could clone the value
-  --> $DIR/clone-on-ref.rs:19:1
-   |
-LL | struct A;
-   | ^^^^^^^^ consider implementing `Clone` for this type
-LL | fn qux(x: A) {
-LL |     let a = &x;
-   |              - you could clone this value
+ at $DIR/clone-on-ref.rs:19:1: consider implementing `Clone` for this type
+  on line 21, column 14: you could clone this value
 help: consider annotating `A` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct A;
-   |
+ on line 19, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 3 previous errors
 

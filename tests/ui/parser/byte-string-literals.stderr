@@ -1,60 +1,28 @@
 error: unknown byte escape: `f`
-  --> $DIR/byte-string-literals.rs:1:32
-   |
-LL | static FOO: &'static [u8] = b"\f";
-   |                                ^ unknown byte escape
-   |
-   = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
+ at $DIR/byte-string-literals.rs:1:32: unknown byte escape
+help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
 help: if you meant to write a form feed, use a hex escape
-   |
-LL - static FOO: &'static [u8] = b"\f";
-LL + static FOO: &'static [u8] = b"\x0C";
-   |
+ on line 1, column 31, replace with `x0C`
 
 error: unknown byte escape: `f`
-  --> $DIR/byte-string-literals.rs:4:8
-   |
-LL |     b"\f";
-   |        ^ unknown byte escape
-   |
-   = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
+ at $DIR/byte-string-literals.rs:4:8: unknown byte escape
+help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
 help: if you meant to write a form feed, use a hex escape
-   |
-LL -     b"\f";
-LL +     b"\x0C";
-   |
+ on line 4, column 7, replace with `x0C`
 
 error: invalid character in numeric character escape: `Z`
-  --> $DIR/byte-string-literals.rs:5:10
-   |
-LL |     b"\x0Z";
-   |          ^ invalid character in numeric character escape
+ at $DIR/byte-string-literals.rs:5:10: invalid character in numeric character escape
 
 error: non-ASCII character in byte string literal
-  --> $DIR/byte-string-literals.rs:6:7
-   |
-LL |     b"é";
-   |       ^ must be ASCII
-   |
+ at $DIR/byte-string-literals.rs:6:7: must be ASCII
 help: if you meant to use the unicode code point for 'é', use a \xHH escape
-   |
-LL -     b"é";
-LL +     b"\xE9";
-   |
+ on line 6, column 6, replace with `\xE9`
 
 error: non-ASCII character in raw byte string literal
-  --> $DIR/byte-string-literals.rs:7:10
-   |
-LL |     br##"é"##;
-   |          ^ must be ASCII
+ at $DIR/byte-string-literals.rs:7:10: must be ASCII
 
-error[E0766]: unterminated double quote byte string
-  --> $DIR/byte-string-literals.rs:8:6
-   |
-LL |       b"a
-   |  ______^
-LL | | }
-   | |__^
+error E0766: unterminated double quote byte string
+ at $DIR/byte-string-literals.rs:8:6 to 9:3
 
 error: aborting due to 6 previous errors
 

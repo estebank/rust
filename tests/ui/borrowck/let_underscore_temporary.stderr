@@ -1,68 +1,32 @@
-error[E0597]: `a` does not live long enough
-  --> $DIR/let_underscore_temporary.rs:11:9
-   |
-LL |         let a = 0;
-   |             - binding `a` declared here
-LL |         &a
-   |         ^^ borrowed value does not live long enough
-LL |
-LL |     };
-   |     - `a` dropped here while still borrowed
+error E0597: `a` does not live long enough
+ at $DIR/let_underscore_temporary.rs:11:9: borrowed value does not live long enough
+  on line 10, column 13: binding `a` declared here
+  on line 13: `a` dropped here while still borrowed
 
-error[E0597]: `a` does not live long enough
-  --> $DIR/let_underscore_temporary.rs:26:9
-   |
-LL |         let a = 0;
-   |             - binding `a` declared here
-LL |         &a
-   |         ^^ borrowed value does not live long enough
-LL |
-LL |     };
-   |     - `a` dropped here while still borrowed
+error E0597: `a` does not live long enough
+ at $DIR/let_underscore_temporary.rs:26:9: borrowed value does not live long enough
+  on line 25, column 13: binding `a` declared here
+  on line 28: `a` dropped here while still borrowed
 
-error[E0597]: `a` does not live long enough
-  --> $DIR/let_underscore_temporary.rs:39:9
-   |
-LL |         let a = 0;
-   |             - binding `a` declared here
-LL |         &a
-   |         ^^ borrowed value does not live long enough
-LL |
-LL |     };
-   |     - `a` dropped here while still borrowed
+error E0597: `a` does not live long enough
+ at $DIR/let_underscore_temporary.rs:39:9: borrowed value does not live long enough
+  on line 38, column 13: binding `a` declared here
+  on line 41: `a` dropped here while still borrowed
 
-error[E0597]: `a` does not live long enough
-  --> $DIR/let_underscore_temporary.rs:54:9
-   |
-LL |         let a = 0;
-   |             - binding `a` declared here
-LL |         &a
-   |         ^^ borrowed value does not live long enough
-LL |
-LL |     };
-   |     - `a` dropped here while still borrowed
+error E0597: `a` does not live long enough
+ at $DIR/let_underscore_temporary.rs:54:9: borrowed value does not live long enough
+  on line 53, column 13: binding `a` declared here
+  on line 56: `a` dropped here while still borrowed
 
-error[E0597]: `a` does not live long enough
-  --> $DIR/let_underscore_temporary.rs:71:9
-   |
-LL |         let a = 0;
-   |             - binding `a` declared here
-LL |         &a
-   |         ^^ borrowed value does not live long enough
-LL |
-LL |     } {
-   |     - `a` dropped here while still borrowed
+error E0597: `a` does not live long enough
+ at $DIR/let_underscore_temporary.rs:71:9: borrowed value does not live long enough
+  on line 70, column 13: binding `a` declared here
+  on line 73: `a` dropped here while still borrowed
 
-error[E0597]: `a` does not live long enough
-  --> $DIR/let_underscore_temporary.rs:92:9
-   |
-LL |         let a = 0;
-   |             - binding `a` declared here
-LL |         &a
-   |         ^^ borrowed value does not live long enough
-LL |
-LL |     } {
-   |     - `a` dropped here while still borrowed
+error E0597: `a` does not live long enough
+ at $DIR/let_underscore_temporary.rs:92:9: borrowed value does not live long enough
+  on line 91, column 13: binding `a` declared here
+  on line 94: `a` dropped here while still borrowed
 
 error: aborting due to 6 previous errors
 

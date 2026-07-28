@@ -1,8 +1,5 @@
-error[E0432]: unresolved import `ycrate`
-  --> $DIR/non-existent-3.rs:3:5
-   |
-LL | use ycrate;
-   |     ^^^^^^ no external crate `ycrate`
+error E0432: unresolved import `ycrate`
+ at $DIR/non-existent-3.rs:3:5: no external crate `ycrate`
 
 error: aborting due to 1 previous error
 

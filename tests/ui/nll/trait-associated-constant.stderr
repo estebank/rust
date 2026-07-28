@@ -1,21 +1,11 @@
-error[E0308]: const not compatible with trait
-  --> $DIR/trait-associated-constant.rs:21:5
-   |
-LL |     const AC: Option<&'c str> = None;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^ lifetime mismatch
-   |
-   = note: expected enum `Option<&'b _>`
-              found enum `Option<&'c _>`
+error E0308: const not compatible with trait
+ at $DIR/trait-associated-constant.rs:21:5: lifetime mismatch
+note: expected enum `Option<&'b _>`
+         found enum `Option<&'c _>`
 note: the lifetime `'c` as defined here...
-  --> $DIR/trait-associated-constant.rs:20:18
-   |
-LL | impl<'a: 'b, 'b, 'c> Anything<'a, 'b> for FailStruct {
-   |                  ^^
+ at $DIR/trait-associated-constant.rs:20:18
 note: ...does not necessarily outlive the lifetime `'b` as defined here
-  --> $DIR/trait-associated-constant.rs:20:14
-   |
-LL | impl<'a: 'b, 'b, 'c> Anything<'a, 'b> for FailStruct {
-   |              ^^
+ at $DIR/trait-associated-constant.rs:20:14
 
 error: aborting due to 1 previous error
 

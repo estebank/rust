@@ -1,23 +1,15 @@
-error[E0283]: type annotations needed
-  --> $DIR/issue-72616.rs:22:37
-   |
-LL |         if String::from("a") == "a".try_into().unwrap() {}
-   |                              --     ^^^^^^^^
-   |                              |
-   |                              type must be known at this point
-   |
-   = note: multiple `impl`s satisfying `String: PartialEq<_>` found in the following crates: `alloc`, `std`:
-           - impl PartialEq for String;
-           - impl PartialEq<ByteStr> for String;
-           - impl PartialEq<ByteString> for String;
-           - impl PartialEq<Path> for String;
-           - impl PartialEq<PathBuf> for String;
-           - impl PartialEq<str> for String;
+error E0283: type annotations needed
+ at $DIR/issue-72616.rs:22:37
+  on line 22, column 30: type must be known at this point
+note: multiple `impl`s satisfying `String: PartialEq<_>` found in the following crates: `alloc`, `std`:
+      - impl PartialEq for String;
+      - impl PartialEq<ByteStr> for String;
+      - impl PartialEq<ByteString> for String;
+      - impl PartialEq<Path> for String;
+      - impl PartialEq<PathBuf> for String;
+      - impl PartialEq<str> for String;
 help: try using a fully qualified path to specify the expected types
-   |
-LL -         if String::from("a") == "a".try_into().unwrap() {}
-LL +         if String::from("a") == <&str as TryInto<T>>::try_into("a").unwrap() {}
-   |
+ on line 22, column 32, add `<&str as TryInto<T>>::try_into(`
 
 error: aborting due to 1 previous error
 

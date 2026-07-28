@@ -1,8 +1,5 @@
-error[E0322]: explicit impls for the `DiscriminantKind` trait are not permitted
-  --> $DIR/forbidden-discriminant-kind-impl.rs:9:1
-   |
-LL | impl DiscriminantKind for NewType {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ impl of `DiscriminantKind` not allowed
+error E0322: explicit impls for the `DiscriminantKind` trait are not permitted
+ at $DIR/forbidden-discriminant-kind-impl.rs:9:1: impl of `DiscriminantKind` not allowed
 
 error: aborting due to 1 previous error
 

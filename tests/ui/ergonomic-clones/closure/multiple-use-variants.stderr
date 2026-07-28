@@ -1,12 +1,7 @@
-error[E0382]: use of moved value: `inner`
-  --> $DIR/multiple-use-variants.rs:32:19
-   |
-LL |         takes_val(inner);
-   |                   ----- value moved here
-LL |         takes_val(inner)
-   |                   ^^^^^ value used here after move
-   |
-   = note: move occurs because `inner` has type `Inner<'_, String>`, which does not implement the `Copy` trait
+error E0382: use of moved value: `inner`
+ at $DIR/multiple-use-variants.rs:32:19: value used here after move
+  on line 31, column 19: value moved here
+note: move occurs because `inner` has type `Inner<'_, String>`, which does not implement the `Copy` trait
 
 error: aborting due to 1 previous error
 

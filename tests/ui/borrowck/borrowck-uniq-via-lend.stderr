@@ -1,22 +1,12 @@
-error[E0502]: cannot borrow `*v` as immutable because it is also borrowed as mutable
-  --> $DIR/borrowck-uniq-via-lend.rs:36:12
-   |
-LL |     let w = &mut v;
-   |             ------ mutable borrow occurs here
-LL |     borrow(&*v);
-   |            ^^^ immutable borrow occurs here
-LL |     w.use_mut();
-   |     - mutable borrow later used here
+error E0502: cannot borrow `*v` as immutable because it is also borrowed as mutable
+ at $DIR/borrowck-uniq-via-lend.rs:36:12: immutable borrow occurs here
+  on line 35, column 13: mutable borrow occurs here
+  on line 37: mutable borrow later used here
 
-error[E0502]: cannot borrow `*v` as immutable because it is also borrowed as mutable
-  --> $DIR/borrowck-uniq-via-lend.rs:53:12
-   |
-LL |     x = &mut v;
-   |         ------ mutable borrow occurs here
-LL |     borrow(&*v);
-   |            ^^^ immutable borrow occurs here
-LL |     x.use_mut();
-   |     - mutable borrow later used here
+error E0502: cannot borrow `*v` as immutable because it is also borrowed as mutable
+ at $DIR/borrowck-uniq-via-lend.rs:53:12: immutable borrow occurs here
+  on line 52, column 9: mutable borrow occurs here
+  on line 54: mutable borrow later used here
 
 error: aborting due to 2 previous errors
 

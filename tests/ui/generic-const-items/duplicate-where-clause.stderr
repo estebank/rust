@@ -1,29 +1,13 @@
 error: cannot define duplicate `where` clauses on an item
-  --> $DIR/duplicate-where-clause.rs:9:9
-   |
-LL |         P: Copy
-   |         - previous `where` clause starts here
-LL |     where
-LL |         P: Eq;
-   |         ^
-   |
+ at $DIR/duplicate-where-clause.rs:9:9
+  on line 7: previous `where` clause starts here
 help: consider joining the two `where` clauses into one
-   |
-LL -         P: Copy
-LL -     where
-LL +         P: Copy,
-   |
+ on line 7, column 15, replace with `,`
 
 error: where clauses are not allowed before const item bodies
-  --> $DIR/duplicate-where-clause.rs:19:5
-   |
-LL |       const K: ()
-   |             - while parsing this const item
-LL | /     where
-LL | |         P: Eq
-   | |_____________^ unexpected where clause
-LL |       = ()
-   |         -- the item body
+ at $DIR/duplicate-where-clause.rs:19:5 to 20:14: unexpected where clause
+  on line 18, column 11: while parsing this const item
+  on line 21, column 7: the item body
 
 error: aborting due to 2 previous errors
 

@@ -1,11 +1,6 @@
-error[E0369]: binary operation `==` cannot be applied to type `(i32) is 0..=999999999`
-  --> $DIR/derives.rs:11:20
-   |
-LL | #[derive(Clone, Copy, PartialEq)]
-   |                       --------- in this derive macro expansion
-LL | #[repr(transparent)]
-LL | struct Nanoseconds(NanoI32);
-   |                    ^^^^^^^
+error E0369: binary operation `==` cannot be applied to type `(i32) is 0..=999999999`
+ at $DIR/derives.rs:11:20
+  on line 9, column 23: in this derive macro expansion
 
 error: aborting due to 1 previous error
 

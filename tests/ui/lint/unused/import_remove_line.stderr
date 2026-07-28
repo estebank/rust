@@ -1,32 +1,16 @@
 warning: unused imports: `Duration` and `Instant`
-  --> $DIR/import_remove_line.rs:7:17
-   |
-LL | use std::time::{Duration, Instant};
-   |                 ^^^^^^^^  ^^^^^^^
-   |
+ at $DIR/import_remove_line.rs:7:17
 note: the lint level is defined here
-  --> $DIR/import_remove_line.rs:5:9
-   |
-LL | #![warn(unused_imports)]
-   |         ^^^^^^^^^^^^^^
+ at $DIR/import_remove_line.rs:5:9
 
 warning: unused import: `std::time::SystemTime`
-  --> $DIR/import_remove_line.rs:9:5
-   |
-LL | use std::time::SystemTime;
-   |     ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/import_remove_line.rs:9:5
 
 warning: unused import: `std::time::SystemTimeError`
-  --> $DIR/import_remove_line.rs:11:5
-   |
-LL | use std::time::SystemTimeError;use std::time::TryFromFloatSecsError;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/import_remove_line.rs:11:5
 
 warning: unused import: `std::time::TryFromFloatSecsError`
-  --> $DIR/import_remove_line.rs:11:36
-   |
-LL | use std::time::SystemTimeError;use std::time::TryFromFloatSecsError;
-   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/import_remove_line.rs:11:36
 
 warning: 4 warnings emitted
 

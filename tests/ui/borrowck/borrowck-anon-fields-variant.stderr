@@ -1,38 +1,17 @@
-error[E0503]: cannot use `y` because it was mutably borrowed
-  --> $DIR/borrowck-anon-fields-variant.rs:16:19
-   |
-LL |       Foo::Y(ref mut a, _) => a,
-   |              --------- `y.0` is borrowed here
-...
-LL |     let b = match y {
-   |                   ^ use of borrowed `y.0`
-...
-LL |     *a += 1;
-   |     ------- borrow later used here
+error E0503: cannot use `y` because it was mutably borrowed
+ at $DIR/borrowck-anon-fields-variant.rs:16:19: use of borrowed `y.0`
+  on line 9, column 14: `y.0` is borrowed here
+  on line 22: borrow later used here
 
-error[E0503]: cannot use `y` because it was mutably borrowed
-  --> $DIR/borrowck-anon-fields-variant.rs:34:19
-   |
-LL |       Foo::Y(ref mut a, _) => a,
-   |              --------- `y.0` is borrowed here
-...
-LL |     let b = match y {
-   |                   ^ use of borrowed `y.0`
-...
-LL |     *a += 1;
-   |     ------- borrow later used here
+error E0503: cannot use `y` because it was mutably borrowed
+ at $DIR/borrowck-anon-fields-variant.rs:34:19: use of borrowed `y.0`
+  on line 30, column 14: `y.0` is borrowed here
+  on line 41: borrow later used here
 
-error[E0499]: cannot borrow `y.0` as mutable more than once at a time
-  --> $DIR/borrowck-anon-fields-variant.rs:36:14
-   |
-LL |       Foo::Y(ref mut a, _) => a,
-   |              --------- first mutable borrow occurs here
-...
-LL |       Foo::Y(ref mut b, _) => b,
-   |              ^^^^^^^^^ second mutable borrow occurs here
-...
-LL |     *a += 1;
-   |     ------- first borrow later used here
+error E0499: cannot borrow `y.0` as mutable more than once at a time
+ at $DIR/borrowck-anon-fields-variant.rs:36:14: second mutable borrow occurs here
+  on line 30, column 14: first mutable borrow occurs here
+  on line 41: first borrow later used here
 
 error: aborting due to 3 previous errors
 

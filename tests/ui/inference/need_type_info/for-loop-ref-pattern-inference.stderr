@@ -1,8 +1,5 @@
-error[E0282]: type annotations needed
-  --> $DIR/for-loop-ref-pattern-inference.rs:6:9
-   |
-LL |         i.clone();
-   |         ^ cannot infer type
+error E0282: type annotations needed
+ at $DIR/for-loop-ref-pattern-inference.rs:6:9: cannot infer type
 
 error: aborting due to 1 previous error
 

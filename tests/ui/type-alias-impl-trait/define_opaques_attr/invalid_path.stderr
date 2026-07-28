@@ -1,8 +1,5 @@
-error[E0425]: cannot find type alias or associated type with opaqaue types `Boom` in this scope
-  --> $DIR/invalid_path.rs:3:17
-   |
-LL | #[define_opaque(Boom)]
-   |                 ^^^^ not found in this scope
+error E0425: cannot find type alias or associated type with opaqaue types `Boom` in this scope
+ at $DIR/invalid_path.rs:3:17: not found in this scope
 
 error: aborting due to 1 previous error
 

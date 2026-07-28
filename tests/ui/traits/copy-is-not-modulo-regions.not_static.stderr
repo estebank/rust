@@ -1,21 +1,10 @@
-error[E0204]: the trait `Copy` cannot be implemented for this type
-  --> $DIR/copy-is-not-modulo-regions.rs:13:21
-   |
-LL | struct Bar<'lt>(Foo<'lt>);
-   |                 -------- this field does not implement `Copy`
-...
-LL | impl<'any> Copy for Bar<'any> {}
-   |                     ^^^^^^^^^
-   |
+error E0204: the trait `Copy` cannot be implemented for this type
+ at $DIR/copy-is-not-modulo-regions.rs:13:21
+  on line 10, column 17: this field does not implement `Copy`
 note: the `Copy` impl for `Foo<'any>` requires that `'any: 'static`
-  --> $DIR/copy-is-not-modulo-regions.rs:10:17
-   |
-LL | struct Bar<'lt>(Foo<'lt>);
-   |                 ^^^^^^^^
+ at $DIR/copy-is-not-modulo-regions.rs:10:17
 help: consider restricting type parameter `'any` with  `'static`
-   |
-LL | impl<'any: 'static> Copy for Bar<'any> {}
-   |          +++++++++
+ on line 13, column 9, add `: 'static`
 
 error: aborting due to 1 previous error
 

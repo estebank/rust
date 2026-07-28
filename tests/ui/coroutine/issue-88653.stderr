@@ -1,23 +1,9 @@
-error[E0631]: type mismatch in coroutine arguments
-  --> $DIR/issue-88653.rs:8:22
-   |
-LL |   fn foo(bar: bool) -> impl Coroutine<(bool,)> {
-   |                        ^^^^^^^^^^^^^^^^^^^^^^^ expected due to this
-...
-LL |       |bar| {
-   |       -----
-   |       |
-   |  _____found signature defined here
-   | |
-LL | |
-LL | |
-LL | |         if bar {
-...  |
-LL | |     }
-   | |_____- return type was inferred to be `{coroutine@$DIR/issue-88653.rs:15:5: 15:10}` here
-   |
-   = note: expected coroutine signature `fn((bool,)) -> _`
-              found coroutine signature `fn(bool) -> _`
+error E0631: type mismatch in coroutine arguments
+ at $DIR/issue-88653.rs:8:22: expected due to this
+  on line 15: found signature defined here
+  on line 15 to line 21: return type was inferred to be `{coroutine@$DIR/issue-88653.rs:15:5: 15:10}` here
+note: expected coroutine signature `fn((bool,)) -> _`
+         found coroutine signature `fn(bool) -> _`
 
 error: aborting due to 1 previous error
 

@@ -1,141 +1,61 @@
 error: `match` arm body without braces
-  --> $DIR/match-arm-without-braces.rs:26:27
-   |
-LL |         Some(Val::Foo) => 3;
-   |                        -- ^ this statement is not surrounded by a body
-   |                        |
-   |                        while parsing the `match` arm starting here
-   |
+ at $DIR/match-arm-without-braces.rs:26:27: this statement is not surrounded by a body
+  on line 26, column 24: while parsing the `match` arm starting here
 help: replace `;` with `,` to end a `match` arm expression
-   |
-LL -         Some(Val::Foo) => 3;
-LL +         Some(Val::Foo) => 3,
-   |
+ on line 26, column 27, replace with `,`
 
 error: `match` arm body without braces
-  --> $DIR/match-arm-without-braces.rs:31:11
-   |
-LL |           Some(Val::Foo) =>
-   |                          -- while parsing the `match` arm starting here
-LL | /           7;
-LL | |           8;
-   | |____________^ these statements are not surrounded by a body
-   |
+ at $DIR/match-arm-without-braces.rs:31:11 to 32:13: these statements are not surrounded by a body
+  on line 30, column 24: while parsing the `match` arm starting here
 help: surround the statements with a body
-   |
-LL ~           { 7;
-LL ~           8; }
-   |
+ on line 31, column 10, add `{ `
 
 error: `match` arm body without braces
-  --> $DIR/match-arm-without-braces.rs:37:11
-   |
-LL |           Some(Val::Foo) =>
-   |                          -- while parsing the `match` arm starting here
-LL | /           11;
-LL | |           12;
-   | |_____________^ these statements are not surrounded by a body
-   |
+ at $DIR/match-arm-without-braces.rs:37:11 to 38:14: these statements are not surrounded by a body
+  on line 36, column 24: while parsing the `match` arm starting here
 help: surround the statements with a body
-   |
-LL ~           { 11;
-LL ~           12; }
-   |
+ on line 37, column 10, add `{ `
 
 error: `match` arm body without braces
-  --> $DIR/match-arm-without-braces.rs:44:11
-   |
-LL |           Some(Val::Foo) =>
-   |                          -- while parsing the `match` arm starting here
-LL | /           14;
-LL | |           15;
-   | |_____________^ these statements are not surrounded by a body
-   |
+ at $DIR/match-arm-without-braces.rs:44:11 to 45:14: these statements are not surrounded by a body
+  on line 43, column 24: while parsing the `match` arm starting here
 help: surround the statements with a body
-   |
-LL ~           { 14;
-LL ~           15; }
-   |
+ on line 44, column 10, add `{ `
 
 error: expected `,` following `match` arm
-  --> $DIR/match-arm-without-braces.rs:48:29
-   |
-LL |         Some(Val::Foo) => 17
-   |                             ^
-   |
+ at $DIR/match-arm-without-braces.rs:48:29
 help: missing a comma here to end this `match` arm
-   |
-LL |         Some(Val::Foo) => 17,
-   |                             +
+ on line 48, column 28, add `,`
 
 error: `match` arm body without braces
-  --> $DIR/match-arm-without-braces.rs:53:11
-   |
-LL |           Some(Val::Foo) =>
-   |                          -- while parsing the `match` arm starting here
-LL | /           20;
-LL | |           21
-   | |____________^ these statements are not surrounded by a body
-   |
+ at $DIR/match-arm-without-braces.rs:53:11 to 54:13: these statements are not surrounded by a body
+  on line 52, column 24: while parsing the `match` arm starting here
 help: surround the statements with a body
-   |
-LL ~           { 20;
-LL ~           21 }
-   |
+ on line 53, column 10, add `{ `
 
 error: `match` arm body without braces
-  --> $DIR/match-arm-without-braces.rs:59:11
-   |
-LL |           Some(Val::Foo) =>
-   |                          -- while parsing the `match` arm starting here
-LL | /           24;
-LL | |           25
-   | |____________^ these statements are not surrounded by a body
-   |
+ at $DIR/match-arm-without-braces.rs:59:11 to 60:13: these statements are not surrounded by a body
+  on line 58, column 24: while parsing the `match` arm starting here
 help: surround the statements with a body
-   |
-LL ~           { 24;
-LL ~           25 }
-   |
+ on line 59, column 10, add `{ `
 
 error: `match` arm body without braces
-  --> $DIR/match-arm-without-braces.rs:66:11
-   |
-LL |           Some(Val::Foo) =>
-   |                          -- while parsing the `match` arm starting here
-LL | /           27;
-LL | |           28
-   | |____________^ these statements are not surrounded by a body
-   |
+ at $DIR/match-arm-without-braces.rs:66:11 to 67:13: these statements are not surrounded by a body
+  on line 65, column 24: while parsing the `match` arm starting here
 help: surround the statements with a body
-   |
-LL ~           { 27;
-LL ~           28 }
-   |
+ on line 66, column 10, add `{ `
 
 error: expected one of `,`, `.`, `?`, `}`, or an operator, found `;`
-  --> $DIR/match-arm-without-braces.rs:71:13
-   |
-LL |         Some(Val::Foo) =>
-   |                        -- while parsing the `match` arm starting here
-LL |           30;
-   |             ^ expected one of `,`, `.`, `?`, `}`, or an operator
+ at $DIR/match-arm-without-braces.rs:71:13: expected one of `,`, `.`, `?`, `}`, or an operator
+  on line 70, column 24: while parsing the `match` arm starting here
 
 error: expected one of `,`, `.`, `?`, `}`, or an operator, found `;`
-  --> $DIR/match-arm-without-braces.rs:77:13
-   |
-LL |         Some(Val::Foo) =>
-   |                        -- while parsing the `match` arm starting here
-LL |           34;
-   |             ^ expected one of `,`, `.`, `?`, `}`, or an operator
+ at $DIR/match-arm-without-braces.rs:77:13: expected one of `,`, `.`, `?`, `}`, or an operator
+  on line 76, column 24: while parsing the `match` arm starting here
 
 error: expected one of `,`, `.`, `?`, `}`, or an operator, found `;`
-  --> $DIR/match-arm-without-braces.rs:84:13
-   |
-LL |         Some(Val::Foo) =>
-   |                        -- while parsing the `match` arm starting here
-LL |           37;
-   |             ^ expected one of `,`, `.`, `?`, `}`, or an operator
+ at $DIR/match-arm-without-braces.rs:84:13: expected one of `,`, `.`, `?`, `}`, or an operator
+  on line 83, column 24: while parsing the `match` arm starting here
 
 error: aborting due to 11 previous errors
 

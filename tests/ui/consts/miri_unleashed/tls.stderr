@@ -1,27 +1,14 @@
-error[E0080]: cannot access thread local static `A`
-  --> $DIR/tls.rs:11:25
-   |
-LL |     unsafe { let _val = A; }
-   |                         ^ evaluation of `TEST_BAD` failed here
+error E0080: cannot access thread local static `A`
+ at $DIR/tls.rs:11:25: evaluation of `TEST_BAD` failed here
 
-error[E0080]: cannot access thread local static `A`
-  --> $DIR/tls.rs:19:26
-   |
-LL |     unsafe { let _val = &A; }
-   |                          ^ evaluation of `TEST_BAD_REF` failed here
+error E0080: cannot access thread local static `A`
+ at $DIR/tls.rs:19:26: evaluation of `TEST_BAD_REF` failed here
 
 warning: skipping const checks
-   |
 help: skipping check that does not even have a feature gate
-  --> $DIR/tls.rs:11:25
-   |
-LL |     unsafe { let _val = A; }
-   |                         ^
+ at $DIR/tls.rs:11:25
 help: skipping check that does not even have a feature gate
-  --> $DIR/tls.rs:19:26
-   |
-LL |     unsafe { let _val = &A; }
-   |                          ^
+ at $DIR/tls.rs:19:26
 
 error: aborting due to 2 previous errors; 1 warning emitted
 

@@ -1,14 +1,7 @@
-error[E0599]: no method named `b` found for reference `&Self` in the current scope
-  --> $DIR/issue-117794.rs:5:14
-   |
-LL |         self.b(|| 0)
-   |              ^
-   |
+error E0599: no method named `b` found for reference `&Self` in the current scope
+ at $DIR/issue-117794.rs:5:14
 help: there is a method `a` with a similar name, but with different arguments
-  --> $DIR/issue-117794.rs:4:5
-   |
-LL |     fn a(&self) -> impl Foo {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-117794.rs:4:5
 
 error: aborting due to 1 previous error
 

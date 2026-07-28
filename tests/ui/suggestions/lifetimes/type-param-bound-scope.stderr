@@ -1,70 +1,32 @@
-error[E0309]: the parameter type `Self` may not live long enough
-  --> $DIR/type-param-bound-scope.rs:12:9
-   |
-LL | trait Trait1<'a>: Sized {
-   |              -- the parameter type `Self` must be valid for the lifetime `'a` as defined here...
-LL |     fn foo(self, lt: Inv<'a>) {
-LL |         check_bound(self, lt)
-   |         ^^^^^^^^^^^^^^^^^^^^^ ...so that the type `Self` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `Self` may not live long enough
+ at $DIR/type-param-bound-scope.rs:12:9: ...so that the type `Self` will meet its required lifetime bounds
+  on line 10, column 14: the parameter type `Self` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL | trait Trait1<'a>: Sized where Self: 'a {
-   |                         ++++++++++++++
+ on line 10, column 23, add ` where Self: 'a`
 
-error[E0309]: the parameter type `Self` may not live long enough
-  --> $DIR/type-param-bound-scope.rs:19:9
-   |
-LL |     fn foo<'a>(self, lt: Inv<'a>) {
-   |            -- the parameter type `Self` must be valid for the lifetime `'a` as defined here...
-LL |         check_bound(self, lt)
-   |         ^^^^^^^^^^^^^^^^^^^^^ ...so that the type `Self` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `Self` may not live long enough
+ at $DIR/type-param-bound-scope.rs:19:9: ...so that the type `Self` will meet its required lifetime bounds
+  on line 18, column 12: the parameter type `Self` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     fn foo<'a>(self, lt: Inv<'a>) where Self: 'a {
-   |                                   ++++++++++++++
+ on line 18, column 33, add ` where Self: 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/type-param-bound-scope.rs:26:9
-   |
-LL |     fn foo<'a>(arg: T, lt: Inv<'a>) {
-   |            -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-LL |         check_bound(arg, lt)
-   |         ^^^^^^^^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/type-param-bound-scope.rs:26:9: ...so that the type `T` will meet its required lifetime bounds
+  on line 25, column 12: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     fn foo<'a>(arg: T, lt: Inv<'a>) where T: 'a {
-   |                                     +++++++++++
+ on line 25, column 35, add ` where T: 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/type-param-bound-scope.rs:33:9
-   |
-LL | trait Trait4<'a> {
-   |              -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-LL |     fn foo<T>(arg: T, lt: Inv<'a>) {
-LL |         check_bound(arg, lt)
-   |         ^^^^^^^^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/type-param-bound-scope.rs:33:9: ...so that the type `T` will meet its required lifetime bounds
+  on line 31, column 14: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     fn foo<T: 'a>(arg: T, lt: Inv<'a>) {
-   |             ++++
+ on line 32, column 12, add `: 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/type-param-bound-scope.rs:43:9
-   |
-LL | impl<'a, T> Trait5<'a> for T {
-   |      -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-LL |     fn foo(self, lt: Inv<'a>) {
-LL |         check_bound(self, lt);
-   |         ^^^^^^^^^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/type-param-bound-scope.rs:43:9: ...so that the type `T` will meet its required lifetime bounds
+  on line 41, column 6: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL | impl<'a, T: 'a> Trait5<'a> for T {
-   |           ++++
+ on line 41, column 10, add `: 'a`
 
 error: aborting due to 5 previous errors
 

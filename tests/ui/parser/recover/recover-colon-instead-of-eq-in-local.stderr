@@ -1,24 +1,12 @@
 error: expected one of `!`, `+`, `->`, `::`, `;`, or `=`, found `.`
-  --> $DIR/recover-colon-instead-of-eq-in-local.rs:5:32
-   |
-LL |     let _: std::env::temp_dir().join(&self, push: Box<usize>);
-   |          -                     ^ expected one of `!`, `+`, `->`, `::`, `;`, or `=`
-   |          |
-   |          while parsing the type for `_`
+ at $DIR/recover-colon-instead-of-eq-in-local.rs:5:32: expected one of `!`, `+`, `->`, `::`, `;`, or `=`
+  on line 5, column 10: while parsing the type for `_`
 
 error: expected one of `!`, `+`, `->`, `::`, `;`, or `=`, found `.`
-  --> $DIR/recover-colon-instead-of-eq-in-local.rs:9:32
-   |
-LL |     let _: std::env::temp_dir().join("foo");
-   |          -                     ^ expected one of `!`, `+`, `->`, `::`, `;`, or `=`
-   |          |
-   |          while parsing the type for `_`
-   |
+ at $DIR/recover-colon-instead-of-eq-in-local.rs:9:32: expected one of `!`, `+`, `->`, `::`, `;`, or `=`
+  on line 9, column 10: while parsing the type for `_`
 help: use `=` if you meant to assign
-   |
-LL -     let _: std::env::temp_dir().join("foo");
-LL +     let _ = std::env::temp_dir().join("foo");
-   |
+ on line 9, column 9, replace with ` = `
 
 error: aborting due to 2 previous errors
 

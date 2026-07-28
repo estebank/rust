@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `Foo<i32>` for type `i32`
-  --> $DIR/coherence-projection-conflict.rs:11:1
-   |
-LL | impl Foo<i32> for i32 { }
-   | --------------------- first implementation here
-LL |
-LL | impl<A:Bar> Foo<A::Output> for A { }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `i32`
+error E0119: conflicting implementations of trait `Foo<i32>` for type `i32`
+ at $DIR/coherence-projection-conflict.rs:11:1: conflicting implementation for `i32`
+  on line 9: first implementation here
 
 error: aborting due to 1 previous error
 

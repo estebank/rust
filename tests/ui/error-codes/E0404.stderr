@@ -1,14 +1,8 @@
-error[E0404]: expected trait, found struct `Foo`
-  --> $DIR/E0404.rs:4:6
-   |
-LL | impl Foo for Bar {}
-   |      ^^^ not a trait
+error E0404: expected trait, found struct `Foo`
+ at $DIR/E0404.rs:4:6: not a trait
 
-error[E0404]: expected trait, found struct `Foo`
-  --> $DIR/E0404.rs:8:11
-   |
-LL | fn baz<T: Foo>(_: T) {}
-   |           ^^^ not a trait
+error E0404: expected trait, found struct `Foo`
+ at $DIR/E0404.rs:8:11: not a trait
 
 error: aborting due to 2 previous errors
 

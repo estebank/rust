@@ -1,8 +1,5 @@
-error[E0720]: cannot resolve opaque type
-  --> $DIR/issue-100075.rs:13:37
-   |
-LL | fn _g<T>(t: &'static T) -> &'static impl Marker {
-   |                                     ^^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/issue-100075.rs:13:37
 
 error: aborting due to 1 previous error
 

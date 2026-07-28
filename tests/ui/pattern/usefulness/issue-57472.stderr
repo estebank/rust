@@ -1,24 +1,12 @@
 error: unreachable pattern
-  --> $DIR/issue-57472.rs:15:13
-   |
-LL |             Punned { foo: [_], .. } => println!("foo"),
-   |             ----------------------- matches all the relevant values
-LL |             Punned { bar: [_], .. } => println!("bar"),
-   |             ^^^^^^^^^^^^^^^^^^^^^^^ no value can reach this
-   |
+ at $DIR/issue-57472.rs:15:13: no value can reach this
+  on line 14: matches all the relevant values
 note: the lint level is defined here
-  --> $DIR/issue-57472.rs:2:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-57472.rs:2:9
 
 error: unreachable pattern
-  --> $DIR/issue-57472.rs:32:17
-   |
-LL |                 Punned { foo: [_] } => println!("foo"),
-   |                 ------------------- matches all the relevant values
-LL |                 Punned { bar: [_] } => println!("bar"),
-   |                 ^^^^^^^^^^^^^^^^^^^ no value can reach this
+ at $DIR/issue-57472.rs:32:17: no value can reach this
+  on line 31: matches all the relevant values
 
 error: aborting due to 2 previous errors
 

@@ -1,43 +1,21 @@
-error[E0308]: mismatched types
-  --> $DIR/clone-on-unconstrained-borrowed-type-param.rs:3:5
-   |
-LL | fn wat<T>(t: &T) -> T {
-   |        -            - expected `T` because of return type
-   |        |
-   |        expected this type parameter
-LL |     t.clone()
-   |     ^^^^^^^^^ expected type parameter `T`, found `&T`
-   |
-   = note: expected type parameter `_`
-                   found reference `&_`
+error E0308: mismatched types
+ at $DIR/clone-on-unconstrained-borrowed-type-param.rs:3:5: expected type parameter `T`, found `&T`
+  on line 2, column 8: expected this type parameter
+  on line 2, column 21: expected `T` because of return type
+note: expected type parameter `_`
+              found reference `&_`
 note: `T` does not implement `Clone`, so `&T` was cloned instead
-  --> $DIR/clone-on-unconstrained-borrowed-type-param.rs:3:5
-   |
-LL |     t.clone()
-   |     ^
+ at $DIR/clone-on-unconstrained-borrowed-type-param.rs:3:5
 help: consider restricting type parameter `T` with trait `Clone`
-   |
-LL | fn wat<T: Clone>(t: &T) -> T {
-   |         +++++++
+ on line 2, column 8, add `: Clone`
 
-error[E0308]: mismatched types
-  --> $DIR/clone-on-unconstrained-borrowed-type-param.rs:9:5
-   |
-LL | fn wut(t: &Foo) -> Foo {
-   |                    --- expected `Foo` because of return type
-LL |     t.clone()
-   |     ^^^^^^^^^ expected `Foo`, found `&Foo`
-   |
+error E0308: mismatched types
+ at $DIR/clone-on-unconstrained-borrowed-type-param.rs:9:5: expected `Foo`, found `&Foo`
+  on line 8, column 20: expected `Foo` because of return type
 note: `Foo` does not implement `Clone`, so `&Foo` was cloned instead
-  --> $DIR/clone-on-unconstrained-borrowed-type-param.rs:9:5
-   |
-LL |     t.clone()
-   |     ^
+ at $DIR/clone-on-unconstrained-borrowed-type-param.rs:9:5
 help: consider annotating `Foo` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Foo;
-   |
+ on line 6, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 2 previous errors
 

@@ -1,45 +1,20 @@
 error: unreachable expression
-  --> $DIR/void-branch.rs:33:5
-   |
-LL |     (x, loop {})
-   |     ^^^^-------^
-   |     |   |
-   |     |   any code following this expression is unreachable
-   |     unreachable expression
-   |
+ at $DIR/void-branch.rs:33:5: unreachable expression
+  on line 33, column 9: any code following this expression is unreachable
 note: the lint level is defined here
-  --> $DIR/void-branch.rs:1:9
-   |
-LL | #![deny(unreachable_code)]
-   |         ^^^^^^^^^^^^^^^^
+ at $DIR/void-branch.rs:1:9
 
 error: unreachable expression
-  --> $DIR/void-branch.rs:10:13
-   |
-LL |             std::mem::uninitialized::<Void>();
-   |             --------------------------------- any code following this expression is unreachable
-LL |             println!();
-   |             ^^^^^^^^^^ unreachable expression
-   |
+ at $DIR/void-branch.rs:10:13: unreachable expression
+  on line 9: any code following this expression is unreachable
 note: this expression has type `Void`, which is uninhabited
-  --> $DIR/void-branch.rs:9:13
-   |
-LL |             std::mem::uninitialized::<Void>();
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/void-branch.rs:9:13
 
 error: unreachable expression
-  --> $DIR/void-branch.rs:25:9
-   |
-LL |         infallible();
-   |         ------------ any code following this expression is unreachable
-LL |         println!()
-   |         ^^^^^^^^^^ unreachable expression
-   |
+ at $DIR/void-branch.rs:25:9: unreachable expression
+  on line 24: any code following this expression is unreachable
 note: this expression has type `Infallible`, which is uninhabited
-  --> $DIR/void-branch.rs:24:9
-   |
-LL |         infallible();
-   |         ^^^^^^^^^^^^
+ at $DIR/void-branch.rs:24:9
 
 error: aborting due to 3 previous errors
 

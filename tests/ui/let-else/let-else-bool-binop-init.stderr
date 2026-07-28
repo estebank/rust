@@ -1,24 +1,12 @@
 error: a `&&` expression cannot be directly assigned in `let...else`
-  --> $DIR/let-else-bool-binop-init.rs:6:16
-   |
-LL |     let true = true && false else { return };
-   |                ^^^^^^^^^^^^^
-   |
+ at $DIR/let-else-bool-binop-init.rs:6:16
 help: wrap the expression in parentheses
-   |
-LL |     let true = (true && false) else { return };
-   |                +             +
+ on line 6, column 15, add `(`
 
 error: a `||` expression cannot be directly assigned in `let...else`
-  --> $DIR/let-else-bool-binop-init.rs:7:16
-   |
-LL |     let true = true || false else { return };
-   |                ^^^^^^^^^^^^^
-   |
+ at $DIR/let-else-bool-binop-init.rs:7:16
 help: wrap the expression in parentheses
-   |
-LL |     let true = (true || false) else { return };
-   |                +             +
+ on line 7, column 15, add `(`
 
 error: aborting due to 2 previous errors
 

@@ -1,90 +1,40 @@
 error: attributes `#[rustc_const_unstable]`, `#[rustc_const_stable]` and `#[rustc_const_stable_indirect]` require the function or method to be `const`
-  --> $DIR/rustc-const-stability-require-const.rs:7:1
-   |
-LL | pub fn foo() {}
-   | ^^^^^^^^^^^^
-   |
+ at $DIR/rustc-const-stability-require-const.rs:7:1
 help: make the function or method const
-  --> $DIR/rustc-const-stability-require-const.rs:7:1
-   |
-LL | pub fn foo() {}
-   | ^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:7:1
 
 error: attributes `#[rustc_const_unstable]`, `#[rustc_const_stable]` and `#[rustc_const_stable_indirect]` require the function or method to be `const`
-  --> $DIR/rustc-const-stability-require-const.rs:12:1
-   |
-LL | pub fn bar() {}
-   | ^^^^^^^^^^^^
-   |
+ at $DIR/rustc-const-stability-require-const.rs:12:1
 help: make the function or method const
-  --> $DIR/rustc-const-stability-require-const.rs:12:1
-   |
-LL | pub fn bar() {}
-   | ^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:12:1
 
 error: attributes `#[rustc_const_unstable]`, `#[rustc_const_stable]` and `#[rustc_const_stable_indirect]` require the function or method to be `const`
-  --> $DIR/rustc-const-stability-require-const.rs:32:1
-   |
-LL | pub extern "C" fn bar_c() {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/rustc-const-stability-require-const.rs:32:1
 help: make the function or method const
-  --> $DIR/rustc-const-stability-require-const.rs:32:1
-   |
-LL | pub extern "C" fn bar_c() {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:32:1
 
 error: attributes `#[rustc_const_unstable]`, `#[rustc_const_stable]` and `#[rustc_const_stable_indirect]` require the function or method to be `const`
-  --> $DIR/rustc-const-stability-require-const.rs:37:1
-   |
-LL | pub extern "C" fn foo_c() {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/rustc-const-stability-require-const.rs:37:1
 help: make the function or method const
-  --> $DIR/rustc-const-stability-require-const.rs:37:1
-   |
-LL | pub extern "C" fn foo_c() {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:37:1
 
 error: attribute `#[rustc_const_stable]` can only be applied to functions that are declared `#[stable]`
-  --> $DIR/rustc-const-stability-require-const.rs:52:1
-   |
-LL | #[rustc_const_stable(feature = "barfoo_const", since = "1.0.0")]
-   | ---------------------------------------------------------------- attribute specified here
-LL | const fn barfoo_unmarked() {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:52:1
+  on line 51: attribute specified here
 
 error: attribute `#[rustc_const_stable]` can only be applied to functions that are declared `#[stable]`
-  --> $DIR/rustc-const-stability-require-const.rs:57:1
-   |
-LL | #[rustc_const_stable(feature = "barfoo_const", since = "1.0.0")]
-   | ---------------------------------------------------------------- attribute specified here
-LL | pub const fn barfoo_unstable() {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:57:1
+  on line 56: attribute specified here
 
 error: attributes `#[rustc_const_unstable]`, `#[rustc_const_stable]` and `#[rustc_const_stable_indirect]` require the function or method to be `const`
-  --> $DIR/rustc-const-stability-require-const.rs:21:5
-   |
-LL |     pub fn salad(&self) -> &'static str { "mmmmmm" }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/rustc-const-stability-require-const.rs:21:5
 help: make the function or method const
-  --> $DIR/rustc-const-stability-require-const.rs:21:5
-   |
-LL |     pub fn salad(&self) -> &'static str { "mmmmmm" }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:21:5
 
 error: attributes `#[rustc_const_unstable]`, `#[rustc_const_stable]` and `#[rustc_const_stable_indirect]` require the function or method to be `const`
-  --> $DIR/rustc-const-stability-require-const.rs:26:5
-   |
-LL |     pub fn roasted(&self) -> &'static str { "mmmmmmmmmm" }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/rustc-const-stability-require-const.rs:26:5
 help: make the function or method const
-  --> $DIR/rustc-const-stability-require-const.rs:26:5
-   |
-LL |     pub fn roasted(&self) -> &'static str { "mmmmmmmmmm" }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/rustc-const-stability-require-const.rs:26:5
 
 error: aborting due to 8 previous errors
 

@@ -1,22 +1,11 @@
-error[E0493]: destructor of `Foo` cannot be evaluated at compile-time
-  --> $DIR/const-promoted-opaque.rs:32:26
-   |
-LL |     let _: &'static _ = &FOO;
-   |                          ^^^ the destructor for this type cannot be evaluated in constants
-LL |
-LL | };
-   | - value is dropped here
+error E0493: destructor of `Foo` cannot be evaluated at compile-time
+ at $DIR/const-promoted-opaque.rs:32:26: the destructor for this type cannot be evaluated in constants
+  on line 34: value is dropped here
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/const-promoted-opaque.rs:40:26
-   |
-LL |     let _: &'static _ = &FOO;
-   |            ----------    ^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-LL |
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/const-promoted-opaque.rs:40:26: creates a temporary value which is freed while still in use
+  on line 40, column 12: type annotation requires that borrow lasts for `'static`
+  on line 42: temporary value is freed at the end of this statement
 
 error: aborting due to 2 previous errors
 

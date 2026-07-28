@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `foo_two`
-  --> $DIR/specialization-trait-item-not-implemented.rs:18:1
-   |
-LL |     fn foo_two(&self) -> &'static str;
-   |     ---------------------------------- `foo_two` from trait
-...
-LL | impl Foo for MyStruct {}
-   | ^^^^^^^^^^^^^^^^^^^^^ missing `foo_two` in implementation
+error E0046: not all trait items implemented, missing: `foo_two`
+ at $DIR/specialization-trait-item-not-implemented.rs:18:1: missing `foo_two` in implementation
+  on line 7: `foo_two` from trait
 
 error: aborting due to 1 previous error
 

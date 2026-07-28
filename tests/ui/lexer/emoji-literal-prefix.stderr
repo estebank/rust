@@ -1,14 +1,5 @@
 error: identifiers cannot contain emoji: `🐛`
-  --> $DIR/emoji-literal-prefix.rs:3:8
-   |
-LL | lexes!(🐛#);
-   |        ^^
-LL | lexes!(🐛"foo");
-   |        ^^
-LL | lexes!(🐛'q');
-   |        ^^
-LL | lexes!(🐛'q);
-   |        ^^
+ at $DIR/emoji-literal-prefix.rs:3:8
 
 error: aborting due to 1 previous error
 

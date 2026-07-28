@@ -1,36 +1,15 @@
-error[E0207]: the type parameter `U` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-87735.rs:25:13
-   |
-LL | impl<'b, T, U> AsRef2 for Foo<T>
-   |             ^ unconstrained type parameter
-   |
+error E0207: the type parameter `U` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-87735.rs:25:13: unconstrained type parameter
 help: use the type parameter `U` in the `Foo` type and use it in the type definition
-   |
-LL ~ struct Foo<T, U>(T);
-LL | #[derive(Debug)]
-LL | struct FooRef<'a, U>(&'a [U]);
-LL |
-LL ~ impl<'b, T, U> AsRef2 for Foo<T, U>
-   |
+ on line 21, column 12, add `, U`
 
-error[E0309]: the parameter type `U` may not live long enough
-  --> $DIR/issue-87735.rs:34:3
-   |
-LL |   type Output<'a> = FooRef<'a, U> where Self: 'a;
-   |   ^^^^^^^^^^^^--^
-   |   |           |
-   |   |           the parameter type `U` must be valid for the lifetime `'a` as defined here...
-   |   ...so that the type `U` will meet its required lifetime bounds...
-   |
+error E0309: the parameter type `U` may not live long enough
+ at $DIR/issue-87735.rs:34:3: ...so that the type `U` will meet its required lifetime bounds...
+  on line 34, column 15: the parameter type `U` must be valid for the lifetime `'a` as defined here...
 note: ...that is required by this bound
-  --> $DIR/issue-87735.rs:23:22
-   |
-LL | struct FooRef<'a, U>(&'a [U]);
-   |                      ^^^^^^^
+ at $DIR/issue-87735.rs:23:22
 help: consider adding an explicit lifetime bound
-   |
-LL |   type Output<'a> = FooRef<'a, U> where Self: 'a, U: 'a;
-   |                                                 +++++++
+ on line 34, column 48, add `, U: 'a`
 
 error: aborting due to 2 previous errors
 

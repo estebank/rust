@@ -1,29 +1,13 @@
-error[E0034]: multiple applicable items in scope
-  --> $DIR/ambig-method-call-in-trait-impl.rs:19:14
-   |
-LL |         self.to_int() + other.to_int()
-   |              ^^^^^^ multiple `to_int` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/ambig-method-call-in-trait-impl.rs:19:14: multiple `to_int` found
 note: candidate #1 is defined in an impl of the trait `Add` for the type `isize`
-  --> $DIR/ambig-method-call-in-trait-impl.rs:17:5
-   |
-LL |     fn to_int(&self) -> isize { *self }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/ambig-method-call-in-trait-impl.rs:17:5
 note: candidate #2 is defined in an impl of the trait `ToPrimitive` for the type `isize`
-  --> $DIR/ambig-method-call-in-trait-impl.rs:5:5
-   |
-LL |     fn to_int(&self) -> isize { 0 }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/ambig-method-call-in-trait-impl.rs:5:5
 help: disambiguate the method for candidate #1
-   |
-LL -         self.to_int() + other.to_int()
-LL +         Add::to_int(&self) + other.to_int()
-   |
+ on line 19, column 8, replace with `Add::to_int(&self)`
 help: disambiguate the method for candidate #2
-   |
-LL -         self.to_int() + other.to_int()
-LL +         ToPrimitive::to_int(&self) + other.to_int()
-   |
+ on line 19, column 8, replace with `ToPrimitive::to_int(&self)`
 
 error: aborting due to 1 previous error
 

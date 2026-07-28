@@ -1,35 +1,17 @@
-error[E0426]: use of undeclared label `'fo`
-  --> $DIR/suggest-labels.rs:4:15
-   |
-LL |     'foo: loop {
-   |     ---- a label with a similar name is reachable
-LL |         break 'fo;
-   |               ^^^
-   |               |
-   |               undeclared label `'fo`
-   |               help: try using similarly named label: `'foo`
+error E0426: use of undeclared label `'fo`
+ at $DIR/suggest-labels.rs:4:15: undeclared label `'fo`
+  on line 4, column 15: help: try using similarly named label: `'foo`
+  on line 3: a label with a similar name is reachable
 
-error[E0426]: use of undeclared label `'bor`
-  --> $DIR/suggest-labels.rs:8:18
-   |
-LL |     'bar: loop {
-   |     ---- a label with a similar name is reachable
-LL |         continue 'bor;
-   |                  ^^^^
-   |                  |
-   |                  undeclared label `'bor`
-   |                  help: try using similarly named label: `'bar`
+error E0426: use of undeclared label `'bor`
+ at $DIR/suggest-labels.rs:8:18: undeclared label `'bor`
+  on line 8, column 18: help: try using similarly named label: `'bar`
+  on line 7: a label with a similar name is reachable
 
-error[E0426]: use of undeclared label `'longlable`
-  --> $DIR/suggest-labels.rs:13:19
-   |
-LL |         'longlabel1: loop {
-   |         ----------- a label with a similar name is reachable
-LL |             break 'longlable;
-   |                   ^^^^^^^^^^
-   |                   |
-   |                   undeclared label `'longlable`
-   |                   help: try using similarly named label: `'longlabel1`
+error E0426: use of undeclared label `'longlable`
+ at $DIR/suggest-labels.rs:13:19: undeclared label `'longlable`
+  on line 13, column 19: help: try using similarly named label: `'longlabel1`
+  on line 12: a label with a similar name is reachable
 
 error: aborting due to 3 previous errors
 

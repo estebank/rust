@@ -1,240 +1,116 @@
 error: the `target_feature` attribute cannot be used on extern crates
-  --> $DIR/invalid-attribute.rs:12:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:12:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on use statements
-  --> $DIR/invalid-attribute.rs:16:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:16:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on foreign modules
-  --> $DIR/invalid-attribute.rs:20:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:20:3
+help: the `target_feature` attribute can only be applied to functions
 
-error[E0539]: malformed `target_feature` attribute input
-  --> $DIR/invalid-attribute.rs:24:3
-   |
-LL | #[target_feature = "+sse2"]
-   |   ^^^^^^^^^^^^^^^---------
-   |                  |
-   |                  expected this to be a list
-   |
+error E0539: malformed `target_feature` attribute input
+ at $DIR/invalid-attribute.rs:24:3
+  on line 24, column 18: expected this to be a list
 help: must be of the form
-   |
-LL - #[target_feature = "+sse2"]
-LL + #[target_feature(enable = "feat1, feat2")]
-   |
+ on line 24, column 2, replace with `target_feature(enable = "feat1, feat2")`
 
-error[E0539]: malformed `target_feature` attribute input
-  --> $DIR/invalid-attribute.rs:30:3
-   |
-LL | #[target_feature(bar)]
-   |   ^^^^^^^^^^^^^^^---^
-   |                  |
-   |                  expected this to be of the form `enable = "..."`
-   |
+error E0539: malformed `target_feature` attribute input
+ at $DIR/invalid-attribute.rs:30:3
+  on line 30, column 18: expected this to be of the form `enable = "..."`
 help: must be of the form
-   |
-LL - #[target_feature(bar)]
-LL + #[target_feature(enable = "feat1, feat2")]
-   |
+ on line 30, column 2, replace with `target_feature(enable = "feat1, feat2")`
 
-error[E0539]: malformed `target_feature` attribute input
-  --> $DIR/invalid-attribute.rs:33:3
-   |
-LL | #[target_feature(disable = "baz")]
-   |   ^^^^^^^^^^^^^^^-------^^^^^^^^^
-   |                  |
-   |                  the only valid argument here is `enable`
-   |
+error E0539: malformed `target_feature` attribute input
+ at $DIR/invalid-attribute.rs:33:3
+  on line 33, column 18: the only valid argument here is `enable`
 help: must be of the form
-   |
-LL - #[target_feature(disable = "baz")]
-LL + #[target_feature(enable = "feat1, feat2")]
-   |
+ on line 33, column 2, replace with `target_feature(enable = "feat1, feat2")`
 
 error: the `target_feature` attribute cannot be used on modules
-  --> $DIR/invalid-attribute.rs:38:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:38:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on constants
-  --> $DIR/invalid-attribute.rs:42:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:42:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on structs
-  --> $DIR/invalid-attribute.rs:46:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:46:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on enums
-  --> $DIR/invalid-attribute.rs:50:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:50:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on unions
-  --> $DIR/invalid-attribute.rs:54:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:54:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on type aliases
-  --> $DIR/invalid-attribute.rs:61:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:61:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on traits
-  --> $DIR/invalid-attribute.rs:65:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:65:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on statics
-  --> $DIR/invalid-attribute.rs:75:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:75:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on trait impl blocks
-  --> $DIR/invalid-attribute.rs:79:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:79:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on inherent impl blocks
-  --> $DIR/invalid-attribute.rs:85:3
-   |
-LL | #[target_feature(enable = "sse2")]
-   |   ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:85:3
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on expressions
-  --> $DIR/invalid-attribute.rs:106:7
-   |
-LL |     #[target_feature(enable = "sse2")]
-   |       ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can only be applied to functions
+ at $DIR/invalid-attribute.rs:106:7
+help: the `target_feature` attribute can only be applied to functions
 
 error: the `target_feature` attribute cannot be used on closures
-  --> $DIR/invalid-attribute.rs:112:7
-   |
-LL |     #[target_feature(enable = "sse2")]
-   |       ^^^^^^^^^^^^^^
-   |
-   = help: the `target_feature` attribute can be applied to functions and methods
+ at $DIR/invalid-attribute.rs:112:7
+help: the `target_feature` attribute can be applied to functions and methods
 
 error: cannot use `#[inline(always)]` with `#[target_feature]`
-  --> $DIR/invalid-attribute.rs:69:1
-   |
-LL | #[inline(always)]
-   | ^^^^^^^^^^^^^^^^^
-   |
-   = note: See this issue for full discussion: https://github.com/rust-lang/rust/issues/145574
+ at $DIR/invalid-attribute.rs:69:1
+note: See this issue for full discussion: https://github.com/rust-lang/rust/issues/145574
 
 error: the feature named `foo` is not valid for this target
-  --> $DIR/invalid-attribute.rs:27:18
-   |
-LL | #[target_feature(enable = "foo")]
-   |                  ^^^^^^^^^^^^^^ `foo` is not valid for this target
-   |
-   = help: valid names are: `fma`, `xop`, `adx`, `aes`, and `avx` and X more
+ at $DIR/invalid-attribute.rs:27:18: `foo` is not valid for this target
+help: valid names are: `fma`, `xop`, `adx`, `aes`, and `avx` and X more
 
-error[E0046]: not all trait items implemented, missing: `foo`
-  --> $DIR/invalid-attribute.rs:81:1
-   |
-LL | impl Quux for u8 {}
-   | ^^^^^^^^^^^^^^^^ missing `foo` in implementation
-...
-LL |     fn foo();
-   |     --------- `foo` from trait
+error E0046: not all trait items implemented, missing: `foo`
+ at $DIR/invalid-attribute.rs:81:1: missing `foo` in implementation
+  on line 90: `foo` from trait
 
 error: `#[target_feature(..)]` cannot be applied to safe trait method
-  --> $DIR/invalid-attribute.rs:95:5
-   |
-LL |     #[target_feature(enable = "sse2")]
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot be applied to safe trait method
-...
-LL |     fn foo() {}
-   |     -------- not an `unsafe` function
+ at $DIR/invalid-attribute.rs:95:5: cannot be applied to safe trait method
+  on line 98: not an `unsafe` function
 
-error[E0053]: method `foo` has an incompatible type for trait
-  --> $DIR/invalid-attribute.rs:98:5
-   |
-LL |     fn foo() {}
-   |     ^^^^^^^^ expected safe fn, found unsafe fn
-   |
+error E0053: method `foo` has an incompatible type for trait
+ at $DIR/invalid-attribute.rs:98:5: expected safe fn, found unsafe fn
 note: type in trait
-  --> $DIR/invalid-attribute.rs:90:5
-   |
-LL |     fn foo();
-   |     ^^^^^^^^^
-   = note: expected signature `fn()`
-              found signature `#[target_feature(..)] fn()`
+ at $DIR/invalid-attribute.rs:90:5
+note: expected signature `fn()`
+         found signature `#[target_feature(..)] fn()`
 
 error: the feature named `+sse2` is not valid for this target
-  --> $DIR/invalid-attribute.rs:117:18
-   |
-LL | #[target_feature(enable = "+sse2")]
-   |                  ^^^^^^^^^^^^^^^^ `+sse2` is not valid for this target
-   |
+ at $DIR/invalid-attribute.rs:117:18: `+sse2` is not valid for this target
 help: consider removing the leading `+` in the feature name
-   |
-LL - #[target_feature(enable = "+sse2")]
-LL + #[target_feature(enable = "sse2")]
-   |
+ on line 117, column 17, replace with `enable = "sse2"`
 
 error: the feature named `sse5` is not valid for this target
-  --> $DIR/invalid-attribute.rs:122:18
-   |
-LL | #[target_feature(enable = "sse5")]
-   |                  ^^^^^^^^^^^^^^^ `sse5` is not valid for this target
-   |
-   = help: valid names are: `sse`, `sse2`, `sse3`, `sse4a`, and `ssse3` and X more
+ at $DIR/invalid-attribute.rs:122:18: `sse5` is not valid for this target
+help: valid names are: `sse`, `sse2`, `sse3`, `sse4a`, and `ssse3` and X more
 
 error: the feature named `avx512` is not valid for this target
-  --> $DIR/invalid-attribute.rs:127:18
-   |
-LL | #[target_feature(enable = "avx512")]
-   |                  ^^^^^^^^^^^^^^^^^ `avx512` is not valid for this target
-   |
-   = help: valid names are: `avx512f`, `avx2`, `avx512bw`, `avx512cd`, and `avx512dq` and X more
+ at $DIR/invalid-attribute.rs:127:18: `avx512` is not valid for this target
+help: valid names are: `avx512f`, `avx2`, `avx512bw`, `avx512cd`, and `avx512dq` and X more
 
 error: aborting due to 26 previous errors
 

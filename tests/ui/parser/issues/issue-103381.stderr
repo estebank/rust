@@ -1,50 +1,22 @@
 error: unexpected `if` in the condition expression
-  --> $DIR/issue-103381.rs:9:12
-   |
-LL |     if b && if let Some(x) = x {}
-   |            ^^^^
-   |
+ at $DIR/issue-103381.rs:9:12
 help: remove the `if`
-   |
-LL -     if b && if let Some(x) = x {}
-LL +     if b && let Some(x) = x {}
-   |
+ on line 9, column 11
 
 error: unexpected `if` in the condition expression
-  --> $DIR/issue-103381.rs:14:12
-   |
-LL |     if b && if let None = x {}
-   |            ^^^^
-   |
+ at $DIR/issue-103381.rs:14:12
 help: remove the `if`
-   |
-LL -     if b && if let None = x {}
-LL +     if b && let None = x {}
-   |
+ on line 14, column 11
 
 error: unexpected `if` in the condition expression
-  --> $DIR/issue-103381.rs:19:15
-   |
-LL |     if true && if true { true } else { false };
-   |               ^^^^
-   |
+ at $DIR/issue-103381.rs:19:15
 help: remove the `if`
-   |
-LL -     if true && if true { true } else { false };
-LL +     if true && true { true } else { false };
-   |
+ on line 19, column 14
 
 error: unexpected `if` in the condition expression
-  --> $DIR/issue-103381.rs:24:15
-   |
-LL |     if true && if false { true } else { false };
-   |               ^^^^
-   |
+ at $DIR/issue-103381.rs:24:15
 help: remove the `if`
-   |
-LL -     if true && if false { true } else { false };
-LL +     if true && false { true } else { false };
-   |
+ on line 24, column 14
 
 error: aborting due to 4 previous errors
 

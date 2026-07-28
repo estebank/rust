@@ -1,81 +1,40 @@
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-ref-chain.rs:8:14
-   |
-LL |     let x: &&Box<i32>;
-   |         - binding declared here but left uninitialized
-LL |     let _y = &**x;
-   |              ^^^^ `**x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-ref-chain.rs:8:14: `**x` used here but it isn't initialized
+  on line 7, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: &&Box<i32> = &&Box::new(42);
-   |                       ++++++++++++++++
+ on line 7, column 21, add ` = &&Box::new(42)`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-ref-chain.rs:11:14
-   |
-LL |     let x: &&S<i32, i32>;
-   |         - binding declared here but left uninitialized
-LL |     let _y = &**x;
-   |              ^^^^ `**x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-ref-chain.rs:11:14: `**x` used here but it isn't initialized
+  on line 10, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: &&S<i32, i32> = &&/* value */;
-   |                          +++++++++++++++
+ on line 10, column 24, add ` = &&/* value */`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-ref-chain.rs:14:14
-   |
-LL |     let x: &&i32;
-   |         - binding declared here but left uninitialized
-LL |     let _y = &**x;
-   |              ^^^^ `**x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-ref-chain.rs:14:14: `**x` used here but it isn't initialized
+  on line 13, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: &&i32 = &&42;
-   |                  ++++++
+ on line 13, column 16, add ` = &&42`
 
-error[E0381]: partially assigned binding `a` isn't fully initialized
-  --> $DIR/borrowck-uninit-ref-chain.rs:18:5
-   |
-LL |     let mut a: S<i32, i32>;
-   |         ----- binding declared here but left uninitialized
-LL |     a.x = 0;
-   |     ^^^^^^^ `a` partially assigned here but it isn't fully initialized
-   |
-   = help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
+error E0381: partially assigned binding `a` isn't fully initialized
+ at $DIR/borrowck-uninit-ref-chain.rs:18:5: `a` partially assigned here but it isn't fully initialized
+  on line 17, column 9: binding declared here but left uninitialized
+help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
 
-error[E0381]: partially assigned binding `a` isn't fully initialized
-  --> $DIR/borrowck-uninit-ref-chain.rs:22:5
-   |
-LL |     let mut a: S<&&i32, &&i32>;
-   |         ----- binding declared here but left uninitialized
-LL |     a.x = &&0;
-   |     ^^^^^^^^^ `a` partially assigned here but it isn't fully initialized
-   |
-   = help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
+error E0381: partially assigned binding `a` isn't fully initialized
+ at $DIR/borrowck-uninit-ref-chain.rs:22:5: `a` partially assigned here but it isn't fully initialized
+  on line 21, column 9: binding declared here but left uninitialized
+help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
 
-error[E0381]: partially assigned binding `a` isn't fully initialized
-  --> $DIR/borrowck-uninit-ref-chain.rs:27:5
-   |
-LL |     let mut a: S<i32, i32>;
-   |         ----- binding declared here but left uninitialized
-LL |     a.x = 0;
-   |     ^^^^^^^ `a` partially assigned here but it isn't fully initialized
-   |
-   = help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
+error E0381: partially assigned binding `a` isn't fully initialized
+ at $DIR/borrowck-uninit-ref-chain.rs:27:5: `a` partially assigned here but it isn't fully initialized
+  on line 26, column 9: binding declared here but left uninitialized
+help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
 
-error[E0381]: partially assigned binding `a` isn't fully initialized
-  --> $DIR/borrowck-uninit-ref-chain.rs:31:5
-   |
-LL |     let mut a: S<&&i32, &&i32>;
-   |         ----- binding declared here but left uninitialized
-LL |     a.x = &&0;
-   |     ^^^^^^^^^ `a` partially assigned here but it isn't fully initialized
-   |
-   = help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
+error E0381: partially assigned binding `a` isn't fully initialized
+ at $DIR/borrowck-uninit-ref-chain.rs:31:5: `a` partially assigned here but it isn't fully initialized
+  on line 30, column 9: binding declared here but left uninitialized
+help: partial initialization isn't supported, fully initialize the binding with a default value and mutate it, or use `std::mem::MaybeUninit`
 
 error: aborting due to 7 previous errors
 

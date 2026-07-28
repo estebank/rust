@@ -1,13 +1,7 @@
-error[E0599]: no method named `map` found for reference `&'static [i32]` in the current scope
-  --> $DIR/issue-94581.rs:7:35
-   |
-LL |     let _sqsum: i32 = get_slice().map(|i| i * i).sum();
-   |                                   ^^^ `&'static [i32]` is not an iterator
-   |
+error E0599: no method named `map` found for reference `&'static [i32]` in the current scope
+ at $DIR/issue-94581.rs:7:35: `&'static [i32]` is not an iterator
 help: call `.into_iter()` first
-   |
-LL |     let _sqsum: i32 = get_slice().into_iter().map(|i| i * i).sum();
-   |                                   ++++++++++++
+ on line 7, column 34, add `into_iter().`
 
 error: aborting due to 1 previous error
 

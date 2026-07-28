@@ -1,62 +1,30 @@
-error[E0565]: malformed `cfg` attribute input
-  --> $DIR/cfg-path-error.rs:6:3
-   |
-LL | #[cfg(any(foo, foo::bar))]
-   |   ^^^^^^^^^^^^^--------^^
-   |                |
-   |                expected a valid identifier here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+error E0565: malformed `cfg` attribute input
+ at $DIR/cfg-path-error.rs:6:3
+  on line 6, column 16: expected a valid identifier here
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
 help: must be of the form
-   |
-LL - #[cfg(any(foo, foo::bar))]
-LL + #[cfg(predicate)]
-   |
+ on line 6, column 2, replace with `cfg(predicate)`
 
-error[E0565]: malformed `cfg` attribute input
-  --> $DIR/cfg-path-error.rs:12:3
-   |
-LL | #[cfg(any(foo::bar, foo))]
-   |   ^^^^^^^^--------^^^^^^^
-   |           |
-   |           expected a valid identifier here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+error E0565: malformed `cfg` attribute input
+ at $DIR/cfg-path-error.rs:12:3
+  on line 12, column 11: expected a valid identifier here
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
 help: must be of the form
-   |
-LL - #[cfg(any(foo::bar, foo))]
-LL + #[cfg(predicate)]
-   |
+ on line 12, column 2, replace with `cfg(predicate)`
 
-error[E0565]: malformed `cfg` attribute input
-  --> $DIR/cfg-path-error.rs:18:3
-   |
-LL | #[cfg(all(foo, foo::bar))]
-   |   ^^^^^^^^^^^^^--------^^
-   |                |
-   |                expected a valid identifier here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+error E0565: malformed `cfg` attribute input
+ at $DIR/cfg-path-error.rs:18:3
+  on line 18, column 16: expected a valid identifier here
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
 help: must be of the form
-   |
-LL - #[cfg(all(foo, foo::bar))]
-LL + #[cfg(predicate)]
-   |
+ on line 18, column 2, replace with `cfg(predicate)`
 
-error[E0565]: malformed `cfg` attribute input
-  --> $DIR/cfg-path-error.rs:24:3
-   |
-LL | #[cfg(all(foo::bar, foo))]
-   |   ^^^^^^^^--------^^^^^^^
-   |           |
-   |           expected a valid identifier here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+error E0565: malformed `cfg` attribute input
+ at $DIR/cfg-path-error.rs:24:3
+  on line 24, column 11: expected a valid identifier here
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
 help: must be of the form
-   |
-LL - #[cfg(all(foo::bar, foo))]
-LL + #[cfg(predicate)]
-   |
+ on line 24, column 2, replace with `cfg(predicate)`
 
 error: aborting due to 4 previous errors
 

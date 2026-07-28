@@ -1,53 +1,26 @@
-error[E0382]: use of moved value: `x`
-  --> $DIR/closure-move-spans.rs:7:13
-   |
-LL | fn move_after_move(x: String) {
-   |                    - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |     || x;
-   |     -- - variable moved due to use in closure
-   |     |
-   |     value moved into closure here
-LL |     let y = x;
-   |             ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/closure-move-spans.rs:7:13: value used here after move
+  on line 5, column 20: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 6: value moved into closure here
+  on line 6, column 8: variable moved due to use in closure
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     || x.clone();
-   |         ++++++++
+ on line 6, column 8, add `.clone()`
 
-error[E0382]: borrow of moved value: `x`
-  --> $DIR/closure-move-spans.rs:12:13
-   |
-LL | fn borrow_after_move(x: String) {
-   |                      - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |     || x;
-   |     -- - variable moved due to use in closure
-   |     |
-   |     value moved into closure here
-LL |     let y = &x;
-   |             ^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `x`
+ at $DIR/closure-move-spans.rs:12:13: value borrowed here after move
+  on line 10, column 22: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 11: value moved into closure here
+  on line 11, column 8: variable moved due to use in closure
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     || x.clone();
-   |         ++++++++
+ on line 11, column 8, add `.clone()`
 
-error[E0382]: borrow of moved value: `x`
-  --> $DIR/closure-move-spans.rs:17:13
-   |
-LL | fn borrow_mut_after_move(mut x: String) {
-   |                          ----- move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |     || x;
-   |     -- - variable moved due to use in closure
-   |     |
-   |     value moved into closure here
-LL |     let y = &mut x;
-   |             ^^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `x`
+ at $DIR/closure-move-spans.rs:17:13: value borrowed here after move
+  on line 15, column 26: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 16: value moved into closure here
+  on line 16, column 8: variable moved due to use in closure
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     || x.clone();
-   |         ++++++++
+ on line 16, column 8, add `.clone()`
 
 error: aborting due to 3 previous errors
 

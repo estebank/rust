@@ -1,136 +1,58 @@
-error[E0599]: no variant named `Squareee` found for enum `Shape`
-  --> $DIR/suggest-variants.rs:12:41
-   |
-LL | enum Shape {
-   | ---------- variant `Squareee` not found here
-...
-LL |     println!("My shape is {:?}", Shape::Squareee { size: 5});
-   |                                         ^^^^^^^^
-   |
+error E0599: no variant named `Squareee` found for enum `Shape`
+ at $DIR/suggest-variants.rs:12:41
+  on line 2: variant `Squareee` not found here
 help: there is a variant with a similar name
-   |
-LL -     println!("My shape is {:?}", Shape::Squareee { size: 5});
-LL +     println!("My shape is {:?}", Shape::Square { size: 5});
-   |
+ on line 12, column 40, replace with `Square`
 
-error[E0599]: no variant named `Circl` found for enum `Shape`
-  --> $DIR/suggest-variants.rs:13:41
-   |
-LL | enum Shape {
-   | ---------- variant `Circl` not found here
-...
-LL |     println!("My shape is {:?}", Shape::Circl { size: 5});
-   |                                         ^^^^^
-   |
+error E0599: no variant named `Circl` found for enum `Shape`
+ at $DIR/suggest-variants.rs:13:41
+  on line 2: variant `Circl` not found here
 help: there is a variant with a similar name
-   |
-LL |     println!("My shape is {:?}", Shape::Circle { size: 5});
-   |                                              +
+ on line 13, column 40, replace with `Circle`
 
-error[E0599]: no variant named `Rombus` found for enum `Shape`
-  --> $DIR/suggest-variants.rs:14:41
-   |
-LL | enum Shape {
-   | ---------- variant `Rombus` not found here
-...
-LL |     println!("My shape is {:?}", Shape::Rombus{ size: 5});
-   |                                         ^^^^^^ variant not found in `Shape`
+error E0599: no variant named `Rombus` found for enum `Shape`
+ at $DIR/suggest-variants.rs:14:41: variant not found in `Shape`
+  on line 2: variant `Rombus` not found here
 
-error[E0599]: no variant, associated function, or constant named `Squareee` found for enum `Shape` in the current scope
-  --> $DIR/suggest-variants.rs:15:12
-   |
-LL | enum Shape {
-   | ---------- variant, associated function, or constant `Squareee` not found for this enum
-...
-LL |     Shape::Squareee;
-   |            ^^^^^^^^ variant, associated function, or constant not found in `Shape`
-   |
+error E0599: no variant, associated function, or constant named `Squareee` found for enum `Shape` in the current scope
+ at $DIR/suggest-variants.rs:15:12: variant, associated function, or constant not found in `Shape`
+  on line 2: variant, associated function, or constant `Squareee` not found for this enum
 help: there is a variant with a similar name
-   |
-LL -     Shape::Squareee;
-LL +     Shape::Square { size: /* value */ };
-   |
+ on line 15, column 11, replace with `Square { size: /* value */ }`
 
-error[E0599]: no variant, associated function, or constant named `Circl` found for enum `Shape` in the current scope
-  --> $DIR/suggest-variants.rs:16:12
-   |
-LL | enum Shape {
-   | ---------- variant, associated function, or constant `Circl` not found for this enum
-...
-LL |     Shape::Circl;
-   |            ^^^^^ variant, associated function, or constant not found in `Shape`
-   |
+error E0599: no variant, associated function, or constant named `Circl` found for enum `Shape` in the current scope
+ at $DIR/suggest-variants.rs:16:12: variant, associated function, or constant not found in `Shape`
+  on line 2: variant, associated function, or constant `Circl` not found for this enum
 help: there is a variant with a similar name
-   |
-LL |     Shape::Circle { radius: /* value */ };
-   |                 +++++++++++++++++++++++++
+ on line 16, column 11, replace with `Circle { radius: /* value */ }`
 
-error[E0599]: no variant, associated function, or constant named `Rombus` found for enum `Shape` in the current scope
-  --> $DIR/suggest-variants.rs:17:12
-   |
-LL | enum Shape {
-   | ---------- variant, associated function, or constant `Rombus` not found for this enum
-...
-LL |     Shape::Rombus;
-   |            ^^^^^^ variant, associated function, or constant not found in `Shape`
+error E0599: no variant, associated function, or constant named `Rombus` found for enum `Shape` in the current scope
+ at $DIR/suggest-variants.rs:17:12: variant, associated function, or constant not found in `Shape`
+  on line 2: variant, associated function, or constant `Rombus` not found for this enum
 
-error[E0599]: no variant, associated function, or constant named `Redd` found for enum `Color` in the current scope
-  --> $DIR/suggest-variants.rs:28:13
-   |
-LL | enum Color {
-   | ---------- variant, associated function, or constant `Redd` not found for this enum
-...
-LL |   Ok(Color::Redd)
-   |             ^^^^ variant, associated function, or constant not found in `Color`
-   |
+error E0599: no variant, associated function, or constant named `Redd` found for enum `Color` in the current scope
+ at $DIR/suggest-variants.rs:28:13: variant, associated function, or constant not found in `Color`
+  on line 20: variant, associated function, or constant `Redd` not found for this enum
 help: there is a variant with a similar name
-   |
-LL -   Ok(Color::Redd)
-LL +   Ok(Color::Red)
-   |
+ on line 28, column 12, replace with `Red`
 
-error[E0599]: no variant, associated function, or constant named `Greenn` found for enum `Color` in the current scope
-  --> $DIR/suggest-variants.rs:32:13
-   |
-LL | enum Color {
-   | ---------- variant, associated function, or constant `Greenn` not found for this enum
-...
-LL |   Ok(Color::Greenn(()))
-   |             ^^^^^^ variant, associated function, or constant not found in `Color`
-   |
+error E0599: no variant, associated function, or constant named `Greenn` found for enum `Color` in the current scope
+ at $DIR/suggest-variants.rs:32:13: variant, associated function, or constant not found in `Color`
+  on line 20: variant, associated function, or constant `Greenn` not found for this enum
 help: there is a variant with a similar name
-   |
-LL -   Ok(Color::Greenn(()))
-LL +   Ok(Color::Green(()))
-   |
+ on line 32, column 12, replace with `Green`
 
-error[E0599]: no variant, associated function, or constant named `Blu` found for enum `Color` in the current scope
-  --> $DIR/suggest-variants.rs:36:13
-   |
-LL | enum Color {
-   | ---------- variant, associated function, or constant `Blu` not found for this enum
-...
-LL |   Ok(Color::Blu)
-   |             ^^^ variant, associated function, or constant not found in `Color`
-   |
+error E0599: no variant, associated function, or constant named `Blu` found for enum `Color` in the current scope
+ at $DIR/suggest-variants.rs:36:13: variant, associated function, or constant not found in `Color`
+  on line 20: variant, associated function, or constant `Blu` not found for this enum
 help: there is a variant with a similar name
-   |
-LL |   Ok(Color::Blue)
-   |                +
+ on line 36, column 12, replace with `Blue`
 
-error[E0599]: no variant named `Alph` found for enum `Color`
-  --> $DIR/suggest-variants.rs:40:13
-   |
-LL | enum Color {
-   | ---------- variant `Alph` not found here
-...
-LL |   Ok(Color::Alph{ a: 255 })
-   |             ^^^^
-   |
+error E0599: no variant named `Alph` found for enum `Color`
+ at $DIR/suggest-variants.rs:40:13
+  on line 20: variant `Alph` not found here
 help: there is a variant with a similar name
-   |
-LL |   Ok(Color::Alpha{ a: 255 })
-   |                 +
+ on line 40, column 12, replace with `Alpha`
 
 error: aborting due to 10 previous errors
 

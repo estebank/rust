@@ -1,19 +1,10 @@
 error: `yield` can only be used in `#[coroutine]` closures, or `gen` blocks
-  --> $DIR/issue-91477.rs:4:5
-   |
-LL |     yield 1;
-   |     ^^^^^^^
-   |
+ at $DIR/issue-91477.rs:4:5
 help: use `#[coroutine]` to make this closure a coroutine
-   |
-LL | #[coroutine] fn foo() -> impl Sized {
-   | ++++++++++++
+ on line 3, column 1, add `#[coroutine] `
 
-error[E0627]: yield expression outside of coroutine literal
-  --> $DIR/issue-91477.rs:4:5
-   |
-LL |     yield 1;
-   |     ^^^^^^^
+error E0627: yield expression outside of coroutine literal
+ at $DIR/issue-91477.rs:4:5
 
 error: aborting due to 2 previous errors
 

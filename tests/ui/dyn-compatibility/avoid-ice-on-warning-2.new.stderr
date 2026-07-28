@@ -1,19 +1,10 @@
-error[E0782]: expected a type, found a trait
-  --> $DIR/avoid-ice-on-warning-2.rs:4:13
-   |
-LL | fn id<F>(f: Copy) -> usize {
-   |             ^^^^
-   |
-   = note: `Copy` is dyn-incompatible, otherwise a trait object could be used
+error E0782: expected a type, found a trait
+ at $DIR/avoid-ice-on-warning-2.rs:4:13
+note: `Copy` is dyn-incompatible, otherwise a trait object could be used
 help: use a new generic type parameter, constrained by `Copy`
-   |
-LL - fn id<F>(f: Copy) -> usize {
-LL + fn id<F, T: Copy>(f: T) -> usize {
-   |
+ on line 4, column 7, add `, T: Copy`
 help: you can also use an opaque type, but users won't be able to specify the type parameter when calling the `fn`, having to rely exclusively on type inference
-   |
-LL | fn id<F>(f: impl Copy) -> usize {
-   |             ++++
+ on line 4, column 12, add `impl `
 
 error: aborting due to 1 previous error
 

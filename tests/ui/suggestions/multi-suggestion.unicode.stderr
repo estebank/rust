@@ -1,136 +1,59 @@
-error[E0423]: cannot find function, tuple struct or tuple variant `HashMap` in module `std::collections`
-   ╭▸ $DIR/multi-suggestion.rs:17:13
-   │
-LL │     let _ = std::collections::HashMap();
-   │             ━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   ╰╴
-   ╭▸ $SRC_DIR/std/src/collections/hash/map.rs:LL:COL
-   ⸬  $SRC_DIR/std/src/collections/hash/map.rs:LL:COL
-   │
-   ├ note: `std::collections::HashMap` defined here
-   │
-   ╰ note: a struct named `std::collections::HashMap` exists in another namespace
+error E0423: cannot find function, tuple struct or tuple variant `HashMap` in module `std::collections`
+ at $DIR/multi-suggestion.rs:17:13
+ at $SRC_DIR/std/src/collections/hash/map.rs:LL:COL
+ at $SRC_DIR/std/src/collections/hash/map.rs:LL:COL
+note: `std::collections::HashMap` defined here
+note: a struct named `std::collections::HashMap` exists in another namespace
 help: you might have meant to use an associated function to build this type
-   ╭╴
-LL │     let _ = std::collections::HashMap::new();
-   ├╴                                     +++++
-LL -     let _ = std::collections::HashMap();
-LL +     let _ = std::collections::HashMap::new_in(_);
-   ├╴
-LL -     let _ = std::collections::HashMap();
-LL +     let _ = std::collections::HashMap::with_capacity(_);
-   ├╴
-LL -     let _ = std::collections::HashMap();
-LL +     let _ = std::collections::HashMap::with_capacity_in(_, _);
-   │
-   ╰ and 4 other candidates
+ on line 17, column 37, replace with one of
+  ::new()
+  ::new_in(_)
+  ::with_capacity(_)
+  ::with_capacity_in(_, _)
+and 4 other candidates
 help: consider using the `Default` trait
-   ╭╴
-LL │     let _ = <std::collections::HashMap as std::default::Default>::default();
-   ╰╴            +                          ++++++++++++++++++++++++++++++++++
+ on line 17, column 12, add `<`
 
-error[E0423]: cannot initialize a tuple struct which contains private fields
-   ╭▸ $DIR/multi-suggestion.rs:11:19
-   │
-LL │         wtf: Some(Box(U {
-   │                   ━━━
-   │
-   ╰ note: a struct named `Box` exists in another namespace
+error E0423: cannot initialize a tuple struct which contains private fields
+ at $DIR/multi-suggestion.rs:11:19
+note: a struct named `Box` exists in another namespace
 note: constructor is not visible here due to private fields
-   ╭▸ $SRC_DIR/alloc/src/boxed.rs:LL:COL
-   │
-   ├ note: private field
-   │
-   ╰ note: private field
+ at $SRC_DIR/alloc/src/boxed.rs:LL:COL
+note: private field
+note: private field
 help: you might have meant to use an associated function to build this type
-   ╭╴
-LL -         wtf: Some(Box(U {
-LL -             wtf: None,
-LL -             x: (),
-LL -         })),
-LL +         wtf: Some(Box::new(_)),
-   ├╴
-LL -         wtf: Some(Box(U {
-LL -             wtf: None,
-LL -             x: (),
-LL -         })),
-LL +         wtf: Some(Box::new_uninit()),
-   ├╴
-LL -         wtf: Some(Box(U {
-LL -             wtf: None,
-LL -             x: (),
-LL -         })),
-LL +         wtf: Some(Box::new_zeroed()),
-   ├╴
-LL -         wtf: Some(Box(U {
-LL -             wtf: None,
-LL -             x: (),
-LL -         })),
-LL +         wtf: Some(Box::new_in(_, _)),
-   │
-   ╰ and 15 other candidates
+ on line 11, column 21, replace with one of
+  ::new(_)
+  ::new_uninit()
+  ::new_zeroed()
+  ::new_in(_, _)
+and 15 other candidates
 help: consider using the `Default` trait
-   ╭╴
-LL -         wtf: Some(Box(U {
-LL -             wtf: None,
-LL -             x: (),
-LL -         })),
-LL +         wtf: Some(<Box as std::default::Default>::default()),
-   ╰╴
+ on line 11, column 18, add `<`
 
 error: cannot construct `HashMap<_, _, _, _>` with struct literal syntax due to private fields
-   ╭▸ $DIR/multi-suggestion.rs:19:13
-   │
-LL │     let _ = std::collections::HashMap {};
-   │             ━━━━━━━━━━━━━━━━━━━━━━━━━
-   ╰╴
+ at $DIR/multi-suggestion.rs:19:13
 help: you might have meant to use an associated function to build this type
-   ╭╴
-LL -     let _ = std::collections::HashMap {};
-LL +     let _ = std::collections::HashMap::new();
-   ├╴
-LL -     let _ = std::collections::HashMap {};
-LL +     let _ = std::collections::HashMap::new_in(_);
-   ├╴
-LL -     let _ = std::collections::HashMap {};
-LL +     let _ = std::collections::HashMap::with_capacity(_);
-   ├╴
-LL -     let _ = std::collections::HashMap {};
-LL +     let _ = std::collections::HashMap::with_capacity_in(_, _);
-   │
-   ╰ and 4 other candidates
+ on line 19, column 37, replace with one of
+  ::new()
+  ::new_in(_)
+  ::with_capacity(_)
+  ::with_capacity_in(_, _)
+and 4 other candidates
 help: consider using the `Default` trait
-   ╭╴
-LL -     let _ = std::collections::HashMap {};
-LL +     let _ = <std::collections::HashMap as std::default::Default>::default();
-   ╰╴
+ on line 19, column 12, add `<`
 
 error: cannot construct `Box<_, _>` with struct literal syntax due to private fields
-   ╭▸ $DIR/multi-suggestion.rs:21:13
-   │
-LL │     let _ = Box {};
-   │             ━━━
-   ╰╴
+ at $DIR/multi-suggestion.rs:21:13
 help: you might have meant to use an associated function to build this type
-   ╭╴
-LL -     let _ = Box {};
-LL +     let _ = Box::new(_);
-   ├╴
-LL -     let _ = Box {};
-LL +     let _ = Box::new_uninit();
-   ├╴
-LL -     let _ = Box {};
-LL +     let _ = Box::new_zeroed();
-   ├╴
-LL -     let _ = Box {};
-LL +     let _ = Box::new_in(_, _);
-   │
-   ╰ and 16 other candidates
+ on line 21, column 15, replace with one of
+  ::new(_)
+  ::new_uninit()
+  ::new_zeroed()
+  ::new_in(_, _)
+and 16 other candidates
 help: consider using the `Default` trait
-   ╭╴
-LL -     let _ = Box {};
-LL +     let _ = <Box as std::default::Default>::default();
-   ╰╴
+ on line 21, column 12, add `<`
 
 error: aborting due to 4 previous errors
 

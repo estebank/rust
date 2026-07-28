@@ -1,58 +1,30 @@
-error[E0308]: mismatched types
-  --> $DIR/wrap-suggestion-privacy.rs:12:19
-   |
-LL |     needs_wrapper(0);
-   |     ------------- ^ expected `Wrapper<i32>`, found integer
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected struct `Wrapper<i32>`
-                found type `{integer}`
+error E0308: mismatched types
+ at $DIR/wrap-suggestion-privacy.rs:12:19: expected `Wrapper<i32>`, found integer
+  on line 12: arguments to this function are incorrect
+note: expected struct `Wrapper<i32>`
+           found type `{integer}`
 note: function defined here
-  --> $DIR/wrap-suggestion-privacy.rs:5:4
-   |
-LL | fn needs_wrapper(t: inner::Wrapper<i32>) {}
-   |    ^^^^^^^^^^^^^ ----------------------
+ at $DIR/wrap-suggestion-privacy.rs:5:4
 help: try wrapping the expression in `inner::Wrapper` (its field is private, but it's local to this crate and its privacy can be changed)
-   |
-LL |     needs_wrapper(inner::Wrapper(0));
-   |                   +++++++++++++++ +
+ on line 12, column 18, add `inner::Wrapper(`
 
-error[E0308]: mismatched types
-  --> $DIR/wrap-suggestion-privacy.rs:17:20
-   |
-LL |     needs_wrapping(0);
-   |     -------------- ^ expected `Wrapping<i32>`, found integer
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected struct `Wrapping<i32>`
-                found type `{integer}`
+error E0308: mismatched types
+ at $DIR/wrap-suggestion-privacy.rs:17:20: expected `Wrapping<i32>`, found integer
+  on line 17: arguments to this function are incorrect
+note: expected struct `Wrapping<i32>`
+           found type `{integer}`
 note: function defined here
-  --> $DIR/wrap-suggestion-privacy.rs:6:4
-   |
-LL | fn needs_wrapping(t: std::num::Wrapping<i32>) {}
-   |    ^^^^^^^^^^^^^^ --------------------------
+ at $DIR/wrap-suggestion-privacy.rs:6:4
 help: try wrapping the expression in `std::num::Wrapping`
-   |
-LL |     needs_wrapping(std::num::Wrapping(0));
-   |                    +++++++++++++++++++ +
+ on line 17, column 19, add `std::num::Wrapping(`
 
-error[E0308]: mismatched types
-  --> $DIR/wrap-suggestion-privacy.rs:22:17
-   |
-LL |     needs_ready(Some(0));
-   |     ----------- ^^^^^^^ expected `Ready<i32>`, found `Option<{integer}>`
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected struct `std::future::Ready<i32>`
-                found enum `Option<{integer}>`
+error E0308: mismatched types
+ at $DIR/wrap-suggestion-privacy.rs:22:17: expected `Ready<i32>`, found `Option<{integer}>`
+  on line 22: arguments to this function are incorrect
+note: expected struct `std::future::Ready<i32>`
+           found enum `Option<{integer}>`
 note: function defined here
-  --> $DIR/wrap-suggestion-privacy.rs:7:4
-   |
-LL | fn needs_ready(t: std::future::Ready<i32>) {}
-   |    ^^^^^^^^^^^ --------------------------
+ at $DIR/wrap-suggestion-privacy.rs:7:4
 
 error: aborting due to 3 previous errors
 

@@ -1,14 +1,7 @@
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/return-cycle-2.rs:6:34
-   |
-LL |     fn as_ref(_: i32, _: i32) -> _ {
-   |                                  ^ not allowed in type signatures
-   |
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/return-cycle-2.rs:6:34: not allowed in type signatures
 help: replace with the correct return type
-   |
-LL -     fn as_ref(_: i32, _: i32) -> _ {
-LL +     fn as_ref(_: i32, _: i32) -> Token<&'static T> {
-   |
+ on line 6, column 33, replace with `Token<&'static T>`
 
 error: aborting due to 1 previous error
 

@@ -1,44 +1,25 @@
-error[E0277]: the size for values of type `[&'static u32]` cannot be known at compilation time
-  --> $DIR/unsized-anon-const-err-1.rs:8:25
-   |
-LL |     const EMPTY_MATRIX: Matrix = [[0; 4]; 4];
-   |                         ^^^^^^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `[&'static u32]`
-   = note: statics and constants must have a statically known size
+error E0277: the size for values of type `[&'static u32]` cannot be known at compilation time
+ at $DIR/unsized-anon-const-err-1.rs:8:25: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `[&'static u32]`
+note: statics and constants must have a statically known size
 
-error[E0658]: use of unstable library feature `unsized_const_params`
-  --> $DIR/unsized-anon-const-err-1.rs:13:43
-   |
-LL |     pub struct Walk<const CURRENT: usize, const REMAINING: Matrix> {
-   |                                           ^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = help: add `#![feature(unsized_const_params)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
-   = note: required for `[&'static u32]` to implement `ConstParamTy_`
+error E0658: use of unstable library feature `unsized_const_params`
+ at $DIR/unsized-anon-const-err-1.rs:13:43
+help: add `#![feature(unsized_const_params)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+note: required for `[&'static u32]` to implement `ConstParamTy_`
 
-error[E0277]: the size for values of type `[&'static u32]` cannot be known at compilation time
-  --> $DIR/unsized-anon-const-err-1.rs:18:46
-   |
-LL |     impl<const CURRENT: usize> Walk<CURRENT, EMPTY_MATRIX> {}
-   |                                              ^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `[&'static u32]`
-   = note: statics and constants must have a statically known size
+error E0277: the size for values of type `[&'static u32]` cannot be known at compilation time
+ at $DIR/unsized-anon-const-err-1.rs:18:46: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `[&'static u32]`
+note: statics and constants must have a statically known size
 
-error[E0308]: mismatched types
-  --> $DIR/unsized-anon-const-err-1.rs:8:35
-   |
-LL |     const EMPTY_MATRIX: Matrix = [[0; 4]; 4];
-   |                                   ^^^^^^ expected `&u32`, found `[{integer}; 4]`
+error E0308: mismatched types
+ at $DIR/unsized-anon-const-err-1.rs:8:35: expected `&u32`, found `[{integer}; 4]`
 
-error[E0308]: mismatched types
-  --> $DIR/unsized-anon-const-err-1.rs:8:34
-   |
-LL |     const EMPTY_MATRIX: Matrix = [[0; 4]; 4];
-   |                         ------   ^^^^^^^^^^^ expected `[&u32]`, found `[&u32; 4]`
-   |                         |
-   |                         expected because of the type of the constant
+error E0308: mismatched types
+ at $DIR/unsized-anon-const-err-1.rs:8:34: expected `[&u32]`, found `[&u32; 4]`
+  on line 8, column 25: expected because of the type of the constant
 
 error: aborting due to 5 previous errors
 

@@ -1,11 +1,6 @@
-error[E0792]: expected generic type parameter, found `<T as TraitWithAssoc>::Assoc`
-  --> $DIR/bound_reduction2.rs:16:46
-   |
-LL | type Foo<V> = impl Trait<V>;
-   |          - this generic parameter must be used with a generic type parameter
-...
-LL | fn foo_desugared<T: TraitWithAssoc>(_: T) -> Foo<T::Assoc> {
-   |                                              ^^^^^^^^^^^^^
+error E0792: expected generic type parameter, found `<T as TraitWithAssoc>::Assoc`
+ at $DIR/bound_reduction2.rs:16:46
+  on line 9, column 10: this generic parameter must be used with a generic type parameter
 
 error: aborting due to 1 previous error
 

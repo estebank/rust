@@ -1,21 +1,11 @@
 error: macro expansion ignores `expr` metavariable and any tokens following
-  --> $DIR/trait-non-item-macros.rs:3:9
-   |
-LL |         $a
-   |         ^^
-...
-LL |     bah!(2);
-   |     ------- caused by the macro expansion here
-   |
-   = note: the usage of `bah!` is likely invalid in trait item context
+ at $DIR/trait-non-item-macros.rs:3:9
+  on line 8: caused by the macro expansion here
+note: the usage of `bah!` is likely invalid in trait item context
 
-error[E0308]: mismatched types
-  --> $DIR/trait-non-item-macros.rs:12:33
-   |
-LL |     let _recovery_witness: () = 0;
-   |                            --   ^ expected `()`, found integer
-   |                            |
-   |                            expected due to this
+error E0308: mismatched types
+ at $DIR/trait-non-item-macros.rs:12:33: expected `()`, found integer
+  on line 12, column 28: expected due to this
 
 error: aborting due to 2 previous errors
 

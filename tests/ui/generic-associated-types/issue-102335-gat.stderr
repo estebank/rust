@@ -1,27 +1,13 @@
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-102335-gat.rs:2:21
-   |
-LL |     type A: S<C<(), i32 = ()> = ()>;
-   |                     ^^^^^^^^ associated item constraint not allowed here
-   |
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-102335-gat.rs:2:21: associated item constraint not allowed here
 help: consider removing this associated item binding
-   |
-LL -     type A: S<C<(), i32 = ()> = ()>;
-LL +     type A: S<C<()> = ()>;
-   |
+ on line 2, column 18
 
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-102335-gat.rs:2:21
-   |
-LL |     type A: S<C<(), i32 = ()> = ()>;
-   |                     ^^^^^^^^ associated item constraint not allowed here
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-102335-gat.rs:2:21: associated item constraint not allowed here
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: consider removing this associated item binding
-   |
-LL -     type A: S<C<(), i32 = ()> = ()>;
-LL +     type A: S<C<()> = ()>;
-   |
+ on line 2, column 18
 
 error: aborting due to 2 previous errors
 

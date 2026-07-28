@@ -1,59 +1,27 @@
-error[E0308]: mismatched types
-  --> $DIR/suggest-ref-macro.rs:9:1
-   |
-LL | #[hello]
-   | ^^^^^^^^
-   | |
-   | expected `&mut i32`, found integer
-   | arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/suggest-ref-macro.rs:9:1: expected `&mut i32`, found integer
+  on line 9: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/suggest-ref-macro.rs:9:1
-   |
-LL | #[hello]
-   | ^^^^^^^^
-   = note: this error originates in the attribute macro `hello` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/suggest-ref-macro.rs:9:1
+note: this error originates in the attribute macro `hello` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-ref-macro.rs:16:11
-   |
-LL |         x(123);
-   |         - ^^^ expected `&mut i32`, found integer
-   |         |
-   |         arguments to this function are incorrect
-...
-LL |     bla!();
-   |     ------ in this macro invocation
-   |
+error E0308: mismatched types
+ at $DIR/suggest-ref-macro.rs:16:11: expected `&mut i32`, found integer
+  on line 16: arguments to this function are incorrect
+  on line 26: in this macro invocation
 note: function defined here
-  --> $DIR/suggest-ref-macro.rs:12:4
-   |
-LL | fn x(_: &mut i32) {}
-   |    ^ -----------
-   = note: this error originates in the macro `bla` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/suggest-ref-macro.rs:12:4
+note: this error originates in the macro `bla` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: consider mutably borrowing here
-   |
-LL |         x(&mut 123);
-   |           ++++
+ on line 16, column 10, add `&mut `
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-ref-macro.rs:27:10
-   |
-LL |         x($v)
-   |         - arguments to this function are incorrect
-...
-LL |     bla!(456);
-   |          ^^^ expected `&mut i32`, found integer
-   |
+error E0308: mismatched types
+ at $DIR/suggest-ref-macro.rs:27:10: expected `&mut i32`, found integer
+  on line 21: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/suggest-ref-macro.rs:12:4
-   |
-LL | fn x(_: &mut i32) {}
-   |    ^ -----------
+ at $DIR/suggest-ref-macro.rs:12:4
 help: consider mutably borrowing here
-   |
-LL |     bla!(&mut 456);
-   |          ++++
+ on line 27, column 9, add `&mut `
 
 error: aborting due to 3 previous errors
 

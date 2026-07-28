@@ -1,52 +1,27 @@
-error[E0053]: method `poll` has an incompatible type for trait
-  --> $DIR/bad-self-type.rs:10:13
-   |
-LL |     fn poll(self, _: &mut Context<'_>) -> Poll<()> {
-   |             ^^^^ expected `Pin<&mut MyFuture>`, found `MyFuture`
-   |
-   = note: expected signature `fn(Pin<&mut MyFuture>, &mut Context<'_>) -> Poll<_>`
-              found signature `fn(MyFuture, &mut Context<'_>) -> Poll<_>`
+error E0053: method `poll` has an incompatible type for trait
+ at $DIR/bad-self-type.rs:10:13: expected `Pin<&mut MyFuture>`, found `MyFuture`
+note: expected signature `fn(Pin<&mut MyFuture>, &mut Context<'_>) -> Poll<_>`
+         found signature `fn(MyFuture, &mut Context<'_>) -> Poll<_>`
 help: change the self-receiver type to match the trait
-   |
-LL |     fn poll(self: Pin<&mut MyFuture>, _: &mut Context<'_>) -> Poll<()> {
-   |                 ++++++++++++++++++++
+ on line 10, column 12, replace with `self: Pin<&mut MyFuture>`
 
-error[E0053]: method `foo` has an incompatible type for trait
-  --> $DIR/bad-self-type.rs:22:18
-   |
-LL |     fn foo(self: Box<Self>) {}
-   |                  ^^^^^^^^^ expected `MyFuture`, found `Box<MyFuture>`
-   |
+error E0053: method `foo` has an incompatible type for trait
+ at $DIR/bad-self-type.rs:22:18: expected `MyFuture`, found `Box<MyFuture>`
 note: type in trait
-  --> $DIR/bad-self-type.rs:17:12
-   |
-LL |     fn foo(self);
-   |            ^^^^
-   = note: expected signature `fn(MyFuture)`
-              found signature `fn(Box<MyFuture>)`
+ at $DIR/bad-self-type.rs:17:12
+note: expected signature `fn(MyFuture)`
+         found signature `fn(Box<MyFuture>)`
 help: change the self-receiver type to match the trait
-   |
-LL -     fn foo(self: Box<Self>) {}
-LL +     fn foo(self) {}
-   |
+ on line 22, column 11, replace with `self`
 
-error[E0053]: method `bar` has an incompatible type for trait
-  --> $DIR/bad-self-type.rs:24:17
-   |
-LL |     fn bar(self) {}
-   |                 ^ expected `Option<()>`, found `()`
-   |
+error E0053: method `bar` has an incompatible type for trait
+ at $DIR/bad-self-type.rs:24:17: expected `Option<()>`, found `()`
 note: type in trait
-  --> $DIR/bad-self-type.rs:18:21
-   |
-LL |     fn bar(self) -> Option<()>;
-   |                     ^^^^^^^^^^
-   = note: expected signature `fn(MyFuture) -> Option<()>`
-              found signature `fn(MyFuture) -> ()`
+ at $DIR/bad-self-type.rs:18:21
+note: expected signature `fn(MyFuture) -> Option<()>`
+         found signature `fn(MyFuture) -> ()`
 help: change the output type to match the trait
-   |
-LL |     fn bar(self) -> Option<()> {}
-   |                  +++++++++++++
+ on line 24, column 16, add ` -> Option<()>`
 
 error: aborting due to 3 previous errors
 

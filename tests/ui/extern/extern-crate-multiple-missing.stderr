@@ -1,14 +1,8 @@
-error[E0463]: can't find crate for `bar`
-  --> $DIR/extern-crate-multiple-missing.rs:2:1
-   |
-LL | extern crate bar;
-   | ^^^^^^^^^^^^^^^^^ can't find crate
+error E0463: can't find crate for `bar`
+ at $DIR/extern-crate-multiple-missing.rs:2:1: can't find crate
 
-error[E0463]: can't find crate for `foo`
-  --> $DIR/extern-crate-multiple-missing.rs:3:1
-   |
-LL | extern crate foo;
-   | ^^^^^^^^^^^^^^^^^ can't find crate
+error E0463: can't find crate for `foo`
+ at $DIR/extern-crate-multiple-missing.rs:3:1: can't find crate
 
 error: aborting due to 2 previous errors
 

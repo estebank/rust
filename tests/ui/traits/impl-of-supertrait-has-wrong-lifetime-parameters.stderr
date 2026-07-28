@@ -1,26 +1,13 @@
-error[E0803]: cannot infer an appropriate lifetime for lifetime parameter `'b` due to conflicting requirements
-  --> $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:28
-   |
-LL | impl<'a,'b> T2<'a, 'b> for S<'a, 'b> {
-   |                            ^^^^^^^^^
-   |
+error E0803: cannot infer an appropriate lifetime for lifetime parameter `'b` due to conflicting requirements
+ at $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:28
 note: first, the lifetime cannot outlive the lifetime `'b` as defined here...
-  --> $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:9
-   |
-LL | impl<'a,'b> T2<'a, 'b> for S<'a, 'b> {
-   |         ^^
+ at $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:9
 note: ...but the lifetime must also be valid for the lifetime `'a` as defined here...
-  --> $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:6
-   |
-LL | impl<'a,'b> T2<'a, 'b> for S<'a, 'b> {
-   |      ^^
+ at $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:6
 note: ...so that the types are compatible
-  --> $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:28
-   |
-LL | impl<'a,'b> T2<'a, 'b> for S<'a, 'b> {
-   |                            ^^^^^^^^^
-   = note: expected `T1<'a>`
-              found `T1<'_>`
+ at $DIR/impl-of-supertrait-has-wrong-lifetime-parameters.rs:24:28
+note: expected `T1<'a>`
+         found `T1<'_>`
 
 error: aborting due to 1 previous error
 

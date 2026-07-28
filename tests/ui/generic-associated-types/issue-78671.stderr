@@ -1,34 +1,17 @@
-error[E0107]: missing generics for associated type `CollectionFamily::Member`
-  --> $DIR/issue-78671.rs:5:47
-   |
-LL |     Box::new(Family) as &dyn CollectionFamily<Member=usize>
-   |                                               ^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for associated type `CollectionFamily::Member`
+ at $DIR/issue-78671.rs:5:47: expected 1 generic argument
 note: associated type defined here, with 1 generic parameter: `T`
-  --> $DIR/issue-78671.rs:2:10
-   |
-LL |     type Member<T>;
-   |          ^^^^^^ -
+ at $DIR/issue-78671.rs:2:10
 help: add missing generic argument
-   |
-LL |     Box::new(Family) as &dyn CollectionFamily<Member<T>=usize>
-   |                                                     +++
+ on line 5, column 52, add `<T>`
 
-error[E0038]: the trait `CollectionFamily` is not dyn compatible
-  --> $DIR/issue-78671.rs:5:30
-   |
-LL |     Box::new(Family) as &dyn CollectionFamily<Member=usize>
-   |                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CollectionFamily` is not dyn compatible
-   |
+error E0038: the trait `CollectionFamily` is not dyn compatible
+ at $DIR/issue-78671.rs:5:30: `CollectionFamily` is not dyn compatible
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/issue-78671.rs:2:10
-   |
-LL | trait CollectionFamily {
-   |       ---------------- this trait is not dyn compatible...
-LL |     type Member<T>;
-   |          ^^^^^^ ...because it contains generic associated type `Member`
-   = help: consider moving `Member` to another trait
+ at $DIR/issue-78671.rs:2:10: ...because it contains generic associated type `Member`
+  on line 1, column 7: this trait is not dyn compatible...
+help: consider moving `Member` to another trait
 
 error: aborting due to 2 previous errors
 

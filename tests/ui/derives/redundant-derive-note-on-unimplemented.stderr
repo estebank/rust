@@ -1,33 +1,18 @@
-error[E0277]: `X` doesn't implement `Debug`
-  --> $DIR/redundant-derive-note-on-unimplemented.rs:14:22
-   |
-LL |     println!("{:?}", S(X));
-   |               ----   ^^^^ `X` cannot be formatted using `{:?}` because it doesn't implement `Debug`
-   |               |
-   |               required by this formatting parameter
-   |
-   = help: the trait `Debug` is not implemented for `X`
+error E0277: `X` doesn't implement `Debug`
+ at $DIR/redundant-derive-note-on-unimplemented.rs:14:22: `X` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+  on line 14, column 15: required by this formatting parameter
+help: the trait `Debug` is not implemented for `X`
 help: the trait `Debug` is conditionally implemented for `S<T>`
-  --> $DIR/redundant-derive-note-on-unimplemented.rs:8:10
-   |
-LL | #[derive(Debug)]
-   |          ^^^^^
-LL | struct S<T>(T);
-   |          - unsatisfied requirement introduced here: `X: Debug`
+ at $DIR/redundant-derive-note-on-unimplemented.rs:8:10
+  on line 9, column 10: unsatisfied requirement introduced here: `X: Debug`
 note: required for `S<X>` to implement `Debug`
-  --> $DIR/redundant-derive-note-on-unimplemented.rs:9:8
-   |
-LL | #[derive(Debug)]
-   |          ----- in this derive macro expansion
-LL | struct S<T>(T);
-   |        ^ - type parameter would need to implement `Debug`
-   = help: consider manually implementing `Debug` to avoid undesired bounds caused by "imperfect derives"
-   = note: to learn more, visit <https://github.com/rust-lang/rust/issues/26925>
+ at $DIR/redundant-derive-note-on-unimplemented.rs:9:8
+  on line 8, column 10: in this derive macro expansion
+  on line 9, column 10: type parameter would need to implement `Debug`
+help: consider manually implementing `Debug` to avoid undesired bounds caused by "imperfect derives"
+note: to learn more, visit <https://github.com/rust-lang/rust/issues/26925>
 help: consider annotating `X` with `#[derive(Debug)]`
-   |
-LL + #[derive(Debug)]
-LL | struct X;
-   |
+ on line 11, column 1, add `#[derive(Debug)]`
 
 error: aborting due to 1 previous error
 

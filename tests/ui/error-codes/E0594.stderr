@@ -1,11 +1,6 @@
-error[E0594]: cannot assign to immutable static item `NUM`
-  --> $DIR/E0594.rs:4:5
-   |
-LL | static NUM: i32 = 18;
-   | --------------- this `static` cannot be written to
-...
-LL |     NUM = 20;
-   |     ^^^^^^^^ cannot assign
+error E0594: cannot assign to immutable static item `NUM`
+ at $DIR/E0594.rs:4:5: cannot assign
+  on line 1: this `static` cannot be written to
 
 error: aborting due to 1 previous error
 

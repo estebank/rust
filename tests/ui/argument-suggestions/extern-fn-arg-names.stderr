@@ -1,24 +1,13 @@
-error[E0425]: cannot find type `err` in this scope
-  --> $DIR/extern-fn-arg-names.rs:2:29
-   |
-LL |     fn dstfn(src: i32, dst: err);
-   |                             ^^^ not found in this scope
+error E0425: cannot find type `err` in this scope
+ at $DIR/extern-fn-arg-names.rs:2:29: not found in this scope
 
-error[E0061]: this function takes 2 arguments but 1 argument was supplied
-  --> $DIR/extern-fn-arg-names.rs:7:5
-   |
-LL |     dstfn(1);
-   |     ^^^^^--- argument #2 is missing
-   |
+error E0061: this function takes 2 arguments but 1 argument was supplied
+ at $DIR/extern-fn-arg-names.rs:7:5
+  on line 7, column 10: argument #2 is missing
 note: function defined here
-  --> $DIR/extern-fn-arg-names.rs:2:8
-   |
-LL |     fn dstfn(src: i32, dst: err);
-   |        ^^^^^           ---
+ at $DIR/extern-fn-arg-names.rs:2:8
 help: provide the argument
-   |
-LL |     dstfn(1, /* dst */);
-   |            +++++++++++
+ on line 7, column 9, replace with `(1, /* dst */)`
 
 error: aborting due to 2 previous errors
 

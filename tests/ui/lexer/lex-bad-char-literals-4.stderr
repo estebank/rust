@@ -1,8 +1,5 @@
-error[E0762]: unterminated character literal
-  --> $DIR/lex-bad-char-literals-4.rs:4:5
-   |
-LL |     '●
-   |     ^^^^
+error E0762: unterminated character literal
+ at $DIR/lex-bad-char-literals-4.rs:4:5
 
 error: aborting due to 1 previous error
 

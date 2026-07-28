@@ -1,14 +1,8 @@
 error: unexpected token: `#`
-  --> <crate attribute>:1:23
-   |
-LL | #![feature(yeet_expr)]#![allow(warnings)]
-   |                       ^ unexpected token after this
+ at <crate attribute>:1:23: unexpected token after this
 
-error[E0601]: `main` function not found in crate `injection2`
-  --> $DIR/injection2.rs:3:12
-   |
-LL | fn foo() {}
-   |            ^ consider adding a `main` function to `$DIR/injection2.rs`
+error E0601: `main` function not found in crate `injection2`
+ at $DIR/injection2.rs:3:12: consider adding a `main` function to `$DIR/injection2.rs`
 
 error: aborting due to 2 previous errors
 

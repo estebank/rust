@@ -1,14 +1,7 @@
 error: incorrect use of `await`
-  --> $DIR/issue-113203.rs:5:5
-   |
-LL |     await {}()
-   |     ^^^^^^^^
-   |
+ at $DIR/issue-113203.rs:5:5
 help: `await` is a postfix operation
-   |
-LL -     await {}()
-LL +     {}.await()
-   |
+ on line 5, column 4
 
 error: aborting due to 1 previous error
 

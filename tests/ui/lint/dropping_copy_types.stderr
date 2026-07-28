@@ -1,140 +1,63 @@
 warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
-  --> $DIR/dropping_copy_types.rs:34:5
-   |
-LL |     drop(s1);
-   |     ^^^^^--^
-   |          |
-   |          argument has type `SomeStruct`
-   |
+ at $DIR/dropping_copy_types.rs:34:5
+  on line 34, column 10: argument has type `SomeStruct`
 note: the lint level is defined here
-  --> $DIR/dropping_copy_types.rs:3:9
-   |
-LL | #![warn(dropping_copy_types)]
-   |         ^^^^^^^^^^^^^^^^^^^
+ at $DIR/dropping_copy_types.rs:3:9
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -     drop(s1);
-LL +     let _ = s1;
-   |
+ on line 34, column 4, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
-  --> $DIR/dropping_copy_types.rs:35:5
-   |
-LL |     drop(s2);
-   |     ^^^^^--^
-   |          |
-   |          argument has type `SomeStruct`
-   |
+ at $DIR/dropping_copy_types.rs:35:5
+  on line 35, column 10: argument has type `SomeStruct`
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -     drop(s2);
-LL +     let _ = s2;
-   |
+ on line 35, column 4, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a reference instead of an owned value does nothing
-  --> $DIR/dropping_copy_types.rs:36:5
-   |
-LL |     drop(s3);
-   |     ^^^^^--^
-   |          |
-   |          argument has type `&SomeStruct`
-   |
-   = note: `#[warn(dropping_references)]` on by default
+ at $DIR/dropping_copy_types.rs:36:5
+  on line 36, column 10: argument has type `&SomeStruct`
+note: `#[warn(dropping_references)]` on by default
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -     drop(s3);
-LL +     let _ = s3;
-   |
+ on line 36, column 4, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
-  --> $DIR/dropping_copy_types.rs:37:5
-   |
-LL |     drop(s4);
-   |     ^^^^^--^
-   |          |
-   |          argument has type `SomeStruct`
-   |
+ at $DIR/dropping_copy_types.rs:37:5
+  on line 37, column 10: argument has type `SomeStruct`
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -     drop(s4);
-LL +     let _ = s4;
-   |
+ on line 37, column 4, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a reference instead of an owned value does nothing
-  --> $DIR/dropping_copy_types.rs:38:5
-   |
-LL |     drop(s5);
-   |     ^^^^^--^
-   |          |
-   |          argument has type `&SomeStruct`
-   |
+ at $DIR/dropping_copy_types.rs:38:5
+  on line 38, column 10: argument has type `&SomeStruct`
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -     drop(s5);
-LL +     let _ = s5;
-   |
+ on line 38, column 4, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a reference instead of an owned value does nothing
-  --> $DIR/dropping_copy_types.rs:50:5
-   |
-LL |     drop(a2);
-   |     ^^^^^--^
-   |          |
-   |          argument has type `&AnotherStruct`
-   |
+ at $DIR/dropping_copy_types.rs:50:5
+  on line 50, column 10: argument has type `&AnotherStruct`
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -     drop(a2);
-LL +     let _ = a2;
-   |
+ on line 50, column 4, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a reference instead of an owned value does nothing
-  --> $DIR/dropping_copy_types.rs:52:5
-   |
-LL |     drop(a4);
-   |     ^^^^^--^
-   |          |
-   |          argument has type `&AnotherStruct`
-   |
+ at $DIR/dropping_copy_types.rs:52:5
+  on line 52, column 10: argument has type `&AnotherStruct`
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -     drop(a4);
-LL +     let _ = a4;
-   |
+ on line 52, column 4, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
-  --> $DIR/dropping_copy_types.rs:71:13
-   |
-LL |             drop(println_and(13));
-   |             ^^^^^---------------^
-   |                  |
-   |                  argument has type `i32`
-   |
+ at $DIR/dropping_copy_types.rs:71:13
+  on line 71, column 18: argument has type `i32`
 help: use `let _ = ...` to ignore the expression or result
-   |
-LL -             drop(println_and(13));
-LL +             let _ = println_and(13);
-   |
+ on line 71, column 12, replace with `let _ = `
 
 warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
-  --> $DIR/dropping_copy_types.rs:74:14
-   |
-LL |         3 if drop(println_and(14)) == () => (),
-   |              ^^^^^---------------^
-   |                   |
-   |                   argument has type `i32`
-   |
-   = note: use `let _ = ...` to ignore the expression or result
+ at $DIR/dropping_copy_types.rs:74:14
+  on line 74, column 19: argument has type `i32`
+note: use `let _ = ...` to ignore the expression or result
 
 warning: calls to `std::mem::drop` with a value that implements `Copy` does nothing
-  --> $DIR/dropping_copy_types.rs:76:14
-   |
-LL |         4 => drop(2),
-   |              ^^^^^-^
-   |                   |
-   |                   argument has type `i32`
-   |
-   = note: use `let _ = ...` to ignore the expression or result
+ at $DIR/dropping_copy_types.rs:76:14
+  on line 76, column 19: argument has type `i32`
+note: use `let _ = ...` to ignore the expression or result
 
 warning: 10 warnings emitted
 

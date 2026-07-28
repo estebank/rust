@@ -1,19 +1,11 @@
-error[E0382]: use of moved value: `r`
-  --> $DIR/pin-mut-reborrow-infer-var-issue-107419.rs:10:9
-   |
-LL |     let mut r = Pin::new(&mut uwu);
-   |         ----- move occurs because `r` has type `Pin<&mut ()>`, which does not implement the `Copy` trait
-LL |     foo(r.get_mut());
-   |           --------- `r` moved due to this method call
-LL |     foo(r.get_mut());
-   |         ^ value used here after move
-   |
+error E0382: use of moved value: `r`
+ at $DIR/pin-mut-reborrow-infer-var-issue-107419.rs:10:9: value used here after move
+  on line 8, column 9: move occurs because `r` has type `Pin<&mut ()>`, which does not implement the `Copy` trait
+  on line 9, column 11: `r` moved due to this method call
 note: `Pin::<&'a mut T>::get_mut` takes ownership of the receiver `self`, which moves `r`
-  --> $SRC_DIR/core/src/pin.rs:LL:COL
+ at $SRC_DIR/core/src/pin.rs:LL:COL
 help: consider reborrowing the `Pin` instead of moving it
-   |
-LL |     foo(r.as_mut().get_mut());
-   |          +++++++++
+ on line 9, column 9, add `.as_mut()`
 
 error: aborting due to 1 previous error
 

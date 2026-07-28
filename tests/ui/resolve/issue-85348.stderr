@@ -1,28 +1,14 @@
-error[E0530]: let bindings cannot shadow const parameters
-  --> $DIR/issue-85348.rs:6:17
-   |
-LL | impl<const N: usize> ArrayWindowsExample {
-   |            - the const parameter `N` is defined here
-...
-LL |         let mut N;
-   |                 ^ cannot be named the same as a const parameter
+error E0530: let bindings cannot shadow const parameters
+ at $DIR/issue-85348.rs:6:17: cannot be named the same as a const parameter
+  on line 3, column 12: the const parameter `N` is defined here
 
-error[E0425]: cannot find type `ArrayWindowsExample` in this scope
-  --> $DIR/issue-85348.rs:3:22
-   |
-LL | impl<const N: usize> ArrayWindowsExample {
-   |                      ^^^^^^^^^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `ArrayWindowsExample` in this scope
+ at $DIR/issue-85348.rs:3:22: not found in this scope
 
-error[E0282]: type annotations needed
-  --> $DIR/issue-85348.rs:6:13
-   |
-LL |         let mut N;
-   |             ^^^^^
-   |
+error E0282: type annotations needed
+ at $DIR/issue-85348.rs:6:13
 help: consider giving `N` an explicit type
-   |
-LL |         let mut N: /* Type */;
-   |                  ++++++++++++
+ on line 6, column 17, add `: /* Type */`
 
 error: aborting due to 3 previous errors
 

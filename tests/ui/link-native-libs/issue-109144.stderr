@@ -1,8 +1,5 @@
-error[E0459]: `#[link]` attribute requires a `name = "string"` argument
-  --> $DIR/issue-109144.rs:2:1
-   |
-LL | #[link(kind = "static", modifiers = "+whole-archive,+bundle")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `name` argument
+error E0459: `#[link]` attribute requires a `name = "string"` argument
+ at $DIR/issue-109144.rs:2:1: missing `name` argument
 
 error: aborting due to 1 previous error
 

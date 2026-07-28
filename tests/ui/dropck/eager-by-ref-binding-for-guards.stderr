@@ -1,27 +1,16 @@
-error[E0597]: `short1` does not live long enough
-  --> $DIR/eager-by-ref-binding-for-guards.rs:12:46
-   |
-LL |         (mut long1, ref short1) => long1.0 = &short1,
-   |                     ----------               ^^^^^^-
-   |                     |                        |     |
-   |                     |                        |     `short1` dropped here while still borrowed
-   |                     |                        |     borrow might be used here, when `long1` is dropped and runs the `Drop` code for type `Struct`
-   |                     |                        borrowed value does not live long enough
-   |                     binding `short1` declared here
-   |
-   = note: values in a scope are dropped in the opposite order they are defined
+error E0597: `short1` does not live long enough
+ at $DIR/eager-by-ref-binding-for-guards.rs:12:46: borrowed value does not live long enough
+  on line 12, column 21: binding `short1` declared here
+  on line 12, column 52: `short1` dropped here while still borrowed
+  on line 12, column 52: borrow might be used here, when `long1` is dropped and runs the `Drop` code for type `Struct`
+note: values in a scope are dropped in the opposite order they are defined
 
-error[E0597]: `short4` does not live long enough
-  --> $DIR/eager-by-ref-binding-for-guards.rs:27:69
-   |
-LL |         (mut long4, &Err(short4) | Ok(short4)) if true => long4.0 = &short4,
-   |                          ------                                     ^^^^^^-
-   |                          |                                          |     |
-   |                          |                                          |     `short4` dropped here while still borrowed
-   |                          |                                          |     borrow might be used here, when `long4` is dropped and runs the `Drop` code for type `Struct`
-   |                          binding `short4` declared here             borrowed value does not live long enough
-   |
-   = note: values in a scope are dropped in the opposite order they are defined
+error E0597: `short4` does not live long enough
+ at $DIR/eager-by-ref-binding-for-guards.rs:27:69: borrowed value does not live long enough
+  on line 27, column 26: binding `short4` declared here
+  on line 27, column 75: `short4` dropped here while still borrowed
+  on line 27, column 75: borrow might be used here, when `long4` is dropped and runs the `Drop` code for type `Struct`
+note: values in a scope are dropped in the opposite order they are defined
 
 error: aborting due to 2 previous errors
 

@@ -1,41 +1,21 @@
-error[E0423]: cannot find value `path` in this scope
-  --> $DIR/builtin-attribute-not-value.rs:2:5
-   |
-LL |     path;
-   |     ^^^^ not found in this scope
-   |
-   = note: a built-in attribute named `path` exists in another namespace
+error E0423: cannot find value `path` in this scope
+ at $DIR/builtin-attribute-not-value.rs:2:5: not found in this scope
+note: a built-in attribute named `path` exists in another namespace
 
-error[E0423]: cannot find value `path` in this scope
-  --> $DIR/builtin-attribute-not-value.rs:13:5
-   |
-LL |     path;
-   |     ^^^^
-   |
-   = note: a built-in attribute named `path` exists in another namespace
+error E0423: cannot find value `path` in this scope
+ at $DIR/builtin-attribute-not-value.rs:13:5
+note: a built-in attribute named `path` exists in another namespace
 help: a local variable with a similar name exists
-   |
-LL |     pathh;
-   |         +
+ on line 13, column 4, replace with `pathh`
 
-error[E0423]: cannot find value `path` in this scope
-  --> $DIR/builtin-attribute-not-value.rs:24:15
-   |
-LL |     path: (),
-   |     ---- a field by that name exists in `Self`
-...
-LL |         Wat { path }
-   |               ^^^^
-   |
-   = note: a built-in attribute named `path` exists in another namespace
+error E0423: cannot find value `path` in this scope
+ at $DIR/builtin-attribute-not-value.rs:24:15
+  on line 19: a field by that name exists in `Self`
+note: a built-in attribute named `path` exists in another namespace
 
-error[E0423]: cannot find function `path` in this scope
-  --> $DIR/builtin-attribute-not-value.rs:7:5
-   |
-LL |     path();
-   |     ^^^^ not found in this scope
-   |
-   = note: a built-in attribute named `path` exists in another namespace
+error E0423: cannot find function `path` in this scope
+ at $DIR/builtin-attribute-not-value.rs:7:5: not found in this scope
+note: a built-in attribute named `path` exists in another namespace
 
 error: aborting due to 4 previous errors
 

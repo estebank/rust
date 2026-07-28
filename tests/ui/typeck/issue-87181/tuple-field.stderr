@@ -1,13 +1,7 @@
-error[E0609]: no field `0` on type `fn(char, u16) -> Foo {Foo}`
-  --> $DIR/tuple-field.rs:12:15
-   |
-LL |     thing.bar.0;
-   |               ^ unknown field
-   |
+error E0609: no field `0` on type `fn(char, u16) -> Foo {Foo}`
+ at $DIR/tuple-field.rs:12:15: unknown field
 help: use parentheses to construct this tuple struct
-   |
-LL |     (thing.bar)(/* char */, /* u16 */).0;
-   |     +         ++++++++++++++++++++++++
+ on line 12, column 4, add `(`
 
 error: aborting due to 1 previous error
 

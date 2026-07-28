@@ -1,11 +1,6 @@
-error[E0594]: cannot assign to immutable static item `S`
-  --> $DIR/thread-local-mutation.rs:11:5
-   |
-LL | static S: &str = "before";
-   | -------------- this `static` cannot be written to
-...
-LL |     S = "after";
-   |     ^^^^^^^^^^^ cannot assign
+error E0594: cannot assign to immutable static item `S`
+ at $DIR/thread-local-mutation.rs:11:5: cannot assign
+  on line 8: this `static` cannot be written to
 
 error: aborting due to 1 previous error
 

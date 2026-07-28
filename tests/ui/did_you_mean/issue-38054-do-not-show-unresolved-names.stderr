@@ -1,14 +1,8 @@
-error[E0432]: unresolved import `Foo`
-  --> $DIR/issue-38054-do-not-show-unresolved-names.rs:2:5
-   |
-LL | use Foo;
-   |     ^^^ no `Foo` in the root
+error E0432: unresolved import `Foo`
+ at $DIR/issue-38054-do-not-show-unresolved-names.rs:2:5: no `Foo` in the root
 
-error[E0432]: unresolved import `Foo1`
-  --> $DIR/issue-38054-do-not-show-unresolved-names.rs:4:5
-   |
-LL | use Foo1;
-   |     ^^^^ no `Foo1` in the root
+error E0432: unresolved import `Foo1`
+ at $DIR/issue-38054-do-not-show-unresolved-names.rs:4:5: no `Foo1` in the root
 
 error: aborting due to 2 previous errors
 

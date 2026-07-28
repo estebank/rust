@@ -1,44 +1,22 @@
 error: unused import: `HashMap`
-  --> $DIR/lint-unused-imports-self-single.rs:6:24
-   |
-LL | use std::collections::{HashMap, self as coll};
-   |                        ^^^^^^^
-   |
+ at $DIR/lint-unused-imports-self-single.rs:6:24
 note: the lint level is defined here
-  --> $DIR/lint-unused-imports-self-single.rs:3:9
-   |
-LL | #![deny(unused_imports)]
-   |         ^^^^^^^^^^^^^^
+ at $DIR/lint-unused-imports-self-single.rs:3:9
 
 error: unused import: `self as std_io`
-  --> $DIR/lint-unused-imports-self-single.rs:9:15
-   |
-LL | use std::io::{self as std_io};
-   |               ^^^^^^^^^^^^^^
+ at $DIR/lint-unused-imports-self-single.rs:9:15
 
 error: unused import: `self as std_sync`
-  --> $DIR/lint-unused-imports-self-single.rs:12:24
-   |
-LL | use std::sync::{Mutex, self as std_sync};
-   |                        ^^^^^^^^^^^^^^^^
+ at $DIR/lint-unused-imports-self-single.rs:12:24
 
 error: unused import: `self as std_sync_mpsc`
-  --> $DIR/lint-unused-imports-self-single.rs:15:24
-   |
-LL | use std::sync::{mpsc::{self as std_sync_mpsc, Sender}};
-   |                        ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lint-unused-imports-self-single.rs:15:24
 
 error: unused import: `Keys`
-  --> $DIR/lint-unused-imports-self-single.rs:18:56
-   |
-LL | use std::collections::{hash_map::{self as std_coll_hm, Keys}};
-   |                                                        ^^^^
+ at $DIR/lint-unused-imports-self-single.rs:18:56
 
 error: unused import: `self`
-  --> $DIR/lint-unused-imports-self-single.rs:21:19
-   |
-LL | use std::borrow::{self, Cow};
-   |                   ^^^^
+ at $DIR/lint-unused-imports-self-single.rs:21:19
 
 error: aborting due to 6 previous errors
 

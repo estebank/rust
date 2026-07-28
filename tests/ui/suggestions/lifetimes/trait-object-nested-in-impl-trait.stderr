@@ -1,78 +1,30 @@
 error: lifetime may not live long enough
-  --> $DIR/trait-object-nested-in-impl-trait.rs:28:9
-   |
-LL |       fn iter(&self) -> impl Iterator<Item = Box<dyn Foo>> {
-   |               - let's call the lifetime of this reference `'1`
-LL | /         Iter {
-LL | |
-LL | |             current: None,
-LL | |             remaining: self.0.iter(),
-LL | |         }
-   | |_________^ returning this value requires that `'1` must outlive `'static`
-   |
+ at $DIR/trait-object-nested-in-impl-trait.rs:28:9 to 32:10: returning this value requires that `'1` must outlive `'static`
+  on line 27, column 13: let's call the lifetime of this reference `'1`
 help: to declare that `impl Iterator<Item = Box<(dyn Foo + 'static)>>` captures data from argument `self`, you can add an explicit `'_` lifetime bound
-   |
-LL |     fn iter(&self) -> impl Iterator<Item = Box<dyn Foo>> + '_ {
-   |                                                          ++++
+ on line 27, column 56, add ` + '_`
 help: to declare that the trait object captures data from argument `self`, you can add an explicit `'_` lifetime bound
-   |
-LL |     fn iter(&self) -> impl Iterator<Item = Box<dyn Foo + '_>> {
-   |                                                        ++++
+ on line 27, column 54, add ` + '_`
 
 error: lifetime may not live long enough
-  --> $DIR/trait-object-nested-in-impl-trait.rs:40:9
-   |
-LL |       fn iter(&self) -> impl Iterator<Item = Box<dyn Foo>> + '_ {
-   |               - let's call the lifetime of this reference `'1`
-LL | /         Iter {
-LL | |
-LL | |             current: None,
-LL | |             remaining: self.0.iter(),
-LL | |         }
-   | |_________^ returning this value requires that `'1` must outlive `'static`
-   |
+ at $DIR/trait-object-nested-in-impl-trait.rs:40:9 to 44:10: returning this value requires that `'1` must outlive `'static`
+  on line 39, column 13: let's call the lifetime of this reference `'1`
 help: to declare that the trait object captures data from argument `self`, you can add an explicit `'_` lifetime bound
-   |
-LL |     fn iter(&self) -> impl Iterator<Item = Box<dyn Foo + '_>> + '_ {
-   |                                                        ++++
+ on line 39, column 54, add ` + '_`
 
 error: lifetime may not live long enough
-  --> $DIR/trait-object-nested-in-impl-trait.rs:52:9
-   |
-LL |       fn iter<'a>(&'a self) -> impl Iterator<Item = Box<dyn Foo>> + 'a {
-   |               -- lifetime `'a` defined here
-LL | /         Iter {
-LL | |
-LL | |             current: None,
-LL | |             remaining: self.0.iter(),
-LL | |         }
-   | |_________^ returning this value requires that `'a` must outlive `'static`
-   |
+ at $DIR/trait-object-nested-in-impl-trait.rs:52:9 to 56:10: returning this value requires that `'a` must outlive `'static`
+  on line 51, column 13: lifetime `'a` defined here
 help: to declare that the trait object captures data from argument `self`, you can add an explicit `'a` lifetime bound
-   |
-LL |     fn iter<'a>(&'a self) -> impl Iterator<Item = Box<dyn Foo + 'a>> + 'a {
-   |                                                               ++++
+ on line 51, column 61, add ` + 'a`
 
 error: lifetime may not live long enough
-  --> $DIR/trait-object-nested-in-impl-trait.rs:64:9
-   |
-LL |       fn iter<'a>(&'a self) -> impl Iterator<Item = Box<dyn Foo>> {
-   |               -- lifetime `'a` defined here
-LL | /         Iter {
-LL | |
-LL | |             current: None,
-LL | |             remaining: self.0.iter(),
-LL | |         }
-   | |_________^ returning this value requires that `'a` must outlive `'static`
-   |
+ at $DIR/trait-object-nested-in-impl-trait.rs:64:9 to 68:10: returning this value requires that `'a` must outlive `'static`
+  on line 63, column 13: lifetime `'a` defined here
 help: to declare that `impl Iterator<Item = Box<(dyn Foo + 'static)>>` captures data from argument `self`, you can add an explicit `'a` lifetime bound
-   |
-LL |     fn iter<'a>(&'a self) -> impl Iterator<Item = Box<dyn Foo>> + 'a {
-   |                                                                 ++++
+ on line 63, column 63, add ` + 'a`
 help: to declare that the trait object captures data from argument `self`, you can add an explicit `'a` lifetime bound
-   |
-LL |     fn iter<'a>(&'a self) -> impl Iterator<Item = Box<dyn Foo + 'a>> {
-   |                                                               ++++
+ on line 63, column 61, add ` + 'a`
 
 error: aborting due to 4 previous errors
 

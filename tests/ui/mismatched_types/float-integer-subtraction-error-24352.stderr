@@ -1,31 +1,20 @@
-error[E0277]: cannot subtract `{integer}` from `f64`
-  --> $DIR/float-integer-subtraction-error-24352.rs:4:12
-   |
-LL |     1.0f64 - 1
-   |            ^ no implementation for `f64 - {integer}`
-   |
-   = help: the trait `Sub<{integer}>` is not implemented for `f64`
+error E0277: cannot subtract `{integer}` from `f64`
+ at $DIR/float-integer-subtraction-error-24352.rs:4:12: no implementation for `f64 - {integer}`
+help: the trait `Sub<{integer}>` is not implemented for `f64`
 help: the following other types implement trait `Sub<Rhs>`
-  --> $SRC_DIR/core/src/ops/arith.rs:LL:COL
-   |
-   = note: `f64` implements `Sub`
-  ::: $SRC_DIR/core/src/ops/arith.rs:LL:COL
-   |
-   = note: in this macro invocation
-  --> $SRC_DIR/core/src/internal_macros.rs:LL:COL
-   |
-   = note: `&f64` implements `Sub<f64>`
-  ::: $SRC_DIR/core/src/internal_macros.rs:LL:COL
-   |
-   = note: `f64` implements `Sub<&f64>`
-  ::: $SRC_DIR/core/src/internal_macros.rs:LL:COL
-   |
-   = note: `&f64` implements `Sub`
-   = note: this error originates in the macro `sub_impl` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $SRC_DIR/core/src/ops/arith.rs:LL:COL
+note: `f64` implements `Sub`
+ at $SRC_DIR/core/src/ops/arith.rs:LL:COL
+note: in this macro invocation
+ at $SRC_DIR/core/src/internal_macros.rs:LL:COL
+note: `&f64` implements `Sub<f64>`
+ at $SRC_DIR/core/src/internal_macros.rs:LL:COL
+note: `f64` implements `Sub<&f64>`
+ at $SRC_DIR/core/src/internal_macros.rs:LL:COL
+note: `&f64` implements `Sub`
+note: this error originates in the macro `sub_impl` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: consider using a floating-point literal by writing it with `.0`
-   |
-LL |     1.0f64 - 1.0
-   |               ++
+ on line 4, column 14, add `.0`
 
 error: aborting due to 1 previous error
 

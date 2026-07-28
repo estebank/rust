@@ -1,10 +1,6 @@
 error: associated constant in `impl` without body
-  --> $DIR/impl-item-const-semantic-fail.rs:6:5
-   |
-LL |     const Y: u8;
-   |     ^^^^^^^^^^^-
-   |                |
-   |                help: provide a definition for the constant: `= <expr>;`
+ at $DIR/impl-item-const-semantic-fail.rs:6:5
+  on line 6, column 16: help: provide a definition for the constant: `= <expr>;`
 
 error: aborting due to 1 previous error
 

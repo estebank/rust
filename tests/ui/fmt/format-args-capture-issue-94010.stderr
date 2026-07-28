@@ -1,31 +1,14 @@
-error[E0425]: cannot find value `foo` in this scope
-  --> $DIR/format-args-capture-issue-94010.rs:3:16
-   |
-LL |     const FOO: i32 = 123;
-   |     --------------------- similarly named constant `FOO` defined here
-LL |     println!("{foo:X}");
-   |                ^^^
-   |
+error E0425: cannot find value `foo` in this scope
+ at $DIR/format-args-capture-issue-94010.rs:3:16
+  on line 2: similarly named constant `FOO` defined here
 help: a constant with a similar name exists (notice the capitalization)
-   |
-LL -     println!("{foo:X}");
-LL +     println!("{FOO:X}");
-   |
+ on line 3, column 15, replace with `FOO`
 
-error[E0425]: cannot find value `foo` in this scope
-  --> $DIR/format-args-capture-issue-94010.rs:5:18
-   |
-LL |     const FOO: i32 = 123;
-   |     --------------------- similarly named constant `FOO` defined here
-...
-LL |     println!("{:.foo$}", 0);
-   |                  ^^^
-   |
+error E0425: cannot find value `foo` in this scope
+ at $DIR/format-args-capture-issue-94010.rs:5:18
+  on line 2: similarly named constant `FOO` defined here
 help: a constant with a similar name exists (notice the capitalization)
-   |
-LL -     println!("{:.foo$}", 0);
-LL +     println!("{:.FOO$}", 0);
-   |
+ on line 5, column 17, replace with `FOO`
 
 error: aborting due to 2 previous errors
 

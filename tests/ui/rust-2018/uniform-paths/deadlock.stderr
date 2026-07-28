@@ -1,8 +1,5 @@
-error[E0463]: can't find crate for `bar`
-  --> $DIR/deadlock.rs:4:5
-   |
-LL | use bar::foo;
-   |     ^^^ can't find crate
+error E0463: can't find crate for `bar`
+ at $DIR/deadlock.rs:4:5: can't find crate
 
 error: aborting due to 1 previous error
 

@@ -1,8 +1,5 @@
-error[E0277]: the trait bound `T: Foo<usize>` is not satisfied
-  --> $DIR/associated-types-invalid-trait-ref-issue-18865.rs:10:13
-   |
-LL |     let u: <T as Foo<usize>>::Bar = t.get_bar();
-   |             ^ the trait `Foo<usize>` is not implemented for `T`
+error E0277: the trait bound `T: Foo<usize>` is not satisfied
+ at $DIR/associated-types-invalid-trait-ref-issue-18865.rs:10:13: the trait `Foo<usize>` is not implemented for `T`
 
 error: aborting due to 1 previous error
 

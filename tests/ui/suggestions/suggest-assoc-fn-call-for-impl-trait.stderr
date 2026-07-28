@@ -1,65 +1,29 @@
-error[E0599]: no method named `foo` found for struct `A` in the current scope
-  --> $DIR/suggest-assoc-fn-call-for-impl-trait.rs:21:8
-   |
-LL | struct A {
-   | -------- method `foo` not found for this struct
-...
-LL |     _a.foo();
-   |        ^^^ this is an associated function, not a method
-   |
-   = note: found the following associated functions; to be used as methods, functions must have a `self` parameter
+error E0599: no method named `foo` found for struct `A` in the current scope
+ at $DIR/suggest-assoc-fn-call-for-impl-trait.rs:21:8: this is an associated function, not a method
+  on line 3: method `foo` not found for this struct
+note: found the following associated functions; to be used as methods, functions must have a `self` parameter
 note: the candidate is defined in the trait `M`
-  --> $DIR/suggest-assoc-fn-call-for-impl-trait.rs:8:5
-   |
-LL |     fn foo(_a: Self);
-   |     ^^^^^^^^^^^^^^^^^
+ at $DIR/suggest-assoc-fn-call-for-impl-trait.rs:8:5
 help: use associated function syntax instead
-   |
-LL -     _a.foo();
-LL +     A::foo(_a);
-   |
+ on line 21, column 4, replace with `A::foo(_a)`
 
-error[E0599]: no method named `baz` found for struct `A` in the current scope
-  --> $DIR/suggest-assoc-fn-call-for-impl-trait.rs:23:8
-   |
-LL | struct A {
-   | -------- method `baz` not found for this struct
-...
-LL |     _a.baz(0);
-   |        ^^^ this is an associated function, not a method
-   |
-   = note: found the following associated functions; to be used as methods, functions must have a `self` parameter
+error E0599: no method named `baz` found for struct `A` in the current scope
+ at $DIR/suggest-assoc-fn-call-for-impl-trait.rs:23:8: this is an associated function, not a method
+  on line 3: method `baz` not found for this struct
+note: found the following associated functions; to be used as methods, functions must have a `self` parameter
 note: the candidate is defined in the trait `M`
-  --> $DIR/suggest-assoc-fn-call-for-impl-trait.rs:10:5
-   |
-LL |     fn baz(_a: i32);
-   |     ^^^^^^^^^^^^^^^^
+ at $DIR/suggest-assoc-fn-call-for-impl-trait.rs:10:5
 help: use associated function syntax instead
-   |
-LL -     _a.baz(0);
-LL +     A::baz(0);
-   |
+ on line 23, column 4, replace with `A::baz(0)`
 
-error[E0599]: no method named `bar` found for struct `A` in the current scope
-  --> $DIR/suggest-assoc-fn-call-for-impl-trait.rs:27:8
-   |
-LL | struct A {
-   | -------- method `bar` not found for this struct
-...
-LL |     _b.bar();
-   |        ^^^ this is an associated function, not a method
-   |
-   = note: found the following associated functions; to be used as methods, functions must have a `self` parameter
+error E0599: no method named `bar` found for struct `A` in the current scope
+ at $DIR/suggest-assoc-fn-call-for-impl-trait.rs:27:8: this is an associated function, not a method
+  on line 3: method `bar` not found for this struct
+note: found the following associated functions; to be used as methods, functions must have a `self` parameter
 note: the candidate is defined in the trait `M`
-  --> $DIR/suggest-assoc-fn-call-for-impl-trait.rs:9:5
-   |
-LL |     fn bar(_a: Self);
-   |     ^^^^^^^^^^^^^^^^^
+ at $DIR/suggest-assoc-fn-call-for-impl-trait.rs:9:5
 help: use associated function syntax instead
-   |
-LL -     _b.bar();
-LL +     A::bar(_b);
-   |
+ on line 27, column 4, replace with `A::bar(_b)`
 
 error: aborting due to 3 previous errors
 

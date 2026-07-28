@@ -1,14 +1,7 @@
-error[E0603]: module `glob` is private
-  --> $DIR/privacy4.rs:23:14
-   |
-LL |     use bar::glob::gpriv;
-   |              ^^^^ private module
-   |
+error E0603: module `glob` is private
+ at $DIR/privacy4.rs:23:14: private module
 note: the module `glob` is defined here
-  --> $DIR/privacy4.rs:15:5
-   |
-LL |     mod glob {
-   |     ^^^^^^^^
+ at $DIR/privacy4.rs:15:5
 
 error: aborting due to 1 previous error
 

@@ -1,17 +1,9 @@
-error[E0393]: the const parameter `N` must be explicitly specified
-  --> $DIR/dyn-compat-const-param-default-mentions-self.rs:18:16
-   |
-LL | trait X<const N: usize = { <Self as Y>::N }> {}
-   | -------------------------------------------- const parameter `N` must be specified for this
-...
-LL |     let _: dyn X;
-   |                ^
-   |
-   = note: because the parameter default references `Self`, the parameter must be specified on the trait object type
+error E0393: the const parameter `N` must be explicitly specified
+ at $DIR/dyn-compat-const-param-default-mentions-self.rs:18:16
+  on line 7: const parameter `N` must be specified for this
+note: because the parameter default references `Self`, the parameter must be specified on the trait object type
 help: explicitly specify the const parameter
-   |
-LL |     let _: dyn X</* N */>;
-   |                 +++++++++
+ on line 18, column 16, add `</* N */>`
 
 error: aborting due to 1 previous error
 

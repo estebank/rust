@@ -1,66 +1,30 @@
-error[E0425]: cannot find value `n` in this scope
-  --> $DIR/macro-hygiene-scope-15167.rs:6:25
-   |
-LL | macro_rules! f { () => (n) }
-   |                         ^ not found in this scope
-...
-LL |         println!("{}", f!());
-   |                        ---- in this macro invocation
-   |
+error E0425: cannot find value `n` in this scope
+ at $DIR/macro-hygiene-scope-15167.rs:6:25: not found in this scope
+  on line 14, column 24: in this macro invocation
 help: an identifier with the same name exists, but is not accessible due to macro hygiene
-  --> $DIR/macro-hygiene-scope-15167.rs:13:9
-   |
-LL |     for n in 0..1 {
-   |         ^
-   = note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/macro-hygiene-scope-15167.rs:13:9
+note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0425]: cannot find value `n` in this scope
-  --> $DIR/macro-hygiene-scope-15167.rs:6:25
-   |
-LL | macro_rules! f { () => (n) }
-   |                         ^ not found in this scope
-...
-LL |         println!("{}", f!());
-   |                        ---- in this macro invocation
-   |
+error E0425: cannot find value `n` in this scope
+ at $DIR/macro-hygiene-scope-15167.rs:6:25: not found in this scope
+  on line 18, column 24: in this macro invocation
 help: an identifier with the same name exists, but is not accessible due to macro hygiene
-  --> $DIR/macro-hygiene-scope-15167.rs:17:17
-   |
-LL |     if let Some(n) = None {
-   |                 ^
-   = note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/macro-hygiene-scope-15167.rs:17:17
+note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0425]: cannot find value `n` in this scope
-  --> $DIR/macro-hygiene-scope-15167.rs:6:25
-   |
-LL | macro_rules! f { () => (n) }
-   |                         ^ not found in this scope
-...
-LL |         println!("{}", f!());
-   |                        ---- in this macro invocation
-   |
+error E0425: cannot find value `n` in this scope
+ at $DIR/macro-hygiene-scope-15167.rs:6:25: not found in this scope
+  on line 23, column 24: in this macro invocation
 help: an identifier with the same name exists, but is not accessible due to macro hygiene
-  --> $DIR/macro-hygiene-scope-15167.rs:22:24
-   |
-LL |     } else if let Some(n) = None {
-   |                        ^
-   = note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/macro-hygiene-scope-15167.rs:22:24
+note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0425]: cannot find value `n` in this scope
-  --> $DIR/macro-hygiene-scope-15167.rs:6:25
-   |
-LL | macro_rules! f { () => (n) }
-   |                         ^ not found in this scope
-...
-LL |         println!("{}", f!());
-   |                        ---- in this macro invocation
-   |
+error E0425: cannot find value `n` in this scope
+ at $DIR/macro-hygiene-scope-15167.rs:6:25: not found in this scope
+  on line 27, column 24: in this macro invocation
 help: an identifier with the same name exists, but is not accessible due to macro hygiene
-  --> $DIR/macro-hygiene-scope-15167.rs:26:20
-   |
-LL |     while let Some(n) = None {
-   |                    ^
-   = note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/macro-hygiene-scope-15167.rs:26:20
+note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 4 previous errors
 

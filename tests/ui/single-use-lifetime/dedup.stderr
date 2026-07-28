@@ -1,10 +1,6 @@
-error[E0392]: lifetime parameter `'a` is never used
-  --> $DIR/dedup.rs:6:12
-   |
-LL | struct Foo<'a>;
-   |            ^^ unused lifetime parameter
-   |
-   = help: consider removing `'a`, referring to it in a field, or using a marker such as `PhantomData`
+error E0392: lifetime parameter `'a` is never used
+ at $DIR/dedup.rs:6:12: unused lifetime parameter
+help: consider removing `'a`, referring to it in a field, or using a marker such as `PhantomData`
 
 error: aborting due to 1 previous error
 

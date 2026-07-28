@@ -1,82 +1,37 @@
-error[E0573]: expected type, found variant `CompileFlag::A`
-  --> $DIR/invalid-enum.rs:24:14
-   |
-LL |     test_1::<CompileFlag::A>();
-   |              ^^^^^^^^^^^^^^ not a type
-   |
+error E0573: expected type, found variant `CompileFlag::A`
+ at $DIR/invalid-enum.rs:24:14: not a type
 help: try using the variant's enum
-   |
-LL -     test_1::<CompileFlag::A>();
-LL +     test_1::<CompileFlag>();
-   |
+ on line 24, column 13, replace with `CompileFlag`
 
-error[E0573]: expected type, found variant `CompileFlag::A`
-  --> $DIR/invalid-enum.rs:28:17
-   |
-LL |     test_2::<_, CompileFlag::A>(0);
-   |                 ^^^^^^^^^^^^^^ not a type
-   |
+error E0573: expected type, found variant `CompileFlag::A`
+ at $DIR/invalid-enum.rs:28:17: not a type
 help: try using the variant's enum
-   |
-LL -     test_2::<_, CompileFlag::A>(0);
-LL +     test_2::<_, CompileFlag>(0);
-   |
+ on line 28, column 16, replace with `CompileFlag`
 
-error[E0573]: expected type, found variant `CompileFlag::A`
-  --> $DIR/invalid-enum.rs:32:20
-   |
-LL |     let _: Example<CompileFlag::A, _> = Example { x: 0 };
-   |                    ^^^^^^^^^^^^^^ not a type
-   |
+error E0573: expected type, found variant `CompileFlag::A`
+ at $DIR/invalid-enum.rs:32:20: not a type
 help: try using the variant's enum
-   |
-LL -     let _: Example<CompileFlag::A, _> = Example { x: 0 };
-LL +     let _: Example<CompileFlag, _> = Example { x: 0 };
-   |
+ on line 32, column 19, replace with `CompileFlag`
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/invalid-enum.rs:24:14
-   |
-LL |     test_1::<CompileFlag::A>();
-   |              ^^^^^^^^^^^^^^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/invalid-enum.rs:24:14
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL |     test_1::<{ CompileFlag::A }>();
-   |              +                +
+ on line 24, column 13, add `{ `
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/invalid-enum.rs:28:17
-   |
-LL |     test_2::<_, CompileFlag::A>(0);
-   |                 ^^^^^^^^^^^^^^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/invalid-enum.rs:28:17
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL |     test_2::<_, { CompileFlag::A }>(0);
-   |                 +                +
+ on line 28, column 16, add `{ `
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/invalid-enum.rs:32:20
-   |
-LL |     let _: Example<CompileFlag::A, _> = Example { x: 0 };
-   |                    ^^^^^^^^^^^^^^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/invalid-enum.rs:32:20
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL |     let _: Example<{ CompileFlag::A }, _> = Example { x: 0 };
-   |                    +                +
+ on line 32, column 19, add `{ `
 
-error[E0747]: type provided when a constant was expected
-  --> $DIR/invalid-enum.rs:36:20
-   |
-LL |     let _: Example<Example::ASSOC_FLAG, _> = Example { x: 0 };
-   |                    ^^^^^^^^^^^^^^^^^^^
-   |
+error E0747: type provided when a constant was expected
+ at $DIR/invalid-enum.rs:36:20
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL |     let _: Example<{ Example::ASSOC_FLAG }, _> = Example { x: 0 };
-   |                    +                     +
+ on line 36, column 19, add `{ `
 
 error: aborting due to 7 previous errors
 

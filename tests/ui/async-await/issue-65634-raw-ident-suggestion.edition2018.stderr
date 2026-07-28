@@ -1,29 +1,13 @@
-error[E0034]: multiple applicable items in scope
-  --> $DIR/issue-65634-raw-ident-suggestion.rs:25:13
-   |
-LL |     r#fn {}.r#struct();
-   |             ^^^^^^^^ multiple `r#struct` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/issue-65634-raw-ident-suggestion.rs:25:13: multiple `r#struct` found
 note: candidate #1 is defined in an impl of the trait `r#async` for the type `r#fn`
-  --> $DIR/issue-65634-raw-ident-suggestion.rs:8:5
-   |
-LL |     fn r#struct(&self) {
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-65634-raw-ident-suggestion.rs:8:5
 note: candidate #2 is defined in an impl of the trait `r#await` for the type `r#fn`
-  --> $DIR/issue-65634-raw-ident-suggestion.rs:14:5
-   |
-LL |     fn r#struct(&self) {
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-65634-raw-ident-suggestion.rs:14:5
 help: disambiguate the method for candidate #1
-   |
-LL -     r#fn {}.r#struct();
-LL +     r#async::r#struct(&r#fn {});
-   |
+ on line 25, column 4, replace with `r#async::r#struct(&r#fn {})`
 help: disambiguate the method for candidate #2
-   |
-LL -     r#fn {}.r#struct();
-LL +     r#await::r#struct(&r#fn {});
-   |
+ on line 25, column 4, replace with `r#await::r#struct(&r#fn {})`
 
 error: aborting due to 1 previous error
 

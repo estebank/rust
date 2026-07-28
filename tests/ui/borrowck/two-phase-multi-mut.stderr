@@ -1,21 +1,12 @@
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/two-phase-multi-mut.rs:11:5
-   |
-LL |     foo.method(&mut foo);
-   |     ^^^^------^--------^
-   |     |   |      |
-   |     |   |      first mutable borrow occurs here
-   |     |   first borrow later used by call
-   |     second mutable borrow occurs here
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/two-phase-multi-mut.rs:11:5: second mutable borrow occurs here
+  on line 11, column 9: first borrow later used by call
+  on line 11, column 16: first mutable borrow occurs here
 
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/two-phase-multi-mut.rs:11:16
-   |
-LL |     foo.method(&mut foo);
-   |     --- ------ ^^^^^^^^ second mutable borrow occurs here
-   |     |   |
-   |     |   first borrow later used by call
-   |     first mutable borrow occurs here
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/two-phase-multi-mut.rs:11:16: second mutable borrow occurs here
+  on line 11: first mutable borrow occurs here
+  on line 11, column 9: first borrow later used by call
 
 error: aborting due to 2 previous errors
 

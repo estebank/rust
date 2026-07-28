@@ -1,46 +1,23 @@
-error[E0539]: malformed `unroll` attribute input
-  --> $DIR/invalid-unroll.rs:5:7
-   |
-LL |     #[unroll(please)]
-   |       ^^^^^^^------^
-   |              |
-   |              valid arguments are `full` or `never`
+error E0539: malformed `unroll` attribute input
+ at $DIR/invalid-unroll.rs:5:7
+  on line 5, column 14: valid arguments are `full` or `never`
 
-error[E0539]: malformed `unroll` attribute input
-  --> $DIR/invalid-unroll.rs:8:7
-   |
-LL |     #[unroll("never")]
-   |       ^^^^^^^-------^
-   |              |
-   |              valid arguments are `full` or `never`
+error E0539: malformed `unroll` attribute input
+ at $DIR/invalid-unroll.rs:8:7
+  on line 8, column 14: valid arguments are `full` or `never`
 
-error[E0805]: malformed `unroll` attribute input
-  --> $DIR/invalid-unroll.rs:11:7
-   |
-LL |     #[unroll()]
-   |       ^^^^^^--
-   |             |
-   |             expected an argument here
+error E0805: malformed `unroll` attribute input
+ at $DIR/invalid-unroll.rs:11:7
+  on line 11, column 13: expected an argument here
 
 error: expected a literal (`1u8`, `1.0f32`, `"string"`, etc.) here, found expression
-  --> $DIR/invalid-unroll.rs:14:14
-   |
-LL |     #[unroll(-1)]
-   |              ^^ expressions are not allowed here
-   |
+ at $DIR/invalid-unroll.rs:14:14: expressions are not allowed here
 help: negative numbers are not literals, try removing the `-` sign
-   |
-LL -     #[unroll(-1)]
-LL +     #[unroll(1)]
-   |
+ on line 14, column 13
 
-error[E0539]: malformed `unroll` attribute input
-  --> $DIR/invalid-unroll.rs:17:7
-   |
-LL |     #[unroll(1.5)]
-   |       ^^^^^^^---^
-   |              |
-   |              valid arguments are `full` or `never`
+error E0539: malformed `unroll` attribute input
+ at $DIR/invalid-unroll.rs:17:7
+  on line 17, column 14: valid arguments are `full` or `never`
 
 error: aborting due to 5 previous errors
 

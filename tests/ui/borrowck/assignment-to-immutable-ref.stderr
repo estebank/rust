@@ -1,24 +1,12 @@
-error[E0594]: cannot assign to `*foo`, which is behind a `&` reference
-  --> $DIR/assignment-to-immutable-ref.rs:8:5
-   |
-LL |     *foo = 32;
-   |     ^^^^^^^^^ `foo` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*foo`, which is behind a `&` reference
+ at $DIR/assignment-to-immutable-ref.rs:8:5: `foo` is a `&` reference, so it cannot be written to
 help: consider changing this to be a mutable reference
-   |
-LL |     let foo = &mut 16;
-   |                +++
+ on line 6, column 15, add `mut `
 
-error[E0594]: cannot assign to `*bar`, which is behind a `&` reference
-  --> $DIR/assignment-to-immutable-ref.rs:12:5
-   |
-LL |     *bar = 64;
-   |     ^^^^^^^^^ `bar` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*bar`, which is behind a `&` reference
+ at $DIR/assignment-to-immutable-ref.rs:12:5: `bar` is a `&` reference, so it cannot be written to
 help: consider specifying this binding's type
-   |
-LL |     let bar: &mut i32 = foo;
-   |            ++++++++++
+ on line 10, column 11, add `: &mut i32`
 
 error: aborting due to 2 previous errors
 

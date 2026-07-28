@@ -1,34 +1,16 @@
-error[E0425]: cannot find type `B` in this scope
-  --> $DIR/undeclared-generic-parameter.rs:2:8
-   |
-LL | struct A;
-   | --------- similarly named struct `A` defined here
-LL | impl A<B> {}
-   |        ^
-   |
+error E0425: cannot find type `B` in this scope
+ at $DIR/undeclared-generic-parameter.rs:2:8
+  on line 1: similarly named struct `A` defined here
 help: a struct with a similar name exists
-   |
-LL - impl A<B> {}
-LL + impl A<A> {}
-   |
+ on line 2, column 7, replace with `A`
 help: you might be missing a type parameter
-   |
-LL | impl<B> A<B> {}
-   |     +++
+ on line 2, column 4, add `<B>`
 
-error[E0107]: struct takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/undeclared-generic-parameter.rs:2:6
-   |
-LL | impl A<B> {}
-   |      ^--- help: remove the unnecessary generics
-   |      |
-   |      expected 0 generic arguments
-   |
+error E0107: struct takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/undeclared-generic-parameter.rs:2:6: expected 0 generic arguments
+  on line 2, column 7: help: remove the unnecessary generics
 note: struct defined here, with 0 generic parameters
-  --> $DIR/undeclared-generic-parameter.rs:1:8
-   |
-LL | struct A;
-   |        ^
+ at $DIR/undeclared-generic-parameter.rs:1:8
 
 error: aborting due to 2 previous errors
 

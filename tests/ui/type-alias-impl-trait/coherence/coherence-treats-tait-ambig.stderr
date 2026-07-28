@@ -1,12 +1,8 @@
-error[E0119]: conflicting implementations of trait `Into<_>` for type `Foo`
-  --> $DIR/coherence-treats-tait-ambig.rs:7:1
-   |
-LL | impl Into<T> for Foo {
-   | ^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: conflicting implementation in crate `core`:
-           - impl<T, U> Into<U> for T
-             where U: From<T>;
+error E0119: conflicting implementations of trait `Into<_>` for type `Foo`
+ at $DIR/coherence-treats-tait-ambig.rs:7:1
+note: conflicting implementation in crate `core`:
+      - impl<T, U> Into<U> for T
+        where U: From<T>;
 
 error: aborting due to 1 previous error
 

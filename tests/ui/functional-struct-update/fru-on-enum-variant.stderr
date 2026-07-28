@@ -1,8 +1,5 @@
-error[E0436]: functional record update syntax requires a struct
-  --> $DIR/fru-on-enum-variant.rs:6:22
-   |
-LL |     Foo::A { x: 6, ..orig };
-   |                      ^^^^
+error E0436: functional record update syntax requires a struct
+ at $DIR/fru-on-enum-variant.rs:6:22
 
 error: aborting due to 1 previous error
 

@@ -1,8 +1,5 @@
-error[E0511]: invalid monomorphization of `simd_add` intrinsic: expected SIMD input type, found non-SIMD `i32`
-  --> $DIR/E0511.rs:9:9
-   |
-LL |         simd_add(0, 1)
-   |         ^^^^^^^^^^^^^^
+error E0511: invalid monomorphization of `simd_add` intrinsic: expected SIMD input type, found non-SIMD `i32`
+ at $DIR/E0511.rs:9:9
 
 error: aborting due to 1 previous error
 

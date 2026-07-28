@@ -1,11 +1,6 @@
-error[E0425]: cannot find value `cx` in this scope
-  --> $DIR/unresolved_static_type_field.rs:9:11
-   |
-LL |     cx: bool,
-   |     -- a field by that name exists in `Self`
-...
-LL |         f(cx);
-   |           ^^
+error E0425: cannot find value `cx` in this scope
+ at $DIR/unresolved_static_type_field.rs:9:11
+  on line 4: a field by that name exists in `Self`
 
 error: aborting due to 1 previous error
 

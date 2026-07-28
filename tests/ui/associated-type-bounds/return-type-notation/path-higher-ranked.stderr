@@ -1,26 +1,12 @@
-error[E0212]: cannot use the associated function of a trait with uninferred generic parameters
-  --> $DIR/path-higher-ranked.rs:11:5
-   |
-LL |     T::method(..): Send,
-   |     ^^^^^^^^^^^^^
-   |
+error E0212: cannot use the associated function of a trait with uninferred generic parameters
+ at $DIR/path-higher-ranked.rs:11:5
 help: use a fully qualified path with inferred lifetimes
-   |
-LL -     T::method(..): Send,
-LL +     <T as A<'_>>::method(..): Send,
-   |
+ on line 11, column 4, replace with `<T as A<'_>>::`
 
-error[E0212]: cannot use the associated function of a trait with uninferred generic parameters
-  --> $DIR/path-higher-ranked.rs:19:5
-   |
-LL |     T::method(..): Send,
-   |     ^^^^^^^^^^^^^
-   |
+error E0212: cannot use the associated function of a trait with uninferred generic parameters
+ at $DIR/path-higher-ranked.rs:19:5
 help: use a fully qualified path with inferred lifetimes
-   |
-LL -     T::method(..): Send,
-LL +     <T as A<'_>>::method(..): Send,
-   |
+ on line 19, column 4, replace with `<T as A<'_>>::`
 
 error: aborting due to 2 previous errors
 

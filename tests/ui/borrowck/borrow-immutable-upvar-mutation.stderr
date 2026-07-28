@@ -1,92 +1,46 @@
-error[E0594]: cannot assign to `x`, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-immutable-upvar-mutation.rs:21:27
-   |
-LL | fn to_fn<A: std::marker::Tuple, F: Fn<A>>(f: F) -> F {
-   |                                              - change this to accept `FnMut` instead of `Fn`
-...
-LL |         let mut x = 0;
-   |             ----- `x` declared here, outside the closure
-LL |         let _f = to_fn(|| x = 42);
-   |                  ----- -- ^^^^^^ cannot assign
-   |                  |     |
-   |                  |     in this closure
-   |                  expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `x`, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-immutable-upvar-mutation.rs:21:27: cannot assign
+  on line 10, column 46: change this to accept `FnMut` instead of `Fn`
+  on line 20, column 13: `x` declared here, outside the closure
+  on line 21, column 18: expects `Fn` instead of `FnMut`
+  on line 21, column 24: in this closure
 
-error[E0596]: cannot borrow `y` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-immutable-upvar-mutation.rs:24:31
-   |
-LL | fn to_fn<A: std::marker::Tuple, F: Fn<A>>(f: F) -> F {
-   |                                              - change this to accept `FnMut` instead of `Fn`
-...
-LL |         let mut y = 0;
-   |             ----- `y` declared here, outside the closure
-LL |         let _g = to_fn(|| set(&mut y));
-   |                  ----- --     ^^^^^^ cannot borrow as mutable
-   |                  |     |
-   |                  |     in this closure
-   |                  expects `Fn` instead of `FnMut`
+error E0596: cannot borrow `y` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-immutable-upvar-mutation.rs:24:31: cannot borrow as mutable
+  on line 10, column 46: change this to accept `FnMut` instead of `Fn`
+  on line 23, column 13: `y` declared here, outside the closure
+  on line 24, column 18: expects `Fn` instead of `FnMut`
+  on line 24, column 24: in this closure
 
-error[E0594]: cannot assign to `z`, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-immutable-upvar-mutation.rs:29:22
-   |
-LL | fn to_fn<A: std::marker::Tuple, F: Fn<A>>(f: F) -> F {
-   |                                              - change this to accept `FnMut` instead of `Fn`
-...
-LL |         let mut z = 0;
-   |             ----- `z` declared here, outside the closure
-...
-LL |             to_fn(|| z = 42);
-   |             ----- -- ^^^^^^ cannot assign
-   |             |     |
-   |             |     in this closure
-   |             expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `z`, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-immutable-upvar-mutation.rs:29:22: cannot assign
+  on line 10, column 46: change this to accept `FnMut` instead of `Fn`
+  on line 26, column 13: `z` declared here, outside the closure
+  on line 29: expects `Fn` instead of `FnMut`
+  on line 29, column 19: in this closure
 
-error[E0594]: cannot assign to `x`, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-immutable-upvar-mutation.rs:36:32
-   |
-LL | fn to_fn<A: std::marker::Tuple, F: Fn<A>>(f: F) -> F {
-   |                                              - change this to accept `FnMut` instead of `Fn`
-...
-LL |         let _f = to_fn(move || x = 42);
-   |                  ----- ------- ^^^^^^ cannot assign
-   |                  |     |
-   |                  |     in this closure
-   |                  expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `x`, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-immutable-upvar-mutation.rs:36:32: cannot assign
+  on line 10, column 46: change this to accept `FnMut` instead of `Fn`
+  on line 36, column 18: expects `Fn` instead of `FnMut`
+  on line 36, column 24: in this closure
 
-error[E0596]: cannot borrow `y` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-immutable-upvar-mutation.rs:39:36
-   |
-LL | fn to_fn<A: std::marker::Tuple, F: Fn<A>>(f: F) -> F {
-   |                                              - change this to accept `FnMut` instead of `Fn`
-...
-LL |         let _g = to_fn(move || set(&mut y));
-   |                  ----- -------     ^^^^^^ cannot borrow as mutable
-   |                  |     |
-   |                  |     in this closure
-   |                  expects `Fn` instead of `FnMut`
+error E0596: cannot borrow `y` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-immutable-upvar-mutation.rs:39:36: cannot borrow as mutable
+  on line 10, column 46: change this to accept `FnMut` instead of `Fn`
+  on line 39, column 18: expects `Fn` instead of `FnMut`
+  on line 39, column 24: in this closure
 
-error[E0594]: cannot assign to `z`, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-immutable-upvar-mutation.rs:44:27
-   |
-LL | fn to_fn<A: std::marker::Tuple, F: Fn<A>>(f: F) -> F {
-   |                                              - change this to accept `FnMut` instead of `Fn`
-...
-LL |             to_fn(move || z = 42);
-   |             ----- ------- ^^^^^^ cannot assign
-   |             |     |
-   |             |     in this closure
-   |             expects `Fn` instead of `FnMut`
+error E0594: cannot assign to `z`, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-immutable-upvar-mutation.rs:44:27: cannot assign
+  on line 10, column 46: change this to accept `FnMut` instead of `Fn`
+  on line 44: expects `Fn` instead of `FnMut`
+  on line 44, column 19: in this closure
 
-error[E0594]: cannot assign to `x`, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-immutable-upvar-mutation.rs:53:9
-   |
-LL | fn foo() -> Box<dyn Fn() -> usize> {
-   |    ---      ---------------------- change this to return `FnMut` instead of `Fn`
-LL |     let mut x = 0;
-LL |     Box::new(move || {
-   |              ------- in this closure
-LL |         x += 1;
-   |         ^^^^^^ cannot assign
+error E0594: cannot assign to `x`, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-immutable-upvar-mutation.rs:53:9: cannot assign
+  on line 50, column 13: change this to return `FnMut` instead of `Fn`
+  on line 52, column 14: in this closure
 
 error: aborting due to 7 previous errors
 

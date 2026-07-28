@@ -1,24 +1,12 @@
 error: missing parameters for function definition
-  --> $DIR/issue-108109-fn-missing-params.rs:3:15
-   |
-LL | pub fn missing -> () {}
-   |               ^
-   |
+ at $DIR/issue-108109-fn-missing-params.rs:3:15
 help: add a parameter list
-   |
-LL | pub fn missing() -> () {}
-   |               ++
+ on line 3, column 14, add `()`
 
 error: missing parameters for function definition
-  --> $DIR/issue-108109-fn-missing-params.rs:6:16
-   |
-LL | pub fn missing2 {}
-   |                ^
-   |
+ at $DIR/issue-108109-fn-missing-params.rs:6:16
 help: add a parameter list
-   |
-LL | pub fn missing2() {}
-   |                ++
+ on line 6, column 15, add `()`
 
 error: aborting due to 2 previous errors
 

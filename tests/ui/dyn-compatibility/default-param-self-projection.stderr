@@ -1,17 +1,9 @@
-error[E0393]: the type parameter `C` must be explicitly specified
-  --> $DIR/default-param-self-projection.rs:13:17
-   |
-LL | trait A<C = <Self as D>::E> {}
-   | --------------------------- type parameter `C` must be specified for this
-...
-LL |     let B: &dyn A = &();
-   |                 ^
-   |
-   = note: because the parameter default references `Self`, the parameter must be specified on the trait object type
+error E0393: the type parameter `C` must be explicitly specified
+ at $DIR/default-param-self-projection.rs:13:17
+  on line 1: type parameter `C` must be specified for this
+note: because the parameter default references `Self`, the parameter must be specified on the trait object type
 help: explicitly specify the type parameter
-   |
-LL |     let B: &dyn A</* C */> = &();
-   |                  +++++++++
+ on line 13, column 17, add `</* C */>`
 
 error: aborting due to 1 previous error
 

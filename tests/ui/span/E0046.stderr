@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `foo`
-  --> $DIR/E0046.rs:7:1
-   |
-LL |     fn foo();
-   |     --------- `foo` from trait
-...
-LL | impl Foo for Bar {}
-   | ^^^^^^^^^^^^^^^^ missing `foo` in implementation
+error E0046: not all trait items implemented, missing: `foo`
+ at $DIR/E0046.rs:7:1: missing `foo` in implementation
+  on line 2: `foo` from trait
 
 error: aborting due to 1 previous error
 

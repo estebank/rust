@@ -1,18 +1,9 @@
-error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/generic_param_mismatch_in_unsatisfied_projection.rs:18:33
-   |
-LL |         F: for<'a> FnOnce(<F as Output<i32>>::Type),
-   |                                 ^^^^^^ expected 0 generic arguments
-   |
+error E0107: trait takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/generic_param_mismatch_in_unsatisfied_projection.rs:18:33: expected 0 generic arguments
 note: trait defined here, with 0 generic parameters
-  --> $DIR/generic_param_mismatch_in_unsatisfied_projection.rs:9:7
-   |
-LL | trait Output<'a> {
-   |       ^^^^^^
+ at $DIR/generic_param_mismatch_in_unsatisfied_projection.rs:9:7
 help: turn the generic argument into an associated item binding
-   |
-LL |         F: for<'a> FnOnce(<F as Output<Type = i32>>::Type),
-   |                                        ++++++
+ on line 18, column 39, add `Type = `
 
 error: aborting due to 1 previous error
 

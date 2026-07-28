@@ -1,13 +1,7 @@
-error[E0425]: cannot find type `Path` in this scope
-  --> $DIR/suggest-import-before-outer-attrs-issue-69733.rs:8:14
-   |
-LL | type Ident = Path;
-   |              ^^^^ not found in this scope
-   |
+error E0425: cannot find type `Path` in this scope
+ at $DIR/suggest-import-before-outer-attrs-issue-69733.rs:8:14: not found in this scope
 help: consider importing this struct
-   |
-LL + use std::path::Path;
-   |
+ on line 5, column 1, add `use std::path::Path;`
 
 error: aborting due to 1 previous error
 

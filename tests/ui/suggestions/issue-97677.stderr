@@ -1,15 +1,9 @@
-error[E0369]: cannot add `{integer}` to `N`
-  --> $DIR/issue-97677.rs:4:7
-   |
-LL |     n + 10
-   |     - ^ -- {integer}
-   |     |
-   |     N
-   |
+error E0369: cannot add `{integer}` to `N`
+ at $DIR/issue-97677.rs:4:7
+  on line 4: N
+  on line 4, column 9: {integer}
 help: consider restricting type parameter `N` with trait `Add`
-   |
-LL | fn add_ten<N: std::ops::Add<i32, Output = N>>(n: N) -> N {
-   |             ++++++++++++++++++++++++++++++++
+ on line 3, column 12, add `: std::ops::Add<i32, Output = N>`
 
 error: aborting due to 1 previous error
 

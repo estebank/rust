@@ -1,11 +1,6 @@
-error[E0792]: expected generic type parameter, found `()`
-  --> $DIR/issue-68368-non-defining-use.rs:10:15
-   |
-LL | type Alias<'a, U> = impl Trait<U>;
-   |                - this generic parameter must be used with a generic type parameter
-...
-LL | fn f<'a>() -> Alias<'a, ()> {}
-   |               ^^^^^^^^^^^^^
+error E0792: expected generic type parameter, found `()`
+ at $DIR/issue-68368-non-defining-use.rs:10:15
+  on line 7, column 16: this generic parameter must be used with a generic type parameter
 
 error: aborting due to 1 previous error
 

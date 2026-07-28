@@ -1,14 +1,7 @@
 error: switch the order of `ref` and `box`
-  --> $DIR/pattern-bad-ref-box-order.rs:8:14
-   |
-LL |         Some(ref box _i) => {},
-   |              ^^^^^^^
-   |
+ at $DIR/pattern-bad-ref-box-order.rs:8:14
 help: swap them
-   |
-LL -         Some(ref box _i) => {},
-LL +         Some(box ref _i) => {},
-   |
+ on line 8, column 13, replace with `box ref`
 
 error: aborting due to 1 previous error
 

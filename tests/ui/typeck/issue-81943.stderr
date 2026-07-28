@@ -1,50 +1,24 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-81943.rs:7:9
-   |
-LL |   f(|x| lib::d!(x));
-   |         ^^^^^^^^^^ expected `()`, found `i32`
-   |
-   = note: this error originates in the macro `lib::d` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0308: mismatched types
+ at $DIR/issue-81943.rs:7:9: expected `()`, found `i32`
+note: this error originates in the macro `lib::d` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0308]: mismatched types
-  --> $DIR/issue-81943.rs:8:28
-   |
-LL |   f(|x| match x { tmp => { g(tmp) } });
-   |         -------------------^^^^^^----
-   |         |                  |
-   |         |                  expected `()`, found `i32`
-   |         expected this to be `()`
-   |
+error E0308: mismatched types
+ at $DIR/issue-81943.rs:8:28: expected `()`, found `i32`
+  on line 8, column 9: expected this to be `()`
 help: consider using a semicolon here
-   |
-LL |   f(|x| match x { tmp => { g(tmp); } });
-   |                                  +
+ on line 8, column 33, add `;`
 help: consider using a semicolon here
-   |
-LL |   f(|x| match x { tmp => { g(tmp) } };);
-   |                                      +
+ on line 8, column 37, add `;`
 
-error[E0308]: mismatched types
-  --> $DIR/issue-81943.rs:10:38
-   |
-LL |     ($e:expr) => { match $e { x => { g(x) } } }
-   |                    ------------------^^^^----
-   |                    |                 |
-   |                    |                 expected `()`, found `i32`
-   |                    expected this to be `()`
-LL |   }
-LL |   f(|x| d!(x));
-   |         ----- in this macro invocation
-   |
-   = note: this error originates in the macro `d` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0308: mismatched types
+ at $DIR/issue-81943.rs:10:38: expected `()`, found `i32`
+  on line 10, column 20: expected this to be `()`
+  on line 12, column 9: in this macro invocation
+note: this error originates in the macro `d` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: consider using a semicolon here
-   |
-LL |     ($e:expr) => { match $e { x => { g(x); } } }
-   |                                          +
+ on line 10, column 41, add `;`
 help: consider using a semicolon here
-   |
-LL |     ($e:expr) => { match $e { x => { g(x) } }; }
-   |                                              +
+ on line 10, column 45, add `;`
 
 error: aborting due to 3 previous errors
 

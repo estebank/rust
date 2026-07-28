@@ -1,8 +1,6 @@
-error[E0409]: variable `x` is bound inconsistently across alternatives separated by `|`
-  --> $DIR/issue-44912-or.rs:6:35
-   |
-LL |         Some((x, 3)) | &Some((ref x, 5)) => x,
-   |               - first binding     ^ bound in different ways
+error E0409: variable `x` is bound inconsistently across alternatives separated by `|`
+ at $DIR/issue-44912-or.rs:6:35: bound in different ways
+  on line 6, column 15: first binding
 
 error: aborting due to 1 previous error
 

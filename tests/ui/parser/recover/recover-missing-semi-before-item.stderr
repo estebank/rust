@@ -1,83 +1,42 @@
 error: expected `;`, found keyword `struct`
-  --> $DIR/recover-missing-semi-before-item.rs:6:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     struct Foo;
-   |     ------ unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:6:16: help: add `;` here
+  on line 7: unexpected token
 
 error: expected `;`, found `union`
-  --> $DIR/recover-missing-semi-before-item.rs:11:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     union Foo {
-   |     ----- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:11:16: help: add `;` here
+  on line 12: unexpected token
 
 error: expected `;`, found keyword `enum`
-  --> $DIR/recover-missing-semi-before-item.rs:18:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     enum Foo {
-   |     ---- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:18:16: help: add `;` here
+  on line 19: unexpected token
 
 error: expected `;`, found keyword `fn`
-  --> $DIR/recover-missing-semi-before-item.rs:25:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     fn foo() {}
-   |     -- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:25:16: help: add `;` here
+  on line 26: unexpected token
 
 error: expected `;`, found keyword `extern`
-  --> $DIR/recover-missing-semi-before-item.rs:30:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     extern "C" fn foo() {}
-   |     ------ unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:30:16: help: add `;` here
+  on line 31: unexpected token
 
 error: expected `;`, found keyword `impl`
-  --> $DIR/recover-missing-semi-before-item.rs:36:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     impl Foo {}
-   |     ---- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:36:16: help: add `;` here
+  on line 37: unexpected token
 
 error: expected `;`, found keyword `pub`
-  --> $DIR/recover-missing-semi-before-item.rs:41:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     pub use bar::Bar;
-   |     --- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:41:16: help: add `;` here
+  on line 42: unexpected token
 
 error: expected `;`, found keyword `mod`
-  --> $DIR/recover-missing-semi-before-item.rs:46:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     mod foo {}
-   |     --- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:46:16: help: add `;` here
+  on line 47: unexpected token
 
 error: expected `;`, found keyword `type`
-  --> $DIR/recover-missing-semi-before-item.rs:51:16
-   |
-LL |     let foo = 3
-   |                ^ help: add `;` here
-LL |     type Foo = usize;
-   |     ---- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:51:16: help: add `;` here
+  on line 52: unexpected token
 
 error: expected `;`, found keyword `fn`
-  --> $DIR/recover-missing-semi-before-item.rs:59:19
-   |
-LL | const X: i32 = 123
-   |                   ^ help: add `;` here
-LL |
-LL | fn main() {}
-   | -- unexpected token
+ at $DIR/recover-missing-semi-before-item.rs:59:19: help: add `;` here
+  on line 61: unexpected token
 
 error: aborting due to 10 previous errors
 

@@ -47,10 +47,7 @@ error: layout_of(UnivariantU8) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/repr-c-int-dead-variants.rs:15:1
-   |
-LL | enum UnivariantU8 {
-   | ^^^^^^^^^^^^^^^^^
+ at $DIR/repr-c-int-dead-variants.rs:15:1
 
 error: layout_of(TwoVariantsU8) = Layout {
            size: Size(2 bytes),
@@ -121,10 +118,7 @@ error: layout_of(TwoVariantsU8) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/repr-c-int-dead-variants.rs:22:1
-   |
-LL | enum TwoVariantsU8 {
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/repr-c-int-dead-variants.rs:22:1
 
 error: layout_of(DeadBranchHasOtherFieldU8) = Layout {
            size: Size(16 bytes),
@@ -193,10 +187,7 @@ error: layout_of(DeadBranchHasOtherFieldU8) = Layout {
            unadjusted_abi_align: Align(8 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/repr-c-int-dead-variants.rs:34:1
-   |
-LL | enum DeadBranchHasOtherFieldU8 {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/repr-c-int-dead-variants.rs:34:1
 
 error: aborting due to 3 previous errors
 

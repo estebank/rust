@@ -1,17 +1,8 @@
-error[E0599]: no variant named `B` found for enum `S`
-  --> $DIR/enum-variant-not-found.rs:9:12
-   |
-LL | enum S {
-   | ------ variant `B` not found here
-...
-LL |         S::B {} => {},
-   |            ^
-   |
+error E0599: no variant named `B` found for enum `S`
+ at $DIR/enum-variant-not-found.rs:9:12
+  on line 3: variant `B` not found here
 help: there is a variant with a similar name
-   |
-LL -         S::B {} => {},
-LL +         S::A {} => {},
-   |
+ on line 9, column 11, replace with `A`
 
 error: aborting due to 1 previous error
 

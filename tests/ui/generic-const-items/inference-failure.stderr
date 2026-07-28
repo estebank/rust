@@ -1,19 +1,11 @@
-error[E0282]: type annotations needed for `Option<_>`
-  --> $DIR/inference-failure.rs:8:9
-   |
-LL |     let _ = NONE;
-   |         ^   ---- type must be known at this point
-   |
+error E0282: type annotations needed for `Option<_>`
+ at $DIR/inference-failure.rs:8:9
+  on line 8, column 13: type must be known at this point
 help: consider giving this pattern a type, where the type for type parameter `T` is specified
-   |
-LL |     let _: Option<T> = NONE;
-   |          +++++++++++
+ on line 8, column 9, add `: Option<T>`
 
-error[E0282]: type annotations needed
-  --> $DIR/inference-failure.rs:12:13
-   |
-LL |     let _ = IGNORE;
-   |             ^^^^^^ cannot infer type for type parameter `T` declared on the constant `IGNORE`
+error E0282: type annotations needed
+ at $DIR/inference-failure.rs:12:13: cannot infer type for type parameter `T` declared on the constant `IGNORE`
 
 error: aborting due to 2 previous errors
 

@@ -1,36 +1,21 @@
-error[E0271]: expected `{closure@return-type-doesnt-match-bound.rs:8:17}` to return `Result<(), _>`, but it returns `!`
-  --> $DIR/return-type-doesnt-match-bound.rs:8:24
-   |
-LL |     f().or_else(|e| -> ! {
-   |         ------- -------^
-   |         |       |      |
-   |         |       |      expected `Result<(), _>`, found `!`
-   |         |       this closure
-   |         required by a bound introduced by this call
-   |
-   = note: expected enum `Result<(), _>`
-              found type `!`
+error E0271: expected `{closure@return-type-doesnt-match-bound.rs:8:17}` to return `Result<(), _>`, but it returns `!`
+ at $DIR/return-type-doesnt-match-bound.rs:8:24: expected `Result<(), _>`, found `!`
+  on line 8, column 9: required by a bound introduced by this call
+  on line 8, column 17: this closure
+note: expected enum `Result<(), _>`
+         found type `!`
 note: required by a bound in `Result::<T, E>::or_else`
-  --> $SRC_DIR/core/src/result.rs:LL:COL
+ at $SRC_DIR/core/src/result.rs:LL:COL
 
-error[E0271]: expected `{closure@return-type-doesnt-match-bound.rs:18:13}` to return `Result<(), _>`, but it returns `!`
-  --> $DIR/return-type-doesnt-match-bound.rs:18:20
-   |
-LL |     let c = |e| -> ! {
-   |             -------^
-   |             |      |
-   |             |      expected `Result<(), _>`, found `!`
-   |             this closure
-...
-LL |     f().or_else(c);
-   |         ------- - closure used here
-   |         |
-   |         required by a bound introduced by this call
-   |
-   = note: expected enum `Result<(), _>`
-              found type `!`
+error E0271: expected `{closure@return-type-doesnt-match-bound.rs:18:13}` to return `Result<(), _>`, but it returns `!`
+ at $DIR/return-type-doesnt-match-bound.rs:18:20: expected `Result<(), _>`, found `!`
+  on line 18, column 13: this closure
+  on line 22, column 9: required by a bound introduced by this call
+  on line 22, column 17: closure used here
+note: expected enum `Result<(), _>`
+         found type `!`
 note: required by a bound in `Result::<T, E>::or_else`
-  --> $SRC_DIR/core/src/result.rs:LL:COL
+ at $SRC_DIR/core/src/result.rs:LL:COL
 
 error: aborting due to 2 previous errors
 

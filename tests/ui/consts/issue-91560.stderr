@@ -1,26 +1,12 @@
-error[E0435]: attempt to use a non-constant value in a constant
-  --> $DIR/issue-91560.rs:10:19
-   |
-LL |     let arr = [0; length];
-   |                   ^^^^^^ non-constant value
-   |
+error E0435: attempt to use a non-constant value in a constant
+ at $DIR/issue-91560.rs:10:19: non-constant value
 help: consider using `const` instead of `let`
-   |
-LL -     let mut length: usize = 2;
-LL +     const length: usize = 2;
-   |
+ on line 8, column 4, replace with `const `
 
-error[E0435]: attempt to use a non-constant value in a constant
-  --> $DIR/issue-91560.rs:17:19
-   |
-LL |     let arr = [0; length];
-   |                   ^^^^^^ non-constant value
-   |
+error E0435: attempt to use a non-constant value in a constant
+ at $DIR/issue-91560.rs:17:19: non-constant value
 help: consider using `const` instead of `let`
-   |
-LL -     let   length: usize = 2;
-LL +     const length: usize = 2;
-   |
+ on line 15, column 4, replace with `const `
 
 error: aborting due to 2 previous errors
 

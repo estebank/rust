@@ -1,84 +1,42 @@
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/pattern-matching-should-fail.rs:8:23
-   |
-LL |     let x: !;
-   |         - binding declared here but left uninitialized
-LL |     let c1 = || match x { };
-   |                       ^ `x` used here but it isn't initialized
+error E0381: used binding `x` isn't initialized
+ at $DIR/pattern-matching-should-fail.rs:8:23: `x` used here but it isn't initialized
+  on line 7, column 9: binding declared here but left uninitialized
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/pattern-matching-should-fail.rs:15:23
-   |
-LL |     let x: !;
-   |         - binding declared here but left uninitialized
-LL |     let c2 = || match x { _ => () };
-   |                       ^ `x` used here but it isn't initialized
+error E0381: used binding `x` isn't initialized
+ at $DIR/pattern-matching-should-fail.rs:15:23: `x` used here but it isn't initialized
+  on line 14, column 9: binding declared here but left uninitialized
 
-error[E0381]: used binding `variant` isn't initialized
-  --> $DIR/pattern-matching-should-fail.rs:27:13
-   |
-LL |     let variant: !;
-   |         ------- binding declared here but left uninitialized
-LL |     let c = || {
-   |             ^^ `variant` used here but it isn't initialized
-LL |
-LL |         match variant {
-   |               ------- borrow occurs due to use in closure
+error E0381: used binding `variant` isn't initialized
+ at $DIR/pattern-matching-should-fail.rs:27:13: `variant` used here but it isn't initialized
+  on line 26, column 9: binding declared here but left uninitialized
+  on line 29, column 15: borrow occurs due to use in closure
 
-error[E0381]: used binding `variant` isn't initialized
-  --> $DIR/pattern-matching-should-fail.rs:39:13
-   |
-LL |     let variant: !;
-   |         ------- binding declared here but left uninitialized
-LL |     let c = || {
-   |             ^^ `variant` used here but it isn't initialized
-LL |         match variant {
-   |               ------- borrow occurs due to use in closure
+error E0381: used binding `variant` isn't initialized
+ at $DIR/pattern-matching-should-fail.rs:39:13: `variant` used here but it isn't initialized
+  on line 38, column 9: binding declared here but left uninitialized
+  on line 40, column 15: borrow occurs due to use in closure
 
-error[E0381]: used binding `g` isn't initialized
-  --> $DIR/pattern-matching-should-fail.rs:54:15
-   |
-LL |     let g: !;
-   |         - binding declared here but left uninitialized
-...
-LL |         match g { };
-   |               ^ `g` used here but it isn't initialized
+error E0381: used binding `g` isn't initialized
+ at $DIR/pattern-matching-should-fail.rs:54:15: `g` used here but it isn't initialized
+  on line 51, column 9: binding declared here but left uninitialized
 
-error[E0381]: used binding `t` isn't initialized
-  --> $DIR/pattern-matching-should-fail.rs:56:19
-   |
-LL |     let t: !;
-   |         - binding declared here but left uninitialized
-...
-LL |             match t { };
-   |                   ^ `t` used here but it isn't initialized
+error E0381: used binding `t` isn't initialized
+ at $DIR/pattern-matching-should-fail.rs:56:19: `t` used here but it isn't initialized
+  on line 50, column 9: binding declared here but left uninitialized
 
-error[E0004]: non-exhaustive patterns: type `u8` is non-empty
-  --> $DIR/pattern-matching-should-fail.rs:67:23
-   |
-LL |     let c1 = || match x { };
-   |                       ^
-   |
-   = note: the matched value is of type `u8`
+error E0004: non-exhaustive patterns: type `u8` is non-empty
+ at $DIR/pattern-matching-should-fail.rs:67:23
+note: the matched value is of type `u8`
 help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
-   |
-LL ~     let c1 = || match x {
-LL +         _ => todo!(),
-LL ~     };
-   |
+ on line 67, column 23, replace with ` {
+        _ => todo!(),
+    }`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/pattern-matching-should-fail.rs:67:23
-   |
-LL |     let x: u8;
-   |         - binding declared here but left uninitialized
-LL |     let c1 = || match x { };
-   |                       ^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/pattern-matching-should-fail.rs:67:23: `x` used here but it isn't initialized
+  on line 66, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: u8 = 42;
-   |               ++++
+ on line 66, column 13, add ` = 42`
 
 error: aborting due to 8 previous errors
 

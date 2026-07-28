@@ -1,39 +1,18 @@
-error[E0532]: cannot find tuple struct or tuple variant `A` in this scope
-  --> $DIR/tuple-struct-alias.rs:7:9
-   |
-LL | struct S(u8, u16);
-   | ------------------ similarly named tuple struct `S` defined here
-...
-LL |         A(..) => {}
-   |         ^
-   |
-   = note: a type alias named `A` exists in another namespace
+error E0532: cannot find tuple struct or tuple variant `A` in this scope
+ at $DIR/tuple-struct-alias.rs:7:9
+  on line 1: similarly named tuple struct `S` defined here
+note: a type alias named `A` exists in another namespace
 help: a tuple struct with a similar name exists
-   |
-LL -         A(..) => {}
-LL +         S(..) => {}
-   |
+ on line 7, column 8, replace with `S`
 
-error[E0423]: cannot find function, tuple struct or tuple variant `A` in this scope
-  --> $DIR/tuple-struct-alias.rs:5:13
-   |
-LL | struct S(u8, u16);
-   | ------------------ similarly named tuple struct `S` defined here
-...
-LL |     let s = A(0, 1);
-   |             ^
-   |
-   = note: a type alias named `A` exists in another namespace
+error E0423: cannot find function, tuple struct or tuple variant `A` in this scope
+ at $DIR/tuple-struct-alias.rs:5:13
+  on line 1: similarly named tuple struct `S` defined here
+note: a type alias named `A` exists in another namespace
 help: a tuple struct with a similar name exists
-   |
-LL -     let s = A(0, 1);
-LL +     let s = S(0, 1);
-   |
+ on line 5, column 12, replace with `S`
 help: you might have meant to use `:` for type annotation
-   |
-LL -     let s = A(0, 1);
-LL +     let s: A(0, 1);
-   |
+ on line 5, column 9, replace with `: `
 
 error: aborting due to 2 previous errors
 

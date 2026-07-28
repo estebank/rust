@@ -1,37 +1,17 @@
-error[E0277]: the trait bound `usize: Foo` is not satisfied
-  --> $DIR/alias-bounds-when-not-wf.rs:15:15
-   |
-LL | fn hello(_: W<A<usize>>) {}
-   |               ^^^^^^^^ the trait `Foo` is not implemented for `usize`
-   |
+error E0277: the trait bound `usize: Foo` is not satisfied
+ at $DIR/alias-bounds-when-not-wf.rs:15:15: the trait `Foo` is not implemented for `usize`
 help: this trait has no implementations, consider adding one
-  --> $DIR/alias-bounds-when-not-wf.rs:5:1
-   |
-LL | trait Foo {}
-   | ^^^^^^^^^
+ at $DIR/alias-bounds-when-not-wf.rs:5:1
 note: required by a bound in `A`
-  --> $DIR/alias-bounds-when-not-wf.rs:7:11
-   |
-LL | type A<T: Foo> = T;
-   |           ^^^ required by this bound in `A`
+ at $DIR/alias-bounds-when-not-wf.rs:7:11: required by this bound in `A`
 
 error: the type `W<A<usize>>` is not well-formed
-  --> $DIR/alias-bounds-when-not-wf.rs:15:13
-   |
-LL | fn hello(_: W<A<usize>>) {}
-   |             ^^^^^^^^^^^
+ at $DIR/alias-bounds-when-not-wf.rs:15:13
 
-error[E0277]: the trait bound `usize: Foo` is not satisfied
-  --> $DIR/alias-bounds-when-not-wf.rs:15:13
-   |
-LL | fn hello(_: W<A<usize>>) {}
-   |             ^^^^^^^^^^^ the trait `Foo` is not implemented for `usize`
-   |
+error E0277: the trait bound `usize: Foo` is not satisfied
+ at $DIR/alias-bounds-when-not-wf.rs:15:13: the trait `Foo` is not implemented for `usize`
 help: this trait has no implementations, consider adding one
-  --> $DIR/alias-bounds-when-not-wf.rs:5:1
-   |
-LL | trait Foo {}
-   | ^^^^^^^^^
+ at $DIR/alias-bounds-when-not-wf.rs:5:1
 
 error: aborting due to 3 previous errors
 

@@ -1,62 +1,26 @@
-error[E0277]: the trait bound `Error: Clone` is not satisfied
-  --> $DIR/derives-span-Clone.rs:9:9
-   |
-LL | #[derive(Clone)]
-   |          ----- in this derive macro expansion
-...
-LL |         x: Error,
-   |         ^^^^^^^^ the trait `Clone` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Clone` is not satisfied
+ at $DIR/derives-span-Clone.rs:9:9: the trait `Clone` is not implemented for `Error`
+  on line 6, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Clone)]`
 
-error[E0277]: the trait bound `Error: Clone` is not satisfied
-  --> $DIR/derives-span-Clone.rs:16:9
-   |
-LL | #[derive(Clone)]
-   |          ----- in this derive macro expansion
-...
-LL |         Error,
-   |         ^^^^^ the trait `Clone` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Clone` is not satisfied
+ at $DIR/derives-span-Clone.rs:16:9: the trait `Clone` is not implemented for `Error`
+  on line 13, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Clone)]`
 
-error[E0277]: the trait bound `Error: Clone` is not satisfied
-  --> $DIR/derives-span-Clone.rs:22:5
-   |
-LL | #[derive(Clone)]
-   |          ----- in this derive macro expansion
-LL | struct Struct {
-LL |     x: Error,
-   |     ^^^^^^^^ the trait `Clone` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Clone` is not satisfied
+ at $DIR/derives-span-Clone.rs:22:5: the trait `Clone` is not implemented for `Error`
+  on line 20, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Clone)]`
 
-error[E0277]: the trait bound `Error: Clone` is not satisfied
-  --> $DIR/derives-span-Clone.rs:27:5
-   |
-LL | #[derive(Clone)]
-   |          ----- in this derive macro expansion
-LL | struct TupleStruct(
-LL |     Error,
-   |     ^^^^^ the trait `Clone` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Clone` is not satisfied
+ at $DIR/derives-span-Clone.rs:27:5: the trait `Clone` is not implemented for `Error`
+  on line 25, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 4 previous errors
 

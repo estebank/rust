@@ -1,26 +1,15 @@
-error[E0204]: the trait `Copy` cannot be implemented for this type
-  --> $DIR/derived-trait-requires-field-impl.rs:4:8
-   |
-LL | #[derive(Copy, Clone)]
-   |          ---- in this derive macro expansion
-LL | struct Bar(Foo);
-   |        ^^^ --- this field does not implement `Copy`
+error E0204: the trait `Copy` cannot be implemented for this type
+ at $DIR/derived-trait-requires-field-impl.rs:4:8
+  on line 3, column 10: in this derive macro expansion
+  on line 4, column 12: this field does not implement `Copy`
 
-error[E0277]: the trait bound `Foo: Clone` is not satisfied
-  --> $DIR/derived-trait-requires-field-impl.rs:4:12
-   |
-LL | #[derive(Copy, Clone)]
-   |                ----- in this derive macro expansion
-LL | struct Bar(Foo);
-   |            ^^^ the trait `Clone` is not implemented for `Foo`
-   |
+error E0277: the trait bound `Foo: Clone` is not satisfied
+ at $DIR/derived-trait-requires-field-impl.rs:4:12: the trait `Clone` is not implemented for `Foo`
+  on line 3, column 16: in this derive macro expansion
 note: required by a bound in `std::clone::AssertParamIsClone`
-  --> $SRC_DIR/core/src/clone.rs:LL:COL
+ at $SRC_DIR/core/src/clone.rs:LL:COL
 help: consider annotating `Foo` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Foo;
-   |
+ on line 2, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 2 previous errors
 

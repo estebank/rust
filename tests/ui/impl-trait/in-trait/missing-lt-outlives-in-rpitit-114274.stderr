@@ -1,22 +1,12 @@
-error[E0261]: use of undeclared lifetime name `'missing`
-  --> $DIR/missing-lt-outlives-in-rpitit-114274.rs:6:55
-   |
-LL |     fn iter(&self) -> impl Iterator<Item = Self::Item<'missing>>;
-   |                                                       ^^^^^^^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'missing`
+ at $DIR/missing-lt-outlives-in-rpitit-114274.rs:6:55: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the bound lifetime-generic with a new `'missing` lifetime
-   |
-LL |     fn iter(&self) -> impl for<'missing> Iterator<Item = Self::Item<'missing>>;
-   |                            +++++++++++++
+ on line 6, column 27, add `for<'missing> `
 help: consider introducing lifetime `'missing` here
-   |
-LL |     fn iter<'missing>(&self) -> impl Iterator<Item = Self::Item<'missing>>;
-   |            ++++++++++
+ on line 6, column 11, add `<'missing>`
 help: consider introducing lifetime `'missing` here
-   |
-LL | trait Iterable<'missing> {
-   |               ++++++++++
+ on line 1, column 14, add `<'missing>`
 
 error: aborting due to 1 previous error
 

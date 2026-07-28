@@ -1,14 +1,7 @@
-error[E0223]: ambiguous associated type
-  --> $DIR/ambiguous-associated-type-error-78622.rs:6:5
-   |
-LL |     S::A::<f> {}
-   |     ^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/ambiguous-associated-type-error-78622.rs:6:5
 help: if there were a trait named `Example` with associated type `A` implemented for `S`, you could use the fully-qualified path
-   |
-LL -     S::A::<f> {}
-LL +     <S as Example>::A::<f> {}
-   |
+ on line 6, column 4, replace with `<S as Example>::`
 
 error: aborting due to 1 previous error
 

@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `DoesNotExist` in this scope
-  --> $DIR/coherence-error-suppression.rs:9:14
-   |
-LL | impl Foo for DoesNotExist {}
-   |              ^^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `DoesNotExist` in this scope
+ at $DIR/coherence-error-suppression.rs:9:14: not found in this scope
 
 error: aborting due to 1 previous error
 

@@ -1,10 +1,6 @@
-error[E0308]: mismatched types
-  --> $DIR/main.rs:7:9
-   |
-LL |     let () = dep::Renamed;
-   |         ^^   ------------ this expression has type `Renamed`
-   |         |
-   |         expected `Renamed`, found `()`
+error E0308: mismatched types
+ at $DIR/main.rs:7:9: expected `Renamed`, found `()`
+  on line 7, column 14: this expression has type `Renamed`
 
 error: aborting due to 1 previous error
 

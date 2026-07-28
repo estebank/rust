@@ -1,11 +1,6 @@
-error[E0599]: no method named `kaname` found for struct `Homura` in the current scope
-  --> $DIR/method-not-found-on-struct.rs:6:40
-   |
-LL | struct Homura;
-   | ------------- method `kaname` not found for this struct
-...
-LL |     let Some(ref madoka) = Some(homura.kaname());
-   |                                        ^^^^^^ method not found in `Homura`
+error E0599: no method named `kaname` found for struct `Homura` in the current scope
+ at $DIR/method-not-found-on-struct.rs:6:40: method not found in `Homura`
+  on line 3: method `kaname` not found for this struct
 
 error: aborting due to 1 previous error
 

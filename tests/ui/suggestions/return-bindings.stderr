@@ -1,113 +1,52 @@
-error[E0308]: mismatched types
-  --> $DIR/return-bindings.rs:3:17
-   |
-LL | fn a(i: i32) -> i32 {}
-   |    -            ^^^ expected `i32`, found `()`
-   |    |
-   |    implicitly returns `()` as its body has no tail or `return` expression
-   |
+error E0308: mismatched types
+ at $DIR/return-bindings.rs:3:17: expected `i32`, found `()`
+  on line 3, column 4: implicitly returns `()` as its body has no tail or `return` expression
 help: consider returning the local binding `i`
-   |
-LL | fn a(i: i32) -> i32 { i }
-   |                       +
+ on line 3, column 21, add ` i `
 
-error[E0308]: mismatched types
-  --> $DIR/return-bindings.rs:7:46
-   |
-LL |       let s: String = if let Some(s) = opt_str {
-   |  ______________________________________________^
-LL | |
-LL | |     } else {
-   | |_____^ expected `String`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/return-bindings.rs:7:46 to 9:6: expected `String`, found `()`
 help: consider returning the local binding `s`
-   |
-LL |     let s: String = if let Some(s) = opt_str {
-LL ~         s
-LL ~
-   |
+ on line 7, column 46, add `
+        s
+    `
 
-error[E0308]: mismatched types
-  --> $DIR/return-bindings.rs:14:11
-   |
-LL | fn c() -> Option<i32> {
-   |    -      ^^^^^^^^^^^ expected `Option<i32>`, found `()`
-   |    |
-   |    implicitly returns `()` as its body has no tail or `return` expression
-   |
-   = note:   expected enum `Option<i32>`
-           found unit type `()`
+error E0308: mismatched types
+ at $DIR/return-bindings.rs:14:11: expected `Option<i32>`, found `()`
+  on line 14, column 4: implicitly returns `()` as its body has no tail or `return` expression
+note:   expected enum `Option<i32>`
+      found unit type `()`
 help: consider returning the local binding `x`
-   |
-LL ~     let x = Some(1);
-LL +     x
-   |
+ on line 16, column 20, add `
+    x`
 
-error[E0308]: mismatched types
-  --> $DIR/return-bindings.rs:20:46
-   |
-LL |       let s: String = if let Some(s) = opt_str {
-   |  ______________________________________________^
-LL | |
-LL | |     } else {
-   | |_____^ expected `String`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/return-bindings.rs:20:46 to 22:6: expected `String`, found `()`
 help: consider returning the local binding `s`
-   |
-LL |     let s: String = if let Some(s) = opt_str {
-LL ~         s
-LL ~
-   |
+ on line 20, column 46, add `
+        s
+    `
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/return-bindings.rs:30:9
-   |
-LL |        let s = if let Some(s) = opt_str {
-   |  ______________-                        -
-   | | ______________________________________|
-LL | ||     } else {
-   | ||_____- expected because of this
-LL | |          String::new()
-   | |          ^^^^^^^^^^^^^ expected `()`, found `String`
-LL | |
-LL | |      };
-   | |______- `if` and `else` have incompatible types
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/return-bindings.rs:30:9: expected `()`, found `String`
+  on line 28, column 13 to line 32, column 6: `if` and `else` have incompatible types
+  on line 28, column 38 to line 29, column 6: expected because of this
 help: consider returning the local binding `s`
-   |
-LL |     let s = if let Some(s) = opt_str {
-LL ~         s
-LL ~     } else {
-   |
+ on line 28, column 38, add `
+        s
+    `
 
-error[E0308]: mismatched types
-  --> $DIR/return-bindings.rs:37:20
-   |
-LL |         Some(s) => {}
-   |                    ^^ expected `String`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/return-bindings.rs:37:20: expected `String`, found `()`
 help: consider returning the local binding `s`
-   |
-LL |         Some(s) => { s }
-   |                      +
+ on line 37, column 20, add ` s `
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/return-bindings.rs:46:17
-   |
-LL |       let s = match opt_str {
-   |  _____________-
-LL | |         Some(s) => {}
-   | |                    -- this is found to be of type `()`
-LL | |         None => String::new(),
-   | |                 ^^^^^^^^^^^^^ expected `()`, found `String`
-LL | |
-LL | |     };
-   | |_____- `match` arms have incompatible types
-   |
+error E0308: `match` arms have incompatible types
+ at $DIR/return-bindings.rs:46:17: expected `()`, found `String`
+  on line 44, column 13 to line 48, column 6: `match` arms have incompatible types
+  on line 45, column 20: this is found to be of type `()`
 help: consider returning the local binding `s`
-   |
-LL |         Some(s) => { s }
-   |                      +
+ on line 45, column 20, add ` s `
 
 error: aborting due to 7 previous errors
 

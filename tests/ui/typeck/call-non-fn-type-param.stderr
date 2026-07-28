@@ -1,29 +1,14 @@
-error[E0618]: expected function, found `U`
-  --> $DIR/call-non-fn-type-param.rs:4:13
-   |
-LL | fn foo<U>(t: U) {
-   |           - `t` has type `U`
-LL |     let y = t();
-   |             ^--
-   |             |
-   |             call expression requires function
+error E0618: expected function, found `U`
+ at $DIR/call-non-fn-type-param.rs:4:13
+  on line 3, column 11: `t` has type `U`
+  on line 4, column 13: call expression requires function
 
-error[E0618]: expected function, found struct `Bar`
-  --> $DIR/call-non-fn-type-param.rs:11:13
-   |
-LL | struct Bar;
-   | ---------- struct `Bar` defined here
-...
-LL |     let f = Bar();
-   |             ^^^--
-   |             |
-   |             call expression requires function
-   |
+error E0618: expected function, found struct `Bar`
+ at $DIR/call-non-fn-type-param.rs:11:13
+  on line 8: struct `Bar` defined here
+  on line 11, column 13: call expression requires function
 help: `Bar` is a unit struct, and does not take parentheses to be constructed
-   |
-LL -     let f = Bar();
-LL +     let f = Bar;
-   |
+ on line 11, column 15
 
 error: aborting due to 2 previous errors
 

@@ -1,38 +1,18 @@
 error: lifetime may not live long enough
-  --> $DIR/issue-57731-ascibed-coupled-types.rs:17:5
-   |
-LL | fn coupled_wilds_rhs<'a>(_x: &'a u32, s: &'static u32) -> &'static u32 {
-   |                      -- lifetime `'a` defined here
-LL |     let ((y, _z),) = type_ascribe!(((s, _x),), (PairCoupledTypes<_>,));
-LL |     y
-   |     ^ returning this value requires that `'a` must outlive `'static`
+ at $DIR/issue-57731-ascibed-coupled-types.rs:17:5: returning this value requires that `'a` must outlive `'static`
+  on line 15, column 22: lifetime `'a` defined here
 
 error: lifetime may not live long enough
-  --> $DIR/issue-57731-ascibed-coupled-types.rs:22:5
-   |
-LL | fn coupled_regions_rhs<'a>(_x: &'a u32, s: &'static u32) -> &'static u32 {
-   |                        -- lifetime `'a` defined here
-LL |     let ((y, _z),) = type_ascribe!(((s, _x),), (PairCoupledRegions<_>,));
-LL |     y
-   |     ^ returning this value requires that `'a` must outlive `'static`
+ at $DIR/issue-57731-ascibed-coupled-types.rs:22:5: returning this value requires that `'a` must outlive `'static`
+  on line 20, column 24: lifetime `'a` defined here
 
 error: lifetime may not live long enough
-  --> $DIR/issue-57731-ascibed-coupled-types.rs:32:5
-   |
-LL | fn cast_coupled_wilds_rhs<'a>(_x: &'a u32, s: &'static u32) -> &'static u32 {
-   |                           -- lifetime `'a` defined here
-LL |     let ((y, _z),) = ((s, _x),) as (PairCoupledTypes<_>,);
-LL |     y
-   |     ^ returning this value requires that `'a` must outlive `'static`
+ at $DIR/issue-57731-ascibed-coupled-types.rs:32:5: returning this value requires that `'a` must outlive `'static`
+  on line 30, column 27: lifetime `'a` defined here
 
 error: lifetime may not live long enough
-  --> $DIR/issue-57731-ascibed-coupled-types.rs:37:5
-   |
-LL | fn cast_coupled_regions_rhs<'a>(_x: &'a u32, s: &'static u32) -> &'static u32 {
-   |                             -- lifetime `'a` defined here
-LL |     let ((y, _z),) = ((s, _x),) as (PairCoupledRegions<_>,);
-LL |     y
-   |     ^ returning this value requires that `'a` must outlive `'static`
+ at $DIR/issue-57731-ascibed-coupled-types.rs:37:5: returning this value requires that `'a` must outlive `'static`
+  on line 35, column 29: lifetime `'a` defined here
 
 error: aborting due to 4 previous errors
 

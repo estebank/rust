@@ -1,14 +1,8 @@
-error[E0741]: using function pointers as const generic parameters is forbidden
-  --> $DIR/fn-const-param-call.rs:13:25
-   |
-LL | struct Wrapper<const F: fn() -> u32>;
-   |                         ^^^^^^^^^^^
+error E0741: using function pointers as const generic parameters is forbidden
+ at $DIR/fn-const-param-call.rs:13:25
 
-error[E0741]: using function pointers as const generic parameters is forbidden
-  --> $DIR/fn-const-param-call.rs:15:15
-   |
-LL | impl<const F: fn() -> u32> Wrapper<F> {
-   |               ^^^^^^^^^^^
+error E0741: using function pointers as const generic parameters is forbidden
+ at $DIR/fn-const-param-call.rs:15:15
 
 error: aborting due to 2 previous errors
 

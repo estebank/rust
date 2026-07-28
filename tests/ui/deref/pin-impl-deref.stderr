@@ -1,78 +1,40 @@
-error[E0277]: the trait bound `&MyUnpinType: DerefMut` is not satisfied
-  --> $DIR/pin-impl-deref.rs:24:20
-   |
-LL |     impl_deref_mut(r_unpin)
-   |     -------------- ^^^^^^^ the trait `DerefMut` is not implemented for `&MyUnpinType`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: `DerefMut` is implemented for `&mut MyUnpinType`, but not for `&MyUnpinType`
-   = note: required for `Pin<&MyUnpinType>` to implement `DerefMut`
+error E0277: the trait bound `&MyUnpinType: DerefMut` is not satisfied
+ at $DIR/pin-impl-deref.rs:24:20: the trait `DerefMut` is not implemented for `&MyUnpinType`
+  on line 24: required by a bound introduced by this call
+note: `DerefMut` is implemented for `&mut MyUnpinType`, but not for `&MyUnpinType`
+note: required for `Pin<&MyUnpinType>` to implement `DerefMut`
 note: required by a bound in `impl_deref_mut`
-  --> $DIR/pin-impl-deref.rs:22:27
-   |
-LL | fn impl_deref_mut(_: impl DerefMut) {}
-   |                           ^^^^^^^^ required by this bound in `impl_deref_mut`
+ at $DIR/pin-impl-deref.rs:22:27: required by this bound in `impl_deref_mut`
 
-error[E0277]: the trait bound `&MyPinType: DerefMut` is not satisfied
-  --> $DIR/pin-impl-deref.rs:31:20
-   |
-LL |     impl_deref_mut(r_pin)
-   |     -------------- ^^^^^ the trait `DerefMut` is not implemented for `&MyPinType`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: `DerefMut` is implemented for `&mut MyPinType`, but not for `&MyPinType`
-   = note: required for `Pin<&MyPinType>` to implement `DerefMut`
+error E0277: the trait bound `&MyPinType: DerefMut` is not satisfied
+ at $DIR/pin-impl-deref.rs:31:20: the trait `DerefMut` is not implemented for `&MyPinType`
+  on line 31: required by a bound introduced by this call
+note: `DerefMut` is implemented for `&mut MyPinType`, but not for `&MyPinType`
+note: required for `Pin<&MyPinType>` to implement `DerefMut`
 note: required by a bound in `impl_deref_mut`
-  --> $DIR/pin-impl-deref.rs:22:27
-   |
-LL | fn impl_deref_mut(_: impl DerefMut) {}
-   |                           ^^^^^^^^ required by this bound in `impl_deref_mut`
+ at $DIR/pin-impl-deref.rs:22:27: required by this bound in `impl_deref_mut`
 
-error[E0277]: `PhantomPinned` cannot be unpinned
-  --> $DIR/pin-impl-deref.rs:31:20
-   |
-LL |     impl_deref_mut(r_pin)
-   |     -------------- ^^^^^ within `MyPinType`, the trait `Unpin` is not implemented for `PhantomPinned`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: consider using the `pin!` macro
-           consider using `Box::pin` if you need to access the pinned value outside of the current scope
+error E0277: `PhantomPinned` cannot be unpinned
+ at $DIR/pin-impl-deref.rs:31:20: within `MyPinType`, the trait `Unpin` is not implemented for `PhantomPinned`
+  on line 31: required by a bound introduced by this call
+note: consider using the `pin!` macro
+      consider using `Box::pin` if you need to access the pinned value outside of the current scope
 note: required because it appears within the type `MyPinType`
-  --> $DIR/pin-impl-deref.rs:15:8
-   |
-LL | struct MyPinType(core::marker::PhantomPinned);
-   |        ^^^^^^^^^
-   = note: required for `Pin<&MyPinType>` to implement `DerefMut`
+ at $DIR/pin-impl-deref.rs:15:8
+note: required for `Pin<&MyPinType>` to implement `DerefMut`
 note: required by a bound in `impl_deref_mut`
-  --> $DIR/pin-impl-deref.rs:22:27
-   |
-LL | fn impl_deref_mut(_: impl DerefMut) {}
-   |                           ^^^^^^^^ required by this bound in `impl_deref_mut`
+ at $DIR/pin-impl-deref.rs:22:27: required by this bound in `impl_deref_mut`
 
-error[E0277]: `PhantomPinned` cannot be unpinned
-  --> $DIR/pin-impl-deref.rs:36:20
-   |
-LL |     impl_deref_mut(r_pin)
-   |     -------------- ^^^^^ within `MyPinType`, the trait `Unpin` is not implemented for `PhantomPinned`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: consider using the `pin!` macro
-           consider using `Box::pin` if you need to access the pinned value outside of the current scope
+error E0277: `PhantomPinned` cannot be unpinned
+ at $DIR/pin-impl-deref.rs:36:20: within `MyPinType`, the trait `Unpin` is not implemented for `PhantomPinned`
+  on line 36: required by a bound introduced by this call
+note: consider using the `pin!` macro
+      consider using `Box::pin` if you need to access the pinned value outside of the current scope
 note: required because it appears within the type `MyPinType`
-  --> $DIR/pin-impl-deref.rs:15:8
-   |
-LL | struct MyPinType(core::marker::PhantomPinned);
-   |        ^^^^^^^^^
-   = note: required for `Pin<&mut MyPinType>` to implement `DerefMut`
+ at $DIR/pin-impl-deref.rs:15:8
+note: required for `Pin<&mut MyPinType>` to implement `DerefMut`
 note: required by a bound in `impl_deref_mut`
-  --> $DIR/pin-impl-deref.rs:22:27
-   |
-LL | fn impl_deref_mut(_: impl DerefMut) {}
-   |                           ^^^^^^^^ required by this bound in `impl_deref_mut`
+ at $DIR/pin-impl-deref.rs:22:27: required by this bound in `impl_deref_mut`
 
 error: aborting due to 4 previous errors
 

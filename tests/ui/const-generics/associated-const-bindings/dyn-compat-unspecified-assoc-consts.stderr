@@ -1,44 +1,20 @@
-error[E0191]: the value of the associated constant `K` in `Trait` must be specified
-  --> $DIR/dyn-compat-unspecified-assoc-consts.rs:19:18
-   |
-LL |     type const K: usize;
-   |     ------------------- `K` defined here
-...
-LL | struct Store(dyn Trait);
-   |                  ^^^^^
-   |
+error E0191: the value of the associated constant `K` in `Trait` must be specified
+ at $DIR/dyn-compat-unspecified-assoc-consts.rs:19:18
+  on line 9: `K` defined here
 help: specify the associated constant
-   |
-LL | struct Store(dyn Trait<K = /* CONST */>);
-   |                       +++++++++++++++++
+ on line 19, column 17, replace with `Trait<K = /* CONST */>`
 
-error[E0191]: the value of the associated constant `K` in `Trait` must be specified
-  --> $DIR/dyn-compat-unspecified-assoc-consts.rs:23:21
-   |
-LL |     type const K: usize;
-   |     ------------------- `K` defined here
-...
-LL | type DynTrait = dyn Trait;
-   |                     ^^^^^
-   |
+error E0191: the value of the associated constant `K` in `Trait` must be specified
+ at $DIR/dyn-compat-unspecified-assoc-consts.rs:23:21
+  on line 9: `K` defined here
 help: specify the associated constant
-   |
-LL | type DynTrait = dyn Trait<K = /* CONST */>;
-   |                          +++++++++++++++++
+ on line 23, column 20, replace with `Trait<K = /* CONST */>`
 
-error[E0191]: the value of the associated constant `K` in `Trait` must be specified
-  --> $DIR/dyn-compat-unspecified-assoc-consts.rs:14:16
-   |
-LL |     type const K: usize;
-   |     ------------------- `K` defined here
-...
-LL |     let _: dyn Trait;
-   |                ^^^^^
-   |
+error E0191: the value of the associated constant `K` in `Trait` must be specified
+ at $DIR/dyn-compat-unspecified-assoc-consts.rs:14:16
+  on line 9: `K` defined here
 help: specify the associated constant
-   |
-LL |     let _: dyn Trait<K = /* CONST */>;
-   |                     +++++++++++++++++
+ on line 14, column 15, replace with `Trait<K = /* CONST */>`
 
 error: aborting due to 3 previous errors
 

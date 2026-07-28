@@ -61,10 +61,7 @@ error: layout_of(MissingPayloadField) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:17:1
-   |
-LL | pub enum MissingPayloadField {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:17:1
 
 error: layout_of(CommonPayloadField) = Layout {
            size: Size(2 bytes),
@@ -135,10 +132,7 @@ error: layout_of(CommonPayloadField) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:26:1
-   |
-LL | pub enum CommonPayloadField {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:26:1
 
 error: layout_of(CommonPayloadFieldIsMaybeUninit) = Layout {
            size: Size(2 bytes),
@@ -209,10 +203,7 @@ error: layout_of(CommonPayloadFieldIsMaybeUninit) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:34:1
-   |
-LL | pub enum CommonPayloadFieldIsMaybeUninit {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:34:1
 
 error: layout_of(NicheFirst) = Layout {
            size: Size(2 bytes),
@@ -299,10 +290,7 @@ error: layout_of(NicheFirst) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:42:1
-   |
-LL | pub enum NicheFirst {
-   | ^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:42:1
 
 error: layout_of(NicheSecond) = Layout {
            size: Size(2 bytes),
@@ -389,10 +377,7 @@ error: layout_of(NicheSecond) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:51:1
-   |
-LL | pub enum NicheSecond {
-   | ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-96158-scalarpair-payload-might-be-uninit.rs:51:1
 
 error: aborting due to 5 previous errors
 

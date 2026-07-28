@@ -1,29 +1,15 @@
-error[E0384]: cannot assign twice to immutable variable `x`
-  --> $DIR/mut-pattern-internal-mutability.rs:5:5
-   |
-LL |     let &mut x = foo;
-   |              - first assignment to `x`
-LL |     x += 1;
-   |     ^^^^^^ cannot assign twice to immutable variable
-   |
+error E0384: cannot assign twice to immutable variable `x`
+ at $DIR/mut-pattern-internal-mutability.rs:5:5: cannot assign twice to immutable variable
+  on line 4, column 14: first assignment to `x`
 help: consider making this binding mutable
-   |
-LL |     let &mut mut x = foo;
-   |              +++
+ on line 4, column 13, add `mut `
 help: to modify the original value, take a borrow instead
-   |
-LL |     let &mut ref mut x = foo;
-   |              +++++++
+ on line 4, column 13, add `ref mut `
 
-error[E0506]: cannot assign to `*foo` because it is borrowed
-  --> $DIR/mut-pattern-internal-mutability.rs:13:5
-   |
-LL |     let &mut ref x = foo;
-   |              ----- `*foo` is borrowed here
-LL |     *foo += 1;
-   |     ^^^^^^^^^ `*foo` is assigned to here but it was already borrowed
-LL |     drop(x);
-   |          - borrow later used here
+error E0506: cannot assign to `*foo` because it is borrowed
+ at $DIR/mut-pattern-internal-mutability.rs:13:5: `*foo` is assigned to here but it was already borrowed
+  on line 12, column 14: `*foo` is borrowed here
+  on line 14, column 10: borrow later used here
 
 error: aborting due to 2 previous errors
 

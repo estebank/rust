@@ -1,51 +1,23 @@
-error[E0597]: `my_string` does not live long enough
-  --> $DIR/try-block-bad-lifetime.rs:15:33
-   |
-LL |         let result: Result<(), &str> = try {
-   |             ------ borrow later stored here
-LL |             let my_string = String::from("");
-   |                 --------- binding `my_string` declared here
-LL |             let my_str: & str = & my_string;
-   |                                 ^^^^^^^^^^^ borrowed value does not live long enough
-...
-LL |         };
-   |         - `my_string` dropped here while still borrowed
+error E0597: `my_string` does not live long enough
+ at $DIR/try-block-bad-lifetime.rs:15:33: borrowed value does not live long enough
+  on line 13, column 13: borrow later stored here
+  on line 14, column 17: binding `my_string` declared here
+  on line 19: `my_string` dropped here while still borrowed
 
-error[E0506]: cannot assign to `i` because it is borrowed
-  --> $DIR/try-block-bad-lifetime.rs:29:13
-   |
-LL |         let k = &mut i;
-   |                 ------ `i` is borrowed here
-...
-LL |             i = 10;
-   |             ^^^^^^ `i` is assigned to here but it was already borrowed
-LL |         };
-LL |         ::std::mem::drop(k);
-   |                          - borrow later used here
+error E0506: cannot assign to `i` because it is borrowed
+ at $DIR/try-block-bad-lifetime.rs:29:13: `i` is assigned to here but it was already borrowed
+  on line 26, column 17: `i` is borrowed here
+  on line 31, column 26: borrow later used here
 
-error[E0382]: use of moved value: `k`
-  --> $DIR/try-block-bad-lifetime.rs:31:26
-   |
-LL |         let k = &mut i;
-   |             - move occurs because `k` has type `&mut i32`, which does not implement the `Copy` trait
-LL |         let mut j: Result<(), &mut i32> = try {
-LL |             Err(k) ?;
-   |                 - value moved here
-...
-LL |         ::std::mem::drop(k);
-   |                          ^ value used here after move
+error E0382: use of moved value: `k`
+ at $DIR/try-block-bad-lifetime.rs:31:26: value used here after move
+  on line 26, column 13: move occurs because `k` has type `&mut i32`, which does not implement the `Copy` trait
+  on line 28, column 17: value moved here
 
-error[E0506]: cannot assign to `i` because it is borrowed
-  --> $DIR/try-block-bad-lifetime.rs:32:9
-   |
-LL |         let k = &mut i;
-   |                 ------ `i` is borrowed here
-...
-LL |         i = 40;
-   |         ^^^^^^ `i` is assigned to here but it was already borrowed
-LL |
-LL |         let i_ptr = if let Err(i_ptr) = j { i_ptr } else { panic ! ("") };
-   |                                         - borrow later used here
+error E0506: cannot assign to `i` because it is borrowed
+ at $DIR/try-block-bad-lifetime.rs:32:9: `i` is assigned to here but it was already borrowed
+  on line 26, column 17: `i` is borrowed here
+  on line 34, column 41: borrow later used here
 
 error: aborting due to 4 previous errors
 

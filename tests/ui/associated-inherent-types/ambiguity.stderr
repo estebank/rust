@@ -1,19 +1,9 @@
-error[E0034]: multiple applicable items in scope
-  --> $DIR/ambiguity.rs:15:24
-   |
-LL |     let _: Wrapper<_>::Foo = ();
-   |                        ^^^ multiple `Foo` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/ambiguity.rs:15:24: multiple `Foo` found
 note: candidate #1 is defined in an impl for the type `Wrapper<i32>`
-  --> $DIR/ambiguity.rs:7:5
-   |
-LL |     type Foo = i32;
-   |     ^^^^^^^^
+ at $DIR/ambiguity.rs:7:5
 note: candidate #2 is defined in an impl for the type `Wrapper<()>`
-  --> $DIR/ambiguity.rs:11:5
-   |
-LL |     type Foo = ();
-   |     ^^^^^^^^
+ at $DIR/ambiguity.rs:11:5
 
 error: aborting due to 1 previous error
 

@@ -1,176 +1,89 @@
-error[E0505]: cannot move out of `x` because it is borrowed
-  --> $DIR/closure-borrow-spans.rs:6:13
-   |
-LL |     let f = || x.len();
-   |             -- - borrow occurs due to use in closure
-   |             |
-   |             borrow of `x` occurs here
-LL |     let y = x;
-   |             ^ move out of `x` occurs here
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0505: cannot move out of `x` because it is borrowed
+ at $DIR/closure-borrow-spans.rs:6:13: move out of `x` occurs here
+  on line 5, column 13: borrow of `x` occurs here
+  on line 5, column 16: borrow occurs due to use in closure
+  on line 7: borrow later used here
 
-error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
-  --> $DIR/closure-borrow-spans.rs:12:13
-   |
-LL |     let f = || x;
-   |             -- - first borrow occurs due to use of `x` in closure
-   |             |
-   |             immutable borrow occurs here
-LL |     let y = &mut x;
-   |             ^^^^^^ mutable borrow occurs here
-LL |     f.use_ref();
-   |     - immutable borrow later used here
+error E0502: cannot borrow `x` as mutable because it is also borrowed as immutable
+ at $DIR/closure-borrow-spans.rs:12:13: mutable borrow occurs here
+  on line 11, column 13: immutable borrow occurs here
+  on line 11, column 16: first borrow occurs due to use of `x` in closure
+  on line 13: immutable borrow later used here
 
-error[E0597]: `x` does not live long enough
-  --> $DIR/closure-borrow-spans.rs:20:16
-   |
-LL |         let x = 1;
-   |             - binding `x` declared here
-LL |         f = || x;
-   |             -- ^ borrowed value does not live long enough
-   |             |
-   |             value captured here
-LL |     }
-   |     - `x` dropped here while still borrowed
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0597: `x` does not live long enough
+ at $DIR/closure-borrow-spans.rs:20:16: borrowed value does not live long enough
+  on line 19, column 13: binding `x` declared here
+  on line 20, column 13: value captured here
+  on line 21: `x` dropped here while still borrowed
+  on line 22: borrow later used here
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/closure-borrow-spans.rs:27:5
-   |
-LL |     let f = || x;
-   |             -- - borrow occurs due to use in closure
-   |             |
-   |             `x` is borrowed here
-LL |     x = 1;
-   |     ^^^^^ `x` is assigned to here but it was already borrowed
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/closure-borrow-spans.rs:27:5: `x` is assigned to here but it was already borrowed
+  on line 26, column 13: `x` is borrowed here
+  on line 26, column 16: borrow occurs due to use in closure
+  on line 28: borrow later used here
 
-error[E0503]: cannot use `x` because it was mutably borrowed
-  --> $DIR/closure-borrow-spans.rs:33:13
-   |
-LL |     let f = || x = 0;
-   |             -- - borrow occurs due to use of `x` in closure
-   |             |
-   |             `x` is borrowed here
-LL |     let y = x;
-   |             ^ use of borrowed `x`
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0503: cannot use `x` because it was mutably borrowed
+ at $DIR/closure-borrow-spans.rs:33:13: use of borrowed `x`
+  on line 32, column 13: `x` is borrowed here
+  on line 32, column 16: borrow occurs due to use of `x` in closure
+  on line 34: borrow later used here
 
-error[E0502]: cannot borrow `x` as immutable because it is also borrowed as mutable
-  --> $DIR/closure-borrow-spans.rs:39:13
-   |
-LL |     let f = || x = 0;
-   |             -- - first borrow occurs due to use of `x` in closure
-   |             |
-   |             mutable borrow occurs here
-LL |     let y = &x;
-   |             ^^ immutable borrow occurs here
-LL |     f.use_ref();
-   |     - mutable borrow later used here
+error E0502: cannot borrow `x` as immutable because it is also borrowed as mutable
+ at $DIR/closure-borrow-spans.rs:39:13: immutable borrow occurs here
+  on line 38, column 13: mutable borrow occurs here
+  on line 38, column 16: first borrow occurs due to use of `x` in closure
+  on line 40: mutable borrow later used here
 
-error[E0499]: cannot borrow `x` as mutable more than once at a time
-  --> $DIR/closure-borrow-spans.rs:45:13
-   |
-LL |     let f = || x = 0;
-   |             -- - first borrow occurs due to use of `x` in closure
-   |             |
-   |             first mutable borrow occurs here
-LL |     let y = &mut x;
-   |             ^^^^^^ second mutable borrow occurs here
-LL |     f.use_ref();
-   |     - first borrow later used here
+error E0499: cannot borrow `x` as mutable more than once at a time
+ at $DIR/closure-borrow-spans.rs:45:13: second mutable borrow occurs here
+  on line 44, column 13: first mutable borrow occurs here
+  on line 44, column 16: first borrow occurs due to use of `x` in closure
+  on line 46: first borrow later used here
 
-error[E0597]: `x` does not live long enough
-  --> $DIR/closure-borrow-spans.rs:53:16
-   |
-LL |         let mut x = 1;
-   |             ----- binding `x` declared here
-LL |         f = || x = 0;
-   |             -- ^ borrowed value does not live long enough
-   |             |
-   |             value captured here
-LL |     }
-   |     - `x` dropped here while still borrowed
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0597: `x` does not live long enough
+ at $DIR/closure-borrow-spans.rs:53:16: borrowed value does not live long enough
+  on line 52, column 13: binding `x` declared here
+  on line 53, column 13: value captured here
+  on line 54: `x` dropped here while still borrowed
+  on line 55: borrow later used here
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/closure-borrow-spans.rs:60:5
-   |
-LL |     let f = || x = 0;
-   |             -- - borrow occurs due to use in closure
-   |             |
-   |             `x` is borrowed here
-LL |     x = 1;
-   |     ^^^^^ `x` is assigned to here but it was already borrowed
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/closure-borrow-spans.rs:60:5: `x` is assigned to here but it was already borrowed
+  on line 59, column 13: `x` is borrowed here
+  on line 59, column 16: borrow occurs due to use in closure
+  on line 61: borrow later used here
 
-error[E0505]: cannot move out of `x` because it is borrowed
-  --> $DIR/closure-borrow-spans.rs:66:13
-   |
-LL |     let f = || *x = 0;
-   |             -- -- borrow occurs due to use in closure
-   |             |
-   |             borrow of `x` occurs here
-LL |     let y = x;
-   |             ^ move out of `x` occurs here
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0505: cannot move out of `x` because it is borrowed
+ at $DIR/closure-borrow-spans.rs:66:13: move out of `x` occurs here
+  on line 65, column 13: borrow of `x` occurs here
+  on line 65, column 16: borrow occurs due to use in closure
+  on line 67: borrow later used here
 
-error[E0501]: cannot borrow `x` as immutable because previous closure requires unique access
-  --> $DIR/closure-borrow-spans.rs:72:13
-   |
-LL |     let f = || *x = 0;
-   |             -- -- first borrow occurs due to use of `x` in closure
-   |             |
-   |             closure construction occurs here
-LL |     let y = &x;
-   |             ^^ second borrow occurs here
-LL |     f.use_ref();
-   |     - first borrow later used here
+error E0501: cannot borrow `x` as immutable because previous closure requires unique access
+ at $DIR/closure-borrow-spans.rs:72:13: second borrow occurs here
+  on line 71, column 13: closure construction occurs here
+  on line 71, column 16: first borrow occurs due to use of `x` in closure
+  on line 73: first borrow later used here
 
-error[E0501]: cannot borrow `x` as mutable because previous closure requires unique access
-  --> $DIR/closure-borrow-spans.rs:78:13
-   |
-LL |     let f = || *x = 0;
-   |             -- -- first borrow occurs due to use of `x` in closure
-   |             |
-   |             closure construction occurs here
-LL |     let y = &mut x;
-   |             ^^^^^^ second borrow occurs here
-LL |     f.use_ref();
-   |     - first borrow later used here
+error E0501: cannot borrow `x` as mutable because previous closure requires unique access
+ at $DIR/closure-borrow-spans.rs:78:13: second borrow occurs here
+  on line 77, column 13: closure construction occurs here
+  on line 77, column 16: first borrow occurs due to use of `x` in closure
+  on line 79: first borrow later used here
 
-error[E0597]: `x` does not live long enough
-  --> $DIR/closure-borrow-spans.rs:87:16
-   |
-LL |         let x = &mut z;
-   |             - binding `x` declared here
-LL |         f = || *x = 0;
-   |             -- ^^ borrowed value does not live long enough
-   |             |
-   |             value captured here
-LL |     }
-   |     - `x` dropped here while still borrowed
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0597: `x` does not live long enough
+ at $DIR/closure-borrow-spans.rs:87:16: borrowed value does not live long enough
+  on line 86, column 13: binding `x` declared here
+  on line 87, column 13: value captured here
+  on line 88: `x` dropped here while still borrowed
+  on line 89: borrow later used here
 
-error[E0506]: cannot assign to `*x` because it is borrowed
-  --> $DIR/closure-borrow-spans.rs:94:5
-   |
-LL |     let f = || *x = 0;
-   |             -- -- borrow occurs due to use in closure
-   |             |
-   |             `*x` is borrowed here
-LL |     *x = 1;
-   |     ^^^^^^ `*x` is assigned to here but it was already borrowed
-LL |     f.use_ref();
-   |     - borrow later used here
+error E0506: cannot assign to `*x` because it is borrowed
+ at $DIR/closure-borrow-spans.rs:94:5: `*x` is assigned to here but it was already borrowed
+  on line 93, column 13: `*x` is borrowed here
+  on line 93, column 16: borrow occurs due to use in closure
+  on line 95: borrow later used here
 
 error: aborting due to 14 previous errors
 

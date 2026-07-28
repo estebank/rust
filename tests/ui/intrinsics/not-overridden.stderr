@@ -1,8 +1,5 @@
 error: must be overridden by codegen backend, but isn't
-  --> $DIR/not-overridden.rs:15:14
-   |
-LL |     unsafe { const_deallocate(std::ptr::null_mut(), 0, 0) }
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/not-overridden.rs:15:14
 
 
 query stack during panic:

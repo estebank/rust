@@ -1,26 +1,12 @@
 error: wrong meta list delimiters
-  --> $DIR/malformed-meta-delim.rs:3:9
-   |
-LL | #[allow { foo_lint } ]
-   |         ^^^^^^^^^^^^
-   |
+ at $DIR/malformed-meta-delim.rs:3:9
 help: the delimiters should be `(` and `)`
-   |
-LL - #[allow { foo_lint } ]
-LL + #[allow ( foo_lint ) ]
-   |
+ on line 3, column 8, replace with `(`
 
 error: wrong meta list delimiters
-  --> $DIR/malformed-meta-delim.rs:8:9
-   |
-LL | #[allow [ foo_lint ] ]
-   |         ^^^^^^^^^^^^
-   |
+ at $DIR/malformed-meta-delim.rs:8:9
 help: the delimiters should be `(` and `)`
-   |
-LL - #[allow [ foo_lint ] ]
-LL + #[allow ( foo_lint ) ]
-   |
+ on line 8, column 8, replace with `(`
 
 error: aborting due to 2 previous errors
 

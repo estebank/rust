@@ -1,14 +1,9 @@
-error[E0432]: first message
-  --> $DIR/unknown_import.rs:12:5
-   |
-LL | use foo::Foo;
-   |     ^^^^^---
-   |          |
-   |          first label
-   |
-   = note: unresolved import `foo::Foo`
-   = note: custom note
-   = note: custom note 2
+error E0432: first message
+ at $DIR/unknown_import.rs:12:5
+  on line 12, column 10: first label
+note: unresolved import `foo::Foo`
+note: custom note
+note: custom note 2
 
 error: aborting due to 1 previous error
 

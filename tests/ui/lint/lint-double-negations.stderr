@@ -1,42 +1,24 @@
 warning: use of a double negation
-  --> $DIR/lint-double-negations.rs:6:5
-   |
-LL |     --x;
-   |     ^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
-   = note: `#[warn(double_negations)]` on by default
+ at $DIR/lint-double-negations.rs:6:5
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
+note: `#[warn(double_negations)]` on by default
 help: add parentheses for clarity
-   |
-LL |     -(-x);
-   |      +  +
+ on line 6, column 5, add `(`
 
 warning: use of a double negation
-  --> $DIR/lint-double-negations.rs:7:6
-   |
-LL |     ---x;
-   |      ^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
+ at $DIR/lint-double-negations.rs:7:6
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
 help: add parentheses for clarity
-   |
-LL |     --(-x);
-   |       +  +
+ on line 7, column 6, add `(`
 
 warning: use of a double negation
-  --> $DIR/lint-double-negations.rs:8:14
-   |
-LL |     let _y = --(-x);
-   |              ^^^^^^
-   |
-   = note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
-   = note: use `-= 1` if you meant to decrement the value
+ at $DIR/lint-double-negations.rs:8:14
+note: the prefix `--` could be misinterpreted as a decrement operator which exists in other languages
+note: use `-= 1` if you meant to decrement the value
 help: add parentheses for clarity
-   |
-LL |     let _y = -(-(-x));
-   |               +     +
+ on line 8, column 14, add `(`
 
 warning: 3 warnings emitted
 

@@ -1,183 +1,92 @@
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:6:13
-   |
-LL |     let _ = -1i32.abs();
-   |             ^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:6:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 note: the lint level is defined here
-  --> $DIR/negative_literals.rs:3:9
-   |
-LL | #![deny(ambiguous_negative_literals)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/negative_literals.rs:3:9
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1i32).abs();
-   |             +     +
+ on line 6, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1i32.abs());
-   |              +          +
+ on line 6, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:8:13
-   |
-LL |     let _ = -1f32.abs();
-   |             ^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:8:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1f32).abs();
-   |             +     +
+ on line 8, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1f32.abs());
-   |              +          +
+ on line 8, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:10:13
-   |
-LL |     let _ = -1f64.asin();
-   |             ^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:10:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1f64).asin();
-   |             +     +
+ on line 10, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1f64.asin());
-   |              +           +
+ on line 10, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:12:13
-   |
-LL |     let _ = -1f64.asinh();
-   |             ^^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:12:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1f64).asinh();
-   |             +     +
+ on line 12, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1f64.asinh());
-   |              +            +
+ on line 12, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:14:13
-   |
-LL |     let _ = -1f64.tan();
-   |             ^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:14:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1f64).tan();
-   |             +     +
+ on line 14, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1f64.tan());
-   |              +          +
+ on line 14, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:16:13
-   |
-LL |     let _ = -1f64.tanh();
-   |             ^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:16:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1f64).tanh();
-   |             +     +
+ on line 16, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1f64.tanh());
-   |              +           +
+ on line 16, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:18:13
-   |
-LL |     let _ = -1.0_f64.cos().cos();
-   |             ^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:18:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1.0_f64).cos().cos();
-   |             +        +
+ on line 18, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1.0_f64.cos().cos());
-   |              +                   +
+ on line 18, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:20:13
-   |
-LL |     let _ = -1.0_f64.cos().sin();
-   |             ^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:20:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1.0_f64).cos().sin();
-   |             +        +
+ on line 20, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1.0_f64.cos().sin());
-   |              +                   +
+ on line 20, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:22:13
-   |
-LL |     let _ = -1.0_f64.sin().cos();
-   |             ^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:22:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1.0_f64).sin().cos();
-   |             +        +
+ on line 22, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1.0_f64.sin().cos());
-   |              +                   +
+ on line 22, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:24:13
-   |
-LL |     let _ = -1f64.sin().sin();
-   |             ^^^^^^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:24:13
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     let _ = (-1f64).sin().sin();
-   |             +     +
+ on line 24, column 12, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     let _ = -(1f64.sin().sin());
-   |              +                +
+ on line 24, column 13, add `(`
 
 error: `-` has lower precedence than method calls, which might be unexpected
-  --> $DIR/negative_literals.rs:27:11
-   |
-LL |     dbg!( -1.0_f32.cos() );
-   |           ^^^^^^^^^^^^^^
-   |
-   = note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
+ at $DIR/negative_literals.rs:27:11
+note: e.g. `-4.abs()` equals `-4`; while `(-4).abs()` equals `4`
 help: add parentheses around the `-` and the literal to call the method on a negative literal
-   |
-LL |     dbg!( (-1.0_f32).cos() );
-   |           +        +
+ on line 27, column 10, add `(`
 help: add parentheses around the literal and the method call to keep the current behavior
-   |
-LL |     dbg!( -(1.0_f32.cos()) );
-   |            +             +
+ on line 27, column 11, add `(`
 
 error: aborting due to 11 previous errors
 

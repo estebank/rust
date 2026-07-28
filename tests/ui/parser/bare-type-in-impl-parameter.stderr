@@ -1,18 +1,9 @@
 error: expected type parameter, found path `Y<A, B, C>`
-  --> $DIR/bare-type-in-impl-parameter.rs:1:6
-   |
-LL | impl<Y<A, B, C>> Z for X<T> {}
-   |      ^^^^^^^^^^
-   |
+ at $DIR/bare-type-in-impl-parameter.rs:1:6
 help: you might have meant to bind a type parameter to a trait
-   |
-LL | impl<T: Y<A, B, C>> Z for X<T> {}
-   |      ++
+ on line 1, column 5, add `T: `
 help: alternatively, you might have meant to introduce type parameter
-   |
-LL - impl<Y<A, B, C>> Z for X<T> {}
-LL + impl<A, B, C> Z for X<T> {}
-   |
+ on line 1, column 5, replace with `A, B, C`
 
 error: aborting due to 1 previous error
 

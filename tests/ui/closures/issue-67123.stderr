@@ -1,16 +1,9 @@
-error[E0382]: use of moved value: `t`
-  --> $DIR/issue-67123.rs:2:13
-   |
-LL |     || { t; t; };
-   |          -  ^ value used here after move
-   |          |
-   |          value moved here
-   |
-   = note: move occurs because `t` has type `T`, which does not implement the `Copy` trait
+error E0382: use of moved value: `t`
+ at $DIR/issue-67123.rs:2:13: value used here after move
+  on line 2, column 10: value moved here
+note: move occurs because `t` has type `T`, which does not implement the `Copy` trait
 help: consider restricting type parameter `T` with trait `Copy`
-   |
-LL | fn foo<T: Copy>(t: T) {
-   |         ++++++
+ on line 1, column 8, add `: Copy`
 
 error: aborting due to 1 previous error
 

@@ -1,45 +1,23 @@
-error[E0425]: cannot find type `Color` in this scope
-  --> $DIR/trait-selection-ice-84727.rs:5:17
-   |
-LL |     foreground: Color<Fg>,
-   |                 ^^^^^ not found in this scope
+error E0425: cannot find type `Color` in this scope
+ at $DIR/trait-selection-ice-84727.rs:5:17: not found in this scope
 
-error[E0425]: cannot find type `Color` in this scope
-  --> $DIR/trait-selection-ice-84727.rs:7:17
-   |
-LL |     background: Color<Bg>,
-   |                 ^^^^^ not found in this scope
+error E0425: cannot find type `Color` in this scope
+ at $DIR/trait-selection-ice-84727.rs:7:17: not found in this scope
 
-error[E0425]: cannot find type `Color` in this scope
-  --> $DIR/trait-selection-ice-84727.rs:18:16
-   |
-LL |     Self: Over<Color<BottomBg>, Cell<NewFg>>,
-   |                ^^^^^ not found in this scope
+error E0425: cannot find type `Color` in this scope
+ at $DIR/trait-selection-ice-84727.rs:18:16: not found in this scope
 
-error[E0425]: cannot find type `NewBg` in this scope
-  --> $DIR/trait-selection-ice-84727.rs:32:27
-   |
-LL |     fn over(self) -> Cell<NewBg> {
-   |                           ^^^^^ not found in this scope
-   |
+error E0425: cannot find type `NewBg` in this scope
+ at $DIR/trait-selection-ice-84727.rs:32:27: not found in this scope
 help: you might be missing a type parameter
-   |
-LL | impl<'b, TopFg, TopBg, BottomFg, BottomBg, NewBg> Over<&Cell<BottomFg, BottomBg>, ()>
-   |                                          +++++++
+ on line 27, column 41, add `, NewBg`
 
-error[E0308]: mismatched types
-  --> $DIR/trait-selection-ice-84727.rs:21:22
-   |
-LL |     fn over(self) -> Cell<NewFg> {
-   |        ----          ^^^^^^^^^^^ expected `Cell<NewFg>`, found `()`
-   |        |
-   |        implicitly returns `()` as its body has no tail or `return` expression
-LL |
-LL |         self.over();
-   |                    - help: remove this semicolon to return this value
-   |
-   = note: expected struct `Cell<NewFg>`
-           found unit type `()`
+error E0308: mismatched types
+ at $DIR/trait-selection-ice-84727.rs:21:22: expected `Cell<NewFg>`, found `()`
+  on line 21, column 8: implicitly returns `()` as its body has no tail or `return` expression
+  on line 23, column 20: help: remove this semicolon to return this value
+note: expected struct `Cell<NewFg>`
+      found unit type `()`
 
 error: aborting due to 5 previous errors
 

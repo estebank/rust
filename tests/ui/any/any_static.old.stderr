@@ -1,15 +1,8 @@
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/any_static.rs:18:35
-   |
-LL | fn extend(a: &Payload) -> &'static Payload {
-   |           -  - let's call the lifetime of this reference `'1`
-   |           |
-   |           `a` is a reference that is only valid in the function body
-LL |     let b: &(dyn Any + 'static) = try_as_dyn::<&Payload, dyn Any + 'static>(&a).unwrap();
-   |                                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |                                   |
-   |                                   `a` escapes the function body here
-   |                                   argument requires that `'1` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/any_static.rs:18:35: `a` escapes the function body here
+  on line 18, column 35: argument requires that `'1` must outlive `'static`
+  on line 17, column 11: `a` is a reference that is only valid in the function body
+  on line 17, column 14: let's call the lifetime of this reference `'1`
 
 error: aborting due to 1 previous error
 

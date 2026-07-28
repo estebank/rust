@@ -1,13 +1,7 @@
 error: generic args in patterns require the turbofish syntax
-  --> $DIR/pat-lt-bracket-3.rs:6:16
-   |
-LL |             Foo<T>(x, y) => {
-   |                ^
-   |
+ at $DIR/pat-lt-bracket-3.rs:6:16
 help: use `::<...>` instead of `<...>` to specify lifetime, type, or const arguments
-   |
-LL |             Foo::<T>(x, y) => {
-   |                ++
+ on line 6, column 15, add `::`
 
 error: aborting due to 1 previous error
 

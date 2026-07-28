@@ -1,26 +1,12 @@
-error[E0223]: ambiguous associated type
-  --> $DIR/self-impl.rs:23:16
-   |
-LL |         let _: <Self>::Baz = true;
-   |                ^^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/self-impl.rs:23:16
 help: use fully-qualified syntax
-   |
-LL -         let _: <Self>::Baz = true;
-LL +         let _: <Bar as Foo>::Baz = true;
-   |
+ on line 23, column 15, replace with `<Bar as Foo>::`
 
-error[E0223]: ambiguous associated type
-  --> $DIR/self-impl.rs:25:16
-   |
-LL |         let _: Self::Baz = true;
-   |                ^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/self-impl.rs:25:16
 help: use fully-qualified syntax
-   |
-LL -         let _: Self::Baz = true;
-LL +         let _: <Bar as Foo>::Baz = true;
-   |
+ on line 25, column 15, replace with `<Bar as Foo>::`
 
 error: aborting due to 2 previous errors
 

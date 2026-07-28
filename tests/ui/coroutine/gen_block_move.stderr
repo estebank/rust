@@ -1,26 +1,10 @@
-error[E0373]: gen block may outlive the current function, but it borrows `x`, which is owned by the current function
-  --> $DIR/gen_block_move.rs:7:5
-   |
-LL |     gen {
-   |     ^^^ may outlive borrowed value `x`
-...
-LL |         x.clear();
-   |         - `x` is borrowed here
-   |
+error E0373: gen block may outlive the current function, but it borrows `x`, which is owned by the current function
+ at $DIR/gen_block_move.rs:7:5: may outlive borrowed value `x`
+  on line 10: `x` is borrowed here
 note: gen block is returned here
-  --> $DIR/gen_block_move.rs:7:5
-   |
-LL | /     gen {
-LL | |         yield 42;
-LL | |         if x == "foo" { return }
-LL | |         x.clear();
-LL | |         for x in 3..6 { yield x }
-LL | |     }
-   | |_____^
+ at $DIR/gen_block_move.rs:7:5 to 12:6
 help: to force the gen block to take ownership of `x` (and any other referenced variables), use the `move` keyword
-   |
-LL |     gen move {
-   |         ++++
+ on line 7, column 7, add ` move`
 
 error: aborting due to 1 previous error
 

@@ -1,17 +1,9 @@
-error[E0594]: cannot assign to `counter`, as it is a captured variable in a `Fn` closure
-  --> $DIR/unboxed-closures-mutated-upvar-from-fn-closure.rs:11:9
-   |
-LL | fn call<F>(f: F) where F : Fn() {
-   |               - change this to accept `FnMut` instead of `Fn`
-...
-LL |     let mut counter = 0;
-   |         ----------- `counter` declared here, outside the closure
-LL |     call(|| {
-   |     ---- -- in this closure
-   |     |
-   |     expects `Fn` instead of `FnMut`
-LL |         counter += 1;
-   |         ^^^^^^^^^^^^ cannot assign
+error E0594: cannot assign to `counter`, as it is a captured variable in a `Fn` closure
+ at $DIR/unboxed-closures-mutated-upvar-from-fn-closure.rs:11:9: cannot assign
+  on line 4, column 15: change this to accept `FnMut` instead of `Fn`
+  on line 9, column 9: `counter` declared here, outside the closure
+  on line 10: expects `Fn` instead of `FnMut`
+  on line 10, column 10: in this closure
 
 error: aborting due to 1 previous error
 

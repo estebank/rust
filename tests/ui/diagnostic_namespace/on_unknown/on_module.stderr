@@ -1,12 +1,7 @@
-error[E0432]: oh no, `Bar` is not in module `x`
-  --> $DIR/on_module.rs:9:9
-   |
-LL | pub use x::Bar;
-   |         ^^^---
-   |            |
-   |            no `Bar` in `x`
-   |
-   = note: unresolved import `x::Bar`
+error E0432: oh no, `Bar` is not in module `x`
+ at $DIR/on_module.rs:9:9
+  on line 9, column 12: no `Bar` in `x`
+note: unresolved import `x::Bar`
 
 error: aborting due to 1 previous error
 

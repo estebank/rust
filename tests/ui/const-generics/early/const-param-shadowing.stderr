@@ -1,13 +1,7 @@
-error[E0747]: type provided when a constant was expected
-  --> $DIR/const-param-shadowing.rs:3:34
-   |
-LL | fn test<const N: usize>() -> Foo<N> {
-   |                                  ^
-   |
+error E0747: type provided when a constant was expected
+ at $DIR/const-param-shadowing.rs:3:34
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL | fn test<const N: usize>() -> Foo<{ N }> {
-   |                                  +   +
+ on line 3, column 33, add `{ `
 
 error: aborting due to 1 previous error
 

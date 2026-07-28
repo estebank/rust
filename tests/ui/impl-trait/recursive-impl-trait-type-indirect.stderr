@@ -1,92 +1,45 @@
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:6:22
-   |
-LL | fn option(i: i32) -> impl Sized {
-   |                      ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:6:22
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:11:15
-   |
-LL | fn tuple() -> impl Sized {
-   |               ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:11:15
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:16:15
-   |
-LL | fn array() -> impl Sized {
-   |               ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:16:15
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:21:13
-   |
-LL | fn ptr() -> impl Sized {
-   |             ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:21:13
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:26:16
-   |
-LL | fn fn_ptr() -> impl Sized {
-   |                ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:26:16
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:31:25
-   |
-LL | fn closure_capture() -> impl Sized {
-   |                         ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:31:25
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:39:29
-   |
-LL | fn closure_ref_capture() -> impl Sized {
-   |                             ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:39:29
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:47:21
-   |
-LL | fn closure_sig() -> impl Sized {
-   |                     ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:47:21
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:52:23
-   |
-LL | fn coroutine_sig() -> impl Sized {
-   |                       ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:52:23
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:58:27
-   |
-LL | fn coroutine_capture() -> impl Sized {
-   |                           ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:58:27
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:69:35
-   |
-LL | fn substs_change<T: 'static>() -> impl Sized {
-   |                                   ^^^^^^^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:69:35
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:79:26
-   |
-LL | fn mutual_recursion() -> impl Sync {
-   |                          ^^^^^^^^^ recursive opaque type
-LL |
-LL |     mutual_recursion_b()
-   |     -------------------- returning here with type `impl Sized`
-...
-LL | fn mutual_recursion_b() -> impl Sized {
-   |                            ---------- returning this opaque type `impl Sized`
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:79:26: recursive opaque type
+  on line 81: returning here with type `impl Sized`
+  on line 84, column 28: returning this opaque type `impl Sized`
 
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-impl-trait-type-indirect.rs:84:28
-   |
-LL | fn mutual_recursion() -> impl Sync {
-   |                          --------- returning this opaque type `impl Sync`
-...
-LL | fn mutual_recursion_b() -> impl Sized {
-   |                            ^^^^^^^^^^ recursive opaque type
-LL |
-LL |     mutual_recursion()
-   |     ------------------ returning here with type `impl Sync`
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-impl-trait-type-indirect.rs:84:28: recursive opaque type
+  on line 79, column 26: returning this opaque type `impl Sync`
+  on line 86: returning here with type `impl Sync`
 
 error: aborting due to 13 previous errors
 

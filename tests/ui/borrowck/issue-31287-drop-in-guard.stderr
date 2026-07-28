@@ -1,34 +1,16 @@
-error[E0382]: use of moved value: `a`
-  --> $DIR/issue-31287-drop-in-guard.rs:5:9
-   |
-LL |     let a = Some("...".to_owned());
-   |         - move occurs because `a` has type `Option<String>`, which does not implement the `Copy` trait
-LL |     let b = match a {
-LL |         Some(_) if { drop(a); false } => None,
-   |                           - value moved here
-LL |         x => x,
-   |         ^ value used here after move
-   |
+error E0382: use of moved value: `a`
+ at $DIR/issue-31287-drop-in-guard.rs:5:9: value used here after move
+  on line 2, column 9: move occurs because `a` has type `Option<String>`, which does not implement the `Copy` trait
+  on line 4, column 27: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         Some(_) if { drop(a.clone()); false } => None,
-   |                            ++++++++
+ on line 4, column 27, add `.clone()`
 
-error[E0382]: use of moved value: `a`
-  --> $DIR/issue-31287-drop-in-guard.rs:11:9
-   |
-LL |     let a = Some("...".to_owned());
-   |         - move occurs because `a` has type `Option<String>`, which does not implement the `Copy` trait
-LL |     let b = match a {
-LL |         Some(_) if let Some(()) = { drop(a); None } => None,
-   |                                          - value moved here
-LL |         x => x,
-   |         ^ value used here after move
-   |
+error E0382: use of moved value: `a`
+ at $DIR/issue-31287-drop-in-guard.rs:11:9: value used here after move
+  on line 8, column 9: move occurs because `a` has type `Option<String>`, which does not implement the `Copy` trait
+  on line 10, column 42: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         Some(_) if let Some(()) = { drop(a.clone()); None } => None,
-   |                                           ++++++++
+ on line 10, column 42, add `.clone()`
 
 error: aborting due to 2 previous errors
 

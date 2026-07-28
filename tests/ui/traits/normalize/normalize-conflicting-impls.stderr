@@ -1,19 +1,9 @@
-error[E0220]: associated type `Value` not found for `R`
-  --> $DIR/normalize-conflicting-impls.rs:10:8
-   |
-LL |     R::Value: DimName,
-   |        ^^^^^ associated type `Value` not found
+error E0220: associated type `Value` not found for `R`
+ at $DIR/normalize-conflicting-impls.rs:10:8: associated type `Value` not found
 
-error[E0119]: conflicting implementations of trait `Allocator<_, ()>` for type `DefaultAllocator`
-  --> $DIR/normalize-conflicting-impls.rs:14:1
-   |
-LL | / impl<N, R> Allocator<N, R> for DefaultAllocator
-LL | | where
-LL | |     R::Value: DimName,
-   | |______________________- first implementation here
-...
-LL |   impl<N> Allocator<N, ()> for DefaultAllocator {}
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `DefaultAllocator`
+error E0119: conflicting implementations of trait `Allocator<_, ()>` for type `DefaultAllocator`
+ at $DIR/normalize-conflicting-impls.rs:14:1: conflicting implementation for `DefaultAllocator`
+  on line 8 to line 10, column 23: first implementation here
 
 error: aborting due to 2 previous errors
 

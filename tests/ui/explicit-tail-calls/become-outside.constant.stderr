@@ -1,8 +1,5 @@
-error[E0572]: become statement outside of function body
-  --> $DIR/become-outside.rs:7:5
-   |
-LL |     become f();
-   |     ^^^^^^^^^^
+error E0572: become statement outside of function body
+ at $DIR/become-outside.rs:7:5
 
 error: aborting due to 1 previous error
 

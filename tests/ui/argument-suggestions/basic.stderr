@@ -1,104 +1,51 @@
-error[E0308]: mismatched types
-  --> $DIR/basic.rs:20:13
-   |
-LL |     invalid(1.0);
-   |     ------- ^^^ expected `u32`, found floating-point number
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/basic.rs:20:13: expected `u32`, found floating-point number
+  on line 20: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/basic.rs:13:4
-   |
-LL | fn invalid(_i: u32) {}
-   |    ^^^^^^^ -------
+ at $DIR/basic.rs:13:4
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/basic.rs:21:5
-   |
-LL |     extra("");
-   |     ^^^^^ -- unexpected argument of type `&'static str`
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/basic.rs:21:5
+  on line 21, column 11: unexpected argument of type `&'static str`
 note: function defined here
-  --> $DIR/basic.rs:14:4
-   |
-LL | fn extra() {}
-   |    ^^^^^
+ at $DIR/basic.rs:14:4
 help: remove the extra argument
-   |
-LL -     extra("");
-LL +     extra();
-   |
+ on line 21, column 10
 
-error[E0061]: this function takes 1 argument but 0 arguments were supplied
-  --> $DIR/basic.rs:22:5
-   |
-LL |     missing();
-   |     ^^^^^^^-- argument #1 of type `u32` is missing
-   |
+error E0061: this function takes 1 argument but 0 arguments were supplied
+ at $DIR/basic.rs:22:5
+  on line 22, column 12: argument #1 of type `u32` is missing
 note: function defined here
-  --> $DIR/basic.rs:15:4
-   |
-LL | fn missing(_i: u32) {}
-   |    ^^^^^^^ -------
+ at $DIR/basic.rs:15:4
 help: provide the argument
-   |
-LL |     missing(/* u32 */);
-   |             +++++++++
+ on line 22, column 11, replace with `(/* u32 */)`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/basic.rs:23:5
-   |
-LL |     swapped("", 1);
-   |     ^^^^^^^ --  - expected `&str`, found `{integer}`
-   |             |
-   |             expected `u32`, found `&'static str`
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/basic.rs:23:5
+  on line 23, column 13: expected `u32`, found `&'static str`
+  on line 23, column 17: expected `&str`, found `{integer}`
 note: function defined here
-  --> $DIR/basic.rs:16:4
-   |
-LL | fn swapped(_i: u32, _s: &str) {}
-   |    ^^^^^^^
+ at $DIR/basic.rs:16:4
 help: swap these arguments
-   |
-LL -     swapped("", 1);
-LL +     swapped(1, "");
-   |
+ on line 23, column 11, replace with `(1, "")`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/basic.rs:24:5
-   |
-LL |     permuted(Y {}, Z {}, X {});
-   |     ^^^^^^^^ ----  ----  ---- expected `Z`, found `X`
-   |              |     |
-   |              |     expected `Y`, found `Z`
-   |              expected `X`, found `Y`
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/basic.rs:24:5
+  on line 24, column 14: expected `X`, found `Y`
+  on line 24, column 20: expected `Y`, found `Z`
+  on line 24, column 26: expected `Z`, found `X`
 note: function defined here
-  --> $DIR/basic.rs:17:4
-   |
-LL | fn permuted(_x: X, _y: Y, _z: Z) {}
-   |    ^^^^^^^^
+ at $DIR/basic.rs:17:4
 help: reorder these arguments
-   |
-LL -     permuted(Y {}, Z {}, X {});
-LL +     permuted(X {}, Y {}, Z {});
-   |
+ on line 24, column 12, replace with `(X {}, Y {}, Z {})`
 
-error[E0057]: this function takes 1 argument but 0 arguments were supplied
-  --> $DIR/basic.rs:27:5
-   |
-LL |     closure();
-   |     ^^^^^^^-- argument #1 is missing
-   |
+error E0057: this function takes 1 argument but 0 arguments were supplied
+ at $DIR/basic.rs:27:5
+  on line 27, column 12: argument #1 is missing
 note: closure defined here
-  --> $DIR/basic.rs:26:19
-   |
-LL |     let closure = |x| x;
-   |                   ^^^
+ at $DIR/basic.rs:26:19
 help: provide the argument
-   |
-LL |     closure(/* x */);
-   |             +++++++
+ on line 27, column 11, replace with `(/* x */)`
 
 error: aborting due to 6 previous errors
 

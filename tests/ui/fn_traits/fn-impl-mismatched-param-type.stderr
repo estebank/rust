@@ -1,48 +1,26 @@
-error[E0053]: method `call` has an incompatible type for trait
-  --> $DIR/fn-impl-mismatched-param-type.rs:8:43
-   |
-LL | impl<'a, T> Fn<(&'a T,)> for Foo {
-   |          - found this type parameter
-LL |   extern "rust-call" fn call(&self, (_,): (T,)) {}
-   |                                           ^^^^ expected `&'a T`, found type parameter `T`
-   |
-   = note: expected signature `extern "rust-call" fn(&Foo, (&'a _,))`
-              found signature `extern "rust-call" fn(&Foo, (_,))`
+error E0053: method `call` has an incompatible type for trait
+ at $DIR/fn-impl-mismatched-param-type.rs:8:43: expected `&'a T`, found type parameter `T`
+  on line 7, column 10: found this type parameter
+note: expected signature `extern "rust-call" fn(&Foo, (&'a _,))`
+         found signature `extern "rust-call" fn(&Foo, (_,))`
 help: change the parameter type to match the trait
-   |
-LL |   extern "rust-call" fn call(&self, (_,): (&'a T,)) {}
-   |                                            +++
+ on line 8, column 42, replace with `(&'a T,)`
 
-error[E0053]: method `call_mut` has an incompatible type for trait
-  --> $DIR/fn-impl-mismatched-param-type.rs:13:51
-   |
-LL | impl<'a, T> FnMut<(&'a T,)> for Foo {
-   |          - found this type parameter
-LL |   extern "rust-call" fn call_mut(&mut self, (_,): (T,)) {}
-   |                                                   ^^^^ expected `&'a T`, found type parameter `T`
-   |
-   = note: expected signature `extern "rust-call" fn(&mut Foo, (&'a _,))`
-              found signature `extern "rust-call" fn(&mut Foo, (_,))`
+error E0053: method `call_mut` has an incompatible type for trait
+ at $DIR/fn-impl-mismatched-param-type.rs:13:51: expected `&'a T`, found type parameter `T`
+  on line 12, column 10: found this type parameter
+note: expected signature `extern "rust-call" fn(&mut Foo, (&'a _,))`
+         found signature `extern "rust-call" fn(&mut Foo, (_,))`
 help: change the parameter type to match the trait
-   |
-LL |   extern "rust-call" fn call_mut(&mut self, (_,): (&'a T,)) {}
-   |                                                    +++
+ on line 13, column 50, replace with `(&'a T,)`
 
-error[E0053]: method `call_once` has an incompatible type for trait
-  --> $DIR/fn-impl-mismatched-param-type.rs:20:47
-   |
-LL | impl<'a, T> FnOnce<(&'a T,)> for Foo {
-   |          - found this type parameter
-...
-LL |   extern "rust-call" fn call_once(self, (_,): (T,)) {}
-   |                                               ^^^^ expected `&'a T`, found type parameter `T`
-   |
-   = note: expected signature `extern "rust-call" fn(Foo, (&'a _,))`
-              found signature `extern "rust-call" fn(Foo, (_,))`
+error E0053: method `call_once` has an incompatible type for trait
+ at $DIR/fn-impl-mismatched-param-type.rs:20:47: expected `&'a T`, found type parameter `T`
+  on line 17, column 10: found this type parameter
+note: expected signature `extern "rust-call" fn(Foo, (&'a _,))`
+         found signature `extern "rust-call" fn(Foo, (_,))`
 help: change the parameter type to match the trait
-   |
-LL |   extern "rust-call" fn call_once(self, (_,): (&'a T,)) {}
-   |                                                +++
+ on line 20, column 46, replace with `(&'a T,)`
 
 error: aborting due to 3 previous errors
 

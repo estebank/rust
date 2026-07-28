@@ -1,38 +1,18 @@
 error: `[const]` is not allowed here
-  --> $DIR/conditionally-const-and-const-params.rs:8:15
-   |
-LL |     fn add<A: [const] Add42>(self) -> Foo<{ A::add(N) }> {
-   |               ^^^^^^^
-   |
+ at $DIR/conditionally-const-and-const-params.rs:8:15
 note: this function is not `const`, so it cannot have `[const]` trait bounds
-  --> $DIR/conditionally-const-and-const-params.rs:8:8
-   |
-LL |     fn add<A: [const] Add42>(self) -> Foo<{ A::add(N) }> {
-   |        ^^^
+ at $DIR/conditionally-const-and-const-params.rs:8:8
 
 error: `[const]` is not allowed here
-  --> $DIR/conditionally-const-and-const-params.rs:25:11
-   |
-LL | fn bar<A: [const] Add42, const N: usize>(_: Foo<N>) -> Foo<{ A::add(N) }> {
-   |           ^^^^^^^
-   |
+ at $DIR/conditionally-const-and-const-params.rs:25:11
 note: this function is not `const`, so it cannot have `[const]` trait bounds
-  --> $DIR/conditionally-const-and-const-params.rs:25:4
-   |
-LL | fn bar<A: [const] Add42, const N: usize>(_: Foo<N>) -> Foo<{ A::add(N) }> {
-   |    ^^^
+ at $DIR/conditionally-const-and-const-params.rs:25:4
 
-error[E0277]: the trait bound `A: const Add42` is not satisfied
-  --> $DIR/conditionally-const-and-const-params.rs:25:62
-   |
-LL | fn bar<A: [const] Add42, const N: usize>(_: Foo<N>) -> Foo<{ A::add(N) }> {
-   |                                                              ^
+error E0277: the trait bound `A: const Add42` is not satisfied
+ at $DIR/conditionally-const-and-const-params.rs:25:62
 
-error[E0277]: the trait bound `A: const Add42` is not satisfied
-  --> $DIR/conditionally-const-and-const-params.rs:8:45
-   |
-LL |     fn add<A: [const] Add42>(self) -> Foo<{ A::add(N) }> {
-   |                                             ^
+error E0277: the trait bound `A: const Add42` is not satisfied
+ at $DIR/conditionally-const-and-const-params.rs:8:45
 
 error: aborting due to 4 previous errors
 

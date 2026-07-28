@@ -1,201 +1,98 @@
 error: delegation's target expression is specified for function with no params
-  --> $DIR/delegation-first-arg.rs:27:38
-   |
-LL |     reuse <S as Trait>::static_empty { self.0 }
-   |                                      ^^^^^^^^^^
+ at $DIR/delegation-first-arg.rs:27:38
 
 error: delegation's target expression is specified for function with no params
-  --> $DIR/delegation-first-arg.rs:61:83
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                                                                   ^^^^^^^^^^
+ at $DIR/delegation-first-arg.rs:61:83
 
 error: delegation's target expression is specified for function with no params
-  --> $DIR/delegation-first-arg.rs:76:23
-   |
-LL | reuse to_reuse::empty { self + 1 }
-   |                       ^^^^^^^^^^^^
+ at $DIR/delegation-first-arg.rs:76:23
 
 error: delegation's target expression is specified for function with no params
-  --> $DIR/delegation-first-arg.rs:82:60
-   |
-LL | reuse to_reuse::{empty as empty1, one_param as one_param1} { self + 1 }
-   |                                                            ^^^^^^^^^^^^
+ at $DIR/delegation-first-arg.rs:82:60
 
-error[E0283]: type annotations needed
-  --> $DIR/delegation-first-arg.rs:18:1
-   |
-LL | reuse impl Trait for F { self.0 }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot infer type
-   |
-   = note: the type must implement `Trait`
+error E0283: type annotations needed
+ at $DIR/delegation-first-arg.rs:18:1: cannot infer type
+note: the type must implement `Trait`
 help: the following types implement trait `Trait`
-  --> $DIR/delegation-first-arg.rs:13:1
-   |
-LL | impl Trait for S {}
-   | ^^^^^^^^^^^^^^^^ `S`
-...
-LL | reuse impl Trait for F { self.0 }
-   | ^^^^^^^^^^^^^^^^^^^^^^ `F`
-...
-LL | impl Trait for F3 {
-   | ^^^^^^^^^^^^^^^^^ `F3`
+ at $DIR/delegation-first-arg.rs:13:1: `S`
+  on line 18: `F`
+  on line 53: `F3`
 
-error[E0283]: type annotations needed
-  --> $DIR/delegation-first-arg.rs:18:1
-   |
-LL | reuse impl Trait for F { self.0 }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot infer type
-   |
-   = note: the type must implement `Trait`
+error E0283: type annotations needed
+ at $DIR/delegation-first-arg.rs:18:1: cannot infer type
+note: the type must implement `Trait`
 help: the following types implement trait `Trait`
-  --> $DIR/delegation-first-arg.rs:13:1
-   |
-LL | impl Trait for S {}
-   | ^^^^^^^^^^^^^^^^ `S`
-...
-LL | reuse impl Trait for F { self.0 }
-   | ^^^^^^^^^^^^^^^^^^^^^^ `F`
-...
-LL | impl Trait for F3 {
-   | ^^^^^^^^^^^^^^^^^ `F3`
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/delegation-first-arg.rs:13:1: `S`
+  on line 18: `F`
+  on line 53: `F3`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/delegation-first-arg.rs:27:25
-   |
-LL |     reuse <S as Trait>::static_empty { self.0 }
-   |                         ^^^^^^^^^^^^ ---------- unexpected argument
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/delegation-first-arg.rs:27:25
+  on line 27, column 38: unexpected argument
 note: associated function defined here
-  --> $DIR/delegation-first-arg.rs:8:8
-   |
-LL |     fn static_empty() {}
-   |        ^^^^^^^^^^^^
+ at $DIR/delegation-first-arg.rs:8:8
 help: remove the extra argument
-   |
-LL -     reuse <S as Trait>::static_empty { self.0 }
-LL +     reuse <S as Trait>::static_empt{ self.0 }
-   |
+ on line 27, column 35
 
-error[E0610]: `usize` is a primitive type and therefore doesn't have fields
-  --> $DIR/delegation-first-arg.rs:31:49
-   |
-LL |     reuse <S as Trait>::static_one_param { self.0 }
-   |                                                 ^
+error E0610: `usize` is a primitive type and therefore doesn't have fields
+ at $DIR/delegation-first-arg.rs:31:49
 
-error[E0308]: mismatched types
-  --> $DIR/delegation-first-arg.rs:54:85
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                   ----- arguments to this function are incorrect    ^^^^^^ expected `&_`, found `S`
-   |
-   = note: expected reference `&_`
-                 found struct `S`
+error E0308: mismatched types
+ at $DIR/delegation-first-arg.rs:54:85: expected `&_`, found `S`
+  on line 54, column 35: arguments to this function are incorrect
+note: expected reference `&_`
+            found struct `S`
 note: function defined here
-  --> $DIR/delegation-first-arg.rs:45:12
-   |
-LL |     pub fn r#ref(_: &impl Trait) {}
-   |            ^^^^^ --------------
+ at $DIR/delegation-first-arg.rs:45:12
 help: consider borrowing here
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { &self.0 }
-   |                                                                                     +
+ on line 54, column 84, add `&`
 
-error[E0308]: mismatched types
-  --> $DIR/delegation-first-arg.rs:54:85
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                          -------                                    ^^^^^^ expected `&mut _`, found `S`
-   |                                          |
-   |                                          arguments to this function are incorrect
-   |
-   = note: expected mutable reference `&mut _`
-                         found struct `S`
+error E0308: mismatched types
+ at $DIR/delegation-first-arg.rs:54:85: expected `&mut _`, found `S`
+  on line 54, column 42: arguments to this function are incorrect
+note: expected mutable reference `&mut _`
+                    found struct `S`
 note: function defined here
-  --> $DIR/delegation-first-arg.rs:46:12
-   |
-LL |     pub fn mut_ref(_: &mut impl Trait) {}
-   |            ^^^^^^^ ------------------
+ at $DIR/delegation-first-arg.rs:46:12
 help: consider mutably borrowing here
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { &mut self.0 }
-   |                                                                                     ++++
+ on line 54, column 84, add `&mut `
 
-error[E0609]: no field `0` on type `impl Trait`
-  --> $DIR/delegation-first-arg.rs:61:90
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                                                                          ^ unknown field
+error E0609: no field `0` on type `impl Trait`
+ at $DIR/delegation-first-arg.rs:61:90: unknown field
 
-error[E0609]: no field `0` on type `&impl Trait`
-  --> $DIR/delegation-first-arg.rs:61:90
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                                                                          ^ unknown field
+error E0609: no field `0` on type `&impl Trait`
+ at $DIR/delegation-first-arg.rs:61:90: unknown field
 
-error[E0609]: no field `0` on type `&mut impl Trait`
-  --> $DIR/delegation-first-arg.rs:61:90
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                                                                          ^ unknown field
+error E0609: no field `0` on type `&mut impl Trait`
+ at $DIR/delegation-first-arg.rs:61:90: unknown field
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/delegation-first-arg.rs:61:51
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                                   ^^^^^^^^^^^^                    ---------- unexpected argument
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/delegation-first-arg.rs:61:51
+  on line 61, column 83: unexpected argument
 note: function defined here
-  --> $DIR/delegation-first-arg.rs:48:12
-   |
-LL |     pub fn static_empty() {}
-   |            ^^^^^^^^^^^^
+ at $DIR/delegation-first-arg.rs:48:12
 help: remove the extra argument
-   |
-LL -     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-LL +     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empt{ self.0 }
-   |
+ on line 61, column 61
 
-error[E0610]: `usize` is a primitive type and therefore doesn't have fields
-  --> $DIR/delegation-first-arg.rs:61:90
-   |
-LL |     reuse trait_to_reuse::{value, r#ref, mut_ref, static_empty, static_one_param} { self.0 }
-   |                                                                                          ^
+error E0610: `usize` is a primitive type and therefore doesn't have fields
+ at $DIR/delegation-first-arg.rs:61:90
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/delegation-first-arg.rs:76:17
-   |
-LL | reuse to_reuse::empty { self + 1 }
-   |                 ^^^^^ ------------ unexpected argument
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/delegation-first-arg.rs:76:17
+  on line 76, column 23: unexpected argument
 note: function defined here
-  --> $DIR/delegation-first-arg.rs:71:12
-   |
-LL |     pub fn empty() {}
-   |            ^^^^^
+ at $DIR/delegation-first-arg.rs:71:12
 help: remove the extra argument
-   |
-LL - reuse to_reuse::empty { self + 1 }
-LL + reuse to_reuse::empt{ self + 1 }
-   |
+ on line 76, column 20
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/delegation-first-arg.rs:82:18
-   |
-LL | reuse to_reuse::{empty as empty1, one_param as one_param1} { self + 1 }
-   |                  ^^^^^                                     ------------ unexpected argument
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/delegation-first-arg.rs:82:18
+  on line 82, column 60: unexpected argument
 note: function defined here
-  --> $DIR/delegation-first-arg.rs:71:12
-   |
-LL |     pub fn empty() {}
-   |            ^^^^^
+ at $DIR/delegation-first-arg.rs:71:12
 help: remove the extra argument
-   |
-LL - reuse to_reuse::{empty as empty1, one_param as one_param1} { self + 1 }
-LL + reuse to_reuse::{empt{ self + 1 }
-   |
+ on line 82, column 21
 
 error: aborting due to 17 previous errors
 

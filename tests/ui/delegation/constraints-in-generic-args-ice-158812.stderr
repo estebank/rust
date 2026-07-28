@@ -1,8 +1,5 @@
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/constraints-in-generic-args-ice-158812.rs:9:19
-   |
-LL |     reuse Trait::<A = ()>::foo;
-   |                   ^^^^^^ associated item constraint not allowed here
+error E0229: associated item constraints are not allowed here
+ at $DIR/constraints-in-generic-args-ice-158812.rs:9:19: associated item constraint not allowed here
 
 error: aborting due to 1 previous error
 

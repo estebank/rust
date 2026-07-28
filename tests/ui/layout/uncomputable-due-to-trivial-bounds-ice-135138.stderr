@@ -1,8 +1,5 @@
-error[E0080]: entering unreachable code
-  --> $DIR/uncomputable-due-to-trivial-bounds-ice-135138.rs:7:10
-   |
-LL |     [(); { let _a: Option<str> = None; 0 }];
-   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `return_str::{constant#0}` failed here
+error E0080: entering unreachable code
+ at $DIR/uncomputable-due-to-trivial-bounds-ice-135138.rs:7:10: evaluation of `return_str::{constant#0}` failed here
 
 error: aborting due to 1 previous error
 

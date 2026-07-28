@@ -1,8 +1,5 @@
-error[E0725]: the feature `unknown_stdlib_feature` is not in the list of allowed features
-  --> $DIR/allow-features.rs:6:12
-   |
-LL | #![feature(unknown_stdlib_feature)]
-   |            ^^^^^^^^^^^^^^^^^^^^^^
+error E0725: the feature `unknown_stdlib_feature` is not in the list of allowed features
+ at $DIR/allow-features.rs:6:12
 
 error: aborting due to 1 previous error
 

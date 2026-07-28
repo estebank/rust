@@ -1,16 +1,8 @@
-error[E0596]: cannot borrow `callback` as mutable, as it is not declared as mutable
-  --> $DIR/issue-80313-mutable-borrow-in-move-closure.rs:6:5
-   |
-LL |         &mut my_var;
-   |              ------ calling `callback` requires mutable binding due to possible mutation of `my_var`
-LL |     };
-LL |     callback();
-   |     ^^^^^^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `callback` as mutable, as it is not declared as mutable
+ at $DIR/issue-80313-mutable-borrow-in-move-closure.rs:6:5: cannot borrow as mutable
+  on line 4, column 14: calling `callback` requires mutable binding due to possible mutation of `my_var`
 help: consider changing this to be mutable
-   |
-LL |     let mut callback = move || {
-   |         +++
+ on line 3, column 8, add `mut `
 
 error: aborting due to 1 previous error
 

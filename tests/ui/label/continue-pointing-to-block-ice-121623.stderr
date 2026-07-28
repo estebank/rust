@@ -1,13 +1,6 @@
-error[E0696]: `continue` pointing to a labeled block
-  --> $DIR/continue-pointing-to-block-ice-121623.rs:7:13
-   |
-LL |           _ => 'b: {
-   |  ______________-
-LL | |             continue 'b;
-   | |             ^^^^^^^^^^^ labeled blocks cannot be `continue`'d
-LL | |
-LL | |         }
-   | |_________- labeled block the `continue` points to
+error E0696: `continue` pointing to a labeled block
+ at $DIR/continue-pointing-to-block-ice-121623.rs:7:13: labeled blocks cannot be `continue`'d
+  on line 6, column 14 to line 9: labeled block the `continue` points to
 
 error: aborting due to 1 previous error
 

@@ -1,681 +1,219 @@
-error[E0433]: cannot find module or crate `some` in this scope
-  --> $DIR/target-expr-removal-defs-inside.rs:49:5
-   |
-LL |     some::path::<{ fn foo() {} }>::xd();
-   |     ^^^^ use of unresolved module or unlinked crate `some`
-   |
-   = help: you might be missing a crate named `some`
+error E0433: cannot find module or crate `some` in this scope
+ at $DIR/target-expr-removal-defs-inside.rs:49:5: use of unresolved module or unlinked crate `some`
+help: you might be missing a crate named `some`
 
-error[E0433]: cannot find module or crate `some` in this scope
-  --> $DIR/target-expr-removal-defs-inside.rs:49:5
-   |
-LL |     some::path::<{ fn foo() {} }>::xd();
-   |     ^^^^ use of unresolved module or unlinked crate `some`
-   |
-   = help: you might be missing a crate named `some`
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0433: cannot find module or crate `some` in this scope
+ at $DIR/target-expr-removal-defs-inside.rs:49:5: use of unresolved module or unlinked crate `some`
+help: you might be missing a crate named `some`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0433]: cannot find module or crate `some` in this scope
-  --> $DIR/target-expr-removal-defs-inside.rs:49:5
-   |
-LL |     some::path::<{ fn foo() {} }>::xd();
-   |     ^^^^ use of unresolved module or unlinked crate `some`
-   |
-   = help: you might be missing a crate named `some`
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0433: cannot find module or crate `some` in this scope
+ at $DIR/target-expr-removal-defs-inside.rs:49:5: use of unresolved module or unlinked crate `some`
+help: you might be missing a crate named `some`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0433]: cannot find module or crate `some` in this scope
-  --> $DIR/target-expr-removal-defs-inside.rs:49:5
-   |
-LL |     some::path::<{ fn foo() {} }>::xd();
-   |     ^^^^ use of unresolved module or unlinked crate `some`
-   |
-   = help: you might be missing a crate named `some`
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0433: cannot find module or crate `some` in this scope
+ at $DIR/target-expr-removal-defs-inside.rs:49:5: use of unresolved module or unlinked crate `some`
+help: you might be missing a crate named `some`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:16:24
-   |
-LL |   reuse impl Trait for S {
-   |  ________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
+ at $DIR/target-expr-removal-defs-inside.rs:16:24 to 32:2
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:16:24
-   |
-LL |   reuse impl Trait for S {
-   |  ________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:16:24 to 32:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:16:24
-   |
-LL |   reuse impl Trait for S {
-   |  ________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:16:24 to 32:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:16:24
-   |
-LL |   reuse impl Trait for S {
-   |  ________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:16:24 to 32:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:35:25
-   |
-LL |   reuse impl Trait for S1 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
+ at $DIR/target-expr-removal-defs-inside.rs:35:25 to 55:2
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:35:25
-   |
-LL |   reuse impl Trait for S1 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:35:25 to 55:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:35:25
-   |
-LL |   reuse impl Trait for S1 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:35:25 to 55:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:35:25
-   |
-LL |   reuse impl Trait for S1 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:35:25 to 55:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:58:25
-   |
-LL |   reuse impl Trait for S2 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
+ at $DIR/target-expr-removal-defs-inside.rs:58:25 to 74:2
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:58:25
-   |
-LL |   reuse impl Trait for S2 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:58:25 to 74:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:58:25
-   |
-LL |   reuse impl Trait for S2 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:58:25 to 74:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: attempted to delete delegation's target expression that contains definitions inside
-  --> $DIR/target-expr-removal-defs-inside.rs:58:25
-   |
-LL |   reuse impl Trait for S2 {
-   |  _________________________^
-...  |
-LL | |     self.0
-LL | | }
-   | |_^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/target-expr-removal-defs-inside.rs:58:25 to 74:2
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0053]: method `static_self` has an incompatible type for trait
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected `F`, found `()`
-   |
+error E0053: method `static_self` has an incompatible type for trait
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected `F`, found `()`
 note: type in trait
-  --> $DIR/target-expr-removal-defs-inside.rs:4:25
-   |
-LL |     fn static_self() -> F { F }
-   |                         ^
-   = note: expected signature `fn() -> F`
-              found signature `fn() -> ()`
+ at $DIR/target-expr-removal-defs-inside.rs:4:25
+note: expected signature `fn() -> F`
+         found signature `fn() -> ()`
 help: change the output type to match the trait
-   |
-LL - reuse impl Trait for S {
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -     struct Def {}
-LL -     self.0
-LL - }
-LL +  -> F
-   |
+ on line 16, column 1, replace with ` -> F`
 
-error[E0050]: method `static_value` has 0 parameters but the declaration in trait `Trait::static_value` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL |       fn static_value(_: Self) -> i32 { 1 }
-   |                          ---- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_value` has 0 parameters but the declaration in trait `Trait::static_value` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected 1 parameter, found 0
+  on line 6, column 24: trait requires 1 parameter
 
-error[E0050]: method `static_mut_ref` has 0 parameters but the declaration in trait `Trait::static_mut_ref` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL |       fn static_mut_ref(_: &mut Self) -> i32 { 2 }
-   |                            --------- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_mut_ref` has 0 parameters but the declaration in trait `Trait::static_mut_ref` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected 1 parameter, found 0
+  on line 7, column 26: trait requires 1 parameter
 
-error[E0050]: method `static_ref` has 0 parameters but the declaration in trait `Trait::static_ref` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL |       fn static_ref(_: &Self) -> i32 { 3 }
-   |                        ----- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_ref` has 0 parameters but the declaration in trait `Trait::static_ref` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected 1 parameter, found 0
+  on line 8, column 22: trait requires 1 parameter
 
-error[E0053]: method `static_self` has an incompatible type for trait
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected `F`, found `()`
-   |
+error E0053: method `static_self` has an incompatible type for trait
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected `F`, found `()`
 note: type in trait
-  --> $DIR/target-expr-removal-defs-inside.rs:4:25
-   |
-LL |     fn static_self() -> F { F }
-   |                         ^
-   = note: expected signature `fn() -> F`
-              found signature `fn() -> ()`
+ at $DIR/target-expr-removal-defs-inside.rs:4:25
+note: expected signature `fn() -> F`
+         found signature `fn() -> ()`
 help: change the output type to match the trait
-   |
-LL - reuse impl Trait for S1 {
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -     some::path::<{ fn foo() {} }>::xd();
-LL -
-LL -
-LL -
-LL -
-LL -     self.0
-LL - }
-LL +  -> F
-   |
+ on line 35, column 1, replace with ` -> F`
 
-error[E0050]: method `static_value` has 0 parameters but the declaration in trait `Trait::static_value` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL |       fn static_value(_: Self) -> i32 { 1 }
-   |                          ---- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_value` has 0 parameters but the declaration in trait `Trait::static_value` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected 1 parameter, found 0
+  on line 6, column 24: trait requires 1 parameter
 
-error[E0050]: method `static_mut_ref` has 0 parameters but the declaration in trait `Trait::static_mut_ref` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL |       fn static_mut_ref(_: &mut Self) -> i32 { 2 }
-   |                            --------- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_mut_ref` has 0 parameters but the declaration in trait `Trait::static_mut_ref` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected 1 parameter, found 0
+  on line 7, column 26: trait requires 1 parameter
 
-error[E0050]: method `static_ref` has 0 parameters but the declaration in trait `Trait::static_ref` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL |       fn static_ref(_: &Self) -> i32 { 3 }
-   |                        ----- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_ref` has 0 parameters but the declaration in trait `Trait::static_ref` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected 1 parameter, found 0
+  on line 8, column 22: trait requires 1 parameter
 
-error[E0053]: method `static_self` has an incompatible type for trait
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected `F`, found `()`
-   |
+error E0053: method `static_self` has an incompatible type for trait
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected `F`, found `()`
 note: type in trait
-  --> $DIR/target-expr-removal-defs-inside.rs:4:25
-   |
-LL |     fn static_self() -> F { F }
-   |                         ^
-   = note: expected signature `fn() -> F`
-              found signature `fn() -> ()`
+ at $DIR/target-expr-removal-defs-inside.rs:4:25
+note: expected signature `fn() -> F`
+         found signature `fn() -> ()`
 help: change the output type to match the trait
-   |
-LL - reuse impl Trait for S2 {
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -     fn foo() {}
-LL -     self.0
-LL - }
-LL +  -> F
-   |
+ on line 58, column 1, replace with ` -> F`
 
-error[E0050]: method `static_value` has 0 parameters but the declaration in trait `Trait::static_value` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL |       fn static_value(_: Self) -> i32 { 1 }
-   |                          ---- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_value` has 0 parameters but the declaration in trait `Trait::static_value` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected 1 parameter, found 0
+  on line 6, column 24: trait requires 1 parameter
 
-error[E0050]: method `static_mut_ref` has 0 parameters but the declaration in trait `Trait::static_mut_ref` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL |       fn static_mut_ref(_: &mut Self) -> i32 { 2 }
-   |                            --------- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_mut_ref` has 0 parameters but the declaration in trait `Trait::static_mut_ref` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected 1 parameter, found 0
+  on line 7, column 26: trait requires 1 parameter
 
-error[E0050]: method `static_ref` has 0 parameters but the declaration in trait `Trait::static_ref` has 1
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL |       fn static_ref(_: &Self) -> i32 { 3 }
-   |                        ----- trait requires 1 parameter
-...
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | |_^ expected 1 parameter, found 0
+error E0050: method `static_ref` has 0 parameters but the declaration in trait `Trait::static_ref` has 1
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected 1 parameter, found 0
+  on line 8, column 22: trait requires 1 parameter
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL |    reuse impl Trait for S {
-   |   _^                      -
-   |  |________________________|
-...  ||
-LL | ||     self.0
-LL | || }
-   | ||_^ unexpected argument
-   |  |_|
-   |
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2
+  on line 16, column 24 to line 32: unexpected argument
 note: associated function defined here
-  --> $DIR/target-expr-removal-defs-inside.rs:4:8
-   |
-LL |     fn static_self() -> F { F }
-   |        ^^^^^^^^^^^
+ at $DIR/target-expr-removal-defs-inside.rs:4:8
 help: remove the extra argument
-   |
-LL - reuse impl Trait for S {
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -     struct Def {}
-LL -     self.0
-LL - }
-LL + reuse impl Trait for S }
-   |
+ on line 16, column 23
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `F`
-   |   expected `()` because of default return type
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected `()`, found `F`
+  on line 16 to line 32: expected `()` because of default return type
+  on line 32, column 2: help: consider using a semicolon here: `;`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected `()`, found `i32`
+  on line 16 to line 32: expected `()` because of default return type
+  on line 32, column 2: help: consider using a semicolon here: `;`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected `()`, found `i32`
+  on line 16 to line 32: expected `()` because of default return type
+  on line 32, column 2: help: consider using a semicolon here: `;`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:16:1
-   |
-LL | / reuse impl Trait for S {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:16:1 to 32:2: expected `()`, found `i32`
+  on line 16 to line 32: expected `()` because of default return type
+  on line 32, column 2: help: consider using a semicolon here: `;`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL |    reuse impl Trait for S1 {
-   |   _^                       -
-   |  |_________________________|
-...  ||
-LL | ||     self.0
-LL | || }
-   | ||_^ unexpected argument
-   |  |_|
-   |
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2
+  on line 35, column 25 to line 55: unexpected argument
 note: associated function defined here
-  --> $DIR/target-expr-removal-defs-inside.rs:4:8
-   |
-LL |     fn static_self() -> F { F }
-   |        ^^^^^^^^^^^
+ at $DIR/target-expr-removal-defs-inside.rs:4:8
 help: remove the extra argument
-   |
-LL - reuse impl Trait for S1 {
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -     some::path::<{ fn foo() {} }>::xd();
-LL -
-LL -
-LL -
-LL -
-LL -     self.0
-LL - }
-LL + reuse impl Trait for S1 }
-   |
+ on line 35, column 24
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `F`
-   |   expected `()` because of default return type
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected `()`, found `F`
+  on line 35 to line 55: expected `()` because of default return type
+  on line 55, column 2: help: consider using a semicolon here: `;`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected `()`, found `i32`
+  on line 35 to line 55: expected `()` because of default return type
+  on line 55, column 2: help: consider using a semicolon here: `;`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected `()`, found `i32`
+  on line 35 to line 55: expected `()` because of default return type
+  on line 55, column 2: help: consider using a semicolon here: `;`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:35:1
-   |
-LL | / reuse impl Trait for S1 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:35:1 to 55:2: expected `()`, found `i32`
+  on line 35 to line 55: expected `()` because of default return type
+  on line 55, column 2: help: consider using a semicolon here: `;`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0061]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL |    reuse impl Trait for S2 {
-   |   _^                       -
-   |  |_________________________|
-...  ||
-LL | ||     self.0
-LL | || }
-   | ||_^ unexpected argument
-   |  |_|
-   |
-   |
+error E0061: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2
+  on line 58, column 25 to line 74: unexpected argument
 note: associated function defined here
-  --> $DIR/target-expr-removal-defs-inside.rs:4:8
-   |
-LL |     fn static_self() -> F { F }
-   |        ^^^^^^^^^^^
+ at $DIR/target-expr-removal-defs-inside.rs:4:8
 help: remove the extra argument
-   |
-LL - reuse impl Trait for S2 {
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -
-LL -     fn foo() {}
-LL -     self.0
-LL - }
-LL + reuse impl Trait for S2 }
-   |
+ on line 58, column 24
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `F`
-   |   expected `()` because of default return type
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected `()`, found `F`
+  on line 58 to line 74: expected `()` because of default return type
+  on line 74, column 2: help: consider using a semicolon here: `;`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected `()`, found `i32`
+  on line 58 to line 74: expected `()` because of default return type
+  on line 74, column 2: help: consider using a semicolon here: `;`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected `()`, found `i32`
+  on line 58 to line 74: expected `()` because of default return type
+  on line 74, column 2: help: consider using a semicolon here: `;`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0308]: mismatched types
-  --> $DIR/target-expr-removal-defs-inside.rs:58:1
-   |
-LL | / reuse impl Trait for S2 {
-...  |
-LL | |     self.0
-LL | | }
-   | | ^- help: consider using a semicolon here: `;`
-   | | |
-   | |_expected `()`, found `i32`
-   |   expected `()` because of default return type
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0308: mismatched types
+ at $DIR/target-expr-removal-defs-inside.rs:58:1 to 74:2: expected `()`, found `i32`
+  on line 58 to line 74: expected `()` because of default return type
+  on line 74, column 2: help: consider using a semicolon here: `;`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: aborting due to 43 previous errors
 

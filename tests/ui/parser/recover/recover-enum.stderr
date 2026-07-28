@@ -1,37 +1,17 @@
 error: expected one of `(`, `,`, `=`, `{`, or `}`, found `Bad`
-  --> $DIR/recover-enum.rs:4:9
-   |
-LL |         Very
-   |             -
-   |             |
-   |             expected one of `(`, `,`, `=`, `{`, or `}`
-   |             help: missing `,`
-LL |         Bad(usize)
-   |         ^^^ unexpected token
+ at $DIR/recover-enum.rs:4:9: unexpected token
+  on line 3, column 13: expected one of `(`, `,`, `=`, `{`, or `}`
+  on line 3, column 13: help: missing `,`
 
 error: expected one of `,`, `=`, or `}`, found `Stuff`
-  --> $DIR/recover-enum.rs:6:9
-   |
-LL |         Bad(usize)
-   |                   -
-   |                   |
-   |                   expected one of `,`, `=`, or `}`
-   |                   help: missing `,`
-LL |
-LL |         Stuff { a: usize }
-   |         ^^^^^ unexpected token
+ at $DIR/recover-enum.rs:6:9: unexpected token
+  on line 4, column 19: expected one of `,`, `=`, or `}`
+  on line 4, column 19: help: missing `,`
 
 error: expected one of `,`, `=`, or `}`, found `Here`
-  --> $DIR/recover-enum.rs:8:9
-   |
-LL |         Stuff { a: usize }
-   |                           -
-   |                           |
-   |                           expected one of `,`, `=`, or `}`
-   |                           help: missing `,`
-LL |
-LL |         Here
-   |         ^^^^ unexpected token
+ at $DIR/recover-enum.rs:8:9: unexpected token
+  on line 6, column 27: expected one of `,`, `=`, or `}`
+  on line 6, column 27: help: missing `,`
 
 error: aborting due to 3 previous errors
 

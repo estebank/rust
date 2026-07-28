@@ -1,43 +1,16 @@
 error: lifetime may not live long enough
-  --> $DIR/suggest-lt-on-ty-alias-w-generics.rs:5:5
-   |
-LL |   fn test(x: &i32) -> Lazy<i32> {
-   |              - let's call the lifetime of this reference `'1`
-LL | /     Box::new(|| {
-LL | |
-LL | |
-LL | |         *x
-LL | |     })
-   | |______^ returning this value requires that `'1` must outlive `'static`
-   |
+ at $DIR/suggest-lt-on-ty-alias-w-generics.rs:5:5 to 9:7: returning this value requires that `'1` must outlive `'static`
+  on line 4, column 12: let's call the lifetime of this reference `'1`
 help: to declare that the trait object captures data from argument `x`, you can add a lifetime parameter `'a` in the type alias
-   |
-LL - type Lazy<T> = Box<dyn Fn() -> T + 'static>;
-LL + type Lazy<'a, T> = Box<dyn Fn() -> T + 'a>;
-   |
+ on line 2, column 10, add `'a, `
 
-error[E0373]: closure may outlive the current function, but it borrows `x`, which is owned by the current function
-  --> $DIR/suggest-lt-on-ty-alias-w-generics.rs:5:14
-   |
-LL |     Box::new(|| {
-   |              ^^ may outlive borrowed value `x`
-...
-LL |         *x
-   |         -- `x` is borrowed here
-   |
+error E0373: closure may outlive the current function, but it borrows `x`, which is owned by the current function
+ at $DIR/suggest-lt-on-ty-alias-w-generics.rs:5:14: may outlive borrowed value `x`
+  on line 8: `x` is borrowed here
 note: closure is returned here
-  --> $DIR/suggest-lt-on-ty-alias-w-generics.rs:5:5
-   |
-LL | /     Box::new(|| {
-LL | |
-LL | |
-LL | |         *x
-LL | |     })
-   | |______^
+ at $DIR/suggest-lt-on-ty-alias-w-generics.rs:5:5 to 9:7
 help: to force the closure to take ownership of `x` (and any other referenced variables), use the `move` keyword
-   |
-LL |     Box::new(move || {
-   |              ++++
+ on line 5, column 13, add `move `
 
 error: aborting due to 2 previous errors
 

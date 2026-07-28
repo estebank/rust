@@ -1,58 +1,20 @@
-error[E0268]: `break` outside of a loop or labeled block
-  --> $DIR/loop-if-else-break-issue-123261.rs:10:13
-   |
-LL |             break 1;
-   |             ^^^^^^^ cannot `break` outside of a loop or labeled block
-LL |         } else {
-LL |             break 2;
-   |             ^^^^^^^ cannot `break` outside of a loop or labeled block
-   |
+error E0268: `break` outside of a loop or labeled block
+ at $DIR/loop-if-else-break-issue-123261.rs:10:13: cannot `break` outside of a loop or labeled block
+  on line 12: cannot `break` outside of a loop or labeled block
 help: consider labeling this block to be able to break within it
-   |
-LL ~     let x = 'block: {
-LL |         if n == 0 {
-LL ~             break 'block 1;
-LL |         } else {
-LL ~             break 'block 2;
-   |
+ on line 8, column 12, add `'block: `
 
-error[E0268]: `break` outside of a loop or labeled block
-  --> $DIR/loop-if-else-break-issue-123261.rs:18:13
-   |
-LL |             break 1;
-   |             ^^^^^^^ cannot `break` outside of a loop or labeled block
-LL |         }
-LL |         break 0;
-   |         ^^^^^^^ cannot `break` outside of a loop or labeled block
-   |
+error E0268: `break` outside of a loop or labeled block
+ at $DIR/loop-if-else-break-issue-123261.rs:18:13: cannot `break` outside of a loop or labeled block
+  on line 20: cannot `break` outside of a loop or labeled block
 help: consider labeling this block to be able to break within it
-   |
-LL ~     let y = 'block: {
-LL |         if n == 0 {
-LL ~             break 'block 1;
-LL |         }
-LL ~         break 'block 0;
-   |
+ on line 16, column 12, add `'block: `
 
-error[E0268]: `break` outside of a loop or labeled block
-  --> $DIR/loop-if-else-break-issue-123261.rs:26:17
-   |
-LL |                 break 3;
-   |                 ^^^^^^^ cannot `break` outside of a loop or labeled block
-...
-LL |         break 1;
-   |         ^^^^^^^ cannot `break` outside of a loop or labeled block
-   |
+error E0268: `break` outside of a loop or labeled block
+ at $DIR/loop-if-else-break-issue-123261.rs:26:17: cannot `break` outside of a loop or labeled block
+  on line 29: cannot `break` outside of a loop or labeled block
 help: consider labeling this block to be able to break within it
-   |
-LL ~     let z = 'block: {
-LL |         if n == 0 {
-LL |             if m > 1 {
-LL ~                 break 'block 3;
-LL |             }
-LL |         }
-LL ~         break 'block 1;
-   |
+ on line 23, column 12, add `'block: `
 
 error: aborting due to 3 previous errors
 

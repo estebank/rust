@@ -1,11 +1,6 @@
-error[E0050]: method `bar` has 1 parameter but the declaration in trait `Foo::bar` has 2
-  --> $DIR/impl-different-num-params.rs:5:12
-   |
-LL |     fn bar(&self, x: usize) -> Self;
-   |            --------------- trait requires 2 parameters
-...
-LL |     fn bar(&self) -> isize {
-   |            ^^^^^ expected 2 parameters, found 1
+error E0050: method `bar` has 1 parameter but the declaration in trait `Foo::bar` has 2
+ at $DIR/impl-different-num-params.rs:5:12: expected 2 parameters, found 1
+  on line 2, column 12: trait requires 2 parameters
 
 error: aborting due to 1 previous error
 

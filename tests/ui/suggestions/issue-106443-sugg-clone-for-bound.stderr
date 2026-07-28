@@ -1,28 +1,14 @@
-error[E0277]: the trait bound `&T: X` is not satisfied
-  --> $DIR/issue-106443-sugg-clone-for-bound.rs:10:9
-   |
-LL |     foo(s);
-   |         ^ the trait `X` is not implemented for `&T`
-   |
+error E0277: the trait bound `&T: X` is not satisfied
+ at $DIR/issue-106443-sugg-clone-for-bound.rs:10:9: the trait `X` is not implemented for `&T`
 help: consider further restricting type parameter `T` with trait `Clone`
-   |
-LL | fn bar<T: X + Clone>(s: &T) {
-   |             +++++++
+ on line 9, column 11, add ` + Clone`
 help: consider using clone here
-   |
-LL |     foo(s.clone());
-   |          ++++++++
+ on line 10, column 9, add `.clone()`
 
-error[E0277]: the trait bound `&T: X` is not satisfied
-  --> $DIR/issue-106443-sugg-clone-for-bound.rs:14:9
-   |
-LL |     foo(s);
-   |         ^ the trait `X` is not implemented for `&T`
-   |
+error E0277: the trait bound `&T: X` is not satisfied
+ at $DIR/issue-106443-sugg-clone-for-bound.rs:14:9: the trait `X` is not implemented for `&T`
 help: consider using clone here
-   |
-LL |     foo(s.clone());
-   |          ++++++++
+ on line 14, column 9, add `.clone()`
 
 error: aborting due to 2 previous errors
 

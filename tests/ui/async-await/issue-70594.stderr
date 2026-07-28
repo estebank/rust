@@ -1,11 +1,6 @@
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/issue-70594.rs:4:12
-   |
-LL |     [1; ().await];
-   |         ---^^^^^
-   |         |  |
-   |         |  only allowed inside `async` functions and blocks
-   |         this is not `async`
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/issue-70594.rs:4:12: only allowed inside `async` functions and blocks
+  on line 4, column 9: this is not `async`
 
 error: aborting due to 1 previous error
 

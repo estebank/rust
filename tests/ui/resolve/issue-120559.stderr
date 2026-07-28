@@ -1,13 +1,7 @@
-error[E0404]: expected trait, found type parameter `Read`
-  --> $DIR/issue-120559.rs:3:9
-   |
-LL | use std::io::Read;
-   |              ---- you might have meant to refer to this trait
-LL |
-LL | fn f<T: Read, U, Read>() {}
-   |         ^^^^     ---- found this type parameter
-   |         |
-   |         not a trait
+error E0404: expected trait, found type parameter `Read`
+ at $DIR/issue-120559.rs:3:9: not a trait
+  on line 1, column 14: you might have meant to refer to this trait
+  on line 3, column 18: found this type parameter
 
 error: aborting due to 1 previous error
 

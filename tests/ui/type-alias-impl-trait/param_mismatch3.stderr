@@ -1,29 +1,14 @@
-error[E0792]: expected generic lifetime parameter, found `'a`
-  --> $DIR/param_mismatch3.rs:14:5
-   |
-LL | type Opaque<'a> = impl Sized + 'a;
-   |             -- this generic parameter must be used with a generic lifetime parameter
-...
-LL |     id2
-   |     ^^^
+error E0792: expected generic lifetime parameter, found `'a`
+ at $DIR/param_mismatch3.rs:14:5
+  on line 10, column 13: this generic parameter must be used with a generic lifetime parameter
 
-error[E0792]: expected generic lifetime parameter, found `'b`
-  --> $DIR/param_mismatch3.rs:14:5
-   |
-LL | type Opaque<'a> = impl Sized + 'a;
-   |             -- this generic parameter must be used with a generic lifetime parameter
-...
-LL |     id2
-   |     ^^^
+error E0792: expected generic lifetime parameter, found `'b`
+ at $DIR/param_mismatch3.rs:14:5
+  on line 10, column 13: this generic parameter must be used with a generic lifetime parameter
 
-error[E0792]: expected generic lifetime parameter, found `'_`
-  --> $DIR/param_mismatch3.rs:27:5
-   |
-LL | type Opaque2<'a> = impl Sized + 'a;
-   |              -- this generic parameter must be used with a generic lifetime parameter
-...
-LL |     (id, s)
-   |     ^^^^^^^
+error E0792: expected generic lifetime parameter, found `'_`
+ at $DIR/param_mismatch3.rs:27:5
+  on line 23, column 14: this generic parameter must be used with a generic lifetime parameter
 
 error: aborting due to 3 previous errors
 

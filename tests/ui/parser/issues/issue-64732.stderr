@@ -1,26 +1,12 @@
 error: character literal may only contain one codepoint
-  --> $DIR/issue-64732.rs:3:16
-   |
-LL |     let _foo = b'hello\0';
-   |                ^^^^^^^^^^
-   |
+ at $DIR/issue-64732.rs:3:16
 help: if you meant to write a byte string literal, use double quotes
-   |
-LL -     let _foo = b'hello\0';
-LL +     let _foo = b"hello\0";
-   |
+ on line 3, column 15, replace with `b"`
 
 error: character literal may only contain one codepoint
-  --> $DIR/issue-64732.rs:6:16
-   |
-LL |     let _bar = 'hello';
-   |                ^^^^^^^
-   |
+ at $DIR/issue-64732.rs:6:16
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let _bar = 'hello';
-LL +     let _bar = "hello";
-   |
+ on line 6, column 15, replace with `"`
 
 error: aborting due to 2 previous errors
 

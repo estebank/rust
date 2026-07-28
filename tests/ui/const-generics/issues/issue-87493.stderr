@@ -1,26 +1,12 @@
 error: expected one of `,` or `>`, found `==`
-  --> $DIR/issue-87493.rs:8:22
-   |
-LL |     T: MyTrait<Assoc == S::Assoc>,
-   |                      ^^ expected one of `,` or `>`
-   |
+ at $DIR/issue-87493.rs:8:22: expected one of `,` or `>`
 help: if you meant to use an associated type binding, replace `==` with `=`
-   |
-LL -     T: MyTrait<Assoc == S::Assoc>,
-LL +     T: MyTrait<Assoc = S::Assoc>,
-   |
+ on line 8, column 21, replace with `=`
 
-error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-87493.rs:8:8
-   |
-LL |     T: MyTrait<Assoc == S::Assoc>,
-   |        ^^^^^^^ expected 0 generic arguments
-   |
+error E0107: trait takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-87493.rs:8:8: expected 0 generic arguments
 note: trait defined here, with 0 generic parameters
-  --> $DIR/issue-87493.rs:1:11
-   |
-LL | pub trait MyTrait {
-   |           ^^^^^^^
+ at $DIR/issue-87493.rs:1:11
 
 error: aborting due to 2 previous errors
 

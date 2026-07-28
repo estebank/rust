@@ -1,14 +1,7 @@
-error[E0603]: struct `S` is private
-  --> $DIR/struct-field-and-impl-expose-10545.rs:8:14
-   |
-LL | fn foo(_: a::S) {
-   |              ^ private struct
-   |
+error E0603: struct `S` is private
+ at $DIR/struct-field-and-impl-expose-10545.rs:8:14: private struct
 note: the struct `S` is defined here
-  --> $DIR/struct-field-and-impl-expose-10545.rs:4:5
-   |
-LL |     struct S;
-   |     ^^^^^^^^^
+ at $DIR/struct-field-and-impl-expose-10545.rs:4:5
 
 error: aborting due to 1 previous error
 

@@ -1,72 +1,32 @@
-error[E0223]: ambiguous associated type
-  --> $DIR/associated-types-in-ambiguous-context.rs:8:36
-   |
-LL | fn get<T:Get,U:Get>(x: T, y: U) -> Get::Value {}
-   |                                    ^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/associated-types-in-ambiguous-context.rs:8:36
 help: if there were a type named `Example` that implemented `Get`, you could use the fully-qualified path
-   |
-LL - fn get<T:Get,U:Get>(x: T, y: U) -> Get::Value {}
-LL + fn get<T:Get,U:Get>(x: T, y: U) -> <Example as Get>::Value {}
-   |
+ on line 8, column 35, replace with `<Example as Get>::`
 
-error[E0223]: ambiguous associated type
-  --> $DIR/associated-types-in-ambiguous-context.rs:22:17
-   |
-LL | trait Foo where Foo::Assoc: Bar {
-   |                 ^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/associated-types-in-ambiguous-context.rs:22:17
 help: use fully-qualified syntax
-   |
-LL - trait Foo where Foo::Assoc: Bar {
-LL + trait Foo where <Self as Foo>::Assoc: Bar {
-   |
+ on line 22, column 16, replace with `<Self as Foo>::`
 
-error[E0223]: ambiguous associated type
-  --> $DIR/associated-types-in-ambiguous-context.rs:27:10
-   |
-LL | type X = std::ops::Deref::Target;
-   |          ^^^^^^^^^^^^^^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/associated-types-in-ambiguous-context.rs:27:10
 help: use fully-qualified syntax
-   |
-LL - type X = std::ops::Deref::Target;
-LL + type X = <ByteStr as Deref>::Target;
-   |
-LL - type X = std::ops::Deref::Target;
-LL + type X = <ByteString as Deref>::Target;
-   |
-LL - type X = std::ops::Deref::Target;
-LL + type X = <CString as Deref>::Target;
-   |
-LL - type X = std::ops::Deref::Target;
-LL + type X = <IoSlice<'_> as Deref>::Target;
-   |
-   = and N other candidates
+ on line 27, column 9, replace with one of
+  <ByteStr as Deref>::
+  <ByteString as Deref>::
+  <CString as Deref>::
+  <IoSlice<'_> as Deref>::
+and N other candidates
 
-error[E0223]: ambiguous associated type
-  --> $DIR/associated-types-in-ambiguous-context.rs:13:23
-   |
-LL |     fn grab(&self) -> Grab::Value;
-   |                       ^^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/associated-types-in-ambiguous-context.rs:13:23
 help: use fully-qualified syntax
-   |
-LL -     fn grab(&self) -> Grab::Value;
-LL +     fn grab(&self) -> <Self as Grab>::Value;
-   |
+ on line 13, column 22, replace with `<Self as Grab>::`
 
-error[E0223]: ambiguous associated type
-  --> $DIR/associated-types-in-ambiguous-context.rs:16:22
-   |
-LL |     fn get(&self) -> Get::Value;
-   |                      ^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/associated-types-in-ambiguous-context.rs:16:22
 help: if there were a type named `Example` that implemented `Get`, you could use the fully-qualified path
-   |
-LL -     fn get(&self) -> Get::Value;
-LL +     fn get(&self) -> <Example as Get>::Value;
-   |
+ on line 16, column 21, replace with `<Example as Get>::`
 
 error: aborting due to 5 previous errors
 

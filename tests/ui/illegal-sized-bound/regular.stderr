@@ -1,20 +1,10 @@
 error: the `function` method cannot be invoked on a trait object
-  --> $DIR/regular.rs:28:41
-   |
-LL |         Self: Sized;
-   |               ----- this has a `Sized` requirement
-...
-LL |     (&mut MutType as &mut dyn MutTrait).function();
-   |                                         ^^^^^^^^
+ at $DIR/regular.rs:28:41
+  on line 6, column 15: this has a `Sized` requirement
 
 error: the `function` method cannot be invoked on a trait object
-  --> $DIR/regular.rs:30:27
-   |
-LL |         Self: Sized;
-   |               ----- this has a `Sized` requirement
-...
-LL |     (&Type as &dyn Trait).function();
-   |                           ^^^^^^^^
+ at $DIR/regular.rs:30:27
+  on line 19, column 15: this has a `Sized` requirement
 
 error: aborting due to 2 previous errors
 

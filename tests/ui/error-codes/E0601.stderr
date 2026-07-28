@@ -1,8 +1,5 @@
-error[E0601]: `main` function not found in crate `E0601`
-  --> $DIR/E0601.rs:1:37
-   |
-LL |
-   |                                    ^ consider adding a `main` function to `$DIR/E0601.rs`
+error E0601: `main` function not found in crate `E0601`
+ at $DIR/E0601.rs:1:37: consider adding a `main` function to `$DIR/E0601.rs`
 
 error: aborting due to 1 previous error
 

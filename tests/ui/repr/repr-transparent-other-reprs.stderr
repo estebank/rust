@@ -1,28 +1,14 @@
-error[E0692]: transparent struct cannot have other repr hints
-  --> $DIR/repr-transparent-other-reprs.rs:3:8
-   |
-LL | #[repr(transparent, C)]
-   |        ^^^^^^^^^^^  ^
+error E0692: transparent struct cannot have other repr hints
+ at $DIR/repr-transparent-other-reprs.rs:3:8
 
-error[E0692]: transparent struct cannot have other repr hints
-  --> $DIR/repr-transparent-other-reprs.rs:8:8
-   |
-LL | #[repr(transparent, packed)]
-   |        ^^^^^^^^^^^  ^^^^^^
+error E0692: transparent struct cannot have other repr hints
+ at $DIR/repr-transparent-other-reprs.rs:8:8
 
-error[E0692]: transparent struct cannot have other repr hints
-  --> $DIR/repr-transparent-other-reprs.rs:11:8
-   |
-LL | #[repr(transparent, align(2))]
-   |        ^^^^^^^^^^^  ^^^^^^^^
+error E0692: transparent struct cannot have other repr hints
+ at $DIR/repr-transparent-other-reprs.rs:11:8
 
-error[E0692]: transparent struct cannot have other repr hints
-  --> $DIR/repr-transparent-other-reprs.rs:14:8
-   |
-LL | #[repr(transparent)]
-   |        ^^^^^^^^^^^
-LL | #[repr(C)]
-   |        ^
+error E0692: transparent struct cannot have other repr hints
+ at $DIR/repr-transparent-other-reprs.rs:14:8
 
 error: aborting due to 4 previous errors
 

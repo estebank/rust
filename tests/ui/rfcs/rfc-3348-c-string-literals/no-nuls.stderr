@@ -1,92 +1,47 @@
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:14:7
-   |
-LL |     c"\0";
-   |       ^^
+ at $DIR/no-nuls.rs:14:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:15:7
-   |
-LL |     c"\u{00}";
-   |       ^^^^^^
+ at $DIR/no-nuls.rs:15:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:16:7
-   |
-LL |     c"␀";
-   |       ^
+ at $DIR/no-nuls.rs:16:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:17:7
-   |
-LL |     c"\x00";
-   |       ^^^^
+ at $DIR/no-nuls.rs:17:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:18:8
-   |
-LL |     cr"␀";
-   |        ^
+ at $DIR/no-nuls.rs:18:8
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:28:7
-   |
-LL |     c"\0";
-   |       ^^
+ at $DIR/no-nuls.rs:28:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:29:7
-   |
-LL |     c"\u{00}";
-   |       ^^^^^^
+ at $DIR/no-nuls.rs:29:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:30:7
-   |
-LL |     c"␀";
-   |       ^
+ at $DIR/no-nuls.rs:30:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:31:7
-   |
-LL |     c"\x00";
-   |       ^^^^
+ at $DIR/no-nuls.rs:31:7
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:32:8
-   |
-LL |     cr"␀";
-   |        ^
+ at $DIR/no-nuls.rs:32:8
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:37:14
-   |
-LL |     empty!(c"\0");
-   |              ^^
+ at $DIR/no-nuls.rs:37:14
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:38:14
-   |
-LL |     empty!(c"\u{00}");
-   |              ^^^^^^
+ at $DIR/no-nuls.rs:38:14
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:39:14
-   |
-LL |     empty!(c"␀");
-   |              ^
+ at $DIR/no-nuls.rs:39:14
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:40:14
-   |
-LL |     empty!(c"\x00");
-   |              ^^^^
+ at $DIR/no-nuls.rs:40:14
 
 error: null characters in C string literals are not supported
-  --> $DIR/no-nuls.rs:41:15
-   |
-LL |     empty!(cr"␀");
-   |               ^
+ at $DIR/no-nuls.rs:41:15
 
 error: aborting due to 15 previous errors
 

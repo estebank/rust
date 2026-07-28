@@ -1,14 +1,8 @@
 error: underscore literal suffix is not allowed
-  --> $DIR/underscore-suffix-for-string.rs:6:18
-   |
-LL |     let _ = "Foo"_;
-   |                  ^
+ at $DIR/underscore-suffix-for-string.rs:6:18
 
 error: underscore literal suffix is not allowed
-  --> $DIR/underscore-suffix-for-string.rs:15:16
-   |
-LL |     sink!("Foo"_);
-   |                ^
+ at $DIR/underscore-suffix-for-string.rs:15:16
 
 error: aborting due to 2 previous errors
 

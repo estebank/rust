@@ -1,18 +1,10 @@
-error[E0308]: mismatched types
-  --> $DIR/method-resolution5-deref-no-constrain.rs:20:5
-   |
-LL | fn via_deref() -> impl Deref<Target = Foo> {
-   |                                       --- expected `&Foo` because of return type
-...
-LL |     Box::new(Foo)
-   |     ^^^^^^^^^^^^^ expected `&Foo`, found `Box<Foo>`
-   |
-   = note: expected reference `&Foo`
-                 found struct `Box<Foo>`
+error E0308: mismatched types
+ at $DIR/method-resolution5-deref-no-constrain.rs:20:5: expected `&Foo`, found `Box<Foo>`
+  on line 14, column 39: expected `&Foo` because of return type
+note: expected reference `&Foo`
+            found struct `Box<Foo>`
 help: consider borrowing here
-   |
-LL |     &Box::new(Foo)
-   |     +
+ on line 20, column 4, add `&`
 
 error: aborting due to 1 previous error
 

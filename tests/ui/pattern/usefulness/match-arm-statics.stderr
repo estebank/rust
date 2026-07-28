@@ -1,44 +1,19 @@
 error: unreachable pattern
-  --> $DIR/match-arm-statics.rs:25:9
-   |
-LL |         TRUE_TRUE => (),
-   |         --------- matches all the relevant values
-...
-LL |         (true, true) => ()
-   |         ^^^^^^^^^^^^ no value can reach this
-   |
+ at $DIR/match-arm-statics.rs:25:9: no value can reach this
+  on line 21: matches all the relevant values
 note: the lint level is defined here
-  --> $DIR/match-arm-statics.rs:2:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/match-arm-statics.rs:2:9
 
 error: unreachable pattern
-  --> $DIR/match-arm-statics.rs:40:9
-   |
-LL |         Some(Some(EAST)) => (),
-   |         ---------------- matches all the relevant values
-...
-LL |         Some(Some(East)) => (),
-   |         ^^^^^^^^^^^^^^^^ no value can reach this
+ at $DIR/match-arm-statics.rs:40:9: no value can reach this
+  on line 37: matches all the relevant values
 
 error: unreachable pattern
-  --> $DIR/match-arm-statics.rs:60:9
-   |
-LL |         Foo { bar: Some(EAST), baz: NewBool(false) } => ()
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ no value can reach this
-   |
+ at $DIR/match-arm-statics.rs:60:9: no value can reach this
 note: multiple earlier patterns match some of the same values
-  --> $DIR/match-arm-statics.rs:60:9
-   |
-LL |         Foo { bar: _, baz: NEW_FALSE } => (),
-   |         ------------------------------ matches some of the same values
-...
-LL |         Foo { bar: Some(EAST), .. } => (),
-   |         --------------------------- matches some of the same values
-LL |         Foo { bar: Some(North), baz: NewBool(true) } => (),
-LL |         Foo { bar: Some(EAST), baz: NewBool(false) } => ()
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ collectively making this unreachable
+ at $DIR/match-arm-statics.rs:60:9: collectively making this unreachable
+  on line 55: matches some of the same values
+  on line 58: matches some of the same values
 
 error: aborting due to 3 previous errors
 

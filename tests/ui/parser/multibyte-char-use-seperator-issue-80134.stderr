@@ -1,32 +1,16 @@
 error: expected one of `)`, `,`, `.`, `?`, or an operator, found `é`
-  --> $DIR/multibyte-char-use-seperator-issue-80134.rs:4:8
-   |
-LL |     (()é);
-   |        ^
-   |        |
-   |        expected one of `)`, `,`, `.`, `?`, or an operator
-   |        help: missing `,`
+ at $DIR/multibyte-char-use-seperator-issue-80134.rs:4:8: expected one of `)`, `,`, `.`, `?`, or an operator
+  on line 4, column 8: help: missing `,`
 
 error: expected one of `)`, `,`, `.`, `?`, or an operator, found `氷`
-  --> $DIR/multibyte-char-use-seperator-issue-80134.rs:7:8
-   |
-LL |     (()氷);
-   |        -^
-   |        |
-   |        expected one of `)`, `,`, `.`, `?`, or an operator
-   |        help: missing `,`
+ at $DIR/multibyte-char-use-seperator-issue-80134.rs:7:8: expected one of `)`, `,`, `.`, `?`, or an operator
+  on line 7, column 8: help: missing `,`
 
-error[E0425]: cannot find value `é` in this scope
-  --> $DIR/multibyte-char-use-seperator-issue-80134.rs:4:8
-   |
-LL |     (()é);
-   |        ^ not found in this scope
+error E0425: cannot find value `é` in this scope
+ at $DIR/multibyte-char-use-seperator-issue-80134.rs:4:8: not found in this scope
 
-error[E0425]: cannot find value `氷` in this scope
-  --> $DIR/multibyte-char-use-seperator-issue-80134.rs:7:8
-   |
-LL |     (()氷);
-   |        ^^ not found in this scope
+error E0425: cannot find value `氷` in this scope
+ at $DIR/multibyte-char-use-seperator-issue-80134.rs:7:8: not found in this scope
 
 error: aborting due to 4 previous errors
 

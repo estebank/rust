@@ -1,25 +1,13 @@
 error: macro-expanded `extern crate` items cannot shadow names passed with `--extern`
-  --> $DIR/ice-on-shadowing-std-with-macro.rs:16:9
-   |
-LL |         extern crate core as std;
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
-...
-LL | define_other_core! {}
-   | --------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `define_other_core` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/ice-on-shadowing-std-with-macro.rs:16:9
+  on line 19: in this macro invocation
+note: this error originates in the macro `define_other_core` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0433]: cannot find `collections` in `std`
-  --> $DIR/ice-on-shadowing-std-with-macro.rs:8:14
-   |
-LL |     use std::collections::hash_map::HashMap;
-   |              ^^^^^^^^^^^ could not find `collections` in `std`
+error E0433: cannot find `collections` in `std`
+ at $DIR/ice-on-shadowing-std-with-macro.rs:8:14: could not find `collections` in `std`
 
-error[E0432]: unresolved import `std::vec`
-  --> $DIR/ice-on-shadowing-std-with-macro.rs:9:14
-   |
-LL |     use std::vec::IntoIter;
-   |              ^^^ could not find `vec` in `std`
+error E0432: unresolved import `std::vec`
+ at $DIR/ice-on-shadowing-std-with-macro.rs:9:14: could not find `vec` in `std`
 
 error: aborting due to 3 previous errors
 

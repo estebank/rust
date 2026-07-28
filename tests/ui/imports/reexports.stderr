@@ -1,83 +1,37 @@
-error[E0364]: `foo` is private, and cannot be re-exported
-  --> $DIR/reexports.rs:8:17
-   |
-LL |         pub use super::foo;
-   |                 ^^^^^^^^^^
-   |
+error E0364: `foo` is private, and cannot be re-exported
+ at $DIR/reexports.rs:8:17
 note: consider marking `foo` as `pub` in the imported module
-  --> $DIR/reexports.rs:8:17
-   |
-LL |         pub use super::foo;
-   |                 ^^^^^^^^^^
+ at $DIR/reexports.rs:8:17
 
-error[E0603]: module import `foo` is private
-  --> $DIR/reexports.rs:36:22
-   |
-LL |     use crate::b::a::foo::S;
-   |                      ^^^  - struct `S` is not publicly re-exported
-   |                      |
-   |                      private module import
-   |
+error E0603: module import `foo` is private
+ at $DIR/reexports.rs:36:22: private module import
+  on line 36, column 27: struct `S` is not publicly re-exported
 note: the module import `foo` is defined here...
-  --> $DIR/reexports.rs:24:17
-   |
-LL |         pub use super::foo; // This is OK since the value `foo` is visible enough.
-   |                 ^^^^^^^^^^
+ at $DIR/reexports.rs:24:17
 note: ...and refers to the module `foo` which is defined here
-  --> $DIR/reexports.rs:19:5
-   |
-LL |     mod foo {
-   |     ^^^^^^^
+ at $DIR/reexports.rs:19:5
 
-error[E0603]: module import `foo` is private
-  --> $DIR/reexports.rs:37:22
-   |
-LL |     use crate::b::b::foo::S as T;
-   |                      ^^^  - struct `S` is not publicly re-exported
-   |                      |
-   |                      private module import
-   |
+error E0603: module import `foo` is private
+ at $DIR/reexports.rs:37:22: private module import
+  on line 37, column 27: struct `S` is not publicly re-exported
 note: the module import `foo` is defined here...
-  --> $DIR/reexports.rs:29:17
-   |
-LL |         pub use super::*; // This is also OK since the value `foo` is visible enough.
-   |                 ^^^^^^^^
+ at $DIR/reexports.rs:29:17
 note: ...and refers to the module `foo` which is defined here
-  --> $DIR/reexports.rs:19:5
-   |
-LL |     mod foo {
-   |     ^^^^^^^
+ at $DIR/reexports.rs:19:5
 
 warning: unused import: `super::foo`
-  --> $DIR/reexports.rs:8:17
-   |
-LL |         pub use super::foo;
-   |                 ^^^^^^^^^^
-   |
+ at $DIR/reexports.rs:8:17
 note: the lint level is defined here
-  --> $DIR/reexports.rs:1:9
-   |
-LL | #![warn(unused_imports)]
-   |         ^^^^^^^^^^^^^^
+ at $DIR/reexports.rs:1:9
 
 warning: glob import doesn't reexport anything with visibility `pub` because no imported item is public enough
-  --> $DIR/reexports.rs:11:17
-   |
-LL |         pub use super::*;
-   |                 ^^^^^^^^
-   |
+ at $DIR/reexports.rs:11:17
 note: the most public imported item is `pub(in crate::a)`
-  --> $DIR/reexports.rs:11:17
-   |
-LL |         pub use super::*;
-   |                 ^^^^^^^^
-   = help: reduce the glob import's visibility or increase visibility of imported items
+ at $DIR/reexports.rs:11:17
+help: reduce the glob import's visibility or increase visibility of imported items
 
 warning: unused import: `super::*`
-  --> $DIR/reexports.rs:11:17
-   |
-LL |         pub use super::*;
-   |                 ^^^^^^^^
+ at $DIR/reexports.rs:11:17
 
 error: aborting due to 3 previous errors; 3 warnings emitted
 

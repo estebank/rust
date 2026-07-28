@@ -1,14 +1,8 @@
-error[E0703]: invalid ABI: found ``
-  --> $DIR/extern-empty-string-issue-140884.rs:1:8
-   |
-LL | extern "" {}
-   |        ^^ invalid ABI
-   |
-   = note: invoke `rustc --print=calling-conventions` for a full list of supported calling conventions
+error E0703: invalid ABI: found ``
+ at $DIR/extern-empty-string-issue-140884.rs:1:8: invalid ABI
+note: invoke `rustc --print=calling-conventions` for a full list of supported calling conventions
 help: there's a similarly named valid ABI `C`
-   |
-LL | extern "C" {}
-   |         +
+ on line 1, column 7, replace with `"C"`
 
 error: aborting due to 1 previous error
 

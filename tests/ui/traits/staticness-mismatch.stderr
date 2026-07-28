@@ -1,11 +1,6 @@
-error[E0185]: method `bar` has a `&self` declaration in the impl, but not in the trait
-  --> $DIR/staticness-mismatch.rs:7:5
-   |
-LL |     fn bar();
-   |     --------- trait method declared without `&self`
-...
-LL |     fn bar(&self) {}
-   |     ^^^^^^^^^^^^^ `&self` used in impl
+error E0185: method `bar` has a `&self` declaration in the impl, but not in the trait
+ at $DIR/staticness-mismatch.rs:7:5: `&self` used in impl
+  on line 3: trait method declared without `&self`
 
 error: aborting due to 1 previous error
 

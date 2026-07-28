@@ -1,22 +1,12 @@
 warning: trait `Trait` is never used
-  --> $DIR/target-expr-pass.rs:16:7
-   |
-LL | trait Trait: Sized {
-   |       ^^^^^
-   |
-   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+ at $DIR/target-expr-pass.rs:16:7
+note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
 
 warning: struct `F` is never constructed
-  --> $DIR/target-expr-pass.rs:22:8
-   |
-LL | struct F;
-   |        ^
+ at $DIR/target-expr-pass.rs:22:8
 
 warning: struct `S` is never constructed
-  --> $DIR/target-expr-pass.rs:25:8
-   |
-LL | struct S(F);
-   |        ^
+ at $DIR/target-expr-pass.rs:25:8
 
 warning: 3 warnings emitted
 

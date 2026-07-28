@@ -1,10 +1,6 @@
-error[E0277]: the trait bound `Result<u32, i32>: From<Result<u64, i32>>` is not satisfied
-  --> $DIR/issue-88696.rs:9:9
-   |
-LL |     a().into()
-   |         ^^^^ the trait `From<Result<u64, i32>>` is not implemented for `Result<u32, i32>`
-   |
-   = note: required for `Result<u64, i32>` to implement `Into<Result<u32, i32>>`
+error E0277: the trait bound `Result<u32, i32>: From<Result<u64, i32>>` is not satisfied
+ at $DIR/issue-88696.rs:9:9: the trait `From<Result<u64, i32>>` is not implemented for `Result<u32, i32>`
+note: required for `Result<u64, i32>` to implement `Into<Result<u32, i32>>`
 
 error: aborting due to 1 previous error
 

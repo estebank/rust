@@ -1,8 +1,5 @@
 error: expected expression, found `)`
-  --> $DIR/post_expansion_error.rs:8:12
-   |
-LL |     await!()
-   |            ^ expected expression
+ at $DIR/post_expansion_error.rs:8:12: expected expression
 
 error: aborting due to 1 previous error
 

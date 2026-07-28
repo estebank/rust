@@ -1,10 +1,6 @@
 error: invalid format string: unmatched `}` found
-  --> $DIR/issue-104142.rs:4:9
-   |
-LL |     \"\'}､"#
-   |         ^ unmatched `}` in format string
-   |
-   = note: if you intended to print `}`, you can escape it using `}}`
+ at $DIR/issue-104142.rs:4:9: unmatched `}` in format string
+note: if you intended to print `}`, you can escape it using `}}`
 
 error: aborting due to 1 previous error
 

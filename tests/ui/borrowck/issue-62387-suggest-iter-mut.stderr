@@ -1,24 +1,12 @@
-error[E0596]: cannot borrow `*a` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-62387-suggest-iter-mut.rs:18:27
-   |
-LL |     v.iter().for_each(|a| a.double());
-   |                           ^ `a` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*a` as mutable, as it is behind a `&` reference
+ at $DIR/issue-62387-suggest-iter-mut.rs:18:27: `a` is a `&` reference, so it cannot be borrowed as mutable
 help: you may want to use `iter_mut` here
-   |
-LL |     v.iter_mut().for_each(|a| a.double());
-   |           ++++
+ on line 18, column 6, replace with `iter_mut`
 
-error[E0596]: cannot borrow `*a` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-62387-suggest-iter-mut.rs:25:39
-   |
-LL |     v.iter().rev().rev().for_each(|a| a.double());
-   |                                       ^ `a` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*a` as mutable, as it is behind a `&` reference
+ at $DIR/issue-62387-suggest-iter-mut.rs:25:39: `a` is a `&` reference, so it cannot be borrowed as mutable
 help: you may want to use `iter_mut` here
-   |
-LL |     v.iter_mut().rev().rev().for_each(|a| a.double());
-   |           ++++
+ on line 25, column 6, replace with `iter_mut`
 
 error: aborting due to 2 previous errors
 

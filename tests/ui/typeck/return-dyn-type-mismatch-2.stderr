@@ -1,14 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/return-dyn-type-mismatch-2.rs:7:5
-   |
-LL | fn foo<T>() -> dyn Trait<T>
-   |                ------------ expected `(dyn Trait<T> + 'static)` because of return type
-...
-LL |     42
-   |     ^^ expected `dyn Trait`, found integer
-   |
-   = note: expected trait object `(dyn Trait<T> + 'static)`
-                      found type `{integer}`
+error E0308: mismatched types
+ at $DIR/return-dyn-type-mismatch-2.rs:7:5: expected `dyn Trait`, found integer
+  on line 3, column 16: expected `(dyn Trait<T> + 'static)` because of return type
+note: expected trait object `(dyn Trait<T> + 'static)`
+                 found type `{integer}`
 
 error: aborting due to 1 previous error
 

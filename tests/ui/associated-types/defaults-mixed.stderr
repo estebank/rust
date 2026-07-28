@@ -1,20 +1,10 @@
-error[E0046]: not all trait items implemented, missing: `Bar`
-  --> $DIR/defaults-mixed.rs:11:1
-   |
-LL |     type Bar;
-   |     -------- `Bar` from trait
-...
-LL | impl Trait for () {}
-   | ^^^^^^^^^^^^^^^^^ missing `Bar` in implementation
+error E0046: not all trait items implemented, missing: `Bar`
+ at $DIR/defaults-mixed.rs:11:1: missing `Bar` in implementation
+  on line 7: `Bar` from trait
 
-error[E0046]: not all trait items implemented, missing: `Bar`
-  --> $DIR/defaults-mixed.rs:14:1
-   |
-LL |     type Bar;
-   |     -------- `Bar` from trait
-...
-LL | impl Trait for bool {
-   | ^^^^^^^^^^^^^^^^^^^ missing `Bar` in implementation
+error E0046: not all trait items implemented, missing: `Bar`
+ at $DIR/defaults-mixed.rs:14:1: missing `Bar` in implementation
+  on line 7: `Bar` from trait
 
 error: aborting due to 2 previous errors
 

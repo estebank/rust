@@ -1,15 +1,8 @@
-error[E0597]: `s` does not live long enough
-  --> $DIR/do-not-ignore-lifetime-bounds-in-copy.rs:8:17
-   |
-LL |     let s = 2;
-   |         - binding `s` declared here
-LL |     let a = Foo(&s);
-   |                 ^^ borrowed value does not live long enough
-LL |     drop(a);
-   |          - copying this value requires that `s` is borrowed for `'static`
-LL |     drop(a);
-LL | }
-   | - `s` dropped here while still borrowed
+error E0597: `s` does not live long enough
+ at $DIR/do-not-ignore-lifetime-bounds-in-copy.rs:8:17: borrowed value does not live long enough
+  on line 7, column 9: binding `s` declared here
+  on line 9, column 10: copying this value requires that `s` is borrowed for `'static`
+  on line 11: `s` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

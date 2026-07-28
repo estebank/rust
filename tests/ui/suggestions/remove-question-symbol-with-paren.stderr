@@ -1,24 +1,13 @@
-error[E0308]: `?` operator has incompatible types
-  --> $DIR/remove-question-symbol-with-paren.rs:5:6
-   |
-LL | fn foo() -> Option<()> {
-   |             ---------- expected `Option<()>` because of return type
-LL |     let x = Some(());
-LL |     (x?)
-   |      ^^ expected `Option<()>`, found `()`
-   |
-   = note: `?` operator cannot convert from `()` to `Option<()>`
-   = note:   expected enum `Option<()>`
-           found unit type `()`
+error E0308: `?` operator has incompatible types
+ at $DIR/remove-question-symbol-with-paren.rs:5:6: expected `Option<()>`, found `()`
+  on line 3, column 13: expected `Option<()>` because of return type
+note: `?` operator cannot convert from `()` to `Option<()>`
+note:   expected enum `Option<()>`
+      found unit type `()`
 help: try removing this `?`
-   |
-LL -     (x?)
-LL +     (x)
-   |
+ on line 5, column 6
 help: try wrapping the expression in `Some`
-   |
-LL |     (Some(x?))
-   |      +++++  +
+ on line 5, column 5, add `Some(`
 
 error: aborting due to 1 previous error
 

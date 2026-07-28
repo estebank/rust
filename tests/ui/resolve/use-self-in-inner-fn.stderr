@@ -1,39 +1,18 @@
-error[E0401]: can't use `Self` from outer item
-  --> $DIR/use-self-in-inner-fn.rs:6:25
-   |
-LL | impl A {
-   | ---- `Self` type implicitly declared here, by this `impl`
-...
-LL |         fn peach(this: &Self) {
-   |            -----        ^^^^ use of `Self` from outer item
-   |            |
-   |            `Self` used in this inner function
-   |
-   = note: nested items are independent from their parent item for everything except for privacy and name resolution
+error E0401: can't use `Self` from outer item
+ at $DIR/use-self-in-inner-fn.rs:6:25: use of `Self` from outer item
+  on line 3: `Self` type implicitly declared here, by this `impl`
+  on line 6, column 12: `Self` used in this inner function
+note: nested items are independent from their parent item for everything except for privacy and name resolution
 help: refer to the type directly here instead
-   |
-LL -         fn peach(this: &Self) {
-LL +         fn peach(this: &A) {
-   |
+ on line 6, column 24, replace with `A`
 
-error[E0401]: can't use `Self` from outer item
-  --> $DIR/use-self-in-inner-fn.rs:27:13
-   |
-LL | impl MyEnum {
-   | ---- `Self` type implicitly declared here, by this `impl`
-...
-LL |         fn inner() {
-   |            ----- `Self` used in this inner function
-LL |
-LL |             Self::do_something(move || {});
-   |             ^^^^ use of `Self` from outer item
-   |
-   = note: nested items are independent from their parent item for everything except for privacy and name resolution
+error E0401: can't use `Self` from outer item
+ at $DIR/use-self-in-inner-fn.rs:27:13: use of `Self` from outer item
+  on line 18: `Self` type implicitly declared here, by this `impl`
+  on line 25, column 12: `Self` used in this inner function
+note: nested items are independent from their parent item for everything except for privacy and name resolution
 help: refer to the type directly here instead
-   |
-LL -             Self::do_something(move || {});
-LL +             MyEnum::do_something(move || {});
-   |
+ on line 27, column 12, replace with `MyEnum`
 
 error: aborting due to 2 previous errors
 

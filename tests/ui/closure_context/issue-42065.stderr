@@ -1,21 +1,10 @@
-error[E0382]: use of moved value: `debug_dump_dict`
-  --> $DIR/issue-42065.rs:11:5
-   |
-LL |     debug_dump_dict();
-   |     ----------------- `debug_dump_dict` moved due to this call
-LL |     debug_dump_dict();
-   |     ^^^^^^^^^^^^^^^ value used here after move
-   |
+error E0382: use of moved value: `debug_dump_dict`
+ at $DIR/issue-42065.rs:11:5: value used here after move
+  on line 10: `debug_dump_dict` moved due to this call
 note: closure cannot be invoked more than once because it moves the variable `dict` out of its environment
-  --> $DIR/issue-42065.rs:6:29
-   |
-LL |         for (key, value) in dict {
-   |                             ^^^^
+ at $DIR/issue-42065.rs:6:29
 note: this value implements `FnOnce`, which causes it to be moved when called
-  --> $DIR/issue-42065.rs:10:5
-   |
-LL |     debug_dump_dict();
-   |     ^^^^^^^^^^^^^^^
+ at $DIR/issue-42065.rs:10:5
 
 error: aborting due to 1 previous error
 

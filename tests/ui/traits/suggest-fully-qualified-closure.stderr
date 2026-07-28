@@ -1,22 +1,9 @@
-error[E0283]: type annotations needed
-  --> $DIR/suggest-fully-qualified-closure.rs:21:7
-   |
-LL |     q.lol(||());
-   |       ^^^
-   |
+error E0283: type annotations needed
+ at $DIR/suggest-fully-qualified-closure.rs:21:7
 note: multiple `impl`s satisfying `Qqq: MyTrait<_>` found
-  --> $DIR/suggest-fully-qualified-closure.rs:12:1
-   |
-LL | impl MyTrait<u32> for Qqq{
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
-...
-LL | impl MyTrait<u64> for Qqq{
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/suggest-fully-qualified-closure.rs:12:1
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     q.lol(||());
-LL +     <Qqq as MyTrait<T>>::lol::<_>(&q, ||());
-   |
+ on line 21, column 4, add `<Qqq as MyTrait<T>>::lol::<_>(&`
 
 error: aborting due to 1 previous error
 

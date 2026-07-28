@@ -1,19 +1,10 @@
-error[E0423]: cannot find value `S` in this scope
-  --> $DIR/no-match-tuple-variant-self-ctor.rs:30:24
-   |
-LL |     struct S {}
-   |     ----------- `S` defined here
-...
-LL |             let Self = S;
-   |                        ^ help: use struct literal syntax instead: `S {}`
-   |
-   = note: a struct named `S` exists in another namespace
+error E0423: cannot find value `S` in this scope
+ at $DIR/no-match-tuple-variant-self-ctor.rs:30:24: help: use struct literal syntax instead: `S {}`
+  on line 27: `S` defined here
+note: a struct named `S` exists in another namespace
 
-error[E0533]: expected unit struct, found self constructor `Self`
-  --> $DIR/no-match-tuple-variant-self-ctor.rs:30:17
-   |
-LL |             let Self = S;
-   |                 ^^^^ not a unit struct
+error E0533: expected unit struct, found self constructor `Self`
+ at $DIR/no-match-tuple-variant-self-ctor.rs:30:17: not a unit struct
 
 error: aborting due to 2 previous errors
 

@@ -1,228 +1,103 @@
-error[E0505]: cannot move out of `arr[..]` because it is borrowed
-  --> $DIR/borrowck-move-ref-pattern.rs:9:24
-   |
-LL |     let mut arr = [U, U, U, U, U];
-   |         ------- binding `arr` declared here
-LL |     let hold_all = &arr;
-   |                    ---- borrow of `arr` occurs here
-LL |     let [ref _x0_hold, _x1, ref xs_hold @ ..] = arr;
-   |                        ^^^ move out of `arr[..]` occurs here
-LL |     _x1 = U;
-LL |     drop(hold_all);
-   |          -------- borrow later used here
+error E0505: cannot move out of `arr[..]` because it is borrowed
+ at $DIR/borrowck-move-ref-pattern.rs:9:24: move out of `arr[..]` occurs here
+  on line 7, column 9: binding `arr` declared here
+  on line 8, column 20: borrow of `arr` occurs here
+  on line 11, column 10: borrow later used here
 
-error[E0384]: cannot assign twice to immutable variable `_x1`
-  --> $DIR/borrowck-move-ref-pattern.rs:10:5
-   |
-LL |     let [ref _x0_hold, _x1, ref xs_hold @ ..] = arr;
-   |                        --- first assignment to `_x1`
-LL |     _x1 = U;
-   |     ^^^^^^^ cannot assign twice to immutable variable
-   |
+error E0384: cannot assign twice to immutable variable `_x1`
+ at $DIR/borrowck-move-ref-pattern.rs:10:5: cannot assign twice to immutable variable
+  on line 9, column 24: first assignment to `_x1`
 help: consider making this binding mutable
-   |
-LL |     let [ref _x0_hold, mut _x1, ref xs_hold @ ..] = arr;
-   |                        +++
+ on line 9, column 23, add `mut `
 help: to modify the original value, take a borrow instead
-   |
-LL |     let [ref _x0_hold, ref mut _x1, ref xs_hold @ ..] = arr;
-   |                        +++++++
+ on line 9, column 23, add `ref mut `
 
-error[E0505]: cannot move out of `arr[..]` because it is borrowed
-  --> $DIR/borrowck-move-ref-pattern.rs:12:10
-   |
-LL |     let [ref _x0_hold, _x1, ref xs_hold @ ..] = arr;
-   |          ------------ borrow of `arr[..]` occurs here
-...
-LL |     let [_x0, ..] = arr;
-   |          ^^^ move out of `arr[..]` occurs here
-LL |     drop(_x0_hold);
-   |          -------- borrow later used here
+error E0505: cannot move out of `arr[..]` because it is borrowed
+ at $DIR/borrowck-move-ref-pattern.rs:12:10: move out of `arr[..]` occurs here
+  on line 9, column 10: borrow of `arr[..]` occurs here
+  on line 13, column 10: borrow later used here
 
-error[E0502]: cannot borrow `arr[..]` as mutable because it is also borrowed as immutable
-  --> $DIR/borrowck-move-ref-pattern.rs:14:16
-   |
-LL |     let [ref _x0_hold, _x1, ref xs_hold @ ..] = arr;
-   |                             ----------- immutable borrow occurs here
-...
-LL |     let [_, _, ref mut _x2, _x3, mut _x4] = arr;
-   |                ^^^^^^^^^^^ mutable borrow occurs here
-...
-LL |     drop(xs_hold);
-   |          ------- immutable borrow later used here
+error E0502: cannot borrow `arr[..]` as mutable because it is also borrowed as immutable
+ at $DIR/borrowck-move-ref-pattern.rs:14:16: mutable borrow occurs here
+  on line 9, column 29: immutable borrow occurs here
+  on line 18, column 10: immutable borrow later used here
 
-error[E0505]: cannot move out of `arr[..]` because it is borrowed
-  --> $DIR/borrowck-move-ref-pattern.rs:14:29
-   |
-LL |     let [ref _x0_hold, _x1, ref xs_hold @ ..] = arr;
-   |                             ----------- borrow of `arr[..]` occurs here
-...
-LL |     let [_, _, ref mut _x2, _x3, mut _x4] = arr;
-   |                             ^^^ move out of `arr[..]` occurs here
-...
-LL |     drop(xs_hold);
-   |          ------- borrow later used here
+error E0505: cannot move out of `arr[..]` because it is borrowed
+ at $DIR/borrowck-move-ref-pattern.rs:14:29: move out of `arr[..]` occurs here
+  on line 9, column 29: borrow of `arr[..]` occurs here
+  on line 18, column 10: borrow later used here
 
-error[E0505]: cannot move out of `arr[..]` because it is borrowed
-  --> $DIR/borrowck-move-ref-pattern.rs:14:34
-   |
-LL |     let [ref _x0_hold, _x1, ref xs_hold @ ..] = arr;
-   |                             ----------- borrow of `arr[..]` occurs here
-...
-LL |     let [_, _, ref mut _x2, _x3, mut _x4] = arr;
-   |                                  ^^^^^^^ move out of `arr[..]` occurs here
-...
-LL |     drop(xs_hold);
-   |          ------- borrow later used here
+error E0505: cannot move out of `arr[..]` because it is borrowed
+ at $DIR/borrowck-move-ref-pattern.rs:14:34: move out of `arr[..]` occurs here
+  on line 9, column 29: borrow of `arr[..]` occurs here
+  on line 18, column 10: borrow later used here
 
-error[E0384]: cannot assign twice to immutable variable `_x1`
-  --> $DIR/borrowck-move-ref-pattern.rs:24:5
-   |
-LL |     let (ref _x0, _x1, ref _x2, ..) = tup;
-   |                   --- first assignment to `_x1`
-LL |     _x1 = U;
-   |     ^^^^^^^ cannot assign twice to immutable variable
-   |
+error E0384: cannot assign twice to immutable variable `_x1`
+ at $DIR/borrowck-move-ref-pattern.rs:24:5: cannot assign twice to immutable variable
+  on line 23, column 19: first assignment to `_x1`
 help: consider making this binding mutable
-   |
-LL |     let (ref _x0, mut _x1, ref _x2, ..) = tup;
-   |                   +++
+ on line 23, column 18, add `mut `
 help: to modify the original value, take a borrow instead
-   |
-LL |     let (ref _x0, ref mut _x1, ref _x2, ..) = tup;
-   |                   +++++++
+ on line 23, column 18, add `ref mut `
 
-error[E0502]: cannot borrow `tup.0` as mutable because it is also borrowed as immutable
-  --> $DIR/borrowck-move-ref-pattern.rs:25:20
-   |
-LL |     let (ref _x0, _x1, ref _x2, ..) = tup;
-   |          ------- immutable borrow occurs here
-LL |     _x1 = U;
-LL |     let _x0_hold = &mut tup.0;
-   |                    ^^^^^^^^^^ mutable borrow occurs here
-LL |     let (ref mut _x0_hold, ..) = tup;
-LL |     *_x0 = U;
-   |     -------- immutable borrow later used here
+error E0502: cannot borrow `tup.0` as mutable because it is also borrowed as immutable
+ at $DIR/borrowck-move-ref-pattern.rs:25:20: mutable borrow occurs here
+  on line 23, column 10: immutable borrow occurs here
+  on line 27: immutable borrow later used here
 
-error[E0502]: cannot borrow `tup.0` as mutable because it is also borrowed as immutable
-  --> $DIR/borrowck-move-ref-pattern.rs:26:10
-   |
-LL |     let (ref _x0, _x1, ref _x2, ..) = tup;
-   |          ------- immutable borrow occurs here
-...
-LL |     let (ref mut _x0_hold, ..) = tup;
-   |          ^^^^^^^^^^^^^^^^ mutable borrow occurs here
-LL |     *_x0 = U;
-   |     -------- immutable borrow later used here
+error E0502: cannot borrow `tup.0` as mutable because it is also borrowed as immutable
+ at $DIR/borrowck-move-ref-pattern.rs:26:10: mutable borrow occurs here
+  on line 23, column 10: immutable borrow occurs here
+  on line 27: immutable borrow later used here
 
-error[E0594]: cannot assign to `*_x0`, which is behind a `&` reference
-  --> $DIR/borrowck-move-ref-pattern.rs:27:5
-   |
-LL |     *_x0 = U;
-   |     ^^^^^^^^ `_x0` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*_x0`, which is behind a `&` reference
+ at $DIR/borrowck-move-ref-pattern.rs:27:5: `_x0` is a `&` reference, so it cannot be written to
 help: consider changing this to be a mutable reference
-   |
-LL |     let (ref mut _x0, _x1, ref _x2, ..) = tup;
-   |              +++
+ on line 23, column 13, add `mut `
 
-error[E0594]: cannot assign to `*_x2`, which is behind a `&` reference
-  --> $DIR/borrowck-move-ref-pattern.rs:28:5
-   |
-LL |     *_x2 = U;
-   |     ^^^^^^^^ `_x2` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*_x2`, which is behind a `&` reference
+ at $DIR/borrowck-move-ref-pattern.rs:28:5: `_x2` is a `&` reference, so it cannot be written to
 help: consider changing this to be a mutable reference
-   |
-LL |     let (ref _x0, _x1, ref mut _x2, ..) = tup;
-   |                            +++
+ on line 23, column 27, add `mut `
 
-error[E0382]: use of moved value: `tup.1`
-  --> $DIR/borrowck-move-ref-pattern.rs:29:10
-   |
-LL |     let (ref _x0, _x1, ref _x2, ..) = tup;
-   |                   --- value moved here
-...
-LL |     drop(tup.1);
-   |          ^^^^^ value used here after move
-   |
-   = note: move occurs because `tup.1` has type `U`, which does not implement the `Copy` trait
+error E0382: use of moved value: `tup.1`
+ at $DIR/borrowck-move-ref-pattern.rs:29:10: value used here after move
+  on line 23, column 19: value moved here
+note: move occurs because `tup.1` has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let (ref _x0, ref _x1, ref _x2, ..) = tup;
-   |                   +++
+ on line 23, column 18, add `ref `
 
-error[E0382]: borrow of moved value: `tup.1`
-  --> $DIR/borrowck-move-ref-pattern.rs:30:20
-   |
-LL |     drop(tup.1);
-   |          ----- value moved here
-LL |     let _x1_hold = &tup.1;
-   |                    ^^^^^^ value borrowed here after move
-   |
-   = note: move occurs because `tup.1` has type `U`, which does not implement the `Copy` trait
+error E0382: borrow of moved value: `tup.1`
+ at $DIR/borrowck-move-ref-pattern.rs:30:20: value borrowed here after move
+  on line 29, column 10: value moved here
+note: move occurs because `tup.1` has type `U`, which does not implement the `Copy` trait
 
-error[E0502]: cannot borrow `tup.3` as immutable because it is also borrowed as mutable
-  --> $DIR/borrowck-move-ref-pattern.rs:32:20
-   |
-LL |     let (.., ref mut _x3) = tup;
-   |              ----------- mutable borrow occurs here
-LL |     let _x3_hold = &tup.3;
-   |                    ^^^^^^ immutable borrow occurs here
-...
-LL |     drop(_x3);
-   |          --- mutable borrow later used here
+error E0502: cannot borrow `tup.3` as immutable because it is also borrowed as mutable
+ at $DIR/borrowck-move-ref-pattern.rs:32:20: immutable borrow occurs here
+  on line 31, column 14: mutable borrow occurs here
+  on line 36, column 10: mutable borrow later used here
 
-error[E0499]: cannot borrow `tup.3` as mutable more than once at a time
-  --> $DIR/borrowck-move-ref-pattern.rs:33:20
-   |
-LL |     let (.., ref mut _x3) = tup;
-   |              ----------- first mutable borrow occurs here
-LL |     let _x3_hold = &tup.3;
-LL |     let _x3_hold = &mut tup.3;
-   |                    ^^^^^^^^^^ second mutable borrow occurs here
-...
-LL |     drop(_x3);
-   |          --- first borrow later used here
+error E0499: cannot borrow `tup.3` as mutable more than once at a time
+ at $DIR/borrowck-move-ref-pattern.rs:33:20: second mutable borrow occurs here
+  on line 31, column 14: first mutable borrow occurs here
+  on line 36, column 10: first borrow later used here
 
-error[E0499]: cannot borrow `tup.3` as mutable more than once at a time
-  --> $DIR/borrowck-move-ref-pattern.rs:34:14
-   |
-LL |     let (.., ref mut _x3) = tup;
-   |              ----------- first mutable borrow occurs here
-...
-LL |     let (.., ref mut _x4_hold) = tup;
-   |              ^^^^^^^^^^^^^^^^ second mutable borrow occurs here
-LL |     let (.., ref _x4_hold) = tup;
-LL |     drop(_x3);
-   |          --- first borrow later used here
+error E0499: cannot borrow `tup.3` as mutable more than once at a time
+ at $DIR/borrowck-move-ref-pattern.rs:34:14: second mutable borrow occurs here
+  on line 31, column 14: first mutable borrow occurs here
+  on line 36, column 10: first borrow later used here
 
-error[E0502]: cannot borrow `tup.3` as immutable because it is also borrowed as mutable
-  --> $DIR/borrowck-move-ref-pattern.rs:35:14
-   |
-LL |     let (.., ref mut _x3) = tup;
-   |              ----------- mutable borrow occurs here
-...
-LL |     let (.., ref _x4_hold) = tup;
-   |              ^^^^^^^^^^^^ immutable borrow occurs here
-LL |     drop(_x3);
-   |          --- mutable borrow later used here
+error E0502: cannot borrow `tup.3` as immutable because it is also borrowed as mutable
+ at $DIR/borrowck-move-ref-pattern.rs:35:14: immutable borrow occurs here
+  on line 31, column 14: mutable borrow occurs here
+  on line 36, column 10: mutable borrow later used here
 
-error[E0382]: use of moved value: `tup`
-  --> $DIR/borrowck-move-ref-pattern.rs:44:14
-   |
-LL |     let mut tup = (U, U, U);
-   |         ------- move occurs because `tup` has type `(U, U, U)`, which does not implement the `Copy` trait
-LL |     let c1 = || {
-   |              -- value moved into closure here
-LL |         let (ref _x0, _x1, _) = tup;
-   |                                 --- variable moved due to use in closure
-LL |     };
-LL |     let c2 = || {
-   |              ^^ value used here after move
-LL |
-LL |         let (ref mut _x0, _, _x2) = tup;
-   |                                     --- use occurs due to use in closure
+error E0382: use of moved value: `tup`
+ at $DIR/borrowck-move-ref-pattern.rs:44:14: value used here after move
+  on line 40, column 9: move occurs because `tup` has type `(U, U, U)`, which does not implement the `Copy` trait
+  on line 41, column 14: value moved into closure here
+  on line 42, column 33: variable moved due to use in closure
+  on line 46, column 37: use occurs due to use in closure
 
 error: aborting due to 18 previous errors
 

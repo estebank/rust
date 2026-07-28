@@ -1,26 +1,14 @@
 error: lifetime may not live long enough
-  --> $DIR/normalization-preserve-equality.rs:27:1
-   |
-LL | fn test_borrowck<'a, 'b>(_: (<Equal<'a, 'b> as Trait>::Ty, Equal<'a, 'b>)) {
-   | ^^^^^^^^^^^^^^^^^--^^--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   | |                |   |
-   | |                |   lifetime `'b` defined here
-   | |                lifetime `'a` defined here
-   | requires that `'a` must outlive `'b`
-   |
-   = help: consider adding the following bound: `'a: 'b`
+ at $DIR/normalization-preserve-equality.rs:27:1: requires that `'a` must outlive `'b`
+  on line 27, column 18: lifetime `'a` defined here
+  on line 27, column 22: lifetime `'b` defined here
+help: consider adding the following bound: `'a: 'b`
 
 error: lifetime may not live long enough
-  --> $DIR/normalization-preserve-equality.rs:27:1
-   |
-LL | fn test_borrowck<'a, 'b>(_: (<Equal<'a, 'b> as Trait>::Ty, Equal<'a, 'b>)) {
-   | ^^^^^^^^^^^^^^^^^--^^--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   | |                |   |
-   | |                |   lifetime `'b` defined here
-   | |                lifetime `'a` defined here
-   | requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/normalization-preserve-equality.rs:27:1: requires that `'b` must outlive `'a`
+  on line 27, column 18: lifetime `'a` defined here
+  on line 27, column 22: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
 help: `'a` and `'b` must be the same: replace one with the other
 

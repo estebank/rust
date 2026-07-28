@@ -1,8 +1,5 @@
-error[E0606]: casting `Test` as `*const isize` is invalid
-  --> $DIR/issue-17444.rs:6:14
-   |
-LL |     let _x = Test::Foo as *const isize;
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0606: casting `Test` as `*const isize` is invalid
+ at $DIR/issue-17444.rs:6:14
 
 error: aborting due to 1 previous error
 

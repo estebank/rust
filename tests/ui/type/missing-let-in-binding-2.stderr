@@ -1,13 +1,7 @@
 error: expected identifier, found `:`
-  --> $DIR/missing-let-in-binding-2.rs:4:7
-   |
-LL |     _v: Vec<i32> = vec![1, 2, 3];
-   |       ^ expected identifier
-   |
+ at $DIR/missing-let-in-binding-2.rs:4:7: expected identifier
 help: you might have meant to introduce a new binding
-   |
-LL |     let _v: Vec<i32> = vec![1, 2, 3];
-   |     +++
+ on line 4, column 4, add `let `
 
 error: aborting due to 1 previous error
 

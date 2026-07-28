@@ -1,11 +1,6 @@
-error[E0050]: method `calm_down_please` has 3 parameters but the declaration in trait `TooMuch::calm_down_please` has 0
-  --> $DIR/method-signature-matches.rs:33:28
-   |
-LL |     fn calm_down_please() -> impl Sized;
-   |     ------------------------------------ trait requires 0 parameters
-...
-LL |     fn calm_down_please(_: (), _: (), _: ()) {}
-   |                            ^^^^^^^^^^^^^^^^ expected 0 parameters, found 3
+error E0050: method `calm_down_please` has 3 parameters but the declaration in trait `TooMuch::calm_down_please` has 0
+ at $DIR/method-signature-matches.rs:33:28: expected 0 parameters, found 3
+  on line 28: trait requires 0 parameters
 
 error: aborting due to 1 previous error
 

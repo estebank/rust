@@ -1,124 +1,59 @@
 error: relaxed bounds are not permitted in supertrait bounds
-  --> $DIR/default-supertrait.rs:8:17
-   |
-LL | trait NegSized: ?Sized { }
-   |                 ^^^^^^
-   |
-   = note: traits are not implicitly bounded by `Sized`, so there is nothing to relax
+ at $DIR/default-supertrait.rs:8:17
+note: traits are not implicitly bounded by `Sized`, so there is nothing to relax
 
 error: relaxed bounds are not permitted in supertrait bounds
-  --> $DIR/default-supertrait.rs:13:21
-   |
-LL | trait NegMetaSized: ?MetaSized { }
-   |                     ^^^^^^^^^^
+ at $DIR/default-supertrait.rs:13:21
 
 error: relaxed bounds are not permitted in supertrait bounds
-  --> $DIR/default-supertrait.rs:21:24
-   |
-LL | trait NegPointeeSized: ?PointeeSized { }
-   |                        ^^^^^^^^^^^^^
+ at $DIR/default-supertrait.rs:21:24
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/default-supertrait.rs:13:21
-   |
-LL | trait NegMetaSized: ?MetaSized { }
-   |                     ^^^^^^^^^^
+ at $DIR/default-supertrait.rs:13:21
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/default-supertrait.rs:13:21
-   |
-LL | trait NegMetaSized: ?MetaSized { }
-   |                     ^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/default-supertrait.rs:13:21
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/default-supertrait.rs:13:21
-   |
-LL | trait NegMetaSized: ?MetaSized { }
-   |                     ^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/default-supertrait.rs:13:21
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/default-supertrait.rs:21:24
-   |
-LL | trait NegPointeeSized: ?PointeeSized { }
-   |                        ^^^^^^^^^^^^^
+ at $DIR/default-supertrait.rs:21:24
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/default-supertrait.rs:21:24
-   |
-LL | trait NegPointeeSized: ?PointeeSized { }
-   |                        ^^^^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/default-supertrait.rs:21:24
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/default-supertrait.rs:21:24
-   |
-LL | trait NegPointeeSized: ?PointeeSized { }
-   |                        ^^^^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/default-supertrait.rs:21:24
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/default-supertrait.rs:40:22
-   |
-LL | fn with_metasized_supertrait<T: PointeeSized + MetaSized_>() {
-   |                              - this type parameter needs to be `Sized`
-LL |     requires_sized::<T>();
-   |                      ^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/default-supertrait.rs:40:22: doesn't have a size known at compile-time
+  on line 39, column 30: this type parameter needs to be `Sized`
 note: required by a bound in `requires_sized`
-  --> $DIR/default-supertrait.rs:29:22
-   |
-LL | fn requires_sized<T: Sized>() {}
-   |                      ^^^^^ required by this bound in `requires_sized`
+ at $DIR/default-supertrait.rs:29:22: required by this bound in `requires_sized`
 
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/default-supertrait.rs:48:22
-   |
-LL | fn with_pointeesized_supertrait<T: PointeeSized + PointeeSized_>() {
-   |                                 - this type parameter needs to be `Sized`
-LL |     requires_sized::<T>();
-   |                      ^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/default-supertrait.rs:48:22: doesn't have a size known at compile-time
+  on line 47, column 33: this type parameter needs to be `Sized`
 note: required by a bound in `requires_sized`
-  --> $DIR/default-supertrait.rs:29:22
-   |
-LL | fn requires_sized<T: Sized>() {}
-   |                      ^^^^^ required by this bound in `requires_sized`
+ at $DIR/default-supertrait.rs:29:22: required by this bound in `requires_sized`
 
-error[E0277]: the size for values of type `T` cannot be known
-  --> $DIR/default-supertrait.rs:50:26
-   |
-LL |     requires_metasized::<T>();
-   |                          ^ doesn't have a known size
-   |
+error E0277: the size for values of type `T` cannot be known
+ at $DIR/default-supertrait.rs:50:26: doesn't have a known size
 note: required by a bound in `requires_metasized`
-  --> $DIR/default-supertrait.rs:30:26
-   |
-LL | fn requires_metasized<T: MetaSized>() {}
-   |                          ^^^^^^^^^ required by this bound in `requires_metasized`
+ at $DIR/default-supertrait.rs:30:26: required by this bound in `requires_metasized`
 help: consider further restricting type parameter `T` with unstable trait `MetaSized`
-   |
-LL | fn with_pointeesized_supertrait<T: PointeeSized + PointeeSized_ + std::marker::MetaSized>() {
-   |                                                                 ++++++++++++++++++++++++
+ on line 47, column 63, add ` + std::marker::MetaSized`
 
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/default-supertrait.rs:57:22
-   |
-LL | fn with_bare_trait<T: PointeeSized + Bare>() {
-   |                    - this type parameter needs to be `Sized`
-LL |     requires_sized::<T>();
-   |                      ^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/default-supertrait.rs:57:22: doesn't have a size known at compile-time
+  on line 56, column 20: this type parameter needs to be `Sized`
 note: required by a bound in `requires_sized`
-  --> $DIR/default-supertrait.rs:29:22
-   |
-LL | fn requires_sized<T: Sized>() {}
-   |                      ^^^^^ required by this bound in `requires_sized`
+ at $DIR/default-supertrait.rs:29:22: required by this bound in `requires_sized`
 
 error: aborting due to 13 previous errors
 

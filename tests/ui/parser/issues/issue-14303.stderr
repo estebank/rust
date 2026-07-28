@@ -1,38 +1,25 @@
 error: lifetime parameters must be declared prior to type and const parameters
-  --> $DIR/issue-14303.rs:1:18
-   |
-LL | enum Enum<'a, T, 'b> {
-   |          --------^^- help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
+ at $DIR/issue-14303.rs:1:18
+  on line 1, column 10: help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
 
 error: lifetime parameters must be declared prior to type and const parameters
-  --> $DIR/issue-14303.rs:6:22
-   |
-LL | struct Struct<'a, T, 'b> {
-   |              --------^^- help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
+ at $DIR/issue-14303.rs:6:22
+  on line 6, column 14: help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
 
 error: lifetime parameters must be declared prior to type and const parameters
-  --> $DIR/issue-14303.rs:11:20
-   |
-LL | trait Trait<'a, T, 'b> {}
-   |            --------^^- help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
+ at $DIR/issue-14303.rs:11:20
+  on line 11, column 12: help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
 
 error: lifetime parameters must be declared prior to type and const parameters
-  --> $DIR/issue-14303.rs:14:15
-   |
-LL | fn foo<'a, T, 'b>(x: &'a T) {}
-   |       --------^^- help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
+ at $DIR/issue-14303.rs:14:15
+  on line 14, column 7: help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
 
 error: lifetime parameters must be declared prior to type and const parameters
-  --> $DIR/issue-14303.rs:18:13
-   |
-LL | impl<'a, T, 'b> Y<T> {}
-   |     --------^^- help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
+ at $DIR/issue-14303.rs:18:13
+  on line 18, column 5: help: reorder the parameters: lifetimes, then consts and types: `<'a, 'b, T>`
 
-error[E0747]: type provided when a lifetime was expected
-  --> $DIR/issue-14303.rs:30:37
-   |
-LL | fn bar<'a, 'b, 'c, T>(x: bar::X<'a, T, 'b, 'c>) {}
-   |                                     ^
+error E0747: type provided when a lifetime was expected
+ at $DIR/issue-14303.rs:30:37
 
 error: aborting due to 6 previous errors
 

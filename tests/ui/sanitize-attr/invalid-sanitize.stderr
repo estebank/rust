@@ -1,84 +1,41 @@
-error[E0539]: malformed `sanitize` attribute input
-  --> $DIR/invalid-sanitize.rs:4:3
-   |
-LL | #[sanitize(brontosaurus = "off")]
-   |   ^^^^^^^^^------------^^^^^^^^^
-   |            |
-   |            valid arguments are "address", "kernel_address", "cfi", "kcfi", "memory", "memtag", "shadow_call_stack", "thread", "hwaddress", "kernel_hwaddress" or "realtime"
+error E0539: malformed `sanitize` attribute input
+ at $DIR/invalid-sanitize.rs:4:3
+  on line 4, column 12: valid arguments are "address", "kernel_address", "cfi", "kcfi", "memory", "memtag", "shadow_call_stack", "thread", "hwaddress", "kernel_hwaddress" or "realtime"
 
 error: multiple `sanitize` attributes
-  --> $DIR/invalid-sanitize.rs:8:1
-   |
-LL | #[sanitize(address = "off")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/invalid-sanitize.rs:8:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/invalid-sanitize.rs:7:1
-   |
-LL | #[sanitize(address = "off")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/invalid-sanitize.rs:7:1
 
 error: multiple `sanitize` attributes
-  --> $DIR/invalid-sanitize.rs:12:1
-   |
-LL | #[sanitize(address = "off")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/invalid-sanitize.rs:12:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/invalid-sanitize.rs:11:1
-   |
-LL | #[sanitize(address = "on")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/invalid-sanitize.rs:11:1
 
-error[E0539]: malformed `sanitize` attribute input
-  --> $DIR/invalid-sanitize.rs:15:3
-   |
-LL | #[sanitize(address = "bogus")]
-   |   ^^^^^^^^^^^^^^^^^^^-------^
-   |                      |
-   |                      valid arguments are "on" or "off"
+error E0539: malformed `sanitize` attribute input
+ at $DIR/invalid-sanitize.rs:15:3
+  on line 15, column 22: valid arguments are "on" or "off"
 
-error[E0539]: malformed `sanitize` attribute input
-  --> $DIR/invalid-sanitize.rs:18:3
-   |
-LL | #[sanitize = "off"]
-   |   ^^^^^^^^^-------
-   |            |
-   |            expected this to be a list
+error E0539: malformed `sanitize` attribute input
+ at $DIR/invalid-sanitize.rs:18:3
+  on line 18, column 12: expected this to be a list
 
-error[E0539]: malformed `sanitize` attribute input
-  --> $DIR/invalid-sanitize.rs:21:3
-   |
-LL | #[sanitize]
-   |   ^^^^^^^^ expected this to be a list
+error E0539: malformed `sanitize` attribute input
+ at $DIR/invalid-sanitize.rs:21:3: expected this to be a list
 
-error[E0539]: malformed `sanitize` attribute input
-  --> $DIR/invalid-sanitize.rs:24:3
-   |
-LL | #[sanitize(realtime = "on")]
-   |   ^^^^^^^^^^^^^^^^^^^^----^
-   |                       |
-   |                       valid arguments are "nonblocking", "blocking" or "caller"
+error E0539: malformed `sanitize` attribute input
+ at $DIR/invalid-sanitize.rs:24:3
+  on line 24, column 23: valid arguments are "nonblocking", "blocking" or "caller"
 
 warning: the async executor can run blocking code, without realtime sanitizer catching it
-  --> $DIR/invalid-sanitize.rs:27:1
-   |
-LL | #[sanitize(realtime = "nonblocking")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: `#[warn(rtsan_nonblocking_async)]` on by default
+ at $DIR/invalid-sanitize.rs:27:1
+note: `#[warn(rtsan_nonblocking_async)]` on by default
 
 warning: the async executor can run blocking code, without realtime sanitizer catching it
-  --> $DIR/invalid-sanitize.rs:32:9
-   |
-LL | ...   #[sanitize(realtime = "nonblocking")]
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/invalid-sanitize.rs:32:9
 
 warning: the async executor can run blocking code, without realtime sanitizer catching it
-  --> $DIR/invalid-sanitize.rs:37:9
-   |
-LL | ...   #[sanitize(realtime = "nonblocking")]
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/invalid-sanitize.rs:37:9
 
 error: aborting due to 7 previous errors; 3 warnings emitted
 

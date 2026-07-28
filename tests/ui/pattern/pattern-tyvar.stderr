@@ -1,13 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/pattern-tyvar.rs:5:18
-   |
-LL |     match t {
-   |           - this expression has type `Bar`
-LL |       Bar::T1(_, Some::<isize>(x)) => {
-   |                  ^^^^^^^^^^^^^^^^ expected `Option<Vec<isize>>`, found `Option<isize>`
-   |
-   = note: expected enum `Option<Vec<isize>>`
-              found enum `Option<isize>`
+error E0308: mismatched types
+ at $DIR/pattern-tyvar.rs:5:18: expected `Option<Vec<isize>>`, found `Option<isize>`
+  on line 4, column 11: this expression has type `Bar`
+note: expected enum `Option<Vec<isize>>`
+         found enum `Option<isize>`
 
 error: aborting due to 1 previous error
 

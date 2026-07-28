@@ -1,55 +1,25 @@
-error[E0432]: unresolved import `a::x`
-  --> $DIR/diagnostics-reexport.rs:12:9
-   |
-LL | pub use a::x;
-   |         ^^^-
-   |            |
-   |            no `x` in `a`
-   |
+error E0432: unresolved import `a::x`
+ at $DIR/diagnostics-reexport.rs:12:9
+  on line 12, column 12: no `x` in `a`
 note: found an item that was configured out
-  --> $DIR/diagnostics-reexport.rs:18:12
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-LL |     pub fn x() {}
-   |            ^
+ at $DIR/diagnostics-reexport.rs:18:12
+  on line 17, column 11: the item is gated here
 
-error[E0432]: unresolved imports `b::x`, `b::y`
-  --> $DIR/diagnostics-reexport.rs:22:13
-   |
-LL | pub use b::{x, y};
-   |             ^  ^ no `y` in `b`
-   |             |
-   |             no `x` in `b`
-   |
+error E0432: unresolved imports `b::x`, `b::y`
+ at $DIR/diagnostics-reexport.rs:22:13: no `x` in `b`
+  on line 22, column 16: no `y` in `b`
 note: found an item that was configured out
-  --> $DIR/diagnostics-reexport.rs:29:12
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-LL |     pub fn x() {}
-   |            ^
+ at $DIR/diagnostics-reexport.rs:29:12
+  on line 28, column 11: the item is gated here
 note: found an item that was configured out
-  --> $DIR/diagnostics-reexport.rs:32:12
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-LL |     pub fn y() {}
-   |            ^
+ at $DIR/diagnostics-reexport.rs:32:12
+  on line 31, column 11: the item is gated here
 
-error[E0425]: cannot find function `uwu` in module `inner`
-  --> $DIR/diagnostics-reexport.rs:38:12
-   |
-LL |     inner::uwu();
-   |            ^^^ not found in `inner`
-   |
+error E0425: cannot find function `uwu` in module `inner`
+ at $DIR/diagnostics-reexport.rs:38:12: not found in `inner`
 note: found an item that was configured out
-  --> $DIR/diagnostics-reexport.rs:8:20
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-LL |     pub use super::uwu;
-   |                    ^^^
+ at $DIR/diagnostics-reexport.rs:8:20
+  on line 7, column 11: the item is gated here
 
 error: aborting due to 3 previous errors
 

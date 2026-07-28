@@ -1,8 +1,5 @@
-error[E0030]: lower bound for range pattern must be less than or equal to upper bound
-  --> $DIR/E0030.rs:3:9
-   |
-LL |         1000 ..= 5 => {}
-   |         ^^^^^^^^^^ lower bound larger than upper bound
+error E0030: lower bound for range pattern must be less than or equal to upper bound
+ at $DIR/E0030.rs:3:9: lower bound larger than upper bound
 
 error: aborting due to 1 previous error
 

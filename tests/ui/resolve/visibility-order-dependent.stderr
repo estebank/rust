@@ -1,14 +1,8 @@
-error[E0742]: visibilities can only be restricted to ancestor modules
-  --> $DIR/visibility-order-dependent.rs:5:12
-   |
-LL |     pub(in crate::bar) struct Foo;
-   |            ^^^^^^^^^^
+error E0742: visibilities can only be restricted to ancestor modules
+ at $DIR/visibility-order-dependent.rs:5:12
 
-error[E0742]: visibilities can only be restricted to ancestor modules
-  --> $DIR/visibility-order-dependent.rs:10:12
-   |
-LL |     pub(in crate::foo) struct Bar;
-   |            ^^^^^^^^^^
+error E0742: visibilities can only be restricted to ancestor modules
+ at $DIR/visibility-order-dependent.rs:10:12
 
 error: aborting due to 2 previous errors
 

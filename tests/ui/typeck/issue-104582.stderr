@@ -1,26 +1,12 @@
 error: invalid `?` in type
-  --> $DIR/issue-104582.rs:2:30
-   |
-LL |     let my_var: String(String?);
-   |                              ^ `?` is only allowed on expressions, not types
-   |
+ at $DIR/issue-104582.rs:2:30: `?` is only allowed on expressions, not types
 help: if you meant to express that the type might not contain a value, use the `Option` wrapper type
-   |
-LL -     let my_var: String(String?);
-LL +     let my_var: String(Option<String>);
-   |
+ on line 2, column 23, add `Option<`
 
-error[E0214]: parenthesized type parameters may only be used with a `Fn` trait
-  --> $DIR/issue-104582.rs:2:17
-   |
-LL |     let my_var: String(String?);
-   |                 ^^^^^^^^^^^^^^^ only `Fn` traits may use parentheses
-   |
+error E0214: parenthesized type parameters may only be used with a `Fn` trait
+ at $DIR/issue-104582.rs:2:17: only `Fn` traits may use parentheses
 help: use angle brackets instead
-   |
-LL -     let my_var: String(String?);
-LL +     let my_var: String<String?>;
-   |
+ on line 2, column 22, replace with `<`
 
 error: aborting due to 2 previous errors
 

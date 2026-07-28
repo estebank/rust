@@ -1,13 +1,8 @@
-error[E0072]: recursive type `Foo` has infinite size
-  --> $DIR/issue-17431-4.rs:3:1
-   |
-LL | struct Foo<T> { foo: Option<Option<Foo<T>>>, marker: marker::PhantomData<T> }
-   | ^^^^^^^^^^^^^                      ------ recursive without indirection
-   |
+error E0072: recursive type `Foo` has infinite size
+ at $DIR/issue-17431-4.rs:3:1
+  on line 3, column 36: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL | struct Foo<T> { foo: Option<Option<Box<Foo<T>>>>, marker: marker::PhantomData<T> }
-   |                                    ++++      +
+ on line 3, column 35, add `Box<`
 
 error: aborting due to 1 previous error
 

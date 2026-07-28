@@ -1,22 +1,11 @@
-error[E0433]: cannot find `linux` in `crate`
-  --> $DIR/path-suggestion-duplicated-crate-keyword.rs:10:33
-   |
-LL |                 let _x = crate::linux::system::Y;
-   |                                 ^^^^^ unresolved import
-   |
+error E0433: cannot find `linux` in `crate`
+ at $DIR/path-suggestion-duplicated-crate-keyword.rs:10:33: unresolved import
 help: a similar path exists
-   |
-LL |                 let _x = crate::unix::linux::system::Y;
-   |                                 ++++++
+ on line 10, column 32, replace with `unix::linux`
 help: consider importing this module
-   |
-LL +             use unix::linux::system;
-   |
+ on line 9, column 12, add `use unix::linux::system;`
 help: if you import `system`, refer to it directly
-   |
-LL -                 let _x = crate::linux::system::Y;
-LL +                 let _x = system::Y;
-   |
+ on line 10, column 25
 
 error: aborting due to 1 previous error
 

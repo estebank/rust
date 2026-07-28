@@ -1,14 +1,8 @@
 error: unexpected token: keyword `fn`
-  --> <crate attribute>:1:23
-   |
-LL | #![feature(yeet_expr)]fn main(){}#[inline]
-   |                       ^^ unexpected token after this
+ at <crate attribute>:1:23: unexpected token after this
 
-error[E0601]: `main` function not found in crate `injection`
-  --> $DIR/injection.rs:3:12
-   |
-LL | fn foo() {}
-   |            ^ consider adding a `main` function to `$DIR/injection.rs`
+error E0601: `main` function not found in crate `injection`
+ at $DIR/injection.rs:3:12: consider adding a `main` function to `$DIR/injection.rs`
 
 error: aborting due to 2 previous errors
 

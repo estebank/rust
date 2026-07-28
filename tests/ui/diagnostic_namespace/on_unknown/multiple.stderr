@@ -1,41 +1,19 @@
-error[E0432]: the same message
-  --> $DIR/multiple.rs:21:5
-   |
-LL |     x::Bar,
-   |     ^^^---
-   |        |
-   |        label x
-...
-LL |     y::Foo,
-   |     ^^^---
-   |        |
-   |        label y
-LL |
-LL |     z::Baz,
-   |     ^^^---
-   |        |
-   |        no `Baz` in `z`
-   |
-   = note: unresolved imports `x::Bar`, `y::Foo`, `z::Baz`
-   = note: note x
-   = note: note y
-   = note: note z
+error E0432: the same message
+ at $DIR/multiple.rs:21:5
+  on line 21, column 8: label x
+  on line 28, column 8: label y
+  on line 30, column 8: no `Baz` in `z`
+note: unresolved imports `x::Bar`, `y::Foo`, `z::Baz`
+note: note x
+note: note y
+note: note z
 
-error[E0432]: unresolved imports `different::nothing`, `x::Buz`
-  --> $DIR/multiple.rs:35:5
-   |
-LL |     different::nothing,
-   |     ^^^^^^^^^^^-------
-   |                |
-   |                label different
-...
-LL |     x::Buz,
-   |     ^^^---
-   |        |
-   |        label x
-   |
-   = note: note different
-   = note: note x
+error E0432: unresolved imports `different::nothing`, `x::Buz`
+ at $DIR/multiple.rs:35:5
+  on line 35, column 16: label different
+  on line 40, column 8: label x
+note: note different
+note: note x
 
 error: aborting due to 2 previous errors
 

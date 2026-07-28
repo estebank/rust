@@ -1,16 +1,8 @@
-error[E0506]: cannot assign to `*opt` because it is borrowed
-  --> $DIR/nll-problem-case-3-issue-112087.rs:23:5
-   |
-LL | fn issue_112087<'a>(opt: &'a mut Option<i32>, b: bool) -> Result<&'a mut Option<i32>, &'a mut i32> {
-   |                 -- lifetime `'a` defined here
-LL |     if let Some(v) = opt {
-   |                 - `*opt` is borrowed here
-LL |         if b {
-LL |             return Err(v);
-   |                    ------ returning this value requires that `opt.0` is borrowed for `'a`
-...
-LL |     *opt = None;
-   |     ^^^^^^^^^^^ `*opt` is assigned to here but it was already borrowed
+error E0506: cannot assign to `*opt` because it is borrowed
+ at $DIR/nll-problem-case-3-issue-112087.rs:23:5: `*opt` is assigned to here but it was already borrowed
+  on line 16, column 17: lifetime `'a` defined here
+  on line 17, column 17: `*opt` is borrowed here
+  on line 19, column 20: returning this value requires that `opt.0` is borrowed for `'a`
 
 error: aborting due to 1 previous error
 

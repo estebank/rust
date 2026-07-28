@@ -1,34 +1,16 @@
-error[E0207]: the type parameter `V` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/unconstrained-param-default-available.rs:6:6
-   |
-LL | impl<V> MyTrait for S {}
-   |      ^ unconstrained type parameter
-   |
+error E0207: the type parameter `V` is not constrained by the impl trait, self type, or predicates
+ at $DIR/unconstrained-param-default-available.rs:6:6: unconstrained type parameter
 help: either remove the unused type parameter `V`
-   |
-LL - impl<V> MyTrait for S {}
-LL + impl MyTrait for S {}
-   |
+ on line 6, column 4
 help: or use it
-   |
-LL | impl<V> MyTrait for S<V> {}
-   |                      +++
+ on line 6, column 21, add `<V>`
 
-error[E0207]: the type parameter `V` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/unconstrained-param-default-available.rs:13:9
-   |
-LL | impl<T, V> MyTrait for S2<T> {}
-   |         ^ unconstrained type parameter
-   |
+error E0207: the type parameter `V` is not constrained by the impl trait, self type, or predicates
+ at $DIR/unconstrained-param-default-available.rs:13:9: unconstrained type parameter
 help: either remove the unused type parameter `V`
-   |
-LL - impl<T, V> MyTrait for S2<T> {}
-LL + impl<T> MyTrait for S2<T> {}
-   |
+ on line 13, column 6
 help: or use it
-   |
-LL | impl<T, V> MyTrait for S2<T, V> {}
-   |                            +++
+ on line 13, column 27, add `, V`
 
 error: aborting due to 2 previous errors
 

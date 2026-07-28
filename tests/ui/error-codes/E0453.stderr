@@ -1,11 +1,6 @@
-error[E0453]: allow(non_snake_case) incompatible with previous forbid
-  --> $DIR/E0453.rs:3:9
-   |
-LL | #![forbid(non_snake_case)]
-   |           -------------- `forbid` level set here
-LL |
-LL | #[allow(non_snake_case)]
-   |         ^^^^^^^^^^^^^^ overruled by previous forbid
+error E0453: allow(non_snake_case) incompatible with previous forbid
+ at $DIR/E0453.rs:3:9: overruled by previous forbid
+  on line 1, column 11: `forbid` level set here
 
 error: aborting due to 1 previous error
 

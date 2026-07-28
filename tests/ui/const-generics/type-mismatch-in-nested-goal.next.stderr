@@ -1,44 +1,21 @@
 error: the constant `N` is not of type `bool`
-  --> $DIR/type-mismatch-in-nested-goal.rs:9:50
-   |
-LL | fn needs_a<const N: usize>(_: [u8; N]) where (): A<N> {}
-   |                                                  ^^^^ expected `bool`, found `usize`
-   |
+ at $DIR/type-mismatch-in-nested-goal.rs:9:50: expected `bool`, found `usize`
 note: required by a const generic parameter in `A`
-  --> $DIR/type-mismatch-in-nested-goal.rs:5:9
-   |
-LL | trait A<const B: bool> {}
-   |         ^^^^^^^^^^^^^ required by this const generic parameter in `A`
+ at $DIR/type-mismatch-in-nested-goal.rs:5:9: required by this const generic parameter in `A`
 
 error: the constant `true` is not of type `usize`
-  --> $DIR/type-mismatch-in-nested-goal.rs:13:13
-   |
-LL |     needs_a([]);
-   |     ------- ^^ expected `usize`, found `bool`
-   |     |
-   |     required by a bound introduced by this call
-   |
+ at $DIR/type-mismatch-in-nested-goal.rs:13:13: expected `usize`, found `bool`
+  on line 13: required by a bound introduced by this call
 note: required by a const generic parameter in `needs_a`
-  --> $DIR/type-mismatch-in-nested-goal.rs:9:12
-   |
-LL | fn needs_a<const N: usize>(_: [u8; N]) where (): A<N> {}
-   |            ^^^^^^^^^^^^^^ required by this const generic parameter in `needs_a`
+ at $DIR/type-mismatch-in-nested-goal.rs:9:12: required by this const generic parameter in `needs_a`
 
-error[E0308]: mismatched types
-  --> $DIR/type-mismatch-in-nested-goal.rs:13:13
-   |
-LL |     needs_a([]);
-   |     ------- ^^ expected an array with a size of true, found one with a size of 0
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected array `[u8; true]`
-              found array `[_; 0]`
+error E0308: mismatched types
+ at $DIR/type-mismatch-in-nested-goal.rs:13:13: expected an array with a size of true, found one with a size of 0
+  on line 13: arguments to this function are incorrect
+note: expected array `[u8; true]`
+         found array `[_; 0]`
 note: function defined here
-  --> $DIR/type-mismatch-in-nested-goal.rs:9:4
-   |
-LL | fn needs_a<const N: usize>(_: [u8; N]) where (): A<N> {}
-   |    ^^^^^^^                 ----------
+ at $DIR/type-mismatch-in-nested-goal.rs:9:4
 
 error: aborting due to 3 previous errors
 

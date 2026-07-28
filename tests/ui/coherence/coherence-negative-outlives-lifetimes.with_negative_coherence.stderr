@@ -1,12 +1,7 @@
-error[E0119]: conflicting implementations of trait `MyTrait<'_>` for type `&_`
-  --> $DIR/coherence-negative-outlives-lifetimes.rs:18:1
-   |
-LL | impl<'a, T: MyPredicate<'a>> MyTrait<'a> for T {}
-   | ---------------------------------------------- first implementation here
-LL | impl<'a, T> MyTrait<'a> for &'a T {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `&_`
-   |
-   = note: downstream crates may implement trait `MyPredicate<'_>` for type `&_`
+error E0119: conflicting implementations of trait `MyTrait<'_>` for type `&_`
+ at $DIR/coherence-negative-outlives-lifetimes.rs:18:1: conflicting implementation for `&_`
+  on line 17: first implementation here
+note: downstream crates may implement trait `MyPredicate<'_>` for type `&_`
 
 error: aborting due to 1 previous error
 

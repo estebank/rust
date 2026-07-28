@@ -1,34 +1,18 @@
 error: duplicate matcher binding
-  --> $DIR/macro-multiple-matcher-bindings.rs:7:16
-   |
-LL |     ($a:ident, $a:ident) => {};
-   |      --------  ^^^^^^^^ duplicate binding
-   |      |
-   |      previous binding
+ at $DIR/macro-multiple-matcher-bindings.rs:7:16: duplicate binding
+  on line 7, column 6: previous binding
 
 error: duplicate matcher binding
-  --> $DIR/macro-multiple-matcher-bindings.rs:8:16
-   |
-LL |     ($a:ident, $a:path) => {};
-   |      --------  ^^^^^^^ duplicate binding
-   |      |
-   |      previous binding
+ at $DIR/macro-multiple-matcher-bindings.rs:8:16: duplicate binding
+  on line 8, column 6: previous binding
 
 error: duplicate matcher binding
-  --> $DIR/macro-multiple-matcher-bindings.rs:17:18
-   |
-LL |     ($a:ident, $($a:ident),*) => {};
-   |      --------    ^^^^^^^^ duplicate binding
-   |      |
-   |      previous binding
+ at $DIR/macro-multiple-matcher-bindings.rs:17:18: duplicate binding
+  on line 17, column 6: previous binding
 
 error: duplicate matcher binding
-  --> $DIR/macro-multiple-matcher-bindings.rs:18:25
-   |
-LL |     ($($a:ident)+ # $($($a:path),+);*) => {};
-   |        --------         ^^^^^^^ duplicate binding
-   |        |
-   |        previous binding
+ at $DIR/macro-multiple-matcher-bindings.rs:18:25: duplicate binding
+  on line 18, column 8: previous binding
 
 error: aborting due to 4 previous errors
 

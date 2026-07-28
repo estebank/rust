@@ -1,14 +1,8 @@
 error: pattern not supported in pattern types
-  --> $DIR/unimplemented_pat.rs:8:44
-   |
-LL | type Always = pattern_type!(Option<u32> is Some(_));
-   |                                            ^^^^^^^
+ at $DIR/unimplemented_pat.rs:8:44
 
 error: pattern not supported in pattern types
-  --> $DIR/unimplemented_pat.rs:11:45
-   |
-LL | type Binding = pattern_type!(Option<u32> is x);
-   |                                             ^
+ at $DIR/unimplemented_pat.rs:11:45
 
 error: aborting due to 2 previous errors
 

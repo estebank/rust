@@ -1,73 +1,38 @@
 warning: trait objects without an explicit `dyn` are deprecated
-  --> $DIR/missing-for-type-in-impl.rs:9:6
-   |
-LL | impl Foo<i64> {
-   |      ^^^^^^^^
-   |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
-   = note: `#[warn(bare_trait_objects)]` (part of `#[warn(rust_2021_compatibility)]`) on by default
+ at $DIR/missing-for-type-in-impl.rs:9:6
+warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
+note: `#[warn(bare_trait_objects)]` (part of `#[warn(rust_2021_compatibility)]`) on by default
 help: if this is a dyn-compatible trait, use `dyn`
-   |
-LL | impl dyn Foo<i64> {
-   |      +++
+ on line 9, column 5, add `dyn `
 help: you might have intended to implement this trait for a given type
-   |
-LL | impl Foo<i64> for /* Type */ {
-   |               ++++++++++++++
+ on line 9, column 13, add ` for /* Type */`
 
 warning: trait objects without an explicit `dyn` are deprecated
-  --> $DIR/missing-for-type-in-impl.rs:9:6
-   |
-LL | impl Foo<i64> {
-   |      ^^^^^^^^
-   |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/missing-for-type-in-impl.rs:9:6
+warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: if this is a dyn-compatible trait, use `dyn`
-   |
-LL | impl dyn Foo<i64> {
-   |      +++
+ on line 9, column 5, add `dyn `
 help: you might have intended to implement this trait for a given type
-   |
-LL | impl Foo<i64> for /* Type */ {
-   |               ++++++++++++++
+ on line 9, column 13, add ` for /* Type */`
 
-error[E0038]: the trait `Foo` is not dyn compatible
-  --> $DIR/missing-for-type-in-impl.rs:9:6
-   |
-LL | impl Foo<i64> {
-   |      ^^^^^^^^ `Foo` is not dyn compatible
-   |
+error E0038: the trait `Foo` is not dyn compatible
+ at $DIR/missing-for-type-in-impl.rs:9:6: `Foo` is not dyn compatible
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/missing-for-type-in-impl.rs:5:8
-   |
-LL | trait Foo<T> {
-   |       --- this trait is not dyn compatible...
-LL |     fn id(me: T) -> T;
-   |        ^^ ...because associated function `id` has no `self` parameter
+ at $DIR/missing-for-type-in-impl.rs:5:8: ...because associated function `id` has no `self` parameter
+  on line 4, column 7: this trait is not dyn compatible...
 help: consider turning `id` into a method by giving it a `&self` argument
-   |
-LL |     fn id(&self, me: T) -> T;
-   |           ++++++
+ on line 5, column 10, add `&self, `
 help: alternatively, consider constraining `id` so it does not apply to trait objects
-   |
-LL |     fn id(me: T) -> T where Self: Sized;
-   |                       +++++++++++++++++
+ on line 5, column 21, add ` where Self: Sized`
 
-error[E0277]: the trait bound `i64: Foo<i64>` is not satisfied
-  --> $DIR/missing-for-type-in-impl.rs:20:19
-   |
-LL |     let x: i64 = <i64 as Foo<i64>>::id(10);
-   |                   ^^^ the trait `Foo<i64>` is not implemented for `i64`
-   |
+error E0277: the trait bound `i64: Foo<i64>` is not satisfied
+ at $DIR/missing-for-type-in-impl.rs:20:19: the trait `Foo<i64>` is not implemented for `i64`
 help: this trait has no implementations, consider adding one
-  --> $DIR/missing-for-type-in-impl.rs:4:1
-   |
-LL | trait Foo<T> {
-   | ^^^^^^^^^^^^
+ at $DIR/missing-for-type-in-impl.rs:4:1
 
 error: aborting due to 2 previous errors; 2 warnings emitted
 

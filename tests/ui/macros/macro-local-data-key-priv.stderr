@@ -1,14 +1,7 @@
-error[E0603]: constant `baz` is private
-  --> $DIR/macro-local-data-key-priv.rs:8:10
-   |
-LL |     bar::baz.with(|_| ());
-   |          ^^^ private constant
-   |
+error E0603: constant `baz` is private
+ at $DIR/macro-local-data-key-priv.rs:8:10: private constant
 note: the constant `baz` is defined here
-  --> $DIR/macro-local-data-key-priv.rs:4:5
-   |
-LL |     thread_local!(static baz: f64 = 0.0);
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/macro-local-data-key-priv.rs:4:5
 
 error: aborting due to 1 previous error
 

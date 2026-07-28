@@ -1,10 +1,6 @@
-error[E0432]: unresolved import `spam`
-  --> $DIR/import-from-missing-star-2.rs:6:9
-   |
-LL |     use spam::*;
-   |         ^^^^ use of unresolved module or unlinked crate `spam`
-   |
-   = help: you might be missing a crate named `spam`
+error E0432: unresolved import `spam`
+ at $DIR/import-from-missing-star-2.rs:6:9: use of unresolved module or unlinked crate `spam`
+help: you might be missing a crate named `spam`
 
 error: aborting due to 1 previous error
 

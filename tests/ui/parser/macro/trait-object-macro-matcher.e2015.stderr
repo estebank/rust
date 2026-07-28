@@ -1,31 +1,16 @@
 error: lifetimes must be followed by `+` to form a trait object type
-  --> $DIR/trait-object-macro-matcher.rs:17:8
-   |
-LL |     m!('static);
-   |        ^^^^^^^
-   |
+ at $DIR/trait-object-macro-matcher.rs:17:8
 help: consider adding a trait bound after the potential lifetime bound
-   |
-LL |     m!('static + /* Trait */);
-   |                +++++++++++++
+ on line 17, column 14, add ` + /* Trait */`
 
 error: lifetimes must be followed by `+` to form a trait object type
-  --> $DIR/trait-object-macro-matcher.rs:17:8
-   |
-LL |     m!('static);
-   |        ^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/trait-object-macro-matcher.rs:17:8
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: consider adding a trait bound after the potential lifetime bound
-   |
-LL |     m!('static + /* Trait */);
-   |                +++++++++++++
+ on line 17, column 14, add ` + /* Trait */`
 
-error[E0224]: at least one trait is required for an object type
-  --> $DIR/trait-object-macro-matcher.rs:17:8
-   |
-LL |     m!('static);
-   |        ^^^^^^^
+error E0224: at least one trait is required for an object type
+ at $DIR/trait-object-macro-matcher.rs:17:8
 
 error: aborting due to 3 previous errors
 

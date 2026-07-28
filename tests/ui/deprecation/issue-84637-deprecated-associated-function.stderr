@@ -1,43 +1,19 @@
 error: use of deprecated method `core::str::<impl str>::trim_left`: superseded by `trim_start`
-  --> $DIR/issue-84637-deprecated-associated-function.rs:6:21
-   |
-LL |     let _foo = str::trim_left("   aoeu");
-   |                     ^^^^^^^^^
-   |
+ at $DIR/issue-84637-deprecated-associated-function.rs:6:21
 note: the lint level is defined here
-  --> $DIR/issue-84637-deprecated-associated-function.rs:3:9
-   |
-LL | #![deny(deprecated)]
-   |         ^^^^^^^^^^
+ at $DIR/issue-84637-deprecated-associated-function.rs:3:9
 help: replace the use of the deprecated method
-   |
-LL -     let _foo = str::trim_left("   aoeu");
-LL +     let _foo = str::trim_start("   aoeu");
-   |
+ on line 6, column 20, replace with `trim_start`
 
 error: use of deprecated method `core::str::<impl str>::trim_left`: superseded by `trim_start`
-  --> $DIR/issue-84637-deprecated-associated-function.rs:8:26
-   |
-LL |     let _bar = "   aoeu".trim_left();
-   |                          ^^^^^^^^^
-   |
+ at $DIR/issue-84637-deprecated-associated-function.rs:8:26
 help: replace the use of the deprecated method
-   |
-LL -     let _bar = "   aoeu".trim_left();
-LL +     let _bar = "   aoeu".trim_start();
-   |
+ on line 8, column 25, replace with `trim_start`
 
 error: use of deprecated method `std::slice::<impl [T]>::connect`: renamed to join
-  --> $DIR/issue-84637-deprecated-associated-function.rs:10:27
-   |
-LL |     let _baz = ["a", "b"].connect(" ");
-   |                           ^^^^^^^
-   |
+ at $DIR/issue-84637-deprecated-associated-function.rs:10:27
 help: replace the use of the deprecated method
-   |
-LL -     let _baz = ["a", "b"].connect(" ");
-LL +     let _baz = ["a", "b"].join(" ");
-   |
+ on line 10, column 26, replace with `join`
 
 error: aborting due to 3 previous errors
 

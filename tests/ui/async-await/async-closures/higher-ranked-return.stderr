@@ -1,14 +1,7 @@
 error: lifetime may not live long enough
-  --> $DIR/higher-ranked-return.rs:11:46
-   |
-LL |           let x = async move |x: &str| -> &str {
-   |  ________________________________-________-____^
-   | |                                |        |
-   | |                                |        let's call the lifetime of this reference `'2`
-   | |                                let's call the lifetime of this reference `'1`
-LL | |             x
-LL | |         };
-   | |_________^ returning this value requires that `'1` must outlive `'2`
+ at $DIR/higher-ranked-return.rs:11:46 to 13:10: returning this value requires that `'1` must outlive `'2`
+  on line 11, column 32: let's call the lifetime of this reference `'1`
+  on line 11, column 41: let's call the lifetime of this reference `'2`
 
 error: aborting due to 1 previous error
 

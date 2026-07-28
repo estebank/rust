@@ -1,47 +1,22 @@
-error[E0597]: `c` does not live long enough
-  --> $DIR/method-call.rs:36:34
-   |
-LL |     let c = 66;
-   |         - binding `c` declared here
-LL |     a.method::<&'static u32>(b,  &c);
-   |     -----------------------------^^-
-   |     |                            |
-   |     |                            borrowed value does not live long enough
-   |     argument requires that `c` is borrowed for `'static`
-LL | }
-   | - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/method-call.rs:36:34: borrowed value does not live long enough
+  on line 35, column 9: binding `c` declared here
+  on line 36: argument requires that `c` is borrowed for `'static`
+  on line 37: `c` dropped here while still borrowed
 
-error[E0597]: `c` does not live long enough
-  --> $DIR/method-call.rs:43:29
-   |
-LL | fn annot_reference_named_lifetime<'a>(_d: &'a u32) {
-   |                                   -- lifetime `'a` defined here
-...
-LL |     let c = 66;
-   |         - binding `c` declared here
-LL |     a.method::<&'a u32>(b,  &c);
-   |     ------------------------^^-
-   |     |                       |
-   |     |                       borrowed value does not live long enough
-   |     argument requires that `c` is borrowed for `'a`
-LL | }
-   | - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/method-call.rs:43:29: borrowed value does not live long enough
+  on line 39, column 35: lifetime `'a` defined here
+  on line 42, column 9: binding `c` declared here
+  on line 43: argument requires that `c` is borrowed for `'a`
+  on line 44: `c` dropped here while still borrowed
 
-error[E0597]: `c` does not live long enough
-  --> $DIR/method-call.rs:57:33
-   |
-LL | fn annot_reference_named_lifetime_in_closure<'a>(_: &'a u32) {
-   |                                              -- lifetime `'a` defined here
-...
-LL |         let c = 66;
-   |             - binding `c` declared here
-LL |         a.method::<&'a u32>(b,  &c);
-   |         ------------------------^^-
-   |         |                       |
-   |         |                       borrowed value does not live long enough
-   |         argument requires that `c` is borrowed for `'a`
-LL |     };
-   |     - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/method-call.rs:57:33: borrowed value does not live long enough
+  on line 52, column 46: lifetime `'a` defined here
+  on line 56, column 13: binding `c` declared here
+  on line 57: argument requires that `c` is borrowed for `'a`
+  on line 58: `c` dropped here while still borrowed
 
 error: aborting due to 3 previous errors
 

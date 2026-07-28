@@ -1,38 +1,18 @@
-error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/try-on-option-diagnostics.rs:7:6
-   |
-LL | fn a_function() -> u32 {
-   | ---------------------- this function should return `Result` or `Option` to accept `?`
-LL |     let x: Option<u32> = None;
-LL |     x?;
-   |      ^ cannot use the `?` operator in a function that returns `u32`
+error E0277: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/try-on-option-diagnostics.rs:7:6: cannot use the `?` operator in a function that returns `u32`
+  on line 5: this function should return `Result` or `Option` to accept `?`
 
-error[E0277]: the `?` operator can only be used in a closure that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/try-on-option-diagnostics.rs:14:10
-   |
-LL |     let a_closure = || {
-   |                     -- this function should return `Result` or `Option` to accept `?`
-LL |         let x: Option<u32> = None;
-LL |         x?;
-   |          ^ cannot use the `?` operator in a closure that returns `{integer}`
+error E0277: the `?` operator can only be used in a closure that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/try-on-option-diagnostics.rs:14:10: cannot use the `?` operator in a closure that returns `{integer}`
+  on line 12, column 21: this function should return `Result` or `Option` to accept `?`
 
-error[E0277]: the `?` operator can only be used in a method that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/try-on-option-diagnostics.rs:26:14
-   |
-LL |         fn a_method() {
-   |         ------------- this function should return `Result` or `Option` to accept `?`
-LL |             let x: Option<u32> = None;
-LL |             x?;
-   |              ^ cannot use the `?` operator in a method that returns `()`
+error E0277: the `?` operator can only be used in a method that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/try-on-option-diagnostics.rs:26:14: cannot use the `?` operator in a method that returns `()`
+  on line 24: this function should return `Result` or `Option` to accept `?`
 
-error[E0277]: the `?` operator can only be used in a trait method that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/try-on-option-diagnostics.rs:39:14
-   |
-LL |         fn a_trait_method() {
-   |         ------------------- this function should return `Result` or `Option` to accept `?`
-LL |             let x: Option<u32> = None;
-LL |             x?;
-   |              ^ cannot use the `?` operator in a trait method that returns `()`
+error E0277: the `?` operator can only be used in a trait method that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/try-on-option-diagnostics.rs:39:14: cannot use the `?` operator in a trait method that returns `()`
+  on line 37: this function should return `Result` or `Option` to accept `?`
 
 error: aborting due to 4 previous errors
 

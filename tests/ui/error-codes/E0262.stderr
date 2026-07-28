@@ -1,8 +1,5 @@
-error[E0262]: invalid lifetime parameter name: `'static`
-  --> $DIR/E0262.rs:1:8
-   |
-LL | fn foo<'static>(x: &'static str) { }
-   |        ^^^^^^^ 'static is a reserved lifetime name
+error E0262: invalid lifetime parameter name: `'static`
+ at $DIR/E0262.rs:1:8: 'static is a reserved lifetime name
 
 error: aborting due to 1 previous error
 

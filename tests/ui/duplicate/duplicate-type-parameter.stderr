@@ -1,58 +1,30 @@
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate-type-parameter.rs:1:12
-   |
-LL | type Foo<T,T> = Option<T>;
-   |          - ^ already used
-   |          |
-   |          first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate-type-parameter.rs:1:12: already used
+  on line 1, column 10: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate-type-parameter.rs:4:14
-   |
-LL | struct Bar<T,T>(T);
-   |            - ^ already used
-   |            |
-   |            first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate-type-parameter.rs:4:14: already used
+  on line 4, column 12: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate-type-parameter.rs:7:14
-   |
-LL | struct Baz<T,T> {
-   |            - ^ already used
-   |            |
-   |            first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate-type-parameter.rs:7:14: already used
+  on line 7, column 12: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate-type-parameter.rs:12:12
-   |
-LL | enum Boo<T,T> {
-   |          - ^ already used
-   |          |
-   |          first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate-type-parameter.rs:12:12: already used
+  on line 12, column 10: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate-type-parameter.rs:18:11
-   |
-LL | fn quux<T,T>(x: T) {}
-   |         - ^ already used
-   |         |
-   |         first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate-type-parameter.rs:18:11: already used
+  on line 18, column 9: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate-type-parameter.rs:21:13
-   |
-LL | trait Qux<T,T> {}
-   |           - ^ already used
-   |           |
-   |           first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate-type-parameter.rs:21:13: already used
+  on line 21, column 11: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate-type-parameter.rs:24:8
-   |
-LL | impl<T,T> Qux<T,T> for Option<T> {}
-   |      - ^ already used
-   |      |
-   |      first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate-type-parameter.rs:24:8: already used
+  on line 24, column 6: first use of `T`
 
 error: aborting due to 7 previous errors
 

@@ -1,91 +1,39 @@
 error: unnecessary qualification
-  --> $DIR/lint-qualification.rs:13:5
-   |
-LL |     foo::bar();
-   |     ^^^^^^^^
-   |
+ at $DIR/lint-qualification.rs:13:5
 note: the lint level is defined here
-  --> $DIR/lint-qualification.rs:3:9
-   |
-LL | #![deny(unused_qualifications)]
-   |         ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lint-qualification.rs:3:9
 help: remove the unnecessary path segments
-   |
-LL -     foo::bar();
-LL +     bar();
-   |
+ on line 13, column 4
 
 error: unnecessary qualification
-  --> $DIR/lint-qualification.rs:14:5
-   |
-LL |     crate::foo::bar();
-   |     ^^^^^^^^^^^^^^^
-   |
+ at $DIR/lint-qualification.rs:14:5
 help: remove the unnecessary path segments
-   |
-LL -     crate::foo::bar();
-LL +     bar();
-   |
+ on line 14, column 4
 
 error: unnecessary qualification
-  --> $DIR/lint-qualification.rs:19:13
-   |
-LL |     let _ = std::string::String::new();
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/lint-qualification.rs:19:13
 help: remove the unnecessary path segments
-   |
-LL -     let _ = std::string::String::new();
-LL +     let _ = String::new();
-   |
+ on line 19, column 12
 
 error: unnecessary qualification
-  --> $DIR/lint-qualification.rs:21:12
-   |
-LL |     let _: std::vec::Vec<String> = std::vec::Vec::<String>::new();
-   |            ^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/lint-qualification.rs:21:12
 help: remove the unnecessary path segments
-   |
-LL -     let _: std::vec::Vec<String> = std::vec::Vec::<String>::new();
-LL +     let _: Vec<String> = std::vec::Vec::<String>::new();
-   |
+ on line 21, column 11
 
 error: unnecessary qualification
-  --> $DIR/lint-qualification.rs:21:36
-   |
-LL |     let _: std::vec::Vec<String> = std::vec::Vec::<String>::new();
-   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/lint-qualification.rs:21:36
 help: remove the unnecessary path segments
-   |
-LL -     let _: std::vec::Vec<String> = std::vec::Vec::<String>::new();
-LL +     let _: std::vec::Vec<String> = Vec::<String>::new();
-   |
+ on line 21, column 35
 
 error: unused import: `std::fmt`
-  --> $DIR/lint-qualification.rs:25:9
-   |
-LL |     use std::fmt;
-   |         ^^^^^^^^
-   |
+ at $DIR/lint-qualification.rs:25:9
 note: the lint level is defined here
-  --> $DIR/lint-qualification.rs:4:9
-   |
-LL | #![deny(unused_imports)]
-   |         ^^^^^^^^^^^^^^
+ at $DIR/lint-qualification.rs:4:9
 
 error: unnecessary qualification
-  --> $DIR/lint-qualification.rs:30:13
-   |
-LL |     let _ = <bool as std::default::Default>::default(); // issue #121999 (modified)
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/lint-qualification.rs:30:13
 help: remove the unnecessary path segments
-   |
-LL -     let _ = <bool as std::default::Default>::default(); // issue #121999 (modified)
-LL +     let _ = <bool as Default>::default(); // issue #121999 (modified)
-   |
+ on line 30, column 21
 
 error: aborting due to 7 previous errors
 

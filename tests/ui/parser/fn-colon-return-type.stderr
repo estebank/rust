@@ -1,14 +1,7 @@
 error: return types are denoted using `->`
-  --> $DIR/fn-colon-return-type.rs:1:15
-   |
-LL | fn foo(x: i32): i32 {
-   |               ^
-   |
+ at $DIR/fn-colon-return-type.rs:1:15
 help: use `->` instead
-   |
-LL - fn foo(x: i32): i32 {
-LL + fn foo(x: i32) -> i32 {
-   |
+ on line 1, column 14, replace with ` -> `
 
 error: aborting due to 1 previous error
 

@@ -1,21 +1,11 @@
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/coerce-in-may-coerce.rs:17:5
-   |
-LL |     arg_error((), || ());
-   |     ^^^^^^^^^ --  ----- expected `()`, found `{closure@$DIR/coerce-in-may-coerce.rs:17:19: 17:21}`
-   |               |
-   |               expected `fn()`, found `()`
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/coerce-in-may-coerce.rs:17:5
+  on line 17, column 15: expected `fn()`, found `()`
+  on line 17, column 19: expected `()`, found `{closure@$DIR/coerce-in-may-coerce.rs:17:19: 17:21}`
 note: function defined here
-  --> $DIR/coerce-in-may-coerce.rs:12:4
-   |
-LL | fn arg_error(x: <fn() as Mirror>::Assoc, y: ()) { todo!() }
-   |    ^^^^^^^^^
+ at $DIR/coerce-in-may-coerce.rs:12:4
 help: swap these arguments
-   |
-LL -     arg_error((), || ());
-LL +     arg_error(|| (), ());
-   |
+ on line 17, column 13, replace with `(|| (), ())`
 
 error: aborting due to 1 previous error
 

@@ -1,98 +1,46 @@
 error: expected `{`, found keyword `false`
-  --> $DIR/else-no-if.rs:7:12
-   |
-LL |     } else false {
-   |       ---- ^^^^^
-   |       |
-   |       expected an `if` or a block after this `else`
-   |
+ at $DIR/else-no-if.rs:7:12
+  on line 7, column 7: expected an `if` or a block after this `else`
 help: add an `if` if this is the condition of a chained `else if` statement
-   |
-LL |     } else if false {
-   |            ++
+ on line 7, column 11, add `if `
 
 error: expected `{`, found `falsy`
-  --> $DIR/else-no-if.rs:14:12
-   |
-LL |     } else falsy() {
-   |       ---- ^^^^^
-   |       |
-   |       expected an `if` or a block after this `else`
-   |
+ at $DIR/else-no-if.rs:14:12
+  on line 14, column 7: expected an `if` or a block after this `else`
 help: add an `if` if this is the condition of a chained `else if` statement
-   |
-LL |     } else if falsy() {
-   |            ++
+ on line 14, column 11, add `if `
 
 error: expected `{`, found `falsy`
-  --> $DIR/else-no-if.rs:21:12
-   |
-LL |     } else falsy();
-   |            ^^^^^ expected `{`
-   |
+ at $DIR/else-no-if.rs:21:12: expected `{`
 help: you might have meant to write this as part of a block
-   |
-LL |     } else { falsy() };
-   |            +         +
+ on line 21, column 11, add `{ `
 
 error: expected `{`, found keyword `loop`
-  --> $DIR/else-no-if.rs:27:12
-   |
-LL |     } else loop{}
-   |            ^^^^ expected `{`
-   |
+ at $DIR/else-no-if.rs:27:12: expected `{`
 help: you might have meant to write this as part of a block
-   |
-LL |     } else { loop{} }
-   |            +        +
+ on line 27, column 11, add `{ `
 
 error: expected `{`, found `falsy`
-  --> $DIR/else-no-if.rs:34:12
-   |
-LL |     } else falsy!() {
-   |       ---- ^^^^^
-   |       |
-   |       expected an `if` or a block after this `else`
-   |
+ at $DIR/else-no-if.rs:34:12
+  on line 34, column 7: expected an `if` or a block after this `else`
 help: add an `if` if this is the condition of a chained `else if` statement
-   |
-LL |     } else if falsy!() {
-   |            ++
+ on line 34, column 11, add `if `
 
 error: expected `{`, found `falsy`
-  --> $DIR/else-no-if.rs:41:12
-   |
-LL |     } else falsy!();
-   |            ^^^^^ expected `{`
-   |
+ at $DIR/else-no-if.rs:41:12: expected `{`
 help: you might have meant to write this as part of a block
-   |
-LL |     } else { falsy!() };
-   |            +          +
+ on line 41, column 11, add `{ `
 
 error: expected `{`, found `falsy`
-  --> $DIR/else-no-if.rs:47:12
-   |
-LL |     } else falsy! {} {
-   |       ---- ^^^^^
-   |       |
-   |       expected an `if` or a block after this `else`
-   |
+ at $DIR/else-no-if.rs:47:12
+  on line 47, column 7: expected an `if` or a block after this `else`
 help: add an `if` if this is the condition of a chained `else if` statement
-   |
-LL |     } else if falsy! {} {
-   |            ++
+ on line 47, column 11, add `if `
 
 error: expected `{`, found `falsy`
-  --> $DIR/else-no-if.rs:54:12
-   |
-LL |     } else falsy! {};
-   |            ^^^^^ expected `{`
-   |
+ at $DIR/else-no-if.rs:54:12: expected `{`
 help: you might have meant to write this as part of a block
-   |
-LL |     } else { falsy! {} };
-   |            +           +
+ on line 54, column 11, add `{ `
 
 error: aborting due to 8 previous errors
 

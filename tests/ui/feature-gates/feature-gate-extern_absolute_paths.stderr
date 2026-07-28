@@ -1,35 +1,16 @@
-error[E0432]: unresolved import `core`
-  --> $DIR/feature-gate-extern_absolute_paths.rs:2:5
-   |
-LL | use core::default;
-   |     ^^^^ you might be missing crate `core`
-   |
+error E0432: unresolved import `core`
+ at $DIR/feature-gate-extern_absolute_paths.rs:2:5: you might be missing crate `core`
 help: try using `std` instead of `core`
-   |
-LL - use core::default;
-LL + use std::default;
-   |
+ on line 2, column 4, replace with `std`
 
-error[E0433]: cannot find `core` in the crate root
-  --> $DIR/feature-gate-extern_absolute_paths.rs:5:19
-   |
-LL |     let _: u8 = ::core::default::Default();
-   |                   ^^^^ you might be missing crate `core`
-   |
+error E0433: cannot find `core` in the crate root
+ at $DIR/feature-gate-extern_absolute_paths.rs:5:19: you might be missing crate `core`
 help: try using `std` instead of `core`
-   |
-LL -     let _: u8 = ::core::default::Default();
-LL +     let _: u8 = ::std::default::Default();
-   |
+ on line 5, column 18, replace with `std`
 help: consider importing this module
-   |
-LL + use std::default;
-   |
+ on line 2, column 1, add `use std::default;`
 help: if you import `default`, refer to it directly
-   |
-LL -     let _: u8 = ::core::default::Default();
-LL +     let _: u8 = default::Default();
-   |
+ on line 5, column 16
 
 error: aborting due to 2 previous errors
 

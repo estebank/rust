@@ -1,114 +1,54 @@
-error[E0502]: cannot borrow `x` as immutable because it is also borrowed as mutable
-  --> $DIR/borrowck-closures-mut-and-imm.rs:18:14
-   |
-LL |     let c1 = || x = 4;
-   |              -- - first borrow occurs due to use of `x` in closure
-   |              |
-   |              mutable borrow occurs here
-LL |     let c2 = || x * 5;
-   |              ^^ - second borrow occurs due to use of `x` in closure
-   |              |
-   |              immutable borrow occurs here
-LL |
-LL |     drop(c1);
-   |          -- mutable borrow later used here
+error E0502: cannot borrow `x` as immutable because it is also borrowed as mutable
+ at $DIR/borrowck-closures-mut-and-imm.rs:18:14: immutable borrow occurs here
+  on line 17, column 14: mutable borrow occurs here
+  on line 17, column 17: first borrow occurs due to use of `x` in closure
+  on line 18, column 17: second borrow occurs due to use of `x` in closure
+  on line 20, column 10: mutable borrow later used here
 
-error[E0502]: cannot borrow `x` as immutable because it is also borrowed as mutable
-  --> $DIR/borrowck-closures-mut-and-imm.rs:26:14
-   |
-LL |     let c1 = || set(&mut x);
-   |              --          - first borrow occurs due to use of `x` in closure
-   |              |
-   |              mutable borrow occurs here
-LL |     let c2 = || get(&x);
-   |              ^^      - second borrow occurs due to use of `x` in closure
-   |              |
-   |              immutable borrow occurs here
-LL |
-LL |     drop(c1);
-   |          -- mutable borrow later used here
+error E0502: cannot borrow `x` as immutable because it is also borrowed as mutable
+ at $DIR/borrowck-closures-mut-and-imm.rs:26:14: immutable borrow occurs here
+  on line 25, column 14: mutable borrow occurs here
+  on line 25, column 26: first borrow occurs due to use of `x` in closure
+  on line 26, column 22: second borrow occurs due to use of `x` in closure
+  on line 28, column 10: mutable borrow later used here
 
-error[E0502]: cannot borrow `x` as immutable because it is also borrowed as mutable
-  --> $DIR/borrowck-closures-mut-and-imm.rs:34:14
-   |
-LL |     let c1 = || set(&mut x);
-   |              --          - first borrow occurs due to use of `x` in closure
-   |              |
-   |              mutable borrow occurs here
-LL |     let c2 = || x * 5;
-   |              ^^ - second borrow occurs due to use of `x` in closure
-   |              |
-   |              immutable borrow occurs here
-LL |
-LL |     drop(c1);
-   |          -- mutable borrow later used here
+error E0502: cannot borrow `x` as immutable because it is also borrowed as mutable
+ at $DIR/borrowck-closures-mut-and-imm.rs:34:14: immutable borrow occurs here
+  on line 33, column 14: mutable borrow occurs here
+  on line 33, column 26: first borrow occurs due to use of `x` in closure
+  on line 34, column 17: second borrow occurs due to use of `x` in closure
+  on line 36, column 10: mutable borrow later used here
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/borrowck-closures-mut-and-imm.rs:42:5
-   |
-LL |     let c2 = || x * 5;
-   |              -- - borrow occurs due to use in closure
-   |              |
-   |              `x` is borrowed here
-LL |     x = 5;
-   |     ^^^^^ `x` is assigned to here but it was already borrowed
-LL |
-LL |     drop(c2);
-   |          -- borrow later used here
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/borrowck-closures-mut-and-imm.rs:42:5: `x` is assigned to here but it was already borrowed
+  on line 41, column 14: `x` is borrowed here
+  on line 41, column 17: borrow occurs due to use in closure
+  on line 44, column 10: borrow later used here
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/borrowck-closures-mut-and-imm.rs:50:5
-   |
-LL |     let c1 = || get(&x);
-   |              --      - borrow occurs due to use in closure
-   |              |
-   |              `x` is borrowed here
-LL |     x = 5;
-   |     ^^^^^ `x` is assigned to here but it was already borrowed
-LL |
-LL |     drop(c1);
-   |          -- borrow later used here
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/borrowck-closures-mut-and-imm.rs:50:5: `x` is assigned to here but it was already borrowed
+  on line 49, column 14: `x` is borrowed here
+  on line 49, column 22: borrow occurs due to use in closure
+  on line 52, column 10: borrow later used here
 
-error[E0506]: cannot assign to `*x` because it is borrowed
-  --> $DIR/borrowck-closures-mut-and-imm.rs:58:5
-   |
-LL |     let c1 = || get(&*x);
-   |              --      -- borrow occurs due to use in closure
-   |              |
-   |              `*x` is borrowed here
-LL |     *x = 5;
-   |     ^^^^^^ `*x` is assigned to here but it was already borrowed
-LL |
-LL |     drop(c1);
-   |          -- borrow later used here
+error E0506: cannot assign to `*x` because it is borrowed
+ at $DIR/borrowck-closures-mut-and-imm.rs:58:5: `*x` is assigned to here but it was already borrowed
+  on line 57, column 14: `*x` is borrowed here
+  on line 57, column 22: borrow occurs due to use in closure
+  on line 60, column 10: borrow later used here
 
-error[E0506]: cannot assign to `*x.f` because it is borrowed
-  --> $DIR/borrowck-closures-mut-and-imm.rs:70:5
-   |
-LL |     let c1 = || get(&*x.f);
-   |              --      ---- borrow occurs due to use in closure
-   |              |
-   |              `*x.f` is borrowed here
-LL |     *x.f = 5;
-   |     ^^^^^^^^ `*x.f` is assigned to here but it was already borrowed
-LL |
-LL |     drop(c1);
-   |          -- borrow later used here
+error E0506: cannot assign to `*x.f` because it is borrowed
+ at $DIR/borrowck-closures-mut-and-imm.rs:70:5: `*x.f` is assigned to here but it was already borrowed
+  on line 69, column 14: `*x.f` is borrowed here
+  on line 69, column 22: borrow occurs due to use in closure
+  on line 72, column 10: borrow later used here
 
-error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
-  --> $DIR/borrowck-closures-mut-and-imm.rs:82:14
-   |
-LL |     let c1 = || get(&*x.f);
-   |              --      ---- first borrow occurs due to use of `x` in closure
-   |              |
-   |              immutable borrow occurs here
-LL |     let c2 = || *x.f = 5;
-   |              ^^ ---- second borrow occurs due to use of `x` in closure
-   |              |
-   |              mutable borrow occurs here
-LL |
-LL |     drop(c1);
-   |          -- immutable borrow later used here
+error E0502: cannot borrow `x` as mutable because it is also borrowed as immutable
+ at $DIR/borrowck-closures-mut-and-imm.rs:82:14: mutable borrow occurs here
+  on line 81, column 14: immutable borrow occurs here
+  on line 81, column 22: first borrow occurs due to use of `x` in closure
+  on line 82, column 17: second borrow occurs due to use of `x` in closure
+  on line 84, column 10: immutable borrow later used here
 
 error: aborting due to 8 previous errors
 

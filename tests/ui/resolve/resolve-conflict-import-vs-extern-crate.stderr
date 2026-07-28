@@ -1,14 +1,8 @@
-error[E0254]: the name `std` is defined multiple times
-  --> $DIR/resolve-conflict-import-vs-extern-crate.rs:2:5
-   |
-LL | use std::slice as std;
-   |     ^^^^^^^^^^^^^^^^^ `std` reimported here
-   |
-   = note: `std` must be defined only once in the type namespace of this module
+error E0254: the name `std` is defined multiple times
+ at $DIR/resolve-conflict-import-vs-extern-crate.rs:2:5: `std` reimported here
+note: `std` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use std::slice as other_std;
-   |                   ++++++
+ on line 2, column 14, replace with ` as other_std`
 
 error: aborting due to 1 previous error
 

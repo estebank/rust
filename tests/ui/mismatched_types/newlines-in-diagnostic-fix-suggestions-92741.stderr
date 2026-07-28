@@ -1,48 +1,20 @@
-error[E0308]: mismatched types
-  --> $DIR/newlines-in-diagnostic-fix-suggestions-92741.rs:5:5
-   |
-LL |   fn _foo() -> bool {
-   |                ---- expected `bool` because of return type
-LL | /     &
-LL | |     mut
-LL | |     if true { true } else { false }
-   | |___________________________________^ expected `bool`, found `&mut bool`
-   |
+error E0308: mismatched types
+ at $DIR/newlines-in-diagnostic-fix-suggestions-92741.rs:5:5 to 7:36: expected `bool`, found `&mut bool`
+  on line 4, column 14: expected `bool` because of return type
 help: consider removing the borrow
-   |
-LL -     &
-LL -     mut
-   |
+ on line 5, column 4
 
-error[E0308]: mismatched types
-  --> $DIR/newlines-in-diagnostic-fix-suggestions-92741.rs:11:5
-   |
-LL |   fn _bar() -> bool {
-   |                ---- expected `bool` because of return type
-LL | /     &
-LL | |     mut if true { true } else { false }
-   | |_______________________________________^ expected `bool`, found `&mut bool`
-   |
+error E0308: mismatched types
+ at $DIR/newlines-in-diagnostic-fix-suggestions-92741.rs:11:5 to 12:40: expected `bool`, found `&mut bool`
+  on line 10, column 14: expected `bool` because of return type
 help: consider removing the borrow
-   |
-LL -     &
-LL -     mut if true { true } else { false }
-LL +     if true { true } else { false }
-   |
+ on line 11, column 4
 
-error[E0308]: mismatched types
-  --> $DIR/newlines-in-diagnostic-fix-suggestions-92741.rs:16:5
-   |
-LL |   fn _baz() -> bool {
-   |                ---- expected `bool` because of return type
-LL | /     & mut
-LL | |     if true { true } else { false }
-   | |___________________________________^ expected `bool`, found `&mut bool`
-   |
+error E0308: mismatched types
+ at $DIR/newlines-in-diagnostic-fix-suggestions-92741.rs:16:5 to 17:36: expected `bool`, found `&mut bool`
+  on line 15, column 14: expected `bool` because of return type
 help: consider removing the borrow
-   |
-LL -     & mut
-   |
+ on line 16, column 4
 
 error: aborting due to 3 previous errors
 

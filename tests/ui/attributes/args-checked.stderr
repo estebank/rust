@@ -1,337 +1,168 @@
-error[E0565]: malformed `test_runner` attribute input
-  --> $DIR/args-checked.rs:7:4
-   |
-LL | #![test_runner(x = 5)]
-   |    ^^^^^^^^^^^^-----^
-   |                |
-   |                didn't expect a literal here
-   |
+error E0565: malformed `test_runner` attribute input
+ at $DIR/args-checked.rs:7:4
+  on line 7, column 16: didn't expect a literal here
 help: must be of the form
-   |
-LL - #![test_runner(x = 5)]
-LL + #![test_runner(path)]
-   |
+ on line 7, column 3, replace with `test_runner(path)`
 
-error[E0565]: malformed `test_runner` attribute input
-  --> $DIR/args-checked.rs:9:4
-   |
-LL | #![test_runner(x(x,y,z))]
-   |    ^^^^^^^^^^^^--------^
-   |                |
-   |                didn't expect a literal here
-   |
+error E0565: malformed `test_runner` attribute input
+ at $DIR/args-checked.rs:9:4
+  on line 9, column 16: didn't expect a literal here
 help: must be of the form
-   |
-LL - #![test_runner(x(x,y,z))]
-LL + #![test_runner(path)]
-   |
+ on line 9, column 3, replace with `test_runner(path)`
 
-error[E0539]: malformed `inline` attribute input
-  --> $DIR/args-checked.rs:12:3
-   |
-LL | #[inline(always = 5)]
-   |   ^^^^^^^----------^
-   |          |
-   |          valid arguments are `always` or `never`
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
+error E0539: malformed `inline` attribute input
+ at $DIR/args-checked.rs:12:3
+  on line 12, column 10: valid arguments are `always` or `never`
+note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[inline(always = 5)]
-LL + #[inline]
-   |
-LL - #[inline(always = 5)]
-LL + #[inline(always)]
-   |
-LL - #[inline(always = 5)]
-LL + #[inline(never)]
-   |
+ on line 12, column 2, replace with one of
+  inline
+  inline(always)
+  inline(never)
 
-error[E0539]: malformed `inline` attribute input
-  --> $DIR/args-checked.rs:14:3
-   |
-LL | #[inline(always(x, y, z))]
-   |   ^^^^^^^---------------^
-   |          |
-   |          valid arguments are `always` or `never`
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
+
+error E0539: malformed `inline` attribute input
+ at $DIR/args-checked.rs:14:3
+  on line 14, column 10: valid arguments are `always` or `never`
+note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-inline-attribute>
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[inline(always(x, y, z))]
-LL + #[inline]
-   |
-LL - #[inline(always(x, y, z))]
-LL + #[inline(always)]
-   |
-LL - #[inline(always(x, y, z))]
-LL + #[inline(never)]
-   |
+ on line 14, column 2, replace with one of
+  inline
+  inline(always)
+  inline(never)
 
-error[E0539]: malformed `instruction_set` attribute input
-  --> $DIR/args-checked.rs:16:3
-   |
-LL | #[instruction_set(arm::a32 = 5)]
-   |   ^^^^^^^^^^^^^^^^------------^
-   |                   |
-   |                   valid arguments are `arm::a32` or `arm::t32`
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-instruction_set-attribute>
+
+error E0539: malformed `instruction_set` attribute input
+ at $DIR/args-checked.rs:16:3
+  on line 16, column 19: valid arguments are `arm::a32` or `arm::t32`
+note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-instruction_set-attribute>
 help: must be of the form
-   |
-LL - #[instruction_set(arm::a32 = 5)]
-LL + #[instruction_set(set)]
-   |
+ on line 16, column 2, replace with `instruction_set(set)`
 
-error[E0539]: malformed `instruction_set` attribute input
-  --> $DIR/args-checked.rs:18:3
-   |
-LL | #[instruction_set(arm::a32(x, y, z))]
-   |   ^^^^^^^^^^^^^^^^-----------------^
-   |                   |
-   |                   valid arguments are `arm::a32` or `arm::t32`
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-instruction_set-attribute>
+error E0539: malformed `instruction_set` attribute input
+ at $DIR/args-checked.rs:18:3
+  on line 18, column 19: valid arguments are `arm::a32` or `arm::t32`
+note: for more information, visit <https://doc.rust-lang.org/reference/attributes/codegen.html#the-instruction_set-attribute>
 help: must be of the form
-   |
-LL - #[instruction_set(arm::a32(x, y, z))]
-LL + #[instruction_set(set)]
-   |
+ on line 18, column 2, replace with `instruction_set(set)`
 
-error[E0539]: malformed `optimize` attribute input
-  --> $DIR/args-checked.rs:20:3
-   |
-LL | #[optimize(size = 5)]
-   |   ^^^^^^^^^--------^
-   |            |
-   |            valid arguments are `size`, `speed` or `none`
-   |
+error E0539: malformed `optimize` attribute input
+ at $DIR/args-checked.rs:20:3
+  on line 20, column 12: valid arguments are `size`, `speed` or `none`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[optimize(size = 5)]
-LL + #[optimize(none)]
-   |
-LL - #[optimize(size = 5)]
-LL + #[optimize(size)]
-   |
-LL - #[optimize(size = 5)]
-LL + #[optimize(speed)]
-   |
+ on line 20, column 2, replace with one of
+  optimize(none)
+  optimize(size)
+  optimize(speed)
 
-error[E0539]: malformed `optimize` attribute input
-  --> $DIR/args-checked.rs:22:3
-   |
-LL | #[optimize(size(x, y, z))]
-   |   ^^^^^^^^^-------------^
-   |            |
-   |            valid arguments are `size`, `speed` or `none`
-   |
+
+error E0539: malformed `optimize` attribute input
+ at $DIR/args-checked.rs:22:3
+  on line 22, column 12: valid arguments are `size`, `speed` or `none`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[optimize(size(x, y, z))]
-LL + #[optimize(none)]
-   |
-LL - #[optimize(size(x, y, z))]
-LL + #[optimize(size)]
-   |
-LL - #[optimize(size(x, y, z))]
-LL + #[optimize(speed)]
-   |
+ on line 22, column 2, replace with one of
+  optimize(none)
+  optimize(size)
+  optimize(speed)
+
 
 error: multiple `optimize` attributes
-  --> $DIR/args-checked.rs:22:1
-   |
-LL | #[optimize(size(x, y, z))]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/args-checked.rs:22:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/args-checked.rs:20:1
-   |
-LL | #[optimize(size = 5)]
-   | ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/args-checked.rs:20:1
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/args-checked.rs:25:3
-   |
-LL | #[coverage(off = 5)]
-   |   ^^^^^^^^^-------^
-   |            |
-   |            valid arguments are `on` or `off`
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/args-checked.rs:25:3
+  on line 25, column 12: valid arguments are `on` or `off`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(off = 5)]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(off = 5)]
-LL + #[coverage(on)]
-   |
+ on line 25, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/args-checked.rs:27:3
-   |
-LL | #[coverage(off(x, y, z))]
-   |   ^^^^^^^^^------------^
-   |            |
-   |            valid arguments are `on` or `off`
-   |
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(off(x, y, z))]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(off(x, y, z))]
-LL + #[coverage(on)]
-   |
 
-error[E0539]: malformed `rustc_abi` attribute input
-  --> $DIR/args-checked.rs:29:3
-   |
-LL | #[rustc_abi(debug = 5)]
-   |   ^^^^^^^^^-----------
-   |            |
-   |            valid arguments are `assert_eq` or `debug`
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/args-checked.rs:27:3
+  on line 27, column 12: valid arguments are `on` or `off`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[rustc_abi(debug = 5)]
-LL + #[rustc_abi(assert_eq)]
-   |
-LL - #[rustc_abi(debug = 5)]
-LL + #[rustc_abi(debug)]
-   |
+ on line 27, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `rustc_abi` attribute input
-  --> $DIR/args-checked.rs:31:3
-   |
-LL | #[rustc_abi(debug(x, y, z))]
-   |   ^^^^^^^^^----------------
-   |            |
-   |            valid arguments are `assert_eq` or `debug`
-   |
+
+error E0539: malformed `rustc_abi` attribute input
+ at $DIR/args-checked.rs:29:3
+  on line 29, column 12: valid arguments are `assert_eq` or `debug`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[rustc_abi(debug(x, y, z))]
-LL + #[rustc_abi(assert_eq)]
-   |
-LL - #[rustc_abi(debug(x, y, z))]
-LL + #[rustc_abi(debug)]
-   |
+ on line 29, column 2, replace with one of
+  rustc_abi(assert_eq)
+  rustc_abi(debug)
+
+
+error E0539: malformed `rustc_abi` attribute input
+ at $DIR/args-checked.rs:31:3
+  on line 31, column 12: valid arguments are `assert_eq` or `debug`
+help: try changing it to one of the following valid forms of the attribute
+ on line 31, column 2, replace with one of
+  rustc_abi(assert_eq)
+  rustc_abi(debug)
+
 
 error: `rustc_allow_const_fn_unstable` expects feature names
-  --> $DIR/args-checked.rs:47:33
-   |
-LL | #[rustc_allow_const_fn_unstable(x = 5)]
-   |                                 ^^^^^
+ at $DIR/args-checked.rs:47:33
 
 error: `rustc_allow_const_fn_unstable` expects feature names
-  --> $DIR/args-checked.rs:49:33
-   |
-LL | #[rustc_allow_const_fn_unstable(x(x, y, z))]
-   |                                 ^^^^^^^^^^
+ at $DIR/args-checked.rs:49:33
 
-error[E0539]: malformed `used` attribute input
-  --> $DIR/args-checked.rs:53:3
-   |
-LL | #[used(always = 5)]
-   |   ^^^^^----------^
-   |        |
-   |        valid arguments are `compiler` or `linker`
-   |
+error E0539: malformed `used` attribute input
+ at $DIR/args-checked.rs:53:3
+  on line 53, column 8: valid arguments are `compiler` or `linker`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[used(always = 5)]
-LL + #[used]
-   |
-LL - #[used(always = 5)]
-LL + #[used(compiler)]
-   |
-LL - #[used(always = 5)]
-LL + #[used(linker)]
-   |
+ on line 53, column 2, replace with one of
+  used
+  used(compiler)
+  used(linker)
 
-error[E0539]: malformed `used` attribute input
-  --> $DIR/args-checked.rs:55:3
-   |
-LL | #[used(always(x, y, z))]
-   |   ^^^^^---------------^
-   |        |
-   |        valid arguments are `compiler` or `linker`
-   |
+
+error E0539: malformed `used` attribute input
+ at $DIR/args-checked.rs:55:3
+  on line 55, column 8: valid arguments are `compiler` or `linker`
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[used(always(x, y, z))]
-LL + #[used]
-   |
-LL - #[used(always(x, y, z))]
-LL + #[used(compiler)]
-   |
-LL - #[used(always(x, y, z))]
-LL + #[used(linker)]
-   |
+ on line 55, column 2, replace with one of
+  used
+  used(compiler)
+  used(linker)
 
-error[E0565]: malformed `rustc_must_implement_one_of` attribute input
-  --> $DIR/args-checked.rs:59:3
-   |
-LL | #[rustc_must_implement_one_of(eq = 5, neq)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^------^^^^^^
-   |                               |
-   |                               expected a valid identifier here
-   |
+
+error E0565: malformed `rustc_must_implement_one_of` attribute input
+ at $DIR/args-checked.rs:59:3
+  on line 59, column 31: expected a valid identifier here
 help: must be of the form
-   |
-LL - #[rustc_must_implement_one_of(eq = 5, neq)]
-LL + #[rustc_must_implement_one_of(function1, function2, ...)]
-   |
+ on line 59, column 2, replace with `rustc_must_implement_one_of(function1, function2, ...)`
 
-error[E0565]: malformed `rustc_must_implement_one_of` attribute input
-  --> $DIR/args-checked.rs:61:3
-   |
-LL | #[rustc_must_implement_one_of(eq(x, y, z), neq)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^-----------^^^^^^
-   |                               |
-   |                               expected a valid identifier here
-   |
+error E0565: malformed `rustc_must_implement_one_of` attribute input
+ at $DIR/args-checked.rs:61:3
+  on line 61, column 31: expected a valid identifier here
 help: must be of the form
-   |
-LL - #[rustc_must_implement_one_of(eq(x, y, z), neq)]
-LL + #[rustc_must_implement_one_of(function1, function2, ...)]
-   |
+ on line 61, column 2, replace with `rustc_must_implement_one_of(function1, function2, ...)`
 
-error[E0565]: malformed `rustc_dump_layout` attribute input
-  --> $DIR/args-checked.rs:67:3
-   |
-LL | #[rustc_dump_layout(debug = 5)]
-   |   ^^^^^^^^^^^^^^^^^^---------^
-   |                     |
-   |                     didn't expect a literal here
+error E0565: malformed `rustc_dump_layout` attribute input
+ at $DIR/args-checked.rs:67:3
+  on line 67, column 21: didn't expect a literal here
 
-error[E0565]: malformed `rustc_dump_layout` attribute input
-  --> $DIR/args-checked.rs:69:3
-   |
-LL | #[rustc_dump_layout(debug(x, y, z))]
-   |   ^^^^^^^^^^^^^^^^^^--------------^
-   |                     |
-   |                     didn't expect a literal here
+error E0565: malformed `rustc_dump_layout` attribute input
+ at $DIR/args-checked.rs:69:3
+  on line 69, column 21: didn't expect a literal here
 
 error: valid forms for the attribute are `macro_export` and `macro_export(local_inner_macros)`
-  --> $DIR/args-checked.rs:37:3
-   |
-LL | #[macro_export(local_inner_macros = 5)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
-   = note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
-   = note: `#[deny(invalid_macro_export_arguments)]` (part of `#[deny(future_incompatible)]`) on by default
+ at $DIR/args-checked.rs:37:3
+warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
+note: `#[deny(invalid_macro_export_arguments)]` (part of `#[deny(future_incompatible)]`) on by default
 
 error: valid forms for the attribute are `macro_export` and `macro_export(local_inner_macros)`
-  --> $DIR/args-checked.rs:40:3
-   |
-LL | #[macro_export(local_inner_macros(x, y, z))]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
-   = note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
+ at $DIR/args-checked.rs:40:3
+warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
 
 error: aborting due to 23 previous errors
 
@@ -339,23 +170,15 @@ Some errors have detailed explanations: E0539, E0565.
 For more information about an error, try `rustc --explain E0539`.
 Future incompatibility report: Future breakage diagnostic:
 error: valid forms for the attribute are `macro_export` and `macro_export(local_inner_macros)`
-  --> $DIR/args-checked.rs:37:3
-   |
-LL | #[macro_export(local_inner_macros = 5)]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
-   = note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
-   = note: `#[deny(invalid_macro_export_arguments)]` (part of `#[deny(future_incompatible)]`) on by default
+ at $DIR/args-checked.rs:37:3
+warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
+note: `#[deny(invalid_macro_export_arguments)]` (part of `#[deny(future_incompatible)]`) on by default
 
 Future breakage diagnostic:
 error: valid forms for the attribute are `macro_export` and `macro_export(local_inner_macros)`
-  --> $DIR/args-checked.rs:40:3
-   |
-LL | #[macro_export(local_inner_macros(x, y, z))]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
-   = note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
-   = note: `#[deny(invalid_macro_export_arguments)]` (part of `#[deny(future_incompatible)]`) on by default
+ at $DIR/args-checked.rs:40:3
+warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+note: for more information, see issue #57571 <https://github.com/rust-lang/rust/issues/57571>
+note: `#[deny(invalid_macro_export_arguments)]` (part of `#[deny(future_incompatible)]`) on by default
 

@@ -1,18 +1,9 @@
 Future incompatibility report: Future breakage diagnostic:
 warning: this function depends on never type fallback being `()`
-  --> $DIR/defaulted-never-note.rs:38:1
-   |
-LL | fn main() {
-   | ^^^^^^^^^
-   |
-   = help: specify the types explicitly
+ at $DIR/defaulted-never-note.rs:38:1
+help: specify the types explicitly
 note: in edition 2024, the requirement `!: OnlyUnit` will fail
-  --> $DIR/defaulted-never-note.rs:40:19
-   |
-LL |     requires_unit(x);
-   |                   ^
+ at $DIR/defaulted-never-note.rs:40:19
 help: use `()` annotations to avoid fallback changes
-   |
-LL |     let x: () = return;
-   |          ++++
+ on line 39, column 9, add `: ()`
 

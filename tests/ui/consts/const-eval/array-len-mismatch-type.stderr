@@ -1,15 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/array-len-mismatch-type.rs:2:34
-   |
-LL | pub struct Data([[&'static str]; 5_i32]);
-   |                                  ^^^^^ expected `usize`, found `i32`
-   |
-   = note: array length can only be `usize`
+error E0308: mismatched types
+ at $DIR/array-len-mismatch-type.rs:2:34: expected `usize`, found `i32`
+note: array length can only be `usize`
 help: change the type of the numeric literal from `i32` to `usize`
-   |
-LL - pub struct Data([[&'static str]; 5_i32]);
-LL + pub struct Data([[&'static str]; 5_usize]);
-   |
+ on line 2, column 35, replace with `usize`
 
 error: aborting due to 1 previous error
 

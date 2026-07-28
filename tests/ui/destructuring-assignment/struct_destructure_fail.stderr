@@ -1,54 +1,26 @@
 error: expected identifier, found reserved identifier `_`
-  --> $DIR/struct_destructure_fail.rs:11:17
-   |
-LL |     Struct { a, _ } = Struct { a: 1, b: 2 };
-   |     ------      ^ expected identifier, found reserved identifier
-   |     |
-   |     while parsing this struct
+ at $DIR/struct_destructure_fail.rs:11:17: expected identifier, found reserved identifier
+  on line 11: while parsing this struct
 
 error: functional record updates are not allowed in destructuring assignments
-  --> $DIR/struct_destructure_fail.rs:13:19
-   |
-LL |     Struct { a, ..d } = Struct { a: 1, b: 2 };
-   |                   ^ help: consider removing the trailing pattern
+ at $DIR/struct_destructure_fail.rs:13:19: help: consider removing the trailing pattern
 
-error[E0026]: struct `Struct` does not have a field named `c`
-  --> $DIR/struct_destructure_fail.rs:10:20
-   |
-LL |     Struct { a, b, c } = Struct { a: 0, b: 1 };
-   |                    ^ struct `Struct` does not have this field
+error E0026: struct `Struct` does not have a field named `c`
+ at $DIR/struct_destructure_fail.rs:10:20: struct `Struct` does not have this field
 
-error[E0027]: pattern does not mention field `b`
-  --> $DIR/struct_destructure_fail.rs:11:5
-   |
-LL |     Struct { a, _ } = Struct { a: 1, b: 2 };
-   |     ^^^^^^^^^^^^^^^ missing field `b`
-   |
+error E0027: pattern does not mention field `b`
+ at $DIR/struct_destructure_fail.rs:11:5: missing field `b`
 help: include the missing field in the pattern
-   |
-LL -     Struct { a, _ } = Struct { a: 1, b: 2 };
-LL +     Struct { a, b } = Struct { a: 1, b: 2 };
-   |
+ on line 11, column 14, replace with `, b }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |     Struct { a, b: _ } = Struct { a: 1, b: 2 };
-   |                 ++
+ on line 11, column 14, replace with `, b: _ }`
 help: or always ignore missing fields here
-   |
-LL -     Struct { a, _ } = Struct { a: 1, b: 2 };
-LL +     Struct { a, .. } = Struct { a: 1, b: 2 };
-   |
+ on line 11, column 14, replace with `, .. }`
 
-error[E0797]: base expression required after `..`
-  --> $DIR/struct_destructure_fail.rs:15:19
-   |
-LL |     Struct { a, .. };
-   |                   ^
-   |
+error E0797: base expression required after `..`
+ at $DIR/struct_destructure_fail.rs:15:19
 help: add a base expression here
-   |
-LL |     Struct { a, ../* expr */ };
-   |                   ++++++++++
+ on line 15, column 18, add `/* expr */`
 
 error: aborting due to 5 previous errors
 

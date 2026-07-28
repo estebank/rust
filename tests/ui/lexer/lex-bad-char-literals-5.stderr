@@ -1,26 +1,12 @@
 error: character literal may only contain one codepoint
-  --> $DIR/lex-bad-char-literals-5.rs:1:18
-   |
-LL | static c: char = '\x10\x10';
-   |                  ^^^^^^^^^^
-   |
+ at $DIR/lex-bad-char-literals-5.rs:1:18
 help: if you meant to write a string literal, use double quotes
-   |
-LL - static c: char = '\x10\x10';
-LL + static c: char = "\x10\x10";
-   |
+ on line 1, column 17, replace with `"`
 
 error: character literal may only contain one codepoint
-  --> $DIR/lex-bad-char-literals-5.rs:5:20
-   |
-LL |     let ch: &str = '\x10\x10';
-   |                    ^^^^^^^^^^
-   |
+ at $DIR/lex-bad-char-literals-5.rs:5:20
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let ch: &str = '\x10\x10';
-LL +     let ch: &str = "\x10\x10";
-   |
+ on line 5, column 19, replace with `"`
 
 error: aborting due to 2 previous errors
 

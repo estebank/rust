@@ -1,29 +1,13 @@
-error[E0277]: the trait bound `Foo: Qux` is not satisfied in `impl Future<Output = ()>`
-  --> $DIR/issue-64130-3-other.rs:25:12
-   |
-LL | async fn bar() {
-   |               - within this `impl Future<Output = ()>`
-...
-LL |     is_qux(bar());
-   |            ^^^^^ unsatisfied trait bound
-   |
+error E0277: the trait bound `Foo: Qux` is not satisfied in `impl Future<Output = ()>`
+ at $DIR/issue-64130-3-other.rs:25:12: unsatisfied trait bound
+  on line 16, column 15: within this `impl Future<Output = ()>`
 help: within `impl Future<Output = ()>`, the trait `Qux` is not implemented for `Foo`
-  --> $DIR/issue-64130-3-other.rs:10:1
-   |
-LL | struct Foo;
-   | ^^^^^^^^^^
+ at $DIR/issue-64130-3-other.rs:10:1
 note: future does not implement `Qux` as this value is used across an await
-  --> $DIR/issue-64130-3-other.rs:18:11
-   |
-LL |     let x = Foo;
-   |         - has type `Foo` which does not implement `Qux`
-LL |     baz().await;
-   |           ^^^^^ await occurs here, with `x` maybe used later
+ at $DIR/issue-64130-3-other.rs:18:11: await occurs here, with `x` maybe used later
+  on line 17, column 9: has type `Foo` which does not implement `Qux`
 note: required by a bound in `is_qux`
-  --> $DIR/issue-64130-3-other.rs:14:14
-   |
-LL | fn is_qux<T: Qux>(t: T) {}
-   |              ^^^ required by this bound in `is_qux`
+ at $DIR/issue-64130-3-other.rs:14:14: required by this bound in `is_qux`
 
 error: aborting due to 1 previous error
 

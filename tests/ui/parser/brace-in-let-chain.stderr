@@ -1,31 +1,13 @@
 error: this file contains an unclosed delimiter
-  --> $DIR/brace-in-let-chain.rs:58:54
-   |
-LL | fn main() {
-   |           - unclosed delimiter
-...
-LL | fn quux() {
-   |           - unclosed delimiter
-...
-LL | fn foobar() {
-   |             - unclosed delimiter
-...
-LL | fn fubar() {
-   |            - unclosed delimiter
-...
-LL | fn qux() {
-   |          - unclosed delimiter
-...
-LL | fn foo() {
-   |          - another 3 unclosed delimiters begin from here
-...
-LL |         {
-   |         - this delimiter might not be properly closed...
-LL |             && let () = ()
-LL |     }
-   |     - ...as it matches this but it has different indentation
-LL | }
-   |                                                     ^
+ at $DIR/brace-in-let-chain.rs:58:54
+  on line 4, column 11: unclosed delimiter
+  on line 12, column 11: unclosed delimiter
+  on line 20, column 13: unclosed delimiter
+  on line 26, column 12: unclosed delimiter
+  on line 33, column 10: unclosed delimiter
+  on line 42, column 10: another 3 unclosed delimiters begin from here
+  on line 55: this delimiter might not be properly closed...
+  on line 57: ...as it matches this but it has different indentation
 
 error: aborting due to 1 previous error
 

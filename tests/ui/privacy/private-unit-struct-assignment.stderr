@@ -1,22 +1,11 @@
-error[E0603]: unit struct `C` is private
-  --> $DIR/private-unit-struct-assignment.rs:8:8
-   |
-LL |     A::C = 1;
-   |        ^ private unit struct
-   |
+error E0603: unit struct `C` is private
+ at $DIR/private-unit-struct-assignment.rs:8:8: private unit struct
 note: the unit struct `C` is defined here
-  --> $DIR/private-unit-struct-assignment.rs:4:5
-   |
-LL |     struct C;
-   |     ^^^^^^^^^
+ at $DIR/private-unit-struct-assignment.rs:4:5
 
-error[E0308]: mismatched types
-  --> $DIR/private-unit-struct-assignment.rs:8:5
-   |
-LL |     A::C = 1;
-   |     ^^^^   - this expression has type `{integer}`
-   |     |
-   |     expected integer, found `C`
+error E0308: mismatched types
+ at $DIR/private-unit-struct-assignment.rs:8:5: expected integer, found `C`
+  on line 8, column 12: this expression has type `{integer}`
 
 error: aborting due to 2 previous errors
 

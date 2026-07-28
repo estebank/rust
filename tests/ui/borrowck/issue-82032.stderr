@@ -1,15 +1,8 @@
-error[E0596]: cannot borrow `*v` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-82032.rs:10:13
-   |
-LL |         for v in self.0.values() {
-   |                  --------------- this iterator yields `&` references
-LL |             v.flush();
-   |             ^ `v` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*v` as mutable, as it is behind a `&` reference
+ at $DIR/issue-82032.rs:10:13: `v` is a `&` reference, so it cannot be borrowed as mutable
+  on line 9, column 18: this iterator yields `&` references
 help: use mutable method
-   |
-LL |         for v in self.0.values_mut() {
-   |                               ++++
+ on line 9, column 24, replace with `values_mut()`
 
 error: aborting due to 1 previous error
 

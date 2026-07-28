@@ -1,18 +1,9 @@
 error: missing type to the right of `=`
-  --> $DIR/recover-assoc-eq-missing-term.rs:3:17
-   |
-LL |     bar::<Item =   >();
-   |                 ^^^
-   |
+ at $DIR/recover-assoc-eq-missing-term.rs:3:17
 help: to constrain the associated type, add a type after `=`
-   |
-LL |     bar::<Item = TheType>();
-   |                  +++++++
+ on line 3, column 16, add ` TheType`
 help: remove the `=` if `Item` is a type
-   |
-LL -     bar::<Item =   >();
-LL +     bar::<Item>();
-   |
+ on line 3, column 14
 
 error: aborting due to 1 previous error
 

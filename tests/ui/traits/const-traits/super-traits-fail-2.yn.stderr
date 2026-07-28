@@ -1,25 +1,12 @@
 error: `[const]` is not allowed here
-  --> $DIR/super-traits-fail-2.rs:14:32
-   |
-LL | #[cfg(any(yn, nn))] trait Bar: [const] Foo {}
-   |                                ^^^^^^^
-   |
+ at $DIR/super-traits-fail-2.rs:14:32
 note: this trait is not `const`, so it cannot have `[const]` trait bounds
-  --> $DIR/super-traits-fail-2.rs:14:21
-   |
-LL | #[cfg(any(yn, nn))] trait Bar: [const] Foo {}
-   |                     ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/super-traits-fail-2.rs:14:21
 
-error[E0277]: the trait bound `T: [const] Foo` is not satisfied
-  --> $DIR/super-traits-fail-2.rs:21:7
-   |
-LL |     x.a();
-   |       ^
-   |
+error E0277: the trait bound `T: [const] Foo` is not satisfied
+ at $DIR/super-traits-fail-2.rs:21:7
 help: consider further restricting type parameter `T` with trait `Foo`
-   |
-LL | const fn foo<T: Bar + [const] Foo>(x: &T) {
-   |                     +++++++++++++
+ on line 20, column 19, add ` + [const] Foo`
 
 error: aborting due to 2 previous errors
 

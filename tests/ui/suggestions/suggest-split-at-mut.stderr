@@ -1,86 +1,43 @@
-error[E0499]: cannot borrow `foo[_]` as mutable more than once at a time
-  --> $DIR/suggest-split-at-mut.rs:4:13
-   |
-LL |     let a = &mut foo[2];
-   |             ----------- first mutable borrow occurs here
-LL |     let b = &mut foo[3];
-   |             ^^^^^^^^^^^ second mutable borrow occurs here
-LL |     *a = 5;
-   |     ------ first borrow later used here
-   |
-   = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
+error E0499: cannot borrow `foo[_]` as mutable more than once at a time
+ at $DIR/suggest-split-at-mut.rs:4:13: second mutable borrow occurs here
+  on line 3, column 13: first mutable borrow occurs here
+  on line 5: first borrow later used here
+help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
 
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/suggest-split-at-mut.rs:13:18
-   |
-LL |     let a = &mut foo[..2];
-   |                  --- first mutable borrow occurs here
-LL |     let b = &mut foo[2..];
-   |                  ^^^ second mutable borrow occurs here
-LL |     a[0] = 5;
-   |     ---- first borrow later used here
-   |
-   = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/suggest-split-at-mut.rs:13:18: second mutable borrow occurs here
+  on line 12, column 18: first mutable borrow occurs here
+  on line 14: first borrow later used here
+help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
 
-error[E0502]: cannot borrow `foo` as mutable because it is also borrowed as immutable
-  --> $DIR/suggest-split-at-mut.rs:22:18
-   |
-LL |     let a = &foo[..2];
-   |              --- immutable borrow occurs here
-LL |     let b = &mut foo[2..];
-   |                  ^^^ mutable borrow occurs here
-LL |     b[0] = 6;
-LL |     println!("{:?} {:?}", a, b);
-   |                           - immutable borrow later used here
-   |
-   = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
+error E0502: cannot borrow `foo` as mutable because it is also borrowed as immutable
+ at $DIR/suggest-split-at-mut.rs:22:18: mutable borrow occurs here
+  on line 21, column 14: immutable borrow occurs here
+  on line 24, column 27: immutable borrow later used here
+help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
 
-error[E0502]: cannot borrow `foo` as immutable because it is also borrowed as mutable
-  --> $DIR/suggest-split-at-mut.rs:30:14
-   |
-LL |     let a = &mut foo[..2];
-   |                  --- mutable borrow occurs here
-LL |     let b = &foo[2..];
-   |              ^^^ immutable borrow occurs here
-LL |     a[0] = 5;
-   |     ---- mutable borrow later used here
-   |
-   = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
+error E0502: cannot borrow `foo` as immutable because it is also borrowed as mutable
+ at $DIR/suggest-split-at-mut.rs:30:14: immutable borrow occurs here
+  on line 29, column 18: mutable borrow occurs here
+  on line 31: mutable borrow later used here
+help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
 
-error[E0502]: cannot borrow `foo[_]` as mutable because it is also borrowed as immutable
-  --> $DIR/suggest-split-at-mut.rs:38:13
-   |
-LL |     let a = &foo[1];
-   |             ------- immutable borrow occurs here
-LL |     let b = &mut foo[2];
-   |             ^^^^^^^^^^^ mutable borrow occurs here
-LL |     *b = 6;
-LL |     println!("{:?} {:?}", a, b);
-   |                           - immutable borrow later used here
-   |
-   = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
+error E0502: cannot borrow `foo[_]` as mutable because it is also borrowed as immutable
+ at $DIR/suggest-split-at-mut.rs:38:13: mutable borrow occurs here
+  on line 37, column 13: immutable borrow occurs here
+  on line 40, column 27: immutable borrow later used here
+help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
 
-error[E0502]: cannot borrow `foo[_]` as immutable because it is also borrowed as mutable
-  --> $DIR/suggest-split-at-mut.rs:46:13
-   |
-LL |     let a = &mut foo[1];
-   |             ----------- mutable borrow occurs here
-LL |     let b = &foo[2];
-   |             ^^^^^^^ immutable borrow occurs here
-LL |     *a = 5;
-   |     ------ mutable borrow later used here
-   |
-   = help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
+error E0502: cannot borrow `foo[_]` as immutable because it is also borrowed as mutable
+ at $DIR/suggest-split-at-mut.rs:46:13: immutable borrow occurs here
+  on line 45, column 13: mutable borrow occurs here
+  on line 47: mutable borrow later used here
+help: use `.split_at_mut(position)` to obtain two mutable non-overlapping sub-slices
 
-error[E0502]: cannot borrow `foo` as immutable because it is also borrowed as mutable
-  --> $DIR/suggest-split-at-mut.rs:54:14
-   |
-LL |     let a = &mut foo[0..];
-   |                  --- mutable borrow occurs here
-LL |     let b = &foo[0..];
-   |              ^^^ immutable borrow occurs here
-LL |     a[0] = 5;
-   |     ---- mutable borrow later used here
+error E0502: cannot borrow `foo` as immutable because it is also borrowed as mutable
+ at $DIR/suggest-split-at-mut.rs:54:14: immutable borrow occurs here
+  on line 53, column 18: mutable borrow occurs here
+  on line 55: mutable borrow later used here
 
 error: aborting due to 7 previous errors
 

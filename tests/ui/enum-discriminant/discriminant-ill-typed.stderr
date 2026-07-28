@@ -1,106 +1,50 @@
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:15:16
-   |
-LL |         OhNo = 0_u8,
-   |                ^^^^ expected `i8`, found `u8`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:15:16: expected `i8`, found `u8`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `u8` to `i8`
-   |
-LL -         OhNo = 0_u8,
-LL +         OhNo = 0_i8,
-   |
+ on line 15, column 17, replace with `i8`
 
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:29:16
-   |
-LL |         OhNo = 0_i8,
-   |                ^^^^ expected `u8`, found `i8`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:29:16: expected `u8`, found `i8`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `i8` to `u8`
-   |
-LL -         OhNo = 0_i8,
-LL +         OhNo = 0_u8,
-   |
+ on line 29, column 17, replace with `u8`
 
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:43:16
-   |
-LL |         OhNo = 0_u16,
-   |                ^^^^^ expected `i16`, found `u16`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:43:16: expected `i16`, found `u16`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `u16` to `i16`
-   |
-LL -         OhNo = 0_u16,
-LL +         OhNo = 0_i16,
-   |
+ on line 43, column 17, replace with `i16`
 
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:57:16
-   |
-LL |         OhNo = 0_i16,
-   |                ^^^^^ expected `u16`, found `i16`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:57:16: expected `u16`, found `i16`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `i16` to `u16`
-   |
-LL -         OhNo = 0_i16,
-LL +         OhNo = 0_u16,
-   |
+ on line 57, column 17, replace with `u16`
 
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:71:16
-   |
-LL |         OhNo = 0_u32,
-   |                ^^^^^ expected `i32`, found `u32`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:71:16: expected `i32`, found `u32`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -         OhNo = 0_u32,
-LL +         OhNo = 0_i32,
-   |
+ on line 71, column 17, replace with `i32`
 
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:85:16
-   |
-LL |         OhNo = 0_i32,
-   |                ^^^^^ expected `u32`, found `i32`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:85:16: expected `u32`, found `i32`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `i32` to `u32`
-   |
-LL -         OhNo = 0_i32,
-LL +         OhNo = 0_u32,
-   |
+ on line 85, column 17, replace with `u32`
 
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:99:16
-   |
-LL |         OhNo = 0_u64,
-   |                ^^^^^ expected `i64`, found `u64`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:99:16: expected `i64`, found `u64`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `u64` to `i64`
-   |
-LL -         OhNo = 0_u64,
-LL +         OhNo = 0_i64,
-   |
+ on line 99, column 17, replace with `i64`
 
-error[E0308]: mismatched types
-  --> $DIR/discriminant-ill-typed.rs:113:16
-   |
-LL |         OhNo = 0_i64,
-   |                ^^^^^ expected `u64`, found `i64`
-   |
-   = note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
+error E0308: mismatched types
+ at $DIR/discriminant-ill-typed.rs:113:16: expected `u64`, found `i64`
+note: enum variant discriminant can only be of a primitive type compatible with the enum's `repr`
 help: change the type of the numeric literal from `i64` to `u64`
-   |
-LL -         OhNo = 0_i64,
-LL +         OhNo = 0_u64,
-   |
+ on line 113, column 17, replace with `u64`
 
 error: aborting due to 8 previous errors
 

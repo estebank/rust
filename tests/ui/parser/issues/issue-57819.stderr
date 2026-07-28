@@ -1,86 +1,37 @@
 error: unmatched angle brackets
-  --> $DIR/issue-57819.rs:19:10
-   |
-LL |     bar::<<<<<T as Foo>::Output>();
-   |          ^^^
-   |
+ at $DIR/issue-57819.rs:19:10
 help: remove extra angle brackets
-   |
-LL -     bar::<<<<<T as Foo>::Output>();
-LL +     bar::<<T as Foo>::Output>();
-   |
+ on line 19, column 9
 
 error: unmatched angle brackets
-  --> $DIR/issue-57819.rs:22:10
-   |
-LL |     bar::<<<<T as Foo>::Output>();
-   |          ^^
-   |
+ at $DIR/issue-57819.rs:22:10
 help: remove extra angle brackets
-   |
-LL -     bar::<<<<T as Foo>::Output>();
-LL +     bar::<<T as Foo>::Output>();
-   |
+ on line 22, column 9
 
 error: unmatched angle bracket
-  --> $DIR/issue-57819.rs:25:10
-   |
-LL |     bar::<<<T as Foo>::Output>();
-   |          ^
-   |
+ at $DIR/issue-57819.rs:25:10
 help: remove extra angle bracket
-   |
-LL -     bar::<<<T as Foo>::Output>();
-LL +     bar::<<T as Foo>::Output>();
-   |
+ on line 25, column 9
 
 error: unmatched angle brackets
-  --> $DIR/issue-57819.rs:34:48
-   |
-LL |     let _ = vec![1, 2, 3].into_iter().collect::<<<<<Vec<usize>>();
-   |                                                ^^^^
-   |
+ at $DIR/issue-57819.rs:34:48
 help: remove extra angle brackets
-   |
-LL -     let _ = vec![1, 2, 3].into_iter().collect::<<<<<Vec<usize>>();
-LL +     let _ = vec![1, 2, 3].into_iter().collect::<Vec<usize>>();
-   |
+ on line 34, column 47
 
 error: unmatched angle brackets
-  --> $DIR/issue-57819.rs:37:48
-   |
-LL |     let _ = vec![1, 2, 3].into_iter().collect::<<<<Vec<usize>>();
-   |                                                ^^^
-   |
+ at $DIR/issue-57819.rs:37:48
 help: remove extra angle brackets
-   |
-LL -     let _ = vec![1, 2, 3].into_iter().collect::<<<<Vec<usize>>();
-LL +     let _ = vec![1, 2, 3].into_iter().collect::<Vec<usize>>();
-   |
+ on line 37, column 47
 
 error: unmatched angle brackets
-  --> $DIR/issue-57819.rs:40:48
-   |
-LL |     let _ = vec![1, 2, 3].into_iter().collect::<<<Vec<usize>>();
-   |                                                ^^
-   |
+ at $DIR/issue-57819.rs:40:48
 help: remove extra angle brackets
-   |
-LL -     let _ = vec![1, 2, 3].into_iter().collect::<<<Vec<usize>>();
-LL +     let _ = vec![1, 2, 3].into_iter().collect::<Vec<usize>>();
-   |
+ on line 40, column 47
 
 error: unmatched angle bracket
-  --> $DIR/issue-57819.rs:43:48
-   |
-LL |     let _ = vec![1, 2, 3].into_iter().collect::<<Vec<usize>>();
-   |                                                ^
-   |
+ at $DIR/issue-57819.rs:43:48
 help: remove extra angle bracket
-   |
-LL -     let _ = vec![1, 2, 3].into_iter().collect::<<Vec<usize>>();
-LL +     let _ = vec![1, 2, 3].into_iter().collect::<Vec<usize>>();
-   |
+ on line 43, column 47
 
 error: aborting due to 7 previous errors
 

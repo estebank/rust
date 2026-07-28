@@ -1,30 +1,15 @@
 error: expected identifier, found keyword `fn`
-  --> $DIR/removed-syntax-static-fn.rs:4:12
-   |
-LL |     static fn f() {}
-   |            ^^ expected identifier, found keyword
+ at $DIR/removed-syntax-static-fn.rs:4:12: expected identifier, found keyword
 
 error: expected one of `:`, `;`, or `=`, found `f`
-  --> $DIR/removed-syntax-static-fn.rs:4:15
-   |
-LL | impl S {
-   |        - while parsing this item list starting here
-LL |     static fn f() {}
-   |               ^ expected one of `:`, `;`, or `=`
-...
-LL | }
-   | - the item list ends here
+ at $DIR/removed-syntax-static-fn.rs:4:15: expected one of `:`, `;`, or `=`
+  on line 3, column 8: while parsing this item list starting here
+  on line 8: the item list ends here
 
 error: missing type for `static` item
-  --> $DIR/removed-syntax-static-fn.rs:4:14
-   |
-LL |     static fn f() {}
-   |              ^
-   |
+ at $DIR/removed-syntax-static-fn.rs:4:14
 help: provide a type for the item
-   |
-LL |     static fn: <type> f() {}
-   |              ++++++++
+ on line 4, column 13, add `: <type>`
 
 error: aborting due to 3 previous errors
 

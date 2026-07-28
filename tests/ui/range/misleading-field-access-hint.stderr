@@ -1,8 +1,5 @@
-error[E0425]: cannot find value `w` in this scope
-  --> $DIR/misleading-field-access-hint.rs:5:17
-   |
-LL |     for _ in 0..w {
-   |                 ^ not found in this scope
+error E0425: cannot find value `w` in this scope
+ at $DIR/misleading-field-access-hint.rs:5:17: not found in this scope
 
 error: aborting due to 1 previous error
 

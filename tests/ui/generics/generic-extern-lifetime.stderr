@@ -1,44 +1,22 @@
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/generic-extern-lifetime.rs:6:26
-   |
-LL |     pub fn life2<'b>(x: &'a i32, y: &'b i32);
-   |                          ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/generic-extern-lifetime.rs:6:26: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL |     pub fn life2<'a, 'b>(x: &'a i32, y: &'b i32);
-   |                  +++
+ on line 6, column 17, add `'a, `
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/generic-extern-lifetime.rs:8:37
-   |
-LL |     pub fn life4<'b>(x: for<'c> fn(&'a i32));
-   |                                     ^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/generic-extern-lifetime.rs:8:37: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the type lifetime-generic with a new `'a` lifetime
-   |
-LL |     pub fn life4<'b>(x: for<'a, 'c> fn(&'a i32));
-   |                             +++
+ on line 8, column 28, add `'a, `
 help: consider introducing lifetime `'a` here
-   |
-LL |     pub fn life4<'a, 'b>(x: for<'c> fn(&'a i32));
-   |                  +++
+ on line 8, column 17, add `'a, `
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/generic-extern-lifetime.rs:11:39
-   |
-LL |     pub fn life7<'b>() -> for<'c> fn(&'a i32);
-   |                                       ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/generic-extern-lifetime.rs:11:39: undeclared lifetime
 help: consider making the type lifetime-generic with a new `'a` lifetime
-   |
-LL |     pub fn life7<'b>() -> for<'a, 'c> fn(&'a i32);
-   |                               +++
+ on line 11, column 30, add `'a, `
 help: consider introducing lifetime `'a` here
-   |
-LL |     pub fn life7<'a, 'b>() -> for<'c> fn(&'a i32);
-   |                  +++
+ on line 11, column 17, add `'a, `
 
 error: aborting due to 3 previous errors
 

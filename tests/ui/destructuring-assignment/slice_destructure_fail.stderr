@@ -1,22 +1,12 @@
 error: `..` can only be used once per slice pattern
-  --> $DIR/slice_destructure_fail.rs:3:16
-   |
-LL |     [a, .., b, ..] = [0, 1];
-   |         --     ^^ can only be used once per slice pattern
-   |         |
-   |         previously used here
+ at $DIR/slice_destructure_fail.rs:3:16: can only be used once per slice pattern
+  on line 3, column 9: previously used here
 
-error[E0527]: pattern requires 3 elements but array has 2
-  --> $DIR/slice_destructure_fail.rs:4:5
-   |
-LL |     [a, a, b] = [1, 2];
-   |     ^^^^^^^^^ expected 2 elements
+error E0527: pattern requires 3 elements but array has 2
+ at $DIR/slice_destructure_fail.rs:4:5: expected 2 elements
 
-error[E0527]: pattern requires 1 element but array has 2
-  --> $DIR/slice_destructure_fail.rs:6:5
-   |
-LL |     [_] = [1, 2];
-   |     ^^^ expected 2 elements
+error E0527: pattern requires 1 element but array has 2
+ at $DIR/slice_destructure_fail.rs:6:5: expected 2 elements
 
 error: aborting due to 3 previous errors
 

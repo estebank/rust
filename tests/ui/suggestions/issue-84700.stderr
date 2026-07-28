@@ -1,23 +1,11 @@
-error[E0532]: expected tuple struct or tuple variant, found unit variant `FarmAnimal::Cow`
-  --> $DIR/issue-84700.rs:15:9
-   |
-LL |     Cow,
-   |     --- `FarmAnimal::Cow` defined here
-...
-LL |         FarmAnimal::Cow(_) => "moo".to_string(),
-   |         ^^^^^^^^^^^^^^^^^^ help: use this syntax instead: `FarmAnimal::Cow`
+error E0532: expected tuple struct or tuple variant, found unit variant `FarmAnimal::Cow`
+ at $DIR/issue-84700.rs:15:9: help: use this syntax instead: `FarmAnimal::Cow`
+  on line 6: `FarmAnimal::Cow` defined here
 
-error[E0164]: expected tuple struct or tuple variant, found struct variant `FarmAnimal::Chicken`
-  --> $DIR/issue-84700.rs:17:9
-   |
-LL |         FarmAnimal::Chicken(_) => "cluck, cluck!".to_string(),
-   |         ^^^^^^^^^^^^^^^^^^^^^^ not a tuple struct or tuple variant
-   |
+error E0164: expected tuple struct or tuple variant, found struct variant `FarmAnimal::Chicken`
+ at $DIR/issue-84700.rs:17:9: not a tuple struct or tuple variant
 help: add the names to match a struct variant's fields
-   |
-LL -         FarmAnimal::Chicken(_) => "cluck, cluck!".to_string(),
-LL +         FarmAnimal::Chicken { num_eggs: _ } => "cluck, cluck!".to_string(),
-   |
+ on line 17, column 27, replace with ` { num_eggs: _ }`
 
 error: aborting due to 2 previous errors
 

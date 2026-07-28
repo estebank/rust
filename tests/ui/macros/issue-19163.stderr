@@ -1,8 +1,5 @@
-error[E0596]: cannot borrow data in a `&` reference as mutable
-  --> $DIR/issue-19163.rs:9:14
-   |
-LL |     mywrite!(&v, "Hello world");
-   |              ^^ cannot borrow as mutable
+error E0596: cannot borrow data in a `&` reference as mutable
+ at $DIR/issue-19163.rs:9:14: cannot borrow as mutable
 
 error: aborting due to 1 previous error
 

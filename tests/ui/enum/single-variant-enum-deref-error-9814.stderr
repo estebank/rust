@@ -1,8 +1,5 @@
-error[E0614]: type `Foo` cannot be dereferenced
-  --> $DIR/single-variant-enum-deref-error-9814.rs:8:13
-   |
-LL |     let _ = *Foo::Bar(2);
-   |             ^^^^^^^^^^^^ can't be dereferenced
+error E0614: type `Foo` cannot be dereferenced
+ at $DIR/single-variant-enum-deref-error-9814.rs:8:13: can't be dereferenced
 
 error: aborting due to 1 previous error
 

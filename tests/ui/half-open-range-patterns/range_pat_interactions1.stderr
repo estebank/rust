@@ -1,24 +1,12 @@
 error: expected a pattern range bound, found an expression
-  --> $DIR/range_pat_interactions1.rs:17:16
-   |
-LL |             0..5+1 => errors_only.push(x),
-   |                ^^^ not a pattern
-   |
-   = note: arbitrary expressions are not allowed in patterns: <https://doc.rust-lang.org/book/ch19-00-patterns.html>
+ at $DIR/range_pat_interactions1.rs:17:16: not a pattern
+note: arbitrary expressions are not allowed in patterns: <https://doc.rust-lang.org/book/ch19-00-patterns.html>
 help: consider extracting the expression into a `const`
-   |
-LL +         const VAL: /* Type */ = 5+1;
-LL |         match x as i32 {
-LL ~             0..VAL => errors_only.push(x),
-   |
+ on line 16, column 1, add `        const VAL: /* Type */ = 5+1;`
 
-error[E0408]: variable `n` is not bound in all patterns
-  --> $DIR/range_pat_interactions1.rs:10:25
-   |
-LL |         if let n @ 2..3|4 = x {
-   |                -        ^ pattern doesn't bind `n`
-   |                |
-   |                variable not in all patterns
+error E0408: variable `n` is not bound in all patterns
+ at $DIR/range_pat_interactions1.rs:10:25: pattern doesn't bind `n`
+  on line 10, column 16: variable not in all patterns
 
 error: aborting due to 2 previous errors
 

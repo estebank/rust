@@ -1,8 +1,5 @@
-error[E0459]: `#[link]` attribute requires a `name = "string"` argument
-  --> $DIR/E0459.rs:1:1
-   |
-LL | #[link(kind = "dylib")] extern "C" {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^ missing `name` argument
+error E0459: `#[link]` attribute requires a `name = "string"` argument
+ at $DIR/E0459.rs:1:1: missing `name` argument
 
 error: aborting due to 1 previous error
 

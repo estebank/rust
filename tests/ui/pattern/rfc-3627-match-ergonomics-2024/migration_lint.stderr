@@ -1,663 +1,330 @@
 error: cannot mutably bind by value within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:25:13
-   |
-LL |     let Foo(mut x) = &Foo(0);
-   |             ^^^ `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:25:13: `mut` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:25:9
-   |
-LL |     let Foo(mut x) = &Foo(0);
-   |         ^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:25:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 note: the lint level is defined here
-  --> $DIR/migration_lint.rs:7:9
-   |
-LL | #![deny(rust_2024_incompatible_pat)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/migration_lint.rs:7:9
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &Foo(mut x) = &Foo(0);
-   |         +
+ on line 25, column 8, add `&`
 
 error: cannot mutably bind by value within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:30:13
-   |
-LL |     let Foo(mut x) = &mut Foo(0);
-   |             ^^^ `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:30:13: `mut` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:30:9
-   |
-LL |     let Foo(mut x) = &mut Foo(0);
-   |         ^^^^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:30:9: this non-reference pattern matches on a reference type `&mut _`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &mut Foo(mut x) = &mut Foo(0);
-   |         ++++
+ on line 30, column 8, add `&mut `
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:35:13
-   |
-LL |     let Foo(ref x) = &Foo(0);
-   |             ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:35:13: explicit `ref` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:35:9
-   |
-LL |     let Foo(ref x) = &Foo(0);
-   |         ^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:35:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: remove the unnecessary binding modifier
-   |
-LL -     let Foo(ref x) = &Foo(0);
-LL +     let Foo(x) = &Foo(0);
-   |
+ on line 35, column 12
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:40:13
-   |
-LL |     let Foo(ref x) = &mut Foo(0);
-   |             ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:40:13: explicit `ref` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:40:9
-   |
-LL |     let Foo(ref x) = &mut Foo(0);
-   |         ^^^^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:40:9: this non-reference pattern matches on a reference type `&mut _`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &mut Foo(ref x) = &mut Foo(0);
-   |         ++++
+ on line 40, column 8, add `&mut `
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:57:13
-   |
-LL |     let Foo(&x) = &Foo(&0);
-   |             ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:57:13: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:57:9
-   |
-LL |     let Foo(&x) = &Foo(&0);
-   |         ^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:57:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &Foo(&x) = &Foo(&0);
-   |         +
+ on line 57, column 8, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:62:13
-   |
-LL |     let Foo(&mut x) = &Foo(&mut 0);
-   |             ^^^^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:62:13: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:62:9
-   |
-LL |     let Foo(&mut x) = &Foo(&mut 0);
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:62:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &Foo(&mut x) = &Foo(&mut 0);
-   |         +
+ on line 62, column 8, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:67:13
-   |
-LL |     let Foo(&x) = &mut Foo(&0);
-   |             ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:67:13: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:67:9
-   |
-LL |     let Foo(&x) = &mut Foo(&0);
-   |         ^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:67:9: this non-reference pattern matches on a reference type `&mut _`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &mut Foo(&x) = &mut Foo(&0);
-   |         ++++
+ on line 67, column 8, add `&mut `
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:72:13
-   |
-LL |     let Foo(&mut x) = &mut Foo(&mut 0);
-   |             ^^^^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:72:13: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:72:9
-   |
-LL |     let Foo(&mut x) = &mut Foo(&mut 0);
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:72:9: this non-reference pattern matches on a reference type `&mut _`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &mut Foo(&mut x) = &mut Foo(&mut 0);
-   |         ++++
+ on line 72, column 8, add `&mut `
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:81:17
-   |
-LL |     if let Some(&x) = &&&&&Some(&0u8) {
-   |                 ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:81:17: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:81:12
-   |
-LL |     if let Some(&x) = &&&&&Some(&0u8) {
-   |            ^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:81:12: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns to avoid implicitly borrowing
-   |
-LL |     if let &&&&&Some(&x) = &&&&&Some(&0u8) {
-   |            +++++
+ on line 81, column 11, add `&&&&&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:87:17
-   |
-LL |     if let Some(&mut x) = &&&&&Some(&mut 0u8) {
-   |                 ^^^^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:87:17: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:87:12
-   |
-LL |     if let Some(&mut x) = &&&&&Some(&mut 0u8) {
-   |            ^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:87:12: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns to avoid implicitly borrowing
-   |
-LL |     if let &&&&&Some(&mut x) = &&&&&Some(&mut 0u8) {
-   |            +++++
+ on line 87, column 11, add `&&&&&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:93:17
-   |
-LL |     if let Some(&x) = &&&&&mut Some(&0u8) {
-   |                 ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:93:17: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:93:12
-   |
-LL |     if let Some(&x) = &&&&&mut Some(&0u8) {
-   |            ^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:93:12: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns to avoid implicitly borrowing
-   |
-LL |     if let &&&&&mut Some(&x) = &&&&&mut Some(&0u8) {
-   |            ++++++++
+ on line 93, column 11, add `&&&&&mut `
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:99:17
-   |
-LL |     if let Some(&mut Some(Some(x))) = &mut Some(&mut Some(&mut Some(0u8))) {
-   |                 ^^^^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:99:17: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:99:12
-   |
-LL |     if let Some(&mut Some(Some(x))) = &mut Some(&mut Some(&mut Some(0u8))) {
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:99:12: this non-reference pattern matches on a reference type `&mut _`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns and borrow explicitly using a variable binding mode
-   |
-LL |     if let &mut Some(&mut Some(&mut Some(ref mut x))) = &mut Some(&mut Some(&mut Some(0u8))) {
-   |            ++++                ++++      +++++++
+ on line 99, column 11, add `&mut `
 
 error: cannot mutably bind by value within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:111:21
-   |
-LL |     let Struct { a, mut b, c } = &Struct { a: 0, b: 0, c: 0 };
-   |                     ^^^ `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:111:21: `mut` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:111:9
-   |
-LL |     let Struct { a, mut b, c } = &Struct { a: 0, b: 0, c: 0 };
-   |         ^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:111:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern and borrow explicitly using variable binding modes
-   |
-LL |     let &Struct { ref a, mut b, ref c } = &Struct { a: 0, b: 0, c: 0 };
-   |         +         +++           +++
+ on line 111, column 8, add `&`
 
 error: cannot explicitly borrow or dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:117:21
-   |
-LL |     let Struct { a: &a, b, ref c } = &Struct { a: &0, b: &0, c: &0 };
-   |                     ^      ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |                     |
-   |                     reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:117:21: reference pattern not allowed when implicitly borrowing
+  on line 117, column 28: explicit `ref` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:117:9
-   |
-LL |     let Struct { a: &a, b, ref c } = &Struct { a: &0, b: &0, c: &0 };
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:117:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern and borrow explicitly using a variable binding mode
-   |
-LL |     let &Struct { a: &a, ref b, ref c } = &Struct { a: &0, b: &0, c: &0 };
-   |         +                +++
+ on line 117, column 8, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:124:24
-   |
-LL |     if let Struct { a: &Some(a), b: Some(&b), c: Some(c) } =
-   |                        ^                 ^ reference pattern not allowed when implicitly borrowing
-   |                        |
-   |                        reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:124:24: reference pattern not allowed when implicitly borrowing
+  on line 124, column 42: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:124:12
-   |
-LL |     if let Struct { a: &Some(a), b: Some(&b), c: Some(c) } =
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:124:12: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns and borrow explicitly using a variable binding mode
-   |
-LL |     if let &Struct { a: &Some(a), b: &Some(&b), c: &Some(ref c) } =
-   |            +                         +             +     +++
+ on line 124, column 11, add `&`
 
 error: cannot mutably bind by value within an implicitly-borrowing pattern
-  --> $DIR/migration_lint.rs:137:15
-   |
-LL |         (Some(mut x), migration_lint_macros::mixed_edition_pat!(y)) => {
-   |               ^^^     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ occurs within macro expansion
-   |               |
-   |               `mut` binding modifier not allowed when implicitly borrowing
-   |
-   = note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
+ at $DIR/migration_lint.rs:137:15: `mut` binding modifier not allowed when implicitly borrowing
+  on line 137, column 23: occurs within macro expansion
+note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:137:9
-   |
-LL |         (Some(mut x), migration_lint_macros::mixed_edition_pat!(y)) => {
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = note: this error originates in the macro `migration_lint_macros::mixed_edition_pat` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/migration_lint.rs:137:9: this non-reference pattern matches on a reference type `&_`
+note: this error originates in the macro `migration_lint_macros::mixed_edition_pat` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |         &(Some(mut x), migration_lint_macros::mixed_edition_pat!(y)) => {
-   |         +
+ on line 137, column 8, add `&`
 
 error: cannot explicitly borrow or dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:145:10
-   |
-LL |     let [&mut [ref a]] = &mut [&mut &[0]];
-   |          ^^^^  ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |          |
-   |          reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:145:10: reference pattern not allowed when implicitly borrowing
+  on line 145, column 16: explicit `ref` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:145:15
-   |
-LL |     let [&mut [ref a]] = &mut [&mut &[0]];
-   |               ^^^^^^^ this non-reference pattern matches on a reference type `&_`
+ at $DIR/migration_lint.rs:145:15: this non-reference pattern matches on a reference type `&_`
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:145:9
-   |
-LL |     let [&mut [ref a]] = &mut [&mut &[0]];
-   |         ^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:145:9: this non-reference pattern matches on a reference type `&mut _`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns to avoid implicitly borrowing
-   |
-LL |     let &mut [&mut &[ref a]] = &mut [&mut &[0]];
-   |         ++++       +
+ on line 145, column 8, add `&mut `
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:150:10
-   |
-LL |     let [&(_)] = &[&0];
-   |          ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:150:10: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:150:9
-   |
-LL |     let [&(_)] = &[&0];
-   |         ^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:150:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &[&(_)] = &[&0];
-   |         +
+ on line 150, column 8, add `&`
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:157:18
-   |
-LL |     let Struct { ref a, ref b, c } = &Struct { a: 0, b: 0, c: 0 };
-   |                  ^^^    ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |                  |
-   |                  explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:157:18: explicit `ref` binding modifier not allowed when implicitly borrowing
+  on line 157, column 25: explicit `ref` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:157:9
-   |
-LL |     let Struct { ref a, ref b, c } = &Struct { a: 0, b: 0, c: 0 };
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:157:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: remove the unnecessary binding modifiers
-   |
-LL -     let Struct { ref a, ref b, c } = &Struct { a: 0, b: 0, c: 0 };
-LL +     let Struct { a, b, c } = &Struct { a: 0, b: 0, c: 0 };
-   |
+ on line 157, column 17
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:164:18
-   |
-LL |     let Struct { ref a, ref mut b, c } = &mut Struct { a: 0, b: 0, c: 0 };
-   |                  ^^^    ^^^^^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |                  |
-   |                  explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:164:18: explicit `ref` binding modifier not allowed when implicitly borrowing
+  on line 164, column 25: explicit `ref` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:164:9
-   |
-LL |     let Struct { ref a, ref mut b, c } = &mut Struct { a: 0, b: 0, c: 0 };
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:164:9: this non-reference pattern matches on a reference type `&mut _`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern and borrow explicitly using a variable binding mode
-   |
-LL |     let &mut Struct { ref a, ref mut b, ref mut c } = &mut Struct { a: 0, b: 0, c: 0 };
-   |         ++++                            +++++++
+ on line 164, column 8, add `&mut `
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:172:21
-   |
-LL |     let Struct { a: &[ref a], b: &mut [[b]], c } = &mut &Struct { a: &[0], b: &mut [&[0]], c: 0 };
-   |                     ^            ^^^^ reference pattern not allowed when implicitly borrowing
-   |                     |
-   |                     reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:172:21: reference pattern not allowed when implicitly borrowing
+  on line 172, column 34: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:172:9
-   |
-LL |     let Struct { a: &[ref a], b: &mut [[b]], c } = &mut &Struct { a: &[0], b: &mut [&[0]], c: 0 };
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:172:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns and borrow explicitly using variable binding modes
-   |
-LL |     let &mut &Struct { a: &[ref a], b: &mut [&[ref b]], ref c } = &mut &Struct { a: &[0], b: &mut [&[0]], c: 0 };
-   |         ++++++                               + +++      +++
+ on line 172, column 8, add `&mut &`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:180:13
-   |
-LL |     let Foo(&ref a) = &Foo(&0);
-   |             ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:180:13: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:180:9
-   |
-LL |     let Foo(&ref a) = &Foo(&0);
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:180:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &Foo(&ref a) = &Foo(&0);
-   |         +
+ on line 180, column 8, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:186:10
-   |
-LL |     let (&a, b, [c], [(d, [e])]) = &(&0, 0, &[0], &mut [&mut (0, &[0])]);
-   |          ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:186:10: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:186:9
-   |
-LL |     let (&a, b, [c], [(d, [e])]) = &(&0, 0, &[0], &mut [&mut (0, &[0])]);
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:186:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns and borrow explicitly using variable binding modes
-   |
-LL |     let &(&a, ref b, &[ref c], &mut [&mut (ref d, &[ref e])]) = &(&0, 0, &[0], &mut [&mut (0, &[0])]);
-   |         +     +++    + +++     ++++  ++++  +++    + +++
+ on line 186, column 8, add `&`
 
 error: cannot mutably bind by value within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:196:19
-   |
-LL |     let (a, [b], [mut c]) = &(0, &mut [0], &[0]);
-   |                   ^^^ `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:196:19: `mut` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:196:9
-   |
-LL |     let (a, [b], [mut c]) = &(0, &mut [0], &[0]);
-   |         ^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:196:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns and borrow explicitly using variable binding modes
-   |
-LL |     let &(ref a, &mut [ref b], &[mut c]) = &(0, &mut [0], &[0]);
-   |         + +++    ++++  +++     +
+ on line 196, column 8, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:204:10
-   |
-LL |     let (&a, (b, &[ref c])) = &(&0, &mut (0, &[0]));
-   |          ^       ^ reference pattern not allowed when implicitly borrowing
-   |          |
-   |          reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:204:10: reference pattern not allowed when implicitly borrowing
+  on line 204, column 18: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:204:9
-   |
-LL |     let (&a, (b, &[ref c])) = &(&0, &mut (0, &[0]));
-   |         ^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:204:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns and borrow explicitly using a variable binding mode
-   |
-LL |     let &(&a, &mut (ref b, &[ref c])) = &(&0, &mut (0, &[0]));
-   |         +     ++++  +++
+ on line 204, column 8, add `&`
 
 error: cannot mutably bind by value within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:212:10
-   |
-LL |     let [mut a @ b] = &[0];
-   |          ^^^ `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:212:10: `mut` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:212:9
-   |
-LL |     let [mut a @ b] = &[0];
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:212:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern and borrow explicitly using a variable binding mode
-   |
-LL |     let &[mut a @ ref b] = &[0];
-   |         +         +++
+ on line 212, column 8, add `&`
 
 error: cannot mutably bind by value within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:219:14
-   |
-LL |     let [a @ mut b] = &[0];
-   |              ^^^ `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:219:14: `mut` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:219:9
-   |
-LL |     let [a @ mut b] = &[0];
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:219:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern and borrow explicitly using a variable binding mode
-   |
-LL |     let &[ref a @ mut b] = &[0];
-   |         + +++
+ on line 219, column 8, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:226:14
-   |
-LL |     let [Foo(&ref a @ ref b), Foo(&ref c @ d)] = [&Foo(&0); 2];
-   |              ^                    ^ reference pattern not allowed when implicitly borrowing
-   |              |
-   |              reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:226:14: reference pattern not allowed when implicitly borrowing
+  on line 226, column 35: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:226:31
-   |
-LL |     let [Foo(&ref a @ ref b), Foo(&ref c @ d)] = [&Foo(&0); 2];
-   |                               ^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
+ at $DIR/migration_lint.rs:226:31: this non-reference pattern matches on a reference type `&_`
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:226:10
-   |
-LL |     let [Foo(&ref a @ ref b), Foo(&ref c @ d)] = [&Foo(&0); 2];
-   |          ^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:226:10: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns to avoid implicitly borrowing
-   |
-LL |     let [&Foo(&ref a @ ref b), &Foo(&ref c @ d)] = [&Foo(&0); 2];
-   |          +                     +
+ on line 226, column 9, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:235:14
-   |
-LL |     let [Foo(&ref a @ [ref b]), Foo(&ref c @ [d])] = [&Foo(&[0]); 2];
-   |              ^                      ^ reference pattern not allowed when implicitly borrowing
-   |              |
-   |              reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:235:14: reference pattern not allowed when implicitly borrowing
+  on line 235, column 37: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:235:33
-   |
-LL |     let [Foo(&ref a @ [ref b]), Foo(&ref c @ [d])] = [&Foo(&[0]); 2];
-   |                                 ^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
+ at $DIR/migration_lint.rs:235:33: this non-reference pattern matches on a reference type `&_`
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:235:10
-   |
-LL |     let [Foo(&ref a @ [ref b]), Foo(&ref c @ [d])] = [&Foo(&[0]); 2];
-   |          ^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:235:10: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on these references with reference patterns to avoid implicitly borrowing
-   |
-LL |     let [&Foo(&ref a @ [ref b]), &Foo(&ref c @ [d])] = [&Foo(&[0]); 2];
-   |          +                       +
+ on line 235, column 9, add `&`
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern
-  --> $DIR/migration_lint.rs:244:10
-   |
-LL |     let [migration_lint_macros::bind_ref!(a)] = &[0];
-   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ occurs within macro expansion
-   |
-   = note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
+ at $DIR/migration_lint.rs:244:10: occurs within macro expansion
+note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:244:9
-   |
-LL |     let [migration_lint_macros::bind_ref!(a)] = &[0];
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = note: this error originates in the macro `migration_lint_macros::bind_ref` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/migration_lint.rs:244:9: this non-reference pattern matches on a reference type `&_`
+note: this error originates in the macro `migration_lint_macros::bind_ref` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &[migration_lint_macros::bind_ref!(a)] = &[0];
-   |         +
+ on line 244, column 8, add `&`
 
 error: cannot explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:249:10
-   |
-LL |     let [&migration_lint_macros::bind_ref!(a)] = &[&0];
-   |          ^ reference pattern not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:249:10: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:249:9
-   |
-LL |     let [&migration_lint_macros::bind_ref!(a)] = &[&0];
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:249:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &[&migration_lint_macros::bind_ref!(a)] = &[&0];
-   |         +
+ on line 249, column 8, add `&`
 
 error: cannot write explicit binding modifiers within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:255:10
-   |
-LL |     let (mut a, ref b) = &(0, 0);
-   |          ^^^    ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |          |
-   |          `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:255:10: `mut` binding modifier not allowed when implicitly borrowing
+  on line 255, column 17: explicit `ref` binding modifier not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:255:9
-   |
-LL |     let (mut a, ref b) = &(0, 0);
-   |         ^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:255:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &(mut a, ref b) = &(0, 0);
-   |         +
+ on line 255, column 8, add `&`
 
 error: cannot mutably bind by value or explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:261:10
-   |
-LL |     let (mut a, &b) = &(0, &0);
-   |          ^^^    ^ reference pattern not allowed when implicitly borrowing
-   |          |
-   |          `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:261:10: `mut` binding modifier not allowed when implicitly borrowing
+  on line 261, column 17: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:261:9
-   |
-LL |     let (mut a, &b) = &(0, &0);
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:261:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &(mut a, &b) = &(0, &0);
-   |         +
+ on line 261, column 8, add `&`
 
 error: cannot write explicit binding modifiers or explicitly dereference within an implicitly-borrowing pattern in Rust 2024
-  --> $DIR/migration_lint.rs:267:10
-   |
-LL |     let (mut a, ref b, &c) = &(0, 0, &0);
-   |          ^^^    ^^^    ^ reference pattern not allowed when implicitly borrowing
-   |          |      |
-   |          |      explicit `ref` binding modifier not allowed when implicitly borrowing
-   |          `mut` binding modifier not allowed when implicitly borrowing
-   |
+ at $DIR/migration_lint.rs:267:10: `mut` binding modifier not allowed when implicitly borrowing
+  on line 267, column 17: explicit `ref` binding modifier not allowed when implicitly borrowing
+  on line 267, column 24: reference pattern not allowed when implicitly borrowing
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/migration_lint.rs:267:9
-   |
-LL |     let (mut a, ref b, &c) = &(0, 0, &0);
-   |         ^^^^^^^^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
-   = warning: this changes meaning in Rust 2024
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
+ at $DIR/migration_lint.rs:267:9: this non-reference pattern matches on a reference type `&_`
+warning: this changes meaning in Rust 2024
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2024/match-ergonomics.html>
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &(mut a, ref b, &c) = &(0, 0, &0);
-   |         +
+ on line 267, column 8, add `&`
 
 error: aborting due to 34 previous errors
 

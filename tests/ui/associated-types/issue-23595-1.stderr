@@ -1,17 +1,10 @@
-error[E0191]: the value of the associated types `Value`, `ChildKey` and `Children` in `Hierarchy` must be specified
-  --> $DIR/issue-23595-1.rs:8:60
-   |
-LL |     type Value;
-   |     ---------- `Value` defined here
-LL |     type ChildKey;
-   |     ------------- `ChildKey` defined here
-LL |     type Children = dyn Index<Self::ChildKey, Output = dyn Hierarchy>;
-   |     ------------- `Children` defined here                  ^^^^^^^^^
-   |
+error E0191: the value of the associated types `Value`, `ChildKey` and `Children` in `Hierarchy` must be specified
+ at $DIR/issue-23595-1.rs:8:60
+  on line 6: `Value` defined here
+  on line 7: `ChildKey` defined here
+  on line 8: `Children` defined here
 help: specify the associated types
-   |
-LL |     type Children = dyn Index<Self::ChildKey, Output = dyn Hierarchy<Value = /* Type */, ChildKey = /* Type */, Children = /* Type */>>;
-   |                                                                     ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ on line 8, column 59, replace with `Hierarchy<Value = /* Type */, ChildKey = /* Type */, Children = /* Type */>`
 
 error: aborting due to 1 previous error
 

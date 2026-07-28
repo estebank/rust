@@ -1,86 +1,39 @@
 error: missing condition for `if` expression
-  --> $DIR/bad-if-statements.rs:2:7
-   |
-LL |     if {}
-   |       ^- if this block is the condition of the `if` expression, then it must be followed by another block
-   |       |
-   |       expected condition here
+ at $DIR/bad-if-statements.rs:2:7: expected condition here
+  on line 2, column 8: if this block is the condition of the `if` expression, then it must be followed by another block
 
 error: this `if` expression is missing a block after the condition
-  --> $DIR/bad-if-statements.rs:7:5
-   |
-LL |     if true && {}
-   |     ^^
-   |
+ at $DIR/bad-if-statements.rs:7:5
 help: this binary operation is possibly unfinished
-  --> $DIR/bad-if-statements.rs:7:8
-   |
-LL |     if true && {}
-   |        ^^^^^^^
+ at $DIR/bad-if-statements.rs:7:8
 
 error: expected `{`, found `x`
-  --> $DIR/bad-if-statements.rs:13:13
-   |
-LL |     if true x
-   |             ^ expected `{`
-   |
+ at $DIR/bad-if-statements.rs:13:13: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/bad-if-statements.rs:13:8
-   |
-LL |     if true x
-   |        ^^^^
+ at $DIR/bad-if-statements.rs:13:8
 help: you might have meant to write this as part of a block
-   |
-LL |     if true { x }
-   |             +   +
+ on line 13, column 12, add `{ `
 
 error: missing condition for `if` expression
-  --> $DIR/bad-if-statements.rs:18:7
-   |
-LL |     if {} else {}
-   |       ^- if this block is the condition of the `if` expression, then it must be followed by another block
-   |       |
-   |       expected condition here
+ at $DIR/bad-if-statements.rs:18:7: expected condition here
+  on line 18, column 8: if this block is the condition of the `if` expression, then it must be followed by another block
 
 error: this `if` expression is missing a block after the condition
-  --> $DIR/bad-if-statements.rs:23:5
-   |
-LL |     if true && {} else {}
-   |     ^^
-   |
+ at $DIR/bad-if-statements.rs:23:5
 help: this binary operation is possibly unfinished
-  --> $DIR/bad-if-statements.rs:23:8
-   |
-LL |     if true && {} else {}
-   |        ^^^^^^^
+ at $DIR/bad-if-statements.rs:23:8
 
 error: expected `{`, found `x`
-  --> $DIR/bad-if-statements.rs:29:13
-   |
-LL |     if true x else {}
-   |             ^ expected `{`
-   |
+ at $DIR/bad-if-statements.rs:29:13: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/bad-if-statements.rs:29:8
-   |
-LL |     if true x else {}
-   |        ^^^^
+ at $DIR/bad-if-statements.rs:29:8
 help: you might have meant to write this as part of a block
-   |
-LL |     if true { x } else {}
-   |             +   +
+ on line 29, column 12, add `{ `
 
 error: this `if` expression is missing a block after the condition
-  --> $DIR/bad-if-statements.rs:34:5
-   |
-LL |     if true else {}
-   |     ^^
-   |
+ at $DIR/bad-if-statements.rs:34:5
 help: add a block here
-  --> $DIR/bad-if-statements.rs:34:12
-   |
-LL |     if true else {}
-   |            ^
+ at $DIR/bad-if-statements.rs:34:12
 
 error: aborting due to 7 previous errors
 

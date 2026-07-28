@@ -1,13 +1,7 @@
-error[E0282]: type annotations needed
-  --> $DIR/unresolved_type_param.rs:9:5
-   |
-LL |     bar().await;
-   |     ^^^ cannot infer type of the type parameter `T` declared on the function `bar`
-   |
+error E0282: type annotations needed
+ at $DIR/unresolved_type_param.rs:9:5: cannot infer type of the type parameter `T` declared on the function `bar`
 help: consider specifying a concrete type for the type parameter `T`
-   |
-LL |     bar::</* Type */>().await;
-   |        ++++++++++++++
+ on line 9, column 7, add `::</* Type */>`
 
 error: aborting due to 1 previous error
 

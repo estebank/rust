@@ -1,19 +1,7 @@
 error: unclosed frontmatter
-  --> $DIR/fence-unclosed-6.rs:1:1
-   |
-LL | / ---
-LL | |
-LL | | 🦀---
-LL | |  ---
-...  |
-LL | |
-   | |_^
-   |
+ at $DIR/fence-unclosed-6.rs:1:1 to 9:1
 note: frontmatter opening here was not closed
-  --> $DIR/fence-unclosed-6.rs:1:1
-   |
-LL | ---
-   | ^^^
+ at $DIR/fence-unclosed-6.rs:1:1
 
 error: aborting due to 1 previous error
 

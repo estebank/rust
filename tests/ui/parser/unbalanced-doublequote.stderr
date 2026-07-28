@@ -1,9 +1,5 @@
-error[E0765]: unterminated double quote string
-  --> $DIR/unbalanced-doublequote.rs:3:5
-   |
-LL | /     "
-LL | | }
-   | |__^
+error E0765: unterminated double quote string
+ at $DIR/unbalanced-doublequote.rs:3:5 to 4:3
 
 error: aborting due to 1 previous error
 

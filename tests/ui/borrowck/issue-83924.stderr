@@ -1,21 +1,11 @@
-error[E0382]: use of moved value: `v`
-  --> $DIR/issue-83924.rs:15:14
-   |
-LL |     let v = &mut values;
-   |         - move occurs because `v` has type `&mut Vec<i32>`, which does not implement the `Copy` trait
-...
-LL |     for n in v {
-   |              - `v` moved due to this implicit call to `.into_iter()`
-...
-LL |     for n in v {
-   |              ^ value used here after move
-   |
+error E0382: use of moved value: `v`
+ at $DIR/issue-83924.rs:15:14: value used here after move
+  on line 5, column 9: move occurs because `v` has type `&mut Vec<i32>`, which does not implement the `Copy` trait
+  on line 9, column 14: `v` moved due to this implicit call to `.into_iter()`
 note: `into_iter` takes ownership of the receiver `self`, which moves `v`
-  --> $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
 help: consider creating a fresh reborrow of `v` here
-   |
-LL |     for n in &mut *v {
-   |              ++++++
+ on line 9, column 13, add `&mut *`
 
 error: aborting due to 1 previous error
 

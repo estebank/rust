@@ -1,11 +1,7 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/non-promotable-static-ref.rs:8:10
-   |
-LL |     foo(&unpromotable(5u32));
-   |     -----^^^^^^^^^^^^^^^^^^-- temporary value is freed at the end of this statement
-   |     |    |
-   |     |    creates a temporary value which is freed while still in use
-   |     argument requires that borrow lasts for `'static`
+error E0716: temporary value dropped while borrowed
+ at $DIR/non-promotable-static-ref.rs:8:10: creates a temporary value which is freed while still in use
+  on line 8: argument requires that borrow lasts for `'static`
+  on line 8, column 29: temporary value is freed at the end of this statement
 
 error: aborting due to 1 previous error
 

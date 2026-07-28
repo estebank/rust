@@ -1,21 +1,10 @@
 error: expected a pattern, found an expression
-  --> $DIR/issue-24375.rs:6:9
-   |
-LL |         tmp[0] => {}
-   |         ^^^^^^ not a pattern
-   |
-   = note: arbitrary expressions are not allowed in patterns: <https://doc.rust-lang.org/book/ch19-00-patterns.html>
+ at $DIR/issue-24375.rs:6:9: not a pattern
+note: arbitrary expressions are not allowed in patterns: <https://doc.rust-lang.org/book/ch19-00-patterns.html>
 help: consider moving the expression to a match arm guard
-   |
-LL -         tmp[0] => {}
-LL +         val if val == tmp[0] => {}
-   |
+ on line 6, column 8, replace with `val`
 help: consider extracting the expression into a `const`
-   |
-LL +     const VAL: /* Type */ = tmp[0];
-LL |     match z {
-LL ~         VAL => {}
-   |
+ on line 5, column 1, add `    const VAL: /* Type */ = tmp[0];`
 
 error: aborting due to 1 previous error
 

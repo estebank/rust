@@ -1,11 +1,6 @@
 error: lifetime may not live long enough
-  --> $DIR/supertrait-lifetime-bound.rs:10:5
-   |
-LL | fn test2<'a>() {
-   |          -- lifetime `'a` defined here
-...
-LL |     test1::<dyn Bar<&'a u32>, _>();
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'a` must outlive `'static`
+ at $DIR/supertrait-lifetime-bound.rs:10:5: requires that `'a` must outlive `'static`
+  on line 7, column 10: lifetime `'a` defined here
 
 error: aborting due to 1 previous error
 

@@ -1,12 +1,7 @@
-error[E0502]: cannot borrow `*collection` as mutable because it is also borrowed as immutable
-  --> $DIR/immutable-borrow-prevents-mut-method.rs:4:5
-   |
-LL |     let _a = &collection;
-   |              ----------- immutable borrow occurs here
-LL |     collection.swap(1, 2);
-   |     ^^^^^^^^^^ mutable borrow occurs here
-LL |     _a.use_ref();
-   |     -- immutable borrow later used here
+error E0502: cannot borrow `*collection` as mutable because it is also borrowed as immutable
+ at $DIR/immutable-borrow-prevents-mut-method.rs:4:5: mutable borrow occurs here
+  on line 3, column 14: immutable borrow occurs here
+  on line 5: immutable borrow later used here
 
 error: aborting due to 1 previous error
 

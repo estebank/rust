@@ -1,154 +1,66 @@
 error: expected identifier, found keyword `fn`
-  --> $DIR/kw-in-trait-bounds.rs:3:10
-   |
-LL | fn _f<F: fn(), G>(_: impl fn(), _: &dyn fn())
-   |          ^^
-   |
+ at $DIR/kw-in-trait-bounds.rs:3:10
 help: use `Fn` to refer to the trait (notice the capitalization)
-   |
-LL - fn _f<F: fn(), G>(_: impl fn(), _: &dyn fn())
-LL + fn _f<F: Fn(), G>(_: impl fn(), _: &dyn fn())
-   |
+ on line 3, column 9, replace with `Fn`
 
 error: expected identifier, found keyword `fn`
-  --> $DIR/kw-in-trait-bounds.rs:3:27
-   |
-LL | fn _f<F: fn(), G>(_: impl fn(), _: &dyn fn())
-   |                           ^^
-   |
+ at $DIR/kw-in-trait-bounds.rs:3:27
 help: use `Fn` to refer to the trait (notice the capitalization)
-   |
-LL - fn _f<F: fn(), G>(_: impl fn(), _: &dyn fn())
-LL + fn _f<F: fn(), G>(_: impl Fn(), _: &dyn fn())
-   |
+ on line 3, column 26, replace with `Fn`
 
 error: expected identifier, found keyword `fn`
-  --> $DIR/kw-in-trait-bounds.rs:3:41
-   |
-LL | fn _f<F: fn(), G>(_: impl fn(), _: &dyn fn())
-   |                                         ^^
-   |
+ at $DIR/kw-in-trait-bounds.rs:3:41
 help: use `Fn` to refer to the trait (notice the capitalization)
-   |
-LL - fn _f<F: fn(), G>(_: impl fn(), _: &dyn fn())
-LL + fn _f<F: fn(), G>(_: impl fn(), _: &dyn Fn())
-   |
+ on line 3, column 40, replace with `Fn`
 
 error: expected identifier, found keyword `fn`
-  --> $DIR/kw-in-trait-bounds.rs:11:4
-   |
-LL | G: fn(),
-   |    ^^
-   |
+ at $DIR/kw-in-trait-bounds.rs:11:4
 help: use `Fn` to refer to the trait (notice the capitalization)
-   |
-LL - G: fn(),
-LL + G: Fn(),
-   |
+ on line 11, column 3, replace with `Fn`
 
 error: expected identifier, found keyword `struct`
-  --> $DIR/kw-in-trait-bounds.rs:16:10
-   |
-LL | fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-   |          ^^^^^^ expected identifier, found keyword
-   |
+ at $DIR/kw-in-trait-bounds.rs:16:10: expected identifier, found keyword
 help: escape `struct` to use it as an identifier
-   |
-LL | fn _g<A: r#struct, B>(_: impl struct, _: &dyn struct)
-   |          ++
+ on line 16, column 9, add `r#`
 
 error: expected identifier, found keyword `struct`
-  --> $DIR/kw-in-trait-bounds.rs:16:29
-   |
-LL | fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-   |                             ^^^^^^ expected identifier, found keyword
-   |
+ at $DIR/kw-in-trait-bounds.rs:16:29: expected identifier, found keyword
 help: escape `struct` to use it as an identifier
-   |
-LL | fn _g<A: struct, B>(_: impl r#struct, _: &dyn struct)
-   |                             ++
+ on line 16, column 28, add `r#`
 
 error: expected identifier, found keyword `struct`
-  --> $DIR/kw-in-trait-bounds.rs:16:45
-   |
-LL | fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-   |                                             ^^^^^^ expected identifier, found keyword
-   |
+ at $DIR/kw-in-trait-bounds.rs:16:45: expected identifier, found keyword
 help: escape `struct` to use it as an identifier
-   |
-LL | fn _g<A: struct, B>(_: impl struct, _: &dyn r#struct)
-   |                                             ++
+ on line 16, column 44, add `r#`
 
 error: expected identifier, found keyword `struct`
-  --> $DIR/kw-in-trait-bounds.rs:30:8
-   |
-LL |     B: struct,
-   |        ^^^^^^ expected identifier, found keyword
-   |
+ at $DIR/kw-in-trait-bounds.rs:30:8: expected identifier, found keyword
 help: escape `struct` to use it as an identifier
-   |
-LL |     B: r#struct,
-   |        ++
+ on line 30, column 7, add `r#`
 
-error[E0405]: cannot find trait `r#struct` in this scope
-  --> $DIR/kw-in-trait-bounds.rs:16:10
-   |
-LL | fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-   |          ^^^^^^
-...
-LL | trait Struct {}
-   | ------------ similarly named trait `Struct` defined here
-   |
+error E0405: cannot find trait `r#struct` in this scope
+ at $DIR/kw-in-trait-bounds.rs:16:10
+  on line 37: similarly named trait `Struct` defined here
 help: a trait with a similar name exists (notice the capitalization)
-   |
-LL - fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-LL + fn _g<A: Struct, B>(_: impl struct, _: &dyn struct)
-   |
+ on line 16, column 9, replace with `Struct`
 
-error[E0405]: cannot find trait `r#struct` in this scope
-  --> $DIR/kw-in-trait-bounds.rs:30:8
-   |
-LL |     B: struct,
-   |        ^^^^^^
-...
-LL | trait Struct {}
-   | ------------ similarly named trait `Struct` defined here
-   |
+error E0405: cannot find trait `r#struct` in this scope
+ at $DIR/kw-in-trait-bounds.rs:30:8
+  on line 37: similarly named trait `Struct` defined here
 help: a trait with a similar name exists (notice the capitalization)
-   |
-LL -     B: struct,
-LL +     B: Struct,
-   |
+ on line 30, column 7, replace with `Struct`
 
-error[E0405]: cannot find trait `r#struct` in this scope
-  --> $DIR/kw-in-trait-bounds.rs:16:29
-   |
-LL | fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-   |                             ^^^^^^
-...
-LL | trait Struct {}
-   | ------------ similarly named trait `Struct` defined here
-   |
+error E0405: cannot find trait `r#struct` in this scope
+ at $DIR/kw-in-trait-bounds.rs:16:29
+  on line 37: similarly named trait `Struct` defined here
 help: a trait with a similar name exists (notice the capitalization)
-   |
-LL - fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-LL + fn _g<A: struct, B>(_: impl Struct, _: &dyn struct)
-   |
+ on line 16, column 28, replace with `Struct`
 
-error[E0405]: cannot find trait `r#struct` in this scope
-  --> $DIR/kw-in-trait-bounds.rs:16:45
-   |
-LL | fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-   |                                             ^^^^^^
-...
-LL | trait Struct {}
-   | ------------ similarly named trait `Struct` defined here
-   |
+error E0405: cannot find trait `r#struct` in this scope
+ at $DIR/kw-in-trait-bounds.rs:16:45
+  on line 37: similarly named trait `Struct` defined here
 help: a trait with a similar name exists (notice the capitalization)
-   |
-LL - fn _g<A: struct, B>(_: impl struct, _: &dyn struct)
-LL + fn _g<A: struct, B>(_: impl struct, _: &dyn Struct)
-   |
+ on line 16, column 44, replace with `Struct`
 
 error: aborting due to 12 previous errors
 

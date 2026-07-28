@@ -1,14 +1,7 @@
 error: call to inline assembly that may unwind
-  --> $DIR/may_unwind_ffi_unwind.rs:14:5
-   |
-LL |     asm!("", options(may_unwind));
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ call to inline assembly that may unwind
-   |
+ at $DIR/may_unwind_ffi_unwind.rs:14:5: call to inline assembly that may unwind
 note: the lint level is defined here
-  --> $DIR/may_unwind_ffi_unwind.rs:8:9
-   |
-LL | #![deny(ffi_unwind_calls)]
-   |         ^^^^^^^^^^^^^^^^
+ at $DIR/may_unwind_ffi_unwind.rs:8:9
 
 error: aborting due to 1 previous error
 

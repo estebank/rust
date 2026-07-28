@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `Database` for type `RootDatabase`
-  --> $DIR/cycle-via-builtin-auto-trait-impl.rs:19:1
-   |
-LL | impl<T: RefUnwindSafe> Database for T {
-   | ------------------------------------- first implementation here
-...
-LL | impl Database for RootDatabase {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `RootDatabase`
+error E0119: conflicting implementations of trait `Database` for type `RootDatabase`
+ at $DIR/cycle-via-builtin-auto-trait-impl.rs:19:1: conflicting implementation for `RootDatabase`
+  on line 16: first implementation here
 
 error: aborting due to 1 previous error
 

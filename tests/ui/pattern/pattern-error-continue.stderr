@@ -1,68 +1,31 @@
-error[E0532]: expected tuple struct or tuple variant, found unit variant `A::D`
-  --> $DIR/pattern-error-continue.rs:20:9
-   |
-LL |     B(isize, isize),
-   |     --------------- similarly named tuple variant `B` defined here
-LL |     C(isize, isize, isize),
-LL |     D
-   |     - `A::D` defined here
-...
-LL |         A::D(_) => (),
-   |         ^^^^^^^
-   |
+error E0532: expected tuple struct or tuple variant, found unit variant `A::D`
+ at $DIR/pattern-error-continue.rs:20:9
+  on line 6: similarly named tuple variant `B` defined here
+  on line 8: `A::D` defined here
 help: use this syntax instead
-   |
-LL -         A::D(_) => (),
-LL +         A::D => (),
-   |
+ on line 20, column 8, replace with `A::D`
 help: a tuple variant with a similar name exists
-   |
-LL -         A::D(_) => (),
-LL +         A::B(_) => (),
-   |
+ on line 20, column 11, replace with `B`
 
-error[E0023]: this pattern has 3 fields, but the corresponding tuple variant has 2 fields
-  --> $DIR/pattern-error-continue.rs:19:14
-   |
-LL |     B(isize, isize),
-   |       -----  ----- tuple variant has 2 fields
-...
-LL |         A::B(_, _, _) => (),
-   |              ^  ^  ^ expected 2 fields, found 3
+error E0023: this pattern has 3 fields, but the corresponding tuple variant has 2 fields
+ at $DIR/pattern-error-continue.rs:19:14
+  on line 19, column 20: expected 2 fields, found 3
+  on line 6, column 14: tuple variant has 2 fields
 
-error[E0308]: mismatched types
-  --> $DIR/pattern-error-continue.rs:24:9
-   |
-LL |     match 'c' {
-   |           --- this expression has type `char`
-LL |         S { .. } => (),
-   |         ^^^^^^^^ expected `char`, found `S`
+error E0308: mismatched types
+ at $DIR/pattern-error-continue.rs:24:9: expected `char`, found `S`
+  on line 23, column 11: this expression has type `char`
 
-error[E0308]: mismatched types
-  --> $DIR/pattern-error-continue.rs:30:7
-   |
-LL |     f(true);
-   |     - ^^^^ expected `char`, found `bool`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/pattern-error-continue.rs:30:7: expected `char`, found `bool`
+  on line 30: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/pattern-error-continue.rs:15:4
-   |
-LL | fn f(_c: char) {}
-   |    ^ --------
+ at $DIR/pattern-error-continue.rs:15:4
 
-error[E0433]: cannot find type `E` in this scope
-  --> $DIR/pattern-error-continue.rs:35:9
-   |
-LL |         E::V => {}
-   |         ^ use of undeclared type `E`
-   |
+error E0433: cannot find type `E` in this scope
+ at $DIR/pattern-error-continue.rs:35:9: use of undeclared type `E`
 help: an enum with a similar name exists
-   |
-LL -         E::V => {}
-LL +         A::V => {}
-   |
+ on line 35, column 8, replace with `A`
 
 error: aborting due to 5 previous errors
 

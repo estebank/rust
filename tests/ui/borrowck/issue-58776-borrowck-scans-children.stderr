@@ -1,16 +1,8 @@
-error[E0506]: cannot assign to `greeting` because it is borrowed
-  --> $DIR/issue-58776-borrowck-scans-children.rs:5:5
-   |
-LL |     let res = (|| (|| &greeting)())();
-   |                --      -------- borrow occurs due to use in closure
-   |                |
-   |                `greeting` is borrowed here
-LL |
-LL |     greeting = "DEALLOCATED".to_string();
-   |     ^^^^^^^^ `greeting` is assigned to here but it was already borrowed
-...
-LL |     println!("thread result: {:?}", res);
-   |                                     --- borrow later used here
+error E0506: cannot assign to `greeting` because it is borrowed
+ at $DIR/issue-58776-borrowck-scans-children.rs:5:5: `greeting` is assigned to here but it was already borrowed
+  on line 3, column 16: `greeting` is borrowed here
+  on line 3, column 24: borrow occurs due to use in closure
+  on line 9, column 37: borrow later used here
 
 error: aborting due to 1 previous error
 

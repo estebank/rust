@@ -1,20 +1,11 @@
-error[E0425]: cannot find value `a` in this scope
-  --> $DIR/error-count.rs:6:5
-   |
-LL |     a;
-   |     ^ not found in this scope
+error E0425: cannot find value `a` in this scope
+ at $DIR/error-count.rs:6:5: not found in this scope
 
-error[E0609]: no field `lorem` on type `&'static str`
-  --> $DIR/error-count.rs:7:8
-   |
-LL |     "".lorem;
-   |        ^^^^^ unknown field
+error E0609: no field `lorem` on type `&'static str`
+ at $DIR/error-count.rs:7:8: unknown field
 
-error[E0609]: no field `ipsum` on type `&'static str`
-  --> $DIR/error-count.rs:8:8
-   |
-LL |     "".ipsum;
-   |        ^^^^^ unknown field
+error E0609: no field `ipsum` on type `&'static str`
+ at $DIR/error-count.rs:8:8: unknown field
 
 error: aborting due to 3 previous errors
 

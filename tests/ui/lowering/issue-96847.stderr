@@ -1,8 +1,5 @@
-error[E0522]: definition of an unknown lang item: `foo`
-  --> $DIR/issue-96847.rs:10:9
-   |
-LL |         #![lang="foo"]
-   |         ^^^^^^^^^^^^^^ definition of unknown lang item `foo`
+error E0522: definition of an unknown lang item: `foo`
+ at $DIR/issue-96847.rs:10:9: definition of unknown lang item `foo`
 
 error: aborting due to 1 previous error
 

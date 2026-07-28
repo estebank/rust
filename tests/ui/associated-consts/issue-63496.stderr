@@ -1,20 +1,10 @@
-error[E0790]: cannot refer to the associated constant on trait without specifying the corresponding `impl` type
-  --> $DIR/issue-63496.rs:4:21
-   |
-LL |     const C: usize;
-   |     -------------- `A::C` defined here
-LL |
-LL |     fn f() -> ([u8; A::C], [u8; A::C]);
-   |                     ^^^^ cannot refer to the associated constant of trait
+error E0790: cannot refer to the associated constant on trait without specifying the corresponding `impl` type
+ at $DIR/issue-63496.rs:4:21: cannot refer to the associated constant of trait
+  on line 2: `A::C` defined here
 
-error[E0790]: cannot refer to the associated constant on trait without specifying the corresponding `impl` type
-  --> $DIR/issue-63496.rs:4:33
-   |
-LL |     const C: usize;
-   |     -------------- `A::C` defined here
-LL |
-LL |     fn f() -> ([u8; A::C], [u8; A::C]);
-   |                                 ^^^^ cannot refer to the associated constant of trait
+error E0790: cannot refer to the associated constant on trait without specifying the corresponding `impl` type
+ at $DIR/issue-63496.rs:4:33: cannot refer to the associated constant of trait
+  on line 2: `A::C` defined here
 
 error: aborting due to 2 previous errors
 

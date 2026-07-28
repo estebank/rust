@@ -1,16 +1,8 @@
-error[E0603]: enum `Y` is private
-  --> $DIR/export-tag-variant.rs:7:26
-   |
-LL | fn main() { let z = foo::Y::Y1; }
-   |                          ^  -- unit variant `Y1` is not publicly re-exported
-   |                          |
-   |                          private enum
-   |
+error E0603: enum `Y` is private
+ at $DIR/export-tag-variant.rs:7:26: private enum
+  on line 7, column 29: unit variant `Y1` is not publicly re-exported
 note: the enum `Y` is defined here
-  --> $DIR/export-tag-variant.rs:4:5
-   |
-LL |     enum Y { Y1 }
-   |     ^^^^^^
+ at $DIR/export-tag-variant.rs:4:5
 
 error: aborting due to 1 previous error
 

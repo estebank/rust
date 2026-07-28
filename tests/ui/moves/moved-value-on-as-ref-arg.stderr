@@ -1,78 +1,36 @@
-error[E0382]: use of moved value: `bar`
-  --> $DIR/moved-value-on-as-ref-arg.rs:27:16
-   |
-LL |     let bar = Bar;
-   |         --- move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
-LL |     foo(bar);
-   |         --- value moved here
-LL |     let _baa = bar;
-   |                ^^^ value used here after move
-   |
+error E0382: use of moved value: `bar`
+ at $DIR/moved-value-on-as-ref-arg.rs:27:16: value used here after move
+  on line 25, column 9: move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
+  on line 26, column 9: value moved here
 help: consider borrowing `bar`
-   |
-LL |     foo(&bar);
-   |         +
+ on line 26, column 8, add `&`
 
-error[E0382]: use of moved value: `bar`
-  --> $DIR/moved-value-on-as-ref-arg.rs:30:16
-   |
-LL |     let mut bar = Bar;
-   |         ------- move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
-LL |     qux(bar);
-   |         --- value moved here
-LL |     let _baa = bar;
-   |                ^^^ value used here after move
-   |
+error E0382: use of moved value: `bar`
+ at $DIR/moved-value-on-as-ref-arg.rs:30:16: value used here after move
+  on line 28, column 9: move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
+  on line 29, column 9: value moved here
 note: if `Bar` implemented `Clone`, you could clone the value
-  --> $DIR/moved-value-on-as-ref-arg.rs:5:1
-   |
-LL | struct Bar;
-   | ^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     qux(bar);
-   |         --- you could clone this value
+ at $DIR/moved-value-on-as-ref-arg.rs:5:1: consider implementing `Clone` for this type
+  on line 29, column 9: you could clone this value
 help: consider mutably borrowing `bar`
-   |
-LL |     qux(&mut bar);
-   |         ++++
+ on line 29, column 8, add `&mut `
 
-error[E0382]: use of moved value: `bar`
-  --> $DIR/moved-value-on-as-ref-arg.rs:33:16
-   |
-LL |     let bar = Bar;
-   |         --- move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
-LL |     bat(bar);
-   |         --- value moved here
-LL |     let _baa = bar;
-   |                ^^^ value used here after move
-   |
+error E0382: use of moved value: `bar`
+ at $DIR/moved-value-on-as-ref-arg.rs:33:16: value used here after move
+  on line 31, column 9: move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
+  on line 32, column 9: value moved here
 help: consider borrowing `bar`
-   |
-LL |     bat(&bar);
-   |         +
+ on line 32, column 8, add `&`
 
-error[E0382]: use of moved value: `bar`
-  --> $DIR/moved-value-on-as-ref-arg.rs:36:16
-   |
-LL |     let mut bar = Bar;
-   |         ------- move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
-LL |     baz(bar);
-   |         --- value moved here
-LL |     let _baa = bar;
-   |                ^^^ value used here after move
-   |
+error E0382: use of moved value: `bar`
+ at $DIR/moved-value-on-as-ref-arg.rs:36:16: value used here after move
+  on line 34, column 9: move occurs because `bar` has type `Bar`, which does not implement the `Copy` trait
+  on line 35, column 9: value moved here
 note: if `Bar` implemented `Clone`, you could clone the value
-  --> $DIR/moved-value-on-as-ref-arg.rs:5:1
-   |
-LL | struct Bar;
-   | ^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     baz(bar);
-   |         --- you could clone this value
+ at $DIR/moved-value-on-as-ref-arg.rs:5:1: consider implementing `Clone` for this type
+  on line 35, column 9: you could clone this value
 help: consider mutably borrowing `bar`
-   |
-LL |     baz(&mut bar);
-   |         ++++
+ on line 35, column 8, add `&mut `
 
 error: aborting due to 4 previous errors
 

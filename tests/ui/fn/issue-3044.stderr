@@ -1,20 +1,11 @@
-error[E0061]: this method takes 2 arguments but 1 argument was supplied
-  --> $DIR/issue-3044.rs:3:23
-   |
-LL |       needlesArr.iter().fold(|x, y| {
-   |  _______________________^^^^-
-LL | |
-LL | |     });
-   | |______- argument #2 is missing
-   |
+error E0061: this method takes 2 arguments but 1 argument was supplied
+ at $DIR/issue-3044.rs:3:23
+  on line 3, column 27 to line 5, column 7: argument #2 is missing
 note: method defined here
-  --> $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
 help: provide the argument
-   |
-LL |     needlesArr.iter().fold(|x, y| {
-LL |
-LL ~     }, /* f */);
-   |
+ on line 3, column 26, replace with `(|x, y| {
+    }, /* f */)`
 
 error: aborting due to 1 previous error
 

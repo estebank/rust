@@ -1,8 +1,5 @@
 error: expected one of `,` or `>`, found `{`
-  --> $DIR/unexpected-token.rs:5:35
-   |
-LL | fn hello() -> impl Sized + use<'a {}> {}
-   |                                   ^ expected one of `,` or `>`
+ at $DIR/unexpected-token.rs:5:35: expected one of `,` or `>`
 
 error: aborting due to 1 previous error
 

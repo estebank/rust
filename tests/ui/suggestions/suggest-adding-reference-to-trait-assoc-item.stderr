@@ -1,24 +1,12 @@
-error[E0277]: the trait bound `&mut usize: Default` is not satisfied
-  --> $DIR/suggest-adding-reference-to-trait-assoc-item.rs:13:9
-   |
-LL |     foo(Default::default());
-   |         ^^^^^^^^^^^^^^^^^^ the trait `Default` is not implemented for `&mut usize`
-   |
+error E0277: the trait bound `&mut usize: Default` is not satisfied
+ at $DIR/suggest-adding-reference-to-trait-assoc-item.rs:13:9: the trait `Default` is not implemented for `&mut usize`
 help: consider mutably borrowing here
-   |
-LL |     foo(&mut Default::default());
-   |         ++++
+ on line 13, column 8, add `&mut `
 
-error[E0277]: the trait bound `&usize: Default` is not satisfied
-  --> $DIR/suggest-adding-reference-to-trait-assoc-item.rs:14:9
-   |
-LL |     bar(Default::default());
-   |         ^^^^^^^^^^^^^^^^^^ the trait `Default` is not implemented for `&usize`
-   |
+error E0277: the trait bound `&usize: Default` is not satisfied
+ at $DIR/suggest-adding-reference-to-trait-assoc-item.rs:14:9: the trait `Default` is not implemented for `&usize`
 help: consider borrowing here
-   |
-LL |     bar(&Default::default());
-   |         +
+ on line 14, column 8, add `&`
 
 error: aborting due to 2 previous errors
 

@@ -1,14 +1,7 @@
 error: type `diamond_priv_dep::SharedInType` from private dependency 'diamond_priv_dep' in public interface
-  --> $DIR/diamond_deps.rs:42:5
-   |
-LL |     pub f: diamond_priv_dep::SharedInType
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/diamond_deps.rs:42:5
 note: the lint level is defined here
-  --> $DIR/diamond_deps.rs:27:9
-   |
-LL | #![deny(exported_private_dependencies)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/diamond_deps.rs:27:9
 
 error: aborting due to 1 previous error
 

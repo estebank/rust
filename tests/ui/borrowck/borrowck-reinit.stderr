@@ -1,18 +1,9 @@
-error[E0382]: use of moved value: `x`
-  --> $DIR/borrowck-reinit.rs:6:16
-   |
-LL |     let mut x = Box::new(0);
-   |         ----- move occurs because `x` has type `Box<i32>`, which does not implement the `Copy` trait
-...
-LL |     drop(x);
-   |          - value moved here
-LL |     let _ = (1,x);
-   |                ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/borrowck-reinit.rs:6:16: value used here after move
+  on line 2, column 9: move occurs because `x` has type `Box<i32>`, which does not implement the `Copy` trait
+  on line 5, column 10: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     drop(x.clone());
-   |           ++++++++
+ on line 5, column 10, add `.clone()`
 
 error: aborting due to 1 previous error
 

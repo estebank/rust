@@ -1,22 +1,11 @@
-error[E0499]: cannot borrow `v` as mutable more than once at a time
-  --> $DIR/one_line.rs:3:12
-   |
-LL |     v.push(v.pop().unwrap());
-   |     - ---- ^ second mutable borrow occurs here
-   |     | |
-   |     | first borrow later used by call
-   |     first mutable borrow occurs here
-   |
+error E0499: cannot borrow `v` as mutable more than once at a time
+ at $DIR/one_line.rs:3:12: second mutable borrow occurs here
+  on line 3: first mutable borrow occurs here
+  on line 3, column 7: first borrow later used by call
 help: try adding a local storing this argument...
-  --> $DIR/one_line.rs:3:12
-   |
-LL |     v.push(v.pop().unwrap());
-   |            ^^^^^^^
+ at $DIR/one_line.rs:3:12
 help: ...and then using that local as the argument to this call
-  --> $DIR/one_line.rs:3:5
-   |
-LL |     v.push(v.pop().unwrap());
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/one_line.rs:3:5
 
 error: aborting due to 1 previous error
 

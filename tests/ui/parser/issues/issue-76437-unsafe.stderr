@@ -1,14 +1,7 @@
 error: expected one of `extern` or `fn`, found keyword `pub`
-  --> $DIR/issue-76437-unsafe.rs:4:12
-   |
-LL |     unsafe pub fn t() {}
-   |            ^^^ expected one of `extern` or `fn`
-   |
+ at $DIR/issue-76437-unsafe.rs:4:12: expected one of `extern` or `fn`
 help: visibility `pub` must come before `unsafe`
-   |
-LL -     unsafe pub fn t() {}
-LL +     pub unsafe fn t() {}
-   |
+ on line 4, column 4, replace with `pub unsafe`
 
 error: aborting due to 1 previous error
 

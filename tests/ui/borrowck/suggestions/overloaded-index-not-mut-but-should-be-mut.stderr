@@ -1,37 +1,17 @@
-error[E0596]: cannot borrow `*string` as mutable, as it is behind a `&` reference
-  --> $DIR/overloaded-index-not-mut-but-should-be-mut.rs:7:5
-   |
-LL |     string.push_str("test");
-   |     ^^^^^^ `string` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*string` as mutable, as it is behind a `&` reference
+ at $DIR/overloaded-index-not-mut-but-should-be-mut.rs:7:5: `string` is a `&` reference, so it cannot be borrowed as mutable
 help: consider using `get_mut`
-   |
-LL -     let string = &map[&0];
-LL +     let string = map.get_mut(&0).unwrap();
-   |
+ on line 6, column 17, replace with `map.get_mut(&0).unwrap()`
 
-error[E0596]: cannot borrow `*string` as mutable, as it is behind a `&` reference
-  --> $DIR/overloaded-index-not-mut-but-should-be-mut.rs:14:5
-   |
-LL |     string.push_str("test");
-   |     ^^^^^^ `string` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*string` as mutable, as it is behind a `&` reference
+ at $DIR/overloaded-index-not-mut-but-should-be-mut.rs:14:5: `string` is a `&` reference, so it cannot be borrowed as mutable
 help: consider using `get_mut`
-   |
-LL -     let string = &map[&0];
-LL +     let string = map.get_mut(&0).unwrap();
-   |
+ on line 13, column 17, replace with `map.get_mut(&0).unwrap()`
 
-error[E0596]: cannot borrow `*string` as mutable, as it is behind a `&` reference
-  --> $DIR/overloaded-index-not-mut-but-should-be-mut.rs:19:5
-   |
-LL |     string.push_str("test");
-   |     ^^^^^^ `string` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*string` as mutable, as it is behind a `&` reference
+ at $DIR/overloaded-index-not-mut-but-should-be-mut.rs:19:5: `string` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL |     let string = &mut vec[0];
-   |                   +++
+ on line 18, column 18, add `mut `
 
 error: aborting due to 3 previous errors
 

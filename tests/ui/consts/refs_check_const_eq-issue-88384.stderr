@@ -1,26 +1,12 @@
-error[E0741]: `CompileTimeSettings` must implement `ConstParamTy` to be used as the type of a const generic parameter
-  --> $DIR/refs_check_const_eq-issue-88384.rs:9:21
-   |
-LL | struct Foo<const T: CompileTimeSettings>;
-   |                     ^^^^^^^^^^^^^^^^^^^
-   |
+error E0741: `CompileTimeSettings` must implement `ConstParamTy` to be used as the type of a const generic parameter
+ at $DIR/refs_check_const_eq-issue-88384.rs:9:21
 help: add `#[derive(ConstParamTy)]` to the struct
-   |
-LL + #[derive(ConstParamTy)]
-LL | struct CompileTimeSettings {
-   |
+ on line 5, column 1, add `#[derive(ConstParamTy)]`
 
-error[E0741]: `CompileTimeSettings` must implement `ConstParamTy` to be used as the type of a const generic parameter
-  --> $DIR/refs_check_const_eq-issue-88384.rs:12:15
-   |
-LL | impl<const T: CompileTimeSettings> Foo<T> {
-   |               ^^^^^^^^^^^^^^^^^^^
-   |
+error E0741: `CompileTimeSettings` must implement `ConstParamTy` to be used as the type of a const generic parameter
+ at $DIR/refs_check_const_eq-issue-88384.rs:12:15
 help: add `#[derive(ConstParamTy)]` to the struct
-   |
-LL + #[derive(ConstParamTy)]
-LL | struct CompileTimeSettings {
-   |
+ on line 5, column 1, add `#[derive(ConstParamTy)]`
 
 error: aborting due to 2 previous errors
 

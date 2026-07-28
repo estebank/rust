@@ -1,27 +1,15 @@
 error: cast cannot be followed by a postfix match
-  --> $DIR/match-after-as.rs:4:5
-   |
-LL |     1 as i32.match {};
-   |     ^^^^^^^^
-   |
+ at $DIR/match-after-as.rs:4:5
 help: try surrounding the expression in parentheses
-   |
-LL |     (1 as i32).match {};
-   |     +        +
+ on line 4, column 4, add `(`
 
-error[E0004]: non-exhaustive patterns: type `i32` is non-empty
-  --> $DIR/match-after-as.rs:4:5
-   |
-LL |     1 as i32.match {};
-   |     ^^^^^^^^
-   |
-   = note: the matched value is of type `i32`
+error E0004: non-exhaustive patterns: type `i32` is non-empty
+ at $DIR/match-after-as.rs:4:5
+note: the matched value is of type `i32`
 help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
-   |
-LL ~     1 as i32.match {
-LL +         _ => todo!(),
-LL ~     };
-   |
+ on line 4, column 18, replace with ` {
+        _ => todo!(),
+    }`
 
 error: aborting due to 2 previous errors
 

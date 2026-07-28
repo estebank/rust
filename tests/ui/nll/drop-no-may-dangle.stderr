@@ -1,25 +1,12 @@
-error[E0506]: cannot assign to `v[_]` because it is borrowed
-  --> $DIR/drop-no-may-dangle.rs:18:9
-   |
-LL |     let p: WrapMayNotDangle<&usize> = WrapMayNotDangle { value: &v[0] };
-   |                                                                 ----- `v[_]` is borrowed here
-...
-LL |         v[0] += 1;
-   |         ^^^^^^^^^ `v[_]` is assigned to here but it was already borrowed
-...
-LL | }
-   | - borrow might be used here, when `p` is dropped and runs the `Drop` code for type `WrapMayNotDangle`
+error E0506: cannot assign to `v[_]` because it is borrowed
+ at $DIR/drop-no-may-dangle.rs:18:9: `v[_]` is assigned to here but it was already borrowed
+  on line 13, column 65: `v[_]` is borrowed here
+  on line 22: borrow might be used here, when `p` is dropped and runs the `Drop` code for type `WrapMayNotDangle`
 
-error[E0506]: cannot assign to `v[_]` because it is borrowed
-  --> $DIR/drop-no-may-dangle.rs:21:5
-   |
-LL |     let p: WrapMayNotDangle<&usize> = WrapMayNotDangle { value: &v[0] };
-   |                                                                 ----- `v[_]` is borrowed here
-...
-LL |     v[0] += 1;
-   |     ^^^^^^^^^ `v[_]` is assigned to here but it was already borrowed
-LL | }
-   | - borrow might be used here, when `p` is dropped and runs the `Drop` code for type `WrapMayNotDangle`
+error E0506: cannot assign to `v[_]` because it is borrowed
+ at $DIR/drop-no-may-dangle.rs:21:5: `v[_]` is assigned to here but it was already borrowed
+  on line 13, column 65: `v[_]` is borrowed here
+  on line 22: borrow might be used here, when `p` is dropped and runs the `Drop` code for type `WrapMayNotDangle`
 
 error: aborting due to 2 previous errors
 

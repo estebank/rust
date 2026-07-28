@@ -1,73 +1,32 @@
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:5:8
-   |
-LL |     a: Trait,
-   |        ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:5:8
 help: you might be missing a type parameter
-   |
-LL ~ struct Foo1<T: Trait> {
-LL ~     a: T,
-   |
+ on line 4, column 11, add `<T: Trait>`
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:12:8
-   |
-LL |     b: Trait,
-   |        ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:12:8
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL |     b: dyn Trait,
-   |        +++
+ on line 12, column 7, add `dyn `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:17:7
-   |
-LL |     A(Trait),
-   |       ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:17:7
 help: you might be missing a type parameter
-   |
-LL ~ enum Enum1<T: Trait> {
-LL ~     A(T),
-   |
+ on line 16, column 10, add `<T: Trait>`
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:24:7
-   |
-LL |     B(Trait),
-   |       ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:24:7
 help: you might be missing a type parameter
-   |
-LL ~ enum Enum2<T: Trait> {
-LL |     A(u32),
-LL ~     B(T),
-   |
+ on line 22, column 10, add `<T: Trait>`
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:35:8
-   |
-LL |     f: Trait,
-   |        ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:35:8
 help: you might be missing a type parameter
-   |
-LL ~ struct HasGenerics<T, U: Trait> {
-LL ~     f: U,
-   |
+ on line 34, column 20, add `, U: Trait`
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:31:5
-   |
-LL |     Trait:, {}
-   |     ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-struct-or-union-add-generic-impl-trait.rs:31:5
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL |     dyn Trait:, {}
-   |     +++
+ on line 31, column 4, add `dyn `
 
 error: aborting due to 6 previous errors
 

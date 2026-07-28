@@ -1,18 +1,10 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/issue-11493.rs:6:35
-   |
-LL |     let y = x.as_ref().unwrap_or(&id(5));
-   |                                   ^^^^^ - temporary value is freed at the end of this statement
-   |                                   |
-   |                                   creates a temporary value which is freed while still in use
-LL |     let _ = &y;
-   |             -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/issue-11493.rs:6:35: creates a temporary value which is freed while still in use
+  on line 6, column 41: temporary value is freed at the end of this statement
+  on line 7, column 13: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = id(5);
-LL ~     let y = x.as_ref().unwrap_or(&binding);
-   |
+ on line 6, add `let binding = id(5);
+    `
 
 error: aborting due to 1 previous error
 

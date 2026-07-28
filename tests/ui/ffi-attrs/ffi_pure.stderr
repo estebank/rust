@@ -1,37 +1,19 @@
 error: the `ffi_pure` attribute cannot be used on functions
-  --> $DIR/ffi_pure.rs:4:10
-   |
-LL | #[unsafe(ffi_pure)]
-   |          ^^^^^^^^
-   |
-   = help: the `ffi_pure` attribute can only be applied to foreign functions
+ at $DIR/ffi_pure.rs:4:10
+help: the `ffi_pure` attribute can only be applied to foreign functions
 
 error: the `ffi_pure` attribute cannot be used on macro defs
-  --> $DIR/ffi_pure.rs:7:10
-   |
-LL | #[unsafe(ffi_pure)]
-   |          ^^^^^^^^
-   |
-   = help: the `ffi_pure` attribute can only be applied to foreign functions
+ at $DIR/ffi_pure.rs:7:10
+help: the `ffi_pure` attribute can only be applied to foreign functions
 
 error: the `ffi_pure` attribute cannot be used on foreign statics
-  --> $DIR/ffi_pure.rs:13:14
-   |
-LL |     #[unsafe(ffi_pure)]
-   |              ^^^^^^^^
-   |
-   = help: the `ffi_pure` attribute can only be applied to foreign functions
+ at $DIR/ffi_pure.rs:13:14
+help: the `ffi_pure` attribute can only be applied to foreign functions
 
 error: unsafe attribute used without unsafe
-  --> $DIR/ffi_pure.rs:16:7
-   |
-LL |     #[ffi_pure]
-   |       ^^^^^^^^ usage of unsafe attribute
-   |
+ at $DIR/ffi_pure.rs:16:7: usage of unsafe attribute
 help: wrap the attribute in `unsafe(...)`
-   |
-LL |     #[unsafe(ffi_pure)]
-   |       +++++++        +
+ on line 16, column 6, add `unsafe(`
 
 error: aborting due to 4 previous errors
 

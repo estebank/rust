@@ -1,19 +1,10 @@
-error[E0530]: match bindings cannot shadow const parameters
-  --> $DIR/shadow-const-param.rs:7:9
-   |
-LL | fn foo<const N: i32>(i: i32) -> bool {
-   |              - the const parameter `N` is defined here
-LL |     match i {
-LL |         N @ _ => true,
-   |         ^ cannot be named the same as a const parameter
+error E0530: match bindings cannot shadow const parameters
+ at $DIR/shadow-const-param.rs:7:9: cannot be named the same as a const parameter
+  on line 5, column 14: the const parameter `N` is defined here
 
-error[E0530]: let bindings cannot shadow const parameters
-  --> $DIR/shadow-const-param.rs:13:9
-   |
-LL | fn bar<const N: i32>(i: i32) -> bool {
-   |              - the const parameter `N` is defined here
-LL |     let N @ _ = 0;
-   |         ^ cannot be named the same as a const parameter
+error E0530: let bindings cannot shadow const parameters
+ at $DIR/shadow-const-param.rs:13:9: cannot be named the same as a const parameter
+  on line 12, column 14: the const parameter `N` is defined here
 
 error: aborting due to 2 previous errors
 

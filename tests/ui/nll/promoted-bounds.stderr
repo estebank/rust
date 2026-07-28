@@ -1,15 +1,8 @@
-error[E0597]: `l` does not live long enough
-  --> $DIR/promoted-bounds.rs:19:17
-   |
-LL |     let ptr = {
-   |         --- borrow later stored here
-LL |         let l = 3;
-   |             - binding `l` declared here
-LL |         let b = &l;
-   |                 ^^ borrowed value does not live long enough
-...
-LL |     };
-   |     - `l` dropped here while still borrowed
+error E0597: `l` does not live long enough
+ at $DIR/promoted-bounds.rs:19:17: borrowed value does not live long enough
+  on line 17, column 9: borrow later stored here
+  on line 18, column 13: binding `l` declared here
+  on line 22: `l` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

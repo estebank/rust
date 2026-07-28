@@ -1,47 +1,23 @@
-error[E0382]: use of partially moved value: `thefoo`
-  --> $DIR/uninhabited-granular-moves.rs:20:11
-   |
-LL |         Foo::Bar((a, _)) => { }
-   |                   - value partially moved here
-...
-LL |     match thefoo {
-   |           ^^^^^^ value used here after partial move
-   |
-   = note: partial move occurs because value has type `Box<u64>`, which does not implement the `Copy` trait
+error E0382: use of partially moved value: `thefoo`
+ at $DIR/uninhabited-granular-moves.rs:20:11: value used here after partial move
+  on line 17, column 19: value partially moved here
+note: partial move occurs because value has type `Box<u64>`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         Foo::Bar((ref a, _)) => { }
-   |                   +++
+ on line 17, column 18, add `ref `
 
-error[E0382]: use of partially moved value: `thefoo`
-  --> $DIR/uninhabited-granular-moves.rs:30:11
-   |
-LL |         Foo::Bar((a, _)) => { }
-   |                   - value partially moved here
-...
-LL |     match thefoo {
-   |           ^^^^^^ value used here after partial move
-   |
-   = note: partial move occurs because value has type `Box<u64>`, which does not implement the `Copy` trait
+error E0382: use of partially moved value: `thefoo`
+ at $DIR/uninhabited-granular-moves.rs:30:11: value used here after partial move
+  on line 27, column 19: value partially moved here
+note: partial move occurs because value has type `Box<u64>`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         Foo::Bar((ref a, _)) => { }
-   |                   +++
+ on line 27, column 18, add `ref `
 
-error[E0382]: use of partially moved value: `thefoo`
-  --> $DIR/uninhabited-granular-moves.rs:41:11
-   |
-LL |         Foo::Bar((a, _)) => { }
-   |                   - value partially moved here
-...
-LL |     match thefoo {
-   |           ^^^^^^ value used here after partial move
-   |
-   = note: partial move occurs because value has type `Box<u64>`, which does not implement the `Copy` trait
+error E0382: use of partially moved value: `thefoo`
+ at $DIR/uninhabited-granular-moves.rs:41:11: value used here after partial move
+  on line 38, column 19: value partially moved here
+note: partial move occurs because value has type `Box<u64>`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         Foo::Bar((ref a, _)) => { }
-   |                   +++
+ on line 38, column 18, add `ref `
 
 error: aborting due to 3 previous errors
 

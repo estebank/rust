@@ -1,14 +1,8 @@
-error[E0597]: `tmp0` does not live long enough
-  --> $DIR/regions-close-over-type-parameter-2.rs:23:20
-   |
-LL |         let tmp0 = 3;
-   |             ---- binding `tmp0` declared here
-LL |         let tmp1 = &tmp0;
-   |                    ^^^^^ borrowed value does not live long enough
-LL |         repeater3(tmp1)
-   |         --------------- borrow later captured here by trait object
-LL |     };
-   |     - `tmp0` dropped here while still borrowed
+error E0597: `tmp0` does not live long enough
+ at $DIR/regions-close-over-type-parameter-2.rs:23:20: borrowed value does not live long enough
+  on line 22, column 13: binding `tmp0` declared here
+  on line 24: borrow later captured here by trait object
+  on line 25: `tmp0` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

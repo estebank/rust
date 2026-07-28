@@ -1,24 +1,10 @@
-error[E0373]: closure may outlive the current function, but it borrows `b`, which is owned by the current function
-  --> $DIR/structural_identity_dependent_reborrows.rs:16:5
-   |
-LL |     || {
-   |     ^^ may outlive borrowed value `b`
-LL |
-LL |         expected::<&'a ()>(b);
-   |                            - `b` is borrowed here
-   |
+error E0373: closure may outlive the current function, but it borrows `b`, which is owned by the current function
+ at $DIR/structural_identity_dependent_reborrows.rs:16:5: may outlive borrowed value `b`
+  on line 18, column 28: `b` is borrowed here
 note: closure is returned here
-  --> $DIR/structural_identity_dependent_reborrows.rs:16:5
-   |
-LL | /     || {
-LL | |
-LL | |         expected::<&'a ()>(b);
-LL | |     }
-   | |_____^
+ at $DIR/structural_identity_dependent_reborrows.rs:16:5 to 19:6
 help: to force the closure to take ownership of `b` (and any other referenced variables), use the `move` keyword
-   |
-LL |     move || {
-   |     ++++
+ on line 16, column 4, add `move `
 
 error: aborting due to 1 previous error
 

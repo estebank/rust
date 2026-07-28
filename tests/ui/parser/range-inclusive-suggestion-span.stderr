@@ -1,333 +1,149 @@
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:10:20
-   |
-LL | fn dot_dot_dot() { ··· }
-   |                    ^^^
-   |
-   = note: character appears 2 more times
+ at $DIR/range-inclusive-suggestion-span.rs:10:20
+note: character appears 2 more times
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot() { ··· }
-LL + fn dot_dot_dot() { ... }
-   |
+ on line 10, column 19, replace with `...`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:10:21
-   |
-LL | fn dot_dot_dot() { ··· }
-   |                     ^^
-   |
-   = note: character appears once more
+ at $DIR/range-inclusive-suggestion-span.rs:10:21
+note: character appears once more
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot() { ··· }
-LL + fn dot_dot_dot() { ·.. }
-   |
+ on line 10, column 20, replace with `..`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:10:22
-   |
-LL | fn dot_dot_dot() { ··· }
-   |                      ^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:10:22
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot() { ··· }
-LL + fn dot_dot_dot() { ··. }
-   |
+ on line 10, column 21, replace with `.`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:17:23
-   |
-LL | fn dot_dot_dot_eq() { ···= }
-   |                       ^^^
-   |
-   = note: character appears 2 more times
+ at $DIR/range-inclusive-suggestion-span.rs:17:23
+note: character appears 2 more times
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot_eq() { ···= }
-LL + fn dot_dot_dot_eq() { ...= }
-   |
+ on line 17, column 22, replace with `...`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:17:24
-   |
-LL | fn dot_dot_dot_eq() { ···= }
-   |                        ^^
-   |
-   = note: character appears once more
+ at $DIR/range-inclusive-suggestion-span.rs:17:24
+note: character appears once more
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot_eq() { ···= }
-LL + fn dot_dot_dot_eq() { ·..= }
-   |
+ on line 17, column 23, replace with `..`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:17:25
-   |
-LL | fn dot_dot_dot_eq() { ···= }
-   |                         ^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:17:25
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot_eq() { ···= }
-LL + fn dot_dot_dot_eq() { ··.= }
-   |
+ on line 17, column 24, replace with `.`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:24:23
-   |
-LL | fn dot_dot_dot_gt() { ···> }
-   |                       ^^^
-   |
-   = note: character appears 2 more times
+ at $DIR/range-inclusive-suggestion-span.rs:24:23
+note: character appears 2 more times
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot_gt() { ···> }
-LL + fn dot_dot_dot_gt() { ...> }
-   |
+ on line 24, column 22, replace with `...`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:24:24
-   |
-LL | fn dot_dot_dot_gt() { ···> }
-   |                        ^^
-   |
-   = note: character appears once more
+ at $DIR/range-inclusive-suggestion-span.rs:24:24
+note: character appears once more
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot_gt() { ···> }
-LL + fn dot_dot_dot_gt() { ·..> }
-   |
+ on line 24, column 23, replace with `..`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:24:25
-   |
-LL | fn dot_dot_dot_gt() { ···> }
-   |                         ^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:24:25
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_dot_gt() { ···> }
-LL + fn dot_dot_dot_gt() { ··.> }
-   |
+ on line 24, column 24, replace with `.`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:32:19
-   |
-LL | fn dot_dot_eq() { ··= }
-   |                   ^^
-   |
-   = note: character appears once more
+ at $DIR/range-inclusive-suggestion-span.rs:32:19
+note: character appears once more
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_eq() { ··= }
-LL + fn dot_dot_eq() { ..= }
-   |
+ on line 32, column 18, replace with `..`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:32:20
-   |
-LL | fn dot_dot_eq() { ··= }
-   |                    ^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:32:20
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_eq() { ··= }
-LL + fn dot_dot_eq() { ·.= }
-   |
+ on line 32, column 19, replace with `.`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:37:22
-   |
-LL | fn dot_dot_eq_eq() { ··== }
-   |                      ^^
-   |
-   = note: character appears once more
+ at $DIR/range-inclusive-suggestion-span.rs:37:22
+note: character appears once more
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_eq_eq() { ··== }
-LL + fn dot_dot_eq_eq() { ..== }
-   |
+ on line 37, column 21, replace with `..`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:37:23
-   |
-LL | fn dot_dot_eq_eq() { ··== }
-   |                       ^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:37:23
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_eq_eq() { ··== }
-LL + fn dot_dot_eq_eq() { ·.== }
-   |
+ on line 37, column 22, replace with `.`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:42:22
-   |
-LL | fn dot_dot_eq_gt() { ··=> }
-   |                      ^^
-   |
-   = note: character appears once more
+ at $DIR/range-inclusive-suggestion-span.rs:42:22
+note: character appears once more
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_eq_gt() { ··=> }
-LL + fn dot_dot_eq_gt() { ..=> }
-   |
+ on line 42, column 21, replace with `..`
 
 error: unknown start of token: \u{b7}
-  --> $DIR/range-inclusive-suggestion-span.rs:42:23
-   |
-LL | fn dot_dot_eq_gt() { ··=> }
-   |                       ^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:42:23
 help: Unicode character '·' (Middle Dot) looks like '.' (Period), but it is not
-   |
-LL - fn dot_dot_eq_gt() { ··=> }
-LL + fn dot_dot_eq_gt() { ·.=> }
-   |
+ on line 42, column 22, replace with `.`
 
 error: unexpected token: `...`
-  --> $DIR/range-inclusive-suggestion-span.rs:10:20
-   |
-LL | fn dot_dot_dot() { ··· }
-   |                    ^^^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:10:20
 help: use `..` for an exclusive range
-   |
-LL - fn dot_dot_dot() { ··· }
-LL + fn dot_dot_dot() { .. }
-   |
+ on line 10, column 19, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL - fn dot_dot_dot() { ··· }
-LL + fn dot_dot_dot() { ..= }
-   |
+ on line 10, column 19, replace with `..=`
 
-error[E0586]: inclusive range with no end
-  --> $DIR/range-inclusive-suggestion-span.rs:10:20
-   |
-LL | fn dot_dot_dot() { ··· }
-   |                    ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/range-inclusive-suggestion-span.rs:10:20
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - fn dot_dot_dot() { ··· }
-LL + fn dot_dot_dot() { .. }
-   |
+ on line 10, column 19, replace with `..`
 
 error: unexpected token: `...`
-  --> $DIR/range-inclusive-suggestion-span.rs:17:23
-   |
-LL | fn dot_dot_dot_eq() { ···= }
-   |                       ^^^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:17:23
 help: use `..` for an exclusive range
-   |
-LL - fn dot_dot_dot_eq() { ···= }
-LL + fn dot_dot_dot_eq() { ..= }
-   |
+ on line 17, column 22, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL - fn dot_dot_dot_eq() { ···= }
-LL + fn dot_dot_dot_eq() { ..== }
-   |
+ on line 17, column 22, replace with `..=`
 
 error: unexpected `=` after inclusive range
-  --> $DIR/range-inclusive-suggestion-span.rs:17:23
-   |
-LL | fn dot_dot_dot_eq() { ···= }
-   |                       ^^^^
-   |
-   = note: inclusive ranges end with a single equals sign (`..=`)
+ at $DIR/range-inclusive-suggestion-span.rs:17:23
+note: inclusive ranges end with a single equals sign (`..=`)
 help: use `..=` instead
-   |
-LL - fn dot_dot_dot_eq() { ···= }
-LL + fn dot_dot_dot_eq() { ..= }
-   |
+ on line 17, column 22, replace with `..=`
 
 error: unexpected token: `...`
-  --> $DIR/range-inclusive-suggestion-span.rs:24:23
-   |
-LL | fn dot_dot_dot_gt() { ···> }
-   |                       ^^^
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:24:23
 help: use `..` for an exclusive range
-   |
-LL - fn dot_dot_dot_gt() { ···> }
-LL + fn dot_dot_dot_gt() { ..> }
-   |
+ on line 24, column 22, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL - fn dot_dot_dot_gt() { ···> }
-LL + fn dot_dot_dot_gt() { ..=> }
-   |
+ on line 24, column 22, replace with `..=`
 
-error[E0586]: inclusive range with no end
-  --> $DIR/range-inclusive-suggestion-span.rs:24:23
-   |
-LL | fn dot_dot_dot_gt() { ···> }
-   |                       ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/range-inclusive-suggestion-span.rs:24:23
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - fn dot_dot_dot_gt() { ···> }
-LL + fn dot_dot_dot_gt() { ..> }
-   |
+ on line 24, column 22, replace with `..`
 
 error: expected one of `;` or `}`, found `>`
-  --> $DIR/range-inclusive-suggestion-span.rs:24:26
-   |
-LL | fn dot_dot_dot_gt() { ···> }
-   |                          ^ expected one of `;` or `}`
+ at $DIR/range-inclusive-suggestion-span.rs:24:26: expected one of `;` or `}`
 
-error[E0586]: inclusive range with no end
-  --> $DIR/range-inclusive-suggestion-span.rs:32:19
-   |
-LL | fn dot_dot_eq() { ··= }
-   |                   ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/range-inclusive-suggestion-span.rs:32:19
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - fn dot_dot_eq() { ··= }
-LL + fn dot_dot_eq() { .. }
-   |
+ on line 32, column 18, replace with `..`
 
 error: unexpected `=` after inclusive range
-  --> $DIR/range-inclusive-suggestion-span.rs:37:22
-   |
-LL | fn dot_dot_eq_eq() { ··== }
-   |                      ^^^^
-   |
-   = note: inclusive ranges end with a single equals sign (`..=`)
+ at $DIR/range-inclusive-suggestion-span.rs:37:22
+note: inclusive ranges end with a single equals sign (`..=`)
 help: use `..=` instead
-   |
-LL - fn dot_dot_eq_eq() { ··== }
-LL + fn dot_dot_eq_eq() { ..= }
-   |
+ on line 37, column 21, replace with `..=`
 
 error: unexpected `>` after inclusive range
-  --> $DIR/range-inclusive-suggestion-span.rs:42:25
-   |
-LL | fn dot_dot_eq_gt() { ··=> }
-   |                      ---^
-   |                      |
-   |                      this is parsed as an inclusive range `..=`
-   |
+ at $DIR/range-inclusive-suggestion-span.rs:42:25
+  on line 42, column 22: this is parsed as an inclusive range `..=`
 help: add a space between the pattern and `=>`
-   |
-LL - fn dot_dot_eq_gt() { ··=> }
-LL + fn dot_dot_eq_gt() { .. => }
-   |
+ on line 42, column 21, replace with `.. =`
 
 error: expected one of `;` or `}`, found `>`
-  --> $DIR/range-inclusive-suggestion-span.rs:42:25
-   |
-LL | fn dot_dot_eq_gt() { ··=> }
-   |                         ^ expected one of `;` or `}`
+ at $DIR/range-inclusive-suggestion-span.rs:42:25: expected one of `;` or `}`
 
 error: aborting due to 26 previous errors
 

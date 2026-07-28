@@ -1,27 +1,15 @@
-error[E0599]: the method `foo` exists for opaque type `impl Iterator`, but its trait bounds were not satisfied
-  --> $DIR/iterator-does-not-need-into-iter.rs:16:16
-   |
-LL |     get_iter().foo();
-   |                ^^^ method cannot be called on `impl Iterator` due to unsatisfied trait bounds
-   |
+error E0599: the method `foo` exists for opaque type `impl Iterator`, but its trait bounds were not satisfied
+ at $DIR/iterator-does-not-need-into-iter.rs:16:16: method cannot be called on `impl Iterator` due to unsatisfied trait bounds
 note: the following trait bounds were not satisfied:
       `&impl Iterator: Iterator`
       `&impl Iterator: Missing`
       `&mut impl Iterator: Missing`
       `impl Iterator: Missing`
-  --> $DIR/iterator-does-not-need-into-iter.rs:7:9
-   |
-LL | impl<T: Iterator + Missing> HasMethod for T {
-   |         ^^^^^^^^   ^^^^^^^  ---------     -
-   |         |          |
-   |         |          unsatisfied trait bound introduced here
-   |         unsatisfied trait bound introduced here
-   = help: items from traits can only be used if the trait is implemented and in scope
+ at $DIR/iterator-does-not-need-into-iter.rs:7:9: unsatisfied trait bound introduced here
+  on line 7, column 20: unsatisfied trait bound introduced here
+help: items from traits can only be used if the trait is implemented and in scope
 note: `HasMethod` defines an item `foo`, perhaps you need to implement it
-  --> $DIR/iterator-does-not-need-into-iter.rs:4:1
-   |
-LL | trait HasMethod {
-   | ^^^^^^^^^^^^^^^
+ at $DIR/iterator-does-not-need-into-iter.rs:4:1
 
 error: aborting due to 1 previous error
 

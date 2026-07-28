@@ -1,8 +1,5 @@
-error[E0275]: overflow evaluating the requirement `T::This == _`
-  --> $DIR/normalization-overflow.rs:14:5
-   |
-LL |     type This = Self::This;
-   |     ^^^^^^^^^
+error E0275: overflow evaluating the requirement `T::This == _`
+ at $DIR/normalization-overflow.rs:14:5
 
 error: aborting due to 1 previous error
 

@@ -1,30 +1,15 @@
-error[E0626]: borrow may still be in use when coroutine yields
-  --> $DIR/yield-while-iterating.rs:13:18
-   |
-LL |     let _b =#[coroutine]  move || {
-   |                           ------- within this coroutine
-LL |         for p in &x {
-   |                  ^^
-LL |             yield();
-   |             ------- possible yield occurs here
-   |
+error E0626: borrow may still be in use when coroutine yields
+ at $DIR/yield-while-iterating.rs:13:18
+  on line 12, column 27: within this coroutine
+  on line 14: possible yield occurs here
 help: add `static` to mark this coroutine as unmovable
-   |
-LL |     let _b =#[coroutine]  static move || {
-   |                           ++++++
+ on line 12, column 26, add `static `
 
-error[E0502]: cannot borrow `x` as immutable because it is also borrowed as mutable
-  --> $DIR/yield-while-iterating.rs:58:20
-   |
-LL |     let mut b = #[coroutine] || {
-   |                              -- mutable borrow occurs here
-LL |         for p in &mut x {
-   |                       - first borrow occurs due to use of `x` in coroutine
-...
-LL |     println!("{}", x[0]);
-   |                    ^ immutable borrow occurs here
-LL |     Pin::new(&mut b).resume(());
-   |              ------ mutable borrow later used here
+error E0502: cannot borrow `x` as immutable because it is also borrowed as mutable
+ at $DIR/yield-while-iterating.rs:58:20: immutable borrow occurs here
+  on line 53, column 30: mutable borrow occurs here
+  on line 54, column 23: first borrow occurs due to use of `x` in coroutine
+  on line 59, column 14: mutable borrow later used here
 
 error: aborting due to 2 previous errors
 

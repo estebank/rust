@@ -1,15 +1,8 @@
-error[E0366]: `Drop` impls cannot be specialized
-  --> $DIR/issue-38868.rs:5:1
-   |
-LL | impl Drop for List<i32> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: `i32` is not a generic parameter
+error E0366: `Drop` impls cannot be specialized
+ at $DIR/issue-38868.rs:5:1
+note: `i32` is not a generic parameter
 note: use the same sequence of generic lifetime, type and const parameters as the struct definition
-  --> $DIR/issue-38868.rs:1:1
-   |
-LL | pub struct List<T> {
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-38868.rs:1:1
 
 error: aborting due to 1 previous error
 

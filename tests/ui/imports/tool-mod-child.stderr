@@ -1,46 +1,22 @@
-error[E0433]: cannot find module or crate `clippy` in the crate root
-  --> $DIR/tool-mod-child.rs:3:5
-   |
-LL | use clippy::a::b;
-   |     ^^^^^^ use of unresolved module or unlinked crate `clippy`
-   |
+error E0433: cannot find module or crate `clippy` in the crate root
+ at $DIR/tool-mod-child.rs:3:5: use of unresolved module or unlinked crate `clippy`
 help: you might be missing a crate named `clippy`, add it to your project and import it in your code
-   |
-LL + extern crate clippy;
-   |
+ on line 2, column 1, add `extern crate clippy;`
 
-error[E0432]: unresolved import `clippy`
-  --> $DIR/tool-mod-child.rs:2:5
-   |
-LL | use clippy::a;
-   |     ^^^^^^ use of unresolved module or unlinked crate `clippy`
-   |
+error E0432: unresolved import `clippy`
+ at $DIR/tool-mod-child.rs:2:5: use of unresolved module or unlinked crate `clippy`
 help: you might be missing a crate named `clippy`, add it to your project and import it in your code
-   |
-LL + extern crate clippy;
-   |
+ on line 2, column 1, add `extern crate clippy;`
 
-error[E0433]: cannot find module or crate `rustdoc` in the crate root
-  --> $DIR/tool-mod-child.rs:6:5
-   |
-LL | use rustdoc::a::b;
-   |     ^^^^^^^ use of unresolved module or unlinked crate `rustdoc`
-   |
+error E0433: cannot find module or crate `rustdoc` in the crate root
+ at $DIR/tool-mod-child.rs:6:5: use of unresolved module or unlinked crate `rustdoc`
 help: you might be missing a crate named `rustdoc`, add it to your project and import it in your code
-   |
-LL + extern crate rustdoc;
-   |
+ on line 2, column 1, add `extern crate rustdoc;`
 
-error[E0432]: unresolved import `rustdoc`
-  --> $DIR/tool-mod-child.rs:5:5
-   |
-LL | use rustdoc::a;
-   |     ^^^^^^^ use of unresolved module or unlinked crate `rustdoc`
-   |
+error E0432: unresolved import `rustdoc`
+ at $DIR/tool-mod-child.rs:5:5: use of unresolved module or unlinked crate `rustdoc`
 help: you might be missing a crate named `rustdoc`, add it to your project and import it in your code
-   |
-LL + extern crate rustdoc;
-   |
+ on line 2, column 1, add `extern crate rustdoc;`
 
 error: aborting due to 4 previous errors
 

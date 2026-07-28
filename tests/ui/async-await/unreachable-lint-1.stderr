@@ -1,16 +1,8 @@
 error: unreachable statement
-  --> $DIR/unreachable-lint-1.rs:5:13
-   |
-LL |     return; bar().await;
-   |     ------  ^^^^^^^^^^^^ unreachable statement
-   |     |
-   |     any code following this expression is unreachable
-   |
+ at $DIR/unreachable-lint-1.rs:5:13: unreachable statement
+  on line 5: any code following this expression is unreachable
 note: the lint level is defined here
-  --> $DIR/unreachable-lint-1.rs:2:9
-   |
-LL | #![deny(unreachable_code)]
-   |         ^^^^^^^^^^^^^^^^
+ at $DIR/unreachable-lint-1.rs:2:9
 
 error: aborting due to 1 previous error
 

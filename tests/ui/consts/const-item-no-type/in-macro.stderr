@@ -1,49 +1,20 @@
-error[E0428]: the name `A` is defined multiple times
-  --> $DIR/in-macro.rs:4:13
-   |
-LL |               const A = "A".$fn();
-   |               ^^^^^^^^^^^^^^^^^^^^ `A` redefined here
-...
-LL | / suite! {
-LL | |     len;
-LL | |     is_empty;
-LL | | }
-   | |_- in this macro invocation
-   |
-   = note: `A` must be defined only once in the value namespace of this module
-   = note: this error originates in the macro `suite` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0428: the name `A` is defined multiple times
+ at $DIR/in-macro.rs:4:13: `A` redefined here
+  on line 11 to line 14: in this macro invocation
+note: `A` must be defined only once in the value namespace of this module
+note: this error originates in the macro `suite` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: missing type for `const` item
-  --> $DIR/in-macro.rs:4:20
-   |
-LL |               const A = "A".$fn();
-   |                      ^
-...
-LL | / suite! {
-LL | |     len;
-LL | |     is_empty;
-LL | | }
-   | |_- in this macro invocation
-   |
-   = note: this error originates in the macro `suite` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/in-macro.rs:4:20
+  on line 11 to line 14: in this macro invocation
+note: this error originates in the macro `suite` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: provide a type for the item
-   |
-LL |             const A: <type> = "A".$fn();
-   |                    ++++++++
+ on line 4, column 19, add `: <type>`
 
-error[E0121]: missing type for item
-  --> $DIR/in-macro.rs:4:20
-   |
-LL |               const A = "A".$fn();
-   |                      ^ not allowed in type signatures
-...
-LL | / suite! {
-LL | |     len;
-LL | |     is_empty;
-LL | | }
-   | |_- in this macro invocation
-   |
-   = note: this error originates in the macro `suite` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0121: missing type for item
+ at $DIR/in-macro.rs:4:20: not allowed in type signatures
+  on line 11 to line 14: in this macro invocation
+note: this error originates in the macro `suite` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 3 previous errors
 

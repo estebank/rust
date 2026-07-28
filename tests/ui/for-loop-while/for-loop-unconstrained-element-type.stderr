@@ -1,13 +1,7 @@
-error[E0282]: type annotations needed
-  --> $DIR/for-loop-unconstrained-element-type.rs:9:14
-   |
-LL |     for i in Vec::new() {}
-   |              ^^^^^^^^ cannot infer type of the type parameter `T` declared on the struct `Vec`
-   |
+error E0282: type annotations needed
+ at $DIR/for-loop-unconstrained-element-type.rs:9:14: cannot infer type of the type parameter `T` declared on the struct `Vec`
 help: consider specifying a concrete type for the type parameter `T`
-   |
-LL |     for i in Vec::</* Type */>::new() {}
-   |                 ++++++++++++++
+ on line 9, column 16, add `::</* Type */>`
 
 error: aborting due to 1 previous error
 

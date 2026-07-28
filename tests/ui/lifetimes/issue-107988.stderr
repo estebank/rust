@@ -1,29 +1,15 @@
-error[E0261]: use of undeclared lifetime name `'tcx`
-  --> $DIR/issue-107988.rs:7:52
-   |
-LL | impl<T: ?Sized + TraitEngine<'tcx>> TraitEngineExt<'tcx> for T {
-   |                                                    ^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'tcx`
+ at $DIR/issue-107988.rs:7:52: undeclared lifetime
 help: consider introducing lifetime `'tcx` here
-   |
-LL | impl<'tcx, T: ?Sized + TraitEngine<'tcx>> TraitEngineExt<'tcx> for T {
-   |      +++++
+ on line 7, column 5, add `'tcx, `
 
-error[E0261]: use of undeclared lifetime name `'tcx`
-  --> $DIR/issue-107988.rs:7:30
-   |
-LL | impl<T: ?Sized + TraitEngine<'tcx>> TraitEngineExt<'tcx> for T {
-   |                              ^^^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'tcx`
+ at $DIR/issue-107988.rs:7:30: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the bound lifetime-generic with a new `'tcx` lifetime
-   |
-LL | impl<T: ?Sized + for<'tcx> TraitEngine<'tcx>> TraitEngineExt<'tcx> for T {
-   |                  +++++++++
+ on line 7, column 17, add `for<'tcx> `
 help: consider introducing lifetime `'tcx` here
-   |
-LL | impl<'tcx, T: ?Sized + TraitEngine<'tcx>> TraitEngineExt<'tcx> for T {
-   |      +++++
+ on line 7, column 5, add `'tcx, `
 
 error: aborting due to 2 previous errors
 

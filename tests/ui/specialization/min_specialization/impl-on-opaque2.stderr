@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `SpecTrait<(), ()>` for type `()`
-  --> $DIR/impl-on-opaque2.rs:21:1
-   |
-LL | impl<U> SpecTrait<U, ()> for () {
-   | ------------------------------- first implementation here
-...
-LL | impl SpecTrait<(), Opaque> for () {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `()`
+error E0119: conflicting implementations of trait `SpecTrait<(), ()>` for type `()`
+ at $DIR/impl-on-opaque2.rs:21:1: conflicting implementation for `()`
+  on line 9: first implementation here
 
 error: aborting due to 1 previous error
 

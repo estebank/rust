@@ -1,34 +1,16 @@
-error[E0107]: function takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/incorrect-number-of-const-args.rs:6:5
-   |
-LL |     foo::<0>();
-   |     ^^^   - supplied 1 generic argument
-   |     |
-   |     expected 2 generic arguments
-   |
+error E0107: function takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/incorrect-number-of-const-args.rs:6:5: expected 2 generic arguments
+  on line 6, column 11: supplied 1 generic argument
 note: function defined here, with 2 generic parameters: `X`, `Y`
-  --> $DIR/incorrect-number-of-const-args.rs:1:4
-   |
-LL | fn foo<const X: usize, const Y: usize>() -> usize {
-   |    ^^^ --------------  --------------
+ at $DIR/incorrect-number-of-const-args.rs:1:4
 help: add missing generic argument
-   |
-LL |     foo::<0, Y>();
-   |            +++
+ on line 6, column 11, add `, Y`
 
-error[E0107]: function takes 2 generic arguments but 3 generic arguments were supplied
-  --> $DIR/incorrect-number-of-const-args.rs:9:5
-   |
-LL |     foo::<0, 0, 0>();
-   |     ^^^       --- help: remove the unnecessary generic argument
-   |     |
-   |     expected 2 generic arguments
-   |
+error E0107: function takes 2 generic arguments but 3 generic arguments were supplied
+ at $DIR/incorrect-number-of-const-args.rs:9:5: expected 2 generic arguments
+  on line 9, column 15: help: remove the unnecessary generic argument
 note: function defined here, with 2 generic parameters: `X`, `Y`
-  --> $DIR/incorrect-number-of-const-args.rs:1:4
-   |
-LL | fn foo<const X: usize, const Y: usize>() -> usize {
-   |    ^^^ --------------  --------------
+ at $DIR/incorrect-number-of-const-args.rs:1:4
 
 error: aborting due to 2 previous errors
 

@@ -1,16 +1,8 @@
-error[E0507]: cannot move out of a shared reference
-  --> $DIR/do-not-suggest-removing-wrong-ref-pattern-issue-132806.rs:8:58
-   |
-LL |     let _ = HashMap::<String, i32>::new().iter().filter(|&(&_k, &_v)| { true });
-   |                                                          ^^^--^^^^^^
-   |                                                             |
-   |                                                             data moved here because `_k` has type `String`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of a shared reference
+ at $DIR/do-not-suggest-removing-wrong-ref-pattern-issue-132806.rs:8:58
+  on line 8, column 61: data moved here because `_k` has type `String`, which does not implement the `Copy` trait
 help: consider removing the borrow
-   |
-LL -     let _ = HashMap::<String, i32>::new().iter().filter(|&(&_k, &_v)| { true });
-LL +     let _ = HashMap::<String, i32>::new().iter().filter(|&(_k, &_v)| { true });
-   |
+ on line 8, column 59
 
 error: aborting due to 1 previous error
 

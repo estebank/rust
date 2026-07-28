@@ -1,46 +1,22 @@
-error[E0596]: cannot borrow `arg` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-argument.rs:10:5
-   |
-LL |     arg.mutate();
-   |     ^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `arg` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-argument.rs:10:5: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL | fn func(mut arg: S) {
-   |         +++
+ on line 9, column 8, add `mut `
 
-error[E0596]: cannot borrow `arg` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-argument.rs:15:9
-   |
-LL |         arg.mutate();
-   |         ^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `arg` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-argument.rs:15:9: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     fn method(&self, mut arg: S) {
-   |                      +++
+ on line 14, column 21, add `mut `
 
-error[E0596]: cannot borrow `arg` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-argument.rs:21:9
-   |
-LL |         arg.mutate();
-   |         ^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `arg` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-argument.rs:21:9: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     fn default(&self, mut arg: S) {
-   |                       +++
+ on line 20, column 22, add `mut `
 
-error[E0596]: cannot borrow `arg` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-argument.rs:32:17
-   |
-LL |     (|arg: S| { arg.mutate() })(s);
-   |                 ^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `arg` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-argument.rs:32:17: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     (|mut arg: S| { arg.mutate() })(s);
-   |       +++
+ on line 32, column 6, add `mut `
 
 error: aborting due to 4 previous errors
 

@@ -1,45 +1,23 @@
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/invalid-bound-modifier-87199.rs:9:11
-   |
-LL | fn arg<T: ?Send>(_: T) {}
-   |           ^^^^^
+ at $DIR/invalid-bound-modifier-87199.rs:9:11
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/invalid-bound-modifier-87199.rs:11:15
-   |
-LL | fn ref_arg<T: ?Send>(_: &T) {}
-   |               ^^^^^
+ at $DIR/invalid-bound-modifier-87199.rs:11:15
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/invalid-bound-modifier-87199.rs:13:40
-   |
-LL | fn ret() -> impl Iterator<Item = ()> + ?Send { std::iter::empty() }
-   |                                        ^^^^^
+ at $DIR/invalid-bound-modifier-87199.rs:13:40
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/invalid-bound-modifier-87199.rs:13:40
-   |
-LL | fn ret() -> impl Iterator<Item = ()> + ?Send { std::iter::empty() }
-   |                                        ^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/invalid-bound-modifier-87199.rs:13:40
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0277]: the size for values of type `[i32]` cannot be known at compilation time
-  --> $DIR/invalid-bound-modifier-87199.rs:20:15
-   |
-LL |     ref_arg::<[i32]>(&[5]);
-   |               ^^^^^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `[i32]`
+error E0277: the size for values of type `[i32]` cannot be known at compilation time
+ at $DIR/invalid-bound-modifier-87199.rs:20:15: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `[i32]`
 note: required by an implicit `Sized` bound in `ref_arg`
-  --> $DIR/invalid-bound-modifier-87199.rs:11:12
-   |
-LL | fn ref_arg<T: ?Send>(_: &T) {}
-   |            ^ required by the implicit `Sized` requirement on this type parameter in `ref_arg`
+ at $DIR/invalid-bound-modifier-87199.rs:11:12: required by the implicit `Sized` requirement on this type parameter in `ref_arg`
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL | fn ref_arg<T: ?Send + ?Sized>(_: &T) {}
-   |                     ++++++++
+ on line 11, column 19, add ` + ?Sized`
 
 error: aborting due to 5 previous errors
 

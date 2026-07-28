@@ -1,16 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-1362.rs:4:16
-   |
-LL |   let x: u32 = 20i32;
-   |          ---   ^^^^^ expected `u32`, found `i32`
-   |          |
-   |          expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/issue-1362.rs:4:16: expected `u32`, found `i32`
+  on line 4, column 10: expected due to this
 help: change the type of the numeric literal from `i32` to `u32`
-   |
-LL -   let x: u32 = 20i32;
-LL +   let x: u32 = 20u32;
-   |
+ on line 4, column 17, replace with `u32`
 
 error: aborting due to 1 previous error
 

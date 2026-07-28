@@ -1,18 +1,9 @@
-error[E0700]: hidden type for `impl Trait<'y>` captures lifetime that does not appear in bounds
-  --> $DIR/region-escape-via-bound.rs:17:5
-   |
-LL | fn foo<'x, 'y>(x: Cell<&'x u32>) -> impl Trait<'y>
-   |        --                           -------------- opaque type defined here
-   |        |
-   |        hidden type `Cell<&'x u32>` captures the lifetime `'x` as defined here
-...
-LL |     x
-   |     ^
-   |
+error E0700: hidden type for `impl Trait<'y>` captures lifetime that does not appear in bounds
+ at $DIR/region-escape-via-bound.rs:17:5
+  on line 14, column 8: hidden type `Cell<&'x u32>` captures the lifetime `'x` as defined here
+  on line 14, column 37: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'x`
-   |
-LL | fn foo<'x, 'y>(x: Cell<&'x u32>) -> impl Trait<'y> + use<'y, 'x>
-   |                                                    +++++++++++++
+ on line 14, column 50, add ` + use<'y, 'x>`
 
 error: aborting due to 1 previous error
 

@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `eq`
-  --> $DIR/missing-derivable-attr.rs:13:1
-   |
-LL |     fn eq(&self, other: &Self) -> bool;
-   |     ----------------------------------- `eq` from trait
-...
-LL | impl MyEq for A {}
-   | ^^^^^^^^^^^^^^^ missing `eq` in implementation
+error E0046: not all trait items implemented, missing: `eq`
+ at $DIR/missing-derivable-attr.rs:13:1: missing `eq` in implementation
+  on line 2: `eq` from trait
 
 error: aborting due to 1 previous error
 

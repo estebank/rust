@@ -1,10 +1,7 @@
-error[E0369]: cannot multiply `bool` by `bool`
-  --> $DIR/binop-mul-bool.rs:1:26
-   |
-LL | fn main() { let x = true * false; }
-   |                     ---- ^ ----- bool
-   |                     |
-   |                     bool
+error E0369: cannot multiply `bool` by `bool`
+ at $DIR/binop-mul-bool.rs:1:26
+  on line 1, column 21: bool
+  on line 1, column 28: bool
 
 error: aborting due to 1 previous error
 

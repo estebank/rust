@@ -1,14 +1,8 @@
 error: cannot find macro `m` in this scope
-  --> $DIR/macros-in-trait-positions-issue-40845.rs:1:11
-   |
-LL | trait T { m!(); }
-   |           ^
+ at $DIR/macros-in-trait-positions-issue-40845.rs:1:11
 
 error: cannot find macro `m` in this scope
-  --> $DIR/macros-in-trait-positions-issue-40845.rs:4:10
-   |
-LL | impl S { m!(); }
-   |          ^
+ at $DIR/macros-in-trait-positions-issue-40845.rs:4:10
 
 error: aborting due to 2 previous errors
 

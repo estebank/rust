@@ -1,31 +1,18 @@
-error[E0277]: the trait bound `S: Deref` is not satisfied
-  --> $DIR/arbitrary_self_types_pin_needing_borrow.rs:10:14
-   |
-LL |     Pin::new(S).x();
-   |     -------- ^ the trait `Deref` is not implemented for `S`
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: the trait bound `S: Deref` is not satisfied
+ at $DIR/arbitrary_self_types_pin_needing_borrow.rs:10:14: the trait `Deref` is not implemented for `S`
+  on line 10: required by a bound introduced by this call
 note: required by a bound in `Pin::<Ptr>::new`
-  --> $SRC_DIR/core/src/pin.rs:LL:COL
+ at $SRC_DIR/core/src/pin.rs:LL:COL
 help: consider borrowing here
-   |
-LL |     Pin::new(&S).x();
-   |              +
-LL |     Pin::new(&mut S).x();
-   |              ++++
+ on line 10, column 13, add one of
+  &
+  &mut 
 
-error[E0599]: no method named `x` found for struct `Pin<Ptr>` in the current scope
-  --> $DIR/arbitrary_self_types_pin_needing_borrow.rs:10:17
-   |
-LL |     Pin::new(S).x();
-   |                 ^ method not found in `Pin<S>`
-   |
+
+error E0599: no method named `x` found for struct `Pin<Ptr>` in the current scope
+ at $DIR/arbitrary_self_types_pin_needing_borrow.rs:10:17: method not found in `Pin<S>`
 note: method is available for `Pin<&mut S>`
-  --> $DIR/arbitrary_self_types_pin_needing_borrow.rs:5:5
-   |
-LL |     fn x(self: Pin<&mut Self>) {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/arbitrary_self_types_pin_needing_borrow.rs:5:5
 
 error: aborting due to 2 previous errors
 

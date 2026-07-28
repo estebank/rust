@@ -1,10 +1,6 @@
-error[E0062]: field `foo` specified more than once
-  --> $DIR/struct-fields-dupe.rs:8:9
-   |
-LL |         foo: 0,
-   |         ------ first use of `foo`
-LL |         foo: 0
-   |         ^^^ used more than once
+error E0062: field `foo` specified more than once
+ at $DIR/struct-fields-dupe.rs:8:9: used more than once
+  on line 7: first use of `foo`
 
 error: aborting due to 1 previous error
 

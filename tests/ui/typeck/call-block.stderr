@@ -1,10 +1,6 @@
-error[E0618]: expected function, found `{integer}`
-  --> $DIR/call-block.rs:2:13
-   |
-LL |     let _ = {42}();
-   |             ^^^^--
-   |             |
-   |             call expression requires function
+error E0618: expected function, found `{integer}`
+ at $DIR/call-block.rs:2:13
+  on line 2, column 13: call expression requires function
 
 error: aborting due to 1 previous error
 

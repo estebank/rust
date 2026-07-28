@@ -1,66 +1,30 @@
-error[E0700]: hidden type for `impl IntoIterator<Item = impl Cap<'a> + Cap<'b>>` captures lifetime that does not appear in bounds
-  --> $DIR/nested-impl-trait-fail.rs:17:5
-   |
-LL | fn fail_early_bound<'s, 'a, 'b>(a: &'s u8) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b>>
-   |                     --                        ------------------------------------------------ opaque type defined here
-   |                     |
-   |                     hidden type `[&'s u8; 1]` captures the lifetime `'s` as defined here
-...
-LL |     [a]
-   |     ^^^
-   |
+error E0700: hidden type for `impl IntoIterator<Item = impl Cap<'a> + Cap<'b>>` captures lifetime that does not appear in bounds
+ at $DIR/nested-impl-trait-fail.rs:17:5
+  on line 12, column 21: hidden type `[&'s u8; 1]` captures the lifetime `'s` as defined here
+  on line 12, column 47: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'s`
-   |
-LL | fn fail_early_bound<'s, 'a, 'b>(a: &'s u8) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b>> + use<'a, 'b, 's>
-   |                                                                                                +++++++++++++++++
+ on line 12, column 94, add ` + use<'a, 'b, 's>`
 
-error[E0700]: hidden type for `impl Cap<'a> + Cap<'b>` captures lifetime that does not appear in bounds
-  --> $DIR/nested-impl-trait-fail.rs:17:5
-   |
-LL | fn fail_early_bound<'s, 'a, 'b>(a: &'s u8) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b>>
-   |                     --                                                 ---------------------- opaque type defined here
-   |                     |
-   |                     hidden type `&'s u8` captures the lifetime `'s` as defined here
-...
-LL |     [a]
-   |     ^^^
-   |
+error E0700: hidden type for `impl Cap<'a> + Cap<'b>` captures lifetime that does not appear in bounds
+ at $DIR/nested-impl-trait-fail.rs:17:5
+  on line 12, column 21: hidden type `&'s u8` captures the lifetime `'s` as defined here
+  on line 12, column 72: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'s`
-   |
-LL | fn fail_early_bound<'s, 'a, 'b>(a: &'s u8) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b> + use<'a, 'b, 's>>
-   |                                                                                               +++++++++++++++++
+ on line 12, column 93, add ` + use<'a, 'b, 's>`
 
-error[E0700]: hidden type for `impl IntoIterator<Item = impl Cap<'a> + Cap<'b>>` captures lifetime that does not appear in bounds
-  --> $DIR/nested-impl-trait-fail.rs:28:5
-   |
-LL | fn fail_late_bound<'s, 'a, 'b>(
-   |                    -- hidden type `[&'s u8; 1]` captures the lifetime `'s` as defined here
-...
-LL | ) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b>> {
-   |      ------------------------------------------------ opaque type defined here
-LL |     [a]
-   |     ^^^
-   |
+error E0700: hidden type for `impl IntoIterator<Item = impl Cap<'a> + Cap<'b>>` captures lifetime that does not appear in bounds
+ at $DIR/nested-impl-trait-fail.rs:28:5
+  on line 23, column 20: hidden type `[&'s u8; 1]` captures the lifetime `'s` as defined here
+  on line 27, column 6: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'s`
-   |
-LL | ) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b>> + use<'a, 'b, 's> {
-   |                                                       +++++++++++++++++
+ on line 27, column 53, add ` + use<'a, 'b, 's>`
 
-error[E0700]: hidden type for `impl Cap<'a> + Cap<'b>` captures lifetime that does not appear in bounds
-  --> $DIR/nested-impl-trait-fail.rs:28:5
-   |
-LL | fn fail_late_bound<'s, 'a, 'b>(
-   |                    -- hidden type `&'s u8` captures the lifetime `'s` as defined here
-...
-LL | ) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b>> {
-   |                               ---------------------- opaque type defined here
-LL |     [a]
-   |     ^^^
-   |
+error E0700: hidden type for `impl Cap<'a> + Cap<'b>` captures lifetime that does not appear in bounds
+ at $DIR/nested-impl-trait-fail.rs:28:5
+  on line 23, column 20: hidden type `&'s u8` captures the lifetime `'s` as defined here
+  on line 27, column 31: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'s`
-   |
-LL | ) -> impl IntoIterator<Item = impl Cap<'a> + Cap<'b> + use<'a, 'b, 's>> {
-   |                                                      +++++++++++++++++
+ on line 27, column 52, add ` + use<'a, 'b, 's>`
 
 error: aborting due to 4 previous errors
 

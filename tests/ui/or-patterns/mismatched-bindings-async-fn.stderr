@@ -1,34 +1,18 @@
-error[E0408]: variable `s` is not bound in all patterns
-  --> $DIR/mismatched-bindings-async-fn.rs:4:13
-   |
-LL | async fn a((x | s): String) {}
-   |             ^   - variable not in all patterns
-   |             |
-   |             pattern doesn't bind `s`
+error E0408: variable `s` is not bound in all patterns
+ at $DIR/mismatched-bindings-async-fn.rs:4:13: pattern doesn't bind `s`
+  on line 4, column 17: variable not in all patterns
 
-error[E0408]: variable `x` is not bound in all patterns
-  --> $DIR/mismatched-bindings-async-fn.rs:4:17
-   |
-LL | async fn a((x | s): String) {}
-   |             -   ^ pattern doesn't bind `x`
-   |             |
-   |             variable not in all patterns
+error E0408: variable `x` is not bound in all patterns
+ at $DIR/mismatched-bindings-async-fn.rs:4:17: pattern doesn't bind `x`
+  on line 4, column 13: variable not in all patterns
 
-error[E0408]: variable `s` is not bound in all patterns
-  --> $DIR/mismatched-bindings-async-fn.rs:9:10
-   |
-LL |     let (x | s) = String::new();
-   |          ^   - variable not in all patterns
-   |          |
-   |          pattern doesn't bind `s`
+error E0408: variable `s` is not bound in all patterns
+ at $DIR/mismatched-bindings-async-fn.rs:9:10: pattern doesn't bind `s`
+  on line 9, column 14: variable not in all patterns
 
-error[E0408]: variable `x` is not bound in all patterns
-  --> $DIR/mismatched-bindings-async-fn.rs:9:14
-   |
-LL |     let (x | s) = String::new();
-   |          -   ^ pattern doesn't bind `x`
-   |          |
-   |          variable not in all patterns
+error E0408: variable `x` is not bound in all patterns
+ at $DIR/mismatched-bindings-async-fn.rs:9:14: pattern doesn't bind `x`
+  on line 9, column 10: variable not in all patterns
 
 error: aborting due to 4 previous errors
 

@@ -1,41 +1,18 @@
-error[E0425]: cannot find type `Foo` in this scope
-  --> $DIR/issue-88472.rs:17:16
-   |
-LL |     type Bar = Foo;
-   |                ^^^ not found in this scope
-   |
+error E0425: cannot find type `Foo` in this scope
+ at $DIR/issue-88472.rs:17:16: not found in this scope
 note: struct `a::Foo` exists but is inaccessible
-  --> $DIR/issue-88472.rs:9:5
-   |
-LL |     struct Foo;
-   |     ^^^^^^^^^^^ not accessible
+ at $DIR/issue-88472.rs:9:5: not accessible
 
-error[E0425]: cannot find type `Eee` in this scope
-  --> $DIR/issue-88472.rs:34:16
-   |
-LL |     type Baz = Eee;
-   |                ^^^ not found in this scope
-   |
+error E0425: cannot find type `Eee` in this scope
+ at $DIR/issue-88472.rs:34:16: not found in this scope
 note: these enums exist but are inaccessible
-  --> $DIR/issue-88472.rs:23:5
-   |
-LL |     enum Eee {}
-   |     ^^^^^^^^ `c::Eee`: not accessible
-...
-LL |         enum Eee {}
-   |         ^^^^^^^^ `c::d::Eee`: not accessible
+ at $DIR/issue-88472.rs:23:5: `c::Eee`: not accessible
+  on line 28: `c::d::Eee`: not accessible
 
 warning: unused import: `crate::a::*`
-  --> $DIR/issue-88472.rs:15:9
-   |
-LL |     use crate::a::*;
-   |         ^^^^^^^^^^^
-   |
+ at $DIR/issue-88472.rs:15:9
 note: the lint level is defined here
-  --> $DIR/issue-88472.rs:5:9
-   |
-LL | #![warn(unused_imports)]
-   |         ^^^^^^^^^^^^^^
+ at $DIR/issue-88472.rs:5:9
 
 error: aborting due to 2 previous errors; 1 warning emitted
 

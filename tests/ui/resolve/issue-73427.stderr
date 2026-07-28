@@ -1,187 +1,81 @@
-error[E0423]: cannot find value `A` in this scope
-  --> $DIR/issue-73427.rs:33:5
-   |
-LL |     A.foo();
-   |     ^
-   |
-   = note: an enum named `A` exists in another namespace
+error E0423: cannot find value `A` in this scope
+ at $DIR/issue-73427.rs:33:5
+note: an enum named `A` exists in another namespace
 note: the enum is defined here
-  --> $DIR/issue-73427.rs:1:1
-   |
-LL | / enum A {
-LL | |     StructWithFields { x: () },
-LL | |     TupleWithFields(()),
-LL | |     Struct {},
-LL | |     Tuple(),
-LL | |     Unit,
-LL | | }
-   | |_^
+ at $DIR/issue-73427.rs:1:1 to 7:2
 help: you might have meant to use one of the following enum variants
-   |
-LL -     A.foo();
-LL +     (A::Tuple()).foo();
-   |
-LL |     A::Unit.foo();
-   |      ++++++
+ on line 33, column 4, replace with one of
+  (A::Tuple())
+  A::Unit
 help: alternatively, the following enum variant is available
-   |
-LL -     A.foo();
-LL +     (A::TupleWithFields(/* fields */)).foo();
-   |
+ on line 33, column 4, replace with `(A::TupleWithFields(/* fields */))`
 
-error[E0423]: cannot find value `B` in this scope
-  --> $DIR/issue-73427.rs:35:5
-   |
-LL |     B.foo();
-   |     ^
-   |
-   = note: an enum named `B` exists in another namespace
+error E0423: cannot find value `B` in this scope
+ at $DIR/issue-73427.rs:35:5
+note: an enum named `B` exists in another namespace
 note: the enum is defined here
-  --> $DIR/issue-73427.rs:9:1
-   |
-LL | / enum B {
-LL | |     StructWithFields { x: () },
-LL | |     TupleWithFields(()),
-LL | | }
-   | |_^
+ at $DIR/issue-73427.rs:9:1 to 12:2
 help: the following enum variant is available
-   |
-LL -     B.foo();
-LL +     (B::TupleWithFields(/* fields */)).foo();
-   |
+ on line 35, column 4, replace with `(B::TupleWithFields(/* fields */))`
 
-error[E0423]: cannot find value `C` in this scope
-  --> $DIR/issue-73427.rs:37:5
-   |
-LL |     C.foo();
-   |     ^
-   |
-   = note: an enum named `C` exists in another namespace
+error E0423: cannot find value `C` in this scope
+ at $DIR/issue-73427.rs:37:5
+note: an enum named `C` exists in another namespace
 note: the enum is defined here
-  --> $DIR/issue-73427.rs:14:1
-   |
-LL | / enum C {
-LL | |     StructWithFields { x: () },
-LL | |     TupleWithFields(()),
-LL | |     Unit,
-LL | | }
-   | |_^
+ at $DIR/issue-73427.rs:14:1 to 18:2
 help: you might have meant to use the following enum variant
-   |
-LL |     C::Unit.foo();
-   |      ++++++
+ on line 37, column 4, replace with `C::Unit`
 help: alternatively, the following enum variant is available
-   |
-LL -     C.foo();
-LL +     (C::TupleWithFields(/* fields */)).foo();
-   |
+ on line 37, column 4, replace with `(C::TupleWithFields(/* fields */))`
 
-error[E0423]: cannot find value `D` in this scope
-  --> $DIR/issue-73427.rs:39:5
-   |
-LL |     D.foo();
-   |     ^
-   |
-   = note: an enum named `D` exists in another namespace
+error E0423: cannot find value `D` in this scope
+ at $DIR/issue-73427.rs:39:5
+note: an enum named `D` exists in another namespace
 note: the enum is defined here
-  --> $DIR/issue-73427.rs:20:1
-   |
-LL | / enum D {
-LL | |     TupleWithFields(()),
-LL | |     Unit,
-LL | | }
-   | |_^
+ at $DIR/issue-73427.rs:20:1 to 23:2
 help: you might have meant to use the following enum variant
-   |
-LL |     D::Unit.foo();
-   |      ++++++
+ on line 39, column 4, replace with `D::Unit`
 help: alternatively, the following enum variant is available
-   |
-LL -     D.foo();
-LL +     (D::TupleWithFields(/* fields */)).foo();
-   |
+ on line 39, column 4, replace with `(D::TupleWithFields(/* fields */))`
 
-error[E0423]: cannot find value `E` in this scope
-  --> $DIR/issue-73427.rs:41:5
-   |
-LL |     E.foo();
-   |     ^
-   |
-   = note: an enum named `E` exists in another namespace
+error E0423: cannot find value `E` in this scope
+ at $DIR/issue-73427.rs:41:5
+note: an enum named `E` exists in another namespace
 note: the enum is defined here
-  --> $DIR/issue-73427.rs:25:1
-   |
-LL | / enum E {
-LL | |     TupleWithFields(()),
-LL | | }
-   | |_^
+ at $DIR/issue-73427.rs:25:1 to 27:2
 help: the following enum variant is available
-   |
-LL -     E.foo();
-LL +     (E::TupleWithFields(/* fields */)).foo();
-   |
+ on line 41, column 4, replace with `(E::TupleWithFields(/* fields */))`
 help: consider importing one of these constants instead
-   |
-LL + use std::f128::consts::E;
-   |
-LL + use std::f16::consts::E;
-   |
-LL + use std::f32::consts::E;
-   |
-LL + use std::f64::consts::E;
-   |
+ on line 1, column 1, add one of
+  use std::f128::consts::E;
+  use std::f16::consts::E;
+  use std::f32::consts::E;
+  use std::f64::consts::E;
 
-error[E0532]: cannot find tuple struct or tuple variant `A` in this scope
-  --> $DIR/issue-73427.rs:48:12
-   |
-LL |     if let A(3) = x { }
-   |            ^
-   |
-   = note: an enum named `A` exists in another namespace
-   = help: you might have meant to match against the enum's non-tuple variant
+
+error E0532: cannot find tuple struct or tuple variant `A` in this scope
+ at $DIR/issue-73427.rs:48:12
+note: an enum named `A` exists in another namespace
+help: you might have meant to match against the enum's non-tuple variant
 note: the enum is defined here
-  --> $DIR/issue-73427.rs:1:1
-   |
-LL | / enum A {
-LL | |     StructWithFields { x: () },
-LL | |     TupleWithFields(()),
-LL | |     Struct {},
-LL | |     Tuple(),
-LL | |     Unit,
-LL | | }
-   | |_^
+ at $DIR/issue-73427.rs:1:1 to 7:2
 help: try to match against one of the enum's variants
-   |
-LL |     if let A::Tuple(3) = x { }
-   |             +++++++
-LL |     if let A::TupleWithFields(3) = x { }
-   |             +++++++++++++++++
+ on line 48, column 11, replace with one of
+  A::Tuple
+  A::TupleWithFields
 
-error[E0423]: cannot find function, tuple struct or tuple variant `A` in this scope
-  --> $DIR/issue-73427.rs:46:13
-   |
-LL |     let x = A(3);
-   |             ^
-   |
-   = note: an enum named `A` exists in another namespace
-   = help: you might have meant to construct the enum's non-tuple variant
+
+error E0423: cannot find function, tuple struct or tuple variant `A` in this scope
+ at $DIR/issue-73427.rs:46:13
+note: an enum named `A` exists in another namespace
+help: you might have meant to construct the enum's non-tuple variant
 note: the enum is defined here
-  --> $DIR/issue-73427.rs:1:1
-   |
-LL | / enum A {
-LL | |     StructWithFields { x: () },
-LL | |     TupleWithFields(()),
-LL | |     Struct {},
-LL | |     Tuple(),
-LL | |     Unit,
-LL | | }
-   | |_^
+ at $DIR/issue-73427.rs:1:1 to 7:2
 help: try to construct one of the enum's variants
-   |
-LL |     let x = A::Tuple(3);
-   |              +++++++
-LL |     let x = A::TupleWithFields(3);
-   |              +++++++++++++++++
+ on line 46, column 12, replace with one of
+  A::Tuple
+  A::TupleWithFields
+
 
 error: aborting due to 7 previous errors
 

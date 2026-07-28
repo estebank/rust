@@ -1,32 +1,18 @@
-error[E0308]: mismatched types
-  --> $DIR/suggest-call-on-pat-mismatch.rs:7:12
-   |
-LL |     if let E::One(var1, var2) = var {
-   |            ^^^^^^^^^^^^^^^^^^   --- this expression has type `fn(i32, i32) -> E {E::One}`
-   |            |
-   |            expected enum constructor, found `E`
-   |
-   = note: expected enum constructor `fn(i32, i32) -> E {E::One}`
-                          found enum `E`
+error E0308: mismatched types
+ at $DIR/suggest-call-on-pat-mismatch.rs:7:12: expected enum constructor, found `E`
+  on line 7, column 33: this expression has type `fn(i32, i32) -> E {E::One}`
+note: expected enum constructor `fn(i32, i32) -> E {E::One}`
+                     found enum `E`
 help: use parentheses to construct this tuple variant
-   |
-LL |     if let E::One(var1, var2) = var(/* i32 */, /* i32 */) {
-   |                                    ++++++++++++++++++++++
+ on line 7, column 35, add `(/* i32 */, /* i32 */)`
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-call-on-pat-mismatch.rs:13:9
-   |
-LL |     let Some(x) = Some;
-   |         ^^^^^^^   ---- this expression has type `fn(_) -> Option<_> {Option::<_>::Some}`
-   |         |
-   |         expected enum constructor, found `Option<_>`
-   |
-   = note: expected enum constructor `fn(_) -> Option<_> {Option::<_>::Some}`
-                          found enum `Option<_>`
+error E0308: mismatched types
+ at $DIR/suggest-call-on-pat-mismatch.rs:13:9: expected enum constructor, found `Option<_>`
+  on line 13, column 19: this expression has type `fn(_) -> Option<_> {Option::<_>::Some}`
+note: expected enum constructor `fn(_) -> Option<_> {Option::<_>::Some}`
+                     found enum `Option<_>`
 help: use parentheses to construct this tuple variant
-   |
-LL |     let Some(x) = Some(/* value */);
-   |                       +++++++++++++
+ on line 13, column 22, add `(/* value */)`
 
 error: aborting due to 2 previous errors
 

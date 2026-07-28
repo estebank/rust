@@ -1,16 +1,8 @@
-error[E0521]: borrowed data escapes outside of method
-  --> $DIR/issue-54779-anon-static-lifetime.rs:32:9
-   |
-LL |         cx: &dyn DebugContext,
-   |         --  - let's call the lifetime of this reference `'1`
-   |         |
-   |         `cx` is a reference that is only valid in the method body
-...
-LL |         bar.debug_with(cx);
-   |         ^^^^^^^^^^^^^^^^^^
-   |         |
-   |         `cx` escapes the method body here
-   |         argument requires that `'1` must outlive `'static`
+error E0521: borrowed data escapes outside of method
+ at $DIR/issue-54779-anon-static-lifetime.rs:32:9: `cx` escapes the method body here
+  on line 32: argument requires that `'1` must outlive `'static`
+  on line 28: `cx` is a reference that is only valid in the method body
+  on line 28, column 13: let's call the lifetime of this reference `'1`
 
 error: aborting due to 1 previous error
 

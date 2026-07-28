@@ -1,69 +1,31 @@
-error[E0107]: function takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/no-explicit-const-params.rs:14:5
-   |
-LL |     foo::<true>();
-   |     ^^^-------- help: remove the unnecessary generics
-   |     |
-   |     expected 0 generic arguments
-   |
+error E0107: function takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/no-explicit-const-params.rs:14:5: expected 0 generic arguments
+  on line 14, column 8: help: remove the unnecessary generics
 note: function defined here, with 0 generic parameters
-  --> $DIR/no-explicit-const-params.rs:3:10
-   |
-LL | const fn foo() {}
-   |          ^^^
+ at $DIR/no-explicit-const-params.rs:3:10
 
-error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/no-explicit-const-params.rs:16:12
-   |
-LL |     <() as Bar<true>>::bar();
-   |            ^^^------ help: remove the unnecessary generics
-   |            |
-   |            expected 0 generic arguments
-   |
+error E0107: trait takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/no-explicit-const-params.rs:16:12: expected 0 generic arguments
+  on line 16, column 15: help: remove the unnecessary generics
 note: trait defined here, with 0 generic parameters
-  --> $DIR/no-explicit-const-params.rs:5:13
-   |
-LL | const trait Bar {
-   |             ^^^
+ at $DIR/no-explicit-const-params.rs:5:13
 
-error[E0107]: function takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/no-explicit-const-params.rs:21:5
-   |
-LL |     foo::<false>();
-   |     ^^^--------- help: remove the unnecessary generics
-   |     |
-   |     expected 0 generic arguments
-   |
+error E0107: function takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/no-explicit-const-params.rs:21:5: expected 0 generic arguments
+  on line 21, column 8: help: remove the unnecessary generics
 note: function defined here, with 0 generic parameters
-  --> $DIR/no-explicit-const-params.rs:3:10
-   |
-LL | const fn foo() {}
-   |          ^^^
+ at $DIR/no-explicit-const-params.rs:3:10
 
-error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/no-explicit-const-params.rs:23:12
-   |
-LL |     <() as Bar<false>>::bar();
-   |            ^^^------- help: remove the unnecessary generics
-   |            |
-   |            expected 0 generic arguments
-   |
+error E0107: trait takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/no-explicit-const-params.rs:23:12: expected 0 generic arguments
+  on line 23, column 15: help: remove the unnecessary generics
 note: trait defined here, with 0 generic parameters
-  --> $DIR/no-explicit-const-params.rs:5:13
-   |
-LL | const trait Bar {
-   |             ^^^
+ at $DIR/no-explicit-const-params.rs:5:13
 
-error[E0277]: the trait bound `(): const Bar` is not satisfied
-  --> $DIR/no-explicit-const-params.rs:23:6
-   |
-LL |     <() as Bar<false>>::bar();
-   |      ^^
-   |
+error E0277: the trait bound `(): const Bar` is not satisfied
+ at $DIR/no-explicit-const-params.rs:23:6
 help: make the `impl` of trait `Bar` `const`
-   |
-LL | impl const Bar for () {
-   |      +++++
+ on line 9, column 5, add `const `
 
 error: aborting due to 5 previous errors
 

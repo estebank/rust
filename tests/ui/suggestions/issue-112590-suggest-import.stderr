@@ -1,38 +1,20 @@
-error[E0433]: cannot find module or crate `fmt` in this scope
-  --> $DIR/issue-112590-suggest-import.rs:3:6
-   |
-LL | impl fmt::Debug for S {
-   |      ^^^ use of unresolved module or unlinked crate `fmt`
-   |
-   = help: you might be missing a crate named `fmt`
+error E0433: cannot find module or crate `fmt` in this scope
+ at $DIR/issue-112590-suggest-import.rs:3:6: use of unresolved module or unlinked crate `fmt`
+help: you might be missing a crate named `fmt`
 help: consider importing this module
-   |
-LL + use std::fmt;
-   |
+ on line 1, column 1, add `use std::fmt;`
 
-error[E0433]: cannot find module or crate `fmt` in this scope
-  --> $DIR/issue-112590-suggest-import.rs:4:28
-   |
-LL |     fn fmt(&self, _f: &mut fmt::Formatter<'_>) -> fmt::Result {
-   |                            ^^^ use of unresolved module or unlinked crate `fmt`
-   |
-   = help: you might be missing a crate named `fmt`
+error E0433: cannot find module or crate `fmt` in this scope
+ at $DIR/issue-112590-suggest-import.rs:4:28: use of unresolved module or unlinked crate `fmt`
+help: you might be missing a crate named `fmt`
 help: consider importing this module
-   |
-LL + use std::fmt;
-   |
+ on line 1, column 1, add `use std::fmt;`
 
-error[E0433]: cannot find module or crate `fmt` in this scope
-  --> $DIR/issue-112590-suggest-import.rs:4:51
-   |
-LL |     fn fmt(&self, _f: &mut fmt::Formatter<'_>) -> fmt::Result {
-   |                                                   ^^^ use of unresolved module or unlinked crate `fmt`
-   |
-   = help: you might be missing a crate named `fmt`
+error E0433: cannot find module or crate `fmt` in this scope
+ at $DIR/issue-112590-suggest-import.rs:4:51: use of unresolved module or unlinked crate `fmt`
+help: you might be missing a crate named `fmt`
 help: consider importing this module
-   |
-LL + use std::fmt;
-   |
+ on line 1, column 1, add `use std::fmt;`
 
 error: aborting due to 3 previous errors
 

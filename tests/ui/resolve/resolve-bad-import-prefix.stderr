@@ -1,19 +1,10 @@
-error[E0432]: unresolved import `S`
-  --> $DIR/resolve-bad-import-prefix.rs:11:5
-   |
-LL | use S::{};
-   |     ^ `S` is a struct, not a module
+error E0432: unresolved import `S`
+ at $DIR/resolve-bad-import-prefix.rs:11:5: `S` is a struct, not a module
 
-error[E0432]: unresolved import `Nonexistent`
-  --> $DIR/resolve-bad-import-prefix.rs:13:5
-   |
-LL | use Nonexistent::{};
-   |     ^^^^^^^^^^^ use of unresolved module or unlinked crate `Nonexistent`
-   |
+error E0432: unresolved import `Nonexistent`
+ at $DIR/resolve-bad-import-prefix.rs:13:5: use of unresolved module or unlinked crate `Nonexistent`
 help: you might be missing a crate named `Nonexistent`, add it to your project and import it in your code
-   |
-LL + extern crate Nonexistent;
-   |
+ on line 2, column 1, add `extern crate Nonexistent;`
 
 error: aborting due to 2 previous errors
 

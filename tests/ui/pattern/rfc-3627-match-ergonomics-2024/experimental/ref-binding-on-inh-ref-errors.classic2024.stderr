@@ -1,91 +1,44 @@
-error[E0308]: mismatched types
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:60:10
-   |
-LL |     let [&mut ref x] = &[&mut 0];
-   |          ^^^^^
-   |
-   = note: cannot match inherited `&` with `&mut` pattern
+error E0308: mismatched types
+ at $DIR/ref-binding-on-inh-ref-errors.rs:60:10
+note: cannot match inherited `&` with `&mut` pattern
 help: replace this `&mut` pattern with `&`
-   |
-LL -     let [&mut ref x] = &[&mut 0];
-LL +     let [&ref x] = &[&mut 0];
-   |
+ on line 60, column 9, replace with `&`
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:73:10
-   |
-LL |     let [ref mut x] = &[0];
-   |          ^^^^^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
-   = note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
+ at $DIR/ref-binding-on-inh-ref-errors.rs:73:10: explicit `ref` binding modifier not allowed when implicitly borrowing
+note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:73:9
-   |
-LL |     let [ref mut x] = &[0];
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&_`
+ at $DIR/ref-binding-on-inh-ref-errors.rs:73:9: this non-reference pattern matches on a reference type `&_`
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &[ref mut x] = &[0];
-   |         +
+ on line 73, column 8, add `&`
 
-error[E0596]: cannot borrow data in a `&` reference as mutable
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:73:10
-   |
-LL |     let [ref mut x] = &[0];
-   |          ^^^^^^^^^    ---- this cannot be borrowed as mutable
-   |          |
-   |          cannot borrow as mutable
+error E0596: cannot borrow data in a `&` reference as mutable
+ at $DIR/ref-binding-on-inh-ref-errors.rs:73:10: cannot borrow as mutable
+  on line 73, column 23: this cannot be borrowed as mutable
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:81:10
-   |
-LL |     let [ref x] = &[0];
-   |          ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
-   = note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
+ at $DIR/ref-binding-on-inh-ref-errors.rs:81:10: explicit `ref` binding modifier not allowed when implicitly borrowing
+note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:81:9
-   |
-LL |     let [ref x] = &[0];
-   |         ^^^^^^^ this non-reference pattern matches on a reference type `&_`
+ at $DIR/ref-binding-on-inh-ref-errors.rs:81:9: this non-reference pattern matches on a reference type `&_`
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &[ref x] = &[0];
-   |         +
+ on line 81, column 8, add `&`
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:85:10
-   |
-LL |     let [ref x] = &mut [0];
-   |          ^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
-   = note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
+ at $DIR/ref-binding-on-inh-ref-errors.rs:85:10: explicit `ref` binding modifier not allowed when implicitly borrowing
+note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:85:9
-   |
-LL |     let [ref x] = &mut [0];
-   |         ^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
+ at $DIR/ref-binding-on-inh-ref-errors.rs:85:9: this non-reference pattern matches on a reference type `&mut _`
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &mut [ref x] = &mut [0];
-   |         ++++
+ on line 85, column 8, add `&mut `
 
 error: cannot explicitly borrow within an implicitly-borrowing pattern
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:89:10
-   |
-LL |     let [ref mut x] = &mut [0];
-   |          ^^^^^^^ explicit `ref` binding modifier not allowed when implicitly borrowing
-   |
-   = note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
+ at $DIR/ref-binding-on-inh-ref-errors.rs:89:10: explicit `ref` binding modifier not allowed when implicitly borrowing
+note: for more information, see <https://doc.rust-lang.org/reference/patterns.html#binding-modes>
 note: matching on a reference type with a non-reference pattern implicitly borrows the contents
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:89:9
-   |
-LL |     let [ref mut x] = &mut [0];
-   |         ^^^^^^^^^^^ this non-reference pattern matches on a reference type `&mut _`
+ at $DIR/ref-binding-on-inh-ref-errors.rs:89:9: this non-reference pattern matches on a reference type `&mut _`
 help: match on the reference with a reference pattern to avoid implicitly borrowing
-   |
-LL |     let &mut [ref mut x] = &mut [0];
-   |         ++++
+ on line 89, column 8, add `&mut `
 
 error: aborting due to 6 previous errors
 

@@ -1,11 +1,6 @@
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/macro-parameter-span.rs:11:9
-   |
-LL |         $id
-   |         --- due to this macro variable
-...
-LL |         x
-   |         ^ not found in this scope
+error E0425: cannot find value `x` in this scope
+ at $DIR/macro-parameter-span.rs:11:9: not found in this scope
+  on line 3: due to this macro variable
 
 error: aborting due to 1 previous error
 

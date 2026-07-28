@@ -1,50 +1,23 @@
-error[E0425]: cannot find value `A` in crate `namespaced_enums`
-  --> $DIR/enums-are-namespaced-xc.rs:5:31
-   |
-LL |     let _ = namespaced_enums::A;
-   |                               ^ not found in `namespaced_enums`
-   |
+error E0425: cannot find value `A` in crate `namespaced_enums`
+ at $DIR/enums-are-namespaced-xc.rs:5:31: not found in `namespaced_enums`
 help: consider importing this unit variant
-   |
-LL + use namespaced_enums::Foo::A;
-   |
+ on line 2, column 1, add `use namespaced_enums::Foo::A;`
 help: if you import `A`, refer to it directly
-   |
-LL -     let _ = namespaced_enums::A;
-LL +     let _ = A;
-   |
+ on line 5, column 12
 
-error[E0425]: cannot find function, tuple struct or tuple variant `B` in crate `namespaced_enums`
-  --> $DIR/enums-are-namespaced-xc.rs:7:31
-   |
-LL |     let _ = namespaced_enums::B(10);
-   |                               ^ not found in `namespaced_enums`
-   |
+error E0425: cannot find function, tuple struct or tuple variant `B` in crate `namespaced_enums`
+ at $DIR/enums-are-namespaced-xc.rs:7:31: not found in `namespaced_enums`
 help: consider importing this tuple variant
-   |
-LL + use namespaced_enums::Foo::B;
-   |
+ on line 2, column 1, add `use namespaced_enums::Foo::B;`
 help: if you import `B`, refer to it directly
-   |
-LL -     let _ = namespaced_enums::B(10);
-LL +     let _ = B(10);
-   |
+ on line 7, column 12
 
-error[E0422]: cannot find struct, variant or union type `C` in crate `namespaced_enums`
-  --> $DIR/enums-are-namespaced-xc.rs:9:31
-   |
-LL |     let _ = namespaced_enums::C { a: 10 };
-   |                               ^ not found in `namespaced_enums`
-   |
+error E0422: cannot find struct, variant or union type `C` in crate `namespaced_enums`
+ at $DIR/enums-are-namespaced-xc.rs:9:31: not found in `namespaced_enums`
 help: consider importing this variant
-   |
-LL + use namespaced_enums::Foo::C;
-   |
+ on line 2, column 1, add `use namespaced_enums::Foo::C;`
 help: if you import `C`, refer to it directly
-   |
-LL -     let _ = namespaced_enums::C { a: 10 };
-LL +     let _ = C { a: 10 };
-   |
+ on line 9, column 12
 
 error: aborting due to 3 previous errors
 

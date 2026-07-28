@@ -1,356 +1,161 @@
 warning: label name `'a` shadows a label name that is already in scope
-  --> $DIR/loop-break-value.rs:140:17
-   |
-LL |     'a: loop {
-   |     -- first declared here
-LL |         break;
-LL |         let _ = 'a: loop {
-   |                 ^^ label `'a` already in scope
+ at $DIR/loop-break-value.rs:140:17: label `'a` already in scope
+  on line 138: first declared here
 
 warning: label name `'a` shadows a label name that is already in scope
-  --> $DIR/loop-break-value.rs:152:17
-   |
-LL |     'a: loop {
-   |     -- first declared here
-LL |         break;
-LL |         let _ = 'a: loop {
-   |                 ^^ label `'a` already in scope
+ at $DIR/loop-break-value.rs:152:17: label `'a` already in scope
+  on line 150: first declared here
 
-error[E0425]: cannot find value `LOOP` in this scope
-  --> $DIR/loop-break-value.rs:99:15
-   |
-LL |     'LOOP: for _ in 0 .. 9 {
-   |     ----- a label with a similar name exists
-LL |         break LOOP;
-   |               ^^^^
-   |               |
-   |               not found in this scope
-   |               help: use the similarly named label: `'LOOP`
+error E0425: cannot find value `LOOP` in this scope
+ at $DIR/loop-break-value.rs:99:15: not found in this scope
+  on line 99, column 15: help: use the similarly named label: `'LOOP`
+  on line 98: a label with a similar name exists
 
 warning: denote infinite loops with `loop { ... }`
-  --> $DIR/loop-break-value.rs:30:5
-   |
-LL |     'while_loop: while true {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^ help: use `loop`
-   |
-   = note: `#[warn(while_true)]` on by default
+ at $DIR/loop-break-value.rs:30:5: help: use `loop`
+note: `#[warn(while_true)]` on by default
 
-error[E0571]: `break` with value from a `while` loop
-  --> $DIR/loop-break-value.rs:32:9
-   |
-LL |     'while_loop: while true {
-   |     ----------------------- you can't `break` with a value in a `while` loop
-LL |         break;
-LL |         break ();
-   |         ^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `while` loop
+ at $DIR/loop-break-value.rs:32:9: can only break with a value inside `loop` or breakable block
+  on line 30: you can't `break` with a value in a `while` loop
 help: use `break` on its own without a value inside this `while` loop
-   |
-LL -         break ();
-LL +         break;
-   |
+ on line 32, column 8, replace with `break`
 help: alternatively, you might have meant to use the available loop label
-   |
-LL -         break ();
-LL +         break 'while_loop;
-   |
+ on line 32, column 14, replace with `'while_loop`
 
-error[E0571]: `break` with value from a `while` loop
-  --> $DIR/loop-break-value.rs:34:13
-   |
-LL |     'while_loop: while true {
-   |     ----------------------- you can't `break` with a value in a `while` loop
-...
-LL |             break 'while_loop 123;
-   |             ^^^^^^^^^^^^^^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `while` loop
+ at $DIR/loop-break-value.rs:34:13: can only break with a value inside `loop` or breakable block
+  on line 30: you can't `break` with a value in a `while` loop
 help: use `break` on its own without a value inside this `while` loop
-   |
-LL -             break 'while_loop 123;
-LL +             break 'while_loop;
-   |
+ on line 34, column 12, replace with `break 'while_loop`
 
-error[E0571]: `break` with value from a `while` loop
-  --> $DIR/loop-break-value.rs:42:12
-   |
-LL |     while let Some(_) = Some(()) {
-   |     ---------------------------- you can't `break` with a value in a `while` loop
-LL |         if break () {
-   |            ^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `while` loop
+ at $DIR/loop-break-value.rs:42:12: can only break with a value inside `loop` or breakable block
+  on line 41: you can't `break` with a value in a `while` loop
 help: use `break` on its own without a value inside this `while` loop
-   |
-LL -         if break () {
-LL +         if break {
-   |
+ on line 42, column 11, replace with `break`
 
-error[E0571]: `break` with value from a `while` loop
-  --> $DIR/loop-break-value.rs:47:9
-   |
-LL |     while let Some(_) = Some(()) {
-   |     ---------------------------- you can't `break` with a value in a `while` loop
-LL |         break None;
-   |         ^^^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `while` loop
+ at $DIR/loop-break-value.rs:47:9: can only break with a value inside `loop` or breakable block
+  on line 46: you can't `break` with a value in a `while` loop
 help: use `break` on its own without a value inside this `while` loop
-   |
-LL -         break None;
-LL +         break;
-   |
+ on line 47, column 8, replace with `break`
 
-error[E0571]: `break` with value from a `while` loop
-  --> $DIR/loop-break-value.rs:53:13
-   |
-LL |     'while_let_loop: while let Some(_) = Some(()) {
-   |     --------------------------------------------- you can't `break` with a value in a `while` loop
-LL |         loop {
-LL |             break 'while_let_loop "nope";
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `while` loop
+ at $DIR/loop-break-value.rs:53:13: can only break with a value inside `loop` or breakable block
+  on line 51: you can't `break` with a value in a `while` loop
 help: use `break` on its own without a value inside this `while` loop
-   |
-LL -             break 'while_let_loop "nope";
-LL +             break 'while_let_loop;
-   |
+ on line 53, column 12, replace with `break 'while_let_loop`
 
-error[E0571]: `break` with value from a `for` loop
-  --> $DIR/loop-break-value.rs:60:9
-   |
-LL |     for _ in &[1,2,3] {
-   |     ----------------- you can't `break` with a value in a `for` loop
-LL |         break ();
-   |         ^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `for` loop
+ at $DIR/loop-break-value.rs:60:9: can only break with a value inside `loop` or breakable block
+  on line 59: you can't `break` with a value in a `for` loop
 help: use `break` on its own without a value inside this `for` loop
-   |
-LL -         break ();
-LL +         break;
-   |
+ on line 60, column 8, replace with `break`
 
-error[E0571]: `break` with value from a `for` loop
-  --> $DIR/loop-break-value.rs:61:9
-   |
-LL |     for _ in &[1,2,3] {
-   |     ----------------- you can't `break` with a value in a `for` loop
-LL |         break ();
-LL |         break [()];
-   |         ^^^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `for` loop
+ at $DIR/loop-break-value.rs:61:9: can only break with a value inside `loop` or breakable block
+  on line 59: you can't `break` with a value in a `for` loop
 help: use `break` on its own without a value inside this `for` loop
-   |
-LL -         break [()];
-LL +         break;
-   |
+ on line 61, column 8, replace with `break`
 
-error[E0571]: `break` with value from a `for` loop
-  --> $DIR/loop-break-value.rs:68:13
-   |
-LL |     'for_loop: for _ in &[1,2,3] {
-   |     ---------------------------- you can't `break` with a value in a `for` loop
-...
-LL |             break 'for_loop Some(17);
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^ can only break with a value inside `loop` or breakable block
-   |
+error E0571: `break` with value from a `for` loop
+ at $DIR/loop-break-value.rs:68:13: can only break with a value inside `loop` or breakable block
+  on line 65: you can't `break` with a value in a `for` loop
 help: use `break` on its own without a value inside this `for` loop
-   |
-LL -             break 'for_loop Some(17);
-LL +             break 'for_loop;
-   |
+ on line 68, column 12, replace with `break 'for_loop`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:4:31
-   |
-LL |     let val: ! = loop { break break; };
-   |         ---      ----         ^^^^^ expected `!`, found `()`
-   |         |        |
-   |         |        this loop is expected to be of type `!`
-   |         expected because of this assignment
-   |
-   = note:   expected type `!`
-           found unit type `()`
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:4:31: expected `!`, found `()`
+  on line 4, column 9: expected because of this assignment
+  on line 4, column 18: this loop is expected to be of type `!`
+note:   expected type `!`
+      found unit type `()`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:11:19
-   |
-LL |             break "asdf";
-   |             ------------ expected because of this `break`
-LL |         } else {
-LL |             break 123;
-   |                   ^^^ expected `&str`, found integer
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:11:19: expected `&str`, found integer
+  on line 9: expected because of this `break`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:16:15
-   |
-LL |     let _: i32 = loop {
-   |         -        ---- this loop is expected to be of type `i32`
-   |         |
-   |         expected because of this assignment
-LL |         break "asdf";
-   |               ^^^^^^ expected `i32`, found `&str`
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:16:15: expected `i32`, found `&str`
+  on line 15, column 9: expected because of this assignment
+  on line 15, column 18: this loop is expected to be of type `i32`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:21:31
-   |
-LL |     let _: i32 = 'outer_loop: loop {
-   |         -                     ---- this loop is expected to be of type `i32`
-   |         |
-   |         expected because of this assignment
-LL |         loop {
-LL |             break 'outer_loop "nope";
-   |                               ^^^^^^ expected `i32`, found `&str`
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:21:31: expected `i32`, found `&str`
+  on line 19, column 9: expected because of this assignment
+  on line 19, column 31: this loop is expected to be of type `i32`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:27:9
-   |
-LL |     let _: Option<String> = loop {
-   |         -                   ---- this loop is expected to be of type `Option<String>`
-   |         |
-   |         expected because of this assignment
-LL |         break;
-   |         ^^^^^ expected `Option<String>`, found `()`
-   |
-   = note:   expected enum `Option<String>`
-           found unit type `()`
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:27:9: expected `Option<String>`, found `()`
+  on line 26, column 9: expected because of this assignment
+  on line 26, column 29: this loop is expected to be of type `Option<String>`
+note:   expected enum `Option<String>`
+      found unit type `()`
 help: give the `break` a value of the expected type
-   |
-LL |         break None;
-   |               ++++
+ on line 27, column 13, add ` None`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:77:26
-   |
-LL |                 break;
-   |                 ----- expected because of this `break`
-LL |                 break 'c 123;
-   |                          ^^^ expected `()`, found integer
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:77:26: expected `()`, found integer
+  on line 76: expected because of this `break`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:84:15
-   |
-LL |         break (break, break);
-   |               ^-----^^-----^
-   |               ||      |
-   |               ||      expected because of this `break`
-   |               |expected because of this `break`
-   |               expected `()`, found `(_, _)`
-   |
-   = note: expected unit type `()`
-                  found tuple `(_, _)`
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:84:15: expected `()`, found `(_, _)`
+  on line 84, column 16: expected because of this `break`
+  on line 84, column 23: expected because of this `break`
+note: expected unit type `()`
+             found tuple `(_, _)`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:89:15
-   |
-LL |         break;
-   |         ----- expected because of this `break`
-LL |         break 2;
-   |               ^ expected `()`, found integer
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:89:15: expected `()`, found integer
+  on line 88: expected because of this `break`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:94:9
-   |
-LL |         break 2;
-   |         ------- expected because of this `break`
-LL |         break;
-   |         ^^^^^ expected integer, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:94:9: expected integer, found `()`
+  on line 93: expected because of this `break`
 help: give the `break` a value of the expected type
-   |
-LL |         break /* value */;
-   |               +++++++++++
+ on line 94, column 13, add ` /* value */`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:112:9
-   |
-LL |                     break 'a 1;
-   |                     ---------- expected because of this `break`
-...
-LL |         break;
-   |         ^^^^^ expected integer, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:112:9: expected integer, found `()`
+  on line 108: expected because of this `break`
 help: give the `break` a value of the expected type
-   |
-LL |         break /* value */;
-   |               +++++++++++
+ on line 112, column 13, add ` /* value */`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:124:9
-   |
-LL |                     break 'a 1;
-   |                     ---------- expected because of this `break`
-...
-LL |         break 'a;
-   |         ^^^^^^^^ expected integer, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:124:9: expected integer, found `()`
+  on line 120: expected because of this `break`
 help: give the `break` a value of the expected type
-   |
-LL |         break 'a /* value */;
-   |                  +++++++++++
+ on line 124, column 16, add ` /* value */`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:135:15
-   |
-LL |         break;
-   |         ----- expected because of this `break`
-...
-LL |         break 2;
-   |               ^ expected `()`, found integer
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:135:15: expected `()`, found integer
+  on line 128: expected because of this `break`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:144:17
-   |
-LL |             break 2;
-   |             ------- expected because of this `break`
-LL |             loop {
-LL |                 break 'a;
-   |                 ^^^^^^^^ expected integer, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:144:17: expected integer, found `()`
+  on line 142: expected because of this `break`
 help: give the `break` a value of the expected type
-   |
-LL |                 break 'a /* value */;
-   |                          +++++++++++
+ on line 144, column 24, add ` /* value */`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:147:15
-   |
-LL |         break;
-   |         ----- expected because of this `break`
-...
-LL |         break 2;
-   |               ^ expected `()`, found integer
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:147:15: expected `()`, found integer
+  on line 139: expected because of this `break`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:156:17
-   |
-LL |             break 'a 2;
-   |             ---------- expected because of this `break`
-LL |             loop {
-LL |                 break 'a;
-   |                 ^^^^^^^^ expected integer, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:156:17: expected integer, found `()`
+  on line 154: expected because of this `break`
 help: give the `break` a value of the expected type
-   |
-LL |                 break 'a /* value */;
-   |                          +++++++++++
+ on line 156, column 24, add ` /* value */`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:159:15
-   |
-LL |         break;
-   |         ----- expected because of this `break`
-...
-LL |         break 2;
-   |               ^ expected `()`, found integer
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:159:15: expected `()`, found integer
+  on line 151: expected because of this `break`
 
-error[E0308]: mismatched types
-  --> $DIR/loop-break-value.rs:163:15
-   |
-LL | fn main() {
-   |          - expected `()` because of this return type
-...
-LL |     loop { // point at the return type
-   |     ---- this loop is expected to be of type `()`
-LL |         break 2;
-   |               ^ expected `()`, found integer
+error E0308: mismatched types
+ at $DIR/loop-break-value.rs:163:15: expected `()`, found integer
+  on line 3, column 10: expected `()` because of this return type
+  on line 162: this loop is expected to be of type `()`
 
 error: aborting due to 26 previous errors; 3 warnings emitted
 

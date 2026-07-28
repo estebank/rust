@@ -1,72 +1,32 @@
-error[E0503]: cannot use `arr[_]` because it was mutably borrowed
-  --> $DIR/arrays.rs:14:5
-   |
-LL |     let mut c = || {
-   |                 -- `arr` is borrowed here
-LL |         arr[0] += 10;
-   |         --- borrow occurs due to use of `arr` in closure
-...
-LL |     arr[1] += 10;
-   |     ^^^^^^^^^^^^ use of borrowed `arr`
-LL |
-LL |     c();
-   |     - borrow later used here
+error E0503: cannot use `arr[_]` because it was mutably borrowed
+ at $DIR/arrays.rs:14:5: use of borrowed `arr`
+  on line 8, column 17: `arr` is borrowed here
+  on line 9: borrow occurs due to use of `arr` in closure
+  on line 16: borrow later used here
 
-error[E0506]: cannot assign to `arr[_]` because it is borrowed
-  --> $DIR/arrays.rs:28:5
-   |
-LL |     let c = || {
-   |             -- `arr[_]` is borrowed here
-LL |         println!("{:#?}", &arr[3..4]);
-   |                            --- borrow occurs due to use in closure
-...
-LL |     arr[1] += 10;
-   |     ^^^^^^^^^^^^ `arr[_]` is assigned to here but it was already borrowed
-LL |
-LL |     c();
-   |     - borrow later used here
+error E0506: cannot assign to `arr[_]` because it is borrowed
+ at $DIR/arrays.rs:28:5: `arr[_]` is assigned to here but it was already borrowed
+  on line 22, column 13: `arr[_]` is borrowed here
+  on line 23, column 28: borrow occurs due to use in closure
+  on line 30: borrow later used here
 
-error[E0506]: cannot assign to `arr[_]` because it is borrowed
-  --> $DIR/arrays.rs:42:5
-   |
-LL |     let c = || {
-   |             -- `arr[_]` is borrowed here
-LL |         println!("{}", arr[3]);
-   |                        --- borrow occurs due to use in closure
-...
-LL |     arr[1] += 10;
-   |     ^^^^^^^^^^^^ `arr[_]` is assigned to here but it was already borrowed
-LL |
-LL |     c();
-   |     - borrow later used here
+error E0506: cannot assign to `arr[_]` because it is borrowed
+ at $DIR/arrays.rs:42:5: `arr[_]` is assigned to here but it was already borrowed
+  on line 36, column 13: `arr[_]` is borrowed here
+  on line 37, column 24: borrow occurs due to use in closure
+  on line 44: borrow later used here
 
-error[E0502]: cannot borrow `arr[_]` as immutable because it is also borrowed as mutable
-  --> $DIR/arrays.rs:56:20
-   |
-LL |     let mut c = || {
-   |                 -- mutable borrow occurs here
-LL |         arr[1] += 10;
-   |         --- first borrow occurs due to use of `arr` in closure
-...
-LL |     println!("{}", arr[3]);
-   |                    ^^^^^^ immutable borrow occurs here
-...
-LL |     c();
-   |     - mutable borrow later used here
+error E0502: cannot borrow `arr[_]` as immutable because it is also borrowed as mutable
+ at $DIR/arrays.rs:56:20: immutable borrow occurs here
+  on line 50, column 17: mutable borrow occurs here
+  on line 51: first borrow occurs due to use of `arr` in closure
+  on line 59: mutable borrow later used here
 
-error[E0502]: cannot borrow `arr` as immutable because it is also borrowed as mutable
-  --> $DIR/arrays.rs:71:24
-   |
-LL |     let mut c = || {
-   |                 -- mutable borrow occurs here
-LL |         arr[1] += 10;
-   |         --- first borrow occurs due to use of `arr` in closure
-...
-LL |     println!("{:#?}", &arr[3..2]);
-   |                        ^^^ immutable borrow occurs here
-...
-LL |     c();
-   |     - mutable borrow later used here
+error E0502: cannot borrow `arr` as immutable because it is also borrowed as mutable
+ at $DIR/arrays.rs:71:24: immutable borrow occurs here
+  on line 65, column 17: mutable borrow occurs here
+  on line 66: first borrow occurs due to use of `arr` in closure
+  on line 74: mutable borrow later used here
 
 error: aborting due to 5 previous errors
 

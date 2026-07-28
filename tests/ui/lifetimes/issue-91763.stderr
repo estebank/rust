@@ -1,18 +1,9 @@
 error: hidden lifetime parameters in types are deprecated
-  --> $DIR/issue-91763.rs:8:20
-   |
-LL | fn f() -> Ptr<Thing>;
-   |                    ^ expected lifetime parameter
-   |
+ at $DIR/issue-91763.rs:8:20: expected lifetime parameter
 note: the lint level is defined here
-  --> $DIR/issue-91763.rs:3:9
-   |
-LL | #![deny(elided_lifetimes_in_paths)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-91763.rs:3:9
 help: indicate the anonymous lifetime
-   |
-LL | fn f() -> Ptr<Thing><'_>;
-   |                     ++++
+ on line 8, column 20, add `<'_>`
 
 error: aborting due to 1 previous error
 

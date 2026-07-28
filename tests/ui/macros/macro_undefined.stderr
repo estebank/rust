@@ -1,16 +1,8 @@
 error: cannot find macro `k` in this scope
-  --> $DIR/macro_undefined.rs:11:5
-   |
-LL |     macro_rules! kl {
-   |     --------------- similarly named macro `kl` defined here
-...
-LL |     k!();
-   |     ^
-   |
+ at $DIR/macro_undefined.rs:11:5
+  on line 5: similarly named macro `kl` defined here
 help: a macro with a similar name exists
-   |
-LL |     kl!();
-   |      +
+ on line 11, column 4, replace with `kl`
 
 error: aborting due to 1 previous error
 

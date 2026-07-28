@@ -1,26 +1,14 @@
-error[E0061]: this enum variant takes 1 argument but 0 arguments were supplied
-  --> $DIR/enum-variant-priority-higher-than-other-inherent.rs:21:5
-   |
-LL |     <E>::V();
-   |     ^^^^^^-- argument #1 of type `u8` is missing
-   |
+error E0061: this enum variant takes 1 argument but 0 arguments were supplied
+ at $DIR/enum-variant-priority-higher-than-other-inherent.rs:21:5
+  on line 21, column 11: argument #1 of type `u8` is missing
 note: tuple variant defined here
-  --> $DIR/enum-variant-priority-higher-than-other-inherent.rs:5:5
-   |
-LL |     V(u8)
-   |     ^
+ at $DIR/enum-variant-priority-higher-than-other-inherent.rs:5:5
 help: provide the argument
-   |
-LL |     <E>::V(/* u8 */);
-   |            ++++++++
+ on line 21, column 10, replace with `(/* u8 */)`
 
-error[E0308]: mismatched types
-  --> $DIR/enum-variant-priority-higher-than-other-inherent.rs:22:17
-   |
-LL |     let _: u8 = <E2>::V;
-   |            --   ^^^^^^^ expected `u8`, found `E2`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/enum-variant-priority-higher-than-other-inherent.rs:22:17: expected `u8`, found `E2`
+  on line 22, column 12: expected due to this
 
 error: aborting due to 2 previous errors
 

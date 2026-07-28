@@ -1,13 +1,6 @@
-error[E0624]: method `method` is private
-  --> $DIR/close_window.rs:9:7
-   |
-LL |     s.method();
-   |       ^^^^^^ private method
-   |
-  ::: $DIR/auxiliary/close_window.rs:3:5
-   |
-LL |     fn method(&self) {}
-   |     ---------------- private method defined here
+error E0624: method `method` is private
+ at $DIR/close_window.rs:9:7: private method
+ at $DIR/auxiliary/close_window.rs:3:5: private method defined here
 
 error: aborting due to 1 previous error
 

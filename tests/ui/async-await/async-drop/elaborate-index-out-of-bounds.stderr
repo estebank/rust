@@ -1,10 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `drop`
-  --> $DIR/elaborate-index-out-of-bounds.rs:14:1
-   |
-LL | impl AsyncDrop for HasIncompleteAsyncDrop {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `drop` in implementation
-   |
-   = help: implement the missing item: `async fn drop(self: Pin<&mut Self>) { todo!() }`
+error E0046: not all trait items implemented, missing: `drop`
+ at $DIR/elaborate-index-out-of-bounds.rs:14:1: missing `drop` in implementation
+help: implement the missing item: `async fn drop(self: Pin<&mut Self>) { todo!() }`
 
 error: aborting due to 1 previous error
 

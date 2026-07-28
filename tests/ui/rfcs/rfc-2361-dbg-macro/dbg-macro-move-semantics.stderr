@@ -1,17 +1,9 @@
-error[E0382]: use of moved value: `a`
-  --> $DIR/dbg-macro-move-semantics.rs:9:13
-   |
-LL |     let a = NoCopy(0);
-   |         - move occurs because `a` has type `NoCopy`, which does not implement the `Copy` trait
-LL |     let _ = dbg!(a);
-   |             ------- value moved here
-LL |     let _ = dbg!(a);
-   |             ^^^^^^^ value used here after move
-   |
+error E0382: use of moved value: `a`
+ at $DIR/dbg-macro-move-semantics.rs:9:13: value used here after move
+  on line 7, column 9: move occurs because `a` has type `NoCopy`, which does not implement the `Copy` trait
+  on line 8, column 13: value moved here
 help: consider borrowing instead of transferring ownership
-   |
-LL |     let _ = dbg!(&a);
-   |                  +
+ on line 8, column 17, add `&`
 
 error: aborting due to 1 previous error
 

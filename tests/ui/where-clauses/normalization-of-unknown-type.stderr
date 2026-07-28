@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `Foo` in this scope
-  --> $DIR/normalization-of-unknown-type.rs:24:5
-   |
-LL |     Foo: Filter,
-   |     ^^^ not found in this scope
+error E0425: cannot find type `Foo` in this scope
+ at $DIR/normalization-of-unknown-type.rs:24:5: not found in this scope
 
 error: aborting due to 1 previous error
 

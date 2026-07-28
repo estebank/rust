@@ -1,8 +1,5 @@
 error: scalable vectors cannot be tuple fields
-  --> $DIR/fn-trait.rs:10:8
-   |
-LL |     T: Fn(ScalableSimdFloat),
-   |        ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/fn-trait.rs:10:8
 
 error: aborting due to 1 previous error
 

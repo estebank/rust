@@ -1,12 +1,7 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/reborrow-promotion-rejected.rs:18:47
-   |
-LL | static BAD: &'static MyRef<'static> = &coerce(MyMut(&1));
-   |                                       --------^^^^^^^^^-
-   |                                       |       |        |
-   |                                       |       |        temporary value is freed at the end of this statement
-   |                                       |       creates a temporary value which is freed while still in use
-   |                                       using this value as a static requires that borrow lasts for `'static`
+error E0716: temporary value dropped while borrowed
+ at $DIR/reborrow-promotion-rejected.rs:18:47: creates a temporary value which is freed while still in use
+  on line 18, column 39: using this value as a static requires that borrow lasts for `'static`
+  on line 18, column 56: temporary value is freed at the end of this statement
 
 error: aborting due to 1 previous error
 

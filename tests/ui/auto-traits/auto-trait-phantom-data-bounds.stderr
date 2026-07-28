@@ -1,67 +1,34 @@
-error[E0277]: `T` cannot be shared between threads safely
-  --> $DIR/auto-trait-phantom-data-bounds.rs:21:12
-   |
-LL |     is_zen(x)
-   |     ------ ^ `T` cannot be shared between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: `T` cannot be shared between threads safely
+ at $DIR/auto-trait-phantom-data-bounds.rs:21:12: `T` cannot be shared between threads safely
+  on line 21: required by a bound introduced by this call
 note: required for `&T` to implement `Zen`
-  --> $DIR/auto-trait-phantom-data-bounds.rs:10:24
-   |
-LL | unsafe impl<'a, T: 'a> Zen for &'a T where T: Sync {}
-   |                        ^^^     ^^^^^          ---- unsatisfied trait bound introduced here
+ at $DIR/auto-trait-phantom-data-bounds.rs:10:24
+  on line 10, column 47: unsatisfied trait bound introduced here
 note: required because it appears within the type `PhantomData<&T>`
-  --> $SRC_DIR/core/src/marker.rs:LL:COL
+ at $SRC_DIR/core/src/marker.rs:LL:COL
 note: required because it appears within the type `Guard<'_, T>`
-  --> $DIR/auto-trait-phantom-data-bounds.rs:12:8
-   |
-LL | struct Guard<'a, T: 'a> {
-   |        ^^^^^
+ at $DIR/auto-trait-phantom-data-bounds.rs:12:8
 note: required by a bound in `is_zen`
-  --> $DIR/auto-trait-phantom-data-bounds.rs:18:14
-   |
-LL | fn is_zen<T: Zen>(_: T) {}
-   |              ^^^ required by this bound in `is_zen`
+ at $DIR/auto-trait-phantom-data-bounds.rs:18:14: required by this bound in `is_zen`
 help: consider restricting type parameter `T` with trait `Sync`
-   |
-LL | fn not_sync<T: std::marker::Sync>(x: Guard<T>) {
-   |              +++++++++++++++++++
+ on line 20, column 13, add `: std::marker::Sync`
 
-error[E0277]: `T` cannot be shared between threads safely
-  --> $DIR/auto-trait-phantom-data-bounds.rs:26:12
-   |
-LL |     is_zen(x)
-   |     ------ ^ `T` cannot be shared between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: `T` cannot be shared between threads safely
+ at $DIR/auto-trait-phantom-data-bounds.rs:26:12: `T` cannot be shared between threads safely
+  on line 26: required by a bound introduced by this call
 note: required for `&T` to implement `Zen`
-  --> $DIR/auto-trait-phantom-data-bounds.rs:10:24
-   |
-LL | unsafe impl<'a, T: 'a> Zen for &'a T where T: Sync {}
-   |                        ^^^     ^^^^^          ---- unsatisfied trait bound introduced here
+ at $DIR/auto-trait-phantom-data-bounds.rs:10:24
+  on line 10, column 47: unsatisfied trait bound introduced here
 note: required because it appears within the type `PhantomData<&T>`
-  --> $SRC_DIR/core/src/marker.rs:LL:COL
+ at $SRC_DIR/core/src/marker.rs:LL:COL
 note: required because it appears within the type `Guard<'_, T>`
-  --> $DIR/auto-trait-phantom-data-bounds.rs:12:8
-   |
-LL | struct Guard<'a, T: 'a> {
-   |        ^^^^^
+ at $DIR/auto-trait-phantom-data-bounds.rs:12:8
 note: required because it appears within the type `Nested<Guard<'_, T>>`
-  --> $DIR/auto-trait-phantom-data-bounds.rs:16:8
-   |
-LL | struct Nested<T>(T);
-   |        ^^^^^^
+ at $DIR/auto-trait-phantom-data-bounds.rs:16:8
 note: required by a bound in `is_zen`
-  --> $DIR/auto-trait-phantom-data-bounds.rs:18:14
-   |
-LL | fn is_zen<T: Zen>(_: T) {}
-   |              ^^^ required by this bound in `is_zen`
+ at $DIR/auto-trait-phantom-data-bounds.rs:18:14: required by this bound in `is_zen`
 help: consider restricting type parameter `T` with trait `Sync`
-   |
-LL | fn nested_not_sync<T: std::marker::Sync>(x: Nested<Guard<T>>) {
-   |                     +++++++++++++++++++
+ on line 25, column 20, add `: std::marker::Sync`
 
 error: aborting due to 2 previous errors
 

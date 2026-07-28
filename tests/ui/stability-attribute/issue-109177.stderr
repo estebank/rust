@@ -1,25 +1,11 @@
-error[E0425]: cannot find function `foo1` in crate `similar_unstable_method`
-  --> $DIR/issue-109177.rs:7:30
-   |
-LL |     similar_unstable_method::foo1();
-   |                              ^^^^
-   |
-  ::: $DIR/auxiliary/similar-unstable-method.rs:5:1
-   |
-LL | pub fn foo() {}
-   | ------------ similarly named function `foo` defined here
-   |
+error E0425: cannot find function `foo1` in crate `similar_unstable_method`
+ at $DIR/issue-109177.rs:7:30
+ at $DIR/auxiliary/similar-unstable-method.rs:5:1: similarly named function `foo` defined here
 help: a function with a similar name exists
-   |
-LL -     similar_unstable_method::foo1();
-LL +     similar_unstable_method::foo();
-   |
+ on line 7, column 29, replace with `foo`
 
-error[E0599]: no method named `foo1` found for struct `Foo` in the current scope
-  --> $DIR/issue-109177.rs:11:9
-   |
-LL |     foo.foo1();
-   |         ^^^^ method not found in `Foo`
+error E0599: no method named `foo1` found for struct `Foo` in the current scope
+ at $DIR/issue-109177.rs:11:9: method not found in `Foo`
 
 error: aborting due to 2 previous errors
 

@@ -1,8 +1,5 @@
-error[E0425]: cannot find value `Foo` in this scope
-  --> $DIR/issue-80079.rs:11:13
-   |
-LL |     let _ = Foo;
-   |             ^^^ not found in this scope
+error E0425: cannot find value `Foo` in this scope
+ at $DIR/issue-80079.rs:11:13: not found in this scope
 
 error: aborting due to 1 previous error
 

@@ -1,129 +1,57 @@
-error[E0506]: cannot assign to `vec[_]` because it is borrowed
-  --> $DIR/borrowck-vec-pattern-nesting.rs:9:13
-   |
-LL |         [box ref _a, _, _] => {
-   |              ------ `vec[_]` is borrowed here
-LL |
-LL |             vec[0] = Box::new(4);
-   |             ^^^^^^ `vec[_]` is assigned to here but it was already borrowed
-LL |
-LL |             _a.use_ref();
-   |             -- borrow later used here
+error E0506: cannot assign to `vec[_]` because it is borrowed
+ at $DIR/borrowck-vec-pattern-nesting.rs:9:13: `vec[_]` is assigned to here but it was already borrowed
+  on line 7, column 14: `vec[_]` is borrowed here
+  on line 11: borrow later used here
 
-error[E0506]: cannot assign to `vec[_]` because it is borrowed
-  --> $DIR/borrowck-vec-pattern-nesting.rs:23:13
-   |
-LL |         &mut [ref _b @ ..] => {
-   |               ------ `vec[_]` is borrowed here
-LL |
-LL |             vec[0] = Box::new(4);
-   |             ^^^^^^ `vec[_]` is assigned to here but it was already borrowed
-LL |
-LL |             _b.use_ref();
-   |             -- borrow later used here
+error E0506: cannot assign to `vec[_]` because it is borrowed
+ at $DIR/borrowck-vec-pattern-nesting.rs:23:13: `vec[_]` is assigned to here but it was already borrowed
+  on line 21, column 15: `vec[_]` is borrowed here
+  on line 25: borrow later used here
 
-error[E0508]: cannot move out of type `[Box<isize>]`, a non-copy slice
-  --> $DIR/borrowck-vec-pattern-nesting.rs:34:11
-   |
-LL |     match vec {
-   |           ^^^ cannot move out of here
-...
-LL |         &mut [_a,
-   |               -- data moved here because `_a` has type `Box<isize>`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[Box<isize>]`, a non-copy slice
+ at $DIR/borrowck-vec-pattern-nesting.rs:34:11: cannot move out of here
+  on line 37, column 15: data moved here because `_a` has type `Box<isize>`, which does not implement the `Copy` trait
 help: consider removing the mutable borrow
-   |
-LL -         &mut [_a,
-LL +         [_a,
-   |
+ on line 37, column 8
 
-error[E0508]: cannot move out of type `[Box<isize>]`, a non-copy slice
-  --> $DIR/borrowck-vec-pattern-nesting.rs:45:13
-   |
-LL |     let a = vec[0];
-   |             ^^^^^^
-   |             |
-   |             cannot move out of here
-   |             move occurs because `vec[_]` has type `Box<isize>`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[Box<isize>]`, a non-copy slice
+ at $DIR/borrowck-vec-pattern-nesting.rs:45:13: cannot move out of here
+  on line 45, column 13: move occurs because `vec[_]` has type `Box<isize>`, which does not implement the `Copy` trait
 help: consider borrowing here
-   |
-LL |     let a = &vec[0];
-   |             +
+ on line 45, column 12, add `&`
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let a = vec[0].clone();
-   |                   ++++++++
+ on line 45, column 18, add `.clone()`
 
-error[E0508]: cannot move out of type `[Box<isize>]`, a non-copy slice
-  --> $DIR/borrowck-vec-pattern-nesting.rs:55:11
-   |
-LL |     match vec {
-   |           ^^^ cannot move out of here
-...
-LL |          _b] => {}
-   |          -- data moved here because `_b` has type `Box<isize>`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[Box<isize>]`, a non-copy slice
+ at $DIR/borrowck-vec-pattern-nesting.rs:55:11: cannot move out of here
+  on line 60: data moved here because `_b` has type `Box<isize>`, which does not implement the `Copy` trait
 help: consider removing the mutable borrow
-   |
-LL -         &mut [
-LL +         [
-   |
+ on line 58, column 8
 
-error[E0508]: cannot move out of type `[Box<isize>]`, a non-copy slice
-  --> $DIR/borrowck-vec-pattern-nesting.rs:64:13
-   |
-LL |     let a = vec[0];
-   |             ^^^^^^
-   |             |
-   |             cannot move out of here
-   |             move occurs because `vec[_]` has type `Box<isize>`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[Box<isize>]`, a non-copy slice
+ at $DIR/borrowck-vec-pattern-nesting.rs:64:13: cannot move out of here
+  on line 64, column 13: move occurs because `vec[_]` has type `Box<isize>`, which does not implement the `Copy` trait
 help: consider borrowing here
-   |
-LL |     let a = &vec[0];
-   |             +
+ on line 64, column 12, add `&`
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let a = vec[0].clone();
-   |                   ++++++++
+ on line 64, column 18, add `.clone()`
 
-error[E0508]: cannot move out of type `[Box<isize>]`, a non-copy slice
-  --> $DIR/borrowck-vec-pattern-nesting.rs:74:11
-   |
-LL |     match vec {
-   |           ^^^ cannot move out of here
-...
-LL |         &mut [_a, _b, _c] => {}
-   |               --  --  -- ...and here
-   |               |   |
-   |               |   ...and here
-   |               data moved here
-   |
-   = note: move occurs because these variables have types that don't implement the `Copy` trait
+error E0508: cannot move out of type `[Box<isize>]`, a non-copy slice
+ at $DIR/borrowck-vec-pattern-nesting.rs:74:11: cannot move out of here
+  on line 78, column 15: data moved here
+  on line 78, column 19: ...and here
+  on line 78, column 23: ...and here
+note: move occurs because these variables have types that don't implement the `Copy` trait
 help: consider removing the mutable borrow
-   |
-LL -         &mut [_a, _b, _c] => {}
-LL +         [_a, _b, _c] => {}
-   |
+ on line 78, column 8
 
-error[E0508]: cannot move out of type `[Box<isize>]`, a non-copy slice
-  --> $DIR/borrowck-vec-pattern-nesting.rs:85:13
-   |
-LL |     let a = vec[0];
-   |             ^^^^^^
-   |             |
-   |             cannot move out of here
-   |             move occurs because `vec[_]` has type `Box<isize>`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[Box<isize>]`, a non-copy slice
+ at $DIR/borrowck-vec-pattern-nesting.rs:85:13: cannot move out of here
+  on line 85, column 13: move occurs because `vec[_]` has type `Box<isize>`, which does not implement the `Copy` trait
 help: consider borrowing here
-   |
-LL |     let a = &vec[0];
-   |             +
+ on line 85, column 12, add `&`
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let a = vec[0].clone();
-   |                   ++++++++
+ on line 85, column 18, add `.clone()`
 
 error: aborting due to 8 previous errors
 

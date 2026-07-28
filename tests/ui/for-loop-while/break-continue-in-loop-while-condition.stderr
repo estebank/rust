@@ -1,56 +1,29 @@
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:6:11
-   |
-LL |     while break {}
-   |           ^^^^^ unlabeled `break` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:6:11: unlabeled `break` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:10:22
-   |
-LL |     while let true = break {}
-   |                      ^^^^^ unlabeled `break` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:10:22: unlabeled `break` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:17:15
-   |
-LL |         while break {}
-   |               ^^^^^ unlabeled `break` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:17:15: unlabeled `break` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:26:15
-   |
-LL |         while break {}
-   |               ^^^^^ unlabeled `break` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:26:15: unlabeled `break` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:32:11
-   |
-LL |     while continue {}
-   |           ^^^^^^^^ unlabeled `continue` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:32:11: unlabeled `continue` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:36:22
-   |
-LL |     while let true = continue {}
-   |                      ^^^^^^^^ unlabeled `continue` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:36:22: unlabeled `continue` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:43:15
-   |
-LL |         while continue {}
-   |               ^^^^^^^^ unlabeled `continue` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:43:15: unlabeled `continue` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:52:15
-   |
-LL |         while continue {}
-   |               ^^^^^^^^ unlabeled `continue` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:52:15: unlabeled `continue` in the condition of a `while` loop
 
-error[E0590]: `break` or `continue` with no label in the condition of a `while` loop
-  --> $DIR/break-continue-in-loop-while-condition.rs:61:21
-   |
-LL |         break while continue {
-   |                     ^^^^^^^^ unlabeled `continue` in the condition of a `while` loop
+error E0590: `break` or `continue` with no label in the condition of a `while` loop
+ at $DIR/break-continue-in-loop-while-condition.rs:61:21: unlabeled `continue` in the condition of a `while` loop
 
 error: aborting due to 9 previous errors
 

@@ -1,13 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `foo`
-  --> $DIR/trivial_impl3.rs:16:1
-   |
-LL | /     fn foo()
-LL | |     where
-LL | |         Self: trivial3::Trait;
-   | |______________________________- `foo` from trait
-...
-LL |   impl Foo for u8 {}
-   |   ^^^^^^^^^^^^^^^ missing `foo` in implementation
+error E0046: not all trait items implemented, missing: `foo`
+ at $DIR/trivial_impl3.rs:16:1: missing `foo` in implementation
+  on line 11 to line 13: `foo` from trait
 
 error: aborting due to 1 previous error
 

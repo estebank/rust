@@ -1,10 +1,6 @@
-error[E0403]: the name `'a` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/regions-name-duplicated.rs:1:16
-   |
-LL | struct Foo<'a, 'a> {
-   |            --  ^^ already used
-   |            |
-   |            first use of `'a`
+error E0403: the name `'a` is already used for a generic parameter in this item's generic parameters
+ at $DIR/regions-name-duplicated.rs:1:16: already used
+  on line 1, column 12: first use of `'a`
 
 error: aborting due to 1 previous error
 

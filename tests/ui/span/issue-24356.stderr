@@ -1,10 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `Target`
-  --> $DIR/issue-24356.rs:18:9
-   |
-LL |         impl Deref for Thing {
-   |         ^^^^^^^^^^^^^^^^^^^^ missing `Target` in implementation
-   |
-   = help: implement the missing item: `type Target = /* Type */;`
+error E0046: not all trait items implemented, missing: `Target`
+ at $DIR/issue-24356.rs:18:9: missing `Target` in implementation
+help: implement the missing item: `type Target = /* Type */;`
 
 error: aborting due to 1 previous error
 

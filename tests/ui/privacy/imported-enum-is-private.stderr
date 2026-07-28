@@ -1,30 +1,14 @@
-error[E0603]: enum `Foo` is private
-  --> $DIR/imported-enum-is-private.rs:7:21
-   |
-LL |     let _b = other::Foo::Bar(1);
-   |                     ^^^  --- tuple variant `Bar` is not publicly re-exported
-   |                     |
-   |                     private enum
-   |
+error E0603: enum `Foo` is private
+ at $DIR/imported-enum-is-private.rs:7:21: private enum
+  on line 7, column 26: tuple variant `Bar` is not publicly re-exported
 note: the enum `Foo` is defined here
-  --> $DIR/auxiliary/imported-enum-is-private.rs:3:1
-   |
-LL | enum Foo {
-   | ^^^^^^^^
+ at $DIR/auxiliary/imported-enum-is-private.rs:3:1
 
-error[E0603]: enum `Foo` is private
-  --> $DIR/imported-enum-is-private.rs:10:27
-   |
-LL |     let _b = other::test::Foo::Bar(1);
-   |                           ^^^  --- tuple variant `Bar` is not publicly re-exported
-   |                           |
-   |                           private enum
-   |
+error E0603: enum `Foo` is private
+ at $DIR/imported-enum-is-private.rs:10:27: private enum
+  on line 10, column 32: tuple variant `Bar` is not publicly re-exported
 note: the enum `Foo` is defined here
-  --> $DIR/auxiliary/imported-enum-is-private.rs:8:5
-   |
-LL |     enum Foo {
-   |     ^^^^^^^^
+ at $DIR/auxiliary/imported-enum-is-private.rs:8:5
 
 error: aborting due to 2 previous errors
 

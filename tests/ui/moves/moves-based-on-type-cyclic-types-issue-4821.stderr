@@ -1,17 +1,9 @@
-error[E0382]: use of partially moved value: `node`
-  --> $DIR/moves-based-on-type-cyclic-types-issue-4821.rs:13:13
-   |
-LL |         Some(right) => consume(right),
-   |              ----- value partially moved here
-...
-LL |     consume(node) + r
-   |             ^^^^ value used here after partial move
-   |
-   = note: partial move occurs because value has type `Box<List>`, which does not implement the `Copy` trait
+error E0382: use of partially moved value: `node`
+ at $DIR/moves-based-on-type-cyclic-types-issue-4821.rs:13:13: value used here after partial move
+  on line 10, column 14: value partially moved here
+note: partial move occurs because value has type `Box<List>`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         Some(ref right) => consume(right),
-   |              +++
+ on line 10, column 13, add `ref `
 
 error: aborting due to 1 previous error
 

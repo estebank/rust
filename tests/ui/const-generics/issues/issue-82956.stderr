@@ -1,20 +1,12 @@
-error[E0433]: cannot find type `IntoIter` in this scope
-  --> $DIR/issue-82956.rs:26:24
-   |
-LL |         let mut iter = IntoIter::new(self);
-   |                        ^^^^^^^^ use of undeclared type `IntoIter`
-   |
+error E0433: cannot find type `IntoIter` in this scope
+ at $DIR/issue-82956.rs:26:24: use of undeclared type `IntoIter`
 help: consider importing one of these structs
-   |
-LL + use std::array::IntoIter;
-   |
-LL + use std::collections::binary_heap::IntoIter;
-   |
-LL + use std::collections::btree_map::IntoIter;
-   |
-LL + use std::collections::btree_set::IntoIter;
-   |
-   = and 9 other candidates
+ on line 5, column 1, add one of
+  use std::array::IntoIter;
+  use std::collections::binary_heap::IntoIter;
+  use std::collections::btree_map::IntoIter;
+  use std::collections::btree_set::IntoIter;
+and 9 other candidates
 
 error: aborting due to 1 previous error
 

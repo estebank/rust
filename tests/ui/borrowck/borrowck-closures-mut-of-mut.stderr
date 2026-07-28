@@ -1,17 +1,9 @@
-error[E0524]: two closures require unique access to `x` at the same time
-  --> $DIR/borrowck-closures-mut-of-mut.rs:15:18
-   |
-LL |     let mut c1 = || set(&mut *x);
-   |                  --          -- first borrow occurs due to use of `x` in closure
-   |                  |
-   |                  first closure is constructed here
-LL |     let mut c2 = || set(&mut *x);
-   |                  ^^          -- second borrow occurs due to use of `x` in closure
-   |                  |
-   |                  second closure is constructed here
-LL |
-LL |     c2(); c1();
-   |           -- first borrow later used here
+error E0524: two closures require unique access to `x` at the same time
+ at $DIR/borrowck-closures-mut-of-mut.rs:15:18: second closure is constructed here
+  on line 14, column 18: first closure is constructed here
+  on line 14, column 30: first borrow occurs due to use of `x` in closure
+  on line 15, column 30: second borrow occurs due to use of `x` in closure
+  on line 17, column 11: first borrow later used here
 
 error: aborting due to 1 previous error
 

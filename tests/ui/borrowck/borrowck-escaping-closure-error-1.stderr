@@ -1,20 +1,10 @@
-error[E0373]: closure may outlive the current function, but it borrows `books`, which is owned by the current function
-  --> $DIR/borrowck-escaping-closure-error-1.rs:13:11
-   |
-LL |     spawn(|| books.push(4));
-   |           ^^ ----- `books` is borrowed here
-   |           |
-   |           may outlive borrowed value `books`
-   |
+error E0373: closure may outlive the current function, but it borrows `books`, which is owned by the current function
+ at $DIR/borrowck-escaping-closure-error-1.rs:13:11: may outlive borrowed value `books`
+  on line 13, column 14: `books` is borrowed here
 note: function requires argument type to outlive `'static`
-  --> $DIR/borrowck-escaping-closure-error-1.rs:13:5
-   |
-LL |     spawn(|| books.push(4));
-   |     ^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/borrowck-escaping-closure-error-1.rs:13:5
 help: to force the closure to take ownership of `books` (and any other referenced variables), use the `move` keyword
-   |
-LL |     spawn(move || books.push(4));
-   |           ++++
+ on line 13, column 10, add `move `
 
 error: aborting due to 1 previous error
 

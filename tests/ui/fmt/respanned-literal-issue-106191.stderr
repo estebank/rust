@@ -1,18 +1,10 @@
 error: invalid format string: expected `}` but string was terminated
-  --> $DIR/respanned-literal-issue-106191.rs:6:65
-   |
-LL |     format_string_proc_macro::respan_to_invalid_format_literal!("¡");
-   |                                                                 ^^^ expected `}` in format string
-   |
-   = note: if you intended to print `{`, you can escape it using `{{`
+ at $DIR/respanned-literal-issue-106191.rs:6:65: expected `}` in format string
+note: if you intended to print `{`, you can escape it using `{{`
 
 error: invalid format string: expected `}` but string was terminated
-  --> $DIR/respanned-literal-issue-106191.rs:8:18
-   |
-LL |     format_args!(r#concat!("¡        {"));
-   |                  ^^^^^^^^^^^^^^^^^^^^^^^ expected `}` in format string
-   |
-   = note: if you intended to print `{`, you can escape it using `{{`
+ at $DIR/respanned-literal-issue-106191.rs:8:18: expected `}` in format string
+note: if you intended to print `{`, you can escape it using `{{`
 
 error: aborting due to 2 previous errors
 

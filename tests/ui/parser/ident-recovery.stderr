@@ -1,48 +1,22 @@
 error: expected identifier, found `,`
-  --> $DIR/ident-recovery.rs:1:4
-   |
-LL | fn ,comma() {
-   |    ^ expected identifier
-   |
+ at $DIR/ident-recovery.rs:1:4: expected identifier
 help: remove this comma
-   |
-LL - fn ,comma() {
-LL + fn comma() {
-   |
+ on line 1, column 3
 
 error: expected identifier, found `,`
-  --> $DIR/ident-recovery.rs:4:16
-   |
-LL |         x: i32,,
-   |                ^ expected identifier
-   |
+ at $DIR/ident-recovery.rs:4:16: expected identifier
 help: remove this comma
-   |
-LL -         x: i32,,
-LL +         x: i32,
-   |
+ on line 4, column 15
 
 error: expected identifier, found keyword `break`
-  --> $DIR/ident-recovery.rs:10:4
-   |
-LL | fn break() {
-   |    ^^^^^ expected identifier, found keyword
-   |
+ at $DIR/ident-recovery.rs:10:4: expected identifier, found keyword
 help: escape `break` to use it as an identifier
-   |
-LL | fn r#break() {
-   |    ++
+ on line 10, column 3, add `r#`
 
 error: expected identifier, found keyword `continue`
-  --> $DIR/ident-recovery.rs:12:9
-   |
-LL |     let continue = 5;
-   |         ^^^^^^^^ expected identifier, found keyword
-   |
+ at $DIR/ident-recovery.rs:12:9: expected identifier, found keyword
 help: escape `continue` to use it as an identifier
-   |
-LL |     let r#continue = 5;
-   |         ++
+ on line 12, column 8, add `r#`
 
 error: aborting due to 4 previous errors
 

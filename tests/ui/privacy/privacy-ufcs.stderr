@@ -1,16 +1,8 @@
-error[E0603]: trait `Bar` is private
-  --> $DIR/privacy-ufcs.rs:12:25
-   |
-LL |     <i32 as crate::foo::Bar>::baz();
-   |                         ^^^   --- associated function `baz` is not publicly re-exported
-   |                         |
-   |                         private trait
-   |
+error E0603: trait `Bar` is private
+ at $DIR/privacy-ufcs.rs:12:25: private trait
+  on line 12, column 31: associated function `baz` is not publicly re-exported
 note: the trait `Bar` is defined here
-  --> $DIR/privacy-ufcs.rs:4:5
-   |
-LL |     trait Bar {
-   |     ^^^^^^^^^
+ at $DIR/privacy-ufcs.rs:4:5
 
 error: aborting due to 1 previous error
 

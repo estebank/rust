@@ -1,15 +1,9 @@
-error[E0369]: binary operation `==` cannot be applied to type `&[T]`
-  --> $DIR/missing-trait-bound-for-op.rs:4:15
-   |
-LL |     let _ = s == t;
-   |             - ^^ - &[T]
-   |             |
-   |             &[T]
-   |
+error E0369: binary operation `==` cannot be applied to type `&[T]`
+ at $DIR/missing-trait-bound-for-op.rs:4:15
+  on line 4, column 13: &[T]
+  on line 4, column 18: &[T]
 help: consider restricting type parameter `T` with trait `PartialEq`
-   |
-LL | pub fn foo<T: std::cmp::PartialEq>(s: &[T], t: &[T]) {
-   |             +++++++++++++++++++++
+ on line 3, column 12, add `: std::cmp::PartialEq`
 
 error: aborting due to 1 previous error
 

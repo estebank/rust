@@ -1,8 +1,5 @@
-error[E0637]: `'_` cannot be used here
-  --> $DIR/where-clause-inherent-impl-underscore.rs:13:19
-   |
-LL |     T: WithRegion<'_>
-   |                   ^^ `'_` is a reserved lifetime name
+error E0637: `'_` cannot be used here
+ at $DIR/where-clause-inherent-impl-underscore.rs:13:19: `'_` is a reserved lifetime name
 
 error: aborting due to 1 previous error
 

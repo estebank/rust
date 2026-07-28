@@ -1,55 +1,29 @@
 error: macro requires a cfg-pattern as an argument
-  --> $DIR/cfg.rs:2:5
-   |
-LL |     cfg!();
-   |     ^^^^^^ cfg-pattern required
+ at $DIR/cfg.rs:2:5: cfg-pattern required
 
-error[E0565]: malformed `cfg` macro input
-  --> $DIR/cfg.rs:3:5
-   |
-LL |     cfg!(123);
-   |     ^^^^^---^
-   |          |
-   |          expected a valid identifier here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+error E0565: malformed `cfg` macro input
+ at $DIR/cfg.rs:3:5
+  on line 3, column 10: expected a valid identifier here
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
 help: must be of the form
-   |
-LL -     cfg!(123);
-LL +     cfg!(predicate);
-   |
+ on line 3, column 4, replace with `cfg!(predicate)`
 
-error[E0539]: malformed `cfg` macro input
-  --> $DIR/cfg.rs:4:5
-   |
-LL |     cfg!(foo = 123);
-   |     ^^^^^^^^^^^---^
-   |                |
-   |                expected a string literal here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+error E0539: malformed `cfg` macro input
+ at $DIR/cfg.rs:4:5
+  on line 4, column 16: expected a string literal here
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
 help: must be of the form
-   |
-LL -     cfg!(foo = 123);
-LL +     cfg!(predicate);
-   |
+ on line 4, column 4, replace with `cfg!(predicate)`
 
 error: expected 1 cfg-pattern
-  --> $DIR/cfg.rs:5:5
-   |
-LL |     cfg!(false, false);
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/cfg.rs:5:5
 
 warning: unexpected `cfg` condition name: `foo`
-  --> $DIR/cfg.rs:6:10
-   |
-LL |     cfg!(foo);
-   |          ^^^
-   |
-   = help: expected names are: `FALSE` and `test` and 33 more
-   = help: to expect this configuration use `--check-cfg=cfg(foo)`
-   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg.html> for more information about checking conditional configuration
-   = note: `#[warn(unexpected_cfgs)]` on by default
+ at $DIR/cfg.rs:6:10
+help: expected names are: `FALSE` and `test` and 33 more
+help: to expect this configuration use `--check-cfg=cfg(foo)`
+note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg.html> for more information about checking conditional configuration
+note: `#[warn(unexpected_cfgs)]` on by default
 
 error: aborting due to 4 previous errors; 1 warning emitted
 

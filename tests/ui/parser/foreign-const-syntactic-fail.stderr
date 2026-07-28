@@ -1,28 +1,14 @@
 error: extern items cannot be `const`
-  --> $DIR/foreign-const-syntactic-fail.rs:7:11
-   |
-LL |     const A: isize;
-   |           ^
-   |
-   = note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
+ at $DIR/foreign-const-syntactic-fail.rs:7:11
+note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
 help: try using a static value
-   |
-LL -     const A: isize;
-LL +     static A: isize;
-   |
+ on line 7, column 4, replace with `static `
 
 error: extern items cannot be `const`
-  --> $DIR/foreign-const-syntactic-fail.rs:8:11
-   |
-LL |     const B: isize = 42;
-   |           ^
-   |
-   = note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
+ at $DIR/foreign-const-syntactic-fail.rs:8:11
+note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
 help: try using a static value
-   |
-LL -     const B: isize = 42;
-LL +     static B: isize = 42;
-   |
+ on line 8, column 4, replace with `static `
 
 error: aborting due to 2 previous errors
 

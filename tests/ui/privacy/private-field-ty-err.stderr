@@ -1,13 +1,7 @@
-error[E0616]: field `len` of struct `Foo` is private
-  --> $DIR/private-field-ty-err.rs:3:10
-   |
-LL |     if x.len {
-   |          ^^^ private field
-   |
+error E0616: field `len` of struct `Foo` is private
+ at $DIR/private-field-ty-err.rs:3:10: private field
 help: a method `len` also exists, call it with parentheses
-   |
-LL |     if x.len() {
-   |             ++
+ on line 3, column 12, add `()`
 
 error: aborting due to 1 previous error
 

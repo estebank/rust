@@ -1,19 +1,9 @@
 error: unnecessary parentheses around `match` scrutinee expression
-  --> $DIR/lint-struct-necessary.rs:15:11
-   |
-LL |     match (e) {
-   |           ^ ^
-   |
+ at $DIR/lint-struct-necessary.rs:15:11
 note: the lint level is defined here
-  --> $DIR/lint-struct-necessary.rs:2:9
-   |
-LL | #![deny(unused_parens)]
-   |         ^^^^^^^^^^^^^
+ at $DIR/lint-struct-necessary.rs:2:9
 help: remove these parentheses
-   |
-LL -     match (e) {
-LL +     match e {
-   |
+ on line 15, column 10
 
 error: aborting due to 1 previous error
 

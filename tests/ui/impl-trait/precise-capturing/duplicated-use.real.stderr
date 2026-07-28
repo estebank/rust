@@ -1,8 +1,6 @@
 error: duplicate `use<...>` precise capturing syntax
-  --> $DIR/duplicated-use.rs:5:32
-   |
-LL | fn hello<'a>() -> impl Sized + use<'a> + use<'a> {}
-   |                                ^^^^^^^   ------- second `use<...>` here
+ at $DIR/duplicated-use.rs:5:32
+  on line 5, column 42: second `use<...>` here
 
 error: aborting due to 1 previous error
 

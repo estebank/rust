@@ -1,8 +1,5 @@
-error[E0533]: expected unit struct, unit variant or constant, found tuple variant `Self::A`
-  --> $DIR/incorrect-variant-form-through-Self-issue-58006.rs:8:13
-   |
-LL |             Self::A => (),
-   |             ^^^^^^^ not a unit struct, unit variant or constant
+error E0533: expected unit struct, unit variant or constant, found tuple variant `Self::A`
+ at $DIR/incorrect-variant-form-through-Self-issue-58006.rs:8:13: not a unit struct, unit variant or constant
 
 error: aborting due to 1 previous error
 

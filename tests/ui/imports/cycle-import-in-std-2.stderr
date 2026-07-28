@@ -1,13 +1,7 @@
-error[E0432]: unresolved import `ops`
-  --> $DIR/cycle-import-in-std-2.rs:5:5
-   |
-LL | use ops::{self as std};
-   |     ^^^
-   |
+error E0432: unresolved import `ops`
+ at $DIR/cycle-import-in-std-2.rs:5:5
 help: a similar path exists
-   |
-LL | use core::ops::{self as std};
-   |     ++++++
+ on line 5, column 4, replace with `core::ops`
 
 error: aborting due to 1 previous error
 

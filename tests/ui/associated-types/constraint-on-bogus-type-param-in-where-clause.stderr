@@ -1,8 +1,5 @@
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/constraint-on-bogus-type-param-in-where-clause.rs:9:17
-   |
-LL |         where T<Bogus = Foo>: A;
-   |                 ^^^^^^^^^^^ associated item constraint not allowed here
+error E0229: associated item constraints are not allowed here
+ at $DIR/constraint-on-bogus-type-param-in-where-clause.rs:9:17: associated item constraint not allowed here
 
 error: aborting due to 1 previous error
 

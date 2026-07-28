@@ -1,144 +1,73 @@
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:26:26
-   |
-LL | struct A<T, M: One<A=(), T>> {
-   |                    ----  ^ generic argument
-   |                    |
-   |                    constraint
-   |
+ at $DIR/suggest-move-types.rs:26:26: generic argument
+  on line 26, column 20: constraint
 help: move the constraint after the generic argument
-   |
-LL - struct A<T, M: One<A=(), T>> {
-LL + struct A<T, M: One<T, A = ()>> {
-   |
+ on line 26, column 18, replace with `<T, A = ()>`
 
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:33:43
-   |
-LL | struct Al<'a, T, M: OneWithLifetime<A=(), T, 'a>> {
-   |                                     ----  ^  ^^ generic arguments
-   |                                     |
-   |                                     constraint
-   |
+ at $DIR/suggest-move-types.rs:33:43
+  on line 33, column 46: generic arguments
+  on line 33, column 37: constraint
 help: move the constraint after the generic arguments
-   |
-LL - struct Al<'a, T, M: OneWithLifetime<A=(), T, 'a>> {
-LL + struct Al<'a, T, M: OneWithLifetime<'a, T, A = ()>> {
-   |
+ on line 33, column 35, replace with `<'a, T, A = ()>`
 
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:40:46
-   |
-LL | struct B<T, U, V, M: Three<A=(), B=(), C=(), T, U, V>> {
-   |                            ----  ----  ----  ^  ^  ^ generic arguments
-   |                            |
-   |                            constraints
-   |
+ at $DIR/suggest-move-types.rs:40:46
+  on line 40, column 52: generic arguments
+  on line 40, column 28: constraints
 help: move the constraints after the generic arguments
-   |
-LL - struct B<T, U, V, M: Three<A=(), B=(), C=(), T, U, V>> {
-LL + struct B<T, U, V, M: Three<T, U, V, A = (), B = (), C = ()>> {
-   |
+ on line 40, column 26, replace with `<T, U, V, A = (), B = (), C = ()>`
 
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:48:71
-   |
-LL | struct Bl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<A=(), B=(), C=(), T, U, V, 'a, 'b, 'c>> {
-   |                                                     ----  ----  ----  ^  ^  ^  ^^  ^^  ^^ generic arguments
-   |                                                     |
-   |                                                     constraints
-   |
+ at $DIR/suggest-move-types.rs:48:71
+  on line 48, column 88: generic arguments
+  on line 48, column 53: constraints
 help: move the constraints after the generic arguments
-   |
-LL - struct Bl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<A=(), B=(), C=(), T, U, V, 'a, 'b, 'c>> {
-LL + struct Bl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<'a, 'b, 'c, T, U, V, A = (), B = (), C = ()>> {
-   |
+ on line 48, column 51, replace with `<'a, 'b, 'c, T, U, V, A = (), B = (), C = ()>`
 
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:57:28
-   |
-LL | struct C<T, U, V, M: Three<T, A=(), B=(), C=(), U, V>> {
-   |                            ^  ----  ----  ----  ^  ^ generic arguments
-   |                               |
-   |                               constraints
-   |
+ at $DIR/suggest-move-types.rs:57:28
+  on line 57, column 52: generic arguments
+  on line 57, column 31: constraints
 help: move the constraints after the generic arguments
-   |
-LL - struct C<T, U, V, M: Three<T, A=(), B=(), C=(), U, V>> {
-LL + struct C<T, U, V, M: Three<T, U, V, A = (), B = (), C = ()>> {
-   |
+ on line 57, column 26, replace with `<T, U, V, A = (), B = (), C = ()>`
 
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:65:53
-   |
-LL | struct Cl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<T, 'a, A=(), B=(), C=(), U, 'b, V, 'c>> {
-   |                                                     ^  ^^  ----  ----  ----  ^  ^^  ^  ^^ generic arguments
-   |                                                            |
-   |                                                            constraints
-   |
+ at $DIR/suggest-move-types.rs:65:53
+  on line 65, column 88: generic arguments
+  on line 65, column 60: constraints
 help: move the constraints after the generic arguments
-   |
-LL - struct Cl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<T, 'a, A=(), B=(), C=(), U, 'b, V, 'c>> {
-LL + struct Cl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<'a, 'b, 'c, T, U, V, A = (), B = (), C = ()>> {
-   |
+ on line 65, column 51, replace with `<'a, 'b, 'c, T, U, V, A = (), B = (), C = ()>`
 
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:74:28
-   |
-LL | struct D<T, U, V, M: Three<T, A=(), B=(), U, C=(), V>> {
-   |                            ^  ----  ----  ^  ----  ^ generic arguments
-   |                               |
-   |                               constraints
-   |
+ at $DIR/suggest-move-types.rs:74:28
+  on line 74, column 52: generic arguments
+  on line 74, column 31: constraints
 help: move the constraints after the generic arguments
-   |
-LL - struct D<T, U, V, M: Three<T, A=(), B=(), U, C=(), V>> {
-LL + struct D<T, U, V, M: Three<T, U, V, A = (), B = (), C = ()>> {
-   |
+ on line 74, column 26, replace with `<T, U, V, A = (), B = (), C = ()>`
 
 error: generic arguments must come before the first constraint
-  --> $DIR/suggest-move-types.rs:82:53
-   |
-LL | struct Dl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<T, 'a, A=(), B=(), U, 'b, C=(), V, 'c>> {
-   |                                                     ^  ^^  ----  ----  ^  ^^  ----  ^  ^^ generic arguments
-   |                                                            |
-   |                                                            constraints
-   |
+ at $DIR/suggest-move-types.rs:82:53
+  on line 82, column 88: generic arguments
+  on line 82, column 60: constraints
 help: move the constraints after the generic arguments
-   |
-LL - struct Dl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<T, 'a, A=(), B=(), U, 'b, C=(), V, 'c>> {
-LL + struct Dl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<'a, 'b, 'c, T, U, V, A = (), B = (), C = ()>> {
-   |
+ on line 82, column 51, replace with `<'a, 'b, 'c, T, U, V, A = (), B = (), C = ()>`
 
-error[E0747]: type provided when a lifetime was expected
-  --> $DIR/suggest-move-types.rs:33:43
-   |
-LL | struct Al<'a, T, M: OneWithLifetime<A=(), T, 'a>> {
-   |                                           ^
+error E0747: type provided when a lifetime was expected
+ at $DIR/suggest-move-types.rs:33:43
 
-error[E0747]: type provided when a lifetime was expected
-  --> $DIR/suggest-move-types.rs:48:71
-   |
-LL | struct Bl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<A=(), B=(), C=(), T, U, V, 'a, 'b, 'c>> {
-   |                                                                       ^
+error E0747: type provided when a lifetime was expected
+ at $DIR/suggest-move-types.rs:48:71
 
-error[E0747]: lifetime provided when a type was expected
-  --> $DIR/suggest-move-types.rs:65:56
-   |
-LL | struct Cl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<T, 'a, A=(), B=(), C=(), U, 'b, V, 'c>> {
-   |                                                        ^^
-   |
-   = note: lifetime arguments must be provided before type arguments
-   = help: reorder the arguments: lifetimes, then type and consts: `<'a, 'b, 'c, T, U, V>`
+error E0747: lifetime provided when a type was expected
+ at $DIR/suggest-move-types.rs:65:56
+note: lifetime arguments must be provided before type arguments
+help: reorder the arguments: lifetimes, then type and consts: `<'a, 'b, 'c, T, U, V>`
 
-error[E0747]: lifetime provided when a type was expected
-  --> $DIR/suggest-move-types.rs:82:56
-   |
-LL | struct Dl<'a, 'b, 'c, T, U, V, M: ThreeWithLifetime<T, 'a, A=(), B=(), U, 'b, C=(), V, 'c>> {
-   |                                                        ^^
-   |
-   = note: lifetime arguments must be provided before type arguments
-   = help: reorder the arguments: lifetimes, then type and consts: `<'a, 'b, 'c, T, U, V>`
+error E0747: lifetime provided when a type was expected
+ at $DIR/suggest-move-types.rs:82:56
+note: lifetime arguments must be provided before type arguments
+help: reorder the arguments: lifetimes, then type and consts: `<'a, 'b, 'c, T, U, V>`
 
 error: aborting due to 12 previous errors
 

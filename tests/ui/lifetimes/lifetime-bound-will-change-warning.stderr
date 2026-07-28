@@ -1,30 +1,14 @@
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/lifetime-bound-will-change-warning.rs:34:5
-   |
-LL | fn test2<'a>(x: &'a Box<dyn Fn() + 'a>) {
-   |          --  - `x` is a reference that is only valid in the function body
-   |          |
-   |          lifetime `'a` defined here
-LL |     // but ref_obj will not, so warn.
-LL |     ref_obj(x)
-   |     ^^^^^^^^^^
-   |     |
-   |     `x` escapes the function body here
-   |     argument requires that `'a` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/lifetime-bound-will-change-warning.rs:34:5: `x` escapes the function body here
+  on line 34: argument requires that `'a` must outlive `'static`
+  on line 32, column 10: lifetime `'a` defined here
+  on line 32, column 14: `x` is a reference that is only valid in the function body
 
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/lifetime-bound-will-change-warning.rs:40:5
-   |
-LL | fn test2cc<'a>(x: &'a Box<dyn Fn() + 'a>) {
-   |            --  - `x` is a reference that is only valid in the function body
-   |            |
-   |            lifetime `'a` defined here
-LL |     // same as test2, but cross crate
-LL |     lib::ref_obj(x)
-   |     ^^^^^^^^^^^^^^^
-   |     |
-   |     `x` escapes the function body here
-   |     argument requires that `'a` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/lifetime-bound-will-change-warning.rs:40:5: `x` escapes the function body here
+  on line 40: argument requires that `'a` must outlive `'static`
+  on line 38, column 12: lifetime `'a` defined here
+  on line 38, column 16: `x` is a reference that is only valid in the function body
 
 error: aborting due to 2 previous errors
 

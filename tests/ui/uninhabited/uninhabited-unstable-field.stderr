@@ -1,40 +1,19 @@
 error: unreachable pattern
-  --> $DIR/uninhabited-unstable-field.rs:24:9
-   |
-LL |         Foo { .. } => {}
-   |         ^^^^^^^^^^------
-   |         |
-   |         matches no values because `Foo<Void>` is uninhabited
-   |         help: remove the match arm
-   |
-   = note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
+ at $DIR/uninhabited-unstable-field.rs:24:9: matches no values because `Foo<Void>` is uninhabited
+  on line 24: help: remove the match arm
+note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
 note: the lint level is defined here
-  --> $DIR/uninhabited-unstable-field.rs:9:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/uninhabited-unstable-field.rs:9:9
 
 error: unreachable pattern
-  --> $DIR/uninhabited-unstable-field.rs:31:9
-   |
-LL |         _ => {}
-   |         ^------
-   |         |
-   |         matches no values because `Foo<Void>` is uninhabited
-   |         help: remove the match arm
-   |
-   = note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
+ at $DIR/uninhabited-unstable-field.rs:31:9: matches no values because `Foo<Void>` is uninhabited
+  on line 31: help: remove the match arm
+note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
 
 error: unreachable pattern
-  --> $DIR/uninhabited-unstable-field.rs:41:9
-   |
-LL |         MyCoroutineState::Complete(_) => {}
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^------
-   |         |
-   |         matches no values because `!` is uninhabited
-   |         help: remove the match arm
-   |
-   = note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
+ at $DIR/uninhabited-unstable-field.rs:41:9: matches no values because `!` is uninhabited
+  on line 41: help: remove the match arm
+note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
 
 error: aborting due to 3 previous errors
 

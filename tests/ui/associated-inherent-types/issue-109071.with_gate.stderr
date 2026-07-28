@@ -1,24 +1,12 @@
-error[E0637]: `&` without an explicit lifetime name cannot be used here
-  --> $DIR/issue-109071.rs:8:17
-   |
-LL |     type Item = &[T];
-   |                 ^ explicit lifetime name needed here
+error E0637: `&` without an explicit lifetime name cannot be used here
+ at $DIR/issue-109071.rs:8:17: explicit lifetime name needed here
 
-error[E0107]: missing generics for struct `Windows`
-  --> $DIR/issue-109071.rs:7:9
-   |
-LL | impl<T> Windows {
-   |         ^^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for struct `Windows`
+ at $DIR/issue-109071.rs:7:9: expected 1 generic argument
 note: struct defined here, with 1 generic parameter: `T`
-  --> $DIR/issue-109071.rs:5:8
-   |
-LL | struct Windows<T> { t: T }
-   |        ^^^^^^^ -
+ at $DIR/issue-109071.rs:5:8
 help: add missing generic argument
-   |
-LL | impl<T> Windows<T> {
-   |                +++
+ on line 7, column 15, add `<T>`
 
 error: aborting due to 2 previous errors
 

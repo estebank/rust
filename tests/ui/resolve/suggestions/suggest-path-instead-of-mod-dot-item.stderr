@@ -1,202 +1,93 @@
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:17:5
-   |
-LL |     a.I
-   |     ^
-   |
-   = note: a module named `a` exists in another namespace
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:17:5
+note: a module named `a` exists in another namespace
 help: use the path separator to refer to an item
-   |
-LL -     a.I
-LL +     a::I
-   |
+ on line 17, column 5, replace with `::`
 
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:23:5
-   |
-LL |     a.g()
-   |     ^
-   |
-   = note: a module named `a` exists in another namespace
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:23:5
+note: a module named `a` exists in another namespace
 help: use the path separator to refer to an item
-   |
-LL -     a.g()
-LL +     a::g()
-   |
+ on line 23, column 5, replace with `::`
 
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:29:5
-   |
-LL |     a.b.J
-   |     ^
-   |
-   = note: a module named `a` exists in another namespace
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:29:5
+note: a module named `a` exists in another namespace
 help: use the path separator to refer to an item
-   |
-LL -     a.b.J
-LL +     a::b.J
-   |
+ on line 29, column 5, replace with `::`
 
-error[E0423]: cannot find value `b` in module `a`
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:35:8
-   |
-LL |     pub const I: i32 = 1;
-   |     --------------------- similarly named constant `I` defined here
-...
-LL |     a::b.J
-   |        ^
-   |
-   = note: a module named `a::b` exists in another namespace
+error E0423: cannot find value `b` in module `a`
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:35:8
+  on line 5: similarly named constant `I` defined here
+note: a module named `a::b` exists in another namespace
 help: use the path separator to refer to an item
-   |
-LL -     a::b.J
-LL +     a::b::J
-   |
+ on line 35, column 8, replace with `::`
 help: a constant with a similar name exists
-   |
-LL -     a::b.J
-LL +     a::I.J
-   |
+ on line 35, column 7, replace with `I`
 
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:42:5
-   |
-LL |     a.b.f();
-   |     ^
-   |
-   = note: a module named `a` exists in another namespace
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:42:5
+note: a module named `a` exists in another namespace
 help: use the path separator to refer to an item
-   |
-LL -     a.b.f();
-LL +     a::b.f();
-   |
+ on line 42, column 5, replace with `::`
 
-error[E0423]: cannot find value `b` in module `a`
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:46:15
-   |
-LL |     pub const I: i32 = 1;
-   |     --------------------- similarly named constant `I` defined here
-...
-LL |     v.push(a::b);
-   |               ^
-   |
-   = note: a module named `a::b` exists in another namespace
+error E0423: cannot find value `b` in module `a`
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:46:15
+  on line 5: similarly named constant `I` defined here
+note: a module named `a::b` exists in another namespace
 help: a constant with a similar name exists
-   |
-LL -     v.push(a::b);
-LL +     v.push(a::I);
-   |
+ on line 46, column 14, replace with `I`
 
-error[E0423]: cannot find value `b` in module `a`
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:52:8
-   |
-LL |     pub const I: i32 = 1;
-   |     --------------------- similarly named constant `I` defined here
-...
-LL |     a::b.f()
-   |        ^
-   |
-   = note: a module named `a::b` exists in another namespace
+error E0423: cannot find value `b` in module `a`
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:52:8
+  on line 5: similarly named constant `I` defined here
+note: a module named `a::b` exists in another namespace
 help: use the path separator to refer to an item
-   |
-LL -     a::b.f()
-LL +     a::b::f()
-   |
+ on line 52, column 8, replace with `::`
 help: a constant with a similar name exists
-   |
-LL -     a::b.f()
-LL +     a::I.f()
-   |
+ on line 52, column 7, replace with `I`
 
-error[E0423]: cannot find value `b` in module `a`
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:59:8
-   |
-LL |     pub const I: i32 = 1;
-   |     --------------------- similarly named constant `I` defined here
-...
-LL |     a::b
-   |        ^
-   |
-   = note: a module named `a::b` exists in another namespace
+error E0423: cannot find value `b` in module `a`
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:59:8
+  on line 5: similarly named constant `I` defined here
+note: a module named `a::b` exists in another namespace
 help: a constant with a similar name exists
-   |
-LL -     a::b
-LL +     a::I
-   |
+ on line 59, column 7, replace with `I`
 
-error[E0423]: cannot find function `b` in module `a`
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:65:8
-   |
-LL |     pub const I: i32 = 1;
-   |     --------------------- similarly named constant `I` defined here
-...
-LL |     a::b()
-   |        ^
-   |
-   = note: a module named `a::b` exists in another namespace
+error E0423: cannot find function `b` in module `a`
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:65:8
+  on line 5: similarly named constant `I` defined here
+note: a module named `a::b` exists in another namespace
 help: a constant with a similar name exists
-   |
-LL -     a::b()
-LL +     a::I()
-   |
+ on line 65, column 7, replace with `I`
 
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:72:9
-   |
-LL |         a
-   |         ^ not found in this scope
-...
-LL |     module!().g::<()>(); // no `help` here!
-   |     --------- in this macro invocation
-   |
-   = note: a module named `a` exists in another namespace
-   = note: this error originates in the macro `module` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:72:9: not found in this scope
+  on line 99: in this macro invocation
+note: a module named `a` exists in another namespace
+note: this error originates in the macro `module` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:72:9
-   |
-LL |         a
-   |         ^ not found in this scope
-...
-LL |     module!().g; // no `help` here!
-   |     --------- in this macro invocation
-   |
-   = note: a module named `a` exists in another namespace
-   = note: this error originates in the macro `module` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:72:9: not found in this scope
+  on line 101: in this macro invocation
+note: a module named `a` exists in another namespace
+note: this error originates in the macro `module` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:80:9
-   |
-LL |         a.f()
-   |         ^
-...
-LL |     let _ = create!(method);
-   |             --------------- in this macro invocation
-   |
-   = note: a module named `a` exists in another namespace
-   = note: this error originates in the macro `create` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:80:9
+  on line 107, column 13: in this macro invocation
+note: a module named `a` exists in another namespace
+note: this error originates in the macro `create` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: use the path separator to refer to an item
-   |
-LL -         a.f()
-LL +         a::f()
-   |
+ on line 80, column 9, replace with `::`
 
-error[E0423]: cannot find value `a` in this scope
-  --> $DIR/suggest-path-instead-of-mod-dot-item.rs:85:9
-   |
-LL |         a.f
-   |         ^
-...
-LL |     let _ = create!(field);
-   |             -------------- in this macro invocation
-   |
-   = note: a module named `a` exists in another namespace
-   = note: this error originates in the macro `create` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0423: cannot find value `a` in this scope
+ at $DIR/suggest-path-instead-of-mod-dot-item.rs:85:9
+  on line 108, column 13: in this macro invocation
+note: a module named `a` exists in another namespace
+note: this error originates in the macro `create` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: use the path separator to refer to an item
-   |
-LL -         a.f
-LL +         a::f
-   |
+ on line 85, column 9, replace with `::`
 
 error: aborting due to 13 previous errors
 

@@ -1,15 +1,10 @@
-error[E0061]: this method takes 1 argument but 0 arguments were supplied
-  --> $DIR/issue-102645.rs:15:22
-   |
-LL |     Pin::new(&mut b).resume();
-   |                      ^^^^^^-- argument #1 of type `()` is missing
-   |
+error E0061: this method takes 1 argument but 0 arguments were supplied
+ at $DIR/issue-102645.rs:15:22
+  on line 15, column 28: argument #1 of type `()` is missing
 note: method defined here
-  --> $SRC_DIR/core/src/ops/coroutine.rs:LL:COL
+ at $SRC_DIR/core/src/ops/coroutine.rs:LL:COL
 help: provide the argument
-   |
-LL |     Pin::new(&mut b).resume(());
-   |                             ++
+ on line 15, column 27, replace with `(())`
 
 error: aborting due to 1 previous error
 

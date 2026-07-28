@@ -1,16 +1,8 @@
-error[E0309]: the associated type `<Self as SomeTrait<'a>>::Type1` may not live long enough
-  --> $DIR/wf-trait-associated-type-region.rs:9:5
-   |
-LL | trait SomeTrait<'a> {
-   |                 -- the associated type `<Self as SomeTrait<'a>>::Type1` must be valid for the lifetime `'a` as defined here...
-LL |     type Type1;
-LL |     type Type2 = &'a Self::Type1;
-   |     ^^^^^^^^^^ ...so that the reference type `&'a <Self as SomeTrait<'a>>::Type1` does not outlive the data it points at
-   |
+error E0309: the associated type `<Self as SomeTrait<'a>>::Type1` may not live long enough
+ at $DIR/wf-trait-associated-type-region.rs:9:5: ...so that the reference type `&'a <Self as SomeTrait<'a>>::Type1` does not outlive the data it points at
+  on line 7, column 17: the associated type `<Self as SomeTrait<'a>>::Type1` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     type Type2 = &'a Self::Type1 where <Self as SomeTrait<'a>>::Type1: 'a;
-   |                                  ++++++++++++++++++++++++++++++++++++++++
+ on line 9, column 32, add ` where <Self as SomeTrait<'a>>::Type1: 'a`
 
 error: aborting due to 1 previous error
 

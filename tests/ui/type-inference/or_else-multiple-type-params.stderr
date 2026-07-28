@@ -1,13 +1,7 @@
-error[E0282]: type annotations needed for `Result<Child, _>`
-  --> $DIR/or_else-multiple-type-params.rs:7:18
-   |
-LL |         .or_else(|err| {
-   |                  ^^^^^
-   |
+error E0282: type annotations needed for `Result<Child, _>`
+ at $DIR/or_else-multiple-type-params.rs:7:18
 help: try giving this closure an explicit return type
-   |
-LL |         .or_else(|err| -> Result<_, F> {
-   |                        +++++++++++++++
+ on line 7, column 22, add ` -> Result<_, F>`
 
 error: aborting due to 1 previous error
 

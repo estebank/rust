@@ -1,109 +1,40 @@
-error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/return-from-residual-sugg-issue-125997.rs:10:44
-   |
-LL | fn test1() {
-   | ---------- this function should return `Result` or `Option` to accept `?`
-LL |     let mut _file = File::create("foo.txt")?;
-   |                                            ^ cannot use the `?` operator in a function that returns `()`
-   |
+error E0277: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/return-from-residual-sugg-issue-125997.rs:10:44: cannot use the `?` operator in a function that returns `()`
+  on line 9: this function should return `Result` or `Option` to accept `?`
 help: consider adding return type
-   |
-LL ~ fn test1() -> Result<(), Box<dyn std::error::Error>> {
-LL |     let mut _file = File::create("foo.txt")?;
-LL |
-LL +     Ok(())
-   |
+ on line 9, column 10, add ` -> Result<(), Box<dyn std::error::Error>>`
 
-error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/return-from-residual-sugg-issue-125997.rs:15:44
-   |
-LL | fn test2() {
-   | ---------- this function should return `Result` or `Option` to accept `?`
-LL |     let mut _file = File::create("foo.txt")?;
-   |                                            ^ cannot use the `?` operator in a function that returns `()`
-   |
+error E0277: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/return-from-residual-sugg-issue-125997.rs:15:44: cannot use the `?` operator in a function that returns `()`
+  on line 14: this function should return `Result` or `Option` to accept `?`
 help: consider adding return type
-   |
-LL ~ fn test2() -> Result<(), Box<dyn std::error::Error>> {
-LL |     let mut _file = File::create("foo.txt")?;
-LL |
-LL |     println!();
-LL +     Ok(())
-   |
+ on line 14, column 10, add ` -> Result<(), Box<dyn std::error::Error>>`
 
-error[E0277]: the `?` operator can only be used in a method that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/return-from-residual-sugg-issue-125997.rs:34:48
-   |
-LL |     fn test4(&self) {
-   |     --------------- this function should return `Result` or `Option` to accept `?`
-LL |         let mut _file = File::create("foo.txt")?;
-   |                                                ^ cannot use the `?` operator in a method that returns `()`
-   |
+error E0277: the `?` operator can only be used in a method that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/return-from-residual-sugg-issue-125997.rs:34:48: cannot use the `?` operator in a method that returns `()`
+  on line 33: this function should return `Result` or `Option` to accept `?`
 help: consider adding return type
-   |
-LL ~     fn test4(&self) -> Result<(), Box<dyn std::error::Error>> {
-LL |         let mut _file = File::create("foo.txt")?;
-LL |
-LL ~         Ok(())
-LL ~     }
-   |
+ on line 33, column 19, add ` -> Result<(), Box<dyn std::error::Error>>`
 
-error[E0277]: the `?` operator can only be used in a method that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/return-from-residual-sugg-issue-125997.rs:39:48
-   |
-LL |     fn test5(&self) {
-   |     --------------- this function should return `Result` or `Option` to accept `?`
-LL |         let mut _file = File::create("foo.txt")?;
-   |                                                ^ cannot use the `?` operator in a method that returns `()`
-   |
+error E0277: the `?` operator can only be used in a method that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/return-from-residual-sugg-issue-125997.rs:39:48: cannot use the `?` operator in a method that returns `()`
+  on line 38: this function should return `Result` or `Option` to accept `?`
 help: consider adding return type
-   |
-LL ~     fn test5(&self) -> Result<(), Box<dyn std::error::Error>> {
-LL |         let mut _file = File::create("foo.txt")?;
-LL |
-LL |         println!();
-LL ~         Ok(())
-LL ~     }
-   |
+ on line 38, column 19, add ` -> Result<(), Box<dyn std::error::Error>>`
 
-error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/return-from-residual-sugg-issue-125997.rs:46:44
-   |
-LL | fn main() {
-   | --------- this function should return `Result` or `Option` to accept `?`
-LL |     let mut _file = File::create("foo.txt")?;
-   |                                            ^ cannot use the `?` operator in a function that returns `()`
-   |
+error E0277: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/return-from-residual-sugg-issue-125997.rs:46:44: cannot use the `?` operator in a function that returns `()`
+  on line 45: this function should return `Result` or `Option` to accept `?`
 help: consider adding return type
-   |
-LL ~ fn main() -> Result<(), Box<dyn std::error::Error>> {
-LL |     let mut _file = File::create("foo.txt")?;
-LL |
-LL |     mac!();
-LL +     Ok(())
-   |
+ on line 45, column 9, add ` -> Result<(), Box<dyn std::error::Error>>`
 
-error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/return-from-residual-sugg-issue-125997.rs:23:52
-   |
-LL |         fn test3() {
-   |         ---------- this function should return `Result` or `Option` to accept `?`
-LL |             let mut _file = File::create("foo.txt")?;
-   |                                                    ^ cannot use the `?` operator in a function that returns `()`
-...
-LL |     mac!();
-   |     ------ in this macro invocation
-   |
-   = note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0277: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/return-from-residual-sugg-issue-125997.rs:23:52: cannot use the `?` operator in a function that returns `()`
+  on line 22: this function should return `Result` or `Option` to accept `?`
+  on line 48: in this macro invocation
+note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: consider adding return type
-   |
-LL ~         fn test3() -> Result<(), Box<dyn std::error::Error>> {
-LL |             let mut _file = File::create("foo.txt")?;
-LL |
-LL |             println!();
-LL ~             Ok(())
-LL ~         }
-   |
+ on line 22, column 18, add ` -> Result<(), Box<dyn std::error::Error>>`
 
 error: aborting due to 6 previous errors
 

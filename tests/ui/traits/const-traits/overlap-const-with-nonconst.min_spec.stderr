@@ -1,13 +1,6 @@
-error[E0119]: conflicting implementations of trait `Foo` for type `(_,)`
-  --> $DIR/overlap-const-with-nonconst.rs:20:1
-   |
-LL | / const impl<T> Foo for T
-LL | | where
-LL | |     T: [const] Bar,
-   | |___________________- first implementation here
-...
-LL |   impl<T> Foo for (T,) {
-   |   ^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `(_,)`
+error E0119: conflicting implementations of trait `Foo` for type `(_,)`
+ at $DIR/overlap-const-with-nonconst.rs:20:1: conflicting implementation for `(_,)`
+  on line 13 to line 15: first implementation here
 
 error: aborting due to 1 previous error
 

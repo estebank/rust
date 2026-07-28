@@ -1,10 +1,6 @@
 error: associated constant in `impl` without body
-  --> $DIR/type-const-assoc-const-without-body.rs:13:5
-   |
-LL |     type const SIZE: usize;
-   |     ^^^^^^^^^^^^^^^^^^^^^^-
-   |                           |
-   |                           help: provide a definition for the constant: `= <expr>;`
+ at $DIR/type-const-assoc-const-without-body.rs:13:5
+  on line 13, column 27: help: provide a definition for the constant: `= <expr>;`
 
 error: aborting due to 1 previous error
 

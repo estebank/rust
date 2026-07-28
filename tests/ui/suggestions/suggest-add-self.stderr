@@ -1,30 +1,16 @@
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/suggest-add-self.rs:5:9
-   |
-LL |     pub(crate) fn f() {
-   |                   - this function doesn't have a `self` parameter
-LL |         self.0
-   |         ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-   |
-   = note: a module named `self` exists in another namespace
+error E0424: cannot find value `self` in this scope
+ at $DIR/suggest-add-self.rs:5:9: `self` value is a keyword only available in methods with a `self` parameter
+  on line 4, column 19: this function doesn't have a `self` parameter
+note: a module named `self` exists in another namespace
 help: add a `self` receiver parameter to make the associated `fn` a method
-   |
-LL |     pub(crate) fn f(&self) {
-   |                     +++++
+ on line 4, column 20, add `&self`
 
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/suggest-add-self.rs:10:9
-   |
-LL |     pub fn g() {
-   |            - this function doesn't have a `self` parameter
-LL |         self.0
-   |         ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-   |
-   = note: a module named `self` exists in another namespace
+error E0424: cannot find value `self` in this scope
+ at $DIR/suggest-add-self.rs:10:9: `self` value is a keyword only available in methods with a `self` parameter
+  on line 9, column 12: this function doesn't have a `self` parameter
+note: a module named `self` exists in another namespace
 help: add a `self` receiver parameter to make the associated `fn` a method
-   |
-LL |     pub fn g(&self) {
-   |              +++++
+ on line 9, column 13, add `&self`
 
 error: aborting due to 2 previous errors
 

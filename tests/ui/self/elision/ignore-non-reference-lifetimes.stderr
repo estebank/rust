@@ -1,31 +1,17 @@
 warning: eliding a lifetime that's named elsewhere is confusing
-  --> $DIR/ignore-non-reference-lifetimes.rs:6:41
-   |
-LL |     fn a<'a>(self: Self, a: &'a str) -> &str {
-   |                              --         ^^^^ the same lifetime is elided here
-   |                              |
-   |                              the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
-   = note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
+ at $DIR/ignore-non-reference-lifetimes.rs:6:41: the same lifetime is elided here
+  on line 6, column 30: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+note: `#[warn(mismatched_lifetime_syntaxes)]` on by default
 help: consistently use `'a`
-   |
-LL |     fn a<'a>(self: Self, a: &'a str) -> &'a str {
-   |                                          ++
+ on line 6, column 41, add `'a `
 
 warning: eliding a lifetime that's named elsewhere is confusing
-  --> $DIR/ignore-non-reference-lifetimes.rs:10:44
-   |
-LL |     fn b<'a>(self: Foo<'b>, a: &'a str) -> &str {
-   |                                 --         ^^^^ the same lifetime is elided here
-   |                                 |
-   |                                 the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/ignore-non-reference-lifetimes.rs:10:44: the same lifetime is elided here
+  on line 10, column 33: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'a`
-   |
-LL |     fn b<'a>(self: Foo<'b>, a: &'a str) -> &'a str {
-   |                                             ++
+ on line 10, column 44, add `'a `
 
 warning: 2 warnings emitted
 

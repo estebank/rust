@@ -1,58 +1,31 @@
-error[E0425]: cannot find type `y` in this scope
-  --> $DIR/next-solver-opaque-inherent-no-ice.rs:6:15
-   |
-LL | impl<const X: y> Foo {
-   |               ^ not found in this scope
+error E0425: cannot find type `y` in this scope
+ at $DIR/next-solver-opaque-inherent-no-ice.rs:6:15: not found in this scope
 
-error[E0658]: `impl Trait` in associated types is unstable
-  --> $DIR/next-solver-opaque-inherent-no-ice.rs:9:22
-   |
-LL |     type ImplTrait = impl Clone;
-   |                      ^^^^^^^^^^
-   |
-   = note: see issue #63063 <https://github.com/rust-lang/rust/issues/63063> for more information
-   = help: add `#![feature(impl_trait_in_assoc_type)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: `impl Trait` in associated types is unstable
+ at $DIR/next-solver-opaque-inherent-no-ice.rs:9:22
+note: see issue #63063 <https://github.com/rust-lang/rust/issues/63063> for more information
+help: add `#![feature(impl_trait_in_assoc_type)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
-error[E0601]: `main` function not found in crate `next_solver_opaque_inherent_no_ice`
-  --> $DIR/next-solver-opaque-inherent-no-ice.rs:16:2
-   |
-LL | }
-   |  ^ consider adding a `main` function to `$DIR/next-solver-opaque-inherent-no-ice.rs`
+error E0601: `main` function not found in crate `next_solver_opaque_inherent_no_ice`
+ at $DIR/next-solver-opaque-inherent-no-ice.rs:16:2: consider adding a `main` function to `$DIR/next-solver-opaque-inherent-no-ice.rs`
 
-error[E0207]: the const parameter `X` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/next-solver-opaque-inherent-no-ice.rs:6:6
-   |
-LL | impl<const X: y> Foo {
-   |     -^^^^^^^^^^-
-   |     ||
-   |     |unconstrained const parameter
-   |     help: remove the unused type parameter `X`
-   |
-   = note: expressions using a const parameter must map each value to a distinct output value
-   = note: proving the result of expressions other than the parameter are unique is not supported
+error E0207: the const parameter `X` is not constrained by the impl trait, self type, or predicates
+ at $DIR/next-solver-opaque-inherent-no-ice.rs:6:6: unconstrained const parameter
+  on line 6, column 5: help: remove the unused type parameter `X`
+note: expressions using a const parameter must map each value to a distinct output value
+note: proving the result of expressions other than the parameter are unique is not supported
 
 error: unconstrained opaque type
-  --> $DIR/next-solver-opaque-inherent-no-ice.rs:9:22
-   |
-LL |     type ImplTrait = impl Clone;
-   |                      ^^^^^^^^^^
-   |
-   = note: `ImplTrait` must be used in combination with a concrete type within the same impl
+ at $DIR/next-solver-opaque-inherent-no-ice.rs:9:22
+note: `ImplTrait` must be used in combination with a concrete type within the same impl
 
-error[E0308]: mismatched types
-  --> $DIR/next-solver-opaque-inherent-no-ice.rs:13:9
-   |
-LL |     type ImplTrait = impl Clone;
-   |                      ---------- the expected opaque type
-...
-LL |     fn f() -> Self::ImplTrait {
-   |               --------------- expected `Foo::ImplTrait` because of return type
-LL |         ()
-   |         ^^ expected opaque type, found `()`
-   |
-   = note: expected opaque type `Foo::ImplTrait`
-                found unit type `()`
+error E0308: mismatched types
+ at $DIR/next-solver-opaque-inherent-no-ice.rs:13:9: expected opaque type, found `()`
+  on line 9, column 22: the expected opaque type
+  on line 12, column 15: expected `Foo::ImplTrait` because of return type
+note: expected opaque type `Foo::ImplTrait`
+           found unit type `()`
 
 error: aborting due to 6 previous errors
 

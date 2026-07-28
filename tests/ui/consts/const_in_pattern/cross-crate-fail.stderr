@@ -1,44 +1,18 @@
 error: constant of non-structural type `CustomEq` in a pattern
-  --> $DIR/cross-crate-fail.rs:11:9
-   |
-LL |         consts::SOME => panic!(),
-   |         ^^^^^^^^^^^^ constant of non-structural type
-   |
-  ::: $DIR/auxiliary/consts.rs:1:1
-   |
-LL | pub struct CustomEq;
-   | ------------------- `CustomEq` is not usable in patterns
-...
-LL | pub const SOME: Option<CustomEq> = Some(CustomEq);
-   | -------------------------------- constant defined here
-   |
-   = note: see https://doc.rust-lang.org/stable/std/marker/trait.StructuralPartialEq.html for details
+ at $DIR/cross-crate-fail.rs:11:9: constant of non-structural type
+ at $DIR/auxiliary/consts.rs:1:1: `CustomEq` is not usable in patterns
+  on line 11: constant defined here
+note: see https://doc.rust-lang.org/stable/std/marker/trait.StructuralPartialEq.html for details
 help: add a condition to the match arm checking for equality
-   |
-LL -         consts::SOME => panic!(),
-LL +         binding if binding == consts::SOME => panic!(),
-   |
+ on line 11, column 8, replace with `binding`
 
 error: constant of non-structural type `CustomEq` in a pattern
-  --> $DIR/cross-crate-fail.rs:17:9
-   |
-LL |         <Defaulted as consts::AssocConst>::SOME => panic!(),
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ constant of non-structural type
-   |
-  ::: $DIR/auxiliary/consts.rs:1:1
-   |
-LL | pub struct CustomEq;
-   | ------------------- `CustomEq` is not usable in patterns
-...
-LL |     const SOME: Option<CustomEq> = Some(CustomEq);
-   |     ---------------------------- constant defined here
-   |
-   = note: see https://doc.rust-lang.org/stable/std/marker/trait.StructuralPartialEq.html for details
+ at $DIR/cross-crate-fail.rs:17:9: constant of non-structural type
+ at $DIR/auxiliary/consts.rs:1:1: `CustomEq` is not usable in patterns
+  on line 15: constant defined here
+note: see https://doc.rust-lang.org/stable/std/marker/trait.StructuralPartialEq.html for details
 help: add a condition to the match arm checking for equality
-   |
-LL -         <Defaulted as consts::AssocConst>::SOME => panic!(),
-LL +         binding if binding == <Defaulted as consts::AssocConst>::SOME => panic!(),
-   |
+ on line 17, column 8, replace with `binding`
 
 error: aborting due to 2 previous errors
 

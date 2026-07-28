@@ -1,14 +1,7 @@
-error[E0282]: type annotations needed
-  --> $DIR/ambiguous_type_parameter.rs:16:19
-   |
-LL |     InMemoryStore.get_raw(&String::default());
-   |                   ^^^^^^^
-   |
+error E0282: type annotations needed
+ at $DIR/ambiguous_type_parameter.rs:16:19
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     InMemoryStore.get_raw(&String::default());
-LL +     <InMemoryStore as Store<String, HashMap<K, String>>>::get_raw(&InMemoryStore, &String::default());
-   |
+ on line 16, column 4, add `<InMemoryStore as Store<String, HashMap<K, String>>>::get_raw(&`
 
 error: aborting due to 1 previous error
 

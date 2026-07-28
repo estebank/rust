@@ -1,89 +1,47 @@
-error[E0061]: this method takes 0 arguments but 1 argument was supplied
-  --> $DIR/method-call-err-msg.rs:13:7
-   |
-LL |     x.zero(0)
-   |       ^^^^ - unexpected argument of type `{integer}`
-   |
+error E0061: this method takes 0 arguments but 1 argument was supplied
+ at $DIR/method-call-err-msg.rs:13:7
+  on line 13, column 12: unexpected argument of type `{integer}`
 note: method defined here
-  --> $DIR/method-call-err-msg.rs:5:8
-   |
-LL |     fn zero(self) -> Foo { self }
-   |        ^^^^
+ at $DIR/method-call-err-msg.rs:5:8
 help: remove the extra argument
-   |
-LL -     x.zero(0)
-LL +     x.zero()
-   |
+ on line 13, column 11
 
-error[E0061]: this method takes 1 argument but 0 arguments were supplied
-  --> $DIR/method-call-err-msg.rs:14:7
-   |
-LL |      .one()
-   |       ^^^-- argument #1 of type `isize` is missing
-   |
+error E0061: this method takes 1 argument but 0 arguments were supplied
+ at $DIR/method-call-err-msg.rs:14:7
+  on line 14, column 10: argument #1 of type `isize` is missing
 note: method defined here
-  --> $DIR/method-call-err-msg.rs:6:8
-   |
-LL |     fn one(self, _: isize) -> Foo { self }
-   |        ^^^       --------
+ at $DIR/method-call-err-msg.rs:6:8
 help: provide the argument
-   |
-LL |      .one(/* isize */)
-   |           +++++++++++
+ on line 14, column 9, replace with `(/* isize */)`
 
-error[E0061]: this method takes 2 arguments but 1 argument was supplied
-  --> $DIR/method-call-err-msg.rs:15:7
-   |
-LL |      .two(0);
-   |       ^^^--- argument #2 of type `isize` is missing
-   |
+error E0061: this method takes 2 arguments but 1 argument was supplied
+ at $DIR/method-call-err-msg.rs:15:7
+  on line 15, column 10: argument #2 of type `isize` is missing
 note: method defined here
-  --> $DIR/method-call-err-msg.rs:7:8
-   |
-LL |     fn two(self, _: isize, _: isize) -> Foo { self }
-   |        ^^^                 --------
+ at $DIR/method-call-err-msg.rs:7:8
 help: provide the argument
-   |
-LL |      .two(0, /* isize */);
-   |            +++++++++++++
+ on line 15, column 9, replace with `(0, /* isize */)`
 
-error[E0599]: `Foo` is not an iterator
-  --> $DIR/method-call-err-msg.rs:19:7
-   |
-LL |   pub struct Foo;
-   |   -------------- method `take` not found for this struct because it doesn't satisfy `Foo: Iterator`
-...
-LL | /     y.zero()
-LL | |      .take()
-   | |      -^^^^ `Foo` is not an iterator
-   | |______|
-   |
-   |
-   = note: the following trait bounds were not satisfied:
-           `Foo: Iterator`
-           which is required by `&mut Foo: Iterator`
+error E0599: `Foo` is not an iterator
+ at $DIR/method-call-err-msg.rs:19:7: `Foo` is not an iterator
+  on line 3: method `take` not found for this struct because it doesn't satisfy `Foo: Iterator`
+note: the following trait bounds were not satisfied:
+      `Foo: Iterator`
+      which is required by `&mut Foo: Iterator`
 note: the trait `Iterator` must be implemented
-  --> $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
-   = help: items from traits can only be used if the trait is implemented and in scope
-   = note: the following traits define an item `take`, perhaps you need to implement one of them:
-           candidate #1: `Iterator`
-           candidate #2: `std::io::Read`
+ at $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
+help: items from traits can only be used if the trait is implemented and in scope
+note: the following traits define an item `take`, perhaps you need to implement one of them:
+      candidate #1: `Iterator`
+      candidate #2: `std::io::Read`
 
-error[E0061]: this method takes 3 arguments but 0 arguments were supplied
-  --> $DIR/method-call-err-msg.rs:21:7
-   |
-LL |     y.three::<usize>();
-   |       ^^^^^^^^^^^^^^-- three arguments of type `usize`, `usize`, and `usize` are missing
-   |
+error E0061: this method takes 3 arguments but 0 arguments were supplied
+ at $DIR/method-call-err-msg.rs:21:7
+  on line 21, column 21: three arguments of type `usize`, `usize`, and `usize` are missing
 note: method defined here
-  --> $DIR/method-call-err-msg.rs:8:8
-   |
-LL |     fn three<T>(self, _: T, _: T, _: T) -> Foo { self }
-   |        ^^^^^          ----  ----  ----
+ at $DIR/method-call-err-msg.rs:8:8
 help: provide the arguments
-   |
-LL |     y.three::<usize>(/* usize */, /* usize */, /* usize */);
-   |                      +++++++++++++++++++++++++++++++++++++
+ on line 21, column 20, replace with `(/* usize */, /* usize */, /* usize */)`
 
 error: aborting due to 5 previous errors
 

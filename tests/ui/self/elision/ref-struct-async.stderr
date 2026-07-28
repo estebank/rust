@@ -1,77 +1,37 @@
 error: lifetime may not live long enough
-  --> $DIR/ref-struct-async.rs:13:9
-   |
-LL |     async fn ref_Struct(self: &Struct, f: &u32) -> &u32 {
-   |                               -           - let's call the lifetime of this reference `'1`
-   |                               |
-   |                               let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-struct-async.rs:13:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 12, column 31: let's call the lifetime of this reference `'2`
+  on line 12, column 43: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn ref_Struct<'a>(self: &Struct, f: &'a u32) -> &'a u32 {
-   |                        ++++                    ++          ++
+ on line 12, column 23, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-struct-async.rs:18:9
-   |
-LL |     async fn box_ref_Struct(self: Box<&Struct>, f: &u32) -> &u32 {
-   |                                       -            - let's call the lifetime of this reference `'1`
-   |                                       |
-   |                                       let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-struct-async.rs:18:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 17, column 39: let's call the lifetime of this reference `'2`
+  on line 17, column 52: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn box_ref_Struct<'a>(self: Box<&Struct>, f: &'a u32) -> &'a u32 {
-   |                            ++++                         ++          ++
+ on line 17, column 27, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-struct-async.rs:23:9
-   |
-LL |     async fn pin_ref_Struct(self: Pin<&Struct>, f: &u32) -> &u32 {
-   |                                       -            - let's call the lifetime of this reference `'1`
-   |                                       |
-   |                                       let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-struct-async.rs:23:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 22, column 39: let's call the lifetime of this reference `'2`
+  on line 22, column 52: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn pin_ref_Struct<'a>(self: Pin<&Struct>, f: &'a u32) -> &'a u32 {
-   |                            ++++                         ++          ++
+ on line 22, column 27, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-struct-async.rs:28:9
-   |
-LL |     async fn box_box_ref_Struct(self: Box<Box<&Struct>>, f: &u32) -> &u32 {
-   |                                               -             - let's call the lifetime of this reference `'1`
-   |                                               |
-   |                                               let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-struct-async.rs:28:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 27, column 47: let's call the lifetime of this reference `'2`
+  on line 27, column 61: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn box_box_ref_Struct<'a>(self: Box<Box<&Struct>>, f: &'a u32) -> &'a u32 {
-   |                                ++++                              ++          ++
+ on line 27, column 31, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/ref-struct-async.rs:33:9
-   |
-LL |     async fn box_pin_Struct(self: Box<Pin<&Struct>>, f: &u32) -> &u32 {
-   |                                           -             - let's call the lifetime of this reference `'1`
-   |                                           |
-   |                                           let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/ref-struct-async.rs:33:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 32, column 43: let's call the lifetime of this reference `'2`
+  on line 32, column 57: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     async fn box_pin_Struct<'a>(self: Box<Pin<&Struct>>, f: &'a u32) -> &'a u32 {
-   |                            ++++                              ++          ++
+ on line 32, column 27, add `<'a>`
 
 error: aborting due to 5 previous errors
 

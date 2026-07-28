@@ -1,84 +1,36 @@
 warning: unnecessary parentheses around assigned value
-  --> $DIR/unused_braces.rs:10:13
-   |
-LL |     let _ = (7);
-   |             ^ ^
-   |
+ at $DIR/unused_braces.rs:10:13
 note: the lint level is defined here
-  --> $DIR/unused_braces.rs:4:24
-   |
-LL | #![warn(unused_braces, unused_parens)]
-   |                        ^^^^^^^^^^^^^
+ at $DIR/unused_braces.rs:4:24
 help: remove these parentheses
-   |
-LL -     let _ = (7);
-LL +     let _ = 7;
-   |
+ on line 10, column 12
 
 warning: unnecessary braces around `if` condition
-  --> $DIR/unused_braces.rs:26:8
-   |
-LL |     if { true } {
-   |        ^^    ^^
-   |
+ at $DIR/unused_braces.rs:26:8
 note: the lint level is defined here
-  --> $DIR/unused_braces.rs:4:9
-   |
-LL | #![warn(unused_braces, unused_parens)]
-   |         ^^^^^^^^^^^^^
+ at $DIR/unused_braces.rs:4:9
 help: remove these braces
-   |
-LL -     if { true } {
-LL +     if true {
-   |
+ on line 26, column 7
 
 warning: unnecessary braces around `while` condition
-  --> $DIR/unused_braces.rs:30:11
-   |
-LL |     while { false } {
-   |           ^^     ^^
-   |
+ at $DIR/unused_braces.rs:30:11
 help: remove these braces
-   |
-LL -     while { false } {
-LL +     while false {
-   |
+ on line 30, column 10
 
 warning: unnecessary braces around const expression
-  --> $DIR/unused_braces.rs:34:17
-   |
-LL |     let _: [u8; { 3 }];
-   |                 ^^ ^^
-   |
+ at $DIR/unused_braces.rs:34:17
 help: remove these braces
-   |
-LL -     let _: [u8; { 3 }];
-LL +     let _: [u8; 3];
-   |
+ on line 34, column 16
 
 warning: unnecessary braces around function argument
-  --> $DIR/unused_braces.rs:37:13
-   |
-LL |     consume({ 7 });
-   |             ^^ ^^
-   |
+ at $DIR/unused_braces.rs:37:13
 help: remove these braces
-   |
-LL -     consume({ 7 });
-LL +     consume(7);
-   |
+ on line 37, column 12
 
 warning: unnecessary braces around `return` value
-  --> $DIR/unused_braces.rs:55:12
-   |
-LL |     return { println!("!") };
-   |            ^^             ^^
-   |
+ at $DIR/unused_braces.rs:55:12
 help: remove these braces
-   |
-LL -     return { println!("!") };
-LL +     return println!("!");
-   |
+ on line 55, column 11
 
 warning: 6 warnings emitted
 

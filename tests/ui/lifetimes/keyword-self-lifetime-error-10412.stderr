@@ -1,55 +1,28 @@
 error: lifetimes cannot use keyword names
-  --> $DIR/keyword-self-lifetime-error-10412.rs:3:20
-   |
-LL | trait Serializable<'self, T> {
-   |                    ^^^^^
+ at $DIR/keyword-self-lifetime-error-10412.rs:3:20
 
 error: lifetimes cannot use keyword names
-  --> $DIR/keyword-self-lifetime-error-10412.rs:5:24
-   |
-LL |     fn serialize(val: &'self T) -> Vec<u8>;
-   |                        ^^^^^
+ at $DIR/keyword-self-lifetime-error-10412.rs:5:24
 
 error: lifetimes cannot use keyword names
-  --> $DIR/keyword-self-lifetime-error-10412.rs:6:37
-   |
-LL |     fn deserialize(repr: &[u8]) -> &'self T;
-   |                                     ^^^^^
+ at $DIR/keyword-self-lifetime-error-10412.rs:6:37
 
 error: lifetimes cannot use keyword names
-  --> $DIR/keyword-self-lifetime-error-10412.rs:9:6
-   |
-LL | impl<'self> Serializable<str> for &'self str {
-   |      ^^^^^
+ at $DIR/keyword-self-lifetime-error-10412.rs:9:6
 
 error: lifetimes cannot use keyword names
-  --> $DIR/keyword-self-lifetime-error-10412.rs:9:36
-   |
-LL | impl<'self> Serializable<str> for &'self str {
-   |                                    ^^^^^
+ at $DIR/keyword-self-lifetime-error-10412.rs:9:36
 
 error: lifetimes cannot use keyword names
-  --> $DIR/keyword-self-lifetime-error-10412.rs:13:24
-   |
-LL |     fn serialize(val: &'self str) -> Vec<u8> {
-   |                        ^^^^^
+ at $DIR/keyword-self-lifetime-error-10412.rs:13:24
 
 error: lifetimes cannot use keyword names
-  --> $DIR/keyword-self-lifetime-error-10412.rs:17:37
-   |
-LL |     fn deserialize(repr: &[u8]) -> &'self str {
-   |                                     ^^^^^
+ at $DIR/keyword-self-lifetime-error-10412.rs:17:37
 
-error[E0726]: implicit elided lifetime not allowed here
-  --> $DIR/keyword-self-lifetime-error-10412.rs:9:13
-   |
-LL | impl<'self> Serializable<str> for &'self str {
-   |             ^^^^^^^^^^^^^^^^^ expected lifetime parameter
-   |
+error E0726: implicit elided lifetime not allowed here
+ at $DIR/keyword-self-lifetime-error-10412.rs:9:13: expected lifetime parameter
 help: indicate the anonymous lifetime
-   |
-LL | impl<'self> Serializable<'_, str> for &'self str {
-   |                          +++
+ on line 9, column 25, add `'_, `
 
 error: aborting due to 8 previous errors
 

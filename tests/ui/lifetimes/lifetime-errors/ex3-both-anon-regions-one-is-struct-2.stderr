@@ -1,28 +1,14 @@
 error: lifetime may not live long enough
-  --> $DIR/ex3-both-anon-regions-one-is-struct-2.rs:4:5
-   |
-LL | fn foo(mut x: Ref, y: &u32) {
-   |        -----          - let's call the lifetime of this reference `'2`
-   |        |
-   |        has type `Ref<'_, '1>`
-LL |     y = x.b;
-   |     ^^^^^^^ assignment requires that `'1` must outlive `'2`
-   |
+ at $DIR/ex3-both-anon-regions-one-is-struct-2.rs:4:5: assignment requires that `'1` must outlive `'2`
+  on line 3, column 8: has type `Ref<'_, '1>`
+  on line 3, column 23: let's call the lifetime of this reference `'2`
 help: consider introducing a named lifetime parameter
-   |
-LL | fn foo<'a>(mut x: Ref<'a, 'a>, y: &'a u32) {
-   |       ++++           ++++++++      ++
+ on line 3, column 6, add `<'a>`
 
-error[E0384]: cannot assign to immutable argument `y`
-  --> $DIR/ex3-both-anon-regions-one-is-struct-2.rs:4:5
-   |
-LL |     y = x.b;
-   |     ^^^^^^^ cannot assign to immutable argument
-   |
+error E0384: cannot assign to immutable argument `y`
+ at $DIR/ex3-both-anon-regions-one-is-struct-2.rs:4:5: cannot assign to immutable argument
 help: consider making this binding mutable
-   |
-LL | fn foo(mut x: Ref, mut y: &u32) {
-   |                    +++
+ on line 3, column 19, add `mut `
 
 error: aborting due to 2 previous errors
 

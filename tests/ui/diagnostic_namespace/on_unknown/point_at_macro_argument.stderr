@@ -1,32 +1,14 @@
-error[E0432]: unresolved import `things::what`
-  --> $DIR/point_at_macro_argument.rs:12:17
-   |
-LL |             use things::$thing;
-   |                 ^^^^^^^^^^^^^^
-...
-LL |     mac!(what);
-   |     ----------
-   |     |    |
-   |     |    you did the bad thing
-   |     in this macro invocation
-   |
-   = note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0432: unresolved import `things::what`
+ at $DIR/point_at_macro_argument.rs:12:17
+  on line 21: in this macro invocation
+  on line 21, column 10: you did the bad thing
+note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0432]: unresolved import `things::what2`
-  --> $DIR/point_at_macro_argument.rs:12:17
-   |
-LL |               use things::$thing;
-   |                   ^^^^^^^^^^^^^^
-...
-LL | /     mac!(
-LL | |
-LL | |         what2
-   | |         ----- you did the bad thing
-...  |
-LL | |     );
-   | |_____- in this macro invocation
-   |
-   = note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0432: unresolved import `things::what2`
+ at $DIR/point_at_macro_argument.rs:12:17
+  on line 25 to line 30, column 6: in this macro invocation
+  on line 27: you did the bad thing
+note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 2 previous errors
 

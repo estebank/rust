@@ -1,19 +1,10 @@
 error: invalid arguments to pair macro invocation
-  --> $DIR/message_and_label.rs:16:13
-   |
-LL | macro_rules! pair {
-   | ----------------- when calling this macro
-...
-LL |     pair!(u8);
-   |             ^ expected a type and value here
-   |
+ at $DIR/message_and_label.rs:16:13: expected a type and value here
+  on line 9: when calling this macro
 note: while trying to match `,`
-  --> $DIR/message_and_label.rs:11:12
-   |
-LL |     ($ty:ty, $value:expr) => {};
-   |            ^
-   = note: this macro expects a type and a value, like `pair!(u8, 0)`
-   = note: see the macro documentation for accepted forms
+ at $DIR/message_and_label.rs:11:12
+note: this macro expects a type and a value, like `pair!(u8, 0)`
+note: see the macro documentation for accepted forms
 
 error: aborting due to 1 previous error
 

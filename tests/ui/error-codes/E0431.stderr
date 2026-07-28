@@ -1,13 +1,7 @@
 error: imports need to be explicitly named
-  --> $DIR/E0431.rs:1:6
-   |
-LL | use {self};
-   |      ^^^^
-   |
+ at $DIR/E0431.rs:1:6
 help: try renaming it with a name
-   |
-LL | use {self as name};
-   |           +++++++
+ on line 1, column 5, replace with `self as name`
 
 error: aborting due to 1 previous error
 

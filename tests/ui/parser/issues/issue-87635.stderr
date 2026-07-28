@@ -1,19 +1,11 @@
 error: expected one of `->`, `where`, or `{`, found `}`
-  --> $DIR/issue-87635.rs:6:1
-   |
-LL |     pub fn bar()
-   |            ---  - expected one of `->`, `where`, or `{`
-   |            |
-   |            while parsing this `fn`
-LL |
-LL | }
-   | ^ unexpected token
+ at $DIR/issue-87635.rs:6:1: unexpected token
+  on line 4, column 12: while parsing this `fn`
+  on line 4, column 17: expected one of `->`, `where`, or `{`
 
 error: associated function in `impl` without body
-  --> $DIR/issue-87635.rs:4:5
-   |
-LL |     pub fn bar()
-   |     ^^^^^^^^^^^^- help: provide a definition for the function: `{ <body> }`
+ at $DIR/issue-87635.rs:4:5
+  on line 4, column 17: help: provide a definition for the function: `{ <body> }`
 
 error: aborting due to 2 previous errors
 

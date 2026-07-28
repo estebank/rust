@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `B` in this scope
-  --> $DIR/impl-for-nonexistent-type-error-8767.rs:2:6
-   |
-LL | impl B {
-   |      ^ not found in this scope
+error E0425: cannot find type `B` in this scope
+ at $DIR/impl-for-nonexistent-type-error-8767.rs:2:6: not found in this scope
 
 error: aborting due to 1 previous error
 

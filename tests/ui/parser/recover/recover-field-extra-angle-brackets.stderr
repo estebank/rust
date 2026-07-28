@@ -1,14 +1,7 @@
 error: unmatched angle bracket
-  --> $DIR/recover-field-extra-angle-brackets.rs:5:19
-   |
-LL |     first: Vec<u8>>,
-   |                   ^
-   |
+ at $DIR/recover-field-extra-angle-brackets.rs:5:19
 help: remove extra angle bracket
-   |
-LL -     first: Vec<u8>>,
-LL +     first: Vec<u8>,
-   |
+ on line 5, column 18
 
 error: aborting due to 1 previous error
 

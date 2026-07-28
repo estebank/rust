@@ -1,92 +1,44 @@
 error: lifetime may not live long enough
-  --> $DIR/lt-ref-self.rs:14:9
-   |
-LL |     fn ref_self(&self, f: &u32) -> &u32 {
-   |                 -         - let's call the lifetime of this reference `'1`
-   |                 |
-   |                 let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/lt-ref-self.rs:14:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 13, column 17: let's call the lifetime of this reference `'2`
+  on line 13, column 27: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn ref_self<'b>(&self, f: &'b u32) -> &'b u32 {
-   |                ++++            ++          ++
+ on line 13, column 15, add `<'b>`
 
 error: lifetime may not live long enough
-  --> $DIR/lt-ref-self.rs:21:9
-   |
-LL |     fn ref_Self(self: &Self, f: &u32) -> &u32 {
-   |                       -         - let's call the lifetime of this reference `'1`
-   |                       |
-   |                       let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/lt-ref-self.rs:21:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 20, column 23: let's call the lifetime of this reference `'2`
+  on line 20, column 33: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn ref_Self<'b>(self: &Self, f: &'b u32) -> &'b u32 {
-   |                ++++                  ++          ++
+ on line 20, column 15, add `<'b>`
 
 error: lifetime may not live long enough
-  --> $DIR/lt-ref-self.rs:26:9
-   |
-LL |     fn box_ref_Self(self: Box<&Self>, f: &u32) -> &u32 {
-   |                               -          - let's call the lifetime of this reference `'1`
-   |                               |
-   |                               let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/lt-ref-self.rs:26:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 25, column 31: let's call the lifetime of this reference `'2`
+  on line 25, column 42: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn box_ref_Self<'b>(self: Box<&Self>, f: &'b u32) -> &'b u32 {
-   |                    ++++                       ++          ++
+ on line 25, column 19, add `<'b>`
 
 error: lifetime may not live long enough
-  --> $DIR/lt-ref-self.rs:31:9
-   |
-LL |     fn pin_ref_Self(self: Pin<&Self>, f: &u32) -> &u32 {
-   |                               -          - let's call the lifetime of this reference `'1`
-   |                               |
-   |                               let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/lt-ref-self.rs:31:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 30, column 31: let's call the lifetime of this reference `'2`
+  on line 30, column 42: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn pin_ref_Self<'b>(self: Pin<&Self>, f: &'b u32) -> &'b u32 {
-   |                    ++++                       ++          ++
+ on line 30, column 19, add `<'b>`
 
 error: lifetime may not live long enough
-  --> $DIR/lt-ref-self.rs:36:9
-   |
-LL |     fn box_box_ref_Self(self: Box<Box<&Self>>, f: &u32) -> &u32 {
-   |                                       -           - let's call the lifetime of this reference `'1`
-   |                                       |
-   |                                       let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/lt-ref-self.rs:36:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 35, column 39: let's call the lifetime of this reference `'2`
+  on line 35, column 51: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn box_box_ref_Self<'b>(self: Box<Box<&Self>>, f: &'b u32) -> &'b u32 {
-   |                        ++++                            ++          ++
+ on line 35, column 23, add `<'b>`
 
 error: lifetime may not live long enough
-  --> $DIR/lt-ref-self.rs:41:9
-   |
-LL |     fn box_pin_Self(self: Box<Pin<&Self>>, f: &u32) -> &u32 {
-   |                                   -           - let's call the lifetime of this reference `'1`
-   |                                   |
-   |                                   let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/lt-ref-self.rs:41:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 40, column 35: let's call the lifetime of this reference `'2`
+  on line 40, column 47: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn box_pin_Self<'b>(self: Box<Pin<&Self>>, f: &'b u32) -> &'b u32 {
-   |                    ++++                            ++          ++
+ on line 40, column 19, add `<'b>`
 
 error: aborting due to 6 previous errors
 

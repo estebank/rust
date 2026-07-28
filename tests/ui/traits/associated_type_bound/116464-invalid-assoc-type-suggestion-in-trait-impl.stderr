@@ -1,131 +1,59 @@
-error[E0107]: trait takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:15:12
-   |
-LL | impl<T, S> Trait<T, S> for () {}
-   |            ^^^^^ expected 1 generic argument
-   |
+error E0107: trait takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:15:12: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
-   |
-LL | pub trait Trait<T> {
-   |           ^^^^^ -
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
 
-error[E0207]: the type parameter `S` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:9:9
-   |
-LL | impl<T, S> Trait<T> for i32 {
-   |         ^ unconstrained type parameter
+error E0207: the type parameter `S` is not constrained by the impl trait, self type, or predicates
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:9:9: unconstrained type parameter
 
-error[E0107]: trait takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:19:12
-   |
-LL | fn func<T: Trait<u32, String>>(t: T) -> impl Trait<(), i32> {
-   |            ^^^^^ expected 1 generic argument
-   |
+error E0107: trait takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:19:12: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
-   |
-LL | pub trait Trait<T> {
-   |           ^^^^^ -
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
 help: turn the generic argument into an associated item binding
-   |
-LL | fn func<T: Trait<u32, Assoc = String>>(t: T) -> impl Trait<(), i32> {
-   |                       +++++++
+ on line 19, column 22, add `Assoc = `
 
-error[E0107]: trait takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:19:46
-   |
-LL | fn func<T: Trait<u32, String>>(t: T) -> impl Trait<(), i32> {
-   |                                              ^^^^^ expected 1 generic argument
-   |
+error E0107: trait takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:19:46: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
-   |
-LL | pub trait Trait<T> {
-   |           ^^^^^ -
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
 help: turn the generic argument into an associated item binding
-   |
-LL | fn func<T: Trait<u32, String>>(t: T) -> impl Trait<(), Assoc = i32> {
-   |                                                        +++++++
+ on line 19, column 55, add `Assoc = `
 
-error[E0107]: trait takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:26:18
-   |
-LL | struct Struct<T: Trait<u32, String>> {
-   |                  ^^^^^ expected 1 generic argument
-   |
+error E0107: trait takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:26:18: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
-   |
-LL | pub trait Trait<T> {
-   |           ^^^^^ -
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
 help: turn the generic argument into an associated item binding
-   |
-LL | struct Struct<T: Trait<u32, Assoc = String>> {
-   |                             +++++++
+ on line 26, column 28, add `Assoc = `
 
-error[E0107]: trait takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:31:23
-   |
-LL | trait AnotherTrait<T: Trait<T, i32>> {}
-   |                       ^^^^^ expected 1 generic argument
-   |
+error E0107: trait takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:31:23: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
-   |
-LL | pub trait Trait<T> {
-   |           ^^^^^ -
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
 help: turn the generic argument into an associated item binding
-   |
-LL | trait AnotherTrait<T: Trait<T, Assoc = i32>> {}
-   |                                +++++++
+ on line 31, column 31, add `Assoc = `
 
-error[E0107]: trait takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:34:9
-   |
-LL | impl<T: Trait<u32, String>> Struct<T> {}
-   |         ^^^^^ expected 1 generic argument
-   |
+error E0107: trait takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:34:9: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
-   |
-LL | pub trait Trait<T> {
-   |           ^^^^^ -
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
 help: turn the generic argument into an associated item binding
-   |
-LL | impl<T: Trait<u32, Assoc = String>> Struct<T> {}
-   |                    +++++++
+ on line 34, column 19, add `Assoc = `
 
-error[E0107]: struct takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:40:58
-   |
-LL | impl<T: Trait<u32, Assoc=String>, U> YetAnotherTrait for Struct<T, U> {}
-   |                                                          ^^^^^^  --- help: remove the unnecessary generic argument
-   |                                                          |
-   |                                                          expected 1 generic argument
-   |
+error E0107: struct takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:40:58: expected 1 generic argument
+  on line 40, column 66: help: remove the unnecessary generic argument
 note: struct defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:26:8
-   |
-LL | struct Struct<T: Trait<u32, String>> {
-   |        ^^^^^^ -
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:26:8
 
-error[E0107]: trait takes 1 generic argument but 2 generic arguments were supplied
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:19:46
-   |
-LL | fn func<T: Trait<u32, String>>(t: T) -> impl Trait<(), i32> {
-   |                                              ^^^^^ expected 1 generic argument
-   |
+error E0107: trait takes 1 generic argument but 2 generic arguments were supplied
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:19:46: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
-   |
-LL | pub trait Trait<T> {
-   |           ^^^^^ -
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/116464-invalid-assoc-type-suggestion-in-trait-impl.rs:5:11
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: turn the generic argument into an associated item binding
-   |
-LL | fn func<T: Trait<u32, String>>(t: T) -> impl Trait<(), Assoc = i32> {
-   |                                                        +++++++
+ on line 19, column 55, add `Assoc = `
 
 error: aborting due to 9 previous errors
 

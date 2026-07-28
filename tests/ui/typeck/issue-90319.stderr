@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `Thing` in this scope
-  --> $DIR/issue-90319.rs:14:23
-   |
-LL |     let thing = get::<Thing>();
-   |                       ^^^^^ not found in this scope
+error E0425: cannot find type `Thing` in this scope
+ at $DIR/issue-90319.rs:14:23: not found in this scope
 
 error: aborting due to 1 previous error
 

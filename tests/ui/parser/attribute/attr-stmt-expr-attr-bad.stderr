@@ -1,485 +1,254 @@
 error: expected expression, found `]`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:4:40
-   |
-LL | #[cfg(false)] fn e() { let _ = [#[attr]]; }
-   |                                        ^ expected expression
+ at $DIR/attr-stmt-expr-attr-bad.rs:4:40: expected expression
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `else`, `{`, or an operator, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:6:35
-   |
-LL | #[cfg(false)] fn e() { let _ = foo#[attr](); }
-   |                                   ^ expected one of 8 possible tokens
+ at $DIR/attr-stmt-expr-attr-bad.rs:6:35: expected one of 8 possible tokens
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:8:36
-   |
-LL | #[cfg(false)] fn e() { let _ = foo(#![attr]); }
-   |                                    ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:8:36
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:8:36
-   |
-LL | #[cfg(false)] fn e() { let _ = foo(#![attr]); }
-   |                                    ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/attr-stmt-expr-attr-bad.rs:8:36
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: expected expression, found `)`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:8:44
-   |
-LL | #[cfg(false)] fn e() { let _ = foo(#![attr]); }
-   |                                            ^ expected expression
+ at $DIR/attr-stmt-expr-attr-bad.rs:8:44: expected expression
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:12:38
-   |
-LL | #[cfg(false)] fn e() { let _ = x.foo(#![attr]); }
-   |                                      ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:12:38
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: expected expression, found `)`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:12:46
-   |
-LL | #[cfg(false)] fn e() { let _ = x.foo(#![attr]); }
-   |                                              ^ expected expression
+ at $DIR/attr-stmt-expr-attr-bad.rs:12:46: expected expression
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:15:36
-   |
-LL | #[cfg(false)] fn e() { let _ = 0 + #![attr] 0; }
-   |                                    ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:15:36
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:17:33
-   |
-LL | #[cfg(false)] fn e() { let _ = !#![attr] 0; }
-   |                                 ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:17:33
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:19:33
-   |
-LL | #[cfg(false)] fn e() { let _ = -#![attr] 0; }
-   |                                 ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:19:33
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `else`, `{`, or an operator, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:21:34
-   |
-LL | #[cfg(false)] fn e() { let _ = x #![attr] as Y; }
-   |                                  ^ expected one of 8 possible tokens
+ at $DIR/attr-stmt-expr-attr-bad.rs:21:34: expected one of 8 possible tokens
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:23:35
-   |
-LL | #[cfg(false)] fn e() { let _ = || #![attr] foo; }
-   |                                   ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:23:35
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:25:40
-   |
-LL | #[cfg(false)] fn e() { let _ = move || #![attr] foo; }
-   |                                        ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:25:40
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:27:35
-   |
-LL | #[cfg(false)] fn e() { let _ = || #![attr] {foo}; }
-   |                                   ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:27:35
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:29:40
-   |
-LL | #[cfg(false)] fn e() { let _ = move || #![attr] {foo}; }
-   |                                        ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:29:40
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: attributes are not allowed on range expressions starting with `..`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:31:40
-   |
-LL | #[cfg(false)] fn e() { let _ = #[attr] ..#[attr] 0; }
-   |                                        ^^
+ at $DIR/attr-stmt-expr-attr-bad.rs:31:40
 
 error: attributes are not allowed on range expressions starting with `..`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:33:40
-   |
-LL | #[cfg(false)] fn e() { let _ = #[attr] ..; }
-   |                                        ^^
+ at $DIR/attr-stmt-expr-attr-bad.rs:33:40
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:35:41
-   |
-LL | #[cfg(false)] fn e() { let _ = #[attr] &#![attr] 0; }
-   |                                         ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:35:41
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:37:45
-   |
-LL | #[cfg(false)] fn e() { let _ = #[attr] &mut #![attr] 0; }
-   |                                             ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:37:45
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:39:37
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 #[attr] {}; }
-   |                                --   ^^^^^^^ -- the attributes are attached to this branch
-   |                                |
-   |                                the branch belongs to this `if`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:39:37
+  on line 39, column 32: the branch belongs to this `if`
+  on line 39, column 45: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if 0 #[attr] {}; }
-LL + #[cfg(false)] fn e() { let _ = if 0 {}; }
-   |
+ on line 39, column 36
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:41:38
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 {#![attr]}; }
-   |                                      ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:41:38
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:43:40
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 {} #[attr] else {}; }
-   |                                        ^ expected one of `.`, `;`, `?`, `else`, or an operator
+ at $DIR/attr-stmt-expr-attr-bad.rs:43:40: expected one of `.`, `;`, `?`, `else`, or an operator
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:45:45
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 {} else #[attr] {}; }
-   |                                        ---- ^^^^^^^ -- the attributes are attached to this branch
-   |                                        |
-   |                                        the branch belongs to this `else`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:45:45
+  on line 45, column 40: the branch belongs to this `else`
+  on line 45, column 53: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if 0 {} else #[attr] {}; }
-LL + #[cfg(false)] fn e() { let _ = if 0 {} else {}; }
-   |
+ on line 45, column 44
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:47:46
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 {} else {#![attr]}; }
-   |                                              ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:47:46
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:49:45
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 {} else #[attr] if 0 {}; }
-   |                                        ---- ^^^^^^^ ------- the attributes are attached to this branch
-   |                                        |
-   |                                        the branch belongs to this `else`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:49:45
+  on line 49, column 40: the branch belongs to this `else`
+  on line 49, column 53: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if 0 {} else #[attr] if 0 {}; }
-LL + #[cfg(false)] fn e() { let _ = if 0 {} else if 0 {}; }
-   |
+ on line 49, column 44
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:51:50
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 {} else if 0 #[attr] {}; }
-   |                                             --   ^^^^^^^ -- the attributes are attached to this branch
-   |                                             |
-   |                                             the branch belongs to this `if`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:51:50
+  on line 51, column 45: the branch belongs to this `if`
+  on line 51, column 58: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if 0 {} else if 0 #[attr] {}; }
-LL + #[cfg(false)] fn e() { let _ = if 0 {} else if 0 {}; }
-   |
+ on line 51, column 49
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:53:51
-   |
-LL | #[cfg(false)] fn e() { let _ = if 0 {} else if 0 {#![attr]}; }
-   |                                                   ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:53:51
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:55:45
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 #[attr] {}; }
-   |                                --           ^^^^^^^ -- the attributes are attached to this branch
-   |                                |
-   |                                the branch belongs to this `if`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:55:45
+  on line 55, column 32: the branch belongs to this `if`
+  on line 55, column 53: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if let _ = 0 #[attr] {}; }
-LL + #[cfg(false)] fn e() { let _ = if let _ = 0 {}; }
-   |
+ on line 55, column 44
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:57:46
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 {#![attr]}; }
-   |                                              ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:57:46
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:59:48
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 {} #[attr] else {}; }
-   |                                                ^ expected one of `.`, `;`, `?`, `else`, or an operator
+ at $DIR/attr-stmt-expr-attr-bad.rs:59:48: expected one of `.`, `;`, `?`, `else`, or an operator
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:61:53
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 {} else #[attr] {}; }
-   |                                                ---- ^^^^^^^ -- the attributes are attached to this branch
-   |                                                |
-   |                                                the branch belongs to this `else`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:61:53
+  on line 61, column 48: the branch belongs to this `else`
+  on line 61, column 61: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if let _ = 0 {} else #[attr] {}; }
-LL + #[cfg(false)] fn e() { let _ = if let _ = 0 {} else {}; }
-   |
+ on line 61, column 52
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:63:54
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 {} else {#![attr]}; }
-   |                                                      ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:63:54
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:65:53
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 {} else #[attr] if let _ = 0 {}; }
-   |                                                ---- ^^^^^^^ --------------- the attributes are attached to this branch
-   |                                                |
-   |                                                the branch belongs to this `else`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:65:53
+  on line 65, column 48: the branch belongs to this `else`
+  on line 65, column 61: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if let _ = 0 {} else #[attr] if let _ = 0 {}; }
-LL + #[cfg(false)] fn e() { let _ = if let _ = 0 {} else if let _ = 0 {}; }
-   |
+ on line 65, column 52
 
 error: outer attributes are not allowed on `if` and `else` branches
-  --> $DIR/attr-stmt-expr-attr-bad.rs:67:66
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 {} else if let _ = 0 #[attr] {}; }
-   |                                                     --           ^^^^^^^ -- the attributes are attached to this branch
-   |                                                     |
-   |                                                     the branch belongs to this `if`
-   |
+ at $DIR/attr-stmt-expr-attr-bad.rs:67:66
+  on line 67, column 53: the branch belongs to this `if`
+  on line 67, column 74: the attributes are attached to this branch
 help: remove the attributes
-   |
-LL - #[cfg(false)] fn e() { let _ = if let _ = 0 {} else if let _ = 0 #[attr] {}; }
-LL + #[cfg(false)] fn e() { let _ = if let _ = 0 {} else if let _ = 0 {}; }
-   |
+ on line 67, column 65
 
 error: an inner attribute is not permitted in this context
-  --> $DIR/attr-stmt-expr-attr-bad.rs:69:67
-   |
-LL | #[cfg(false)] fn e() { let _ = if let _ = 0 {} else if let _ = 0 {#![attr]}; }
-   |                                                                   ^^^^^^^^
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:69:67
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted following an outer attribute
-  --> $DIR/attr-stmt-expr-attr-bad.rs:72:32
-   |
-LL | #[cfg(false)] fn s() { #[attr] #![attr] let _ = 0; }
-   |                        ------- ^^^^^^^^ not permitted following an outer attribute
-   |                        |
-   |                        previous outer attribute
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:72:32: not permitted following an outer attribute
+  on line 72, column 24: previous outer attribute
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted following an outer attribute
-  --> $DIR/attr-stmt-expr-attr-bad.rs:74:32
-   |
-LL | #[cfg(false)] fn s() { #[attr] #![attr] 0; }
-   |                        ------- ^^^^^^^^ not permitted following an outer attribute
-   |                        |
-   |                        previous outer attribute
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
-   = note: outer attributes, like `#[test]`, annotate the item following them
+ at $DIR/attr-stmt-expr-attr-bad.rs:74:32: not permitted following an outer attribute
+  on line 74, column 24: previous outer attribute
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+note: outer attributes, like `#[test]`, annotate the item following them
 
 error: an inner attribute is not permitted following an outer attribute
-  --> $DIR/attr-stmt-expr-attr-bad.rs:76:32
-   |
-LL | #[cfg(false)] fn s() { #[attr] #![attr] foo!(); }
-   |                        ------- ^^^^^^^^ ------- the inner attribute doesn't annotate this item macro invocation
-   |                        |       |
-   |                        |       not permitted following an outer attribute
-   |                        previous outer attribute
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+ at $DIR/attr-stmt-expr-attr-bad.rs:76:32: not permitted following an outer attribute
+  on line 76, column 24: previous outer attribute
+  on line 76, column 41: the inner attribute doesn't annotate this item macro invocation
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
 
 error: an inner attribute is not permitted following an outer attribute
-  --> $DIR/attr-stmt-expr-attr-bad.rs:78:32
-   |
-LL | #[cfg(false)] fn s() { #[attr] #![attr] foo![]; }
-   |                        ------- ^^^^^^^^ ------- the inner attribute doesn't annotate this item macro invocation
-   |                        |       |
-   |                        |       not permitted following an outer attribute
-   |                        previous outer attribute
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+ at $DIR/attr-stmt-expr-attr-bad.rs:78:32: not permitted following an outer attribute
+  on line 78, column 24: previous outer attribute
+  on line 78, column 41: the inner attribute doesn't annotate this item macro invocation
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
 
 error: an inner attribute is not permitted following an outer attribute
-  --> $DIR/attr-stmt-expr-attr-bad.rs:80:32
-   |
-LL | #[cfg(false)] fn s() { #[attr] #![attr] foo!{}; }
-   |                        ------- ^^^^^^^^ ------ the inner attribute doesn't annotate this item macro invocation
-   |                        |       |
-   |                        |       not permitted following an outer attribute
-   |                        previous outer attribute
-   |
-   = note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
+ at $DIR/attr-stmt-expr-attr-bad.rs:80:32: not permitted following an outer attribute
+  on line 80, column 24: previous outer attribute
+  on line 80, column 41: the inner attribute doesn't annotate this item macro invocation
+note: inner attributes, like `#![no_std]`, annotate the item enclosing them, and are usually found at the beginning of source files
 
-error[E0586]: inclusive range with no end
-  --> $DIR/attr-stmt-expr-attr-bad.rs:86:35
-   |
-LL | #[cfg(false)] fn e() { match 0 { 0..=#[attr] 10 => () } }
-   |                                   ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/attr-stmt-expr-attr-bad.rs:86:35
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - #[cfg(false)] fn e() { match 0 { 0..=#[attr] 10 => () } }
-LL + #[cfg(false)] fn e() { match 0 { 0..#[attr] 10 => () } }
-   |
+ on line 86, column 34, replace with `..`
 
 error: expected one of `=>`, `if`, or `|`, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:86:38
-   |
-LL | #[cfg(false)] fn e() { match 0 { 0..=#[attr] 10 => () } }
-   |                                      ^ expected one of `=>`, `if`, or `|`
+ at $DIR/attr-stmt-expr-attr-bad.rs:86:38: expected one of `=>`, `if`, or `|`
 
-error[E0586]: inclusive range with no end
-  --> $DIR/attr-stmt-expr-attr-bad.rs:89:35
-   |
-LL | #[cfg(false)] fn e() { match 0 { 0..=#[attr] -10 => () } }
-   |                                   ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/attr-stmt-expr-attr-bad.rs:89:35
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - #[cfg(false)] fn e() { match 0 { 0..=#[attr] -10 => () } }
-LL + #[cfg(false)] fn e() { match 0 { 0..#[attr] -10 => () } }
-   |
+ on line 89, column 34, replace with `..`
 
 error: expected one of `=>`, `if`, or `|`, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:89:38
-   |
-LL | #[cfg(false)] fn e() { match 0 { 0..=#[attr] -10 => () } }
-   |                                      ^ expected one of `=>`, `if`, or `|`
+ at $DIR/attr-stmt-expr-attr-bad.rs:89:38: expected one of `=>`, `if`, or `|`
 
 error: unexpected token: `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:92:39
-   |
-LL | #[cfg(false)] fn e() { match 0 { 0..=-#[attr] 10 => () } }
-   |                                       ^
+ at $DIR/attr-stmt-expr-attr-bad.rs:92:39
 
-error[E0586]: inclusive range with no end
-  --> $DIR/attr-stmt-expr-attr-bad.rs:94:35
-   |
-LL | #[cfg(false)] fn e() { match 0 { 0..=#[attr] FOO => () } }
-   |                                   ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/attr-stmt-expr-attr-bad.rs:94:35
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL - #[cfg(false)] fn e() { match 0 { 0..=#[attr] FOO => () } }
-LL + #[cfg(false)] fn e() { match 0 { 0..#[attr] FOO => () } }
-   |
+ on line 94, column 34, replace with `..`
 
 error: expected one of `=>`, `if`, or `|`, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:94:38
-   |
-LL | #[cfg(false)] fn e() { match 0 { 0..=#[attr] FOO => () } }
-   |                                      ^ expected one of `=>`, `if`, or `|`
+ at $DIR/attr-stmt-expr-attr-bad.rs:94:38: expected one of `=>`, `if`, or `|`
 
 error: unexpected token: `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:98:34
-   |
-LL | #[cfg(false)] fn e() { let _ = x.#![attr]foo(); }
-   |                                  ^
+ at $DIR/attr-stmt-expr-attr-bad.rs:98:34
 
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:98:34
-   |
-LL | #[cfg(false)] fn e() { let _ = x.#![attr]foo(); }
-   |                                  ^ expected one of `.`, `;`, `?`, `else`, or an operator
+ at $DIR/attr-stmt-expr-attr-bad.rs:98:34: expected one of `.`, `;`, `?`, `else`, or an operator
 
 error: unexpected token: `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:101:34
-   |
-LL | #[cfg(false)] fn e() { let _ = x.#[attr]foo(); }
-   |                                  ^
+ at $DIR/attr-stmt-expr-attr-bad.rs:101:34
 
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `#`
-  --> $DIR/attr-stmt-expr-attr-bad.rs:101:34
-   |
-LL | #[cfg(false)] fn e() { let _ = x.#[attr]foo(); }
-   |                                  ^ expected one of `.`, `;`, `?`, `else`, or an operator
+ at $DIR/attr-stmt-expr-attr-bad.rs:101:34: expected one of `.`, `;`, `?`, `else`, or an operator
 
 error: expected statement after outer attribute
-  --> $DIR/attr-stmt-expr-attr-bad.rs:106:37
-   |
-LL | #[cfg(false)] fn e() { { fn foo() { #[attr]; } } }
-   |                                     ^^^^^^^
+ at $DIR/attr-stmt-expr-attr-bad.rs:106:37
 
 error: expected statement after outer attribute
-  --> $DIR/attr-stmt-expr-attr-bad.rs:108:37
-   |
-LL | #[cfg(false)] fn e() { { fn foo() { #[attr] } } }
-   |                                     ^^^^^^^
+ at $DIR/attr-stmt-expr-attr-bad.rs:108:37
 
 error: aborting due to 53 previous errors
 

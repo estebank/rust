@@ -1,13 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/opaque-alias-relate-issue-151331.rs:7:18
-   |
-LL | fn make_foo() -> Foo {}
-   |    --------      ^^^ expected `Vec<_>`, found `()`
-   |    |
-   |    implicitly returns `()` as its body has no tail or `return` expression
-   |
-   = note: expected struct `Vec<_>`
-           found unit type `()`
+error E0308: mismatched types
+ at $DIR/opaque-alias-relate-issue-151331.rs:7:18: expected `Vec<_>`, found `()`
+  on line 7, column 4: implicitly returns `()` as its body has no tail or `return` expression
+note: expected struct `Vec<_>`
+      found unit type `()`
 
 error: aborting due to 1 previous error
 

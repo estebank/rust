@@ -1,58 +1,26 @@
-error[E0277]: `Rc<Cell<i32>>` cannot be sent between threads safely
-  --> $DIR/auto-trait-leak2.rs:21:10
-   |
-LL | fn before() -> impl Fn(i32) {
-   |                ------------ within this `impl Fn(i32)`
-...
-LL |     send(before());
-   |     ---- ^^^^^^^^ `Rc<Cell<i32>>` cannot be sent between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: within `impl Fn(i32)`, the trait `Send` is not implemented for `Rc<Cell<i32>>`
+error E0277: `Rc<Cell<i32>>` cannot be sent between threads safely
+ at $DIR/auto-trait-leak2.rs:21:10: `Rc<Cell<i32>>` cannot be sent between threads safely
+  on line 6, column 16: within this `impl Fn(i32)`
+  on line 21: required by a bound introduced by this call
+help: within `impl Fn(i32)`, the trait `Send` is not implemented for `Rc<Cell<i32>>`
 note: required because it's used within this closure
-  --> $DIR/auto-trait-leak2.rs:11:5
-   |
-LL |     move |x| p.set(x)
-   |     ^^^^^^^^
+ at $DIR/auto-trait-leak2.rs:11:5
 note: required because it appears within the type `impl Fn(i32)`
-  --> $DIR/auto-trait-leak2.rs:6:16
-   |
-LL | fn before() -> impl Fn(i32) {
-   |                ^^^^^^^^^^^^
+ at $DIR/auto-trait-leak2.rs:6:16
 note: required by a bound in `send`
-  --> $DIR/auto-trait-leak2.rs:14:12
-   |
-LL | fn send<T: Send>(_: T) {}
-   |            ^^^^ required by this bound in `send`
+ at $DIR/auto-trait-leak2.rs:14:12: required by this bound in `send`
 
-error[E0277]: `Rc<Cell<i32>>` cannot be sent between threads safely
-  --> $DIR/auto-trait-leak2.rs:26:10
-   |
-LL |     send(after());
-   |     ---- ^^^^^^^ `Rc<Cell<i32>>` cannot be sent between threads safely
-   |     |
-   |     required by a bound introduced by this call
-...
-LL | fn after() -> impl Fn(i32) {
-   |               ------------ within this `impl Fn(i32)`
-   |
-   = help: within `impl Fn(i32)`, the trait `Send` is not implemented for `Rc<Cell<i32>>`
+error E0277: `Rc<Cell<i32>>` cannot be sent between threads safely
+ at $DIR/auto-trait-leak2.rs:26:10: `Rc<Cell<i32>>` cannot be sent between threads safely
+  on line 26: required by a bound introduced by this call
+  on line 34, column 15: within this `impl Fn(i32)`
+help: within `impl Fn(i32)`, the trait `Send` is not implemented for `Rc<Cell<i32>>`
 note: required because it's used within this closure
-  --> $DIR/auto-trait-leak2.rs:39:5
-   |
-LL |     move |x| p.set(x)
-   |     ^^^^^^^^
+ at $DIR/auto-trait-leak2.rs:39:5
 note: required because it appears within the type `impl Fn(i32)`
-  --> $DIR/auto-trait-leak2.rs:34:15
-   |
-LL | fn after() -> impl Fn(i32) {
-   |               ^^^^^^^^^^^^
+ at $DIR/auto-trait-leak2.rs:34:15
 note: required by a bound in `send`
-  --> $DIR/auto-trait-leak2.rs:14:12
-   |
-LL | fn send<T: Send>(_: T) {}
-   |            ^^^^ required by this bound in `send`
+ at $DIR/auto-trait-leak2.rs:14:12: required by this bound in `send`
 
 error: aborting due to 2 previous errors
 

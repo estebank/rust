@@ -1,19 +1,10 @@
-error[E0119]: conflicting implementations of trait `Foo` for type `u32`
-  --> $DIR/specialization-overlap-projection.rs:19:1
-   |
-LL | impl Foo for u32 {}
-   | ---------------- first implementation here
-LL | impl Foo for <u8 as Assoc>::Output {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `u32`
+error E0119: conflicting implementations of trait `Foo` for type `u32`
+ at $DIR/specialization-overlap-projection.rs:19:1: conflicting implementation for `u32`
+  on line 18: first implementation here
 
-error[E0119]: conflicting implementations of trait `Foo` for type `u32`
-  --> $DIR/specialization-overlap-projection.rs:21:1
-   |
-LL | impl Foo for u32 {}
-   | ---------------- first implementation here
-...
-LL | impl Foo for <u16 as Assoc>::Output {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `u32`
+error E0119: conflicting implementations of trait `Foo` for type `u32`
+ at $DIR/specialization-overlap-projection.rs:21:1: conflicting implementation for `u32`
+  on line 18: first implementation here
 
 error: aborting due to 2 previous errors
 

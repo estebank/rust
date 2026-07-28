@@ -1,13 +1,7 @@
-error[E0605]: non-primitive cast: `i32` as `&(dyn Any + 'static)`
-  --> $DIR/cast-to-dyn-any.rs:3:5
-   |
-LL |     0 as &dyn std::any::Any;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^ invalid cast
-   |
+error E0605: non-primitive cast: `i32` as `&(dyn Any + 'static)`
+ at $DIR/cast-to-dyn-any.rs:3:5: invalid cast
 help: consider borrowing the value
-   |
-LL |     &0 as &dyn std::any::Any;
-   |     +
+ on line 3, column 4, add `&`
 
 error: aborting due to 1 previous error
 

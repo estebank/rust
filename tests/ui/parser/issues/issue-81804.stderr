@@ -1,19 +1,11 @@
 error: mismatched closing delimiter: `}`
-  --> $DIR/issue-81804.rs:5:8
-   |
-LL | fn p([=(}
-   |        ^^ mismatched closing delimiter
-   |        |
-   |        unclosed delimiter
+ at $DIR/issue-81804.rs:5:8: unclosed delimiter
+  on line 5, column 9: mismatched closing delimiter
 
 error: this file contains an unclosed delimiter
-  --> $DIR/issue-81804.rs:5:11
-   |
-LL | fn p([=(}
-   |     --   ^
-   |     ||
-   |     |unclosed delimiter
-   |     unclosed delimiter
+ at $DIR/issue-81804.rs:5:11
+  on line 5, column 5: unclosed delimiter
+  on line 5, column 6: unclosed delimiter
 
 error: aborting due to 2 previous errors
 

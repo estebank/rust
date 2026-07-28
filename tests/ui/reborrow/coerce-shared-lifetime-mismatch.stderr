@@ -1,16 +1,8 @@
-error[E0597]: `a` does not live long enough
-  --> $DIR/coerce-shared-lifetime-mismatch.rs:21:12
-   |
-LL |     let a = CustomMarker(PhantomData);
-   |         - binding `a` declared here
-LL |     method(a);
-   |     -------^-
-   |     |      |
-   |     |      borrowed value does not live long enough
-   |     argument requires that `a` is borrowed for `'static`
-LL |
-LL | }
-   | - `a` dropped here while still borrowed
+error E0597: `a` does not live long enough
+ at $DIR/coerce-shared-lifetime-mismatch.rs:21:12: borrowed value does not live long enough
+  on line 20, column 9: binding `a` declared here
+  on line 21: argument requires that `a` is borrowed for `'static`
+  on line 23: `a` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

@@ -1,98 +1,43 @@
 error: unexpected token `||` in pattern
-  --> $DIR/multiple-pattern-typo.rs:7:15
-   |
-LL |         1 | 2 || 3 => (),
-   |         -     ^^
-   |         |
-   |         while parsing this or-pattern starting here
-   |
+ at $DIR/multiple-pattern-typo.rs:7:15
+  on line 7: while parsing this or-pattern starting here
 help: use a single `|` to separate multiple alternative patterns
-   |
-LL -         1 | 2 || 3 => (),
-LL +         1 | 2 | 3 => (),
-   |
+ on line 7, column 14, replace with `|`
 
 error: unexpected token `||` in pattern
-  --> $DIR/multiple-pattern-typo.rs:12:16
-   |
-LL |         (1 | 2 || 3) => (),
-   |          -     ^^
-   |          |
-   |          while parsing this or-pattern starting here
-   |
+ at $DIR/multiple-pattern-typo.rs:12:16
+  on line 12, column 10: while parsing this or-pattern starting here
 help: use a single `|` to separate multiple alternative patterns
-   |
-LL -         (1 | 2 || 3) => (),
-LL +         (1 | 2 | 3) => (),
-   |
+ on line 12, column 15, replace with `|`
 
 error: unexpected token `||` in pattern
-  --> $DIR/multiple-pattern-typo.rs:17:16
-   |
-LL |         (1 | 2 || 3,) => (),
-   |          -     ^^
-   |          |
-   |          while parsing this or-pattern starting here
-   |
+ at $DIR/multiple-pattern-typo.rs:17:16
+  on line 17, column 10: while parsing this or-pattern starting here
 help: use a single `|` to separate multiple alternative patterns
-   |
-LL -         (1 | 2 || 3,) => (),
-LL +         (1 | 2 | 3,) => (),
-   |
+ on line 17, column 15, replace with `|`
 
 error: unexpected token `||` in pattern
-  --> $DIR/multiple-pattern-typo.rs:24:18
-   |
-LL |         TS(1 | 2 || 3) => (),
-   |            -     ^^
-   |            |
-   |            while parsing this or-pattern starting here
-   |
+ at $DIR/multiple-pattern-typo.rs:24:18
+  on line 24, column 12: while parsing this or-pattern starting here
 help: use a single `|` to separate multiple alternative patterns
-   |
-LL -         TS(1 | 2 || 3) => (),
-LL +         TS(1 | 2 | 3) => (),
-   |
+ on line 24, column 17, replace with `|`
 
 error: unexpected token `||` in pattern
-  --> $DIR/multiple-pattern-typo.rs:31:23
-   |
-LL |         NS { f: 1 | 2 || 3 } => (),
-   |                 -     ^^
-   |                 |
-   |                 while parsing this or-pattern starting here
-   |
+ at $DIR/multiple-pattern-typo.rs:31:23
+  on line 31, column 17: while parsing this or-pattern starting here
 help: use a single `|` to separate multiple alternative patterns
-   |
-LL -         NS { f: 1 | 2 || 3 } => (),
-LL +         NS { f: 1 | 2 | 3 } => (),
-   |
+ on line 31, column 22, replace with `|`
 
 error: unexpected token `||` in pattern
-  --> $DIR/multiple-pattern-typo.rs:36:16
-   |
-LL |         [1 | 2 || 3] => (),
-   |          -     ^^
-   |          |
-   |          while parsing this or-pattern starting here
-   |
+ at $DIR/multiple-pattern-typo.rs:36:16
+  on line 36, column 10: while parsing this or-pattern starting here
 help: use a single `|` to separate multiple alternative patterns
-   |
-LL -         [1 | 2 || 3] => (),
-LL +         [1 | 2 | 3] => (),
-   |
+ on line 36, column 15, replace with `|`
 
 error: unexpected token `||` in pattern
-  --> $DIR/multiple-pattern-typo.rs:41:9
-   |
-LL |         || 1 | 2 | 3 => (),
-   |         ^^
-   |
+ at $DIR/multiple-pattern-typo.rs:41:9
 help: use a single `|` to separate multiple alternative patterns
-   |
-LL -         || 1 | 2 | 3 => (),
-LL +         | 1 | 2 | 3 => (),
-   |
+ on line 41, column 8, replace with `|`
 
 error: aborting due to 7 previous errors
 

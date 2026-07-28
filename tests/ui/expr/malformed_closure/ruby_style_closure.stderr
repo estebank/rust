@@ -1,8 +1,5 @@
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/ruby_style_closure.rs:12:14
-   |
-LL |         Some(x * 2)
-   |              ^ not found in this scope
+error E0425: cannot find value `x` in this scope
+ at $DIR/ruby_style_closure.rs:12:14: not found in this scope
 
 error: aborting due to 1 previous error
 

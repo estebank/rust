@@ -1,23 +1,11 @@
-error[E0308]: mismatched types
-  --> $DIR/dont-assume-err-is-yes-issue-126377.rs:13:23
-   |
-LL |     is_transmutable::<{}>();
-   |                       ^^ expected `bool`, found `()`
+error E0308: mismatched types
+ at $DIR/dont-assume-err-is-yes-issue-126377.rs:13:23: expected `bool`, found `()`
 
-error[E0277]: the trait bound `(): TransmuteFrom<(), { Assume::SAFETY }>` is not satisfied
-  --> $DIR/dont-assume-err-is-yes-issue-126377.rs:13:23
-   |
-LL |     is_transmutable::<{}>();
-   |                       ^^ the nightly-only, unstable trait `TransmuteFrom<(), { Assume::SAFETY }>` is not implemented for `()`
-   |
+error E0277: the trait bound `(): TransmuteFrom<(), { Assume::SAFETY }>` is not satisfied
+ at $DIR/dont-assume-err-is-yes-issue-126377.rs:13:23: the nightly-only, unstable trait `TransmuteFrom<(), { Assume::SAFETY }>` is not implemented for `()`
 note: required by a bound in `is_transmutable`
-  --> $DIR/dont-assume-err-is-yes-issue-126377.rs:8:9
-   |
-LL | pub fn is_transmutable<const ASSUME_ALIGNMENT: bool>()
-   |        --------------- required by a bound in this function
-LL | where
-LL |     (): TransmuteFrom<(), { Assume::SAFETY }>,
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `is_transmutable`
+ at $DIR/dont-assume-err-is-yes-issue-126377.rs:8:9: required by this bound in `is_transmutable`
+  on line 6, column 8: required by a bound in this function
 
 error: aborting due to 2 previous errors
 

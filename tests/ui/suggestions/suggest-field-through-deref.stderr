@@ -1,70 +1,32 @@
-error[E0609]: no field `longname` on type `Arc<S>`
-  --> $DIR/suggest-field-through-deref.rs:10:15
-   |
-LL |     let _ = x.longname;
-   |               ^^^^^^^^ unknown field
-   |
+error E0609: no field `longname` on type `Arc<S>`
+ at $DIR/suggest-field-through-deref.rs:10:15: unknown field
 help: a field with a similar name exists
-   |
-LL |     let _ = x.long_name;
-   |                   +
+ on line 10, column 14, replace with `long_name`
 
-error[E0609]: no field `longname` on type `S`
-  --> $DIR/suggest-field-through-deref.rs:12:15
-   |
-LL |     let _ = y.longname;
-   |               ^^^^^^^^ unknown field
-   |
+error E0609: no field `longname` on type `S`
+ at $DIR/suggest-field-through-deref.rs:12:15: unknown field
 help: a field with a similar name exists
-   |
-LL |     let _ = y.long_name;
-   |                   +
+ on line 12, column 14, replace with `long_name`
 
-error[E0609]: no field `longname` on type `Option<Arc<S>>`
-  --> $DIR/suggest-field-through-deref.rs:14:15
-   |
-LL |     let _ = a.longname;
-   |               ^^^^^^^^ unknown field
-   |
+error E0609: no field `longname` on type `Option<Arc<S>>`
+ at $DIR/suggest-field-through-deref.rs:14:15: unknown field
 help: a field with a similar name exists
-   |
-LL -     let _ = a.longname;
-LL +     let _ = a.unwrap().long_name;
-   |
+ on line 14, column 14, replace with `unwrap().long_name`
 
-error[E0609]: no field `long_name` on type `Option<S>`
-  --> $DIR/suggest-field-through-deref.rs:16:15
-   |
-LL |     let _ = b.long_name;
-   |               ^^^^^^^^^ unknown field
-   |
+error E0609: no field `long_name` on type `Option<S>`
+ at $DIR/suggest-field-through-deref.rs:16:15: unknown field
 help: one of the expressions' fields has a field of the same name
-   |
-LL |     let _ = b.unwrap().long_name;
-   |               +++++++++
+ on line 16, column 14, add `unwrap().`
 
-error[E0609]: no field `longname` on type `Result<Arc<S>, ()>`
-  --> $DIR/suggest-field-through-deref.rs:18:15
-   |
-LL |     let _ = c.longname;
-   |               ^^^^^^^^ unknown field
-   |
+error E0609: no field `longname` on type `Result<Arc<S>, ()>`
+ at $DIR/suggest-field-through-deref.rs:18:15: unknown field
 help: a field with a similar name exists
-   |
-LL -     let _ = c.longname;
-LL +     let _ = c.unwrap().long_name;
-   |
+ on line 18, column 14, replace with `unwrap().long_name`
 
-error[E0609]: no field `long_name` on type `Result<S, ()>`
-  --> $DIR/suggest-field-through-deref.rs:20:15
-   |
-LL |     let _ = d.long_name;
-   |               ^^^^^^^^^ unknown field
-   |
+error E0609: no field `long_name` on type `Result<S, ()>`
+ at $DIR/suggest-field-through-deref.rs:20:15: unknown field
 help: one of the expressions' fields has a field of the same name
-   |
-LL |     let _ = d.unwrap().long_name;
-   |               +++++++++
+ on line 20, column 14, add `unwrap().`
 
 error: aborting due to 6 previous errors
 

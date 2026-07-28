@@ -1,22 +1,11 @@
-error[E0107]: trait takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/dont-probe-missing-item-name-2.rs:8:12
-   |
-LL | fn test<T: Foo<i32, Assoc = i32>>() {}
-   |            ^^^------------------ help: remove the unnecessary generics
-   |            |
-   |            expected 0 generic arguments
-   |
+error E0107: trait takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/dont-probe-missing-item-name-2.rs:8:12: expected 0 generic arguments
+  on line 8, column 15: help: remove the unnecessary generics
 note: trait defined here, with 0 generic parameters
-  --> $DIR/dont-probe-missing-item-name-2.rs:1:7
-   |
-LL | trait Foo {
-   |       ^^^
+ at $DIR/dont-probe-missing-item-name-2.rs:1:7
 
-error[E0220]: associated type `Assoc` not found for `Foo`
-  --> $DIR/dont-probe-missing-item-name-2.rs:8:21
-   |
-LL | fn test<T: Foo<i32, Assoc = i32>>() {}
-   |                     ^^^^^ associated type `Assoc` not found
+error E0220: associated type `Assoc` not found for `Foo`
+ at $DIR/dont-probe-missing-item-name-2.rs:8:21: associated type `Assoc` not found
 
 error: aborting due to 2 previous errors
 

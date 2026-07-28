@@ -1,8 +1,5 @@
-error[E0080]: evaluation panicked: assertion failed: false
-  --> $DIR/assert.rs:5:15
-   |
-LL | const _: () = assert!(false);
-   |               ^^^^^^^^^^^^^^ evaluation of `_` failed here
+error E0080: evaluation panicked: assertion failed: false
+ at $DIR/assert.rs:5:15: evaluation of `_` failed here
 
 error: aborting due to 1 previous error
 

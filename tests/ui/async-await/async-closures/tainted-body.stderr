@@ -1,8 +1,5 @@
-error[E0425]: cannot find function `used_fn` in this scope
-  --> $DIR/tainted-body.rs:7:9
-   |
-LL |         used_fn();
-   |         ^^^^^^^ not found in this scope
+error E0425: cannot find function `used_fn` in this scope
+ at $DIR/tainted-body.rs:7:9: not found in this scope
 
 error: aborting due to 1 previous error
 

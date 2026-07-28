@@ -1,31 +1,13 @@
 warning: multiple lines skipped by escaped newline
-  --> $DIR/str-escape.rs:6:14
-   |
-LL |       let s = "\
-   |  ______________^
-LL | |
-LL | |              ";
-   | |_____________^ skipping everything up to and including this point
+ at $DIR/str-escape.rs:6:14 to 8:14: skipping everything up to and including this point
 
 warning: whitespace symbol '\u{a0}' is not skipped
-  --> $DIR/str-escape.rs:12:18
-   |
-LL |       let s = c"foo\
-   |  __________________^
-LL | |              bar
-   | |   ^ whitespace symbol '\u{a0}' is not skipped
-   | |___|
-   |
+ at $DIR/str-escape.rs:12:18 to 13:4
+  on line 13: whitespace symbol '\u{a0}' is not skipped
 
 warning: whitespace symbol '\u{c}' is not skipped
-  --> $DIR/str-escape.rs:26:16
-   |
-LL |       let s = b"a\
-   |  ________________^
-LL | |     ␌b";
-   | |     ^ whitespace symbol '\u{c}' is not skipped
-   | |_____|
-   |
+ at $DIR/str-escape.rs:26:16 to 27:6
+  on line 27: whitespace symbol '\u{c}' is not skipped
 
 warning: 3 warnings emitted
 

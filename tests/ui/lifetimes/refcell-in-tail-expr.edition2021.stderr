@@ -1,25 +1,11 @@
-error[E0597]: `cell` does not live long enough
-  --> $DIR/refcell-in-tail-expr.rs:9:27
-   |
-LL |     let cell = std::cell::RefCell::new(0u8);
-   |         ---- binding `cell` declared here
-LL |
-LL |     if let Ok(mut byte) = cell.try_borrow_mut() {
-   |                           ^^^^-----------------
-   |                           |
-   |                           borrowed value does not live long enough
-   |                           a temporary with access to the borrow is created here ...
-...
-LL | }
-   | -
-   | |
-   | `cell` dropped here while still borrowed
-   | ... and the borrow might be used here, when that temporary is dropped and runs the destructor for type `Result<RefMut<'_, u8>, BorrowMutError>`
-   |
+error E0597: `cell` does not live long enough
+ at $DIR/refcell-in-tail-expr.rs:9:27: borrowed value does not live long enough
+  on line 7, column 9: binding `cell` declared here
+  on line 9, column 27: a temporary with access to the borrow is created here ...
+  on line 13: `cell` dropped here while still borrowed
+  on line 13: ... and the borrow might be used here, when that temporary is dropped and runs the destructor for type `Result<RefMut<'_, u8>, BorrowMutError>`
 help: consider adding semicolon after the expression so its temporaries are dropped sooner, before the local variables declared by the block are dropped
-   |
-LL |     };
-   |      +
+ on line 12, column 5, add `;`
 
 error: aborting due to 1 previous error
 

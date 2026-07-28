@@ -1,16 +1,8 @@
-error[E0072]: recursive type `Bar` has infinite size
-  --> $DIR/issue-3008-1.rs:5:1
-   |
-LL | enum Bar {
-   | ^^^^^^^^
-...
-LL |     BarSome(Bar)
-   |             --- recursive without indirection
-   |
+error E0072: recursive type `Bar` has infinite size
+ at $DIR/issue-3008-1.rs:5:1
+  on line 8, column 13: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL |     BarSome(Box<Bar>)
-   |             ++++   +
+ on line 8, column 12, add `Box<`
 
 error: aborting due to 1 previous error
 

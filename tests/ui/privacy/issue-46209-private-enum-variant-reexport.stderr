@@ -1,94 +1,44 @@
-error[E0364]: `JuniorGrade` is private, and cannot be re-exported
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:6:32
-   |
-LL |     pub use self::Lieutenant::{JuniorGrade, Full};
-   |                                ^^^^^^^^^^^
-   |
+error E0364: `JuniorGrade` is private, and cannot be re-exported
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:6:32
 note: consider marking `JuniorGrade` as `pub` in the imported module
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:6:32
-   |
-LL |     pub use self::Lieutenant::{JuniorGrade, Full};
-   |                                ^^^^^^^^^^^
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:6:32
 
-error[E0364]: `Full` is private, and cannot be re-exported
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:6:45
-   |
-LL |     pub use self::Lieutenant::{JuniorGrade, Full};
-   |                                             ^^^^
-   |
+error E0364: `Full` is private, and cannot be re-exported
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:6:45
 note: consider marking `Full` as `pub` in the imported module
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:6:45
-   |
-LL |     pub use self::Lieutenant::{JuniorGrade, Full};
-   |                                             ^^^^
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:6:45
 
 error: glob import doesn't reexport anything with visibility `pub` because no imported item is public enough
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:3:13
-   |
-LL |     pub use self::Professor::*;
-   |             ^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:3:13
 note: the most public imported item is `pub(self)`
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:3:13
-   |
-LL |     pub use self::Professor::*;
-   |             ^^^^^^^^^^^^^^^^^^
-   = help: reduce the glob import's visibility or increase visibility of imported items
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:3:13
+help: reduce the glob import's visibility or increase visibility of imported items
 note: the lint level is defined here
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:1:8
-   |
-LL | #[deny(unused_imports)]
-   |        ^^^^^^^^^^^^^^
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:1:8
 
 error: unused import: `self::Professor::*`
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:3:13
-   |
-LL |     pub use self::Professor::*;
-   |             ^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:3:13
 
 error: unused imports: `Full` and `JuniorGrade`
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:6:32
-   |
-LL |     pub use self::Lieutenant::{JuniorGrade, Full};
-   |                                ^^^^^^^^^^^  ^^^^
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:6:32
 
 error: glob import doesn't reexport anything with visibility `pub` because no imported item is public enough
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:10:13
-   |
-LL |     pub use self::PettyOfficer::*;
-   |             ^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:10:13
 note: the most public imported item is `pub(self)`
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:10:13
-   |
-LL |     pub use self::PettyOfficer::*;
-   |             ^^^^^^^^^^^^^^^^^^^^^
-   = help: reduce the glob import's visibility or increase visibility of imported items
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:10:13
+help: reduce the glob import's visibility or increase visibility of imported items
 
 error: unused import: `self::PettyOfficer::*`
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:10:13
-   |
-LL |     pub use self::PettyOfficer::*;
-   |             ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:10:13
 
 error: glob import doesn't reexport anything with visibility `pub` because no imported item is public enough
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:13:13
-   |
-LL |     pub use self::Crewman::*;
-   |             ^^^^^^^^^^^^^^^^
-   |
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:13:13
 note: the most public imported item is `pub(crate)`
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:13:13
-   |
-LL |     pub use self::Crewman::*;
-   |             ^^^^^^^^^^^^^^^^
-   = help: reduce the glob import's visibility or increase visibility of imported items
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:13:13
+help: reduce the glob import's visibility or increase visibility of imported items
 
 error: unused import: `self::Crewman::*`
-  --> $DIR/issue-46209-private-enum-variant-reexport.rs:13:13
-   |
-LL |     pub use self::Crewman::*;
-   |             ^^^^^^^^^^^^^^^^
+ at $DIR/issue-46209-private-enum-variant-reexport.rs:13:13
 
 error: aborting due to 9 previous errors
 

@@ -1,10 +1,6 @@
 error: lifetime may not live long enough
-  --> $DIR/fixpoint-rerun-all-cycle-heads.rs:60:5
-   |
-LL | fn check<'a, T>() {
-   |          -- lifetime `'a` defined here
-LL |     impls_trait::<'a, 'static, A<T>>();
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'a` must outlive `'static`
+ at $DIR/fixpoint-rerun-all-cycle-heads.rs:60:5: requires that `'a` must outlive `'static`
+  on line 59, column 10: lifetime `'a` defined here
 
 error: aborting due to 1 previous error
 

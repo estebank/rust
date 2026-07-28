@@ -1,14 +1,7 @@
-error[E0367]: `Drop` impl requires `T: 'static` but the struct it is implemented for does not
-  --> $DIR/relate_lt_in_type_outlives_bound.rs:7:8
-   |
-LL |     T: 'static,
-   |        ^^^^^^^
-   |
+error E0367: `Drop` impl requires `T: 'static` but the struct it is implemented for does not
+ at $DIR/relate_lt_in_type_outlives_bound.rs:7:8
 note: the implementor must specify the same requirement
-  --> $DIR/relate_lt_in_type_outlives_bound.rs:1:1
-   |
-LL | struct Wrapper<'a, T>(&'a T)
-   | ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/relate_lt_in_type_outlives_bound.rs:1:1
 
 error: aborting due to 1 previous error
 

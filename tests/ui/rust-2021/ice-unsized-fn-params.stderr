@@ -1,58 +1,28 @@
-error[E0782]: expected a type, found a trait
-  --> $DIR/ice-unsized-fn-params.rs:12:13
-   |
-LL |     fn g(b: B) -> B;
-   |             ^
-   |
-   = note: `B` is dyn-incompatible, otherwise a trait object could be used
+error E0782: expected a type, found a trait
+ at $DIR/ice-unsized-fn-params.rs:12:13
+note: `B` is dyn-incompatible, otherwise a trait object could be used
 help: use a new generic type parameter, constrained by `B`
-   |
-LL -     fn g(b: B) -> B;
-LL +     fn g<T: B>(b: T) -> B;
-   |
+ on line 12, column 8, add `<T: B>`
 help: you can also use an opaque type, but users won't be able to specify the type parameter when calling the `fn`, having to rely exclusively on type inference
-   |
-LL |     fn g(b: impl B) -> B;
-   |             ++++
+ on line 12, column 12, add `impl `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/ice-unsized-fn-params.rs:12:19
-   |
-LL |     fn g(b: B) -> B;
-   |                   ^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/ice-unsized-fn-params.rs:12:19
 help: `B` is dyn-incompatible, use `impl B` to return an opaque type, as long as you return a single underlying type
-   |
-LL |     fn g(b: B) -> impl B;
-   |                   ++++
+ on line 12, column 18, add `impl `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/ice-unsized-fn-params.rs:6:13
-   |
-LL |     fn f(a: A) -> A;
-   |             ^
-   |
-   = note: `A` is dyn-incompatible, otherwise a trait object could be used
+error E0782: expected a type, found a trait
+ at $DIR/ice-unsized-fn-params.rs:6:13
+note: `A` is dyn-incompatible, otherwise a trait object could be used
 help: use a new generic type parameter, constrained by `A`
-   |
-LL -     fn f(a: A) -> A;
-LL +     fn f<T: A>(a: T) -> A;
-   |
+ on line 6, column 8, add `<T: A>`
 help: you can also use an opaque type, but users won't be able to specify the type parameter when calling the `fn`, having to rely exclusively on type inference
-   |
-LL |     fn f(a: impl A) -> A;
-   |             ++++
+ on line 6, column 12, add `impl `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/ice-unsized-fn-params.rs:6:19
-   |
-LL |     fn f(a: A) -> A;
-   |                   ^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/ice-unsized-fn-params.rs:6:19
 help: `A` is dyn-incompatible, use `impl A` to return an opaque type, as long as you return a single underlying type
-   |
-LL |     fn f(a: A) -> impl A;
-   |                   ++++
+ on line 6, column 18, add `impl `
 
 error: aborting due to 4 previous errors
 

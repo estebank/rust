@@ -1,35 +1,17 @@
-error[E0107]: missing generics for associated type `B::C`
-  --> $DIR/dropck-after-failed-type-lowering.rs:11:25
-   |
-LL |     h: Option<<G as B>::C>,
-   |                         ^ expected 1 lifetime argument
-   |
+error E0107: missing generics for associated type `B::C`
+ at $DIR/dropck-after-failed-type-lowering.rs:11:25: expected 1 lifetime argument
 note: associated type defined here, with 1 lifetime parameter: `'a`
-  --> $DIR/dropck-after-failed-type-lowering.rs:4:10
-   |
-LL |     type C<'a>;
-   |          ^ --
+ at $DIR/dropck-after-failed-type-lowering.rs:4:10
 help: add missing lifetime argument
-   |
-LL |     h: Option<<G as B>::C<'a>>,
-   |                          ++++
+ on line 11, column 25, add `<'a>`
 
-error[E0277]: the trait bound `G: B` is not satisfied
-  --> $DIR/dropck-after-failed-type-lowering.rs:11:8
-   |
-LL |     h: Option<<G as B>::C>,
-   |        ^^^^^^^^^^^^^^^^^^^ the trait `B` is not implemented for `G`
-   |
+error E0277: the trait bound `G: B` is not satisfied
+ at $DIR/dropck-after-failed-type-lowering.rs:11:8: the trait `B` is not implemented for `G`
 help: consider restricting type parameter `G` with trait `B`
-   |
-LL | struct F<G: B> {
-   |           +++
+ on line 10, column 10, add `: B`
 
-error[E0277]: the trait bound `E: B` is not satisfied
-  --> $DIR/dropck-after-failed-type-lowering.rs:5:18
-   |
-LL |     fn d<E>() -> F<E> {
-   |                  ^^^^ the trait `B` is not implemented for `E`
+error E0277: the trait bound `E: B` is not satisfied
+ at $DIR/dropck-after-failed-type-lowering.rs:5:18: the trait `B` is not implemented for `E`
 
 error: aborting due to 3 previous errors
 

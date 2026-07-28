@@ -1,15 +1,8 @@
 error: unreachable pattern
-  --> $DIR/unreachable-loop-patterns.rs:16:9
-   |
-LL |     for _ in unimplemented!() as Void {}
-   |         ^ matches no values because `Void` is uninhabited
-   |
-   = note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
+ at $DIR/unreachable-loop-patterns.rs:16:9: matches no values because `Void` is uninhabited
+note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
 note: the lint level is defined here
-  --> $DIR/unreachable-loop-patterns.rs:3:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/unreachable-loop-patterns.rs:3:9
 
 error: aborting due to 1 previous error
 

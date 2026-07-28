@@ -1,30 +1,14 @@
-error[E0184]: the trait `Copy` cannot be implemented for this type; the type has a destructor
-  --> $DIR/copy-drop-mutually-exclusive.rs:4:8
-   |
-LL | #[derive(Copy, Clone)]
-   |          ---- in this derive macro expansion
-LL | struct Foo;
-   |        ^^^ `Copy` not allowed on types with destructors
-   |
+error E0184: the trait `Copy` cannot be implemented for this type; the type has a destructor
+ at $DIR/copy-drop-mutually-exclusive.rs:4:8: `Copy` not allowed on types with destructors
+  on line 3, column 10: in this derive macro expansion
 note: destructor declared here
-  --> $DIR/copy-drop-mutually-exclusive.rs:7:5
-   |
-LL |     fn drop(&mut self) {}
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/copy-drop-mutually-exclusive.rs:7:5
 
-error[E0184]: the trait `Copy` cannot be implemented for this type; the type has a destructor
-  --> $DIR/copy-drop-mutually-exclusive.rs:11:8
-   |
-LL | #[derive(Copy, Clone)]
-   |          ---- in this derive macro expansion
-LL | struct Bar<T>(::std::marker::PhantomData<T>);
-   |        ^^^ `Copy` not allowed on types with destructors
-   |
+error E0184: the trait `Copy` cannot be implemented for this type; the type has a destructor
+ at $DIR/copy-drop-mutually-exclusive.rs:11:8: `Copy` not allowed on types with destructors
+  on line 10, column 10: in this derive macro expansion
 note: destructor declared here
-  --> $DIR/copy-drop-mutually-exclusive.rs:14:5
-   |
-LL |     fn drop(&mut self) {}
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/copy-drop-mutually-exclusive.rs:14:5
 
 error: aborting due to 2 previous errors
 

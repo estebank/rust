@@ -1,13 +1,7 @@
 error: expected one of `!`, `(`, `+`, `,`, `::`, `:`, `<`, `=`, or `>`, found `/`
-  --> $DIR/removed-syntax-closure-lifetime.rs:1:22
-   |
-LL | type closure = Box<lt/fn()>;
-   |                      ^ expected one of 9 possible tokens
-   |
+ at $DIR/removed-syntax-closure-lifetime.rs:1:22: expected one of 9 possible tokens
 help: you might have meant to end the type parameters here
-   |
-LL | type closure = Box<lt>/fn()>;
-   |                      +
+ on line 1, column 21, add `>`
 
 error: aborting due to 1 previous error
 

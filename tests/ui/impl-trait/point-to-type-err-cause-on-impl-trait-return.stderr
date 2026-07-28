@@ -1,320 +1,122 @@
-error[E0746]: return type cannot be a trait object without pointer indirection
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:66:13
-   |
-LL | fn hat() -> dyn std::fmt::Display {
-   |             ^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0746: return type cannot be a trait object without pointer indirection
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:66:13: doesn't have a size known at compile-time
 help: consider returning an `impl Trait` instead of a `dyn Trait`
-   |
-LL - fn hat() -> dyn std::fmt::Display {
-LL + fn hat() -> impl std::fmt::Display {
-   |
+ on line 66, column 12, replace with `impl `
 help: alternatively, box the return type, and wrap all of the returned values in `Box::new`
-   |
-LL ~ fn hat() -> Box<dyn std::fmt::Display> {
-LL |     match 13 {
-LL |         0 => {
-LL ~             return Box::new(0i32);
-LL |         }
-LL |         _ => {
-LL ~             Box::new(1u32)
-   |
+ on line 66, column 12, add `Box<`
 
-error[E0746]: return type cannot be a trait object without pointer indirection
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:77:13
-   |
-LL | fn pug() -> dyn std::fmt::Display {
-   |             ^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0746: return type cannot be a trait object without pointer indirection
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:77:13: doesn't have a size known at compile-time
 help: consider returning an `impl Trait` instead of a `dyn Trait`
-   |
-LL - fn pug() -> dyn std::fmt::Display {
-LL + fn pug() -> impl std::fmt::Display {
-   |
+ on line 77, column 12, replace with `impl `
 help: alternatively, box the return type, and wrap all of the returned values in `Box::new`
-   |
-LL ~ fn pug() -> Box<dyn std::fmt::Display> {
-LL |     match 13 {
-LL ~         0 => Box::new(0i32),
-LL ~         1 => Box::new(1u32),
-LL ~         _ => Box::new(2u32),
-   |
+ on line 77, column 12, add `Box<`
 
-error[E0746]: return type cannot be a trait object without pointer indirection
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:85:13
-   |
-LL | fn man() -> dyn std::fmt::Display {
-   |             ^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0746: return type cannot be a trait object without pointer indirection
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:85:13: doesn't have a size known at compile-time
 help: consider returning an `impl Trait` instead of a `dyn Trait`
-   |
-LL - fn man() -> dyn std::fmt::Display {
-LL + fn man() -> impl std::fmt::Display {
-   |
+ on line 85, column 12, replace with `impl `
 help: alternatively, box the return type, and wrap all of the returned values in `Box::new`
-   |
-LL ~ fn man() -> Box<dyn std::fmt::Display> {
-LL |     if false {
-LL ~         Box::new(0i32)
-LL |     } else {
-LL ~         Box::new(1u32)
-   |
+ on line 85, column 12, add `Box<`
 
-error[E0308]: mismatched types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:5:5
-   |
-LL | fn foo() -> impl std::fmt::Display {
-   |             ---------------------- expected a single type implementing `std::fmt::Display` because of return type
-LL |     if false {
-LL |         return 0i32;
-   |                ---- return type resolved to be `i32`
-LL |     }
-LL |     1u32
-   |     ^^^^ expected `i32`, found `u32`
-   |
+error E0308: mismatched types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:5:5: expected `i32`, found `u32`
+  on line 1, column 13: expected a single type implementing `std::fmt::Display` because of return type
+  on line 3, column 16: return type resolved to be `i32`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn foo() -> impl std::fmt::Display {
-LL + fn foo() -> Box<dyn std::fmt::Display> {
-   |
+ on line 1, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         return Box::new(0i32);
-LL |     }
-LL ~     Box::new(1u32)
-   |
+ on line 3, column 15, add `Box::new(`
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -     1u32
-LL +     1i32
-   |
+ on line 5, column 5, replace with `i32`
 
-error[E0308]: mismatched types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:12:16
-   |
-LL | fn bar() -> impl std::fmt::Display {
-   |             ---------------------- expected a single type implementing `std::fmt::Display` because of return type
-LL |     if false {
-LL |         return 0i32;
-   |                ---- return type resolved to be `i32`
-LL |     } else {
-LL |         return 1u32;
-   |                ^^^^ expected `i32`, found `u32`
-   |
+error E0308: mismatched types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:12:16: expected `i32`, found `u32`
+  on line 8, column 13: expected a single type implementing `std::fmt::Display` because of return type
+  on line 10, column 16: return type resolved to be `i32`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn bar() -> impl std::fmt::Display {
-LL + fn bar() -> Box<dyn std::fmt::Display> {
-   |
+ on line 8, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         return Box::new(0i32);
-LL |     } else {
-LL ~         return Box::new(1u32);
-   |
+ on line 10, column 15, add `Box::new(`
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -         return 1u32;
-LL +         return 1i32;
-   |
+ on line 12, column 16, replace with `i32`
 
-error[E0308]: mismatched types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:20:9
-   |
-LL | fn baz() -> impl std::fmt::Display {
-   |             ---------------------- expected a single type implementing `std::fmt::Display` because of return type
-LL |     if false {
-LL |         return 0i32;
-   |                ---- return type resolved to be `i32`
-LL |     } else {
-LL |         1u32
-   |         ^^^^ expected `i32`, found `u32`
-   |
+error E0308: mismatched types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:20:9: expected `i32`, found `u32`
+  on line 16, column 13: expected a single type implementing `std::fmt::Display` because of return type
+  on line 18, column 16: return type resolved to be `i32`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn baz() -> impl std::fmt::Display {
-LL + fn baz() -> Box<dyn std::fmt::Display> {
-   |
+ on line 16, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         return Box::new(0i32);
-LL |     } else {
-LL ~         Box::new(1u32)
-   |
+ on line 18, column 15, add `Box::new(`
 help: you can convert a `u32` to an `i32` and panic if the converted value doesn't fit
-   |
-LL |     }.try_into().unwrap()
-   |      ++++++++++++++++++++
+ on line 21, column 5, add `.try_into().unwrap()`
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:28:9
-   |
-LL | /     if false {
-LL | |         0i32
-   | |         ---- expected because of this
-LL | |     } else {
-LL | |         1u32
-   | |         ^^^^ expected `i32`, found `u32`
-LL | |     }
-   | |_____- `if` and `else` have incompatible types
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:28:9: expected `i32`, found `u32`
+  on line 25 to line 29: `if` and `else` have incompatible types
+  on line 26: expected because of this
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn qux() -> impl std::fmt::Display {
-LL + fn qux() -> Box<dyn std::fmt::Display> {
-   |
+ on line 24, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         Box::new(0i32)
-LL |     } else {
-LL ~         Box::new(1u32)
-   |
+ on line 26, column 8, add `Box::new(`
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -         1u32
-LL +         1i32
-   |
+ on line 28, column 9, replace with `i32`
 
-error[E0308]: mismatched types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:35:14
-   |
-LL | fn bat() -> impl std::fmt::Display {
-   |             ---------------------- expected a single type implementing `std::fmt::Display` because of return type
-LL |     match 13 {
-LL |         0 => return 0i32,
-   |                     ---- return type resolved to be `i32`
-LL |         _ => 1u32,
-   |              ^^^^ expected `i32`, found `u32`
-   |
+error E0308: mismatched types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:35:14: expected `i32`, found `u32`
+  on line 32, column 13: expected a single type implementing `std::fmt::Display` because of return type
+  on line 34, column 21: return type resolved to be `i32`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn bat() -> impl std::fmt::Display {
-LL + fn bat() -> Box<dyn std::fmt::Display> {
-   |
+ on line 32, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         0 => return Box::new(0i32),
-LL ~         _ => Box::new(1u32),
-   |
+ on line 34, column 20, add `Box::new(`
 help: you can convert a `u32` to an `i32` and panic if the converted value doesn't fit
-   |
-LL |     }.try_into().unwrap()
-   |      ++++++++++++++++++++
+ on line 36, column 5, add `.try_into().unwrap()`
 
-error[E0308]: mismatched types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:40:5
-   |
-LL |   fn can() -> impl std::fmt::Display {
-   |               ---------------------- expected a single type implementing `std::fmt::Display` because of return type
-LL | /     match 13 {
-LL | |         0 => return 0i32,
-   | |                     ---- return type resolved to be `i32`
-LL | |         1 => 1u32,
-LL | |         _ => 2u32,
-LL | |     }
-   | |_____^ expected `i32`, found `u32`
-   |
+error E0308: mismatched types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:40:5 to 44:6: expected `i32`, found `u32`
+  on line 39, column 13: expected a single type implementing `std::fmt::Display` because of return type
+  on line 41, column 21: return type resolved to be `i32`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn can() -> impl std::fmt::Display {
-LL + fn can() -> Box<dyn std::fmt::Display> {
-   |
+ on line 39, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         0 => return Box::new(0i32),
-LL ~         1 => Box::new(1u32),
-LL ~         _ => Box::new(2u32),
-   |
+ on line 41, column 20, add `Box::new(`
 help: you can convert a `u32` to an `i32` and panic if the converted value doesn't fit
-   |
-LL |     }.try_into().unwrap()
-   |      ++++++++++++++++++++
+ on line 44, column 5, add `.try_into().unwrap()`
 
-error[E0308]: mismatched types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:53:13
-   |
-LL | fn cat() -> impl std::fmt::Display {
-   |             ---------------------- expected a single type implementing `std::fmt::Display` because of return type
-...
-LL |             return 0i32;
-   |                    ---- return type resolved to be `i32`
-...
-LL |             1u32
-   |             ^^^^ expected `i32`, found `u32`
-   |
+error E0308: mismatched types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:53:13: expected `i32`, found `u32`
+  on line 47, column 13: expected a single type implementing `std::fmt::Display` because of return type
+  on line 50, column 20: return type resolved to be `i32`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn cat() -> impl std::fmt::Display {
-LL + fn cat() -> Box<dyn std::fmt::Display> {
-   |
+ on line 47, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~             return Box::new(0i32);
-LL |         }
-LL |         _ => {
-LL ~             Box::new(1u32)
-   |
+ on line 50, column 19, add `Box::new(`
 help: you can convert a `u32` to an `i32` and panic if the converted value doesn't fit
-   |
-LL |     }.try_into().unwrap()
-   |      ++++++++++++++++++++
+ on line 55, column 5, add `.try_into().unwrap()`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:61:14
-   |
-LL | /     match 13 {
-LL | |         0 => 0i32,
-   | |              ---- this is found to be of type `i32`
-LL | |         1 => 1u32,
-   | |              ^^^^ expected `i32`, found `u32`
-LL | |         _ => 2u32,
-LL | |     }
-   | |_____- `match` arms have incompatible types
-   |
+error E0308: `match` arms have incompatible types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:61:14: expected `i32`, found `u32`
+  on line 59 to line 63: `match` arms have incompatible types
+  on line 60, column 14: this is found to be of type `i32`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn dog() -> impl std::fmt::Display {
-LL + fn dog() -> Box<dyn std::fmt::Display> {
-   |
+ on line 58, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         0 => Box::new(0i32),
-LL ~         1 => Box::new(1u32),
-   |
+ on line 60, column 13, add `Box::new(`
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -         1 => 1u32,
-LL +         1 => 1i32,
-   |
+ on line 61, column 14, replace with `i32`
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/point-to-type-err-cause-on-impl-trait-return.rs:97:9
-   |
-LL | /     if let Some(42) = Some(42) {
-LL | |         0i32
-   | |         ---- expected because of this
-LL | |     } else {
-LL | |         1u32
-   | |         ^^^^ expected `i32`, found `u32`
-LL | |     }
-   | |_____- `if` and `else` have incompatible types
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/point-to-type-err-cause-on-impl-trait-return.rs:97:9: expected `i32`, found `u32`
+  on line 94 to line 98: `if` and `else` have incompatible types
+  on line 95: expected because of this
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn apt() -> impl std::fmt::Display {
-LL + fn apt() -> Box<dyn std::fmt::Display> {
-   |
+ on line 93, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         Box::new(0i32)
-LL |     } else {
-LL ~         Box::new(1u32)
-   |
+ on line 95, column 8, add `Box::new(`
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -         1u32
-LL +         1i32
-   |
+ on line 97, column 9, replace with `i32`
 
 error: aborting due to 12 previous errors
 

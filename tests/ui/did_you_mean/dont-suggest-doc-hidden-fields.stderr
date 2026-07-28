@@ -1,26 +1,14 @@
-error[E0609]: no field `hey` on type `A`
-  --> $DIR/dont-suggest-doc-hidden-fields.rs:22:18
-   |
-LL |     A::default().hey;
-   |                  ^^^ unknown field
-   |
-   = note: available fields are: `hello`, `bye`
+error E0609: no field `hey` on type `A`
+ at $DIR/dont-suggest-doc-hidden-fields.rs:22:18: unknown field
+note: available fields are: `hello`, `bye`
 
-error[E0609]: no field `hey` on type `B`
-  --> $DIR/dont-suggest-doc-hidden-fields.rs:29:37
-   |
-LL |     doc_hidden_fields::B::default().hey;
-   |                                     ^^^ unknown field
-   |
-   = note: available field is: `bye`
+error E0609: no field `hey` on type `B`
+ at $DIR/dont-suggest-doc-hidden-fields.rs:29:37: unknown field
+note: available field is: `bye`
 
-error[E0609]: no field `hey` on type `C`
-  --> $DIR/dont-suggest-doc-hidden-fields.rs:34:18
-   |
-LL |     C::default().hey;
-   |                  ^^^ unknown field
-   |
-   = note: available fields are: `hello`, `bye`
+error E0609: no field `hey` on type `C`
+ at $DIR/dont-suggest-doc-hidden-fields.rs:34:18: unknown field
+note: available fields are: `hello`, `bye`
 
 error: aborting due to 3 previous errors
 

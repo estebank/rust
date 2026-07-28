@@ -1,26 +1,13 @@
 error: allow(uncommon_codepoints) is ignored unless specified at crate level
-  --> $DIR/crate_level_only_lint.rs:4:10
-   |
-LL | #![allow(uncommon_codepoints)]
-   |          ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/crate_level_only_lint.rs:4:10
 note: the lint level is defined here
-  --> $DIR/crate_level_only_lint.rs:1:30
-   |
-LL | #![deny(uncommon_codepoints, unused_attributes)]
-   |                              ^^^^^^^^^^^^^^^^^
+ at $DIR/crate_level_only_lint.rs:1:30
 
 error: allow(uncommon_codepoints) is ignored unless specified at crate level
-  --> $DIR/crate_level_only_lint.rs:7:9
-   |
-LL | #[allow(uncommon_codepoints)]
-   |         ^^^^^^^^^^^^^^^^^^^
+ at $DIR/crate_level_only_lint.rs:7:9
 
 error: allow(uncommon_codepoints) is ignored unless specified at crate level
-  --> $DIR/crate_level_only_lint.rs:13:9
-   |
-LL | #[allow(uncommon_codepoints)]
-   |         ^^^^^^^^^^^^^^^^^^^
+ at $DIR/crate_level_only_lint.rs:13:9
 
 error: aborting due to 3 previous errors
 

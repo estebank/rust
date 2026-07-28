@@ -1,58 +1,26 @@
 error: `[const]` is not allowed here
-  --> $DIR/trait-where-clause.rs:7:24
-   |
-LL |     fn b() where Self: [const] Bar;
-   |                        ^^^^^^^
-   |
+ at $DIR/trait-where-clause.rs:7:24
 note: this function is not `const`, so it cannot have `[const]` trait bounds
-  --> $DIR/trait-where-clause.rs:7:8
-   |
-LL |     fn b() where Self: [const] Bar;
-   |        ^
+ at $DIR/trait-where-clause.rs:7:8
 
 error: `[const]` is not allowed here
-  --> $DIR/trait-where-clause.rs:9:13
-   |
-LL |     fn c<T: [const] Bar>();
-   |             ^^^^^^^
-   |
+ at $DIR/trait-where-clause.rs:9:13
 note: this function is not `const`, so it cannot have `[const]` trait bounds
-  --> $DIR/trait-where-clause.rs:9:8
-   |
-LL |     fn c<T: [const] Bar>();
-   |        ^
+ at $DIR/trait-where-clause.rs:9:8
 
-error[E0277]: the trait bound `T: Bar` is not satisfied
-  --> $DIR/trait-where-clause.rs:15:5
-   |
-LL |     T::b();
-   |     ^ the trait `Bar` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Bar` is not satisfied
+ at $DIR/trait-where-clause.rs:15:5: the trait `Bar` is not implemented for `T`
 note: required by a bound in `Foo::b`
-  --> $DIR/trait-where-clause.rs:7:24
-   |
-LL |     fn b() where Self: [const] Bar;
-   |                        ^^^^^^^^^^^ required by this bound in `Foo::b`
+ at $DIR/trait-where-clause.rs:7:24: required by this bound in `Foo::b`
 help: consider further restricting type parameter `T` with trait `Bar`
-   |
-LL | fn test1<T: Foo + Bar>() {
-   |                 +++++
+ on line 13, column 15, add ` + Bar`
 
-error[E0277]: the trait bound `T: Bar` is not satisfied
-  --> $DIR/trait-where-clause.rs:17:12
-   |
-LL |     T::c::<T>();
-   |            ^ the trait `Bar` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Bar` is not satisfied
+ at $DIR/trait-where-clause.rs:17:12: the trait `Bar` is not implemented for `T`
 note: required by a bound in `Foo::c`
-  --> $DIR/trait-where-clause.rs:9:13
-   |
-LL |     fn c<T: [const] Bar>();
-   |             ^^^^^^^^^^^ required by this bound in `Foo::c`
+ at $DIR/trait-where-clause.rs:9:13: required by this bound in `Foo::c`
 help: consider further restricting type parameter `T` with trait `Bar`
-   |
-LL | fn test1<T: Foo + Bar>() {
-   |                 +++++
+ on line 13, column 15, add ` + Bar`
 
 error: aborting due to 4 previous errors
 

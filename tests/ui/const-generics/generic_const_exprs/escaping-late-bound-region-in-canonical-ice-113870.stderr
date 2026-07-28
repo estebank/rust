@@ -1,50 +1,25 @@
-error[E0403]: the name `'b` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:6:20
-   |
-LL | const fn allow<'b, 'b>() -> usize
-   |                --  ^^ already used
-   |                |
-   |                first use of `'b`
+error E0403: the name `'b` is already used for a generic parameter in this item's generic parameters
+ at $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:6:20: already used
+  on line 6, column 16: first use of `'b`
 
-error[E0496]: lifetime name `'b` shadows a lifetime name that is already in scope
-  --> $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:9:9
-   |
-LL | const fn allow<'b, 'b>() -> usize
-   |                -- first declared here
-...
-LL |     for<'b> [u8; foo::<'a, 'b>()]: Sized,
-   |         ^^ lifetime `'b` already in scope
+error E0496: lifetime name `'b` shadows a lifetime name that is already in scope
+ at $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:9:9: lifetime `'b` already in scope
+  on line 6, column 16: first declared here
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:9:24
-   |
-LL |     for<'b> [u8; foo::<'a, 'b>()]: Sized,
-   |                        ^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:9:24: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the bound lifetime-generic with a new `'a` lifetime
-   |
-LL |     for<'a, 'b> [u8; foo::<'a, 'b>()]: Sized,
-   |         +++
+ on line 9, column 8, add `'a, `
 help: consider introducing lifetime `'a` here
-   |
-LL | const fn allow<'a, 'b, 'b>() -> usize
-   |                +++
+ on line 6, column 15, add `'a, `
 
-error[E0601]: `main` function not found in crate `escaping_late_bound_region_in_canonical_ice_113870`
-  --> $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:23:2
-   |
-LL | }
-   |  ^ consider adding a `main` function to `$DIR/escaping-late-bound-region-in-canonical-ice-113870.rs`
+error E0601: `main` function not found in crate `escaping_late_bound_region_in_canonical_ice_113870`
+ at $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:23:2: consider adding a `main` function to `$DIR/escaping-late-bound-region-in-canonical-ice-113870.rs`
 
 error: cannot capture late-bound lifetime in constant
-  --> $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:9:28
-   |
-LL | const fn allow<'b, 'b>() -> usize
-   |                -- lifetime defined here
-...
-LL |     for<'b> [u8; foo::<'a, 'b>()]: Sized,
-   |                            ^^
+ at $DIR/escaping-late-bound-region-in-canonical-ice-113870.rs:9:28
+  on line 6, column 16: lifetime defined here
 
 error: aborting due to 5 previous errors
 

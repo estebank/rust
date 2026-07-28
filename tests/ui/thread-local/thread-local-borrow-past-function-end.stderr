@@ -1,11 +1,6 @@
-error[E0712]: thread-local variable borrowed past end of function
-  --> $DIR/thread-local-borrow-past-function-end.rs:8:13
-   |
-LL |     let a = &FOO;
-   |             ^^^^ thread-local variables cannot be borrowed beyond the end of the function
-...
-LL | }
-   | - end of enclosing function is here
+error E0712: thread-local variable borrowed past end of function
+ at $DIR/thread-local-borrow-past-function-end.rs:8:13: thread-local variables cannot be borrowed beyond the end of the function
+  on line 15: end of enclosing function is here
 
 error: aborting due to 1 previous error
 

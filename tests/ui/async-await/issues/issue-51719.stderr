@@ -1,10 +1,6 @@
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/issue-51719.rs:8:25
-   |
-LL |     let _gen = || foo().await;
-   |                --       ^^^^^ only allowed inside `async` functions and blocks
-   |                |
-   |                this is not `async`
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/issue-51719.rs:8:25: only allowed inside `async` functions and blocks
+  on line 8, column 16: this is not `async`
 
 error: aborting due to 1 previous error
 

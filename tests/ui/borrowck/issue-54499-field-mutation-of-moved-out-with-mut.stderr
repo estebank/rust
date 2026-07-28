@@ -1,50 +1,23 @@
-error[E0382]: assign to part of moved value: `t`
-  --> $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:13:9
-   |
-LL |         let mut t: Tuple = (S(0), 0);
-   |             ----- move occurs because `t` has type `(S, i32)`, which does not implement the `Copy` trait
-LL |         drop(t);
-   |              - value moved here
-LL |         t.0 = S(1);
-   |         ^^^^^^^^^^ value partially assigned here after move
+error E0382: assign to part of moved value: `t`
+ at $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:13:9: value partially assigned here after move
+  on line 11, column 13: move occurs because `t` has type `(S, i32)`, which does not implement the `Copy` trait
+  on line 12, column 14: value moved here
 
-error[E0382]: assign to part of moved value: `u`
-  --> $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:22:9
-   |
-LL |         let mut u: Tpair = Tpair(S(0), 0);
-   |             ----- move occurs because `u` has type `Tpair`, which does not implement the `Copy` trait
-LL |         drop(u);
-   |              - value moved here
-LL |         u.0 = S(1);
-   |         ^^^^^^^^^^ value partially assigned here after move
-   |
+error E0382: assign to part of moved value: `u`
+ at $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:22:9: value partially assigned here after move
+  on line 20, column 13: move occurs because `u` has type `Tpair`, which does not implement the `Copy` trait
+  on line 21, column 14: value moved here
 note: if `Tpair` implemented `Clone`, you could clone the value
-  --> $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:6:1
-   |
-LL | struct Tpair(S, i32);
-   | ^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         drop(u);
-   |              - you could clone this value
+ at $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:6:1: consider implementing `Clone` for this type
+  on line 21, column 14: you could clone this value
 
-error[E0382]: assign to part of moved value: `v`
-  --> $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:31:9
-   |
-LL |         let mut v: Spair = Spair { x: S(0), y: 0 };
-   |             ----- move occurs because `v` has type `Spair`, which does not implement the `Copy` trait
-LL |         drop(v);
-   |              - value moved here
-LL |         v.x = S(1);
-   |         ^^^^^^^^^^ value partially assigned here after move
-   |
+error E0382: assign to part of moved value: `v`
+ at $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:31:9: value partially assigned here after move
+  on line 29, column 13: move occurs because `v` has type `Spair`, which does not implement the `Copy` trait
+  on line 30, column 14: value moved here
 note: if `Spair` implemented `Clone`, you could clone the value
-  --> $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:7:1
-   |
-LL | struct Spair { x: S, y: i32 }
-   | ^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         drop(v);
-   |              - you could clone this value
+ at $DIR/issue-54499-field-mutation-of-moved-out-with-mut.rs:7:1: consider implementing `Clone` for this type
+  on line 30, column 14: you could clone this value
 
 error: aborting due to 3 previous errors
 

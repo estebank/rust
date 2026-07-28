@@ -1,20 +1,11 @@
 error: Direct: pub(in crate::ty::print), Reexported: pub, Reachable: pub, ReachableThroughImplTrait: pub
-  --> $DIR/effective-visibilities-macro.rs:7:13
-   |
-LL |             pub macro with_no_queries() {}
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/effective-visibilities-macro.rs:7:13
 
 error: Direct: pub(self), Reexported: pub(self), Reachable: pub(self), ReachableThroughImplTrait: pub(self)
-  --> $DIR/effective-visibilities-macro.rs:17:5
-   |
-LL |     mod sty {
-   |     ^^^^^^^
+ at $DIR/effective-visibilities-macro.rs:17:5
 
 error: Direct: pub(in crate::ty), Reexported: pub(in crate::ty), Reachable: pub, ReachableThroughImplTrait: pub
-  --> $DIR/effective-visibilities-macro.rs:20:9
-   |
-LL |         pub type Placeholder = ();
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/effective-visibilities-macro.rs:20:9
 
 error: aborting due to 3 previous errors
 

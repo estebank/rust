@@ -1,11 +1,6 @@
-error[E0624]: associated function `foo` is private
-  --> $DIR/ufc-method-call.rs:27:27
-   |
-LL |         fn foo() {}
-   |         -------- private associated function defined here
-...
-LL |     test::Foo::<test::B>::foo();
-   |                           ^^^ private associated function
+error E0624: associated function `foo` is private
+ at $DIR/ufc-method-call.rs:27:27: private associated function
+  on line 20: private associated function defined here
 
 error: aborting due to 1 previous error
 

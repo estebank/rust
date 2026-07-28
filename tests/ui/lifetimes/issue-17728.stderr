@@ -1,36 +1,16 @@
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/issue-17728.rs:108:14
-   |
-LL | /     match to_parse {
-LL | |         "w" | "west" => RoomDirection::West,
-LL | |         "e" | "east" => RoomDirection::East,
-LL | |         "n" | "north" => RoomDirection::North,
-...  |
-LL | |         "down" => RoomDirection::Down,
-   | |                   ------------------- this and all prior arms are found to be of type `RoomDirection`
-LL | |         _ => None
-   | |              ^^^^ expected `RoomDirection`, found `Option<_>`
-LL | |     }
-   | |_____- `match` arms have incompatible types
-   |
-   = note: expected enum `RoomDirection`
-              found enum `Option<_>`
+error E0308: `match` arms have incompatible types
+ at $DIR/issue-17728.rs:108:14: expected `RoomDirection`, found `Option<_>`
+  on line 99 to line 109: `match` arms have incompatible types
+  on line 107, column 19: this and all prior arms are found to be of type `RoomDirection`
+note: expected enum `RoomDirection`
+         found enum `Option<_>`
 
 error: lifetime may not live long enough
-  --> $DIR/issue-17728.rs:15:28
-   |
-LL |     fn attemptTraverse(&self, room: &Room, directionStr: &str) -> Result<&Room, &str> {
-   |                        -            - let's call the lifetime of this reference `'1`
-   |                        |
-   |                        let's call the lifetime of this reference `'2`
-...
-LL |             Some(entry) => Ok(entry),
-   |                            ^^^^^^^^^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/issue-17728.rs:15:28: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 11, column 24: let's call the lifetime of this reference `'2`
+  on line 11, column 37: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter
-   |
-LL |     fn attemptTraverse<'a>(&self, room: &'a Room, directionStr: &str) -> Result<&'a Room, &'a str> {
-   |                       ++++               ++                                      ++        ++
+ on line 11, column 22, add `<'a>`
 
 error: aborting due to 2 previous errors
 

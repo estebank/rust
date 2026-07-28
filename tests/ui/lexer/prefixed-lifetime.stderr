@@ -1,14 +1,8 @@
 error: prefix `'foo` is unknown
-  --> $DIR/prefixed-lifetime.rs:7:4
-   |
-LL | w!('foo#lifetime);
-   |    ^^^^ unknown prefix
-   |
-   = note: prefixed identifiers and literals are reserved since Rust 2021
+ at $DIR/prefixed-lifetime.rs:7:4: unknown prefix
+note: prefixed identifiers and literals are reserved since Rust 2021
 help: consider inserting whitespace here
-   |
-LL | w!('foo #lifetime);
-   |        +
+ on line 7, column 7
 
 error: aborting due to 1 previous error
 

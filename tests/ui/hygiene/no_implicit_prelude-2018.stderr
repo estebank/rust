@@ -1,13 +1,7 @@
 error: cannot find macro `print` in this scope
-  --> $DIR/no_implicit_prelude-2018.rs:7:9
-   |
-LL |         print!();
-   |         ^^^^^
-   |
+ at $DIR/no_implicit_prelude-2018.rs:7:9
 help: consider importing this macro
-   |
-LL +     use std::print;
-   |
+ on line 5, column 4, add `use std::print;`
 
 error: aborting due to 1 previous error
 

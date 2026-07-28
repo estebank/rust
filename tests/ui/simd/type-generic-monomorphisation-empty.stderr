@@ -1,8 +1,5 @@
 error: the SIMD type `Simd<0>` has zero elements
-  --> $DIR/type-generic-monomorphisation-empty.rs:9:9
-   |
-LL |     let _empty = Simd::<0>([]);
-   |         ^^^^^^
+ at $DIR/type-generic-monomorphisation-empty.rs:9:9
 
 error: aborting due to 1 previous error
 

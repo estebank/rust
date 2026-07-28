@@ -1,19 +1,10 @@
-error[E0599]: no method named `homura` found for type `{integer}` in the current scope
-  --> $DIR/issue-29181.rs:6:7
-   |
-LL |     0.homura();
-   |       ^^^^^^ method not found in `{integer}`
+error E0599: no method named `homura` found for type `{integer}` in the current scope
+ at $DIR/issue-29181.rs:6:7: method not found in `{integer}`
 
-error[E0689]: can't call method `exp` on ambiguous numeric type `{float}`
-  --> $DIR/issue-29181.rs:8:30
-   |
-LL |     let _ = |x: f64| x * 2.0.exp();
-   |                              ^^^
-   |
+error E0689: can't call method `exp` on ambiguous numeric type `{float}`
+ at $DIR/issue-29181.rs:8:30
 help: you must specify a concrete type for this numeric value, like `f32`
-   |
-LL |     let _ = |x: f64| x * 2.0_f32.exp();
-   |                             ++++
+ on line 8, column 25, replace with `2.0_f32`
 
 error: aborting due to 2 previous errors
 

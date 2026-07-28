@@ -1,46 +1,22 @@
-error[E0597]: `c` does not live long enough
-  --> $DIR/fns.rs:23:29
-   |
-LL |     let c = 66;
-   |         - binding `c` declared here
-LL |     some_fn::<&'static u32>(&c);
-   |     ------------------------^^-
-   |     |                       |
-   |     |                       borrowed value does not live long enough
-   |     argument requires that `c` is borrowed for `'static`
-LL | }
-   | - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/fns.rs:23:29: borrowed value does not live long enough
+  on line 22, column 9: binding `c` declared here
+  on line 23: argument requires that `c` is borrowed for `'static`
+  on line 24: `c` dropped here while still borrowed
 
-error[E0597]: `c` does not live long enough
-  --> $DIR/fns.rs:28:24
-   |
-LL | fn annot_reference_named_lifetime<'a>(_d: &'a u32) {
-   |                                   -- lifetime `'a` defined here
-LL |     let c = 66;
-   |         - binding `c` declared here
-LL |     some_fn::<&'a u32>(&c);
-   |     -------------------^^-
-   |     |                  |
-   |     |                  borrowed value does not live long enough
-   |     argument requires that `c` is borrowed for `'a`
-LL | }
-   | - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/fns.rs:28:24: borrowed value does not live long enough
+  on line 26, column 35: lifetime `'a` defined here
+  on line 27, column 9: binding `c` declared here
+  on line 28: argument requires that `c` is borrowed for `'a`
+  on line 29: `c` dropped here while still borrowed
 
-error[E0597]: `c` does not live long enough
-  --> $DIR/fns.rs:38:28
-   |
-LL | fn annot_reference_named_lifetime_in_closure<'a>(_: &'a u32) {
-   |                                              -- lifetime `'a` defined here
-LL |     let _closure = || {
-LL |         let c = 66;
-   |             - binding `c` declared here
-LL |         some_fn::<&'a u32>(&c);
-   |         -------------------^^-
-   |         |                  |
-   |         |                  borrowed value does not live long enough
-   |         argument requires that `c` is borrowed for `'a`
-LL |     };
-   |     - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/fns.rs:38:28: borrowed value does not live long enough
+  on line 35, column 46: lifetime `'a` defined here
+  on line 37, column 13: binding `c` declared here
+  on line 38: argument requires that `c` is borrowed for `'a`
+  on line 39: `c` dropped here while still borrowed
 
 error: aborting due to 3 previous errors
 

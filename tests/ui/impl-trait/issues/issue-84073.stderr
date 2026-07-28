@@ -1,8 +1,5 @@
-error[E0275]: overflow assigning `_` to `Option<_>`
-  --> $DIR/issue-84073.rs:32:27
-   |
-LL |     Race::new(|race| race.when());
-   |                           ^^^^
+error E0275: overflow assigning `_` to `Option<_>`
+ at $DIR/issue-84073.rs:32:27
 
 error: aborting due to 1 previous error
 

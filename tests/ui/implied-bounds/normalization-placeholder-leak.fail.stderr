@@ -1,56 +1,26 @@
-error[E0477]: the type `&'lt u8` does not fulfill the required lifetime
-  --> $DIR/normalization-placeholder-leak.rs:31:5
-   |
-LL |     fn test_lifetime<'lt, T: Trait>(_: Foo<&'lt u8>) {}
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0477: the type `&'lt u8` does not fulfill the required lifetime
+ at $DIR/normalization-placeholder-leak.rs:31:5
 
-error[E0477]: the type `&'lt u8` does not fulfill the required lifetime
-  --> $DIR/normalization-placeholder-leak.rs:31:40
-   |
-LL |     fn test_lifetime<'lt, T: Trait>(_: Foo<&'lt u8>) {}
-   |                                        ^^^^^^^^^^^^
+error E0477: the type `&'lt u8` does not fulfill the required lifetime
+ at $DIR/normalization-placeholder-leak.rs:31:40
 
-error[E0477]: the type `<T as AnotherTrait>::Ty2<'lt>` does not fulfill the required lifetime
-  --> $DIR/normalization-placeholder-leak.rs:38:5
-   |
-LL |     fn test_alias<'lt, T: AnotherTrait>(_: Foo<T::Ty2::<'lt>>) {}
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0477: the type `<T as AnotherTrait>::Ty2<'lt>` does not fulfill the required lifetime
+ at $DIR/normalization-placeholder-leak.rs:38:5
 
-error[E0477]: the type `<T as AnotherTrait>::Ty2<'lt>` does not fulfill the required lifetime
-  --> $DIR/normalization-placeholder-leak.rs:38:44
-   |
-LL |     fn test_alias<'lt, T: AnotherTrait>(_: Foo<T::Ty2::<'lt>>) {}
-   |                                            ^^^^^^^^^^^^^^^^^^
+error E0477: the type `<T as AnotherTrait>::Ty2<'lt>` does not fulfill the required lifetime
+ at $DIR/normalization-placeholder-leak.rs:38:44
 
 error: lifetime may not live long enough
-  --> $DIR/normalization-placeholder-leak.rs:31:5
-   |
-LL |     fn test_lifetime<'lt, T: Trait>(_: Foo<&'lt u8>) {}
-   |     ^^^^^^^^^^^^^^^^^---^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |                |
-   |     |                lifetime `'lt` defined here
-   |     requires that `'lt` must outlive `'static`
-   |
+ at $DIR/normalization-placeholder-leak.rs:31:5: requires that `'lt` must outlive `'static`
+  on line 31, column 22: lifetime `'lt` defined here
 note: due to a current limitation of the type system, this implies a `'static` lifetime
-  --> $DIR/normalization-placeholder-leak.rs:19:5
-   |
-LL |     for<'x> T::Ty<'x>: Sized;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/normalization-placeholder-leak.rs:19:5
 
 error: lifetime may not live long enough
-  --> $DIR/normalization-placeholder-leak.rs:38:5
-   |
-LL |     fn test_alias<'lt, T: AnotherTrait>(_: Foo<T::Ty2::<'lt>>) {}
-   |     ^^^^^^^^^^^^^^---^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |             |
-   |     |             lifetime `'lt` defined here
-   |     requires that `'lt` must outlive `'static`
-   |
+ at $DIR/normalization-placeholder-leak.rs:38:5: requires that `'lt` must outlive `'static`
+  on line 38, column 19: lifetime `'lt` defined here
 note: due to a current limitation of the type system, this implies a `'static` lifetime
-  --> $DIR/normalization-placeholder-leak.rs:19:5
-   |
-LL |     for<'x> T::Ty<'x>: Sized;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/normalization-placeholder-leak.rs:19:5
 
 error: aborting due to 6 previous errors
 

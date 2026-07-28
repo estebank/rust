@@ -1,11 +1,6 @@
 error: cannot use unions in constant patterns
-  --> $DIR/union-const-pat.rs:10:9
-   |
-LL | const C: U = U { a: 10 };
-   | ---------- constant defined here
-...
-LL |         C => {}
-   |         ^ can't use a `union` here
+ at $DIR/union-const-pat.rs:10:9: can't use a `union` here
+  on line 6: constant defined here
 
 error: aborting due to 1 previous error
 

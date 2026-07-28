@@ -1,17 +1,9 @@
-error[E0626]: borrow may still be in use when coroutine yields
-  --> $DIR/pattern-borrow.rs:9:24
-   |
-LL |     #[coroutine] move || {
-   |                  ------- within this coroutine
-LL |         if let Test::A(ref _a) = test {
-   |                        ^^^^^^
-LL |             yield ();
-   |             -------- possible yield occurs here
-   |
+error E0626: borrow may still be in use when coroutine yields
+ at $DIR/pattern-borrow.rs:9:24
+  on line 8, column 18: within this coroutine
+  on line 10: possible yield occurs here
 help: add `static` to mark this coroutine as unmovable
-   |
-LL |     #[coroutine] static move || {
-   |                  ++++++
+ on line 8, column 17, add `static `
 
 error: aborting due to 1 previous error
 

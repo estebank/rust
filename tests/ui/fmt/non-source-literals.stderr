@@ -1,54 +1,26 @@
-error[E0277]: `NonDisplay` doesn't implement `std::fmt::Display`
-  --> $DIR/non-source-literals.rs:9:40
-   |
-LL |     let _ = format!(concat!("{", "}"), NonDisplay);
-   |                                        ^^^^^^^^^^ `NonDisplay` cannot be formatted with the default formatter
-   |
+error E0277: `NonDisplay` doesn't implement `std::fmt::Display`
+ at $DIR/non-source-literals.rs:9:40: `NonDisplay` cannot be formatted with the default formatter
 help: the trait `std::fmt::Display` is not implemented for `NonDisplay`
-  --> $DIR/non-source-literals.rs:5:1
-   |
-LL | pub struct NonDisplay;
-   | ^^^^^^^^^^^^^^^^^^^^^
-   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+ at $DIR/non-source-literals.rs:5:1
+note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
 
-error[E0277]: `NonDisplay` doesn't implement `std::fmt::Display`
-  --> $DIR/non-source-literals.rs:10:45
-   |
-LL |     let _ = format!(concat!("{", "0", "}"), NonDisplay);
-   |                                             ^^^^^^^^^^ `NonDisplay` cannot be formatted with the default formatter
-   |
+error E0277: `NonDisplay` doesn't implement `std::fmt::Display`
+ at $DIR/non-source-literals.rs:10:45: `NonDisplay` cannot be formatted with the default formatter
 help: the trait `std::fmt::Display` is not implemented for `NonDisplay`
-  --> $DIR/non-source-literals.rs:5:1
-   |
-LL | pub struct NonDisplay;
-   | ^^^^^^^^^^^^^^^^^^^^^
-   = note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
+ at $DIR/non-source-literals.rs:5:1
+note: in format strings you may be able to use `{:?}` (or {:#?} for pretty-print) instead
 
-error[E0277]: `NonDebug` doesn't implement `Debug`
-  --> $DIR/non-source-literals.rs:11:42
-   |
-LL |     let _ = format!(concat!("{:", "?}"), NonDebug);
-   |                                          ^^^^^^^^ `NonDebug` cannot be formatted using `{:?}` because it doesn't implement `Debug`
-   |
-   = help: the trait `Debug` is not implemented for `NonDebug`
+error E0277: `NonDebug` doesn't implement `Debug`
+ at $DIR/non-source-literals.rs:11:42: `NonDebug` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+help: the trait `Debug` is not implemented for `NonDebug`
 help: consider annotating `NonDebug` with `#[derive(Debug)]`
-   |
-LL + #[derive(Debug)]
-LL | pub struct NonDebug;
-   |
+ on line 6, column 1, add `#[derive(Debug)]`
 
-error[E0277]: `NonDebug` doesn't implement `Debug`
-  --> $DIR/non-source-literals.rs:12:47
-   |
-LL |     let _ = format!(concat!("{", "0", ":?}"), NonDebug);
-   |                                               ^^^^^^^^ `NonDebug` cannot be formatted using `{:?}` because it doesn't implement `Debug`
-   |
-   = help: the trait `Debug` is not implemented for `NonDebug`
+error E0277: `NonDebug` doesn't implement `Debug`
+ at $DIR/non-source-literals.rs:12:47: `NonDebug` cannot be formatted using `{:?}` because it doesn't implement `Debug`
+help: the trait `Debug` is not implemented for `NonDebug`
 help: consider annotating `NonDebug` with `#[derive(Debug)]`
-   |
-LL + #[derive(Debug)]
-LL | pub struct NonDebug;
-   |
+ on line 6, column 1, add `#[derive(Debug)]`
 
 error: aborting due to 4 previous errors
 

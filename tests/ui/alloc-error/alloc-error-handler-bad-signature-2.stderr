@@ -1,47 +1,21 @@
-error[E0308]: mismatched types
-  --> $DIR/alloc-error-handler-bad-signature-2.rs:10:1
-   |
-LL |    #[alloc_error_handler]
-   |    ---------------------- in this attribute macro expansion
-LL | // fn oom(
-LL | ||     info: Layout,
-LL | || ) {
-   | ||_- arguments to this function are incorrect
-LL | |      loop {}
-LL | |  }
-   | |__^ expected `Layout`, found `core::alloc::Layout`
-   |
-   = note: `core::alloc::Layout` and `Layout` have similar names, but are actually distinct types
+error E0308: mismatched types
+ at $DIR/alloc-error-handler-bad-signature-2.rs:10:1 to 14:2: expected `Layout`, found `core::alloc::Layout`
+  on line 9: in this attribute macro expansion
+  on line 10 to line 12, column 2: arguments to this function are incorrect
+note: `core::alloc::Layout` and `Layout` have similar names, but are actually distinct types
 note: `core::alloc::Layout` is defined in crate `core`
-  --> $SRC_DIR/core/src/alloc/layout.rs:LL:COL
+ at $SRC_DIR/core/src/alloc/layout.rs:LL:COL
 note: `Layout` is defined in the current crate
-  --> $DIR/alloc-error-handler-bad-signature-2.rs:7:1
-   |
-LL | struct Layout;
-   | ^^^^^^^^^^^^^
+ at $DIR/alloc-error-handler-bad-signature-2.rs:7:1
 note: function defined here
-  --> $DIR/alloc-error-handler-bad-signature-2.rs:10:4
-   |
-LL | fn oom(
-   |    ^^^
-LL |     info: Layout,
-   |     ------------
+ at $DIR/alloc-error-handler-bad-signature-2.rs:10:4
 
-error[E0308]: mismatched types
-  --> $DIR/alloc-error-handler-bad-signature-2.rs:10:1
-   |
-LL |    #[alloc_error_handler]
-   |    ---------------------- in this attribute macro expansion
-LL | // fn oom(
-LL | ||     info: Layout,
-LL | || ) {
-   | ||_^ expected `!`, found `()`
-LL | |      loop {}
-LL | |  }
-   | |__- expected `!` because of return type
-   |
-   = note:   expected type `!`
-           found unit type `()`
+error E0308: mismatched types
+ at $DIR/alloc-error-handler-bad-signature-2.rs:10:1 to 12:2: expected `!`, found `()`
+  on line 9: in this attribute macro expansion
+  on line 10 to line 14: expected `!` because of return type
+note:   expected type `!`
+      found unit type `()`
 
 error: aborting due to 2 previous errors
 

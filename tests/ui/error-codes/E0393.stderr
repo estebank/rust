@@ -1,17 +1,9 @@
-error[E0393]: the type parameter `T` must be explicitly specified
-  --> $DIR/E0393.rs:3:47
-   |
-LL | trait A<T=Self> {}
-   | --------------- type parameter `T` must be specified for this
-LL |
-LL | fn together_we_will_rule_the_galaxy(son: &dyn A) {}
-   |                                               ^
-   |
-   = note: because the parameter default references `Self`, the parameter must be specified on the trait object type
+error E0393: the type parameter `T` must be explicitly specified
+ at $DIR/E0393.rs:3:47
+  on line 1: type parameter `T` must be specified for this
+note: because the parameter default references `Self`, the parameter must be specified on the trait object type
 help: explicitly specify the type parameter
-   |
-LL | fn together_we_will_rule_the_galaxy(son: &dyn A</* T */>) {}
-   |                                                +++++++++
+ on line 3, column 47, add `</* T */>`
 
 error: aborting due to 1 previous error
 

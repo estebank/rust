@@ -1,13 +1,7 @@
 error: expected one of `+`, `,`, `::`, `=`, or `>`, found `(`
-  --> $DIR/missing-closing-generics-bracket.rs:7:25
-   |
-LL | fn foo<T: Trait<'static>() {}
-   |                         ^ expected one of `+`, `,`, `::`, `=`, or `>`
-   |
+ at $DIR/missing-closing-generics-bracket.rs:7:25: expected one of `+`, `,`, `::`, `=`, or `>`
 help: you might have meant to end the type parameters here
-   |
-LL | fn foo<T: Trait<'static>>() {}
-   |                         +
+ on line 7, column 24, add `>`
 
 error: aborting due to 1 previous error
 

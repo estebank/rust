@@ -1,41 +1,20 @@
-error[E0308]: mismatched types
-  --> $DIR/numeric-cast-2.rs:5:18
-   |
-LL |     let x: u16 = foo();
-   |            ---   ^^^^^ expected `u16`, found `i32`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/numeric-cast-2.rs:5:18: expected `u16`, found `i32`
+  on line 5, column 12: expected due to this
 help: you can convert an `i32` to a `u16` and panic if the converted value doesn't fit
-   |
-LL |     let x: u16 = foo().try_into().unwrap();
-   |                       ++++++++++++++++++++
+ on line 5, column 22, add `.try_into().unwrap()`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-cast-2.rs:7:18
-   |
-LL |     let y: i64 = x + x;
-   |            ---   ^^^^^ expected `i64`, found `u16`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/numeric-cast-2.rs:7:18: expected `i64`, found `u16`
+  on line 7, column 12: expected due to this
 help: you can convert a `u16` to an `i64`
-   |
-LL |     let y: i64 = (x + x).into();
-   |                  +     ++++++++
+ on line 7, column 17, add `(`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-cast-2.rs:9:18
-   |
-LL |     let z: i32 = x + x;
-   |            ---   ^^^^^ expected `i32`, found `u16`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/numeric-cast-2.rs:9:18: expected `i32`, found `u16`
+  on line 9, column 12: expected due to this
 help: you can convert a `u16` to an `i32`
-   |
-LL |     let z: i32 = (x + x).into();
-   |                  +     ++++++++
+ on line 9, column 17, add `(`
 
 error: aborting due to 3 previous errors
 

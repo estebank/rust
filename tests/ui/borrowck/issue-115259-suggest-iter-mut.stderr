@@ -1,13 +1,7 @@
-error[E0596]: cannot borrow `**layer` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-115259-suggest-iter-mut.rs:15:65
-   |
-LL |         self.layers.iter().fold(0, |result, mut layer| result + layer.process())
-   |                                                                 ^^^^^ `layer` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `**layer` as mutable, as it is behind a `&` reference
+ at $DIR/issue-115259-suggest-iter-mut.rs:15:65: `layer` is a `&` reference, so it cannot be borrowed as mutable
 help: you may want to use `iter_mut` here
-   |
-LL |         self.layers.iter_mut().fold(0, |result, mut layer| result + layer.process())
-   |                         ++++
+ on line 15, column 20, replace with `iter_mut`
 
 error: aborting due to 1 previous error
 

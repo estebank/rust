@@ -1,90 +1,46 @@
 error: the `splat` attribute cannot be used on functions
-  --> $DIR/splat-non-fn-arg.rs:6:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:6:3
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on traits
-  --> $DIR/splat-non-fn-arg.rs:9:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:9:3
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on inherent impl blocks
-  --> $DIR/splat-non-fn-arg.rs:18:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:18:3
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on inherent methods
-  --> $DIR/splat-non-fn-arg.rs:24:7
-   |
-LL |     #[splat]
-   |       ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:24:7
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on inherent methods
-  --> $DIR/splat-non-fn-arg.rs:27:7
-   |
-LL |     #[splat]
-   |       ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:27:7
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on trait impl blocks
-  --> $DIR/splat-non-fn-arg.rs:33:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:33:3
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on foreign modules
-  --> $DIR/splat-non-fn-arg.rs:40:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:40:3
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on foreign functions
-  --> $DIR/splat-non-fn-arg.rs:46:7
-   |
-LL |     #[splat]
-   |       ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:46:7
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on modules
-  --> $DIR/splat-non-fn-arg.rs:50:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:50:3
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on use statements
-  --> $DIR/splat-non-fn-arg.rs:53:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:53:3
+help: the `splat` attribute can only be applied to function params
 
 error: the `splat` attribute cannot be used on structs
-  --> $DIR/splat-non-fn-arg.rs:56:3
-   |
-LL | #[splat]
-   |   ^^^^^
-   |
-   = help: the `splat` attribute can only be applied to function params
+ at $DIR/splat-non-fn-arg.rs:56:3
+help: the `splat` attribute can only be applied to function params
 
 error: aborting due to 11 previous errors
 

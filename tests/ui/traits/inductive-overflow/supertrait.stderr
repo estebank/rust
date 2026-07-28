@@ -1,21 +1,10 @@
-error[E0275]: overflow evaluating the requirement `NoClone: Magic`
-  --> $DIR/supertrait.rs:13:18
-   |
-LL |     let (a, b) = copy(NoClone);
-   |                  ^^^^^^^^^^^^^
-   |
+error E0275: overflow evaluating the requirement `NoClone: Magic`
+ at $DIR/supertrait.rs:13:18
 note: required for `NoClone` to implement `Magic`
-  --> $DIR/supertrait.rs:5:16
-   |
-LL | impl<T: Magic> Magic for T {}
-   |         -----  ^^^^^     ^
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/supertrait.rs:5:16
+  on line 5, column 9: unsatisfied trait bound introduced here
 note: required by a bound in `copy`
-  --> $DIR/supertrait.rs:7:12
-   |
-LL | fn copy<T: Magic>(x: T) -> (T, T) { (x, x) }
-   |            ^^^^^ required by this bound in `copy`
+ at $DIR/supertrait.rs:7:12: required by this bound in `copy`
 
 error: aborting due to 1 previous error
 

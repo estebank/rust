@@ -1,48 +1,22 @@
-error[E0107]: missing generics for trait `IntoCow`
-  --> $DIR/ufcs-qpath-missing-params.rs:14:16
-   |
-LL |     <String as IntoCow>::into_cow("foo".to_string());
-   |                ^^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for trait `IntoCow`
+ at $DIR/ufcs-qpath-missing-params.rs:14:16: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `B`
-  --> $DIR/ufcs-qpath-missing-params.rs:3:11
-   |
-LL | pub trait IntoCow<'a, B: ?Sized> where B: ToOwned {
-   |           ^^^^^^^     -
+ at $DIR/ufcs-qpath-missing-params.rs:3:11
 help: add missing generic argument
-   |
-LL |     <String as IntoCow<B>>::into_cow("foo".to_string());
-   |                       +++
+ on line 14, column 22, add `<B>`
 
-error[E0107]: missing generics for trait `IntoCow`
-  --> $DIR/ufcs-qpath-missing-params.rs:17:16
-   |
-LL |     <String as IntoCow>::into_cow::<str>("foo".to_string());
-   |                ^^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for trait `IntoCow`
+ at $DIR/ufcs-qpath-missing-params.rs:17:16: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `B`
-  --> $DIR/ufcs-qpath-missing-params.rs:3:11
-   |
-LL | pub trait IntoCow<'a, B: ?Sized> where B: ToOwned {
-   |           ^^^^^^^     -
+ at $DIR/ufcs-qpath-missing-params.rs:3:11
 help: add missing generic argument
-   |
-LL |     <String as IntoCow<B>>::into_cow::<str>("foo".to_string());
-   |                       +++
+ on line 17, column 22, add `<B>`
 
-error[E0107]: method takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/ufcs-qpath-missing-params.rs:17:26
-   |
-LL |     <String as IntoCow>::into_cow::<str>("foo".to_string());
-   |                          ^^^^^^^^------- help: remove the unnecessary generics
-   |                          |
-   |                          expected 0 generic arguments
-   |
+error E0107: method takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/ufcs-qpath-missing-params.rs:17:26: expected 0 generic arguments
+  on line 17, column 34: help: remove the unnecessary generics
 note: method defined here, with 0 generic parameters
-  --> $DIR/ufcs-qpath-missing-params.rs:4:8
-   |
-LL |     fn into_cow(self) -> Cow<'a, B>;
-   |        ^^^^^^^^
+ at $DIR/ufcs-qpath-missing-params.rs:4:8
 
 error: aborting due to 3 previous errors
 

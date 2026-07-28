@@ -1,13 +1,7 @@
 error: path separator must be a double colon
-  --> $DIR/type-ascription-instead-of-method.rs:3:16
-   |
-LL |     let _ = Box:new("foo".to_string());
-   |                ^
-   |
+ at $DIR/type-ascription-instead-of-method.rs:3:16
 help: use a double colon instead
-   |
-LL |     let _ = Box::new("foo".to_string());
-   |                 +
+ on line 3, column 16, add `:`
 
 error: aborting due to 1 previous error
 

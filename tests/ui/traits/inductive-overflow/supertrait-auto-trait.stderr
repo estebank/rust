@@ -1,10 +1,6 @@
-error[E0568]: auto traits cannot have super traits or lifetime bounds
-  --> $DIR/supertrait-auto-trait.rs:8:19
-   |
-LL | auto trait Magic: Copy {}
-   |            -----  ^^^^
-   |            |
-   |            auto traits cannot have super traits or lifetime bounds
+error E0568: auto traits cannot have super traits or lifetime bounds
+ at $DIR/supertrait-auto-trait.rs:8:19
+  on line 8, column 12: auto traits cannot have super traits or lifetime bounds
 
 error: aborting due to 1 previous error
 

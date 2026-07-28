@@ -1,25 +1,13 @@
-error[E0428]: the name `A` is defined multiple times
-  --> $DIR/eii-declaration-not-fn-issue-152337.rs:8:1
-   |
-LL | const A: () = ();
-   | ----------------- previous definition of the value `A` here
-LL | #[eii]
-LL | fn A() {}
-   | ^^^^^^ `A` redefined here
-   |
-   = note: `A` must be defined only once in the value namespace of this module
+error E0428: the name `A` is defined multiple times
+ at $DIR/eii-declaration-not-fn-issue-152337.rs:8:1: `A` redefined here
+  on line 6: previous definition of the value `A` here
+note: `A` must be defined only once in the value namespace of this module
 
-error[E0423]: expected function or static, found constant `self::A`
-  --> $DIR/eii-declaration-not-fn-issue-152337.rs:8:4
-   |
-LL | fn A() {}
-   |    ^ not a function or static
+error E0423: expected function or static, found constant `self::A`
+ at $DIR/eii-declaration-not-fn-issue-152337.rs:8:4: not a function or static
 
-error[E0423]: expected function or static, found constant `A`
-  --> $DIR/eii-declaration-not-fn-issue-152337.rs:8:4
-   |
-LL | fn A() {}
-   |    ^ not a function or static
+error E0423: expected function or static, found constant `A`
+ at $DIR/eii-declaration-not-fn-issue-152337.rs:8:4: not a function or static
 
 error: aborting due to 3 previous errors
 

@@ -1,24 +1,12 @@
-error[E0594]: cannot assign to `*y`, as `y` is not declared as mutable
-  --> $DIR/immut-function-arguments.rs:2:5
-   |
-LL |     *y = 5;
-   |     ^^^^^^ cannot assign
-   |
+error E0594: cannot assign to `*y`, as `y` is not declared as mutable
+ at $DIR/immut-function-arguments.rs:2:5: cannot assign
 help: consider changing this to be mutable
-   |
-LL | fn f(mut y: Box<isize>) {
-   |      +++
+ on line 1, column 5, add `mut `
 
-error[E0594]: cannot assign to `*q`, as `q` is not declared as mutable
-  --> $DIR/immut-function-arguments.rs:6:35
-   |
-LL |     let _frob = |q: Box<isize>| { *q = 2; };
-   |                                   ^^^^^^ cannot assign
-   |
+error E0594: cannot assign to `*q`, as `q` is not declared as mutable
+ at $DIR/immut-function-arguments.rs:6:35: cannot assign
 help: consider changing this to be mutable
-   |
-LL |     let _frob = |mut q: Box<isize>| { *q = 2; };
-   |                  +++
+ on line 6, column 17, add `mut `
 
 error: aborting due to 2 previous errors
 

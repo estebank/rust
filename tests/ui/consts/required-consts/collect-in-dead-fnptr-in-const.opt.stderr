@@ -1,17 +1,11 @@
-error[E0080]: evaluation panicked: explicit panic
-  --> $DIR/collect-in-dead-fnptr-in-const.rs:9:22
-   |
-LL |     const FAIL: () = panic!();
-   |                      ^^^^^^^^ evaluation of `Late::<i32>::FAIL` failed here
+error E0080: evaluation panicked: explicit panic
+ at $DIR/collect-in-dead-fnptr-in-const.rs:9:22: evaluation of `Late::<i32>::FAIL` failed here
 
 note: erroneous constant encountered
-  --> $DIR/collect-in-dead-fnptr-in-const.rs:10:28
-   |
-LL |     const FNPTR: fn() = || Self::FAIL;
-   |                            ^^^^^^^^^^
+ at $DIR/collect-in-dead-fnptr-in-const.rs:10:28
 
 note: the above error was encountered while instantiating `fn Late::<i32>::FNPTR::{closure#0}`
-  --> $SRC_DIR/core/src/ops/function.rs:LL:COL
+ at $SRC_DIR/core/src/ops/function.rs:LL:COL
 
 error: aborting due to 1 previous error
 

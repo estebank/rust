@@ -1,96 +1,49 @@
 error: argument never used
-  --> $DIR/missing-format-specifiers-issue-68293.rs:2:23
-   |
-LL |     println!("Hello", "World");
-   |              -------  ^^^^^^^ argument never used
-   |              |
-   |              formatting specifier missing
-   |
+ at $DIR/missing-format-specifiers-issue-68293.rs:2:23: argument never used
+  on line 2, column 14: formatting specifier missing
 help: format specifiers use curly braces, consider adding a format specifier
-   |
-LL |     println!("Hello{}", "World");
-   |                    ++
+ on line 2, column 13, replace with `"Hello{}"`
 
 error: multiple unused formatting arguments
-  --> $DIR/missing-format-specifiers-issue-68293.rs:10:24
-   |
-LL |     println!("list: ", 1, 2, 3);
-   |              --------  ^  ^  ^ argument never used
-   |              |         |  |
-   |              |         |  argument never used
-   |              |         argument never used
-   |              multiple missing formatting specifiers
-   |
+ at $DIR/missing-format-specifiers-issue-68293.rs:10:24: argument never used
+  on line 10, column 27: argument never used
+  on line 10, column 30: argument never used
+  on line 10, column 14: multiple missing formatting specifiers
 help: format specifiers use curly braces, consider adding 3 format specifiers
-   |
-LL |     println!("list: {}{}{}", 1, 2, 3);
-   |                     ++++++
+ on line 10, column 13, replace with `"list: {}{}{}"`
 
 error: argument never used
-  --> $DIR/missing-format-specifiers-issue-68293.rs:20:36
-   |
-LL |     println!("list: {}, {}", 1, 2, 3);
-   |              --------------        ^ argument never used
-   |              |
-   |              formatting specifier missing
+ at $DIR/missing-format-specifiers-issue-68293.rs:20:36: argument never used
+  on line 20, column 14: formatting specifier missing
 
 error: multiple unused formatting arguments
-  --> $DIR/missing-format-specifiers-issue-68293.rs:27:29
-   |
-LL |     println!("list: {}", 1, 2, 3);
-   |              ----------     ^  ^ argument never used
-   |              |              |
-   |              |              argument never used
-   |              multiple missing formatting specifiers
-   |
-   = note: consider adding 2 format specifiers
+ at $DIR/missing-format-specifiers-issue-68293.rs:27:29: argument never used
+  on line 27, column 32: argument never used
+  on line 27, column 14: multiple missing formatting specifiers
+note: consider adding 2 format specifiers
 
 error: multiple unused formatting arguments
-  --> $DIR/missing-format-specifiers-issue-68293.rs:36:17
-   |
-LL |     panic!("👆", "👆", 1);
-   |            ----  ^^^^  ^ argument never used
-   |            |     |
-   |            |     argument never used
-   |            multiple missing formatting specifiers
-   |
+ at $DIR/missing-format-specifiers-issue-68293.rs:36:17: argument never used
+  on line 36, column 22: argument never used
+  on line 36, column 12: multiple missing formatting specifiers
 help: format specifiers use curly braces, consider adding 2 format specifiers
-   |
-LL |     panic!("👆{}{}", "👆", 1);
-   |               ++++
+ on line 36, column 11, replace with `"👆{}{}"`
 
 error: multiple unused formatting arguments
-  --> $DIR/missing-format-specifiers-issue-68293.rs:45:35
-   |
-LL |     format_args!(r##"lJ𐏿Æ�.𐏿�"##, r#"r}J𐏿Æ" {}"#, 1);
-   |                  ---------------  ^^^^^^^^^^^^^^  ^ argument never used
-   |                  |                |
-   |                  |                argument never used
-   |                  multiple missing formatting specifiers
-   |
+ at $DIR/missing-format-specifiers-issue-68293.rs:45:35: argument never used
+  on line 45, column 51: argument never used
+  on line 45, column 18: multiple missing formatting specifiers
 help: format specifiers use curly braces, consider adding 2 format specifiers
-   |
-LL |     format_args!(r##"lJ𐏿Æ�.𐏿�{}{}"##, r#"r}J𐏿Æ" {}"#, 1);
-   |                              ++++
+ on line 45, column 17, replace with `r##"lJ𐏿Æ�.𐏿�{}{}"##`
 
 error: multiple unused formatting arguments
-  --> $DIR/missing-format-specifiers-issue-68293.rs:56:4
-   |
-LL |       panic!("Expect 2 newlines
-   |  ____________-
-LL | |
-LL | | ", "👆", 1);
-   | | -  ^^^^  ^ argument never used
-   | | |  |
-   | |_|  argument never used
-   |   multiple missing formatting specifiers
-   |
+ at $DIR/missing-format-specifiers-issue-68293.rs:56:4: argument never used
+  on line 56, column 9: argument never used
+  on line 54, column 12 to line 56, column 2: multiple missing formatting specifiers
 help: format specifiers use curly braces, consider adding 2 format specifiers
-   |
-LL |     panic!("Expect 2 newlines
-LL |
-LL ~ {}{}", "👆", 1);
-   |
+ on line 54, column 11, replace with `"Expect 2 newlines
+
+{}{}"`
 
 error: aborting due to 7 previous errors
 

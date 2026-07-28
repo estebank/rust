@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `Foo<_>` for type `Option<_>`
-  --> $DIR/coherence-projection-conflict-ty-param.rs:10:1
-   |
-LL | impl <P, T: Foo<P>> Foo<P> for Option<T> {}
-   | ---------------------------------------- first implementation here
-LL |
-LL | impl<T, U> Foo<T> for Option<U> { }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `Option<_>`
+error E0119: conflicting implementations of trait `Foo<_>` for type `Option<_>`
+ at $DIR/coherence-projection-conflict-ty-param.rs:10:1: conflicting implementation for `Option<_>`
+  on line 8: first implementation here
 
 error: aborting due to 1 previous error
 

@@ -1,50 +1,23 @@
-error[E0425]: cannot find value `this` in this scope
-  --> $DIR/issue-5099.rs:3:9
-   |
-LL |         this.a
-   |         ^^^^ not found in this scope
-   |
+error E0425: cannot find value `this` in this scope
+ at $DIR/issue-5099.rs:3:9: not found in this scope
 help: you might have meant to use `self` here instead
-   |
-LL -         this.a
-LL +         self.a
-   |
+ on line 3, column 8, replace with `self`
 help: if you meant to use `self`, you are also missing a `self` receiver argument
-   |
-LL |     fn a(&self) -> A {
-   |          +++++
+ on line 2, column 9, add `&self`
 
-error[E0425]: cannot find value `this` in this scope
-  --> $DIR/issue-5099.rs:6:9
-   |
-LL |         this.b(x);
-   |         ^^^^ not found in this scope
-   |
+error E0425: cannot find value `this` in this scope
+ at $DIR/issue-5099.rs:6:9: not found in this scope
 help: you might have meant to use `self` here instead
-   |
-LL -         this.b(x);
-LL +         self.b(x);
-   |
+ on line 6, column 8, replace with `self`
 help: if you meant to use `self`, you are also missing a `self` receiver argument
-   |
-LL |     fn b(&self, x: i32) {
-   |          ++++++
+ on line 5, column 9, add `&self, `
 
-error[E0425]: cannot find value `this` in this scope
-  --> $DIR/issue-5099.rs:9:20
-   |
-LL |         let _ = || this.a;
-   |                    ^^^^ not found in this scope
-   |
+error E0425: cannot find value `this` in this scope
+ at $DIR/issue-5099.rs:9:20: not found in this scope
 help: you might have meant to use `self` here instead
-   |
-LL -         let _ = || this.a;
-LL +         let _ = || self.a;
-   |
+ on line 9, column 19, replace with `self`
 help: if you meant to use `self`, you are also missing a `self` receiver argument
-   |
-LL |     fn c(&self) {
-   |          +++++
+ on line 8, column 9, add `&self`
 
 error: aborting due to 3 previous errors
 

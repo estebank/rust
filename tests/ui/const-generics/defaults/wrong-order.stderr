@@ -1,14 +1,8 @@
 error: generic parameters with a default must be trailing
-  --> $DIR/wrong-order.rs:1:10
-   |
-LL | struct A<T = u32, const N: usize> {
-   |          ^
+ at $DIR/wrong-order.rs:1:10
 
 error: generic parameters with a default must be trailing
-  --> $DIR/wrong-order.rs:6:18
-   |
-LL | struct Foo<const N: u8 = 3, T>(T);
-   |                  ^
+ at $DIR/wrong-order.rs:6:18
 
 error: aborting due to 2 previous errors
 

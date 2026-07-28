@@ -1,8 +1,5 @@
-error[E0574]: expected struct, variant or union type, found enum `Foo`
-  --> $DIR/struct_pattern_on_tuple_enum.rs:8:9
-   |
-LL |         Foo { i } => ()
-   |         ^^^ not a struct, variant or union type
+error E0574: expected struct, variant or union type, found enum `Foo`
+ at $DIR/struct_pattern_on_tuple_enum.rs:8:9: not a struct, variant or union type
 
 error: aborting due to 1 previous error
 

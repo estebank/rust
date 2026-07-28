@@ -1,33 +1,19 @@
-error[E0432]: unresolved import `super::super::C::D::AA`
-  --> $DIR/bad-import-in-nested.rs:10:21
-   |
-LL |         use super::{super::C::D::AA, AA as _};
-   |                     ^^^^^^^^^^^^^--
-   |                                  |
-   |                                  no `AA` in `C::D`
-   |
-   = help: consider importing this type alias instead:
-           crate::A::AA
+error E0432: unresolved import `super::super::C::D::AA`
+ at $DIR/bad-import-in-nested.rs:10:21
+  on line 10, column 34: no `AA` in `C::D`
+help: consider importing this type alias instead:
+      crate::A::AA
 
-error[E0432]: unresolved import `crate::C::AA`
-  --> $DIR/bad-import-in-nested.rs:20:26
-   |
-LL |     use crate::C::{self, AA};
-   |                          ^^ no `AA` in `C`
-   |
-   = help: consider importing this type alias instead:
-           crate::A::AA
+error E0432: unresolved import `crate::C::AA`
+ at $DIR/bad-import-in-nested.rs:20:26: no `AA` in `C`
+help: consider importing this type alias instead:
+      crate::A::AA
 
-error[E0432]: unresolved import `crate::C::BB`
-  --> $DIR/bad-import-in-nested.rs:23:20
-   |
-LL |     use crate::{A, C::BB};
-   |                    ^^^--
-   |                       |
-   |                       no `BB` in `C`
-   |
-   = help: consider importing this type alias instead:
-           crate::A::BB
+error E0432: unresolved import `crate::C::BB`
+ at $DIR/bad-import-in-nested.rs:23:20
+  on line 23, column 23: no `BB` in `C`
+help: consider importing this type alias instead:
+      crate::A::BB
 
 error: aborting due to 3 previous errors
 

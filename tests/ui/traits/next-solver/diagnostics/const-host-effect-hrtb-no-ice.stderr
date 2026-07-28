@@ -1,27 +1,13 @@
-error[E0277]: expected an `Fn(&'a ())` closure, found `()`
-  --> $DIR/const-host-effect-hrtb-no-ice.rs:9:21
-   |
-LL |     with_positive::<()>();
-   |                     ^^ expected an `Fn(&'a ())` closure, found `()`
-   |
-   = help: the trait `for<'a> Fn(&'a ())` is not implemented for `()`
+error E0277: expected an `Fn(&'a ())` closure, found `()`
+ at $DIR/const-host-effect-hrtb-no-ice.rs:9:21: expected an `Fn(&'a ())` closure, found `()`
+help: the trait `for<'a> Fn(&'a ())` is not implemented for `()`
 note: required by a bound in `with_positive`
-  --> $DIR/const-host-effect-hrtb-no-ice.rs:6:27
-   |
-LL | const fn with_positive<F: for<'a> [const] Fn(&'a ())>() {}
-   |                           ^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `with_positive`
+ at $DIR/const-host-effect-hrtb-no-ice.rs:6:27: required by this bound in `with_positive`
 
-error[E0271]: type mismatch resolving `<() as FnOnce<(&(),)>>::Output == ()`
-  --> $DIR/const-host-effect-hrtb-no-ice.rs:9:21
-   |
-LL |     with_positive::<()>();
-   |                     ^^ types differ
-   |
+error E0271: type mismatch resolving `<() as FnOnce<(&(),)>>::Output == ()`
+ at $DIR/const-host-effect-hrtb-no-ice.rs:9:21: types differ
 note: required by a bound in `with_positive`
-  --> $DIR/const-host-effect-hrtb-no-ice.rs:6:43
-   |
-LL | const fn with_positive<F: for<'a> [const] Fn(&'a ())>() {}
-   |                                           ^^^^^^^^^^ required by this bound in `with_positive`
+ at $DIR/const-host-effect-hrtb-no-ice.rs:6:43: required by this bound in `with_positive`
 
 error: aborting due to 2 previous errors
 

@@ -1,8 +1,5 @@
-error[E0220]: associated type `Assoc` not found for `Self`
-  --> $DIR/coroutine-in-orphaned-anon-const.rs:4:24
-   |
-LL |     fn test() -> Self::Assoc<{ async {} }>;
-   |                        ^^^^^ associated type `Assoc` not found
+error E0220: associated type `Assoc` not found for `Self`
+ at $DIR/coroutine-in-orphaned-anon-const.rs:4:24: associated type `Assoc` not found
 
 error: aborting due to 1 previous error
 

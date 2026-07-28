@@ -1,41 +1,17 @@
-error[E0392]: lifetime parameter `'a` is never used
-  --> $DIR/variance-regions-unused-indirect.rs:3:10
-   |
-LL | enum Foo<'a> {
-   |          ^^ unused lifetime parameter
-   |
-   = help: consider removing `'a`, referring to it in a field, or using a marker such as `PhantomData`
+error E0392: lifetime parameter `'a` is never used
+ at $DIR/variance-regions-unused-indirect.rs:3:10: unused lifetime parameter
+help: consider removing `'a`, referring to it in a field, or using a marker such as `PhantomData`
 
-error[E0072]: recursive types `Foo` and `Bar` have infinite size
-  --> $DIR/variance-regions-unused-indirect.rs:3:1
-   |
-LL | enum Foo<'a> {
-   | ^^^^^^^^^^^^
-LL |
-LL |     Foo1(Bar<'a>)
-   |          ------- recursive without indirection
-...
-LL | enum Bar<'a> {
-   | ^^^^^^^^^^^^
-LL |     Bar1(Foo<'a>)
-   |          ------- recursive without indirection
-   |
+error E0072: recursive types `Foo` and `Bar` have infinite size
+ at $DIR/variance-regions-unused-indirect.rs:3:1
+  on line 5, column 10: recursive without indirection
+  on line 9, column 10: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL ~     Foo1(Box<Bar<'a>>)
-LL | }
-LL |
-LL | enum Bar<'a> {
-LL ~     Bar1(Box<Foo<'a>>)
-   |
+ on line 5, column 9, add `Box<`
 
-error[E0392]: lifetime parameter `'a` is never used
-  --> $DIR/variance-regions-unused-indirect.rs:8:10
-   |
-LL | enum Bar<'a> {
-   |          ^^ unused lifetime parameter
-   |
-   = help: consider removing `'a`, referring to it in a field, or using a marker such as `PhantomData`
+error E0392: lifetime parameter `'a` is never used
+ at $DIR/variance-regions-unused-indirect.rs:8:10: unused lifetime parameter
+help: consider removing `'a`, referring to it in a field, or using a marker such as `PhantomData`
 
 error: aborting due to 3 previous errors
 

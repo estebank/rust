@@ -1,194 +1,80 @@
 error: cannot find macro `bang_proc_macrp` in this scope
-  --> $DIR/resolve-error.rs:60:5
-   |
-LL |     bang_proc_macrp!();
-   |     ^^^^^^^^^^^^^^^
-   |
-  ::: $DIR/auxiliary/test-macros.rs:10:1
-   |
-LL | pub fn empty(_: TokenStream) -> TokenStream {
-   | ------------------------------------------- similarly named macro `bang_proc_macro` defined here
-   |
+ at $DIR/resolve-error.rs:60:5
+ at $DIR/auxiliary/test-macros.rs:10:1: similarly named macro `bang_proc_macro` defined here
 help: a macro with a similar name exists
-   |
-LL -     bang_proc_macrp!();
-LL +     bang_proc_macro!();
-   |
+ on line 60, column 4, replace with `bang_proc_macro`
 
 error: cannot find macro `Dlona` in this scope
-  --> $DIR/resolve-error.rs:57:5
-   |
-LL |     Dlona!();
-   |     ^^^^^
+ at $DIR/resolve-error.rs:57:5
 
 error: cannot find macro `attr_proc_macra` in this scope
-  --> $DIR/resolve-error.rs:54:5
-   |
-LL | macro_rules! attr_proc_mac {
-   | -------------------------- similarly named macro `attr_proc_mac` defined here
-...
-LL |     attr_proc_macra!();
-   |     ^^^^^^^^^^^^^^^
-   |
+ at $DIR/resolve-error.rs:54:5
+  on line 18: similarly named macro `attr_proc_mac` defined here
 help: a macro with a similar name exists
-   |
-LL -     attr_proc_macra!();
-LL +     attr_proc_mac!();
-   |
+ on line 54, column 4, replace with `attr_proc_mac`
 
 error: cannot find macro `FooWithLongNama` in this scope
-  --> $DIR/resolve-error.rs:51:5
-   |
-LL | macro_rules! FooWithLongNam {
-   | --------------------------- similarly named macro `FooWithLongNam` defined here
-...
-LL |     FooWithLongNama!();
-   |     ^^^^^^^^^^^^^^^
-   |
+ at $DIR/resolve-error.rs:51:5
+  on line 14: similarly named macro `FooWithLongNam` defined here
 help: a macro with a similar name exists
-   |
-LL -     FooWithLongNama!();
-LL +     FooWithLongNam!();
-   |
+ on line 51, column 4, replace with `FooWithLongNam`
 
 error: cannot find derive macro `attr_proc_macra` in this scope
-  --> $DIR/resolve-error.rs:45:10
-   |
-LL | #[derive(attr_proc_macra)]
-   |          ^^^^^^^^^^^^^^^
+ at $DIR/resolve-error.rs:45:10
 
 error: cannot find derive macro `attr_proc_macra` in this scope
-  --> $DIR/resolve-error.rs:45:10
-   |
-LL | #[derive(attr_proc_macra)]
-   |          ^^^^^^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/resolve-error.rs:45:10
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: cannot find derive macro `Dlona` in this scope
-  --> $DIR/resolve-error.rs:40:10
-   |
-LL | #[derive(Dlona)]
-   |          ^^^^^
-   |
-  ::: $DIR/auxiliary/derive-clona.rs:6:1
-   |
-LL | pub fn derive_clonea(input: TokenStream) -> TokenStream {
-   | ------------------------------------------------------- similarly named derive macro `Clona` defined here
-   |
+ at $DIR/resolve-error.rs:40:10
+ at $DIR/auxiliary/derive-clona.rs:6:1: similarly named derive macro `Clona` defined here
 help: a derive macro with a similar name exists
-   |
-LL - #[derive(Dlona)]
-LL + #[derive(Clona)]
-   |
+ on line 40, column 9, replace with `Clona`
 
 error: cannot find derive macro `Dlona` in this scope
-  --> $DIR/resolve-error.rs:40:10
-   |
-LL | #[derive(Dlona)]
-   |          ^^^^^
-   |
-  ::: $DIR/auxiliary/derive-clona.rs:6:1
-   |
-LL | pub fn derive_clonea(input: TokenStream) -> TokenStream {
-   | ------------------------------------------------------- similarly named derive macro `Clona` defined here
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/resolve-error.rs:40:10
+ at $DIR/auxiliary/derive-clona.rs:6:1: similarly named derive macro `Clona` defined here
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: a derive macro with a similar name exists
-   |
-LL - #[derive(Dlona)]
-LL + #[derive(Clona)]
-   |
+ on line 40, column 9, replace with `Clona`
 
 error: cannot find derive macro `Dlone` in this scope
-  --> $DIR/resolve-error.rs:35:10
-   |
-LL | #[derive(Dlone)]
-   |          ^^^^^
-   |
-  --> $SRC_DIR/core/src/clone.rs:LL:COL
-   |
-   = note: similarly named derive macro `Clone` defined here
+ at $DIR/resolve-error.rs:35:10
+ at $SRC_DIR/core/src/clone.rs:LL:COL
+note: similarly named derive macro `Clone` defined here
 help: a derive macro with a similar name exists
-   |
-LL - #[derive(Dlone)]
-LL + #[derive(Clone)]
-   |
+ on line 35, column 9, replace with `Clone`
 
 error: cannot find derive macro `Dlone` in this scope
-  --> $DIR/resolve-error.rs:35:10
-   |
-LL | #[derive(Dlone)]
-   |          ^^^^^
-   |
-  --> $SRC_DIR/core/src/clone.rs:LL:COL
-   |
-   = note: similarly named derive macro `Clone` defined here
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/resolve-error.rs:35:10
+ at $SRC_DIR/core/src/clone.rs:LL:COL
+note: similarly named derive macro `Clone` defined here
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: a derive macro with a similar name exists
-   |
-LL - #[derive(Dlone)]
-LL + #[derive(Clone)]
-   |
+ on line 35, column 9, replace with `Clone`
 
 error: cannot find attribute `FooWithLongNan` in this scope
-  --> $DIR/resolve-error.rs:32:3
-   |
-LL | #[FooWithLongNan]
-   |   ^^^^^^^^^^^^^^
+ at $DIR/resolve-error.rs:32:3
 
 error: cannot find attribute `attr_proc_macra` in this scope
-  --> $DIR/resolve-error.rs:28:3
-   |
-LL | #[attr_proc_macra]
-   |   ^^^^^^^^^^^^^^^
-   |
-  ::: $DIR/auxiliary/test-macros.rs:15:1
-   |
-LL | pub fn empty_attr(_: TokenStream, _: TokenStream) -> TokenStream {
-   | ---------------------------------------------------------------- similarly named attribute macro `attr_proc_macro` defined here
-   |
+ at $DIR/resolve-error.rs:28:3
+ at $DIR/auxiliary/test-macros.rs:15:1: similarly named attribute macro `attr_proc_macro` defined here
 help: an attribute macro with a similar name exists
-   |
-LL - #[attr_proc_macra]
-LL + #[attr_proc_macro]
-   |
+ on line 28, column 2, replace with `attr_proc_macro`
 
 error: cannot find derive macro `FooWithLongNan` in this scope
-  --> $DIR/resolve-error.rs:22:10
-   |
-LL | #[derive(FooWithLongNan)]
-   |          ^^^^^^^^^^^^^^
-   |
-  ::: $DIR/auxiliary/derive-foo.rs:6:1
-   |
-LL | pub fn derive_foo(input: TokenStream) -> TokenStream {
-   | ---------------------------------------------------- similarly named derive macro `FooWithLongName` defined here
-   |
+ at $DIR/resolve-error.rs:22:10
+ at $DIR/auxiliary/derive-foo.rs:6:1: similarly named derive macro `FooWithLongName` defined here
 help: a derive macro with a similar name exists
-   |
-LL - #[derive(FooWithLongNan)]
-LL + #[derive(FooWithLongName)]
-   |
+ on line 22, column 9, replace with `FooWithLongName`
 
 error: cannot find derive macro `FooWithLongNan` in this scope
-  --> $DIR/resolve-error.rs:22:10
-   |
-LL | #[derive(FooWithLongNan)]
-   |          ^^^^^^^^^^^^^^
-   |
-  ::: $DIR/auxiliary/derive-foo.rs:6:1
-   |
-LL | pub fn derive_foo(input: TokenStream) -> TokenStream {
-   | ---------------------------------------------------- similarly named derive macro `FooWithLongName` defined here
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/resolve-error.rs:22:10
+ at $DIR/auxiliary/derive-foo.rs:6:1: similarly named derive macro `FooWithLongName` defined here
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: a derive macro with a similar name exists
-   |
-LL - #[derive(FooWithLongNan)]
-LL + #[derive(FooWithLongName)]
-   |
+ on line 22, column 9, replace with `FooWithLongName`
 
 error: aborting due to 14 previous errors
 

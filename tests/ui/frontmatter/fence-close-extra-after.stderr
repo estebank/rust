@@ -1,8 +1,5 @@
 error: extra characters after frontmatter close are not allowed
-  --> $DIR/fence-close-extra-after.rs:2:1
-   |
-LL | ---cargo
-   | ^^^^^^^^
+ at $DIR/fence-close-extra-after.rs:2:1
 
 error: aborting due to 1 previous error
 

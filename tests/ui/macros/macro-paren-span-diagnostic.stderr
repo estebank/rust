@@ -1,8 +1,5 @@
-error[E0616]: field `x` of struct `S` is private
-  --> $DIR/macro-paren-span-diagnostic.rs:21:14
-   |
-LL |     paren!(s.x);
-   |              ^ private field
+error E0616: field `x` of struct `S` is private
+ at $DIR/macro-paren-span-diagnostic.rs:21:14: private field
 
 error: aborting due to 1 previous error
 

@@ -1,34 +1,18 @@
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/shadowed.rs:3:28
-   |
-LL | fn function<T>() where for<T> (): Sized {}
-   |             -              ^ already used
-   |             |
-   |             first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/shadowed.rs:3:28: already used
+  on line 3, column 13: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/shadowed.rs:6:31
-   |
-LL | struct Struct<T>(T) where for<T> (): Sized;
-   |               -               ^ already used
-   |               |
-   |               first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/shadowed.rs:6:31: already used
+  on line 6, column 15: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/shadowed.rs:10:27
-   |
-LL | impl<T> Struct<T> {
-   |      - first use of `T`
-LL |     fn method() where for<T> (): Sized {}
-   |                           ^ already used
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/shadowed.rs:10:27: already used
+  on line 9, column 6: first use of `T`
 
-error[E0403]: the name `T` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/shadowed.rs:14:28
-   |
-LL | fn repeated() where for<T, T> (): Sized {}
-   |                         -  ^ already used
-   |                         |
-   |                         first use of `T`
+error E0403: the name `T` is already used for a generic parameter in this item's generic parameters
+ at $DIR/shadowed.rs:14:28: already used
+  on line 14, column 25: first use of `T`
 
 error: aborting due to 4 previous errors
 

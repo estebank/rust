@@ -1,14 +1,7 @@
-error[E0277]: the trait bound `Vec<()>: Copy` is not satisfied
-  --> $DIR/generic-associated-types-bad.rs:21:12
-   |
-LL |     let _: Ty::Pr<Vec<()>>;
-   |            ^^^^^^^^^^^^^^^ the trait `Copy` is not implemented for `Vec<()>`
-   |
+error E0277: the trait bound `Vec<()>: Copy` is not satisfied
+ at $DIR/generic-associated-types-bad.rs:21:12: the trait `Copy` is not implemented for `Vec<()>`
 note: required by a bound in `Ty::Pr`
-  --> $DIR/generic-associated-types-bad.rs:10:16
-   |
-LL |     type Pr<T: Copy> = T;
-   |                ^^^^ required by this bound in `Ty::Pr`
+ at $DIR/generic-associated-types-bad.rs:10:16: required by this bound in `Ty::Pr`
 
 error: aborting due to 1 previous error
 

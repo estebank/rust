@@ -1,13 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-66451.rs:19:58
-   |
-LL |     let y: Test<{ Foo { value: 3, nested: &Bar(5) } }> = x;
-   |            -------------------------------------------   ^ expected `Foo { value: 3, nested: &Bar::<i32>(5) }`, found `Foo { value: 3, nested: &Bar::<i32>(4) }`
-   |            |
-   |            expected due to this
-   |
-   = note: expected struct `Test<Foo { value: 3, nested: &Bar::<i32>(5) }>`
-              found struct `Test<Foo { value: 3, nested: &Bar::<i32>(4) }>`
+error E0308: mismatched types
+ at $DIR/issue-66451.rs:19:58: expected `Foo { value: 3, nested: &Bar::<i32>(5) }`, found `Foo { value: 3, nested: &Bar::<i32>(4) }`
+  on line 19, column 12: expected due to this
+note: expected struct `Test<Foo { value: 3, nested: &Bar::<i32>(5) }>`
+         found struct `Test<Foo { value: 3, nested: &Bar::<i32>(4) }>`
 
 error: aborting due to 1 previous error
 

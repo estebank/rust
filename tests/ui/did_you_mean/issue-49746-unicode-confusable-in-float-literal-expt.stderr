@@ -1,20 +1,10 @@
 error: expected at least one digit in exponent
-  --> $DIR/issue-49746-unicode-confusable-in-float-literal-expt.rs:1:47
-   |
-LL | const UNIVERSAL_GRAVITATIONAL_CONSTANT: f64 = 6.674e−11; // m³⋅kg⁻¹⋅s⁻²
-   |                                               ^^^^^^
+ at $DIR/issue-49746-unicode-confusable-in-float-literal-expt.rs:1:47
 
 error: unknown start of token: \u{2212}
-  --> $DIR/issue-49746-unicode-confusable-in-float-literal-expt.rs:1:53
-   |
-LL | const UNIVERSAL_GRAVITATIONAL_CONSTANT: f64 = 6.674e−11; // m³⋅kg⁻¹⋅s⁻²
-   |                                                     ^
-   |
+ at $DIR/issue-49746-unicode-confusable-in-float-literal-expt.rs:1:53
 help: Unicode character '−' (Minus Sign) looks like '-' (Minus/Hyphen), but it is not
-   |
-LL - const UNIVERSAL_GRAVITATIONAL_CONSTANT: f64 = 6.674e−11; // m³⋅kg⁻¹⋅s⁻²
-LL + const UNIVERSAL_GRAVITATIONAL_CONSTANT: f64 = 6.674e-11; // m³⋅kg⁻¹⋅s⁻²
-   |
+ on line 1, column 52, replace with `-`
 
 error: aborting due to 2 previous errors
 

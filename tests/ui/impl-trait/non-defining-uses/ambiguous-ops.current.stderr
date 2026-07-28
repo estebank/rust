@@ -1,60 +1,31 @@
-error[E0369]: cannot add `{integer}` to `impl Sized`
-  --> $DIR/ambiguous-ops.rs:17:15
-   |
-LL |         add() + 1
-   |         ----- ^ - {integer}
-   |         |
-   |         impl Sized
+error E0369: cannot add `{integer}` to `impl Sized`
+ at $DIR/ambiguous-ops.rs:17:15
+  on line 17: impl Sized
+  on line 17, column 17: {integer}
 
-error[E0368]: binary assignment operation `*=` cannot be applied to type `impl Sized`
-  --> $DIR/ambiguous-ops.rs:31:9
-   |
-LL |         temp *= 2;
-   |         ----^^^^^
-   |         |
-   |         cannot use `*=` on type `impl Sized`
+error E0368: binary assignment operation `*=` cannot be applied to type `impl Sized`
+ at $DIR/ambiguous-ops.rs:31:9
+  on line 31: cannot use `*=` on type `impl Sized`
 
-error[E0614]: type `DerefWrapper<impl Sized>` cannot be dereferenced
-  --> $DIR/ambiguous-ops.rs:57:22
-   |
-LL |         let _rarw = &*explicit_deref();
-   |                      ^^^^^^^^^^^^^^^^^ can't be dereferenced
+error E0614: type `DerefWrapper<impl Sized>` cannot be dereferenced
+ at $DIR/ambiguous-ops.rs:57:22: can't be dereferenced
 
-error[E0614]: type `DerefWrapper<impl Sized>` cannot be dereferenced
-  --> $DIR/ambiguous-ops.rs:69:9
-   |
-LL |         *explicit_deref_mut() = 1;
-   |         ^^^^^^^^^^^^^^^^^^^^^ can't be dereferenced
+error E0614: type `DerefWrapper<impl Sized>` cannot be dereferenced
+ at $DIR/ambiguous-ops.rs:69:9: can't be dereferenced
 
-error[E0277]: the type `impl Sized` cannot be indexed by `_`
-  --> $DIR/ambiguous-ops.rs:94:18
-   |
-LL |         let _y = explicit_index()[0];
-   |                  ^^^^^^^^^^^^^^^^ `impl Sized` cannot be indexed by `_`
-   |
-   = help: the trait `Index<_>` is not implemented for `impl Sized`
+error E0277: the type `impl Sized` cannot be indexed by `_`
+ at $DIR/ambiguous-ops.rs:94:18: `impl Sized` cannot be indexed by `_`
+help: the trait `Index<_>` is not implemented for `impl Sized`
 note: required for `IndexWrapper<impl Sized>` to implement `Index<_>`
-  --> $DIR/ambiguous-ops.rs:81:22
-   |
-LL | impl<T: Index<U>, U> Index<U> for IndexWrapper<T> {
-   |         --------     ^^^^^^^^     ^^^^^^^^^^^^^^^
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/ambiguous-ops.rs:81:22
+  on line 81, column 9: unsatisfied trait bound introduced here
 
-error[E0277]: the type `impl Sized` cannot be indexed by `_`
-  --> $DIR/ambiguous-ops.rs:106:9
-   |
-LL |         explicit_index_mut()[0] = 1;
-   |         ^^^^^^^^^^^^^^^^^^^^ `impl Sized` cannot be indexed by `_`
-   |
-   = help: the trait `Index<_>` is not implemented for `impl Sized`
+error E0277: the type `impl Sized` cannot be indexed by `_`
+ at $DIR/ambiguous-ops.rs:106:9: `impl Sized` cannot be indexed by `_`
+help: the trait `Index<_>` is not implemented for `impl Sized`
 note: required for `IndexWrapper<impl Sized>` to implement `Index<_>`
-  --> $DIR/ambiguous-ops.rs:81:22
-   |
-LL | impl<T: Index<U>, U> Index<U> for IndexWrapper<T> {
-   |         --------     ^^^^^^^^     ^^^^^^^^^^^^^^^
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/ambiguous-ops.rs:81:22
+  on line 81, column 9: unsatisfied trait bound introduced here
 
 error: aborting due to 6 previous errors
 

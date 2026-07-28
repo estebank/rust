@@ -1,56 +1,28 @@
 error: expected one of `:`, `@`, or `|`, found `)`
-  --> $DIR/suggest-self-in-bare-function.rs:7:17
-   |
-LL | fn is_even(value) -> bool {
-   |                 ^ expected one of `:`, `@`, or `|`
-   |
+ at $DIR/suggest-self-in-bare-function.rs:7:17: expected one of `:`, `@`, or `|`
 help: if this is a parameter name, give it a type
-   |
-LL | fn is_even(value: TypeName) -> bool {
-   |                 ++++++++++
+ on line 7, column 16, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL | fn is_even(_: value) -> bool {
-   |            ++
+ on line 7, column 11, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `)`
-  --> $DIR/suggest-self-in-bare-function.rs:14:21
-   |
-LL |     fn is_even(value) -> bool {
-   |                     ^ expected one of `:`, `@`, or `|`
-   |
+ at $DIR/suggest-self-in-bare-function.rs:14:21: expected one of `:`, `@`, or `|`
 help: if this is a `self` type, give it a parameter name
-   |
-LL |     fn is_even(self: value) -> bool {
-   |                +++++
+ on line 14, column 15, add `self: `
 help: if this is a parameter name, give it a type
-   |
-LL |     fn is_even(value: TypeName) -> bool {
-   |                     ++++++++++
+ on line 14, column 20, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL |     fn is_even(_: value) -> bool {
-   |                ++
+ on line 14, column 15, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `)`
-  --> $DIR/suggest-self-in-bare-function.rs:20:21
-   |
-LL |     fn is_even(value) -> bool {
-   |                     ^ expected one of `:`, `@`, or `|`
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/suggest-self-in-bare-function.rs:20:21: expected one of `:`, `@`, or `|`
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: if this is a `self` type, give it a parameter name
-   |
-LL |     fn is_even(self: value) -> bool {
-   |                +++++
+ on line 20, column 15, add `self: `
 help: if this is a parameter name, give it a type
-   |
-LL |     fn is_even(value: TypeName) -> bool {
-   |                     ++++++++++
+ on line 20, column 20, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL |     fn is_even(_: value) -> bool {
-   |                ++
+ on line 20, column 15, add `_: `
 
 error: aborting due to 3 previous errors
 

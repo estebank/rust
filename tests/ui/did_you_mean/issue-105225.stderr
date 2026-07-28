@@ -1,72 +1,31 @@
 error: redundant argument
-  --> $DIR/issue-105225.rs:7:21
-   |
-LL |     println!("{x}", x);
-   |                     ^ help: this can be removed
-   |
+ at $DIR/issue-105225.rs:7:21: help: this can be removed
 note: the formatting specifier is referencing the binding already
-  --> $DIR/issue-105225.rs:7:16
-   |
-LL |     println!("{x}", x);
-   |                ^
+ at $DIR/issue-105225.rs:7:16
 
 error: redundant argument
-  --> $DIR/issue-105225.rs:10:27
-   |
-LL |     println!("{x} {}", x, x);
-   |                           ^ help: this can be removed
-   |
+ at $DIR/issue-105225.rs:10:27: help: this can be removed
 note: the formatting specifier is referencing the binding already
-  --> $DIR/issue-105225.rs:10:16
-   |
-LL |     println!("{x} {}", x, x);
-   |                ^
+ at $DIR/issue-105225.rs:10:16
 
 error: redundant argument
-  --> $DIR/issue-105225.rs:13:27
-   |
-LL |     println!("{} {x}", x, x);
-   |                           ^ help: this can be removed
-   |
+ at $DIR/issue-105225.rs:13:27: help: this can be removed
 note: the formatting specifier is referencing the binding already
-  --> $DIR/issue-105225.rs:13:19
-   |
-LL |     println!("{} {x}", x, x);
-   |                   ^
+ at $DIR/issue-105225.rs:13:19
 
 error: redundant arguments
-  --> $DIR/issue-105225.rs:16:25
-   |
-LL |     println!("{x} {y}", x, y);
-   |                         ^  ^
-   |
+ at $DIR/issue-105225.rs:16:25
 note: the formatting specifiers are referencing the bindings already
-  --> $DIR/issue-105225.rs:16:16
-   |
-LL |     println!("{x} {y}", x, y);
-   |                ^   ^
+ at $DIR/issue-105225.rs:16:16
 help: this can be removed
-   |
-LL -     println!("{x} {y}", x, y);
-LL +     println!("{x} {y}", );
-   |
+ on line 16, column 24
 
 error: redundant arguments
-  --> $DIR/issue-105225.rs:19:43
-   |
-LL |     println!("{} {} {x} {y} {}", x, x, x, y, y);
-   |                                           ^  ^
-   |
+ at $DIR/issue-105225.rs:19:43
 note: the formatting specifiers are referencing the bindings already
-  --> $DIR/issue-105225.rs:19:26
-   |
-LL |     println!("{} {} {x} {y} {}", x, x, x, y, y);
-   |                          ^
+ at $DIR/issue-105225.rs:19:26
 help: this can be removed
-   |
-LL -     println!("{} {} {x} {y} {}", x, x, x, y, y);
-LL +     println!("{} {} {x} {y} {}", x, x, x, );
-   |
+ on line 19, column 42
 
 error: aborting due to 5 previous errors
 

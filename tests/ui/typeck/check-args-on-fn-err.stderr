@@ -1,8 +1,5 @@
-error[E0425]: cannot find function `unknown` in this scope
-  --> $DIR/check-args-on-fn-err.rs:2:5
-   |
-LL |     unknown(1, |glyf| {
-   |     ^^^^^^^ not found in this scope
+error E0425: cannot find function `unknown` in this scope
+ at $DIR/check-args-on-fn-err.rs:2:5: not found in this scope
 
 error: aborting due to 1 previous error
 

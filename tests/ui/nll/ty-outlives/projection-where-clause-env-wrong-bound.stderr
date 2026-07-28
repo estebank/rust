@@ -1,16 +1,8 @@
-error[E0309]: the associated type `<T as MyTrait<'a>>::Output` may not live long enough
-  --> $DIR/projection-where-clause-env-wrong-bound.rs:15:5
-   |
-LL | fn foo1<'a, 'b, T>() -> &'a ()
-   |         -- the associated type `<T as MyTrait<'a>>::Output` must be valid for the lifetime `'a` as defined here...
-...
-LL |     bar::<T::Output>()
-   |     ^^^^^^^^^^^^^^^^ ...so that the type `<T as MyTrait<'a>>::Output` will meet its required lifetime bounds
-   |
+error E0309: the associated type `<T as MyTrait<'a>>::Output` may not live long enough
+ at $DIR/projection-where-clause-env-wrong-bound.rs:15:5: ...so that the type `<T as MyTrait<'a>>::Output` will meet its required lifetime bounds
+  on line 10, column 9: the associated type `<T as MyTrait<'a>>::Output` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     <T as MyTrait<'a>>::Output: 'b, <T as MyTrait<'a>>::Output: 'a
-   |                                     ++++++++++++++++++++++++++++++
+ on line 13, column 34, replace with `, <T as MyTrait<'a>>::Output: 'a`
 
 error: aborting due to 1 previous error
 

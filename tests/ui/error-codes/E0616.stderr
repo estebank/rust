@@ -1,8 +1,5 @@
-error[E0616]: field `x` of struct `Foo` is private
-  --> $DIR/E0616.rs:13:7
-   |
-LL |     f.x;
-   |       ^ private field
+error E0616: field `x` of struct `Foo` is private
+ at $DIR/E0616.rs:13:7: private field
 
 error: aborting due to 1 previous error
 

@@ -1,28 +1,15 @@
 error: attempted to repeat an expression containing no syntax variables matched as repeating at this depth
-  --> $DIR/typo-in-repeat-expr-2.rs:3:11
-   |
-LL |         [$($typo),*]
-   |           ^^----^
-   |             |
-   |             expected a repeatable metavariable: `$arg`
+ at $DIR/typo-in-repeat-expr-2.rs:3:11
+  on line 3, column 13: expected a repeatable metavariable: `$arg`
 
 error: attempted to repeat an expression containing no syntax variables matched as repeating at this depth
-  --> $DIR/typo-in-repeat-expr-2.rs:10:11
-   |
-LL |     (begin $arg:ident end) => {
-   |             --- this similarly named macro metavariable is unrepeatable
-LL |         [$($ard),*]
-   |           ^^---^
-   |             |
-   |             argument not found
+ at $DIR/typo-in-repeat-expr-2.rs:10:11
+  on line 9, column 13: this similarly named macro metavariable is unrepeatable
+  on line 10, column 13: argument not found
 
 error: attempted to repeat an expression containing no syntax variables matched as repeating at this depth
-  --> $DIR/typo-in-repeat-expr-2.rs:17:11
-   |
-LL |         [$($typo),*]
-   |           ^^----^
-   |             |
-   |             this macro metavariable is not repeatable and there are no other repeatable metavariables
+ at $DIR/typo-in-repeat-expr-2.rs:17:11
+  on line 17, column 13: this macro metavariable is not repeatable and there are no other repeatable metavariables
 
 error: aborting due to 3 previous errors
 

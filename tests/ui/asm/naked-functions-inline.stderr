@@ -1,34 +1,18 @@
-error[E0736]: attribute incompatible with `#[unsafe(naked)]`
-  --> $DIR/naked-functions-inline.rs:13:3
-   |
-LL | #[unsafe(naked)]
-   | ---------------- function marked with `#[unsafe(naked)]` here
-LL | #[inline]
-   |   ^^^^^^ the `inline` attribute is incompatible with `#[unsafe(naked)]`
+error E0736: attribute incompatible with `#[unsafe(naked)]`
+ at $DIR/naked-functions-inline.rs:13:3: the `inline` attribute is incompatible with `#[unsafe(naked)]`
+  on line 12: function marked with `#[unsafe(naked)]` here
 
-error[E0736]: attribute incompatible with `#[unsafe(naked)]`
-  --> $DIR/naked-functions-inline.rs:20:3
-   |
-LL | #[unsafe(naked)]
-   | ---------------- function marked with `#[unsafe(naked)]` here
-LL | #[inline(always)]
-   |   ^^^^^^ the `inline` attribute is incompatible with `#[unsafe(naked)]`
+error E0736: attribute incompatible with `#[unsafe(naked)]`
+ at $DIR/naked-functions-inline.rs:20:3: the `inline` attribute is incompatible with `#[unsafe(naked)]`
+  on line 19: function marked with `#[unsafe(naked)]` here
 
-error[E0736]: attribute incompatible with `#[unsafe(naked)]`
-  --> $DIR/naked-functions-inline.rs:27:3
-   |
-LL | #[unsafe(naked)]
-   | ---------------- function marked with `#[unsafe(naked)]` here
-LL | #[inline(never)]
-   |   ^^^^^^ the `inline` attribute is incompatible with `#[unsafe(naked)]`
+error E0736: attribute incompatible with `#[unsafe(naked)]`
+ at $DIR/naked-functions-inline.rs:27:3: the `inline` attribute is incompatible with `#[unsafe(naked)]`
+  on line 26: function marked with `#[unsafe(naked)]` here
 
-error[E0736]: attribute incompatible with `#[unsafe(naked)]`
-  --> $DIR/naked-functions-inline.rs:34:18
-   |
-LL | #[unsafe(naked)]
-   | ---------------- function marked with `#[unsafe(naked)]` here
-LL | #[cfg_attr(true, inline(never))]
-   |                  ^^^^^^ the `inline` attribute is incompatible with `#[unsafe(naked)]`
+error E0736: attribute incompatible with `#[unsafe(naked)]`
+ at $DIR/naked-functions-inline.rs:34:18: the `inline` attribute is incompatible with `#[unsafe(naked)]`
+  on line 33: function marked with `#[unsafe(naked)]` here
 
 error: aborting due to 4 previous errors
 

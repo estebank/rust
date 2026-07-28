@@ -1,15 +1,9 @@
-error[E0369]: cannot multiply `&T` by `&T`
-  --> $DIR/issue-35668.rs:2:23
-   |
-LL |     a.iter().map(|a| a*a)
-   |                      -^- &T
-   |                      |
-   |                      &T
-   |
+error E0369: cannot multiply `&T` by `&T`
+ at $DIR/issue-35668.rs:2:23
+  on line 2, column 22: &T
+  on line 2, column 24: &T
 help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
-   |
-LL | fn func<'a, T>(a: &'a [T]) -> impl Iterator<Item=&'a T> where &T: Mul<&T> {
-   |                                                         +++++++++++++++++
+ on line 1, column 55, add ` where &T: Mul<&T>`
 
 error: aborting due to 1 previous error
 

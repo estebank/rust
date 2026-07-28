@@ -1,44 +1,26 @@
-error[E0283]: type annotations needed
-  --> $DIR/question-mark-type-infer.rs:10:21
-   |
-LL |     l.iter().map(f).collect()?
-   |                     ^^^^^^^ cannot infer type of the type parameter `B` declared on the method `collect`
-   |
-   = note: the type must implement `FromIterator<Result<i32, ()>>`
+error E0283: type annotations needed
+ at $DIR/question-mark-type-infer.rs:10:21: cannot infer type of the type parameter `B` declared on the method `collect`
+note: the type must implement `FromIterator<Result<i32, ()>>`
 note: required by a bound in `collect`
-  --> $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
 help: consider specifying the generic argument
-   |
-LL |     l.iter().map(f).collect::<Result<_, _>>()?
-   |                            ++++++++++++++++
+ on line 10, column 27, add `::<Result<_, _>>`
 
-error[E0283]: type annotations needed
-  --> $DIR/question-mark-type-infer.rs:16:29
-   |
-LL |     let x = l.iter().map(f).collect()?;
-   |                             ^^^^^^^ cannot infer type of the type parameter `B` declared on the method `collect`
-   |
-   = note: the type must implement `FromIterator<Result<i32, ()>>`
+error E0283: type annotations needed
+ at $DIR/question-mark-type-infer.rs:16:29: cannot infer type of the type parameter `B` declared on the method `collect`
+note: the type must implement `FromIterator<Result<i32, ()>>`
 note: required by a bound in `collect`
-  --> $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
 help: consider specifying the generic argument
-   |
-LL |     let x = l.iter().map(f).collect::<Result<_, _>>()?;
-   |                                    ++++++++++++++++
+ on line 16, column 35, add `::<Result<_, _>>`
 
-error[E0283]: type annotations needed
-  --> $DIR/question-mark-type-infer.rs:23:39
-   |
-LL |     let x: Vec<i32> = l.iter().map(f).collect()?;
-   |                                       ^^^^^^^ cannot infer type of the type parameter `B` declared on the method `collect`
-   |
-   = note: the type must implement `FromIterator<Result<i32, ()>>`
+error E0283: type annotations needed
+ at $DIR/question-mark-type-infer.rs:23:39: cannot infer type of the type parameter `B` declared on the method `collect`
+note: the type must implement `FromIterator<Result<i32, ()>>`
 note: required by a bound in `collect`
-  --> $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
 help: consider specifying the generic argument
-   |
-LL |     let x: Vec<i32> = l.iter().map(f).collect::<Result<_, _>>()?;
-   |                                              ++++++++++++++++
+ on line 23, column 45, add `::<Result<_, _>>`
 
 error: aborting due to 3 previous errors
 

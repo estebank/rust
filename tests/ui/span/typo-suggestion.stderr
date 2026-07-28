@@ -1,20 +1,10 @@
-error[E0425]: cannot find value `bar` in this scope
-  --> $DIR/typo-suggestion.rs:5:26
-   |
-LL |     println!("Hello {}", bar);
-   |                          ^^^ not found in this scope
+error E0425: cannot find value `bar` in this scope
+ at $DIR/typo-suggestion.rs:5:26: not found in this scope
 
-error[E0425]: cannot find value `fob` in this scope
-  --> $DIR/typo-suggestion.rs:8:26
-   |
-LL |     println!("Hello {}", fob);
-   |                          ^^^
-   |
+error E0425: cannot find value `fob` in this scope
+ at $DIR/typo-suggestion.rs:8:26
 help: a local variable with a similar name exists
-   |
-LL -     println!("Hello {}", fob);
-LL +     println!("Hello {}", foo);
-   |
+ on line 8, column 25, replace with `foo`
 
 error: aborting due to 2 previous errors
 

@@ -1,62 +1,26 @@
-error[E0277]: `Error` doesn't implement `Debug`
-  --> $DIR/derives-span-Debug.rs:9:9
-   |
-LL | #[derive(Debug)]
-   |          ----- in this derive macro expansion
-...
-LL |         x: Error,
-   |         ^^^^^^^^ the trait `Debug` is not implemented for `Error`
-   |
+error E0277: `Error` doesn't implement `Debug`
+ at $DIR/derives-span-Debug.rs:9:9: the trait `Debug` is not implemented for `Error`
+  on line 6, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Debug)]`
-   |
-LL + #[derive(Debug)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Debug)]`
 
-error[E0277]: `Error` doesn't implement `Debug`
-  --> $DIR/derives-span-Debug.rs:16:9
-   |
-LL | #[derive(Debug)]
-   |          ----- in this derive macro expansion
-...
-LL |         Error,
-   |         ^^^^^ the trait `Debug` is not implemented for `Error`
-   |
+error E0277: `Error` doesn't implement `Debug`
+ at $DIR/derives-span-Debug.rs:16:9: the trait `Debug` is not implemented for `Error`
+  on line 13, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Debug)]`
-   |
-LL + #[derive(Debug)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Debug)]`
 
-error[E0277]: `Error` doesn't implement `Debug`
-  --> $DIR/derives-span-Debug.rs:21:5
-   |
-LL | #[derive(Debug)]
-   |          ----- in this derive macro expansion
-LL | struct Struct {
-LL |     x: Error,
-   |     ^^^^^^^^ the trait `Debug` is not implemented for `Error`
-   |
+error E0277: `Error` doesn't implement `Debug`
+ at $DIR/derives-span-Debug.rs:21:5: the trait `Debug` is not implemented for `Error`
+  on line 19, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Debug)]`
-   |
-LL + #[derive(Debug)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Debug)]`
 
-error[E0277]: `Error` doesn't implement `Debug`
-  --> $DIR/derives-span-Debug.rs:26:5
-   |
-LL | #[derive(Debug)]
-   |          ----- in this derive macro expansion
-LL | struct TupleStruct(
-LL |     Error,
-   |     ^^^^^ the trait `Debug` is not implemented for `Error`
-   |
+error E0277: `Error` doesn't implement `Debug`
+ at $DIR/derives-span-Debug.rs:26:5: the trait `Debug` is not implemented for `Error`
+  on line 24, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Debug)]`
-   |
-LL + #[derive(Debug)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Debug)]`
 
 error: aborting due to 4 previous errors
 

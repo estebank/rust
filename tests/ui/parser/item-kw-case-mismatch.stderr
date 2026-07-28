@@ -1,170 +1,72 @@
 error: keyword `use` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:7:1
-   |
-LL | Use std::ptr::read;
-   | ^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:7:1
 help: write it in lowercase (notice the capitalization)
-   |
-LL - Use std::ptr::read;
-LL + use std::ptr::read;
-   |
+ on line 7, column 1, replace with `use`
 
 error: keyword `use` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:8:1
-   |
-LL | USE std::ptr::write;
-   | ^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:8:1
 help: write it in lowercase
-   |
-LL - USE std::ptr::write;
-LL + use std::ptr::write;
-   |
+ on line 8, column 1, replace with `use`
 
 error: keyword `fn` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:10:7
-   |
-LL | async Fn _a() {}
-   |       ^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:10:7
 help: write it in lowercase (notice the capitalization)
-   |
-LL - async Fn _a() {}
-LL + async fn _a() {}
-   |
+ on line 10, column 6, replace with `fn`
 
 error: keyword `fn` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:13:1
-   |
-LL | Fn _b() {}
-   | ^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:13:1
 help: write it in lowercase (notice the capitalization)
-   |
-LL - Fn _b() {}
-LL + fn _b() {}
-   |
+ on line 13, column 1, replace with `fn`
 
 error: keyword `async` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:16:1
-   |
-LL | aSYNC fN _c() {}
-   | ^^^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:16:1
 help: write it in lowercase
-   |
-LL - aSYNC fN _c() {}
-LL + async fN _c() {}
-   |
+ on line 16, column 1, replace with `async`
 
 error: keyword `fn` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:16:7
-   |
-LL | aSYNC fN _c() {}
-   |       ^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:16:7
 help: write it in lowercase
-   |
-LL - aSYNC fN _c() {}
-LL + aSYNC fn _c() {}
-   |
+ on line 16, column 6, replace with `fn`
 
 error: keyword `async` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:20:1
-   |
-LL | Async fn _d() {}
-   | ^^^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:20:1
 help: write it in lowercase
-   |
-LL - Async fn _d() {}
-LL + async fn _d() {}
-   |
+ on line 20, column 1, replace with `async`
 
 error: keyword `const` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:23:1
-   |
-LL | CONST UNSAFE FN _e() {}
-   | ^^^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:23:1
 help: write it in lowercase
-   |
-LL - CONST UNSAFE FN _e() {}
-LL + const UNSAFE FN _e() {}
-   |
+ on line 23, column 1, replace with `const`
 
 error: keyword `unsafe` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:23:7
-   |
-LL | CONST UNSAFE FN _e() {}
-   |       ^^^^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:23:7
 help: write it in lowercase
-   |
-LL - CONST UNSAFE FN _e() {}
-LL + CONST unsafe FN _e() {}
-   |
+ on line 23, column 6, replace with `unsafe`
 
 error: keyword `fn` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:23:14
-   |
-LL | CONST UNSAFE FN _e() {}
-   |              ^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:23:14
 help: write it in lowercase
-   |
-LL - CONST UNSAFE FN _e() {}
-LL + CONST UNSAFE fn _e() {}
-   |
+ on line 23, column 13, replace with `fn`
 
 error: keyword `unsafe` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:28:1
-   |
-LL | unSAFE EXTern "C" fn _f() {}
-   | ^^^^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:28:1
 help: write it in lowercase
-   |
-LL - unSAFE EXTern "C" fn _f() {}
-LL + unsafe EXTern "C" fn _f() {}
-   |
+ on line 28, column 1, replace with `unsafe`
 
 error: keyword `extern` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:28:8
-   |
-LL | unSAFE EXTern "C" fn _f() {}
-   |        ^^^^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:28:8
 help: write it in lowercase
-   |
-LL - unSAFE EXTern "C" fn _f() {}
-LL + unSAFE extern "C" fn _f() {}
-   |
+ on line 28, column 7, replace with `extern`
 
 error: keyword `extern` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:32:1
-   |
-LL | EXTERN "C" FN _g() {}
-   | ^^^^^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:32:1
 help: write it in lowercase
-   |
-LL - EXTERN "C" FN _g() {}
-LL + extern "C" FN _g() {}
-   |
+ on line 32, column 1, replace with `extern`
 
 error: keyword `fn` is written in the wrong case
-  --> $DIR/item-kw-case-mismatch.rs:32:12
-   |
-LL | EXTERN "C" FN _g() {}
-   |            ^^
-   |
+ at $DIR/item-kw-case-mismatch.rs:32:12
 help: write it in lowercase
-   |
-LL - EXTERN "C" FN _g() {}
-LL + EXTERN "C" fn _g() {}
-   |
+ on line 32, column 11, replace with `fn`
 
 error: aborting due to 14 previous errors
 

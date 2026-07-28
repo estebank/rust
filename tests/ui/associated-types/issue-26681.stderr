@@ -1,15 +1,9 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-26681.rs:17:39
-   |
-LL |     type Fv: Foo = u8;
-   |     ------------ associated type defaults can't be assumed inside the trait defining them
-LL |     const C: <Self::Fv as Foo>::Bar = 6665;
-   |              ----------------------   ^^^^ expected associated type, found integer
-   |              |
-   |              expected because of the type of the associated constant
-   |
-   = note: expected associated type `<<Self as Baz>::Fv as Foo>::Bar`
-                         found type `{integer}`
+error E0308: mismatched types
+ at $DIR/issue-26681.rs:17:39: expected associated type, found integer
+  on line 16: associated type defaults can't be assumed inside the trait defining them
+  on line 17, column 14: expected because of the type of the associated constant
+note: expected associated type `<<Self as Baz>::Fv as Foo>::Bar`
+                    found type `{integer}`
 
 error: aborting due to 1 previous error
 

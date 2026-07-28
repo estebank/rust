@@ -1,11 +1,6 @@
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/trait-bound-mismatch-14853.rs:14:15
-   |
-LL |     fn yay<T: Debug>(_: Option<Self>, thing: &[T]);
-   |     ----------------------------------------------- definition of `yay` from trait
-...
-LL |     fn yay<T: Str>(_:Option<X>, thing: &[T]) {
-   |               ^^^ impl has extra requirement `T: Str`
+error E0276: impl has stricter requirements than trait
+ at $DIR/trait-bound-mismatch-14853.rs:14:15: impl has extra requirement `T: Str`
+  on line 8: definition of `yay` from trait
 
 error: aborting due to 1 previous error
 

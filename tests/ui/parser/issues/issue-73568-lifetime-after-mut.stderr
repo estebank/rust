@@ -1,61 +1,29 @@
 error: lifetime must precede `mut`
-  --> $DIR/issue-73568-lifetime-after-mut.rs:2:13
-   |
-LL | fn x<'a>(x: &mut 'a i32){}
-   |             ^^^^^^^
-   |
+ at $DIR/issue-73568-lifetime-after-mut.rs:2:13
 help: place the lifetime before `mut`
-   |
-LL - fn x<'a>(x: &mut 'a i32){}
-LL + fn x<'a>(x: &'a mut i32){}
-   |
+ on line 2, column 12, replace with `&'a mut`
 
-error[E0178]: expected a path on the left-hand side of `+`
-  --> $DIR/issue-73568-lifetime-after-mut.rs:14:13
-   |
-LL | fn y<'a>(y: &mut 'a + Send) {
-   |             ^^^^^^^
-   |
+error E0178: expected a path on the left-hand side of `+`
+ at $DIR/issue-73568-lifetime-after-mut.rs:14:13
 help: try adding parentheses
-   |
-LL | fn y<'a>(y: &mut ('a + Send)) {
-   |                  +         +
+ on line 14, column 17, add `(`
 
 error: lifetime must precede `mut`
-  --> $DIR/issue-73568-lifetime-after-mut.rs:6:22
-   |
-LL |         fn w<$lt>(w: &mut $lt i32) {}
-   |                      ^^^^^^^^
-...
-LL | mac!('a);
-   | -------- in this macro invocation
-   |
-   = note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/issue-73568-lifetime-after-mut.rs:6:22
+  on line 11: in this macro invocation
+note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: place the lifetime before `mut`
-   |
-LL -         fn w<$lt>(w: &mut $lt i32) {}
-LL +         fn w<$lt>(w: &$lt mut i32) {}
-   |
+ on line 6, column 21, replace with `&$lt mut`
 
-error[E0423]: cannot find value `Send` in this scope
-  --> $DIR/issue-73568-lifetime-after-mut.rs:17:28
-   |
-LL |     let z = y as &mut 'a + Send;
-   |                            ^^^^ not found in this scope
-   |
-   = note: a trait named `Send` exists in another namespace
+error E0423: cannot find value `Send` in this scope
+ at $DIR/issue-73568-lifetime-after-mut.rs:17:28: not found in this scope
+note: a trait named `Send` exists in another namespace
 
-error[E0224]: at least one trait is required for an object type
-  --> $DIR/issue-73568-lifetime-after-mut.rs:14:18
-   |
-LL | fn y<'a>(y: &mut 'a + Send) {
-   |                  ^^
+error E0224: at least one trait is required for an object type
+ at $DIR/issue-73568-lifetime-after-mut.rs:14:18
 
-error[E0224]: at least one trait is required for an object type
-  --> $DIR/issue-73568-lifetime-after-mut.rs:17:23
-   |
-LL |     let z = y as &mut 'a + Send;
-   |                       ^^
+error E0224: at least one trait is required for an object type
+ at $DIR/issue-73568-lifetime-after-mut.rs:17:23
 
 error: aborting due to 6 previous errors
 

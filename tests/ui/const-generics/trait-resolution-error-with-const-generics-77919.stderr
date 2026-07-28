@@ -1,33 +1,16 @@
-error[E0425]: cannot find type `PhantomData` in this scope
-  --> $DIR/trait-resolution-error-with-const-generics-77919.rs:10:9
-   |
-LL |     _n: PhantomData,
-   |         ^^^^^^^^^^^ not found in this scope
-   |
+error E0425: cannot find type `PhantomData` in this scope
+ at $DIR/trait-resolution-error-with-const-generics-77919.rs:10:9: not found in this scope
 help: consider importing this struct
-   |
-LL + use std::marker::PhantomData;
-   |
+ on line 2, column 1, add `use std::marker::PhantomData;`
 
-error[E0425]: cannot find type `VAL` in this scope
-  --> $DIR/trait-resolution-error-with-const-generics-77919.rs:12:63
-   |
-LL | impl<N, M> TypeVal<usize> for Multiply<N, M> where N: TypeVal<VAL> {}
-   |                                                               ^^^ not found in this scope
-   |
+error E0425: cannot find type `VAL` in this scope
+ at $DIR/trait-resolution-error-with-const-generics-77919.rs:12:63: not found in this scope
 help: you might be missing a type parameter
-   |
-LL | impl<N, M, VAL> TypeVal<usize> for Multiply<N, M> where N: TypeVal<VAL> {}
-   |          +++++
+ on line 12, column 9, add `, VAL`
 
-error[E0046]: not all trait items implemented, missing: `VAL`
-  --> $DIR/trait-resolution-error-with-const-generics-77919.rs:12:1
-   |
-LL |     const VAL: T;
-   |     ------------ `VAL` from trait
-...
-LL | impl<N, M> TypeVal<usize> for Multiply<N, M> where N: TypeVal<VAL> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `VAL` in implementation
+error E0046: not all trait items implemented, missing: `VAL`
+ at $DIR/trait-resolution-error-with-const-generics-77919.rs:12:1: missing `VAL` in implementation
+  on line 6: `VAL` from trait
 
 error: aborting due to 3 previous errors
 

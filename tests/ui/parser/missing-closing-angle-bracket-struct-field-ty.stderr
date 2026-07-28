@@ -1,18 +1,9 @@
 error: expected one of `>`, a const expression, lifetime, or type, found `}`
-  --> $DIR/missing-closing-angle-bracket-struct-field-ty.rs:9:1
-   |
-LL | pub struct Foo {
-   |            --- while parsing this struct
-...
-LL |     c: Arc<Mutex<usize>>,
-   |                          - expected one of `>`, a const expression, lifetime, or type
-LL | }
-   | ^ unexpected token
-   |
+ at $DIR/missing-closing-angle-bracket-struct-field-ty.rs:9:1: unexpected token
+  on line 5, column 12: while parsing this struct
+  on line 8, column 26: expected one of `>`, a const expression, lifetime, or type
 help: you might have meant to end the type parameters here
-   |
-LL |     b: Arc<Mutex<usize>>,
-   |                        +
+ on line 7, column 23, add `>`
 
 error: aborting due to 1 previous error
 

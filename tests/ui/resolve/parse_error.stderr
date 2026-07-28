@@ -1,13 +1,7 @@
 error: expected one of `+`, `,`, `::`, `=`, or `>`, found `From`
-  --> $DIR/parse_error.rs:2:46
-   |
-LL | impl<S: Into<std::borrow::Cow<'static, str>> From<S> for Canonical {
-   |                                              ^^^^ expected one of `+`, `,`, `::`, `=`, or `>`
-   |
+ at $DIR/parse_error.rs:2:46: expected one of `+`, `,`, `::`, `=`, or `>`
 help: you might have meant to end the type parameters here
-   |
-LL | impl<S: Into<std::borrow::Cow<'static, str>>> From<S> for Canonical {
-   |                                             +
+ on line 2, column 44, add `>`
 
 error: aborting due to 1 previous error
 

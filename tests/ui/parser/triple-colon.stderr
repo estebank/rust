@@ -1,146 +1,62 @@
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:6:7
-   |
-LL | use :::std::{cell as _};
-   |       ^
-   |
+ at $DIR/triple-colon.rs:6:7
 help: use a double colon instead
-   |
-LL - use :::std::{cell as _};
-LL + use ::std::{cell as _};
-   |
+ on line 6, column 6
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:7:16
-   |
-LL | use std::cell:::*;
-   |                ^
-   |
+ at $DIR/triple-colon.rs:7:16
 help: use a double colon instead
-   |
-LL - use std::cell:::*;
-LL + use std::cell::*;
-   |
+ on line 7, column 15
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:8:16
-   |
-LL | use std::cell:::Cell;
-   |                ^
-   |
+ at $DIR/triple-colon.rs:8:16
 help: use a double colon instead
-   |
-LL - use std::cell:::Cell;
-LL + use std::cell::Cell;
-   |
+ on line 8, column 15
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:9:10
-   |
-LL | use std:::{cell as _};
-   |          ^
-   |
+ at $DIR/triple-colon.rs:9:10
 help: use a double colon instead
-   |
-LL - use std:::{cell as _};
-LL + use std::{cell as _};
-   |
+ on line 9, column 9
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:12:11
-   |
-LL |     use :::{};
-   |           ^
-   |
+ at $DIR/triple-colon.rs:12:11
 help: use a double colon instead
-   |
-LL -     use :::{};
-LL +     use ::{};
-   |
+ on line 12, column 10
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:13:11
-   |
-LL |     use :::*;
-   |           ^
-   |
+ at $DIR/triple-colon.rs:13:11
 help: use a double colon instead
-   |
-LL -     use :::*;
-LL +     use ::*;
-   |
+ on line 13, column 10
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:17:14
-   |
-LL |     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |              ^
-   |
+ at $DIR/triple-colon.rs:17:14
 help: use a double colon instead
-   |
-LL -     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-LL +     let c: ::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |
+ on line 17, column 13
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:17:20
-   |
-LL |     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |                    ^
-   |
+ at $DIR/triple-colon.rs:17:20
 help: use a double colon instead
-   |
-LL -     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-LL +     let c: :::std::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |
+ on line 17, column 19
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:17:27
-   |
-LL |     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |                           ^
-   |
+ at $DIR/triple-colon.rs:17:27
 help: use a double colon instead
-   |
-LL -     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-LL +     let c: :::std:::cell::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |
+ on line 17, column 26
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:17:34
-   |
-LL |     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |                                  ^
-   |
+ at $DIR/triple-colon.rs:17:34
 help: use a double colon instead
-   |
-LL -     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-LL +     let c: :::std:::cell:::Cell::<u8> = Cell:::<u8>:::new(0);
-   |
+ on line 17, column 33
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:17:48
-   |
-LL |     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |                                                ^
-   |
+ at $DIR/triple-colon.rs:17:48
 help: use a double colon instead
-   |
-LL -     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-LL +     let c: :::std:::cell:::Cell:::<u8> = Cell::<u8>:::new(0);
-   |
+ on line 17, column 47
 
 error: path separator must be a double colon
-  --> $DIR/triple-colon.rs:17:55
-   |
-LL |     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-   |                                                       ^
-   |
+ at $DIR/triple-colon.rs:17:55
 help: use a double colon instead
-   |
-LL -     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>:::new(0);
-LL +     let c: :::std:::cell:::Cell:::<u8> = Cell:::<u8>::new(0);
-   |
+ on line 17, column 54
 
 error: aborting due to 12 previous errors
 

@@ -1,14 +1,8 @@
-error[E0711]: feature `foo` is declared stable since 1.29.0, but was previously declared stable since 1.0.0
-  --> $DIR/E0711.rs:10:1
-   |
-LL | #[stable(feature = "foo", since = "1.29.0")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0711: feature `foo` is declared stable since 1.29.0, but was previously declared stable since 1.0.0
+ at $DIR/E0711.rs:10:1
 
-error[E0711]: feature `foo` is declared unstable, but was previously declared stable
-  --> $DIR/E0711.rs:14:1
-   |
-LL | #[unstable(feature = "foo", issue = "none")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0711: feature `foo` is declared unstable, but was previously declared stable
+ at $DIR/E0711.rs:14:1
 
 error: aborting due to 2 previous errors
 

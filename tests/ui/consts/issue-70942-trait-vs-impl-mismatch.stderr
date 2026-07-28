@@ -1,14 +1,7 @@
-error[E0326]: implemented const `VALUE` has an incompatible type for trait
-  --> $DIR/issue-70942-trait-vs-impl-mismatch.rs:8:18
-   |
-LL |     const VALUE: i32 = 0;
-   |                  ^^^ expected `usize`, found `i32`
-   |
+error E0326: implemented const `VALUE` has an incompatible type for trait
+ at $DIR/issue-70942-trait-vs-impl-mismatch.rs:8:18: expected `usize`, found `i32`
 note: type in trait
-  --> $DIR/issue-70942-trait-vs-impl-mismatch.rs:2:18
-   |
-LL |     const VALUE: usize;
-   |                  ^^^^^
+ at $DIR/issue-70942-trait-vs-impl-mismatch.rs:2:18
 
 error: aborting due to 1 previous error
 

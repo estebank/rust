@@ -1,36 +1,18 @@
 error: lifetime may not live long enough
-  --> $DIR/normalization-self.rs:9:14
-   |
-LL |     fn test(x: &(), y: &()) {
-   |                - let's call the lifetime of this reference `'1`
-LL |         Self(x);
-   |              ^ this usage requires that `'1` must outlive `'static`
+ at $DIR/normalization-self.rs:9:14: this usage requires that `'1` must outlive `'static`
+  on line 8, column 16: let's call the lifetime of this reference `'1`
 
 error: lifetime may not live long enough
-  --> $DIR/normalization-self.rs:11:16
-   |
-LL |     fn test(x: &(), y: &()) {
-   |                        - let's call the lifetime of this reference `'2`
-...
-LL |         let _: Self = MyTuple(y);
-   |                ^^^^ type annotation requires that `'2` must outlive `'static`
+ at $DIR/normalization-self.rs:11:16: type annotation requires that `'2` must outlive `'static`
+  on line 8, column 24: let's call the lifetime of this reference `'2`
 
 error: lifetime may not live long enough
-  --> $DIR/normalization-self.rs:19:21
-   |
-LL |     fn test(x: &(), y: &()) {
-   |                - let's call the lifetime of this reference `'1`
-LL |         Self { val: x };
-   |                     ^ this usage requires that `'1` must outlive `'static`
+ at $DIR/normalization-self.rs:19:21: this usage requires that `'1` must outlive `'static`
+  on line 18, column 16: let's call the lifetime of this reference `'1`
 
 error: lifetime may not live long enough
-  --> $DIR/normalization-self.rs:21:16
-   |
-LL |     fn test(x: &(), y: &()) {
-   |                        - let's call the lifetime of this reference `'2`
-...
-LL |         let _: Self = MyStruct { val: y };
-   |                ^^^^ type annotation requires that `'2` must outlive `'static`
+ at $DIR/normalization-self.rs:21:16: type annotation requires that `'2` must outlive `'static`
+  on line 18, column 24: let's call the lifetime of this reference `'2`
 
 error: aborting due to 4 previous errors
 

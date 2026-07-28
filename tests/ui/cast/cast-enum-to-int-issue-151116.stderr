@@ -1,37 +1,18 @@
-error[E0606]: casting `&Priority` as `u8` is invalid
-  --> $DIR/cast-enum-to-int-issue-151116.rs:18:20
-   |
-LL |     let priority = priority as u8;
-   |                    ^^^^^^^^^^^^^^
-   |
+error E0606: casting `&Priority` as `u8` is invalid
+ at $DIR/cast-enum-to-int-issue-151116.rs:18:20
 help: try dereferencing before the cast
-   |
-LL |     let priority = *priority as u8;
-   |                    +
+ on line 18, column 19, add `*`
 help: add `#[derive(Copy, Clone)]` to the enum definition
-   |
-LL + #[derive(Copy, Clone)]
-LL | enum Priority {
-   |
+ on line 2, column 1, add `#[derive(Copy, Clone)]`
 
-error[E0606]: casting `&Priority` as `u8` is invalid
-  --> $DIR/cast-enum-to-int-issue-151116.rs:21:20
-   |
-LL |     let priority = &Priority::Normal as u8;
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = help: cast through a raw pointer first
+error E0606: casting `&Priority` as `u8` is invalid
+ at $DIR/cast-enum-to-int-issue-151116.rs:21:20
+help: cast through a raw pointer first
 
-error[E0606]: casting `&CopyPriority` as `u8` is invalid
-  --> $DIR/cast-enum-to-int-issue-151116.rs:25:20
-   |
-LL |     let priority = priority as u8;
-   |                    ^^^^^^^^^^^^^^
-   |
+error E0606: casting `&CopyPriority` as `u8` is invalid
+ at $DIR/cast-enum-to-int-issue-151116.rs:25:20
 help: try dereferencing before the cast
-   |
-LL |     let priority = *priority as u8;
-   |                    +
+ on line 25, column 19, add `*`
 
 error: aborting due to 3 previous errors
 

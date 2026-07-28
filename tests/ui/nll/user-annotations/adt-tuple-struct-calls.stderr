@@ -1,59 +1,29 @@
-error[E0597]: `c` does not live long enough
-  --> $DIR/adt-tuple-struct-calls.rs:27:7
-   |
-LL |     let c = 66;
-   |         - binding `c` declared here
-LL |     let f = SomeStruct::<&'static u32>;
-   |             -------------------------- assignment requires that `c` is borrowed for `'static`
-LL |     f(&c);
-   |       ^^ borrowed value does not live long enough
-LL | }
-   | - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/adt-tuple-struct-calls.rs:27:7: borrowed value does not live long enough
+  on line 25, column 9: binding `c` declared here
+  on line 26, column 13: assignment requires that `c` is borrowed for `'static`
+  on line 28: `c` dropped here while still borrowed
 
-error[E0597]: `c` does not live long enough
-  --> $DIR/adt-tuple-struct-calls.rs:33:7
-   |
-LL | fn annot_reference_named_lifetime<'a>(_d: &'a u32) {
-   |                                   -- lifetime `'a` defined here
-LL |     let c = 66;
-   |         - binding `c` declared here
-LL |     let f = SomeStruct::<&'a u32>;
-   |             --------------------- assignment requires that `c` is borrowed for `'a`
-LL |     f(&c);
-   |       ^^ borrowed value does not live long enough
-LL | }
-   | - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/adt-tuple-struct-calls.rs:33:7: borrowed value does not live long enough
+  on line 30, column 35: lifetime `'a` defined here
+  on line 31, column 9: binding `c` declared here
+  on line 32, column 13: assignment requires that `c` is borrowed for `'a`
+  on line 34: `c` dropped here while still borrowed
 
-error[E0597]: `c` does not live long enough
-  --> $DIR/adt-tuple-struct-calls.rs:45:11
-   |
-LL | fn annot_reference_named_lifetime_in_closure<'a>(_: &'a u32) {
-   |                                              -- lifetime `'a` defined here
-LL |     let _closure = || {
-LL |         let c = 66;
-   |             - binding `c` declared here
-LL |         let f = SomeStruct::<&'a u32>;
-   |                 --------------------- assignment requires that `c` is borrowed for `'a`
-LL |         f(&c);
-   |           ^^ borrowed value does not live long enough
-LL |     };
-   |     - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/adt-tuple-struct-calls.rs:45:11: borrowed value does not live long enough
+  on line 41, column 46: lifetime `'a` defined here
+  on line 43, column 13: binding `c` declared here
+  on line 44, column 17: assignment requires that `c` is borrowed for `'a`
+  on line 46: `c` dropped here while still borrowed
 
-error[E0597]: `c` does not live long enough
-  --> $DIR/adt-tuple-struct-calls.rs:53:11
-   |
-LL |     let f = SomeStruct::<&'a u32>;
-   |         - lifetime `'1` appears in the type of `f`
-LL |     let _closure = || {
-LL |         let c = 66;
-   |             - binding `c` declared here
-LL |         f(&c);
-   |         --^^-
-   |         | |
-   |         | borrowed value does not live long enough
-   |         argument requires that `c` is borrowed for `'1`
-LL |     };
-   |     - `c` dropped here while still borrowed
+error E0597: `c` does not live long enough
+ at $DIR/adt-tuple-struct-calls.rs:53:11: borrowed value does not live long enough
+  on line 50, column 9: lifetime `'1` appears in the type of `f`
+  on line 52, column 13: binding `c` declared here
+  on line 53: argument requires that `c` is borrowed for `'1`
+  on line 54: `c` dropped here while still borrowed
 
 error: aborting due to 4 previous errors
 

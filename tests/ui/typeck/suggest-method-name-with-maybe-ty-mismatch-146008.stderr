@@ -1,13 +1,7 @@
-error[E0615]: attempted to take value of method `chat_template` on type `LlamaModel`
-  --> $DIR/suggest-method-name-with-maybe-ty-mismatch-146008.rs:13:30
-   |
-LL |     template_from_str(&model.chat_template);
-   |                              ^^^^^^^^^^^^^ method, not a field
-   |
+error E0615: attempted to take value of method `chat_template` on type `LlamaModel`
+ at $DIR/suggest-method-name-with-maybe-ty-mismatch-146008.rs:13:30: method, not a field
 help: use parentheses to call the method
-   |
-LL |     template_from_str(&model.chat_template());
-   |                                           ++
+ on line 13, column 42, add `()`
 
 error: aborting due to 1 previous error
 

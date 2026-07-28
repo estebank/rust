@@ -1,86 +1,38 @@
-error[E0565]: malformed `proc_macro` attribute input
-  --> $DIR/invalid-attributes.rs:10:3
-   |
-LL | #[proc_macro = "test"]
-   |   ^^^^^^^^^^^--------
-   |              |
-   |              didn't expect any arguments here
-   |
+error E0565: malformed `proc_macro` attribute input
+ at $DIR/invalid-attributes.rs:10:3
+  on line 10, column 14: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[proc_macro = "test"]
-LL + #[proc_macro]
-   |
+ on line 10, column 2, replace with `proc_macro`
 
-error[E0565]: malformed `proc_macro` attribute input
-  --> $DIR/invalid-attributes.rs:15:3
-   |
-LL | #[proc_macro()]
-   |   ^^^^^^^^^^--
-   |             |
-   |             didn't expect any arguments here
-   |
+error E0565: malformed `proc_macro` attribute input
+ at $DIR/invalid-attributes.rs:15:3
+  on line 15, column 13: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[proc_macro()]
-LL + #[proc_macro]
-   |
+ on line 15, column 2, replace with `proc_macro`
 
-error[E0565]: malformed `proc_macro` attribute input
-  --> $DIR/invalid-attributes.rs:20:3
-   |
-LL | #[proc_macro(x)]
-   |   ^^^^^^^^^^---
-   |             |
-   |             didn't expect any arguments here
-   |
+error E0565: malformed `proc_macro` attribute input
+ at $DIR/invalid-attributes.rs:20:3
+  on line 20, column 13: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[proc_macro(x)]
-LL + #[proc_macro]
-   |
+ on line 20, column 2, replace with `proc_macro`
 
-error[E0565]: malformed `proc_macro_attribute` attribute input
-  --> $DIR/invalid-attributes.rs:25:3
-   |
-LL | #[proc_macro_attribute = "test"]
-   |   ^^^^^^^^^^^^^^^^^^^^^--------
-   |                        |
-   |                        didn't expect any arguments here
-   |
+error E0565: malformed `proc_macro_attribute` attribute input
+ at $DIR/invalid-attributes.rs:25:3
+  on line 25, column 24: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[proc_macro_attribute = "test"]
-LL + #[proc_macro_attribute]
-   |
+ on line 25, column 2, replace with `proc_macro_attribute`
 
-error[E0565]: malformed `proc_macro_attribute` attribute input
-  --> $DIR/invalid-attributes.rs:30:3
-   |
-LL | #[proc_macro_attribute()]
-   |   ^^^^^^^^^^^^^^^^^^^^--
-   |                       |
-   |                       didn't expect any arguments here
-   |
+error E0565: malformed `proc_macro_attribute` attribute input
+ at $DIR/invalid-attributes.rs:30:3
+  on line 30, column 23: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[proc_macro_attribute()]
-LL + #[proc_macro_attribute]
-   |
+ on line 30, column 2, replace with `proc_macro_attribute`
 
-error[E0565]: malformed `proc_macro_attribute` attribute input
-  --> $DIR/invalid-attributes.rs:35:3
-   |
-LL | #[proc_macro_attribute(x)]
-   |   ^^^^^^^^^^^^^^^^^^^^---
-   |                       |
-   |                       didn't expect any arguments here
-   |
+error E0565: malformed `proc_macro_attribute` attribute input
+ at $DIR/invalid-attributes.rs:35:3
+  on line 35, column 23: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[proc_macro_attribute(x)]
-LL + #[proc_macro_attribute]
-   |
+ on line 35, column 2, replace with `proc_macro_attribute`
 
 error: aborting due to 6 previous errors
 

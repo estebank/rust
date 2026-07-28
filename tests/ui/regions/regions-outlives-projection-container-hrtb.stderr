@@ -1,28 +1,14 @@
 error: lifetime may not live long enough
-  --> $DIR/regions-outlives-projection-container-hrtb.rs:27:12
-   |
-LL | fn with_assoc<'a,'b>() {
-   |               -- -- lifetime `'b` defined here
-   |               |
-   |               lifetime `'a` defined here
-...
-LL |     let _: &'a WithHrAssoc<TheType<'b>> = loop { };
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/regions-outlives-projection-container-hrtb.rs:27:12: requires that `'b` must outlive `'a`
+  on line 24, column 15: lifetime `'a` defined here
+  on line 24, column 18: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
 error: lifetime may not live long enough
-  --> $DIR/regions-outlives-projection-container-hrtb.rs:46:12
-   |
-LL | fn with_assoc_sub<'a,'b>() {
-   |                   -- -- lifetime `'b` defined here
-   |                   |
-   |                   lifetime `'a` defined here
-...
-LL |     let _: &'a WithHrAssocSub<TheType<'b>> = loop { };
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/regions-outlives-projection-container-hrtb.rs:46:12: requires that `'b` must outlive `'a`
+  on line 42, column 19: lifetime `'a` defined here
+  on line 42, column 22: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
 error: aborting due to 2 previous errors
 

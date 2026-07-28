@@ -1,15 +1,8 @@
-error[E0597]: `local` does not live long enough
-  --> $DIR/nesting-lifetime-failure.rs:8:53
-   |
-LL |     let local = 0;
-   |         ----- binding `local` declared here
-LL |     let _: impl IntoIterator<Item = impl Static> = [&local];
-   |            -------------------------------------    ^^^^^^ borrowed value does not live long enough
-   |            |
-   |            type annotation requires that `local` is borrowed for `'static`
-LL |
-LL | }
-   | - `local` dropped here while still borrowed
+error E0597: `local` does not live long enough
+ at $DIR/nesting-lifetime-failure.rs:8:53: borrowed value does not live long enough
+  on line 7, column 9: binding `local` declared here
+  on line 8, column 12: type annotation requires that `local` is borrowed for `'static`
+  on line 10: `local` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

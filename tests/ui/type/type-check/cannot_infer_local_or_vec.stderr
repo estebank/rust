@@ -1,13 +1,8 @@
-error[E0282]: type annotations needed for `Vec<_>`
-  --> $DIR/cannot_infer_local_or_vec.rs:2:9
-   |
-LL |     let x = vec![];
-   |         ^   ------ type must be known at this point
-   |
+error E0282: type annotations needed for `Vec<_>`
+ at $DIR/cannot_infer_local_or_vec.rs:2:9
+  on line 2, column 13: type must be known at this point
 help: consider giving `x` an explicit type, where the placeholder `_` is specified
-   |
-LL |     let x: Vec<_> = vec![];
-   |          ++++++++
+ on line 2, column 9, add `: Vec<_>`
 
 error: aborting due to 1 previous error
 

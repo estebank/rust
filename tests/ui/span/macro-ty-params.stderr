@@ -1,20 +1,11 @@
 error: generic arguments in macro path
-  --> $DIR/macro-ty-params.rs:10:10
-   |
-LL |     foo::<T>!();
-   |          ^^^
+ at $DIR/macro-ty-params.rs:10:10
 
 error: generic arguments in macro path
-  --> $DIR/macro-ty-params.rs:11:10
-   |
-LL |     foo::<>!();
-   |          ^^
+ at $DIR/macro-ty-params.rs:11:10
 
 error: unexpected generic arguments in path
-  --> $DIR/macro-ty-params.rs:12:15
-   |
-LL |     m!(Default<>);
-   |               ^^
+ at $DIR/macro-ty-params.rs:12:15
 
 error: aborting due to 3 previous errors
 

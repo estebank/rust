@@ -1,13 +1,7 @@
-error[E0726]: implicit elided lifetime not allowed here
-  --> $DIR/wf-in-foreign-fn-decls-issue-80468.rs:13:16
-   |
-LL | impl Trait for Ref {}
-   |                ^^^ expected lifetime parameter
-   |
+error E0726: implicit elided lifetime not allowed here
+ at $DIR/wf-in-foreign-fn-decls-issue-80468.rs:13:16: expected lifetime parameter
 help: indicate the anonymous lifetime
-   |
-LL | impl Trait for Ref<'_> {}
-   |                   ++++
+ on line 13, column 18, add `<'_>`
 
 error: aborting due to 1 previous error
 

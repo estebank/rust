@@ -1,29 +1,14 @@
 error: unused return value of `foo` that must be used
-  --> $DIR/must_use-unit.rs:13:5
-   |
-LL |     foo();
-   |     ^^^^^
-   |
+ at $DIR/must_use-unit.rs:13:5
 note: the lint level is defined here
-  --> $DIR/must_use-unit.rs:2:9
-   |
-LL | #![deny(unused_must_use)]
-   |         ^^^^^^^^^^^^^^^
+ at $DIR/must_use-unit.rs:2:9
 help: use `let _ = ...` to ignore the resulting value
-   |
-LL |     let _ = foo();
-   |     +++++++
+ on line 13, column 4, add `let _ = `
 
 error: unused return value of `bar` that must be used
-  --> $DIR/must_use-unit.rs:15:5
-   |
-LL |     bar();
-   |     ^^^^^
-   |
+ at $DIR/must_use-unit.rs:15:5
 help: use `let _ = ...` to ignore the resulting value
-   |
-LL |     let _ = bar();
-   |     +++++++
+ on line 15, column 4, add `let _ = `
 
 error: aborting due to 2 previous errors
 

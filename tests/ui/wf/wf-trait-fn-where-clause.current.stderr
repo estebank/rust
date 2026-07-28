@@ -1,18 +1,9 @@
-error[E0277]: the trait bound `Self: Eq` is not satisfied
-  --> $DIR/wf-trait-fn-where-clause.rs:18:20
-   |
-LL |         Bar<Self>: Copy;
-   |                    ^^^^ the trait `Eq` is not implemented for `Self`
-   |
+error E0277: the trait bound `Self: Eq` is not satisfied
+ at $DIR/wf-trait-fn-where-clause.rs:18:20: the trait `Eq` is not implemented for `Self`
 note: required by a bound in `Bar`
-  --> $DIR/wf-trait-fn-where-clause.rs:10:15
-   |
-LL | struct Bar<T: Eq + ?Sized> {
-   |               ^^ required by this bound in `Bar`
+ at $DIR/wf-trait-fn-where-clause.rs:10:15: required by this bound in `Bar`
 help: consider further restricting `Self`
-   |
-LL |         Bar<Self>: Copy, Self: Eq;
-   |                        ++++++++++
+ on line 18, column 23, add `, Self: Eq`
 
 error: aborting due to 1 previous error
 

@@ -1,54 +1,30 @@
-error[E0308]: mismatched types
-  --> $DIR/const-pats-do-not-mislead-inference.rs:32:12
-   |
-LL |     if let b"..." = &&x {}
-   |            ^^^^^^   --- this expression has type `&&_`
-   |            |
-   |            expected `&&_`, found `&[u8; 3]`
-   |
-   = note: expected reference `&&_`
-              found reference `&'static [u8; 3]`
+error E0308: mismatched types
+ at $DIR/const-pats-do-not-mislead-inference.rs:32:12: expected `&&_`, found `&[u8; 3]`
+  on line 32, column 21: this expression has type `&&_`
+note: expected reference `&&_`
+         found reference `&'static [u8; 3]`
 
-error[E0308]: mismatched types
-  --> $DIR/const-pats-do-not-mislead-inference.rs:38:12
-   |
-LL |     if let "..." = &Box::new(x) {}
-   |            ^^^^^   ------------ this expression has type `&Box<_>`
-   |            |
-   |            expected `&Box<_>`, found `&str`
-   |
-   = note: expected reference `&Box<_>`
-              found reference `&'static str`
+error E0308: mismatched types
+ at $DIR/const-pats-do-not-mislead-inference.rs:38:12: expected `&Box<_>`, found `&str`
+  on line 38, column 20: this expression has type `&Box<_>`
+note: expected reference `&Box<_>`
+         found reference `&'static str`
 help: consider dereferencing to access the inner value using the `Deref` trait
-   |
-LL |     if let "..." = &*Box::new(x) {}
-   |                     +
+ on line 38, column 19, replace with `&*Box::new(x)`
 
-error[E0308]: mismatched types
-  --> $DIR/const-pats-do-not-mislead-inference.rs:44:12
-   |
-LL |     if let b"..." = Box::new(&x) {}
-   |            ^^^^^^   ------------ this expression has type `Box<&_>`
-   |            |
-   |            expected `Box<&_>`, found `&[u8; 3]`
-   |
-   = note: expected struct `Box<&_>`
-           found reference `&'static [u8; 3]`
+error E0308: mismatched types
+ at $DIR/const-pats-do-not-mislead-inference.rs:44:12: expected `Box<&_>`, found `&[u8; 3]`
+  on line 44, column 21: this expression has type `Box<&_>`
+note: expected struct `Box<&_>`
+      found reference `&'static [u8; 3]`
 help: consider dereferencing to access the inner value using the `Deref` trait
-   |
-LL |     if let b"..." = *Box::new(&x) {}
-   |                     +
+ on line 44, column 20, replace with `*Box::new(&x)`
 
-error[E0308]: mismatched types
-  --> $DIR/const-pats-do-not-mislead-inference.rs:50:12
-   |
-LL |     if let "..." = &mut x {}
-   |            ^^^^^   ------ this expression has type `&mut _`
-   |            |
-   |            types differ in mutability
-   |
-   = note: expected mutable reference `&mut _`
-                      found reference `&'static str`
+error E0308: mismatched types
+ at $DIR/const-pats-do-not-mislead-inference.rs:50:12: types differ in mutability
+  on line 50, column 20: this expression has type `&mut _`
+note: expected mutable reference `&mut _`
+                 found reference `&'static str`
 
 error: aborting due to 4 previous errors
 

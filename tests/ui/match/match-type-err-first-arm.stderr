@@ -1,61 +1,23 @@
-error[E0308]: mismatched types
-  --> $DIR/match-type-err-first-arm.rs:8:15
-   |
-LL | fn test_func1(n: i32) -> i32 {
-   |                          --- expected `i32` because of return type
-LL |     match n {
-LL |         12 => 'b',
-   |               ^^^ expected `i32`, found `char`
-   |
+error E0308: mismatched types
+ at $DIR/match-type-err-first-arm.rs:8:15: expected `i32`, found `char`
+  on line 6, column 26: expected `i32` because of return type
 help: you can cast a `char` to an `i32`, since a `char` always occupies 4 bytes
-   |
-LL |         12 => 'b' as i32,
-   |                   ++++++
+ on line 8, column 17, add ` as i32`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-type-err-first-arm.rs:18:14
-   |
-LL |       let x = match n {
-   |  _____________-
-LL | |         12 => 'b',
-   | |               --- this is found to be of type `char`
-LL | |         _ => 42,
-   | |              ^^ expected `char`, found integer
-...  |
-LL | |     };
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/match-type-err-first-arm.rs:18:14: expected `char`, found integer
+  on line 16, column 13 to line 21, column 6: `match` arms have incompatible types
+  on line 17, column 15: this is found to be of type `char`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-type-err-first-arm.rs:34:14
-   |
-LL |       let x = match n {
-   |  _____________-
-LL | |         1 => 'b',
-LL | |         2 => 'b',
-LL | |         3 => 'b',
-...  |
-LL | |         6 => 'b',
-   | |              --- this and all prior arms are found to be of type `char`
-LL | |
-LL | |         _ => 42,
-   | |              ^^ expected `char`, found integer
-...  |
-LL | |     };
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/match-type-err-first-arm.rs:34:14: expected `char`, found integer
+  on line 26, column 13 to line 37, column 6: `match` arms have incompatible types
+  on line 32, column 14: this and all prior arms are found to be of type `char`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-type-err-first-arm.rs:46:17
-   |
-LL | /     match Some(0u32) {
-LL | |         Some(x) => {
-LL | |             x
-   | |             - this is found to be of type `u32`
-LL | |         },
-LL | |         None => {}
-   | |                 ^^ expected `u32`, found `()`
-...  |
-LL | |     };
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/match-type-err-first-arm.rs:46:17: expected `u32`, found `()`
+  on line 42 to line 49, column 6: `match` arms have incompatible types
+  on line 44: this is found to be of type `u32`
 
 error: aborting due to 4 previous errors
 

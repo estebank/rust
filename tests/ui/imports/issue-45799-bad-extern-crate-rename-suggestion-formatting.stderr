@@ -1,14 +1,8 @@
-error[E0259]: the name `std` is defined multiple times
-  --> $DIR/issue-45799-bad-extern-crate-rename-suggestion-formatting.rs:4:1
-   |
-LL | extern crate std;
-   | ^^^^^^^^^^^^^^^^^ `std` reimported here
-   |
-   = note: `std` must be defined only once in the type namespace of this module
+error E0259: the name `std` is defined multiple times
+ at $DIR/issue-45799-bad-extern-crate-rename-suggestion-formatting.rs:4:1: `std` reimported here
+note: `std` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | extern crate std as other_std;
-   |                  ++++++++++++
+ on line 4, replace with `extern crate std as other_std;`
 
 error: aborting due to 1 previous error
 

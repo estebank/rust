@@ -1,8 +1,5 @@
-error[E0433]: too many leading `super` keywords within `crate`
-  --> $DIR/issue-82156.rs:2:5
-   |
-LL |     super();
-   |     ^^^^^ this `super` would go above the crate root
+error E0433: too many leading `super` keywords within `crate`
+ at $DIR/issue-82156.rs:2:5: this `super` would go above the crate root
 
 error: aborting due to 1 previous error
 

@@ -1,39 +1,20 @@
-error[E0609]: no field `d` on type `&A`
-  --> $DIR/struct-pat-derived-error.rs:8:31
-   |
-LL |         let A { x, y } = self.d;
-   |                               ^ unknown field
-   |
+error E0609: no field `d` on type `&A`
+ at $DIR/struct-pat-derived-error.rs:8:31: unknown field
 help: a field with a similar name exists
-   |
-LL -         let A { x, y } = self.d;
-LL +         let A { x, y } = self.b;
-   |
+ on line 8, column 30, replace with `b`
 
-error[E0026]: struct `A` does not have fields named `x`, `y`
-  --> $DIR/struct-pat-derived-error.rs:8:17
-   |
-LL |         let A { x, y } = self.d;
-   |                 ^  ^ struct `A` does not have these fields
+error E0026: struct `A` does not have fields named `x`, `y`
+ at $DIR/struct-pat-derived-error.rs:8:17
+  on line 8, column 20: struct `A` does not have these fields
 
-error[E0027]: pattern does not mention fields `b`, `c`
-  --> $DIR/struct-pat-derived-error.rs:8:13
-   |
-LL |         let A { x, y } = self.d;
-   |             ^^^^^^^^^^ missing fields `b`, `c`
-   |
+error E0027: pattern does not mention fields `b`, `c`
+ at $DIR/struct-pat-derived-error.rs:8:13: missing fields `b`, `c`
 help: include the missing fields in the pattern
-   |
-LL |         let A { x, y, b, c } = self.d;
-   |                     ++++++
+ on line 8, column 20, replace with `, b, c }`
 help: if you don't care about these missing fields, you can explicitly ignore them
-   |
-LL |         let A { x, y, b: _, c: _ } = self.d;
-   |                     ++++++++++++
+ on line 8, column 20, replace with `, b: _, c: _ }`
 help: or always ignore missing fields here
-   |
-LL |         let A { x, y, .. } = self.d;
-   |                     ++++
+ on line 8, column 20, replace with `, .. }`
 
 error: aborting due to 3 previous errors
 

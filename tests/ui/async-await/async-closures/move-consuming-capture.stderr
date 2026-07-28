@@ -1,25 +1,13 @@
-error[E0382]: use of moved value: `x`
-  --> $DIR/move-consuming-capture.rs:15:9
-   |
-LL |         let x = async move || {
-   |             - move occurs because `x` has type `{async closure@$DIR/move-consuming-capture.rs:11:17: 11:30}`, which does not implement the `Copy` trait
-...
-LL |         x().await;
-   |         --- `x` moved due to this method call
-LL |         x().await;
-   |         ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/move-consuming-capture.rs:15:9: value used here after move
+  on line 11, column 13: move occurs because `x` has type `{async closure@$DIR/move-consuming-capture.rs:11:17: 11:30}`, which does not implement the `Copy` trait
+  on line 14: `x` moved due to this method call
 note: `async_call_once` takes ownership of the receiver `self`, which moves `x`
-  --> $SRC_DIR/core/src/ops/async_function.rs:LL:COL
+ at $SRC_DIR/core/src/ops/async_function.rs:LL:COL
 help: you could `clone` the value and consume it, if the `NoCopy: Clone` trait bound could be satisfied
-   |
-LL |         x.clone()().await;
-   |          ++++++++
+ on line 14, column 9, add `.clone()`
 help: consider annotating `NoCopy` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct NoCopy;
-   |
+ on line 6, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 1 previous error
 

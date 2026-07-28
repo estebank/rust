@@ -1,93 +1,41 @@
-error[E0423]: cannot find function, tuple struct or tuple variant `Bar` in this scope
-  --> $DIR/privacy-ns1.rs:21:5
-   |
-LL |     pub struct Baz;
-   |     --------------- similarly named unit struct `Baz` defined here
-...
-LL |     Bar();
-   |     ^^^
-   |
-   = note: a trait named `Bar` exists in another namespace
+error E0423: cannot find function, tuple struct or tuple variant `Bar` in this scope
+ at $DIR/privacy-ns1.rs:21:5
+  on line 13: similarly named unit struct `Baz` defined here
+note: a trait named `Bar` exists in another namespace
 note: these functions exist but are inaccessible
-  --> $DIR/privacy-ns1.rs:15:5
-   |
-LL |     fn Bar() { }
-   |     ^^^^^^^^ `foo1::Bar`: not accessible
-...
-LL |     fn Bar() { }
-   |     ^^^^^^^^ `foo3::Bar`: not accessible
+ at $DIR/privacy-ns1.rs:15:5: `foo1::Bar`: not accessible
+  on line 46: `foo3::Bar`: not accessible
 help: a unit struct with a similar name exists
-   |
-LL -     Bar();
-LL +     Baz();
-   |
+ on line 21, column 4, replace with `Baz`
 help: consider importing this function instead
-   |
-LL + use foo2::Bar;
-   |
+ on line 10, column 1, add `use foo2::Bar;`
 
-error[E0425]: cannot find function, tuple struct or tuple variant `Bar` in this scope
-  --> $DIR/privacy-ns1.rs:52:5
-   |
-LL |     pub struct Baz;
-   |     --------------- similarly named unit struct `Baz` defined here
-...
-LL |     Bar();
-   |     ^^^
-   |
+error E0425: cannot find function, tuple struct or tuple variant `Bar` in this scope
+ at $DIR/privacy-ns1.rs:52:5
+  on line 44: similarly named unit struct `Baz` defined here
 note: these functions exist but are inaccessible
-  --> $DIR/privacy-ns1.rs:15:5
-   |
-LL |     fn Bar() { }
-   |     ^^^^^^^^ `foo1::Bar`: not accessible
-...
-LL |     fn Bar() { }
-   |     ^^^^^^^^ `foo3::Bar`: not accessible
+ at $DIR/privacy-ns1.rs:15:5: `foo1::Bar`: not accessible
+  on line 46: `foo3::Bar`: not accessible
 help: a unit struct with a similar name exists
-   |
-LL -     Bar();
-LL +     Baz();
-   |
+ on line 52, column 4, replace with `Baz`
 help: consider importing this function
-   |
-LL + use foo2::Bar;
-   |
+ on line 10, column 1, add `use foo2::Bar;`
 
-error[E0425]: cannot find type `Bar` in this scope
-  --> $DIR/privacy-ns1.rs:53:17
-   |
-LL |     pub struct Baz;
-   |     --------------- similarly named struct `Baz` defined here
-...
-LL |     let _x: Box<Bar>;
-   |                 ^^^
-   |
+error E0425: cannot find type `Bar` in this scope
+ at $DIR/privacy-ns1.rs:53:17
+  on line 44: similarly named struct `Baz` defined here
 note: these traits exist but are inaccessible
-  --> $DIR/privacy-ns1.rs:26:5
-   |
-LL |     trait Bar {
-   |     ^^^^^^^^^ `foo2::Bar`: not accessible
-...
-LL |     trait Bar {
-   |     ^^^^^^^^^ `foo3::Bar`: not accessible
+ at $DIR/privacy-ns1.rs:26:5: `foo2::Bar`: not accessible
+  on line 42: `foo3::Bar`: not accessible
 help: a struct with a similar name exists
-   |
-LL -     let _x: Box<Bar>;
-LL +     let _x: Box<Baz>;
-   |
+ on line 53, column 16, replace with `Baz`
 help: consider importing this trait
-   |
-LL + use foo1::Bar;
-   |
+ on line 10, column 1, add `use foo1::Bar;`
 
-error[E0747]: constant provided when a type was expected
-  --> $DIR/privacy-ns1.rs:36:17
-   |
-LL |     let _x: Box<Bar>;
-   |                 ^^^
-   |
-   = help: `Bar` is a function item, not a type
-   = help: function item types cannot be named directly
+error E0747: constant provided when a type was expected
+ at $DIR/privacy-ns1.rs:36:17
+help: `Bar` is a function item, not a type
+help: function item types cannot be named directly
 
 error: aborting due to 4 previous errors
 

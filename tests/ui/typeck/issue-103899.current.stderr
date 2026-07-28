@@ -1,14 +1,7 @@
-error[E0277]: the trait bound `(): BaseWithAssoc` is not satisfied
-  --> $DIR/issue-103899.rs:24:54
-   |
-LL | fn trigger<L: WrapperWithAssoc<BaseAssoc = ()>>() -> DoubleProject<L> {
-   |                                                      ^^^^^^^^^^^^^^^^ the trait `BaseWithAssoc` is not implemented for `()`
-   |
+error E0277: the trait bound `(): BaseWithAssoc` is not satisfied
+ at $DIR/issue-103899.rs:24:54: the trait `BaseWithAssoc` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/issue-103899.rs:4:1
-   |
-LL | trait BaseWithAssoc {
-   | ^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-103899.rs:4:1
 
 error: aborting due to 1 previous error
 

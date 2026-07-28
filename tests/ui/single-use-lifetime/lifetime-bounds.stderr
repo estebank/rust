@@ -1,14 +1,8 @@
 error: bounds cannot be used in this context
-  --> $DIR/lifetime-bounds.rs:11:26
-   |
-LL | type FnPtr = for<'a, 'b: 'a> fn(Foo<'a>, Bar<'b>);
-   |                          ^^
+ at $DIR/lifetime-bounds.rs:11:26
 
 error: bounds cannot be used in this context
-  --> $DIR/lifetime-bounds.rs:18:20
-   |
-LL |     T: for<'a, 'b: 'a> WhereBound<'a, 'b>,
-   |                    ^^
+ at $DIR/lifetime-bounds.rs:18:20
 
 error: aborting due to 2 previous errors
 

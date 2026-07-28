@@ -1,8 +1,5 @@
-error[E0608]: cannot index into a value of type `!`
-  --> $DIR/index-bot.rs:2:13
-   |
-LL |     (return)[0];
-   |             ^^^
+error E0608: cannot index into a value of type `!`
+ at $DIR/index-bot.rs:2:13
 
 error: aborting due to 1 previous error
 

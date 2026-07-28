@@ -1,28 +1,15 @@
-error[E0369]: binary operation `==` cannot be applied to type `for<'a> fn(&'a i32) -> &'a i32 {foo}`
-  --> $DIR/issue-77910-2.rs:7:12
-   |
-LL |     if foo == y {}
-   |        --- ^^ - _
-   |        |
-   |        for<'a> fn(&'a i32) -> &'a i32 {foo}
-   |
+error E0369: binary operation `==` cannot be applied to type `for<'a> fn(&'a i32) -> &'a i32 {foo}`
+ at $DIR/issue-77910-2.rs:7:12
+  on line 7, column 8: for<'a> fn(&'a i32) -> &'a i32 {foo}
+  on line 7, column 15: _
 help: use parentheses to call this function
-   |
-LL |     if foo(/* &i32 */) == y {}
-   |           ++++++++++++
+ on line 7, column 10, add `(/* &i32 */)`
 
-error[E0381]: used binding `xs` isn't initialized
-  --> $DIR/issue-77910-2.rs:3:5
-   |
-LL |     let xs;
-   |         -- binding declared here but left uninitialized
-LL |     xs
-   |     ^^ `xs` used here but it isn't initialized
-   |
+error E0381: used binding `xs` isn't initialized
+ at $DIR/issue-77910-2.rs:3:5: `xs` used here but it isn't initialized
+  on line 2, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let xs = &42;
-   |            +++++
+ on line 2, column 10, add ` = &42`
 
 error: aborting due to 2 previous errors
 

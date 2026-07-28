@@ -1,24 +1,12 @@
-error[E0594]: cannot assign to `*x`, which is behind a `&` reference
-  --> $DIR/issue-57989.rs:5:5
-   |
-LL |     *x = 0;
-   |     ^^^^^^ `x` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*x`, which is behind a `&` reference
+ at $DIR/issue-57989.rs:5:5: `x` is a `&` reference, so it cannot be written to
 help: consider changing this to be a mutable reference
-   |
-LL | fn f(x: &mut i32) {
-   |          +++
+ on line 3, column 8, replace with `&mut `
 
-error[E0506]: cannot assign to `*x` because it is borrowed
-  --> $DIR/issue-57989.rs:5:5
-   |
-LL |     let g = &x;
-   |             -- `*x` is borrowed here
-LL |     *x = 0;
-   |     ^^^^^^ `*x` is assigned to here but it was already borrowed
-LL |
-LL |     g;
-   |     - borrow later used here
+error E0506: cannot assign to `*x` because it is borrowed
+ at $DIR/issue-57989.rs:5:5: `*x` is assigned to here but it was already borrowed
+  on line 4, column 13: `*x` is borrowed here
+  on line 7: borrow later used here
 
 error: aborting due to 2 previous errors
 

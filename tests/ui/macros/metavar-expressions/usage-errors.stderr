@@ -1,70 +1,34 @@
 error: `count` can not be placed inside the innermost repetition
-  --> $DIR/usage-errors.rs:15:24
-   |
-LL |     ( $i:ident ) => { ${ count($i) } };
-   |                        ^^^^^^^^^^^^^
+ at $DIR/usage-errors.rs:15:24
 
 error: `count` can not be placed inside the innermost repetition
-  --> $DIR/usage-errors.rs:21:24
-   |
-LL |     ( $i:ident ) => { ${ count($i) } };
-   |                        ^^^^^^^^^^^^^
+ at $DIR/usage-errors.rs:21:24
 
 error: missing `fn` or `struct` for function or struct definition
-  --> $DIR/usage-errors.rs:28:30
-   |
-LL |     ( $( $i:ident ),* ) => { count(i) };
-   |                              ^^^^^
-...
-LL | no_curly__no_rhs_dollar__round !(a, b, c);
-   | ----------------------------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `no_curly__no_rhs_dollar__round` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/usage-errors.rs:28:30
+  on line 32: in this macro invocation
+note: this error originates in the macro `no_curly__no_rhs_dollar__round` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: if you meant to call a macro, try
-   |
-LL |     ( $( $i:ident ),* ) => { count!(i) };
-   |                                   +
+ on line 28, column 29, replace with `count!`
 
 error: missing `fn` or `struct` for function or struct definition
-  --> $DIR/usage-errors.rs:36:23
-   |
-LL |     ( $i:ident ) => { count(i) };
-   |                       ^^^^^
-...
-LL | no_curly__no_rhs_dollar__no_round !(a);
-   | -------------------------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `no_curly__no_rhs_dollar__no_round` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/usage-errors.rs:36:23
+  on line 40: in this macro invocation
+note: this error originates in the macro `no_curly__no_rhs_dollar__no_round` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: if you meant to call a macro, try
-   |
-LL |     ( $i:ident ) => { count!(i) };
-   |                            +
+ on line 36, column 22, replace with `count!`
 
 error: variable `i` is still repeating at this depth
-  --> $DIR/usage-errors.rs:44:36
-   |
-LL |     ( $( $i:ident ),* ) => { count($i) };
-   |                                    ^^
+ at $DIR/usage-errors.rs:44:36
 
-error[E0425]: cannot find value `a` in this scope
-  --> $DIR/usage-errors.rs:54:49
-   |
-LL |     ( $i:ident ) => { count($i) };
-   |                             -- due to this macro variable
-...
-LL | const _: u32 = no_curly__rhs_dollar__no_round! (a);
-   |                                                 ^ not found in this scope
+error E0425: cannot find value `a` in this scope
+ at $DIR/usage-errors.rs:54:49: not found in this scope
+  on line 51, column 29: due to this macro variable
 
-error[E0425]: cannot find function `count` in this scope
-  --> $DIR/usage-errors.rs:51:23
-   |
-LL |     ( $i:ident ) => { count($i) };
-   |                       ^^^^^ not found in this scope
-...
-LL | const _: u32 = no_curly__rhs_dollar__no_round! (a);
-   |                ----------------------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `no_curly__rhs_dollar__no_round` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0425: cannot find function `count` in this scope
+ at $DIR/usage-errors.rs:51:23: not found in this scope
+  on line 54, column 16: in this macro invocation
+note: this error originates in the macro `no_curly__rhs_dollar__no_round` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 7 previous errors
 

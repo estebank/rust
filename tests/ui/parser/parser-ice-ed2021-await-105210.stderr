@@ -1,34 +1,19 @@
 error: mismatched closing delimiter: `}`
-  --> $DIR/parser-ice-ed2021-await-105210.rs:7:58
-   |
-LL |  (( h (const {( default ( await ( await (    (move {await((((}}
-   |                                                    -        ^^ mismatched closing delimiter
-   |                                                    |        |
-   |                                                    |        unclosed delimiter
-   |                                                    closing delimiter possibly meant for this
+ at $DIR/parser-ice-ed2021-await-105210.rs:7:58: unclosed delimiter
+  on line 7, column 59: mismatched closing delimiter
+  on line 7, column 49: closing delimiter possibly meant for this
 
 error: mismatched closing delimiter: `}`
-  --> $DIR/parser-ice-ed2021-await-105210.rs:7:43
-   |
-LL |  (( h (const {( default ( await ( await (    (move {await((((}}
-   |              -                               ^                ^ mismatched closing delimiter
-   |              |                               |
-   |              |                               unclosed delimiter
-   |              closing delimiter possibly meant for this
+ at $DIR/parser-ice-ed2021-await-105210.rs:7:43: unclosed delimiter
+  on line 7, column 60: mismatched closing delimiter
+  on line 7, column 14: closing delimiter possibly meant for this
 
 error: this file contains an unclosed delimiter
-  --> $DIR/parser-ice-ed2021-await-105210.rs:10:52
-   |
-LL | fn box () {
-   |           - unclosed delimiter
-LL |  (( h (const {( default ( await ( await (    (move {await((((}}
-   |  --   - unclosed delimiter
-   |  ||
-   |  |unclosed delimiter
-   |  unclosed delimiter
-...
-LL |
-   |                                                   ^
+ at $DIR/parser-ice-ed2021-await-105210.rs:10:52
+  on line 6, column 11: unclosed delimiter
+  on line 7: unclosed delimiter
+  on line 7, column 3: unclosed delimiter
+  on line 7, column 7: unclosed delimiter
 
 error: aborting due to 3 previous errors
 

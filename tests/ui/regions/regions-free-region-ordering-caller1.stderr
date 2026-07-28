@@ -1,32 +1,15 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/regions-free-region-ordering-caller1.rs:9:27
-   |
-LL | fn call1<'a>(x: &'a usize) {
-   |          -- lifetime `'a` defined here
-...
-LL |     let z: &'a & usize = &(&y);
-   |            -----------    ^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'a`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/regions-free-region-ordering-caller1.rs:9:27: creates a temporary value which is freed while still in use
+  on line 5, column 10: lifetime `'a` defined here
+  on line 9, column 12: type annotation requires that borrow lasts for `'a`
+  on line 12: temporary value is freed at the end of this statement
 
-error[E0597]: `y` does not live long enough
-  --> $DIR/regions-free-region-ordering-caller1.rs:9:27
-   |
-LL | fn call1<'a>(x: &'a usize) {
-   |          -- lifetime `'a` defined here
-...
-LL |     let y: usize = 3;
-   |         - binding `y` declared here
-LL |     let z: &'a & usize = &(&y);
-   |            -----------    ^^^^ borrowed value does not live long enough
-   |            |
-   |            type annotation requires that `y` is borrowed for `'a`
-...
-LL | }
-   | - `y` dropped here while still borrowed
+error E0597: `y` does not live long enough
+ at $DIR/regions-free-region-ordering-caller1.rs:9:27: borrowed value does not live long enough
+  on line 5, column 10: lifetime `'a` defined here
+  on line 8, column 9: binding `y` declared here
+  on line 9, column 12: type annotation requires that `y` is borrowed for `'a`
+  on line 12: `y` dropped here while still borrowed
 
 error: aborting due to 2 previous errors
 

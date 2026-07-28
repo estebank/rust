@@ -1,32 +1,14 @@
 error: cannot find macro `a` in this scope
-  --> $DIR/expand-full-no-resolution.rs:18:18
-   |
-LL |         macro_rules! _a {
-   |         --------------- similarly named macro `_a` defined here
-...
-LL |     format_args!(a!());
-   |                  ^
-   |
+ at $DIR/expand-full-no-resolution.rs:18:18
+  on line 7: similarly named macro `_a` defined here
 help: the leading underscore in `_a` marks it as unused, consider renaming it to `a`
-   |
-LL -         macro_rules! _a {
-LL +         macro_rules! a {
-   |
+ on line 7, column 21, replace with `a`
 
 error: cannot find macro `a` in this scope
-  --> $DIR/expand-full-no-resolution.rs:19:10
-   |
-LL |         macro_rules! _a {
-   |         --------------- similarly named macro `_a` defined here
-...
-LL |     env!(a!());
-   |          ^
-   |
+ at $DIR/expand-full-no-resolution.rs:19:10
+  on line 7: similarly named macro `_a` defined here
 help: the leading underscore in `_a` marks it as unused, consider renaming it to `a`
-   |
-LL -         macro_rules! _a {
-LL +         macro_rules! a {
-   |
+ on line 7, column 21, replace with `a`
 
 error: aborting due to 2 previous errors
 

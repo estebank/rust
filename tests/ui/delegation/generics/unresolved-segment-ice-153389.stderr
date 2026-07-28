@@ -1,8 +1,5 @@
-error[E0425]: cannot find function `missing` in this scope
-  --> $DIR/unresolved-segment-ice-153389.rs:8:11
-   |
-LL |     reuse missing::<> as bar;
-   |           ^^^^^^^ not found in this scope
+error E0425: cannot find function `missing` in this scope
+ at $DIR/unresolved-segment-ice-153389.rs:8:11: not found in this scope
 
 error: aborting due to 1 previous error
 

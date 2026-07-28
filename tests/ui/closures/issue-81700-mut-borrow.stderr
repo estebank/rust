@@ -1,15 +1,8 @@
-error[E0596]: cannot borrow `bar` as mutable, as it is not declared as mutable
-  --> $DIR/issue-81700-mut-borrow.rs:4:5
-   |
-LL |     let bar = || { foo(x); };
-   |                        - calling `bar` requires mutable binding due to mutable borrow of `x`
-LL |     bar();
-   |     ^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `bar` as mutable, as it is not declared as mutable
+ at $DIR/issue-81700-mut-borrow.rs:4:5: cannot borrow as mutable
+  on line 3, column 24: calling `bar` requires mutable binding due to mutable borrow of `x`
 help: consider changing this to be mutable
-   |
-LL |     let mut bar = || { foo(x); };
-   |         +++
+ on line 3, column 8, add `mut `
 
 error: aborting due to 1 previous error
 

@@ -1,18 +1,10 @@
 error: lifetime may not live long enough
-  --> $DIR/unsatisfied-outlives-bounds.rs:10:14
-   |
-LL | fn parametrized0<'any>() {
-   |                  ---- lifetime `'any` defined here
-LL |     let () = C::<'static, &'any ()>;
-   |              ^^^^^^^^^^^^^^^^^^^^^^ requires that `'any` must outlive `'static`
+ at $DIR/unsatisfied-outlives-bounds.rs:10:14: requires that `'any` must outlive `'static`
+  on line 9, column 18: lifetime `'any` defined here
 
 error: lifetime may not live long enough
-  --> $DIR/unsatisfied-outlives-bounds.rs:14:14
-   |
-LL | fn parametrized1<'any>() {
-   |                  ---- lifetime `'any` defined here
-LL |     let () = K::<'static, 'any>;
-   |              ^^^^^^^^^^^^^^^^^^ requires that `'any` must outlive `'static`
+ at $DIR/unsatisfied-outlives-bounds.rs:14:14: requires that `'any` must outlive `'static`
+  on line 13, column 18: lifetime `'any` defined here
 
 error: aborting due to 2 previous errors
 

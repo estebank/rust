@@ -1,26 +1,13 @@
 error: `#[doc(test(...)]` takes a list of attributes
-  --> $DIR/doc-test-attr.rs:4:8
-   |
-LL | #![doc(test)]
-   |        ^^^^
-   |
+ at $DIR/doc-test-attr.rs:4:8
 note: the lint level is defined here
-  --> $DIR/doc-test-attr.rs:2:9
-   |
-LL | #![deny(invalid_doc_attributes)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/doc-test-attr.rs:2:9
 
 error: `#[doc(test(...)]` takes a list of attributes
-  --> $DIR/doc-test-attr.rs:6:13
-   |
-LL | #![doc(test = "hello")]
-   |             ^^^^^^^^^
+ at $DIR/doc-test-attr.rs:6:13
 
 error: unknown `doc(test)` attribute `a`
-  --> $DIR/doc-test-attr.rs:8:13
-   |
-LL | #![doc(test(a))]
-   |             ^
+ at $DIR/doc-test-attr.rs:8:13
 
 error: aborting due to 3 previous errors
 

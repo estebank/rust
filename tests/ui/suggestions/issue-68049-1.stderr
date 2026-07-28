@@ -1,10 +1,6 @@
-error[E0594]: cannot assign to `self.0`, which is behind a `&` reference
-  --> $DIR/issue-68049-1.rs:7:9
-   |
-LL |     unsafe fn alloc(&self, _layout: Layout) -> *mut u8 {
-   |                     ----- this is an immutable reference
-LL |         self.0 += 1;
-   |         ^^^^^^^^^^^ `self` is a `&` reference, so it cannot be written to
+error E0594: cannot assign to `self.0`, which is behind a `&` reference
+ at $DIR/issue-68049-1.rs:7:9: `self` is a `&` reference, so it cannot be written to
+  on line 6, column 21: this is an immutable reference
 
 error: aborting due to 1 previous error
 

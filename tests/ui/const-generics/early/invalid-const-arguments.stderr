@@ -1,138 +1,63 @@
-error[E0425]: cannot find const `N` in this scope
-  --> $DIR/invalid-const-arguments.rs:5:16
-   |
-LL | struct A<const N: u8>;
-   |          ----------- corresponding const parameter on the type defined here
-LL | trait Foo {}
-LL | impl Foo for A<N> {}
-   |                ^ not found in this scope
-   |
+error E0425: cannot find const `N` in this scope
+ at $DIR/invalid-const-arguments.rs:5:16: not found in this scope
+  on line 3, column 10: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `N` on the impl
-   |
-LL | impl<const N: u8> Foo for A<N> {}
-   |     +++++++++++++
+ on line 5, column 4, add `<const N: u8>`
 
-error[E0425]: cannot find const `T` in this scope
-  --> $DIR/invalid-const-arguments.rs:14:32
-   |
-LL | struct C<const C: u8, const N: u8>;
-   |                       ----------- corresponding const parameter on the type defined here
-LL | impl<const N: u8> Foo for C<N, T> {}
-   |                                ^ not found in this scope
-   |
+error E0425: cannot find const `T` in this scope
+ at $DIR/invalid-const-arguments.rs:14:32: not found in this scope
+  on line 13, column 23: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `T` on the impl
-   |
-LL | impl<const N: u8, const T: u8> Foo for C<N, T> {}
-   |                 +++++++++++++
+ on line 14, column 16, add `, const T: u8`
 
-error[E0425]: cannot find const `E` in this scope
-  --> $DIR/invalid-const-arguments.rs:19:16
-   |
-LL | struct D<const E: u8, const X: u8, const P: u32>;
-   |          ----------- corresponding const parameter on the type defined here
-LL | impl Foo for D<E, X, P> {}
-   |                ^ not found in this scope
-   |
+error E0425: cannot find const `E` in this scope
+ at $DIR/invalid-const-arguments.rs:19:16: not found in this scope
+  on line 18, column 10: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `E` on the impl
-   |
-LL | impl<const E: u8> Foo for D<E, X, P> {}
-   |     +++++++++++++
+ on line 19, column 4, add `<const E: u8>`
 
-error[E0425]: cannot find const `X` in this scope
-  --> $DIR/invalid-const-arguments.rs:19:19
-   |
-LL | struct D<const E: u8, const X: u8, const P: u32>;
-   |                       ----------- corresponding const parameter on the type defined here
-LL | impl Foo for D<E, X, P> {}
-   |                   ^ not found in this scope
-   |
+error E0425: cannot find const `X` in this scope
+ at $DIR/invalid-const-arguments.rs:19:19: not found in this scope
+  on line 18, column 23: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `X` on the impl
-   |
-LL | impl<const X: u8> Foo for D<E, X, P> {}
-   |     +++++++++++++
+ on line 19, column 4, add `<const X: u8>`
 
-error[E0425]: cannot find const `P` in this scope
-  --> $DIR/invalid-const-arguments.rs:19:22
-   |
-LL | struct D<const E: u8, const X: u8, const P: u32>;
-   |                                    ------------ corresponding const parameter on the type defined here
-LL | impl Foo for D<E, X, P> {}
-   |                      ^ not found in this scope
-   |
+error E0425: cannot find const `P` in this scope
+ at $DIR/invalid-const-arguments.rs:19:22: not found in this scope
+  on line 18, column 36: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `P` on the impl
-   |
-LL | impl<const P: u32> Foo for D<E, X, P> {}
-   |     ++++++++++++++
+ on line 19, column 4, add `<const P: u32>`
 
-error[E0425]: cannot find const `Q` in this scope
-  --> $DIR/invalid-const-arguments.rs:25:46
-   |
-LL | struct D<const E: u8, const X: u8, const P: u32>;
-   |                       ----------- corresponding const parameter on the type defined here
-...
-LL | impl<const F: u8, const H: u32> Foo for D<F, Q, D> {}
-   |                                              ^ not found in this scope
-   |
+error E0425: cannot find const `Q` in this scope
+ at $DIR/invalid-const-arguments.rs:25:46: not found in this scope
+  on line 18, column 23: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `Q` on the impl
-   |
-LL | impl<const F: u8, const H: u32, const Q: u8> Foo for D<F, Q, D> {}
-   |                               +++++++++++++
+ on line 25, column 30, add `, const Q: u8`
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/invalid-const-arguments.rs:5:16
-   |
-LL | impl Foo for A<N> {}
-   |                ^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/invalid-const-arguments.rs:5:16
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL | impl Foo for A<{ N }> {}
-   |                +   +
+ on line 5, column 15, add `{ `
 
-error[E0747]: type provided when a constant was expected
-  --> $DIR/invalid-const-arguments.rs:10:19
-   |
-LL | impl<N> Foo for B<N> {}
-   |                   ^
-   |
+error E0747: type provided when a constant was expected
+ at $DIR/invalid-const-arguments.rs:10:19
 help: consider changing this type parameter to a const parameter
-   |
-LL - impl<N> Foo for B<N> {}
-LL + impl<const N: u8> Foo for B<N> {}
-   |
+ on line 10, column 5, replace with `const N: u8`
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/invalid-const-arguments.rs:14:32
-   |
-LL | impl<const N: u8> Foo for C<N, T> {}
-   |                                ^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/invalid-const-arguments.rs:14:32
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL | impl<const N: u8> Foo for C<N, { T }> {}
-   |                                +   +
+ on line 14, column 31, add `{ `
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/invalid-const-arguments.rs:19:16
-   |
-LL | impl Foo for D<E, X, P> {}
-   |                ^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/invalid-const-arguments.rs:19:16
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL | impl Foo for D<{ E }, X, P> {}
-   |                +   +
+ on line 19, column 15, add `{ `
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/invalid-const-arguments.rs:25:46
-   |
-LL | impl<const F: u8, const H: u32> Foo for D<F, Q, D> {}
-   |                                              ^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/invalid-const-arguments.rs:25:46
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL | impl<const F: u8, const H: u32> Foo for D<F, { Q }, D> {}
-   |                                              +   +
+ on line 25, column 45, add `{ `
 
 error: aborting due to 11 previous errors
 

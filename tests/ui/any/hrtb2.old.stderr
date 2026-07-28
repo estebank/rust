@@ -1,8 +1,5 @@
-error[E0080]: evaluation panicked: called `Option::unwrap()` on a `None` value
-  --> $DIR/hrtb2.rs:15:25
-   |
-LL |     let _dy: &dyn Bar = try_as_dyn(&x).unwrap();
-   |                         ^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `_` failed here
+error E0080: evaluation panicked: called `Option::unwrap()` on a `None` value
+ at $DIR/hrtb2.rs:15:25: evaluation of `_` failed here
 
 error: aborting due to 1 previous error
 

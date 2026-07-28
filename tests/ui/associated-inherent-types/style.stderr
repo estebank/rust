@@ -1,14 +1,7 @@
 error: associated type `typ` should have an upper camel case name
-  --> $DIR/style.rs:8:10
-   |
-LL |     type typ = ();
-   |          ^^^ help: convert the identifier to upper camel case: `Typ`
-   |
+ at $DIR/style.rs:8:10: help: convert the identifier to upper camel case: `Typ`
 note: the lint level is defined here
-  --> $DIR/style.rs:3:9
-   |
-LL | #![deny(non_camel_case_types)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/style.rs:3:9
 
 error: aborting due to 1 previous error
 

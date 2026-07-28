@@ -1,13 +1,7 @@
-error[E0596]: cannot borrow `*self.s` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-38147-1.rs:17:9
-   |
-LL |         self.s.push('x');
-   |         ^^^^^^ `self` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*self.s` as mutable, as it is behind a `&` reference
+ at $DIR/issue-38147-1.rs:17:9: `self` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL |     fn f(&mut self) {
-   |           +++
+ on line 16, column 10, add `mut `
 
 error: aborting due to 1 previous error
 

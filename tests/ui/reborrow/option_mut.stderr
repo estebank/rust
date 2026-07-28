@@ -1,20 +1,10 @@
-error[E0382]: use of moved value: `a`
-  --> $DIR/option_mut.rs:6:20
-   |
-LL |     let a = Some(&mut ());
-   |         - move occurs because `a` has type `Option<&mut ()>`, which does not implement the `Copy` trait
-LL |     let _ = method(a);
-   |                    - value moved here
-LL |     let _ = method(a);
-   |                    ^ value used here after move
-   |
+error E0382: use of moved value: `a`
+ at $DIR/option_mut.rs:6:20: value used here after move
+  on line 4, column 9: move occurs because `a` has type `Option<&mut ()>`, which does not implement the `Copy` trait
+  on line 5, column 20: value moved here
 note: consider changing this parameter type in function `method` to borrow instead if owning the value isn't necessary
-  --> $DIR/option_mut.rs:1:14
-   |
-LL | fn method(a: Option<&mut ()>) {}
-   |    ------    ^^^^^^^^^^^^^^^ this parameter takes ownership of the value
-   |    |
-   |    in this function
+ at $DIR/option_mut.rs:1:14: this parameter takes ownership of the value
+  on line 1, column 4: in this function
 
 error: aborting due to 1 previous error
 

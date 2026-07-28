@@ -1,14 +1,7 @@
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/return-cycle.rs:6:17
-   |
-LL |     fn new() -> _ {
-   |                 ^ not allowed in type signatures
-   |
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/return-cycle.rs:6:17: not allowed in type signatures
 help: replace with the correct return type
-   |
-LL -     fn new() -> _ {
-LL +     fn new() -> Token<()> {
-   |
+ on line 6, column 16, replace with `Token<()>`
 
 error: aborting due to 1 previous error
 

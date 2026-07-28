@@ -1,71 +1,40 @@
-error[E0308]: mismatched types
-  --> $DIR/match-errors-derived-error-suppression.rs:10:9
-   |
-LL |     match (true, false) {
-   |           ------------- this expression has type `(bool, bool)`
-LL |         A::B => (),
-   |         ^^^^ expected `(bool, bool)`, found `A`
-   |
-   = note: expected tuple `(bool, bool)`
-               found enum `A`
+error E0308: mismatched types
+ at $DIR/match-errors-derived-error-suppression.rs:10:9: expected `(bool, bool)`, found `A`
+  on line 9, column 11: this expression has type `(bool, bool)`
+note: expected tuple `(bool, bool)`
+          found enum `A`
 
-error[E0308]: mismatched types
-  --> $DIR/match-errors-derived-error-suppression.rs:19:9
-   |
-LL |     match (true, false) {
-   |           ------------- this expression has type `(bool, bool)`
-LL |         (true, false, false) => ()
-   |         ^^^^^^^^^^^^^^^^^^^^ expected a tuple with 2 elements, found one with 3 elements
-   |
-   = note: expected tuple `(bool, bool)`
-              found tuple `(_, _, _)`
+error E0308: mismatched types
+ at $DIR/match-errors-derived-error-suppression.rs:19:9: expected a tuple with 2 elements, found one with 3 elements
+  on line 18, column 11: this expression has type `(bool, bool)`
+note: expected tuple `(bool, bool)`
+         found tuple `(_, _, _)`
 
-error[E0308]: mismatched types
-  --> $DIR/match-errors-derived-error-suppression.rs:27:9
-   |
-LL |     match (true, false) {
-   |           ------------- this expression has type `(bool, bool)`
-LL |         (true, false, false) => ()
-   |         ^^^^^^^^^^^^^^^^^^^^ expected a tuple with 2 elements, found one with 3 elements
-   |
-   = note: expected tuple `(bool, bool)`
-              found tuple `(_, _, _)`
+error E0308: mismatched types
+ at $DIR/match-errors-derived-error-suppression.rs:27:9: expected a tuple with 2 elements, found one with 3 elements
+  on line 26, column 11: this expression has type `(bool, bool)`
+note: expected tuple `(bool, bool)`
+         found tuple `(_, _, _)`
 
-error[E0308]: mismatched types
-  --> $DIR/match-errors-derived-error-suppression.rs:35:9
-   |
-LL |     match (true, false) {
-   |           ------------- this expression has type `(bool, bool)`
-LL |         box (true, false) => ()
-   |         ^^^^^^^^^^^^^^^^^ expected `(bool, bool)`, found `Box<_>`
-   |
-   = note: expected tuple `(bool, bool)`
-             found struct `Box<_>`
+error E0308: mismatched types
+ at $DIR/match-errors-derived-error-suppression.rs:35:9: expected `(bool, bool)`, found `Box<_>`
+  on line 34, column 11: this expression has type `(bool, bool)`
+note: expected tuple `(bool, bool)`
+        found struct `Box<_>`
 
-error[E0308]: mismatched types
-  --> $DIR/match-errors-derived-error-suppression.rs:42:9
-   |
-LL |     match (true, false) {
-   |           ------------- this expression has type `(bool, bool)`
-LL |         &(true, false) => ()
-   |         ^^^^^^^^^^^^^^ expected `(bool, bool)`, found `&_`
-   |
-   = note:  expected tuple `(bool, bool)`
-           found reference `&_`
+error E0308: mismatched types
+ at $DIR/match-errors-derived-error-suppression.rs:42:9: expected `(bool, bool)`, found `&_`
+  on line 41, column 11: this expression has type `(bool, bool)`
+note:  expected tuple `(bool, bool)`
+      found reference `&_`
 
-error[E0618]: expected function, found `(char, char)`
-  --> $DIR/match-errors-derived-error-suppression.rs:50:14
-   |
-LL |     let v = [('a', 'b')
-   |              ^^^^^^^^^^- help: consider separating array elements with a comma: `,`
+error E0618: expected function, found `(char, char)`
+ at $DIR/match-errors-derived-error-suppression.rs:50:14
+  on line 50, column 24: help: consider separating array elements with a comma: `,`
 
-error[E0308]: mismatched types
-  --> $DIR/match-errors-derived-error-suppression.rs:57:19
-   |
-LL |     let x: char = true;
-   |            ----   ^^^^ expected `char`, found `bool`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/match-errors-derived-error-suppression.rs:57:19: expected `char`, found `bool`
+  on line 57, column 12: expected due to this
 
 error: aborting due to 7 previous errors
 

@@ -1,25 +1,11 @@
-error[E0599]: the method `f` exists for struct `S`, but its trait bounds were not satisfied
-  --> $DIR/method-unsatisfied-assoc-type-predicate.rs:26:7
-   |
-LL | struct S;
-   | -------- method `f` not found for this struct because it doesn't satisfy `<S as X>::Y<i32> = i32` or `S: M`
-...
-LL |     a.f();
-   |       ^ method cannot be called on `S` due to unsatisfied trait bounds
-   |
+error E0599: the method `f` exists for struct `S`, but its trait bounds were not satisfied
+ at $DIR/method-unsatisfied-assoc-type-predicate.rs:26:7: method cannot be called on `S` due to unsatisfied trait bounds
+  on line 18: method `f` not found for this struct because it doesn't satisfy `<S as X>::Y<i32> = i32` or `S: M`
 note: trait bound `<S as X>::Y<i32> = i32` was not satisfied
-  --> $DIR/method-unsatisfied-assoc-type-predicate.rs:12:11
-   |
-LL | impl<T: X<Y<i32> = i32>> M for T {}
-   |           ^^^^^^^^^^^^   -     -
-   |           |
-   |           unsatisfied trait bound introduced here
-   = help: items from traits can only be used if the trait is implemented and in scope
+ at $DIR/method-unsatisfied-assoc-type-predicate.rs:12:11: unsatisfied trait bound introduced here
+help: items from traits can only be used if the trait is implemented and in scope
 note: `M` defines an item `f`, perhaps you need to implement it
-  --> $DIR/method-unsatisfied-assoc-type-predicate.rs:8:1
-   |
-LL | trait M {
-   | ^^^^^^^
+ at $DIR/method-unsatisfied-assoc-type-predicate.rs:8:1
 
 error: aborting due to 1 previous error
 

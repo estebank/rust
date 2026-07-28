@@ -1,262 +1,138 @@
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:12:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^^-------
-   |            |
-   |            expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:12:3
+  on line 12, column 12: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(off)]
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(on)]
-   |
+ on line 12, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:17:8
-   |
-LL |     #![coverage = "off"]
-   |        ^^^^^^^^^-------
-   |                 |
-   |                 expected this to be a list
-   |
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL -     #![coverage = "off"]
-LL +     #![coverage(off)]
-   |
-LL -     #![coverage = "off"]
-LL +     #![coverage(on)]
-   |
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:21:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^^-------
-   |            |
-   |            expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:17:8
+  on line 17, column 17: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(off)]
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(on)]
-   |
+ on line 17, column 7, replace with one of
+  coverage(off)
+  coverage(on)
+
+
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:21:3
+  on line 21, column 12: expected this to be a list
+help: try changing it to one of the following valid forms of the attribute
+ on line 21, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: the `coverage` attribute cannot be used on structs
-  --> $DIR/name-value.rs:21:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^
-   |
-   = help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
+ at $DIR/name-value.rs:21:3
+help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:26:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^^-------
-   |            |
-   |            expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:26:3
+  on line 26, column 12: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(off)]
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(on)]
-   |
+ on line 26, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:29:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^^-------
-   |                |
-   |                expected this to be a list
-   |
+
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:29:7
+  on line 29, column 16: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(off)]
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(on)]
-   |
+ on line 29, column 6, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: the `coverage` attribute cannot be used on associated consts
-  --> $DIR/name-value.rs:29:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^
-   |
-   = help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
+ at $DIR/name-value.rs:29:7
+help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:35:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^^-------
-   |            |
-   |            expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:35:3
+  on line 35, column 12: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(off)]
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(on)]
-   |
+ on line 35, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: the `coverage` attribute cannot be used on traits
-  --> $DIR/name-value.rs:35:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^
-   |
-   = help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
+ at $DIR/name-value.rs:35:3
+help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:39:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^^-------
-   |                |
-   |                expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:39:7
+  on line 39, column 16: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(off)]
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(on)]
-   |
+ on line 39, column 6, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: the `coverage` attribute cannot be used on associated consts
-  --> $DIR/name-value.rs:39:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^
-   |
-   = help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
+ at $DIR/name-value.rs:39:7
+help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:44:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^^-------
-   |                |
-   |                expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:44:7
+  on line 44, column 16: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(off)]
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(on)]
-   |
+ on line 44, column 6, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: the `coverage` attribute cannot be used on associated types
-  --> $DIR/name-value.rs:44:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^
-   |
-   = help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
+ at $DIR/name-value.rs:44:7
+help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:50:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^^-------
-   |            |
-   |            expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:50:3
+  on line 50, column 12: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(off)]
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(on)]
-   |
+ on line 50, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:53:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^^-------
-   |                |
-   |                expected this to be a list
-   |
+
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:53:7
+  on line 53, column 16: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(off)]
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(on)]
-   |
+ on line 53, column 6, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: the `coverage` attribute cannot be used on associated consts
-  --> $DIR/name-value.rs:53:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^
-   |
-   = help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
+ at $DIR/name-value.rs:53:7
+help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:58:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^^-------
-   |                |
-   |                expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:58:7
+  on line 58, column 16: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(off)]
-   |
-LL -     #[coverage = "off"]
-LL +     #[coverage(on)]
-   |
+ on line 58, column 6, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: the `coverage` attribute cannot be used on associated types
-  --> $DIR/name-value.rs:58:7
-   |
-LL |     #[coverage = "off"]
-   |       ^^^^^^^^
-   |
-   = help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
+ at $DIR/name-value.rs:58:7
+help: the `coverage` attribute can be applied to crates, functions, impl blocks, and modules
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/name-value.rs:64:3
-   |
-LL | #[coverage = "off"]
-   |   ^^^^^^^^^-------
-   |            |
-   |            expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/name-value.rs:64:3
+  on line 64, column 12: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(off)]
-   |
-LL - #[coverage = "off"]
-LL + #[coverage(on)]
-   |
+ on line 64, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: aborting due to 19 previous errors
 

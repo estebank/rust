@@ -1,8 +1,5 @@
-error[E0747]: constant provided when a type was expected
-  --> $DIR/mismatched-gat-subst-kind.rs:7:13
-   |
-LL | fn f<T: B<U<1i32> = ()>>() {}
-   |             ^^^^
+error E0747: constant provided when a type was expected
+ at $DIR/mismatched-gat-subst-kind.rs:7:13
 
 error: aborting due to 1 previous error
 

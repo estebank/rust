@@ -1,14 +1,8 @@
 error: at least one trait must be specified
-  --> $DIR/issue-83499-input-output-iteration-ice.rs:5:45
-   |
-LL | unsafe extern "C" fn foo(_: Bar, _: ...) -> impl {}
-   |                                             ^^^^
+ at $DIR/issue-83499-input-output-iteration-ice.rs:5:45
 
-error[E0425]: cannot find type `Bar` in this scope
-  --> $DIR/issue-83499-input-output-iteration-ice.rs:5:29
-   |
-LL | unsafe extern "C" fn foo(_: Bar, _: ...) -> impl {}
-   |                             ^^^ not found in this scope
+error E0425: cannot find type `Bar` in this scope
+ at $DIR/issue-83499-input-output-iteration-ice.rs:5:29: not found in this scope
 
 error: aborting due to 2 previous errors
 

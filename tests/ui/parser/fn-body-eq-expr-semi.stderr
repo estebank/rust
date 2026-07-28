@@ -1,125 +1,56 @@
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:4:14
-   |
-LL |     fn foo() = 42;
-   |              ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:4:14
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn foo() = 42;
-LL +     fn foo() { 42 }
-   |
+ on line 4, column 13, replace with `{`
 
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:5:20
-   |
-LL |     fn bar() -> u8 = 42;
-   |                    ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:5:20
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn bar() -> u8 = 42;
-LL +     fn bar() -> u8 { 42 }
-   |
+ on line 5, column 19, replace with `{`
 
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:9:14
-   |
-LL |     fn foo() = 42;
-   |              ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:9:14
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn foo() = 42;
-LL +     fn foo() { 42 }
-   |
+ on line 9, column 13, replace with `{`
 
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:11:20
-   |
-LL |     fn bar() -> u8 = 42;
-   |                    ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:11:20
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn bar() -> u8 = 42;
-LL +     fn bar() -> u8 { 42 }
-   |
+ on line 11, column 19, replace with `{`
 
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:16:14
-   |
-LL |     fn foo() = 42;
-   |              ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:16:14
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn foo() = 42;
-LL +     fn foo() { 42 }
-   |
+ on line 16, column 13, replace with `{`
 
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:17:20
-   |
-LL |     fn bar() -> u8 = 42;
-   |                    ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:17:20
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn bar() -> u8 = 42;
-LL +     fn bar() -> u8 { 42 }
-   |
+ on line 17, column 19, replace with `{`
 
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:21:14
-   |
-LL |     fn foo() = 42;
-   |              ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:21:14
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn foo() = 42;
-LL +     fn foo() { 42 }
-   |
+ on line 21, column 13, replace with `{`
 
 error: function body cannot be `= expression;`
-  --> $DIR/fn-body-eq-expr-semi.rs:22:20
-   |
-LL |     fn bar() -> u8 = 42;
-   |                    ^^^^^
-   |
+ at $DIR/fn-body-eq-expr-semi.rs:22:20
 help: surround the expression with `{` and `}` instead of `=` and `;`
-   |
-LL -     fn bar() -> u8 = 42;
-LL +     fn bar() -> u8 { 42 }
-   |
+ on line 22, column 19, replace with `{`
 
 error: incorrect function inside `extern` block
-  --> $DIR/fn-body-eq-expr-semi.rs:9:8
-   |
-LL | extern "C" {
-   | ---------- `extern` blocks define existing foreign functions and functions inside of them cannot have a body
-LL |     fn foo() = 42;
-   |        ^^^   ----- help: remove the invalid body: `;`
-   |        |
-   |        cannot have a body
-   |
-   = help: you might have meant to write a function accessible through FFI, which can be done by writing `extern fn` outside of the `extern` block
-   = note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
+ at $DIR/fn-body-eq-expr-semi.rs:9:8: cannot have a body
+  on line 8: `extern` blocks define existing foreign functions and functions inside of them cannot have a body
+  on line 9, column 14: help: remove the invalid body: `;`
+help: you might have meant to write a function accessible through FFI, which can be done by writing `extern fn` outside of the `extern` block
+note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
 
 error: incorrect function inside `extern` block
-  --> $DIR/fn-body-eq-expr-semi.rs:11:8
-   |
-LL | extern "C" {
-   | ---------- `extern` blocks define existing foreign functions and functions inside of them cannot have a body
-...
-LL |     fn bar() -> u8 = 42;
-   |        ^^^         ----- help: remove the invalid body: `;`
-   |        |
-   |        cannot have a body
-   |
-   = help: you might have meant to write a function accessible through FFI, which can be done by writing `extern fn` outside of the `extern` block
-   = note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
+ at $DIR/fn-body-eq-expr-semi.rs:11:8: cannot have a body
+  on line 8: `extern` blocks define existing foreign functions and functions inside of them cannot have a body
+  on line 11, column 20: help: remove the invalid body: `;`
+help: you might have meant to write a function accessible through FFI, which can be done by writing `extern fn` outside of the `extern` block
+note: for more information, visit https://doc.rust-lang.org/std/keyword.extern.html
 
 error: aborting due to 10 previous errors
 

@@ -1,23 +1,12 @@
-error[E0207]: the lifetime parameter `'a` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-74761-2.rs:7:6
-   |
-LL | impl<'a, 'b> A for () {
-   |      ^^ unconstrained lifetime parameter
+error E0207: the lifetime parameter `'a` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-74761-2.rs:7:6: unconstrained lifetime parameter
 
-error[E0207]: the lifetime parameter `'b` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-74761-2.rs:7:10
-   |
-LL | impl<'a, 'b> A for () {
-   |          ^^ unconstrained lifetime parameter
+error E0207: the lifetime parameter `'b` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-74761-2.rs:7:10: unconstrained lifetime parameter
 
-error[E0792]: expected generic lifetime parameter, found `'_`
-  --> $DIR/issue-74761-2.rs:12:28
-   |
-LL | impl<'a, 'b> A for () {
-   |      -- this generic parameter must be used with a generic lifetime parameter
-...
-LL |     fn f(&self) -> Self::B {}
-   |                            ^^
+error E0792: expected generic lifetime parameter, found `'_`
+ at $DIR/issue-74761-2.rs:12:28
+  on line 7, column 6: this generic parameter must be used with a generic lifetime parameter
 
 error: aborting due to 3 previous errors
 

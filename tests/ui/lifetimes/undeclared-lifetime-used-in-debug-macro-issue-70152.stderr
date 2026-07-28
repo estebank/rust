@@ -1,42 +1,20 @@
-error[E0261]: use of undeclared lifetime name `'b`
-  --> $DIR/undeclared-lifetime-used-in-debug-macro-issue-70152.rs:3:9
-   |
-LL |     a: &'b str,
-   |         ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'b`
+ at $DIR/undeclared-lifetime-used-in-debug-macro-issue-70152.rs:3:9: undeclared lifetime
 help: consider introducing lifetime `'b` here
-   |
-LL | struct Test<'b> {
-   |            ++++
+ on line 2, column 11, add `<'b>`
 
-error[E0261]: use of undeclared lifetime name `'b`
-  --> $DIR/undeclared-lifetime-used-in-debug-macro-issue-70152.rs:3:9
-   |
-LL | #[derive(Eq, PartialEq)]
-   |          -- lifetime `'b` is missing in item created through this procedural macro
-LL | struct Test {
-LL |     a: &'b str,
-   |         ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'b`
+ at $DIR/undeclared-lifetime-used-in-debug-macro-issue-70152.rs:3:9: undeclared lifetime
+  on line 1, column 10: lifetime `'b` is missing in item created through this procedural macro
 help: consider introducing lifetime `'b` here
-   |
-LL | struct Test<'b> {
-   |            ++++
+ on line 2, column 11, add `<'b>`
 
-error[E0261]: use of undeclared lifetime name `'b`
-  --> $DIR/undeclared-lifetime-used-in-debug-macro-issue-70152.rs:13:13
-   |
-LL |     fn foo(&'b self) {}
-   |             ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'b`
+ at $DIR/undeclared-lifetime-used-in-debug-macro-issue-70152.rs:13:13: undeclared lifetime
 help: consider introducing lifetime `'b` here
-   |
-LL |     fn foo<'b>(&'b self) {}
-   |           ++++
+ on line 13, column 10, add `<'b>`
 help: consider introducing lifetime `'b` here
-   |
-LL | impl<'b> T for Test {
-   |     ++++
+ on line 12, column 4, add `<'b>`
 
 error: aborting due to 3 previous errors
 

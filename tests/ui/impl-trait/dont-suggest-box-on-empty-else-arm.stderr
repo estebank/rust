@@ -1,15 +1,7 @@
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/dont-suggest-box-on-empty-else-arm.rs:4:12
-   |
-LL |       if true {
-   |       ------- `if` and `else` have incompatible types
-LL |           "boo2"
-   |           ------ expected because of this
-LL |       } else {
-   |  ____________^
-LL | |
-LL | |     }
-   | |_____^ expected `&str`, found `()`
+error E0308: `if` and `else` have incompatible types
+ at $DIR/dont-suggest-box-on-empty-else-arm.rs:4:12 to 6:6: expected `&str`, found `()`
+  on line 2: `if` and `else` have incompatible types
+  on line 3: expected because of this
 
 error: aborting due to 1 previous error
 

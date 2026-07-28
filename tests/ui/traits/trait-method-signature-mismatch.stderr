@@ -1,12 +1,6 @@
-error[E0050]: method `foo` has 2 parameters but the declaration in trait `Foo::foo` has 3
-  --> $DIR/trait-method-signature-mismatch.rs:12:9
-   |
-LL |       fn foo(&mut self, x: i32, y: i32) -> i32;
-   |              ------------------------- trait requires 3 parameters
-...
-LL | /         &mut self,
-LL | |         x: i32,
-   | |______________^ expected 3 parameters, found 2
+error E0050: method `foo` has 2 parameters but the declaration in trait `Foo::foo` has 3
+ at $DIR/trait-method-signature-mismatch.rs:12:9 to 13:15: expected 3 parameters, found 2
+  on line 7, column 12: trait requires 3 parameters
 
 error: aborting due to 1 previous error
 

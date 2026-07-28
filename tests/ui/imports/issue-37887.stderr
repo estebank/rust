@@ -1,23 +1,13 @@
-error[E0432]: unresolved import `test`
-  --> $DIR/issue-37887.rs:4:9
-   |
-LL |     use test::*;
-   |         ^^^^ use of unresolved module or unlinked crate `test`
-   |
+error E0432: unresolved import `test`
+ at $DIR/issue-37887.rs:4:9: use of unresolved module or unlinked crate `test`
 help: you might be missing a crate named `test`, add it to your project and import it in your code
-   |
-LL + extern crate test;
-   |
+ on line 2, column 1, add `extern crate test;`
 
-error[E0658]: use of unstable library feature `test`
-  --> $DIR/issue-37887.rs:3:5
-   |
-LL |     extern crate test;
-   |     ^^^^^^^^^^^^^^^^^^
-   |
-   = note: see issue #50297 <https://github.com/rust-lang/rust/issues/50297> for more information
-   = help: add `#![feature(test)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: use of unstable library feature `test`
+ at $DIR/issue-37887.rs:3:5
+note: see issue #50297 <https://github.com/rust-lang/rust/issues/50297> for more information
+help: add `#![feature(test)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error: aborting due to 2 previous errors
 

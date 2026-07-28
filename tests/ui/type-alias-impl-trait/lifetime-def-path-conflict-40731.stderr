@@ -1,24 +1,13 @@
-error[E0437]: type `Opq2` is not a member of trait `Trait`
-  --> $DIR/lifetime-def-path-conflict-40731.rs:10:5
-   |
-LL |     type Opq2 = impl for<'a> Trait<'a>;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ not a member of trait `Trait`
+error E0437: type `Opq2` is not a member of trait `Trait`
+ at $DIR/lifetime-def-path-conflict-40731.rs:10:5: not a member of trait `Trait`
 
-error[E0496]: lifetime name `'a` shadows a lifetime name that is already in scope
-  --> $DIR/lifetime-def-path-conflict-40731.rs:10:26
-   |
-LL | impl<'a> Trait<'a> for u32 {
-   |      -- first declared here
-LL |     type Opq2 = impl for<'a> Trait<'a>;
-   |                          ^^ lifetime `'a` already in scope
+error E0496: lifetime name `'a` shadows a lifetime name that is already in scope
+ at $DIR/lifetime-def-path-conflict-40731.rs:10:26: lifetime `'a` already in scope
+  on line 9, column 6: first declared here
 
 error: unconstrained opaque type
-  --> $DIR/lifetime-def-path-conflict-40731.rs:10:17
-   |
-LL |     type Opq2 = impl for<'a> Trait<'a>;
-   |                 ^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: `Opq2` must be used in combination with a concrete type within the same impl
+ at $DIR/lifetime-def-path-conflict-40731.rs:10:17
+note: `Opq2` must be used in combination with a concrete type within the same impl
 
 error: aborting due to 3 previous errors
 

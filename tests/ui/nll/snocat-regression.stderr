@@ -1,11 +1,5 @@
 error: `S` does not live long enough
-  --> $DIR/snocat-regression.rs:7:5
-   |
-LL | /     || {
-...  |
-LL | |         let _x = link;
-LL | |     };
-   | |_____^
+ at $DIR/snocat-regression.rs:7:5 to 13:6
 
 error: aborting due to 1 previous error
 

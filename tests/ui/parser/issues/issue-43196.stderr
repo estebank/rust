@@ -1,18 +1,10 @@
 error: expected `|`, found `}`
-  --> $DIR/issue-43196.rs:3:1
-   |
-LL |     |
-   |      - expected `|`
-LL | }
-   | ^ unexpected token
+ at $DIR/issue-43196.rs:3:1: unexpected token
+  on line 2, column 6: expected `|`
 
 error: expected item, found `|`
-  --> $DIR/issue-43196.rs:5:1
-   |
-LL | |
-   | ^ expected item
-   |
-   = note: for a full list of items that can appear in modules, see <https://doc.rust-lang.org/reference/items.html>
+ at $DIR/issue-43196.rs:5:1: expected item
+note: for a full list of items that can appear in modules, see <https://doc.rust-lang.org/reference/items.html>
 
 error: aborting due to 2 previous errors
 

@@ -1,20 +1,10 @@
 error: return type notation is not allowed for functions that have type parameters
-  --> $DIR/path-type-param.rs:9:5
-   |
-LL |     fn method<T>() -> impl Sized;
-   |               - type parameter declared here
-...
-LL |     <T as Foo>::method(..): Send,
-   |     ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/path-type-param.rs:9:5
+  on line 4, column 15: type parameter declared here
 
 error: return type notation is not allowed for functions that have type parameters
-  --> $DIR/path-type-param.rs:16:5
-   |
-LL |     fn method<T>() -> impl Sized;
-   |               - type parameter declared here
-...
-LL |     <T as Foo>::method(..): Send,
-   |     ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/path-type-param.rs:16:5
+  on line 4, column 15: type parameter declared here
 
 error: aborting due to 2 previous errors
 

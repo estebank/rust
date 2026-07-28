@@ -1,30 +1,12 @@
-error[E0283]: type annotations needed: cannot satisfy `&'a T: Foo`
-  --> $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:13:19
-   |
-LL |     where &'a T : Foo,
-   |                   ^^^
-   |
+error E0283: type annotations needed: cannot satisfy `&'a T: Foo`
+ at $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:13:19
 note: multiple `impl`s or `where` clauses satisfying `&'a T: Foo` found
-  --> $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:13:19
-   |
-LL |     where &'a T : Foo,
-   |                   ^^^
-LL |           &'b T : Foo
-   |                   ^^^
+ at $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:13:19
 
-error[E0283]: type annotations needed: cannot satisfy `&T: Foo`
-  --> $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:16:7
-   |
-LL |     x.foo();
-   |       ^^^
-   |
+error E0283: type annotations needed: cannot satisfy `&T: Foo`
+ at $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:16:7
 note: multiple `impl`s or `where` clauses satisfying `&T: Foo` found
-  --> $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:13:19
-   |
-LL |     where &'a T : Foo,
-   |                   ^^^
-LL |           &'b T : Foo
-   |                   ^^^
+ at $DIR/ambiguous-trait-matching-distinct-lifetimes.rs:13:19
 
 error: aborting due to 2 previous errors
 

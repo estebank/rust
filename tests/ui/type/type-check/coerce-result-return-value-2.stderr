@@ -1,46 +1,23 @@
-error[E0308]: mismatched types
-  --> $DIR/coerce-result-return-value-2.rs:8:17
-   |
-LL | fn foo4(x: Result<(), A>) -> Result<(), B> {
-   |                              ------------- expected `Result<(), B>` because of return type
-LL |     match true {
-LL |         true => x,
-   |                 ^ expected `Result<(), B>`, found `Result<(), A>`
-   |
-   = note: expected enum `Result<_, B>`
-              found enum `Result<_, A>`
+error E0308: mismatched types
+ at $DIR/coerce-result-return-value-2.rs:8:17: expected `Result<(), B>`, found `Result<(), A>`
+  on line 6, column 30: expected `Result<(), B>` because of return type
+note: expected enum `Result<_, B>`
+         found enum `Result<_, A>`
 help: use `?` to coerce and return an appropriate `Err`, and wrap the resulting value in `Ok` so the expression remains of type `Result`
-   |
-LL |         true => Ok(x?),
-   |                 +++ ++
+ on line 8, column 16, add `Ok(`
 
-error[E0308]: mismatched types
-  --> $DIR/coerce-result-return-value-2.rs:14:24
-   |
-LL | fn foo5(x: Result<(), A>) -> Result<(), B> {
-   |                              ------------- expected `Result<(), B>` because of return type
-LL |     match true {
-LL |         true => return x,
-   |                        ^ expected `Result<(), B>`, found `Result<(), A>`
-   |
-   = note: expected enum `Result<_, B>`
-              found enum `Result<_, A>`
+error E0308: mismatched types
+ at $DIR/coerce-result-return-value-2.rs:14:24: expected `Result<(), B>`, found `Result<(), A>`
+  on line 12, column 30: expected `Result<(), B>` because of return type
+note: expected enum `Result<_, B>`
+         found enum `Result<_, A>`
 help: use `?` to coerce and return an appropriate `Err`, and wrap the resulting value in `Ok` so the expression remains of type `Result`
-   |
-LL |         true => return Ok(x?),
-   |                        +++ ++
+ on line 14, column 23, add `Ok(`
 
-error[E0308]: mismatched types
-  --> $DIR/coerce-result-return-value-2.rs:21:28
-   |
-LL |       let _: Result<(), B> = {
-   |  ____________________________^
-LL | |         Err(A);
-LL | |     };
-   | |_____^ expected `Result<(), B>`, found `()`
-   |
-   = note:   expected enum `Result<(), B>`
-           found unit type `()`
+error E0308: mismatched types
+ at $DIR/coerce-result-return-value-2.rs:21:28 to 23:6: expected `Result<(), B>`, found `()`
+note:   expected enum `Result<(), B>`
+      found unit type `()`
 
 error: aborting due to 3 previous errors
 

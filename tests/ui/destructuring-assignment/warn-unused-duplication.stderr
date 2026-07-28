@@ -1,16 +1,8 @@
 warning: value assigned to `a` is never read
-  --> $DIR/warn-unused-duplication.rs:9:6
-   |
-LL |     (a, a) = (0, 1);
-   |      ^  - `a` is overwritten here before the previous value is read
-   |      |
-   |      this value is reassigned later and never used
-   |
+ at $DIR/warn-unused-duplication.rs:9:6: this value is reassigned later and never used
+  on line 9, column 9: `a` is overwritten here before the previous value is read
 note: the lint level is defined here
-  --> $DIR/warn-unused-duplication.rs:3:9
-   |
-LL | #![warn(unused_assignments)]
-   |         ^^^^^^^^^^^^^^^^^^
+ at $DIR/warn-unused-duplication.rs:3:9
 
 warning: 1 warning emitted
 

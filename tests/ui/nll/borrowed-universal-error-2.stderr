@@ -1,8 +1,5 @@
-error[E0515]: cannot return reference to local variable `v`
-  --> $DIR/borrowed-universal-error-2.rs:3:5
-   |
-LL |     &v
-   |     ^^ returns a reference to data owned by the current function
+error E0515: cannot return reference to local variable `v`
+ at $DIR/borrowed-universal-error-2.rs:3:5: returns a reference to data owned by the current function
 
 error: aborting due to 1 previous error
 

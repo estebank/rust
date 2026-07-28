@@ -1,32 +1,14 @@
-error[E0277]: the trait bound `Error: Default` is not satisfied
-  --> $DIR/derives-span-Default.rs:8:5
-   |
-LL | #[derive(Default)]
-   |          ------- in this derive macro expansion
-LL | struct Struct {
-LL |     x: Error,
-   |     ^^^^^^^^ the trait `Default` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Default` is not satisfied
+ at $DIR/derives-span-Default.rs:8:5: the trait `Default` is not implemented for `Error`
+  on line 6, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Default)]`
-   |
-LL + #[derive(Default)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Default)]`
 
-error[E0277]: the trait bound `Error: Default` is not satisfied
-  --> $DIR/derives-span-Default.rs:13:5
-   |
-LL | #[derive(Default)]
-   |          ------- in this derive macro expansion
-LL | struct TupleStruct(
-LL |     Error,
-   |     ^^^^^ the trait `Default` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Default` is not satisfied
+ at $DIR/derives-span-Default.rs:13:5: the trait `Default` is not implemented for `Error`
+  on line 11, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Default)]`
-   |
-LL + #[derive(Default)]
-LL | struct Error;
-   |
+ on line 4, column 1, add `#[derive(Default)]`
 
 error: aborting due to 2 previous errors
 

@@ -1,38 +1,18 @@
-error[E0207]: the type parameter `U` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/leaking-vars-in-cause-code-2.rs:19:9
-   |
-LL | impl<T, U> Trait<()> for B<T>
-   |       --^
-   |       | |
-   |       | unconstrained type parameter
-   |       help: remove the unused type parameter `U`
+error E0207: the type parameter `U` is not constrained by the impl trait, self type, or predicates
+ at $DIR/leaking-vars-in-cause-code-2.rs:19:9: unconstrained type parameter
+  on line 19, column 7: help: remove the unused type parameter `U`
 
-error[E0277]: the trait bound `(): IncompleteGuidance` is not satisfied
-  --> $DIR/leaking-vars-in-cause-code-2.rs:29:19
-   |
-LL |     impls_trait::<B<()>>();
-   |                   ^^^^^ the trait `IncompleteGuidance` is not implemented for `()`
-   |
+error E0277: the trait bound `(): IncompleteGuidance` is not satisfied
+ at $DIR/leaking-vars-in-cause-code-2.rs:29:19: the trait `IncompleteGuidance` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/leaking-vars-in-cause-code-2.rs:11:1
-   |
-LL | trait IncompleteGuidance {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/leaking-vars-in-cause-code-2.rs:11:1
 note: required for `A<()>` to implement `Trait<()>`
-  --> $DIR/leaking-vars-in-cause-code-2.rs:13:9
-   |
-LL | impl<T> Trait<()> for A<T>
-   |         ^^^^^^^^^     ^^^^
-LL | where
-LL |     T: IncompleteGuidance,
-   |        ------------------ unsatisfied trait bound introduced here
-   = note: 1 redundant requirement hidden
-   = note: required for `B<()>` to implement `Trait<()>`
+ at $DIR/leaking-vars-in-cause-code-2.rs:13:9
+  on line 15, column 8: unsatisfied trait bound introduced here
+note: 1 redundant requirement hidden
+note: required for `B<()>` to implement `Trait<()>`
 note: required by a bound in `impls_trait`
-  --> $DIR/leaking-vars-in-cause-code-2.rs:26:19
-   |
-LL | fn impls_trait<T: Trait<()>>() {}
-   |                   ^^^^^^^^^ required by this bound in `impls_trait`
+ at $DIR/leaking-vars-in-cause-code-2.rs:26:19: required by this bound in `impls_trait`
 
 error: aborting due to 2 previous errors
 

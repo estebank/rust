@@ -1,14 +1,7 @@
-error[E0367]: `Drop` impl requires `T: 'static` but the struct it is implemented for does not
-  --> $DIR/explicit-implied-outlives.rs:28:8
-   |
-LL |     T: 'static,
-   |        ^^^^^^^
-   |
+error E0367: `Drop` impl requires `T: 'static` but the struct it is implemented for does not
+ at $DIR/explicit-implied-outlives.rs:28:8
 note: the implementor must specify the same requirement
-  --> $DIR/explicit-implied-outlives.rs:7:1
-   |
-LL | struct DropMe<'a, T>(&'a T);
-   | ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/explicit-implied-outlives.rs:7:1
 
 error: aborting due to 1 previous error
 

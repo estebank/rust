@@ -1,13 +1,7 @@
-error[E0596]: cannot borrow `*buf` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-40823.rs:3:5
-   |
-LL |     buf.iter_mut();
-   |     ^^^ `buf` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*buf` as mutable, as it is behind a `&` reference
+ at $DIR/issue-40823.rs:3:5: `buf` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL |     let mut buf = &mut [1, 2, 3, 4];
-   |                    +++
+ on line 2, column 19, add `mut `
 
 error: aborting due to 1 previous error
 

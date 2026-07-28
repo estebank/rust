@@ -1,19 +1,11 @@
-error[E0432]: unresolved imports `std::time::foo`, `std::time::bar`, `std::time::buzz`
-  --> $DIR/issue-53565.rs:1:17
-   |
-LL | use std::time::{foo, bar, buzz};
-   |                 ^^^  ^^^  ^^^^ no `buzz` in `time`
-   |                 |    |
-   |                 |    no `bar` in `time`
-   |                 no `foo` in `time`
+error E0432: unresolved imports `std::time::foo`, `std::time::bar`, `std::time::buzz`
+ at $DIR/issue-53565.rs:1:17: no `foo` in `time`
+  on line 1, column 22: no `bar` in `time`
+  on line 1, column 27: no `buzz` in `time`
 
-error[E0432]: unresolved imports `std::time::abc`, `std::time::def`
-  --> $DIR/issue-53565.rs:3:17
-   |
-LL | use std::time::{abc, def};
-   |                 ^^^  ^^^ no `def` in `time`
-   |                 |
-   |                 no `abc` in `time`
+error E0432: unresolved imports `std::time::abc`, `std::time::def`
+ at $DIR/issue-53565.rs:3:17: no `abc` in `time`
+  on line 3, column 22: no `def` in `time`
 
 error: aborting due to 2 previous errors
 

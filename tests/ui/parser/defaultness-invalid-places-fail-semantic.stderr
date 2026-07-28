@@ -1,74 +1,38 @@
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:6:5
-   |
-LL |     default const A: u8;
-   |     -------^^^^^^^^^^^^^
-   |     |
-   |     `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:6:5
+  on line 6: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:7:5
-   |
-LL |     default const B: u8 = 0;
-   |     -------^^^^^^^^^^^^^^^^^
-   |     |
-   |     `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:7:5
+  on line 7: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:8:5
-   |
-LL |     default type D;
-   |     -------^^^^^^^^
-   |     |
-   |     `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:8:5
+  on line 8: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:9:5
-   |
-LL |     default type C: Ord;
-   |     -------^^^^^^^^^^^^^
-   |     |
-   |     `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:9:5
+  on line 9: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:10:5
-   |
-LL |     default fn f1();
-   |     -------^^^^^^^^^
-   |     |
-   |     `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:10:5
+  on line 10: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:11:5
-   |
-LL |     default fn f2() {}
-   |     -------^^^^^^^^
-   |     |
-   |     `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:11:5
+  on line 11: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:14:1
-   |
-LL | default const E: u8 = 0;
-   | -------^^^^^^^^^^^^^^^^^
-   | |
-   | `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:14:1
+  on line 14: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:15:1
-   |
-LL | default type F = ();
-   | -------^^^^^^^^^^^^^
-   | |
-   | `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:15:1
+  on line 15: `default` because of this
 
 error: `default` is only allowed on items in trait impls
-  --> $DIR/defaultness-invalid-places-fail-semantic.rs:16:1
-   |
-LL | default fn h() {}
-   | -------^^^^^^^
-   | |
-   | `default` because of this
+ at $DIR/defaultness-invalid-places-fail-semantic.rs:16:1
+  on line 16: `default` because of this
 
 error: aborting due to 9 previous errors
 

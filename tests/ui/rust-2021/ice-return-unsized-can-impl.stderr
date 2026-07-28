@@ -1,30 +1,15 @@
-error[E0782]: expected a type, found a trait
-  --> $DIR/ice-return-unsized-can-impl.rs:10:15
-   |
-LL |     fn g(new: B) -> B;
-   |               ^
-   |
-   = note: `B` is dyn-incompatible, otherwise a trait object could be used
+error E0782: expected a type, found a trait
+ at $DIR/ice-return-unsized-can-impl.rs:10:15
+note: `B` is dyn-incompatible, otherwise a trait object could be used
 help: use a new generic type parameter, constrained by `B`
-   |
-LL -     fn g(new: B) -> B;
-LL +     fn g<T: B>(new: T) -> B;
-   |
+ on line 10, column 8, add `<T: B>`
 help: you can also use an opaque type, but users won't be able to specify the type parameter when calling the `fn`, having to rely exclusively on type inference
-   |
-LL |     fn g(new: impl B) -> B;
-   |               ++++
+ on line 10, column 14, add `impl `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/ice-return-unsized-can-impl.rs:10:21
-   |
-LL |     fn g(new: B) -> B;
-   |                     ^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/ice-return-unsized-can-impl.rs:10:21
 help: `B` is dyn-incompatible, use `impl B` to return an opaque type, as long as you return a single underlying type
-   |
-LL |     fn g(new: B) -> impl B;
-   |                     ++++
+ on line 10, column 20, add `impl `
 
 error: aborting due to 2 previous errors
 

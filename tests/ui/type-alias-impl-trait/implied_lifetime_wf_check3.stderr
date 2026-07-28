@@ -1,42 +1,20 @@
 error: lifetime may not live long enough
-  --> $DIR/implied_lifetime_wf_check3.rs:15:5
-   |
-LL | fn test_lifetime_param_test<'a>()
-   |                             -- lifetime `'a` defined here
-...
-LL |     test_lifetime_param::assert_static::<'a>()
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'a` must outlive `'static`
+ at $DIR/implied_lifetime_wf_check3.rs:15:5: requires that `'a` must outlive `'static`
+  on line 11, column 29: lifetime `'a` defined here
 
 error: lifetime may not live long enough
-  --> $DIR/implied_lifetime_wf_check3.rs:31:5
-   |
-LL | fn test_higher_kinded_lifetime_param_test<'a>()
-   |                                           -- lifetime `'a` defined here
-...
-LL |     test_higher_kinded_lifetime_param::assert_static::<'a>()
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'a` must outlive `'static`
+ at $DIR/implied_lifetime_wf_check3.rs:31:5: requires that `'a` must outlive `'static`
+  on line 27, column 43: lifetime `'a` defined here
 
 error: lifetime may not live long enough
-  --> $DIR/implied_lifetime_wf_check3.rs:38:9
-   |
-LL |     fn test<'a>() {
-   |             -- lifetime `'a` defined here
-LL |         assert_static::<'a>()
-   |         ^^^^^^^^^^^^^^^^^^^ requires that `'a` must outlive `'static`
+ at $DIR/implied_lifetime_wf_check3.rs:38:9: requires that `'a` must outlive `'static`
+  on line 37, column 13: lifetime `'a` defined here
 
-error[E0310]: the parameter type `A` may not live long enough
-  --> $DIR/implied_lifetime_wf_check3.rs:55:5
-   |
-LL |     test_type_param::assert_static::<A>()
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |
-   |     the parameter type `A` must be valid for the static lifetime...
-   |     ...so that the type `A` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `A` may not live long enough
+ at $DIR/implied_lifetime_wf_check3.rs:55:5: the parameter type `A` must be valid for the static lifetime...
+  on line 55: ...so that the type `A` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn test_type_param_test<A: 'static>()
-   |                          +++++++++
+ on line 51, column 25, add `: 'static`
 
 error: aborting due to 4 previous errors
 

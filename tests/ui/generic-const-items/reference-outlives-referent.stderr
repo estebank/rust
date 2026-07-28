@@ -1,19 +1,9 @@
-error[E0491]: in type `&'a &'b ()`, reference has a longer lifetime than the data it references
-  --> $DIR/reference-outlives-referent.rs:7:18
-   |
-LL | const Q<'a, 'b>: &'a &'b () = &&();
-   |                  ^^^^^^^^^^
-   |
+error E0491: in type `&'a &'b ()`, reference has a longer lifetime than the data it references
+ at $DIR/reference-outlives-referent.rs:7:18
 note: the pointer is valid for the lifetime `'a` as defined here
-  --> $DIR/reference-outlives-referent.rs:7:9
-   |
-LL | const Q<'a, 'b>: &'a &'b () = &&();
-   |         ^^
+ at $DIR/reference-outlives-referent.rs:7:9
 note: but the referenced data is only valid for the lifetime `'b` as defined here
-  --> $DIR/reference-outlives-referent.rs:7:13
-   |
-LL | const Q<'a, 'b>: &'a &'b () = &&();
-   |             ^^
+ at $DIR/reference-outlives-referent.rs:7:13
 
 error: aborting due to 1 previous error
 

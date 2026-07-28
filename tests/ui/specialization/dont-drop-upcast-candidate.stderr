@@ -1,10 +1,6 @@
-error[E0119]: conflicting implementations of trait `Bar` for type `()`
-  --> $DIR/dont-drop-upcast-candidate.rs:10:1
-   |
-LL | impl<T> Bar for T where dyn Foo: Unsize<dyn Bar> {}
-   | ------------------------------------------------ first implementation here
-LL | impl Bar for () {}
-   | ^^^^^^^^^^^^^^^ conflicting implementation for `()`
+error E0119: conflicting implementations of trait `Bar` for type `()`
+ at $DIR/dont-drop-upcast-candidate.rs:10:1: conflicting implementation for `()`
+  on line 9: first implementation here
 
 error: aborting due to 1 previous error
 

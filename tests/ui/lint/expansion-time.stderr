@@ -1,28 +1,14 @@
 warning: meta-variable repeats with different Kleene operator
-  --> $DIR/expansion-time.rs:5:29
-   |
-LL |     ( $($i:ident)* ) => { $($i)+ };
-   |                  -          ^^ - conflicting repetition
-   |                  |
-   |                  expected repetition
-   |
+ at $DIR/expansion-time.rs:5:29
+  on line 5, column 18: expected repetition
+  on line 5, column 32: conflicting repetition
 note: the lint level is defined here
-  --> $DIR/expansion-time.rs:3:8
-   |
-LL | #[warn(meta_variable_misuse)]
-   |        ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/expansion-time.rs:3:8
 
 warning: include macro expected single expression in source
-  --> $DIR/expansion-time-include.rs:4:1
-   |
-LL | 2
-   | ^
-   |
+ at $DIR/expansion-time-include.rs:4:1
 note: the lint level is defined here
-  --> $DIR/expansion-time.rs:18:8
-   |
-LL | #[warn(incomplete_include)]
-   |        ^^^^^^^^^^^^^^^^^^
+ at $DIR/expansion-time.rs:18:8
 
 warning: 2 warnings emitted
 

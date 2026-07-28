@@ -1,8 +1,5 @@
-error[E0275]: overflow assigning `_` to `*const _`
-  --> $DIR/subtype-recursion-limit.rs:12:17
-   |
-LL |     let mut w = (x, y);
-   |                 ^^^^^^
+error E0275: overflow assigning `_` to `*const _`
+ at $DIR/subtype-recursion-limit.rs:12:17
 
 error: aborting due to 1 previous error
 

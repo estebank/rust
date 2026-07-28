@@ -1,30 +1,13 @@
-error[E0382]: borrow of moved value: `n`
-  --> $DIR/use-after-move-implicity-coerced-object.rs:28:13
-   |
-LL |     let n: Box<_> = Number { n: 42 }.into();
-   |         - move occurs because `n` has type `Box<Number>`, which does not implement the `Copy` trait
-LL |     let mut l: Box<_> = List { list: Vec::new() }.into();
-LL |     l.push(n);
-   |            - value moved here
-LL |
-LL |     let x = n.to_string();
-   |             ^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `n`
+ at $DIR/use-after-move-implicity-coerced-object.rs:28:13: value borrowed here after move
+  on line 24, column 9: move occurs because `n` has type `Box<Number>`, which does not implement the `Copy` trait
+  on line 26, column 12: value moved here
 note: consider changing this parameter type in method `push` to borrow instead if owning the value isn't necessary
-  --> $DIR/use-after-move-implicity-coerced-object.rs:17:27
-   |
-LL |     fn push(&mut self, n: Box<dyn ToString + 'static>) {
-   |        ----               ^^^^^^^^^^^^^^^^^^^^^^^^^^^ this parameter takes ownership of the value
-   |        |
-   |        in this method
+ at $DIR/use-after-move-implicity-coerced-object.rs:17:27: this parameter takes ownership of the value
+  on line 17, column 8: in this method
 note: if `Number` implemented `Clone`, you could clone the value
-  --> $DIR/use-after-move-implicity-coerced-object.rs:3:1
-   |
-LL | struct Number {
-   | ^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     l.push(n);
-   |            - you could clone this value
+ at $DIR/use-after-move-implicity-coerced-object.rs:3:1: consider implementing `Clone` for this type
+  on line 26, column 12: you could clone this value
 
 error: aborting due to 1 previous error
 

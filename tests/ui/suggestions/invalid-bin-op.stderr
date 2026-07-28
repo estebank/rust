@@ -1,25 +1,13 @@
-error[E0369]: binary operation `==` cannot be applied to type `S<T>`
-  --> $DIR/invalid-bin-op.rs:2:15
-   |
-LL |     let _ = s == t;
-   |             - ^^ - S<T>
-   |             |
-   |             S<T>
-   |
+error E0369: binary operation `==` cannot be applied to type `S<T>`
+ at $DIR/invalid-bin-op.rs:2:15
+  on line 2, column 13: S<T>
+  on line 2, column 18: S<T>
 note: an implementation of `PartialEq` might be missing for `S<T>`
-  --> $DIR/invalid-bin-op.rs:5:1
-   |
-LL | struct S<T>(T);
-   | ^^^^^^^^^^^ must implement `PartialEq`
+ at $DIR/invalid-bin-op.rs:5:1: must implement `PartialEq`
 help: consider annotating `S<T>` with `#[derive(PartialEq)]`
-   |
-LL + #[derive(PartialEq)]
-LL | struct S<T>(T);
-   |
+ on line 5, column 1, add `#[derive(PartialEq)]`
 help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
-   |
-LL | pub fn foo<T>(s: S<T>, t: S<T>) where S<T>: PartialEq {
-   |                                 +++++++++++++++++++++
+ on line 1, column 31, add ` where S<T>: PartialEq`
 
 error: aborting due to 1 previous error
 

@@ -1,24 +1,12 @@
-error[E0594]: cannot assign to `z.0.0.0`, as it is not declared as mutable
-  --> $DIR/cant-mutate-imm.rs:12:9
-   |
-LL |         z.0.0.0 = 20;
-   |         ^^^^^^^^^^^^ cannot assign
-   |
+error E0594: cannot assign to `z.0.0.0`, as it is not declared as mutable
+ at $DIR/cant-mutate-imm.rs:12:9: cannot assign
 help: consider changing this to be mutable
-   |
-LL |     let mut z = (y, 10);
-   |         +++
+ on line 9, column 8, add `mut `
 
-error[E0594]: cannot assign to `*bx.0`, as it is not declared as mutable
-  --> $DIR/cant-mutate-imm.rs:24:9
-   |
-LL |         bx.0 = 20;
-   |         ^^^^^^^^^ cannot assign
-   |
+error E0594: cannot assign to `*bx.0`, as it is not declared as mutable
+ at $DIR/cant-mutate-imm.rs:24:9: cannot assign
 help: consider changing this to be mutable
-   |
-LL |     let mut bx = Box::new(x);
-   |         +++
+ on line 21, column 8, add `mut `
 
 error: aborting due to 2 previous errors
 

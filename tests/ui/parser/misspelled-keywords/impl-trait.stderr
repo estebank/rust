@@ -1,14 +1,7 @@
 error: expected one of `(`, `+`, `,`, `::`, `<`, `=`, or `>`, found `Debug`
-  --> $DIR/impl-trait.rs:1:18
-   |
-LL | fn code<T: impll Debug>() -> u8 {}
-   |                  ^^^^^ expected one of 7 possible tokens
-   |
+ at $DIR/impl-trait.rs:1:18: expected one of 7 possible tokens
 help: there is a keyword `impl` with a similar name
-   |
-LL - fn code<T: impll Debug>() -> u8 {}
-LL + fn code<T: impl Debug>() -> u8 {}
-   |
+ on line 1, column 11, replace with `impl`
 
 error: aborting due to 1 previous error
 

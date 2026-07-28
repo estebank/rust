@@ -1,8 +1,5 @@
-error[E0758]: unterminated block doc-comment
-  --> $DIR/unterminated-doc-comment.rs:1:1
-   |
-LL | /*!
-   | ^^^^^^^^^^^^^^^^^^^
+error E0758: unterminated block doc-comment
+ at $DIR/unterminated-doc-comment.rs:1:1
 
 error: aborting due to 1 previous error
 

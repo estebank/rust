@@ -1,11 +1,6 @@
-error[E0792]: expected generic lifetime parameter, found `'_`
-  --> $DIR/taint.rs:14:17
-   |
-LL | type Two<'a, 'b> = impl std::fmt::Debug;
-   |          -- this generic parameter must be used with a generic lifetime parameter
-...
-LL |     let c1 = || set(x);
-   |                 ^^^^^^
+error E0792: expected generic lifetime parameter, found `'_`
+ at $DIR/taint.rs:14:17
+  on line 6, column 10: this generic parameter must be used with a generic lifetime parameter
 
 error: aborting due to 1 previous error
 

@@ -1,17 +1,9 @@
 error: where clauses are not allowed before tuple struct bodies
-  --> $DIR/issue-17904.rs:6:15
-   |
-LL | struct Foo<T> where T: Copy, (T);
-   |        ---    ^^^^^^^^^^^^^^ --- the struct body
-   |        |      |
-   |        |      unexpected where clause
-   |        while parsing this tuple struct
-   |
+ at $DIR/issue-17904.rs:6:15: unexpected where clause
+  on line 6, column 8: while parsing this tuple struct
+  on line 6, column 30: the struct body
 help: move the body before the where clause
-   |
-LL - struct Foo<T> where T: Copy, (T);
-LL + struct Foo<T>(T) where T: Copy;
-   |
+ on line 6, column 13, add `(T)`
 
 error: aborting due to 1 previous error
 

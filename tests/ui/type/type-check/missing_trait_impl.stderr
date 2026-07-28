@@ -1,56 +1,28 @@
-error[E0369]: cannot add `T` to `T`
-  --> $DIR/missing_trait_impl.rs:5:15
-   |
-LL |     let z = x + y;
-   |             - ^ - T
-   |             |
-   |             T
-   |
+error E0369: cannot add `T` to `T`
+ at $DIR/missing_trait_impl.rs:5:15
+  on line 5, column 13: T
+  on line 5, column 17: T
 help: consider restricting type parameter `T` with trait `Add`
-   |
-LL | fn foo<T: std::ops::Add>(x: T, y: T) {
-   |         +++++++++++++++
+ on line 4, column 8, add `: std::ops::Add`
 
-error[E0368]: binary assignment operation `+=` cannot be applied to type `T`
-  --> $DIR/missing_trait_impl.rs:9:5
-   |
-LL |     x += x;
-   |     -^^^^^
-   |     |
-   |     cannot use `+=` on type `T`
-   |
+error E0368: binary assignment operation `+=` cannot be applied to type `T`
+ at $DIR/missing_trait_impl.rs:9:5
+  on line 9: cannot use `+=` on type `T`
 help: consider restricting type parameter `T` with trait `AddAssign`
-   |
-LL | fn bar<T: std::ops::AddAssign>(x: T) {
-   |         +++++++++++++++++++++
+ on line 8, column 8, add `: std::ops::AddAssign`
 
-error[E0600]: cannot apply unary operator `-` to type `T`
-  --> $DIR/missing_trait_impl.rs:13:13
-   |
-LL |     let y = -x;
-   |             ^^ cannot apply unary operator `-`
-   |
+error E0600: cannot apply unary operator `-` to type `T`
+ at $DIR/missing_trait_impl.rs:13:13: cannot apply unary operator `-`
 help: consider restricting type parameter `T` with trait `Neg`
-   |
-LL | fn baz<T: std::ops::Neg>(x: T) {
-   |         +++++++++++++++
+ on line 12, column 8, add `: std::ops::Neg`
 
-error[E0600]: cannot apply unary operator `!` to type `T`
-  --> $DIR/missing_trait_impl.rs:14:13
-   |
-LL |     let y = !x;
-   |             ^^ cannot apply unary operator `!`
-   |
+error E0600: cannot apply unary operator `!` to type `T`
+ at $DIR/missing_trait_impl.rs:14:13: cannot apply unary operator `!`
 help: consider restricting type parameter `T` with trait `Not`
-   |
-LL | fn baz<T: std::ops::Not>(x: T) {
-   |         +++++++++++++++
+ on line 12, column 8, add `: std::ops::Not`
 
-error[E0614]: type `T` cannot be dereferenced
-  --> $DIR/missing_trait_impl.rs:15:13
-   |
-LL |     let y = *x;
-   |             ^^ can't be dereferenced
+error E0614: type `T` cannot be dereferenced
+ at $DIR/missing_trait_impl.rs:15:13: can't be dereferenced
 
 error: aborting due to 5 previous errors
 

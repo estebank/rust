@@ -1,10 +1,6 @@
-error[E0515]: cannot return value referencing local variable `z`
-  --> $DIR/issue-48697.rs:7:5
-   |
-LL |     let k = f(&z);
-   |               -- `z` is borrowed here
-LL |     f(x)
-   |     ^^^^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing local variable `z`
+ at $DIR/issue-48697.rs:7:5: returns a value referencing data owned by the current function
+  on line 6, column 15: `z` is borrowed here
 
 error: aborting due to 1 previous error
 

@@ -1,16 +1,8 @@
-error[E0310]: the placeholder type `T` may not live long enough
-  --> $DIR/placeholders-dont-outlive-static.rs:12:5
-   |
-LL |     foo();
-   |     ^^^^^
-   |     |
-   |     the placeholder type `T` must be valid for the static lifetime...
-   |     ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0310: the placeholder type `T` may not live long enough
+ at $DIR/placeholders-dont-outlive-static.rs:12:5: the placeholder type `T` must be valid for the static lifetime...
+  on line 12: ...so that the type `T` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn bad() where T: 'static {
-   |          ++++++++++++++++
+ on line 11, column 8, add ` where T: 'static`
 
 error: aborting due to 1 previous error
 

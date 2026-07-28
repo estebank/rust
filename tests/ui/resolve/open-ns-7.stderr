@@ -1,14 +1,8 @@
-error[E0432]: unresolved import `my_api::utils`
-  --> $DIR/open-ns-7.rs:8:13
-   |
-LL | use my_api::utils::utils_helper;
-   |             ^^^^^ could not find `utils` in `my_api`
+error E0432: unresolved import `my_api::utils`
+ at $DIR/open-ns-7.rs:8:13: could not find `utils` in `my_api`
 
-error[E0433]: cannot find `utils` in `my_api`
-  --> $DIR/open-ns-7.rs:12:21
-   |
-LL |     let _ = my_api::utils::utils_helper();
-   |                     ^^^^^ could not find `utils` in `my_api`
+error E0433: cannot find `utils` in `my_api`
+ at $DIR/open-ns-7.rs:12:21: could not find `utils` in `my_api`
 
 error: aborting due to 2 previous errors
 

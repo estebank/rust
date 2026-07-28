@@ -1,130 +1,82 @@
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:5:17
-   |
-LL |         pub mut(crate::foo) x: i32,
-   |                 ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:5:17
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |         pub mut(in crate::foo) x: i32,
-   |                 ++
+ on line 5, column 16, replace with `in crate::foo`
 
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:6:17
-   |
-LL |         pub mut(crate::foo) unsafe y: i32,
-   |                 ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:6:17
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |         pub mut(in crate::foo) unsafe y: i32,
-   |                 ++
+ on line 6, column 16, replace with `in crate::foo`
 
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:9:31
-   |
-LL |     pub struct TupFoo(pub mut(crate::foo) i32);
-   |                               ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:9:31
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |     pub struct TupFoo(pub mut(in crate::foo) i32);
-   |                               ++
+ on line 9, column 30, replace with `in crate::foo`
 
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:13:17
-   |
-LL |             mut(crate::foo) x: i32,
-   |                 ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:13:17
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |             mut(in crate::foo) x: i32,
-   |                 ++
+ on line 13, column 16, replace with `in crate::foo`
 
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:14:17
-   |
-LL |             mut(crate::foo) unsafe y: i32
-   |                 ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:14:17
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |             mut(in crate::foo) unsafe y: i32
-   |                 ++
+ on line 14, column 16, replace with `in crate::foo`
 
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:16:17
-   |
-LL |         Tup(mut(crate::foo) i32),
-   |                 ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:16:17
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |         Tup(mut(in crate::foo) i32),
-   |                 ++
+ on line 16, column 16, replace with `in crate::foo`
 
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:20:17
-   |
-LL |         pub mut(crate::foo) x: i32,
-   |                 ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:20:17
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |         pub mut(in crate::foo) x: i32,
-   |                 ++
+ on line 20, column 16, replace with `in crate::foo`
 
 error: incorrect `mut` restriction
-  --> $DIR/recover-incorrect-mut-restriction.rs:21:17
-   |
-LL |         pub mut(crate::foo) unsafe y: i32,
-   |                 ^^^^^^^^^^
-   |
-   = help: some possible `mut` restrictions are:
-           `mut(crate)`: can only be mutated in the current crate
-           `mut(super)`: can only be mutated in the parent module
-           `mut(self)`: can only be mutated in current module
-           `mut(in path::to::module)`: can only be mutated in the specified path
+ at $DIR/recover-incorrect-mut-restriction.rs:21:17
+help: some possible `mut` restrictions are:
+      `mut(crate)`: can only be mutated in the current crate
+      `mut(super)`: can only be mutated in the parent module
+      `mut(self)`: can only be mutated in current module
+      `mut(in path::to::module)`: can only be mutated in the specified path
 help: help: use `in` to restrict mutations to the path `crate::foo`
-   |
-LL |         pub mut(in crate::foo) unsafe y: i32,
-   |                 ++
+ on line 21, column 16, replace with `in crate::foo`
 
 error: aborting due to 8 previous errors
 

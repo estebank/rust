@@ -1,20 +1,10 @@
-error[E0384]: cannot assign twice to immutable variable `a`
-  --> $DIR/pattern-ref-bindings-reassignment.rs:18:5
-   |
-LL |     let &mut (ref a, ref mut b) = &mut one_two;
-   |               ----- first assignment to `a`
-...
-LL |     a = &three_four.0;
-   |     ^^^^^^^^^^^^^^^^^ cannot assign twice to immutable variable
+error E0384: cannot assign twice to immutable variable `a`
+ at $DIR/pattern-ref-bindings-reassignment.rs:18:5: cannot assign twice to immutable variable
+  on line 15, column 15: first assignment to `a`
 
-error[E0384]: cannot assign twice to immutable variable `b`
-  --> $DIR/pattern-ref-bindings-reassignment.rs:22:5
-   |
-LL |     let &mut (ref a, ref mut b) = &mut one_two;
-   |                      --------- first assignment to `b`
-...
-LL |     b = &mut three_four.1;
-   |     ^^^^^^^^^^^^^^^^^^^^^ cannot assign twice to immutable variable
+error E0384: cannot assign twice to immutable variable `b`
+ at $DIR/pattern-ref-bindings-reassignment.rs:22:5: cannot assign twice to immutable variable
+  on line 15, column 22: first assignment to `b`
 
 error: aborting due to 2 previous errors
 

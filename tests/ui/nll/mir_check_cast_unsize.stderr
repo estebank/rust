@@ -1,15 +1,8 @@
 error: lifetime may not live long enough
-  --> $DIR/mir_check_cast_unsize.rs:6:5
-   |
-LL | fn bar<'a>(x: &'a u32) -> &'static dyn Debug {
-   |        -- lifetime `'a` defined here
-LL |     x
-   |     ^ returning this value requires that `'a` must outlive `'static`
-   |
+ at $DIR/mir_check_cast_unsize.rs:6:5: returning this value requires that `'a` must outlive `'static`
+  on line 5, column 8: lifetime `'a` defined here
 help: to declare that the trait object captures data from argument `x`, you can add an explicit `'a` lifetime bound
-   |
-LL | fn bar<'a>(x: &'a u32) -> &'static dyn Debug + 'a {
-   |                                              ++++
+ on line 5, column 44, add ` + 'a`
 
 error: aborting due to 1 previous error
 

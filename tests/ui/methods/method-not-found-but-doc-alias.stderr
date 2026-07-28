@@ -1,17 +1,8 @@
-error[E0599]: no method named `quux` found for struct `Foo` in the current scope
-  --> $DIR/method-not-found-but-doc-alias.rs:9:9
-   |
-LL | struct Foo;
-   | ---------- method `quux` not found for this struct
-...
-LL |     Foo.quux();
-   |         ^^^^
-   |
+error E0599: no method named `quux` found for struct `Foo` in the current scope
+ at $DIR/method-not-found-but-doc-alias.rs:9:9
+  on line 1: method `quux` not found for this struct
 help: there is a method `bar` with a similar name
-   |
-LL -     Foo.quux();
-LL +     Foo.bar();
-   |
+ on line 9, column 8, replace with `bar`
 
 error: aborting due to 1 previous error
 

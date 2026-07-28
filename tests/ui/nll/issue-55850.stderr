@@ -1,25 +1,13 @@
-error[E0515]: cannot yield value referencing local variable `s`
-  --> $DIR/issue-55850.rs:28:9
-   |
-LL |         yield &s[..]
-   |         ^^^^^^^-^^^^
-   |         |      |
-   |         |      `s` is borrowed here
-   |         yields a value referencing data owned by the current function
+error E0515: cannot yield value referencing local variable `s`
+ at $DIR/issue-55850.rs:28:9: yields a value referencing data owned by the current function
+  on line 28, column 16: `s` is borrowed here
 
-error[E0626]: borrow may still be in use when coroutine yields
-  --> $DIR/issue-55850.rs:28:16
-   |
-LL |     GenIter(#[coroutine] move || {
-   |                          ------- within this coroutine
-LL |         let mut s = String::new();
-LL |         yield &s[..]
-   |         -------^---- possible yield occurs here
-   |
+error E0626: borrow may still be in use when coroutine yields
+ at $DIR/issue-55850.rs:28:16
+  on line 26, column 26: within this coroutine
+  on line 28: possible yield occurs here
 help: add `static` to mark this coroutine as unmovable
-   |
-LL |     GenIter(#[coroutine] static move || {
-   |                          ++++++
+ on line 26, column 25, add `static `
 
 error: aborting due to 2 previous errors
 

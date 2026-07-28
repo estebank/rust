@@ -1,42 +1,21 @@
 error: expected identifier, found `+`
-  --> $DIR/issue-33569.rs:2:8
-   |
-LL |     { $+ } => {
-   |        ^
+ at $DIR/issue-33569.rs:2:8
 
 error: missing fragment specifier
-  --> $DIR/issue-33569.rs:2:8
-   |
-LL |     { $+ } => {
-   |        ^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/issue-33569.rs:2:8
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: try adding a specifier here
-   |
-LL |     { $+:spec } => {
-   |         +++++
+ on line 2, column 8, add `:spec`
 
 error: expected one of: `*`, `+`, or `?`
-  --> $DIR/issue-33569.rs:4:13
-   |
-LL |         $(x)(y)
-   |             ^^^
+ at $DIR/issue-33569.rs:4:13
 
 error: unexpected end of macro invocation
-  --> $DIR/issue-33569.rs:8:1
-   |
-LL | macro_rules! foo {
-   | ---------------- when calling this macro
-...
-LL | foo!();
-   | ^^^^^^ missing tokens in macro arguments
-   |
+ at $DIR/issue-33569.rs:8:1: missing tokens in macro arguments
+  on line 1: when calling this macro
 note: while trying to match meta-variable `$<!dummy!>:tt`
-  --> $DIR/issue-33569.rs:2:8
-   |
-LL |     { $+ } => {
-   |        ^
+ at $DIR/issue-33569.rs:2:8
 
 error: aborting due to 4 previous errors
 

@@ -1,26 +1,10 @@
-error[E0072]: recursive types `Foo` and `Bar` have infinite size
-  --> $DIR/recursive-type-field.rs:3:1
-   |
-LL | struct Foo<'a> {
-   | ^^^^^^^^^^^^^^
-LL |     bar: Bar<'a>,
-   |          ------- recursive without indirection
-...
-LL | struct Bar<'a> {
-   | ^^^^^^^^^^^^^^
-LL |     y: (Foo<'a>, Foo<'a>),
-   |         -------  ------- recursive without indirection
-   |         |
-   |         recursive without indirection
-   |
+error E0072: recursive types `Foo` and `Bar` have infinite size
+ at $DIR/recursive-type-field.rs:3:1
+  on line 4, column 10: recursive without indirection
+  on line 9, column 9: recursive without indirection
+  on line 9, column 18: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL ~     bar: Box<Bar<'a>>,
-LL |     b: Rc<Bar<'a>>,
-...
-LL | struct Bar<'a> {
-LL ~     y: (Box<Foo<'a>>, Box<Foo<'a>>),
-   |
+ on line 4, column 9, add `Box<`
 
 error: aborting due to 1 previous error
 

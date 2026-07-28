@@ -1,66 +1,27 @@
 error: field `b` is never read
-  --> $DIR/lint-dead-code-4.rs:7:5
-   |
-LL | struct Foo {
-   |        --- field in this struct
-LL |     x: usize,
-LL |     b: bool,
-   |     ^
-   |
+ at $DIR/lint-dead-code-4.rs:7:5
+  on line 5, column 8: field in this struct
 note: the lint level is defined here
-  --> $DIR/lint-dead-code-4.rs:3:9
-   |
-LL | #![deny(dead_code)]
-   |         ^^^^^^^^^
+ at $DIR/lint-dead-code-4.rs:3:9
 
 error: variants `X` and `Y` are never constructed
-  --> $DIR/lint-dead-code-4.rs:15:5
-   |
-LL | enum XYZ {
-   |      --- variants in this enum
-LL |     X,
-   |     ^
-LL |     Y {
-   |     ^
+ at $DIR/lint-dead-code-4.rs:15:5
+  on line 14, column 6: variants in this enum
 
 error: enum `ABC` is never used
-  --> $DIR/lint-dead-code-4.rs:24:6
-   |
-LL | enum ABC {
-   |      ^^^
+ at $DIR/lint-dead-code-4.rs:24:6
 
 error: fields `b` and `c` are never read
-  --> $DIR/lint-dead-code-4.rs:39:9
-   |
-LL |     J {
-   |     - fields in this variant
-LL |         a: String,
-LL |         b: i32,
-   |         ^
-LL |         c: i32,
-   |         ^
+ at $DIR/lint-dead-code-4.rs:39:9
+  on line 37: fields in this variant
 
 error: variants `I` and `K` are never constructed
-  --> $DIR/lint-dead-code-4.rs:36:5
-   |
-LL | enum IJK {
-   |      --- variants in this enum
-LL |     I,
-   |     ^
-...
-LL |     K
-   |     ^
+ at $DIR/lint-dead-code-4.rs:36:5
+  on line 35, column 6: variants in this enum
 
 error: fields `x` and `c` are never read
-  --> $DIR/lint-dead-code-4.rs:61:5
-   |
-LL | struct Bar {
-   |        --- fields in this struct
-LL |     x: usize,
-   |     ^
-LL |     b: bool,
-LL |     c: bool,
-   |     ^
+ at $DIR/lint-dead-code-4.rs:61:5
+  on line 60, column 8: fields in this struct
 
 error: aborting due to 6 previous errors
 

@@ -1,26 +1,12 @@
-error[E0275]: overflow evaluating the requirement `Ty: Id`
-  --> $DIR/type-alias-impl-trait-with-cycle-error-4.rs:11:1
-   |
-LL | type Ty
-   | ^^^^^^^
-   |
+error E0275: overflow evaluating the requirement `Ty: Id`
+ at $DIR/type-alias-impl-trait-with-cycle-error-4.rs:11:1
 note: required by a bound on the type alias `Ty`
-  --> $DIR/type-alias-impl-trait-with-cycle-error-4.rs:13:9
-   |
-LL |     Ty: Id<Assoc = Ty>,
-   |         ^^^^^^^^^^^^^^ required by this bound
+ at $DIR/type-alias-impl-trait-with-cycle-error-4.rs:13:9: required by this bound
 
-error[E0275]: overflow evaluating the requirement `Ty: Id`
-  --> $DIR/type-alias-impl-trait-with-cycle-error-4.rs:15:16
-   |
-LL | fn define() -> Ty {}
-   |                ^^
-   |
+error E0275: overflow evaluating the requirement `Ty: Id`
+ at $DIR/type-alias-impl-trait-with-cycle-error-4.rs:15:16
 note: required by a bound on the type alias `Ty`
-  --> $DIR/type-alias-impl-trait-with-cycle-error-4.rs:13:9
-   |
-LL |     Ty: Id<Assoc = Ty>,
-   |         ^^^^^^^^^^^^^^ required by this bound
+ at $DIR/type-alias-impl-trait-with-cycle-error-4.rs:13:9: required by this bound
 
 error: aborting due to 2 previous errors
 

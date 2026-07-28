@@ -1,109 +1,56 @@
-error[E0382]: use of moved value
-  --> $DIR/borrowck-move-and-move.rs:11:9
-   |
-LL |     let a @ b = U;
-   |         ^   -   - move occurs because value has type `U`, which does not implement the `Copy` trait
-   |         |   |
-   |         |   value moved here
-   |         value used here after move
-   |
+error E0382: use of moved value
+ at $DIR/borrowck-move-and-move.rs:11:9: value used here after move
+  on line 11, column 13: value moved here
+  on line 11, column 17: move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ ref b = U;
-   |         +++     +++
+ on line 11, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-move-and-move.rs:13:9
-   |
-LL |     let a @ (b, c) = (U, U);
-   |         ^       - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-move-and-move.rs:13:9: value used here after partial move
+  on line 13, column 17: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ (b, ref c) = (U, U);
-   |         +++         +++
+ on line 13, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-move-and-move.rs:15:9
-   |
-LL |     let a @ (b, c) = (u(), u());
-   |         ^       - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-move-and-move.rs:15:9: value used here after partial move
+  on line 15, column 17: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ (b, ref c) = (u(), u());
-   |         +++         +++
+ on line 15, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-move-and-move.rs:18:9
-   |
-LL |         a @ Ok(b) | a @ Err(b) => {}
-   |         ^      - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-move-and-move.rs:18:9: value used here after partial move
+  on line 18, column 16: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref a @ Ok(ref b) | a @ Err(b) => {}
-   |         +++        +++
+ on line 18, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-move-and-move.rs:18:21
-   |
-LL |         a @ Ok(b) | a @ Err(b) => {}
-   |                     ^       - value partially moved here
-   |                     |
-   |                     value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-move-and-move.rs:18:21: value used here after partial move
+  on line 18, column 29: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         a @ Ok(b) | ref a @ Err(ref b) => {}
-   |                     +++         +++
+ on line 18, column 20, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-move-and-move.rs:25:9
-   |
-LL |         xs @ [a, .., b] => {}
-   |         ^^           - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-move-and-move.rs:25:9: value used here after partial move
+  on line 25, column 22: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref xs @ [a, .., ref b] => {}
-   |         +++              +++
+ on line 25, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-move-and-move.rs:29:9
-   |
-LL |         xs @ [_, ys @ .., _] => {}
-   |         ^^       -- value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-move-and-move.rs:29:9: value used here after partial move
+  on line 29, column 18: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref xs @ [_, ref ys @ .., _] => {}
-   |         +++          +++
+ on line 29, column 8, add `ref `
 
-error[E0382]: use of moved value
-  --> $DIR/borrowck-move-and-move.rs:22:12
-   |
-LL |     fn fun(a @ b: U) {}
-   |            ^   - value moved here
-   |            |
-   |            value used here after move
-   |            move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of moved value
+ at $DIR/borrowck-move-and-move.rs:22:12: value used here after move
+  on line 22, column 12: move occurs because value has type `U`, which does not implement the `Copy` trait
+  on line 22, column 16: value moved here
 
 error: aborting due to 8 previous errors
 

@@ -1,22 +1,12 @@
-error[E0502]: cannot borrow `*x` as mutable because it is also borrowed as immutable
-  --> $DIR/borrowck-object-lifetime.rs:20:13
-   |
-LL |     let y = x.borrowed();
-   |             - immutable borrow occurs here
-LL |     let z = x.mut_borrowed();
-   |             ^^^^^^^^^^^^^^^^ mutable borrow occurs here
-LL |     y.use_ref();
-   |     - immutable borrow later used here
+error E0502: cannot borrow `*x` as mutable because it is also borrowed as immutable
+ at $DIR/borrowck-object-lifetime.rs:20:13: mutable borrow occurs here
+  on line 19, column 13: immutable borrow occurs here
+  on line 21: immutable borrow later used here
 
-error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
-  --> $DIR/borrowck-object-lifetime.rs:26:13
-   |
-LL |     let y = x.borrowed();
-   |             - immutable borrow occurs here
-LL |     let z = &mut x;
-   |             ^^^^^^ mutable borrow occurs here
-LL |     y.use_ref();
-   |     - immutable borrow later used here
+error E0502: cannot borrow `x` as mutable because it is also borrowed as immutable
+ at $DIR/borrowck-object-lifetime.rs:26:13: mutable borrow occurs here
+  on line 25, column 13: immutable borrow occurs here
+  on line 27: immutable borrow later used here
 
 error: aborting due to 2 previous errors
 

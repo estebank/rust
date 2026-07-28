@@ -1,34 +1,17 @@
 error: expected a label, found an identifier
-  --> $DIR/recover-unticked-labels.rs:5:26
-   |
-LL |     'label: loop { break label 0 };
-   |                          ^^^^^
-   |
+ at $DIR/recover-unticked-labels.rs:5:26
 help: labels start with a tick
-   |
-LL |     'label: loop { break 'label 0 };
-   |                          +
+ on line 5, column 25, add `'`
 
 error: expected a label, found an identifier
-  --> $DIR/recover-unticked-labels.rs:6:29
-   |
-LL |     'label: loop { continue label };
-   |                             ^^^^^
-   |
+ at $DIR/recover-unticked-labels.rs:6:29
 help: labels start with a tick
-   |
-LL |     'label: loop { continue 'label };
-   |                             +
+ on line 6, column 28, add `'`
 
-error[E0425]: cannot find value `label` in this scope
-  --> $DIR/recover-unticked-labels.rs:4:26
-   |
-LL |     'label: loop { break label };
-   |     ------               ^^^^^
-   |     |                    |
-   |     |                    not found in this scope
-   |     |                    help: use the similarly named label: `'label`
-   |     a label with a similar name exists
+error E0425: cannot find value `label` in this scope
+ at $DIR/recover-unticked-labels.rs:4:26: not found in this scope
+  on line 4, column 26: help: use the similarly named label: `'label`
+  on line 4: a label with a similar name exists
 
 error: aborting due to 3 previous errors
 

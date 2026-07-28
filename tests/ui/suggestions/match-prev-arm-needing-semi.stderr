@@ -1,104 +1,38 @@
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-prev-arm-needing-semi.rs:26:18
-   |
-LL |       let _ = match true {
-   |  _____________-
-LL | |         true => {
-LL | |             async_dummy();
-   | |             -------------- this is found to be of type `()`
-...  |
-LL | |         false => async_dummy(),
-   | |                  ^^^^^^^^^^^^^ expected `()`, found future
-...  |
-LL | |     };
-   | |_____- `match` arms have incompatible types
-   |
+error E0308: `match` arms have incompatible types
+ at $DIR/match-prev-arm-needing-semi.rs:26:18: expected `()`, found future
+  on line 21, column 13 to line 30, column 6: `match` arms have incompatible types
+  on line 23: this is found to be of type `()`
 note: calling an async function returns a future
-  --> $DIR/match-prev-arm-needing-semi.rs:26:18
-   |
-LL |         false => async_dummy(),
-   |                  ^^^^^^^^^^^^^
+ at $DIR/match-prev-arm-needing-semi.rs:26:18
 help: consider `await`ing on the `Future`
-   |
-LL |         false => async_dummy().await,
-   |                               ++++++
+ on line 26, column 30, add `.await`
 help: consider removing this semicolon
-   |
-LL -             async_dummy();
-LL +             async_dummy()
-   |
+ on line 23, column 25
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-prev-arm-needing-semi.rs:39:18
-   |
-LL |       let _ = match true {
-   |  _____________-
-LL | |         true => {
-LL | |             async_dummy();
-   | |             -------------- this is found to be of type `()`
-...  |
-LL | |         false => async_dummy2(),
-   | |                  ^^^^^^^^^^^^^^ expected `()`, found future
-...  |
-LL | |     };
-   | |_____- `match` arms have incompatible types
-   |
+error E0308: `match` arms have incompatible types
+ at $DIR/match-prev-arm-needing-semi.rs:39:18: expected `()`, found future
+  on line 34, column 13 to line 43, column 6: `match` arms have incompatible types
+  on line 36: this is found to be of type `()`
 note: calling an async function returns a future
-  --> $DIR/match-prev-arm-needing-semi.rs:39:18
-   |
-LL |         false => async_dummy2(),
-   |                  ^^^^^^^^^^^^^^
+ at $DIR/match-prev-arm-needing-semi.rs:39:18
 help: consider `await`ing on the `Future`
-   |
-LL |         false => async_dummy2().await,
-   |                                ++++++
+ on line 39, column 31, add `.await`
 help: consider removing this semicolon and boxing the expressions
-   |
-LL ~             Box::new(async_dummy())
-LL |
-LL |         }
-LL ~         false => Box::new(async_dummy2()),
-   |
+ on line 36, column 12, add `Box::new(`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-prev-arm-needing-semi.rs:50:18
-   |
-LL |       let _ = match true {
-   |  _____________-
-LL | |         true => async_dummy(),
-   | |                 ------------- this is found to be of type `impl Future<Output = ()>`
-LL | |
-LL | |         false => async_dummy2(),
-   | |                  ^^^^^^^^^^^^^^ expected future, found a different future
-...  |
-LL | |     };
-   | |_____- `match` arms have incompatible types
-   |
-   = note: distinct uses of `impl Trait` result in different opaque types
+error E0308: `match` arms have incompatible types
+ at $DIR/match-prev-arm-needing-semi.rs:50:18: expected future, found a different future
+  on line 47, column 13 to line 53, column 6: `match` arms have incompatible types
+  on line 48, column 17: this is found to be of type `impl Future<Output = ()>`
+note: distinct uses of `impl Trait` result in different opaque types
 help: consider `await`ing on both `Future`s
-   |
-LL ~         true => async_dummy().await,
-LL |
-LL ~         false => async_dummy2().await,
-   |
+ on line 48, column 29, add `.await`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-prev-arm-needing-semi.rs:11:18
-   |
-LL |       let _ = match true {
-   |  _____________-
-LL | |         true => {
-LL | |             dummy();
-   | |             --------
-   | |             |      |
-   | |             |      help: consider removing this semicolon
-   | |             this is found to be of type `()`
-...  |
-LL | |         false => dummy(),
-   | |                  ^^^^^^^ expected `()`, found `i32`
-LL | |
-LL | |     };
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/match-prev-arm-needing-semi.rs:11:18: expected `()`, found `i32`
+  on line 6, column 13 to line 13, column 6: `match` arms have incompatible types
+  on line 8: this is found to be of type `()`
+  on line 8, column 20: help: consider removing this semicolon
 
 error: aborting due to 4 previous errors
 

@@ -1,121 +1,59 @@
-error[E0061]: this function takes 2 arguments but 3 arguments were supplied
-  --> $DIR/mixed_cases.rs:10:3
-   |
-LL |   two_args(1, "", X {});
-   |   ^^^^^^^^    --  ---- unexpected argument #3 of type `X`
-   |               |
-   |               expected `f32`, found `&str`
-   |
+error E0061: this function takes 2 arguments but 3 arguments were supplied
+ at $DIR/mixed_cases.rs:10:3
+  on line 10, column 15: expected `f32`, found `&str`
+  on line 10, column 19: unexpected argument #3 of type `X`
 note: function defined here
-  --> $DIR/mixed_cases.rs:5:4
-   |
-LL | fn two_args(_a: i32, _b: f32) {}
-   |    ^^^^^^^^          -------
+ at $DIR/mixed_cases.rs:5:4
 help: remove the extra argument
-   |
-LL -   two_args(1, "", X {});
-LL +   two_args(1, /* f32 */);
-   |
+ on line 10, column 14, replace with `/* f32 */`
 
-error[E0061]: this function takes 3 arguments but 4 arguments were supplied
-  --> $DIR/mixed_cases.rs:11:3
-   |
-LL |   three_args(1, "", X {}, "");
-   |   ^^^^^^^^^^    --  ----  -- unexpected argument #4 of type `&'static str`
-   |                 |   |
-   |                 |   unexpected argument #3 of type `X`
-   |                 argument #2 of type `f32` is missing
-   |
+error E0061: this function takes 3 arguments but 4 arguments were supplied
+ at $DIR/mixed_cases.rs:11:3
+  on line 11, column 17: argument #2 of type `f32` is missing
+  on line 11, column 21: unexpected argument #3 of type `X`
+  on line 11, column 27: unexpected argument #4 of type `&'static str`
 note: function defined here
-  --> $DIR/mixed_cases.rs:6:4
-   |
-LL | fn three_args(_a: i32, _b: f32, _c: &str) {}
-   |    ^^^^^^^^^^          -------
+ at $DIR/mixed_cases.rs:6:4
 help: did you mean
-   |
-LL -   three_args(1, "", X {}, "");
-LL +   three_args(1, /* f32 */, "");
-   |
+ on line 11, column 12, replace with `(1, /* f32 */, "")`
 
-error[E0061]: this function takes 3 arguments but 2 arguments were supplied
-  --> $DIR/mixed_cases.rs:14:3
-   |
-LL |   three_args(1, X {});
-   |   ^^^^^^^^^^---------
-   |             |   |
-   |             |   expected `f32`, found `X`
-   |             argument #3 of type `&str` is missing
-   |
+error E0061: this function takes 3 arguments but 2 arguments were supplied
+ at $DIR/mixed_cases.rs:14:3
+  on line 14, column 13: argument #3 of type `&str` is missing
+  on line 14, column 17: expected `f32`, found `X`
 note: function defined here
-  --> $DIR/mixed_cases.rs:6:4
-   |
-LL | fn three_args(_a: i32, _b: f32, _c: &str) {}
-   |    ^^^^^^^^^^          -------  --------
+ at $DIR/mixed_cases.rs:6:4
 help: provide the argument
-   |
-LL -   three_args(1, X {});
-LL +   three_args(1, /* f32 */, /* &str */);
-   |
+ on line 14, column 12, replace with `(1, /* f32 */, /* &str */)`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/mixed_cases.rs:17:3
-   |
-LL |   three_args(1, "", X {});
-   |   ^^^^^^^^^^    --  ---- unexpected argument #3 of type `X`
-   |                 |
-   |                 argument #2 of type `f32` is missing
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/mixed_cases.rs:17:3
+  on line 17, column 17: argument #2 of type `f32` is missing
+  on line 17, column 21: unexpected argument #3 of type `X`
 note: function defined here
-  --> $DIR/mixed_cases.rs:6:4
-   |
-LL | fn three_args(_a: i32, _b: f32, _c: &str) {}
-   |    ^^^^^^^^^^          -------
+ at $DIR/mixed_cases.rs:6:4
 help: did you mean
-   |
-LL -   three_args(1, "", X {});
-LL +   three_args(1, /* f32 */, "");
-   |
+ on line 17, column 12, replace with `(1, /* f32 */, "")`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/mixed_cases.rs:20:3
-   |
-LL |   three_args("", X {}, 1);
-   |   ^^^^^^^^^^ --  ----  - expected `&str`, found `{integer}`
-   |              |   |
-   |              |   expected `f32`, found `X`
-   |              expected `i32`, found `&'static str`
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/mixed_cases.rs:20:3
+  on line 20, column 14: expected `i32`, found `&'static str`
+  on line 20, column 18: expected `f32`, found `X`
+  on line 20, column 24: expected `&str`, found `{integer}`
 note: function defined here
-  --> $DIR/mixed_cases.rs:6:4
-   |
-LL | fn three_args(_a: i32, _b: f32, _c: &str) {}
-   |    ^^^^^^^^^^          -------
+ at $DIR/mixed_cases.rs:6:4
 help: swap these arguments
-   |
-LL -   three_args("", X {}, 1);
-LL +   three_args(1, /* f32 */, "");
-   |
+ on line 20, column 12, replace with `(1, /* f32 */, "")`
 
-error[E0061]: this function takes 3 arguments but 2 arguments were supplied
-  --> $DIR/mixed_cases.rs:23:3
-   |
-LL |   three_args("", 1);
-   |   ^^^^^^^^^^ --  -
-   |              |   |
-   |              |   argument #2 of type `f32` is missing
-   |              |   expected `&str`, found `{integer}`
-   |              expected `i32`, found `&'static str`
-   |
+error E0061: this function takes 3 arguments but 2 arguments were supplied
+ at $DIR/mixed_cases.rs:23:3
+  on line 23, column 14: expected `i32`, found `&'static str`
+  on line 23, column 18: argument #2 of type `f32` is missing
+  on line 23, column 18: expected `&str`, found `{integer}`
 note: function defined here
-  --> $DIR/mixed_cases.rs:6:4
-   |
-LL | fn three_args(_a: i32, _b: f32, _c: &str) {}
-   |    ^^^^^^^^^^          -------
+ at $DIR/mixed_cases.rs:6:4
 help: did you mean
-   |
-LL -   three_args("", 1);
-LL +   three_args(1, /* f32 */, "");
-   |
+ on line 23, column 12, replace with `(1, /* f32 */, "")`
 
 error: aborting due to 6 previous errors
 

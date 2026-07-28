@@ -1,16 +1,8 @@
-error[E0565]: malformed `deprecated` attribute input
-  --> $DIR/E0565-1.rs:2:3
-   |
-LL | #[deprecated("since")]
-   |   ^^^^^^^^^^^-------^
-   |              |
-   |              didn't expect a literal here
-   |
+error E0565: malformed `deprecated` attribute input
+ at $DIR/E0565-1.rs:2:3
+  on line 2, column 14: didn't expect a literal here
 help: try using `=` instead
-   |
-LL - #[deprecated("since")]
-LL + #[deprecated = "since"]
-   |
+ on line 2, column 12, replace with ` = "since"`
 
 error: aborting due to 1 previous error
 

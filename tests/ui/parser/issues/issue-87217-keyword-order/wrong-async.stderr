@@ -1,15 +1,8 @@
 error: expected one of `extern` or `fn`, found keyword `async`
-  --> $DIR/wrong-async.rs:9:8
-   |
-LL | unsafe async fn test() {}
-   |        ^^^^^ expected one of `extern` or `fn`
-   |
-   = note: keyword order for functions declaration is `pub`, `default`, `const`, `async`, `unsafe`, `extern`
+ at $DIR/wrong-async.rs:9:8: expected one of `extern` or `fn`
+note: keyword order for functions declaration is `pub`, `default`, `const`, `async`, `unsafe`, `extern`
 help: `async` must come before `unsafe`
-   |
-LL - unsafe async fn test() {}
-LL + async unsafe fn test() {}
-   |
+ on line 9, column 1, replace with `async unsafe`
 
 error: aborting due to 1 previous error
 

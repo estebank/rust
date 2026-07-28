@@ -1,35 +1,16 @@
-error[E0382]: use of moved value: `s`
-  --> $DIR/use-moved-value-in-match-guard-drop.rs:10:13
-   |
-LL |     let s = String::new();
-   |         - move occurs because `s` has type `String`, which does not implement the `Copy` trait
-LL |     let _s = match 0 {
-LL |         0 if { drop(s); false } => String::from("oops"),
-   |                     - value moved here
-...
-LL |             s
-   |             ^ value used here after move
-   |
+error E0382: use of moved value: `s`
+ at $DIR/use-moved-value-in-match-guard-drop.rs:10:13: value used here after move
+  on line 4, column 9: move occurs because `s` has type `String`, which does not implement the `Copy` trait
+  on line 6, column 21: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         0 if { drop(s.clone()); false } => String::from("oops"),
-   |                      ++++++++
+ on line 6, column 21, add `.clone()`
 
-error[E0382]: use of moved value: `s`
-  --> $DIR/use-moved-value-in-match-guard-drop.rs:18:14
-   |
-LL |     let s = String::new();
-   |         - move occurs because `s` has type `String`, which does not implement the `Copy` trait
-LL |     let _s = match 0 {
-LL |         0 if let Some(()) = { drop(s); None } => String::from("oops"),
-   |                                    - value moved here
-LL |         _ => s
-   |              ^ value used here after move
-   |
+error E0382: use of moved value: `s`
+ at $DIR/use-moved-value-in-match-guard-drop.rs:18:14: value used here after move
+  on line 15, column 9: move occurs because `s` has type `String`, which does not implement the `Copy` trait
+  on line 17, column 36: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         0 if let Some(()) = { drop(s.clone()); None } => String::from("oops"),
-   |                                     ++++++++
+ on line 17, column 36, add `.clone()`
 
 error: aborting due to 2 previous errors
 

@@ -1,23 +1,12 @@
 error: attribute items not separated with `,`
-  --> $DIR/attr-missing-comma.rs:4:20
-   |
-LL |     since = "since"
-   |                    ^ help: try adding `,` here
+ at $DIR/attr-missing-comma.rs:4:20: help: try adding `,` here
 
 error: attribute items not separated with `,`
-  --> $DIR/attr-missing-comma.rs:10:18
-   |
-LL |     name = "name"
-   |                  ^
-   |
+ at $DIR/attr-missing-comma.rs:10:18
 help: try adding `,` here
-   |
-LL |     name = "name",
-   |                  +
+ on line 10, column 17, add `,`
 help: try adding `,` here
-   |
-LL |     kind = "static",
-   |                    +
+ on line 11, column 19, add `,`
 
 error: aborting due to 2 previous errors
 

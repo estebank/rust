@@ -1,22 +1,12 @@
-error[E0308]: mismatched types
-  --> $DIR/different-fn.rs:10:5
-   |
-LL |     [0; size_of::<Foo<T>>()]
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^ expected `size_of::<T>()`, found `size_of::<Foo<T>>()`
-   |
-   = note: expected constant `size_of::<T>()`
-              found constant `size_of::<Foo<T>>()`
+error E0308: mismatched types
+ at $DIR/different-fn.rs:10:5: expected `size_of::<T>()`, found `size_of::<Foo<T>>()`
+note: expected constant `size_of::<T>()`
+         found constant `size_of::<Foo<T>>()`
 
 error: unconstrained generic constant
-  --> $DIR/different-fn.rs:10:9
-   |
-LL |     [0; size_of::<Foo<T>>()]
-   |         ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/different-fn.rs:10:9
 help: try adding a `where` bound
-   |
-LL | fn test<T>() -> [u8; size_of::<T>()] where [(); size_of::<Foo<T>>()]: {
-   |                                      ++++++++++++++++++++++++++++++++
+ on line 9, column 36, add ` where [(); size_of::<Foo<T>>()]:`
 
 error: aborting due to 2 previous errors
 

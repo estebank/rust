@@ -1,14 +1,8 @@
 error: at least one trait must be specified
-  --> $DIR/type-alias-impl-trait-with-no-traits.rs:3:12
-   |
-LL | type Foo = impl 'static;
-   |            ^^^^^^^^^^^^
+ at $DIR/type-alias-impl-trait-with-no-traits.rs:3:12
 
 error: at least one trait must be specified
-  --> $DIR/type-alias-impl-trait-with-no-traits.rs:11:13
-   |
-LL | fn bar() -> impl 'static {
-   |             ^^^^^^^^^^^^
+ at $DIR/type-alias-impl-trait-with-no-traits.rs:11:13
 
 error: aborting due to 2 previous errors
 

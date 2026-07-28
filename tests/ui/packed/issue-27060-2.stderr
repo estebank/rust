@@ -1,26 +1,14 @@
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/issue-27060-2.rs:3:11
-   |
-LL | pub struct Bad<T: ?Sized> {
-   |                - this type parameter needs to be `Sized`
-LL |     data: T,
-   |           ^ doesn't have a size known at compile-time
-   |
-   = note: the last field of a packed struct may only have a dynamically sized type if it does not need drop to be run
-   = help: change the field's type to have a statically known size
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/issue-27060-2.rs:3:11: doesn't have a size known at compile-time
+  on line 2, column 16: this type parameter needs to be `Sized`
+note: the last field of a packed struct may only have a dynamically sized type if it does not need drop to be run
+help: change the field's type to have a statically known size
 help: consider removing the `?Sized` bound to make the type parameter `Sized`
-   |
-LL - pub struct Bad<T: ?Sized> {
-LL + pub struct Bad<T> {
-   |
+ on line 2, column 16
 help: borrowed types always have a statically known size
-   |
-LL |     data: &T,
-   |           +
+ on line 3, column 10, add `&`
 help: the `Box` type always has a statically known size and allocates its contents in the heap
-   |
-LL |     data: Box<T>,
-   |           ++++ +
+ on line 3, column 10, add `Box<`
 
 error: aborting due to 1 previous error
 

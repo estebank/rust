@@ -1,64 +1,34 @@
-error[E0070]: invalid left-hand side of assignment
-  --> $DIR/assign-non-lval-derefmut.rs:5:23
-   |
-LL |     x.lock().unwrap() = 2;
-   |     ----------------- ^
-   |     |
-   |     cannot assign to this expression
-   |
+error E0070: invalid left-hand side of assignment
+ at $DIR/assign-non-lval-derefmut.rs:5:23
+  on line 5: cannot assign to this expression
 help: consider dereferencing here to assign to the mutably borrowed value
-   |
-LL |     *x.lock().unwrap() = 2;
-   |     +
+ on line 5, column 4, add `*`
 
-error[E0368]: binary assignment operation `+=` cannot be applied to type `std::sync::MutexGuard<'_, usize>`
-  --> $DIR/assign-non-lval-derefmut.rs:7:5
-   |
-LL |     x.lock().unwrap() += 1;
-   |     -----------------^^^^^
-   |     |
-   |     cannot use `+=` on type `std::sync::MutexGuard<'_, usize>`
-   |
+error E0368: binary assignment operation `+=` cannot be applied to type `std::sync::MutexGuard<'_, usize>`
+ at $DIR/assign-non-lval-derefmut.rs:7:5
+  on line 7: cannot use `+=` on type `std::sync::MutexGuard<'_, usize>`
 note: `std::sync::MutexGuard<'_, usize>` does not implement `AddAssign<{integer}>`
-  --> $SRC_DIR/std/src/sync/poison/mutex.rs:LL:COL
-   |
-   = note: `std::sync::MutexGuard<'_, usize>` is defined in another crate
+ at $SRC_DIR/std/src/sync/poison/mutex.rs:LL:COL
+note: `std::sync::MutexGuard<'_, usize>` is defined in another crate
 help: `+=` can be used on `usize` if you dereference the left-hand side
-   |
-LL |     *x.lock().unwrap() += 1;
-   |     +
+ on line 7, column 4, add `*`
 
-error[E0308]: mismatched types
-  --> $DIR/assign-non-lval-derefmut.rs:11:9
-   |
-LL |     let mut y = x.lock().unwrap();
-   |                 ----------------- expected due to this value
-LL |     y = 2;
-   |         ^ expected `MutexGuard<'_, usize>`, found integer
-   |
-   = note: expected struct `std::sync::MutexGuard<'_, usize>`
-                found type `{integer}`
+error E0308: mismatched types
+ at $DIR/assign-non-lval-derefmut.rs:11:9: expected `MutexGuard<'_, usize>`, found integer
+  on line 10, column 17: expected due to this value
+note: expected struct `std::sync::MutexGuard<'_, usize>`
+           found type `{integer}`
 help: consider dereferencing here to assign to the mutably borrowed value
-   |
-LL |     *y = 2;
-   |     +
+ on line 11, column 4, add `*`
 
-error[E0368]: binary assignment operation `+=` cannot be applied to type `std::sync::MutexGuard<'_, usize>`
-  --> $DIR/assign-non-lval-derefmut.rs:13:5
-   |
-LL |     y += 1;
-   |     -^^^^^
-   |     |
-   |     cannot use `+=` on type `std::sync::MutexGuard<'_, usize>`
-   |
+error E0368: binary assignment operation `+=` cannot be applied to type `std::sync::MutexGuard<'_, usize>`
+ at $DIR/assign-non-lval-derefmut.rs:13:5
+  on line 13: cannot use `+=` on type `std::sync::MutexGuard<'_, usize>`
 note: `std::sync::MutexGuard<'_, usize>` does not implement `AddAssign<{integer}>`
-  --> $SRC_DIR/std/src/sync/poison/mutex.rs:LL:COL
-   |
-   = note: `std::sync::MutexGuard<'_, usize>` is defined in another crate
+ at $SRC_DIR/std/src/sync/poison/mutex.rs:LL:COL
+note: `std::sync::MutexGuard<'_, usize>` is defined in another crate
 help: `+=` can be used on `usize` if you dereference the left-hand side
-   |
-LL |     *y += 1;
-   |     +
+ on line 13, column 4, add `*`
 
 error: aborting due to 4 previous errors
 

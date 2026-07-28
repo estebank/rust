@@ -1,14 +1,9 @@
-error[E0277]: expected an `FnMut(_, char)` closure, found `()`
-  --> $DIR/fold-iterator-error-23966.rs:3:32
-   |
-LL |     "".chars().fold(|_, _| (), ());
-   |                ----            ^^ expected an `FnMut(_, char)` closure, found `()`
-   |                |
-   |                required by a bound introduced by this call
-   |
-   = help: the trait `FnMut(_, char)` is not implemented for `()`
+error E0277: expected an `FnMut(_, char)` closure, found `()`
+ at $DIR/fold-iterator-error-23966.rs:3:32: expected an `FnMut(_, char)` closure, found `()`
+  on line 3, column 16: required by a bound introduced by this call
+help: the trait `FnMut(_, char)` is not implemented for `()`
 note: required by a bound in `fold`
-  --> $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/iterator.rs:LL:COL
 
 error: aborting due to 1 previous error
 

@@ -1,17 +1,8 @@
 error: unexpected end of macro invocation
-  --> $DIR/empty-comment.rs:10:5
-   |
-LL | macro_rules! one_arg_macro {
-   | -------------------------- when calling this macro
-...
-LL |     one_arg_macro!(/**/);
-   |     ^^^^^^^^^^^^^^^^^^^^ missing tokens in macro arguments
-   |
+ at $DIR/empty-comment.rs:10:5: missing tokens in macro arguments
+  on line 5: when calling this macro
 note: while trying to match meta-variable `$fmt:expr`
-  --> $DIR/empty-comment.rs:6:6
-   |
-LL |     ($fmt:expr) => (print!(concat!($fmt, "\n")));
-   |      ^^^^^^^^^
+ at $DIR/empty-comment.rs:6:6
 
 error: aborting due to 1 previous error
 

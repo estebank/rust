@@ -1,54 +1,28 @@
 error: expected identifier, found `1`
-  --> $DIR/resolve-hint-macro.rs:5:17
-   |
-LL |     assert_eq { 1, 1 };
-   |     ---------   ^ expected identifier
-   |     |
-   |     while parsing this struct
+ at $DIR/resolve-hint-macro.rs:5:17: expected identifier
+  on line 5: while parsing this struct
 
 error: expected identifier, found `1`
-  --> $DIR/resolve-hint-macro.rs:5:20
-   |
-LL |     assert_eq { 1, 1 };
-   |     ---------      ^ expected identifier
-   |     |
-   |     while parsing this struct
+ at $DIR/resolve-hint-macro.rs:5:20: expected identifier
+  on line 5: while parsing this struct
 
-error[E0574]: cannot find struct, variant or union type `assert_eq` in this scope
-  --> $DIR/resolve-hint-macro.rs:5:5
-   |
-LL |     assert_eq { 1, 1 };
-   |     ^^^^^^^^^ not found in this scope
-   |
-   = note: a macro named `assert_eq` exists in another namespace
+error E0574: cannot find struct, variant or union type `assert_eq` in this scope
+ at $DIR/resolve-hint-macro.rs:5:5: not found in this scope
+note: a macro named `assert_eq` exists in another namespace
 help: use `!` to invoke the macro
-   |
-LL |     assert_eq! { 1, 1 };
-   |              +
+ on line 5, column 13, add `!`
 
-error[E0423]: cannot find value `assert` in this scope
-  --> $DIR/resolve-hint-macro.rs:9:5
-   |
-LL |     assert[true];
-   |     ^^^^^^ not found in this scope
-   |
-   = note: a macro named `assert` exists in another namespace
+error E0423: cannot find value `assert` in this scope
+ at $DIR/resolve-hint-macro.rs:9:5: not found in this scope
+note: a macro named `assert` exists in another namespace
 help: use `!` to invoke the macro
-   |
-LL |     assert![true];
-   |           +
+ on line 9, column 10, add `!`
 
-error[E0423]: cannot find function `assert_eq` in this scope
-  --> $DIR/resolve-hint-macro.rs:3:5
-   |
-LL |     assert_eq(1, 1);
-   |     ^^^^^^^^^ not found in this scope
-   |
-   = note: a macro named `assert_eq` exists in another namespace
+error E0423: cannot find function `assert_eq` in this scope
+ at $DIR/resolve-hint-macro.rs:3:5: not found in this scope
+note: a macro named `assert_eq` exists in another namespace
 help: use `!` to invoke the macro
-   |
-LL |     assert_eq!(1, 1);
-   |              +
+ on line 3, column 13, add `!`
 
 error: aborting due to 5 previous errors
 

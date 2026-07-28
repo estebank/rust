@@ -1,25 +1,10 @@
-error[E0373]: coroutine may outlive the current function, but it borrows `x`, which is owned by the current function
-  --> $DIR/static-move-suggestion.rs:10:5
-   |
-LL |     static || {
-   |     ^^^^^^^^^ may outlive borrowed value `x`
-...
-LL |         x
-   |         - `x` is borrowed here
-   |
+error E0373: coroutine may outlive the current function, but it borrows `x`, which is owned by the current function
+ at $DIR/static-move-suggestion.rs:10:5: may outlive borrowed value `x`
+  on line 13: `x` is borrowed here
 note: coroutine is returned here
-  --> $DIR/static-move-suggestion.rs:10:5
-   |
-LL | /     static || {
-LL | |
-LL | |         yield;
-LL | |         x
-LL | |     }
-   | |_____^
+ at $DIR/static-move-suggestion.rs:10:5 to 14:6
 help: to force the coroutine to take ownership of `x` (and any other referenced variables), use the `move` keyword
-   |
-LL |     static move || {
-   |            ++++
+ on line 10, column 10, add ` move`
 
 error: aborting due to 1 previous error
 

@@ -399,23 +399,15 @@ current module, then it must also be declared as public (e.g., `pub fn`).
       "rendered": null
     }
   ],
-  "rendered": "\u001b[1m\u001b[91merror[E0425]\u001b[0m\u001b[1m: cannot find type `Iter` in this scope\u001b[0m
-  \u001b[1m\u001b[94m--> \u001b[0m$DIR/use_suggestion_json.rs:13:12
-   \u001b[1m\u001b[94m|\u001b[0m
-\u001b[1m\u001b[94mLL\u001b[0m \u001b[1m\u001b[94m|\u001b[0m     let x: Iter;
-   \u001b[1m\u001b[94m|\u001b[0m            \u001b[1m\u001b[91m^^^^\u001b[0m \u001b[1m\u001b[91mnot found in this scope\u001b[0m
-   \u001b[1m\u001b[94m|\u001b[0m
+  "rendered": "\u001b[1m\u001b[91merror\u001b[0m\u001b[0m E0425: \u001b[1mcannot find type `Iter` in this scope\u001b[0m
+ at $DIR/use_suggestion_json.rs:13:12: not found in this scope
 \u001b[1m\u001b[96mhelp\u001b[0m: consider importing one of these structs
-   \u001b[1m\u001b[94m|\u001b[0m
-\u001b[1m\u001b[94mLL\u001b[0m \u001b[92m+ use std::collections::binary_heap::Iter;\u001b[0m
-   \u001b[1m\u001b[94m|\u001b[0m
-\u001b[1m\u001b[94mLL\u001b[0m \u001b[92m+ use std::collections::btree_map::Iter;\u001b[0m
-   \u001b[1m\u001b[94m|\u001b[0m
-\u001b[1m\u001b[94mLL\u001b[0m \u001b[92m+ use std::collections::btree_set::Iter;\u001b[0m
-   \u001b[1m\u001b[94m|\u001b[0m
-\u001b[1m\u001b[94mLL\u001b[0m \u001b[92m+ use std::collections::hash_map::Iter;\u001b[0m
-   \u001b[1m\u001b[94m|\u001b[0m
-   \u001b[1m\u001b[94m= \u001b[0mand 9 other candidates
+ on line 12, column 1, add one of
+  \u001b[92muse std::collections::binary_heap::Iter;\u001b[0m
+  \u001b[92muse std::collections::btree_map::Iter;\u001b[0m
+  \u001b[92muse std::collections::btree_set::Iter;\u001b[0m
+  \u001b[92muse std::collections::hash_map::Iter;\u001b[0m
+and 9 other candidates
 
 "
 }
@@ -426,7 +418,7 @@ current module, then it must also be declared as public (e.g., `pub fn`).
   "level": "error",
   "spans": [],
   "children": [],
-  "rendered": "\u001b[1m\u001b[91merror\u001b[0m\u001b[1m: aborting due to 1 previous error\u001b[0m
+  "rendered": "\u001b[1m\u001b[91merror\u001b[0m: \u001b[1maborting due to 1 previous error\u001b[0m
 
 "
 }

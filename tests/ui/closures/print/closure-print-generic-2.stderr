@@ -1,19 +1,11 @@
-error[E0308]: mismatched types
-  --> $DIR/closure-print-generic-2.rs:6:22
-   |
-LL |         let c = || println!("{} {}", t, x);
-   |                 -- the found closure
-LL |         let c1: () = c;
-   |                 --   ^ expected `()`, found closure
-   |                 |
-   |                 expected due to this
-   |
-   = note: expected unit type `()`
-                found closure `{closure@$DIR/closure-print-generic-2.rs:5:17: 5:19}`
+error E0308: mismatched types
+ at $DIR/closure-print-generic-2.rs:6:22: expected `()`, found closure
+  on line 5, column 17: the found closure
+  on line 6, column 17: expected due to this
+note: expected unit type `()`
+           found closure `{closure@$DIR/closure-print-generic-2.rs:5:17: 5:19}`
 help: use parentheses to call this closure
-   |
-LL |         let c1: () = c();
-   |                       ++
+ on line 6, column 22, add `()`
 
 error: aborting due to 1 previous error
 

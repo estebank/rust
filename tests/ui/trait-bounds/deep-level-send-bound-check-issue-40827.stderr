@@ -1,54 +1,26 @@
-error[E0277]: `Rc<Foo>` cannot be shared between threads safely
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:14:7
-   |
-LL |     f(Foo(Arc::new(Bar::B(None))));
-   |     - ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Rc<Foo>` cannot be shared between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: within `Bar`, the trait `Sync` is not implemented for `Rc<Foo>`
+error E0277: `Rc<Foo>` cannot be shared between threads safely
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:14:7: `Rc<Foo>` cannot be shared between threads safely
+  on line 14: required by a bound introduced by this call
+help: within `Bar`, the trait `Sync` is not implemented for `Rc<Foo>`
 note: required because it appears within the type `Bar`
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:6:6
-   |
-LL | enum Bar {
-   |      ^^^
-   = note: required for `Arc<Bar>` to implement `Send`
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:6:6
+note: required for `Arc<Bar>` to implement `Send`
 note: required because it appears within the type `Foo`
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:4:8
-   |
-LL | struct Foo(Arc<Bar>);
-   |        ^^^
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:4:8
 note: required by a bound in `f`
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:11:9
-   |
-LL | fn f<T: Send>(_: T) {}
-   |         ^^^^ required by this bound in `f`
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:11:9: required by this bound in `f`
 
-error[E0277]: `Rc<Foo>` cannot be sent between threads safely
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:14:7
-   |
-LL |     f(Foo(Arc::new(Bar::B(None))));
-   |     - ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Rc<Foo>` cannot be sent between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: within `Bar`, the trait `Send` is not implemented for `Rc<Foo>`
+error E0277: `Rc<Foo>` cannot be sent between threads safely
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:14:7: `Rc<Foo>` cannot be sent between threads safely
+  on line 14: required by a bound introduced by this call
+help: within `Bar`, the trait `Send` is not implemented for `Rc<Foo>`
 note: required because it appears within the type `Bar`
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:6:6
-   |
-LL | enum Bar {
-   |      ^^^
-   = note: required for `Arc<Bar>` to implement `Send`
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:6:6
+note: required for `Arc<Bar>` to implement `Send`
 note: required because it appears within the type `Foo`
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:4:8
-   |
-LL | struct Foo(Arc<Bar>);
-   |        ^^^
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:4:8
 note: required by a bound in `f`
-  --> $DIR/deep-level-send-bound-check-issue-40827.rs:11:9
-   |
-LL | fn f<T: Send>(_: T) {}
-   |         ^^^^ required by this bound in `f`
+ at $DIR/deep-level-send-bound-check-issue-40827.rs:11:9: required by this bound in `f`
 
 error: aborting due to 2 previous errors
 

@@ -5,10 +5,7 @@ error: vtable entries: [
            Method(<() as Supertrait<()>>::_print_numbers),
            Method(<() as Middle<()>>::say_hello),
        ]
-  --> $DIR/multiple-supertraits-modulo-normalization-vtable.rs:29:1
-   |
-LL | impl Trait for () {}
-   | ^^^^^^^^^^^^^^^^^
+ at $DIR/multiple-supertraits-modulo-normalization-vtable.rs:29:1
 
 error: vtable entries: [
            MetadataDropInPlace,
@@ -17,10 +14,7 @@ error: vtable entries: [
            Method(<dyn Middle<()> as Supertrait<()>>::_print_numbers - shim(reify)),
            Method(<dyn Middle<()> as Middle<()>>::say_hello - shim(reify)),
        ]
-  --> $DIR/multiple-supertraits-modulo-normalization-vtable.rs:33:1
-   |
-LL | type Virtual = dyn Middle<()>;
-   | ^^^^^^^^^^^^
+ at $DIR/multiple-supertraits-modulo-normalization-vtable.rs:33:1
 
 error: aborting due to 2 previous errors
 

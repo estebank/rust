@@ -1,62 +1,34 @@
-error[E0369]: cannot add `&str` to `&str`
-  --> $DIR/non-1-width-unicode-multiline-label.rs:8:237
-   |
-LL | ... 👦👨👩👧👦👨👩👧👦"; let _a = unicode_is_fun + " really fun!";
-   |                                   -------------- ^ -------------- &str
-   |                                   |              |
-   |                                   |              `+` cannot be used to concatenate two `&str` strings
-   |                                   &str
-   |
-   = note: string concatenation requires an owned `String` on the left
+error E0369: cannot add `&str` to `&str`
+ at $DIR/non-1-width-unicode-multiline-label.rs:8:237: `+` cannot be used to concatenate two `&str` strings
+  on line 8, column 222: &str
+  on line 8, column 239: &str
+note: string concatenation requires an owned `String` on the left
 help: create an owned `String` from a string reference
-   |
-LL |     let _ = "👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦"; let _a = unicode_is_fun.to_owned() + " really fun!";
-   |                                                                                                                                                                                                                                                                                                                                                                                                                                                +++++++++++
+ on line 8, column 235, add `.to_owned()`
 
-error[E0369]: cannot add `&str` to `&str`
-  --> $DIR/non-1-width-unicode-multiline-label.rs:10:384
-   |
-LL | ... 👦👨👩👧👦👨👩👧👦"; let _a = unicode_is_fun + " really fun!";
-   |                                   -------------- ^ -------------- &str
-   |                                   |              |
-   |                                   |              `+` cannot be used to concatenate two `&str` strings
-   |                                   &str
-   |
-   = note: string concatenation requires an owned `String` on the left
+error E0369: cannot add `&str` to `&str`
+ at $DIR/non-1-width-unicode-multiline-label.rs:10:384: `+` cannot be used to concatenate two `&str` strings
+  on line 10, column 369: &str
+  on line 10, column 386: &str
+note: string concatenation requires an owned `String` on the left
 help: create an owned `String` from a string reference
-   |
-LL |     let _ = "👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦👨👩👧👦"; let _a = unicode_is_fun.to_owned() + " really fun!";
-   |                                                                                                                                                                                                                                                                                                                                                                                                                                                +++++++++++
+ on line 10, column 382, add `.to_owned()`
 
-error[E0369]: cannot add `&str` to `&str`
-  --> $DIR/non-1-width-unicode-multiline-label.rs:12:260
-   |
-LL | ...࿆࿇࿈࿉࿊࿋࿌࿍࿎࿏࿐࿑࿒࿓࿔࿕࿖࿗࿘࿙࿚"; let _a = unicode_is_fun + " really fun!";
-   |                                    -------------- ^ -------------- &str
-   |                                    |              |
-   |                                    |              `+` cannot be used to concatenate two `&str` strings
-   |                                    &str
-   |
-   = note: string concatenation requires an owned `String` on the left
+error E0369: cannot add `&str` to `&str`
+ at $DIR/non-1-width-unicode-multiline-label.rs:12:260: `+` cannot be used to concatenate two `&str` strings
+  on line 12, column 245: &str
+  on line 12, column 262: &str
+note: string concatenation requires an owned `String` on the left
 help: create an owned `String` from a string reference
-   |
-LL |     let _ = "ༀ༁༂༃༄༅༆༇༈༉༊་༌།༎༏༐༑༒༓༔༕༖༗༘༙༚༛༜༝༞༟༠༡༢༣༤༥༦༧༨༩༪༫༬༭༮༯༰༱༲༳༴༵༶༷༸༹༺༻༼༽༾༿ཀཁགགྷངཅཆཇ཈ཉཊཋཌཌྷཎཏཐདདྷནཔཕབབྷམཙཚཛཛྷཝཞཟའཡརལཤཥསཧཨཀྵཪཫཬ཭཮཯཰ཱཱཱིིུུྲྀཷླྀཹེཻོཽཾཿ྄ཱྀྀྂྃ྅྆྇ྈྉྊྋྌྍྎྏྐྑྒྒྷྔྕྖྗ྘ྙྚྛྜྜྷྞྟྠྡྡྷྣྤྥྦྦྷྨྩྪྫྫྷྭྮྯྰྱྲླྴྵྶྷྸྐྵྺྻྼ྽྾྿࿀࿁࿂࿃࿄࿅࿆࿇࿈࿉࿊࿋࿌࿍࿎࿏࿐࿑࿒࿓࿔࿕࿖࿗࿘࿙࿚"; let _a = unicode_is_fun.to_owned() + " really fun!";
-   |                                                                                                                                                                                         +++++++++++
+ on line 12, column 258, add `.to_owned()`
 
-error[E0369]: cannot add `&str` to `&str`
-  --> $DIR/non-1-width-unicode-multiline-label.rs:14:219
-   |
-LL | ...xxxxxxxxxxxxxxxxxxxx"; let _a = unicode_is_fun + " really fun!";
-   |                                    -------------- ^ -------------- &str
-   |                                    |              |
-   |                                    |              `+` cannot be used to concatenate two `&str` strings
-   |                                    &str
-   |
-   = note: string concatenation requires an owned `String` on the left
+error E0369: cannot add `&str` to `&str`
+ at $DIR/non-1-width-unicode-multiline-label.rs:14:219: `+` cannot be used to concatenate two `&str` strings
+  on line 14, column 204: &str
+  on line 14, column 221: &str
+note: string concatenation requires an owned `String` on the left
 help: create an owned `String` from a string reference
-   |
-LL |     let _ = "xxxxxxx👨👩👧👦xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx👨xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"; let _a = unicode_is_fun.to_owned() + " really fun!";
-   |                                                                                                                                                                                                                            +++++++++++
+ on line 14, column 217, add `.to_owned()`
 
 error: aborting due to 4 previous errors
 

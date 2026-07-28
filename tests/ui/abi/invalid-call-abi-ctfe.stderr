@@ -1,8 +1,5 @@
-error[E0570]: "rust-invalid" is not a supported ABI for the current target
-  --> $DIR/invalid-call-abi-ctfe.rs:6:14
-   |
-LL | const extern "rust-invalid" fn foo() {
-   |              ^^^^^^^^^^^^^^
+error E0570: "rust-invalid" is not a supported ABI for the current target
+ at $DIR/invalid-call-abi-ctfe.rs:6:14
 
 error: aborting due to 1 previous error
 

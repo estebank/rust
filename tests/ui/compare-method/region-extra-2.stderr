@@ -1,17 +1,8 @@
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/region-extra-2.rs:9:53
-   |
-LL |     fn renew<'b: 'a>(self) -> &'b mut [T];
-   |     -------------------------------------- definition of `renew` from trait
-...
-LL |     fn renew<'b: 'a>(self) -> &'b mut [T] where 'a: 'b {
-   |                                                     ^^ impl has extra requirement `'a: 'b`
-   |
+error E0276: impl has stricter requirements than trait
+ at $DIR/region-extra-2.rs:9:53: impl has extra requirement `'a: 'b`
+  on line 5: definition of `renew` from trait
 help: copy the `where` clause predicates from the trait
-   |
-LL -     fn renew<'b: 'a>(self) -> &'b mut [T] where 'a: 'b {
-LL +     fn renew<'b: 'a>(self) -> &'b mut [T] where 'b: 'a {
-   |
+ on line 9, column 42, replace with `where 'b: 'a`
 
 error: aborting due to 1 previous error
 

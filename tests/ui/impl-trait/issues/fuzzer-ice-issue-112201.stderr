@@ -1,17 +1,9 @@
-error[E0792]: expected generic type parameter, found `impl Sized`
-  --> $DIR/fuzzer-ice-issue-112201.rs:11:5
-   |
-LL | fn repeat_helper<T>(x: T) -> impl Sized {
-   |                  - this generic parameter must be used with a generic type parameter
-LL |     return x;
-LL |     repeat_helper(wrap(x))
-   |     ^^^^^^^^^^^^^^^^^^^^^^
+error E0792: expected generic type parameter, found `impl Sized`
+ at $DIR/fuzzer-ice-issue-112201.rs:11:5
+  on line 9, column 18: this generic parameter must be used with a generic type parameter
 
 error: type parameter `T` is part of concrete type but not used in parameter list for the `impl Trait` type alias
-  --> $DIR/fuzzer-ice-issue-112201.rs:11:5
-   |
-LL |     repeat_helper(wrap(x))
-   |     ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/fuzzer-ice-issue-112201.rs:11:5
 
 error: aborting due to 2 previous errors
 

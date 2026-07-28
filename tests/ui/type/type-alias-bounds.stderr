@@ -1,146 +1,83 @@
 warning: bounds on generic parameters in type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:8:14
-   |
-LL | type SVec<T: Send + Send> = Vec<T>;
-   |              ^^^^   ^^^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
-   = note: `#[warn(type_alias_bounds)]` on by default
+ at $DIR/type-alias-bounds.rs:8:14
+  on line 8, column 21: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+note: `#[warn(type_alias_bounds)]` on by default
 help: remove this bound
-   |
-LL - type SVec<T: Send + Send> = Vec<T>;
-LL + type SVec<T> = Vec<T>;
-   |
+ on line 8, column 11
 
 warning: where clauses on type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:10:21
-   |
-LL | type S2Vec<T> where T: Send = Vec<T>;
-   |                     ^^^^^^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:10:21: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this where clause
-   |
-LL - type S2Vec<T> where T: Send = Vec<T>;
-LL + type S2Vec<T>  = Vec<T>;
-   |
+ on line 10, column 14
 
 warning: bounds on generic parameters in type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:12:19
-   |
-LL | type VVec<'b, 'a: 'b + 'b> = (&'b u32, Vec<&'a i32>);
-   |                   ^^   ^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:12:19
+  on line 12, column 24: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this bound
-   |
-LL - type VVec<'b, 'a: 'b + 'b> = (&'b u32, Vec<&'a i32>);
-LL + type VVec<'b, 'a> = (&'b u32, Vec<&'a i32>);
-   |
+ on line 12, column 16
 
 warning: bounds on generic parameters in type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:14:18
-   |
-LL | type WVec<'b, T: 'b + 'b> = (&'b u32, Vec<T>);
-   |                  ^^   ^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:14:18
+  on line 14, column 23: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this bound
-   |
-LL - type WVec<'b, T: 'b + 'b> = (&'b u32, Vec<T>);
-LL + type WVec<'b, T> = (&'b u32, Vec<T>);
-   |
+ on line 14, column 15
 
 warning: where clauses on type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:16:25
-   |
-LL | type W2Vec<'b, T> where T: 'b, T: 'b = (&'b u32, Vec<T>);
-   |                         ^^^^^  ^^^^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:16:25
+  on line 16, column 32: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this where clause
-   |
-LL - type W2Vec<'b, T> where T: 'b, T: 'b = (&'b u32, Vec<T>);
-LL + type W2Vec<'b, T>  = (&'b u32, Vec<T>);
-   |
+ on line 16, column 18
 
 warning: bounds on generic parameters in type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:48:12
-   |
-LL | type T1<U: Bound> = U::Assoc;
-   |            ^^^^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:48:12: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this bound
-   |
-LL - type T1<U: Bound> = U::Assoc;
-LL + type T1<U> = U::Assoc;
-   |
+ on line 48, column 9
 help: fully qualify this associated type
-   |
-LL | type T1<U: Bound> = <U as /* Trait */>::Assoc;
-   |                     +  +++++++++++++++
+ on line 48, column 20, add `<`
 
 warning: where clauses on type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:49:18
-   |
-LL | type T2<U> where U: Bound = U::Assoc;
-   |                  ^^^^^^^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:49:18: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this where clause
-   |
-LL - type T2<U> where U: Bound = U::Assoc;
-LL + type T2<U>  = U::Assoc;
-   |
+ on line 49, column 11
 help: fully qualify this associated type
-   |
-LL | type T2<U> where U: Bound = <U as /* Trait */>::Assoc;
-   |                             +  +++++++++++++++
+ on line 49, column 28, add `<`
 
 warning: bounds on generic parameters in type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:57:12
-   |
-LL | type T5<U: Bound> = <U as Bound>::Assoc;
-   |            ^^^^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:57:12: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this bound
-   |
-LL - type T5<U: Bound> = <U as Bound>::Assoc;
-LL + type T5<U> = <U as Bound>::Assoc;
-   |
+ on line 57, column 9
 
 warning: bounds on generic parameters in type aliases are not enforced
-  --> $DIR/type-alias-bounds.rs:58:12
-   |
-LL | type T6<U: Bound> = ::std::vec::Vec<U>;
-   |            ^^^^^ will not be checked at usage sites of the type alias
-   |
-   = note: this is a known limitation of the type checker that may be lifted in a future edition.
-           see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
-   = help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
+ at $DIR/type-alias-bounds.rs:58:12: will not be checked at usage sites of the type alias
+note: this is a known limitation of the type checker that may be lifted in a future edition.
+      see issue #112792 <https://github.com/rust-lang/rust/issues/112792> for more information
+help: add `#![feature(checked_type_aliases)]` to the crate attributes to enable the desired semantics
 help: remove this bound
-   |
-LL - type T6<U: Bound> = ::std::vec::Vec<U>;
-LL + type T6<U> = ::std::vec::Vec<U>;
-   |
+ on line 58, column 9
 
 warning: 9 warnings emitted
 

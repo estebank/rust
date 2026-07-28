@@ -1,17 +1,10 @@
-error[E0425]: cannot find type `Missing` in this scope
-  --> $DIR/cannot-transmute-unnormalizable-type.rs:7:5
-   |
-LL |     Missing: Trait,
-   |     ^^^^^^^ not found in this scope
+error E0425: cannot find type `Missing` in this scope
+ at $DIR/cannot-transmute-unnormalizable-type.rs:7:5: not found in this scope
 
-error[E0512]: cannot transmute between types of different sizes, or dependently-sized types
-  --> $DIR/cannot-transmute-unnormalizable-type.rs:19:9
-   |
-LL |         std::mem::transmute::<Option<()>, Option<&Other>>(None);
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: source type: `Option<()>` (8 bits)
-   = note: target type: `Option<&Other>` (unable to determine layout for `Other` because `<() as Trait>::RefTarget` cannot be normalized)
+error E0512: cannot transmute between types of different sizes, or dependently-sized types
+ at $DIR/cannot-transmute-unnormalizable-type.rs:19:9
+note: source type: `Option<()>` (8 bits)
+note: target type: `Option<&Other>` (unable to determine layout for `Other` because `<() as Trait>::RefTarget` cannot be normalized)
 
 error: aborting due to 2 previous errors
 

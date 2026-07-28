@@ -1,40 +1,18 @@
 error: non-binding let on a type that has a destructor
-  --> $DIR/issue-119697-extra-let.rs:16:5
-   |
-LL |     _ = field;
-   |     ^^^^^^^^^
-   |
+ at $DIR/issue-119697-extra-let.rs:16:5
 note: the lint level is defined here
-  --> $DIR/issue-119697-extra-let.rs:1:9
-   |
-LL | #![deny(let_underscore_drop)]
-   |         ^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-119697-extra-let.rs:1:9
 help: consider binding to an unused variable to avoid immediately dropping the value
-   |
-LL -     _ = field;
-LL +     let _unused = field;
-   |
+ on line 16, column 4, replace with `let _unused`
 help: consider immediately dropping the value
-   |
-LL -     _ = field;
-LL +     drop(field);
-   |
+ on line 16, column 4, replace with `drop(`
 
 error: non-binding let on a type that has a destructor
-  --> $DIR/issue-119697-extra-let.rs:18:5
-   |
-LL |     let _ = field;
-   |     ^^^^^^^^^^^^^^
-   |
+ at $DIR/issue-119697-extra-let.rs:18:5
 help: consider binding to an unused variable to avoid immediately dropping the value
-   |
-LL |     let _unused = field;
-   |          ++++++
+ on line 18, column 8, replace with `_unused`
 help: consider immediately dropping the value
-   |
-LL -     let _ = field;
-LL +     drop(field);
-   |
+ on line 18, column 4, replace with `drop(`
 
 error: aborting due to 2 previous errors
 

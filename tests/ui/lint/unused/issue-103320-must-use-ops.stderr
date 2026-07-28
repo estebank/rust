@@ -1,67 +1,34 @@
 warning: unused return value of `add` that must be used
-  --> $DIR/issue-103320-must-use-ops.rs:15:5
-   |
-LL |     x.add(4);
-   |     ^^^^^^^^
-   |
-   = note: this returns the result of the operation, without modifying the original
+ at $DIR/issue-103320-must-use-ops.rs:15:5
+note: this returns the result of the operation, without modifying the original
 note: the lint level is defined here
-  --> $DIR/issue-103320-must-use-ops.rs:3:9
-   |
-LL | #![warn(unused_must_use)]
-   |         ^^^^^^^^^^^^^^^
+ at $DIR/issue-103320-must-use-ops.rs:3:9
 help: use `let _ = ...` to ignore the resulting value
-   |
-LL |     let _ = x.add(4);
-   |     +++++++
+ on line 15, column 4, add `let _ = `
 
 warning: unused return value of `sub` that must be used
-  --> $DIR/issue-103320-must-use-ops.rs:17:5
-   |
-LL |     x.sub(4);
-   |     ^^^^^^^^
-   |
-   = note: this returns the result of the operation, without modifying the original
+ at $DIR/issue-103320-must-use-ops.rs:17:5
+note: this returns the result of the operation, without modifying the original
 help: use `let _ = ...` to ignore the resulting value
-   |
-LL |     let _ = x.sub(4);
-   |     +++++++
+ on line 17, column 4, add `let _ = `
 
 warning: unused return value of `mul` that must be used
-  --> $DIR/issue-103320-must-use-ops.rs:19:5
-   |
-LL |     x.mul(4);
-   |     ^^^^^^^^
-   |
-   = note: this returns the result of the operation, without modifying the original
+ at $DIR/issue-103320-must-use-ops.rs:19:5
+note: this returns the result of the operation, without modifying the original
 help: use `let _ = ...` to ignore the resulting value
-   |
-LL |     let _ = x.mul(4);
-   |     +++++++
+ on line 19, column 4, add `let _ = `
 
 warning: unused return value of `div` that must be used
-  --> $DIR/issue-103320-must-use-ops.rs:21:5
-   |
-LL |     x.div(4);
-   |     ^^^^^^^^
-   |
-   = note: this returns the result of the operation, without modifying the original
+ at $DIR/issue-103320-must-use-ops.rs:21:5
+note: this returns the result of the operation, without modifying the original
 help: use `let _ = ...` to ignore the resulting value
-   |
-LL |     let _ = x.div(4);
-   |     +++++++
+ on line 21, column 4, add `let _ = `
 
 warning: unused return value of `rem` that must be used
-  --> $DIR/issue-103320-must-use-ops.rs:23:5
-   |
-LL |     x.rem(4);
-   |     ^^^^^^^^
-   |
-   = note: this returns the result of the operation, without modifying the original
+ at $DIR/issue-103320-must-use-ops.rs:23:5
+note: this returns the result of the operation, without modifying the original
 help: use `let _ = ...` to ignore the resulting value
-   |
-LL |     let _ = x.rem(4);
-   |     +++++++
+ on line 23, column 4, add `let _ = `
 
 warning: 5 warnings emitted
 

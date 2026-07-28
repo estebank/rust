@@ -1,42 +1,20 @@
-error[E0499]: cannot borrow `*self` as mutable more than once at a time
-  --> $DIR/suggest-local-var-double-mut.rs:12:22
-   |
-LL |             self.foo(self.bar());
-   |             ---- --- ^^^^ second mutable borrow occurs here
-   |             |    |
-   |             |    first borrow later used by call
-   |             first mutable borrow occurs here
-   |
+error E0499: cannot borrow `*self` as mutable more than once at a time
+ at $DIR/suggest-local-var-double-mut.rs:12:22: second mutable borrow occurs here
+  on line 12: first mutable borrow occurs here
+  on line 12, column 18: first borrow later used by call
 help: try adding a local storing this argument...
-  --> $DIR/suggest-local-var-double-mut.rs:12:22
-   |
-LL |             self.foo(self.bar());
-   |                      ^^^^^^^^^^
+ at $DIR/suggest-local-var-double-mut.rs:12:22
 help: ...and then using that local as the argument to this call
-  --> $DIR/suggest-local-var-double-mut.rs:12:13
-   |
-LL |             self.foo(self.bar());
-   |             ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/suggest-local-var-double-mut.rs:12:13
 
-error[E0499]: cannot borrow `*self` as mutable more than once at a time
-  --> $DIR/suggest-local-var-double-mut.rs:24:39
-   |
-LL |             Self::foo(self, Self::bar(self));
-   |             --------- ----            ^^^^ second mutable borrow occurs here
-   |             |         |
-   |             |         first mutable borrow occurs here
-   |             first borrow later used by call
-   |
+error E0499: cannot borrow `*self` as mutable more than once at a time
+ at $DIR/suggest-local-var-double-mut.rs:24:39: second mutable borrow occurs here
+  on line 24: first borrow later used by call
+  on line 24, column 23: first mutable borrow occurs here
 help: try adding a local storing this argument...
-  --> $DIR/suggest-local-var-double-mut.rs:24:29
-   |
-LL |             Self::foo(self, Self::bar(self));
-   |                             ^^^^^^^^^^^^^^^
+ at $DIR/suggest-local-var-double-mut.rs:24:29
 help: ...and then using that local as the argument to this call
-  --> $DIR/suggest-local-var-double-mut.rs:24:13
-   |
-LL |             Self::foo(self, Self::bar(self));
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/suggest-local-var-double-mut.rs:24:13
 
 error: aborting due to 2 previous errors
 

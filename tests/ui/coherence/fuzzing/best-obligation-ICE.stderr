@@ -1,77 +1,35 @@
-error[E0046]: not all trait items implemented, missing: `Assoc`
-  --> $DIR/best-obligation-ICE.rs:10:1
-   |
-LL |     type Assoc;
-   |     ---------- `Assoc` from trait
-...
-LL | impl<T> Trait for W<W<W<T>>> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `Assoc` in implementation
+error E0046: not all trait items implemented, missing: `Assoc`
+ at $DIR/best-obligation-ICE.rs:10:1: missing `Assoc` in implementation
+  on line 6: `Assoc` from trait
 
-error[E0277]: the trait bound `W<W<T>>: Trait` is not satisfied
-  --> $DIR/best-obligation-ICE.rs:10:19
-   |
-LL | impl<T> Trait for W<W<W<T>>> {}
-   |                   ^^^^^^^^^^ unsatisfied trait bound
-   |
+error E0277: the trait bound `W<W<T>>: Trait` is not satisfied
+ at $DIR/best-obligation-ICE.rs:10:19: unsatisfied trait bound
 help: the trait `Trait` is not implemented for `W<W<T>>`
-  --> $DIR/best-obligation-ICE.rs:9:1
-   |
-LL | struct W<T: Trait>(*mut T);
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/best-obligation-ICE.rs:9:1
 note: required by a bound in `W`
-  --> $DIR/best-obligation-ICE.rs:9:13
-   |
-LL | struct W<T: Trait>(*mut T);
-   |             ^^^^^ required by this bound in `W`
+ at $DIR/best-obligation-ICE.rs:9:13: required by this bound in `W`
 help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
-   |
-LL | impl<T> Trait for W<W<W<T>>> where W<W<T>>: Trait {}
-   |                              ++++++++++++++++++++
+ on line 10, column 28, add ` where W<W<T>>: Trait`
 
-error[E0277]: the trait bound `W<T>: Trait` is not satisfied
-  --> $DIR/best-obligation-ICE.rs:10:19
-   |
-LL | impl<T> Trait for W<W<W<T>>> {}
-   |                   ^^^^^^^^^^ unsatisfied trait bound
-   |
+error E0277: the trait bound `W<T>: Trait` is not satisfied
+ at $DIR/best-obligation-ICE.rs:10:19: unsatisfied trait bound
 help: the trait `Trait` is not implemented for `W<T>`
-  --> $DIR/best-obligation-ICE.rs:9:1
-   |
-LL | struct W<T: Trait>(*mut T);
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/best-obligation-ICE.rs:9:1
 note: required by a bound in `W`
-  --> $DIR/best-obligation-ICE.rs:9:13
-   |
-LL | struct W<T: Trait>(*mut T);
-   |             ^^^^^ required by this bound in `W`
+ at $DIR/best-obligation-ICE.rs:9:13: required by this bound in `W`
 help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
-   |
-LL | impl<T> Trait for W<W<W<T>>> where W<T>: Trait {}
-   |                              +++++++++++++++++
+ on line 10, column 28, add ` where W<T>: Trait`
 
-error[E0277]: the trait bound `T: Trait` is not satisfied
-  --> $DIR/best-obligation-ICE.rs:10:19
-   |
-LL | impl<T> Trait for W<W<W<T>>> {}
-   |                   ^^^^^^^^^^ the trait `Trait` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Trait` is not satisfied
+ at $DIR/best-obligation-ICE.rs:10:19: the trait `Trait` is not implemented for `T`
 note: required by a bound in `W`
-  --> $DIR/best-obligation-ICE.rs:9:13
-   |
-LL | struct W<T: Trait>(*mut T);
-   |             ^^^^^ required by this bound in `W`
+ at $DIR/best-obligation-ICE.rs:9:13: required by this bound in `W`
 help: consider restricting type parameter `T` with trait `Trait`
-   |
-LL | impl<T: Trait> Trait for W<W<W<T>>> {}
-   |       +++++++
+ on line 10, column 6, add `: Trait`
 
-error[E0119]: conflicting implementations of trait `NoOverlap` for type `W<W<W<W<_>>>>`
-  --> $DIR/best-obligation-ICE.rs:18:1
-   |
-LL | impl<T: Trait> NoOverlap for T {}
-   | ------------------------------ first implementation here
-LL | impl<T: Trait<Assoc = u32>> NoOverlap for W<T> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `W<W<W<W<_>>>>`
+error E0119: conflicting implementations of trait `NoOverlap` for type `W<W<W<W<_>>>>`
+ at $DIR/best-obligation-ICE.rs:18:1: conflicting implementation for `W<W<W<W<_>>>>`
+  on line 17: first implementation here
 
 error: aborting due to 5 previous errors
 

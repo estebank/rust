@@ -1,35 +1,20 @@
-error[E0308]: mismatched types
-  --> $DIR/ptr-mutability-errors.rs:8:25
-   |
-LL |     let x: *mut isize = x;
-   |            ----------   ^ types differ in mutability
-   |            |
-   |            expected due to this
-   |
-   = note: expected raw pointer `*mut isize`
-              found raw pointer `*const isize`
+error E0308: mismatched types
+ at $DIR/ptr-mutability-errors.rs:8:25: types differ in mutability
+  on line 8, column 12: expected due to this
+note: expected raw pointer `*mut isize`
+         found raw pointer `*const isize`
 
-error[E0308]: mismatched types
-  --> $DIR/ptr-mutability-errors.rs:14:25
-   |
-LL |     let x: *mut isize = &42;
-   |            ----------   ^^^ types differ in mutability
-   |            |
-   |            expected due to this
-   |
-   = note: expected raw pointer `*mut isize`
-                found reference `&isize`
+error E0308: mismatched types
+ at $DIR/ptr-mutability-errors.rs:14:25: types differ in mutability
+  on line 14, column 12: expected due to this
+note: expected raw pointer `*mut isize`
+           found reference `&isize`
 
-error[E0308]: mismatched types
-  --> $DIR/ptr-mutability-errors.rs:20:25
-   |
-LL |     let x: *mut isize = x;
-   |            ----------   ^ types differ in mutability
-   |            |
-   |            expected due to this
-   |
-   = note: expected raw pointer `*mut isize`
-              found raw pointer `*const isize`
+error E0308: mismatched types
+ at $DIR/ptr-mutability-errors.rs:20:25: types differ in mutability
+  on line 20, column 12: expected due to this
+note: expected raw pointer `*mut isize`
+         found raw pointer `*const isize`
 
 error: aborting due to 3 previous errors
 

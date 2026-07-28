@@ -1,22 +1,11 @@
-error[E0751]: found both positive and negative implementation of trait `Send` for type `TestType<_>`:
-  --> $DIR/specialization-overlap-negative.rs:9:1
-   |
-LL | unsafe impl<T: Clone> Send for TestType<T> {}
-   | ------------------------------------------ positive implementation here
-LL | impl<T: MyTrait> !Send for TestType<T> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ negative implementation here
+error E0751: found both positive and negative implementation of trait `Send` for type `TestType<_>`:
+ at $DIR/specialization-overlap-negative.rs:9:1: negative implementation here
+  on line 8: positive implementation here
 
-error[E0367]: `!Send` impl requires `T: MyTrait` but the struct it is implemented for does not
-  --> $DIR/specialization-overlap-negative.rs:9:9
-   |
-LL | impl<T: MyTrait> !Send for TestType<T> {}
-   |         ^^^^^^^
-   |
+error E0367: `!Send` impl requires `T: MyTrait` but the struct it is implemented for does not
+ at $DIR/specialization-overlap-negative.rs:9:9
 note: the implementor must specify the same requirement
-  --> $DIR/specialization-overlap-negative.rs:6:1
-   |
-LL | struct TestType<T>(::std::marker::PhantomData<T>);
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/specialization-overlap-negative.rs:6:1
 
 error: aborting due to 2 previous errors
 

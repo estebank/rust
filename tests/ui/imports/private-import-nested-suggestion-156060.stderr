@@ -1,19 +1,9 @@
-error[E0603]: struct import `One` is private
-  --> $DIR/private-import-nested-suggestion-156060.rs:13:22
-   |
-LL |     use crate::two::{One, Two};
-   |                      ^^^ private struct import
-   |
+error E0603: struct import `One` is private
+ at $DIR/private-import-nested-suggestion-156060.rs:13:22: private struct import
 note: the struct import `One` is defined here...
-  --> $DIR/private-import-nested-suggestion-156060.rs:8:9
-   |
-LL |     use crate::one::One;
-   |         ^^^^^^^^^^^^^^^
+ at $DIR/private-import-nested-suggestion-156060.rs:8:9
 note: ...and refers to the struct `One` which is defined here
-  --> $DIR/private-import-nested-suggestion-156060.rs:4:5
-   |
-LL |     pub struct One();
-   |     ^^^^^^^^^^^^^^^^^ you could import this directly
+ at $DIR/private-import-nested-suggestion-156060.rs:4:5: you could import this directly
 
 error: aborting due to 1 previous error
 

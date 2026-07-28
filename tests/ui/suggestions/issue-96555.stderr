@@ -1,65 +1,35 @@
-error[E0277]: `()` is not a future
-  --> $DIR/issue-96555.rs:4:13
-   |
-LL |     m::f1().await;
-   |     ------- ^^^^^ `()` is not a future
-   |     |
-   |     this call returns `()`
-   |
-   = help: the trait `Future` is not implemented for `()`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
-   = note: required for `()` to implement `IntoFuture`
+error E0277: `()` is not a future
+ at $DIR/issue-96555.rs:4:13: `()` is not a future
+  on line 4: this call returns `()`
+help: the trait `Future` is not implemented for `()`
+note: () must be a future or must implement `IntoFuture` to be awaited
+note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
-   |
-LL -     m::f1().await;
-LL +     m::f1();
-   |
+ on line 4, column 11
 help: alternatively, consider making `fn f1` asynchronous
-   |
-LL |     pub async fn f1() {}
-   |         +++++
+ on line 10, column 7, add ` async`
 
-error[E0277]: `()` is not a future
-  --> $DIR/issue-96555.rs:5:13
-   |
-LL |     m::f2().await;
-   |     ------- ^^^^^ `()` is not a future
-   |     |
-   |     this call returns `()`
-   |
-   = help: the trait `Future` is not implemented for `()`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
-   = note: required for `()` to implement `IntoFuture`
+error E0277: `()` is not a future
+ at $DIR/issue-96555.rs:5:13: `()` is not a future
+  on line 5: this call returns `()`
+help: the trait `Future` is not implemented for `()`
+note: () must be a future or must implement `IntoFuture` to be awaited
+note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
-   |
-LL -     m::f2().await;
-LL +     m::f2();
-   |
+ on line 5, column 11
 help: alternatively, consider making `fn f2` asynchronous
-   |
-LL |     pub(crate) async fn f2() {}
-   |                +++++
+ on line 12, column 14, add ` async`
 
-error[E0277]: `()` is not a future
-  --> $DIR/issue-96555.rs:6:13
-   |
-LL |     m::f3().await;
-   |     ------- ^^^^^ `()` is not a future
-   |     |
-   |     this call returns `()`
-   |
-   = help: the trait `Future` is not implemented for `()`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
-   = note: required for `()` to implement `IntoFuture`
+error E0277: `()` is not a future
+ at $DIR/issue-96555.rs:6:13: `()` is not a future
+  on line 6: this call returns `()`
+help: the trait `Future` is not implemented for `()`
+note: () must be a future or must implement `IntoFuture` to be awaited
+note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
-   |
-LL -     m::f3().await;
-LL +     m::f3();
-   |
+ on line 6, column 11
 help: alternatively, consider making `fn f3` asynchronous
-   |
-LL |     pub async
-   |         +++++
+ on line 14, column 7, add ` async`
 
 error: aborting due to 3 previous errors
 

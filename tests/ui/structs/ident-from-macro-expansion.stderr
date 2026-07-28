@@ -1,13 +1,7 @@
-error[E0609]: no field `y` on type `Foo`
-  --> $DIR/ident-from-macro-expansion.rs:17:16
-   |
-LL |         $expr.$ident
-   |               ------ due to this macro variable
-...
-LL |     access!(k, y);
-   |                ^ unknown field
-   |
-   = note: available field is: `inner`
+error E0609: no field `y` on type `Foo`
+ at $DIR/ident-from-macro-expansion.rs:17:16: unknown field
+  on line 11, column 15: due to this macro variable
+note: available field is: `inner`
 
 error: aborting due to 1 previous error
 

@@ -1,22 +1,12 @@
-error[E0382]: use of moved value: `x`
-  --> $DIR/type_of_a_let.rs:23:16
-   |
-LL |     let x: Foo = 22_u32;
-   |         - move occurs because `x` has type `Foo`, which does not implement the `Copy` trait
-LL |     let y: Foo = x;
-   |                  - value moved here
-LL |     same_type((x, y));
-   |                ^ value used here after move
+error E0382: use of moved value: `x`
+ at $DIR/type_of_a_let.rs:23:16: value used here after move
+  on line 21, column 9: move occurs because `x` has type `Foo`, which does not implement the `Copy` trait
+  on line 22, column 18: value moved here
 
-error[E0382]: use of moved value: `y`
-  --> $DIR/type_of_a_let.rs:24:6
-   |
-LL |     let y: Foo = x;
-   |         - move occurs because `y` has type `Foo`, which does not implement the `Copy` trait
-LL |     same_type((x, y));
-   |                   - value moved here
-LL |     (y, todo!())
-   |      ^ value used here after move
+error E0382: use of moved value: `y`
+ at $DIR/type_of_a_let.rs:24:6: value used here after move
+  on line 22, column 9: move occurs because `y` has type `Foo`, which does not implement the `Copy` trait
+  on line 23, column 19: value moved here
 
 error: aborting due to 2 previous errors
 

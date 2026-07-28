@@ -1,44 +1,20 @@
-error[E0107]: struct takes 1 lifetime argument but 2 lifetime arguments were supplied
-  --> $DIR/generic-arg-mismatch-recover.rs:6:5
-   |
-LL |     Foo::<'static, 'static, ()>(&0);
-   |     ^^^          --------- help: remove the lifetime argument
-   |     |
-   |     expected 1 lifetime argument
-   |
+error E0107: struct takes 1 lifetime argument but 2 lifetime arguments were supplied
+ at $DIR/generic-arg-mismatch-recover.rs:6:5: expected 1 lifetime argument
+  on line 6, column 18: help: remove the lifetime argument
 note: struct defined here, with 1 lifetime parameter: `'a`
-  --> $DIR/generic-arg-mismatch-recover.rs:1:8
-   |
-LL | struct Foo<'a, T: 'a>(&'a T);
-   |        ^^^ --
+ at $DIR/generic-arg-mismatch-recover.rs:1:8
 
-error[E0107]: struct takes 1 lifetime argument but 2 lifetime arguments were supplied
-  --> $DIR/generic-arg-mismatch-recover.rs:9:5
-   |
-LL |     Bar::<'static, 'static, ()>(&());
-   |     ^^^          --------- help: remove the lifetime argument
-   |     |
-   |     expected 1 lifetime argument
-   |
+error E0107: struct takes 1 lifetime argument but 2 lifetime arguments were supplied
+ at $DIR/generic-arg-mismatch-recover.rs:9:5: expected 1 lifetime argument
+  on line 9, column 18: help: remove the lifetime argument
 note: struct defined here, with 1 lifetime parameter: `'a`
-  --> $DIR/generic-arg-mismatch-recover.rs:3:8
-   |
-LL | struct Bar<'a>(&'a ());
-   |        ^^^ --
+ at $DIR/generic-arg-mismatch-recover.rs:3:8
 
-error[E0107]: struct takes 0 generic arguments but 1 generic argument was supplied
-  --> $DIR/generic-arg-mismatch-recover.rs:9:5
-   |
-LL |     Bar::<'static, 'static, ()>(&());
-   |     ^^^                     -- help: remove the unnecessary generic argument
-   |     |
-   |     expected 0 generic arguments
-   |
+error E0107: struct takes 0 generic arguments but 1 generic argument was supplied
+ at $DIR/generic-arg-mismatch-recover.rs:9:5: expected 0 generic arguments
+  on line 9, column 29: help: remove the unnecessary generic argument
 note: struct defined here, with 0 generic parameters
-  --> $DIR/generic-arg-mismatch-recover.rs:3:8
-   |
-LL | struct Bar<'a>(&'a ());
-   |        ^^^
+ at $DIR/generic-arg-mismatch-recover.rs:3:8
 
 error: aborting due to 3 previous errors
 

@@ -1,13 +1,7 @@
-error[E0282]: type annotations needed
-  --> $DIR/expect-two-infer-vars-supply-ty-with-bound-region.rs:8:27
-   |
-LL |     with_closure(|x: u32, y| {});
-   |                           ^
-   |
+error E0282: type annotations needed
+ at $DIR/expect-two-infer-vars-supply-ty-with-bound-region.rs:8:27
 help: consider giving this closure parameter an explicit type
-   |
-LL |     with_closure(|x: u32, y: /* Type */| {});
-   |                            ++++++++++++
+ on line 8, column 27, add `: /* Type */`
 
 error: aborting due to 1 previous error
 

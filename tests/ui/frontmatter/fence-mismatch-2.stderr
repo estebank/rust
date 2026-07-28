@@ -1,22 +1,10 @@
 error: frontmatter close does not match the opening
-  --> $DIR/fence-mismatch-2.rs:1:1
-   |
-LL |   ----cargo
-   |   ^---
-   |   |
-   |  _the opening here has 4 dashes...
-   | |
-LL | |
-LL | | ---cargo
-   | |_---____^
-   |   |
-   |   ...while the close has 3 dashes
+ at $DIR/fence-mismatch-2.rs:1:1 to 3:9
+  on line 1: the opening here has 4 dashes...
+  on line 3: ...while the close has 3 dashes
 
 error: extra characters after frontmatter close are not allowed
-  --> $DIR/fence-mismatch-2.rs:3:1
-   |
-LL | ---cargo
-   | ^^^^^^^^
+ at $DIR/fence-mismatch-2.rs:3:1
 
 error: aborting due to 2 previous errors
 

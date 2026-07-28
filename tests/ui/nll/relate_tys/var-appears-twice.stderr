@@ -1,17 +1,8 @@
-error[E0597]: `b` does not live long enough
-  --> $DIR/var-appears-twice.rs:20:38
-   |
-LL |     let b = 44;
-   |         - binding `b` declared here
-...
-LL |     let x: DoubleCell<_> = make_cell(&b);
-   |                            ----------^^-
-   |                            |         |
-   |                            |         borrowed value does not live long enough
-   |                            assignment requires that `b` is borrowed for `'static`
-...
-LL | }
-   | - `b` dropped here while still borrowed
+error E0597: `b` does not live long enough
+ at $DIR/var-appears-twice.rs:20:38: borrowed value does not live long enough
+  on line 16, column 9: binding `b` declared here
+  on line 20, column 28: assignment requires that `b` is borrowed for `'static`
+  on line 25: `b` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

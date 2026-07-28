@@ -1,15 +1,9 @@
-error[E0277]: the trait bound `&mut T: Clone` is not satisfied
-  --> $DIR/issue-79458.rs:6:5
-   |
-LL | #[derive(Clone)]
-   |          ----- in this derive macro expansion
-LL | struct Foo<'a, T> {
-LL |     bar: &'a mut T
-   |     ^^^^^^^^^^^^^^ the trait `Clone` is not implemented for `&mut T`
-   |
+error E0277: the trait bound `&mut T: Clone` is not satisfied
+ at $DIR/issue-79458.rs:6:5: the trait `Clone` is not implemented for `&mut T`
+  on line 4, column 10: in this derive macro expansion
 help: the trait `Clone` is implemented for `&T`
-  --> $SRC_DIR/core/src/clone.rs:LL:COL
-   = note: `Clone` is implemented for `&T`, but not for `&mut T`
+ at $SRC_DIR/core/src/clone.rs:LL:COL
+note: `Clone` is implemented for `&T`, but not for `&mut T`
 
 error: aborting due to 1 previous error
 

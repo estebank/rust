@@ -1,40 +1,19 @@
-error[E0384]: cannot assign twice to immutable variable `b`
-  --> $DIR/issue-45199.rs:6:5
-   |
-LL |     b = Box::new(1);
-   |     - first assignment to `b`
-LL |     b = Box::new(2);
-   |     ^ cannot assign twice to immutable variable
-   |
+error E0384: cannot assign twice to immutable variable `b`
+ at $DIR/issue-45199.rs:6:5: cannot assign twice to immutable variable
+  on line 5: first assignment to `b`
 help: consider making this binding mutable
-   |
-LL |     let mut b: Box<isize>;
-   |         +++
+ on line 2, column 8, add `mut `
 
-error[E0384]: cannot assign twice to immutable variable `b`
-  --> $DIR/issue-45199.rs:14:5
-   |
-LL |     let b = Box::new(1);
-   |         - first assignment to `b`
-...
-LL |     b = Box::new(2);
-   |     ^ cannot assign twice to immutable variable
-   |
+error E0384: cannot assign twice to immutable variable `b`
+ at $DIR/issue-45199.rs:14:5: cannot assign twice to immutable variable
+  on line 11, column 9: first assignment to `b`
 help: consider making this binding mutable
-   |
-LL |     let mut b = Box::new(1);
-   |         +++
+ on line 11, column 8, add `mut `
 
-error[E0384]: cannot assign to immutable argument `b`
-  --> $DIR/issue-45199.rs:20:5
-   |
-LL |     b = Box::new(2);
-   |     ^ cannot assign to immutable argument
-   |
+error E0384: cannot assign to immutable argument `b`
+ at $DIR/issue-45199.rs:20:5: cannot assign to immutable argument
 help: consider making this binding mutable
-   |
-LL | fn test_args(mut b: Box<i32>) {
-   |              +++
+ on line 18, column 13, add `mut `
 
 error: aborting due to 3 previous errors
 

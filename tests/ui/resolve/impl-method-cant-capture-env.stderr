@@ -1,10 +1,6 @@
-error[E0434]: can't capture dynamic environment in a fn item
-  --> $DIR/impl-method-cant-capture-env.rs:12:22
-   |
-LL |            self.v0 = k0 ^ 0x736f6d6570736575;
-   |                      ^^
-   |
-   = help: use the `|| { ... }` closure form instead
+error E0434: can't capture dynamic environment in a fn item
+ at $DIR/impl-method-cant-capture-env.rs:12:22
+help: use the `|| { ... }` closure form instead
 
 error: aborting due to 1 previous error
 

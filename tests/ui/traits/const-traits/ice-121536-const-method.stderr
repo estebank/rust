@@ -1,18 +1,9 @@
-error[E0379]: functions in trait impls cannot be declared const
-  --> $DIR/ice-121536-const-method.rs:10:5
-   |
-LL |     const fn add(self) -> Vec3 {
-   |     ^^^^^ functions in trait impls cannot be const
-   |
+error E0379: functions in trait impls cannot be declared const
+ at $DIR/ice-121536-const-method.rs:10:5: functions in trait impls cannot be const
 help: remove the `const` ...
-   |
-LL -     const fn add(self) -> Vec3 {
-LL +     fn add(self) -> Vec3 {
-   |
+ on line 10, column 4
 help: ... and declare the impl to be const instead
-   |
-LL | impl const Add for Vec3 {
-   |      +++++
+ on line 9, column 5, add `const `
 
 error: aborting due to 1 previous error
 

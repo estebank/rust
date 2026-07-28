@@ -1,21 +1,12 @@
-error[E0004]: non-exhaustive patterns: type `UninhabitedEnum` is non-empty
-  --> $DIR/match_with_exhaustive_patterns.rs:17:11
-   |
-LL |     match x {}
-   |           ^
-   |
+error E0004: non-exhaustive patterns: type `UninhabitedEnum` is non-empty
+ at $DIR/match_with_exhaustive_patterns.rs:17:11
 note: `UninhabitedEnum` defined here
-  --> $DIR/auxiliary/uninhabited.rs:5:1
-   |
-LL | pub enum UninhabitedEnum {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^
-   = note: the matched value is of type `UninhabitedEnum`, which is marked as non-exhaustive
+ at $DIR/auxiliary/uninhabited.rs:5:1
+note: the matched value is of type `UninhabitedEnum`, which is marked as non-exhaustive
 help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern as shown
-   |
-LL ~     match x {
-LL +         _ => todo!(),
-LL ~     }
-   |
+ on line 17, column 11, replace with ` {
+        _ => todo!(),
+    }`
 
 error: aborting due to 1 previous error
 

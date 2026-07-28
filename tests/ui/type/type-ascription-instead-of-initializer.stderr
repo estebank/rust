@@ -1,30 +1,16 @@
 error: expected type, found `10`
-  --> $DIR/type-ascription-instead-of-initializer.rs:2:31
-   |
-LL |     let x: Vec::with_capacity(10, 20);
-   |          -                    ^^ expected type
-   |          |
-   |          while parsing the type for `x`
-   |
+ at $DIR/type-ascription-instead-of-initializer.rs:2:31: expected type
+  on line 2, column 10: while parsing the type for `x`
 help: use `=` if you meant to assign
-   |
-LL -     let x: Vec::with_capacity(10, 20);
-LL +     let x = Vec::with_capacity(10, 20);
-   |
+ on line 2, column 9, replace with ` =`
 
-error[E0061]: this function takes 1 argument but 2 arguments were supplied
-  --> $DIR/type-ascription-instead-of-initializer.rs:2:12
-   |
-LL |     let x: Vec::with_capacity(10, 20);
-   |            ^^^^^^^^^^^^^^^^^^     -- unexpected argument #2 of type `{integer}`
-   |
+error E0061: this function takes 1 argument but 2 arguments were supplied
+ at $DIR/type-ascription-instead-of-initializer.rs:2:12
+  on line 2, column 35: unexpected argument #2 of type `{integer}`
 note: associated function defined here
-  --> $SRC_DIR/alloc/src/vec/mod.rs:LL:COL
+ at $SRC_DIR/alloc/src/vec/mod.rs:LL:COL
 help: remove the extra argument
-   |
-LL -     let x: Vec::with_capacity(10, 20);
-LL +     let x: Vec::with_capacity(10);
-   |
+ on line 2, column 32
 
 error: aborting due to 2 previous errors
 

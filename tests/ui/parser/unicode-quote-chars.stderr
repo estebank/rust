@@ -1,32 +1,15 @@
 error: unknown start of token: \u{201c}
-  --> $DIR/unicode-quote-chars.rs:2:14
-   |
-LL |     println!(“hello world”);
-   |              ^
-   |
+ at $DIR/unicode-quote-chars.rs:2:14
 help: Unicode characters '“' (Left Double Quotation Mark) and '”' (Right Double Quotation Mark) look like '"' (Quotation Mark), but are not
-   |
-LL -     println!(“hello world”);
-LL +     println!("hello world");
-   |
+ on line 2, column 13, replace with `"hello world"`
 
 error: unknown start of token: \u{201d}
-  --> $DIR/unicode-quote-chars.rs:2:26
-   |
-LL |     println!(“hello world”);
-   |                          ^
-   |
+ at $DIR/unicode-quote-chars.rs:2:26
 help: Unicode character '”' (Right Double Quotation Mark) looks like '"' (Quotation Mark), but it is not
-   |
-LL -     println!(“hello world”);
-LL +     println!(“hello world");
-   |
+ on line 2, column 25, replace with `"`
 
 error: expected `,`, found `world`
-  --> $DIR/unicode-quote-chars.rs:2:21
-   |
-LL |     println!(“hello world”);
-   |                     ^^^^^ expected `,`
+ at $DIR/unicode-quote-chars.rs:2:21: expected `,`
 
 error: aborting due to 3 previous errors
 

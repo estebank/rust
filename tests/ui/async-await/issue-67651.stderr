@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `From` for type `()`
-  --> $DIR/issue-67651.rs:11:1
-   |
-LL | impl From for () {
-   | ---------------- first implementation here
-...
-LL | impl From for () {
-   | ^^^^^^^^^^^^^^^^ conflicting implementation for `()`
+error E0119: conflicting implementations of trait `From` for type `()`
+ at $DIR/issue-67651.rs:11:1: conflicting implementation for `()`
+  on line 7: first implementation here
 
 error: aborting due to 1 previous error
 

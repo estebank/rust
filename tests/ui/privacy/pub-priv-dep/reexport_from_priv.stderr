@@ -1,14 +1,7 @@
 error: type `Shared` from private dependency 'shared' in public interface
-  --> $DIR/reexport_from_priv.rs:11:1
-   |
-LL | pub fn leaks_priv() -> reexport::Shared {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/reexport_from_priv.rs:11:1
 note: the lint level is defined here
-  --> $DIR/reexport_from_priv.rs:7:9
-   |
-LL | #![deny(exported_private_dependencies)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/reexport_from_priv.rs:7:9
 
 error: aborting due to 1 previous error
 

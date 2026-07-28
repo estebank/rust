@@ -1,26 +1,12 @@
-error[E0769]: tuple variant `S` written as struct variant
-  --> $DIR/tuple-variant-written-as-empty-struct-variant.rs:5:9
-   |
-LL |     let S {} = S(0);
-   |         ^^^^
-   |
+error E0769: tuple variant `S` written as struct variant
+ at $DIR/tuple-variant-written-as-empty-struct-variant.rs:5:9
 help: use the tuple variant pattern syntax instead
-   |
-LL -     let S {} = S(0);
-LL +     let S(_) = S(0);
-   |
+ on line 5, column 9, replace with `(_)`
 
-error[E0769]: tuple variant `E::V` written as struct variant
-  --> $DIR/tuple-variant-written-as-empty-struct-variant.rs:6:9
-   |
-LL |     let E::V {} = E::V(0);
-   |         ^^^^^^^
-   |
+error E0769: tuple variant `E::V` written as struct variant
+ at $DIR/tuple-variant-written-as-empty-struct-variant.rs:6:9
 help: use the tuple variant pattern syntax instead
-   |
-LL -     let E::V {} = E::V(0);
-LL +     let E::V(_) = E::V(0);
-   |
+ on line 6, column 12, replace with `(_)`
 
 error: aborting due to 2 previous errors
 

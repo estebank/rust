@@ -1,25 +1,13 @@
-error[E0539]: malformed `repr` attribute input
-  --> $DIR/malformed-reprs.rs:4:4
-   |
-LL | #![repr]
-   |    ^^^^ expected this to be a list
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/type-layout.html#representations>
+error E0539: malformed `repr` attribute input
+ at $DIR/malformed-reprs.rs:4:4: expected this to be a list
+note: for more information, visit <https://doc.rust-lang.org/reference/type-layout.html#representations>
 
-error[E0589]: invalid alignment value: not a power of two
-  --> $DIR/malformed-reprs.rs:8:14
-   |
-LL | #[repr(align(0))]
-   |              ^
+error E0589: invalid alignment value: not a power of two
+ at $DIR/malformed-reprs.rs:8:14
 
-error[E0084]: unsupported representation for zero-variant enum
-  --> $DIR/malformed-reprs.rs:8:1
-   |
-LL | #[repr(align(0))]
-   | ^^^^^^^^^^^^^^^^^
-...
-LL | enum Foo {}
-   | -------- zero-variant enum
+error E0084: unsupported representation for zero-variant enum
+ at $DIR/malformed-reprs.rs:8:1
+  on line 11: zero-variant enum
 
 error: aborting due to 3 previous errors
 

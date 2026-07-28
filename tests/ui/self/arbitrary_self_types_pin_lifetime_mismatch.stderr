@@ -1,47 +1,23 @@
 error: lifetime may not live long enough
-  --> $DIR/arbitrary_self_types_pin_lifetime_mismatch.rs:7:9
-   |
-LL |     fn a(self: Pin<&Foo>, f: &Foo) -> &Foo {
-   |                    -         - let's call the lifetime of this reference `'1`
-   |                    |
-   |                    let's call the lifetime of this reference `'2`
-LL |         f
-   |         ^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/arbitrary_self_types_pin_lifetime_mismatch.rs:7:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 6, column 20: let's call the lifetime of this reference `'2`
+  on line 6, column 30: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn a<'a>(self: Pin<&Foo>, f: &'a Foo) -> &'a Foo {
-   |         ++++                      ++          ++
+ on line 6, column 8, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/arbitrary_self_types_pin_lifetime_mismatch.rs:14:9
-   |
-LL |     fn c(self: Pin<&Self>, f: &Foo, g: &Foo) -> (Pin<&Foo>, &Foo) {
-   |                    -          - let's call the lifetime of this reference `'1`
-   |                    |
-   |                    let's call the lifetime of this reference `'2`
-LL |         (self, f)
-   |         ^^^^^^^^^ method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
-   |
+ at $DIR/arbitrary_self_types_pin_lifetime_mismatch.rs:14:9: method was supposed to return data with lifetime `'2` but it is returning data with lifetime `'1`
+  on line 13, column 20: let's call the lifetime of this reference `'2`
+  on line 13, column 31: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter and update trait if needed
-   |
-LL |     fn c<'a>(self: Pin<&Self>, f: &'a Foo, g: &Foo) -> (Pin<&'a Foo>, &'a Foo) {
-   |         ++++                       ++                        ++        ++
+ on line 13, column 8, add `<'a>`
 
 error: lifetime may not live long enough
-  --> $DIR/arbitrary_self_types_pin_lifetime_mismatch.rs:21:9
-   |
-LL |     fn bar<'a>(self: Alias<&Self>, arg: &'a ()) -> &() {
-   |            --  ---- has type `Pin<&'1 Foo>`
-   |            |
-   |            lifetime `'a` defined here
-LL |         arg
-   |         ^^^ method was supposed to return data with lifetime `'1` but it is returning data with lifetime `'a`
-   |
+ at $DIR/arbitrary_self_types_pin_lifetime_mismatch.rs:21:9: method was supposed to return data with lifetime `'1` but it is returning data with lifetime `'a`
+  on line 20, column 12: lifetime `'a` defined here
+  on line 20, column 16: has type `Pin<&'1 Foo>`
 help: consider reusing a named lifetime parameter and update trait if needed
-   |
-LL |     fn bar<'a>(self: Alias<&Self>, arg: &'a ()) -> &'a () {
-   |                                                     ++
+ on line 20, column 52, add `'a `
 
 error: aborting due to 3 previous errors
 

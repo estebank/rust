@@ -1,21 +1,11 @@
-error[E0369]: no implementation for `SingleVariant | ()`
-  --> $DIR/span-bug-issue-121445.rs:8:9
-   |
-LL |       let c2 = SingleVariant::Points(0)
-   |                ------------------------ SingleVariant
-LL |           | match x {
-   |  _________^_-
-LL | |             _ => (),
-LL | |         };
-   | |_________- ()
-   |
+error E0369: no implementation for `SingleVariant | ()`
+ at $DIR/span-bug-issue-121445.rs:8:9
+  on line 7, column 14: SingleVariant
+  on line 8, column 11 to line 10, column 10: ()
 note: an implementation of `BitOr<()>` might be missing for `SingleVariant`
-  --> $DIR/span-bug-issue-121445.rs:13:1
-   |
-LL | enum SingleVariant {
-   | ^^^^^^^^^^^^^^^^^^ must implement `BitOr<()>`
+ at $DIR/span-bug-issue-121445.rs:13:1: must implement `BitOr<()>`
 note: the trait `BitOr` must be implemented
-  --> $SRC_DIR/core/src/ops/bit.rs:LL:COL
+ at $SRC_DIR/core/src/ops/bit.rs:LL:COL
 
 error: aborting due to 1 previous error
 

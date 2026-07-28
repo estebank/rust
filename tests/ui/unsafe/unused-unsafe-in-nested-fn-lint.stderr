@@ -1,20 +1,10 @@
 error: unnecessary `unsafe` block
-  --> $DIR/unused-unsafe-in-nested-fn-lint.rs:11:9
-   |
-LL |         unsafe { /* unnecessary */ }
-   |         ^^^^^^ unnecessary `unsafe` block
-   |
+ at $DIR/unused-unsafe-in-nested-fn-lint.rs:11:9: unnecessary `unsafe` block
 note: the lint level is defined here
-  --> $DIR/unused-unsafe-in-nested-fn-lint.rs:5:9
-   |
-LL | #![deny(unused_unsafe)]
-   |         ^^^^^^^^^^^^^
+ at $DIR/unused-unsafe-in-nested-fn-lint.rs:5:9
 
 error: unnecessary `unsafe` block
-  --> $DIR/unused-unsafe-in-nested-fn-lint.rs:21:13
-   |
-LL |             unsafe { /* unnecessary */ }
-   |             ^^^^^^ unnecessary `unsafe` block
+ at $DIR/unused-unsafe-in-nested-fn-lint.rs:21:13: unnecessary `unsafe` block
 
 error: aborting due to 2 previous errors
 

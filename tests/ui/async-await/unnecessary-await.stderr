@@ -1,70 +1,38 @@
-error[E0277]: `()` is not a future
-  --> $DIR/unnecessary-await.rs:9:11
-   |
-LL |     boo().await;
-   |     ----- ^^^^^ `()` is not a future
-   |     |
-   |     this call returns `()`
-   |
-   = help: the trait `Future` is not implemented for `()`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
-   = note: required for `()` to implement `IntoFuture`
+error E0277: `()` is not a future
+ at $DIR/unnecessary-await.rs:9:11: `()` is not a future
+  on line 9: this call returns `()`
+help: the trait `Future` is not implemented for `()`
+note: () must be a future or must implement `IntoFuture` to be awaited
+note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
-   |
-LL -     boo().await;
-LL +     boo();
-   |
+ on line 9, column 9
 help: alternatively, consider making `fn boo` asynchronous
-   |
-LL | async fn boo() {}
-   | +++++
+ on line 5, column 1, add `async `
 
-error[E0277]: `()` is not a future
-  --> $DIR/unnecessary-await.rs:28:10
-   |
-LL |     e!().await;
-   |          ^^^^^ `()` is not a future
-   |
-   = help: the trait `Future` is not implemented for `()`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
-   = note: required for `()` to implement `IntoFuture`
+error E0277: `()` is not a future
+ at $DIR/unnecessary-await.rs:28:10: `()` is not a future
+help: the trait `Future` is not implemented for `()`
+note: () must be a future or must implement `IntoFuture` to be awaited
+note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
-   |
-LL -     e!().await;
-LL +     e!();
-   |
+ on line 28, column 8
 
-error[E0277]: `()` is not a future
-  --> $DIR/unnecessary-await.rs:22:15
-   |
-LL |         $expr.await
-   |               ^^^^^
-   |               |
-   |               `()` is not a future
-   |               remove the `.await`
-...
-LL |     f!(());
-   |     ------ in this macro invocation
-   |
-   = help: the trait `Future` is not implemented for `()`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
-   = note: required for `()` to implement `IntoFuture`
-   = note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0277: `()` is not a future
+ at $DIR/unnecessary-await.rs:22:15: `()` is not a future
+  on line 22, column 15: remove the `.await`
+  on line 31: in this macro invocation
+help: the trait `Future` is not implemented for `()`
+note: () must be a future or must implement `IntoFuture` to be awaited
+note: required for `()` to implement `IntoFuture`
+note: this error originates in the macro `f` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0277]: `()` is not a future
-  --> $DIR/unnecessary-await.rs:36:20
-   |
-LL |     for x in [] {}.await
-   |                    ^^^^^ `()` is not a future
-   |
-   = help: the trait `Future` is not implemented for `()`
-   = note: () must be a future or must implement `IntoFuture` to be awaited
-   = note: required for `()` to implement `IntoFuture`
+error E0277: `()` is not a future
+ at $DIR/unnecessary-await.rs:36:20: `()` is not a future
+help: the trait `Future` is not implemented for `()`
+note: () must be a future or must implement `IntoFuture` to be awaited
+note: required for `()` to implement `IntoFuture`
 help: remove the `.await`
-   |
-LL -     for x in [] {}.await
-LL +     for x in [] {}
-   |
+ on line 36, column 18
 
 error: aborting due to 4 previous errors
 

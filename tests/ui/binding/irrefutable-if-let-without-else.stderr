@@ -1,60 +1,26 @@
-error[E0317]: `if` may be missing an `else` clause
-  --> $DIR/irrefutable-if-let-without-else.rs:8:5
-   |
-LL |   fn foo(x: Enum) -> i32 {
-   |                      --- expected `i32` because of this return type
-LL | /     if let Enum::Variant(value) = x {
-LL | |         value
-LL | |     }
-   | |_____^ expected `i32`, found `()`
-   |
-   = note: `if` expressions without `else` evaluate to `()`
-   = help: consider adding an `else` block that evaluates to the expected type
+error E0317: `if` may be missing an `else` clause
+ at $DIR/irrefutable-if-let-without-else.rs:8:5 to 10:6: expected `i32`, found `()`
+  on line 7, column 20: expected `i32` because of this return type
+note: `if` expressions without `else` evaluate to `()`
+help: consider adding an `else` block that evaluates to the expected type
 help: consider using an irrefutable `let` binding instead
-   |
-LL ~     let Enum::Variant(value) = x;
-LL ~         value
-   |
+ on line 8, column 4
 
-error[E0317]: `if` may be missing an `else` clause
-  --> $DIR/irrefutable-if-let-without-else.rs:13:5
-   |
-LL |   fn bar(x: Enum) -> i32 {
-   |                      --- expected `i32` because of this return type
-LL | /     if let Enum::Variant(value) = x {
-LL | |         let x = value + 1;
-LL | |         x
-LL | |     }
-   | |_____^ expected `i32`, found `()`
-   |
-   = note: `if` expressions without `else` evaluate to `()`
-   = help: consider adding an `else` block that evaluates to the expected type
+error E0317: `if` may be missing an `else` clause
+ at $DIR/irrefutable-if-let-without-else.rs:13:5 to 16:6: expected `i32`, found `()`
+  on line 12, column 20: expected `i32` because of this return type
+note: `if` expressions without `else` evaluate to `()`
+help: consider adding an `else` block that evaluates to the expected type
 help: consider using an irrefutable `let` binding instead
-   |
-LL ~     let Enum::Variant(value) = x;
-LL ~         let x = value + 1;
-LL ~         x
-   |
+ on line 13, column 4
 
-error[E0317]: `if` may be missing an `else` clause
-  --> $DIR/irrefutable-if-let-without-else.rs:19:5
-   |
-LL |   fn baz(x: Struct) -> i32 {
-   |                        --- expected `i32` because of this return type
-LL | /     if let Struct(value) = x {
-LL | |         let x = value + 1;
-LL | |         x
-LL | |     }
-   | |_____^ expected `i32`, found `()`
-   |
-   = note: `if` expressions without `else` evaluate to `()`
-   = help: consider adding an `else` block that evaluates to the expected type
+error E0317: `if` may be missing an `else` clause
+ at $DIR/irrefutable-if-let-without-else.rs:19:5 to 22:6: expected `i32`, found `()`
+  on line 18, column 22: expected `i32` because of this return type
+note: `if` expressions without `else` evaluate to `()`
+help: consider adding an `else` block that evaluates to the expected type
 help: consider using an irrefutable `let` binding instead
-   |
-LL ~     let Struct(value) = x;
-LL ~         let x = value + 1;
-LL ~         x
-   |
+ on line 19, column 4
 
 error: aborting due to 3 previous errors
 

@@ -1,24 +1,13 @@
-error[E0425]: cannot find type `X` in this scope
-  --> $DIR/type_not_in_scope.rs:1:6
-   |
-LL | impl X {
-   |      ^ not found in this scope
+error E0425: cannot find type `X` in this scope
+ at $DIR/type_not_in_scope.rs:1:6: not found in this scope
 
-error[E0573]: cannot find type `cfg_attr` in this scope
-  --> $DIR/type_not_in_scope.rs:7:18
-   |
-LL | fn getn<const N: cfg_attr>() -> [u8; N] {}
-   |                  ^^^^^^^^ not found in this scope
-   |
-   = note: a built-in attribute named `cfg_attr` exists in another namespace
+error E0573: cannot find type `cfg_attr` in this scope
+ at $DIR/type_not_in_scope.rs:7:18: not found in this scope
+note: a built-in attribute named `cfg_attr` exists in another namespace
 
-error[E0308]: mismatched types
-  --> $DIR/type_not_in_scope.rs:7:33
-   |
-LL | fn getn<const N: cfg_attr>() -> [u8; N] {}
-   |    ----                         ^^^^^^^ expected `[u8; N]`, found `()`
-   |    |
-   |    implicitly returns `()` as its body has no tail or `return` expression
+error E0308: mismatched types
+ at $DIR/type_not_in_scope.rs:7:33: expected `[u8; N]`, found `()`
+  on line 7, column 4: implicitly returns `()` as its body has no tail or `return` expression
 
 error: aborting due to 3 previous errors
 

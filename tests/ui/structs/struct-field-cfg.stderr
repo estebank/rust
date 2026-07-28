@@ -1,44 +1,21 @@
-error[E0063]: missing field `present` in initializer of `Foo`
-  --> $DIR/struct-field-cfg.rs:7:13
-   |
-LL |     let _ = Foo { #[cfg(false)] present: () };
-   |             ^^^ missing `present`
+error E0063: missing field `present` in initializer of `Foo`
+ at $DIR/struct-field-cfg.rs:7:13: missing `present`
 
-error[E0560]: struct `Foo` has no field named `absent`
-  --> $DIR/struct-field-cfg.rs:10:45
-   |
-LL |     let _ = Foo { present: (), #[cfg(true)] absent: () };
-   |                                             ^^^^^^ `Foo` does not have this field
-   |
-   = note: all struct fields are already assigned
+error E0560: struct `Foo` has no field named `absent`
+ at $DIR/struct-field-cfg.rs:10:45: `Foo` does not have this field
+note: all struct fields are already assigned
 
-error[E0027]: pattern does not mention field `present`
-  --> $DIR/struct-field-cfg.rs:13:9
-   |
-LL |     let Foo { #[cfg(false)] present: () } = foo;
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing field `present`
-   |
+error E0027: pattern does not mention field `present`
+ at $DIR/struct-field-cfg.rs:13:9: missing field `present`
 help: include the missing field in the pattern
-   |
-LL -     let Foo { #[cfg(false)] present: () } = foo;
-LL +     let Foo { present } = foo;
-   |
+ on line 13, column 11, replace with ` { present }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL -     let Foo { #[cfg(false)] present: () } = foo;
-LL +     let Foo { present: _ } = foo;
-   |
+ on line 13, column 11, replace with ` { present: _ }`
 help: or always ignore missing fields here
-   |
-LL -     let Foo { #[cfg(false)] present: () } = foo;
-LL +     let Foo { .. } = foo;
-   |
+ on line 13, column 11, replace with ` { .. }`
 
-error[E0026]: struct `Foo` does not have a field named `absent`
-  --> $DIR/struct-field-cfg.rs:16:41
-   |
-LL |     let Foo { present: (), #[cfg(true)] absent: () } = foo;
-   |                                         ^^^^^^ struct `Foo` does not have this field
+error E0026: struct `Foo` does not have a field named `absent`
+ at $DIR/struct-field-cfg.rs:16:41: struct `Foo` does not have this field
 
 error: aborting due to 4 previous errors
 

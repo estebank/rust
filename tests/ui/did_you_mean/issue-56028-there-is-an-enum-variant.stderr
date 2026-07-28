@@ -1,42 +1,22 @@
-error[E0425]: cannot find type `Set` in this scope
-  --> $DIR/issue-56028-there-is-an-enum-variant.rs:10:15
-   |
-LL | fn setup() -> Set { Set }
-   |               ^^^ not found in this scope
-   |
+error E0425: cannot find type `Set` in this scope
+ at $DIR/issue-56028-there-is-an-enum-variant.rs:10:15: not found in this scope
 help: there is an enum variant `AffixHeart::Set` and 7 others; try using the variant's enum
-   |
-LL - fn setup() -> Set { Set }
-LL + fn setup() -> AffixHeart { Set }
-   |
-LL - fn setup() -> Set { Set }
-LL + fn setup() -> CauseToBe { Set }
-   |
-LL - fn setup() -> Set { Set }
-LL + fn setup() -> Determine { Set }
-   |
-LL - fn setup() -> Set { Set }
-LL + fn setup() -> PutDown { Set }
-   |
-   = and 3 other candidates
+ on line 10, column 14, replace with one of
+  AffixHeart
+  CauseToBe
+  Determine
+  PutDown
+and 3 other candidates
 
-error[E0425]: cannot find value `Set` in this scope
-  --> $DIR/issue-56028-there-is-an-enum-variant.rs:10:21
-   |
-LL | fn setup() -> Set { Set }
-   |                     ^^^ not found in this scope
-   |
+error E0425: cannot find value `Set` in this scope
+ at $DIR/issue-56028-there-is-an-enum-variant.rs:10:21: not found in this scope
 help: consider importing one of these unit variants
-   |
-LL + use AffixHeart::Set;
-   |
-LL + use CauseToBe::Set;
-   |
-LL + use Determine::Set;
-   |
-LL + use PutDown::Set;
-   |
-   = and 3 other candidates
+ on line 2, column 1, add one of
+  use AffixHeart::Set;
+  use CauseToBe::Set;
+  use Determine::Set;
+  use PutDown::Set;
+and 3 other candidates
 
 error: aborting due to 2 previous errors
 

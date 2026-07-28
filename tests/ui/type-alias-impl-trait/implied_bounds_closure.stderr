@@ -1,11 +1,6 @@
 error: lifetime may not live long enough
-  --> $DIR/implied_bounds_closure.rs:17:16
-   |
-LL | fn extend_lifetime<'a>(x: &'a str) -> &'static str {
-   |                    -- lifetime `'a` defined here
-LL |     let t = into_impl(x);
-LL |     helper(|_| t)
-   |                ^ returning this value requires that `'a` must outlive `'static`
+ at $DIR/implied_bounds_closure.rs:17:16: returning this value requires that `'a` must outlive `'static`
+  on line 15, column 20: lifetime `'a` defined here
 
 error: aborting due to 1 previous error
 

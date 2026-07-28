@@ -1,11 +1,6 @@
 error: internal compiler error: compiler/rustc_mir_transform/src/check_packed_ref.rs:LL:CC: builtin derive created an unaligned reference
-  --> $DIR/proc_macro_generated_packed.rs:19:25
-   |
-LL | #[derive(PartialEq)]
-   |          --------- in this derive macro expansion
-...
-LL | struct Dealigned<T>(u8, T);
-   |                         ^
+ at $DIR/proc_macro_generated_packed.rs:19:25
+  on line 16, column 10: in this derive macro expansion
 
 
 Box<dyn Any>

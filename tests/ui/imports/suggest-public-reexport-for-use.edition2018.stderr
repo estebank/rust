@@ -1,118 +1,50 @@
-error[E0603]: module `inner` is private
-  --> $DIR/suggest-public-reexport-for-use.rs:27:12
-   |
-LL | use outer::inner::MyStruct;
-   |            ^^^^^ private module
-   |
+error E0603: module `inner` is private
+ at $DIR/suggest-public-reexport-for-use.rs:27:12: private module
 note: the module `inner` is defined here
-  --> $DIR/suggest-public-reexport-for-use.rs:16:5
-   |
-LL |     mod inner {
-   |     ^^^^^^^^^
+ at $DIR/suggest-public-reexport-for-use.rs:16:5
 help: consider importing this struct through its public re-export instead
-   |
-LL - use outer::inner::MyStruct;
-LL + use outer::MyStruct;
-   |
+ on line 27, column 4, replace with `outer::MyStruct`
 
-error[E0603]: module `inner` is private
-  --> $DIR/suggest-public-reexport-for-use.rs:28:12
-   |
-LL | use outer::inner::my_function;
-   |            ^^^^^ private module
-   |
+error E0603: module `inner` is private
+ at $DIR/suggest-public-reexport-for-use.rs:28:12: private module
 note: the module `inner` is defined here
-  --> $DIR/suggest-public-reexport-for-use.rs:16:5
-   |
-LL |     mod inner {
-   |     ^^^^^^^^^
+ at $DIR/suggest-public-reexport-for-use.rs:16:5
 help: consider importing this function through its public re-export instead
-   |
-LL - use outer::inner::my_function;
-LL + use outer::my_function;
-   |
+ on line 28, column 4, replace with `outer::my_function`
 
-error[E0603]: module `inner` is private
-  --> $DIR/suggest-public-reexport-for-use.rs:29:12
-   |
-LL | use outer::inner::MyTrait;
-   |            ^^^^^ private module
-   |
+error E0603: module `inner` is private
+ at $DIR/suggest-public-reexport-for-use.rs:29:12: private module
 note: the module `inner` is defined here
-  --> $DIR/suggest-public-reexport-for-use.rs:16:5
-   |
-LL |     mod inner {
-   |     ^^^^^^^^^
+ at $DIR/suggest-public-reexport-for-use.rs:16:5
 help: consider importing this trait through its public re-export instead
-   |
-LL - use outer::inner::MyTrait;
-LL + use outer::MyTrait;
-   |
+ on line 29, column 4, replace with `outer::MyTrait`
 
-error[E0603]: module `inner` is private
-  --> $DIR/suggest-public-reexport-for-use.rs:30:12
-   |
-LL | use outer::inner::MyEnum;
-   |            ^^^^^ private module
-   |
+error E0603: module `inner` is private
+ at $DIR/suggest-public-reexport-for-use.rs:30:12: private module
 note: the module `inner` is defined here
-  --> $DIR/suggest-public-reexport-for-use.rs:16:5
-   |
-LL |     mod inner {
-   |     ^^^^^^^^^
+ at $DIR/suggest-public-reexport-for-use.rs:16:5
 help: consider importing this enum through its public re-export instead
-   |
-LL - use outer::inner::MyEnum;
-LL + use outer::MyEnum;
-   |
+ on line 30, column 4, replace with `outer::MyEnum`
 
-error[E0603]: module `inner` is private
-  --> $DIR/suggest-public-reexport-for-use.rs:39:23
-   |
-LL |     use crate::outer::inner::MyStruct;
-   |                       ^^^^^ private module
-   |
+error E0603: module `inner` is private
+ at $DIR/suggest-public-reexport-for-use.rs:39:23: private module
 note: the module `inner` is defined here
-  --> $DIR/suggest-public-reexport-for-use.rs:16:5
-   |
-LL |     mod inner {
-   |     ^^^^^^^^^
+ at $DIR/suggest-public-reexport-for-use.rs:16:5
 help: consider importing this struct through its public re-export instead
-   |
-LL -     use crate::outer::inner::MyStruct;
-LL +     use crate::outer::MyStruct;
-   |
+ on line 39, column 8, replace with `crate::outer::MyStruct`
 
-error[E0603]: module `inner` is private
-  --> $DIR/suggest-public-reexport-for-use.rs:49:27
-   |
-LL |         use crate::outer::inner::MyStruct;
-   |                           ^^^^^ private module
-   |
+error E0603: module `inner` is private
+ at $DIR/suggest-public-reexport-for-use.rs:49:27: private module
 note: the module `inner` is defined here
-  --> $DIR/suggest-public-reexport-for-use.rs:16:5
-   |
-LL |     mod inner {
-   |     ^^^^^^^^^
+ at $DIR/suggest-public-reexport-for-use.rs:16:5
 help: consider importing this struct through its public re-export instead
-   |
-LL -         use crate::outer::inner::MyStruct;
-LL +         use crate::outer::MyStruct;
-   |
+ on line 49, column 12, replace with `crate::outer::MyStruct`
 
-error[E0603]: module `hidden` is private
-  --> $DIR/suggest-public-reexport-for-use.rs:60:18
-   |
-LL | use no_reexport::hidden::Secret;
-   |                  ^^^^^^  ------ struct `Secret` is not publicly re-exported
-   |                  |
-   |                  private module
-   |
+error E0603: module `hidden` is private
+ at $DIR/suggest-public-reexport-for-use.rs:60:18: private module
+  on line 60, column 26: struct `Secret` is not publicly re-exported
 note: the module `hidden` is defined here
-  --> $DIR/suggest-public-reexport-for-use.rs:55:5
-   |
-LL |     mod hidden {
-   |     ^^^^^^^^^^
+ at $DIR/suggest-public-reexport-for-use.rs:55:5
 
 error: aborting due to 7 previous errors
 

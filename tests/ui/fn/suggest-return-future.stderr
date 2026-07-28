@@ -1,26 +1,12 @@
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/suggest-return-future.rs:7:13
-   |
-LL | fn foo() -> _ {
-   |             ^ not allowed in type signatures
-   |
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/suggest-return-future.rs:7:13: not allowed in type signatures
 help: replace with an appropriate return type
-   |
-LL - fn foo() -> _ {
-LL + fn foo() -> impl Future<Output = i32> {
-   |
+ on line 7, column 12, replace with `impl Future<Output = i32>`
 
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/suggest-return-future.rs:15:13
-   |
-LL | fn bar() -> _ {
-   |             ^ not allowed in type signatures
-   |
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/suggest-return-future.rs:15:13: not allowed in type signatures
 help: replace with an appropriate return type
-   |
-LL - fn bar() -> _ {
-LL + fn bar() -> impl Future<Output = i32> {
-   |
+ on line 15, column 12, replace with `impl Future<Output = i32>`
 
 error: aborting due to 2 previous errors
 

@@ -1,25 +1,14 @@
-error[E0271]: type mismatch resolving `<dyn Trait<A = A, B = B> as SuperTrait>::A == B`
-  --> $DIR/enforce-supertrait-projection.rs:9:17
-   |
-LL | fn transmute<A, B>(x: A) -> B {
-   |              -  - expected type parameter
-   |              |
-   |              found type parameter
-LL |     foo::<A, B, dyn Trait<A = A, B = B>>(x)
-   |                 ^^^^^^^^^^^^^^^^^^^^^^^ expected type parameter `B`, found type parameter `A`
-   |
-   = note: expected type parameter `B`
-              found type parameter `A`
-   = note: a type parameter was expected, but a different one was found; you might be missing a type parameter or trait bound
-   = note: for more information, visit https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters
+error E0271: type mismatch resolving `<dyn Trait<A = A, B = B> as SuperTrait>::A == B`
+ at $DIR/enforce-supertrait-projection.rs:9:17: expected type parameter `B`, found type parameter `A`
+  on line 8, column 14: found type parameter
+  on line 8, column 17: expected type parameter
+note: expected type parameter `B`
+         found type parameter `A`
+note: a type parameter was expected, but a different one was found; you might be missing a type parameter or trait bound
+note: for more information, visit https://doc.rust-lang.org/book/ch10-02-traits.html#traits-as-parameters
 note: required by a bound in `foo`
-  --> $DIR/enforce-supertrait-projection.rs:15:8
-   |
-LL | fn foo<A, B, T: ?Sized>(x: T::A) -> B
-   |    --- required by a bound in this function
-LL | where
-LL |     T: Trait<B = B>,
-   |        ^^^^^^^^^^^^ required by this bound in `foo`
+ at $DIR/enforce-supertrait-projection.rs:15:8: required by this bound in `foo`
+  on line 13, column 4: required by a bound in this function
 
 error: aborting due to 1 previous error
 

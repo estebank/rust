@@ -1,24 +1,12 @@
-error[E0621]: explicit lifetime required in the type of `y`
-  --> $DIR/mut-slice-struct-lifetime-transmute.rs:13:5
-   |
-LL |     out[0]
-   |     ^^^^^^ lifetime `'a` required
-   |
+error E0621: explicit lifetime required in the type of `y`
+ at $DIR/mut-slice-struct-lifetime-transmute.rs:13:5: lifetime `'a` required
 help: add explicit lifetime `'a` to the type of `y`
-   |
-LL | fn lifetime_transmute_slice<'a, T: ?Sized>(x: &'a T, y: &'a T) -> &'a T {
-   |                                                          ++
+ on line 7, column 56, replace with `&'a T`
 
-error[E0621]: explicit lifetime required in the type of `y`
-  --> $DIR/mut-slice-struct-lifetime-transmute.rs:28:5
-   |
-LL |     out.head
-   |     ^^^^^^^^ lifetime `'a` required
-   |
+error E0621: explicit lifetime required in the type of `y`
+ at $DIR/mut-slice-struct-lifetime-transmute.rs:28:5: lifetime `'a` required
 help: add explicit lifetime `'a` to the type of `y`
-   |
-LL | fn lifetime_transmute_struct<'a, T: ?Sized>(x: &'a T, y: &'a T) -> &'a T {
-   |                                                           ++
+ on line 22, column 57, replace with `&'a T`
 
 error: aborting due to 2 previous errors
 

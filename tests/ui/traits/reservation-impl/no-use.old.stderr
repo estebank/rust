@@ -1,8 +1,5 @@
-error[E0277]: the trait bound `(): MyTrait` is not satisfied
-  --> $DIR/no-use.rs:11:6
-   |
-LL |     <() as MyTrait>::foo(&());
-   |      ^^ the trait `MyTrait` is not implemented for `()`
+error E0277: the trait bound `(): MyTrait` is not satisfied
+ at $DIR/no-use.rs:11:6: the trait `MyTrait` is not implemented for `()`
 
 error: aborting due to 1 previous error
 

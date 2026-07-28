@@ -1,13 +1,8 @@
-error[E0072]: recursive type `Rec` has infinite size
-  --> $DIR/infinite-alias.rs:7:1
-   |
-LL | struct Rec(Wrapper<Rec>);
-   | ^^^^^^^^^^ ------------ recursive without indirection
-   |
+error E0072: recursive type `Rec` has infinite size
+ at $DIR/infinite-alias.rs:7:1
+  on line 7, column 12: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL | struct Rec(Box<Wrapper<Rec>>);
-   |            ++++            +
+ on line 7, column 11, add `Box<`
 
 error: aborting due to 1 previous error
 

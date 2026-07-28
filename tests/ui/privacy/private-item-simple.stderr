@@ -1,26 +1,12 @@
-error[E0603]: function `f` is private
-  --> $DIR/private-item-simple.rs:12:12
-   |
-LL |     use a::f;
-   |            ^ private function
-   |
+error E0603: function `f` is private
+ at $DIR/private-item-simple.rs:12:12: private function
 note: the function `f` is defined here
-  --> $DIR/private-item-simple.rs:4:5
-   |
-LL |     fn f() {}
-   |     ^^^^^^
+ at $DIR/private-item-simple.rs:4:5
 
-error[E0603]: function `f` is private
-  --> $DIR/private-item-simple.rs:8:8
-   |
-LL |     a::f();
-   |        ^ private function
-   |
+error E0603: function `f` is private
+ at $DIR/private-item-simple.rs:8:8: private function
 note: the function `f` is defined here
-  --> $DIR/private-item-simple.rs:4:5
-   |
-LL |     fn f() {}
-   |     ^^^^^^
+ at $DIR/private-item-simple.rs:4:5
 
 error: aborting due to 2 previous errors
 

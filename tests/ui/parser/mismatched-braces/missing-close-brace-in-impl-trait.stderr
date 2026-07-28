@@ -1,11 +1,6 @@
 error: this file contains an unclosed delimiter
-  --> $DIR/missing-close-brace-in-impl-trait.rs:13:52
-   |
-LL | impl T for () {
-   |               - unclosed delimiter
-...
-LL |
-   |                                                   ^
+ at $DIR/missing-close-brace-in-impl-trait.rs:13:52
+  on line 3, column 15: unclosed delimiter
 
 error: aborting due to 1 previous error
 

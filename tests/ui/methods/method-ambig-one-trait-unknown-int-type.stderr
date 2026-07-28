@@ -1,46 +1,21 @@
-error[E0282]: type annotations needed for `Vec<_>`
-  --> $DIR/method-ambig-one-trait-unknown-int-type.rs:24:9
-   |
-LL |     let mut x = Vec::new();
-   |         ^^^^^   ---------- type must be known at this point
-   |
+error E0282: type annotations needed for `Vec<_>`
+ at $DIR/method-ambig-one-trait-unknown-int-type.rs:24:9
+  on line 24, column 17: type must be known at this point
 help: consider giving `x` an explicit type, where the type for type parameter `T` is specified
-   |
-LL |     let mut x: Vec<T> = Vec::new();
-   |              ++++++++
+ on line 24, column 13, add `: Vec<T>`
 
-error[E0283]: type annotations needed
-  --> $DIR/method-ambig-one-trait-unknown-int-type.rs:26:7
-   |
-LL |     x.foo();
-   |       ^^^
-   |
+error E0283: type annotations needed
+ at $DIR/method-ambig-one-trait-unknown-int-type.rs:26:7
 note: multiple `impl`s satisfying `Vec<_>: Foo` found
-  --> $DIR/method-ambig-one-trait-unknown-int-type.rs:9:1
-   |
-LL | impl Foo for Vec<usize> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^
-...
-LL | impl Foo for Vec<isize> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/method-ambig-one-trait-unknown-int-type.rs:9:1
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     x.foo();
-LL +     <Vec<T> as Foo>::foo(&x);
-   |
+ on line 26, column 4, add `<Vec<T> as Foo>::foo(&`
 
-error[E0308]: mismatched types
-  --> $DIR/method-ambig-one-trait-unknown-int-type.rs:33:20
-   |
-LL |     let y: usize = x.foo();
-   |            -----   ^^^^^^^ expected `usize`, found `isize`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/method-ambig-one-trait-unknown-int-type.rs:33:20: expected `usize`, found `isize`
+  on line 33, column 12: expected due to this
 help: you can convert an `isize` to a `usize` and panic if the converted value doesn't fit
-   |
-LL |     let y: usize = x.foo().try_into().unwrap();
-   |                           ++++++++++++++++++++
+ on line 33, column 26, add `.try_into().unwrap()`
 
 error: aborting due to 3 previous errors
 

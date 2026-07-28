@@ -1,58 +1,26 @@
 error: expected identifier, found `1234test`
-  --> $DIR/binding-name-starting-with-number.rs:1:4
-   |
-LL | fn 1234test() {
-   |    ^^^^^^^^ expected identifier
-   |
+ at $DIR/binding-name-starting-with-number.rs:1:4: expected identifier
 help: identifiers cannot start with a number
-  --> $DIR/binding-name-starting-with-number.rs:1:4
-   |
-LL | fn 1234test() {
-   |    ^^^^
+ at $DIR/binding-name-starting-with-number.rs:1:4
 
 error: expected identifier, found `23name`
-  --> $DIR/binding-name-starting-with-number.rs:9:9
-   |
-LL |     let 23name = 123;
-   |         ^^^^^^ expected identifier
-   |
+ at $DIR/binding-name-starting-with-number.rs:9:9: expected identifier
 help: identifiers cannot start with a number
-  --> $DIR/binding-name-starting-with-number.rs:9:9
-   |
-LL |     let 23name = 123;
-   |         ^^
+ at $DIR/binding-name-starting-with-number.rs:9:9
 
 error: expected identifier, found `2x`
-  --> $DIR/binding-name-starting-with-number.rs:13:9
-   |
-LL |     let 2x: i32 = 123;
-   |         ^^ expected identifier
-   |
+ at $DIR/binding-name-starting-with-number.rs:13:9: expected identifier
 help: identifiers cannot start with a number
-  --> $DIR/binding-name-starting-with-number.rs:13:9
-   |
-LL |     let 2x: i32 = 123;
-   |         ^
+ at $DIR/binding-name-starting-with-number.rs:13:9
 
 error: expected identifier, found `1x`
-  --> $DIR/binding-name-starting-with-number.rs:17:9
-   |
-LL |     let 1x = 123;
-   |         ^^ expected identifier
-   |
+ at $DIR/binding-name-starting-with-number.rs:17:9: expected identifier
 help: identifiers cannot start with a number
-  --> $DIR/binding-name-starting-with-number.rs:17:9
-   |
-LL |     let 1x = 123;
-   |         ^
+ at $DIR/binding-name-starting-with-number.rs:17:9
 
-error[E0308]: mismatched types
-  --> $DIR/binding-name-starting-with-number.rs:5:12
-   |
-LL |     if let 2e1 = 123 {
-   |            ^^^   --- this expression has type `{integer}`
-   |            |
-   |            expected integer, found floating-point number
+error E0308: mismatched types
+ at $DIR/binding-name-starting-with-number.rs:5:12: expected integer, found floating-point number
+  on line 5, column 18: this expression has type `{integer}`
 
 error: aborting due to 5 previous errors
 

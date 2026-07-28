@@ -1,35 +1,17 @@
-error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/aliasability-violation-with-closure-21600.rs:15:17
-   |
-LL | fn call_it<F>(f: F) where F: Fn() { f(); }
-   |                  - change this to accept `FnMut` instead of `Fn`
-...
-LL |     let mut x = A;
-   |         ----- `x` declared here, outside the closure
-LL |     call_it(|| {
-   |     ------- -- in this closure
-   |     |
-   |     expects `Fn` instead of `FnMut`
-LL |         call_it(|| x.gen());
-LL |         call_it(|| x.gen_mut());
-   |                 ^^ - mutable borrow occurs due to use of `x` in closure
-   |                 |
-   |                 cannot borrow as mutable
+error E0596: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/aliasability-violation-with-closure-21600.rs:15:17: cannot borrow as mutable
+  on line 2, column 18: change this to accept `FnMut` instead of `Fn`
+  on line 12, column 9: `x` declared here, outside the closure
+  on line 13: expects `Fn` instead of `FnMut`
+  on line 13, column 13: in this closure
+  on line 15, column 20: mutable borrow occurs due to use of `x` in closure
 
-error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/aliasability-violation-with-closure-21600.rs:15:20
-   |
-LL | fn call_it<F>(f: F) where F: Fn() { f(); }
-   |                  - change this to accept `FnMut` instead of `Fn`
-...
-LL |     let mut x = A;
-   |         ----- `x` declared here, outside the closure
-...
-LL |         call_it(|| x.gen_mut());
-   |         ------- -- ^ cannot borrow as mutable
-   |         |       |
-   |         |       in this closure
-   |         expects `Fn` instead of `FnMut`
+error E0596: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/aliasability-violation-with-closure-21600.rs:15:20: cannot borrow as mutable
+  on line 2, column 18: change this to accept `FnMut` instead of `Fn`
+  on line 12, column 9: `x` declared here, outside the closure
+  on line 15: expects `Fn` instead of `FnMut`
+  on line 15, column 17: in this closure
 
 error: aborting due to 2 previous errors
 

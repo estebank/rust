@@ -1,19 +1,9 @@
 error: opaque type's hidden type cannot be another opaque type from the same scope
-  --> $DIR/two_tait_defining_each_other.rs:18:5
-   |
-LL |     x // A's hidden type is `Bar`, because all the hidden types of `B` are compared with each other
-   |     ^ one of the two opaque types used here has to be outside its defining scope
-   |
+ at $DIR/two_tait_defining_each_other.rs:18:5: one of the two opaque types used here has to be outside its defining scope
 note: opaque type whose hidden type is being assigned
-  --> $DIR/two_tait_defining_each_other.rs:9:10
-   |
-LL | type B = impl Foo;
-   |          ^^^^^^^^
+ at $DIR/two_tait_defining_each_other.rs:9:10
 note: opaque type being used as hidden type
-  --> $DIR/two_tait_defining_each_other.rs:8:10
-   |
-LL | type A = impl Foo;
-   |          ^^^^^^^^
+ at $DIR/two_tait_defining_each_other.rs:8:10
 
 error: aborting due to 1 previous error
 

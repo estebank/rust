@@ -1,28 +1,14 @@
 error: lifetime may not live long enough
-  --> $DIR/associated-types-project-from-hrtb-in-fn-body.rs:22:29
-   |
-LL | fn bar<'a, 'b, I : for<'x> Foo<&'x isize>>(
-   |        --  -- lifetime `'b` defined here
-   |        |
-   |        lifetime `'a` defined here
-...
-LL |     let z: I::A = if cond { x } else { y };
-   |                             ^ assignment requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/associated-types-project-from-hrtb-in-fn-body.rs:22:29: assignment requires that `'b` must outlive `'a`
+  on line 16, column 8: lifetime `'a` defined here
+  on line 16, column 12: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
 error: lifetime may not live long enough
-  --> $DIR/associated-types-project-from-hrtb-in-fn-body.rs:22:40
-   |
-LL | fn bar<'a, 'b, I : for<'x> Foo<&'x isize>>(
-   |        --  -- lifetime `'b` defined here
-   |        |
-   |        lifetime `'a` defined here
-...
-LL |     let z: I::A = if cond { x } else { y };
-   |                                        ^ assignment requires that `'a` must outlive `'b`
-   |
-   = help: consider adding the following bound: `'a: 'b`
+ at $DIR/associated-types-project-from-hrtb-in-fn-body.rs:22:40: assignment requires that `'a` must outlive `'b`
+  on line 16, column 8: lifetime `'a` defined here
+  on line 16, column 12: lifetime `'b` defined here
+help: consider adding the following bound: `'a: 'b`
 
 help: `'a` and `'b` must be the same: replace one with the other
 

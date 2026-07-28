@@ -1,90 +1,40 @@
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/already-borrowed-as-mutable-if-let-133941.rs:24:9
-   |
-LL |     while let Some(_) = foo.f() {
-   |                         -------
-   |                         |
-   |                         first mutable borrow occurs here
-   |                         a temporary with access to the first borrow is created here ...
-LL |
-LL |         foo.g();
-   |         ^^^ second mutable borrow occurs here
-LL |
-LL |     }
-   |     - ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
-   |
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/already-borrowed-as-mutable-if-let-133941.rs:24:9: second mutable borrow occurs here
+  on line 22, column 25: first mutable borrow occurs here
+  on line 22, column 25: a temporary with access to the first borrow is created here ...
+  on line 26: ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
 help: consider using the `matches!` macro
-   |
-LL -     while let Some(_) = foo.f() {
-LL +     while matches!(foo.f(), Some(_)) {
-   |
+ on line 22, column 10, replace with `matches!(foo.f(), Some(_))`
 
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/already-borrowed-as-mutable-if-let-133941.rs:29:9
-   |
-LL |     if let Some(_) = foo.f() {
-   |                      -------
-   |                      |
-   |                      first mutable borrow occurs here
-   |                      a temporary with access to the first borrow is created here ...
-LL |
-LL |         foo.g();
-   |         ^^^ second mutable borrow occurs here
-LL |
-LL |     }
-   |     - ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
-   |
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/already-borrowed-as-mutable-if-let-133941.rs:29:9: second mutable borrow occurs here
+  on line 27, column 22: first mutable borrow occurs here
+  on line 27, column 22: a temporary with access to the first borrow is created here ...
+  on line 31: ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
 help: consider using the `matches!` macro
-   |
-LL -     if let Some(_) = foo.f() {
-LL +     if matches!(foo.f(), Some(_)) {
-   |
+ on line 27, column 7, replace with `matches!(foo.f(), Some(_))`
 
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/already-borrowed-as-mutable-if-let-133941.rs:33:9
-   |
-LL |     while let Some(_x) = foo.f() {
-   |                          -------
-   |                          |
-   |                          first mutable borrow occurs here
-   |                          a temporary with access to the first borrow is created here ...
-LL |         foo.g();
-   |         ^^^ second mutable borrow occurs here
-LL |
-LL |     }
-   |     - ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/already-borrowed-as-mutable-if-let-133941.rs:33:9: second mutable borrow occurs here
+  on line 32, column 26: first mutable borrow occurs here
+  on line 32, column 26: a temporary with access to the first borrow is created here ...
+  on line 35: ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
 
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/already-borrowed-as-mutable-if-let-133941.rs:37:9
-   |
-LL |     if let Some(_x) = foo.f() {
-   |                       -------
-   |                       |
-   |                       first mutable borrow occurs here
-   |                       a temporary with access to the first borrow is created here ...
-LL |         foo.g();
-   |         ^^^ second mutable borrow occurs here
-LL |
-LL |     }
-   |     - ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/already-borrowed-as-mutable-if-let-133941.rs:37:9: second mutable borrow occurs here
+  on line 36, column 23: first mutable borrow occurs here
+  on line 36, column 23: a temporary with access to the first borrow is created here ...
+  on line 39: ... and the first borrow might be used here, when that temporary is dropped and runs the destructor for type `Option<Bar<'_>>`
 
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/already-borrowed-as-mutable-if-let-133941.rs:40:45
-   |
-LL |     while let Some(_x) = {let _x = foo.f(); foo.g(); None::<()>} {
-   |                                    ---      ^^^                - first borrow might be used here, when `_x` is dropped and runs the destructor for type `Option<Bar<'_>>`
-   |                                    |        |
-   |                                    |        second mutable borrow occurs here
-   |                                    first mutable borrow occurs here
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/already-borrowed-as-mutable-if-let-133941.rs:40:45: second mutable borrow occurs here
+  on line 40, column 36: first mutable borrow occurs here
+  on line 40, column 64: first borrow might be used here, when `_x` is dropped and runs the destructor for type `Option<Bar<'_>>`
 
-error[E0499]: cannot borrow `foo` as mutable more than once at a time
-  --> $DIR/already-borrowed-as-mutable-if-let-133941.rs:43:42
-   |
-LL |     if let Some(_x) = {let _x = foo.f(); foo.g(); None::<()>} {
-   |                                 ---      ^^^                - first borrow might be used here, when `_x` is dropped and runs the destructor for type `Option<Bar<'_>>`
-   |                                 |        |
-   |                                 |        second mutable borrow occurs here
-   |                                 first mutable borrow occurs here
+error E0499: cannot borrow `foo` as mutable more than once at a time
+ at $DIR/already-borrowed-as-mutable-if-let-133941.rs:43:42: second mutable borrow occurs here
+  on line 43, column 33: first mutable borrow occurs here
+  on line 43, column 61: first borrow might be used here, when `_x` is dropped and runs the destructor for type `Option<Bar<'_>>`
 
 error: aborting due to 6 previous errors
 

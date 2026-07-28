@@ -1,37 +1,17 @@
-error[E0560]: union `U` has no field named `principle`
-  --> $DIR/union-suggest-field.rs:10:17
-   |
-LL |     let u = U { principle: 0 };
-   |                 ^^^^^^^^^ unknown field
-   |
+error E0560: union `U` has no field named `principle`
+ at $DIR/union-suggest-field.rs:10:17: unknown field
 help: a field with a similar name exists
-   |
-LL -     let u = U { principle: 0 };
-LL +     let u = U { principal: 0 };
-   |
+ on line 10, column 16, replace with `principal`
 
-error[E0609]: no field `principial` on type `U`
-  --> $DIR/union-suggest-field.rs:14:15
-   |
-LL |     let w = u.principial;
-   |               ^^^^^^^^^^ unknown field
-   |
+error E0609: no field `principial` on type `U`
+ at $DIR/union-suggest-field.rs:14:15: unknown field
 help: a field with a similar name exists
-   |
-LL -     let w = u.principial;
-LL +     let w = u.principal;
-   |
+ on line 14, column 14, replace with `principal`
 
-error[E0615]: attempted to take value of method `calculate` on type `U`
-  --> $DIR/union-suggest-field.rs:18:15
-   |
-LL |     let y = u.calculate;
-   |               ^^^^^^^^^ method, not a field
-   |
+error E0615: attempted to take value of method `calculate` on type `U`
+ at $DIR/union-suggest-field.rs:18:15: method, not a field
 help: use parentheses to call the method
-   |
-LL |     let y = u.calculate();
-   |                        ++
+ on line 18, column 23, add `()`
 
 error: aborting due to 3 previous errors
 

@@ -1,16 +1,8 @@
-error[E0599]: no method named `kind` found for struct `InferOk<T>` in the current scope
-  --> $DIR/field-has-method.rs:19:15
-   |
-LL | struct InferOk<T> {
-   | ----------------- method `kind` not found for this struct
-...
-LL |     let k = i.kind();
-   |               ^^^^ method not found in `InferOk<Ty>`
-   |
+error E0599: no method named `kind` found for struct `InferOk<T>` in the current scope
+ at $DIR/field-has-method.rs:19:15: method not found in `InferOk<Ty>`
+  on line 13: method `kind` not found for this struct
 help: one of the expressions' fields has a method of the same name
-   |
-LL |     let k = i.value.kind();
-   |               ++++++
+ on line 19, column 14, add `value.`
 
 error: aborting due to 1 previous error
 

@@ -1,56 +1,29 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-87461.rs:10:8
-   |
-LL |     Ok(())
-   |     -- ^^ expected `u16`, found `()`
-   |     |
-   |     arguments to this enum variant are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/issue-87461.rs:10:8: expected `u16`, found `()`
+  on line 10: arguments to this enum variant are incorrect
 help: the type constructed contains `()` due to the type of the argument passed
-  --> $DIR/issue-87461.rs:10:5
-   |
-LL |     Ok(())
-   |     ^^^--^
-   |        |
-   |        this argument influences the type of `Ok`
+ at $DIR/issue-87461.rs:10:5
+  on line 10, column 8: this argument influences the type of `Ok`
 note: tuple variant defined here
-  --> $SRC_DIR/core/src/result.rs:LL:COL
+ at $SRC_DIR/core/src/result.rs:LL:COL
 
-error[E0308]: mismatched types
-  --> $DIR/issue-87461.rs:17:8
-   |
-LL |     Ok(())
-   |     -- ^^ expected `u16`, found `()`
-   |     |
-   |     arguments to this enum variant are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/issue-87461.rs:17:8: expected `u16`, found `()`
+  on line 17: arguments to this enum variant are incorrect
 help: the type constructed contains `()` due to the type of the argument passed
-  --> $DIR/issue-87461.rs:17:5
-   |
-LL |     Ok(())
-   |     ^^^--^
-   |        |
-   |        this argument influences the type of `Ok`
+ at $DIR/issue-87461.rs:17:5
+  on line 17, column 8: this argument influences the type of `Ok`
 note: tuple variant defined here
-  --> $SRC_DIR/core/src/result.rs:LL:COL
+ at $SRC_DIR/core/src/result.rs:LL:COL
 
-error[E0308]: mismatched types
-  --> $DIR/issue-87461.rs:26:12
-   |
-LL |         Ok(())
-   |         -- ^^ expected `u16`, found `()`
-   |         |
-   |         arguments to this enum variant are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/issue-87461.rs:26:12: expected `u16`, found `()`
+  on line 26: arguments to this enum variant are incorrect
 help: the type constructed contains `()` due to the type of the argument passed
-  --> $DIR/issue-87461.rs:26:9
-   |
-LL |         Ok(())
-   |         ^^^--^
-   |            |
-   |            this argument influences the type of `Ok`
+ at $DIR/issue-87461.rs:26:9
+  on line 26, column 12: this argument influences the type of `Ok`
 note: tuple variant defined here
-  --> $SRC_DIR/core/src/result.rs:LL:COL
+ at $SRC_DIR/core/src/result.rs:LL:COL
 
 error: aborting due to 3 previous errors
 

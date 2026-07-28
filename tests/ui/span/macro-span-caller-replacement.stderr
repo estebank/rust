@@ -1,31 +1,15 @@
-error[E0308]: mismatched types
-  --> $DIR/macro-span-caller-replacement.rs:5:17
-   |
-LL |             s = format!("{arg}");
-   |                 ^^^^^^^^^^^^^^^^ expected `&str`, found `String`
-...
-LL |     macro_with_format!();
-   |     -------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `format` which comes from the expansion of the macro `macro_with_format` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0308: mismatched types
+ at $DIR/macro-span-caller-replacement.rs:5:17: expected `&str`, found `String`
+  on line 14: in this macro invocation
+note: this error originates in the macro `format` which comes from the expansion of the macro `macro_with_format` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0308]: mismatched types
-  --> $DIR/macro-span-caller-replacement.rs:7:17
-   |
-LL |         let s : &str;
-   |                 ---- expected due to this type
-...
-LL |             s = String::new();
-   |                 ^^^^^^^^^^^^^ expected `&str`, found `String`
-...
-LL |     macro_with_format!();
-   |     -------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `macro_with_format` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0308: mismatched types
+ at $DIR/macro-span-caller-replacement.rs:7:17: expected `&str`, found `String`
+  on line 3, column 17: expected due to this type
+  on line 14: in this macro invocation
+note: this error originates in the macro `macro_with_format` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: consider borrowing here
-   |
-LL |             s = &String::new();
-   |                 +
+ on line 7, column 16, add `&`
 
 error: aborting due to 2 previous errors
 

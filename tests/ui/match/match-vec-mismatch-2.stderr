@@ -1,8 +1,5 @@
-error[E0529]: expected an array or slice, found `()`
-  --> $DIR/match-vec-mismatch-2.rs:3:9
-   |
-LL |         [()] => { }
-   |         ^^^^ pattern cannot match with input type `()`
+error E0529: expected an array or slice, found `()`
+ at $DIR/match-vec-mismatch-2.rs:3:9: pattern cannot match with input type `()`
 
 error: aborting due to 1 previous error
 

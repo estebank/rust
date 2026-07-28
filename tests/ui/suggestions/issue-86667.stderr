@@ -1,26 +1,14 @@
-error[E0106]: missing lifetime specifier
-  --> $DIR/issue-86667.rs:6:35
-   |
-LL | async fn a(s1: &str, s2: &str) -> &str {
-   |                ----      ----     ^ expected named lifetime parameter
-   |
-   = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `s1` or `s2`
+error E0106: missing lifetime specifier
+ at $DIR/issue-86667.rs:6:35: expected named lifetime parameter
+help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `s1` or `s2`
 help: consider introducing a named lifetime parameter
-   |
-LL | async fn a<'a>(s1: &'a str, s2: &'a str) -> &'a str {
-   |           ++++      ++           ++          ++
+ on line 6, column 10, add `<'a>`
 
-error[E0106]: missing lifetime specifier
-  --> $DIR/issue-86667.rs:11:29
-   |
-LL | fn b(s1: &str, s2: &str) -> &str {
-   |          ----      ----     ^ expected named lifetime parameter
-   |
-   = help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `s1` or `s2`
+error E0106: missing lifetime specifier
+ at $DIR/issue-86667.rs:11:29: expected named lifetime parameter
+help: this function's return type contains a borrowed value, but the signature does not say whether it is borrowed from `s1` or `s2`
 help: consider introducing a named lifetime parameter
-   |
-LL | fn b<'a>(s1: &'a str, s2: &'a str) -> &'a str {
-   |     ++++      ++           ++          ++
+ on line 11, column 4, add `<'a>`
 
 error: aborting due to 2 previous errors
 

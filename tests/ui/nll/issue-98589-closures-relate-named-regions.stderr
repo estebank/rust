@@ -1,64 +1,32 @@
 error: lifetime may not live long enough
-  --> $DIR/issue-98589-closures-relate-named-regions.rs:10:5
-   |
-LL | fn test_early_early<'a: 'a, 'b: 'b>() {
-   |                     --      -- lifetime `'b` defined here
-   |                     |
-   |                     lifetime `'a` defined here
-LL |     || { None::<&'a &'b ()>; };
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/issue-98589-closures-relate-named-regions.rs:10:5: requires that `'b` must outlive `'a`
+  on line 9, column 21: lifetime `'a` defined here
+  on line 9, column 29: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
 error: lifetime may not live long enough
-  --> $DIR/issue-98589-closures-relate-named-regions.rs:15:5
-   |
-LL | fn test_early_late<'a: 'a, 'b>() {
-   |                    --      -- lifetime `'b` defined here
-   |                    |
-   |                    lifetime `'a` defined here
-LL |     || { None::<&'a &'b ()>; };
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/issue-98589-closures-relate-named-regions.rs:15:5: requires that `'b` must outlive `'a`
+  on line 14, column 20: lifetime `'a` defined here
+  on line 14, column 28: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
 error: lifetime may not live long enough
-  --> $DIR/issue-98589-closures-relate-named-regions.rs:21:10
-   |
-LL | fn test_late_late<'a, 'b>() {
-   |                   --  -- lifetime `'b` defined here
-   |                   |
-   |                   lifetime `'a` defined here
-LL |     || { None::<&'a &'b ()>; };
-   |          ^^^^^^^^^^^^^^^^^^ requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/issue-98589-closures-relate-named-regions.rs:21:10: requires that `'b` must outlive `'a`
+  on line 20, column 19: lifetime `'a` defined here
+  on line 20, column 23: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/issue-98589-closures-relate-named-regions.rs:26:10
-   |
-LL | fn test_early_type<'a: 'a, T>() {
-   |                    -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-LL |     || { None::<&'a T>; };
-   |          ^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/issue-98589-closures-relate-named-regions.rs:26:10: ...so that the type `T` will meet its required lifetime bounds
+  on line 25, column 20: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL | fn test_early_type<'a: 'a, T: 'a>() {
-   |                             ++++
+ on line 25, column 28, add `: 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/issue-98589-closures-relate-named-regions.rs:32:10
-   |
-LL | fn test_late_type<'a, T>() {
-   |                   -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-LL |     || { None::<&'a T>; };
-   |          ^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/issue-98589-closures-relate-named-regions.rs:32:10: ...so that the type `T` will meet its required lifetime bounds
+  on line 31, column 19: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL | fn test_late_type<'a, T: 'a>() {
-   |                        ++++
+ on line 31, column 23, add `: 'a`
 
 error: aborting due to 5 previous errors
 

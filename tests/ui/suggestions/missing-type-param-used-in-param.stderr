@@ -1,20 +1,10 @@
-error[E0107]: function takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/missing-type-param-used-in-param.rs:6:5
-   |
-LL |     two_type_params::<String>(100);
-   |     ^^^^^^^^^^^^^^^   ------ supplied 1 generic argument
-   |     |
-   |     expected 2 generic arguments
-   |
+error E0107: function takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/missing-type-param-used-in-param.rs:6:5: expected 2 generic arguments
+  on line 6, column 23: supplied 1 generic argument
 note: function defined here, with 2 generic parameters: `A`, `B`
-  --> $DIR/missing-type-param-used-in-param.rs:3:4
-   |
-LL | fn two_type_params<A, B>(_: B) {}
-   |    ^^^^^^^^^^^^^^^ -  -
+ at $DIR/missing-type-param-used-in-param.rs:3:4
 help: add missing generic argument
-   |
-LL |     two_type_params::<String, _>(100);
-   |                             +++
+ on line 6, column 28, add `, _`
 
 error: aborting due to 1 previous error
 

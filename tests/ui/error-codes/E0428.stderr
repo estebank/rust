@@ -1,12 +1,7 @@
-error[E0428]: the name `Bar` is defined multiple times
-  --> $DIR/E0428.rs:4:1
-   |
-LL | struct Bar;
-   | ----------- previous definition of the type `Bar` here
-LL | struct Bar;
-   | ^^^^^^^^^^^ `Bar` redefined here
-   |
-   = note: `Bar` must be defined only once in the type namespace of this module
+error E0428: the name `Bar` is defined multiple times
+ at $DIR/E0428.rs:4:1: `Bar` redefined here
+  on line 3: previous definition of the type `Bar` here
+note: `Bar` must be defined only once in the type namespace of this module
 
 error: aborting due to 1 previous error
 

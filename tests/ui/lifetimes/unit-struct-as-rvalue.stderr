@@ -1,10 +1,6 @@
-error[E0515]: cannot return value referencing temporary value
-  --> $DIR/unit-struct-as-rvalue.rs:14:10
-   |
-LL |   let testValue = &Test;
-   |                    ---- temporary value created here
-LL |   return testValue;
-   |          ^^^^^^^^^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing temporary value
+ at $DIR/unit-struct-as-rvalue.rs:14:10: returns a value referencing data owned by the current function
+  on line 13, column 20: temporary value created here
 
 error: aborting due to 1 previous error
 

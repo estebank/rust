@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `MyTrait` for type `()`
-  --> $DIR/issue-65384.rs:9:1
-   |
-LL | impl MyTrait for () {}
-   | ------------------- first implementation here
-...
-LL | impl MyTrait for Bar {}
-   | ^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `()`
+error E0119: conflicting implementations of trait `MyTrait` for type `()`
+ at $DIR/issue-65384.rs:9:1: conflicting implementation for `()`
+  on line 5: first implementation here
 
 error: aborting due to 1 previous error
 

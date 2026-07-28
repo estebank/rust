@@ -1,42 +1,18 @@
-error[E0277]: the trait bound `Foo: Trait<Bar>` is not satisfied
-  --> $DIR/constrain_in_projection2.rs:28:14
-   |
-LL |     let x = <Foo as Trait<Bar>>::Assoc::default();
-   |              ^^^ unsatisfied trait bound
-   |
+error E0277: the trait bound `Foo: Trait<Bar>` is not satisfied
+ at $DIR/constrain_in_projection2.rs:28:14: unsatisfied trait bound
 help: the trait `Trait<Bar>` is not implemented for `Foo`
-  --> $DIR/constrain_in_projection2.rs:10:1
-   |
-LL | struct Foo;
-   | ^^^^^^^^^^
+ at $DIR/constrain_in_projection2.rs:10:1
 help: `Foo` implements trait `Trait<T>`
-  --> $DIR/constrain_in_projection2.rs:18:1
-   |
-LL | impl Trait<()> for Foo {
-   | ^^^^^^^^^^^^^^^^^^^^^^ `Trait<()>`
-...
-LL | impl Trait<u32> for Foo {
-   | ^^^^^^^^^^^^^^^^^^^^^^^ `Trait<u32>`
+ at $DIR/constrain_in_projection2.rs:18:1: `Trait<()>`
+  on line 22: `Trait<u32>`
 
-error[E0277]: the trait bound `Foo: Trait<Bar>` is not satisfied
-  --> $DIR/constrain_in_projection2.rs:28:13
-   |
-LL |     let x = <Foo as Trait<Bar>>::Assoc::default();
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unsatisfied trait bound
-   |
+error E0277: the trait bound `Foo: Trait<Bar>` is not satisfied
+ at $DIR/constrain_in_projection2.rs:28:13: unsatisfied trait bound
 help: the trait `Trait<Bar>` is not implemented for `Foo`
-  --> $DIR/constrain_in_projection2.rs:10:1
-   |
-LL | struct Foo;
-   | ^^^^^^^^^^
+ at $DIR/constrain_in_projection2.rs:10:1
 help: `Foo` implements trait `Trait<T>`
-  --> $DIR/constrain_in_projection2.rs:18:1
-   |
-LL | impl Trait<()> for Foo {
-   | ^^^^^^^^^^^^^^^^^^^^^^ `Trait<()>`
-...
-LL | impl Trait<u32> for Foo {
-   | ^^^^^^^^^^^^^^^^^^^^^^^ `Trait<u32>`
+ at $DIR/constrain_in_projection2.rs:18:1: `Trait<()>`
+  on line 22: `Trait<u32>`
 
 error: aborting due to 2 previous errors
 

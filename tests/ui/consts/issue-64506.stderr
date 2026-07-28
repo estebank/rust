@@ -1,8 +1,5 @@
-error[E0080]: constructing invalid value of type ChildStdin: at .inner, encountered a value of zero-variant enum `AnonPipe`
-  --> $DIR/issue-64506.rs:16:22
-   |
-LL |     let x = unsafe { Foo { b: () }.a };
-   |                      ^^^^^^^^^^^^^^^ evaluation of `FOO` failed here
+error E0080: constructing invalid value of type ChildStdin: at .inner, encountered a value of zero-variant enum `AnonPipe`
+ at $DIR/issue-64506.rs:16:22: evaluation of `FOO` failed here
 
 error: aborting due to 1 previous error
 

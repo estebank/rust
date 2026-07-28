@@ -1,26 +1,12 @@
-error[E0404]: expected trait, found enum `ParseError`
-  --> $DIR/issue-112472-multi-generics-suggestion.rs:17:54
-   |
-LL |     <DecodeLine as convert::TryFrom<String>>::Error: ParseError,
-   |                                                      ^^^^^^^^^^ not a trait
-   |
+error E0404: expected trait, found enum `ParseError`
+ at $DIR/issue-112472-multi-generics-suggestion.rs:17:54: not a trait
 help: constrain the associated type to `ParseError`
-   |
-LL -     <DecodeLine as convert::TryFrom<String>>::Error: ParseError,
-LL +     DecodeLine: convert::TryFrom<String, Error = ParseError>,
-   |
+ on line 17, column 4, replace with `DecodeLine: convert::TryFrom<String, Error = ParseError>`
 
-error[E0404]: expected trait, found enum `ParseError`
-  --> $DIR/issue-112472-multi-generics-suggestion.rs:25:45
-   |
-LL |     <DecodeLine as TryFrom<String>>::Error: ParseError,
-   |                                             ^^^^^^^^^^ not a trait
-   |
+error E0404: expected trait, found enum `ParseError`
+ at $DIR/issue-112472-multi-generics-suggestion.rs:25:45: not a trait
 help: constrain the associated type to `ParseError`
-   |
-LL -     <DecodeLine as TryFrom<String>>::Error: ParseError,
-LL +     DecodeLine: TryFrom<String, Error = ParseError>,
-   |
+ on line 25, column 4, replace with `DecodeLine: TryFrom<String, Error = ParseError>`
 
 error: aborting due to 2 previous errors
 

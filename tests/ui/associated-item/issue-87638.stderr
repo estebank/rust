@@ -1,32 +1,14 @@
-error[E0576]: cannot find associated type `Output` in trait `Trait`
-  --> $DIR/issue-87638.rs:17:26
-   |
-LL |     type Target;
-   |     ------------ associated type `Target` defined here
-...
-LL |     let _: <S as Trait>::Output;
-   |                          ^^^^^^ not found in `Trait`
-   |
+error E0576: cannot find associated type `Output` in trait `Trait`
+ at $DIR/issue-87638.rs:17:26: not found in `Trait`
+  on line 6: associated type `Target` defined here
 help: maybe you meant this associated type
-   |
-LL -     let _: <S as Trait>::Output;
-LL +     let _: <S as Trait>::Target;
-   |
+ on line 17, column 25, replace with `Target`
 
-error[E0576]: cannot find method or associated constant `BAR` in trait `Trait`
-  --> $DIR/issue-87638.rs:20:27
-   |
-LL |     const FOO: usize;
-   |     ----------------- associated constant `FOO` defined here
-...
-LL |     let _ = <S as Trait>::BAR;
-   |                           ^^^ not found in `Trait`
-   |
+error E0576: cannot find method or associated constant `BAR` in trait `Trait`
+ at $DIR/issue-87638.rs:20:27: not found in `Trait`
+  on line 4: associated constant `FOO` defined here
 help: maybe you meant this associated constant
-   |
-LL -     let _ = <S as Trait>::BAR;
-LL +     let _ = <S as Trait>::FOO;
-   |
+ on line 20, column 26, replace with `FOO`
 
 error: aborting due to 2 previous errors
 

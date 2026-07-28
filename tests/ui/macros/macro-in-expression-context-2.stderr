@@ -1,17 +1,9 @@
 error: macro expansion ends with an incomplete expression: expected expression
-  --> $DIR/macro-in-expression-context-2.rs:5:16
-   |
-LL | macro_rules! empty { () => () }
-   |                            -- in this macro arm
-...
-LL |         _ => { empty!() }
-   |                ^^^^^^^^ expected expression
-   |
-   = note: the macro call doesn't expand to an expression, but it can expand to a statement
+ at $DIR/macro-in-expression-context-2.rs:5:16: expected expression
+  on line 1, column 28: in this macro arm
+note: the macro call doesn't expand to an expression, but it can expand to a statement
 help: add `;` to interpret the expansion as a statement
-   |
-LL |         _ => { empty!(); }
-   |                        +
+ on line 5, column 23, add `;`
 
 error: aborting due to 1 previous error
 

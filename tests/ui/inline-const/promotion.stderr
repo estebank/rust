@@ -1,13 +1,7 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promotion.rs:16:37
-   |
-LL |             let _x: &'static i32 = &div_by_zero();
-   |                     ------------    ^^^^^^^^^^^^^ creates a temporary value which is freed while still in use
-   |                     |
-   |                     type annotation requires that borrow lasts for `'static`
-LL |
-LL |         }
-   |         - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promotion.rs:16:37: creates a temporary value which is freed while still in use
+  on line 16, column 21: type annotation requires that borrow lasts for `'static`
+  on line 18: temporary value is freed at the end of this statement
 
 error: aborting due to 1 previous error
 

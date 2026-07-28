@@ -1,46 +1,21 @@
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/min-choice-reject-ambiguous.rs:17:5
-   |
-LL | fn test_b<'a, 'b, 'c, T>() -> impl Cap<'a> + Cap<'b> + Cap<'c>
-   |           -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-...
-LL |     type_test::<'_, T>() // This should pass if we pick 'b.
-   |     ^^^^^^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/min-choice-reject-ambiguous.rs:17:5: ...so that the type `T` will meet its required lifetime bounds
+  on line 11, column 11: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     T: 'b + 'a,
-   |           ++++
+ on line 15, column 9, add ` + 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/min-choice-reject-ambiguous.rs:28:5
-   |
-LL | fn test_c<'a, 'b, 'c, T>() -> impl Cap<'a> + Cap<'b> + Cap<'c>
-   |           -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-...
-LL |     type_test::<'_, T>() // This should pass if we pick 'c.
-   |     ^^^^^^^^^^^^^^^^^^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/min-choice-reject-ambiguous.rs:28:5: ...so that the type `T` will meet its required lifetime bounds
+  on line 22, column 11: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     T: 'c + 'a,
-   |           ++++
+ on line 26, column 9, add ` + 'a`
 
-error[E0700]: hidden type for `impl Cap<'b> + Cap<'c>` captures lifetime that does not appear in bounds
-  --> $DIR/min-choice-reject-ambiguous.rs:39:5
-   |
-LL | fn test_ambiguous<'a, 'b, 'c>(s: &'a u8) -> impl Cap<'b> + Cap<'c>
-   |                   --                        ---------------------- opaque type defined here
-   |                   |
-   |                   hidden type `&'a u8` captures the lifetime `'a` as defined here
-...
-LL |     s
-   |     ^
-   |
+error E0700: hidden type for `impl Cap<'b> + Cap<'c>` captures lifetime that does not appear in bounds
+ at $DIR/min-choice-reject-ambiguous.rs:39:5
+  on line 34, column 19: hidden type `&'a u8` captures the lifetime `'a` as defined here
+  on line 34, column 45: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'a`
-   |
-LL | fn test_ambiguous<'a, 'b, 'c>(s: &'a u8) -> impl Cap<'b> + Cap<'c> + use<'b, 'c, 'a>
-   |                                                                    +++++++++++++++++
+ on line 34, column 66, add ` + use<'b, 'c, 'a>`
 
 error: aborting due to 3 previous errors
 

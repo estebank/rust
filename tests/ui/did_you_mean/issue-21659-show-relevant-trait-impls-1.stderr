@@ -1,24 +1,11 @@
-error[E0277]: the trait bound `Bar: Foo<usize>` is not satisfied
-  --> $DIR/issue-21659-show-relevant-trait-impls-1.rs:24:12
-   |
-LL |     f1.foo(1usize);
-   |        --- ^^^^^^ unsatisfied trait bound
-   |        |
-   |        required by a bound introduced by this call
-   |
+error E0277: the trait bound `Bar: Foo<usize>` is not satisfied
+ at $DIR/issue-21659-show-relevant-trait-impls-1.rs:24:12: unsatisfied trait bound
+  on line 24, column 8: required by a bound introduced by this call
 help: the trait `Foo<usize>` is not implemented for `Bar`
-  --> $DIR/issue-21659-show-relevant-trait-impls-1.rs:13:1
-   |
-LL | struct Bar;
-   | ^^^^^^^^^^
+ at $DIR/issue-21659-show-relevant-trait-impls-1.rs:13:1
 help: `Bar` implements trait `Foo<A>`
-  --> $DIR/issue-21659-show-relevant-trait-impls-1.rs:15:1
-   |
-LL | impl Foo<i32> for Bar {}
-   | ^^^^^^^^^^^^^^^^^^^^^ `Foo<i32>`
-LL |
-LL | impl Foo<u8> for Bar {}
-   | ^^^^^^^^^^^^^^^^^^^^ `Foo<u8>`
+ at $DIR/issue-21659-show-relevant-trait-impls-1.rs:15:1: `Foo<i32>`
+  on line 17: `Foo<u8>`
 
 error: aborting due to 1 previous error
 

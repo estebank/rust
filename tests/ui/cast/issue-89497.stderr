@@ -1,14 +1,7 @@
-error[E0605]: non-primitive cast: `*const i32` as `&'static i32`
-  --> $DIR/issue-89497.rs:7:45
-   |
-LL |     let _reference: &'static i32 = unsafe { pointer as *const i32 as &'static i32 };
-   |                                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ invalid cast
-   |
+error E0605: non-primitive cast: `*const i32` as `&'static i32`
+ at $DIR/issue-89497.rs:7:45: invalid cast
 help: consider borrowing the value
-   |
-LL -     let _reference: &'static i32 = unsafe { pointer as *const i32 as &'static i32 };
-LL +     let _reference: &'static i32 = unsafe { &*(pointer as *const i32) };
-   |
+ on line 7, column 44, add `&*(`
 
 error: aborting due to 1 previous error
 

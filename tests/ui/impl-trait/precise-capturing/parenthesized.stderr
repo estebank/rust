@@ -1,14 +1,7 @@
 error: precise capturing lists may not be parenthesized
-  --> $DIR/parenthesized.rs:4:24
-   |
-LL | fn f() -> impl Sized + (use<>) {}
-   |                        ^^^^^^^
-   |
+ at $DIR/parenthesized.rs:4:24
 help: remove the parentheses
-   |
-LL - fn f() -> impl Sized + (use<>) {}
-LL + fn f() -> impl Sized + use<> {}
-   |
+ on line 4, column 23
 
 error: aborting due to 1 previous error
 

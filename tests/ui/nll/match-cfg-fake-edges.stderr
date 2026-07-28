@@ -1,182 +1,83 @@
 warning: irrefutable `if let` pattern
-  --> $DIR/match-cfg-fake-edges.rs:17:8
-   |
-LL |     if let _ = true {
-   |        ^^^^^^^^^^^^
-   |
-   = note: this pattern will always match, so the `if let` is useless
-   = help: consider replacing the `if let` with a `let`
-   = note: `#[warn(irrefutable_let_patterns)]` on by default
+ at $DIR/match-cfg-fake-edges.rs:17:8
+note: this pattern will always match, so the `if let` is useless
+help: consider replacing the `if let` with a `let`
+note: `#[warn(irrefutable_let_patterns)]` on by default
 
-error[E0382]: use of moved value: `x`
-  --> $DIR/match-cfg-fake-edges.rs:14:10
-   |
-LL |     let x = String::new();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-...
-LL |         _ => drop(x),
-   |                   - value moved here
-...
-LL |     drop(x);
-   |          ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/match-cfg-fake-edges.rs:14:10: value used here after move
+  on line 8, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 11, column 19: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         _ => drop(x.clone()),
-   |                    ++++++++
+ on line 11, column 19, add `.clone()`
 
-error[E0382]: use of moved value: `x`
-  --> $DIR/match-cfg-fake-edges.rs:22:10
-   |
-LL |     let x = String::new();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-...
-LL |         drop(x)
-   |              - value moved here
-...
-LL |     drop(x);
-   |          ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/match-cfg-fake-edges.rs:22:10: value used here after move
+  on line 16, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 19, column 14: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         drop(x.clone())
-   |               ++++++++
+ on line 19, column 14, add `.clone()`
 
-error[E0382]: borrow of moved value: `x.0`
-  --> $DIR/match-cfg-fake-edges.rs:28:5
-   |
-LL |         (y, _) | (_, y) => (),
-   |          - value moved here
-LL |     }
-LL |     &x.0;
-   |     ^^^^ value borrowed here after move
-   |
-   = note: move occurs because `x.0` has type `String`, which does not implement the `Copy` trait
+error E0382: borrow of moved value: `x.0`
+ at $DIR/match-cfg-fake-edges.rs:28:5: value borrowed here after move
+  on line 26, column 10: value moved here
+note: move occurs because `x.0` has type `String`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         (ref y, _) | (_, y) => (),
-   |          +++
+ on line 26, column 9, add `ref `
 
-error[E0382]: borrow of moved value: `x.1`
-  --> $DIR/match-cfg-fake-edges.rs:30:5
-   |
-LL |         (y, _) | (_, y) => (),
-   |                      - value moved here
-...
-LL |     &x.1;
-   |     ^^^^ value borrowed here after move
-   |
-   = note: move occurs because `x.1` has type `String`, which does not implement the `Copy` trait
+error E0382: borrow of moved value: `x.1`
+ at $DIR/match-cfg-fake-edges.rs:30:5: value borrowed here after move
+  on line 26, column 22: value moved here
+note: move occurs because `x.1` has type `String`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         (y, _) | (_, ref y) => (),
-   |                      +++
+ on line 26, column 21, add `ref `
 
-error[E0382]: borrow of moved value: `x.0`
-  --> $DIR/match-cfg-fake-edges.rs:34:5
-   |
-LL |     let ((y, _) | (_, y)) = x;
-   |           - value moved here
-LL |     &x.0;
-   |     ^^^^ value borrowed here after move
-   |
-   = note: move occurs because `x.0` has type `String`, which does not implement the `Copy` trait
+error E0382: borrow of moved value: `x.0`
+ at $DIR/match-cfg-fake-edges.rs:34:5: value borrowed here after move
+  on line 33, column 11: value moved here
+note: move occurs because `x.0` has type `String`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ((ref y, _) | (_, y)) = x;
-   |           +++
+ on line 33, column 10, add `ref `
 
-error[E0382]: borrow of moved value: `x.1`
-  --> $DIR/match-cfg-fake-edges.rs:36:5
-   |
-LL |     let ((y, _) | (_, y)) = x;
-   |                       - value moved here
-...
-LL |     &x.1;
-   |     ^^^^ value borrowed here after move
-   |
-   = note: move occurs because `x.1` has type `String`, which does not implement the `Copy` trait
+error E0382: borrow of moved value: `x.1`
+ at $DIR/match-cfg-fake-edges.rs:36:5: value borrowed here after move
+  on line 33, column 23: value moved here
+note: move occurs because `x.1` has type `String`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ((y, _) | (_, ref y)) = x;
-   |                       +++
+ on line 33, column 22, add `ref `
 
-error[E0381]: used binding `x` is possibly-uninitialized
-  --> $DIR/match-cfg-fake-edges.rs:70:19
-   |
-LL |     let x;
-   |         - binding declared here but left uninitialized
-...
-LL |         _ => drop(x),
-   |         -         ^ `x` used here but it is possibly-uninitialized
-   |         |
-   |         if this pattern is matched, `x` is not initialized
+error E0381: used binding `x` is possibly-uninitialized
+ at $DIR/match-cfg-fake-edges.rs:70:19: `x` used here but it is possibly-uninitialized
+  on line 66, column 9: binding declared here but left uninitialized
+  on line 70: if this pattern is matched, `x` is not initialized
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/match-cfg-fake-edges.rs:77:16
-   |
-LL |     let x;
-   |         - binding declared here but left uninitialized
-LL |     match y {
-LL |         _ if { x = 2; true } => 1,
-   |                ----- binding initialized here in some conditions
-LL |         // Borrowck must not know the guard is always run.
-LL |         _ if { x; false } => 2,
-   |                ^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/match-cfg-fake-edges.rs:77:16: `x` used here but it isn't initialized
+  on line 73, column 9: binding declared here but left uninitialized
+  on line 75, column 16: binding initialized here in some conditions
 help: consider assigning a value
-   |
-LL |     let x = 42;
-   |           ++++
+ on line 73, column 9, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/match-cfg-fake-edges.rs:84:31
-   |
-LL |     let x;
-   |         - binding declared here but left uninitialized
-LL |     match y {
-LL |         _ if let Some(()) = { x = 2; Some(()) } => 1,
-   |                               ----- binding initialized here in some conditions
-LL |         _ if let Some(()) = { x; None } => 2,
-   |                               ^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/match-cfg-fake-edges.rs:84:31: `x` used here but it isn't initialized
+  on line 81, column 9: binding declared here but left uninitialized
+  on line 83, column 31: binding initialized here in some conditions
 help: consider assigning a value
-   |
-LL |     let x = 42;
-   |           ++++
+ on line 81, column 9, add ` = 42`
 
-error[E0382]: use of moved value: `x`
-  --> $DIR/match-cfg-fake-edges.rs:97:22
-   |
-LL |     let x = String::new();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |     match y {
-LL |         false if { drop(x); true } => {},
-   |                         - value moved here
-LL |         // Borrowck must not know the guard is not run in the `true` case.
-LL |         true => drop(x),
-   |                      ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/match-cfg-fake-edges.rs:97:22: value used here after move
+  on line 93, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 95, column 25: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         false if { drop(x.clone()); true } => {},
-   |                          ++++++++
+ on line 95, column 25, add `.clone()`
 
-error[E0382]: use of moved value: `x`
-  --> $DIR/match-cfg-fake-edges.rs:112:22
-   |
-LL |     let x = String::new();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |     match y {
-LL |         false if let Some(()) = { drop(x); Some(()) } => {},
-   |                                        - value moved here
-LL |         true => drop(x),
-   |                      ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/match-cfg-fake-edges.rs:112:22: value used here after move
+  on line 109, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 111, column 40: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         false if let Some(()) = { drop(x.clone()); Some(()) } => {},
-   |                                         ++++++++
+ on line 111, column 40, add `.clone()`
 
 error: aborting due to 11 previous errors; 1 warning emitted
 

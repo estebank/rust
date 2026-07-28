@@ -1,32 +1,14 @@
-error[E0277]: `()` cannot be safely transmuted into `ExplicitlyPadded`
-  --> $DIR/huge-len.rs:21:41
-   |
-LL |     assert::is_maybe_transmutable::<(), ExplicitlyPadded>();
-   |                                         ^^^^^^^^^^^^^^^^ values of the type `ExplicitlyPadded` are too big for the target architecture
-   |
+error E0277: `()` cannot be safely transmuted into `ExplicitlyPadded`
+ at $DIR/huge-len.rs:21:41: values of the type `ExplicitlyPadded` are too big for the target architecture
 note: required by a bound in `is_maybe_transmutable`
-  --> $DIR/huge-len.rs:8:14
-   |
-LL |     pub fn is_maybe_transmutable<Src, Dst>()
-   |            --------------------- required by a bound in this function
-LL |     where
-LL |         Dst: TransmuteFrom<Src>,
-   |              ^^^^^^^^^^^^^^^^^^ required by this bound in `is_maybe_transmutable`
+ at $DIR/huge-len.rs:8:14: required by this bound in `is_maybe_transmutable`
+  on line 6, column 12: required by a bound in this function
 
-error[E0277]: `ExplicitlyPadded` cannot be safely transmuted into `()`
-  --> $DIR/huge-len.rs:24:55
-   |
-LL |     assert::is_maybe_transmutable::<ExplicitlyPadded, ()>();
-   |                                                       ^^ values of the type `ExplicitlyPadded` are too big for the target architecture
-   |
+error E0277: `ExplicitlyPadded` cannot be safely transmuted into `()`
+ at $DIR/huge-len.rs:24:55: values of the type `ExplicitlyPadded` are too big for the target architecture
 note: required by a bound in `is_maybe_transmutable`
-  --> $DIR/huge-len.rs:8:14
-   |
-LL |     pub fn is_maybe_transmutable<Src, Dst>()
-   |            --------------------- required by a bound in this function
-LL |     where
-LL |         Dst: TransmuteFrom<Src>,
-   |              ^^^^^^^^^^^^^^^^^^ required by this bound in `is_maybe_transmutable`
+ at $DIR/huge-len.rs:8:14: required by this bound in `is_maybe_transmutable`
+  on line 6, column 12: required by a bound in this function
 
 error: aborting due to 2 previous errors
 

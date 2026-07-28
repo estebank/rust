@@ -1,14 +1,8 @@
 error: lel
-  --> $DIR/macro-comma-support.rs:6:5
-   |
-LL |     compile_error!("lel");
-   |     ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/macro-comma-support.rs:6:5
 
 error: lel
-  --> $DIR/macro-comma-support.rs:7:5
-   |
-LL |     compile_error!("lel",);
-   |     ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/macro-comma-support.rs:7:5
 
 error: aborting due to 2 previous errors
 

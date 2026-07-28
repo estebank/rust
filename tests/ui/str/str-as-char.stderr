@@ -1,14 +1,7 @@
 error: character literal may only contain one codepoint
-  --> $DIR/str-as-char.rs:4:14
-   |
-LL |     println!('●●');
-   |              ^^^^
-   |
+ at $DIR/str-as-char.rs:4:14
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     println!('●●');
-LL +     println!("●●");
-   |
+ on line 4, column 13, replace with `"`
 
 error: aborting due to 1 previous error
 

@@ -1,8 +1,5 @@
-error[E0720]: cannot resolve opaque type
-  --> $DIR/match-upvar-discriminant-of-opaque.rs:7:9
-   |
-LL |         None => (),
-   |         ^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/match-upvar-discriminant-of-opaque.rs:7:9
 
 error: aborting due to 1 previous error
 

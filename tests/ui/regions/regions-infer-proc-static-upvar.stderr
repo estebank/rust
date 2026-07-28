@@ -1,22 +1,10 @@
-error[E0597]: `x` does not live long enough
-  --> $DIR/regions-infer-proc-static-upvar.rs:10:13
-   |
-LL |       let x = 3;
-   |           - binding `x` declared here
-LL |       let y = &x;
-   |               ^^ borrowed value does not live long enough
-LL | /     foo(move|| {
-LL | |         let _a = *y;
-LL | |     });
-   | |______- argument requires that `x` is borrowed for `'static`
-LL |   }
-   |   - `x` dropped here while still borrowed
-   |
+error E0597: `x` does not live long enough
+ at $DIR/regions-infer-proc-static-upvar.rs:10:13: borrowed value does not live long enough
+  on line 9, column 9: binding `x` declared here
+  on line 11 to line 13, column 7: argument requires that `x` is borrowed for `'static`
+  on line 14: `x` dropped here while still borrowed
 note: requirement that the value outlives `'static` introduced here
-  --> $DIR/regions-infer-proc-static-upvar.rs:4:19
-   |
-LL | fn foo<F:FnOnce()+'static>(_p: F) { }
-   |                   ^^^^^^^
+ at $DIR/regions-infer-proc-static-upvar.rs:4:19
 
 error: aborting due to 1 previous error
 

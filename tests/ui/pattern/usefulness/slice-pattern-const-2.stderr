@@ -1,41 +1,20 @@
 error: unreachable pattern
-  --> $DIR/slice-pattern-const-2.rs:9:9
-   |
-LL |         MAGIC_TEST => (),
-   |         ---------- matches all the relevant values
-LL |         [0x00, 0x00, 0x00, 0x00] => (),
-LL |         [4, 5, 6, 7] => (),
-   |         ^^^^^^^^^^^^ no value can reach this
-   |
+ at $DIR/slice-pattern-const-2.rs:9:9: no value can reach this
+  on line 7: matches all the relevant values
 note: the lint level is defined here
-  --> $DIR/slice-pattern-const-2.rs:1:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/slice-pattern-const-2.rs:1:9
 
 error: unreachable pattern
-  --> $DIR/slice-pattern-const-2.rs:15:9
-   |
-LL |         MAGIC_TEST => (),
-   |         ---------- matches all the relevant values
-LL |         [4, 5, 6, 7] => (),
-   |         ^^^^^^^^^^^^ no value can reach this
+ at $DIR/slice-pattern-const-2.rs:15:9: no value can reach this
+  on line 14: matches all the relevant values
 
 error: unreachable pattern
-  --> $DIR/slice-pattern-const-2.rs:21:9
-   |
-LL |         [4, 5, 6, 7] => (),
-   |         ------------ matches all the relevant values
-LL |         MAGIC_TEST => (),
-   |         ^^^^^^^^^^ no value can reach this
+ at $DIR/slice-pattern-const-2.rs:21:9: no value can reach this
+  on line 20: matches all the relevant values
 
 error: unreachable pattern
-  --> $DIR/slice-pattern-const-2.rs:28:9
-   |
-LL |         [4] => (),
-   |         --- matches all the relevant values
-LL |         FOO => (),
-   |         ^^^ no value can reach this
+ at $DIR/slice-pattern-const-2.rs:28:9: no value can reach this
+  on line 27: matches all the relevant values
 
 error: aborting due to 4 previous errors
 

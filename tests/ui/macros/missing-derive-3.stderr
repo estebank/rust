@@ -1,47 +1,21 @@
 error: cannot find attribute `sede` in this scope
-  --> $DIR/missing-derive-3.rs:20:7
-   |
-LL |     #[sede(untagged)]
-   |       ^^^^
-   |
+ at $DIR/missing-derive-3.rs:20:7
 help: the derive macros `Deserialize` and `Serialize` accept the similarly named `serde` attribute
-   |
-LL |     #[serde(untagged)]
-   |         +
+ on line 20, column 6, replace with `serde`
 
 error: cannot find attribute `serde` in this scope
-  --> $DIR/missing-derive-3.rs:14:7
-   |
-LL |     #[serde(untagged)]
-   |       ^^^^^
-   |
+ at $DIR/missing-derive-3.rs:14:7
 note: `serde` is imported here, but it is a crate, not an attribute
-  --> $DIR/missing-derive-3.rs:4:1
-   |
-LL | extern crate serde;
-   | ^^^^^^^^^^^^^^^^^^^
+ at $DIR/missing-derive-3.rs:4:1
 help: `serde` is an attribute that can be used by the derive macros `Deserialize` and `Serialize`, you might be missing a `derive` attribute
-   |
-LL + #[derive(Deserialize, Serialize)]
-LL | enum B {
-   |
+ on line 12, column 1, add `#[derive(Deserialize, Serialize)]`
 
 error: cannot find attribute `serde` in this scope
-  --> $DIR/missing-derive-3.rs:6:3
-   |
-LL | #[serde(untagged)]
-   |   ^^^^^
-   |
+ at $DIR/missing-derive-3.rs:6:3
 note: `serde` is imported here, but it is a crate, not an attribute
-  --> $DIR/missing-derive-3.rs:4:1
-   |
-LL | extern crate serde;
-   | ^^^^^^^^^^^^^^^^^^^
+ at $DIR/missing-derive-3.rs:4:1
 help: `serde` is an attribute that can be used by the derive macros `Deserialize` and `Serialize`, you might be missing a `derive` attribute
-   |
-LL + #[derive(Deserialize, Serialize)]
-LL | enum A {
-   |
+ on line 7, column 1, add `#[derive(Deserialize, Serialize)]`
 
 error: aborting due to 3 previous errors
 

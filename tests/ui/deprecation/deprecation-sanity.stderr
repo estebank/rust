@@ -1,109 +1,54 @@
-error[E0539]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:6:7
-   |
-LL |     #[deprecated(since = "a", note = "a", reason)]
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^------^
-   |                                           |
-   |                                           valid arguments are `since` or `note`
+error E0539: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:6:7
+  on line 6, column 43: valid arguments are `since` or `note`
 
-error[E0539]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:9:7
-   |
-LL |     #[deprecated(since = "a", note)]
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^----^
-   |                               |
-   |                               expected this to be of the form `note = "..."`
+error E0539: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:9:7
+  on line 9, column 31: expected this to be of the form `note = "..."`
 
-error[E0539]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:12:7
-   |
-LL |     #[deprecated(since, note = "a")]
-   |       ^^^^^^^^^^^-----^^^^^^^^^^^^^
-   |                  |
-   |                  expected this to be of the form `since = "..."`
+error E0539: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:12:7
+  on line 12, column 18: expected this to be of the form `since = "..."`
 
-error[E0539]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:15:7
-   |
-LL |     #[deprecated(since = "a", note(b))]
-   |       ^^^^^^^^^^^^^^^^^^^^^^^^-------^
-   |                               |
-   |                               expected this to be of the form `note = "..."`
+error E0539: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:15:7
+  on line 15, column 31: expected this to be of the form `note = "..."`
 
-error[E0539]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:18:7
-   |
-LL |     #[deprecated(since(b), note = "a")]
-   |       ^^^^^^^^^^^--------^^^^^^^^^^^^^
-   |                  |
-   |                  expected this to be of the form `since = "..."`
+error E0539: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:18:7
+  on line 18, column 18: expected this to be of the form `since = "..."`
 
-error[E0539]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:21:7
-   |
-LL |     #[deprecated(note = b"test")]
-   |       ^^^^^^^^^^^^^^^^^^-^^^^^^^
-   |                         |
-   |                         help: consider removing the prefix
-   |
-   = note: expected a normal string literal, not a byte string literal
+error E0539: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:21:7
+  on line 21, column 25: help: consider removing the prefix
+note: expected a normal string literal, not a byte string literal
 
-error[E0565]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:24:7
-   |
-LL |     #[deprecated("test")]
-   |       ^^^^^^^^^^^------^
-   |                  |
-   |                  didn't expect a literal here
-   |
+error E0565: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:24:7
+  on line 24, column 18: didn't expect a literal here
 help: try using `=` instead
-   |
-LL -     #[deprecated("test")]
-LL +     #[deprecated = "test"]
-   |
+ on line 24, column 16, replace with ` = "test"`
 
-error[E0565]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:27:7
-   |
-LL |     #[deprecated("1.2.3")]
-   |       ^^^^^^^^^^^-------^
-   |                  |
-   |                  didn't expect a literal here
-   |
+error E0565: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:27:7
+  on line 27, column 18: didn't expect a literal here
 help: try specifying a deprecated since version
-   |
-LL |     #[deprecated(since = "1.2.3")]
-   |                  +++++++
+ on line 27, column 17, replace with `since = "1.2.3"`
 
 error: multiple `deprecated` attributes
-  --> $DIR/deprecation-sanity.rs:32:1
-   |
-LL | #[deprecated(since = "a", note = "b")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/deprecation-sanity.rs:32:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/deprecation-sanity.rs:31:1
-   |
-LL | #[deprecated(since = "a", note = "b")]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/deprecation-sanity.rs:31:1
 
-error[E0538]: malformed `deprecated` attribute input
-  --> $DIR/deprecation-sanity.rs:35:3
-   |
-LL | #[deprecated(since = "a", since = "b", note = "c")]
-   |   ^^^^^^^^^^^^^^^^^^^^^^^^-----------^^^^^^^^^^^^^
-   |                           |
-   |                           found `since` used as a key more than once
+error E0538: malformed `deprecated` attribute input
+ at $DIR/deprecation-sanity.rs:35:3
+  on line 35, column 27: found `since` used as a key more than once
 
 error: the `deprecated` attribute cannot be used on trait impl blocks
-  --> $DIR/deprecation-sanity.rs:40:3
-   |
-LL | #[deprecated = "hello"]
-   |   ^^^^^^^^^^
-   |
-   = help: the `deprecated` attribute can be applied to associated consts, associated types, constants, crates, data types, enum variants, foreign statics, functions, inherent impl blocks, macro defs, modules, statics, struct fields, traits, type aliases, and use statements
-   = warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
-   = note: `#[deny(useless_deprecated)]` on by default
+ at $DIR/deprecation-sanity.rs:40:3
+help: the `deprecated` attribute can be applied to associated consts, associated types, constants, crates, data types, enum variants, foreign statics, functions, inherent impl blocks, macro defs, modules, statics, struct fields, traits, type aliases, and use statements
+warning: this was previously accepted by the compiler but is being phased out; it will become a hard error in a future release!
+note: `#[deny(useless_deprecated)]` on by default
 
 error: aborting due to 11 previous errors
 

@@ -1,32 +1,17 @@
-error[E0382]: use of moved value: `foo`
-  --> $DIR/as-ref-2.rs:10:14
-   |
-LL |     let foo = Some(Struct);
-   |         --- move occurs because `foo` has type `Option<Struct>`, which does not implement the `Copy` trait
-LL |     let _x: Option<Struct> = foo.map(|s| bar(&s));
-   |                                  ---------------- `foo` moved due to this method call
-LL |     let _y = foo;
-   |              ^^^ value used here after move
-   |
+error E0382: use of moved value: `foo`
+ at $DIR/as-ref-2.rs:10:14: value used here after move
+  on line 8, column 9: move occurs because `foo` has type `Option<Struct>`, which does not implement the `Copy` trait
+  on line 9, column 34: `foo` moved due to this method call
 note: `Option::<T>::map` takes ownership of the receiver `self`, which moves `foo`
-  --> $SRC_DIR/core/src/option.rs:LL:COL
+ at $SRC_DIR/core/src/option.rs:LL:COL
 help: consider calling `.as_ref()` to borrow the value's contents
-   |
-LL |     let _x: Option<Struct> = foo.as_ref().map(|s| bar(&s));
-   |                                 +++++++++
+ on line 9, column 32, add `.as_ref()`
 help: consider calling `.as_mut()` to mutably borrow the value's contents
-   |
-LL |     let _x: Option<Struct> = foo.as_mut().map(|s| bar(&s));
-   |                                 +++++++++
+ on line 9, column 32, add `.as_mut()`
 help: you could `clone` the value and consume it, if the `Struct: Clone` trait bound could be satisfied
-   |
-LL |     let _x: Option<Struct> = foo.clone().map(|s| bar(&s));
-   |                                 ++++++++
+ on line 9, column 32, add `.clone()`
 help: consider annotating `Struct` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Struct;
-   |
+ on line 1, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 1 previous error
 

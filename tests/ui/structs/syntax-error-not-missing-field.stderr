@@ -1,115 +1,58 @@
 error: expected one of `,`, `.`, `?`, `}`, or an operator, found `;`
-  --> $DIR/syntax-error-not-missing-field.rs:16:30
-   |
-LL |     let f = Foo { a: make_a(); b: 2 };
-   |             ---              ^
-   |             |                |
-   |             |                expected one of `,`, `.`, `?`, `}`, or an operator
-   |             |                help: try adding a comma: `,`
-   |             while parsing this struct
+ at $DIR/syntax-error-not-missing-field.rs:16:30: expected one of `,`, `.`, `?`, `}`, or an operator
+  on line 16, column 13: while parsing this struct
+  on line 16, column 30: help: try adding a comma: `,`
 
 error: expected one of `,`, `.`, `?`, `}`, or an operator, found `b`
-  --> $DIR/syntax-error-not-missing-field.rs:20:31
-   |
-LL |     let f = Foo { a: make_a() b: 2 };
-   |             ---              -^ expected one of `,`, `.`, `?`, `}`, or an operator
-   |             |                |
-   |             |                help: try adding a comma: `,`
-   |             while parsing this struct
+ at $DIR/syntax-error-not-missing-field.rs:20:31: expected one of `,`, `.`, `?`, `}`, or an operator
+  on line 20, column 13: while parsing this struct
+  on line 20, column 30: help: try adding a comma: `,`
 
 error: cannot use a comma after the base struct
-  --> $DIR/syntax-error-not-missing-field.rs:24:32
-   |
-LL |     let f = Foo { a: make_a(), ..todo!(), };
-   |                                ^^^^^^^^^
-   |
-   = note: the base struct must always be the last field
+ at $DIR/syntax-error-not-missing-field.rs:24:32
+note: the base struct must always be the last field
 help: remove this comma
-   |
-LL -     let f = Foo { a: make_a(), ..todo!(), };
-LL +     let f = Foo { a: make_a(), ..todo!() };
-   |
+ on line 24, column 40
 
 error: expected one of `,`, `:`, or `}`, found `(`
-  --> $DIR/syntax-error-not-missing-field.rs:28:25
-   |
-LL |     let f = Foo { make_a(), b: 2, };
-   |             ---   ------^ expected one of `,`, `:`, or `}`
-   |             |     |
-   |             |     while parsing this struct field
-   |             while parsing this struct
-   |
+ at $DIR/syntax-error-not-missing-field.rs:28:25: expected one of `,`, `:`, or `}`
+  on line 28, column 13: while parsing this struct
+  on line 28, column 19: while parsing this struct field
 help: try naming a field
-   |
-LL |     let f = Foo { make_a: make_a(), b: 2, };
-   |                   +++++++
+ on line 28, column 18, add `make_a: `
 
 error: expected `,`
-  --> $DIR/syntax-error-not-missing-field.rs:31:31
-   |
-LL | fn pat_wrong_separator(Foo { a; b }: Foo) {
-   |                        ---    ^
-   |                        |
-   |                        while parsing the fields for this pattern
+ at $DIR/syntax-error-not-missing-field.rs:31:31
+  on line 31, column 24: while parsing the fields for this pattern
 
 error: expected `,`
-  --> $DIR/syntax-error-not-missing-field.rs:35:34
-   |
-LL | fn pat_missing_separator(Foo { a b }: Foo) {
-   |                          ---     ^
-   |                          |
-   |                          while parsing the fields for this pattern
+ at $DIR/syntax-error-not-missing-field.rs:35:34
+  on line 35, column 26: while parsing the fields for this pattern
 
 error: expected `}`, found `,`
-  --> $DIR/syntax-error-not-missing-field.rs:39:39
-   |
-LL | fn pat_rest_trailing_comma(Foo { a, .., }: Foo) {
-   |                                     --^
-   |                                     | |
-   |                                     | expected `}`
-   |                                     | help: remove this comma
-   |                                     `..` must be at the end and cannot have a trailing comma
+ at $DIR/syntax-error-not-missing-field.rs:39:39: expected `}`
+  on line 39, column 39: help: remove this comma
+  on line 39, column 37: `..` must be at the end and cannot have a trailing comma
 
 error: expected one of `,`, `.`, `?`, `}`, or an operator, found `;`
-  --> $DIR/syntax-error-not-missing-field.rs:43:35
-   |
-LL |     let e = Bar::Baz { a: make_a(); b: 2 };
-   |             --------              ^
-   |             |                     |
-   |             |                     expected one of `,`, `.`, `?`, `}`, or an operator
-   |             |                     help: try adding a comma: `,`
-   |             while parsing this struct
+ at $DIR/syntax-error-not-missing-field.rs:43:35: expected one of `,`, `.`, `?`, `}`, or an operator
+  on line 43, column 13: while parsing this struct
+  on line 43, column 35: help: try adding a comma: `,`
 
 error: expected one of `,`, `.`, `?`, `}`, or an operator, found `b`
-  --> $DIR/syntax-error-not-missing-field.rs:47:36
-   |
-LL |     let e = Bar::Baz { a: make_a() b: 2 };
-   |             --------              -^ expected one of `,`, `.`, `?`, `}`, or an operator
-   |             |                     |
-   |             |                     help: try adding a comma: `,`
-   |             while parsing this struct
+ at $DIR/syntax-error-not-missing-field.rs:47:36: expected one of `,`, `.`, `?`, `}`, or an operator
+  on line 47, column 13: while parsing this struct
+  on line 47, column 35: help: try adding a comma: `,`
 
 error: expected identifier, found `,`
-  --> $DIR/syntax-error-not-missing-field.rs:57:37
-   |
-LL |     static A: MyStruct = MyStruct { ,s: TheStruct };
-   |                          --------   ^ expected identifier
-   |                          |
-   |                          while parsing this struct
-   |
+ at $DIR/syntax-error-not-missing-field.rs:57:37: expected identifier
+  on line 57, column 26: while parsing this struct
 help: remove this comma
-   |
-LL -     static A: MyStruct = MyStruct { ,s: TheStruct };
-LL +     static A: MyStruct = MyStruct { s: TheStruct };
-   |
+ on line 57, column 36
 
 error: expected identifier, found `,`
-  --> $DIR/syntax-error-not-missing-field.rs:64:36
-   |
-LL |     static A: MyStruct = MyStruct {,};
-   |                          --------  ^ expected identifier
-   |                          |
-   |                          while parsing this struct
+ at $DIR/syntax-error-not-missing-field.rs:64:36: expected identifier
+  on line 64, column 26: while parsing this struct
 
 error: aborting due to 11 previous errors
 

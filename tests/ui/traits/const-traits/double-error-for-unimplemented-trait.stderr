@@ -1,40 +1,18 @@
-error[E0277]: the trait bound `(): Trait` is not satisfied
-  --> $DIR/double-error-for-unimplemented-trait.rs:12:15
-   |
-LL |   needs_const(&());
-   |   ----------- ^^^ the trait `Trait` is not implemented for `()`
-   |   |
-   |   required by a bound introduced by this call
-   |
+error E0277: the trait bound `(): Trait` is not satisfied
+ at $DIR/double-error-for-unimplemented-trait.rs:12:15: the trait `Trait` is not implemented for `()`
+  on line 12: required by a bound introduced by this call
 help: this trait has no implementations, consider adding one
-  --> $DIR/double-error-for-unimplemented-trait.rs:5:1
-   |
-LL | const trait Trait {
-   | ^^^^^^^^^^^^^^^^^
+ at $DIR/double-error-for-unimplemented-trait.rs:5:1
 note: required by a bound in `needs_const`
-  --> $DIR/double-error-for-unimplemented-trait.rs:9:25
-   |
-LL | const fn needs_const<T: [const] Trait>(_: &T) {}
-   |                         ^^^^^^^^^^^^^ required by this bound in `needs_const`
+ at $DIR/double-error-for-unimplemented-trait.rs:9:25: required by this bound in `needs_const`
 
-error[E0277]: the trait bound `(): Trait` is not satisfied
-  --> $DIR/double-error-for-unimplemented-trait.rs:17:15
-   |
-LL |   needs_const(&());
-   |   ----------- ^^^ the trait `Trait` is not implemented for `()`
-   |   |
-   |   required by a bound introduced by this call
-   |
+error E0277: the trait bound `(): Trait` is not satisfied
+ at $DIR/double-error-for-unimplemented-trait.rs:17:15: the trait `Trait` is not implemented for `()`
+  on line 17: required by a bound introduced by this call
 help: this trait has no implementations, consider adding one
-  --> $DIR/double-error-for-unimplemented-trait.rs:5:1
-   |
-LL | const trait Trait {
-   | ^^^^^^^^^^^^^^^^^
+ at $DIR/double-error-for-unimplemented-trait.rs:5:1
 note: required by a bound in `needs_const`
-  --> $DIR/double-error-for-unimplemented-trait.rs:9:25
-   |
-LL | const fn needs_const<T: [const] Trait>(_: &T) {}
-   |                         ^^^^^^^^^^^^^ required by this bound in `needs_const`
+ at $DIR/double-error-for-unimplemented-trait.rs:9:25: required by this bound in `needs_const`
 
 error: aborting due to 2 previous errors
 

@@ -1,30 +1,14 @@
-error[E0408]: variable `Ban` is not bound in all patterns
-  --> $DIR/binding-typo.rs:12:9
-   |
-LL |         (Foo, Bar) | (Ban, Foo) => {}
-   |         ^^^^^^^^^^    --- variable not in all patterns
-   |         |
-   |         pattern doesn't bind `Ban`
-   |
+error E0408: variable `Ban` is not bound in all patterns
+ at $DIR/binding-typo.rs:12:9: pattern doesn't bind `Ban`
+  on line 12, column 23: variable not in all patterns
 help: you might have meant to use the similarly named previously used binding `Bar`
-   |
-LL -         (Foo, Bar) | (Ban, Foo) => {}
-LL +         (Foo, Bar) | (Bar, Foo) => {}
-   |
+ on line 12, column 22, replace with `Bar`
 
-error[E0408]: variable `Ban` is not bound in all patterns
-  --> $DIR/binding-typo.rs:20:9
-   |
-LL |         (Foo, _) | (Ban, Foo) => {}
-   |         ^^^^^^^^    --- variable not in all patterns
-   |         |
-   |         pattern doesn't bind `Ban`
-   |
+error E0408: variable `Ban` is not bound in all patterns
+ at $DIR/binding-typo.rs:20:9: pattern doesn't bind `Ban`
+  on line 20, column 21: variable not in all patterns
 help: you might have meant to use the similarly named unit variant `Bar`
-   |
-LL -         (Foo, _) | (Ban, Foo) => {}
-LL +         (Foo, _) | (Bar, Foo) => {}
-   |
+ on line 20, column 20, replace with `Bar`
 
 error: aborting due to 2 previous errors
 

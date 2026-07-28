@@ -1,22 +1,11 @@
-error[E0380]: auto traits cannot have associated items
-  --> $DIR/issue-105732.rs:4:8
-   |
-LL | auto trait Foo {
-   |            --- auto traits cannot have associated items
-LL |     fn g(&self);
-   |        ^
+error E0380: auto traits cannot have associated items
+ at $DIR/issue-105732.rs:4:8
+  on line 3, column 12: auto traits cannot have associated items
 
-error[E0599]: no method named `g` found for reference `&Self` in the current scope
-  --> $DIR/issue-105732.rs:10:14
-   |
-LL |         self.g();
-   |              ^
-   |
+error E0599: no method named `g` found for reference `&Self` in the current scope
+ at $DIR/issue-105732.rs:10:14
 help: there is a method `f` with a similar name
-   |
-LL -         self.g();
-LL +         self.f();
-   |
+ on line 10, column 13, replace with `f`
 
 error: aborting due to 2 previous errors
 

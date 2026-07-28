@@ -1,52 +1,24 @@
 error: explicit register arguments cannot have names
-  --> $DIR/x86_64_parse_error.rs:15:18
-   |
-LL |         asm!("", a = in("eax") foo);
-   |                  ^^^^^^^^^^^^^^^^^
+ at $DIR/x86_64_parse_error.rs:15:18
 
 error: positional arguments cannot follow named arguments or explicit register arguments
-  --> $DIR/x86_64_parse_error.rs:21:36
-   |
-LL |         asm!("{1}", in("eax") foo, const bar);
-   |                     -------------  ^^^^^^^^^ positional argument
-   |                     |
-   |                     explicit register argument
+ at $DIR/x86_64_parse_error.rs:21:36: positional argument
+  on line 21, column 21: explicit register argument
 
-error[E0435]: attempt to use a non-constant value in a constant
-  --> $DIR/x86_64_parse_error.rs:17:46
-   |
-LL |         asm!("{a}", in("eax") foo, a = const bar);
-   |                                              ^^^ non-constant value
-   |
+error E0435: attempt to use a non-constant value in a constant
+ at $DIR/x86_64_parse_error.rs:17:46: non-constant value
 help: consider using `const` instead of `let`
-   |
-LL -     let mut bar = 0;
-LL +     const bar: /* Type */ = 0;
-   |
+ on line 13, column 4, replace with `const `
 
-error[E0435]: attempt to use a non-constant value in a constant
-  --> $DIR/x86_64_parse_error.rs:19:46
-   |
-LL |         asm!("{a}", in("eax") foo, a = const bar);
-   |                                              ^^^ non-constant value
-   |
+error E0435: attempt to use a non-constant value in a constant
+ at $DIR/x86_64_parse_error.rs:19:46: non-constant value
 help: consider using `const` instead of `let`
-   |
-LL -     let mut bar = 0;
-LL +     const bar: /* Type */ = 0;
-   |
+ on line 13, column 4, replace with `const `
 
-error[E0435]: attempt to use a non-constant value in a constant
-  --> $DIR/x86_64_parse_error.rs:21:42
-   |
-LL |         asm!("{1}", in("eax") foo, const bar);
-   |                                          ^^^ non-constant value
-   |
+error E0435: attempt to use a non-constant value in a constant
+ at $DIR/x86_64_parse_error.rs:21:42: non-constant value
 help: consider using `const` instead of `let`
-   |
-LL -     let mut bar = 0;
-LL +     const bar: /* Type */ = 0;
-   |
+ on line 13, column 4, replace with `const `
 
 error: aborting due to 5 previous errors
 

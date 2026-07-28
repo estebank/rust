@@ -1,17 +1,10 @@
-error[E0507]: cannot move out of an `Rc`
-  --> $DIR/borrowck-move-out-of-overloaded-auto-deref.rs:5:14
-   |
-LL |     let _x = Rc::new(vec![1, 2]).into_iter();
-   |              ^^^^^^^^^^^^^^^^^^^ ----------- value moved due to this method call
-   |              |
-   |              move occurs because value has type `Vec<i32>`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of an `Rc`
+ at $DIR/borrowck-move-out-of-overloaded-auto-deref.rs:5:14: move occurs because value has type `Vec<i32>`, which does not implement the `Copy` trait
+  on line 5, column 34: value moved due to this method call
 note: `into_iter` takes ownership of the receiver `self`, which moves value
-  --> $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
 help: you can `clone` the value and consume it, but this might not be your desired behavior
-   |
-LL |     let _x = <Vec<i32> as Clone>::clone(&Rc::new(vec![1, 2])).into_iter();
-   |              ++++++++++++++++++++++++++++                   +
+ on line 5, column 13, add `<Vec<i32> as Clone>::clone(&`
 
 error: aborting due to 1 previous error
 

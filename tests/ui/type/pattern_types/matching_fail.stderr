@@ -1,46 +1,23 @@
 error: constant of non-structural type `(u32) is 1..` in a pattern
-  --> $DIR/matching_fail.rs:8:5
-   |
-LL | const THREE: pattern_type!(u32 is 1..) = 3;
-   | -------------------------------------- constant defined here
-...
-LL |     THREE => {}
-   |     ^^^^^ constant of non-structural type
-   |
-   = note: see https://doc.rust-lang.org/stable/std/marker/trait.StructuralPartialEq.html for details
+ at $DIR/matching_fail.rs:8:5: constant of non-structural type
+  on line 5: constant defined here
+note: see https://doc.rust-lang.org/stable/std/marker/trait.StructuralPartialEq.html for details
 
-error[E0308]: mismatched types
-  --> $DIR/matching_fail.rs:14:5
-   |
-LL | const _: () = match THREE {
-   |                     ----- this expression has type `(u32) is 1..`
-LL |     3 => {}
-   |     ^ expected `(u32) is 1..`, found integer
-   |
-   = note: expected pattern type `(u32) is 1..`
-                      found type `{integer}`
+error E0308: mismatched types
+ at $DIR/matching_fail.rs:14:5: expected `(u32) is 1..`, found integer
+  on line 13, column 21: this expression has type `(u32) is 1..`
+note: expected pattern type `(u32) is 1..`
+                 found type `{integer}`
 
-error[E0308]: mismatched types
-  --> $DIR/matching_fail.rs:20:5
-   |
-LL | const THREE: pattern_type!(u32 is 1..) = 3;
-   | -------------------------------------- constant defined here
-...
-LL | const _: () = match 3 {
-   |                     - this expression has type `{integer}`
-LL |     THREE => {}
-   |     ^^^^^
-   |     |
-   |     expected integer, found `(u32) is 1..`
-   |     `THREE` is interpreted as a constant, not a new binding
-   |
-   = note:      expected type `{integer}`
-           found pattern type `(u32) is 1..`
+error E0308: mismatched types
+ at $DIR/matching_fail.rs:20:5: expected integer, found `(u32) is 1..`
+  on line 20: `THREE` is interpreted as a constant, not a new binding
+  on line 5: constant defined here
+  on line 19, column 21: this expression has type `{integer}`
+note:      expected type `{integer}`
+      found pattern type `(u32) is 1..`
 help: introduce a new binding instead
-   |
-LL -     THREE => {}
-LL +     other_three => {}
-   |
+ on line 20, column 4, replace with `other_three`
 
 error: aborting due to 3 previous errors
 

@@ -1,166 +1,69 @@
-error[E0423]: cannot find value `Z` in this scope
-  --> $DIR/privacy-struct-ctor.rs:21:9
-   |
-LL |     pub struct S(u8);
-   |     ----------------- similarly named tuple struct `S` defined here
-...
-LL |         Z;
-   |         ^ constructor is not visible here due to private fields
-   |
-   = note: a struct named `Z` exists in another namespace
+error E0423: cannot find value `Z` in this scope
+ at $DIR/privacy-struct-ctor.rs:21:9: constructor is not visible here due to private fields
+  on line 7: similarly named tuple struct `S` defined here
+note: a struct named `Z` exists in another namespace
 help: a tuple struct with a similar name exists
-   |
-LL -         Z;
-LL +         S;
-   |
+ on line 21, column 8, replace with `S`
 
-error[E0423]: cannot find value `S` in this scope
-  --> $DIR/privacy-struct-ctor.rs:34:5
-   |
-LL |     S;
-   |     ^ constructor is not visible here due to private fields
-   |
-   = note: a struct named `S` exists in another namespace
+error E0423: cannot find value `S` in this scope
+ at $DIR/privacy-struct-ctor.rs:34:5: constructor is not visible here due to private fields
+note: a struct named `S` exists in another namespace
 
-error[E0423]: cannot find value `S2` in this scope
-  --> $DIR/privacy-struct-ctor.rs:39:5
-   |
-LL | /     pub struct S2 {
-LL | |         s: u8
-LL | |     }
-   | |_____- `S2` defined here
-...
-LL |       S2;
-   |       ^^ help: use struct literal syntax instead: `S2 { s: val }`
-   |
-   = note: a struct named `S2` exists in another namespace
+error E0423: cannot find value `S2` in this scope
+ at $DIR/privacy-struct-ctor.rs:39:5: help: use struct literal syntax instead: `S2 { s: val }`
+  on line 8 to line 10: `S2` defined here
+note: a struct named `S2` exists in another namespace
 
-error[E0423]: cannot find value `S` in crate `xcrate`
-  --> $DIR/privacy-struct-ctor.rs:44:13
-   |
-LL |     xcrate::S;
-   |     --------^
-   |     |
-   |     constructor is not visible here due to private fields
-   |
-   = note: a struct named `xcrate::S` exists in another namespace
+error E0423: cannot find value `S` in crate `xcrate`
+ at $DIR/privacy-struct-ctor.rs:44:13
+  on line 44: constructor is not visible here due to private fields
+note: a struct named `xcrate::S` exists in another namespace
 note: tuple struct `m::S` exists but is inaccessible
-  --> $DIR/privacy-struct-ctor.rs:7:5
-   |
-LL |     pub struct S(u8);
-   |     ^^^^^^^^^^^^^^^^^ not accessible
+ at $DIR/privacy-struct-ctor.rs:7:5: not accessible
 
-error[E0603]: tuple struct constructor `Z` is private
-  --> $DIR/privacy-struct-ctor.rs:19:12
-   |
-LL |         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-   |                                   ---------------------- a constructor is private if any of the fields is private
-...
-LL |         n::Z;
-   |            ^ private tuple struct constructor
-   |
+error E0603: tuple struct constructor `Z` is private
+ at $DIR/privacy-struct-ctor.rs:19:12: private tuple struct constructor
+  on line 13, column 35: a constructor is private if any of the fields is private
 note: the tuple struct constructor `Z` is defined here
-  --> $DIR/privacy-struct-ctor.rs:13:9
-   |
-LL |         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/privacy-struct-ctor.rs:13:9
 help: consider making the field publicly accessible
-   |
-LL -         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-LL +         pub(in crate::m) struct Z(pub u8);
-   |
+ on line 13, column 34, replace with `pub `
 
-error[E0603]: tuple struct constructor `S` is private
-  --> $DIR/privacy-struct-ctor.rs:30:8
-   |
-LL |     pub struct S(u8);
-   |                  -- a constructor is private if any of the fields is private
-...
-LL |     m::S;
-   |        ^ private tuple struct constructor
-   |
+error E0603: tuple struct constructor `S` is private
+ at $DIR/privacy-struct-ctor.rs:30:8: private tuple struct constructor
+  on line 7, column 18: a constructor is private if any of the fields is private
 note: the tuple struct constructor `S` is defined here
-  --> $DIR/privacy-struct-ctor.rs:7:5
-   |
-LL |     pub struct S(u8);
-   |     ^^^^^^^^^^^^^^^^^
+ at $DIR/privacy-struct-ctor.rs:7:5
 help: consider making the field publicly accessible
-   |
-LL |     pub struct S(pub u8);
-   |                  +++
+ on line 7, column 17, add `pub `
 
-error[E0603]: tuple struct constructor `S` is private
-  --> $DIR/privacy-struct-ctor.rs:32:19
-   |
-LL |     pub struct S(u8);
-   |                  -- a constructor is private if any of the fields is private
-...
-LL |     let _: S = m::S(2);
-   |                   ^ private tuple struct constructor
-   |
+error E0603: tuple struct constructor `S` is private
+ at $DIR/privacy-struct-ctor.rs:32:19: private tuple struct constructor
+  on line 7, column 18: a constructor is private if any of the fields is private
 note: the tuple struct constructor `S` is defined here
-  --> $DIR/privacy-struct-ctor.rs:7:5
-   |
-LL |     pub struct S(u8);
-   |     ^^^^^^^^^^^^^^^^^
+ at $DIR/privacy-struct-ctor.rs:7:5
 help: consider making the field publicly accessible
-   |
-LL |     pub struct S(pub u8);
-   |                  +++
+ on line 7, column 17, add `pub `
 
-error[E0603]: tuple struct constructor `Z` is private
-  --> $DIR/privacy-struct-ctor.rs:36:11
-   |
-LL |         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-   |                                   ---------------------- a constructor is private if any of the fields is private
-...
-LL |     m::n::Z;
-   |           ^ private tuple struct constructor
-   |
+error E0603: tuple struct constructor `Z` is private
+ at $DIR/privacy-struct-ctor.rs:36:11: private tuple struct constructor
+  on line 13, column 35: a constructor is private if any of the fields is private
 note: the tuple struct constructor `Z` is defined here
-  --> $DIR/privacy-struct-ctor.rs:13:9
-   |
-LL |         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/privacy-struct-ctor.rs:13:9
 help: consider making the field publicly accessible
-   |
-LL -         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-LL +         pub(in crate::m) struct Z(pub u8);
-   |
+ on line 13, column 34, replace with `pub `
 
-error[E0603]: tuple struct constructor `S` is private
-  --> $DIR/privacy-struct-ctor.rs:42:16
-   |
-LL |     xcrate::m::S;
-   |                ^ private tuple struct constructor
-   |
-  ::: $DIR/auxiliary/privacy-struct-ctor.rs:2:18
-   |
-LL |     pub struct S(u8);
-   |                  -- a constructor is private if any of the fields is private
-   |
+error E0603: tuple struct constructor `S` is private
+ at $DIR/privacy-struct-ctor.rs:42:16: private tuple struct constructor
+ at $DIR/auxiliary/privacy-struct-ctor.rs:2:18: a constructor is private if any of the fields is private
 note: the tuple struct constructor `S` is defined here
-  --> $DIR/auxiliary/privacy-struct-ctor.rs:2:5
-   |
-LL |     pub struct S(u8);
-   |     ^^^^^^^^^^^^
+ at $DIR/auxiliary/privacy-struct-ctor.rs:2:5
 
-error[E0603]: tuple struct constructor `Z` is private
-  --> $DIR/privacy-struct-ctor.rs:46:19
-   |
-LL |     xcrate::m::n::Z;
-   |                   ^ private tuple struct constructor
-   |
-  ::: $DIR/auxiliary/privacy-struct-ctor.rs:5:35
-   |
-LL |         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-   |                                   ---------------------- a constructor is private if any of the fields is private
-   |
+error E0603: tuple struct constructor `Z` is private
+ at $DIR/privacy-struct-ctor.rs:46:19: private tuple struct constructor
+ at $DIR/auxiliary/privacy-struct-ctor.rs:5:35: a constructor is private if any of the fields is private
 note: the tuple struct constructor `Z` is defined here
-  --> $DIR/auxiliary/privacy-struct-ctor.rs:5:9
-   |
-LL |         pub(in crate::m) struct Z(pub(in crate::m::n) u8);
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/auxiliary/privacy-struct-ctor.rs:5:9
 
 error: aborting due to 10 previous errors
 

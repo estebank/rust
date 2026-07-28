@@ -1,13 +1,7 @@
 error: expected identifier, found reserved keyword `typeof`
-  --> $DIR/keyword-typeof.rs:2:9
-   |
-LL |     let typeof = ();
-   |         ^^^^^^ expected identifier, found reserved keyword
-   |
+ at $DIR/keyword-typeof.rs:2:9: expected identifier, found reserved keyword
 help: escape `typeof` to use it as an identifier
-   |
-LL |     let r#typeof = ();
-   |         ++
+ on line 2, column 8, add `r#`
 
 error: aborting due to 1 previous error
 

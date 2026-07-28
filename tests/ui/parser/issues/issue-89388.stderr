@@ -1,13 +1,7 @@
 error: missing angle brackets in associated item path
-  --> $DIR/issue-89388.rs:5:24
-   |
-LL |     let _ = option.map([_]::to_vec);
-   |                        ^^^
-   |
+ at $DIR/issue-89388.rs:5:24
 help: types that don't start with an identifier need to be surrounded with angle brackets in qualified paths
-   |
-LL |     let _ = option.map(<[_]>::to_vec);
-   |                        +   +
+ on line 5, column 23, add `<`
 
 error: aborting due to 1 previous error
 

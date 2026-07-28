@@ -1,17 +1,9 @@
-error[E0700]: hidden type for `impl Sized` captures lifetime that does not appear in bounds
-  --> $DIR/feature-gate-lifetime-capture-rules-2024.rs:2:5
-   |
-LL | fn foo(x: &Vec<i32>) -> impl Sized {
-   |           ---------     ---------- opaque type defined here
-   |           |
-   |           hidden type `&Vec<i32>` captures the anonymous lifetime defined here
-LL |     x
-   |     ^
-   |
+error E0700: hidden type for `impl Sized` captures lifetime that does not appear in bounds
+ at $DIR/feature-gate-lifetime-capture-rules-2024.rs:2:5
+  on line 1, column 11: hidden type `&Vec<i32>` captures the anonymous lifetime defined here
+  on line 1, column 25: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'_`
-   |
-LL | fn foo(x: &Vec<i32>) -> impl Sized + use<'_> {
-   |                                    +++++++++
+ on line 1, column 34, add ` + use<'_>`
 
 error: aborting due to 1 previous error
 

@@ -1,14 +1,8 @@
-error[E0405]: cannot find trait `Temp` in this scope
-  --> $DIR/missing-trait-bound-for-assoc-fails.rs:4:14
-   |
-LL |     M::Item: Temp,
-   |              ^^^^ not found in this scope
+error E0405: cannot find trait `Temp` in this scope
+ at $DIR/missing-trait-bound-for-assoc-fails.rs:4:14: not found in this scope
 
-error[E0220]: associated type `Item` not found for `M`
-  --> $DIR/missing-trait-bound-for-assoc-fails.rs:4:8
-   |
-LL |     M::Item: Temp,
-   |        ^^^^ associated type `Item` not found
+error E0220: associated type `Item` not found for `M`
+ at $DIR/missing-trait-bound-for-assoc-fails.rs:4:8: associated type `Item` not found
 
 error: aborting due to 2 previous errors
 

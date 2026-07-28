@@ -1,8 +1,5 @@
-error[E0608]: cannot index into a value of type `u8`
-  --> $DIR/E0608.rs:2:8
-   |
-LL |     0u8[2];
-   |        ^^^
+error E0608: cannot index into a value of type `u8`
+ at $DIR/E0608.rs:2:8
 
 error: aborting due to 1 previous error
 

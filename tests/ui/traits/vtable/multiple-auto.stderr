@@ -4,10 +4,7 @@ error: vtable entries: [
            MetadataAlign,
            Method(<S as T>::method),
        ]
-  --> $DIR/multiple-auto.rs:35:1
-   |
-LL | impl A for S {}
-   | ^^^^^^^^^^^^
+ at $DIR/multiple-auto.rs:35:1
 
 error: vtable entries: [
            MetadataDropInPlace,
@@ -15,10 +12,7 @@ error: vtable entries: [
            MetadataAlign,
            Method(<S as T>::method),
        ]
-  --> $DIR/multiple-auto.rs:39:1
-   |
-LL | impl B for S {}
-   | ^^^^^^^^^^^^
+ at $DIR/multiple-auto.rs:39:1
 
 error: vtable entries: [
            MetadataDropInPlace,
@@ -26,10 +20,7 @@ error: vtable entries: [
            MetadataAlign,
            Method(<S as T>::method),
        ]
-  --> $DIR/multiple-auto.rs:43:1
-   |
-LL | impl C for S {}
-   | ^^^^^^^^^^^^
+ at $DIR/multiple-auto.rs:43:1
 
 error: vtable entries: [
            MetadataDropInPlace,
@@ -37,10 +28,7 @@ error: vtable entries: [
            MetadataAlign,
            Method(<S as T>::method),
        ]
-  --> $DIR/multiple-auto.rs:47:1
-   |
-LL | impl D for S {}
-   | ^^^^^^^^^^^^
+ at $DIR/multiple-auto.rs:47:1
 
 error: aborting due to 4 previous errors
 

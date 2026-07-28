@@ -1,41 +1,20 @@
-error[E0261]: use of undeclared lifetime name `'r#fn`
-  --> $DIR/use-of-undeclared-raw-lifetimes.rs:6:21
-   |
-LL | fn a(_: dyn Trait + 'r#fn) {
-   |                     ^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'r#fn`
+ at $DIR/use-of-undeclared-raw-lifetimes.rs:6:21: undeclared lifetime
 help: consider introducing lifetime `'r#fn` here
-   |
-LL | fn a<'r#fn>(_: dyn Trait + 'r#fn) {
-   |     +++++++
+ on line 6, column 4, add `<'r#fn>`
 
-error[E0261]: use of undeclared lifetime name `'r#fn`
-  --> $DIR/use-of-undeclared-raw-lifetimes.rs:13:9
-   |
-LL |     a: &'r#fn str,
-   |         ^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'r#fn`
+ at $DIR/use-of-undeclared-raw-lifetimes.rs:13:9: undeclared lifetime
 help: consider introducing lifetime `'r#fn` here
-   |
-LL | struct Test<'r#fn> {
-   |            +++++++
+ on line 12, column 11, add `<'r#fn>`
 
-error[E0261]: use of undeclared lifetime name `'r#fn`
-  --> $DIR/use-of-undeclared-raw-lifetimes.rs:18:32
-   |
-LL |   where T: for<'a> Trait1<T> + 'r#fn { }
-   |                                ^^^^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'r#fn`
+ at $DIR/use-of-undeclared-raw-lifetimes.rs:18:32: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the bound lifetime-generic with a new `'r#fn` lifetime
-   |
-LL -   where T: for<'a> Trait1<T> + 'r#fn { }
-LL +   where for<'r#fn, 'a> T: Trait1<T> + 'r#fn { }
-   |
+ on line 18, column 8, add `for<'r#fn, 'a> `
 help: consider introducing lifetime `'r#fn` here
-   |
-LL | trait Trait1<'r#fn, T>
-   |              ++++++
+ on line 17, column 13, add `'r#fn, `
 
 error: aborting due to 3 previous errors
 

@@ -1,20 +1,11 @@
-error[E0382]: borrow of moved value: `some_vec`
-  --> $DIR/tab_3.rs:7:20
-   |
-LL |     let some_vec = vec!["hi"];
-   |         -------- move occurs because `some_vec` has type `Vec<&str>`, which does not implement the `Copy` trait
-LL |     some_vec.into_iter();
-   |              ----------- `some_vec` moved due to this method call
-LL |     {
-LL |         println!("{:?}", some_vec);
-   |                          ^^^^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `some_vec`
+ at $DIR/tab_3.rs:7:20: value borrowed here after move
+  on line 4, column 6: move occurs because `some_vec` has type `Vec<&str>`, which does not implement the `Copy` trait
+  on line 5, column 11: `some_vec` moved due to this method call
 note: `into_iter` takes ownership of the receiver `self`, which moves `some_vec`
-  --> $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
 help: you can `clone` the value and consume it, but this might not be your desired behavior
-   |
-LL |     some_vec.clone().into_iter();
-   |             ++++++++
+ on line 5, column 9, add `.clone()`
 
 error: aborting due to 1 previous error
 

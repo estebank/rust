@@ -1,8 +1,5 @@
-error[E0628]: too many parameters for a coroutine (expected 0 or 1 parameters)
-  --> $DIR/too-many-parameters.rs:5:5
-   |
-LL |     |(), ()| {
-   |     ^^^^^^^^
+error E0628: too many parameters for a coroutine (expected 0 or 1 parameters)
+ at $DIR/too-many-parameters.rs:5:5
 
 error: aborting due to 1 previous error
 

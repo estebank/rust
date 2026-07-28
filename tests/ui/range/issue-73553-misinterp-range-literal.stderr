@@ -1,42 +1,22 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-73553-misinterp-range-literal.rs:12:10
-   |
-LL |     demo(tell(1)..tell(10));
-   |     ---- ^^^^^^^^^^^^^^^^^ expected `&Range<usize>`, found `Range<usize>`
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected reference `&Range<_>`
-                 found struct `Range<_>`
+error E0308: mismatched types
+ at $DIR/issue-73553-misinterp-range-literal.rs:12:10: expected `&Range<usize>`, found `Range<usize>`
+  on line 12: arguments to this function are incorrect
+note: expected reference `&Range<_>`
+            found struct `Range<_>`
 note: function defined here
-  --> $DIR/issue-73553-misinterp-range-literal.rs:3:4
-   |
-LL | fn demo(r: &Range) {
-   |    ^^^^ ---------
+ at $DIR/issue-73553-misinterp-range-literal.rs:3:4
 help: consider borrowing here
-   |
-LL |     demo(&(tell(1)..tell(10)));
-   |          ++                 +
+ on line 12, column 9, add `&(`
 
-error[E0308]: mismatched types
-  --> $DIR/issue-73553-misinterp-range-literal.rs:14:10
-   |
-LL |     demo(1..10);
-   |     ---- ^^^^^ expected `&Range<usize>`, found `Range<{integer}>`
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected reference `&Range<usize>`
-                 found struct `Range<{integer}>`
+error E0308: mismatched types
+ at $DIR/issue-73553-misinterp-range-literal.rs:14:10: expected `&Range<usize>`, found `Range<{integer}>`
+  on line 14: arguments to this function are incorrect
+note: expected reference `&Range<usize>`
+            found struct `Range<{integer}>`
 note: function defined here
-  --> $DIR/issue-73553-misinterp-range-literal.rs:3:4
-   |
-LL | fn demo(r: &Range) {
-   |    ^^^^ ---------
+ at $DIR/issue-73553-misinterp-range-literal.rs:3:4
 help: consider borrowing here
-   |
-LL |     demo(&(1..10));
-   |          ++     +
+ on line 14, column 9, add `&(`
 
 error: aborting due to 2 previous errors
 

@@ -1,4 +1,3 @@
-error[E0765]: unterminated double quote string
-  |
-  = note: this occurred on the command line: `--cfg=a"`
+error E0765: unterminated double quote string
+note: this occurred on the command line: `--cfg=a"`
 

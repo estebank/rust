@@ -1,10 +1,6 @@
-error[E0509]: cannot move out of type `Thing`, which implements the `Drop` trait
-  --> $DIR/invalid-suggestions-destructuring-assignment-drop.rs:12:34
-   |
-LL |     Thing(*&mut String::new()) = Thing(String::new());
-   |           -------------------    ^^^^^^^^^^^^^^^^^^^^ cannot move out of here
-   |           |
-   |           data moved here because the place has type `String`, which does not implement the `Copy` trait
+error E0509: cannot move out of type `Thing`, which implements the `Drop` trait
+ at $DIR/invalid-suggestions-destructuring-assignment-drop.rs:12:34: cannot move out of here
+  on line 12, column 11: data moved here because the place has type `String`, which does not implement the `Copy` trait
 
 error: aborting due to 1 previous error
 

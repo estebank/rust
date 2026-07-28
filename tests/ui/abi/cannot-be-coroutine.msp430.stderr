@@ -1,23 +1,10 @@
 error: functions with the "msp430-interrupt" ABI cannot be `async`
-  --> $DIR/cannot-be-coroutine.rs:46:1
-   |
-LL | async extern "msp430-interrupt" fn msp430() {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/cannot-be-coroutine.rs:46:1
 help: remove the `async` keyword from this definition
-   |
-LL - async extern "msp430-interrupt" fn msp430() {
-LL + extern "msp430-interrupt" fn msp430() {
-   |
+ on line 46, column 1
 
 error: requires `ResumeTy` lang_item
-  --> $DIR/cannot-be-coroutine.rs:38:19
-   |
-LL |   async fn vanilla(){
-   |  ___________________^
-LL | |
-LL | | }
-   | |_^
+ at $DIR/cannot-be-coroutine.rs:38:19 to 40:2
 
 error: aborting due to 2 previous errors
 

@@ -1,22 +1,14 @@
-error[E0369]: cannot add `((_, _, _, _), _, _, _)` to `((_, _, _, _), _, _, _)`
-  --> $DIR/binop.rs:8:7
-   |
-LL |     x + x;
-   |     - ^ - ((_, _, _, _), _, _, _)
-   |     |
-   |     ((_, _, _, _), _, _, _)
-   |
-   = note: the full name for the type has been written to '$TEST_BUILD_DIR/binop.long-type-$LONG_TYPE_HASH.txt'
-   = note: consider using `--verbose` to print the full type name to the console
+error E0369: cannot add `((_, _, _, _), _, _, _)` to `((_, _, _, _), _, _, _)`
+ at $DIR/binop.rs:8:7
+  on line 8: ((_, _, _, _), _, _, _)
+  on line 8, column 9: ((_, _, _, _), _, _, _)
+note: the full name for the type has been written to '$TEST_BUILD_DIR/binop.long-type-$LONG_TYPE_HASH.txt'
+note: consider using `--verbose` to print the full type name to the console
 
-error[E0600]: cannot apply unary operator `!` to type `((_, _, _, _), _, _, _)`
-  --> $DIR/binop.rs:12:5
-   |
-LL |     !x;
-   |     ^^ cannot apply unary operator `!`
-   |
-   = note: the full name for the type has been written to '$TEST_BUILD_DIR/binop.long-type-$LONG_TYPE_HASH.txt'
-   = note: consider using `--verbose` to print the full type name to the console
+error E0600: cannot apply unary operator `!` to type `((_, _, _, _), _, _, _)`
+ at $DIR/binop.rs:12:5: cannot apply unary operator `!`
+note: the full name for the type has been written to '$TEST_BUILD_DIR/binop.long-type-$LONG_TYPE_HASH.txt'
+note: consider using `--verbose` to print the full type name to the console
 
 error: aborting due to 2 previous errors
 

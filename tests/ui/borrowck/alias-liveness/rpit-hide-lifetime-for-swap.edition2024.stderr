@@ -1,24 +1,12 @@
-error[E0515]: cannot return value referencing local variable `x`
-  --> $DIR/rpit-hide-lifetime-for-swap.rs:44:5
-   |
-LL |     hide_ref(&mut res).swap(hide_ref(&mut &x));
-   |                                           -- `x` is borrowed here
-LL |     res
-   |     ^^^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing local variable `x`
+ at $DIR/rpit-hide-lifetime-for-swap.rs:44:5: returns a value referencing data owned by the current function
+  on line 43, column 43: `x` is borrowed here
 
-error[E0597]: `x` does not live long enough
-  --> $DIR/rpit-hide-lifetime-for-swap.rs:60:38
-   |
-LL |     let x = [1, 2, 3];
-   |         - binding `x` declared here
-LL |     let short = Rc::new(RefCell::new(&x));
-   |                                      ^^ borrowed value does not live long enough
-LL |     hide_rc_refcell(long.clone()).swap(hide_rc_refcell(short));
-LL |     let res: &'static [i32; 3] = *long.borrow();
-   |              ----------------- type annotation requires that `x` is borrowed for `'static`
-LL |     res
-LL | }
-   | - `x` dropped here while still borrowed
+error E0597: `x` does not live long enough
+ at $DIR/rpit-hide-lifetime-for-swap.rs:60:38: borrowed value does not live long enough
+  on line 59, column 9: binding `x` declared here
+  on line 62, column 14: type annotation requires that `x` is borrowed for `'static`
+  on line 64: `x` dropped here while still borrowed
 
 error: aborting due to 2 previous errors
 

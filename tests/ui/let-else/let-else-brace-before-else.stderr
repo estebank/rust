@@ -1,35 +1,17 @@
 error: right curly brace `}` before `else` in a `let...else` statement not allowed
-  --> $DIR/let-else-brace-before-else.rs:6:29
-   |
-LL |     let Some(1) = { Some(1) } else {
-   |                             ^
-   |
+ at $DIR/let-else-brace-before-else.rs:6:29
 help: wrap the expression in parentheses
-   |
-LL |     let Some(1) = ({ Some(1) }) else {
-   |                   +           +
+ on line 6, column 18, add `(`
 
 error: right curly brace `}` before `else` in a `let...else` statement not allowed
-  --> $DIR/let-else-brace-before-else.rs:10:34
-   |
-LL |     let 2 = 1 + match 1 { n => n } else {
-   |                                  ^
-   |
+ at $DIR/let-else-brace-before-else.rs:10:34
 help: wrap the expression in parentheses
-   |
-LL |     let 2 = 1 + (match 1 { n => n }) else {
-   |                 +                  +
+ on line 10, column 16, add `(`
 
 error: right curly brace `}` before `else` in a `let...else` statement not allowed
-  --> $DIR/let-else-brace-before-else.rs:14:40
-   |
-LL |     let Some(1) = unsafe { unsafe_fn() } else {
-   |                                        ^
-   |
+ at $DIR/let-else-brace-before-else.rs:14:40
 help: wrap the expression in parentheses
-   |
-LL |     let Some(1) = (unsafe { unsafe_fn() }) else {
-   |                   +                      +
+ on line 14, column 18, add `(`
 
 error: aborting due to 3 previous errors
 

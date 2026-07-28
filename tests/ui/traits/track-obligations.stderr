@@ -1,61 +1,24 @@
-error[E0599]: the method `check` exists for struct `Client<()>`, but its trait bounds were not satisfied
-  --> $DIR/track-obligations.rs:83:16
-   |
-LL | struct ALayer<C>(C);
-   | ---------------- doesn't satisfy `ALayer<()>: ParticularServiceLayer<()>`
-...
-LL | struct AService;
-   | --------------- doesn't satisfy `<AService as Service<Req>>::Response = Res`
-...
-LL | struct Client<C>(C);
-   | ---------------- method `check` not found for this struct
-...
-LL |     Client(()).check();
-   |                ^^^^^ method cannot be called on `Client<()>` due to unsatisfied trait bounds
-   |
+error E0599: the method `check` exists for struct `Client<()>`, but its trait bounds were not satisfied
+ at $DIR/track-obligations.rs:83:16: method cannot be called on `Client<()>` due to unsatisfied trait bounds
+  on line 51: doesn't satisfy `ALayer<()>: ParticularServiceLayer<()>`
+  on line 56: doesn't satisfy `<AService as Service<Req>>::Response = Res`
+  on line 65: method `check` not found for this struct
 note: trait bound `<AService as Service<Req>>::Response = Res` was not satisfied
-  --> $DIR/track-obligations.rs:24:21
-   |
-LL | impl<T> ParticularService for T
-   |         -----------------     -
-LL | where
-LL |     T: Service<Req, Response = Res>,
-   |                     ^^^^^^^^^^^^^^ unsatisfied trait bound introduced here
+ at $DIR/track-obligations.rs:24:21: unsatisfied trait bound introduced here
 
-error[E0271]: type mismatch resolving `<AService as Service<Req>>::Response == Res`
-  --> $DIR/track-obligations.rs:87:11
-   |
-LL |     check(());
-   |     ----- ^^ type mismatch resolving `<AService as Service<Req>>::Response == Res`
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0271: type mismatch resolving `<AService as Service<Req>>::Response == Res`
+ at $DIR/track-obligations.rs:87:11: type mismatch resolving `<AService as Service<Req>>::Response == Res`
+  on line 87: required by a bound introduced by this call
 note: expected this to be `Res`
-  --> $DIR/track-obligations.rs:60:21
-   |
-LL |     type Response = bool;
-   |                     ^^^^
+ at $DIR/track-obligations.rs:60:21
 note: required for `AService` to implement `ParticularService`
-  --> $DIR/track-obligations.rs:22:9
-   |
-LL | impl<T> ParticularService for T
-   |         ^^^^^^^^^^^^^^^^^     ^
-LL | where
-LL |     T: Service<Req, Response = Res>,
-   |                     -------------- unsatisfied trait bound introduced here
+ at $DIR/track-obligations.rs:22:9
+  on line 24, column 21: unsatisfied trait bound introduced here
 note: required for `ALayer<_>` to implement `ParticularServiceLayer<_>`
-  --> $DIR/track-obligations.rs:40:12
-   |
-LL | impl<T, C> ParticularServiceLayer<C> for T
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^^     ^
-...
-LL |     T::Service: ParticularService,
-   |                 ----------------- unsatisfied trait bound introduced here
+ at $DIR/track-obligations.rs:40:12
+  on line 43, column 17: unsatisfied trait bound introduced here
 note: required by a bound in `check`
-  --> $DIR/track-obligations.rs:76:36
-   |
-LL | fn check<C>(_: C) where ALayer<C>: ParticularServiceLayer<C> {}
-   |                                    ^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `check`
+ at $DIR/track-obligations.rs:76:36: required by this bound in `check`
 
 error: aborting due to 2 previous errors
 

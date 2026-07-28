@@ -1,14 +1,7 @@
-error[E0223]: ambiguous associated type
-  --> $DIR/issue-107087.rs:16:5
-   |
-LL |     A::B::<>::C
-   |     ^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/issue-107087.rs:16:5
 help: use fully-qualified syntax
-   |
-LL -     A::B::<>::C
-LL +     <A<_> as Foo>::B::<>::C
-   |
+ on line 16, column 4, replace with `<A<_> as Foo>::`
 
 error: aborting due to 1 previous error
 

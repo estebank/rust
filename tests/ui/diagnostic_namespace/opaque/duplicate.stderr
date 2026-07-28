@@ -1,19 +1,9 @@
 error: unused attribute
-  --> $DIR/duplicate.rs:5:1
-   |
-LL | #[diagnostic::opaque]
-   | ^^^^^^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/duplicate.rs:5:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/duplicate.rs:4:1
-   |
-LL | #[diagnostic::opaque]
-   | ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/duplicate.rs:4:1
 note: the lint level is defined here
-  --> $DIR/duplicate.rs:3:9
-   |
-LL | #![deny(unused_attributes)]
-   |         ^^^^^^^^^^^^^^^^^
+ at $DIR/duplicate.rs:3:9
 
 error: aborting due to 1 previous error
 

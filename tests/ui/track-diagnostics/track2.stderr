@@ -1,17 +1,10 @@
-error[E0382]: use of moved value
-  --> $DIR/track2.rs:LL:CC
-   |
-LL |     let _moved @ _from = String::from("foo");
-   |         ^^^^^^   -----   ------------------- move occurs because value has type `String`, which does not implement the `Copy` trait
-   |         |        |
-   |         |        value moved here
-   |         value used here after move
-   |
-   = note: -Ztrack-diagnostics: created at compiler/rustc_borrowck/src/borrowck_errors.rs:LL:CC
+error E0382: use of moved value
+ at $DIR/track2.rs:LL:CC: value used here after move
+  on line 10, column 18: value moved here
+  on line 10, column 26: move occurs because value has type `String`, which does not implement the `Copy` trait
+note: -Ztrack-diagnostics: created at compiler/rustc_borrowck/src/borrowck_errors.rs:LL:CC
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref _moved @ ref _from = String::from("foo");
-   |         +++          +++
+ on line 10, column 8, add `ref `
 
 error: aborting due to 1 previous error
 

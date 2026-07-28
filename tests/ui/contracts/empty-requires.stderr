@@ -1,8 +1,5 @@
-error[E0308]: mismatched types
-  --> $DIR/empty-requires.rs:9:1
-   |
-LL | #[requires()]
-   | ^^^^^^^^^^^^^ expected `bool`, found `()`
+error E0308: mismatched types
+ at $DIR/empty-requires.rs:9:1: expected `bool`, found `()`
 
 error: aborting due to 1 previous error
 

@@ -1,11 +1,7 @@
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/single-line.rs:2:52
-   |
-LL |     let _ = match Some(42) { Some(x) => x, None => "" };
-   |             --------------              -          ^^ expected integer, found `&str`
-   |             |                           |
-   |             |                           this is found to be of type `{integer}`
-   |             `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/single-line.rs:2:52: expected integer, found `&str`
+  on line 2, column 13: `match` arms have incompatible types
+  on line 2, column 41: this is found to be of type `{integer}`
 
 error: aborting due to 1 previous error
 

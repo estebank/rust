@@ -1,28 +1,15 @@
-error[E0404]: expected trait, found type parameter `Add`
-  --> $DIR/issue-35987.rs:5:21
-   |
-LL | use std::ops::Add;
-   |               --- you might have meant to refer to this trait
-LL |
-LL | impl<T: Clone, Add> Add for Foo<T> {
-   |                ---  ^^^ not a trait
-   |                |
-   |                found this type parameter
+error E0404: expected trait, found type parameter `Add`
+ at $DIR/issue-35987.rs:5:21: not a trait
+  on line 3, column 15: you might have meant to refer to this trait
+  on line 5, column 16: found this type parameter
 
-error[E0223]: ambiguous associated type
-  --> $DIR/issue-35987.rs:9:32
-   |
-LL |     fn add(self, rhs: Self) -> Self::Output {
-   |                                ^^^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/issue-35987.rs:9:32
 help: use fully-qualified syntax
-   |
-LL -     fn add(self, rhs: Self) -> Self::Output {
-LL +     fn add(self, rhs: Self) -> <Foo<T> as BitOr>::Output {
-   |
-LL -     fn add(self, rhs: Self) -> Self::Output {
-LL +     fn add(self, rhs: Self) -> <Foo<T> as IntoFuture>::Output {
-   |
+ on line 9, column 31, replace with one of
+  <Foo<T> as BitOr>::
+  <Foo<T> as IntoFuture>::
+
 
 error: aborting due to 2 previous errors
 

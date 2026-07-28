@@ -1,42 +1,22 @@
-error[E0308]: mismatched types
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:43:10
-   |
-LL |     let [&ref x] = &[&mut 0];
-   |          ^^^^^^    --------- this expression has type `&[&mut {integer}; 1]`
-   |          |
-   |          types differ in mutability
-   |
-   = note: expected mutable reference `&mut {integer}`
-                      found reference `&_`
+error E0308: mismatched types
+ at $DIR/ref-binding-on-inh-ref-errors.rs:43:10: types differ in mutability
+  on line 43, column 20: this expression has type `&[&mut {integer}; 1]`
+note: expected mutable reference `&mut {integer}`
+                 found reference `&_`
 help: consider removing `&` from the pattern
-   |
-LL -     let [&ref x] = &[&mut 0];
-LL +     let [ref x] = &[&mut 0];
-   |
+ on line 43, column 9
 
-error[E0308]: mismatched types
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:50:10
-   |
-LL |     let [&ref x] = &mut [&mut 0];
-   |          ^^^^^^    ------------- this expression has type `&mut [&mut {integer}; 1]`
-   |          |
-   |          types differ in mutability
-   |
-   = note: expected mutable reference `&mut {integer}`
-                      found reference `&_`
+error E0308: mismatched types
+ at $DIR/ref-binding-on-inh-ref-errors.rs:50:10: types differ in mutability
+  on line 50, column 20: this expression has type `&mut [&mut {integer}; 1]`
+note: expected mutable reference `&mut {integer}`
+                 found reference `&_`
 help: consider removing `&` from the pattern
-   |
-LL -     let [&ref x] = &mut [&mut 0];
-LL +     let [ref x] = &mut [&mut 0];
-   |
+ on line 50, column 9
 
-error[E0596]: cannot borrow data in a `&` reference as mutable
-  --> $DIR/ref-binding-on-inh-ref-errors.rs:73:10
-   |
-LL |     let [ref mut x] = &[0];
-   |          ^^^^^^^^^    ---- this cannot be borrowed as mutable
-   |          |
-   |          cannot borrow as mutable
+error E0596: cannot borrow data in a `&` reference as mutable
+ at $DIR/ref-binding-on-inh-ref-errors.rs:73:10: cannot borrow as mutable
+  on line 73, column 23: this cannot be borrowed as mutable
 
 error: aborting due to 3 previous errors
 

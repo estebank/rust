@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `Trait` for type `(dyn Dyn<(), ()> + 'static)`
-  --> $DIR/incomplete-multiple-super-projection.rs:20:1
-   |
-LL | impl Trait for dyn Dyn<(), ()> {
-   | ------------------------------ first implementation here
-...
-LL | impl<A, B> Trait for dyn Dyn<A, B> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `(dyn Dyn<(), ()> + 'static)`
+error E0119: conflicting implementations of trait `Trait` for type `(dyn Dyn<(), ()> + 'static)`
+ at $DIR/incomplete-multiple-super-projection.rs:20:1: conflicting implementation for `(dyn Dyn<(), ()> + 'static)`
+  on line 17: first implementation here
 
 error: aborting due to 1 previous error
 

@@ -1,40 +1,21 @@
-error[E0425]: cannot find type `F` in this scope
-  --> $DIR/issue-83693.rs:6:6
-   |
-LL | impl F {
-   |      ^
-   |
-  --> $SRC_DIR/core/src/ops/function.rs:LL:COL
-   |
-   = note: similarly named trait `Fn` defined here
+error E0425: cannot find type `F` in this scope
+ at $DIR/issue-83693.rs:6:6
+ at $SRC_DIR/core/src/ops/function.rs:LL:COL
+note: similarly named trait `Fn` defined here
 help: a trait with a similar name exists
-   |
-LL | impl Fn {
-   |       +
+ on line 6, column 5, replace with `Fn`
 
-error[E0425]: cannot find type `TestResult` in this scope
-  --> $DIR/issue-83693.rs:9:22
-   |
-LL |         <Self as Fn(&TestResult)>::call
-   |                      ^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `TestResult` in this scope
+ at $DIR/issue-83693.rs:9:22: not found in this scope
 
-error[E0425]: cannot find type `x` in this scope
-  --> $DIR/issue-83693.rs:16:6
-   |
-LL |     <x as Fn(&usize)>::call
-   |      ^ not found in this scope
+error E0425: cannot find type `x` in this scope
+ at $DIR/issue-83693.rs:16:6: not found in this scope
 
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-83693.rs:9:18
-   |
-LL |         <Self as Fn(&TestResult)>::call
-   |                  ^^^^^^^^^^^^^^^ associated item constraint not allowed here
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-83693.rs:9:18: associated item constraint not allowed here
 
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-83693.rs:16:11
-   |
-LL |     <x as Fn(&usize)>::call
-   |           ^^^^^^^^^^ associated item constraint not allowed here
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-83693.rs:16:11: associated item constraint not allowed here
 
 error: aborting due to 5 previous errors
 

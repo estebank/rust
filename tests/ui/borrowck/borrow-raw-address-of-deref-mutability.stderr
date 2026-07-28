@@ -1,24 +1,12 @@
-error[E0596]: cannot borrow `*x` as mutable, as it is behind a `&` reference
-  --> $DIR/borrow-raw-address-of-deref-mutability.rs:6:13
-   |
-LL |     let q = &raw mut *x;
-   |             ^^^^^^^^^^^ `x` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*x` as mutable, as it is behind a `&` reference
+ at $DIR/borrow-raw-address-of-deref-mutability.rs:6:13: `x` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL |     let x = &mut 0;
-   |              +++
+ on line 4, column 13, add `mut `
 
-error[E0596]: cannot borrow `*x` as mutable, as it is behind a `*const` pointer
-  --> $DIR/borrow-raw-address-of-deref-mutability.rs:12:13
-   |
-LL |     let q = &raw mut *x;
-   |             ^^^^^^^^^^^ `x` is a `*const` pointer, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*x` as mutable, as it is behind a `*const` pointer
+ at $DIR/borrow-raw-address-of-deref-mutability.rs:12:13: `x` is a `*const` pointer, so it cannot be borrowed as mutable
 help: consider specifying this binding's type
-   |
-LL |     let x: *mut i32 = &0 as *const i32;
-   |          ++++++++++
+ on line 10, column 9, add `: *mut i32`
 
 error: aborting due to 2 previous errors
 

@@ -1,14 +1,7 @@
 error: unnecessary allocation, use `&` instead
-  --> $DIR/unused-allocation.rs:4:9
-   |
-LL |     _ = Box::new([1]).len();
-   |         ^^^^^^^^^^^^^
-   |
+ at $DIR/unused-allocation.rs:4:9
 note: the lint level is defined here
-  --> $DIR/unused-allocation.rs:1:9
-   |
-LL | #![deny(unused_allocation)]
-   |         ^^^^^^^^^^^^^^^^^
+ at $DIR/unused-allocation.rs:1:9
 
 error: aborting due to 1 previous error
 

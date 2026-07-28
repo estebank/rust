@@ -1,23 +1,11 @@
-error[E0195]: lifetime parameters or bounds on method `get` do not match the trait declaration
-  --> $DIR/lifetime-mismatch-trait-impl-16048.rs:23:11
-   |
-LL |     fn get<'p, T : Test<'p>>(&self) -> T;
-   |           ------------------ lifetimes in impl do not match this method in trait
-...
-LL |     fn get<'p, T: Test<'a> + From<Foo<'a>>>(&self) -> T {
-   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ lifetimes do not match method in trait
+error E0195: lifetime parameters or bounds on method `get` do not match the trait declaration
+ at $DIR/lifetime-mismatch-trait-impl-16048.rs:23:11: lifetimes do not match method in trait
+  on line 4, column 11: lifetimes in impl do not match this method in trait
 
-error[E0605]: non-primitive cast: `Foo<'a>` as `T`
-  --> $DIR/lifetime-mismatch-trait-impl-16048.rs:26:16
-   |
-LL |         return *self as T;
-   |                ^^^^^^^^^^ an `as` expression can only be used to convert between primitive types or to coerce to a specific trait object
-   |
+error E0605: non-primitive cast: `Foo<'a>` as `T`
+ at $DIR/lifetime-mismatch-trait-impl-16048.rs:26:16: an `as` expression can only be used to convert between primitive types or to coerce to a specific trait object
 help: consider using the `From` trait instead
-   |
-LL -         return *self as T;
-LL +         return T::from(*self);
-   |
+ on line 26, column 15, add `T::from(`
 
 error: aborting due to 2 previous errors
 

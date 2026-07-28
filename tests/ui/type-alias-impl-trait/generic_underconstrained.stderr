@@ -1,35 +1,17 @@
-error[E0277]: the trait bound `T: Trait` is not satisfied
-  --> $DIR/generic_underconstrained.rs:10:31
-   |
-LL | fn underconstrain<T>(_: T) -> Underconstrained<T> {
-   |                               ^^^^^^^^^^^^^^^^^^^ the trait `Trait` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Trait` is not satisfied
+ at $DIR/generic_underconstrained.rs:10:31: the trait `Trait` is not implemented for `T`
 note: required by a bound on the type alias `Underconstrained`
-  --> $DIR/generic_underconstrained.rs:6:26
-   |
-LL | type Underconstrained<T: Trait> = impl Send;
-   |                          ^^^^^ required by this bound
+ at $DIR/generic_underconstrained.rs:6:26: required by this bound
 help: consider restricting type parameter `T` with trait `Trait`
-   |
-LL | fn underconstrain<T: Trait>(_: T) -> Underconstrained<T> {
-   |                    +++++++
+ on line 10, column 19, add `: Trait`
 
-error[E0277]: the trait bound `T: Trait` is not satisfied
-  --> $DIR/generic_underconstrained.rs:10:31
-   |
-LL | fn underconstrain<T>(_: T) -> Underconstrained<T> {
-   |                               ^^^^^^^^^^^^^^^^^^^ the trait `Trait` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Trait` is not satisfied
+ at $DIR/generic_underconstrained.rs:10:31: the trait `Trait` is not implemented for `T`
 note: required by a bound on the type alias `Underconstrained`
-  --> $DIR/generic_underconstrained.rs:6:26
-   |
-LL | type Underconstrained<T: Trait> = impl Send;
-   |                          ^^^^^ required by this bound
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/generic_underconstrained.rs:6:26: required by this bound
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: consider restricting type parameter `T` with trait `Trait`
-   |
-LL | fn underconstrain<T: Trait>(_: T) -> Underconstrained<T> {
-   |                    +++++++
+ on line 10, column 19, add `: Trait`
 
 error: aborting due to 2 previous errors
 

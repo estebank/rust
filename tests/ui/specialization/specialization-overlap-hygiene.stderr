@@ -1,11 +1,6 @@
-error[E0592]: duplicate definitions with name `f`
-  --> $DIR/specialization-overlap-hygiene.rs:13:4
-   |
-LL |     fn f() {}
-   |     ------ other definition for `f`
-...
-LL |    fn f() {}
-   |    ^^^^^^ duplicate definitions for `f`
+error E0592: duplicate definitions with name `f`
+ at $DIR/specialization-overlap-hygiene.rs:13:4: duplicate definitions for `f`
+  on line 6: other definition for `f`
 
 error: aborting due to 1 previous error
 

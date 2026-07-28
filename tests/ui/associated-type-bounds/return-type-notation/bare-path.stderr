@@ -1,14 +1,8 @@
 error: return type notation not allowed in this position yet
-  --> $DIR/bare-path.rs:14:23
-   |
-LL |     let _ = T::CONST::(..);
-   |                       ^^^^
+ at $DIR/bare-path.rs:14:23
 
 error: return type notation not allowed in this position yet
-  --> $DIR/bare-path.rs:16:12
-   |
-LL |     let _: T::method(..);
-   |            ^^^^^^^^^^^^^
+ at $DIR/bare-path.rs:16:12
 
 error: aborting due to 2 previous errors
 

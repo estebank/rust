@@ -1,32 +1,17 @@
 error: struct fields are separated by `,`
-  --> $DIR/recover-field-semi.rs:2:13
-   |
-LL | struct Foo {
-   |        --- while parsing this struct
-LL |     foo: i32;
-   |             ^ help: replace `;` with `,`
+ at $DIR/recover-field-semi.rs:2:13: help: replace `;` with `,`
+  on line 1, column 8: while parsing this struct
 
 error: union fields are separated by `,`
-  --> $DIR/recover-field-semi.rs:7:13
-   |
-LL | union Bar {
-   |       --- while parsing this union
-LL |     foo: i32;
-   |             ^ help: replace `;` with `,`
+ at $DIR/recover-field-semi.rs:7:13: help: replace `;` with `,`
+  on line 6, column 7: while parsing this union
 
 error: struct fields are separated by `,`
-  --> $DIR/recover-field-semi.rs:12:19
-   |
-LL |     Qux { foo: i32; }
-   |     ---           ^ help: replace `;` with `,`
-   |     |
-   |     while parsing this struct
+ at $DIR/recover-field-semi.rs:12:19: help: replace `;` with `,`
+  on line 12: while parsing this struct
 
-error[E0308]: mismatched types
-  --> $DIR/recover-field-semi.rs:17:24
-   |
-LL |     let _ = Foo { foo: "" };
-   |                        ^^ expected `i32`, found `&str`
+error E0308: mismatched types
+ at $DIR/recover-field-semi.rs:17:24: expected `i32`, found `&str`
 
 error: aborting due to 4 previous errors
 

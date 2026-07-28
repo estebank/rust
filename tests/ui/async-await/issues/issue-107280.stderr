@@ -1,20 +1,10 @@
-error[E0107]: function takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-107280.rs:4:5
-   |
-LL |     inner::<false>().await
-   |     ^^^^^   ----- supplied 1 generic argument
-   |     |
-   |     expected 2 generic arguments
-   |
+error E0107: function takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-107280.rs:4:5: expected 2 generic arguments
+  on line 4, column 13: supplied 1 generic argument
 note: function defined here, with 2 generic parameters: `T`, `PING`
-  --> $DIR/issue-107280.rs:8:10
-   |
-LL | async fn inner<T, const PING: bool>() {}
-   |          ^^^^^ -  ----------------
+ at $DIR/issue-107280.rs:8:10
 help: add missing generic argument
-   |
-LL |     inner::<false, PING>().await
-   |                  ++++++
+ on line 4, column 17, add `, PING`
 
 error: aborting due to 1 previous error
 

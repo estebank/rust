@@ -1,19 +1,11 @@
-error[E0382]: use of moved value: `f`
-  --> $DIR/clone-suggestion.rs:24:5
-   |
-LL |     let f = SharedFuture;
-   |         - move occurs because `f` has type `SharedFuture`, which does not implement the `Copy` trait
-LL |     f.await;
-   |       ----- `f` moved due to this await
-LL |     f.await;
-   |     ^ value used here after move
-   |
+error E0382: use of moved value: `f`
+ at $DIR/clone-suggestion.rs:24:5: value used here after move
+  on line 22, column 9: move occurs because `f` has type `SharedFuture`, which does not implement the `Copy` trait
+  on line 23, column 7: `f` moved due to this await
 note: `into_future` takes ownership of the receiver `self`, which moves `f`
-  --> $SRC_DIR/core/src/future/into_future.rs:LL:COL
+ at $SRC_DIR/core/src/future/into_future.rs:LL:COL
 help: you can `clone` the value and consume it, but this might not be your desired behavior
-   |
-LL |     f.clone().await;
-   |      ++++++++
+ on line 23, column 5, add `.clone()`
 
 error: aborting due to 1 previous error
 

@@ -1,46 +1,22 @@
-error[E0596]: cannot borrow `*rofl` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-85765.rs:5:5
-   |
-LL |     rofl.push(Vec::new());
-   |     ^^^^ `rofl` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*rofl` as mutable, as it is behind a `&` reference
+ at $DIR/issue-85765.rs:5:5: `rofl` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this binding's type
-   |
-LL |     let rofl: &mut Vec<Vec<i32>> = &mut test;
-   |                +++
+ on line 3, column 14, replace with `&mut Vec<Vec<i32>>`
 
-error[E0594]: cannot assign to `*r`, which is behind a `&` reference
-  --> $DIR/issue-85765.rs:12:5
-   |
-LL |     *r = 0;
-   |     ^^^^^^ `r` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*r`, which is behind a `&` reference
+ at $DIR/issue-85765.rs:12:5: `r` is a `&` reference, so it cannot be written to
 help: consider changing this to be a mutable reference
-   |
-LL |     let r = &mut mutvar;
-   |              +++
+ on line 10, column 13, add `mut `
 
-error[E0594]: cannot assign to `*x`, which is behind a `&` reference
-  --> $DIR/issue-85765.rs:19:5
-   |
-LL |     *x = 1;
-   |     ^^^^^^ `x` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*x`, which is behind a `&` reference
+ at $DIR/issue-85765.rs:19:5: `x` is a `&` reference, so it cannot be written to
 help: consider changing this binding's type
-   |
-LL |     let x: &mut usize = &mut{0};
-   |             +++
+ on line 17, column 11, replace with `&mut usize`
 
-error[E0594]: cannot assign to `*y`, which is behind a `&` reference
-  --> $DIR/issue-85765.rs:26:5
-   |
-LL |     *y = 1;
-   |     ^^^^^^ `y` is a `&` reference, so it cannot be written to
-   |
+error E0594: cannot assign to `*y`, which is behind a `&` reference
+ at $DIR/issue-85765.rs:26:5: `y` is a `&` reference, so it cannot be written to
 help: consider changing this binding's type
-   |
-LL |     let y: &mut usize = &mut(0);
-   |             +++
+ on line 24, column 11, replace with `&mut usize`
 
 error: aborting due to 4 previous errors
 

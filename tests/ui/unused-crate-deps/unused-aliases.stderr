@@ -1,15 +1,8 @@
 warning: extern crate `barbar` is unused in crate `unused_aliases`
-  --> $DIR/unused-aliases.rs:8:1
-   |
-LL | #![warn(unused_crate_dependencies)]
-   | ^
-   |
-   = help: remove the dependency or add `use barbar as _;` to the crate root
+ at $DIR/unused-aliases.rs:8:1
+help: remove the dependency or add `use barbar as _;` to the crate root
 note: the lint level is defined here
-  --> $DIR/unused-aliases.rs:8:9
-   |
-LL | #![warn(unused_crate_dependencies)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/unused-aliases.rs:8:9
 
 warning: 1 warning emitted
 

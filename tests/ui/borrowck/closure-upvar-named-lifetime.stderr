@@ -1,114 +1,46 @@
-error[E0700]: hidden type for `impl Fn(RefCell<HashMap<String, String>>)` captures lifetime that does not appear in bounds
-  --> $DIR/closure-upvar-named-lifetime.rs:17:5
-   |
-LL |   fn apply<'a>(
-   |            -- hidden type `{closure@$DIR/closure-upvar-named-lifetime.rs:17:5: 17:15}` captures the lifetime `'a` as defined here
-LL |       f: Arc<dyn Fn(Entry<'a, String, String>) + 'a>,
-LL |   ) -> impl Fn(RefCell<HashMap<String, String>>)
-   |        ----------------------------------------- opaque type defined here
-LL |   {
-LL | /     move |map| {
-LL | |
-LL | |         let value = map.borrow_mut().entry("foo".to_string());
-...  |
-LL | |         f(wrapped_value);
-LL | |     }
-   | |_____^
-   |
+error E0700: hidden type for `impl Fn(RefCell<HashMap<String, String>>)` captures lifetime that does not appear in bounds
+ at $DIR/closure-upvar-named-lifetime.rs:17:5 to 24:6
+  on line 13, column 10: hidden type `{closure@$DIR/closure-upvar-named-lifetime.rs:17:5: 17:15}` captures the lifetime `'a` as defined here
+  on line 15, column 6: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'a`
-   |
-LL | ) -> impl Fn(RefCell<HashMap<String, String>>) + use<'a>
-   |                                                +++++++++
+ on line 15, column 46, add ` + use<'a>`
 
-error[E0597]: `map` does not live long enough
-  --> $DIR/closure-upvar-named-lifetime.rs:19:21
-   |
-LL | fn apply<'a>(
-   |          -- lifetime `'a` defined here
-...
-LL |     move |map| {
-   |           --- binding `map` declared here
-LL |
-LL |         let value = map.borrow_mut().entry("foo".to_string());
-   |                     ^^^ borrowed value does not live long enough
-...
-LL |         f(wrapped_value);
-   |         ---------------- argument requires that `map` is borrowed for `'a`
-LL |     }
-   |     - `map` dropped here while still borrowed
-   |
+error E0597: `map` does not live long enough
+ at $DIR/closure-upvar-named-lifetime.rs:19:21: borrowed value does not live long enough
+  on line 13, column 10: lifetime `'a` defined here
+  on line 17, column 11: binding `map` declared here
+  on line 23: argument requires that `map` is borrowed for `'a`
+  on line 24: `map` dropped here while still borrowed
 note: requirement that the value outlives `'a` introduced here
-  --> $SRC_DIR/core/src/ops/function.rs:LL:COL
+ at $SRC_DIR/core/src/ops/function.rs:LL:COL
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/closure-upvar-named-lifetime.rs:19:21
-   |
-LL | fn apply<'a>(
-   |          -- lifetime `'a` defined here
-...
-LL |         let value = map.borrow_mut().entry("foo".to_string());
-   |                     ^^^^^^^^^^^^^^^^                         - temporary value is freed at the end of this statement
-   |                     |
-   |                     creates a temporary value which is freed while still in use
-...
-LL |         f(wrapped_value);
-   |         ---------------- argument requires that borrow lasts for `'a`
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/closure-upvar-named-lifetime.rs:19:21: creates a temporary value which is freed while still in use
+  on line 13, column 10: lifetime `'a` defined here
+  on line 19, column 62: temporary value is freed at the end of this statement
+  on line 23: argument requires that borrow lasts for `'a`
 note: requirement that the value outlives `'a` introduced here
-  --> $SRC_DIR/core/src/ops/function.rs:LL:COL
+ at $SRC_DIR/core/src/ops/function.rs:LL:COL
 
-error[E0700]: hidden type for `impl Fn(RefCell<HashMap<String, String>>)` captures lifetime that does not appear in bounds
-  --> $DIR/closure-upvar-named-lifetime.rs:32:5
-   |
-LL |   fn apply_box<'a>(
-   |                -- hidden type `{closure@$DIR/closure-upvar-named-lifetime.rs:32:5: 32:15}` captures the lifetime `'a` as defined here
-LL |       f: Box<dyn Fn(Entry<'a, String, String>) + 'a>,
-LL |   ) -> impl Fn(RefCell<HashMap<String, String>>)
-   |        ----------------------------------------- opaque type defined here
-LL |   {
-LL | /     move |map| {
-LL | |
-LL | |         let value = map.borrow_mut().entry("foo".to_string());
-...  |
-LL | |         f(value);
-LL | |     }
-   | |_____^
-   |
+error E0700: hidden type for `impl Fn(RefCell<HashMap<String, String>>)` captures lifetime that does not appear in bounds
+ at $DIR/closure-upvar-named-lifetime.rs:32:5 to 38:6
+  on line 28, column 14: hidden type `{closure@$DIR/closure-upvar-named-lifetime.rs:32:5: 32:15}` captures the lifetime `'a` as defined here
+  on line 30, column 6: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'a`
-   |
-LL | ) -> impl Fn(RefCell<HashMap<String, String>>) + use<'a>
-   |                                                +++++++++
+ on line 30, column 46, add ` + use<'a>`
 
-error[E0597]: `map` does not live long enough
-  --> $DIR/closure-upvar-named-lifetime.rs:34:21
-   |
-LL | fn apply_box<'a>(
-   |              -- lifetime `'a` defined here
-...
-LL |     move |map| {
-   |           --- binding `map` declared here
-LL |
-LL |         let value = map.borrow_mut().entry("foo".to_string());
-   |                     ^^^ borrowed value does not live long enough
-...
-LL |         f(value);
-   |         -------- argument requires that `map` is borrowed for `'a`
-LL |     }
-   |     - `map` dropped here while still borrowed
+error E0597: `map` does not live long enough
+ at $DIR/closure-upvar-named-lifetime.rs:34:21: borrowed value does not live long enough
+  on line 28, column 14: lifetime `'a` defined here
+  on line 32, column 11: binding `map` declared here
+  on line 37: argument requires that `map` is borrowed for `'a`
+  on line 38: `map` dropped here while still borrowed
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/closure-upvar-named-lifetime.rs:34:21
-   |
-LL | fn apply_box<'a>(
-   |              -- lifetime `'a` defined here
-...
-LL |         let value = map.borrow_mut().entry("foo".to_string());
-   |                     ^^^^^^^^^^^^^^^^                         - temporary value is freed at the end of this statement
-   |                     |
-   |                     creates a temporary value which is freed while still in use
-...
-LL |         f(value);
-   |         -------- argument requires that borrow lasts for `'a`
+error E0716: temporary value dropped while borrowed
+ at $DIR/closure-upvar-named-lifetime.rs:34:21: creates a temporary value which is freed while still in use
+  on line 28, column 14: lifetime `'a` defined here
+  on line 34, column 62: temporary value is freed at the end of this statement
+  on line 37: argument requires that borrow lasts for `'a`
 
 error: aborting due to 6 previous errors
 

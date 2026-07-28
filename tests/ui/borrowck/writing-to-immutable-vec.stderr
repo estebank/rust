@@ -1,13 +1,7 @@
-error[E0596]: cannot borrow `v` as mutable, as it is not declared as mutable
-  --> $DIR/writing-to-immutable-vec.rs:3:5
-   |
-LL |     v[1] = 4;
-   |     ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `v` as mutable, as it is not declared as mutable
+ at $DIR/writing-to-immutable-vec.rs:3:5: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     let mut v: Vec<isize> = vec![1, 2, 3];
-   |         +++
+ on line 2, column 8, add `mut `
 
 error: aborting due to 1 previous error
 

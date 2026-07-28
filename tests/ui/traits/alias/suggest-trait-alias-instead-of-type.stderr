@@ -1,14 +1,7 @@
-error[E0404]: expected trait, found type alias `Strings`
-  --> $DIR/suggest-trait-alias-instead-of-type.rs:11:18
-   |
-LL | struct Struct<S: Strings>(S);
-   |                  ^^^^^^^ type aliases cannot be used as traits
-   |
+error E0404: expected trait, found type alias `Strings`
+ at $DIR/suggest-trait-alias-instead-of-type.rs:11:18: type aliases cannot be used as traits
 help: you might have meant to use `#![feature(trait_alias)]` instead of a `type` alias
-   |
-LL - type Strings = Iterator<Item=String>;
-LL + trait Strings = Iterator<Item=String>;
-   |
+ on line 9, replace with `trait Strings = Iterator<Item=String>;`
 
 error: aborting due to 1 previous error
 

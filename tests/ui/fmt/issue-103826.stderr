@@ -1,20 +1,11 @@
 error: 1 positional argument in format string, but no arguments were given
-  --> $DIR/issue-103826.rs:2:14
-   |
-LL |     format!("{\x7D");
-   |              ^^^^^
+ at $DIR/issue-103826.rs:2:14
 
 error: 1 positional argument in format string, but no arguments were given
-  --> $DIR/issue-103826.rs:4:14
-   |
-LL |     format!("\x7B\x7D");
-   |              ^^^^^^^^
+ at $DIR/issue-103826.rs:4:14
 
 error: 2 positional arguments in format string, but no arguments were given
-  --> $DIR/issue-103826.rs:6:14
-   |
-LL |     format!("{\x7D {\x7D");
-   |              ^^^^^ ^^^^^
+ at $DIR/issue-103826.rs:6:14
 
 error: aborting due to 3 previous errors
 

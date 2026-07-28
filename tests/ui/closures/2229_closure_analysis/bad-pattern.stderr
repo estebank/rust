@@ -1,115 +1,64 @@
-error[E0005]: refutable pattern in local binding
-  --> $DIR/bad-pattern.rs:13:13
-   |
-LL |         let 0 = v1;
-   |             ^ pattern `1_u32..=u32::MAX` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `u32`
+error E0005: refutable pattern in local binding
+ at $DIR/bad-pattern.rs:13:13: pattern `1_u32..=u32::MAX` not covered
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `u32`
 help: you might want to use `if let` to ignore the variant that isn't matched
-   |
-LL |         if let 0 = v1 { todo!() };
-   |         ++            +++++++++++
+ on line 13, column 8, add `if `
 help: alternatively, you could prepend the pattern with an underscore to define a new named variable; identifiers cannot begin with digits
-   |
-LL |         let _0 = v1;
-   |             +
+ on line 13, column 12, add `_`
 
-error[E0005]: refutable pattern in local binding
-  --> $DIR/bad-pattern.rs:14:14
-   |
-LL |         let (0 | 1) = v1;
-   |              ^^^^^ pattern `2_u32..=u32::MAX` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `u32`
+error E0005: refutable pattern in local binding
+ at $DIR/bad-pattern.rs:14:14: pattern `2_u32..=u32::MAX` not covered
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `u32`
 help: you might want to use `if let` to ignore the variant that isn't matched
-   |
-LL |         if let (0 | 1) = v1 { todo!() };
-   |         ++                  +++++++++++
+ on line 14, column 8, add `if `
 
-error[E0005]: refutable pattern in local binding
-  --> $DIR/bad-pattern.rs:15:13
-   |
-LL |         let 1.. = v1;
-   |             ^^^ pattern `0_u32` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `u32`
+error E0005: refutable pattern in local binding
+ at $DIR/bad-pattern.rs:15:13: pattern `0_u32` not covered
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `u32`
 help: you might want to use `if let` to ignore the variant that isn't matched
-   |
-LL |         if let 1.. = v1 { todo!() };
-   |         ++              +++++++++++
+ on line 15, column 8, add `if `
 
-error[E0005]: refutable pattern in local binding
-  --> $DIR/bad-pattern.rs:16:13
-   |
-LL |         let [0, 0, 0, 0] = v2;
-   |             ^^^^^^^^^^^^ pattern `[1_u32..=u32::MAX, _, _, _]` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `[u32; 4]`
+error E0005: refutable pattern in local binding
+ at $DIR/bad-pattern.rs:16:13: pattern `[1_u32..=u32::MAX, _, _, _]` not covered
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `[u32; 4]`
 help: you might want to use `if let` to ignore the variant that isn't matched
-   |
-LL |         if let [0, 0, 0, 0] = v2 { todo!() };
-   |         ++                       +++++++++++
+ on line 16, column 8, add `if `
 
-error[E0005]: refutable pattern in local binding
-  --> $DIR/bad-pattern.rs:17:13
-   |
-LL |         let [0] = v4;
-   |             ^^^ patterns `&[]` and `&[_, _, ..]` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `&[u32]`
+error E0005: refutable pattern in local binding
+ at $DIR/bad-pattern.rs:17:13: patterns `&[]` and `&[_, _, ..]` not covered
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `&[u32]`
 help: you might want to use `if let` to ignore the variants that aren't matched
-   |
-LL |         if let [0] = v4 { todo!() };
-   |         ++              +++++++++++
+ on line 17, column 8, add `if `
 
-error[E0005]: refutable pattern in local binding
-  --> $DIR/bad-pattern.rs:18:13
-   |
-LL |         let Refutable::A = v3;
-   |             ^^^^^^^^^^^^ pattern `Refutable::B` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+error E0005: refutable pattern in local binding
+ at $DIR/bad-pattern.rs:18:13: pattern `Refutable::B` not covered
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
 note: `Refutable` defined here
-  --> $DIR/bad-pattern.rs:4:6
-   |
-LL | enum Refutable {
-   |      ^^^^^^^^^
-LL |     A,
-LL |     B,
-   |     - not covered
-   = note: the matched value is of type `Refutable`
+ at $DIR/bad-pattern.rs:4:6
+  on line 6: not covered
+note: the matched value is of type `Refutable`
 help: you might want to use `if let` to ignore the variant that isn't matched
-   |
-LL |         if let Refutable::A = v3 { todo!() };
-   |         ++                       +++++++++++
+ on line 18, column 8, add `if `
 
-error[E0005]: refutable pattern in local binding
-  --> $DIR/bad-pattern.rs:19:13
-   |
-LL |     const PAT: u32 = 0;
-   |     -------------- missing patterns are not covered because `PAT` is interpreted as a constant pattern, not a new variable
-...
-LL |         let PAT = v1;
-   |             ^^^ pattern `1_u32..=u32::MAX` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `u32`
+error E0005: refutable pattern in local binding
+ at $DIR/bad-pattern.rs:19:13: pattern `1_u32..=u32::MAX` not covered
+  on line 10: missing patterns are not covered because `PAT` is interpreted as a constant pattern, not a new variable
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `u32`
 help: introduce a variable instead
-   |
-LL |         let PAT_var = v1;
-   |                ++++
+ on line 19, column 12, replace with `PAT_var`
 
 error: aborting due to 7 previous errors
 

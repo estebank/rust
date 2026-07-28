@@ -1,14 +1,7 @@
-error[E0282]: type annotations needed
-  --> $DIR/method_resolution_trait_method_from_opaque.rs:28:18
-   |
-LL |         self.bar.next().unwrap();
-   |                  ^^^^
-   |
+error E0282: type annotations needed
+ at $DIR/method_resolution_trait_method_from_opaque.rs:28:18
 help: try using a fully qualified path to specify the expected types
-   |
-LL -         self.bar.next().unwrap();
-LL +         <_ as Iterator>::next(&mut self.bar).unwrap();
-   |
+ on line 28, column 8, add `<_ as Iterator>::next(&mut `
 
 error: aborting due to 1 previous error
 

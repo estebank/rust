@@ -1,26 +1,12 @@
-error[E0277]: the trait bound `T: [const] Bar` is not satisfied
-  --> $DIR/trait-where-clause-const.rs:19:5
-   |
-LL |     T::b();
-   |     ^
-   |
+error E0277: the trait bound `T: [const] Bar` is not satisfied
+ at $DIR/trait-where-clause-const.rs:19:5
 note: required by a bound in `Foo::b`
-  --> $DIR/trait-where-clause-const.rs:13:24
-   |
-LL |     fn b() where Self: [const] Bar;
-   |                        ^^^^^^^^^^^ required by this bound in `Foo::b`
+ at $DIR/trait-where-clause-const.rs:13:24: required by this bound in `Foo::b`
 
-error[E0277]: the trait bound `T: [const] Bar` is not satisfied
-  --> $DIR/trait-where-clause-const.rs:21:12
-   |
-LL |     T::c::<T>();
-   |            ^
-   |
+error E0277: the trait bound `T: [const] Bar` is not satisfied
+ at $DIR/trait-where-clause-const.rs:21:12
 note: required by a bound in `Foo::c`
-  --> $DIR/trait-where-clause-const.rs:14:13
-   |
-LL |     fn c<T: [const] Bar>();
-   |             ^^^^^^^^^^^ required by this bound in `Foo::c`
+ at $DIR/trait-where-clause-const.rs:14:13: required by this bound in `Foo::c`
 
 error: aborting due to 2 previous errors
 

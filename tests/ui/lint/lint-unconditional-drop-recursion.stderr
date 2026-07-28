@@ -1,17 +1,9 @@
 error: function cannot return without recursing
-  --> $DIR/lint-unconditional-drop-recursion.rs:11:5
-   |
-LL |     fn drop(&mut self) {
-   |     ^^^^^^^^^^^^^^^^^^ cannot return without recursing
-LL |         let _ = RecursiveDrop;
-   |                              - recursive call site
-   |
-   = help: a `loop` may express intention better if this is on purpose
+ at $DIR/lint-unconditional-drop-recursion.rs:11:5: cannot return without recursing
+  on line 12, column 30: recursive call site
+help: a `loop` may express intention better if this is on purpose
 note: the lint level is defined here
-  --> $DIR/lint-unconditional-drop-recursion.rs:5:9
-   |
-LL | #![deny(unconditional_recursion)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lint-unconditional-drop-recursion.rs:5:9
 
 error: aborting due to 1 previous error
 

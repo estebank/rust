@@ -1,50 +1,22 @@
 error: return types are denoted using `->`
-  --> $DIR/fn-recover-return-sign.rs:3:8
-   |
-LL | fn a() => usize { 0 }
-   |        ^^
-   |
+ at $DIR/fn-recover-return-sign.rs:3:8
 help: use `->` instead
-   |
-LL - fn a() => usize { 0 }
-LL + fn a() -> usize { 0 }
-   |
+ on line 3, column 6, replace with ` -> `
 
 error: return types are denoted using `->`
-  --> $DIR/fn-recover-return-sign.rs:6:7
-   |
-LL | fn b(): usize { 0 }
-   |       ^
-   |
+ at $DIR/fn-recover-return-sign.rs:6:7
 help: use `->` instead
-   |
-LL - fn b(): usize { 0 }
-LL + fn b() -> usize { 0 }
-   |
+ on line 6, column 6, replace with ` -> `
 
 error: return types are denoted using `->`
-  --> $DIR/fn-recover-return-sign.rs:21:25
-   |
-LL |     let foo = |a: bool| => bool { a };
-   |                         ^^
-   |
+ at $DIR/fn-recover-return-sign.rs:21:25
 help: use `->` instead
-   |
-LL -     let foo = |a: bool| => bool { a };
-LL +     let foo = |a: bool| -> bool { a };
-   |
+ on line 21, column 23, replace with ` -> `
 
 error: return types are denoted using `->`
-  --> $DIR/fn-recover-return-sign.rs:25:24
-   |
-LL |     let bar = |a: bool|: bool { a };
-   |                        ^
-   |
+ at $DIR/fn-recover-return-sign.rs:25:24
 help: use `->` instead
-   |
-LL -     let bar = |a: bool|: bool { a };
-LL +     let bar = |a: bool| -> bool { a };
-   |
+ on line 25, column 23, replace with ` -> `
 
 error: aborting due to 4 previous errors
 

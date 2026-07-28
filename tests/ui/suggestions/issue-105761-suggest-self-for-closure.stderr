@@ -1,48 +1,18 @@
-error[E0502]: cannot borrow `*self` as mutable because it is also borrowed as immutable
-  --> $DIR/issue-105761-suggest-self-for-closure.rs:12:9
-   |
-LL |         let x = |v: i32| {
-   |                 -------- immutable borrow occurs here
-LL |             self.bar();
-   |             ---- first borrow occurs due to use of `self` in closure
-...
-LL |         self.qux();
-   |         ^^^^^^^^^^ mutable borrow occurs here
-LL |         x(1);
-   |         - immutable borrow later used here
-   |
+error E0502: cannot borrow `*self` as mutable because it is also borrowed as immutable
+ at $DIR/issue-105761-suggest-self-for-closure.rs:12:9: mutable borrow occurs here
+  on line 8, column 17: immutable borrow occurs here
+  on line 9: first borrow occurs due to use of `self` in closure
+  on line 13: immutable borrow later used here
 help: try explicitly passing `&Self` into the closure as an argument
-   |
-LL ~         let x = |this: &Self, v: i32| {
-LL ~             this.bar();
-LL ~             this.hel();
-LL |         };
-LL |         self.qux();
-LL ~         x(self, 1);
-LL ~         x(self, 3);
-   |
+ on line 8, column 17, add `this: &Self, `
 
-error[E0502]: cannot borrow `*self` as mutable because it is also borrowed as immutable
-  --> $DIR/issue-105761-suggest-self-for-closure.rs:24:9
-   |
-LL |         let y = || {
-   |                 -- immutable borrow occurs here
-LL |             self.bar();
-   |             ---- first borrow occurs due to use of `self` in closure
-LL |         };
-LL |         self.qux();
-   |         ^^^^^^^^^^ mutable borrow occurs here
-LL |         y();
-   |         - immutable borrow later used here
-   |
+error E0502: cannot borrow `*self` as mutable because it is also borrowed as immutable
+ at $DIR/issue-105761-suggest-self-for-closure.rs:24:9: mutable borrow occurs here
+  on line 21, column 17: immutable borrow occurs here
+  on line 22: first borrow occurs due to use of `self` in closure
+  on line 25: immutable borrow later used here
 help: try explicitly passing `&Self` into the closure as an argument
-   |
-LL ~         let y = |this: &Self| {
-LL ~             this.bar();
-LL |         };
-LL |         self.qux();
-LL ~         y(self);
-   |
+ on line 21, column 17, add `this: &Self`
 
 error: aborting due to 2 previous errors
 

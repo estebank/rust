@@ -1,19 +1,10 @@
-error[E0119]: conflicting implementations of trait `MyTrait` for type `(_, _)`
-  --> $DIR/coherence-tuple-conflict.rs:15:1
-   |
-LL | impl<T> MyTrait for (T,T) {
-   | ------------------------- first implementation here
-...
-LL | impl<A,B> MyTrait for (A,B) {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `(_, _)`
+error E0119: conflicting implementations of trait `MyTrait` for type `(_, _)`
+ at $DIR/coherence-tuple-conflict.rs:15:1: conflicting implementation for `(_, _)`
+  on line 11: first implementation here
 
-error[E0609]: no field `dummy` on type `&(A, B)`
-  --> $DIR/coherence-tuple-conflict.rs:17:35
-   |
-LL |     fn get(&self) -> usize { self.dummy }
-   |                                   ^^^^^ unknown field
-   |
-   = note: available fields are: `0`, `1`
+error E0609: no field `dummy` on type `&(A, B)`
+ at $DIR/coherence-tuple-conflict.rs:17:35: unknown field
+note: available fields are: `0`, `1`
 
 error: aborting due to 2 previous errors
 

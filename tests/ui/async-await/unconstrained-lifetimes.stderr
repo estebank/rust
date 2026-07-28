@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `Missing` in this scope
-  --> $DIR/unconstrained-lifetimes.rs:6:17
-   |
-LL | async fn foo(_: Missing<'_>) {}
-   |                 ^^^^^^^ not found in this scope
+error E0425: cannot find type `Missing` in this scope
+ at $DIR/unconstrained-lifetimes.rs:6:17: not found in this scope
 
 error: aborting due to 1 previous error
 

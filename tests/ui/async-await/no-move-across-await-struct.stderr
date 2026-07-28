@@ -1,12 +1,7 @@
-error[E0382]: use of moved value: `s.x`
-  --> $DIR/no-move-across-await-struct.rs:7:5
-   |
-LL |     needs_vec(s.x).await;
-   |               --- value moved here
-LL |     s.x
-   |     ^^^ value used here after move
-   |
-   = note: move occurs because `s.x` has type `Vec<usize>`, which does not implement the `Copy` trait
+error E0382: use of moved value: `s.x`
+ at $DIR/no-move-across-await-struct.rs:7:5: value used here after move
+  on line 6, column 15: value moved here
+note: move occurs because `s.x` has type `Vec<usize>`, which does not implement the `Copy` trait
 
 error: aborting due to 1 previous error
 

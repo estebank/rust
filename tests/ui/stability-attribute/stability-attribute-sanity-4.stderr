@@ -1,70 +1,33 @@
-error[E0539]: malformed `unstable` attribute input
-  --> $DIR/stability-attribute-sanity-4.rs:8:7
-   |
-LL |     #[unstable]
-   |       ^^^^^^^^ expected this to be a list
-   |
+error E0539: malformed `unstable` attribute input
+ at $DIR/stability-attribute-sanity-4.rs:8:7: expected this to be a list
 help: must be of the form
-   |
-LL |     #[unstable(feature = "name", reason = "...", issue = "N")]
-   |               +++++++++++++++++++++++++++++++++++++++++++++++
+ on line 8, column 6, replace with `unstable(feature = "name", reason = "...", issue = "N")`
 
-error[E0539]: malformed `unstable` attribute input
-  --> $DIR/stability-attribute-sanity-4.rs:11:7
-   |
-LL |     #[unstable = "b"]
-   |       ^^^^^^^^^-----
-   |                |
-   |                expected this to be a list
-   |
+error E0539: malformed `unstable` attribute input
+ at $DIR/stability-attribute-sanity-4.rs:11:7
+  on line 11, column 16: expected this to be a list
 help: must be of the form
-   |
-LL -     #[unstable = "b"]
-LL +     #[unstable(feature = "name", reason = "...", issue = "N")]
-   |
+ on line 11, column 6, replace with `unstable(feature = "name", reason = "...", issue = "N")`
 
-error[E0539]: malformed `stable` attribute input
-  --> $DIR/stability-attribute-sanity-4.rs:14:7
-   |
-LL |     #[stable]
-   |       ^^^^^^ expected this to be a list
-   |
+error E0539: malformed `stable` attribute input
+ at $DIR/stability-attribute-sanity-4.rs:14:7: expected this to be a list
 help: must be of the form
-   |
-LL |     #[stable(feature = "name", since = "version")]
-   |             +++++++++++++++++++++++++++++++++++++
+ on line 14, column 6, replace with `stable(feature = "name", since = "version")`
 
-error[E0539]: malformed `stable` attribute input
-  --> $DIR/stability-attribute-sanity-4.rs:17:7
-   |
-LL |     #[stable = "a"]
-   |       ^^^^^^^-----
-   |              |
-   |              expected this to be a list
-   |
+error E0539: malformed `stable` attribute input
+ at $DIR/stability-attribute-sanity-4.rs:17:7
+  on line 17, column 14: expected this to be a list
 help: must be of the form
-   |
-LL -     #[stable = "a"]
-LL +     #[stable(feature = "name", since = "version")]
-   |
+ on line 17, column 6, replace with `stable(feature = "name", since = "version")`
 
-error[E0542]: missing 'since'
-  --> $DIR/stability-attribute-sanity-4.rs:21:5
-   |
-LL |     #[deprecated]
-   |     ^^^^^^^^^^^^^
+error E0542: missing 'since'
+ at $DIR/stability-attribute-sanity-4.rs:21:5
 
-error[E0543]: missing 'note'
-  --> $DIR/stability-attribute-sanity-4.rs:21:5
-   |
-LL |     #[deprecated]
-   |     ^^^^^^^^^^^^^
+error E0543: missing 'note'
+ at $DIR/stability-attribute-sanity-4.rs:21:5
 
-error[E0542]: missing 'since'
-  --> $DIR/stability-attribute-sanity-4.rs:26:5
-   |
-LL |     #[deprecated = "a"]
-   |     ^^^^^^^^^^^^^^^^^^^
+error E0542: missing 'since'
+ at $DIR/stability-attribute-sanity-4.rs:26:5
 
 error: aborting due to 7 previous errors
 

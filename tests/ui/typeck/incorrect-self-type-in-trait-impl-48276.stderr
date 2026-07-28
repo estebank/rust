@@ -1,27 +1,14 @@
-error[E0185]: method `from` has a `&self` declaration in the impl, but not in the trait
-  --> $DIR/incorrect-self-type-in-trait-impl-48276.rs:12:5
-   |
-LL |     fn from(a: A) -> Self;
-   |     ---------------------- trait method declared without `&self`
-...
-LL |     fn from(self: &'a Self) -> &'b str {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `&self` used in impl
+error E0185: method `from` has a `&self` declaration in the impl, but not in the trait
+ at $DIR/incorrect-self-type-in-trait-impl-48276.rs:12:5: `&self` used in impl
+  on line 6: trait method declared without `&self`
 
-error[E0185]: method `from` has a `&self` declaration in the impl, but not in the trait
-  --> $DIR/incorrect-self-type-in-trait-impl-48276.rs:21:5
-   |
-LL |     fn from(&self) -> B {
-   |     ^^^^^^^^^^^^^^^^^^^ `&self` used in impl
-   |
-   = note: `from` from trait: `fn(T) -> Self`
+error E0185: method `from` has a `&self` declaration in the impl, but not in the trait
+ at $DIR/incorrect-self-type-in-trait-impl-48276.rs:21:5: `&self` used in impl
+note: `from` from trait: `fn(T) -> Self`
 
-error[E0185]: method `from` has a `&self` declaration in the impl, but not in the trait
-  --> $DIR/incorrect-self-type-in-trait-impl-48276.rs:28:5
-   |
-LL |     fn from(&self) -> &'static str {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `&self` used in impl
-   |
-   = note: `from` from trait: `fn(T) -> Self`
+error E0185: method `from` has a `&self` declaration in the impl, but not in the trait
+ at $DIR/incorrect-self-type-in-trait-impl-48276.rs:28:5: `&self` used in impl
+note: `from` from trait: `fn(T) -> Self`
 
 error: aborting due to 3 previous errors
 

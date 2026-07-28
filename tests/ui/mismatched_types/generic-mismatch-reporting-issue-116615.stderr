@@ -1,94 +1,65 @@
-error[E0308]: mismatched types
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:6:12
-   |
-LL |     foo(1, 2.);
-   |     --- -  ^^ expected integer, found floating-point number
-   |     |   |
-   |     |   expected all arguments to be this integer type because they need to match the type of this parameter
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:6:12: expected integer, found floating-point number
+  on line 6: arguments to this function are incorrect
+  on line 6, column 9: expected all arguments to be this integer type because they need to match the type of this parameter
 note: function defined here
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:1:4
-   |
-LL | fn foo<T>(a: T, b: T) {}
-   |    ^^^ -  ----  ---- this parameter needs to match the integer type of `a`
-   |        |  |
-   |        |  `b` needs to match the integer type of this parameter
-   |        `a` and `b` both reference this parameter `T`
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:1:4
+  on line 1, column 8: `a` and `b` both reference this parameter `T`
+  on line 1, column 11: `b` needs to match the integer type of this parameter
+  on line 1, column 17: this parameter needs to match the integer type of `a`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:8:5
-   |
-LL |     foo_multi_same("a", "b", false, true, (), 32);
-   |     ^^^^^^^^^^^^^^ ---  ---  -----  ----  -- expected `&str`, found `()`
-   |                    |    |    |      |
-   |                    |    |    |      expected `&str`, found `bool`
-   |                    |    |    expected `&str`, found `bool`
-   |                    |    expected some other arguments to be an `&str` type to match the type of this parameter
-   |                    expected some other arguments to be an `&str` type to match the type of this parameter
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:8:5
+  on line 8, column 20: expected some other arguments to be an `&str` type to match the type of this parameter
+  on line 8, column 25: expected some other arguments to be an `&str` type to match the type of this parameter
+  on line 8, column 30: expected `&str`, found `bool`
+  on line 8, column 37: expected `&str`, found `bool`
+  on line 8, column 43: expected `&str`, found `()`
 note: function defined here
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:2:4
-   |
-LL | fn foo_multi_same<T>(a: T, b: T, c: T, d: T, e: T, f: i32) {}
-   |    ^^^^^^^^^^^^^^ -  ----  ----  ----  ----  ---- this parameter needs to match the `&str` type of `a` and `b`
-   |                   |  |     |     |     |
-   |                   |  |     |     |     this parameter needs to match the `&str` type of `a` and `b`
-   |                   |  |     |     this parameter needs to match the `&str` type of `a` and `b`
-   |                   |  |     `c`, `d` and `e` need to match the `&str` type of this parameter
-   |                   |  `c`, `d` and `e` need to match the `&str` type of this parameter
-   |                   `a`, `b`, `c`, `d` and `e` all reference this parameter `T`
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:2:4
+  on line 2, column 19: `a`, `b`, `c`, `d` and `e` all reference this parameter `T`
+  on line 2, column 22: `c`, `d` and `e` need to match the `&str` type of this parameter
+  on line 2, column 28: `c`, `d` and `e` need to match the `&str` type of this parameter
+  on line 2, column 34: this parameter needs to match the `&str` type of `a` and `b`
+  on line 2, column 40: this parameter needs to match the `&str` type of `a` and `b`
+  on line 2, column 46: this parameter needs to match the `&str` type of `a` and `b`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:10:5
-   |
-LL |     foo_multi_generics("a", "b", "c", true, false, 32, 2.);
-   |     ^^^^^^^^^^^^^^^^^^ ---  ---  ---  ----  -----  --  -- expected integer, found floating-point number
-   |                        |    |    |    |     |      |
-   |                        |    |    |    |     |      expected some other arguments to be an integer type to match the type of this parameter
-   |                        |    |    |    |     expected `&str`, found `bool`
-   |                        |    |    |    expected `&str`, found `bool`
-   |                        |    |    expected some other arguments to be an `&str` type to match the type of this parameter
-   |                        |    expected some other arguments to be an `&str` type to match the type of this parameter
-   |                        expected some other arguments to be an `&str` type to match the type of this parameter
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:10:5
+  on line 10, column 24: expected some other arguments to be an `&str` type to match the type of this parameter
+  on line 10, column 29: expected some other arguments to be an `&str` type to match the type of this parameter
+  on line 10, column 34: expected some other arguments to be an `&str` type to match the type of this parameter
+  on line 10, column 39: expected `&str`, found `bool`
+  on line 10, column 45: expected `&str`, found `bool`
+  on line 10, column 52: expected some other arguments to be an integer type to match the type of this parameter
+  on line 10, column 56: expected integer, found floating-point number
 note: function defined here
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:3:4
-   |
-LL | fn foo_multi_generics<S, T>(a: T, b: T, c: T, d: T, e: T, f: S, g: S) {}
-   |    ^^^^^^^^^^^^^^^^^^ -  -  ----  ----  ----  ----  ----  ----  ---- this parameter needs to match the integer type of `f`
-   |                       |  |  |     |     |     |     |     |
-   |                       |  |  |     |     |     |     |     `g` needs to match the integer type of this parameter
-   |                       |  |  |     |     |     |     this parameter needs to match the `&str` type of `a`, `b` and `c`
-   |                       |  |  |     |     |     this parameter needs to match the `&str` type of `a`, `b` and `c`
-   |                       |  |  |     |     `d` and `e` need to match the `&str` type of this parameter
-   |                       |  |  |     `d` and `e` need to match the `&str` type of this parameter
-   |                       |  |  `d` and `e` need to match the `&str` type of this parameter
-   |                       |  `a`, `b`, `c`, `d` and `e` all reference this parameter `T`
-   |                       `f` and `g` both reference this parameter `S`
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:3:4
+  on line 3, column 23: `f` and `g` both reference this parameter `S`
+  on line 3, column 26: `a`, `b`, `c`, `d` and `e` all reference this parameter `T`
+  on line 3, column 29: `d` and `e` need to match the `&str` type of this parameter
+  on line 3, column 35: `d` and `e` need to match the `&str` type of this parameter
+  on line 3, column 41: `d` and `e` need to match the `&str` type of this parameter
+  on line 3, column 47: this parameter needs to match the `&str` type of `a`, `b` and `c`
+  on line 3, column 53: this parameter needs to match the `&str` type of `a`, `b` and `c`
+  on line 3, column 59: `g` needs to match the integer type of this parameter
+  on line 3, column 65: this parameter needs to match the integer type of `f`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:12:5
-   |
-LL |     foo_multi_same("a", 1, 2, "d", "e", 32);
-   |     ^^^^^^^^^^^^^^ ---  -  -  ---  --- expected some other arguments to be an `&str` type to match the type of this parameter
-   |                    |    |  |  |
-   |                    |    |  |  expected some other arguments to be an `&str` type to match the type of this parameter
-   |                    |    |  expected `&str`, found integer
-   |                    |    expected `&str`, found integer
-   |                    expected some other arguments to be an `&str` type to match the type of this parameter
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:12:5
+  on line 12, column 20: expected some other arguments to be an `&str` type to match the type of this parameter
+  on line 12, column 25: expected `&str`, found integer
+  on line 12, column 28: expected `&str`, found integer
+  on line 12, column 31: expected some other arguments to be an `&str` type to match the type of this parameter
+  on line 12, column 36: expected some other arguments to be an `&str` type to match the type of this parameter
 note: function defined here
-  --> $DIR/generic-mismatch-reporting-issue-116615.rs:2:4
-   |
-LL | fn foo_multi_same<T>(a: T, b: T, c: T, d: T, e: T, f: i32) {}
-   |    ^^^^^^^^^^^^^^ -  ----  ----  ----  ----  ---- `b` and `c` need to match the `&str` type of this parameter
-   |                   |  |     |     |     |
-   |                   |  |     |     |     `b` and `c` need to match the `&str` type of this parameter
-   |                   |  |     |     this parameter needs to match the `&str` type of `a`, `d` and `e`
-   |                   |  |     this parameter needs to match the `&str` type of `a`, `d` and `e`
-   |                   |  `b` and `c` need to match the `&str` type of this parameter
-   |                   `a`, `b`, `c`, `d` and `e` all reference this parameter `T`
+ at $DIR/generic-mismatch-reporting-issue-116615.rs:2:4
+  on line 2, column 19: `a`, `b`, `c`, `d` and `e` all reference this parameter `T`
+  on line 2, column 22: `b` and `c` need to match the `&str` type of this parameter
+  on line 2, column 28: this parameter needs to match the `&str` type of `a`, `d` and `e`
+  on line 2, column 34: this parameter needs to match the `&str` type of `a`, `d` and `e`
+  on line 2, column 40: `b` and `c` need to match the `&str` type of this parameter
+  on line 2, column 46: `b` and `c` need to match the `&str` type of this parameter
 
 error: aborting due to 4 previous errors
 

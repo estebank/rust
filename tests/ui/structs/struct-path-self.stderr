@@ -1,78 +1,35 @@
-error[E0071]: expected struct, variant or union type, found type parameter `Self`
-  --> $DIR/struct-path-self.rs:5:17
-   |
-LL |         let s = Self {};
-   |                 ^^^^ not a struct
+error E0071: expected struct, variant or union type, found type parameter `Self`
+ at $DIR/struct-path-self.rs:5:17: not a struct
 
-error[E0109]: type arguments are not allowed on self type
-  --> $DIR/struct-path-self.rs:7:24
-   |
-LL |         let z = Self::<u8> {};
-   |                 ----   ^^ type argument not allowed
-   |                 |
-   |                 not allowed on self type
-   |
+error E0109: type arguments are not allowed on self type
+ at $DIR/struct-path-self.rs:7:24: type argument not allowed
+  on line 7, column 17: not allowed on self type
 help: the `Self` type doesn't accept type parameters
-   |
-LL -         let z = Self::<u8> {};
-LL +         let z = Self {};
-   |
+ on line 7, column 20
 
-error[E0071]: expected struct, variant or union type, found type parameter `Self`
-  --> $DIR/struct-path-self.rs:7:17
-   |
-LL |         let z = Self::<u8> {};
-   |                 ^^^^^^^^^^ not a struct
+error E0071: expected struct, variant or union type, found type parameter `Self`
+ at $DIR/struct-path-self.rs:7:17: not a struct
 
-error[E0071]: expected struct, variant or union type, found type parameter `Self`
-  --> $DIR/struct-path-self.rs:11:13
-   |
-LL |             Self { .. } => {}
-   |             ^^^^ not a struct
+error E0071: expected struct, variant or union type, found type parameter `Self`
+ at $DIR/struct-path-self.rs:11:13: not a struct
 
-error[E0109]: type arguments are not allowed on self type
-  --> $DIR/struct-path-self.rs:20:24
-   |
-LL |         let z = Self::<u8> {};
-   |                 ----   ^^ type argument not allowed
-   |                 |
-   |                 not allowed on self type
-   |
+error E0109: type arguments are not allowed on self type
+ at $DIR/struct-path-self.rs:20:24: type argument not allowed
+  on line 20, column 17: not allowed on self type
 note: `Self` is of type `S`
-  --> $DIR/struct-path-self.rs:1:8
-   |
-LL | struct S;
-   |        ^ `Self` corresponds to this type, which doesn't have generic parameters
-...
-LL | impl Tr for S {
-   | ------------- `Self` is on type `S` in this `impl`
+ at $DIR/struct-path-self.rs:1:8: `Self` corresponds to this type, which doesn't have generic parameters
+  on line 17: `Self` is on type `S` in this `impl`
 help: the `Self` type doesn't accept type parameters
-   |
-LL -         let z = Self::<u8> {};
-LL +         let z = Self {};
-   |
+ on line 20, column 20
 
-error[E0109]: type arguments are not allowed on self type
-  --> $DIR/struct-path-self.rs:30:24
-   |
-LL |         let z = Self::<u8> {};
-   |                 ----   ^^ type argument not allowed
-   |                 |
-   |                 not allowed on self type
-   |
+error E0109: type arguments are not allowed on self type
+ at $DIR/struct-path-self.rs:30:24: type argument not allowed
+  on line 30, column 17: not allowed on self type
 note: `Self` is of type `S`
-  --> $DIR/struct-path-self.rs:1:8
-   |
-LL | struct S;
-   |        ^ `Self` corresponds to this type, which doesn't have generic parameters
-...
-LL | impl S {
-   | ------ `Self` is on type `S` in this `impl`
+ at $DIR/struct-path-self.rs:1:8: `Self` corresponds to this type, which doesn't have generic parameters
+  on line 27: `Self` is on type `S` in this `impl`
 help: the `Self` type doesn't accept type parameters
-   |
-LL -         let z = Self::<u8> {};
-LL +         let z = Self {};
-   |
+ on line 30, column 20
 
 error: aborting due to 6 previous errors
 

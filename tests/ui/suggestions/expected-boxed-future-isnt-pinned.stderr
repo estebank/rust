@@ -1,91 +1,52 @@
-error[E0308]: mismatched types
-  --> $DIR/expected-boxed-future-isnt-pinned.rs:11:5
-   |
-LL | fn foo<F: Future<Output=i32> + Send + 'static>(x: F) -> BoxFuture<'static, i32> {
-   |        - found this type parameter                      ----------------------- expected `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>` because of return type
-LL |     // We could instead use an `async` block, but this way we have no std spans.
-LL |     x
-   |     ^ expected `Pin<Box<_>>`, found type parameter `F`
-   |
-   = note:      expected struct `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>`
-           found type parameter `F`
+error E0308: mismatched types
+ at $DIR/expected-boxed-future-isnt-pinned.rs:11:5: expected `Pin<Box<_>>`, found type parameter `F`
+  on line 9, column 8: found this type parameter
+  on line 9, column 57: expected `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>` because of return type
+note:      expected struct `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>`
+      found type parameter `F`
 help: you need to pin and box this expression
-   |
-LL |     Box::pin(x)
-   |     +++++++++ +
+ on line 11, column 4, add `Box::pin(`
 
-error[E0308]: mismatched types
-  --> $DIR/expected-boxed-future-isnt-pinned.rs:15:5
-   |
-LL | fn bar<F: Future<Output=i32> + Send + 'static>(x: F) -> BoxFuture<'static, i32> {
-   |                                                         ----------------------- expected `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>` because of return type
-LL |     Box::new(x)
-   |     ^^^^^^^^^^^ expected `Pin<Box<_>>`, found `Box<F>`
-   |
-   = note: expected struct `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>`
-              found struct `Box<F>`
-   = help: use `Box::pin`
+error E0308: mismatched types
+ at $DIR/expected-boxed-future-isnt-pinned.rs:15:5: expected `Pin<Box<_>>`, found `Box<F>`
+  on line 14, column 57: expected `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>` because of return type
+note: expected struct `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>`
+         found struct `Box<F>`
+help: use `Box::pin`
 
-error[E0308]: mismatched types
-  --> $DIR/expected-boxed-future-isnt-pinned.rs:19:14
-   |
-LL | fn baz<F: Future<Output=i32> + Send + 'static>(x: F) -> BoxFuture<'static, i32> {
-   |        - found this type parameter
-LL |     Pin::new(x)
-   |     -------- ^ expected `Box<dyn Future<Output = i32> + Send>`, found type parameter `F`
-   |     |
-   |     arguments to this function are incorrect
-   |     help: use `Box::pin` to pin and box this expression: `Box::pin`
-   |
-   = note:      expected struct `Box<dyn Future<Output = i32> + Send>`
-           found type parameter `F`
+error E0308: mismatched types
+ at $DIR/expected-boxed-future-isnt-pinned.rs:19:14: expected `Box<dyn Future<Output = i32> + Send>`, found type parameter `F`
+  on line 18, column 8: found this type parameter
+  on line 19: arguments to this function are incorrect
+  on line 19: help: use `Box::pin` to pin and box this expression: `Box::pin`
+note:      expected struct `Box<dyn Future<Output = i32> + Send>`
+      found type parameter `F`
 note: associated function defined here
-  --> $SRC_DIR/core/src/pin.rs:LL:COL
+ at $SRC_DIR/core/src/pin.rs:LL:COL
 
-error[E0277]: `dyn Future<Output = i32> + Send` cannot be unpinned
-  --> $DIR/expected-boxed-future-isnt-pinned.rs:19:14
-   |
-LL |     Pin::new(x)
-   |     -------- ^ the trait `Unpin` is not implemented for `dyn Future<Output = i32> + Send`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: consider using the `pin!` macro
-           consider using `Box::pin` if you need to access the pinned value outside of the current scope
+error E0277: `dyn Future<Output = i32> + Send` cannot be unpinned
+ at $DIR/expected-boxed-future-isnt-pinned.rs:19:14: the trait `Unpin` is not implemented for `dyn Future<Output = i32> + Send`
+  on line 19: required by a bound introduced by this call
+note: consider using the `pin!` macro
+      consider using `Box::pin` if you need to access the pinned value outside of the current scope
 note: required by a bound in `Pin::<Ptr>::new`
-  --> $SRC_DIR/core/src/pin.rs:LL:COL
+ at $SRC_DIR/core/src/pin.rs:LL:COL
 
-error[E0277]: `dyn Future<Output = i32> + Send` cannot be unpinned
-  --> $DIR/expected-boxed-future-isnt-pinned.rs:24:14
-   |
-LL |     Pin::new(Box::new(x))
-   |     -------- ^^^^^^^^^^^ the trait `Unpin` is not implemented for `dyn Future<Output = i32> + Send`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: consider using the `pin!` macro
-           consider using `Box::pin` if you need to access the pinned value outside of the current scope
+error E0277: `dyn Future<Output = i32> + Send` cannot be unpinned
+ at $DIR/expected-boxed-future-isnt-pinned.rs:24:14: the trait `Unpin` is not implemented for `dyn Future<Output = i32> + Send`
+  on line 24: required by a bound introduced by this call
+note: consider using the `pin!` macro
+      consider using `Box::pin` if you need to access the pinned value outside of the current scope
 note: required by a bound in `Pin::<Ptr>::new`
-  --> $SRC_DIR/core/src/pin.rs:LL:COL
+ at $SRC_DIR/core/src/pin.rs:LL:COL
 
-error[E0308]: mismatched types
-  --> $DIR/expected-boxed-future-isnt-pinned.rs:28:5
-   |
-LL |   fn zap() -> BoxFuture<'static, i32> {
-   |               ----------------------- expected `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>` because of return type
-LL | /     async {
-LL | |         42
-LL | |     }
-   | |_____^ expected `Pin<Box<_>>`, found `async` block
-   |
-   = note:     expected struct `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>`
-           found `async` block `{async block@$DIR/expected-boxed-future-isnt-pinned.rs:28:5: 28:10}`
+error E0308: mismatched types
+ at $DIR/expected-boxed-future-isnt-pinned.rs:28:5 to 30:6: expected `Pin<Box<_>>`, found `async` block
+  on line 27, column 13: expected `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>` because of return type
+note:     expected struct `Pin<Box<(dyn Future<Output = i32> + Send + 'static)>>`
+      found `async` block `{async block@$DIR/expected-boxed-future-isnt-pinned.rs:28:5: 28:10}`
 help: you need to pin and box this expression
-   |
-LL ~     Box::pin(async {
-LL |         42
-LL ~     })
-   |
+ on line 28, column 4, add `Box::pin(`
 
 error: aborting due to 6 previous errors
 

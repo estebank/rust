@@ -1,8 +1,5 @@
-error[E0433]: cannot find `Self` in this scope
-  --> $DIR/unreachable-issue-121455.rs:1:13
-   |
-LL | fn test(s: &Self::Id) {
-   |             ^^^^ `Self` is only available in impls, traits, and type definitions
+error E0433: cannot find `Self` in this scope
+ at $DIR/unreachable-issue-121455.rs:1:13: `Self` is only available in impls, traits, and type definitions
 
 error: aborting due to 1 previous error
 

@@ -1,62 +1,31 @@
-error[E0023]: this pattern has 1 field, but the corresponding tuple variant has 2 fields
-  --> $DIR/E0023.rs:11:22
-   |
-LL |     Apple(String, String),
-   |           ------  ------ tuple variant has 2 fields
-...
-LL |         Fruit::Apple(a) => {},
-   |                      ^ expected 2 fields, found 1
-   |
+error E0023: this pattern has 1 field, but the corresponding tuple variant has 2 fields
+ at $DIR/E0023.rs:11:22: expected 2 fields, found 1
+  on line 2, column 19: tuple variant has 2 fields
 help: use `_` to explicitly ignore each field
-   |
-LL |         Fruit::Apple(a, _) => {},
-   |                       +++
+ on line 11, column 22, add `, _`
 
-error[E0023]: this pattern has 3 fields, but the corresponding tuple variant has 2 fields
-  --> $DIR/E0023.rs:12:22
-   |
-LL |     Apple(String, String),
-   |           ------  ------ tuple variant has 2 fields
-...
-LL |         Fruit::Apple(a, b, c) => {},
-   |                      ^  ^  ^ expected 2 fields, found 3
+error E0023: this pattern has 3 fields, but the corresponding tuple variant has 2 fields
+ at $DIR/E0023.rs:12:22
+  on line 12, column 28: expected 2 fields, found 3
+  on line 2, column 19: tuple variant has 2 fields
 
-error[E0023]: this pattern has 2 fields, but the corresponding tuple variant has 1 field
-  --> $DIR/E0023.rs:13:21
-   |
-LL |     Pear(u32),
-   |          --- tuple variant has 1 field
-...
-LL |         Fruit::Pear(1, 2) => {},
-   |                     ^  ^ expected 1 field, found 2
+error E0023: this pattern has 2 fields, but the corresponding tuple variant has 1 field
+ at $DIR/E0023.rs:13:21
+  on line 13, column 24: expected 1 field, found 2
+  on line 3, column 10: tuple variant has 1 field
 
-error[E0023]: this pattern has 2 fields, but the corresponding tuple variant has 1 field
-  --> $DIR/E0023.rs:14:23
-   |
-LL |     Orange((String, String)),
-   |            ---------------- tuple variant has 1 field
-...
-LL |         Fruit::Orange(a, b) => {},
-   |                       ^  ^ expected 1 field, found 2
-   |
+error E0023: this pattern has 2 fields, but the corresponding tuple variant has 1 field
+ at $DIR/E0023.rs:14:23
+  on line 14, column 26: expected 1 field, found 2
+  on line 4, column 12: tuple variant has 1 field
 help: missing parentheses
-   |
-LL |         Fruit::Orange((a, b)) => {},
-   |                       +    +
+ on line 14, column 22, add `(`
 
-error[E0023]: this pattern has 0 fields, but the corresponding tuple variant has 1 field
-  --> $DIR/E0023.rs:15:9
-   |
-LL |     Banana(()),
-   |            -- tuple variant has 1 field
-...
-LL |         Fruit::Banana() => {},
-   |         ^^^^^^^^^^^^^^^ expected 1 field, found 0
-   |
+error E0023: this pattern has 0 fields, but the corresponding tuple variant has 1 field
+ at $DIR/E0023.rs:15:9: expected 1 field, found 0
+  on line 5, column 12: tuple variant has 1 field
 help: missing parentheses
-   |
-LL |         Fruit::Banana(()) => {},
-   |                      +  +
+ on line 15, column 21, add `(`
 
 error: aborting due to 5 previous errors
 

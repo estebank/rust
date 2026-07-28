@@ -1,11 +1,6 @@
-error[E0515]: cannot return reference to temporary value
-  --> $DIR/return-ref-to-temporary.rs:3:5
-   |
-LL |     &mut 4
-   |     ^^^^^-
-   |     |    |
-   |     |    temporary value created here
-   |     returns a reference to data owned by the current function
+error E0515: cannot return reference to temporary value
+ at $DIR/return-ref-to-temporary.rs:3:5: returns a reference to data owned by the current function
+  on line 3, column 10: temporary value created here
 
 error: aborting due to 1 previous error
 

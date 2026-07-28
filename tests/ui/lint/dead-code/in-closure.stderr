@@ -1,20 +1,10 @@
 error: function `a` is never used
-  --> $DIR/in-closure.rs:7:12
-   |
-LL |         fn a() {}
-   |            ^
-   |
+ at $DIR/in-closure.rs:7:12
 note: the lint level is defined here
-  --> $DIR/in-closure.rs:3:9
-   |
-LL | #![deny(dead_code)]
-   |         ^^^^^^^^^
+ at $DIR/in-closure.rs:3:9
 
 error: constant `A` is never used
-  --> $DIR/in-closure.rs:13:11
-   |
-LL |     const A: usize = 1;
-   |           ^
+ at $DIR/in-closure.rs:13:11
 
 error: aborting due to 2 previous errors
 

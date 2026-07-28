@@ -1,11 +1,6 @@
-error[E0599]: no method named `dog_age` found for struct `Dog` in the current scope
-  --> $DIR/private-field.rs:16:23
-   |
-LL |     pub struct Dog {
-   |     -------------- method `dog_age` not found for this struct
-...
-LL |     let dog_age = dog.dog_age();
-   |                       ^^^^^^^ private field, not a method
+error E0599: no method named `dog_age` found for struct `Dog` in the current scope
+ at $DIR/private-field.rs:16:23: private field, not a method
+  on line 2: method `dog_age` not found for this struct
 
 error: aborting due to 1 previous error
 

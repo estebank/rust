@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `Assoc`
-  --> $DIR/specialize_on_type_error.rs:14:1
-   |
-LL |     type Assoc: Y;
-   |     ------------- `Assoc` from trait
-...
-LL | impl<T: X> Z for A<T> {}
-   | ^^^^^^^^^^^^^^^^^^^^^ missing `Assoc` in implementation
+error E0046: not all trait items implemented, missing: `Assoc`
+ at $DIR/specialize_on_type_error.rs:14:1: missing `Assoc` in implementation
+  on line 10: `Assoc` from trait
 
 error: aborting due to 1 previous error
 

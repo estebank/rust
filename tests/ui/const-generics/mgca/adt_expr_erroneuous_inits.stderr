@@ -1,49 +1,24 @@
-error[E0422]: cannot find struct, variant or union type `Fooo` in this scope
-  --> $DIR/adt_expr_erroneuous_inits.rs:20:17
-   |
-LL | struct Foo<T> { field: T }
-   | ------------- similarly named struct `Foo` defined here
-...
-LL |     accepts::<{ Fooo::<u8> { field: const { 1 } }}>();
-   |                 ^^^^
-   |
+error E0422: cannot find struct, variant or union type `Fooo` in this scope
+ at $DIR/adt_expr_erroneuous_inits.rs:20:17
+  on line 9: similarly named struct `Foo` defined here
 help: a struct with a similar name exists
-   |
-LL -     accepts::<{ Fooo::<u8> { field: const { 1 } }}>();
-LL +     accepts::<{ Foo::<u8> { field: const { 1 } }}>();
-   |
+ on line 20, column 16, replace with `Foo`
 
-error[E0574]: cannot find struct, variant or union type `NonStruct` in this scope
-  --> $DIR/adt_expr_erroneuous_inits.rs:23:17
-   |
-LL |     accepts::<{ NonStruct { }}>();
-   |                 ^^^^^^^^^ not found in this scope
-   |
-   = note: a function named `NonStruct` exists in another namespace
+error E0574: cannot find struct, variant or union type `NonStruct` in this scope
+ at $DIR/adt_expr_erroneuous_inits.rs:23:17: not found in this scope
+note: a function named `NonStruct` exists in another namespace
 
 error: struct expression with missing field initialiser for `field`
-  --> $DIR/adt_expr_erroneuous_inits.rs:16:17
-   |
-LL |     accepts::<{ Foo::<u8> { }}>();
-   |                 ^^^^^^^^^^^^^
+ at $DIR/adt_expr_erroneuous_inits.rs:16:17
 
 error: struct expression with multiple initialisers for `field`
-  --> $DIR/adt_expr_erroneuous_inits.rs:18:49
-   |
-LL |     accepts::<{ Foo::<u8> { field: const { 1 }, field: const { 2} }}>();
-   |                                                 ^^^^^^^^^^^^^^^^^
+ at $DIR/adt_expr_erroneuous_inits.rs:18:49
 
 error: struct expression with invalid base path
-  --> $DIR/adt_expr_erroneuous_inits.rs:20:17
-   |
-LL |     accepts::<{ Fooo::<u8> { field: const { 1 } }}>();
-   |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/adt_expr_erroneuous_inits.rs:20:17
 
 error: struct expression with invalid base path
-  --> $DIR/adt_expr_erroneuous_inits.rs:23:17
-   |
-LL |     accepts::<{ NonStruct { }}>();
-   |                 ^^^^^^^^^^^^^
+ at $DIR/adt_expr_erroneuous_inits.rs:23:17
 
 error: aborting due to 6 previous errors
 

@@ -1,14 +1,7 @@
 error: function `unused_priv_fn` is never used
-  --> $DIR/allow-lint.rs:10:4
-   |
-LL | fn unused_priv_fn() {}
-   |    ^^^^^^^^^^^^^^
-   |
+ at $DIR/allow-lint.rs:10:4
 note: the lint level is defined here
-  --> $DIR/allow-lint.rs:1:9
-   |
-LL | #![deny(dead_code)]
-   |         ^^^^^^^^^
+ at $DIR/allow-lint.rs:1:9
 
 error: aborting due to 1 previous error
 

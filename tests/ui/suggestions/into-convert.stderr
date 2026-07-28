@@ -1,45 +1,24 @@
-error[E0308]: mismatched types
-  --> $DIR/into-convert.rs:6:16
-   |
-LL |     let x: A = B;
-   |            -   ^ expected `A`, found `B`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/into-convert.rs:6:16: expected `A`, found `B`
+  on line 6, column 12: expected due to this
 help: call `Into::into` on this expression to convert `B` into `A`
-   |
-LL |     let x: A = B.into();
-   |                 +++++++
+ on line 6, column 16, add `.into()`
 
-error[E0308]: mismatched types
-  --> $DIR/into-convert.rs:10:24
-   |
-LL |     let y: Arc<Path> = PathBuf::new();
-   |            ---------   ^^^^^^^^^^^^^^ expected `Arc<Path>`, found `PathBuf`
-   |            |
-   |            expected due to this
-   |
-   = note: expected struct `Arc<Path>`
-              found struct `PathBuf`
+error E0308: mismatched types
+ at $DIR/into-convert.rs:10:24: expected `Arc<Path>`, found `PathBuf`
+  on line 10, column 12: expected due to this
+note: expected struct `Arc<Path>`
+         found struct `PathBuf`
 help: call `Into::into` on this expression to convert `PathBuf` into `Arc<Path>`
-   |
-LL |     let y: Arc<Path> = PathBuf::new().into();
-   |                                      +++++++
+ on line 10, column 37, add `.into()`
 
-error[E0308]: mismatched types
-  --> $DIR/into-convert.rs:14:24
-   |
-LL |     let z: AtomicU32 = 1;
-   |            ---------   ^ expected `Atomic<u32>`, found integer
-   |            |
-   |            expected due to this
-   |
-   = note: expected struct `Atomic<u32>`
-                found type `{integer}`
+error E0308: mismatched types
+ at $DIR/into-convert.rs:14:24: expected `Atomic<u32>`, found integer
+  on line 14, column 12: expected due to this
+note: expected struct `Atomic<u32>`
+           found type `{integer}`
 help: call `Into::into` on this expression to convert `{integer}` into `Atomic<u32>`
-   |
-LL |     let z: AtomicU32 = 1.into();
-   |                         +++++++
+ on line 14, column 24, add `.into()`
 
 error: aborting due to 3 previous errors
 

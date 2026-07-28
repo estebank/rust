@@ -1,16 +1,9 @@
-error[E0700]: hidden type for `impl Clone` captures lifetime that does not appear in bounds
-  --> $DIR/arbitrary_self_types_pin_lifetime_impl_trait.rs:6:44
-   |
-LL |     fn f(self: Pin<&Self>) -> impl Clone { self }
-   |                    -----      ----------   ^^^^
-   |                    |          |
-   |                    |          opaque type defined here
-   |                    hidden type `Pin<&Foo>` captures the anonymous lifetime defined here
-   |
+error E0700: hidden type for `impl Clone` captures lifetime that does not appear in bounds
+ at $DIR/arbitrary_self_types_pin_lifetime_impl_trait.rs:6:44
+  on line 6, column 20: hidden type `Pin<&Foo>` captures the anonymous lifetime defined here
+  on line 6, column 31: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'_`
-   |
-LL |     fn f(self: Pin<&Self>) -> impl Clone + use<'_> { self }
-   |                                          +++++++++
+ on line 6, column 40, add ` + use<'_>`
 
 error: aborting due to 1 previous error
 

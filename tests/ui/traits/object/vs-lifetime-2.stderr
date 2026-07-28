@@ -1,8 +1,5 @@
-error[E0224]: at least one trait is required for an object type
-  --> $DIR/vs-lifetime-2.rs:7:5
-   |
-LL |     dyn 'static +: 'static + Copy,
-   |     ^^^^^^^^^^^^^
+error E0224: at least one trait is required for an object type
+ at $DIR/vs-lifetime-2.rs:7:5
 
 error: aborting due to 1 previous error
 

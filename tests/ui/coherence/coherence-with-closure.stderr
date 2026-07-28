@@ -1,10 +1,6 @@
-error[E0119]: conflicting implementations of trait `Trait` for type `Wrapper<OpaqueClosure>`
-  --> $DIR/coherence-with-closure.rs:12:1
-   |
-LL | impl Trait for Wrapper<OpaqueClosure> {}
-   | ------------------------------------- first implementation here
-LL | impl<T: Sync> Trait for Wrapper<T> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `Wrapper<OpaqueClosure>`
+error E0119: conflicting implementations of trait `Trait` for type `Wrapper<OpaqueClosure>`
+ at $DIR/coherence-with-closure.rs:12:1: conflicting implementation for `Wrapper<OpaqueClosure>`
+  on line 11: first implementation here
 
 error: aborting due to 1 previous error
 

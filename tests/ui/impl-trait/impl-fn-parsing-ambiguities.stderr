@@ -1,38 +1,17 @@
 error: ambiguous `+` in a type
-  --> $DIR/impl-fn-parsing-ambiguities.rs:4:27
-   |
-LL | fn a() -> impl Fn(&u8) -> impl Debug + '_ {
-   |                           ^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-fn-parsing-ambiguities.rs:4:27
 help: try adding parentheses
-   |
-LL | fn a() -> impl Fn(&u8) -> (impl Debug + '_) {
-   |                           +               +
+ on line 4, column 26, add `(`
 
 error: ambiguous `+` in a type
-  --> $DIR/impl-fn-parsing-ambiguities.rs:10:24
-   |
-LL | fn b() -> impl Fn() -> impl Debug + Send {
-   |                        ^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-fn-parsing-ambiguities.rs:10:24
 help: try adding parentheses
-   |
-LL | fn b() -> impl Fn() -> (impl Debug + Send) {
-   |                        +                 +
+ on line 10, column 23, add `(`
 
-error[E0657]: `impl Trait` cannot capture higher-ranked lifetime from outer `impl Trait`
-  --> $DIR/impl-fn-parsing-ambiguities.rs:4:27
-   |
-LL | fn a() -> impl Fn(&u8) -> impl Debug + '_ {
-   |                           ^^^^^^^^^^^^^--
-   |                           |
-   |                           `impl Trait` implicitly captures all lifetimes in scope
-   |
+error E0657: `impl Trait` cannot capture higher-ranked lifetime from outer `impl Trait`
+ at $DIR/impl-fn-parsing-ambiguities.rs:4:27: `impl Trait` implicitly captures all lifetimes in scope
 note: lifetime declared here
-  --> $DIR/impl-fn-parsing-ambiguities.rs:4:19
-   |
-LL | fn a() -> impl Fn(&u8) -> impl Debug + '_ {
-   |                   ^
+ at $DIR/impl-fn-parsing-ambiguities.rs:4:19
 
 error: aborting due to 3 previous errors
 

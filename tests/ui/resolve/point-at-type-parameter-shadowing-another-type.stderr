@@ -1,14 +1,7 @@
-error[E0574]: expected struct, variant or union type, found type parameter `Baz`
-  --> $DIR/point-at-type-parameter-shadowing-another-type.rs:16:13
-   |
-LL | struct Baz {
-   |        --- you might have meant to refer to this struct
-...
-LL | impl<Baz> Foo<Baz> for Bar {
-   |      --- found this type parameter
-...
-LL |             Baz { num } => num,
-   |             ^^^ not a struct, variant or union type
+error E0574: expected struct, variant or union type, found type parameter `Baz`
+ at $DIR/point-at-type-parameter-shadowing-another-type.rs:16:13: not a struct, variant or union type
+  on line 9, column 8: you might have meant to refer to this struct
+  on line 13, column 6: found this type parameter
 
 error: aborting due to 1 previous error
 

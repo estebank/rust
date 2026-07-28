@@ -1,17 +1,9 @@
-error[E0425]: cannot find type `A` in this scope
-  --> $DIR/associated-types-eq-1.rs:10:12
-   |
-LL |     let _: A = x.boo();
-   |            ^
-   |
+error E0425: cannot find type `A` in this scope
+ at $DIR/associated-types-eq-1.rs:10:12
 help: you might have meant to use an associated type of the same name
-   |
-LL |     let _: I::A = x.boo();
-   |            +++
+ on line 10, column 11, replace with `I::A`
 help: you might be missing a type parameter
-   |
-LL | fn foo2<I: Foo, A>(x: I) {
-   |               +++
+ on line 9, column 14, add `, A`
 
 error: aborting due to 1 previous error
 

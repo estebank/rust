@@ -1,62 +1,27 @@
 error: `~` cannot be used as a unary operator
-  --> $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:4:14
-   |
-LL |     let _x = ~1;
-   |              ^
-   |
+ at $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:4:14
 help: use `!` to perform bitwise not
-   |
-LL -     let _x = ~1;
-LL +     let _x = !1;
-   |
+ on line 4, column 13, replace with `!`
 
 error: unexpected `1` after identifier
-  --> $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:5:18
-   |
-LL |     let _y = not 1;
-   |                  ^
-   |
+ at $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:5:18
 help: use `!` to perform bitwise not
-   |
-LL -     let _y = not 1;
-LL +     let _y = !1;
-   |
+ on line 5, column 13, replace with `!`
 
 error: unexpected keyword `false` after identifier
-  --> $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:6:18
-   |
-LL |     let _z = not false;
-   |                  ^^^^^
-   |
+ at $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:6:18
 help: use `!` to perform logical negation
-   |
-LL -     let _z = not false;
-LL +     let _z = !false;
-   |
+ on line 6, column 13, replace with `!`
 
 error: unexpected keyword `true` after identifier
-  --> $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:7:18
-   |
-LL |     let _a = not true;
-   |                  ^^^^
-   |
+ at $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:7:18
 help: use `!` to perform logical negation
-   |
-LL -     let _a = not true;
-LL +     let _a = !true;
-   |
+ on line 7, column 13, replace with `!`
 
 error: unexpected `v` after identifier
-  --> $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:9:18
-   |
-LL |     let _v = not v;
-   |                  ^
-   |
+ at $DIR/issue-41679-tilde-bitwise-negation-attempt.rs:9:18
 help: use `!` to perform logical negation or bitwise not
-   |
-LL -     let _v = not v;
-LL +     let _v = !v;
-   |
+ on line 9, column 13, replace with `!`
 
 error: aborting due to 5 previous errors
 

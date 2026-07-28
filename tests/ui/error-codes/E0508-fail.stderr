@@ -1,24 +1,11 @@
-error[E0508]: cannot move out of type `[NonCopy; 1]`, a non-copy array
-  --> $DIR/E0508-fail.rs:5:18
-   |
-LL |     let _value = array[0];
-   |                  ^^^^^^^^
-   |                  |
-   |                  cannot move out of here
-   |                  move occurs because `array[_]` has type `NonCopy`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[NonCopy; 1]`, a non-copy array
+ at $DIR/E0508-fail.rs:5:18: cannot move out of here
+  on line 5, column 18: move occurs because `array[_]` has type `NonCopy`, which does not implement the `Copy` trait
 note: if `NonCopy` implemented `Clone`, you could clone the value
-  --> $DIR/E0508-fail.rs:1:1
-   |
-LL | struct NonCopy;
-   | ^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     let _value = array[0];
-   |                  -------- you could clone this value
+ at $DIR/E0508-fail.rs:1:1: consider implementing `Clone` for this type
+  on line 5, column 18: you could clone this value
 help: consider borrowing here
-   |
-LL |     let _value = &array[0];
-   |                  +
+ on line 5, column 17, add `&`
 
 error: aborting due to 1 previous error
 

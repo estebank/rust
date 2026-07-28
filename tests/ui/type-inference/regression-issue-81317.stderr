@@ -1,16 +1,8 @@
-error[E0282]: type annotations needed
-  --> $DIR/regression-issue-81317.rs:44:9
-   |
-LL |     let iv = S ^ index.into();
-   |         ^^
-LL |
-LL |     &iv.to_bytes_be();
-   |      -- type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/regression-issue-81317.rs:44:9
+  on line 46, column 6: type must be known at this point
 help: consider giving `iv` an explicit type
-   |
-LL |     let iv: /* Type */ = S ^ index.into();
-   |           ++++++++++++
+ on line 44, column 10, add `: /* Type */`
 
 error: aborting due to 1 previous error
 

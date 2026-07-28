@@ -1,42 +1,21 @@
 error: calls to `std::mem::drop` with `std::mem::ManuallyDrop` instead of the inner value does nothing
-  --> $DIR/undropped_manually_drops.rs:10:5
-   |
-LL |     drop(std::mem::ManuallyDrop::new(S));
-   |     ^^^^^------------------------------^
-   |          |
-   |          argument has type `ManuallyDrop<S>`
-   |
-   = note: `#[deny(undropped_manually_drops)]` on by default
+ at $DIR/undropped_manually_drops.rs:10:5
+  on line 10, column 10: argument has type `ManuallyDrop<S>`
+note: `#[deny(undropped_manually_drops)]` on by default
 help: use `std::mem::ManuallyDrop::into_inner` to get the inner value
-   |
-LL |     drop(std::mem::ManuallyDrop::into_inner(std::mem::ManuallyDrop::new(S)));
-   |          +++++++++++++++++++++++++++++++++++                              +
+ on line 10, column 9, add `std::mem::ManuallyDrop::into_inner(`
 
 error: calls to `std::mem::drop` with `std::mem::ManuallyDrop` instead of the inner value does nothing
-  --> $DIR/undropped_manually_drops.rs:11:5
-   |
-LL |     drop(manual1);
-   |     ^^^^^-------^
-   |          |
-   |          argument has type `ManuallyDrop<S>`
-   |
+ at $DIR/undropped_manually_drops.rs:11:5
+  on line 11, column 10: argument has type `ManuallyDrop<S>`
 help: use `std::mem::ManuallyDrop::into_inner` to get the inner value
-   |
-LL |     drop(std::mem::ManuallyDrop::into_inner(manual1));
-   |          +++++++++++++++++++++++++++++++++++       +
+ on line 11, column 9, add `std::mem::ManuallyDrop::into_inner(`
 
 error: calls to `std::mem::drop` with `std::mem::ManuallyDrop` instead of the inner value does nothing
-  --> $DIR/undropped_manually_drops.rs:12:5
-   |
-LL |     drop({ manual3 });
-   |     ^^^^^-----------^
-   |          |
-   |          argument has type `ManuallyDrop<S>`
-   |
+ at $DIR/undropped_manually_drops.rs:12:5
+  on line 12, column 10: argument has type `ManuallyDrop<S>`
 help: use `std::mem::ManuallyDrop::into_inner` to get the inner value
-   |
-LL |     drop(std::mem::ManuallyDrop::into_inner({ manual3 }));
-   |          +++++++++++++++++++++++++++++++++++           +
+ on line 12, column 9, add `std::mem::ManuallyDrop::into_inner(`
 
 error: aborting due to 3 previous errors
 

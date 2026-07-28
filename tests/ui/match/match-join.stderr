@@ -1,8 +1,5 @@
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/match-join.rs:9:20
-   |
-LL |     println!("{}", x);
-   |                    ^ not found in this scope
+error E0425: cannot find value `x` in this scope
+ at $DIR/match-join.rs:9:20: not found in this scope
 
 error: aborting due to 1 previous error
 

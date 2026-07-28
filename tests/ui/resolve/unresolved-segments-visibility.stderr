@@ -1,8 +1,5 @@
-error[E0433]: cannot find module `String` in `string`
-  --> $DIR/unresolved-segments-visibility.rs:8:34
-   |
-LL |         pub(in crate::b::string::String::newy) extern crate alloc as e;
-   |                                  ^^^^^^ `String` is a struct, not a module
+error E0433: cannot find module `String` in `string`
+ at $DIR/unresolved-segments-visibility.rs:8:34: `String` is a struct, not a module
 
 error: aborting due to 1 previous error
 

@@ -1,83 +1,35 @@
-error[E0277]: the trait bound `for<'a> &'a (): BufferMut` is not satisfied
-  --> $DIR/issue-89118.rs:19:8
-   |
-LL |     C: StackContext,
-   |        ^^^^^^^^^^^^ the trait `for<'a> BufferMut` is not implemented for `&'a ()`
-   |
+error E0277: the trait bound `for<'a> &'a (): BufferMut` is not satisfied
+ at $DIR/issue-89118.rs:19:8: the trait `for<'a> BufferMut` is not implemented for `&'a ()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/issue-89118.rs:1:1
-   |
-LL | trait BufferMut {}
-   | ^^^^^^^^^^^^^^^
+ at $DIR/issue-89118.rs:1:1
 note: required for `Ctx<()>` to implement `for<'a> BufferUdpStateContext<&'a ()>`
-  --> $DIR/issue-89118.rs:5:23
-   |
-LL | impl<B: BufferMut, C> BufferUdpStateContext<B> for C {}
-   |         ---------     ^^^^^^^^^^^^^^^^^^^^^^^^     ^
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/issue-89118.rs:5:23
+  on line 5, column 9: unsatisfied trait bound introduced here
 note: required by a bound in `StackContext`
-  --> $DIR/issue-89118.rs:9:14
-   |
-LL | trait StackContext
-   |       ------------ required by a bound in this trait
-LL | where
-LL |     Ctx<()>: for<'a> BufferUdpStateContext<&'a ()>,
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `StackContext`
+ at $DIR/issue-89118.rs:9:14: required by this bound in `StackContext`
+  on line 7, column 7: required by a bound in this trait
 
-error[E0277]: the trait bound `for<'a> &'a (): BufferMut` is not satisfied
-  --> $DIR/issue-89118.rs:29:9
-   |
-LL | impl<C> EthernetWorker<C> {}
-   |         ^^^^^^^^^^^^^^^^^ the trait `for<'a> BufferMut` is not implemented for `&'a ()`
-   |
+error E0277: the trait bound `for<'a> &'a (): BufferMut` is not satisfied
+ at $DIR/issue-89118.rs:29:9: the trait `for<'a> BufferMut` is not implemented for `&'a ()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/issue-89118.rs:1:1
-   |
-LL | trait BufferMut {}
-   | ^^^^^^^^^^^^^^^
+ at $DIR/issue-89118.rs:1:1
 note: required for `Ctx<()>` to implement `for<'a> BufferUdpStateContext<&'a ()>`
-  --> $DIR/issue-89118.rs:5:23
-   |
-LL | impl<B: BufferMut, C> BufferUdpStateContext<B> for C {}
-   |         ---------     ^^^^^^^^^^^^^^^^^^^^^^^^     ^
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/issue-89118.rs:5:23
+  on line 5, column 9: unsatisfied trait bound introduced here
 note: required by a bound in `EthernetWorker`
-  --> $DIR/issue-89118.rs:28:14
-   |
-LL | struct EthernetWorker<C>(C)
-   |        -------------- required by a bound in this struct
-LL | where
-LL |     Ctx<()>: for<'a> BufferUdpStateContext<&'a ()>;
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `EthernetWorker`
+ at $DIR/issue-89118.rs:28:14: required by this bound in `EthernetWorker`
+  on line 26, column 8: required by a bound in this struct
 
-error[E0277]: the trait bound `for<'a> &'a (): BufferMut` is not satisfied
-  --> $DIR/issue-89118.rs:22:5
-   |
-LL |     type Handler = Ctx<C::Dispatcher>;
-   |     ^^^^^^^^^^^^ the trait `for<'a> BufferMut` is not implemented for `&'a ()`
-   |
+error E0277: the trait bound `for<'a> &'a (): BufferMut` is not satisfied
+ at $DIR/issue-89118.rs:22:5: the trait `for<'a> BufferMut` is not implemented for `&'a ()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/issue-89118.rs:1:1
-   |
-LL | trait BufferMut {}
-   | ^^^^^^^^^^^^^^^
+ at $DIR/issue-89118.rs:1:1
 note: required for `Ctx<()>` to implement `for<'a> BufferUdpStateContext<&'a ()>`
-  --> $DIR/issue-89118.rs:5:23
-   |
-LL | impl<B: BufferMut, C> BufferUdpStateContext<B> for C {}
-   |         ---------     ^^^^^^^^^^^^^^^^^^^^^^^^     ^
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/issue-89118.rs:5:23
+  on line 5, column 9: unsatisfied trait bound introduced here
 note: required by a bound in `StackContext`
-  --> $DIR/issue-89118.rs:9:14
-   |
-LL | trait StackContext
-   |       ------------ required by a bound in this trait
-LL | where
-LL |     Ctx<()>: for<'a> BufferUdpStateContext<&'a ()>,
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `StackContext`
+ at $DIR/issue-89118.rs:9:14: required by this bound in `StackContext`
+  on line 7, column 7: required by a bound in this trait
 
 error: aborting due to 3 previous errors
 

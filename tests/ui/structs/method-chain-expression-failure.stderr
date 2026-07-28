@@ -1,14 +1,8 @@
-error[E0599]: no method named `foo` found for struct `E` in the current scope
-  --> $DIR/method-chain-expression-failure.rs:29:23
-   |
-LL | struct E;
-   | -------- method `foo` not found for this struct
-...
-LL |     A.b().c().d().e().foo();
-   |     -     ---         ^^^ method not found in `E`
-   |     |     |
-   |     |     method `foo` is available on `&C`
-   |     method `foo` is available on `&A`
+error E0599: no method named `foo` found for struct `E` in the current scope
+ at $DIR/method-chain-expression-failure.rs:29:23: method not found in `E`
+  on line 5: method `foo` not found for this struct
+  on line 29: method `foo` is available on `&A`
+  on line 29, column 11: method `foo` is available on `&C`
 
 error: aborting due to 1 previous error
 

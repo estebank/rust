@@ -1,12 +1,7 @@
 error: expected `:`, found `Bad`
-  --> $DIR/recover-struct.rs:4:9
-   |
-LL |     struct Test {
-   |            ---- while parsing this struct
-LL |         Very
-   |             - expected `:`
-LL |         Bad
-   |         ^^^ unexpected token
+ at $DIR/recover-struct.rs:4:9: unexpected token
+  on line 2, column 12: while parsing this struct
+  on line 3, column 13: expected `:`
 
 error: aborting due to 1 previous error
 

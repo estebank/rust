@@ -1,11 +1,6 @@
-error[E0624]: associated function `new` is private
-  --> $DIR/static-method-privacy.rs:9:19
-   |
-LL |         fn new() -> S { S }
-   |         ------------- private associated function defined here
-...
-LL |     let _ = a::S::new();
-   |                   ^^^ private associated function
+error E0624: associated function `new` is private
+ at $DIR/static-method-privacy.rs:9:19: private associated function
+  on line 4: private associated function defined here
 
 error: aborting due to 1 previous error
 

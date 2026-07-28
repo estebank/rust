@@ -1,49 +1,26 @@
 error: `Option<usize>` is forbidden as the type of a const generic parameter
-  --> $DIR/issue-68366.rs:9:25
-   |
-LL | struct Collatz<const N: Option<usize>>;
-   |                         ^^^^^^^^^^^^^
-   |
-   = note: the only supported types are integers, `bool`, and `char`
+ at $DIR/issue-68366.rs:9:25
+note: the only supported types are integers, `bool`, and `char`
 help: add `#![feature(min_adt_const_params)]` to the crate attributes to enable more complex and user defined types
-   |
-LL + #![feature(min_adt_const_params)]
-   |
+ on line 9, column 1, add `#![feature(min_adt_const_params)]`
 
-error[E0207]: the const parameter `N` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-68366.rs:12:7
-   |
-LL | impl <const N: usize> Collatz<{Some(N)}> {}
-   |      -^^^^^^^^^^^^^^-
-   |      ||
-   |      |unconstrained const parameter
-   |      help: remove the unused type parameter `N`
-   |
-   = note: expressions using a const parameter must map each value to a distinct output value
-   = note: proving the result of expressions other than the parameter are unique is not supported
+error E0207: the const parameter `N` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-68366.rs:12:7: unconstrained const parameter
+  on line 12, column 6: help: remove the unused type parameter `N`
+note: expressions using a const parameter must map each value to a distinct output value
+note: proving the result of expressions other than the parameter are unique is not supported
 
-error[E0207]: the const parameter `N` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-68366.rs:19:6
-   |
-LL | impl<const N: usize> Foo {}
-   |     -^^^^^^^^^^^^^^-
-   |     ||
-   |     |unconstrained const parameter
-   |     help: remove the unused type parameter `N`
-   |
-   = note: expressions using a const parameter must map each value to a distinct output value
-   = note: proving the result of expressions other than the parameter are unique is not supported
+error E0207: the const parameter `N` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-68366.rs:19:6: unconstrained const parameter
+  on line 19, column 5: help: remove the unused type parameter `N`
+note: expressions using a const parameter must map each value to a distinct output value
+note: proving the result of expressions other than the parameter are unique is not supported
 
 error: overly complex generic constant
-  --> $DIR/issue-68366.rs:12:31
-   |
-LL | impl <const N: usize> Collatz<{Some(N)}> {}
-   |                               ^-------^
-   |                                |
-   |                                struct/enum construction is not supported in generic constants
-   |
-   = help: consider moving this anonymous constant into a `const` function
-   = note: this operation may be supported in the future
+ at $DIR/issue-68366.rs:12:31
+  on line 12, column 32: struct/enum construction is not supported in generic constants
+help: consider moving this anonymous constant into a `const` function
+note: this operation may be supported in the future
 
 error: aborting due to 4 previous errors
 

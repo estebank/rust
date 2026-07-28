@@ -1,40 +1,20 @@
-error[E0027]: pattern does not mention field `unstable`
-  --> $DIR/unstable-gated-fields.rs:10:9
-   |
-LL |     let UnstableStruct { stable, stable2, } = UnstableStruct::default();
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing field `unstable`
-   |
+error E0027: pattern does not mention field `unstable`
+ at $DIR/unstable-gated-fields.rs:10:9: missing field `unstable`
 help: include the missing field in the pattern
-   |
-LL |     let UnstableStruct { stable, stable2, unstable } = UnstableStruct::default();
-   |                                           ++++++++
+ on line 10, column 40, replace with `, unstable }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |     let UnstableStruct { stable, stable2, unstable: _ } = UnstableStruct::default();
-   |                                           +++++++++++
+ on line 10, column 40, replace with `, unstable: _ }`
 help: or always ignore missing fields here
-   |
-LL |     let UnstableStruct { stable, stable2, .. } = UnstableStruct::default();
-   |                                           ++
+ on line 10, column 40, replace with `, .. }`
 
-error[E0027]: pattern does not mention field `stable2`
-  --> $DIR/unstable-gated-fields.rs:13:9
-   |
-LL |     let UnstableStruct { stable, unstable, } = UnstableStruct::default();
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing field `stable2`
-   |
+error E0027: pattern does not mention field `stable2`
+ at $DIR/unstable-gated-fields.rs:13:9: missing field `stable2`
 help: include the missing field in the pattern
-   |
-LL |     let UnstableStruct { stable, unstable, stable2 } = UnstableStruct::default();
-   |                                            +++++++
+ on line 13, column 41, replace with `, stable2 }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |     let UnstableStruct { stable, unstable, stable2: _ } = UnstableStruct::default();
-   |                                            ++++++++++
+ on line 13, column 41, replace with `, stable2: _ }`
 help: or always ignore missing fields here
-   |
-LL |     let UnstableStruct { stable, unstable, .. } = UnstableStruct::default();
-   |                                            ++
+ on line 13, column 41, replace with `, .. }`
 
 error: aborting due to 2 previous errors
 

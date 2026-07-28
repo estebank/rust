@@ -1,17 +1,9 @@
-error[E0207]: the lifetime parameter `'a` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/type-alias-impl-trait-unconstrained-lifetime.rs:10:6
-   |
-LL | impl<'a, I: Iterator<Item = i32>> Trait for (i32, I) {
-   |      ^^ unconstrained lifetime parameter
+error E0207: the lifetime parameter `'a` is not constrained by the impl trait, self type, or predicates
+ at $DIR/type-alias-impl-trait-unconstrained-lifetime.rs:10:6: unconstrained lifetime parameter
 
-error[E0792]: expected generic lifetime parameter, found `'_`
-  --> $DIR/type-alias-impl-trait-unconstrained-lifetime.rs:14:9
-   |
-LL | impl<'a, I: Iterator<Item = i32>> Trait for (i32, I) {
-   |      -- this generic parameter must be used with a generic lifetime parameter
-...
-LL |         (0_i32, [0_i32].iter().copied())
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0792: expected generic lifetime parameter, found `'_`
+ at $DIR/type-alias-impl-trait-unconstrained-lifetime.rs:14:9
+  on line 10, column 6: this generic parameter must be used with a generic lifetime parameter
 
 error: aborting due to 2 previous errors
 

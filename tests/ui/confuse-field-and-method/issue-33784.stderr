@@ -1,40 +1,19 @@
-error[E0599]: no method named `closure` found for reference `&Obj<{closure@$DIR/issue-33784.rs:25:43: 25:45}>` in the current scope
-  --> $DIR/issue-33784.rs:27:7
-   |
-LL |     p.closure();
-   |       ^^^^^^^ field, not a method
-   |
+error E0599: no method named `closure` found for reference `&Obj<{closure@$DIR/issue-33784.rs:25:43: 25:45}>` in the current scope
+ at $DIR/issue-33784.rs:27:7: field, not a method
 help: to call the closure stored in `closure`, surround the field access with parentheses
-   |
-LL |     (p.closure)();
-   |     +         +
+ on line 27, column 4, add `(`
 help: there is a method `clone` with a similar name
-   |
-LL -     p.closure();
-LL +     p.clone();
-   |
+ on line 27, column 6, replace with `clone`
 
-error[E0599]: no method named `fn_ptr` found for reference `&&Obj<{closure@$DIR/issue-33784.rs:25:43: 25:45}>` in the current scope
-  --> $DIR/issue-33784.rs:29:7
-   |
-LL |     q.fn_ptr();
-   |       ^^^^^^ field, not a method
-   |
+error E0599: no method named `fn_ptr` found for reference `&&Obj<{closure@$DIR/issue-33784.rs:25:43: 25:45}>` in the current scope
+ at $DIR/issue-33784.rs:29:7: field, not a method
 help: to call the function pointer stored in `fn_ptr`, surround the field access with parentheses
-   |
-LL |     (q.fn_ptr)();
-   |     +        +
+ on line 29, column 4, add `(`
 
-error[E0599]: no method named `c_fn_ptr` found for reference `&D` in the current scope
-  --> $DIR/issue-33784.rs:32:7
-   |
-LL |     s.c_fn_ptr();
-   |       ^^^^^^^^ field, not a method
-   |
+error E0599: no method named `c_fn_ptr` found for reference `&D` in the current scope
+ at $DIR/issue-33784.rs:32:7: field, not a method
 help: to call the function pointer stored in `c_fn_ptr`, surround the field access with parentheses
-   |
-LL |     (s.c_fn_ptr)();
-   |     +          +
+ on line 32, column 4, add `(`
 
 error: aborting due to 3 previous errors
 

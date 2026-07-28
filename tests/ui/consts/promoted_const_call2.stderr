@@ -1,42 +1,22 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promoted_const_call2.rs:4:26
-   |
-LL |     let _: &'static _ = &id(&String::new());
-   |            ----------    ^^^^^^^^^^^^^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | };
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promoted_const_call2.rs:4:26: creates a temporary value which is freed while still in use
+  on line 4, column 12: type annotation requires that borrow lasts for `'static`
+  on line 7: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promoted_const_call2.rs:4:30
-   |
-LL |     let _: &'static _ = &id(&String::new());
-   |            ----------        ^^^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |            |                 |
-   |            |                 creates a temporary value which is freed while still in use
-   |            type annotation requires that borrow lasts for `'static`
+error E0716: temporary value dropped while borrowed
+ at $DIR/promoted_const_call2.rs:4:30: creates a temporary value which is freed while still in use
+  on line 4, column 12: type annotation requires that borrow lasts for `'static`
+  on line 4, column 44: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promoted_const_call2.rs:10:26
-   |
-LL |     let _: &'static _ = &id(&String::new());
-   |            ----------    ^^^^^^^^^^^^^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promoted_const_call2.rs:10:26: creates a temporary value which is freed while still in use
+  on line 10, column 12: type annotation requires that borrow lasts for `'static`
+  on line 13: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promoted_const_call2.rs:10:30
-   |
-LL |     let _: &'static _ = &id(&String::new());
-   |            ----------        ^^^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |            |                 |
-   |            |                 creates a temporary value which is freed while still in use
-   |            type annotation requires that borrow lasts for `'static`
+error E0716: temporary value dropped while borrowed
+ at $DIR/promoted_const_call2.rs:10:30: creates a temporary value which is freed while still in use
+  on line 10, column 12: type annotation requires that borrow lasts for `'static`
+  on line 10, column 44: temporary value is freed at the end of this statement
 
 error: aborting due to 4 previous errors
 

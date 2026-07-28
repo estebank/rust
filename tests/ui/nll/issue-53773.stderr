@@ -1,15 +1,8 @@
-error[E0713]: borrow may still be in use when destructor runs
-  --> $DIR/issue-53773.rs:41:22
-   |
-LL |         members.push(child.raw);
-   |         -------      ^^^^^^^^^
-   |         |
-   |         borrow later used here
-LL |
-LL |     }
-   |     - here, drop of `child` needs exclusive access to `*child.raw`, because the type `C<'_>` implements the `Drop` trait
-   |
-   = note: consider using a `let` binding to create a longer lived value
+error E0713: borrow may still be in use when destructor runs
+ at $DIR/issue-53773.rs:41:22
+  on line 41: borrow later used here
+  on line 43: here, drop of `child` needs exclusive access to `*child.raw`, because the type `C<'_>` implements the `Drop` trait
+note: consider using a `let` binding to create a longer lived value
 
 error: aborting due to 1 previous error
 

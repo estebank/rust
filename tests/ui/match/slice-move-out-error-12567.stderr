@@ -1,50 +1,22 @@
-error[E0508]: cannot move out of type `[T]`, a non-copy slice
-  --> $DIR/slice-move-out-error-12567.rs:4:11
-   |
-LL |     match (l1, l2) {
-   |           ^^^^^^^^ cannot move out of here
-...
-LL |         (&[], &[hd, ..]) | (&[hd, ..], &[])
-   |                 -- data moved here
-LL |             => println!("one empty"),
-LL |         (&[hd1, ..], &[hd2, ..])
-   |                        --- ...and here
-   |
-   = note: move occurs because these variables have types that don't implement the `Copy` trait
+error E0508: cannot move out of type `[T]`, a non-copy slice
+ at $DIR/slice-move-out-error-12567.rs:4:11: cannot move out of here
+  on line 8, column 17: data moved here
+  on line 10, column 24: ...and here
+note: move occurs because these variables have types that don't implement the `Copy` trait
 help: consider removing the borrow
-   |
-LL -         (&[], &[hd, ..]) | (&[hd, ..], &[])
-LL +         (&[], [hd, ..]) | (&[hd, ..], &[])
-   |
+ on line 8, column 14
 help: consider removing the borrow
-   |
-LL -         (&[hd1, ..], &[hd2, ..])
-LL +         (&[hd1, ..], [hd2, ..])
-   |
+ on line 10, column 21
 
-error[E0508]: cannot move out of type `[T]`, a non-copy slice
-  --> $DIR/slice-move-out-error-12567.rs:4:11
-   |
-LL |     match (l1, l2) {
-   |           ^^^^^^^^ cannot move out of here
-...
-LL |         (&[], &[hd, ..]) | (&[hd, ..], &[])
-   |                 -- data moved here
-LL |             => println!("one empty"),
-LL |         (&[hd1, ..], &[hd2, ..])
-   |            --- ...and here
-   |
-   = note: move occurs because these variables have types that don't implement the `Copy` trait
+error E0508: cannot move out of type `[T]`, a non-copy slice
+ at $DIR/slice-move-out-error-12567.rs:4:11: cannot move out of here
+  on line 8, column 17: data moved here
+  on line 10, column 12: ...and here
+note: move occurs because these variables have types that don't implement the `Copy` trait
 help: consider removing the borrow
-   |
-LL -         (&[], &[hd, ..]) | (&[hd, ..], &[])
-LL +         (&[], [hd, ..]) | (&[hd, ..], &[])
-   |
+ on line 8, column 14
 help: consider removing the borrow
-   |
-LL -         (&[hd1, ..], &[hd2, ..])
-LL +         ([hd1, ..], &[hd2, ..])
-   |
+ on line 10, column 9
 
 error: aborting due to 2 previous errors
 

@@ -1,31 +1,15 @@
-error[E0666]: nested `impl Trait` is not allowed
-  --> $DIR/non-lifetime-binder.rs:6:29
-   |
-LL | fn f() -> impl for<T> Trait<impl Trait<T>> {}
-   |           ------------------^^^^^^^^^^^^^-
-   |           |                 |
-   |           |                 nested `impl Trait` here
-   |           outer `impl Trait`
+error E0666: nested `impl Trait` is not allowed
+ at $DIR/non-lifetime-binder.rs:6:29: nested `impl Trait` here
+  on line 6, column 11: outer `impl Trait`
 
 error: cannot capture late-bound type parameter in nested `impl Trait`
-  --> $DIR/non-lifetime-binder.rs:6:40
-   |
-LL | fn f() -> impl for<T> Trait<impl Trait<T>> {}
-   |                    -                   ^
-   |                    |
-   |                    parameter defined here
+ at $DIR/non-lifetime-binder.rs:6:40
+  on line 6, column 20: parameter defined here
 
-error[E0277]: the trait bound `(): Trait<impl Trait<{type error}>>` is not satisfied
-  --> $DIR/non-lifetime-binder.rs:6:11
-   |
-LL | fn f() -> impl for<T> Trait<impl Trait<T>> {}
-   |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Trait<impl Trait<{type error}>>` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Trait<impl Trait<{type error}>>` is not satisfied
+ at $DIR/non-lifetime-binder.rs:6:11: the trait `Trait<impl Trait<{type error}>>` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/non-lifetime-binder.rs:4:1
-   |
-LL | trait Trait<T> {}
-   | ^^^^^^^^^^^^^^
+ at $DIR/non-lifetime-binder.rs:4:1
 
 error: aborting due to 3 previous errors
 

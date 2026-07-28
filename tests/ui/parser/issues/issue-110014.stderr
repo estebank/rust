@@ -1,20 +1,10 @@
 error: unknown start of token: `
-  --> $DIR/issue-110014.rs:1:3
-   |
-LL | fn`2222222222222222222222222222222222222222() {}
-   |   ^
-   |
+ at $DIR/issue-110014.rs:1:3
 help: Unicode character '`' (Grave Accent) looks like ''' (Single Quote), but it is not
-   |
-LL - fn`2222222222222222222222222222222222222222() {}
-LL + fn'2222222222222222222222222222222222222222() {}
-   |
+ on line 1, column 2, replace with `'`
 
 error: expected identifier, found `2222222222222222222222222222222222222222`
-  --> $DIR/issue-110014.rs:1:4
-   |
-LL | fn`2222222222222222222222222222222222222222() {}
-   |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected identifier
+ at $DIR/issue-110014.rs:1:4: expected identifier
 
 error: aborting due to 2 previous errors
 

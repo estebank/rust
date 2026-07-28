@@ -1,25 +1,13 @@
-error[E0596]: cannot borrow data in a `&` reference as mutable
-  --> $DIR/dont-print-desugared.rs:4:10
-   |
-LL |     for &ref mut x in s {}
-   |          ^^^^^^^^^    - this cannot be borrowed as mutable
-   |          |
-   |          cannot borrow as mutable
+error E0596: cannot borrow data in a `&` reference as mutable
+ at $DIR/dont-print-desugared.rs:4:10: cannot borrow as mutable
+  on line 4, column 23: this cannot be borrowed as mutable
 
-error[E0597]: `y` does not live long enough
-  --> $DIR/dont-print-desugared.rs:17:16
-   |
-LL |     for ref mut d in v {
-   |                      - a temporary with access to the borrow is created here ...
-LL |         let y = ();
-   |             - binding `y` declared here
-LL |         *d = D(&y);
-   |                ^^ borrowed value does not live long enough
-LL |     }
-   |     -
-   |     |
-   |     `y` dropped here while still borrowed
-   |     ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `D`
+error E0597: `y` does not live long enough
+ at $DIR/dont-print-desugared.rs:17:16: borrowed value does not live long enough
+  on line 15, column 22: a temporary with access to the borrow is created here ...
+  on line 16, column 13: binding `y` declared here
+  on line 18: `y` dropped here while still borrowed
+  on line 18: ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `D`
 
 error: aborting due to 2 previous errors
 

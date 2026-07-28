@@ -1,16 +1,9 @@
 error: variable `v` is still repeating at this depth
-  --> $DIR/macro-repeat.rs:3:9
-   |
-LL |         $v
-   |         ^^
+ at $DIR/macro-repeat.rs:3:9
 
 error: variable `v` is still repeating at this depth
-  --> $DIR/macro-repeat.rs:3:9
-   |
-LL |         $v
-   |         ^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/macro-repeat.rs:3:9
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: aborting due to 2 previous errors
 

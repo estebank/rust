@@ -1,20 +1,10 @@
-error[E0762]: unterminated character literal
-  --> $DIR/lex-bad-str-literal-as-char-1.rs:3:20
-   |
-LL |     println!('1 + 1');
-   |                    ^^^
-   |
+error E0762: unterminated character literal
+ at $DIR/lex-bad-str-literal-as-char-1.rs:3:20
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     println!('1 + 1');
-LL +     println!("1 + 1");
-   |
+ on line 3, column 13, replace with `"`
 
 error: lifetimes cannot start with a number
-  --> $DIR/lex-bad-str-literal-as-char-1.rs:3:14
-   |
-LL |     println!('1 + 1');
-   |              ^^
+ at $DIR/lex-bad-str-literal-as-char-1.rs:3:14
 
 error: aborting due to 2 previous errors
 

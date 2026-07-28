@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `req`
-  --> $DIR/impl-with-default-fn-fail.rs:11:1
-   |
-LL |     fn req(&self);
-   |     -------------- `req` from trait
-...
-LL | const impl Tr for u16 {
-   | ^^^^^^^^^^^^^^^^^^^^^ missing `req` in implementation
+error E0046: not all trait items implemented, missing: `req`
+ at $DIR/impl-with-default-fn-fail.rs:11:1: missing `req` in implementation
+  on line 4: `req` from trait
 
 error: aborting due to 1 previous error
 

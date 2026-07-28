@@ -1,14 +1,8 @@
-error[E0080]: evaluation panicked: explicit panic
-  --> $DIR/required-const.rs:6:17
-   |
-LL |         const { panic!() }
-   |                 ^^^^^^^^ evaluation of `foo::<i32>::{constant#0}` failed here
+error E0080: evaluation panicked: explicit panic
+ at $DIR/required-const.rs:6:17: evaluation of `foo::<i32>::{constant#0}` failed here
 
 note: erroneous constant encountered
-  --> $DIR/required-const.rs:6:9
-   |
-LL |         const { panic!() }
-   |         ^^^^^^^^^^^^^^^^^^
+ at $DIR/required-const.rs:6:9
 
 error: aborting due to 1 previous error
 

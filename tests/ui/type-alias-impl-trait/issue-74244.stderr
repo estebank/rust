@@ -1,11 +1,6 @@
-error[E0207]: the type parameter `T` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-74244.rs:9:6
-   |
-LL | impl<T> Allocator for DefaultAllocator {
-   |     -^-
-   |     ||
-   |     |unconstrained type parameter
-   |     help: remove the unused type parameter `T`
+error E0207: the type parameter `T` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-74244.rs:9:6: unconstrained type parameter
+  on line 9, column 5: help: remove the unused type parameter `T`
 
 error: aborting due to 1 previous error
 

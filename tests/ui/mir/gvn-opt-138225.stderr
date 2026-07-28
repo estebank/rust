@@ -1,17 +1,10 @@
-error[E0670]: `async fn` is not permitted in Rust 2015
-  --> $DIR/gvn-opt-138225.rs:9:9
-   |
-LL |     pub async fn func1() -> &'static A {
-   |         ^^^^^ to use `async fn`, switch to Rust 2018 or later
-   |
-   = help: pass `--edition 2024` to `rustc`
-   = note: for more on editions, read https://doc.rust-lang.org/edition-guide
+error E0670: `async fn` is not permitted in Rust 2015
+ at $DIR/gvn-opt-138225.rs:9:9: to use `async fn`, switch to Rust 2018 or later
+help: pass `--edition 2024` to `rustc`
+note: for more on editions, read https://doc.rust-lang.org/edition-guide
 
-error[E0425]: cannot find type `NestedOption` in this scope
-  --> $DIR/gvn-opt-138225.rs:4:11
-   |
-LL |     name: NestedOption<Option<String>>,
-   |           ^^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `NestedOption` in this scope
+ at $DIR/gvn-opt-138225.rs:4:11: not found in this scope
 
 error: aborting due to 2 previous errors
 

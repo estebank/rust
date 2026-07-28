@@ -1,13 +1,7 @@
-error[E0384]: cannot assign twice to immutable variable `v`
-  --> $DIR/liveness-assign-imm-local-in-loop.rs:6:9
-   |
-LL |         v = 1;
-   |         ^^^^^ cannot assign twice to immutable variable
-   |
+error E0384: cannot assign twice to immutable variable `v`
+ at $DIR/liveness-assign-imm-local-in-loop.rs:6:9: cannot assign twice to immutable variable
 help: consider making this binding mutable
-   |
-LL |     let mut v: isize;
-   |         +++
+ on line 2, column 8, add `mut `
 
 error: aborting due to 1 previous error
 

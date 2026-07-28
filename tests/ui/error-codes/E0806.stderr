@@ -1,13 +1,7 @@
-error[E0806]: `y` has 1 parameter but #[foo] requires it to have 0
-  --> $DIR/E0806.rs:7:9
-   |
-LL | fn x();
-   | ------- requires 0 parameters
-LL |
-LL | #[foo]
-   | ------ required because of this attribute
-LL | fn y(a: u64) -> u64 {
-   |         ^^^ expected 0 parameters, found 1
+error E0806: `y` has 1 parameter but #[foo] requires it to have 0
+ at $DIR/E0806.rs:7:9: expected 0 parameters, found 1
+  on line 4: requires 0 parameters
+  on line 6: required because of this attribute
 
 error: aborting due to 1 previous error
 

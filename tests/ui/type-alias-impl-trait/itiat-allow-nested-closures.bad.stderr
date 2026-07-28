@@ -1,25 +1,13 @@
-error[E0308]: mismatched types
-  --> $DIR/itiat-allow-nested-closures.rs:21:22
-   |
-LL |     type Assoc = impl Sized;
-   |                  ---------- the found opaque type
-...
-LL |         let _: i32 = closure();
-   |                ---   ^^^^^^^^^ expected `i32`, found opaque type
-   |                |
-   |                expected due to this
-   |
-   = note:     expected type `i32`
-           found opaque type `<() as Foo>::Assoc`
+error E0308: mismatched types
+ at $DIR/itiat-allow-nested-closures.rs:21:22: expected `i32`, found opaque type
+  on line 12, column 18: the found opaque type
+  on line 21, column 16: expected due to this
+note:     expected type `i32`
+      found opaque type `<() as Foo>::Assoc`
 
-error[E0308]: mismatched types
-  --> $DIR/itiat-allow-nested-closures.rs:22:9
-   |
-LL |     fn bar() -> Self::Assoc {
-   |                 ----------- expected `()` because of return type
-...
-LL |         1i32
-   |         ^^^^ expected `()`, found `i32`
+error E0308: mismatched types
+ at $DIR/itiat-allow-nested-closures.rs:22:9: expected `()`, found `i32`
+  on line 13, column 17: expected `()` because of return type
 
 error: aborting due to 2 previous errors
 

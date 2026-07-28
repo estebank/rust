@@ -1,35 +1,17 @@
-error[E0277]: the trait bound `(): SuperTrait` is not satisfied
-  --> $DIR/type-const-ice-issue-151631.rs:10:16
-   |
-LL | impl Trait for () {
-   |                ^^ the trait `SuperTrait` is not implemented for `()`
-   |
+error E0277: the trait bound `(): SuperTrait` is not satisfied
+ at $DIR/type-const-ice-issue-151631.rs:10:16: the trait `SuperTrait` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/type-const-ice-issue-151631.rs:6:1
-   |
-LL | trait SuperTrait {}
-   | ^^^^^^^^^^^^^^^^
+ at $DIR/type-const-ice-issue-151631.rs:6:1
 note: required by a bound in `Trait`
-  --> $DIR/type-const-ice-issue-151631.rs:7:14
-   |
-LL | trait Trait: SuperTrait {
-   |              ^^^^^^^^^^ required by this bound in `Trait`
+ at $DIR/type-const-ice-issue-151631.rs:7:14: required by this bound in `Trait`
 
-error[E0271]: type mismatch resolving `<() as Trait>::K == 0`
-  --> $DIR/type-const-ice-issue-151631.rs:17:11
-   |
-LL |     check(());
-   |     ----- ^^ expected `0`, found `1`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: expected constant `0`
-              found constant `1`
+error E0271: type mismatch resolving `<() as Trait>::K == 0`
+ at $DIR/type-const-ice-issue-151631.rs:17:11: expected `0`, found `1`
+  on line 17: required by a bound introduced by this call
+note: expected constant `0`
+         found constant `1`
 note: required by a bound in `check`
-  --> $DIR/type-const-ice-issue-151631.rs:14:24
-   |
-LL | fn check(_: impl Trait<K = 0>) {}
-   |                        ^^^^^ required by this bound in `check`
+ at $DIR/type-const-ice-issue-151631.rs:14:24: required by this bound in `check`
 
 error: aborting due to 2 previous errors
 

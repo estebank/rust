@@ -1,22 +1,11 @@
-error[E0792]: non-defining opaque type use in defining scope
-  --> $DIR/non-defining-method.rs:16:17
-   |
-LL |     fn foo() -> Self::Bar<u32> {}
-   |                 ^^^^^^^^^^^^^^ argument `u32` is not a generic parameter
-   |
+error E0792: non-defining opaque type use in defining scope
+ at $DIR/non-defining-method.rs:16:17: argument `u32` is not a generic parameter
 note: for this opaque type
-  --> $DIR/non-defining-method.rs:15:19
-   |
-LL |     type Bar<T> = impl Sized;
-   |                   ^^^^^^^^^^
+ at $DIR/non-defining-method.rs:15:19
 
-error[E0792]: expected generic type parameter, found `u32`
-  --> $DIR/non-defining-method.rs:16:17
-   |
-LL |     type Bar<T> = impl Sized;
-   |              - this generic parameter must be used with a generic type parameter
-LL |     fn foo() -> Self::Bar<u32> {}
-   |                 ^^^^^^^^^^^^^^
+error E0792: expected generic type parameter, found `u32`
+ at $DIR/non-defining-method.rs:16:17
+  on line 15, column 14: this generic parameter must be used with a generic type parameter
 
 error: aborting due to 2 previous errors
 

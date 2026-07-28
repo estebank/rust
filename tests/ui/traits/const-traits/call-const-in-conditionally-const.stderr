@@ -1,8 +1,5 @@
-error[E0277]: the trait bound `T: const Foo` is not satisfied
-  --> $DIR/call-const-in-conditionally-const.rs:9:13
-   |
-LL |     const { T::foo() }
-   |             ^
+error E0277: the trait bound `T: const Foo` is not satisfied
+ at $DIR/call-const-in-conditionally-const.rs:9:13
 
 error: aborting due to 1 previous error
 

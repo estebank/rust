@@ -1,52 +1,25 @@
-error[E0261]: use of undeclared lifetime name `'blk`
-  --> $DIR/regions-undeclared.rs:1:14
-   |
-LL | static c_x: &'blk isize = &22;
-   |              ^^^^ undeclared lifetime
+error E0261: use of undeclared lifetime name `'blk`
+ at $DIR/regions-undeclared.rs:1:14: undeclared lifetime
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/regions-undeclared.rs:4:10
-   |
-LL |     Foo(&'a isize),
-   |          ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/regions-undeclared.rs:4:10: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | enum EnumDecl<'a> {
-   |              ++++
+ on line 3, column 13, add `<'a>`
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/regions-undeclared.rs:5:10
-   |
-LL |     Bar(&'a isize),
-   |          ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/regions-undeclared.rs:5:10: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | enum EnumDecl<'a> {
-   |              ++++
+ on line 3, column 13, add `<'a>`
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/regions-undeclared.rs:8:15
-   |
-LL | fn fnDecl(x: &'a isize,
-   |               ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/regions-undeclared.rs:8:15: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | fn fnDecl<'a>(x: &'a isize,
-   |          ++++
+ on line 8, column 9, add `<'a>`
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/regions-undeclared.rs:9:15
-   |
-LL |           y: &'a isize)
-   |               ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/regions-undeclared.rs:9:15: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | fn fnDecl<'a>(x: &'a isize,
-   |          ++++
+ on line 8, column 9, add `<'a>`
 
 error: aborting due to 5 previous errors
 

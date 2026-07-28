@@ -1,64 +1,30 @@
-error[E0277]: the trait bound `(): Project` is not satisfied
-  --> $DIR/bad-projection.rs:14:17
-   |
-LL | pub fn uwu() -> <() as Project>::Assoc {}
-   |                 ^^^^^^^^^^^^^^^^^^^^^^ the trait `Project` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Project` is not satisfied
+ at $DIR/bad-projection.rs:14:17: the trait `Project` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/bad-projection.rs:9:1
-   |
-LL | trait Project {
-   | ^^^^^^^^^^^^^
+ at $DIR/bad-projection.rs:9:1
 
-error[E0277]: the trait bound `(): Project` is not satisfied
-  --> $DIR/bad-projection.rs:14:17
-   |
-LL | pub fn uwu() -> <() as Project>::Assoc {}
-   |                 ^^^^^^^^^^^^^^^^^^^^^^ the trait `Project` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Project` is not satisfied
+ at $DIR/bad-projection.rs:14:17: the trait `Project` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/bad-projection.rs:9:1
-   |
-LL | trait Project {
-   | ^^^^^^^^^^^^^
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/bad-projection.rs:9:1
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0593]: function is expected to take 1 argument, but it takes 0 arguments
-  --> $DIR/bad-projection.rs:14:1
-   |
-LL | pub fn uwu() -> <() as Project>::Assoc {}
-   | --------------------------------------^^^
-   | |
-   | expected function that takes 1 argument
-   | takes 0 arguments
-   | required by a bound introduced by this call
-   |
+error E0593: function is expected to take 1 argument, but it takes 0 arguments
+ at $DIR/bad-projection.rs:14:1: expected function that takes 1 argument
+  on line 14: takes 0 arguments
+  on line 14: required by a bound introduced by this call
 note: required by a bound in `proc_macro::bridge::client::Client::expand1`
-  --> $SRC_DIR/proc_macro/src/bridge/client.rs:LL:COL
+ at $SRC_DIR/proc_macro/src/bridge/client.rs:LL:COL
 
-error[E0277]: the trait bound `(): Project` is not satisfied
-  --> $DIR/bad-projection.rs:14:1
-   |
-LL | pub fn uwu() -> <() as Project>::Assoc {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Project` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Project` is not satisfied
+ at $DIR/bad-projection.rs:14:1: the trait `Project` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/bad-projection.rs:9:1
-   |
-LL | trait Project {
-   | ^^^^^^^^^^^^^
+ at $DIR/bad-projection.rs:9:1
 
-error[E0277]: the trait bound `(): Project` is not satisfied
-  --> $DIR/bad-projection.rs:14:1
-   |
-LL | pub fn uwu() -> <() as Project>::Assoc {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Project` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Project` is not satisfied
+ at $DIR/bad-projection.rs:14:1: the trait `Project` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/bad-projection.rs:9:1
-   |
-LL | trait Project {
-   | ^^^^^^^^^^^^^
+ at $DIR/bad-projection.rs:9:1
 
 error: aborting due to 5 previous errors
 

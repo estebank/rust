@@ -1,58 +1,26 @@
-error[E0508]: cannot move out of type `[Struct]`, a non-copy slice
-  --> $DIR/cant_move_out_of_pattern.rs:8:11
-   |
-LL |     match b {
-   |           ^ cannot move out of here
-LL |
-LL |         deref!([x]) => x,
-   |                 - data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[Struct]`, a non-copy slice
+ at $DIR/cant_move_out_of_pattern.rs:8:11: cannot move out of here
+  on line 10, column 17: data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
 help: consider borrowing the pattern binding
-   |
-LL |         deref!([ref x]) => x,
-   |                 +++
+ on line 10, column 16, add `ref `
 
-error[E0507]: cannot move out of a shared reference
-  --> $DIR/cant_move_out_of_pattern.rs:16:11
-   |
-LL |     match rc {
-   |           ^^
-LL |
-LL |         deref!(x) => x,
-   |                - data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of a shared reference
+ at $DIR/cant_move_out_of_pattern.rs:16:11
+  on line 18, column 16: data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
 help: consider borrowing the pattern binding
-   |
-LL |         deref!(ref x) => x,
-   |                +++
+ on line 18, column 15, add `ref `
 
-error[E0508]: cannot move out of type `[Struct]`, a non-copy slice
-  --> $DIR/cant_move_out_of_pattern.rs:24:11
-   |
-LL |     match b {
-   |           ^ cannot move out of here
-LL |
-LL |         [x] => x,
-   |          - data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
-   |
+error E0508: cannot move out of type `[Struct]`, a non-copy slice
+ at $DIR/cant_move_out_of_pattern.rs:24:11: cannot move out of here
+  on line 26, column 10: data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
 help: consider borrowing the pattern binding
-   |
-LL |         [ref x] => x,
-   |          +++
+ on line 26, column 9, add `ref `
 
-error[E0507]: cannot move out of a shared reference
-  --> $DIR/cant_move_out_of_pattern.rs:34:11
-   |
-LL |     match rc {
-   |           ^^
-LL |
-LL |         Container(x) => x,
-   |                   - data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of a shared reference
+ at $DIR/cant_move_out_of_pattern.rs:34:11
+  on line 36, column 19: data moved here because `x` has type `Struct`, which does not implement the `Copy` trait
 help: consider borrowing the pattern binding
-   |
-LL |         Container(ref x) => x,
-   |                   +++
+ on line 36, column 18, add `ref `
 
 error: aborting due to 4 previous errors
 

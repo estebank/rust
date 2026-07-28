@@ -1,50 +1,20 @@
 error: this is a block expression, not an array
-  --> $DIR/issue-87830-try-brackets-for-arrays.rs:3:22
-   |
-LL |   const FOO: [u8; 3] = {
-   |  ______________________^
-LL | |
-LL | |     1, 2, 3
-LL | | };
-   | |_^
-   |
+ at $DIR/issue-87830-try-brackets-for-arrays.rs:3:22 to 6:2
 help: to make an array, use square brackets instead of curly braces
-   |
-LL ~ const FOO: [u8; 3] = [
-LL |
-LL |     1, 2, 3
-LL ~ ];
-   |
+ on line 3, column 21, replace with `[`
 
 error: this is a block expression, not an array
-  --> $DIR/issue-87830-try-brackets-for-arrays.rs:8:24
-   |
-LL | const BAR: [&str; 3] = {"one", "two", "three"};
-   |                        ^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/issue-87830-try-brackets-for-arrays.rs:8:24
 help: to make an array, use square brackets instead of curly braces
-   |
-LL - const BAR: [&str; 3] = {"one", "two", "three"};
-LL + const BAR: [&str; 3] = ["one", "two", "three"];
-   |
+ on line 8, column 23, replace with `[`
 
 error: this is a block expression, not an array
-  --> $DIR/issue-87830-try-brackets-for-arrays.rs:12:5
-   |
-LL |     {1, 2, 3};
-   |     ^^^^^^^^^
-   |
+ at $DIR/issue-87830-try-brackets-for-arrays.rs:12:5
 help: to make an array, use square brackets instead of curly braces
-   |
-LL -     {1, 2, 3};
-LL +     [1, 2, 3];
-   |
+ on line 12, column 4, replace with `[`
 
 error: expected one of `.`, `;`, `?`, `}`, or an operator, found `,`
-  --> $DIR/issue-87830-try-brackets-for-arrays.rs:17:6
-   |
-LL |     1, 2, 3
-   |      ^ expected one of `.`, `;`, `?`, `}`, or an operator
+ at $DIR/issue-87830-try-brackets-for-arrays.rs:17:6: expected one of `.`, `;`, `?`, `}`, or an operator
 
 error: aborting due to 4 previous errors
 

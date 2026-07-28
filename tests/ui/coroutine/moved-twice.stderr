@@ -1,23 +1,10 @@
-error[E0382]: use of moved value: `first`
-  --> $DIR/moved-twice.rs:21:22
-   |
-LL |         let first = Foo([0; FOO_SIZE]);
-   |             ----- move occurs because `first` has type `Foo`, which does not implement the `Copy` trait
-LL |         yield;
-LL |         let second = first;
-   |                      ----- value moved here
-LL |         yield;
-LL |         let second = first;
-   |                      ^^^^^ value used here after move
-   |
+error E0382: use of moved value: `first`
+ at $DIR/moved-twice.rs:21:22: value used here after move
+  on line 17, column 13: move occurs because `first` has type `Foo`, which does not implement the `Copy` trait
+  on line 19, column 22: value moved here
 note: if `Foo` implemented `Clone`, you could clone the value
-  --> $DIR/moved-twice.rs:9:1
-   |
-LL | struct Foo([u8; FOO_SIZE]);
-   | ^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let second = first;
-   |                      ----- you could clone this value
+ at $DIR/moved-twice.rs:9:1: consider implementing `Clone` for this type
+  on line 19, column 22: you could clone this value
 
 error: aborting due to 1 previous error
 

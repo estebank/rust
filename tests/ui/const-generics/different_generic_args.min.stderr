@@ -1,11 +1,7 @@
-error[E0308]: mismatched types
-  --> $DIR/different_generic_args.rs:11:9
-   |
-LL |     u = ConstUsize::<4> {};
-   |         ^^^^^^^^^^^^^^^^^^ expected `3`, found `4`
-   |
-   = note: expected struct `ConstUsize<3>`
-              found struct `ConstUsize<4>`
+error E0308: mismatched types
+ at $DIR/different_generic_args.rs:11:9: expected `3`, found `4`
+note: expected struct `ConstUsize<3>`
+         found struct `ConstUsize<4>`
 
 error: aborting due to 1 previous error
 

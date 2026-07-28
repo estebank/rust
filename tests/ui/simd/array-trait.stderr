@@ -1,27 +1,14 @@
-error[E0077]: SIMD vector element type should be a primitive scalar (integer/float/pointer) type
-  --> $DIR/array-trait.rs:22:1
-   |
-LL | pub struct T<S: Simd>([S::Lane; S::SIZE]);
-   | ^^^^^^^^^^^^^^^^^^^^^
+error E0077: SIMD vector element type should be a primitive scalar (integer/float/pointer) type
+ at $DIR/array-trait.rs:22:1
 
 error: unconstrained generic constant
-  --> $DIR/array-trait.rs:22:23
-   |
-LL | pub struct T<S: Simd>([S::Lane; S::SIZE]);
-   |                       ^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/array-trait.rs:22:23
 help: try adding a `where` bound
-   |
-LL | pub struct T<S: Simd>([S::Lane; S::SIZE]) where [(); S::SIZE]:;
-   |                                           ++++++++++++++++++++
+ on line 22, column 41, add ` where [(); S::SIZE]:`
 
 error: unconstrained generic constant
-  --> $DIR/array-trait.rs:22:23
-   |
-LL | #[derive(Copy, Clone)]
-   |                ----- in this derive macro expansion
-LL | pub struct T<S: Simd>([S::Lane; S::SIZE]);
-   |                       ^^^^^^^^^^^^^^^^^^
+ at $DIR/array-trait.rs:22:23
+  on line 21, column 16: in this derive macro expansion
 
 error: aborting due to 3 previous errors
 

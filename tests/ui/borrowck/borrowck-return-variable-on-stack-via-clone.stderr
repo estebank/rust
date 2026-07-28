@@ -1,11 +1,6 @@
-error[E0515]: cannot return value referencing function parameter `x`
-  --> $DIR/borrowck-return-variable-on-stack-via-clone.rs:7:5
-   |
-LL |     (&x).clone()
-   |     ----^^^^^^^^
-   |     |
-   |     returns a value referencing data owned by the current function
-   |     `x` is borrowed here
+error E0515: cannot return value referencing function parameter `x`
+ at $DIR/borrowck-return-variable-on-stack-via-clone.rs:7:5: returns a value referencing data owned by the current function
+  on line 7: `x` is borrowed here
 
 error: aborting due to 1 previous error
 

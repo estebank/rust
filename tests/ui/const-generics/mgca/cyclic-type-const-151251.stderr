@@ -1,10 +1,6 @@
-error[E0275]: overflow normalizing the const alias `A`
-  --> $DIR/cyclic-type-const-151251.rs:7:1
-   |
-LL | type const A: u8 = A;
-   | ^^^^^^^^^^^^^^^^
-   |
-   = note: in case this is a recursive type alias, consider using a struct, enum, or union instead
+error E0275: overflow normalizing the const alias `A`
+ at $DIR/cyclic-type-const-151251.rs:7:1
+note: in case this is a recursive type alias, consider using a struct, enum, or union instead
 
 error: aborting due to 1 previous error
 

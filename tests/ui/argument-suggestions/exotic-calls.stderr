@@ -1,87 +1,42 @@
-error[E0057]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/exotic-calls.rs:6:5
-   |
-LL |     t(1i32);
-   |     ^ ---- unexpected argument of type `i32`
-   |
+error E0057: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/exotic-calls.rs:6:5
+  on line 6, column 7: unexpected argument of type `i32`
 note: callable defined here
-  --> $DIR/exotic-calls.rs:5:11
-   |
-LL | fn foo<T: Fn()>(t: T) {
-   |           ^^^^
+ at $DIR/exotic-calls.rs:5:11
 help: remove the extra argument
-   |
-LL -     t(1i32);
-LL +     t();
-   |
+ on line 6, column 6
 
-error[E0057]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/exotic-calls.rs:12:9
-   |
-LL |     |t| f(t);
-   |         ^ - unexpected argument
-   |
+error E0057: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/exotic-calls.rs:12:9
+  on line 12, column 11: unexpected argument
 note: callable defined here
-  --> $DIR/exotic-calls.rs:11:12
-   |
-LL | fn foo2<T: Fn()>(f: T) {
-   |            ^^^^
+ at $DIR/exotic-calls.rs:11:12
 help: remove the extra argument
-   |
-LL -     |t| f(t);
-LL +     |t| f();
-   |
+ on line 12, column 10
 
-error[E0057]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/exotic-calls.rs:17:5
-   |
-LL |     t(1i32);
-   |     ^ ---- unexpected argument of type `i32`
-   |
+error E0057: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/exotic-calls.rs:17:5
+  on line 17, column 7: unexpected argument of type `i32`
 note: type parameter defined here
-  --> $DIR/exotic-calls.rs:16:11
-   |
-LL | fn bar(t: impl Fn()) {
-   |           ^^^^^^^^^
+ at $DIR/exotic-calls.rs:16:11
 help: remove the extra argument
-   |
-LL -     t(1i32);
-LL +     t();
-   |
+ on line 17, column 6
 
-error[E0057]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/exotic-calls.rs:26:5
-   |
-LL |     baz()(1i32)
-   |     ^^^^^ ---- unexpected argument of type `i32`
-   |
+error E0057: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/exotic-calls.rs:26:5
+  on line 26, column 11: unexpected argument of type `i32`
 note: opaque type defined here
-  --> $DIR/exotic-calls.rs:21:13
-   |
-LL | fn baz() -> impl Fn() {
-   |             ^^^^^^^^^
+ at $DIR/exotic-calls.rs:21:13
 help: remove the extra argument
-   |
-LL -     baz()(1i32)
-LL +     baz()()
-   |
+ on line 26, column 10
 
-error[E0057]: this function takes 0 arguments but 1 argument was supplied
-  --> $DIR/exotic-calls.rs:32:5
-   |
-LL |     x(1i32);
-   |     ^ ---- unexpected argument of type `i32`
-   |
+error E0057: this function takes 0 arguments but 1 argument was supplied
+ at $DIR/exotic-calls.rs:32:5
+  on line 32, column 7: unexpected argument of type `i32`
 note: closure defined here
-  --> $DIR/exotic-calls.rs:31:13
-   |
-LL |     let x = || {};
-   |             ^^
+ at $DIR/exotic-calls.rs:31:13
 help: remove the extra argument
-   |
-LL -     x(1i32);
-LL +     x();
-   |
+ on line 32, column 6
 
 error: aborting due to 5 previous errors
 

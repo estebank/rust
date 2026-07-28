@@ -1,17 +1,9 @@
-error[E0382]: borrow of moved value: `x`
-  --> $DIR/use-after-move-based-on-type.rs:4:20
-   |
-LL |     let x = "Hello!".to_string();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |     let _y = x;
-   |              - value moved here
-LL |     println!("{}", x);
-   |                    ^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `x`
+ at $DIR/use-after-move-based-on-type.rs:4:20: value borrowed here after move
+  on line 2, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 3, column 14: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let _y = x.clone();
-   |               ++++++++
+ on line 3, column 14, add `.clone()`
 
 error: aborting due to 1 previous error
 

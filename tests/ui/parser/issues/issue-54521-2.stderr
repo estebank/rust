@@ -1,50 +1,22 @@
 error: unmatched angle brackets
-  --> $DIR/issue-54521-2.rs:11:25
-   |
-LL |     let _ = Vec::<usize>>>>>::new();
-   |                         ^^^^
-   |
+ at $DIR/issue-54521-2.rs:11:25
 help: remove extra angle brackets
-   |
-LL -     let _ = Vec::<usize>>>>>::new();
-LL +     let _ = Vec::<usize>::new();
-   |
+ on line 11, column 24
 
 error: unmatched angle brackets
-  --> $DIR/issue-54521-2.rs:14:25
-   |
-LL |     let _ = Vec::<usize>>>>::new();
-   |                         ^^^
-   |
+ at $DIR/issue-54521-2.rs:14:25
 help: remove extra angle brackets
-   |
-LL -     let _ = Vec::<usize>>>>::new();
-LL +     let _ = Vec::<usize>::new();
-   |
+ on line 14, column 24
 
 error: unmatched angle brackets
-  --> $DIR/issue-54521-2.rs:17:25
-   |
-LL |     let _ = Vec::<usize>>>::new();
-   |                         ^^
-   |
+ at $DIR/issue-54521-2.rs:17:25
 help: remove extra angle brackets
-   |
-LL -     let _ = Vec::<usize>>>::new();
-LL +     let _ = Vec::<usize>::new();
-   |
+ on line 17, column 24
 
 error: unmatched angle bracket
-  --> $DIR/issue-54521-2.rs:20:25
-   |
-LL |     let _ = Vec::<usize>>::new();
-   |                         ^
-   |
+ at $DIR/issue-54521-2.rs:20:25
 help: remove extra angle bracket
-   |
-LL -     let _ = Vec::<usize>>::new();
-LL +     let _ = Vec::<usize>::new();
-   |
+ on line 20, column 24
 
 error: aborting due to 4 previous errors
 

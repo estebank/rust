@@ -1,33 +1,16 @@
-error[E0201]: duplicate definitions with name `baz`:
-  --> $DIR/E0201.rs:17:5
-   |
-LL |     fn baz(&self) -> bool;
-   |     ---------------------- item in trait
-...
-LL |     fn baz(&self) -> bool { true }
-   |     ------------------------------ previous definition here
-LL |     fn baz(&self) -> bool { self.0 > 5 }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ duplicate definition
+error E0201: duplicate definitions with name `baz`:
+ at $DIR/E0201.rs:17:5: duplicate definition
+  on line 10: item in trait
+  on line 16: previous definition here
 
-error[E0201]: duplicate definitions with name `Quux`:
-  --> $DIR/E0201.rs:18:5
-   |
-LL |     type Quux;
-   |     ---------- item in trait
-...
-LL |     type Quux = u32;
-   |     ---------------- previous definition here
-...
-LL |     type Quux = u32;
-   |     ^^^^^^^^^^^^^^^^ duplicate definition
+error E0201: duplicate definitions with name `Quux`:
+ at $DIR/E0201.rs:18:5: duplicate definition
+  on line 9: item in trait
+  on line 14: previous definition here
 
-error[E0592]: duplicate definitions with name `bar`
-  --> $DIR/E0201.rs:5:5
-   |
-LL |     fn bar(&self) -> bool { self.0 > 5 }
-   |     --------------------- other definition for `bar`
-LL |     fn bar() {}
-   |     ^^^^^^^^ duplicate definitions for `bar`
+error E0592: duplicate definitions with name `bar`
+ at $DIR/E0201.rs:5:5: duplicate definitions for `bar`
+  on line 4: other definition for `bar`
 
 error: aborting due to 3 previous errors
 

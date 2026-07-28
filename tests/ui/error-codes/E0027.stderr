@@ -1,78 +1,38 @@
-error[E0027]: pattern does not mention field `name`
-  --> $DIR/E0027.rs:11:9
-   |
-LL |         Dog { age: x } => {}
-   |         ^^^^^^^^^^^^^^ missing field `name`
-   |
+error E0027: pattern does not mention field `name`
+ at $DIR/E0027.rs:11:9: missing field `name`
 help: include the missing field in the pattern
-   |
-LL |         Dog { age: x, name } => {}
-   |                     ++++++
+ on line 11, column 20, replace with `, name }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |         Dog { age: x, name: _ } => {}
-   |                     +++++++++
+ on line 11, column 20, replace with `, name: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Dog { age: x, .. } => {}
-   |                     ++++
+ on line 11, column 20, replace with `, .. }`
 
-error[E0027]: pattern does not mention field `age`
-  --> $DIR/E0027.rs:15:9
-   |
-LL |         Dog { name: x, } => {}
-   |         ^^^^^^^^^^^^^^^^ missing field `age`
-   |
+error E0027: pattern does not mention field `age`
+ at $DIR/E0027.rs:15:9: missing field `age`
 help: include the missing field in the pattern
-   |
-LL |         Dog { name: x, age } => {}
-   |                        +++
+ on line 15, column 21, replace with `, age }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |         Dog { name: x, age: _ } => {}
-   |                        ++++++
+ on line 15, column 21, replace with `, age: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Dog { name: x, .. } => {}
-   |                        ++
+ on line 15, column 21, replace with `, .. }`
 
-error[E0027]: pattern does not mention field `age`
-  --> $DIR/E0027.rs:19:9
-   |
-LL |         Dog { name: x  , } => {}
-   |         ^^^^^^^^^^^^^^^^^^ missing field `age`
-   |
+error E0027: pattern does not mention field `age`
+ at $DIR/E0027.rs:19:9: missing field `age`
 help: include the missing field in the pattern
-   |
-LL |         Dog { name: x, age } => {}
-   |                      ~~~~~~~
+ on line 19, column 21, replace with `, age }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |         Dog { name: x, age: _ } => {}
-   |                      ~~~~~~~~~~
+ on line 19, column 21, replace with `, age: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Dog { name: x, .. } => {}
-   |                      ~~~~~~
+ on line 19, column 21, replace with `, .. }`
 
-error[E0027]: pattern does not mention fields `name`, `age`
-  --> $DIR/E0027.rs:22:9
-   |
-LL |         Dog {} => {}
-   |         ^^^^^^ missing fields `name`, `age`
-   |
+error E0027: pattern does not mention fields `name`, `age`
+ at $DIR/E0027.rs:22:9: missing fields `name`, `age`
 help: include the missing fields in the pattern
-   |
-LL |         Dog { name, age } => {}
-   |               +++++++++
+ on line 22, column 11, replace with ` { name, age }`
 help: if you don't care about these missing fields, you can explicitly ignore them
-   |
-LL |         Dog { name: _, age: _ } => {}
-   |               +++++++++++++++
+ on line 22, column 11, replace with ` { name: _, age: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Dog { .. } => {}
-   |               ++
+ on line 22, column 11, replace with ` { .. }`
 
 error: aborting due to 4 previous errors
 

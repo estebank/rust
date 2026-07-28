@@ -1,76 +1,32 @@
 error: unexpected `for_you` after identifier
-  --> $DIR/issue-46836-identifier-not-instead-of-negation.rs:3:12
-   |
-LL |     if not for_you {
-   |            ^^^^^^^
-   |
+ at $DIR/issue-46836-identifier-not-instead-of-negation.rs:3:12
 help: use `!` to perform logical negation or bitwise not
-   |
-LL -     if not for_you {
-LL +     if !for_you {
-   |
+ on line 3, column 7, replace with `!`
 
 error: unexpected `the_worst` after identifier
-  --> $DIR/issue-46836-identifier-not-instead-of-negation.rs:11:15
-   |
-LL |     while not the_worst {
-   |               ^^^^^^^^^
-   |
+ at $DIR/issue-46836-identifier-not-instead-of-negation.rs:11:15
 help: use `!` to perform logical negation or bitwise not
-   |
-LL -     while not the_worst {
-LL +     while !the_worst {
-   |
+ on line 11, column 10, replace with `!`
 
 error: unexpected `println` after identifier
-  --> $DIR/issue-46836-identifier-not-instead-of-negation.rs:20:9
-   |
-LL |         println!("Then when?");
-   |         ^^^^^^^
-   |
+ at $DIR/issue-46836-identifier-not-instead-of-negation.rs:20:9
 help: use `!` to perform logical negation or bitwise not
-   |
-LL -     if not  // lack of braces is [sic]
-LL +     if !// lack of braces is [sic]
-   |
+ on line 19, column 7, replace with `!`
 
 error: expected `{`, found `;`
-  --> $DIR/issue-46836-identifier-not-instead-of-negation.rs:20:31
-   |
-LL |         println!("Then when?");
-   |                               ^ expected `{`
-   |
+ at $DIR/issue-46836-identifier-not-instead-of-negation.rs:20:31: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/issue-46836-identifier-not-instead-of-negation.rs:19:8
-   |
-LL |       if not  // lack of braces is [sic]
-   |  ________^
-LL | |         println!("Then when?");
-   | |______________________________^
+ at $DIR/issue-46836-identifier-not-instead-of-negation.rs:19:8 to 20:31
 
 error: unexpected `2` after identifier
-  --> $DIR/issue-46836-identifier-not-instead-of-negation.rs:26:24
-   |
-LL |     let resource = not 2;
-   |                        ^
-   |
+ at $DIR/issue-46836-identifier-not-instead-of-negation.rs:26:24
 help: use `!` to perform bitwise not
-   |
-LL -     let resource = not 2;
-LL +     let resource = !2;
-   |
+ on line 26, column 19, replace with `!`
 
 error: unexpected `be_smothered_out_before` after identifier
-  --> $DIR/issue-46836-identifier-not-instead-of-negation.rs:32:27
-   |
-LL |     let young_souls = not be_smothered_out_before;
-   |                           ^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/issue-46836-identifier-not-instead-of-negation.rs:32:27
 help: use `!` to perform logical negation or bitwise not
-   |
-LL -     let young_souls = not be_smothered_out_before;
-LL +     let young_souls = !be_smothered_out_before;
-   |
+ on line 32, column 22, replace with `!`
 
 error: aborting due to 6 previous errors
 

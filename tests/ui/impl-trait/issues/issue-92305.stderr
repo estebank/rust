@@ -1,25 +1,13 @@
-error[E0107]: missing generics for struct `Vec`
-  --> $DIR/issue-92305.rs:5:45
-   |
-LL | fn f<T>(data: &[T]) -> impl Iterator<Item = Vec> {
-   |                                             ^^^ expected at least 1 generic argument
-   |
+error E0107: missing generics for struct `Vec`
+ at $DIR/issue-92305.rs:5:45: expected at least 1 generic argument
 help: add missing generic argument
-   |
-LL | fn f<T>(data: &[T]) -> impl Iterator<Item = Vec<T>> {
-   |                                                +++
+ on line 5, column 47, add `<T>`
 
-error[E0107]: missing generics for struct `Vec`
-  --> $DIR/issue-92305.rs:5:45
-   |
-LL | fn f<T>(data: &[T]) -> impl Iterator<Item = Vec> {
-   |                                             ^^^ expected at least 1 generic argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0107: missing generics for struct `Vec`
+ at $DIR/issue-92305.rs:5:45: expected at least 1 generic argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: add missing generic argument
-   |
-LL | fn f<T>(data: &[T]) -> impl Iterator<Item = Vec<T>> {
-   |                                                +++
+ on line 5, column 47, add `<T>`
 
 error: aborting due to 2 previous errors
 

@@ -1,14 +1,8 @@
-error[E0277]: the trait bound `Rc<{integer}>: DerefMut` is not satisfied
-  --> $DIR/ref-mut.rs:16:9
-   |
-LL |         deref!(x) => {}
-   |         ^^^^^^^^^ the trait `DerefMut` is not implemented for `Rc<{integer}>`
+error E0277: the trait bound `Rc<{integer}>: DerefMut` is not satisfied
+ at $DIR/ref-mut.rs:16:9: the trait `DerefMut` is not implemented for `Rc<{integer}>`
 
-error[E0277]: the trait bound `Rc<({integer},)>: DerefMut` is not satisfied
-  --> $DIR/ref-mut.rs:21:9
-   |
-LL |         (x,) => {}
-   |         ^^^^ the trait `DerefMut` is not implemented for `Rc<({integer},)>`
+error E0277: the trait bound `Rc<({integer},)>: DerefMut` is not satisfied
+ at $DIR/ref-mut.rs:21:9: the trait `DerefMut` is not implemented for `Rc<({integer},)>`
 
 error: aborting due to 2 previous errors
 

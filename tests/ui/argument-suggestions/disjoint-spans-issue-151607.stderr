@@ -1,83 +1,41 @@
-error[E0425]: cannot find type `E` in this scope
-  --> $DIR/disjoint-spans-issue-151607.rs:8:24
-   |
-LL | struct B;
-   | --------- similarly named struct `B` defined here
-...
-LL | fn foo(g: F, y: F, e: &E) {
-   |                        ^
-   |
+error E0425: cannot find type `E` in this scope
+ at $DIR/disjoint-spans-issue-151607.rs:8:24
+  on line 5: similarly named struct `B` defined here
 help: a struct with a similar name exists
-   |
-LL - fn foo(g: F, y: F, e: &E) {
-LL + fn foo(g: F, y: F, e: &B) {
-   |
+ on line 8, column 23, replace with `B`
 help: you might be missing a type parameter
-   |
-LL | fn foo<E>(g: F, y: F, e: &E) {
-   |       +++
+ on line 8, column 6, add `<E>`
 
-error[E0425]: cannot find value `E` in this scope
-  --> $DIR/disjoint-spans-issue-151607.rs:10:18
-   |
-LL |     foo(B, g, D, E, F, G)
-   |                  ^
-   |
+error E0425: cannot find value `E` in this scope
+ at $DIR/disjoint-spans-issue-151607.rs:10:18
 help: a local variable with a similar name exists
-   |
-LL -     foo(B, g, D, E, F, G)
-LL +     foo(B, g, D, e, F, G)
-   |
+ on line 10, column 17, replace with `e`
 help: consider importing one of these constants
-   |
-LL + use std::f128::consts::E;
-   |
-LL + use std::f16::consts::E;
-   |
-LL + use std::f32::consts::E;
-   |
-LL + use std::f64::consts::E;
-   |
+ on line 5, column 1, add one of
+  use std::f128::consts::E;
+  use std::f16::consts::E;
+  use std::f32::consts::E;
+  use std::f64::consts::E;
 
-error[E0425]: cannot find value `G` in this scope
-  --> $DIR/disjoint-spans-issue-151607.rs:10:24
-   |
-LL |     foo(B, g, D, E, F, G)
-   |                        ^
-   |
+
+error E0425: cannot find value `G` in this scope
+ at $DIR/disjoint-spans-issue-151607.rs:10:24
 help: a local variable with a similar name exists
-   |
-LL -     foo(B, g, D, E, F, G)
-LL +     foo(B, g, D, E, F, g)
-   |
+ on line 10, column 23, replace with `g`
 help: you might be missing a const parameter
-   |
-LL | fn foo<const G: /* Type */>(g: F, y: F, e: &E) {
-   |       +++++++++++++++++++++
+ on line 8, column 6, add `<const G: /* Type */>`
 
-error[E0061]: this function takes 3 arguments but 6 arguments were supplied
-  --> $DIR/disjoint-spans-issue-151607.rs:10:5
-   |
-LL |     foo(B, g, D, E, F, G)
-   |     ^^^ -     -  - unexpected argument #4
-   |         |     |
-   |         |     unexpected argument #3 of type `D`
-   |         unexpected argument #1 of type `B`
-   |
+error E0061: this function takes 3 arguments but 6 arguments were supplied
+ at $DIR/disjoint-spans-issue-151607.rs:10:5
+  on line 10, column 9: unexpected argument #1 of type `B`
+  on line 10, column 15: unexpected argument #3 of type `D`
+  on line 10, column 18: unexpected argument #4
 note: function defined here
-  --> $DIR/disjoint-spans-issue-151607.rs:8:4
-   |
-LL | fn foo(g: F, y: F, e: &E) {
-   |    ^^^             -----
+ at $DIR/disjoint-spans-issue-151607.rs:8:4
 help: consider borrowing here
-   |
-LL |     foo(B, g, D, E, F, &G)
-   |                        +
+ on line 10, column 23, add `&`
 help: remove the extra arguments
-   |
-LL -     foo(B, g, D, E, F, G)
-LL +     foo(, g, F, G)
-   |
+ on line 10, column 8
 
 error: aborting due to 4 previous errors
 

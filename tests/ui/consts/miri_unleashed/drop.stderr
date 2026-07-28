@@ -1,19 +1,11 @@
-error[E0080]: calling non-const function `<NotConstDestruct as Drop>::drop`
-  --> $DIR/drop.rs:23:1
-   |
-LL | };
-   | ^ evaluation of `TEST_BAD` failed inside this call
-   |
+error E0080: calling non-const function `<NotConstDestruct as Drop>::drop`
+ at $DIR/drop.rs:23:1: evaluation of `TEST_BAD` failed inside this call
 note: inside `std::ptr::drop_glue::<NotConstDestruct> - shim(Some(NotConstDestruct))`
-  --> $SRC_DIR/core/src/ptr/mod.rs:LL:COL
+ at $SRC_DIR/core/src/ptr/mod.rs:LL:COL
 
 warning: skipping const checks
-   |
 help: skipping check that does not even have a feature gate
-  --> $DIR/drop.rs:22:9
-   |
-LL |     let _v: NotConstDestruct = NotConstDestruct;
-   |         ^^
+ at $DIR/drop.rs:22:9
 
 error: aborting due to 1 previous error; 1 warning emitted
 

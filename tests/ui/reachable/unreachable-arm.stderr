@@ -1,16 +1,8 @@
 error: unreachable pattern
-  --> $DIR/unreachable-arm.rs:11:9
-   |
-LL |         Foo::B(_) | Foo::A(box _, 1) => { }
-   |         ---------------------------- matches all the relevant values
-LL |         Foo::A(_, 1) => { }
-   |         ^^^^^^^^^^^^ no value can reach this
-   |
+ at $DIR/unreachable-arm.rs:11:9: no value can reach this
+  on line 10: matches all the relevant values
 note: the lint level is defined here
-  --> $DIR/unreachable-arm.rs:4:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/unreachable-arm.rs:4:9
 
 error: aborting due to 1 previous error
 

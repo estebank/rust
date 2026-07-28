@@ -1,11 +1,6 @@
-error[E0624]: method `f` is private
-  --> $DIR/private-method-inherited.rs:13:7
-   |
-LL |         fn f(self) {}
-   |         ---------- private method defined here
-...
-LL |     x.f();
-   |       ^ private method
+error E0624: method `f` is private
+ at $DIR/private-method-inherited.rs:13:7: private method
+  on line 7: private method defined here
 
 error: aborting due to 1 previous error
 

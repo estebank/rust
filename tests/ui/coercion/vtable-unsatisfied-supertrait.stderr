@@ -1,19 +1,9 @@
-error[E0277]: the trait bound `(): Supertrait` is not satisfied
-  --> $DIR/vtable-unsatisfied-supertrait.rs:13:16
-   |
-LL | impl Trait for () {}
-   |                ^^ the trait `Supertrait` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Supertrait` is not satisfied
+ at $DIR/vtable-unsatisfied-supertrait.rs:13:16: the trait `Supertrait` is not implemented for `()`
 help: this trait has no implementations, consider adding one
-  --> $DIR/vtable-unsatisfied-supertrait.rs:7:1
-   |
-LL | trait Supertrait {
-   | ^^^^^^^^^^^^^^^^
+ at $DIR/vtable-unsatisfied-supertrait.rs:7:1
 note: required by a bound in `Trait`
-  --> $DIR/vtable-unsatisfied-supertrait.rs:11:14
-   |
-LL | trait Trait: Supertrait {}
-   |              ^^^^^^^^^^ required by this bound in `Trait`
+ at $DIR/vtable-unsatisfied-supertrait.rs:11:14: required by this bound in `Trait`
 
 error: aborting due to 1 previous error
 

@@ -1,81 +1,47 @@
-error[E0277]: the trait bound `{closure@$DIR/const-eval-select-bad.rs:7:27: 7:29}: const FnOnce()` is not satisfied
-  --> $DIR/const-eval-select-bad.rs:7:27
-   |
-LL |     const_eval_select((), || {}, || {});
-   |     -----------------     ^^^^^
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: the trait bound `{closure@$DIR/const-eval-select-bad.rs:7:27: 7:29}: const FnOnce()` is not satisfied
+ at $DIR/const-eval-select-bad.rs:7:27
+  on line 7: required by a bound introduced by this call
 note: required by a bound in `const_eval_select`
-  --> $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
+ at $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
 
-error[E0277]: expected an `FnOnce()` closure, found `{integer}`
-  --> $DIR/const-eval-select-bad.rs:9:27
-   |
-LL |     const_eval_select((), 42, 0xDEADBEEF);
-   |     -----------------     ^^ expected an `FnOnce()` closure, found `{integer}`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: the trait `FnOnce()` is not implemented for `{integer}`
-   = note: wrap the `{integer}` in a closure with no arguments: `|| { /* code */ }`
+error E0277: expected an `FnOnce()` closure, found `{integer}`
+ at $DIR/const-eval-select-bad.rs:9:27: expected an `FnOnce()` closure, found `{integer}`
+  on line 9: required by a bound introduced by this call
+help: the trait `FnOnce()` is not implemented for `{integer}`
+note: wrap the `{integer}` in a closure with no arguments: `|| { /* code */ }`
 note: required by a bound in `const_eval_select`
-  --> $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
+ at $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
 
-error[E0277]: expected an `FnOnce()` closure, found `{integer}`
-  --> $DIR/const-eval-select-bad.rs:9:31
-   |
-LL |     const_eval_select((), 42, 0xDEADBEEF);
-   |     -----------------         ^^^^^^^^^^ expected an `FnOnce()` closure, found `{integer}`
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: the trait `FnOnce()` is not implemented for `{integer}`
-   = note: wrap the `{integer}` in a closure with no arguments: `|| { /* code */ }`
+error E0277: expected an `FnOnce()` closure, found `{integer}`
+ at $DIR/const-eval-select-bad.rs:9:31: expected an `FnOnce()` closure, found `{integer}`
+  on line 9: required by a bound introduced by this call
+help: the trait `FnOnce()` is not implemented for `{integer}`
+note: wrap the `{integer}` in a closure with no arguments: `|| { /* code */ }`
 note: required by a bound in `const_eval_select`
-  --> $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
+ at $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
 
-error[E0271]: expected `bar` to return `i32`, but it returns `bool`
-  --> $DIR/const-eval-select-bad.rs:29:34
-   |
-LL |     const_eval_select((1,), foo, bar);
-   |     -----------------            ^^^ expected `i32`, found `bool`
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0271: expected `bar` to return `i32`, but it returns `bool`
+ at $DIR/const-eval-select-bad.rs:29:34: expected `i32`, found `bool`
+  on line 29: required by a bound introduced by this call
 note: required by a bound in `const_eval_select`
-  --> $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
+ at $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
 
-error[E0631]: type mismatch in function arguments
-  --> $DIR/const-eval-select-bad.rs:34:32
-   |
-LL | const fn foo(n: i32) -> i32 {
-   | --------------------------- found signature defined here
-...
-LL |     const_eval_select((true,), foo, baz);
-   |     -----------------          ^^^ expected due to this
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = note: expected function signature `fn(bool) -> _`
-              found function signature `fn(i32) -> _`
+error E0631: type mismatch in function arguments
+ at $DIR/const-eval-select-bad.rs:34:32: expected due to this
+  on line 14: found signature defined here
+  on line 34: required by a bound introduced by this call
+note: expected function signature `fn(bool) -> _`
+         found function signature `fn(i32) -> _`
 note: required by a bound in `const_eval_select`
-  --> $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
+ at $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
 help: consider wrapping the function in a closure
-   |
-LL |     const_eval_select((true,), |arg0: bool| foo(/* i32 */), baz);
-   |                                ++++++++++++    +++++++++++
+ on line 34, column 31, add `|arg0: bool| `
 
-error[E0277]: the trait bound `fn(i32) -> bool {bar}: const FnOnce(i32)` is not satisfied
-  --> $DIR/const-eval-select-bad.rs:39:29
-   |
-LL |     const_eval_select((1,), bar, bar);
-   |     -----------------       ^^^
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: the trait bound `fn(i32) -> bool {bar}: const FnOnce(i32)` is not satisfied
+ at $DIR/const-eval-select-bad.rs:39:29
+  on line 39: required by a bound introduced by this call
 note: required by a bound in `const_eval_select`
-  --> $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
+ at $SRC_DIR/core/src/intrinsics/mod.rs:LL:COL
 
 error: aborting due to 6 previous errors
 

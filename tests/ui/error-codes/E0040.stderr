@@ -1,14 +1,7 @@
-error[E0040]: explicit use of destructor method
-  --> $DIR/E0040.rs:16:7
-   |
-LL |     x.drop();
-   |       ^^^^ explicit destructor calls not allowed
-   |
+error E0040: explicit use of destructor method
+ at $DIR/E0040.rs:16:7: explicit destructor calls not allowed
 help: consider using `drop` function
-   |
-LL -     x.drop();
-LL +     drop(x);
-   |
+ on line 16, column 4, add `drop(`
 
 error: aborting due to 1 previous error
 

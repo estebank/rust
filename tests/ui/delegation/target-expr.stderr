@@ -1,45 +1,22 @@
-error[E0401]: can't use generic parameters from outer item
-  --> $DIR/target-expr.rs:18:17
-   |
-LL | fn bar<T: Default>(_: T) {
-   |        - type parameter from outer item
-LL |     reuse Trait::static_method {
-   |                  ------------- generic parameter used in this inner delegated function
-LL |         let _ = T::Default();
-   |                 ^ use of generic parameter from outer item
-   |
-   = note: nested items are independent from their parent item for everything except for privacy and name resolution
+error E0401: can't use generic parameters from outer item
+ at $DIR/target-expr.rs:18:17: use of generic parameter from outer item
+  on line 16, column 8: type parameter from outer item
+  on line 17, column 18: generic parameter used in this inner delegated function
+note: nested items are independent from their parent item for everything except for privacy and name resolution
 
-error[E0434]: can't capture dynamic environment in a fn item
-  --> $DIR/target-expr.rs:26:17
-   |
-LL |         let x = y;
-   |                 ^
-   |
-   = help: use the `|| { ... }` closure form instead
+error E0434: can't capture dynamic environment in a fn item
+ at $DIR/target-expr.rs:26:17
+help: use the `|| { ... }` closure form instead
 
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/target-expr.rs:33:5
-   |
-LL | fn main() {
-   |    ---- this function can't have a `self` parameter
-...
-LL |     self.0;
-   |     ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-   |
-   = note: a module named `self` exists in another namespace
+error E0424: cannot find value `self` in this scope
+ at $DIR/target-expr.rs:33:5: `self` value is a keyword only available in methods with a `self` parameter
+  on line 23, column 4: this function can't have a `self` parameter
+note: a module named `self` exists in another namespace
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/target-expr.rs:35:13
-   |
-LL |     let z = x;
-   |             ^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/target-expr.rs:35:13
 help: the binding `x` is available in a different scope in the same function
-  --> $DIR/target-expr.rs:26:13
-   |
-LL |         let x = y;
-   |             ^
+ at $DIR/target-expr.rs:26:13
 
 error: aborting due to 4 previous errors
 

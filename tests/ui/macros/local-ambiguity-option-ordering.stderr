@@ -1,14 +1,8 @@
 error: local ambiguity when calling macro `ambiguity_1`: multiple parsing options: built-in NTs ident ('i') or ident ('j').
-  --> $DIR/local-ambiguity-option-ordering.rs:9:14
-   |
-LL | ambiguity_1!(error);
-   |              ^^^^^
+ at $DIR/local-ambiguity-option-ordering.rs:9:14
 
 error: local ambiguity when calling macro `ambiguity_2`: multiple parsing options: built-in NTs ident ('i') or ident ('j').
-  --> $DIR/local-ambiguity-option-ordering.rs:15:17
-   |
-LL | ambiguity_2!( ; error );
-   |                 ^^^^^
+ at $DIR/local-ambiguity-option-ordering.rs:15:17
 
 error: aborting due to 2 previous errors
 

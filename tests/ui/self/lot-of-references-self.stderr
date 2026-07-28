@@ -1,86 +1,37 @@
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/lot-of-references-self.rs:4:16
-   |
-LL |     fn a(&&self) {}
-   |                ^ expected one of 9 possible tokens
-   |
+ at $DIR/lot-of-references-self.rs:4:16: expected one of 9 possible tokens
 help: `self` should be `self`, `&self` or `&mut self`, consider removing extra references
-   |
-LL -     fn a(&&self) {}
-LL +     fn a(&self) {}
-   |
+ on line 4, column 9
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/lot-of-references-self.rs:7:20
-   |
-LL |     fn b(&&&&&&self) {}
-   |                    ^ expected one of 9 possible tokens
-   |
+ at $DIR/lot-of-references-self.rs:7:20: expected one of 9 possible tokens
 help: `self` should be `self`, `&self` or `&mut self`, consider removing extra references
-   |
-LL -     fn b(&&&&&&self) {}
-LL +     fn b(&self) {}
-   |
+ on line 7, column 9
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/lot-of-references-self.rs:11:20
-   |
-LL |     fn d(&mut &self) {}
-   |                    ^ expected one of 9 possible tokens
-   |
+ at $DIR/lot-of-references-self.rs:11:20: expected one of 9 possible tokens
 help: `self` should be `self`, `&self` or `&mut self`, consider removing extra references
-   |
-LL -     fn d(&mut &self) {}
-LL +     fn d(&self) {}
-   |
+ on line 11, column 9
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/lot-of-references-self.rs:14:22
-   |
-LL |     fn e(&mut &&&self) {}
-   |                      ^ expected one of 9 possible tokens
-   |
+ at $DIR/lot-of-references-self.rs:14:22: expected one of 9 possible tokens
 help: `self` should be `self`, `&self` or `&mut self`, consider removing extra references
-   |
-LL -     fn e(&mut &&&self) {}
-LL +     fn e(&self) {}
-   |
+ on line 14, column 9
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/lot-of-references-self.rs:17:29
-   |
-LL |     fn f(&mut &mut &mut self) {}
-   |                             ^ expected one of 9 possible tokens
-   |
+ at $DIR/lot-of-references-self.rs:17:29: expected one of 9 possible tokens
 help: `self` should be `self`, `&self` or `&mut self`, consider removing extra references
-   |
-LL -     fn f(&mut &mut &mut self) {}
-LL +     fn f(&mut self) {}
-   |
+ on line 17, column 9
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/lot-of-references-self.rs:20:26
-   |
-LL |     fn g(&mut & &mut self) {}
-   |                          ^ expected one of 9 possible tokens
-   |
+ at $DIR/lot-of-references-self.rs:20:26: expected one of 9 possible tokens
 help: `self` should be `self`, `&self` or `&mut self`, consider removing extra references
-   |
-LL -     fn g(&mut & &mut self) {}
-LL +     fn g(&mut self) {}
-   |
+ on line 20, column 9
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/lot-of-references-self.rs:23:39
-   |
-LL |     fn h(&mut & & & && &        & self) {}
-   |                                       ^ expected one of 9 possible tokens
-   |
+ at $DIR/lot-of-references-self.rs:23:39: expected one of 9 possible tokens
 help: `self` should be `self`, `&self` or `&mut self`, consider removing extra references
-   |
-LL -     fn h(&mut & & & && &        & self) {}
-LL +     fn h(& self) {}
-   |
+ on line 23, column 9
 
 error: aborting due to 7 previous errors
 

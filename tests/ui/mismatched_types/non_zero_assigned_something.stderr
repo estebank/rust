@@ -1,32 +1,18 @@
-error[E0308]: mismatched types
-  --> $DIR/non_zero_assigned_something.rs:2:37
-   |
-LL |     let _: std::num::NonZero<u64> = 1;
-   |            ----------------------   ^ expected `NonZero<u64>`, found integer
-   |            |
-   |            expected due to this
-   |
-   = note: expected struct `NonZero<u64>`
-                found type `{integer}`
+error E0308: mismatched types
+ at $DIR/non_zero_assigned_something.rs:2:37: expected `NonZero<u64>`, found integer
+  on line 2, column 12: expected due to this
+note: expected struct `NonZero<u64>`
+           found type `{integer}`
 help: consider calling `NonZero::new`
-   |
-LL |     let _: std::num::NonZero<u64> = NonZero::new(1).unwrap();
-   |                                     +++++++++++++ ++++++++++
+ on line 2, column 36, add `NonZero::new(`
 
-error[E0308]: mismatched types
-  --> $DIR/non_zero_assigned_something.rs:6:45
-   |
-LL |     let _: Option<std::num::NonZero<u64>> = 1;
-   |            ------------------------------   ^ expected `Option<NonZero<u64>>`, found integer
-   |            |
-   |            expected due to this
-   |
-   = note: expected enum `Option<NonZero<u64>>`
-              found type `{integer}`
+error E0308: mismatched types
+ at $DIR/non_zero_assigned_something.rs:6:45: expected `Option<NonZero<u64>>`, found integer
+  on line 6, column 12: expected due to this
+note: expected enum `Option<NonZero<u64>>`
+         found type `{integer}`
 help: consider calling `NonZero::new`
-   |
-LL |     let _: Option<std::num::NonZero<u64>> = NonZero::new(1);
-   |                                             +++++++++++++ +
+ on line 6, column 44, add `NonZero::new(`
 
 error: aborting due to 2 previous errors
 

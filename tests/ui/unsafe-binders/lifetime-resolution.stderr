@@ -1,36 +1,18 @@
-error[E0261]: use of undeclared lifetime name `'missing`
-  --> $DIR/lifetime-resolution.rs:6:28
-   |
-LL |     let missing: unsafe<> &'missing ();
-   |                            ^^^^^^^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'missing`
+ at $DIR/lifetime-resolution.rs:6:28: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the type lifetime-generic with a new `'missing` lifetime
-   |
-LL |     let missing: unsafe<'missing, > &'missing ();
-   |                         +++++++++
+ on line 6, column 24, add `'missing, `
 help: consider introducing lifetime `'missing` here
-   |
-LL | fn foo<'missing, 'a>() {
-   |        +++++++++
+ on line 3, column 7, add `'missing, `
 
-error[E0401]: can't use generic parameters from outer item
-  --> $DIR/lifetime-resolution.rs:10:30
-   |
-LL | fn foo<'a>() {
-   |        -- lifetime parameter from outer item
-...
-LL |         let outer: unsafe<> &'a &'b ();
-   |                              ^^ use of generic parameter from outer item
-   |
+error E0401: can't use generic parameters from outer item
+ at $DIR/lifetime-resolution.rs:10:30: use of generic parameter from outer item
+  on line 3, column 8: lifetime parameter from outer item
 help: consider making the type lifetime-generic with a new `'a` lifetime
-   |
-LL |         let outer: unsafe<'a, > &'a &'b ();
-   |                           +++
+ on line 10, column 26, add `'a, `
 help: consider introducing lifetime `'a` here
-   |
-LL |     fn inner<'a, 'b>() {
-   |              +++
+ on line 9, column 13, add `'a, `
 
 error: aborting due to 2 previous errors
 

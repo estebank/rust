@@ -1,16 +1,8 @@
-error[E0191]: the value of the associated type `Bar` in `Trait` must be specified
-  --> $DIR/E0191.rs:5:16
-   |
-LL |     type Bar;
-   |     -------- `Bar` defined here
-...
-LL | type Foo = dyn Trait;
-   |                ^^^^^
-   |
+error E0191: the value of the associated type `Bar` in `Trait` must be specified
+ at $DIR/E0191.rs:5:16
+  on line 2: `Bar` defined here
 help: specify the associated type
-   |
-LL | type Foo = dyn Trait<Bar = /* Type */>;
-   |                     ++++++++++++++++++
+ on line 5, column 15, replace with `Trait<Bar = /* Type */>`
 
 error: aborting due to 1 previous error
 

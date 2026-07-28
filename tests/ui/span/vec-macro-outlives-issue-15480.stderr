@@ -1,20 +1,10 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/vec-macro-outlives-issue-15480.rs:6:10
-   |
-LL |         &id(3)
-   |          ^^^^^ creates a temporary value which is freed while still in use
-LL |     ];
-   |      - temporary value is freed at the end of this statement
-...
-LL |     for &&x in &v {
-   |                -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/vec-macro-outlives-issue-15480.rs:6:10: creates a temporary value which is freed while still in use
+  on line 7, column 6: temporary value is freed at the end of this statement
+  on line 10, column 16: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = id(3);
-LL ~     let v = vec![
-LL ~         &binding
-   |
+ on line 5, add `let binding = id(3);
+    `
 
 error: aborting due to 1 previous error
 

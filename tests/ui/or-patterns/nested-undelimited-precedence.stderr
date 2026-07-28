@@ -1,109 +1,55 @@
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/nested-undelimited-precedence.rs:19:9
-   |
-LL |     let b @ A | B: E = A;
-   |         ^^^^^^^^^
-   |
+ at $DIR/nested-undelimited-precedence.rs:19:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (b @ A | B): E = A;
-   |         +         +
+ on line 19, column 8, add `(`
 
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/nested-undelimited-precedence.rs:34:9
-   |
-LL |     let &A(_) | B(_): F = A(3);
-   |         ^^^^^^^^^^^^
-   |
+ at $DIR/nested-undelimited-precedence.rs:34:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (&A(_) | B(_)): F = A(3);
-   |         +            +
+ on line 34, column 8, add `(`
 
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/nested-undelimited-precedence.rs:36:9
-   |
-LL |     let &&A(_) | B(_): F = A(3);
-   |         ^^^^^^^^^^^^^
-   |
+ at $DIR/nested-undelimited-precedence.rs:36:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (&&A(_) | B(_)): F = A(3);
-   |         +             +
+ on line 36, column 8, add `(`
 
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/nested-undelimited-precedence.rs:38:9
-   |
-LL |     let &mut A(_) | B(_): F = A(3);
-   |         ^^^^^^^^^^^^^^^^
-   |
+ at $DIR/nested-undelimited-precedence.rs:38:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (&mut A(_) | B(_)): F = A(3);
-   |         +                +
+ on line 38, column 8, add `(`
 
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/nested-undelimited-precedence.rs:40:9
-   |
-LL |     let &&mut A(_) | B(_): F = A(3);
-   |         ^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/nested-undelimited-precedence.rs:40:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (&&mut A(_) | B(_)): F = A(3);
-   |         +                 +
+ on line 40, column 8, add `(`
 
-error[E0408]: variable `b` is not bound in all patterns
-  --> $DIR/nested-undelimited-precedence.rs:19:17
-   |
-LL |     let b @ A | B: E = A;
-   |         -       ^ pattern doesn't bind `b`
-   |         |
-   |         variable not in all patterns
+error E0408: variable `b` is not bound in all patterns
+ at $DIR/nested-undelimited-precedence.rs:19:17: pattern doesn't bind `b`
+  on line 19, column 9: variable not in all patterns
 
-error[E0308]: mismatched types
-  --> $DIR/nested-undelimited-precedence.rs:34:9
-   |
-LL |     let &A(_) | B(_): F = A(3);
-   |         ^^^^^         - expected due to this
-   |         |
-   |         expected `F`, found `&_`
-   |
-   = note:   expected enum `F`
-           found reference `&_`
+error E0308: mismatched types
+ at $DIR/nested-undelimited-precedence.rs:34:9: expected `F`, found `&_`
+  on line 34, column 23: expected due to this
+note:   expected enum `F`
+      found reference `&_`
 
-error[E0308]: mismatched types
-  --> $DIR/nested-undelimited-precedence.rs:36:9
-   |
-LL |     let &&A(_) | B(_): F = A(3);
-   |         ^^^^^^         - expected due to this
-   |         |
-   |         expected `F`, found `&_`
-   |
-   = note:   expected enum `F`
-           found reference `&_`
+error E0308: mismatched types
+ at $DIR/nested-undelimited-precedence.rs:36:9: expected `F`, found `&_`
+  on line 36, column 24: expected due to this
+note:   expected enum `F`
+      found reference `&_`
 
-error[E0308]: mismatched types
-  --> $DIR/nested-undelimited-precedence.rs:38:9
-   |
-LL |     let &mut A(_) | B(_): F = A(3);
-   |         ^^^^^^^^^         - expected due to this
-   |         |
-   |         expected `F`, found `&mut _`
-   |
-   = note:           expected enum `F`
-           found mutable reference `&mut _`
+error E0308: mismatched types
+ at $DIR/nested-undelimited-precedence.rs:38:9: expected `F`, found `&mut _`
+  on line 38, column 27: expected due to this
+note:           expected enum `F`
+      found mutable reference `&mut _`
 
-error[E0308]: mismatched types
-  --> $DIR/nested-undelimited-precedence.rs:40:9
-   |
-LL |     let &&mut A(_) | B(_): F = A(3);
-   |         ^^^^^^^^^^         - expected due to this
-   |         |
-   |         expected `F`, found `&_`
-   |
-   = note:   expected enum `F`
-           found reference `&_`
+error E0308: mismatched types
+ at $DIR/nested-undelimited-precedence.rs:40:9: expected `F`, found `&_`
+  on line 40, column 28: expected due to this
+note:   expected enum `F`
+      found reference `&_`
 
 error: aborting due to 10 previous errors
 

@@ -1,13 +1,7 @@
-error[E0599]: no method named `build` found for struct `Builder<false, true>` in the current scope
-  --> $DIR/lookup-method.rs:17:14
-   |
-LL | struct Builder<const A: bool, const B: bool>;
-   | -------------------------------------------- method `build` not found for this struct
-...
-LL |     b.cast().build();
-   |              ^^^^^ method not found in `Builder<false, true>`
-   |
-   = note: the method was found for `Builder<true, true>`
+error E0599: no method named `build` found for struct `Builder<false, true>` in the current scope
+ at $DIR/lookup-method.rs:17:14: method not found in `Builder<false, true>`
+  on line 3: method `build` not found for this struct
+note: the method was found for `Builder<true, true>`
 
 error: aborting due to 1 previous error
 

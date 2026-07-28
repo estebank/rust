@@ -1,13 +1,7 @@
-error[E0425]: cannot find type `Bla` in this scope
-  --> $DIR/assoc-type-in-method-return.rs:3:25
-   |
-LL |     fn to_bla(&self) -> Bla;
-   |                         ^^^
-   |
+error E0425: cannot find type `Bla` in this scope
+ at $DIR/assoc-type-in-method-return.rs:3:25
 help: you might have meant to use the associated type
-   |
-LL |     fn to_bla(&self) -> Self::Bla;
-   |                         ++++++
+ on line 3, column 24, add `Self::`
 
 error: aborting due to 1 previous error
 

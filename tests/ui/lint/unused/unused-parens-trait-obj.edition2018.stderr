@@ -1,19 +1,9 @@
 error: unnecessary parentheses around type
-  --> $DIR/unused-parens-trait-obj.rs:25:51
-   |
-LL | pub type DynIsAContextualKeywordIn2015B = Box<dyn (::std::ops::Fn())>;
-   |                                                   ^                ^
-   |
+ at $DIR/unused-parens-trait-obj.rs:25:51
 note: the lint level is defined here
-  --> $DIR/unused-parens-trait-obj.rs:7:9
-   |
-LL | #![deny(unused_parens)]
-   |         ^^^^^^^^^^^^^
+ at $DIR/unused-parens-trait-obj.rs:7:9
 help: remove these parentheses
-   |
-LL - pub type DynIsAContextualKeywordIn2015B = Box<dyn (::std::ops::Fn())>;
-LL + pub type DynIsAContextualKeywordIn2015B = Box<dyn ::std::ops::Fn()>;
-   |
+ on line 25, column 50
 
 error: aborting due to 1 previous error
 

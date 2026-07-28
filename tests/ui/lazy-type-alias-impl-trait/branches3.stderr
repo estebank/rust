@@ -1,46 +1,26 @@
-error[E0282]: type annotations needed
-  --> $DIR/branches3.rs:9:10
-   |
-LL |         |s| s.len()
-   |          ^  - type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/branches3.rs:9:10
+  on line 9, column 13: type must be known at this point
 help: consider giving this closure parameter an explicit type
-   |
-LL |         |s: /* Type */| s.len()
-   |           ++++++++++++
+ on line 9, column 10, add `: /* Type */`
 
-error[E0282]: type annotations needed
-  --> $DIR/branches3.rs:18:10
-   |
-LL |         |s| s.len()
-   |          ^  - type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/branches3.rs:18:10
+  on line 18, column 13: type must be known at this point
 help: consider giving this closure parameter an explicit type
-   |
-LL |         |s: /* Type */| s.len()
-   |           ++++++++++++
+ on line 18, column 10, add `: /* Type */`
 
-error[E0282]: type annotations needed
-  --> $DIR/branches3.rs:26:10
-   |
-LL |         |s| s.len()
-   |          ^  - type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/branches3.rs:26:10
+  on line 26, column 13: type must be known at this point
 help: consider giving this closure parameter an explicit type
-   |
-LL |         |s: /* Type */| s.len()
-   |           ++++++++++++
+ on line 26, column 10, add `: /* Type */`
 
-error[E0282]: type annotations needed
-  --> $DIR/branches3.rs:33:10
-   |
-LL |         |s| s.len()
-   |          ^  - type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/branches3.rs:33:10
+  on line 33, column 13: type must be known at this point
 help: consider giving this closure parameter an explicit type
-   |
-LL |         |s: /* Type */| s.len()
-   |           ++++++++++++
+ on line 33, column 10, add `: /* Type */`
 
 error: aborting due to 4 previous errors
 

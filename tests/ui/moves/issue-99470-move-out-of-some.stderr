@@ -1,17 +1,8 @@
-error[E0507]: cannot move out of `x` as enum variant `Some` which is behind a shared reference
-  --> $DIR/issue-99470-move-out-of-some.rs:4:11
-   |
-LL |     match x {
-   |           ^
-LL |
-LL |         &Some(_y) => (),
-   |               -- data moved here because `_y` has type `Box<i32>`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of `x` as enum variant `Some` which is behind a shared reference
+ at $DIR/issue-99470-move-out-of-some.rs:4:11
+  on line 6, column 15: data moved here because `_y` has type `Box<i32>`, which does not implement the `Copy` trait
 help: consider removing the borrow
-   |
-LL -         &Some(_y) => (),
-LL +         Some(_y) => (),
-   |
+ on line 6, column 8
 
 error: aborting due to 1 previous error
 

@@ -1,20 +1,11 @@
-error[E0770]: the type of const parameters must not depend on other generic parameters
-  --> $DIR/issue-62878.rs:5:38
-   |
-LL | fn foo<const N: usize, const A: [u8; N]>() {}
-   |                                      ^ the type must not depend on the parameter `N`
+error E0770: the type of const parameters must not depend on other generic parameters
+ at $DIR/issue-62878.rs:5:38: the type must not depend on the parameter `N`
 
 error: `[u8; N]` is forbidden as the type of a const generic parameter
-  --> $DIR/issue-62878.rs:5:33
-   |
-LL | fn foo<const N: usize, const A: [u8; N]>() {}
-   |                                 ^^^^^^^
-   |
-   = note: the only supported types are integers, `bool`, and `char`
+ at $DIR/issue-62878.rs:5:33
+note: the only supported types are integers, `bool`, and `char`
 help: add `#![feature(min_adt_const_params)]` to the crate attributes to enable more complex and user defined types
-   |
-LL + #![feature(min_adt_const_params)]
-   |
+ on line 5, column 1, add `#![feature(min_adt_const_params)]`
 
 error: aborting due to 2 previous errors
 

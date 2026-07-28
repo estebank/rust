@@ -1,94 +1,44 @@
-error[E0308]: mismatched types
-  --> $DIR/wrap-function-local-constructors.rs:14:13
-   |
-LL |     _ = Bar(false);
-   |         --- ^^^^^ expected `Foo`, found `bool`
-   |         |
-   |         arguments to this struct are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/wrap-function-local-constructors.rs:14:13: expected `Foo`, found `bool`
+  on line 14, column 9: arguments to this struct are incorrect
 note: tuple struct defined here
-  --> $DIR/wrap-function-local-constructors.rs:12:12
-   |
-LL |     struct Bar(Foo);
-   |            ^^^
+ at $DIR/wrap-function-local-constructors.rs:12:12
 help: try wrapping the expression in `Foo`
-   |
-LL |     _ = Bar(Foo(false));
-   |             ++++     +
+ on line 14, column 12, add `Foo(`
 
-error[E0308]: mismatched types
-  --> $DIR/wrap-function-local-constructors.rs:25:13
-   |
-LL |     _ = Bar(false);
-   |         --- ^^^^^ expected `LocalResult<bool>`, found `bool`
-   |         |
-   |         arguments to this struct are incorrect
-   |
-   = note: expected enum `LocalResult<bool>`
-              found type `bool`
+error E0308: mismatched types
+ at $DIR/wrap-function-local-constructors.rs:25:13: expected `LocalResult<bool>`, found `bool`
+  on line 25, column 9: arguments to this struct are incorrect
+note: expected enum `LocalResult<bool>`
+         found type `bool`
 note: tuple struct defined here
-  --> $DIR/wrap-function-local-constructors.rs:23:12
-   |
-LL |     struct Bar(LocalResult<bool>);
-   |            ^^^
+ at $DIR/wrap-function-local-constructors.rs:23:12
 help: try wrapping the expression in `LocalResult::Ok`
-   |
-LL |     _ = Bar(LocalResult::Ok(false));
-   |             ++++++++++++++++     +
+ on line 25, column 12, add `LocalResult::Ok(`
 
-error[E0308]: mismatched types
-  --> $DIR/wrap-function-local-constructors.rs:36:13
-   |
-LL |     _ = Bar(false);
-   |         --- ^^^^^ expected `Foo`, found `bool`
-   |         |
-   |         arguments to this struct are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/wrap-function-local-constructors.rs:36:13: expected `Foo`, found `bool`
+  on line 36, column 9: arguments to this struct are incorrect
 note: tuple struct defined here
-  --> $DIR/wrap-function-local-constructors.rs:34:12
-   |
-LL |     struct Bar(inner::Foo);
-   |            ^^^
+ at $DIR/wrap-function-local-constructors.rs:34:12
 help: try wrapping the expression in `inner::Foo`
-   |
-LL |     _ = Bar(inner::Foo(false));
-   |             +++++++++++     +
+ on line 36, column 12, add `inner::Foo(`
 
-error[E0308]: mismatched types
-  --> $DIR/wrap-function-local-constructors.rs:46:17
-   |
-LL |         _ = Bar(false);
-   |             --- ^^^^^ expected `Foo`, found `bool`
-   |             |
-   |             arguments to this struct are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/wrap-function-local-constructors.rs:46:17: expected `Foo`, found `bool`
+  on line 46, column 13: arguments to this struct are incorrect
 note: tuple struct defined here
-  --> $DIR/wrap-function-local-constructors.rs:44:16
-   |
-LL |         struct Bar(Foo);
-   |                ^^^
+ at $DIR/wrap-function-local-constructors.rs:44:16
 help: try wrapping the expression in `Foo`
-   |
-LL |         _ = Bar(Foo(false));
-   |                 ++++     +
+ on line 46, column 16, add `Foo(`
 
-error[E0308]: mismatched types
-  --> $DIR/wrap-function-local-constructors.rs:57:17
-   |
-LL |         _ = Bar(false);
-   |             --- ^^^^^ expected `Foo`, found `bool`
-   |             |
-   |             arguments to this struct are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/wrap-function-local-constructors.rs:57:17: expected `Foo`, found `bool`
+  on line 57, column 13: arguments to this struct are incorrect
 note: tuple struct defined here
-  --> $DIR/wrap-function-local-constructors.rs:55:16
-   |
-LL |         struct Bar(Foo);
-   |                ^^^
+ at $DIR/wrap-function-local-constructors.rs:55:16
 help: try wrapping the expression in `Foo`
-   |
-LL |         _ = Bar(Foo(false));
-   |                 ++++     +
+ on line 57, column 16, add `Foo(`
 
 error: aborting due to 5 previous errors
 

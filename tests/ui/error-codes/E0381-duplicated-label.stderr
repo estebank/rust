@@ -1,14 +1,7 @@
-error[E0381]: used binding `blah` is possibly-uninitialized
-  --> $DIR/E0381-duplicated-label.rs:11:33
-   |
-LL |             let blah: Option<String>;
-   |                 ---- binding declared here but left uninitialized
-LL |             if true {
-LL |                 blah = Some("".to_string());
-   |                 ---- binding initialized here in some conditions
-LL |             }
-LL |             if let Some(blah) = blah.as_ref() {
-   |                                 ^^^^ `blah` used here but it is possibly-uninitialized
+error E0381: used binding `blah` is possibly-uninitialized
+ at $DIR/E0381-duplicated-label.rs:11:33: `blah` used here but it is possibly-uninitialized
+  on line 7, column 17: binding declared here but left uninitialized
+  on line 9: binding initialized here in some conditions
 
 error: aborting due to 1 previous error
 

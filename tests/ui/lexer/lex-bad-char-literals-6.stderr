@@ -1,46 +1,21 @@
 error: character literal may only contain one codepoint
-  --> $DIR/lex-bad-char-literals-6.rs:2:19
-   |
-LL |     let x: &str = 'ab';
-   |                   ^^^^
-   |
+ at $DIR/lex-bad-char-literals-6.rs:2:19
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let x: &str = 'ab';
-LL +     let x: &str = "ab";
-   |
+ on line 2, column 18, replace with `"`
 
 error: character literal may only contain one codepoint
-  --> $DIR/lex-bad-char-literals-6.rs:4:19
-   |
-LL |     let y: char = 'cd';
-   |                   ^^^^
-   |
+ at $DIR/lex-bad-char-literals-6.rs:4:19
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let y: char = 'cd';
-LL +     let y: char = "cd";
-   |
+ on line 4, column 18, replace with `"`
 
 error: character literal may only contain one codepoint
-  --> $DIR/lex-bad-char-literals-6.rs:6:13
-   |
-LL |     let z = 'ef';
-   |             ^^^^
-   |
+ at $DIR/lex-bad-char-literals-6.rs:6:13
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let z = 'ef';
-LL +     let z = "ef";
-   |
+ on line 6, column 12, replace with `"`
 
-error[E0308]: mismatched types
-  --> $DIR/lex-bad-char-literals-6.rs:13:20
-   |
-LL |     let a: usize = "";
-   |            -----   ^^ expected `usize`, found `&str`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/lex-bad-char-literals-6.rs:13:20: expected `usize`, found `&str`
+  on line 13, column 12: expected due to this
 
 error: aborting due to 4 previous errors
 

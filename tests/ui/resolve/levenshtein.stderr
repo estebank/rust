@@ -1,108 +1,47 @@
-error[E0425]: cannot find type `esize` in this scope
-  --> $DIR/levenshtein.rs:5:11
-   |
-LL | fn foo(c: esize) {} // Misspelled primitive type name.
-   |           ^^^^^
-   |
+error E0425: cannot find type `esize` in this scope
+ at $DIR/levenshtein.rs:5:11
 help: a builtin type with a similar name exists
-   |
-LL - fn foo(c: esize) {} // Misspelled primitive type name.
-LL + fn foo(c: isize) {} // Misspelled primitive type name.
-   |
+ on line 5, column 10, replace with `isize`
 
-error[E0425]: cannot find type `Baz` in this scope
-  --> $DIR/levenshtein.rs:10:10
-   |
-LL | enum Bar { }
-   | -------- similarly named enum `Bar` defined here
-LL |
-LL | type A = Baz; // Misspelled type name.
-   |          ^^^
-   |
+error E0425: cannot find type `Baz` in this scope
+ at $DIR/levenshtein.rs:10:10
+  on line 8: similarly named enum `Bar` defined here
 help: an enum with a similar name exists
-   |
-LL - type A = Baz; // Misspelled type name.
-LL + type A = Bar; // Misspelled type name.
-   |
+ on line 10, column 9, replace with `Bar`
 
-error[E0425]: cannot find type `Opiton` in this scope
-  --> $DIR/levenshtein.rs:12:10
-   |
-LL | type B = Opiton<u8>; // Misspelled type name from the prelude.
-   |          ^^^^^^
-   |
-  --> $SRC_DIR/core/src/option.rs:LL:COL
-   |
-   = note: similarly named enum `Option` defined here
+error E0425: cannot find type `Opiton` in this scope
+ at $DIR/levenshtein.rs:12:10
+ at $SRC_DIR/core/src/option.rs:LL:COL
+note: similarly named enum `Option` defined here
 help: an enum with a similar name exists
-   |
-LL - type B = Opiton<u8>; // Misspelled type name from the prelude.
-LL + type B = Option<u8>; // Misspelled type name from the prelude.
-   |
+ on line 12, column 9, replace with `Option`
 
-error[E0425]: cannot find type `Baz` in this scope
-  --> $DIR/levenshtein.rs:16:14
-   |
-LL |     type A = Baz; // No suggestion here, Bar is not visible
-   |              ^^^ not found in this scope
+error E0425: cannot find type `Baz` in this scope
+ at $DIR/levenshtein.rs:16:14: not found in this scope
 
-error[E0425]: cannot find value `MAXITEM` in this scope
-  --> $DIR/levenshtein.rs:24:20
-   |
-LL | const MAX_ITEM: usize = 10;
-   | --------------------------- similarly named constant `MAX_ITEM` defined here
-...
-LL |     let v = [0u32; MAXITEM]; // Misspelled constant name.
-   |                    ^^^^^^^
-   |
+error E0425: cannot find value `MAXITEM` in this scope
+ at $DIR/levenshtein.rs:24:20
+  on line 1: similarly named constant `MAX_ITEM` defined here
 help: a constant with a similar name exists
-   |
-LL |     let v = [0u32; MAX_ITEM]; // Misspelled constant name.
-   |                       +
+ on line 24, column 19, replace with `MAX_ITEM`
 
-error[E0425]: cannot find type `first` in module `m`
-  --> $DIR/levenshtein.rs:28:15
-   |
-LL |     pub struct First;
-   |     ----------------- similarly named struct `First` defined here
-...
-LL |     let b: m::first = m::second; // Misspelled item in module.
-   |               ^^^^^
-   |
+error E0425: cannot find type `first` in module `m`
+ at $DIR/levenshtein.rs:28:15
+  on line 19: similarly named struct `First` defined here
 help: a struct with a similar name exists (notice the capitalization)
-   |
-LL -     let b: m::first = m::second; // Misspelled item in module.
-LL +     let b: m::First = m::second; // Misspelled item in module.
-   |
+ on line 28, column 14, replace with `First`
 
-error[E0425]: cannot find value `second` in module `m`
-  --> $DIR/levenshtein.rs:28:26
-   |
-LL |     pub struct Second;
-   |     ------------------ similarly named unit struct `Second` defined here
-...
-LL |     let b: m::first = m::second; // Misspelled item in module.
-   |                          ^^^^^^
-   |
+error E0425: cannot find value `second` in module `m`
+ at $DIR/levenshtein.rs:28:26
+  on line 20: similarly named unit struct `Second` defined here
 help: a unit struct with a similar name exists (notice the capitalization)
-   |
-LL -     let b: m::first = m::second; // Misspelled item in module.
-LL +     let b: m::first = m::Second; // Misspelled item in module.
-   |
+ on line 28, column 25, replace with `Second`
 
-error[E0425]: cannot find function `foobar` in this scope
-  --> $DIR/levenshtein.rs:26:5
-   |
-LL | fn foo_bar() {}
-   | ------------ similarly named function `foo_bar` defined here
-...
-LL |     foobar(); // Misspelled function name.
-   |     ^^^^^^
-   |
+error E0425: cannot find function `foobar` in this scope
+ at $DIR/levenshtein.rs:26:5
+  on line 3: similarly named function `foo_bar` defined here
 help: a function with a similar name exists
-   |
-LL |     foo_bar(); // Misspelled function name.
-   |        +
+ on line 26, column 4, replace with `foo_bar`
 
 error: aborting due to 8 previous errors
 

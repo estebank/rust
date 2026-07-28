@@ -1,128 +1,53 @@
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:11:5
-   |
-LL | fn test_if() -> i32 {
-   |                 --- expected `i32` because of return type
-...
-LL |     x
-   |     ^ expected `i32`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:11:5: expected `i32`, found `()`
+  on line 3, column 17: expected `i32` because of return type
 help: remove this semicolon to return this value
-   |
-LL -         3;
-LL +         3
-   |
+ on line 6, column 9
 help: remove this semicolon to return this value
-   |
-LL -         4;
-LL +         4
-   |
+ on line 9, column 9
 
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:15:13
-   |
-LL |       if true {
-   |  _____________^
-LL | |         eprintln!("hello");
-LL | |         3;
-   | |          - help: remove this semicolon to return this value
-LL | |     }
-   | |_____^ expected `i32`, found `()`
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:15:13 to 18:6: expected `i32`, found `()`
+  on line 17, column 10: help: remove this semicolon to return this value
 
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:19:10
-   |
-LL |       else {
-   |  __________^
-LL | |         4;
-   | |          - help: remove this semicolon to return this value
-LL | |     }
-   | |_____^ expected `i32`, found `()`
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:19:10 to 21:6: expected `i32`, found `()`
+  on line 20, column 10: help: remove this semicolon to return this value
 
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:30:5
-   |
-LL | fn test_match() -> i32 {
-   |                    --- expected `i32` because of return type
-...
-LL |     res
-   |     ^^^ expected `i32`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:30:5: expected `i32`, found `()`
+  on line 24, column 20: expected `i32` because of return type
 help: remove this semicolon to return this value
-   |
-LL -         1 => { 1; }
-LL +         1 => { 1 }
-   |
+ on line 27, column 16
 help: remove this semicolon to return this value
-   |
-LL -         _ => { 2; }
-LL +         _ => { 2 }
-   |
+ on line 28, column 16
 
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:36:14
-   |
-LL |         1 => { 1; }
-   |              ^^^-^^
-   |              |  |
-   |              |  help: remove this semicolon to return this value
-   |              expected `i32`, found `()`
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:36:14: expected `i32`, found `()`
+  on line 36, column 17: help: remove this semicolon to return this value
 
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:37:14
-   |
-LL |         _ => { 2; }
-   |              ^^^-^^
-   |              |  |
-   |              |  help: remove this semicolon to return this value
-   |              expected `i32`, found `()`
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:37:14: expected `i32`, found `()`
+  on line 37, column 17: help: remove this semicolon to return this value
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/stmts-as-exp-105431.rs:45:16
-   |
-LL |       let res = match v {
-   |  _______________-
-LL | |         1 => { if 1 < 2 { 1 } else { 2 } }
-   | |                ------------------------- this is found to be of type `{integer}`
-LL | |         _ => { 2; }
-   | |                ^-
-   | |                ||
-   | |                |help: consider removing this semicolon
-   | |                expected integer, found `()`
-LL | |     };
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/stmts-as-exp-105431.rs:45:16: expected integer, found `()`
+  on line 43, column 15 to line 46, column 6: `match` arms have incompatible types
+  on line 44, column 16: this is found to be of type `{integer}`
+  on line 45, column 17: help: consider removing this semicolon
 
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:59:5
-   |
-LL | fn test_if_match_mixed() -> i32 {
-   |                             --- expected `i32` because of return type
-...
-LL |     x
-   |     ^ expected `i32`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:59:5: expected `i32`, found `()`
+  on line 50, column 29: expected `i32` because of return type
 help: remove this semicolon to return this value
-   |
-LL -         3;
-LL +         3
-   |
+ on line 52, column 9
 help: remove this semicolon to return this value
-   |
-LL -         };
-LL +         }
-   |
+ on line 57, column 9
 
-error[E0308]: mismatched types
-  --> $DIR/stmts-as-exp-105431.rs:72:5
-   |
-LL | fn test_if_match_mixed_failed() -> i32 {
-   |                                    --- expected `i32` because of return type
-LL |     let x = if true {
-LL |         3;
-   |          - help: remove this semicolon to return this value
-...
-LL |     x
-   |     ^ expected `i32`, found `()`
+error E0308: mismatched types
+ at $DIR/stmts-as-exp-105431.rs:72:5: expected `i32`, found `()`
+  on line 62, column 36: expected `i32` because of return type
+  on line 64, column 10: help: remove this semicolon to return this value
 
 error: aborting due to 9 previous errors
 

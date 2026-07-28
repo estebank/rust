@@ -1,70 +1,38 @@
-error[E0408]: variable `b` is not bound in all patterns
-  --> $DIR/issue-39698.rs:10:9
-   |
-LL |         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-   |         ^^^^^^^^^^^            -    ^^^^^^^^   ^^^^^^^^ pattern doesn't bind `b`
-   |         |                      |    |
-   |         |                      |    pattern doesn't bind `b`
-   |         |                      variable not in all patterns
-   |         pattern doesn't bind `b`
-   |
+error E0408: variable `b` is not bound in all patterns
+ at $DIR/issue-39698.rs:10:9: pattern doesn't bind `b`
+  on line 10, column 37: pattern doesn't bind `b`
+  on line 10, column 48: pattern doesn't bind `b`
+  on line 10, column 32: variable not in all patterns
 help: you might have meant to use the similarly named previously used binding `a`
-   |
-LL -         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-LL +         T::T1(a, d) | T::T2(d, a) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-   |
+ on line 10, column 31, replace with `a`
 
-error[E0408]: variable `c` is not bound in all patterns
-  --> $DIR/issue-39698.rs:10:9
-   |
-LL |         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-   |         ^^^^^^^^^^^   ^^^^^^^^^^^         -    ^^^^^^^^ pattern doesn't bind `c`
-   |         |             |                   |
-   |         |             |                   variable not in all patterns
-   |         |             pattern doesn't bind `c`
-   |         pattern doesn't bind `c`
-   |
+error E0408: variable `c` is not bound in all patterns
+ at $DIR/issue-39698.rs:10:9: pattern doesn't bind `c`
+  on line 10, column 23: pattern doesn't bind `c`
+  on line 10, column 48: pattern doesn't bind `c`
+  on line 10, column 43: variable not in all patterns
 help: you might have meant to use the similarly named previously used binding `a`
-   |
-LL -         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-LL +         T::T1(a, d) | T::T2(d, b) | T::T3(a) | T::T4(a) => { println!("{:?}", a); }
-   |
+ on line 10, column 42, replace with `a`
 
-error[E0408]: variable `a` is not bound in all patterns
-  --> $DIR/issue-39698.rs:10:23
-   |
-LL |         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-   |               -       ^^^^^^^^^^^   ^^^^^^^^         - variable not in all patterns
-   |               |       |             |
-   |               |       |             pattern doesn't bind `a`
-   |               |       pattern doesn't bind `a`
-   |               variable not in all patterns
-   |
+error E0408: variable `a` is not bound in all patterns
+ at $DIR/issue-39698.rs:10:23: pattern doesn't bind `a`
+  on line 10, column 37: pattern doesn't bind `a`
+  on line 10, column 15: variable not in all patterns
+  on line 10, column 54: variable not in all patterns
 help: you might have meant to use the similarly named previously used binding `b`
-   |
-LL -         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-LL +         T::T1(b, d) | T::T2(d, b) | T::T3(c) | T::T4(b) => { println!("{:?}", a); }
-   |
+ on line 10, column 14, replace with `b`
 
-error[E0408]: variable `d` is not bound in all patterns
-  --> $DIR/issue-39698.rs:10:37
-   |
-LL |         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-   |                  -          -       ^^^^^^^^   ^^^^^^^^ pattern doesn't bind `d`
-   |                  |          |       |
-   |                  |          |       pattern doesn't bind `d`
-   |                  |          variable not in all patterns
-   |                  variable not in all patterns
+error E0408: variable `d` is not bound in all patterns
+ at $DIR/issue-39698.rs:10:37: pattern doesn't bind `d`
+  on line 10, column 48: pattern doesn't bind `d`
+  on line 10, column 18: variable not in all patterns
+  on line 10, column 29: variable not in all patterns
 
-error[E0381]: used binding `a` is possibly-uninitialized
-  --> $DIR/issue-39698.rs:10:79
-   |
-LL |         T::T1(a, d) | T::T2(d, b) | T::T3(c) | T::T4(a) => { println!("{:?}", a); }
-   |               -                                      -                        ^ `a` used here but it is possibly-uninitialized
-   |               |                                      |
-   |               |                                      binding initialized here in some conditions
-   |               binding initialized here in some conditions
-   |               binding declared here but left uninitialized
+error E0381: used binding `a` is possibly-uninitialized
+ at $DIR/issue-39698.rs:10:79: `a` used here but it is possibly-uninitialized
+  on line 10, column 15: binding initialized here in some conditions
+  on line 10, column 15: binding declared here but left uninitialized
+  on line 10, column 54: binding initialized here in some conditions
 
 error: aborting due to 5 previous errors
 

@@ -1,28 +1,14 @@
-error[E0423]: cannot find value `u64` in this scope
-  --> $DIR/let-binding-suggest-issue-133713.rs:5:17
-   |
-LL |     let _last = u64 = 0;
-   |                 ^^^
-   |
-   = note: a builtin type named `u64` exists in another namespace
+error E0423: cannot find value `u64` in this scope
+ at $DIR/let-binding-suggest-issue-133713.rs:5:17
+note: a builtin type named `u64` exists in another namespace
 help: you might have meant to use `:` for type annotation
-   |
-LL -     let _last = u64 = 0;
-LL +     let _last: u64 = 0;
-   |
+ on line 5, column 13, replace with `: `
 
-error[E0423]: cannot find value `u64` in this scope
-  --> $DIR/let-binding-suggest-issue-133713.rs:9:16
-   |
-LL |     let _val = u64;
-   |                ^^^
-   |
-   = note: a builtin type named `u64` exists in another namespace
+error E0423: cannot find value `u64` in this scope
+ at $DIR/let-binding-suggest-issue-133713.rs:9:16
+note: a builtin type named `u64` exists in another namespace
 help: you might have meant to use `:` for type annotation
-   |
-LL -     let _val = u64;
-LL +     let _val: u64;
-   |
+ on line 9, column 12, replace with `: `
 
 error: aborting due to 2 previous errors
 

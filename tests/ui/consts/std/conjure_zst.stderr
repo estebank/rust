@@ -1,11 +1,7 @@
-error[E0080]: evaluation panicked: aborted execution: attempted to instantiate uninhabited type `Infallible`
-  --> $DIR/conjure_zst.rs:5:38
-   |
-LL | const INVALID: Infallible = unsafe { mem::conjure_zst() };
-   |                                      ^^^^^^^^^^^^^^^^^^ evaluation of `INVALID` failed inside this call
-   |
+error E0080: evaluation panicked: aborted execution: attempted to instantiate uninhabited type `Infallible`
+ at $DIR/conjure_zst.rs:5:38: evaluation of `INVALID` failed inside this call
 note: inside `conjure_zst::<Infallible>`
-  --> $SRC_DIR/core/src/mem/mod.rs:LL:COL
+ at $SRC_DIR/core/src/mem/mod.rs:LL:COL
 
 error: aborting due to 1 previous error
 

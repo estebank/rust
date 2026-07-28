@@ -1,11 +1,7 @@
-error[E0580]: `main` function has wrong type
-  --> $DIR/extern-main-fn.rs:1:1
-   |
-LL | extern "C" fn main() {}
-   | ^^^^^^^^^^^^^^^^^^^^ expected "Rust" fn, found "C" fn
-   |
-   = note: expected signature `fn()`
-              found signature `extern "C" fn()`
+error E0580: `main` function has wrong type
+ at $DIR/extern-main-fn.rs:1:1: expected "Rust" fn, found "C" fn
+note: expected signature `fn()`
+         found signature `extern "C" fn()`
 
 error: aborting due to 1 previous error
 

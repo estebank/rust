@@ -1,20 +1,11 @@
-error[E0767]: use of unreachable label `'a`
-  --> $DIR/labeled-break-inside-closure-62480.rs:7:18
-   |
-LL |     'a: {
-   |     -- unreachable label defined here
-LL |         || break 'a
-   |                  ^^ unreachable label `'a`
-   |
-   = note: labels are unreachable through functions, closures, async blocks and modules
+error E0767: use of unreachable label `'a`
+ at $DIR/labeled-break-inside-closure-62480.rs:7:18: unreachable label `'a`
+  on line 6: unreachable label defined here
+note: labels are unreachable through functions, closures, async blocks and modules
 
-error[E0267]: `break` inside of a closure
-  --> $DIR/labeled-break-inside-closure-62480.rs:7:12
-   |
-LL |         || break 'a
-   |         -- ^^^^^^^^ cannot `break` inside of a closure
-   |         |
-   |         enclosing closure
+error E0267: `break` inside of a closure
+ at $DIR/labeled-break-inside-closure-62480.rs:7:12: cannot `break` inside of a closure
+  on line 7: enclosing closure
 
 error: aborting due to 2 previous errors
 

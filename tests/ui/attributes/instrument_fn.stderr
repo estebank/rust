@@ -1,125 +1,63 @@
-error[E0658]: attributes on expressions are experimental
-  --> $DIR/instrument_fn.rs:14:9
-   |
-LL |         #[instrument_fn = "off"]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: see issue #15701 <https://github.com/rust-lang/rust/issues/15701> for more information
-   = help: add `#![feature(stmt_expr_attributes)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: attributes on expressions are experimental
+ at $DIR/instrument_fn.rs:14:9
+note: see issue #15701 <https://github.com/rust-lang/rust/issues/15701> for more information
+help: add `#![feature(stmt_expr_attributes)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
-error[E0658]: attributes on expressions are experimental
-  --> $DIR/instrument_fn.rs:47:14
-   |
-LL |     let _x = #[instrument_fn = "on"]
-   |              ^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: see issue #15701 <https://github.com/rust-lang/rust/issues/15701> for more information
-   = help: add `#![feature(stmt_expr_attributes)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: attributes on expressions are experimental
+ at $DIR/instrument_fn.rs:47:14
+note: see issue #15701 <https://github.com/rust-lang/rust/issues/15701> for more information
+help: add `#![feature(stmt_expr_attributes)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error: the `instrument_fn` attribute cannot be used on crates
-  --> $DIR/instrument_fn.rs:2:4
-   |
-LL | #![instrument_fn = "off"]
-   |    ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can only be applied to functions
+ at $DIR/instrument_fn.rs:2:4
+help: the `instrument_fn` attribute can only be applied to functions
 
 error: the `instrument_fn` attribute cannot be used on structs
-  --> $DIR/instrument_fn.rs:4:3
-   |
-LL | #[instrument_fn = "on"]
-   |   ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can only be applied to functions
+ at $DIR/instrument_fn.rs:4:3
+help: the `instrument_fn` attribute can only be applied to functions
 
 error: the `instrument_fn` attribute cannot be used on modules
-  --> $DIR/instrument_fn.rs:7:3
-   |
-LL | #[instrument_fn = "on"]
-   |   ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can only be applied to functions
+ at $DIR/instrument_fn.rs:7:3
+help: the `instrument_fn` attribute can only be applied to functions
 
 error: the `instrument_fn` attribute cannot be used on inherent impl blocks
-  --> $DIR/instrument_fn.rs:10:3
-   |
-LL | #[instrument_fn = "on"]
-   |   ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can only be applied to functions
+ at $DIR/instrument_fn.rs:10:3
+help: the `instrument_fn` attribute can only be applied to functions
 
 error: the `instrument_fn` attribute cannot be used on expressions
-  --> $DIR/instrument_fn.rs:14:11
-   |
-LL |         #[instrument_fn = "off"]
-   |           ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can only be applied to functions
+ at $DIR/instrument_fn.rs:14:11
+help: the `instrument_fn` attribute can only be applied to functions
 
 error: the `instrument_fn` attribute cannot be used on traits
-  --> $DIR/instrument_fn.rs:20:3
-   |
-LL | #[instrument_fn = "off"]
-   |   ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can only be applied to functions
+ at $DIR/instrument_fn.rs:20:3
+help: the `instrument_fn` attribute can only be applied to functions
 
 error: the `instrument_fn` attribute cannot be used on required trait methods
-  --> $DIR/instrument_fn.rs:22:7
-   |
-LL |     #[instrument_fn = "off"]
-   |       ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can only be applied to functions with a body
+ at $DIR/instrument_fn.rs:22:7
+help: the `instrument_fn` attribute can only be applied to functions with a body
 
-error[E0805]: malformed `instrument_fn` attribute input
-  --> $DIR/instrument_fn.rs:37:3
-   |
-LL | #[instrument_fn(entry = "on")]
-   |   ^^^^^^^^^^^^^--------------
-   |                |
-   |                expected a single argument here
-   |
+error E0805: malformed `instrument_fn` attribute input
+ at $DIR/instrument_fn.rs:37:3
+  on line 37, column 16: expected a single argument here
 help: must be of the form
-   |
-LL - #[instrument_fn(entry = "on")]
-LL + #[instrument_fn = "on|off"]
-   |
+ on line 37, column 2, replace with `instrument_fn = "on|off"`
 
-error[E0539]: malformed `instrument_fn` attribute input
-  --> $DIR/instrument_fn.rs:40:3
-   |
-LL | #[instrument_fn]
-   |   ^^^^^^^^^^^^^ valid arguments are "on" or "off"
-   |
+error E0539: malformed `instrument_fn` attribute input
+ at $DIR/instrument_fn.rs:40:3: valid arguments are "on" or "off"
 help: must be of the form
-   |
-LL | #[instrument_fn = "on|off"]
-   |                 ++++++++++
+ on line 40, column 2, replace with `instrument_fn = "on|off"`
 
-error[E0539]: malformed `instrument_fn` attribute input
-  --> $DIR/instrument_fn.rs:43:3
-   |
-LL | #[instrument_fn = 1]
-   |   ^^^^^^^^^^^^^^^^-
-   |                   |
-   |                   valid arguments are "on" or "off"
-   |
+error E0539: malformed `instrument_fn` attribute input
+ at $DIR/instrument_fn.rs:43:3
+  on line 43, column 19: valid arguments are "on" or "off"
 help: must be of the form
-   |
-LL - #[instrument_fn = 1]
-LL + #[instrument_fn = "on|off"]
-   |
+ on line 43, column 2, replace with `instrument_fn = "on|off"`
 
 error: the `instrument_fn` attribute cannot be used on closures
-  --> $DIR/instrument_fn.rs:47:16
-   |
-LL |     let _x = #[instrument_fn = "on"]
-   |                ^^^^^^^^^^^^^
-   |
-   = help: the `instrument_fn` attribute can be applied to functions and methods
+ at $DIR/instrument_fn.rs:47:16
+help: the `instrument_fn` attribute can be applied to functions and methods
 
 error: aborting due to 13 previous errors
 

@@ -1,37 +1,19 @@
-error[E0261]: use of undeclared lifetime name `'b`
-  --> $DIR/generic_associated_type_undeclared_lifetimes.rs:6:37
-   |
-LL |         + Deref<Target = Self::Item<'b>>;
-   |                                     ^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'b`
+ at $DIR/generic_associated_type_undeclared_lifetimes.rs:6:37: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the bound lifetime-generic with a new `'b` lifetime
-   |
-LL |         + for<'b> Deref<Target = Self::Item<'b>>;
-   |           +++++++
+ on line 6, column 10, add `for<'b> `
 help: consider introducing lifetime `'b` here
-   |
-LL |     type Iter<'b, 'a>: Iterator<Item = Self::Item<'a>>
-   |               +++
+ on line 5, column 14, add `'b, `
 help: consider introducing lifetime `'b` here
-   |
-LL | trait Iterable<'b> {
-   |               ++++
+ on line 3, column 14, add `<'b>`
 
-error[E0261]: use of undeclared lifetime name `'undeclared`
-  --> $DIR/generic_associated_type_undeclared_lifetimes.rs:9:41
-   |
-LL |     fn iter<'a>(&'a self) -> Self::Iter<'undeclared>;
-   |                                         ^^^^^^^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'undeclared`
+ at $DIR/generic_associated_type_undeclared_lifetimes.rs:9:41: undeclared lifetime
 help: consider introducing lifetime `'undeclared` here
-   |
-LL |     fn iter<'undeclared, 'a>(&'a self) -> Self::Iter<'undeclared>;
-   |             ++++++++++++
+ on line 9, column 12, add `'undeclared, `
 help: consider introducing lifetime `'undeclared` here
-   |
-LL | trait Iterable<'undeclared> {
-   |               +++++++++++++
+ on line 3, column 14, add `<'undeclared>`
 
 error: aborting due to 2 previous errors
 

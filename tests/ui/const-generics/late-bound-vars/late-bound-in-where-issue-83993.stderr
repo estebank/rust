@@ -1,10 +1,6 @@
 error: cannot capture late-bound lifetime in constant
-  --> $DIR/late-bound-in-where-issue-83993.rs:10:17
-   |
-LL |     for<'b> [(); {
-   |         -- lifetime defined here
-LL |         let x: &'b ();
-   |                 ^^
+ at $DIR/late-bound-in-where-issue-83993.rs:10:17
+  on line 9, column 9: lifetime defined here
 
 error: aborting due to 1 previous error
 

@@ -1,24 +1,12 @@
-error[E0404]: expected trait, found enum `Tag`
-  --> $DIR/change-ty-to-const-param-sugg-1.rs:6:18
-   |
-LL | struct Tagged<T: Tag, O: Options>;
-   |                  ^^^ not a trait
-   |
+error E0404: expected trait, found enum `Tag`
+ at $DIR/change-ty-to-const-param-sugg-1.rs:6:18: not a trait
 help: you might have meant to write a const parameter here
-   |
-LL | struct Tagged<const T: Tag, O: Options>;
-   |               +++++
+ on line 6, column 14, add `const `
 
-error[E0404]: expected trait, found struct `Options`
-  --> $DIR/change-ty-to-const-param-sugg-1.rs:6:26
-   |
-LL | struct Tagged<T: Tag, O: Options>;
-   |                          ^^^^^^^ not a trait
-   |
+error E0404: expected trait, found struct `Options`
+ at $DIR/change-ty-to-const-param-sugg-1.rs:6:26: not a trait
 help: you might have meant to write a const parameter here
-   |
-LL | struct Tagged<T: Tag, const O: Options>;
-   |                       +++++
+ on line 6, column 22, add `const `
 
 error: aborting due to 2 previous errors
 

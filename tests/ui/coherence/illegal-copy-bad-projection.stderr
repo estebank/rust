@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `void` in this scope
-  --> $DIR/illegal-copy-bad-projection.rs:6:23
-   |
-LL |     type Ptr = *const void;
-   |                       ^^^^ not found in this scope
+error E0425: cannot find type `void` in this scope
+ at $DIR/illegal-copy-bad-projection.rs:6:23: not found in this scope
 
 error: aborting due to 1 previous error
 

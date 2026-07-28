@@ -1,37 +1,17 @@
-error[E0046]: not all trait items implemented, missing: `foo`
-  --> $DIR/unsized-trait-impl-self-type.rs:10:1
-   |
-LL |     fn foo(&self, z: &Z);
-   |     --------------------- `foo` from trait
-...
-LL | impl<X: ?Sized> T3<X> for S5<X> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `foo` in implementation
+error E0046: not all trait items implemented, missing: `foo`
+ at $DIR/unsized-trait-impl-self-type.rs:10:1: missing `foo` in implementation
+  on line 5: `foo` from trait
 
-error[E0277]: the size for values of type `X` cannot be known at compilation time
-  --> $DIR/unsized-trait-impl-self-type.rs:10:27
-   |
-LL | impl<X: ?Sized> T3<X> for S5<X> {
-   |      -                    ^^^^^ doesn't have a size known at compile-time
-   |      |
-   |      this type parameter needs to be `Sized`
-   |
+error E0277: the size for values of type `X` cannot be known at compilation time
+ at $DIR/unsized-trait-impl-self-type.rs:10:27: doesn't have a size known at compile-time
+  on line 10, column 6: this type parameter needs to be `Sized`
 note: required by an implicit `Sized` bound in `S5`
-  --> $DIR/unsized-trait-impl-self-type.rs:8:11
-   |
-LL | struct S5<Y>(Y);
-   |           ^ required by the implicit `Sized` requirement on this type parameter in `S5`
+ at $DIR/unsized-trait-impl-self-type.rs:8:11: required by the implicit `Sized` requirement on this type parameter in `S5`
 help: you could relax the implicit `Sized` bound on `Y` if it were used through indirection like `&Y` or `Box<Y>`
-  --> $DIR/unsized-trait-impl-self-type.rs:8:11
-   |
-LL | struct S5<Y>(Y);
-   |           ^  - ...if indirection were used here: `Box<Y>`
-   |           |
-   |           this could be changed to `Y: ?Sized`...
+ at $DIR/unsized-trait-impl-self-type.rs:8:11: this could be changed to `Y: ?Sized`...
+  on line 8, column 14: ...if indirection were used here: `Box<Y>`
 help: consider removing the `?Sized` bound to make the type parameter `Sized`
-   |
-LL - impl<X: ?Sized> T3<X> for S5<X> {
-LL + impl<X> T3<X> for S5<X> {
-   |
+ on line 10, column 6
 
 error: aborting due to 2 previous errors
 

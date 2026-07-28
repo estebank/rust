@@ -1,8 +1,5 @@
-error[E0748]: unterminated raw string
-  --> $DIR/issue-70677-panic-on-unterminated-raw-str-at-eof.rs:5:1
-   |
-LL | r"
-   | ^ unterminated raw string
+error E0748: unterminated raw string
+ at $DIR/issue-70677-panic-on-unterminated-raw-str-at-eof.rs:5:1: unterminated raw string
 
 error: aborting due to 1 previous error
 

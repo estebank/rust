@@ -1,28 +1,13 @@
 error: expected one of `extern`, `fn`, `safe`, or `unsafe`, found keyword `const`
-  --> $DIR/const-async-const.rs:5:13
-   |
-LL | const async const fn test() {}
-   |             ^^^^^ expected one of `extern`, `fn`, `safe`, or `unsafe`
-   |
+ at $DIR/const-async-const.rs:5:13: expected one of `extern`, `fn`, `safe`, or `unsafe`
 note: `const` first seen here
-  --> $DIR/const-async-const.rs:5:1
-   |
-LL | const async const fn test() {}
-   | ^^^^^
+ at $DIR/const-async-const.rs:5:1
 help: `const` already used earlier, remove this one
-   |
-LL - const async const fn test() {}
-LL + const async  fn test() {}
-   |
+ on line 5, column 12
 
 error: functions cannot be both `const` and `async`
-  --> $DIR/const-async-const.rs:5:1
-   |
-LL | const async const fn test() {}
-   | ^^^^^-^^^^^-------------------
-   | |     |
-   | |     `async` because of this
-   | `const` because of this
+ at $DIR/const-async-const.rs:5:1: `const` because of this
+  on line 5, column 7: `async` because of this
 
 error: aborting due to 2 previous errors
 

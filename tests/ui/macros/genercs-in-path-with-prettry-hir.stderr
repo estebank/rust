@@ -1,8 +1,5 @@
 error: unexpected generic arguments in path
-  --> $DIR/genercs-in-path-with-prettry-hir.rs:13:10
-   |
-LL | m!(inline<u8>);
-   |          ^^^^
+ at $DIR/genercs-in-path-with-prettry-hir.rs:13:10
 
 error: aborting due to 1 previous error
 

@@ -1,14 +1,8 @@
-error[E0599]: no method named `deref` found for reference `&()` in the current scope
-  --> $DIR/shadow.rs:19:11
-   |
-LL |         x.deref();
-   |           ^^^^^ method not found in `&()`
-   |
-   = help: items from traits can only be used if the trait is in scope
+error E0599: no method named `deref` found for reference `&()` in the current scope
+ at $DIR/shadow.rs:19:11: method not found in `&()`
+help: items from traits can only be used if the trait is in scope
 help: trait `Deref` which provides `deref` is implemented but not in scope; perhaps you want to import it
-   |
-LL +     use std::ops::Deref;
-   |
+ on line 16, column 4, add `use std::ops::Deref;`
 
 error: aborting due to 1 previous error
 

@@ -1,14 +1,7 @@
-error[E0603]: constant `PRIVATE` is private
-  --> $DIR/E0603.rs:6:17
-   |
-LL |     SomeModule::PRIVATE;
-   |                 ^^^^^^^ private constant
-   |
+error E0603: constant `PRIVATE` is private
+ at $DIR/E0603.rs:6:17: private constant
 note: the constant `PRIVATE` is defined here
-  --> $DIR/E0603.rs:2:5
-   |
-LL |     const PRIVATE: u32 = 0x_a_bad_1dea_u32;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/E0603.rs:2:5
 
 error: aborting due to 1 previous error
 

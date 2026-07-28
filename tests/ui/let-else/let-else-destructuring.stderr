@@ -1,16 +1,9 @@
 error: <assignment> ... else { ... } is not allowed
-  --> $DIR/let-else-destructuring.rs:10:9
-   |
-LL |         &Foo::Nested(Some(value)) = value else { break };
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/let-else-destructuring.rs:10:9
 
-error[E0070]: invalid left-hand side of assignment
-  --> $DIR/let-else-destructuring.rs:10:35
-   |
-LL |         &Foo::Nested(Some(value)) = value else { break };
-   |         ------------------------- ^
-   |         |
-   |         cannot assign to this expression
+error E0070: invalid left-hand side of assignment
+ at $DIR/let-else-destructuring.rs:10:35
+  on line 10: cannot assign to this expression
 
 error: aborting due to 2 previous errors
 

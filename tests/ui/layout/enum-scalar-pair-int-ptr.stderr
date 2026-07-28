@@ -1,14 +1,8 @@
 error: backend_repr: ScalarPair { a: u?? is 0..=1, b: pointer is $VALID_RANGE, b_offset: Size(? bytes) }
-  --> $DIR/enum-scalar-pair-int-ptr.rs:13:1
-   |
-LL | enum ScalarPairPointerWithInt {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/enum-scalar-pair-int-ptr.rs:13:1
 
 error: backend_repr: Memory { sized: true }
-  --> $DIR/enum-scalar-pair-int-ptr.rs:22:1
-   |
-LL | enum NotScalarPairPointerWithSmallerInt {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/enum-scalar-pair-int-ptr.rs:22:1
 
 error: aborting due to 2 previous errors
 

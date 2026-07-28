@@ -1,54 +1,26 @@
-error[E0515]: cannot return value referencing temporary value
-  --> $DIR/wf-misc-methods-issue-28609.rs:22:5
-   |
-LL |     s.transmute_inherent(&mut 42)
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^--^
-   |     |                         |
-   |     |                         temporary value created here
-   |     returns a value referencing data owned by the current function
+error E0515: cannot return value referencing temporary value
+ at $DIR/wf-misc-methods-issue-28609.rs:22:5: returns a value referencing data owned by the current function
+  on line 22, column 31: temporary value created here
 
-error[E0515]: cannot return value referencing local variable `four`
-  --> $DIR/wf-misc-methods-issue-28609.rs:36:5
-   |
-LL |     s.bomb = Some(&four);
-   |                   ----- `four` is borrowed here
-LL |     &s
-   |     ^^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing local variable `four`
+ at $DIR/wf-misc-methods-issue-28609.rs:36:5: returns a value referencing data owned by the current function
+  on line 35, column 19: `four` is borrowed here
 
-error[E0515]: cannot return value referencing local variable `four`
-  --> $DIR/wf-misc-methods-issue-28609.rs:43:5
-   |
-LL |     s.bomb = Some(&four);
-   |                   ----- `four` is borrowed here
-LL |     &*s
-   |     ^^^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing local variable `four`
+ at $DIR/wf-misc-methods-issue-28609.rs:43:5: returns a value referencing data owned by the current function
+  on line 42, column 19: `four` is borrowed here
 
-error[E0515]: cannot return value referencing temporary value
-  --> $DIR/wf-misc-methods-issue-28609.rs:53:5
-   |
-LL |     s << &mut 3
-   |     ^^^^^^^^^^-
-   |     |         |
-   |     |         temporary value created here
-   |     returns a value referencing data owned by the current function
+error E0515: cannot return value referencing temporary value
+ at $DIR/wf-misc-methods-issue-28609.rs:53:5: returns a value referencing data owned by the current function
+  on line 53, column 15: temporary value created here
 
-error[E0515]: cannot return value referencing temporary value
-  --> $DIR/wf-misc-methods-issue-28609.rs:58:5
-   |
-LL |     s.shl(&mut 3)
-   |     ^^^^^^^^^^^-^
-   |     |          |
-   |     |          temporary value created here
-   |     returns a value referencing data owned by the current function
+error E0515: cannot return value referencing temporary value
+ at $DIR/wf-misc-methods-issue-28609.rs:58:5: returns a value referencing data owned by the current function
+  on line 58, column 16: temporary value created here
 
-error[E0515]: cannot return value referencing temporary value
-  --> $DIR/wf-misc-methods-issue-28609.rs:63:5
-   |
-LL |     S2::shl(s, &mut 3)
-   |     ^^^^^^^^^^^^^^^^-^
-   |     |               |
-   |     |               temporary value created here
-   |     returns a value referencing data owned by the current function
+error E0515: cannot return value referencing temporary value
+ at $DIR/wf-misc-methods-issue-28609.rs:63:5: returns a value referencing data owned by the current function
+  on line 63, column 21: temporary value created here
 
 error: aborting due to 6 previous errors
 

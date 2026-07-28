@@ -1,8 +1,5 @@
-error[E0080]: evaluation panicked: not yet implemented
-  --> $DIR/wrong-typing-mode-ice-1.rs:24:26
-   |
-LL | static POOL: Task<Foo> = todo!();
-   |                          ^^^^^^^ evaluation of `POOL` failed here
+error E0080: evaluation panicked: not yet implemented
+ at $DIR/wrong-typing-mode-ice-1.rs:24:26: evaluation of `POOL` failed here
 
 error: aborting due to 1 previous error
 

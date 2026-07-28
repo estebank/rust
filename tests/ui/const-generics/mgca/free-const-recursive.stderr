@@ -1,14 +1,8 @@
-error[E0275]: overflow evaluating the requirement `A == _`
-  --> $DIR/free-const-recursive.rs:7:1
-   |
-LL | type const A: () = A;
-   | ^^^^^^^^^^^^^^^^
+error E0275: overflow evaluating the requirement `A == _`
+ at $DIR/free-const-recursive.rs:7:1
 
-error[E0275]: overflow evaluating the requirement `the constant `A` has type `()``
-  --> $DIR/free-const-recursive.rs:7:1
-   |
-LL | type const A: () = A;
-   | ^^^^^^^^^^^^^^^^
+error E0275: overflow evaluating the requirement `the constant `A` has type `()``
+ at $DIR/free-const-recursive.rs:7:1
 
 error: aborting due to 2 previous errors
 

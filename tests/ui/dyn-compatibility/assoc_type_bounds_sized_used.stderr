@@ -1,80 +1,35 @@
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/assoc_type_bounds_sized_used.rs:11:14
-   |
-LL | fn bop<T: Bop + ?Sized>() {
-   |        - this type parameter needs to be `Sized`
-LL |     let _ = <T as Bop>::Bar::default();
-   |              ^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/assoc_type_bounds_sized_used.rs:11:14: doesn't have a size known at compile-time
+  on line 10, column 8: this type parameter needs to be `Sized`
 note: required by a bound in `Bop::Bar`
-  --> $DIR/assoc_type_bounds_sized_used.rs:7:15
-   |
-LL |     type Bar: Default
-   |          --- required by a bound in this associated type
-LL |     where
-LL |         Self: Sized;
-   |               ^^^^^ required by this bound in `Bop::Bar`
+ at $DIR/assoc_type_bounds_sized_used.rs:7:15: required by this bound in `Bop::Bar`
+  on line 5, column 10: required by a bound in this associated type
 help: consider removing the `?Sized` bound to make the type parameter `Sized`
-   |
-LL - fn bop<T: Bop + ?Sized>() {
-LL + fn bop<T: Bop>() {
-   |
+ on line 10, column 13
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL |     type Bar: Default + ?Sized
-   |                       ++++++++
+ on line 5, column 21, add ` + ?Sized`
 
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/assoc_type_bounds_sized_used.rs:11:13
-   |
-LL | fn bop<T: Bop + ?Sized>() {
-   |        - this type parameter needs to be `Sized`
-LL |     let _ = <T as Bop>::Bar::default();
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/assoc_type_bounds_sized_used.rs:11:13: doesn't have a size known at compile-time
+  on line 10, column 8: this type parameter needs to be `Sized`
 note: required by a bound in `Bop::Bar`
-  --> $DIR/assoc_type_bounds_sized_used.rs:7:15
-   |
-LL |     type Bar: Default
-   |          --- required by a bound in this associated type
-LL |     where
-LL |         Self: Sized;
-   |               ^^^^^ required by this bound in `Bop::Bar`
+ at $DIR/assoc_type_bounds_sized_used.rs:7:15: required by this bound in `Bop::Bar`
+  on line 5, column 10: required by a bound in this associated type
 help: consider removing the `?Sized` bound to make the type parameter `Sized`
-   |
-LL - fn bop<T: Bop + ?Sized>() {
-LL + fn bop<T: Bop>() {
-   |
+ on line 10, column 13
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL |     type Bar: Default + ?Sized
-   |                       ++++++++
+ on line 5, column 21, add ` + ?Sized`
 
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/assoc_type_bounds_sized_used.rs:11:13
-   |
-LL | fn bop<T: Bop + ?Sized>() {
-   |        - this type parameter needs to be `Sized`
-LL |     let _ = <T as Bop>::Bar::default();
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/assoc_type_bounds_sized_used.rs:11:13: doesn't have a size known at compile-time
+  on line 10, column 8: this type parameter needs to be `Sized`
 note: required by a bound in `Bop::Bar`
-  --> $DIR/assoc_type_bounds_sized_used.rs:7:15
-   |
-LL |     type Bar: Default
-   |          --- required by a bound in this associated type
-LL |     where
-LL |         Self: Sized;
-   |               ^^^^^ required by this bound in `Bop::Bar`
+ at $DIR/assoc_type_bounds_sized_used.rs:7:15: required by this bound in `Bop::Bar`
+  on line 5, column 10: required by a bound in this associated type
 help: consider removing the `?Sized` bound to make the type parameter `Sized`
-   |
-LL - fn bop<T: Bop + ?Sized>() {
-LL + fn bop<T: Bop>() {
-   |
+ on line 10, column 13
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL |     type Bar: Default + ?Sized
-   |                       ++++++++
+ on line 5, column 21, add ` + ?Sized`
 
 error: aborting due to 3 previous errors
 

@@ -1,26 +1,14 @@
 error: macro requires a boolean expression as an argument
-  --> $DIR/assert.rs:5:5
-   |
-LL |     assert!();
-   |     ^^^^^^^^^ boolean expression required
+ at $DIR/assert.rs:5:5: boolean expression required
 
 error: expected expression, found keyword `struct`
-  --> $DIR/assert.rs:6:13
-   |
-LL |     assert!(struct);
-   |             ^^^^^^ expected expression
+ at $DIR/assert.rs:6:13: expected expression
 
 error: macro requires a boolean expression as an argument
-  --> $DIR/assert.rs:7:5
-   |
-LL |     debug_assert!();
-   |     ^^^^^^^^^^^^^^^ boolean expression required
+ at $DIR/assert.rs:7:5: boolean expression required
 
 error: expected expression, found keyword `struct`
-  --> $DIR/assert.rs:8:19
-   |
-LL |     debug_assert!(struct);
-   |                   ^^^^^^ expected expression
+ at $DIR/assert.rs:8:19: expected expression
 
 error: aborting due to 4 previous errors
 

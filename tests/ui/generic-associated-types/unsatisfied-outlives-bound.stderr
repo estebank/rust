@@ -1,26 +1,12 @@
-error[E0477]: the type `&'b ()` does not fulfill the required lifetime
-  --> $DIR/unsatisfied-outlives-bound.rs:6:21
-   |
-LL |     type Item<'a> = &'b ();
-   |                     ^^^^^^
-   |
+error E0477: the type `&'b ()` does not fulfill the required lifetime
+ at $DIR/unsatisfied-outlives-bound.rs:6:21
 note: type must outlive the lifetime `'a` as defined here as required by this binding
-  --> $DIR/unsatisfied-outlives-bound.rs:6:15
-   |
-LL |     type Item<'a> = &'b ();
-   |               ^^
+ at $DIR/unsatisfied-outlives-bound.rs:6:15
 
-error[E0477]: the type `&'a ()` does not fulfill the required lifetime
-  --> $DIR/unsatisfied-outlives-bound.rs:15:21
-   |
-LL |     type Item<'a> = &'a ();
-   |                     ^^^^^^
-   |
+error E0477: the type `&'a ()` does not fulfill the required lifetime
+ at $DIR/unsatisfied-outlives-bound.rs:15:21
 note: type must satisfy the static lifetime as required by this binding
-  --> $DIR/unsatisfied-outlives-bound.rs:11:20
-   |
-LL |     type Item<'a>: 'static;
-   |                    ^^^^^^^
+ at $DIR/unsatisfied-outlives-bound.rs:11:20
 
 error: aborting due to 2 previous errors
 

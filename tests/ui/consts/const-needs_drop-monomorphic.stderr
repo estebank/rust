@@ -1,22 +1,11 @@
 error: unconstrained generic constant
-  --> $DIR/const-needs_drop-monomorphic.rs:11:5
-   |
-LL |     Bool::<{ std::mem::needs_drop::<T>() }>::assert();
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/const-needs_drop-monomorphic.rs:11:5
 help: try adding a `where` bound
-   |
-LL | fn f<T>() where [(); { std::mem::needs_drop::<T>() } as usize]: {
-   |           +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ on line 10, column 9, add ` where [(); { std::mem::needs_drop::<T>() } as usize]:`
 
-error[E0599]: no associated function or constant named `assert` found for struct `Bool<{ std::mem::needs_drop::<T>() }>` in the current scope
-  --> $DIR/const-needs_drop-monomorphic.rs:11:46
-   |
-LL | struct Bool<const B: bool> {}
-   | -------------------------- associated function or constant `assert` not found for this struct
-...
-LL |     Bool::<{ std::mem::needs_drop::<T>() }>::assert();
-   |                                              ^^^^^^ associated function or constant cannot be called on `Bool<{ std::mem::needs_drop::<T>() }>` due to unsatisfied trait bounds
+error E0599: no associated function or constant named `assert` found for struct `Bool<{ std::mem::needs_drop::<T>() }>` in the current scope
+ at $DIR/const-needs_drop-monomorphic.rs:11:46: associated function or constant cannot be called on `Bool<{ std::mem::needs_drop::<T>() }>` due to unsatisfied trait bounds
+  on line 6: associated function or constant `assert` not found for this struct
 
 error: aborting due to 2 previous errors
 

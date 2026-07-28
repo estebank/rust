@@ -1,8 +1,5 @@
-error[E0515]: cannot return reference to function parameter `x`
-  --> $DIR/borrowck-local-borrow-outlives-fn.rs:2:5
-   |
-LL |     &x
-   |     ^^ returns a reference to data owned by the current function
+error E0515: cannot return reference to function parameter `x`
+ at $DIR/borrowck-local-borrow-outlives-fn.rs:2:5: returns a reference to data owned by the current function
 
 error: aborting due to 1 previous error
 

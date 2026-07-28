@@ -1,172 +1,73 @@
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:30:28
-   |
-LL |             super let b = DropMe(&mut x);
-   |                                  ------ `x` is borrowed here
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:30:28: `x` is assigned to here but it was already borrowed
+  on line 27, column 34: `x` is borrowed here
+  on line 33: borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:46:28
-   |
-LL |             super let b = &DropMe(&mut x);
-   |                            --------------
-   |                            |      |
-   |                            |      `x` is borrowed here
-   |                            a temporary with access to the borrow is created here ...
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:46:28: `x` is assigned to here but it was already borrowed
+  on line 43, column 28: a temporary with access to the borrow is created here ...
+  on line 43, column 35: `x` is borrowed here
+  on line 49: ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:64:32
-   |
-LL |             super let b = identity(&DropMe(&mut x));
-   |                                     --------------
-   |                                     |      |
-   |                                     |      `x` is borrowed here
-   |                                     a temporary with access to the borrow is created here ...
-LL |             #[cfg(borrowck)] { x = true; }
-   |                                ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |         };
-   |          - ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:64:32: `x` is assigned to here but it was already borrowed
+  on line 63, column 37: a temporary with access to the borrow is created here ...
+  on line 63, column 44: `x` is borrowed here
+  on line 67, column 10: ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:87:36
-   |
-LL |                 super let b = identity(&DropMe(&mut x));
-   |                                         --------------
-   |                                         |      |
-   |                                         |      `x` is borrowed here
-   |                                         a temporary with access to the borrow is created here ...
-...
-LL |                 #[cfg(borrowck)] { x = true; }
-   |                                    ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |         ));
-   |           - ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:87:36: `x` is assigned to here but it was already borrowed
+  on line 83, column 41: a temporary with access to the borrow is created here ...
+  on line 83, column 48: `x` is borrowed here
+  on line 90, column 11: ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:107:28
-   |
-LL |                 super let b = DropMe(&mut x);
-   |                                      ------ `x` is borrowed here
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:107:28: `x` is assigned to here but it was already borrowed
+  on line 102, column 38: `x` is borrowed here
+  on line 110: borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:125:28
-   |
-LL |             super let b = DropMe(&mut x);
-   |                                  ------ `x` is borrowed here
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:125:28: `x` is assigned to here but it was already borrowed
+  on line 120, column 34: `x` is borrowed here
+  on line 128: borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:143:28
-   |
-LL |             super let b = DropMe(&mut x);
-   |                                  ------ `x` is borrowed here
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:143:28: `x` is assigned to here but it was already borrowed
+  on line 140, column 34: `x` is borrowed here
+  on line 146: borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:159:28
-   |
-LL |             b = DropMe(&mut x);
-   |                        ------ `x` is borrowed here
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-LL |         drop(a);
-   |              - borrow later used here
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:159:28: `x` is assigned to here but it was already borrowed
+  on line 156, column 24: `x` is borrowed here
+  on line 160, column 14: borrow later used here
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:172:33
-   |
-LL |         #[cfg(borrowck)] { a = &String::from("asdf"); };
-   |                                 ^^^^^^^^^^^^^^^^^^^^- temporary value is freed at the end of this statement
-   |                                 |
-   |                                 creates a temporary value which is freed while still in use
-...
-LL |         let _ = a;
-   |                 - borrow later used here
-   |
-   = note: consider using a `let` binding to create a longer lived value
+error E0716: temporary value dropped while borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:172:33: creates a temporary value which is freed while still in use
+  on line 172, column 53: temporary value is freed at the end of this statement
+  on line 175, column 17: borrow later used here
+note: consider using a `let` binding to create a longer lived value
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:206:28
-   |
-LL |                     super let d = &DropMe(&mut x);
-   |                                    --------------
-   |                                    |      |
-   |                                    |      `x` is borrowed here
-   |                                    a temporary with access to the borrow is created here ...
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:206:28: `x` is assigned to here but it was already borrowed
+  on line 199, column 36: a temporary with access to the borrow is created here ...
+  on line 199, column 43: `x` is borrowed here
+  on line 209: ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:227:32
-   |
-LL |                     super let d = identity(&DropMe(&mut x));
-   |                                             --------------
-   |                                             |      |
-   |                                             |      `x` is borrowed here
-   |                                             a temporary with access to the borrow is created here ...
-...
-LL |             #[cfg(borrowck)] { x = true; }
-   |                                ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |         };
-   |          - ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:227:32: `x` is assigned to here but it was already borrowed
+  on line 222, column 45: a temporary with access to the borrow is created here ...
+  on line 222, column 52: `x` is borrowed here
+  on line 230, column 10: ... and the borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:246:28
-   |
-LL |             super let b = DropMe(&mut x);
-   |                                  ------ `x` is borrowed here
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:246:28: `x` is assigned to here but it was already borrowed
+  on line 242, column 34: `x` is borrowed here
+  on line 249: borrow might be used here, when `b` is dropped and runs the `Drop` code for type `DropMe`
 
-error[E0506]: cannot assign to `x` because it is borrowed
-  --> $DIR/super-let-lifetime-and-drop.rs:263:28
-   |
-LL |             let dropme = Some(DropMe(&mut x));
-   |                                      ------ `x` is borrowed here
-...
-LL |         #[cfg(borrowck)] { x = true; }
-   |                            ^^^^^^^^ `x` is assigned to here but it was already borrowed
-...
-LL |     }
-   |     - borrow might be used here, when `x` is dropped and runs the `Drop` code for type `DropMe`
+error E0506: cannot assign to `x` because it is borrowed
+ at $DIR/super-let-lifetime-and-drop.rs:263:28: `x` is assigned to here but it was already borrowed
+  on line 259, column 38: `x` is borrowed here
+  on line 266: borrow might be used here, when `x` is dropped and runs the `Drop` code for type `DropMe`
 
 error: aborting due to 13 previous errors
 

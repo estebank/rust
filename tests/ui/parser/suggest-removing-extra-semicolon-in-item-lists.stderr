@@ -1,53 +1,23 @@
 error: non-item in item list
-  --> $DIR/suggest-removing-extra-semicolon-in-item-lists.rs:8:24
-   |
-LL | trait Factory {
-   |               - item list starts here
-LL |     fn create() -> u32;;
-   |                        ^ non-item starts here
-...
-LL | }
-   | - item list ends here
-   |
+ at $DIR/suggest-removing-extra-semicolon-in-item-lists.rs:8:24: non-item starts here
+  on line 7, column 15: item list starts here
+  on line 11: item list ends here
 help: consider removing this semicolon
-   |
-LL -     fn create() -> u32;;
-LL +     fn create() -> u32;
-   |
+ on line 8, column 23
 
 error: non-item in item list
-  --> $DIR/suggest-removing-extra-semicolon-in-item-lists.rs:16:26
-   |
-LL | impl Local {
-   |            - item list starts here
-LL |     const VALUE: u32 = 0;;
-   |                          ^ non-item starts here
-LL |
-LL | }
-   | - item list ends here
-   |
+ at $DIR/suggest-removing-extra-semicolon-in-item-lists.rs:16:26: non-item starts here
+  on line 15, column 12: item list starts here
+  on line 18: item list ends here
 help: consider removing this semicolon
-   |
-LL -     const VALUE: u32 = 0;;
-LL +     const VALUE: u32 = 0;
-   |
+ on line 16, column 25
 
 error: non-item in item list
-  --> $DIR/suggest-removing-extra-semicolon-in-item-lists.rs:21:18
-   |
-LL | unsafe extern "C" {
-   |                   - item list starts here
-LL |     fn foreign();;
-   |                  ^ non-item starts here
-LL |
-LL | }
-   | - item list ends here
-   |
+ at $DIR/suggest-removing-extra-semicolon-in-item-lists.rs:21:18: non-item starts here
+  on line 20, column 19: item list starts here
+  on line 23: item list ends here
 help: consider removing this semicolon
-   |
-LL -     fn foreign();;
-LL +     fn foreign();
-   |
+ on line 21, column 17
 
 error: aborting due to 3 previous errors
 

@@ -1,40 +1,18 @@
-error[E0425]: cannot find value `field` in this scope
-  --> $DIR/field-and-method-in-self-not-available-in-assoc-fn.rs:11:9
-   |
-LL |     field: u32,
-   |     ----- a field by that name exists in `Self`
-...
-LL |     fn field(&self) -> u32 {
-   |        ----- a method by that name is available on `Self` here
-...
-LL |         field;
-   |         ^^^^^
+error E0425: cannot find value `field` in this scope
+ at $DIR/field-and-method-in-self-not-available-in-assoc-fn.rs:11:9
+  on line 2: a field by that name exists in `Self`
+  on line 6, column 8: a method by that name is available on `Self` here
 
-error[E0425]: cannot find value `field` in this scope
-  --> $DIR/field-and-method-in-self-not-available-in-assoc-fn.rs:12:15
-   |
-LL |     field: u32,
-   |     ----- a field by that name exists in `Self`
-...
-LL |     fn field(&self) -> u32 {
-   |        ----- a method by that name is available on `Self` here
-...
-LL |         Foo { field }
-   |               ^^^^^
+error E0425: cannot find value `field` in this scope
+ at $DIR/field-and-method-in-self-not-available-in-assoc-fn.rs:12:15
+  on line 2: a field by that name exists in `Self`
+  on line 6, column 8: a method by that name is available on `Self` here
 
-error[E0425]: cannot find value `field` in this scope
-  --> $DIR/field-and-method-in-self-not-available-in-assoc-fn.rs:15:15
-   |
-LL |     fn field(&self) -> u32 {
-   |        ----- a method by that name is available on `Self` here
-...
-LL |         Foo { field }
-   |               ^^^^^
-   |
+error E0425: cannot find value `field` in this scope
+ at $DIR/field-and-method-in-self-not-available-in-assoc-fn.rs:15:15
+  on line 6, column 8: a method by that name is available on `Self` here
 help: you might have meant to use the available field
-   |
-LL |         Foo { field: self.field }
-   |               ++++++++++++
+ on line 15, column 14, add `field: self.`
 
 error: aborting due to 3 previous errors
 

@@ -1,13 +1,7 @@
-error[E0425]: cannot find type `Path` in this scope
-  --> $DIR/apit-with-bad-path.rs:3:29
-   |
-LL | fn foo(filename: impl AsRef<Path>) {
-   |                             ^^^^ not found in this scope
-   |
+error E0425: cannot find type `Path` in this scope
+ at $DIR/apit-with-bad-path.rs:3:29: not found in this scope
 help: consider importing this struct
-   |
-LL + use std::path::Path;
-   |
+ on line 3, column 1, add `use std::path::Path;`
 
 error: aborting due to 1 previous error
 

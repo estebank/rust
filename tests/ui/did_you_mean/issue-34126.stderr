@@ -1,28 +1,14 @@
-error[E0596]: cannot borrow `self` as mutable, as it is not declared as mutable
-  --> $DIR/issue-34126.rs:6:18
-   |
-LL |         self.run(&mut self);
-   |                  ^^^^^^^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `self` as mutable, as it is not declared as mutable
+ at $DIR/issue-34126.rs:6:18: cannot borrow as mutable
 note: the binding is already a mutable borrow
-  --> $DIR/issue-34126.rs:5:14
-   |
-LL |     fn start(&mut self) {
-   |              ^^^^^^^^^
+ at $DIR/issue-34126.rs:5:14
 help: if there is only one mutable reborrow, remove the `&mut`
-   |
-LL -         self.run(&mut self);
-LL +         self.run(self);
-   |
+ on line 6, column 17
 
-error[E0502]: cannot borrow `self` as mutable because it is also borrowed as immutable
-  --> $DIR/issue-34126.rs:6:18
-   |
-LL |         self.run(&mut self);
-   |         ---- --- ^^^^^^^^^ mutable borrow occurs here
-   |         |    |
-   |         |    immutable borrow later used by call
-   |         immutable borrow occurs here
+error E0502: cannot borrow `self` as mutable because it is also borrowed as immutable
+ at $DIR/issue-34126.rs:6:18: mutable borrow occurs here
+  on line 6: immutable borrow occurs here
+  on line 6, column 14: immutable borrow later used by call
 
 error: aborting due to 2 previous errors
 

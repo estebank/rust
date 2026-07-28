@@ -1,121 +1,58 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/rvalue-borrow-scope-error.rs:30:19
-   |
-LL |     let x1 = arg(&AddFlags(1));
-   |                   ^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |                   |
-   |                   creates a temporary value which is freed while still in use
-...
-LL |     (x1, x2, x3, x4, x5, x6, x7);
-   |      -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/rvalue-borrow-scope-error.rs:30:19: creates a temporary value which is freed while still in use
+  on line 30, column 31: temporary value is freed at the end of this statement
+  on line 38, column 6: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = AddFlags(1);
-LL ~     let x1 = arg(&binding);
-   |
+ on line 30, add `let binding = AddFlags(1);
+    `
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/rvalue-borrow-scope-error.rs:31:14
-   |
-LL |     let x2 = AddFlags(1).get();
-   |              ^^^^^^^^^^^      - temporary value is freed at the end of this statement
-   |              |
-   |              creates a temporary value which is freed while still in use
-...
-LL |     (x1, x2, x3, x4, x5, x6, x7);
-   |          -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/rvalue-borrow-scope-error.rs:31:14: creates a temporary value which is freed while still in use
+  on line 31, column 31: temporary value is freed at the end of this statement
+  on line 38, column 10: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = AddFlags(1);
-LL ~     let x2 = binding.get();
-   |
+ on line 31, add `let binding = AddFlags(1);
+    `
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/rvalue-borrow-scope-error.rs:32:21
-   |
-LL |     let x3 = &*arg(&AddFlags(1));
-   |                     ^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |                     |
-   |                     creates a temporary value which is freed while still in use
-...
-LL |     (x1, x2, x3, x4, x5, x6, x7);
-   |              -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/rvalue-borrow-scope-error.rs:32:21: creates a temporary value which is freed while still in use
+  on line 32, column 33: temporary value is freed at the end of this statement
+  on line 38, column 14: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = AddFlags(1);
-LL ~     let x3 = &*arg(&binding);
-   |
+ on line 32, add `let binding = AddFlags(1);
+    `
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/rvalue-borrow-scope-error.rs:33:24
-   |
-LL |     let ref x4 = *arg(&AddFlags(1));
-   |                        ^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |                        |
-   |                        creates a temporary value which is freed while still in use
-...
-LL |     (x1, x2, x3, x4, x5, x6, x7);
-   |                  -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/rvalue-borrow-scope-error.rs:33:24: creates a temporary value which is freed while still in use
+  on line 33, column 36: temporary value is freed at the end of this statement
+  on line 38, column 18: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = AddFlags(1);
-LL ~     let ref x4 = *arg(&binding);
-   |
+ on line 33, add `let binding = AddFlags(1);
+    `
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/rvalue-borrow-scope-error.rs:34:24
-   |
-LL |     let &ref x5 = arg(&AddFlags(1));
-   |                        ^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |                        |
-   |                        creates a temporary value which is freed while still in use
-...
-LL |     (x1, x2, x3, x4, x5, x6, x7);
-   |                      -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/rvalue-borrow-scope-error.rs:34:24: creates a temporary value which is freed while still in use
+  on line 34, column 36: temporary value is freed at the end of this statement
+  on line 38, column 22: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = AddFlags(1);
-LL ~     let &ref x5 = arg(&binding);
-   |
+ on line 34, add `let binding = AddFlags(1);
+    `
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/rvalue-borrow-scope-error.rs:35:14
-   |
-LL |     let x6 = AddFlags(1).get();
-   |              ^^^^^^^^^^^      - temporary value is freed at the end of this statement
-   |              |
-   |              creates a temporary value which is freed while still in use
-...
-LL |     (x1, x2, x3, x4, x5, x6, x7);
-   |                          -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/rvalue-borrow-scope-error.rs:35:14: creates a temporary value which is freed while still in use
+  on line 35, column 31: temporary value is freed at the end of this statement
+  on line 38, column 26: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = AddFlags(1);
-LL ~     let x6 = binding.get();
-   |
+ on line 35, add `let binding = AddFlags(1);
+    `
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/rvalue-borrow-scope-error.rs:36:44
-   |
-LL |     let StackBox { f: x7 } = StackBox { f: AddFlags(1).get() };
-   |                                            ^^^^^^^^^^^        - temporary value is freed at the end of this statement
-   |                                            |
-   |                                            creates a temporary value which is freed while still in use
-LL |
-LL |     (x1, x2, x3, x4, x5, x6, x7);
-   |                              -- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/rvalue-borrow-scope-error.rs:36:44: creates a temporary value which is freed while still in use
+  on line 36, column 63: temporary value is freed at the end of this statement
+  on line 38, column 30: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = AddFlags(1);
-LL ~     let StackBox { f: x7 } = StackBox { f: binding.get() };
-   |
+ on line 36, add `let binding = AddFlags(1);
+    `
 
 error: aborting due to 7 previous errors
 

@@ -1,13 +1,7 @@
 error: expected one of `:`, `@`, or `|`, found `<`
-  --> $DIR/pat-lt-bracket-2.rs:1:7
-   |
-LL | fn a(B<) {}
-   |       ^ expected one of `:`, `@`, or `|`
-   |
+ at $DIR/pat-lt-bracket-2.rs:1:7: expected one of `:`, `@`, or `|`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL | fn a(_: B<) {}
-   |      ++
+ on line 1, column 5, add `_: `
 
 error: aborting due to 1 previous error
 

@@ -1,22 +1,10 @@
-error[E0277]: can't compare `Bar` with `(Foo, i32)`
-  --> $DIR/recursive-type-alias-impl-trait-declaration.rs:14:13
-   |
-LL | fn foo() -> Foo {
-   |             ^^^ no implementation for `Bar == (Foo, i32)`
-LL |
-LL |     Bar
-   |     --- return type was inferred to be `Bar` here
-   |
+error E0277: can't compare `Bar` with `(Foo, i32)`
+ at $DIR/recursive-type-alias-impl-trait-declaration.rs:14:13: no implementation for `Bar == (Foo, i32)`
+  on line 16: return type was inferred to be `Bar` here
 help: the trait `PartialEq<(Foo, i32)>` is not implemented for `Bar`
-  --> $DIR/recursive-type-alias-impl-trait-declaration.rs:5:1
-   |
-LL | struct Bar;
-   | ^^^^^^^^^^
+ at $DIR/recursive-type-alias-impl-trait-declaration.rs:5:1
 help: the trait `PartialEq<(Bar, i32)>` is implemented for `Bar`
-  --> $DIR/recursive-type-alias-impl-trait-declaration.rs:7:1
-   |
-LL | impl PartialEq<(Bar, i32)> for Bar {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/recursive-type-alias-impl-trait-declaration.rs:7:1
 
 error: aborting due to 1 previous error
 

@@ -1,82 +1,40 @@
 error: the `optimize` attribute cannot be used on structs
-  --> $DIR/optimize.rs:8:3
-   |
-LL | #[optimize(speed)]
-   |   ^^^^^^^^
-   |
-   = help: the `optimize` attribute can only be applied to functions
+ at $DIR/optimize.rs:8:3
+help: the `optimize` attribute can only be applied to functions
 
 error: the `optimize` attribute cannot be used on expressions
-  --> $DIR/optimize.rs:12:7
-   |
-LL |     #[optimize(speed)]
-   |       ^^^^^^^^
-   |
-   = help: the `optimize` attribute can only be applied to functions
+ at $DIR/optimize.rs:12:7
+help: the `optimize` attribute can only be applied to functions
 
 error: the `optimize` attribute cannot be used on modules
-  --> $DIR/optimize.rs:21:3
-   |
-LL | #[optimize(speed)]
-   |   ^^^^^^^^
-   |
-   = help: the `optimize` attribute can only be applied to functions
+ at $DIR/optimize.rs:21:3
+help: the `optimize` attribute can only be applied to functions
 
 error: the `optimize` attribute cannot be used on inherent impl blocks
-  --> $DIR/optimize.rs:24:3
-   |
-LL | #[optimize(speed)]
-   |   ^^^^^^^^
-   |
-   = help: the `optimize` attribute can only be applied to functions
+ at $DIR/optimize.rs:24:3
+help: the `optimize` attribute can only be applied to functions
 
 error: the `optimize` attribute cannot be used on required trait methods
-  --> $DIR/optimize.rs:45:7
-   |
-LL |     #[optimize(speed)]
-   |       ^^^^^^^^
-   |
-   = help: the `optimize` attribute can only be applied to functions with a body
+ at $DIR/optimize.rs:45:7
+help: the `optimize` attribute can only be applied to functions with a body
 
 error: multiple `optimize` attributes
-  --> $DIR/optimize.rs:59:1
-   |
-LL | #[optimize(speed)]
-   | ^^^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/optimize.rs:59:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/optimize.rs:58:1
-   |
-LL | #[optimize(speed)]
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/optimize.rs:58:1
 
 error: multiple `optimize` attributes
-  --> $DIR/optimize.rs:63:1
-   |
-LL | #[optimize(size)]
-   | ^^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/optimize.rs:63:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/optimize.rs:62:1
-   |
-LL | #[optimize(speed)]
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/optimize.rs:62:1
 
 error: `#[optimize(none)]` cannot be used with `#[inline]` attributes
-  --> $DIR/optimize.rs:66:1
-   |
-LL | #[optimize(none)]
-   | ^^^^^^^^^^^^^^^^^ `#[optimize(none)]` here
-LL | #[inline]
-   | --------- `#[inline]` here
+ at $DIR/optimize.rs:66:1: `#[optimize(none)]` here
+  on line 67: `#[inline]` here
 
 error: `#[optimize(none)]` cannot be used with `#[inline]` attributes
-  --> $DIR/optimize.rs:71:1
-   |
-LL | #[inline(always)]
-   | ----------------- `#[inline]` here
-LL | #[optimize(none)]
-   | ^^^^^^^^^^^^^^^^^ `#[optimize(none)]` here
+ at $DIR/optimize.rs:71:1: `#[optimize(none)]` here
+  on line 70: `#[inline]` here
 
 error: aborting due to 9 previous errors
 

@@ -1,42 +1,16 @@
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/closure-bounds-static-cant-capture-borrowed.rs:6:5
-   |
-LL |   fn foo(x: &()) {
-   |          -  - let's call the lifetime of this reference `'1`
-   |          |
-   |          `x` is a reference that is only valid in the function body
-LL | /     bar(|| {
-LL | |
-LL | |
-LL | |         let _ = x;
-LL | |     })
-   | |      ^
-   | |      |
-   | |______`x` escapes the function body here
-   |        argument requires that `'1` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/closure-bounds-static-cant-capture-borrowed.rs:6:5 to 10:7: `x` escapes the function body here
+  on line 6 to line 10: argument requires that `'1` must outlive `'static`
+  on line 5, column 8: `x` is a reference that is only valid in the function body
+  on line 5, column 11: let's call the lifetime of this reference `'1`
 
-error[E0373]: closure may outlive the current function, but it borrows `x`, which is owned by the current function
-  --> $DIR/closure-bounds-static-cant-capture-borrowed.rs:6:9
-   |
-LL |     bar(|| {
-   |         ^^ may outlive borrowed value `x`
-...
-LL |         let _ = x;
-   |                 - `x` is borrowed here
-   |
+error E0373: closure may outlive the current function, but it borrows `x`, which is owned by the current function
+ at $DIR/closure-bounds-static-cant-capture-borrowed.rs:6:9: may outlive borrowed value `x`
+  on line 9, column 17: `x` is borrowed here
 note: function requires argument type to outlive `'static`
-  --> $DIR/closure-bounds-static-cant-capture-borrowed.rs:6:5
-   |
-LL | /     bar(|| {
-LL | |
-LL | |
-LL | |         let _ = x;
-LL | |     })
-   | |______^
+ at $DIR/closure-bounds-static-cant-capture-borrowed.rs:6:5 to 10:7
 help: to force the closure to take ownership of `x` (and any other referenced variables), use the `move` keyword
-   |
-LL |     bar(move || {
-   |         ++++
+ on line 6, column 8, add `move `
 
 error: aborting due to 2 previous errors
 

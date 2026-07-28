@@ -1,16 +1,8 @@
 error: expected one of `.`, `?`, `{`, or an operator, found `;`
-  --> $DIR/match-refactor-to-expr.rs:8:9
-   |
-LL |         match
-   |         -----
-   |         |
-   |         while parsing this `match` expression
-   |         help: try removing this `match`
-LL |         Some(4).unwrap_or(5)
-   |                             - expected one of `.`, `?`, `{`, or an operator
-LL |
-LL |         ;
-   |         ^ unexpected token
+ at $DIR/match-refactor-to-expr.rs:8:9: unexpected token
+  on line 5: while parsing this `match` expression
+  on line 5: help: try removing this `match`
+  on line 6, column 29: expected one of `.`, `?`, `{`, or an operator
 
 error: aborting due to 1 previous error
 

@@ -1,26 +1,12 @@
 error: expected a trait, found type
-  --> $DIR/suggest-removing-impl.rs:2:17
-   |
-LL |     type Assoc: impl Sized;
-   |                 ^^^^^^^^^^
-   |
+ at $DIR/suggest-removing-impl.rs:2:17
 help: use the trait bounds directly
-   |
-LL -     type Assoc: impl Sized;
-LL +     type Assoc: Sized;
-   |
+ on line 2, column 16
 
 error: expected a trait, found type
-  --> $DIR/suggest-removing-impl.rs:8:12
-   |
-LL |         T: impl Sized
-   |            ^^^^^^^^^^
-   |
+ at $DIR/suggest-removing-impl.rs:8:12
 help: use the trait bounds directly
-   |
-LL -         T: impl Sized
-LL +         T: Sized
-   |
+ on line 8, column 11
 
 error: aborting due to 2 previous errors
 

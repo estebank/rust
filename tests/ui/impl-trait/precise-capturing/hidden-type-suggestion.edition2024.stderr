@@ -1,50 +1,23 @@
-error[E0700]: hidden type for `impl Sized` captures lifetime that does not appear in bounds
-  --> $DIR/hidden-type-suggestion.rs:6:5
-   |
-LL | fn lifetime<'a, 'b>(x: &'a ()) -> impl Sized + use<'b> {
-   |             --                    -------------------- opaque type defined here
-   |             |
-   |             hidden type `&'a ()` captures the lifetime `'a` as defined here
-LL |
-LL |     x
-   |     ^
-   |
+error E0700: hidden type for `impl Sized` captures lifetime that does not appear in bounds
+ at $DIR/hidden-type-suggestion.rs:6:5
+  on line 4, column 13: hidden type `&'a ()` captures the lifetime `'a` as defined here
+  on line 4, column 35: opaque type defined here
 help: add `'a` to the `use<...>` bound to explicitly capture it
-   |
-LL | fn lifetime<'a, 'b>(x: &'a ()) -> impl Sized + use<'b, 'a> {
-   |                                                      ++++
+ on line 4, column 53, add `, 'a`
 
-error[E0700]: hidden type for `impl Sized` captures lifetime that does not appear in bounds
-  --> $DIR/hidden-type-suggestion.rs:12:5
-   |
-LL | fn param<'a, T>(x: &'a ()) -> impl Sized + use<T> {
-   |          --                   ------------------- opaque type defined here
-   |          |
-   |          hidden type `&'a ()` captures the lifetime `'a` as defined here
-LL |
-LL |     x
-   |     ^
-   |
+error E0700: hidden type for `impl Sized` captures lifetime that does not appear in bounds
+ at $DIR/hidden-type-suggestion.rs:12:5
+  on line 10, column 10: hidden type `&'a ()` captures the lifetime `'a` as defined here
+  on line 10, column 31: opaque type defined here
 help: add `'a` to the `use<...>` bound to explicitly capture it
-   |
-LL | fn param<'a, T>(x: &'a ()) -> impl Sized + use<'a, T> {
-   |                                                +++
+ on line 10, column 47, add `'a, `
 
-error[E0700]: hidden type for `impl Sized` captures lifetime that does not appear in bounds
-  --> $DIR/hidden-type-suggestion.rs:18:5
-   |
-LL | fn empty<'a>(x: &'a ()) -> impl Sized + use<> {
-   |          --                ------------------ opaque type defined here
-   |          |
-   |          hidden type `&'a ()` captures the lifetime `'a` as defined here
-LL |
-LL |     x
-   |     ^
-   |
+error E0700: hidden type for `impl Sized` captures lifetime that does not appear in bounds
+ at $DIR/hidden-type-suggestion.rs:18:5
+  on line 16, column 10: hidden type `&'a ()` captures the lifetime `'a` as defined here
+  on line 16, column 28: opaque type defined here
 help: add `'a` to the `use<...>` bound to explicitly capture it
-   |
-LL | fn empty<'a>(x: &'a ()) -> impl Sized + use<'a> {
-   |                                             ++
+ on line 16, column 44, add `'a`
 
 error: aborting due to 3 previous errors
 

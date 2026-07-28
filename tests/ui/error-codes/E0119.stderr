@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `MyTrait` for type `Foo`
-  --> $DIR/E0119.rs:13:1
-   |
-LL | impl<T> MyTrait for T {
-   | --------------------- first implementation here
-...
-LL | impl MyTrait for Foo {
-   | ^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `Foo`
+error E0119: conflicting implementations of trait `MyTrait` for type `Foo`
+ at $DIR/E0119.rs:13:1: conflicting implementation for `Foo`
+  on line 5: first implementation here
 
 error: aborting due to 1 previous error
 

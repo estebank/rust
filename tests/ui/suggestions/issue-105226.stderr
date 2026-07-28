@@ -1,35 +1,17 @@
 error: non-item in item list
-  --> $DIR/issue-105226.rs:7:56
-   |
-LL | impl S {
-   |        - item list starts here
-LL |     fn hello<P>(&self, val: &P) where P: fmt::Display; {
-   |                                                        ^ non-item starts here
-...
-LL | }
-   | - item list ends here
-   |
+ at $DIR/issue-105226.rs:7:56: non-item starts here
+  on line 6, column 8: item list starts here
+  on line 12: item list ends here
 help: consider removing this semicolon
-   |
-LL -     fn hello<P>(&self, val: &P) where P: fmt::Display; {
-LL +     fn hello<P>(&self, val: &P) where P: fmt::Display {
-   |
+ on line 7, column 53
 
 error: associated function in `impl` without body
-  --> $DIR/issue-105226.rs:7:5
-   |
-LL |     fn hello<P>(&self, val: &P) where P: fmt::Display; {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-
-   |                                                      |
-   |                                                      help: provide a definition for the function: `{ <body> }`
+ at $DIR/issue-105226.rs:7:5
+  on line 7, column 54: help: provide a definition for the function: `{ <body> }`
 
 error: associated function in `impl` without body
-  --> $DIR/issue-105226.rs:15:5
-   |
-LL |     fn hello_empty<P>(&self, val: &P) where P: fmt::Display;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-
-   |                                                            |
-   |                                                            help: provide a definition for the function: `{ <body> }`
+ at $DIR/issue-105226.rs:15:5
+  on line 15, column 60: help: provide a definition for the function: `{ <body> }`
 
 error: aborting due to 3 previous errors
 

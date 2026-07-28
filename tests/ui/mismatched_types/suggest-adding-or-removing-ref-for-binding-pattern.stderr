@@ -1,47 +1,26 @@
-error[E0409]: variable `y` is bound inconsistently across alternatives separated by `|`
-  --> $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:11:43
-   |
-LL |         Blah::A(_, x, ref y) | Blah::B(x, y) => {}
-   |                           - first binding ^ bound in different ways
+error E0409: variable `y` is bound inconsistently across alternatives separated by `|`
+ at $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:11:43: bound in different ways
+  on line 11, column 27: first binding
 
-error[E0409]: variable `y` is bound inconsistently across alternatives separated by `|`
-  --> $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:17:43
-   |
-LL |         Blah::A(_, x, y) | Blah::B(x, ref y) => {}
-   |                       - first binding     ^ bound in different ways
+error E0409: variable `y` is bound inconsistently across alternatives separated by `|`
+ at $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:17:43: bound in different ways
+  on line 17, column 23: first binding
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:11:43
-   |
-LL |     match Blah::A(1, 1, 2) {
-   |           ---------------- this expression has type `Blah`
-LL |         Blah::A(_, x, ref y) | Blah::B(x, y) => {}
-   |                       -----               ^ expected `&usize`, found `usize`
-   |                       |
-   |                       first introduced with type `&usize` here
-   |
-   = note: in the same arm, a binding must have the same type in all alternatives
+error E0308: mismatched types
+ at $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:11:43: expected `&usize`, found `usize`
+  on line 10, column 11: this expression has type `Blah`
+  on line 11, column 23: first introduced with type `&usize` here
+note: in the same arm, a binding must have the same type in all alternatives
 help: consider adding `ref`
-   |
-LL |         Blah::A(_, x, ref y) | Blah::B(x, ref y) => {}
-   |                                           +++
+ on line 11, column 42, add `ref `
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:17:39
-   |
-LL |     match Blah::A(1, 1, 2) {
-   |           ---------------- this expression has type `Blah`
-LL |         Blah::A(_, x, y) | Blah::B(x, ref y) => {}
-   |                       -               ^^^^^ expected `usize`, found `&usize`
-   |                       |
-   |                       first introduced with type `usize` here
-   |
-   = note: in the same arm, a binding must have the same type in all alternatives
+error E0308: mismatched types
+ at $DIR/suggest-adding-or-removing-ref-for-binding-pattern.rs:17:39: expected `usize`, found `&usize`
+  on line 16, column 11: this expression has type `Blah`
+  on line 17, column 23: first introduced with type `usize` here
+note: in the same arm, a binding must have the same type in all alternatives
 help: consider removing `ref`
-   |
-LL -         Blah::A(_, x, y) | Blah::B(x, ref y) => {}
-LL +         Blah::A(_, x, y) | Blah::B(x, y) => {}
-   |
+ on line 17, column 38
 
 error: aborting due to 4 previous errors
 

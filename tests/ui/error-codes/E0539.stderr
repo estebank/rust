@@ -1,12 +1,7 @@
-error[E0539]: malformed `deprecated` attribute input
-  --> $DIR/E0539.rs:2:3
-   |
-LL | #[deprecated(since = b"1.29", note = "hi")]
-   |   ^^^^^^^^^^^^^^^^^^^-^^^^^^^^^^^^^^^^^^^^
-   |                      |
-   |                      help: consider removing the prefix
-   |
-   = note: expected a normal string literal, not a byte string literal
+error E0539: malformed `deprecated` attribute input
+ at $DIR/E0539.rs:2:3
+  on line 2, column 22: help: consider removing the prefix
+note: expected a normal string literal, not a byte string literal
 
 error: aborting due to 1 previous error
 

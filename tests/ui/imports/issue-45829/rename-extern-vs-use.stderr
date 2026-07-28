@@ -1,16 +1,9 @@
-error[E0254]: the name `bar` is defined multiple times
-  --> $DIR/rename-extern-vs-use.rs:8:1
-   |
-LL | use foo::bar;
-   |     -------- previous import of the module `bar` here
-LL | extern crate issue_45829_b as bar;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `bar` reimported here
-   |
-   = note: `bar` must be defined only once in the type namespace of this module
+error E0254: the name `bar` is defined multiple times
+ at $DIR/rename-extern-vs-use.rs:8:1: `bar` reimported here
+  on line 7, column 5: previous import of the module `bar` here
+note: `bar` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | extern crate issue_45829_b as other_bar;
-   |                               ++++++
+ on line 8, replace with `extern crate issue_45829_b as other_bar;`
 
 error: aborting due to 1 previous error
 

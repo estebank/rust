@@ -1,38 +1,18 @@
-error[E0659]: `m` is ambiguous
-  --> $DIR/ambiguity-legacy-vs-modern.rs:31:9
-   |
-LL |         m!()
-   |         ^ ambiguous name
-   |
-   = note: ambiguous because of a conflict between a `macro_rules` name and a non-`macro_rules` name from another module
+error E0659: `m` is ambiguous
+ at $DIR/ambiguity-legacy-vs-modern.rs:31:9: ambiguous name
+note: ambiguous because of a conflict between a `macro_rules` name and a non-`macro_rules` name from another module
 note: `m` could refer to the macro defined here
-  --> $DIR/ambiguity-legacy-vs-modern.rs:26:5
-   |
-LL |     macro_rules! m { () => (()) }
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/ambiguity-legacy-vs-modern.rs:26:5
 note: `m` could also refer to the macro defined here
-  --> $DIR/ambiguity-legacy-vs-modern.rs:29:9
-   |
-LL |         macro m() { 0 }
-   |         ^^^^^^^^^^^^^^^
+ at $DIR/ambiguity-legacy-vs-modern.rs:29:9
 
-error[E0659]: `m` is ambiguous
-  --> $DIR/ambiguity-legacy-vs-modern.rs:43:5
-   |
-LL |     m!()
-   |     ^ ambiguous name
-   |
-   = note: ambiguous because of a conflict between a `macro_rules` name and a non-`macro_rules` name from another module
+error E0659: `m` is ambiguous
+ at $DIR/ambiguity-legacy-vs-modern.rs:43:5: ambiguous name
+note: ambiguous because of a conflict between a `macro_rules` name and a non-`macro_rules` name from another module
 note: `m` could refer to the macro defined here
-  --> $DIR/ambiguity-legacy-vs-modern.rs:40:9
-   |
-LL |         macro_rules! m { () => (()) }
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/ambiguity-legacy-vs-modern.rs:40:9
 note: `m` could also refer to the macro defined here
-  --> $DIR/ambiguity-legacy-vs-modern.rs:36:5
-   |
-LL |     macro m() { 0 }
-   |     ^^^^^^^^^^^^^^^
+ at $DIR/ambiguity-legacy-vs-modern.rs:36:5
 
 error: aborting due to 2 previous errors
 

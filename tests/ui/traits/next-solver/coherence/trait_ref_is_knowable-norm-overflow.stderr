@@ -1,14 +1,8 @@
-error[E0119]: conflicting implementations of trait `Trait`
-  --> $DIR/trait_ref_is_knowable-norm-overflow.rs:20:1
-   |
-LL | impl<T: Copy> Trait for T {}
-   | ------------------------- first implementation here
-LL | struct LocalTy;
-LL | impl Trait for <LocalTy as Overflow>::Assoc {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation
-   |
-   = note: overflow evaluating the requirement `<LocalTy as Overflow>::Assoc == _`
-   = help: consider increasing the recursion limit by adding a `#![recursion_limit = "256"]` attribute to your crate (`trait_ref_is_knowable_norm_overflow`)
+error E0119: conflicting implementations of trait `Trait`
+ at $DIR/trait_ref_is_knowable-norm-overflow.rs:20:1: conflicting implementation
+  on line 18: first implementation here
+note: overflow evaluating the requirement `<LocalTy as Overflow>::Assoc == _`
+help: consider increasing the recursion limit by adding a `#![recursion_limit = "256"]` attribute to your crate (`trait_ref_is_knowable_norm_overflow`)
 
 error: aborting due to 1 previous error
 

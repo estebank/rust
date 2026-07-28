@@ -1,16 +1,8 @@
-error[E0425]: cannot find type `Stuct` in this scope
-  --> $DIR/issue-88844.rs:6:6
-   |
-LL | struct Struct { value: i32 }
-   | ------------- similarly named struct `Struct` defined here
-...
-LL | impl Stuct {
-   |      ^^^^^
-   |
+error E0425: cannot find type `Stuct` in this scope
+ at $DIR/issue-88844.rs:6:6
+  on line 3: similarly named struct `Struct` defined here
 help: a struct with a similar name exists
-   |
-LL | impl Struct {
-   |        +
+ on line 6, column 5, replace with `Struct`
 
 error: aborting due to 1 previous error
 

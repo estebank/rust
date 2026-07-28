@@ -1,10 +1,6 @@
-error[E0618]: expected function, found `Option<impl FnOnce()>`
-  --> $DIR/issue-99240.rs:2:5
-   |
-LL |     (it.0.take())()
-   |     ^^^^^^^^^^^^^--
-   |     |
-   |     call expression requires function
+error E0618: expected function, found `Option<impl FnOnce()>`
+ at $DIR/issue-99240.rs:2:5
+  on line 2: call expression requires function
 
 error: aborting due to 1 previous error
 

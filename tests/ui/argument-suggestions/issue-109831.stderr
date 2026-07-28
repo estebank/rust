@@ -1,56 +1,26 @@
-error[E0425]: cannot find type `C` in this scope
-  --> $DIR/issue-109831.rs:4:24
-   |
-LL | struct A;
-   | --------- similarly named struct `A` defined here
-...
-LL | fn f(b1: B, b2: B, a2: C) {}
-   |                        ^
-   |
+error E0425: cannot find type `C` in this scope
+ at $DIR/issue-109831.rs:4:24
+  on line 1: similarly named struct `A` defined here
 help: a struct with a similar name exists
-   |
-LL - fn f(b1: B, b2: B, a2: C) {}
-LL + fn f(b1: B, b2: B, a2: A) {}
-   |
+ on line 4, column 23, replace with `A`
 help: you might be missing a type parameter
-   |
-LL | fn f<C>(b1: B, b2: B, a2: C) {}
-   |     +++
+ on line 4, column 4, add `<C>`
 
-error[E0425]: cannot find value `C` in this scope
-  --> $DIR/issue-109831.rs:7:16
-   |
-LL | struct A;
-   | --------- similarly named unit struct `A` defined here
-...
-LL |     f(A, A, B, C);
-   |                ^
-   |
+error E0425: cannot find value `C` in this scope
+ at $DIR/issue-109831.rs:7:16
+  on line 1: similarly named unit struct `A` defined here
 help: a unit struct with a similar name exists
-   |
-LL -     f(A, A, B, C);
-LL +     f(A, A, B, A);
-   |
+ on line 7, column 15, replace with `A`
 
-error[E0061]: this function takes 3 arguments but 4 arguments were supplied
-  --> $DIR/issue-109831.rs:7:5
-   |
-LL |     f(A, A, B, C);
-   |     ^ -  -     - unexpected argument #4
-   |       |  |
-   |       |  expected `B`, found `A`
-   |       expected `B`, found `A`
-   |
+error E0061: this function takes 3 arguments but 4 arguments were supplied
+ at $DIR/issue-109831.rs:7:5
+  on line 7, column 7: expected `B`, found `A`
+  on line 7, column 10: expected `B`, found `A`
+  on line 7, column 16: unexpected argument #4
 note: function defined here
-  --> $DIR/issue-109831.rs:4:4
-   |
-LL | fn f(b1: B, b2: B, a2: C) {}
-   |    ^ -----  -----
+ at $DIR/issue-109831.rs:4:4
 help: remove the extra argument
-   |
-LL -     f(A, A, B, C);
-LL +     f(/* B */, /* B */, B);
-   |
+ on line 7, column 6, replace with `/* B */`
 
 error: aborting due to 3 previous errors
 

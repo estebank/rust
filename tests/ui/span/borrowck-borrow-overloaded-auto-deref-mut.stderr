@@ -1,110 +1,52 @@
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:53:24
-   |
-LL |     let __isize = &mut x.y;
-   |                        ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:53:24: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL | fn deref_mut_field1(mut x: Own<Point>) {
-   |                     +++
+ on line 52, column 20, add `mut `
 
-error[E0596]: cannot borrow `*x` as mutable, as it is behind a `&` reference
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:65:10
-   |
-LL |     &mut x.y
-   |          ^ `x` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*x` as mutable, as it is behind a `&` reference
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:65:10: `x` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL | fn deref_extend_mut_field1(x: &mut Own<Point>) -> &mut isize {
-   |                                +++
+ on line 64, column 30, replace with `&mut `
 
-error[E0499]: cannot borrow `*x` as mutable more than once at a time
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:78:19
-   |
-LL |     let _x = &mut x.x;
-   |                   - first mutable borrow occurs here
-LL |     let _y = &mut x.y;
-   |                   ^ second mutable borrow occurs here
-LL |     use_mut(_x);
-   |             -- first borrow later used here
+error E0499: cannot borrow `*x` as mutable more than once at a time
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:78:19: second mutable borrow occurs here
+  on line 77, column 19: first mutable borrow occurs here
+  on line 79, column 13: first borrow later used here
 
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:88:5
-   |
-LL |     x.y = 3;
-   |     ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:88:5: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL | fn assign_field1<'a>(mut x: Own<Point>) {
-   |                      +++
+ on line 87, column 21, add `mut `
 
-error[E0596]: cannot borrow `*x` as mutable, as it is behind a `&` reference
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:92:5
-   |
-LL |     x.y = 3;
-   |     ^ `x` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*x` as mutable, as it is behind a `&` reference
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:92:5: `x` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL | fn assign_field2<'a>(x: &'a mut Own<Point>) {
-   |                             +++
+ on line 91, column 27, add ` mut`
 
-error[E0499]: cannot borrow `*x` as mutable more than once at a time
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:101:5
-   |
-LL |     let _p: &mut Point = &mut **x;
-   |                                -- first mutable borrow occurs here
-LL |     x.y = 3;
-   |     ^ second mutable borrow occurs here
-LL |     use_mut(_p);
-   |             -- first borrow later used here
+error E0499: cannot borrow `*x` as mutable more than once at a time
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:101:5: second mutable borrow occurs here
+  on line 100, column 32: first mutable borrow occurs here
+  on line 102, column 13: first borrow later used here
 
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:109:5
-   |
-LL |     x.set(0, 0);
-   |     ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:109:5: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL | fn deref_mut_method1(mut x: Own<Point>) {
-   |                      +++
+ on line 108, column 21, add `mut `
 
-error[E0596]: cannot borrow `*x` as mutable, as it is behind a `&` reference
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:121:5
-   |
-LL |     x.y_mut()
-   |     ^ `x` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*x` as mutable, as it is behind a `&` reference
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:121:5: `x` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL | fn deref_extend_mut_method1(x: &mut Own<Point>) -> &mut isize {
-   |                                 +++
+ on line 120, column 31, replace with `&mut `
 
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:129:6
-   |
-LL |     *x.y_mut() = 3;
-   |      ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:129:6: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL | fn assign_method1<'a>(mut x: Own<Point>) {
-   |                       +++
+ on line 128, column 22, add `mut `
 
-error[E0596]: cannot borrow `*x` as mutable, as it is behind a `&` reference
-  --> $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:133:6
-   |
-LL |     *x.y_mut() = 3;
-   |      ^ `x` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*x` as mutable, as it is behind a `&` reference
+ at $DIR/borrowck-borrow-overloaded-auto-deref-mut.rs:133:6: `x` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL | fn assign_method2<'a>(x: &'a mut Own<Point>) {
-   |                              +++
+ on line 132, column 28, add ` mut`
 
 error: aborting due to 10 previous errors
 

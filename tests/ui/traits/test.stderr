@@ -1,8 +1,5 @@
-error[E0404]: expected trait, found builtin type `isize`
-  --> $DIR/test.rs:4:6
-   |
-LL | impl isize for usize { fn foo(&self) {} }
-   |      ^^^^^ not a trait
+error E0404: expected trait, found builtin type `isize`
+ at $DIR/test.rs:4:6: not a trait
 
 error: aborting due to 1 previous error
 

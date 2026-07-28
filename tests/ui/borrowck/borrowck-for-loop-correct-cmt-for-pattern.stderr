@@ -1,44 +1,20 @@
-error[E0507]: cannot move out of a shared reference
-  --> $DIR/borrowck-for-loop-correct-cmt-for-pattern.rs:12:15
-   |
-LL |     for &a in x.iter() {
-   |          -    ^^^^^^^^
-   |          |
-   |          data moved here because `a` has type `&mut i32`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of a shared reference
+ at $DIR/borrowck-for-loop-correct-cmt-for-pattern.rs:12:15
+  on line 12, column 10: data moved here because `a` has type `&mut i32`, which does not implement the `Copy` trait
 help: consider removing the borrow
-   |
-LL -     for &a in x.iter() {
-LL +     for a in x.iter() {
-   |
+ on line 12, column 8
 
-error[E0507]: cannot move out of a shared reference
-  --> $DIR/borrowck-for-loop-correct-cmt-for-pattern.rs:18:15
-   |
-LL |     for &a in &f.a {
-   |          -    ^^^^
-   |          |
-   |          data moved here because `a` has type `Box<isize>`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of a shared reference
+ at $DIR/borrowck-for-loop-correct-cmt-for-pattern.rs:18:15
+  on line 18, column 10: data moved here because `a` has type `Box<isize>`, which does not implement the `Copy` trait
 help: consider removing the borrow
-   |
-LL -     for &a in &f.a {
-LL +     for a in &f.a {
-   |
+ on line 18, column 8
 
-error[E0507]: cannot move out of a shared reference
-  --> $DIR/borrowck-for-loop-correct-cmt-for-pattern.rs:22:15
-   |
-LL |     for &a in x.iter() {
-   |          -    ^^^^^^^^
-   |          |
-   |          data moved here because `a` has type `Box<i32>`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of a shared reference
+ at $DIR/borrowck-for-loop-correct-cmt-for-pattern.rs:22:15
+  on line 22, column 10: data moved here because `a` has type `Box<i32>`, which does not implement the `Copy` trait
 help: consider removing the borrow
-   |
-LL -     for &a in x.iter() {
-LL +     for a in x.iter() {
-   |
+ on line 22, column 8
 
 error: aborting due to 3 previous errors
 

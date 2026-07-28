@@ -1,8 +1,5 @@
-error[E0227]: ambiguous lifetime bound, explicit lifetime bound required
-  --> $DIR/E0227.rs:7:10
-   |
-LL |     baz: dyn FooBar<'foo, 'bar>,
-   |          ^^^^^^^^^^^^^^^^^^^^^^
+error E0227: ambiguous lifetime bound, explicit lifetime bound required
+ at $DIR/E0227.rs:7:10
 
 error: aborting due to 1 previous error
 

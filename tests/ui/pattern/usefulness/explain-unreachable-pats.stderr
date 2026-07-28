@@ -1,137 +1,58 @@
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:11:9
-   |
-LL |         (1 | 2,) => {}
-   |         -------- matches all the relevant values
-LL |
-LL |         (2,) => {}
-   |         ^^^^ no value can reach this
-   |
+ at $DIR/explain-unreachable-pats.rs:11:9: no value can reach this
+  on line 9: matches all the relevant values
 note: the lint level is defined here
-  --> $DIR/explain-unreachable-pats.rs:3:9
-   |
-LL | #![deny(unreachable_patterns)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/explain-unreachable-pats.rs:3:9
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:22:9
-   |
-LL |         (1 | 2,) => {}
-   |         ^^^^^^^^ no value can reach this
-   |
+ at $DIR/explain-unreachable-pats.rs:22:9: no value can reach this
 note: multiple earlier patterns match some of the same values
-  --> $DIR/explain-unreachable-pats.rs:22:9
-   |
-LL |         (1,) => {}
-   |         ---- matches some of the same values
-LL |
-LL |         (2,) => {}
-   |         ---- matches some of the same values
-LL |
-LL |         (1 | 2,) => {}
-   |         ^^^^^^^^ collectively making this unreachable
+ at $DIR/explain-unreachable-pats.rs:22:9: collectively making this unreachable
+  on line 18: matches some of the same values
+  on line 20: matches some of the same values
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:41:9
-   |
-LL |         1 ..= 6 => {}
-   |         ^^^^^^^ no value can reach this
-   |
+ at $DIR/explain-unreachable-pats.rs:41:9: no value can reach this
 note: multiple earlier patterns match some of the same values
-  --> $DIR/explain-unreachable-pats.rs:41:9
-   |
-LL |         1 => {}
-   |         - matches some of the same values
-LL |
-LL |         2 => {}
-   |         - matches some of the same values
-LL |
-LL |         3 => {}
-   |         - matches some of the same values
-LL |
-LL |         4 => {}
-   |         - matches some of the same values
-...
-LL |         1 ..= 6 => {}
-   |         ^^^^^^^ ...and 2 other patterns collectively make this unreachable
+ at $DIR/explain-unreachable-pats.rs:41:9: ...and 2 other patterns collectively make this unreachable
+  on line 31: matches some of the same values
+  on line 33: matches some of the same values
+  on line 35: matches some of the same values
+  on line 37: matches some of the same values
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:52:9
-   |
-LL |         Err(_) => {}
-   |         ^^^^^^------
-   |         |
-   |         matches no values because `!` is uninhabited
-   |         help: remove the match arm
-   |
-   = note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
+ at $DIR/explain-unreachable-pats.rs:52:9: matches no values because `!` is uninhabited
+  on line 52: help: remove the match arm
+note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:66:9
-   |
-LL |         (Err(_), Err(_)) => {}
-   |         ^^^^^^^^^^^^^^^^------
-   |         |
-   |         matches no values because `Void2` is uninhabited
-   |         help: remove the match arm
-   |
-   = note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
+ at $DIR/explain-unreachable-pats.rs:66:9: matches no values because `Void2` is uninhabited
+  on line 66: help: remove the match arm
+note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:73:9
-   |
-LL |         (Err(_), Err(_)) => {}
-   |         ^^^^^^^^^^^^^^^^------
-   |         |
-   |         matches no values because `Void1` is uninhabited
-   |         help: remove the match arm
-   |
-   = note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
+ at $DIR/explain-unreachable-pats.rs:73:9: matches no values because `Void1` is uninhabited
+  on line 73: help: remove the match arm
+note: to learn more about uninhabited types, see https://doc.rust-lang.org/nomicon/exotic-sizes.html#empty-types
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:83:11
-   |
-LL |     if let (0
-   |             - matches all the relevant values
-LL |
-LL |         | 0, _) = (0, 0) {}
-   |           ^ no value can reach this
+ at $DIR/explain-unreachable-pats.rs:83:11: no value can reach this
+  on line 81, column 13: matches all the relevant values
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:93:9
-   |
-LL |         (_, true) => {}
-   |         ^^^^^^^^^ no value can reach this
-   |
+ at $DIR/explain-unreachable-pats.rs:93:9: no value can reach this
 note: multiple earlier patterns match some of the same values
-  --> $DIR/explain-unreachable-pats.rs:93:9
-   |
-LL |         (true, _) => {}
-   |         --------- matches some of the same values
-LL |
-LL |         (false, _) => {}
-   |         ---------- matches some of the same values
-LL |
-LL |         (_, true) => {}
-   |         ^^^^^^^^^ collectively making this unreachable
+ at $DIR/explain-unreachable-pats.rs:93:9: collectively making this unreachable
+  on line 89: matches some of the same values
+  on line 91: matches some of the same values
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:106:9
-   |
-LL |         (true, _) => {}
-   |         --------- matches all the relevant values
-...
-LL |         (true, true) => {}
-   |         ^^^^^^^^^^^^ no value can reach this
+ at $DIR/explain-unreachable-pats.rs:106:9: no value can reach this
+  on line 101: matches all the relevant values
 
 error: unreachable pattern
-  --> $DIR/explain-unreachable-pats.rs:118:9
-   |
-LL |         (_, true, 0..10) => {}
-   |         ---------------- matches all the relevant values
-...
-LL |         (_, true, 3) => {}
-   |         ^^^^^^^^^^^^ no value can reach this
+ at $DIR/explain-unreachable-pats.rs:118:9: no value can reach this
+  on line 115: matches all the relevant values
 
 error: aborting due to 10 previous errors
 

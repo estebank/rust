@@ -1,24 +1,12 @@
-error[E0507]: cannot move out of `i`, a captured variable in an `Fn` closure
-  --> $DIR/moves-based-on-type-move-out-of-closure-env-issue-1965.rs:9:28
-   |
-LL |     let i = Box::new(3);
-   |         -   ----------- move occurs because `i` has type `Box<usize>`, which does not implement the `Copy` trait
-   |         |
-   |         captured outer variable
-LL |     let _f = to_fn(|| test(i));
-   |                    --      ^ `i` is moved here
-   |                    |
-   |                    captured by this `Fn` closure
-   |
+error E0507: cannot move out of `i`, a captured variable in an `Fn` closure
+ at $DIR/moves-based-on-type-move-out-of-closure-env-issue-1965.rs:9:28: `i` is moved here
+  on line 8, column 9: captured outer variable
+  on line 8, column 13: move occurs because `i` has type `Box<usize>`, which does not implement the `Copy` trait
+  on line 9, column 20: captured by this `Fn` closure
 help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
-  --> $DIR/moves-based-on-type-move-out-of-closure-env-issue-1965.rs:3:33
-   |
-LL | fn to_fn<A:std::marker::Tuple,F:Fn<A>>(f: F) -> F { f }
-   |                                 ^^^^^
+ at $DIR/moves-based-on-type-move-out-of-closure-env-issue-1965.rs:3:33
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let _f = to_fn(|| test(i.clone()));
-   |                             ++++++++
+ on line 9, column 28, add `.clone()`
 
 error: aborting due to 1 previous error
 

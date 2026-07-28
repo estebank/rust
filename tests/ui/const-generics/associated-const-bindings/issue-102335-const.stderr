@@ -1,27 +1,13 @@
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-102335-const.rs:5:17
-   |
-LL |     type A: S<C<X = 0i32> = 34>;
-   |                 ^^^^^^^^ associated item constraint not allowed here
-   |
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-102335-const.rs:5:17: associated item constraint not allowed here
 help: consider removing this associated item binding
-   |
-LL -     type A: S<C<X = 0i32> = 34>;
-LL +     type A: S<C = 34>;
-   |
+ on line 5, column 15
 
-error[E0229]: associated item constraints are not allowed here
-  --> $DIR/issue-102335-const.rs:5:17
-   |
-LL |     type A: S<C<X = 0i32> = 34>;
-   |                 ^^^^^^^^ associated item constraint not allowed here
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0229: associated item constraints are not allowed here
+ at $DIR/issue-102335-const.rs:5:17: associated item constraint not allowed here
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: consider removing this associated item binding
-   |
-LL -     type A: S<C<X = 0i32> = 34>;
-LL +     type A: S<C = 34>;
-   |
+ on line 5, column 15
 
 error: aborting due to 2 previous errors
 

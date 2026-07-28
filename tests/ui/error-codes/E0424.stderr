@@ -1,52 +1,27 @@
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/E0424.rs:7:9
-   |
-LL |     fn foo() {
-   |        --- this function doesn't have a `self` parameter
-LL |         self.bar();
-   |         ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-   |
-   = note: a module named `self` exists in another namespace
+error E0424: cannot find value `self` in this scope
+ at $DIR/E0424.rs:7:9: `self` value is a keyword only available in methods with a `self` parameter
+  on line 6, column 8: this function doesn't have a `self` parameter
+note: a module named `self` exists in another namespace
 help: add a `self` receiver parameter to make the associated `fn` a method
-   |
-LL |     fn foo(&self) {
-   |            +++++
+ on line 6, column 11, add `&self`
 
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/E0424.rs:11:9
-   |
-LL |     fn baz(_: i32) {
-   |        --- this function doesn't have a `self` parameter
-LL |         self.bar();
-   |         ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-   |
-   = note: a module named `self` exists in another namespace
+error E0424: cannot find value `self` in this scope
+ at $DIR/E0424.rs:11:9: `self` value is a keyword only available in methods with a `self` parameter
+  on line 10, column 8: this function doesn't have a `self` parameter
+note: a module named `self` exists in another namespace
 help: add a `self` receiver parameter to make the associated `fn` a method
-   |
-LL |     fn baz(&self, _: i32) {
-   |            ++++++
+ on line 10, column 11, add `&self, `
 
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/E0424.rs:15:20
-   |
-LL |     fn qux() {
-   |        --- this function doesn't have a `self` parameter
-LL |         let _ = || self.bar();
-   |                    ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-   |
-   = note: a module named `self` exists in another namespace
+error E0424: cannot find value `self` in this scope
+ at $DIR/E0424.rs:15:20: `self` value is a keyword only available in methods with a `self` parameter
+  on line 14, column 8: this function doesn't have a `self` parameter
+note: a module named `self` exists in another namespace
 help: add a `self` receiver parameter to make the associated `fn` a method
-   |
-LL |     fn qux(&self) {
-   |            +++++
+ on line 14, column 11, add `&self`
 
-error[E0424]: cannot find unit struct, unit variant or constant `self` in this scope
-  --> $DIR/E0424.rs:20:9
-   |
-LL |     let self = "self";
-   |         ^^^^ `self` value is a keyword and may not be bound to variables or shadowed
-   |
-   = note: a module named `self` exists in another namespace
+error E0424: cannot find unit struct, unit variant or constant `self` in this scope
+ at $DIR/E0424.rs:20:9: `self` value is a keyword and may not be bound to variables or shadowed
+note: a module named `self` exists in another namespace
 
 error: aborting due to 4 previous errors
 

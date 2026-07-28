@@ -1,12 +1,7 @@
-error[E0597]: `z` does not live long enough
-  --> $DIR/borrow-checker-lifetime-error-46471.rs:5:9
-   |
-LL |         let mut z = 0;
-   |             ----- binding `z` declared here
-LL |         &mut z
-   |         ^^^^^^ borrowed value does not live long enough
-LL |     };
-   |     - `z` dropped here while still borrowed
+error E0597: `z` does not live long enough
+ at $DIR/borrow-checker-lifetime-error-46471.rs:5:9: borrowed value does not live long enough
+  on line 4, column 13: binding `z` declared here
+  on line 6: `z` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

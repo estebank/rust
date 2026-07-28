@@ -1,40 +1,18 @@
-error[E0432]: unresolved import `bar::gpriv`
-  --> $DIR/privacy3.rs:23:9
-   |
-LL |     use bar::gpriv;
-   |         ^^^^^-----
-   |              |
-   |              no `gpriv` in `bar`
+error E0432: unresolved import `bar::gpriv`
+ at $DIR/privacy3.rs:23:9
+  on line 23, column 14: no `gpriv` in `bar`
 
 error: requires `sized` lang_item
-  --> $DIR/privacy3.rs:13:20
-   |
-LL |         fn gpriv() {}
-   |                    ^^
+ at $DIR/privacy3.rs:13:20
 
 error: requires `sized` lang_item
-  --> $DIR/privacy3.rs:18:14
-   |
-LL | pub fn foo() {}
-   |              ^^
+ at $DIR/privacy3.rs:18:14
 
 error: requires `sized` lang_item
-  --> $DIR/privacy3.rs:21:12
-   |
-LL |   fn test1() {
-   |  ____________^
-LL | |
-LL | |     use bar::gpriv;
-...  |
-LL | |     gpriv();
-LL | | }
-   | |_^
+ at $DIR/privacy3.rs:21:12 to 30:2
 
 error: requires `sized` lang_item
-  --> $DIR/privacy3.rs:32:11
-   |
-LL | fn main() {}
-   |           ^^
+ at $DIR/privacy3.rs:32:11
 
 error: aborting due to 5 previous errors
 

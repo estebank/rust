@@ -1,13 +1,7 @@
-error[E0596]: cannot borrow `*inner` as mutable, as it is behind a `&` reference
-  --> $DIR/issue-91206.rs:13:5
-   |
-LL |     inner.clear();
-   |     ^^^^^ `inner` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*inner` as mutable, as it is behind a `&` reference
+ at $DIR/issue-91206.rs:13:5: `inner` is a `&` reference, so it cannot be borrowed as mutable
 help: consider specifying this binding's type
-   |
-LL |     let inner: &mut Vec<usize> = client.get_inner_ref();
-   |              +++++++++++++++++
+ on line 11, column 13, add `: &mut Vec<usize>`
 
 error: aborting due to 1 previous error
 

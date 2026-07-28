@@ -1,8 +1,5 @@
-error[E0433]: cannot find `xcrate` in the crate root
-  --> $DIR/non-existent-2.rs:4:15
-   |
-LL |     let s = ::xcrate::S;
-   |               ^^^^^^ could not find `xcrate` in the list of imported crates
+error E0433: cannot find `xcrate` in the crate root
+ at $DIR/non-existent-2.rs:4:15: could not find `xcrate` in the list of imported crates
 
 error: aborting due to 1 previous error
 

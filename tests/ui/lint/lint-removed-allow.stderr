@@ -1,14 +1,7 @@
 error: unused variable: `unused`
-  --> $DIR/lint-removed-allow.rs:8:17
-   |
-LL | fn main() { let unused = (); }
-   |                 ^^^^^^ help: if this is intentional, prefix it with an underscore: `_unused`
-   |
+ at $DIR/lint-removed-allow.rs:8:17: help: if this is intentional, prefix it with an underscore: `_unused`
 note: the lint level is defined here
-  --> $DIR/lint-removed-allow.rs:7:8
-   |
-LL | #[deny(unused_variables)]
-   |        ^^^^^^^^^^^^^^^^
+ at $DIR/lint-removed-allow.rs:7:8
 
 error: aborting due to 1 previous error
 

@@ -1,24 +1,12 @@
-error[E0503]: cannot use `x` because it was mutably borrowed
-  --> $DIR/borrowck-non-exhaustive.rs:17:11
-   |
-LL |     let y = &mut x;
-   |             ------ `x` is borrowed here
-LL |     match x {
-   |           ^ use of borrowed `x`
-...
-LL |     drop(y);
-   |          - borrow later used here
+error E0503: cannot use `x` because it was mutably borrowed
+ at $DIR/borrowck-non-exhaustive.rs:17:11: use of borrowed `x`
+  on line 16, column 13: `x` is borrowed here
+  on line 22, column 10: borrow later used here
 
-error[E0503]: cannot use `x` because it was mutably borrowed
-  --> $DIR/borrowck-non-exhaustive.rs:25:11
-   |
-LL |     let y = &mut x;
-   |             ------ `x` is borrowed here
-LL |     match x {
-   |           ^ use of borrowed `x`
-...
-LL |     drop(y);
-   |          - borrow later used here
+error E0503: cannot use `x` because it was mutably borrowed
+ at $DIR/borrowck-non-exhaustive.rs:25:11: use of borrowed `x`
+  on line 24, column 13: `x` is borrowed here
+  on line 29, column 10: borrow later used here
 
 error: aborting due to 2 previous errors
 

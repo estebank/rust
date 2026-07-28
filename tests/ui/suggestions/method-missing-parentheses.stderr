@@ -1,13 +1,7 @@
-error[E0615]: attempted to take value of method `collect` on type `std::vec::IntoIter<_>`
-  --> $DIR/method-missing-parentheses.rs:2:32
-   |
-LL |     let _ = vec![].into_iter().collect::<usize>;
-   |                                ^^^^^^^ method, not a field
-   |
+error E0615: attempted to take value of method `collect` on type `std::vec::IntoIter<_>`
+ at $DIR/method-missing-parentheses.rs:2:32: method, not a field
 help: use parentheses to call the method
-   |
-LL |     let _ = vec![].into_iter().collect::<usize>();
-   |                                                ++
+ on line 2, column 47, add `()`
 
 error: aborting due to 1 previous error
 

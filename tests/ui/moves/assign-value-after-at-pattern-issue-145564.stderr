@@ -1,67 +1,32 @@
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/assign-value-after-at-pattern-issue-145564.rs:6:5
-   |
-LL |     let ref mut x @ _v;
-   |         --------- binding declared here but left uninitialized
-LL |     *x = 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/assign-value-after-at-pattern-issue-145564.rs:6:5: `x` used here but it isn't initialized
+  on line 5, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let ref mut x @ _v = 42;
-   |                        ++++
+ on line 5, column 22, add ` = 42`
 
-error[E0381]: used binding `a` isn't initialized
-  --> $DIR/assign-value-after-at-pattern-issue-145564.rs:9:20
-   |
-LL |     let a @ _b: i32;
-   |         - binding declared here but left uninitialized
-LL |     println!("{}", a);
-   |                    ^ `a` used here but it isn't initialized
-   |
+error E0381: used binding `a` isn't initialized
+ at $DIR/assign-value-after-at-pattern-issue-145564.rs:9:20: `a` used here but it isn't initialized
+  on line 8, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let a @ _b: i32 = 42;
-   |                     ++++
+ on line 8, column 19, add ` = 42`
 
-error[E0381]: used binding `c` isn't initialized
-  --> $DIR/assign-value-after-at-pattern-issue-145564.rs:12:22
-   |
-LL |     let ref c @ _d: i32;
-   |         ----- binding declared here but left uninitialized
-LL |     println!("{:?}", c);
-   |                      ^ `c` used here but it isn't initialized
-   |
+error E0381: used binding `c` isn't initialized
+ at $DIR/assign-value-after-at-pattern-issue-145564.rs:12:22: `c` used here but it isn't initialized
+  on line 11, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let ref c @ _d: i32 = 42;
-   |                         ++++
+ on line 11, column 23, add ` = 42`
 
-error[E0381]: used binding `e` isn't initialized
-  --> $DIR/assign-value-after-at-pattern-issue-145564.rs:15:22
-   |
-LL |     let ref e: i32;
-   |         ----- binding declared here but left uninitialized
-LL |     println!("{:?}", e);
-   |                      ^ `e` used here but it isn't initialized
-   |
+error E0381: used binding `e` isn't initialized
+ at $DIR/assign-value-after-at-pattern-issue-145564.rs:15:22: `e` used here but it isn't initialized
+  on line 14, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let ref e: i32 = 42;
-   |                    ++++
+ on line 14, column 18, add ` = 42`
 
-error[E0381]: used binding `y` isn't initialized
-  --> $DIR/assign-value-after-at-pattern-issue-145564.rs:18:5
-   |
-LL |     let ref mut y;
-   |         --------- binding declared here but left uninitialized
-LL |     *y = 1;
-   |     ^^^^^^ `y` used here but it isn't initialized
-   |
+error E0381: used binding `y` isn't initialized
+ at $DIR/assign-value-after-at-pattern-issue-145564.rs:18:5: `y` used here but it isn't initialized
+  on line 17, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let ref mut y = 42;
-   |                   ++++
+ on line 17, column 17, add ` = 42`
 
 error: aborting due to 5 previous errors
 

@@ -1,17 +1,9 @@
-error[E0437]: type `M` is not a member of trait `TraitB`
-  --> $DIR/trait-implementation-ambiguity-69602.rs:18:5
-   |
-LL |     type M   = A;
-   |     ^^^^^^^^^^^^^ not a member of trait `TraitB`
+error E0437: type `M` is not a member of trait `TraitB`
+ at $DIR/trait-implementation-ambiguity-69602.rs:18:5: not a member of trait `TraitB`
 
-error[E0046]: not all trait items implemented, missing: `MyA`
-  --> $DIR/trait-implementation-ambiguity-69602.rs:17:1
-   |
-LL |     type MyA: TraitA;
-   |     ---------------- `MyA` from trait
-...
-LL | impl TraitB for B {
-   | ^^^^^^^^^^^^^^^^^ missing `MyA` in implementation
+error E0046: not all trait items implemented, missing: `MyA`
+ at $DIR/trait-implementation-ambiguity-69602.rs:17:1: missing `MyA` in implementation
+  on line 12: `MyA` from trait
 
 error: aborting due to 2 previous errors
 

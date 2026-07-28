@@ -1,54 +1,30 @@
-error[E0308]: mismatched types
-  --> $DIR/mismatch-ty-dont-suggest.rs:5:18
-   |
-LL |     let v: i32 = b; // return type is not `Result`, we don't suggest ? here
-   |            ---   ^ expected `i32`, found `Result<i32, ()>`
-   |            |
-   |            expected due to this
-   |
-   = note: expected type `i32`
-              found enum `Result<i32, ()>`
+error E0308: mismatched types
+ at $DIR/mismatch-ty-dont-suggest.rs:5:18: expected `i32`, found `Result<i32, ()>`
+  on line 5, column 12: expected due to this
+note: expected type `i32`
+         found enum `Result<i32, ()>`
 help: consider using `Result::expect` to unwrap the `Result<i32, ()>` value, panicking if the value is a `Result::Err`
-   |
-LL |     let v: i32 = b.expect("REASON"); // return type is not `Result`, we don't suggest ? here
-   |                   +++++++++++++++++
+ on line 5, column 18, add `.expect("REASON")`
 
-error[E0308]: mismatched types
-  --> $DIR/mismatch-ty-dont-suggest.rs:12:18
-   |
-LL |     let v: i32 = b; // return type is not `Option`, we don't suggest ? here
-   |            ---   ^ expected `i32`, found `Option<{integer}>`
-   |            |
-   |            expected due to this
-   |
-   = note: expected type `i32`
-              found enum `Option<{integer}>`
+error E0308: mismatched types
+ at $DIR/mismatch-ty-dont-suggest.rs:12:18: expected `i32`, found `Option<{integer}>`
+  on line 12, column 12: expected due to this
+note: expected type `i32`
+         found enum `Option<{integer}>`
 help: consider using `Option::expect` to unwrap the `Option<{integer}>` value, panicking if the value is an `Option::None`
-   |
-LL |     let v: i32 = b.expect("REASON"); // return type is not `Option`, we don't suggest ? here
-   |                   +++++++++++++++++
+ on line 12, column 18, add `.expect("REASON")`
 
-error[E0308]: mismatched types
-  --> $DIR/mismatch-ty-dont-suggest.rs:18:18
-   |
-LL |     let v: i32 = Some(0);
-   |            ---   ^^^^^^^ expected `i32`, found `Option<{integer}>`
-   |            |
-   |            expected due to this
-   |
-   = note: expected type `i32`
-              found enum `Option<{integer}>`
+error E0308: mismatched types
+ at $DIR/mismatch-ty-dont-suggest.rs:18:18: expected `i32`, found `Option<{integer}>`
+  on line 18, column 12: expected due to this
+note: expected type `i32`
+         found enum `Option<{integer}>`
 
-error[E0308]: mismatched types
-  --> $DIR/mismatch-ty-dont-suggest.rs:21:18
-   |
-LL |     let v: i32 = c;
-   |            ---   ^ expected `i32`, found `Result<bool, _>`
-   |            |
-   |            expected due to this
-   |
-   = note: expected type `i32`
-              found enum `Result<bool, _>`
+error E0308: mismatched types
+ at $DIR/mismatch-ty-dont-suggest.rs:21:18: expected `i32`, found `Result<bool, _>`
+  on line 21, column 12: expected due to this
+note: expected type `i32`
+         found enum `Result<bool, _>`
 
 error: aborting due to 4 previous errors
 

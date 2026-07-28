@@ -1,33 +1,17 @@
 error: unexpected token: `...`
-  --> $DIR/malformed-range-to-never.rs:4:6
-   |
-LL |     0.....{loop{}1};
-   |      ^^^
-   |
+ at $DIR/malformed-range-to-never.rs:4:6
 help: use `..` for an exclusive range
-   |
-LL -     0.....{loop{}1};
-LL +     0....{loop{}1};
-   |
+ on line 4, column 5, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL -     0.....{loop{}1};
-LL +     0..=..{loop{}1};
-   |
+ on line 4, column 5, replace with `..=`
 
-error[E0308]: mismatched types
-  --> $DIR/malformed-range-to-never.rs:4:9
-   |
-LL |     0.....{loop{}1};
-   |     ----^^^^^^^^^^^
-   |     |   |
-   |     |   expected integer, found `RangeTo<{integer}>`
-   |     arguments to this function are incorrect
-   |
-   = note: expected type `{integer}`
-            found struct `RangeTo<{integer}>`
+error E0308: mismatched types
+ at $DIR/malformed-range-to-never.rs:4:9: expected integer, found `RangeTo<{integer}>`
+  on line 4: arguments to this function are incorrect
+note: expected type `{integer}`
+       found struct `RangeTo<{integer}>`
 note: associated function defined here
-  --> $SRC_DIR/core/src/ops/range.rs:LL:COL
+ at $SRC_DIR/core/src/ops/range.rs:LL:COL
 
 error: aborting due to 2 previous errors
 

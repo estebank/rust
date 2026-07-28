@@ -1,15 +1,9 @@
-error[E0271]: expected `hi` to return `Box<u8>`, but it returns `impl Sized`
-  --> $DIR/issue-98608.rs:6:39
-   |
-LL | fn hi() -> impl Sized {
-   |            ---------- the found opaque type
-...
-LL |     let b: Box<dyn Fn() -> Box<u8>> = Box::new(hi);
-   |                                       ^^^^^^^^^^^^ expected `Box<u8>`, found opaque type
-   |
-   = note:   expected struct `Box<u8>`
-           found opaque type `impl Sized`
-   = note: required for the cast from `Box<fn() -> impl Sized {hi}>` to `Box<dyn Fn() -> Box<u8>>`
+error E0271: expected `hi` to return `Box<u8>`, but it returns `impl Sized`
+ at $DIR/issue-98608.rs:6:39: expected `Box<u8>`, found opaque type
+  on line 1, column 12: the found opaque type
+note:   expected struct `Box<u8>`
+      found opaque type `impl Sized`
+note: required for the cast from `Box<fn() -> impl Sized {hi}>` to `Box<dyn Fn() -> Box<u8>>`
 
 error: aborting due to 1 previous error
 

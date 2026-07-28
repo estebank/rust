@@ -1,18 +1,10 @@
-error[E0119]: conflicting implementations of trait `Copy` for type `E`
-  --> $DIR/duplicate-derive-copy-clone-diagnostics.rs:6:10
-   |
-LL | #[derive(Copy, Clone)]
-   |          ---- first implementation here
-LL | #[derive(Copy, Clone)]
-   |          ^^^^ conflicting implementation for `E`
+error E0119: conflicting implementations of trait `Copy` for type `E`
+ at $DIR/duplicate-derive-copy-clone-diagnostics.rs:6:10: conflicting implementation for `E`
+  on line 5, column 10: first implementation here
 
-error[E0119]: conflicting implementations of trait `Clone` for type `E`
-  --> $DIR/duplicate-derive-copy-clone-diagnostics.rs:6:16
-   |
-LL | #[derive(Copy, Clone)]
-   |                ----- first implementation here
-LL | #[derive(Copy, Clone)]
-   |                ^^^^^ conflicting implementation for `E`
+error E0119: conflicting implementations of trait `Clone` for type `E`
+ at $DIR/duplicate-derive-copy-clone-diagnostics.rs:6:16: conflicting implementation for `E`
+  on line 5, column 16: first implementation here
 
 error: aborting due to 2 previous errors
 

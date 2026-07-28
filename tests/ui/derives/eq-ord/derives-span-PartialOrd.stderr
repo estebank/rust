@@ -1,66 +1,30 @@
-error[E0277]: can't compare `Error` with `Error`
-  --> $DIR/derives-span-PartialOrd.rs:10:9
-   |
-LL | #[derive(PartialOrd, PartialEq)]
-   |          ---------- in this derive macro expansion
-...
-LL |         x: Error,
-   |         ^^^^^^^^ no implementation for `Error < Error` and `Error > Error`
-   |
-   = help: the trait `PartialOrd` is not implemented for `Error`
+error E0277: can't compare `Error` with `Error`
+ at $DIR/derives-span-PartialOrd.rs:10:9: no implementation for `Error < Error` and `Error > Error`
+  on line 7, column 10: in this derive macro expansion
+help: the trait `PartialOrd` is not implemented for `Error`
 help: consider annotating `Error` with `#[derive(PartialOrd)]`
-   |
-LL + #[derive(PartialOrd)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(PartialOrd)]`
 
-error[E0277]: can't compare `Error` with `Error`
-  --> $DIR/derives-span-PartialOrd.rs:17:9
-   |
-LL | #[derive(PartialOrd, PartialEq)]
-   |          ---------- in this derive macro expansion
-...
-LL |         Error,
-   |         ^^^^^ no implementation for `Error < Error` and `Error > Error`
-   |
-   = help: the trait `PartialOrd` is not implemented for `Error`
+error E0277: can't compare `Error` with `Error`
+ at $DIR/derives-span-PartialOrd.rs:17:9: no implementation for `Error < Error` and `Error > Error`
+  on line 14, column 10: in this derive macro expansion
+help: the trait `PartialOrd` is not implemented for `Error`
 help: consider annotating `Error` with `#[derive(PartialOrd)]`
-   |
-LL + #[derive(PartialOrd)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(PartialOrd)]`
 
-error[E0277]: can't compare `Error` with `Error`
-  --> $DIR/derives-span-PartialOrd.rs:23:5
-   |
-LL | #[derive(PartialOrd, PartialEq)]
-   |          ---------- in this derive macro expansion
-LL | struct Struct {
-LL |     x: Error,
-   |     ^^^^^^^^ no implementation for `Error < Error` and `Error > Error`
-   |
-   = help: the trait `PartialOrd` is not implemented for `Error`
+error E0277: can't compare `Error` with `Error`
+ at $DIR/derives-span-PartialOrd.rs:23:5: no implementation for `Error < Error` and `Error > Error`
+  on line 21, column 10: in this derive macro expansion
+help: the trait `PartialOrd` is not implemented for `Error`
 help: consider annotating `Error` with `#[derive(PartialOrd)]`
-   |
-LL + #[derive(PartialOrd)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(PartialOrd)]`
 
-error[E0277]: can't compare `Error` with `Error`
-  --> $DIR/derives-span-PartialOrd.rs:28:5
-   |
-LL | #[derive(PartialOrd, PartialEq)]
-   |          ---------- in this derive macro expansion
-LL | struct TupleStruct(
-LL |     Error,
-   |     ^^^^^ no implementation for `Error < Error` and `Error > Error`
-   |
-   = help: the trait `PartialOrd` is not implemented for `Error`
+error E0277: can't compare `Error` with `Error`
+ at $DIR/derives-span-PartialOrd.rs:28:5: no implementation for `Error < Error` and `Error > Error`
+  on line 26, column 10: in this derive macro expansion
+help: the trait `PartialOrd` is not implemented for `Error`
 help: consider annotating `Error` with `#[derive(PartialOrd)]`
-   |
-LL + #[derive(PartialOrd)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(PartialOrd)]`
 
 error: aborting due to 4 previous errors
 

@@ -1,150 +1,66 @@
-error[E0599]: no method named `closure` found for struct `Obj<F>` in the current scope
-  --> $DIR/issue-2392.rs:36:15
-   |
-LL | struct Obj<F> where F: FnOnce() -> u32 {
-   | ------------- method `closure` not found for this struct
-...
-LL |     o_closure.closure();
-   |               ^^^^^^^ field, not a method
-   |
+error E0599: no method named `closure` found for struct `Obj<F>` in the current scope
+ at $DIR/issue-2392.rs:36:15: field, not a method
+  on line 11: method `closure` not found for this struct
 help: to call the closure stored in `closure`, surround the field access with parentheses
-   |
-LL |     (o_closure.closure)();
-   |     +                 +
+ on line 36, column 4, add `(`
 
-error[E0599]: no method named `not_closure` found for struct `Obj<F>` in the current scope
-  --> $DIR/issue-2392.rs:38:15
-   |
-LL | struct Obj<F> where F: FnOnce() -> u32 {
-   | ------------- method `not_closure` not found for this struct
-...
-LL |     o_closure.not_closure();
-   |               ^^^^^^^^^^^-- help: remove the arguments
-   |               |
-   |               field, not a method
+error E0599: no method named `not_closure` found for struct `Obj<F>` in the current scope
+ at $DIR/issue-2392.rs:38:15: field, not a method
+  on line 11: method `not_closure` not found for this struct
+  on line 38, column 26: help: remove the arguments
 
-error[E0599]: no method named `closure` found for struct `Obj<F>` in the current scope
-  --> $DIR/issue-2392.rs:42:12
-   |
-LL | struct Obj<F> where F: FnOnce() -> u32 {
-   | ------------- method `closure` not found for this struct
-...
-LL |     o_func.closure();
-   |            ^^^^^^^ field, not a method
-   |
+error E0599: no method named `closure` found for struct `Obj<F>` in the current scope
+ at $DIR/issue-2392.rs:42:12: field, not a method
+  on line 11: method `closure` not found for this struct
 help: to call the function stored in `closure`, surround the field access with parentheses
-   |
-LL |     (o_func.closure)();
-   |     +              +
+ on line 42, column 4, add `(`
 
-error[E0599]: no method named `boxed_closure` found for struct `BoxedObj` in the current scope
-  --> $DIR/issue-2392.rs:45:14
-   |
-LL | struct BoxedObj {
-   | --------------- method `boxed_closure` not found for this struct
-...
-LL |     boxed_fn.boxed_closure();
-   |              ^^^^^^^^^^^^^ field, not a method
-   |
+error E0599: no method named `boxed_closure` found for struct `BoxedObj` in the current scope
+ at $DIR/issue-2392.rs:45:14: field, not a method
+  on line 16: method `boxed_closure` not found for this struct
 help: to call the trait object stored in `boxed_closure`, surround the field access with parentheses
-   |
-LL |     (boxed_fn.boxed_closure)();
-   |     +                      +
+ on line 45, column 4, add `(`
 
-error[E0599]: no method named `boxed_closure` found for struct `BoxedObj` in the current scope
-  --> $DIR/issue-2392.rs:48:19
-   |
-LL | struct BoxedObj {
-   | --------------- method `boxed_closure` not found for this struct
-...
-LL |     boxed_closure.boxed_closure();
-   |                   ^^^^^^^^^^^^^ field, not a method
-   |
+error E0599: no method named `boxed_closure` found for struct `BoxedObj` in the current scope
+ at $DIR/issue-2392.rs:48:19: field, not a method
+  on line 16: method `boxed_closure` not found for this struct
 help: to call the trait object stored in `boxed_closure`, surround the field access with parentheses
-   |
-LL |     (boxed_closure.boxed_closure)();
-   |     +                           +
+ on line 48, column 4, add `(`
 
-error[E0599]: no method named `closure` found for struct `Obj<F>` in the current scope
-  --> $DIR/issue-2392.rs:53:12
-   |
-LL | struct Obj<F> where F: FnOnce() -> u32 {
-   | ------------- method `closure` not found for this struct
-...
-LL |     w.wrap.closure();
-   |            ^^^^^^^ field, not a method
-   |
+error E0599: no method named `closure` found for struct `Obj<F>` in the current scope
+ at $DIR/issue-2392.rs:53:12: field, not a method
+  on line 11: method `closure` not found for this struct
 help: to call the function stored in `closure`, surround the field access with parentheses
-   |
-LL |     (w.wrap.closure)();
-   |     +              +
+ on line 53, column 4, add `(`
 
-error[E0599]: no method named `not_closure` found for struct `Obj<F>` in the current scope
-  --> $DIR/issue-2392.rs:55:12
-   |
-LL | struct Obj<F> where F: FnOnce() -> u32 {
-   | ------------- method `not_closure` not found for this struct
-...
-LL |     w.wrap.not_closure();
-   |            ^^^^^^^^^^^-- help: remove the arguments
-   |            |
-   |            field, not a method
+error E0599: no method named `not_closure` found for struct `Obj<F>` in the current scope
+ at $DIR/issue-2392.rs:55:12: field, not a method
+  on line 11: method `not_closure` not found for this struct
+  on line 55, column 23: help: remove the arguments
 
-error[E0599]: no method named `closure` found for struct `Obj<F>` in the current scope
-  --> $DIR/issue-2392.rs:58:24
-   |
-LL | struct Obj<F> where F: FnOnce() -> u32 {
-   | ------------- method `closure` not found for this struct
-...
-LL |     check_expression().closure();
-   |                        ^^^^^^^ field, not a method
-   |
+error E0599: no method named `closure` found for struct `Obj<F>` in the current scope
+ at $DIR/issue-2392.rs:58:24: field, not a method
+  on line 11: method `closure` not found for this struct
 help: to call the trait object stored in `closure`, surround the field access with parentheses
-   |
-LL |     (check_expression().closure)();
-   |     +                          +
+ on line 58, column 4, add `(`
 
-error[E0599]: no method named `f1` found for struct `FuncContainer` in the current scope
-  --> $DIR/issue-2392.rs:64:31
-   |
-LL | struct FuncContainer {
-   | -------------------- method `f1` not found for this struct
-...
-LL |             (*self.container).f1(1);
-   |                               ^^ field, not a method
-   |
+error E0599: no method named `f1` found for struct `FuncContainer` in the current scope
+ at $DIR/issue-2392.rs:64:31: field, not a method
+  on line 1: method `f1` not found for this struct
 help: to call the function pointer stored in `f1`, surround the field access with parentheses
-   |
-LL |             ((*self.container).f1)(1);
-   |             +                    +
+ on line 64, column 12, add `(`
 
-error[E0599]: no method named `f2` found for struct `FuncContainer` in the current scope
-  --> $DIR/issue-2392.rs:65:31
-   |
-LL | struct FuncContainer {
-   | -------------------- method `f2` not found for this struct
-...
-LL |             (*self.container).f2(1);
-   |                               ^^ field, not a method
-   |
+error E0599: no method named `f2` found for struct `FuncContainer` in the current scope
+ at $DIR/issue-2392.rs:65:31: field, not a method
+  on line 1: method `f2` not found for this struct
 help: to call the function pointer stored in `f2`, surround the field access with parentheses
-   |
-LL |             ((*self.container).f2)(1);
-   |             +                    +
+ on line 65, column 12, add `(`
 
-error[E0599]: no method named `f3` found for struct `FuncContainer` in the current scope
-  --> $DIR/issue-2392.rs:66:31
-   |
-LL | struct FuncContainer {
-   | -------------------- method `f3` not found for this struct
-...
-LL |             (*self.container).f3(1);
-   |                               ^^ field, not a method
-   |
+error E0599: no method named `f3` found for struct `FuncContainer` in the current scope
+ at $DIR/issue-2392.rs:66:31: field, not a method
+  on line 1: method `f3` not found for this struct
 help: to call the function pointer stored in `f3`, surround the field access with parentheses
-   |
-LL |             ((*self.container).f3)(1);
-   |             +                    +
+ on line 66, column 12, add `(`
 
 error: aborting due to 11 previous errors
 

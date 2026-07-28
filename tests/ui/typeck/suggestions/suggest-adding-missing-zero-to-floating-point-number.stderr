@@ -1,79 +1,37 @@
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:4:7
-   |
-LL |     2.e1;
-   |       ^^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:4:7
 help: if intended to be a floating point literal, consider adding a `0` after the period
-   |
-LL |     2.0e1;
-   |       +
+ on line 4, column 6, add `0`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:5:7
-   |
-LL |     2.E1;
-   |       ^^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:5:7
 help: if intended to be a floating point literal, consider adding a `0` after the period
-   |
-LL |     2.0E1;
-   |       +
+ on line 5, column 6, add `0`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:6:7
-   |
-LL |     2.f32;
-   |       ^^^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:6:7
 help: if intended to be a floating point literal, consider adding a `0` after the period
-   |
-LL |     2.0f32;
-   |       +
+ on line 6, column 6, add `0`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:7:7
-   |
-LL |     2.f64;
-   |       ^^^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:7:7
 help: if intended to be a floating point literal, consider adding a `0` after the period
-   |
-LL |     2.0f64;
-   |       +
+ on line 7, column 6, add `0`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:8:7
-   |
-LL |     2.e+12;
-   |       ^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:8:7
 help: if intended to be a floating point literal, consider adding a `0` after the period
-   |
-LL |     2.0e+12;
-   |       +
+ on line 8, column 6, add `0`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:9:7
-   |
-LL |     2.e-12;
-   |       ^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:9:7
 help: if intended to be a floating point literal, consider adding a `0` after the period
-   |
-LL |     2.0e-12;
-   |       +
+ on line 9, column 6, add `0`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:10:7
-   |
-LL |     2.e1f32;
-   |       ^^^^^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/suggest-adding-missing-zero-to-floating-point-number.rs:10:7
 help: if intended to be a floating point literal, consider adding a `0` after the period
-   |
-LL |     2.0e1f32;
-   |       +
+ on line 10, column 6, add `0`
 
 error: aborting due to 7 previous errors
 

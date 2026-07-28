@@ -1,46 +1,22 @@
-error[E0432]: unresolved import `alloc`
-  --> $DIR/resolve_self_super_hint.rs:4:9
-   |
-LL |     use alloc::HashMap;
-   |         ^^^^^
-   |
+error E0432: unresolved import `alloc`
+ at $DIR/resolve_self_super_hint.rs:4:9
 help: a similar path exists
-   |
-LL |     use self::alloc::HashMap;
-   |         ++++++
+ on line 4, column 8, replace with `self::alloc`
 
-error[E0432]: unresolved import `alloc`
-  --> $DIR/resolve_self_super_hint.rs:9:13
-   |
-LL |         use alloc::HashMap;
-   |             ^^^^^
-   |
+error E0432: unresolved import `alloc`
+ at $DIR/resolve_self_super_hint.rs:9:13
 help: a similar path exists
-   |
-LL |         use super::alloc::HashMap;
-   |             +++++++
+ on line 9, column 12, replace with `super::alloc`
 
-error[E0432]: unresolved import `alloc`
-  --> $DIR/resolve_self_super_hint.rs:14:17
-   |
-LL |             use alloc::HashMap;
-   |                 ^^^^^ unresolved import
-   |
+error E0432: unresolved import `alloc`
+ at $DIR/resolve_self_super_hint.rs:14:17: unresolved import
 help: a similar path exists
-   |
-LL |             use a::alloc::HashMap;
-   |                 +++
+ on line 14, column 16, replace with `a::alloc`
 
-error[E0432]: unresolved import `alloc`
-  --> $DIR/resolve_self_super_hint.rs:19:21
-   |
-LL |                 use alloc::HashMap;
-   |                     ^^^^^ unresolved import
-   |
+error E0432: unresolved import `alloc`
+ at $DIR/resolve_self_super_hint.rs:19:21: unresolved import
 help: a similar path exists
-   |
-LL |                 use a::alloc::HashMap;
-   |                     +++
+ on line 19, column 20, replace with `a::alloc`
 
 error: aborting due to 4 previous errors
 

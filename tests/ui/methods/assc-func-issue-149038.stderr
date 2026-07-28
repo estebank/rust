@@ -1,41 +1,19 @@
-error[E0599]: no method named `foo` found for reference `&S` in the current scope
-  --> $DIR/assc-func-issue-149038.rs:5:14
-   |
-LL |         self.foo();
-   |              ^^^ this is an associated function, not a method
-   |
-   = note: found the following associated functions; to be used as methods, functions must have a `self` parameter
+error E0599: no method named `foo` found for reference `&S` in the current scope
+ at $DIR/assc-func-issue-149038.rs:5:14: this is an associated function, not a method
+note: found the following associated functions; to be used as methods, functions must have a `self` parameter
 note: the candidate is defined in an impl for the type `S`
-  --> $DIR/assc-func-issue-149038.rs:3:5
-   |
-LL |     fn foo() {}
-   |     ^^^^^^^^
+ at $DIR/assc-func-issue-149038.rs:3:5
 help: use associated function syntax instead
-   |
-LL -         self.foo();
-LL +         S::foo();
-   |
+ on line 5, column 8, replace with `S::foo()`
 
-error[E0609]: no field `foo` on type `&S`
-  --> $DIR/assc-func-issue-149038.rs:6:28
-   |
-LL |         let f: fn() = self.foo;
-   |                            ^^^
-   |                            |
-   |                            this is an associated function, not a method
-   |                            unknown field
-   |
-   = note: found the following associated function; to be used as method, it must have a `self` parameter
+error E0609: no field `foo` on type `&S`
+ at $DIR/assc-func-issue-149038.rs:6:28: this is an associated function, not a method
+  on line 6, column 28: unknown field
+note: found the following associated function; to be used as method, it must have a `self` parameter
 note: the candidate is defined in an impl for the type `S`
-  --> $DIR/assc-func-issue-149038.rs:3:5
-   |
-LL |     fn foo() {}
-   |     ^^^^^^^^
+ at $DIR/assc-func-issue-149038.rs:3:5
 help: use associated function syntax instead
-   |
-LL -         let f: fn() = self.foo;
-LL +         let f: fn() = S::foo;
-   |
+ on line 6, column 22, replace with `S`
 
 error: aborting due to 2 previous errors
 

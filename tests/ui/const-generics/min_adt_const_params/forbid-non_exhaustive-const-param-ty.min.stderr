@@ -1,23 +1,12 @@
 error: the trait `ConstParamTy` may not be implemented for this type
-  --> $DIR/forbid-non_exhaustive-const-param-ty.rs:13:12
-   |
-LL | #[non_exhaustive]
-   | ----------------- caused by this attribute
-LL | #[derive(PartialEq, Eq, ConstParamTy)]
-   |                         ------------ in this derive macro expansion
-LL | pub struct Miow;
-   |            ^^^^ non exhaustive const params are forbidden
+ at $DIR/forbid-non_exhaustive-const-param-ty.rs:13:12: non exhaustive const params are forbidden
+  on line 11: caused by this attribute
+  on line 12, column 25: in this derive macro expansion
 
 error: the trait `ConstParamTy` may not be implemented for this type
-  --> $DIR/forbid-non_exhaustive-const-param-ty.rs:17:10
-   |
-LL | #[derive(PartialEq, Eq, ConstParamTy)]
-   |                         ------------ in this derive macro expansion
-LL | pub enum Enumiow {
-   |          ^^^^^^^ non exhaustive const params are forbidden
-LL |
-LL |     #[non_exhaustive] NonExhaustiveThingie,
-   |     ----------------- caused by this attribute
+ at $DIR/forbid-non_exhaustive-const-param-ty.rs:17:10: non exhaustive const params are forbidden
+  on line 16, column 25: in this derive macro expansion
+  on line 19: caused by this attribute
 
 error: aborting due to 2 previous errors
 

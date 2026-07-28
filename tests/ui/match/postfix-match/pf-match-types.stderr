@@ -1,20 +1,8 @@
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/pf-match-types.rs:10:20
-   |
-LL | /     Some(10).match {
-LL | |
-LL | |         Some(5) => false,
-   | |                    ----- this is found to be of type `bool`
-LL | |
-LL | |         Some(2) => true,
-   | |                    ---- this is found to be of type `bool`
-LL | |
-LL | |         None    => (),
-   | |                    ^^ expected `bool`, found `()`
-...  |
-LL | |         _       => true
-LL | |     }
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/pf-match-types.rs:10:20: expected `bool`, found `()`
+  on line 4 to line 14: `match` arms have incompatible types
+  on line 6, column 20: this is found to be of type `bool`
+  on line 8, column 20: this is found to be of type `bool`
 
 error: aborting due to 1 previous error
 

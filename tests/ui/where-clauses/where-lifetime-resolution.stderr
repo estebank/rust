@@ -1,41 +1,21 @@
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/where-lifetime-resolution.rs:6:38
-   |
-LL |     (dyn for<'a> Trait1<'a>): Trait1<'a>,
-   |                                      ^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/where-lifetime-resolution.rs:6:38: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the bound lifetime-generic with a new `'a` lifetime
-   |
-LL |     (dyn for<'a> Trait1<'a>): for<'a> Trait1<'a>,
-   |                               +++++++
+ on line 6, column 30, add `for<'a> `
 help: consider making the bound lifetime-generic with a new `'a` lifetime
-   |
-LL |     for<'a> (dyn for<'a> Trait1<'a>): Trait1<'a>,
-   |     +++++++
+ on line 6, column 4, add `for<'a> `
 help: consider introducing lifetime `'a` here
-   |
-LL | fn f<'a>() where
-   |     ++++
+ on line 4, column 4, add `<'a>`
 
-error[E0261]: use of undeclared lifetime name `'b`
-  --> $DIR/where-lifetime-resolution.rs:8:52
-   |
-LL |     for<'a> dyn for<'b> Trait2<'a, 'b>: Trait2<'a, 'b>,
-   |                                                    ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'b`
+ at $DIR/where-lifetime-resolution.rs:8:52: undeclared lifetime
 help: consider making the bound lifetime-generic with a new `'b` lifetime
-   |
-LL |     for<'a> dyn for<'b> Trait2<'a, 'b>: for<'b> Trait2<'a, 'b>,
-   |                                         +++++++
+ on line 8, column 40, add `for<'b> `
 help: consider making the bound lifetime-generic with a new `'b` lifetime
-   |
-LL |     for<'b, 'a> dyn for<'b> Trait2<'a, 'b>: Trait2<'a, 'b>,
-   |         +++
+ on line 8, column 8, add `'b, `
 help: consider introducing lifetime `'b` here
-   |
-LL | fn f<'b>() where
-   |     ++++
+ on line 4, column 4, add `<'b>`
 
 error: aborting due to 2 previous errors
 

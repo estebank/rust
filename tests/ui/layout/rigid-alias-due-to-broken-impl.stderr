@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `Assoc`
-  --> $DIR/rigid-alias-due-to-broken-impl.rs:14:1
-   |
-LL |     type Assoc;
-   |     ---------- `Assoc` from trait
-...
-LL | impl Foo for str {}
-   | ^^^^^^^^^^^^^^^^ missing `Assoc` in implementation
+error E0046: not all trait items implemented, missing: `Assoc`
+ at $DIR/rigid-alias-due-to-broken-impl.rs:14:1: missing `Assoc` in implementation
+  on line 9: `Assoc` from trait
 
 error: aborting due to 1 previous error
 

@@ -1,13 +1,7 @@
-error[E0626]: borrow may still be in use when `gen` block yields
-  --> $DIR/self_referential_gen_block.rs:9:21
-   |
-LL |         let mut x = gen {
-   |                     --- within this `gen` block
-LL |             let y = 42;
-LL |             let z = &y;
-   |                     ^^
-LL |             yield 43;
-   |             -------- possible yield occurs here
+error E0626: borrow may still be in use when `gen` block yields
+ at $DIR/self_referential_gen_block.rs:9:21
+  on line 7, column 21: within this `gen` block
+  on line 10: possible yield occurs here
 
 error: aborting due to 1 previous error
 

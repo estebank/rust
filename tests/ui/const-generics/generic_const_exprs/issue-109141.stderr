@@ -1,13 +1,7 @@
-error[E0425]: cannot find value `HashesEntryLEN` in this scope
-  --> $DIR/issue-109141.rs:10:32
-   |
-LL | struct EntriesBuffer(Box<[[u8; HashesEntryLEN]; 5]>);
-   |                                ^^^^^^^^^^^^^^ not found in this scope
-   |
+error E0425: cannot find value `HashesEntryLEN` in this scope
+ at $DIR/issue-109141.rs:10:32: not found in this scope
 help: you might be missing a const parameter
-   |
-LL | struct EntriesBuffer<const HashesEntryLEN: /* Type */>(Box<[[u8; HashesEntryLEN]; 5]>);
-   |                     ++++++++++++++++++++++++++++++++++
+ on line 10, column 20, add `<const HashesEntryLEN: /* Type */>`
 
 error: aborting due to 1 previous error
 

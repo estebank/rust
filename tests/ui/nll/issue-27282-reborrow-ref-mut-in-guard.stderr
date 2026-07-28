@@ -1,22 +1,12 @@
-error[E0596]: cannot borrow `r` as mutable, as it is immutable for the pattern guard
-  --> $DIR/issue-27282-reborrow-ref-mut-in-guard.rs:13:25
-   |
-LL |         ref mut r if { (|| { let bar = &mut *r; **bar = false; })();
-   |                         ^^                  -- mutable borrow occurs due to use of `r` in closure
-   |                         |
-   |                         cannot borrow as mutable
-   |
-   = note: variables bound in patterns are immutable until the end of the pattern guard
+error E0596: cannot borrow `r` as mutable, as it is immutable for the pattern guard
+ at $DIR/issue-27282-reborrow-ref-mut-in-guard.rs:13:25: cannot borrow as mutable
+  on line 13, column 45: mutable borrow occurs due to use of `r` in closure
+note: variables bound in patterns are immutable until the end of the pattern guard
 
-error[E0596]: cannot borrow `r` as mutable, as it is immutable for the pattern guard
-  --> $DIR/issue-27282-reborrow-ref-mut-in-guard.rs:23:40
-   |
-LL |         ref mut r if let Some(()) = { (|| { let bar = &mut *r; **bar = false; })();
-   |                                        ^^                  -- mutable borrow occurs due to use of `r` in closure
-   |                                        |
-   |                                        cannot borrow as mutable
-   |
-   = note: variables bound in patterns are immutable until the end of the pattern guard
+error E0596: cannot borrow `r` as mutable, as it is immutable for the pattern guard
+ at $DIR/issue-27282-reborrow-ref-mut-in-guard.rs:23:40: cannot borrow as mutable
+  on line 23, column 60: mutable borrow occurs due to use of `r` in closure
+note: variables bound in patterns are immutable until the end of the pattern guard
 
 error: aborting due to 2 previous errors
 

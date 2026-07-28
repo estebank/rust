@@ -1,30 +1,14 @@
-error[E0432]: unresolved import `crate::ImportError`
-  --> $DIR/issue-5035.rs:7:5
-   |
-LL | use crate::ImportError;
-   |     ^^^^^^^-----------
-   |            |
-   |            no `ImportError` in the root
+error E0432: unresolved import `crate::ImportError`
+ at $DIR/issue-5035.rs:7:5
+  on line 7, column 12: no `ImportError` in the root
 
-error[E0404]: expected trait, found type alias `K`
-  --> $DIR/issue-5035.rs:5:6
-   |
-LL | trait I {}
-   | ------- similarly named trait `I` defined here
-LL | type K = dyn I;
-LL | impl K for isize {}
-   |      ^ type aliases cannot be used as traits
-   |
+error E0404: expected trait, found type alias `K`
+ at $DIR/issue-5035.rs:5:6: type aliases cannot be used as traits
+  on line 3: similarly named trait `I` defined here
 help: you might have meant to use `#![feature(trait_alias)]` instead of a `type` alias
-   |
-LL - type K = dyn I;
-LL + trait K = dyn I;
-   |
+ on line 4, replace with `trait K = dyn I;`
 help: a trait with a similar name exists
-   |
-LL - impl K for isize {}
-LL + impl I for isize {}
-   |
+ on line 5, column 5, replace with `I`
 
 error: aborting due to 2 previous errors
 

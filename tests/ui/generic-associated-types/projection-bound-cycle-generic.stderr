@@ -1,8 +1,5 @@
-error[E0275]: overflow evaluating the requirement `<Number<T> as Foo>::Item == _`
-  --> $DIR/projection-bound-cycle-generic.rs:23:5
-   |
-LL |     type Item = [T] where [T]: Sized;
-   |     ^^^^^^^^^
+error E0275: overflow evaluating the requirement `<Number<T> as Foo>::Item == _`
+ at $DIR/projection-bound-cycle-generic.rs:23:5
 
 error: aborting due to 1 previous error
 

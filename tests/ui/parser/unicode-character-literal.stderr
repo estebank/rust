@@ -1,53 +1,23 @@
 error: character literal may only contain one codepoint
-  --> $DIR/unicode-character-literal.rs:7:18
-   |
-LL |     let _spade = '♠️';
-   |                  ^^^
-   |
+ at $DIR/unicode-character-literal.rs:7:18
 note: this `♠` is followed by the combining mark `\u{fe0f}`
-  --> $DIR/unicode-character-literal.rs:7:19
-   |
-LL |     let _spade = '♠️';
-   |                   ^
+ at $DIR/unicode-character-literal.rs:7:19
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let _spade = '♠️';
-LL +     let _spade = "♠️";
-   |
+ on line 7, column 17, replace with `"`
 
 error: character literal may only contain one codepoint
-  --> $DIR/unicode-character-literal.rs:12:14
-   |
-LL |     let _s = 'ṩ̂̊';
-   |              ^^^
-   |
+ at $DIR/unicode-character-literal.rs:12:14
 note: this `s` is followed by the combining marks `\u{323}\u{307}\u{302}\u{30a}`
-  --> $DIR/unicode-character-literal.rs:12:15
-   |
-LL |     let _s = 'ṩ̂̊';
-   |               ^
+ at $DIR/unicode-character-literal.rs:12:15
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let _s = 'ṩ̂̊';
-LL +     let _s = "ṩ̂̊";
-   |
+ on line 12, column 13, replace with `"`
 
 error: character literal may only contain one codepoint
-  --> $DIR/unicode-character-literal.rs:17:14
-   |
-LL |     let _a = 'Å';
-   |              ^^^
-   |
+ at $DIR/unicode-character-literal.rs:17:14
 note: this `A` is followed by the combining mark `\u{30a}`
-  --> $DIR/unicode-character-literal.rs:17:15
-   |
-LL |     let _a = 'Å';
-   |               ^
+ at $DIR/unicode-character-literal.rs:17:15
 help: consider using the normalized form `\u{c5}` of this character
-   |
-LL -     let _a = 'Å';
-LL +     let _a = 'Å';
-   |
+ on line 17, column 14, replace with `Å`
 
 error: aborting due to 3 previous errors
 

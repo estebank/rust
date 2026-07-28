@@ -1,10 +1,6 @@
-error[E0792]: expected generic lifetime parameter, found `'_`
-  --> $DIR/impl-fn-predefined-lifetimes.rs:8:9
-   |
-LL | fn a<'a>() -> impl Fn(&'a u8) -> (impl Debug + '_) {
-   |      -- this generic parameter must be used with a generic lifetime parameter
-LL |     |x| x
-   |         ^
+error E0792: expected generic lifetime parameter, found `'_`
+ at $DIR/impl-fn-predefined-lifetimes.rs:8:9
+  on line 7, column 6: this generic parameter must be used with a generic lifetime parameter
 
 error: aborting due to 1 previous error
 

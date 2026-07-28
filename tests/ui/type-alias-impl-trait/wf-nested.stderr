@@ -1,44 +1,20 @@
-error[E0310]: the parameter type `T` may not live long enough
-  --> $DIR/wf-nested.rs:30:35
-   |
-LL | fn define<T>() -> OuterOpaque1<T> {}
-   |                                   ^^
-   |                                   |
-   |                                   the parameter type `T` must be valid for the static lifetime...
-   |                                   ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `T` may not live long enough
+ at $DIR/wf-nested.rs:30:35: the parameter type `T` must be valid for the static lifetime...
+  on line 30, column 35: ...so that the type `T` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn define<T: 'static>() -> OuterOpaque1<T> {}
-   |            +++++++++
+ on line 30, column 11, add `: 'static`
 
-error[E0310]: the parameter type `T` may not live long enough
-  --> $DIR/wf-nested.rs:33:65
-   |
-LL | fn define_rpit<T>() -> impl Trait<&'static T, Out = impl Sized> {}
-   |                                                                 ^^
-   |                                                                 |
-   |                                                                 the parameter type `T` must be valid for the static lifetime...
-   |                                                                 ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `T` may not live long enough
+ at $DIR/wf-nested.rs:33:65: the parameter type `T` must be valid for the static lifetime...
+  on line 33, column 65: ...so that the type `T` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn define_rpit<T: 'static>() -> impl Trait<&'static T, Out = impl Sized> {}
-   |                 +++++++++
+ on line 33, column 16, add `: 'static`
 
-error[E0310]: the parameter type `T` may not live long enough
-  --> $DIR/wf-nested.rs:42:47
-   |
-LL | fn define_nested_rpit<T>() -> OuterOpaque2<T> {}
-   |                                               ^^
-   |                                               |
-   |                                               the parameter type `T` must be valid for the static lifetime...
-   |                                               ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `T` may not live long enough
+ at $DIR/wf-nested.rs:42:47: the parameter type `T` must be valid for the static lifetime...
+  on line 42, column 47: ...so that the type `T` will meet its required lifetime bounds
 help: consider adding an explicit lifetime bound
-   |
-LL | fn define_nested_rpit<T: 'static>() -> OuterOpaque2<T> {}
-   |                        +++++++++
+ on line 42, column 23, add `: 'static`
 
 error: aborting due to 3 previous errors
 

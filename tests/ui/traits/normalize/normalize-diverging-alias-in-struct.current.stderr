@@ -1,8 +1,5 @@
-error[E0275]: overflow evaluating the requirement `<u8 as Trait>::Diverges<u8> == _`
-  --> $DIR/normalize-diverging-alias-in-struct.rs:21:12
-   |
-LL |     field: Box<<u8 as Trait>::Diverges<u8>>,
-   |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0275: overflow evaluating the requirement `<u8 as Trait>::Diverges<u8> == _`
+ at $DIR/normalize-diverging-alias-in-struct.rs:21:12
 
 error: aborting due to 1 previous error
 

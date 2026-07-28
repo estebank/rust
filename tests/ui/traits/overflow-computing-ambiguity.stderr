@@ -1,27 +1,13 @@
-error[E0283]: type annotations needed
-  --> $DIR/overflow-computing-ambiguity.rs:15:5
-   |
-LL |     hello();
-   |     ^^^^^ cannot infer type of the type parameter `T` declared on the function `hello`
-   |
-   = note: the type must implement `Hello`
+error E0283: type annotations needed
+ at $DIR/overflow-computing-ambiguity.rs:15:5: cannot infer type of the type parameter `T` declared on the function `hello`
+note: the type must implement `Hello`
 help: the following types implement trait `Hello`
-  --> $DIR/overflow-computing-ambiguity.rs:8:1
-   |
-LL | impl<'a, T> Hello for Foo<'a, &'a T> where Foo<'a, T>: Hello {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Foo<'a, &'a T>`
-LL |
-LL | impl Hello for Foo<'static, i32> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Foo<'static, i32>`
+ at $DIR/overflow-computing-ambiguity.rs:8:1: `Foo<'a, &'a T>`
+  on line 10: `Foo<'static, i32>`
 note: required by a bound in `hello`
-  --> $DIR/overflow-computing-ambiguity.rs:12:13
-   |
-LL | fn hello<T: Hello>() {}
-   |             ^^^^^ required by this bound in `hello`
+ at $DIR/overflow-computing-ambiguity.rs:12:13: required by this bound in `hello`
 help: consider specifying a concrete type for the type parameter `T`
-   |
-LL |     hello::</* Type */>();
-   |          ++++++++++++++
+ on line 15, column 9, add `::</* Type */>`
 
 error: aborting due to 1 previous error
 

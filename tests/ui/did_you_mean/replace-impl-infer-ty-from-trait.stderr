@@ -1,24 +1,13 @@
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for associated functions
-  --> $DIR/replace-impl-infer-ty-from-trait.rs:9:15
-   |
-LL |     fn bar(i: _, t: _, s: _) -> _ {
-   |               ^     ^     ^     ^ not allowed in type signatures
-   |               |     |     |
-   |               |     |     not allowed in type signatures
-   |               |     not allowed in type signatures
-   |               not allowed in type signatures
-   |
+error E0121: the placeholder `_` is not allowed within types on item signatures for associated functions
+ at $DIR/replace-impl-infer-ty-from-trait.rs:9:15: not allowed in type signatures
+  on line 9, column 21: not allowed in type signatures
+  on line 9, column 27: not allowed in type signatures
+  on line 9, column 33: not allowed in type signatures
 help: try replacing `_` with the types in the corresponding trait method signature
-   |
-LL -     fn bar(i: _, t: _, s: _) -> _ {
-LL +     fn bar(i: i32, t: usize, s: &()) -> (usize, i32) {
-   |
+ on line 9, column 14, replace with `i32`
 
-error[E0282]: type annotations needed
-  --> $DIR/replace-impl-infer-ty-from-trait.rs:9:15
-   |
-LL |     fn bar(i: _, t: _, s: _) -> _ {
-   |               ^ cannot infer type
+error E0282: type annotations needed
+ at $DIR/replace-impl-infer-ty-from-trait.rs:9:15: cannot infer type
 
 error: aborting due to 2 previous errors
 

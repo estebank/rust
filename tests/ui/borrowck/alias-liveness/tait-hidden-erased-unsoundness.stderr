@@ -1,13 +1,7 @@
-error[E0700]: hidden type for `Tait<'a>` captures lifetime that does not appear in bounds
-  --> $DIR/tait-hidden-erased-unsoundness.rs:18:5
-   |
-LL | type Tait<'a> = impl Sized + 'a;
-   |                 --------------- opaque type defined here
-LL | #[define_opaque(Tait)]
-LL | fn step2<'a, 'b: 'a>() -> Tait<'a> {
-   |              -- hidden type `impl Captures<'b> + 'a` captures the lifetime `'b` as defined here
-LL |     step1::<'a, 'b>()
-   |     ^^^^^^^^^^^^^^^^^
+error E0700: hidden type for `Tait<'a>` captures lifetime that does not appear in bounds
+ at $DIR/tait-hidden-erased-unsoundness.rs:18:5
+  on line 15, column 17: opaque type defined here
+  on line 17, column 14: hidden type `impl Captures<'b> + 'a` captures the lifetime `'b` as defined here
 
 error: aborting due to 1 previous error
 

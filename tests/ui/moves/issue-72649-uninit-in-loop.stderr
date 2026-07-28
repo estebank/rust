@@ -1,114 +1,47 @@
-error[E0382]: use of moved value: `value`
-  --> $DIR/issue-72649-uninit-in-loop.rs:29:22
-   |
-LL |         let value = NonCopy{};
-   |             ----- move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
-LL |
-LL |         let _used = value;
-   |                     ----- value moved here
-...
-LL |         let _used2 = value;
-   |                      ^^^^^ value used here after move
-   |
+error E0382: use of moved value: `value`
+ at $DIR/issue-72649-uninit-in-loop.rs:29:22: value used here after move
+  on line 24, column 13: move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
+  on line 26, column 21: value moved here
 note: if `NonCopy` implemented `Clone`, you could clone the value
-  --> $DIR/issue-72649-uninit-in-loop.rs:5:1
-   |
-LL | struct NonCopy;
-   | ^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let _used = value;
-   |                     ----- you could clone this value
+ at $DIR/issue-72649-uninit-in-loop.rs:5:1: consider implementing `Clone` for this type
+  on line 26, column 21: you could clone this value
 
-error[E0382]: use of moved value: `value`
-  --> $DIR/issue-72649-uninit-in-loop.rs:42:26
-   |
-LL |     let value = NonCopy{};
-   |         ----- move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
-LL |
-LL |     loop {
-   |     ---- inside of this loop
-LL |         let _used = value;
-   |                     ----- value moved here
-...
-LL |             let _used2 = value;
-   |                          ^^^^^ value used here after move
-   |
+error E0382: use of moved value: `value`
+ at $DIR/issue-72649-uninit-in-loop.rs:42:26: value used here after move
+  on line 35, column 9: move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
+  on line 37: inside of this loop
+  on line 38, column 21: value moved here
 note: if `NonCopy` implemented `Clone`, you could clone the value
-  --> $DIR/issue-72649-uninit-in-loop.rs:5:1
-   |
-LL | struct NonCopy;
-   | ^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let _used = value;
-   |                     ----- you could clone this value
+ at $DIR/issue-72649-uninit-in-loop.rs:5:1: consider implementing `Clone` for this type
+  on line 38, column 21: you could clone this value
 
-error[E0382]: use of moved value: `value`
-  --> $DIR/issue-72649-uninit-in-loop.rs:52:21
-   |
-LL |     let value = NonCopy{};
-   |         ----- move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
-LL |
-LL |     loop {
-   |     ---- inside of this loop
-LL |         let _used = value;
-   |                     ^^^^^ value moved here, in previous iteration of loop
-   |
+error E0382: use of moved value: `value`
+ at $DIR/issue-72649-uninit-in-loop.rs:52:21: value moved here, in previous iteration of loop
+  on line 49, column 9: move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
+  on line 51: inside of this loop
 note: if `NonCopy` implemented `Clone`, you could clone the value
-  --> $DIR/issue-72649-uninit-in-loop.rs:5:1
-   |
-LL | struct NonCopy;
-   | ^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let _used = value;
-   |                     ----- you could clone this value
+ at $DIR/issue-72649-uninit-in-loop.rs:5:1: consider implementing `Clone` for this type
+  on line 52, column 21: you could clone this value
 
-error[E0382]: use of moved value: `value`
-  --> $DIR/issue-72649-uninit-in-loop.rs:64:22
-   |
-LL |     let mut value = NonCopy{};
-   |         --------- move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
-...
-LL |     loop {
-   |     ---- inside of this loop
-LL |         let _used2 = value;
-   |                      ^^^^^ value moved here, in previous iteration of loop
-   |
+error E0382: use of moved value: `value`
+ at $DIR/issue-72649-uninit-in-loop.rs:64:22: value moved here, in previous iteration of loop
+  on line 59, column 9: move occurs because `value` has type `NonCopy`, which does not implement the `Copy` trait
+  on line 63: inside of this loop
 note: if `NonCopy` implemented `Clone`, you could clone the value
-  --> $DIR/issue-72649-uninit-in-loop.rs:5:1
-   |
-LL | struct NonCopy;
-   | ^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let _used2 = value;
-   |                      ----- you could clone this value
+ at $DIR/issue-72649-uninit-in-loop.rs:5:1: consider implementing `Clone` for this type
+  on line 64, column 22: you could clone this value
 
-error[E0381]: used binding `value` isn't initialized
-  --> $DIR/issue-72649-uninit-in-loop.rs:74:21
-   |
-LL |         let value: NonCopy;
-   |             ----- binding declared here but left uninitialized
-LL |
-LL |         let _used = value;
-   |                     ^^^^^ `value` used here but it isn't initialized
-   |
+error E0381: used binding `value` isn't initialized
+ at $DIR/issue-72649-uninit-in-loop.rs:74:21: `value` used here but it isn't initialized
+  on line 72, column 13: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |         let value: NonCopy = /* value */;
-   |                            +++++++++++++
+ on line 72, column 26, add ` = /* value */`
 
-error[E0381]: used binding `value` isn't initialized
-  --> $DIR/issue-72649-uninit-in-loop.rs:83:21
-   |
-LL |     let mut value: NonCopy;
-   |         --------- binding declared here but left uninitialized
-...
-LL |         let _used = value;
-   |                     ^^^^^ `value` used here but it isn't initialized
-   |
+error E0381: used binding `value` isn't initialized
+ at $DIR/issue-72649-uninit-in-loop.rs:83:21: `value` used here but it isn't initialized
+  on line 80, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let mut value: NonCopy = /* value */;
-   |                            +++++++++++++
+ on line 80, column 26, add ` = /* value */`
 
 error: aborting due to 6 previous errors
 

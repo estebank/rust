@@ -1,36 +1,19 @@
-error[E0080]: index out of bounds: the length is 1 but the index is 1
-  --> $DIR/issue-44578.rs:14:24
-   |
-LL |     const AMT: usize = [A::AMT][(A::AMT > B::AMT) as usize];
-   |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ evaluation of `<Bar<u16, u8> as Foo>::AMT` failed here
+error E0080: index out of bounds: the length is 1 but the index is 1
+ at $DIR/issue-44578.rs:14:24: evaluation of `<Bar<u16, u8> as Foo>::AMT` failed here
 
 note: erroneous constant encountered
-  --> $DIR/issue-44578.rs:26:20
-   |
-LL |     println!("{}", <Bar<u16, u8> as Foo>::AMT);
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-44578.rs:26:20
 
 note: erroneous constant encountered
-  --> $DIR/issue-44578.rs:26:20
-   |
-LL |     println!("{}", <Bar<u16, u8> as Foo>::AMT);
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/issue-44578.rs:26:20
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 note: erroneous constant encountered
-  --> $DIR/issue-44578.rs:26:20
-   |
-LL |     println!("{}", <Bar<u16, u8> as Foo>::AMT);
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-44578.rs:26:20
 
 note: erroneous constant encountered
-  --> $DIR/issue-44578.rs:26:20
-   |
-LL |     println!("{}", <Bar<u16, u8> as Foo>::AMT);
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/issue-44578.rs:26:20
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: aborting due to 1 previous error
 

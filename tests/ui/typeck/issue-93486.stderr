@@ -1,15 +1,8 @@
-error[E0070]: invalid left-hand side of assignment
-  --> $DIR/issue-93486.rs:3:36
-   |
-LL |         vec![].last_mut().unwrap() = 3_u8;
-   |         -------------------------- ^
-   |         |
-   |         cannot assign to this expression
-   |
+error E0070: invalid left-hand side of assignment
+ at $DIR/issue-93486.rs:3:36
+  on line 3: cannot assign to this expression
 help: consider dereferencing here to assign to the mutably borrowed value
-   |
-LL |         *vec![].last_mut().unwrap() = 3_u8;
-   |         +
+ on line 3, column 8, add `*`
 
 error: aborting due to 1 previous error
 

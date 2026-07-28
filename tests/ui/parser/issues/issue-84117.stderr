@@ -1,78 +1,38 @@
 error: expected one of `>`, a const expression, lifetime, or type, found `}`
-  --> $DIR/issue-84117.rs:2:67
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-   |                                                    -              ^ expected one of `>`, a const expression, lifetime, or type
-   |                                                    |
-   |                                                    while parsing the type for `inner_local`
-   |
+ at $DIR/issue-84117.rs:2:67: expected one of `>`, a const expression, lifetime, or type
+  on line 2, column 52: while parsing the type for `inner_local`
 help: you might have meant to end the type parameters here
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str>, }
-   |                                                                 +
+ on line 2, column 64, add `>`
 help: use `=` if you meant to assign
-   |
-LL -     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-LL +     let outer_local:e_outer<&str, { let inner_local =e_inner<&str, }
-   |
+ on line 2, column 51, replace with ` =`
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `else`, `{`, or an operator, found `,`
-  --> $DIR/issue-84117.rs:2:65
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-   |                                                                 ^ expected one of 8 possible tokens
+ at $DIR/issue-84117.rs:2:65: expected one of 8 possible tokens
 
 error: expected one of `,` or `>`, found `}`
-  --> $DIR/issue-84117.rs:8:1
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-   |                    - while parsing the type for `outer_local`      - expected one of `,` or `>`
-...
-LL | }
-   | ^ unexpected token
-   |
+ at $DIR/issue-84117.rs:8:1: unexpected token
+  on line 2, column 20: while parsing the type for `outer_local`
+  on line 2, column 68: expected one of `,` or `>`
 help: you might have meant to end the type parameters here
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }>
-   |                                                                    +
+ on line 2, column 67, add `>`
 help: use `=` if you meant to assign
-   |
-LL -     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-LL +     let outer_local =e_outer<&str, { let inner_local:e_inner<&str, }
-   |
+ on line 2, column 19, replace with ` =`
 
 error: expected one of `>`, a const expression, lifetime, or type, found `}`
-  --> $DIR/issue-84117.rs:2:67
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-   |                                                    -              ^ expected one of `>`, a const expression, lifetime, or type
-   |                                                    |
-   |                                                    while parsing the type for `inner_local`
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/issue-84117.rs:2:67: expected one of `>`, a const expression, lifetime, or type
+  on line 2, column 52: while parsing the type for `inner_local`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: you might have meant to end the type parameters here
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str>, }
-   |                                                                 +
+ on line 2, column 64, add `>`
 help: use `=` if you meant to assign
-   |
-LL -     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-LL +     let outer_local:e_outer<&str, { let inner_local =e_inner<&str, }
-   |
+ on line 2, column 51, replace with ` =`
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `else`, `{`, or an operator, found `,`
-  --> $DIR/issue-84117.rs:2:65
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-   |                                                                 ^ expected one of 8 possible tokens
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/issue-84117.rs:2:65: expected one of 8 possible tokens
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `else`, `{`, or an operator, found `,`
-  --> $DIR/issue-84117.rs:2:33
-   |
-LL |     let outer_local:e_outer<&str, { let inner_local:e_inner<&str, }
-   |                                 ^ expected one of 8 possible tokens
+ at $DIR/issue-84117.rs:2:33: expected one of 8 possible tokens
 
 error: aborting due to 6 previous errors
 

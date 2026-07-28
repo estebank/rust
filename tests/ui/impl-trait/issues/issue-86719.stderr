@@ -1,28 +1,13 @@
 error: at least one trait must be specified
-  --> $DIR/issue-86719.rs:7:14
-   |
-LL |     type E = impl ;
-   |              ^^^^
+ at $DIR/issue-86719.rs:7:14
 
-error[E0407]: method `foo` is not a member of trait `Bar`
-  --> $DIR/issue-86719.rs:8:5
-   |
-LL | /     fn foo() -> Self::E {
-LL | |
-LL | |         |_| true
-LL | |     }
-   | |_____^ not a member of trait `Bar`
+error E0407: method `foo` is not a member of trait `Bar`
+ at $DIR/issue-86719.rs:8:5 to 11:6: not a member of trait `Bar`
 
-error[E0282]: type annotations needed
-  --> $DIR/issue-86719.rs:10:10
-   |
-LL |         |_| true
-   |          ^
-   |
+error E0282: type annotations needed
+ at $DIR/issue-86719.rs:10:10
 help: consider giving this closure parameter an explicit type
-   |
-LL |         |_: /* Type */| true
-   |           ++++++++++++
+ on line 10, column 10, add `: /* Type */`
 
 error: aborting due to 3 previous errors
 

@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `DecoderError` in this scope
-  --> $DIR/impl-trait-for-undeclared-type.rs:6:23
-   |
-LL | impl fmt::Display for DecoderError {
-   |                       ^^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `DecoderError` in this scope
+ at $DIR/impl-trait-for-undeclared-type.rs:6:23: not found in this scope
 
 error: aborting due to 1 previous error
 

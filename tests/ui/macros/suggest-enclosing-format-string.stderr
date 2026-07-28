@@ -1,72 +1,33 @@
 error: format argument must be a string literal
-  --> $DIR/suggest-enclosing-format-string.rs:11:14
-   |
-LL |     println!({}, UwU::QwQ);
-   |              ^^
-   |
+ at $DIR/suggest-enclosing-format-string.rs:11:14
 help: you might be missing a string literal to format with
-   |
-LL |     println!("{:?} {}", {}, UwU::QwQ);
-   |              ++++++++++
+ on line 11, column 13, add `"{:?} {}", `
 help: you might want to enclose `{}` with `""`
-   |
-LL -     println!({}, UwU::QwQ);
-LL +     println!("{}", UwU::QwQ);
-   |
+ on line 11, column 13, replace with `"{}"`
 
 error: expected expression, found `:`
-  --> $DIR/suggest-enclosing-format-string.rs:15:15
-   |
-LL |     println!({:?}, UwU::QwQ);
-   |               ^ expected expression
-   |
+ at $DIR/suggest-enclosing-format-string.rs:15:15: expected expression
 help: maybe write a path separator here
-   |
-LL |     println!({::?}, UwU::QwQ);
-   |                +
+ on line 15, column 14, replace with `::`
 
 error: format argument must be a string literal
-  --> $DIR/suggest-enclosing-format-string.rs:15:14
-   |
-LL |     println!({:?}, UwU::QwQ);
-   |              ^^^^
-   |
+ at $DIR/suggest-enclosing-format-string.rs:15:14
 help: you might be missing a string literal to format with
-   |
-LL |     println!("{} {}", {:?}, UwU::QwQ);
-   |              ++++++++
+ on line 15, column 13, add `"{} {}", `
 help: you might want to enclose `{:?}` with `""`
-   |
-LL -     println!({:?}, UwU::QwQ);
-LL +     println!("{:?}", UwU::QwQ);
-   |
+ on line 15, column 13, replace with `"{:?}"`
 
 error: expected expression, found `:`
-  --> $DIR/suggest-enclosing-format-string.rs:21:15
-   |
-LL |     println!({:#?}, UwU::QwQ);
-   |               ^ expected expression
-   |
+ at $DIR/suggest-enclosing-format-string.rs:21:15: expected expression
 help: maybe write a path separator here
-   |
-LL |     println!({::#?}, UwU::QwQ);
-   |                +
+ on line 21, column 14, replace with `::`
 
 error: format argument must be a string literal
-  --> $DIR/suggest-enclosing-format-string.rs:21:14
-   |
-LL |     println!({:#?}, UwU::QwQ);
-   |              ^^^^^
-   |
+ at $DIR/suggest-enclosing-format-string.rs:21:14
 help: you might be missing a string literal to format with
-   |
-LL |     println!("{} {}", {:#?}, UwU::QwQ);
-   |              ++++++++
+ on line 21, column 13, add `"{} {}", `
 help: you might want to enclose `{:#?}` with `""`
-   |
-LL -     println!({:#?}, UwU::QwQ);
-LL +     println!("{:#?}", UwU::QwQ);
-   |
+ on line 21, column 13, replace with `"{:#?}"`
 
 error: aborting due to 5 previous errors
 

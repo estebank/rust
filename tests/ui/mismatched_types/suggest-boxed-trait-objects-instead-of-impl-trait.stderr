@@ -1,48 +1,20 @@
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/suggest-boxed-trait-objects-instead-of-impl-trait.rs:17:9
-   |
-LL | /     if true {
-LL | |         S
-   | |         - expected because of this
-LL | |     } else {
-LL | |         Y
-   | |         ^ expected `S`, found `Y`
-LL | |     }
-   | |_____- `if` and `else` have incompatible types
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/suggest-boxed-trait-objects-instead-of-impl-trait.rs:17:9: expected `S`, found `Y`
+  on line 14 to line 18: `if` and `else` have incompatible types
+  on line 15: expected because of this
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn foo() -> impl Trait {
-LL + fn foo() -> Box<dyn Trait> {
-   |
+ on line 13, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         Box::new(S)
-LL |     } else {
-LL ~         Box::new(Y)
-   |
+ on line 15, column 8, add `Box::new(`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/suggest-boxed-trait-objects-instead-of-impl-trait.rs:24:18
-   |
-LL | /     match true {
-LL | |         true => S,
-   | |                 - this is found to be of type `S`
-LL | |         false => Y,
-   | |                  ^ expected `S`, found `Y`
-LL | |     }
-   | |_____- `match` arms have incompatible types
-   |
+error E0308: `match` arms have incompatible types
+ at $DIR/suggest-boxed-trait-objects-instead-of-impl-trait.rs:24:18: expected `S`, found `Y`
+  on line 22 to line 25: `match` arms have incompatible types
+  on line 23, column 17: this is found to be of type `S`
 help: you could change the return type to be a boxed trait object
-   |
-LL - fn bar() -> impl Trait {
-LL + fn bar() -> Box<dyn Trait> {
-   |
+ on line 21, column 12, replace with `Box<dyn`
 help: if you change the return type to expect trait objects, box the returned expressions
-   |
-LL ~         true => Box::new(S),
-LL ~         false => Box::new(Y),
-   |
+ on line 23, column 16, add `Box::new(`
 
 error: aborting due to 2 previous errors
 

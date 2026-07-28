@@ -1,17 +1,8 @@
-error[E0790]: cannot call associated function on trait without specifying the corresponding `impl` type
-  --> $DIR/issue-101866.rs:12:5
-   |
-LL |     fn func();
-   |     ---------- `TraitA::func` defined here
-...
-LL |     TraitA::<i32>::func();
-   |     ^^^^^^^^^^^^^^^^^^^^^ cannot call associated function of trait
-   |
+error E0790: cannot call associated function on trait without specifying the corresponding `impl` type
+ at $DIR/issue-101866.rs:12:5: cannot call associated function of trait
+  on line 2: `TraitA::func` defined here
 help: use the fully-qualified path to the only available implementation
-   |
-LL -     TraitA::<i32>::func();
-LL +     <StructA as TraitA<i32>>::func();
-   |
+ on line 12, column 4, add `<StructA as `
 
 error: aborting due to 1 previous error
 

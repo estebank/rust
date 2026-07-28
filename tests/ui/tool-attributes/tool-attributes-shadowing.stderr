@@ -1,8 +1,5 @@
-error[E0433]: cannot find `skip` in `rustfmt`
-  --> $DIR/tool-attributes-shadowing.rs:3:12
-   |
-LL | #[rustfmt::skip]
-   |            ^^^^ could not find `skip` in `rustfmt`
+error E0433: cannot find `skip` in `rustfmt`
+ at $DIR/tool-attributes-shadowing.rs:3:12: could not find `skip` in `rustfmt`
 
 error: aborting due to 1 previous error
 

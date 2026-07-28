@@ -1,19 +1,9 @@
-error[E0597]: `d1` does not live long enough
-  --> $DIR/issue-24805-dropck-child-has-items-via-parent.rs:28:18
-   |
-LL |     let (_d, d1);
-   |              -- binding `d1` declared here
-...
-LL |     _d = D_Child(&d1);
-   |                  ^^^ borrowed value does not live long enough
-...
-LL | }
-   | -
-   | |
-   | `d1` dropped here while still borrowed
-   | borrow might be used here, when `_d` is dropped and runs the `Drop` code for type `D_Child`
-   |
-   = note: values in a scope are dropped in the opposite order they are defined
+error E0597: `d1` does not live long enough
+ at $DIR/issue-24805-dropck-child-has-items-via-parent.rs:28:18: borrowed value does not live long enough
+  on line 24, column 14: binding `d1` declared here
+  on line 33: `d1` dropped here while still borrowed
+  on line 33: borrow might be used here, when `_d` is dropped and runs the `Drop` code for type `D_Child`
+note: values in a scope are dropped in the opposite order they are defined
 
 error: aborting due to 1 previous error
 

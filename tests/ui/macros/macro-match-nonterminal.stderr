@@ -1,43 +1,22 @@
 error: missing fragment specifier
-  --> $DIR/macro-match-nonterminal.rs:2:6
-   |
-LL |     ($a, $b) => {
-   |      ^^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/macro-match-nonterminal.rs:2:6
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: try adding a specifier here
-   |
-LL |     ($a:spec, $b) => {
-   |        +++++
+ on line 2, column 7, add `:spec`
 
 error: missing fragment specifier
-  --> $DIR/macro-match-nonterminal.rs:2:10
-   |
-LL |     ($a, $b) => {
-   |          ^^
-   |
-   = note: fragment specifiers must be provided
-   = help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
+ at $DIR/macro-match-nonterminal.rs:2:10
+note: fragment specifiers must be provided
+help: valid fragment specifiers are `ident`, `block`, `stmt`, `expr`, `pat`, `ty`, `lifetime`, `literal`, `path`, `meta`, `tt`, `item` and `vis`, along with `expr_2021` and `pat_param` for edition compatibility
 help: try adding a specifier here
-   |
-LL |     ($a, $b:spec) => {
-   |            +++++
+ on line 2, column 11, add `:spec`
 
 error: unexpected end of macro invocation
-  --> $DIR/macro-match-nonterminal.rs:10:5
-   |
-LL | macro_rules! test {
-   | ----------------- when calling this macro
-...
-LL |     test!()
-   |     ^^^^^^^ missing tokens in macro arguments
-   |
+ at $DIR/macro-match-nonterminal.rs:10:5: missing tokens in macro arguments
+  on line 1: when calling this macro
 note: while trying to match meta-variable `$a:tt`
-  --> $DIR/macro-match-nonterminal.rs:2:6
-   |
-LL |     ($a, $b) => {
-   |      ^^
+ at $DIR/macro-match-nonterminal.rs:2:6
 
 error: aborting due to 3 previous errors
 

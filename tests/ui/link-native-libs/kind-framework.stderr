@@ -1,8 +1,5 @@
-error[E0455]: link kind `framework` is only supported on Apple targets
-  --> $DIR/kind-framework.rs:3:29
-   |
-LL | #[link(name = "foo", kind = "framework")]
-   |                             ^^^^^^^^^^^
+error E0455: link kind `framework` is only supported on Apple targets
+ at $DIR/kind-framework.rs:3:29
 
 error: aborting due to 1 previous error
 

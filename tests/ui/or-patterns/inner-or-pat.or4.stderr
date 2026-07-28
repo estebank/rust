@@ -1,10 +1,6 @@
-error[E0408]: variable `x` is not bound in all patterns
-  --> $DIR/inner-or-pat.rs:51:37
-   |
-LL |         (x @ "red" | (x @ "blue" |  "red")) => {
-   |                       -             ^^^^^ pattern doesn't bind `x`
-   |                       |
-   |                       variable not in all patterns
+error E0408: variable `x` is not bound in all patterns
+ at $DIR/inner-or-pat.rs:51:37: pattern doesn't bind `x`
+  on line 51, column 23: variable not in all patterns
 
 error: aborting due to 1 previous error
 

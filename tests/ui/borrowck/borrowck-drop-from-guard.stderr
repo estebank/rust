@@ -1,36 +1,16 @@
-error[E0382]: use of moved value: `my_str`
-  --> $DIR/borrowck-drop-from-guard.rs:9:23
-   |
-LL |     let my_str = "hello".to_owned();
-   |         ------ move occurs because `my_str` has type `String`, which does not implement the `Copy` trait
-LL |     match Some(42) {
-LL |         Some(_) if { drop(my_str); false } => {}
-   |                           ------ value moved here
-LL |         Some(_) => {}
-LL |         None => { foo(my_str); }
-   |                       ^^^^^^ value used here after move
-   |
+error E0382: use of moved value: `my_str`
+ at $DIR/borrowck-drop-from-guard.rs:9:23: value used here after move
+  on line 5, column 9: move occurs because `my_str` has type `String`, which does not implement the `Copy` trait
+  on line 7, column 27: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         Some(_) if { drop(my_str.clone()); false } => {}
-   |                                 ++++++++
+ on line 7, column 32, add `.clone()`
 
-error[E0382]: use of moved value: `my_str`
-  --> $DIR/borrowck-drop-from-guard.rs:16:23
-   |
-LL |     let my_str = "hello".to_owned();
-   |         ------ move occurs because `my_str` has type `String`, which does not implement the `Copy` trait
-LL |     match Some(42) {
-LL |         Some(_) if let Some(()) = { drop(my_str); None } => {}
-   |                                          ------ value moved here
-LL |         Some(_) => {}
-LL |         None => { foo(my_str); }
-   |                       ^^^^^^ value used here after move
-   |
+error E0382: use of moved value: `my_str`
+ at $DIR/borrowck-drop-from-guard.rs:16:23: value used here after move
+  on line 12, column 9: move occurs because `my_str` has type `String`, which does not implement the `Copy` trait
+  on line 14, column 42: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         Some(_) if let Some(()) = { drop(my_str.clone()); None } => {}
-   |                                                ++++++++
+ on line 14, column 47, add `.clone()`
 
 error: aborting due to 2 previous errors
 

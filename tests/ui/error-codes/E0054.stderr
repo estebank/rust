@@ -1,14 +1,7 @@
-error[E0054]: cannot cast `i32` as `bool`
-  --> $DIR/E0054.rs:3:24
-   |
-LL |     let x_is_nonzero = x as bool;
-   |                        ^^^^^^^^^
-   |
+error E0054: cannot cast `i32` as `bool`
+ at $DIR/E0054.rs:3:24
 help: compare with zero instead
-   |
-LL -     let x_is_nonzero = x as bool;
-LL +     let x_is_nonzero = x != 0;
-   |
+ on line 3, column 24, replace with ` != 0`
 
 error: aborting due to 1 previous error
 

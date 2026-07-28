@@ -1,40 +1,20 @@
-error[E0107]: enum takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-75883.rs:6:21
-   |
-LL |     pub fn run() -> Result<_> {
-   |                     ^^^^^^ - supplied 1 generic argument
-   |                     |
-   |                     expected 2 generic arguments
-   |
+error E0107: enum takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-75883.rs:6:21: expected 2 generic arguments
+  on line 6, column 28: supplied 1 generic argument
 help: add missing generic argument
-   |
-LL |     pub fn run() -> Result<_, E> {
-   |                             +++
+ on line 6, column 28, add `, E`
 
-error[E0107]: enum takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-75883.rs:15:35
-   |
-LL |     pub fn interact(&mut self) -> Result<_> {
-   |                                   ^^^^^^ - supplied 1 generic argument
-   |                                   |
-   |                                   expected 2 generic arguments
-   |
+error E0107: enum takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-75883.rs:15:35: expected 2 generic arguments
+  on line 15, column 42: supplied 1 generic argument
 help: add missing generic argument
-   |
-LL |     pub fn interact(&mut self) -> Result<_, E> {
-   |                                           +++
+ on line 15, column 42, add `, E`
 
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/issue-75883.rs:15:42
-   |
-LL |     pub fn interact(&mut self) -> Result<_> {
-   |                                          ^ not allowed in type signatures
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/issue-75883.rs:15:42: not allowed in type signatures
 
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/issue-75883.rs:6:28
-   |
-LL |     pub fn run() -> Result<_> {
-   |                            ^ not allowed in type signatures
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/issue-75883.rs:6:28: not allowed in type signatures
 
 error: aborting due to 4 previous errors
 

@@ -1,13 +1,7 @@
-error[E0620]: cast to unsized type: `&[usize; 2]` as `[usize]`
-  --> $DIR/E0620.rs:2:16
-   |
-LL |     let _foo = &[1_usize, 2] as [usize];
-   |                ^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+error E0620: cast to unsized type: `&[usize; 2]` as `[usize]`
+ at $DIR/E0620.rs:2:16
 help: consider casting to a reference instead
-   |
-LL |     let _foo = &[1_usize, 2] as &[usize];
-   |                                 +
+ on line 2, column 32, add `&`
 
 error: aborting due to 1 previous error
 

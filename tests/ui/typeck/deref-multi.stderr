@@ -1,73 +1,36 @@
-error[E0308]: mismatched types
-  --> $DIR/deref-multi.rs:2:5
-   |
-LL | fn a(x: &&i32) -> i32 {
-   |                   --- expected `i32` because of return type
-LL |     x
-   |     ^ expected `i32`, found `&&i32`
-   |
+error E0308: mismatched types
+ at $DIR/deref-multi.rs:2:5: expected `i32`, found `&&i32`
+  on line 1, column 19: expected `i32` because of return type
 help: consider dereferencing the borrow
-   |
-LL |     **x
-   |     ++
+ on line 2, column 4, add `**`
 
-error[E0308]: mismatched types
-  --> $DIR/deref-multi.rs:7:5
-   |
-LL | fn a2(x: &&&&&i32) -> i32 {
-   |                       --- expected `i32` because of return type
-LL |     x
-   |     ^ expected `i32`, found `&&&&&i32`
-   |
+error E0308: mismatched types
+ at $DIR/deref-multi.rs:7:5: expected `i32`, found `&&&&&i32`
+  on line 6, column 23: expected `i32` because of return type
 help: consider dereferencing the borrow
-   |
-LL |     *****x
-   |     +++++
+ on line 7, column 4, add `*****`
 
-error[E0308]: mismatched types
-  --> $DIR/deref-multi.rs:12:5
-   |
-LL | fn b(x: &i32) -> i32 {
-   |                  --- expected `i32` because of return type
-LL |     &x
-   |     ^^ expected `i32`, found `&&i32`
-   |
+error E0308: mismatched types
+ at $DIR/deref-multi.rs:12:5: expected `i32`, found `&&i32`
+  on line 11, column 18: expected `i32` because of return type
 help: consider removing the `&` and dereferencing the borrow instead
-   |
-LL -     &x
-LL +     *x
-   |
+ on line 12, column 4, replace with `*`
 
-error[E0308]: mismatched types
-  --> $DIR/deref-multi.rs:17:5
-   |
-LL | fn c(x: Box<i32>) -> i32 {
-   |                      --- expected `i32` because of return type
-LL |     &x
-   |     ^^ expected `i32`, found `&Box<i32>`
-   |
-   = note:   expected type `i32`
-           found reference `&Box<i32>`
+error E0308: mismatched types
+ at $DIR/deref-multi.rs:17:5: expected `i32`, found `&Box<i32>`
+  on line 16, column 22: expected `i32` because of return type
+note:   expected type `i32`
+      found reference `&Box<i32>`
 help: consider removing the `&` and dereferencing the borrow instead
-   |
-LL -     &x
-LL +     *x
-   |
+ on line 17, column 4, replace with `*`
 
-error[E0308]: mismatched types
-  --> $DIR/deref-multi.rs:22:5
-   |
-LL | fn d(x: std::sync::Mutex<&i32>) -> i32 {
-   |                                    --- expected `i32` because of return type
-LL |     x.lock().unwrap()
-   |     ^^^^^^^^^^^^^^^^^ expected `i32`, found `MutexGuard<'_, &i32>`
-   |
-   = note: expected type `i32`
-            found struct `std::sync::MutexGuard<'_, &i32>`
+error E0308: mismatched types
+ at $DIR/deref-multi.rs:22:5: expected `i32`, found `MutexGuard<'_, &i32>`
+  on line 21, column 36: expected `i32` because of return type
+note: expected type `i32`
+       found struct `std::sync::MutexGuard<'_, &i32>`
 help: consider dereferencing the type
-   |
-LL |     **x.lock().unwrap()
-   |     ++
+ on line 22, column 4, add `**`
 
 error: aborting due to 5 previous errors
 

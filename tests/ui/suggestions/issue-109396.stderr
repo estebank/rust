@@ -1,39 +1,17 @@
-error[E0423]: cannot find value `file` in this scope
-  --> $DIR/issue-109396.rs:5:13
-   |
-LL |             file.as_raw_fd(),
-   |             ^^^^ not found in this scope
-   |
-   = note: a macro named `file` exists in another namespace
+error E0423: cannot find value `file` in this scope
+ at $DIR/issue-109396.rs:5:13: not found in this scope
+note: a macro named `file` exists in another namespace
 
-error[E0061]: this function takes 0 arguments but 4 arguments were supplied
-  --> $DIR/issue-109396.rs:3:25
-   |
-LL |         let mut mutex = std::mem::zeroed(
-   |                         ^^^^^^^^^^^^^^^^
-LL |
-LL |             file.as_raw_fd(),
-   |             ---------------- unexpected argument #1
-LL |
-LL |             0,
-   |             - unexpected argument #2 of type `{integer}`
-LL |             0,
-   |             - unexpected argument #3 of type `{integer}`
-LL |             0,
-   |             - unexpected argument #4 of type `{integer}`
-   |
+error E0061: this function takes 0 arguments but 4 arguments were supplied
+ at $DIR/issue-109396.rs:3:25
+  on line 5: unexpected argument #1
+  on line 7: unexpected argument #2 of type `{integer}`
+  on line 8: unexpected argument #3 of type `{integer}`
+  on line 9: unexpected argument #4 of type `{integer}`
 note: function defined here
-  --> $SRC_DIR/core/src/mem/mod.rs:LL:COL
+ at $SRC_DIR/core/src/mem/mod.rs:LL:COL
 help: remove the extra arguments
-   |
-LL -             file.as_raw_fd(),
-LL -
-LL -             0,
-LL -             0,
-LL -             0,
-LL -         );
-LL +             );
-   |
+ on line 5, column 12
 
 error: aborting due to 2 previous errors
 

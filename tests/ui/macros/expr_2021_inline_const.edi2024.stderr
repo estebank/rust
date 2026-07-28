@@ -1,17 +1,8 @@
 error: no rules expected keyword `const`
-  --> $DIR/expr_2021_inline_const.rs:24:12
-   |
-LL | macro_rules! m2021 {
-   | ------------------ when calling this macro
-...
-LL |     m2021!(const { 1 });
-   |            ^^^^^ no rules expected this token in macro call
-   |
+ at $DIR/expr_2021_inline_const.rs:24:12: no rules expected this token in macro call
+  on line 7: when calling this macro
 note: while trying to match meta-variable `$e:expr_2021`
-  --> $DIR/expr_2021_inline_const.rs:8:6
-   |
-LL |     ($e:expr_2021) => {
-   |      ^^^^^^^^^^^^
+ at $DIR/expr_2021_inline_const.rs:8:6
 
 error: aborting due to 1 previous error
 

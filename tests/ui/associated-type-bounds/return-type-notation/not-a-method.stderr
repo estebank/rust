@@ -1,40 +1,21 @@
-error[E0575]: expected function, found function `function`
-  --> $DIR/not-a-method.rs:7:5
-   |
-LL |     function(..): Send,
-   |     ^^^^^^^^^^^^ not a function
+error E0575: expected function, found function `function`
+ at $DIR/not-a-method.rs:7:5: not a function
 
-error[E0573]: cannot find type `function` in this scope
-  --> $DIR/not-a-method.rs:15:5
-   |
-LL |     function(): Send,
-   |     ^^^^^^^^ not found in this scope
-   |
-   = note: a function named `function` exists in another namespace
+error E0573: cannot find type `function` in this scope
+ at $DIR/not-a-method.rs:15:5: not found in this scope
+note: a function named `function` exists in another namespace
 
-error[E0576]: cannot find function `method` in this scope
-  --> $DIR/not-a-method.rs:27:5
-   |
-LL |     method(..): Send,
-   |     ^^^^^^ not found in this scope
+error E0576: cannot find function `method` in this scope
+ at $DIR/not-a-method.rs:27:5: not found in this scope
 
-error[E0425]: cannot find type `method` in this scope
-  --> $DIR/not-a-method.rs:36:5
-   |
-LL |     method(): Send,
-   |     ^^^^^^ not found in this scope
+error E0425: cannot find type `method` in this scope
+ at $DIR/not-a-method.rs:36:5: not found in this scope
 
 error: return type notation not allowed in this position yet
-  --> $DIR/not-a-method.rs:7:5
-   |
-LL |     function(..): Send,
-   |     ^^^^^^^^^^^^
+ at $DIR/not-a-method.rs:7:5
 
 error: return type notation not allowed in this position yet
-  --> $DIR/not-a-method.rs:27:5
-   |
-LL |     method(..): Send,
-   |     ^^^^^^^^^^
+ at $DIR/not-a-method.rs:27:5
 
 error: aborting due to 6 previous errors
 

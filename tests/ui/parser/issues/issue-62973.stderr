@@ -1,29 +1,15 @@
 error: mismatched closing delimiter: `)`
-  --> $DIR/issue-62973.rs:8:27
-   |
-LL | fn p() { match s { v, E { [) {) }
-   |                           ^^ mismatched closing delimiter
-   |                           |
-   |                           unclosed delimiter
+ at $DIR/issue-62973.rs:8:27: unclosed delimiter
+  on line 8, column 28: mismatched closing delimiter
 
 error: mismatched closing delimiter: `)`
-  --> $DIR/issue-62973.rs:8:30
-   |
-LL | fn p() { match s { v, E { [) {) }
-   |                              ^^ mismatched closing delimiter
-   |                              |
-   |                              unclosed delimiter
+ at $DIR/issue-62973.rs:8:30: unclosed delimiter
+  on line 8, column 31: mismatched closing delimiter
 
 error: this file contains an unclosed delimiter
-  --> $DIR/issue-62973.rs:10:2
-   |
-LL | fn p() { match s { v, E { [) {) }
-   |        -         - unclosed delimiter
-   |        |
-   |        unclosed delimiter
-LL |
-LL |
-   | ^
+ at $DIR/issue-62973.rs:10:2
+  on line 8, column 8: unclosed delimiter
+  on line 8, column 18: unclosed delimiter
 
 error: aborting due to 3 previous errors
 

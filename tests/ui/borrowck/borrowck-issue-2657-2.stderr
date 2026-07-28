@@ -1,19 +1,9 @@
-error[E0507]: cannot move out of `*y` which is behind a shared reference
-  --> $DIR/borrowck-issue-2657-2.rs:8:18
-   |
-LL |         let _b = *y;
-   |                  ^^ move occurs because `*y` has type `Box<i32>`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of `*y` which is behind a shared reference
+ at $DIR/borrowck-issue-2657-2.rs:8:18: move occurs because `*y` has type `Box<i32>`, which does not implement the `Copy` trait
 help: consider removing the dereference here
-   |
-LL -         let _b = *y;
-LL +         let _b = y;
-   |
+ on line 8, column 17
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL -         let _b = *y;
-LL +         let _b = y.clone();
-   |
+ on line 8, column 17
 
 error: aborting due to 1 previous error
 

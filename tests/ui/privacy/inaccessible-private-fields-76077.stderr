@@ -1,24 +1,12 @@
 error: pattern requires `..` due to inaccessible fields
-  --> $DIR/inaccessible-private-fields-76077.rs:14:9
-   |
-LL |     let foo::Foo {} = foo::Foo::default();
-   |         ^^^^^^^^^^^
-   |
+ at $DIR/inaccessible-private-fields-76077.rs:14:9
 help: ignore the inaccessible and unused fields
-   |
-LL |     let foo::Foo { .. } = foo::Foo::default();
-   |                    ++
+ on line 14, column 16, replace with ` { .. }`
 
 error: pattern requires `..` due to inaccessible fields
-  --> $DIR/inaccessible-private-fields-76077.rs:17:9
-   |
-LL |     let foo::Bar { visible } = foo::Bar::default();
-   |         ^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/inaccessible-private-fields-76077.rs:17:9
 help: ignore the inaccessible and unused fields
-   |
-LL |     let foo::Bar { visible, .. } = foo::Bar::default();
-   |                           ++++
+ on line 17, column 26, add `, ..`
 
 error: aborting due to 2 previous errors
 

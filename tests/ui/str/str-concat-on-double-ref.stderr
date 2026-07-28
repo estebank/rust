@@ -1,17 +1,10 @@
-error[E0369]: cannot add `&str` to `&String`
-  --> $DIR/str-concat-on-double-ref.rs:4:15
-   |
-LL |     let c = a + b;
-   |             - ^ - &str
-   |             | |
-   |             | `+` cannot be used to concatenate two `&str` strings
-   |             &String
-   |
-   = note: string concatenation requires an owned `String` on the left
+error E0369: cannot add `&str` to `&String`
+ at $DIR/str-concat-on-double-ref.rs:4:15: `+` cannot be used to concatenate two `&str` strings
+  on line 4, column 13: &String
+  on line 4, column 17: &str
+note: string concatenation requires an owned `String` on the left
 help: create an owned `String` from a string reference
-   |
-LL |     let c = a.to_owned() + b;
-   |              +++++++++++
+ on line 4, column 13, add `.to_owned()`
 
 error: aborting due to 1 previous error
 

@@ -1,18 +1,11 @@
 error: `impl Trait` captures lifetime parameter, but it is not mentioned in `use<...>` precise captures list
-  --> $DIR/capture-parent-arg.rs:25:31
-   |
-LL | impl<'a> W<'a> {
-   |      -- this lifetime parameter is captured
-LL |     fn bad1() -> impl Into<<W<'a> as Tr>::Assoc> + use<> {}
-   |                  -------------^^------------------------ lifetime captured due to being mentioned in the bounds of the `impl Trait`
+ at $DIR/capture-parent-arg.rs:25:31
+  on line 24, column 6: this lifetime parameter is captured
+  on line 25, column 18: lifetime captured due to being mentioned in the bounds of the `impl Trait`
 
 error: `impl Trait` captures lifetime parameter, but it is not mentioned in `use<...>` precise captures list
-  --> $DIR/capture-parent-arg.rs:31:18
-   |
-LL | impl<'a> W<'a> {
-   |      -- this lifetime parameter is captured
-LL |     fn bad2() -> impl Into<<Self as Tr>::Assoc> + use<> {}
-   |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ lifetime captured due to being mentioned in the bounds of the `impl Trait`
+ at $DIR/capture-parent-arg.rs:31:18: lifetime captured due to being mentioned in the bounds of the `impl Trait`
+  on line 30, column 6: this lifetime parameter is captured
 
 error: aborting due to 2 previous errors
 

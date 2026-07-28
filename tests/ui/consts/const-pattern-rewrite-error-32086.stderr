@@ -1,32 +1,14 @@
-error[E0532]: expected tuple struct or tuple variant, found constant `C`
-  --> $DIR/const-pattern-rewrite-error-32086.rs:6:9
-   |
-LL | struct S(u8);
-   | ------------- similarly named tuple struct `S` defined here
-...
-LL |     let C(a) = S(11);
-   |         ^
-   |
+error E0532: expected tuple struct or tuple variant, found constant `C`
+ at $DIR/const-pattern-rewrite-error-32086.rs:6:9
+  on line 2: similarly named tuple struct `S` defined here
 help: a tuple struct with a similar name exists
-   |
-LL -     let C(a) = S(11);
-LL +     let S(a) = S(11);
-   |
+ on line 6, column 8, replace with `S`
 
-error[E0532]: expected tuple struct or tuple variant, found constant `C`
-  --> $DIR/const-pattern-rewrite-error-32086.rs:7:9
-   |
-LL | struct S(u8);
-   | ------------- similarly named tuple struct `S` defined here
-...
-LL |     let C(..) = S(11);
-   |         ^
-   |
+error E0532: expected tuple struct or tuple variant, found constant `C`
+ at $DIR/const-pattern-rewrite-error-32086.rs:7:9
+  on line 2: similarly named tuple struct `S` defined here
 help: a tuple struct with a similar name exists
-   |
-LL -     let C(..) = S(11);
-LL +     let S(..) = S(11);
-   |
+ on line 7, column 8, replace with `S`
 
 error: aborting due to 2 previous errors
 

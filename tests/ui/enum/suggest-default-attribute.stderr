@@ -1,14 +1,7 @@
 error: cannot find attribute `default` in this scope
-  --> $DIR/suggest-default-attribute.rs:2:7
-   |
-LL |     #[default]
-   |       ^^^^^^^
-   |
+ at $DIR/suggest-default-attribute.rs:2:7
 help: consider adding a derive
-   |
-LL + #[derive(Default)]
-LL | pub enum Test {
-   |
+ on line 1, column 1, add `#[derive(Default)]`
 
 error: aborting due to 1 previous error
 

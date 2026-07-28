@@ -1,24 +1,12 @@
-error[E0201]: duplicate definitions with name `Ty`:
-  --> $DIR/associated-item-duplicate-names.rs:11:5
-   |
-LL |     type Ty;
-   |     -------- item in trait
-...
-LL |     type Ty = ();
-   |     ------------- previous definition here
-LL |     type Ty = usize;
-   |     ^^^^^^^^^^^^^^^^ duplicate definition
+error E0201: duplicate definitions with name `Ty`:
+ at $DIR/associated-item-duplicate-names.rs:11:5: duplicate definition
+  on line 5: item in trait
+  on line 10: previous definition here
 
-error[E0201]: duplicate definitions with name `BAR`:
-  --> $DIR/associated-item-duplicate-names.rs:13:5
-   |
-LL |     const BAR: u32;
-   |     --------------- item in trait
-...
-LL |     const BAR: u32 = 7;
-   |     ------------------- previous definition here
-LL |     const BAR: u32 = 8;
-   |     ^^^^^^^^^^^^^^^^^^^ duplicate definition
+error E0201: duplicate definitions with name `BAR`:
+ at $DIR/associated-item-duplicate-names.rs:13:5: duplicate definition
+  on line 6: item in trait
+  on line 12: previous definition here
 
 error: aborting due to 2 previous errors
 

@@ -1,16 +1,8 @@
 error: this file contains an unclosed delimiter
-  --> $DIR/unclosed-delims.rs:12:54
-   |
-LL | mod tests {
-   |           - unclosed delimiter
-...
-LL |     fn test1() {
-   |                - this delimiter might not be properly closed...
-...
-LL | }
-   | -                                                   ^
-   | |
-   | ...as it matches this but it has different indentation
+ at $DIR/unclosed-delims.rs:12:54
+  on line 4, column 11: unclosed delimiter
+  on line 7, column 16: this delimiter might not be properly closed...
+  on line 12: ...as it matches this but it has different indentation
 
 error: aborting due to 1 previous error
 

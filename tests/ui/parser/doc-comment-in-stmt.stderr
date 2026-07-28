@@ -1,61 +1,29 @@
 error: expected one of `.`, `;`, `?`, `}`, or an operator, found doc comment `//!self.allow_ty_infer()`
-  --> $DIR/doc-comment-in-stmt.rs:5:5
-   |
-LL |     false
-   |          - expected one of `.`, `;`, `?`, `}`, or an operator
-LL |     //!self.allow_ty_infer()
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^ unexpected token
-   |
+ at $DIR/doc-comment-in-stmt.rs:5:5: unexpected token
+  on line 4, column 10: expected one of `.`, `;`, `?`, `}`, or an operator
 help: add a space before `!` to write a regular comment
-   |
-LL |     // !self.allow_ty_infer()
-   |       +
+ on line 5, column 6
 
 error: expected one of `.`, `;`, `?`, `}`, or an operator, found doc comment `/*! bar */`
-  --> $DIR/doc-comment-in-stmt.rs:11:5
-   |
-LL |     false
-   |          - expected one of `.`, `;`, `?`, `}`, or an operator
-LL |     /*! bar */
-   |     ^^^^^^^^^^ unexpected token
-   |
+ at $DIR/doc-comment-in-stmt.rs:11:5: unexpected token
+  on line 10, column 10: expected one of `.`, `;`, `?`, `}`, or an operator
 help: add a space before `!` to write a regular comment
-   |
-LL |     /* ! bar */
-   |       +
+ on line 11, column 6
 
 error: expected one of `.`, `;`, `?`, `}`, or an operator, found doc comment `/** baz */`
-  --> $DIR/doc-comment-in-stmt.rs:15:7
-   |
-LL |     1 /** baz */
-   |       ^^^^^^^^^^ expected one of `.`, `;`, `?`, `}`, or an operator
-   |
+ at $DIR/doc-comment-in-stmt.rs:15:7: expected one of `.`, `;`, `?`, `}`, or an operator
 help: add a space before the last `*` to write a regular comment
-   |
-LL |     1 /* * baz */
-   |         +
+ on line 15, column 8
 
 error: expected one of `.`, `;`, `?`, `}`, or an operator, found doc comment `/// quux`
-  --> $DIR/doc-comment-in-stmt.rs:19:7
-   |
-LL |     2 /// quux
-   |       ^^^^^^^^ expected one of `.`, `;`, `?`, `}`, or an operator
-   |
+ at $DIR/doc-comment-in-stmt.rs:19:7: expected one of `.`, `;`, `?`, `}`, or an operator
 help: add a space before the last `/` to write a regular comment
-   |
-LL |     2 // / quux
-   |         +
+ on line 19, column 8
 
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found doc comment `//!foo
-  --> $DIR/doc-comment-in-stmt.rs:25:22
-   |
-LL |     let y = x.max(1) //!foo
-   |                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected one of `.`, `;`, `?`, `else`, or an operator
-   |
+ at $DIR/doc-comment-in-stmt.rs:25:22: expected one of `.`, `;`, `?`, `else`, or an operator
 help: add a space before `!` to write a regular comment
-   |
-LL |     let y = x.max(1) // !foo
-   |                        +
+ on line 25, column 23
 
 error: aborting due to 5 previous errors
 

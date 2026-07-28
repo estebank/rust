@@ -1,8 +1,5 @@
 error: attribute value must be a literal
-  --> $DIR/crate-name-macro-call.rs:4:17
-   |
-LL | #![crate_name = concat!("my", "crate")]
-   |                 ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/crate-name-macro-call.rs:4:17
 
 error: aborting due to 1 previous error
 

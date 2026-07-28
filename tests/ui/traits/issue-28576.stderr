@@ -1,66 +1,30 @@
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/issue-28576.rs:5:16
-   |
-LL | pub trait Bar: Foo<Assoc=()> {
-   |                ^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/issue-28576.rs:5:16: doesn't have a size known at compile-time
 note: required by an implicit `Sized` bound in `Foo`
-  --> $DIR/issue-28576.rs:1:15
-   |
-LL | pub trait Foo<RHS=Self> {
-   |               ^^^^^^^^ required by the implicit `Sized` requirement on this type parameter in `Foo`
+ at $DIR/issue-28576.rs:1:15: required by the implicit `Sized` requirement on this type parameter in `Foo`
 help: consider further restricting `Self`
-   |
-LL | pub trait Bar: Foo<Assoc=()> + Sized {
-   |                              +++++++
+ on line 5, column 28, add ` + Sized`
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL | pub trait Foo<RHS: ?Sized=Self> {
-   |                  ++++++++
+ on line 1, column 17, add `: ?Sized`
 
-error[E0038]: the trait `Bar` is not dyn compatible
-  --> $DIR/issue-28576.rs:9:16
-   |
-LL |              dyn Bar
-   |  ________________^
-LL | |               <Assoc=()>
-   | |________________________^ `Bar` is not dyn compatible
-   |
+error E0038: the trait `Bar` is not dyn compatible
+ at $DIR/issue-28576.rs:9:16 to 10:25: `Bar` is not dyn compatible
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/issue-28576.rs:5:16
-   |
-LL | pub trait Bar: Foo<Assoc=()> {
-   |           ---  ^^^^^^^^^^^^^
-   |           |    |   |
-   |           |    |   ...because it uses `Self` as a type parameter
-   |           |    ...because it uses `Self` as a type parameter
-   |           this trait is not dyn compatible...
+ at $DIR/issue-28576.rs:5:16: ...because it uses `Self` as a type parameter
+  on line 5, column 20: ...because it uses `Self` as a type parameter
+  on line 5, column 11: this trait is not dyn compatible...
 help: consider using an opaque type instead
-   |
-LL -            dyn Bar
-LL +            impl Bar
-   |
+ on line 9, column 11, replace with `impl `
 
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/issue-28576.rs:5:16
-   |
-LL | pub trait Bar: Foo<Assoc=()> {
-   |                ^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/issue-28576.rs:5:16: doesn't have a size known at compile-time
 note: required by an implicit `Sized` bound in `Foo`
-  --> $DIR/issue-28576.rs:1:15
-   |
-LL | pub trait Foo<RHS=Self> {
-   |               ^^^^^^^^ required by the implicit `Sized` requirement on this type parameter in `Foo`
+ at $DIR/issue-28576.rs:1:15: required by the implicit `Sized` requirement on this type parameter in `Foo`
 help: consider further restricting `Self`
-   |
-LL |     ) where Self: Sized;
-   |       +++++++++++++++++
+ on line 11, column 5, add ` where Self: Sized`
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL | pub trait Foo<RHS: ?Sized=Self> {
-   |                  ++++++++
+ on line 1, column 17, add `: ?Sized`
 
 error: aborting due to 3 previous errors
 

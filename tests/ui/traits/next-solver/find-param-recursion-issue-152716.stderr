@@ -1,13 +1,7 @@
-error[E0277]: the trait bound `(): Trait<fn(for<'b> fn(<T as Proj<'b>>::Assoc))>` is not satisfied
-  --> $DIR/find-param-recursion-issue-152716.rs:16:9
-   |
-LL |     (): Trait<<T as Proj<'static>>::Assoc>
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ the trait `Trait<fn(for<'b> fn(<T as Proj<'b>>::Assoc))>` is not implemented for `()`
-   |
+error E0277: the trait bound `(): Trait<fn(for<'b> fn(<T as Proj<'b>>::Assoc))>` is not satisfied
+ at $DIR/find-param-recursion-issue-152716.rs:16:9: the trait `Trait<fn(for<'b> fn(<T as Proj<'b>>::Assoc))>` is not implemented for `()`
 help: consider extending the `where` clause, but there might be an alternative better way to express this requirement
-   |
-LL |     (): Trait<<T as Proj<'static>>::Assoc>, (): Trait<fn(for<'b> fn(<T as Proj<'b>>::Assoc))>
-   |                                           +++++++++++++++++++++++++++++++++++++++++++++++++++
+ on line 16, column 42, add `, (): Trait<fn(for<'b> fn(<T as Proj<'b>>::Assoc))>`
 
 error: aborting due to 1 previous error
 

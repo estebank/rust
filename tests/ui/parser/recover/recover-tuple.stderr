@@ -1,16 +1,9 @@
 error: expected expression, found `.`
-  --> $DIR/recover-tuple.rs:3:40
-   |
-LL |     let x: (usize, usize, usize) = (3, .=.);
-   |                                        ^ expected expression
+ at $DIR/recover-tuple.rs:3:40: expected expression
 
-error[E0308]: mismatched types
-  --> $DIR/recover-tuple.rs:6:20
-   |
-LL |     let y: usize = "";
-   |            -----   ^^ expected `usize`, found `&str`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/recover-tuple.rs:6:20: expected `usize`, found `&str`
+  on line 6, column 12: expected due to this
 
 error: aborting due to 2 previous errors
 

@@ -1,25 +1,12 @@
 error: cannot determine resolution for the import
-  --> $DIR/inconsistent-resolution-153842.rs:2:13
-   |
-LL |     pub use crate::s::Trait as s;
-   |             ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/inconsistent-resolution-153842.rs:2:13
 
 error: cannot determine resolution for the import
-  --> $DIR/inconsistent-resolution-153842.rs:2:13
-   |
-LL |     pub use crate::s::Trait as s;
-   |             ^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/inconsistent-resolution-153842.rs:2:13
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0432]: unresolved imports `crate::s::Trait`, `a::s`
-  --> $DIR/inconsistent-resolution-153842.rs:2:13
-   |
-LL |     pub use crate::s::Trait as s;
-   |             ^^^^^^^^^^^^^^^^^^^^
-...
-LL | use a::s;
-   |     ^^^^
+error E0432: unresolved imports `crate::s::Trait`, `a::s`
+ at $DIR/inconsistent-resolution-153842.rs:2:13
 
 error: aborting due to 3 previous errors
 

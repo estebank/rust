@@ -1,20 +1,10 @@
-error[E0515]: cannot return reference to temporary value
-  --> $DIR/regions-creating-enums.rs:23:16
-   |
-LL |         return &Ast::Num((*f)(x));
-   |                ^-----------------
-   |                ||
-   |                |temporary value created here
-   |                returns a reference to data owned by the current function
+error E0515: cannot return reference to temporary value
+ at $DIR/regions-creating-enums.rs:23:16: returns a reference to data owned by the current function
+  on line 23, column 17: temporary value created here
 
-error[E0515]: cannot return reference to temporary value
-  --> $DIR/regions-creating-enums.rs:28:16
-   |
-LL |         return &Ast::Add(m_x, m_y);
-   |                ^------------------
-   |                ||
-   |                |temporary value created here
-   |                returns a reference to data owned by the current function
+error E0515: cannot return reference to temporary value
+ at $DIR/regions-creating-enums.rs:28:16: returns a reference to data owned by the current function
+  on line 28, column 17: temporary value created here
 
 error: aborting due to 2 previous errors
 

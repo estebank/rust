@@ -1,39 +1,20 @@
 error: numeric character escape is too short
-  --> $DIR/lex-bad-char-literals-1.rs:2:6
-   |
-LL |     '\x1'
-   |      ^^^
+ at $DIR/lex-bad-char-literals-1.rs:2:6
 
 error: numeric character escape is too short
-  --> $DIR/lex-bad-char-literals-1.rs:6:6
-   |
-LL |     "\x1"
-   |      ^^^
+ at $DIR/lex-bad-char-literals-1.rs:6:6
 
 error: unknown character escape: `\u{25cf}`
-  --> $DIR/lex-bad-char-literals-1.rs:10:7
-   |
-LL |     '\●'
-   |       ^ unknown character escape
-   |
-   = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
+ at $DIR/lex-bad-char-literals-1.rs:10:7: unknown character escape
+help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
 help: if you meant to write a literal backslash (perhaps escaping in a regular expression), consider a raw string literal
-   |
-LL -     '\●'
-LL +     r"\●"
-   |
+ on line 10, column 4, replace with `r"\●"`
 
 error: unknown character escape: `\u{25cf}`
-  --> $DIR/lex-bad-char-literals-1.rs:14:7
-   |
-LL |     "\●"
-   |       ^ unknown character escape
-   |
-   = help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
+ at $DIR/lex-bad-char-literals-1.rs:14:7: unknown character escape
+help: for more information, visit <https://doc.rust-lang.org/reference/tokens.html#literals>
 help: if you meant to write a literal backslash (perhaps escaping in a regular expression), consider a raw string literal
-   |
-LL |     r"\●"
-   |     +
+ on line 14, column 4, replace with `r"\●"`
 
 error: aborting due to 4 previous errors
 

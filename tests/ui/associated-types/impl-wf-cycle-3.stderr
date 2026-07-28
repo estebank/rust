@@ -1,27 +1,11 @@
-error[E0275]: overflow evaluating the requirement `<T as B>::Type == <T as B>::Type`
-  --> $DIR/impl-wf-cycle-3.rs:7:1
-   |
-LL | / impl<T> B for T
-LL | | where
-LL | |     T: A<Self::Type>,
-   | |_____________________^
-LL |   {
-LL |       type Type = bool;
-   |       --------- associated type `<T as B>::Type` is specified here
-   |
+error E0275: overflow evaluating the requirement `<T as B>::Type == <T as B>::Type`
+ at $DIR/impl-wf-cycle-3.rs:7:1 to 9:22
+  on line 11: associated type `<T as B>::Type` is specified here
 note: required for `T` to implement `B`
-  --> $DIR/impl-wf-cycle-3.rs:7:9
-   |
-LL | impl<T> B for T
-   |         ^     ^
-LL | where
-LL |     T: A<Self::Type>,
-   |        ------------- unsatisfied trait bound introduced here
+ at $DIR/impl-wf-cycle-3.rs:7:9
+  on line 9, column 8: unsatisfied trait bound introduced here
 help: replace the associated type with the type specified in this `impl`
-   |
-LL -     T: A<Self::Type>,
-LL +     T: A<bool>,
-   |
+ on line 9, column 9, replace with `bool`
 
 error: aborting due to 1 previous error
 

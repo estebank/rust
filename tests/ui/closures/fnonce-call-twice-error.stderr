@@ -1,20 +1,10 @@
-error[E0382]: use of moved value: `blk`
-  --> $DIR/fnonce-call-twice-error.rs:7:5
-   |
-LL | fn foo<F: FnOnce()>(blk: F) {
-   |                     --- move occurs because `blk` has type `F`, which does not implement the `Copy` trait
-LL |     blk();
-   |     ----- `blk` moved due to this call
-LL |     blk();
-   |     ^^^ value used here after move
-   |
+error E0382: use of moved value: `blk`
+ at $DIR/fnonce-call-twice-error.rs:7:5: value used here after move
+  on line 5, column 21: move occurs because `blk` has type `F`, which does not implement the `Copy` trait
+  on line 6: `blk` moved due to this call
 note: `FnOnce` closures can only be called once
-  --> $DIR/fnonce-call-twice-error.rs:5:11
-   |
-LL | fn foo<F: FnOnce()>(blk: F) {
-   |           ^^^^^^^^ `F` is made to be an `FnOnce` closure here
-LL |     blk();
-   |     ----- this value implements `FnOnce`, which causes it to be moved when called
+ at $DIR/fnonce-call-twice-error.rs:5:11: `F` is made to be an `FnOnce` closure here
+  on line 6: this value implements `FnOnce`, which causes it to be moved when called
 
 error: aborting due to 1 previous error
 

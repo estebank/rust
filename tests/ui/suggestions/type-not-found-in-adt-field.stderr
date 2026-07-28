@@ -1,19 +1,10 @@
-error[E0425]: cannot find type `Someunknownname` in this scope
-  --> $DIR/type-not-found-in-adt-field.rs:2:12
-   |
-LL |     m: Vec<Someunknownname<String, ()>>,
-   |            ^^^^^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `Someunknownname` in this scope
+ at $DIR/type-not-found-in-adt-field.rs:2:12: not found in this scope
 
-error[E0425]: cannot find type `K` in this scope
-  --> $DIR/type-not-found-in-adt-field.rs:6:8
-   |
-LL |     m: K,
-   |        ^ not found in this scope
-   |
+error E0425: cannot find type `K` in this scope
+ at $DIR/type-not-found-in-adt-field.rs:6:8: not found in this scope
 help: you might be missing a type parameter
-   |
-LL | struct OtherStruct<K> {
-   |                   +++
+ on line 5, column 18, add `<K>`
 
 error: aborting due to 2 previous errors
 

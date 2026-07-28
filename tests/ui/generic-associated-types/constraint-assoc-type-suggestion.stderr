@@ -1,17 +1,10 @@
-error[E0308]: mismatched types
-  --> $DIR/constraint-assoc-type-suggestion.rs:10:23
-   |
-LL |     let b: Vec<i32> = a;
-   |            --------   ^ expected `Vec<i32>`, found associated type
-   |            |
-   |            expected due to this
-   |
-   = note:       expected struct `Vec<i32>`
-           found associated type `<T as X>::Y<i32>`
+error E0308: mismatched types
+ at $DIR/constraint-assoc-type-suggestion.rs:10:23: expected `Vec<i32>`, found associated type
+  on line 10, column 12: expected due to this
+note:       expected struct `Vec<i32>`
+      found associated type `<T as X>::Y<i32>`
 help: consider constraining the associated type `<T as X>::Y<i32>` to `Vec<i32>`
-   |
-LL | fn f<T: X<Y<i32> = Vec<i32>>>(a: T::Y<i32>) {
-   |          +++++++++++++++++++
+ on line 7, column 9, add `<Y<i32> = Vec<i32>>`
 
 error: aborting due to 1 previous error
 

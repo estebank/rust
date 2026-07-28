@@ -1,13 +1,7 @@
 error: expected `;`, found `[`
-  --> $DIR/suggest-semicolon-before-array.rs:8:5
-   |
-LL |     [1, 3]
-   |     ^
-   |
+ at $DIR/suggest-semicolon-before-array.rs:8:5
 help: consider adding `;` here
-   |
-LL |     foo();
-   |          +
+ on line 7, column 9, add `;`
 
 error: aborting due to 1 previous error
 

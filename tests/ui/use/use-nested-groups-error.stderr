@@ -1,14 +1,7 @@
-error[E0432]: unresolved import `a::b1::C1`
-  --> $DIR/use-nested-groups-error.rs:9:14
-   |
-LL | use a::{b1::{C1, C2}, B2};
-   |              ^^ no `C1` in `a::b1`
-   |
+error E0432: unresolved import `a::b1::C1`
+ at $DIR/use-nested-groups-error.rs:9:14: no `C1` in `a::b1`
 help: a similar name exists in the module
-   |
-LL - use a::{b1::{C1, C2}, B2};
-LL + use a::{b1::{C2, C2}, B2};
-   |
+ on line 9, column 13, replace with `C2`
 
 error: aborting due to 1 previous error
 

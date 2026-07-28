@@ -1,118 +1,51 @@
-error[E0603]: struct import `One` is private
-  --> $DIR/private-import-suggestion-path-156244.rs:17:12
-   |
-LL |     use b::One;
-   |            ^^^ private struct import
-   |
+error E0603: struct import `One` is private
+ at $DIR/private-import-suggestion-path-156244.rs:17:12: private struct import
 note: the struct import `One` is defined here...
-  --> $DIR/private-import-suggestion-path-156244.rs:12:20
-   |
-LL |     use crate::a::{One, Two};
-   |                    ^^^
+ at $DIR/private-import-suggestion-path-156244.rs:12:20
 note: ...and refers to the struct `One` which is defined here
-  --> $DIR/private-import-suggestion-path-156244.rs:7:5
-   |
-LL |     pub struct One;
-   |     ^^^^^^^^^^^^^^^ you could import this directly
+ at $DIR/private-import-suggestion-path-156244.rs:7:5: you could import this directly
 help: import `One` directly
-   |
-LL -     use b::One;
-LL +     use crate::a::One;
-   |
+ on line 17, column 8, replace with `crate::a::One`
 
-error[E0603]: struct import `One` is private
-  --> $DIR/private-import-suggestion-path-156244.rs:35:20
-   |
-LL |     use crate::b::{One, Two};
-   |                    ^^^ private struct import
-   |
+error E0603: struct import `One` is private
+ at $DIR/private-import-suggestion-path-156244.rs:35:20: private struct import
 note: the struct import `One` is defined here...
-  --> $DIR/private-import-suggestion-path-156244.rs:12:20
-   |
-LL |     use crate::a::{One, Two};
-   |                    ^^^
+ at $DIR/private-import-suggestion-path-156244.rs:12:20
 note: ...and refers to the struct `One` which is defined here
-  --> $DIR/private-import-suggestion-path-156244.rs:7:5
-   |
-LL |     pub struct One;
-   |     ^^^^^^^^^^^^^^^ you could import this directly
+ at $DIR/private-import-suggestion-path-156244.rs:7:5: you could import this directly
 
-error[E0603]: struct import `Two` is private
-  --> $DIR/private-import-suggestion-path-156244.rs:35:25
-   |
-LL |     use crate::b::{One, Two};
-   |                         ^^^ private struct import
-   |
+error E0603: struct import `Two` is private
+ at $DIR/private-import-suggestion-path-156244.rs:35:25: private struct import
 note: the struct import `Two` is defined here...
-  --> $DIR/private-import-suggestion-path-156244.rs:12:25
-   |
-LL |     use crate::a::{One, Two};
-   |                         ^^^
+ at $DIR/private-import-suggestion-path-156244.rs:12:25
 note: ...and refers to the struct `Two` which is defined here
-  --> $DIR/private-import-suggestion-path-156244.rs:8:5
-   |
-LL |     pub struct Two;
-   |     ^^^^^^^^^^^^^^^ you could import this directly
+ at $DIR/private-import-suggestion-path-156244.rs:8:5: you could import this directly
 
-error[E0603]: module import `inner` is private
-  --> $DIR/private-import-suggestion-path-156244.rs:38:24
-   |
-LL |     use crate::rename::inner::Item as Item1;
-   |                        ^^^^^ private module import
-   |
+error E0603: module import `inner` is private
+ at $DIR/private-import-suggestion-path-156244.rs:38:24: private module import
 note: the module import `inner` is defined here...
-  --> $DIR/private-import-suggestion-path-156244.rs:31:9
-   |
-LL |     use crate::outer::actual as inner;
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/private-import-suggestion-path-156244.rs:31:9
 note: ...and refers to the module `actual` which is defined here
-  --> $DIR/private-import-suggestion-path-156244.rs:25:5
-   |
-LL |     pub mod actual {
-   |     ^^^^^^^^^^^^^^ you could import this directly
+ at $DIR/private-import-suggestion-path-156244.rs:25:5: you could import this directly
 help: consider importing this struct instead
-   |
-LL -     use crate::rename::inner::Item as Item1;
-LL +     use outer::actual::Item as Item1;
-   |
+ on line 38, column 8, replace with `outer::actual::Item`
 
-error[E0603]: struct import `Hi` is private
-  --> $DIR/private-import-suggestion-path-156244.rs:55:37
-   |
-LL | use inaccessible_ancestor::testing::Hi;
-   |                                     ^^ private struct import
-   |
+error E0603: struct import `Hi` is private
+ at $DIR/private-import-suggestion-path-156244.rs:55:37: private struct import
 note: the struct import `Hi` is defined here...
-  --> $DIR/private-import-suggestion-path-156244.rs:51:13
-   |
-LL |         use super::private::public::Hi;
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/private-import-suggestion-path-156244.rs:51:13
 note: ...and refers to the struct `Hi` which is defined here
-  --> $DIR/private-import-suggestion-path-156244.rs:46:13
-   |
-LL |             pub struct Hi;
-   |             ^^^^^^^^^^^^^^ you could import this directly
+ at $DIR/private-import-suggestion-path-156244.rs:46:13: you could import this directly
 
-error[E0603]: module import `mem` is private
-  --> $DIR/private-import-suggestion-path-156244.rs:65:21
-   |
-LL | use external_alias::mem;
-   |                     ^^^ private module import
-   |
+error E0603: module import `mem` is private
+ at $DIR/private-import-suggestion-path-156244.rs:65:21: private module import
 note: the module import `mem` is defined here...
-  --> $DIR/private-import-suggestion-path-156244.rs:62:9
-   |
-LL |     use super::s::mem;
-   |         ^^^^^^^^^^^^^
+ at $DIR/private-import-suggestion-path-156244.rs:62:9
 note: ...and refers to the module `mem` which is defined here
-  --> $SRC_DIR/std/src/lib.rs:LL:COL
-   |
-   = note: you could import this directly
+ at $SRC_DIR/std/src/lib.rs:LL:COL
+note: you could import this directly
 help: import `mem` directly
-   |
-LL - use external_alias::mem;
-LL + use core::mem;
-   |
+ on line 65, column 4, replace with `core::mem`
 
 error: aborting due to 6 previous errors
 

@@ -1,8 +1,5 @@
-error[E0730]: cannot pattern-match on an array without a fixed length
-  --> $DIR/E0730.rs:3:9
-   |
-LL |         [1, 2, ..] => true,
-   |         ^^^^^^^^^^
+error E0730: cannot pattern-match on an array without a fixed length
+ at $DIR/E0730.rs:3:9
 
 error: aborting due to 1 previous error
 

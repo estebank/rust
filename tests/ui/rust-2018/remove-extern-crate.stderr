@@ -1,44 +1,20 @@
 warning: unused extern crate
-  --> $DIR/remove-extern-crate.rs:11:1
-   |
-LL | extern crate core;
-   | ^^^^^^^^^^^^^^^^^^ unused
-   |
+ at $DIR/remove-extern-crate.rs:11:1: unused
 note: the lint level is defined here
-  --> $DIR/remove-extern-crate.rs:7:9
-   |
-LL | #![warn(rust_2018_idioms)]
-   |         ^^^^^^^^^^^^^^^^
-   = note: `#[warn(unused_extern_crates)]` implied by `#[warn(rust_2018_idioms)]`
+ at $DIR/remove-extern-crate.rs:7:9
+note: `#[warn(unused_extern_crates)]` implied by `#[warn(rust_2018_idioms)]`
 help: remove the unused `extern crate`
-   |
-LL - extern crate core;
-LL +
-   |
+ on line 11, column 1
 
 warning: `extern crate` is not idiomatic in the new edition
-  --> $DIR/remove-extern-crate.rs:35:5
-   |
-LL |     extern crate core;
-   |     ^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/remove-extern-crate.rs:35:5
 help: convert it to a `use`
-   |
-LL -     extern crate core;
-LL +     use core;
-   |
+ on line 35, column 4, replace with `use `
 
 warning: `extern crate` is not idiomatic in the new edition
-  --> $DIR/remove-extern-crate.rs:45:5
-   |
-LL |     pub extern crate core;
-   |     ^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/remove-extern-crate.rs:45:5
 help: convert it to a `use`
-   |
-LL -     pub extern crate core;
-LL +     pub use core;
-   |
+ on line 45, column 7, replace with ` use `
 
 warning: 3 warnings emitted
 

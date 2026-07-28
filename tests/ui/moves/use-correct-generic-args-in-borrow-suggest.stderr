@@ -1,17 +1,9 @@
-error[E0382]: use of moved value: `value`
-  --> $DIR/use-correct-generic-args-in-borrow-suggest.rs:10:9
-   |
-LL |     let value = String::new();
-   |         ----- move occurs because `value` has type `String`, which does not implement the `Copy` trait
-LL |     run.clone()(value, ());
-   |                 ----- value moved here
-LL |     run(value, ());
-   |         ^^^^^ value used here after move
-   |
+error E0382: use of moved value: `value`
+ at $DIR/use-correct-generic-args-in-borrow-suggest.rs:10:9: value used here after move
+  on line 8, column 9: move occurs because `value` has type `String`, which does not implement the `Copy` trait
+  on line 9, column 17: value moved here
 help: consider borrowing `value`
-   |
-LL |     run.clone()(&value, ());
-   |                 +
+ on line 9, column 16, add `&`
 
 error: aborting due to 1 previous error
 

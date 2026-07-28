@@ -1,15 +1,8 @@
-error[E0507]: cannot move out of a shared reference
-  --> $DIR/move-ref-patterns-default-binding-modes.rs:8:22
-   |
-LL |     let (a, mut b) = &p;
-   |             -----    ^^
-   |             |
-   |             data moved here because `b` has type `U`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of a shared reference
+ at $DIR/move-ref-patterns-default-binding-modes.rs:8:22
+  on line 8, column 13: data moved here because `b` has type `U`, which does not implement the `Copy` trait
 help: consider borrowing the pattern binding
-   |
-LL |     let (a, ref mut b) = &p;
-   |             +++
+ on line 8, column 12, add `ref `
 
 error: aborting due to 1 previous error
 

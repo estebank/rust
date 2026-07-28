@@ -1,40 +1,20 @@
-error[E0403]: the name `S` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/issue-103790.rs:4:29
-   |
-LL | struct S<const S: (), const S: S = { S }>;
-   |                -            ^ already used
-   |                |
-   |                first use of `S`
+error E0403: the name `S` is already used for a generic parameter in this item's generic parameters
+ at $DIR/issue-103790.rs:4:29: already used
+  on line 4, column 16: first use of `S`
 
-error[E0107]: missing generics for struct `S`
-  --> $DIR/issue-103790.rs:4:32
-   |
-LL | struct S<const S: (), const S: S = { S }>;
-   |                                ^ expected at least 1 generic argument
-   |
+error E0107: missing generics for struct `S`
+ at $DIR/issue-103790.rs:4:32: expected at least 1 generic argument
 note: struct defined here, with at least 1 generic parameter: `S`
-  --> $DIR/issue-103790.rs:4:8
-   |
-LL | struct S<const S: (), const S: S = { S }>;
-   |        ^ -----------
+ at $DIR/issue-103790.rs:4:8
 help: add missing generic argument
-   |
-LL | struct S<const S: (), const S: S<S> = { S }>;
-   |                                 +++
+ on line 4, column 32, add `<S>`
 
-error[E0391]: cycle detected when computing type of `S::S`
-  --> $DIR/issue-103790.rs:4:32
-   |
-LL | struct S<const S: (), const S: S = { S }>;
-   |                                ^
-   |
-   = note: ...which immediately requires computing type of `S::S` again
+error E0391: cycle detected when computing type of `S::S`
+ at $DIR/issue-103790.rs:4:32
+note: ...which immediately requires computing type of `S::S` again
 note: cycle used when checking that `S` is well-formed
-  --> $DIR/issue-103790.rs:4:1
-   |
-LL | struct S<const S: (), const S: S = { S }>;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   = note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
+ at $DIR/issue-103790.rs:4:1
+note: for more information, see <https://rustc-dev-guide.rust-lang.org/overview.html#queries> and <https://rustc-dev-guide.rust-lang.org/query.html>
 
 error: aborting due to 3 previous errors
 

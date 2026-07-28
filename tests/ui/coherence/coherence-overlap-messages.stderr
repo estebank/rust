@@ -1,43 +1,22 @@
-error[E0119]: conflicting implementations of trait `Foo`
-  --> $DIR/coherence-overlap-messages.rs:4:1
-   |
-LL | impl<T> Foo for T {}
-   | ----------------- first implementation here
-LL | impl<U> Foo for U {}
-   | ^^^^^^^^^^^^^^^^^ conflicting implementation
+error E0119: conflicting implementations of trait `Foo`
+ at $DIR/coherence-overlap-messages.rs:4:1: conflicting implementation
+  on line 3: first implementation here
 
-error[E0119]: conflicting implementations of trait `Bar` for type `(u8, u8)`
-  --> $DIR/coherence-overlap-messages.rs:11:1
-   |
-LL | impl<T> Bar for (T, u8) {}
-   | ----------------------- first implementation here
-LL | impl<T> Bar for (u8, T) {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `(u8, u8)`
+error E0119: conflicting implementations of trait `Bar` for type `(u8, u8)`
+ at $DIR/coherence-overlap-messages.rs:11:1: conflicting implementation for `(u8, u8)`
+  on line 10: first implementation here
 
-error[E0119]: conflicting implementations of trait `Baz<u8>` for type `u8`
-  --> $DIR/coherence-overlap-messages.rs:17:1
-   |
-LL | impl<T> Baz<u8> for T {}
-   | --------------------- first implementation here
-LL | impl<T> Baz<T> for u8 {}
-   | ^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `u8`
+error E0119: conflicting implementations of trait `Baz<u8>` for type `u8`
+ at $DIR/coherence-overlap-messages.rs:17:1: conflicting implementation for `u8`
+  on line 16: first implementation here
 
-error[E0119]: conflicting implementations of trait `Quux<_, _>`
-  --> $DIR/coherence-overlap-messages.rs:23:1
-   |
-LL | impl<T, U, V> Quux<U, V> for T {}
-   | ------------------------------ first implementation here
-LL | impl<T, U> Quux<U, U> for T {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation
+error E0119: conflicting implementations of trait `Quux<_, _>`
+ at $DIR/coherence-overlap-messages.rs:23:1: conflicting implementation
+  on line 22: first implementation here
 
-error[E0119]: conflicting implementations of trait `Quux<_, _>`
-  --> $DIR/coherence-overlap-messages.rs:25:1
-   |
-LL | impl<T, U, V> Quux<U, V> for T {}
-   | ------------------------------ first implementation here
-...
-LL | impl<T, V> Quux<T, V> for T {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation
+error E0119: conflicting implementations of trait `Quux<_, _>`
+ at $DIR/coherence-overlap-messages.rs:25:1: conflicting implementation
+  on line 22: first implementation here
 
 error: aborting due to 5 previous errors
 

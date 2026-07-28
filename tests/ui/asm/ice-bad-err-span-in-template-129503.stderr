@@ -1,37 +1,19 @@
 error: invalid asm template string: unmatched `}` found
-  --> $DIR/ice-bad-err-span-in-template-129503.rs:13:10
-   |
-LL |     asm!(concat!(r#"lJ𐏿Æ�.𐏿�"#, "r} {}"));
-   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unmatched `}` in asm template string
-   |
-   = note: if you intended to print `}`, you can escape it using `}}`
+ at $DIR/ice-bad-err-span-in-template-129503.rs:13:10: unmatched `}` in asm template string
+note: if you intended to print `}`, you can escape it using `}}`
 
 error: invalid asm template string: expected `}`, found `0`
-  --> $DIR/ice-bad-err-span-in-template-129503.rs:17:10
-   |
-LL |     asm!(concat!(r#"lJ𐏿Æ�.𐏿�"#, "{}/day{:02}.txt"));
-   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |          |
-   |          expected `}` in asm template string
-   |          because of this opening brace
-   |
-   = note: if you intended to print `{`, you can escape it using `{{`
+ at $DIR/ice-bad-err-span-in-template-129503.rs:17:10: expected `}` in asm template string
+  on line 17, column 10: because of this opening brace
+note: if you intended to print `{`, you can escape it using `{{`
 
 error: invalid asm template string: unmatched `}` found
-  --> $DIR/ice-bad-err-span-in-template-129503.rs:23:10
-   |
-LL |     asm!(concat!("abc", "r} {}"));
-   |          ^^^^^^^^^^^^^^^^^^^^^^^ unmatched `}` in asm template string
-   |
-   = note: if you intended to print `}`, you can escape it using `}}`
+ at $DIR/ice-bad-err-span-in-template-129503.rs:23:10: unmatched `}` in asm template string
+note: if you intended to print `}`, you can escape it using `}}`
 
 error: invalid asm template string: unmatched `}` found
-  --> $DIR/ice-bad-err-span-in-template-129503.rs:29:19
-   |
-LL |     asm!("abc", "r} {}");
-   |                   ^ unmatched `}` in asm template string
-   |
-   = note: if you intended to print `}`, you can escape it using `}}`
+ at $DIR/ice-bad-err-span-in-template-129503.rs:29:19: unmatched `}` in asm template string
+note: if you intended to print `}`, you can escape it using `}}`
 
 error: aborting due to 4 previous errors
 

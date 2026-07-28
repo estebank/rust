@@ -1,10 +1,6 @@
-error[E0515]: cannot return value referencing temporary value
-  --> $DIR/borrowck-borrow-from-temporary.rs:10:5
-   |
-LL |     let &Foo(ref x) = &id(Foo(3));
-   |                        ---------- temporary value created here
-LL |     x
-   |     ^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing temporary value
+ at $DIR/borrowck-borrow-from-temporary.rs:10:5: returns a value referencing data owned by the current function
+  on line 9, column 24: temporary value created here
 
 error: aborting due to 1 previous error
 

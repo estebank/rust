@@ -1,111 +1,53 @@
-error[E0061]: this function takes 6 arguments but 7 arguments were supplied
-  --> $DIR/issue-101097.rs:16:5
-   |
-LL |     f(C, A, A, A, B, B, C);
-   |     ^ -     -  -  - expected `C`, found `B`
-   |       |     |  |
-   |       |     |  unexpected argument #4 of type `A`
-   |       |     expected `B`, found `A`
-   |       expected `A`, found `C`
-   |
+error E0061: this function takes 6 arguments but 7 arguments were supplied
+ at $DIR/issue-101097.rs:16:5
+  on line 16, column 7: expected `A`, found `C`
+  on line 16, column 13: expected `B`, found `A`
+  on line 16, column 16: unexpected argument #4 of type `A`
+  on line 16, column 19: expected `C`, found `B`
 note: function defined here
-  --> $DIR/issue-101097.rs:6:4
-   |
-LL | fn f(
-   |    ^
+ at $DIR/issue-101097.rs:6:4
 help: did you mean
-   |
-LL -     f(C, A, A, A, B, B, C);
-LL +     f(A, A, B, B, C, C);
-   |
+ on line 16, column 5, replace with `(A, A, B, B, C, C)`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/issue-101097.rs:17:5
-   |
-LL |     f(C, C, A, A, B, B);
-   |     ^
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/issue-101097.rs:17:5
 note: function defined here
-  --> $DIR/issue-101097.rs:6:4
-   |
-LL | fn f(
-   |    ^
+ at $DIR/issue-101097.rs:6:4
 help: did you mean
-   |
-LL -     f(C, C, A, A, B, B);
-LL +     f(A, A, B, B, C, C);
-   |
+ on line 17, column 5, replace with `(A, A, B, B, C, C)`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/issue-101097.rs:18:5
-   |
-LL |     f(A, A, D, D, B, B);
-   |     ^       -  -  ---- two arguments of type `C` and `C` are missing
-   |             |  |
-   |             |  unexpected argument #4 of type `D`
-   |             unexpected argument #3 of type `D`
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/issue-101097.rs:18:5
+  on line 18, column 13: unexpected argument #3 of type `D`
+  on line 18, column 16: unexpected argument #4 of type `D`
+  on line 18, column 19: two arguments of type `C` and `C` are missing
 note: function defined here
-  --> $DIR/issue-101097.rs:6:4
-   |
-LL | fn f(
-   |    ^
-...
-LL |     c1: C,
-   |     -----
-LL |     c2: C,
-   |     -----
+ at $DIR/issue-101097.rs:6:4
 help: did you mean
-   |
-LL -     f(A, A, D, D, B, B);
-LL +     f(A, A, B, B, /* C */, /* C */);
-   |
+ on line 18, column 5, replace with `(A, A, B, B, /* C */, /* C */)`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/issue-101097.rs:19:5
-   |
-LL |     f(C, C, B, B, A, A);
-   |     ^ -  -        -  - expected `C`, found `A`
-   |       |  |        |
-   |       |  |        expected `C`, found `A`
-   |       |  expected `A`, found `C`
-   |       expected `A`, found `C`
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/issue-101097.rs:19:5
+  on line 19, column 7: expected `A`, found `C`
+  on line 19, column 10: expected `A`, found `C`
+  on line 19, column 19: expected `C`, found `A`
+  on line 19, column 22: expected `C`, found `A`
 note: function defined here
-  --> $DIR/issue-101097.rs:6:4
-   |
-LL | fn f(
-   |    ^
+ at $DIR/issue-101097.rs:6:4
 help: did you mean
-   |
-LL -     f(C, C, B, B, A, A);
-LL +     f(A, A, B, B, C, C);
-   |
+ on line 19, column 5, replace with `(A, A, B, B, C, C)`
 
-error[E0308]: arguments to this function are incorrect
-  --> $DIR/issue-101097.rs:20:5
-   |
-LL |     f(C, C, A, B, A, A);
-   |     ^ -  -  -     -  - expected `C`, found `A`
-   |       |  |  |     |
-   |       |  |  |     expected `C`, found `A`
-   |       |  |  expected `B`, found `A`
-   |       |  expected `A`, found `C`
-   |       expected `A`, found `C`
-   |
+error E0308: arguments to this function are incorrect
+ at $DIR/issue-101097.rs:20:5
+  on line 20, column 7: expected `A`, found `C`
+  on line 20, column 10: expected `A`, found `C`
+  on line 20, column 13: expected `B`, found `A`
+  on line 20, column 19: expected `C`, found `A`
+  on line 20, column 22: expected `C`, found `A`
 note: function defined here
-  --> $DIR/issue-101097.rs:6:4
-   |
-LL | fn f(
-   |    ^
-...
-LL |     b1: B,
-   |     -----
+ at $DIR/issue-101097.rs:6:4
 help: did you mean
-   |
-LL -     f(C, C, A, B, A, A);
-LL +     f(A, A, /* B */, B, C, C);
-   |
+ on line 20, column 5, replace with `(A, A, /* B */, B, C, C)`
 
 error: aborting due to 5 previous errors
 

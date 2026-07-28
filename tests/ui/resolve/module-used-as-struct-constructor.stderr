@@ -1,8 +1,5 @@
-error[E0574]: expected struct, variant or union type, found module `foo`
-  --> $DIR/module-used-as-struct-constructor.rs:5:13
-   |
-LL |     let p = foo { x: () };
-   |             ^^^ not a struct, variant or union type
+error E0574: expected struct, variant or union type, found module `foo`
+ at $DIR/module-used-as-struct-constructor.rs:5:13: not a struct, variant or union type
 
 error: aborting due to 1 previous error
 

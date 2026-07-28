@@ -1,24 +1,12 @@
-error[E0277]: `Rc<usize>` cannot be sent between threads safely
-  --> $DIR/closure-rc-not-send.rs:9:9
-   |
-LL |     bar(move || foo(x));
-   |     --- -------^^^^^^^
-   |     |   |
-   |     |   `Rc<usize>` cannot be sent between threads safely
-   |     |   within this `{closure@$DIR/closure-rc-not-send.rs:9:9: 9:16}`
-   |     required by a bound introduced by this call
-   |
-   = help: within `{closure@$DIR/closure-rc-not-send.rs:9:9: 9:16}`, the trait `Send` is not implemented for `Rc<usize>`
+error E0277: `Rc<usize>` cannot be sent between threads safely
+ at $DIR/closure-rc-not-send.rs:9:9: `Rc<usize>` cannot be sent between threads safely
+  on line 9: required by a bound introduced by this call
+  on line 9, column 9: within this `{closure@$DIR/closure-rc-not-send.rs:9:9: 9:16}`
+help: within `{closure@$DIR/closure-rc-not-send.rs:9:9: 9:16}`, the trait `Send` is not implemented for `Rc<usize>`
 note: required because it's used within this closure
-  --> $DIR/closure-rc-not-send.rs:9:9
-   |
-LL |     bar(move || foo(x));
-   |         ^^^^^^^
+ at $DIR/closure-rc-not-send.rs:9:9
 note: required by a bound in `bar`
-  --> $DIR/closure-rc-not-send.rs:5:22
-   |
-LL | fn bar<F: FnOnce() + Send>(_: F) {}
-   |                      ^^^^ required by this bound in `bar`
+ at $DIR/closure-rc-not-send.rs:5:22: required by this bound in `bar`
 
 error: aborting due to 1 previous error
 

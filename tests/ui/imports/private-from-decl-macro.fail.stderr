@@ -1,46 +1,21 @@
-error[E0364]: `S` is private, and cannot be re-exported
-  --> $DIR/private-from-decl-macro.rs:18:13
-   |
-LL |         use crate::m::*;
-   |             ^^^^^^^^^^^
-...
-LL |     crate::m::mac_glob!();
-   |     --------------------- in this macro invocation
-   |
+error E0364: `S` is private, and cannot be re-exported
+ at $DIR/private-from-decl-macro.rs:18:13
+  on line 33: in this macro invocation
 note: consider marking `S` as `pub` in the imported module
-  --> $DIR/private-from-decl-macro.rs:18:13
-   |
-LL |         use crate::m::*;
-   |             ^^^^^^^^^^^
-...
-LL |     crate::m::mac_glob!();
-   |     --------------------- in this macro invocation
-   = note: this error originates in the macro `crate::m::mac_glob` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/private-from-decl-macro.rs:18:13
+  on line 33: in this macro invocation
+note: this error originates in the macro `crate::m::mac_glob` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0423]: cannot find value `S` in this scope
-  --> $DIR/private-from-decl-macro.rs:28:17
-   |
-LL |     pub struct S {}
-   |     --------------- `S` defined here
-...
-LL |         let s = S;
-   |                 ^
-   |
-   = note: a struct named `S` exists in another namespace
+error E0423: cannot find value `S` in this scope
+ at $DIR/private-from-decl-macro.rs:28:17
+  on line 9: `S` defined here
+note: a struct named `S` exists in another namespace
 note: constant `m::S` exists but is inaccessible
-  --> $DIR/private-from-decl-macro.rs:10:5
-   |
-LL |     const S: u8 = 0;
-   |     ^^^^^^^^^^^^^^^^ not accessible
+ at $DIR/private-from-decl-macro.rs:10:5: not accessible
 help: use struct literal syntax instead
-   |
-LL |         let s = S {};
-   |                   ++
+ on line 28, column 16, replace with `S {}`
 help: a local variable with a similar name exists (notice the capitalization)
-   |
-LL -         let s = S;
-LL +         let s = s;
-   |
+ on line 28, column 16, replace with `s`
 
 error: aborting due to 2 previous errors
 

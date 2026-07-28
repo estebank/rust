@@ -1,23 +1,10 @@
 error: functions with the "gpu-kernel" ABI cannot be `async`
-  --> $DIR/cannot-be-coroutine.rs:62:1
-   |
-LL | async extern "gpu-kernel" fn async_kernel() {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/cannot-be-coroutine.rs:62:1
 help: remove the `async` keyword from this definition
-   |
-LL - async extern "gpu-kernel" fn async_kernel() {
-LL + extern "gpu-kernel" fn async_kernel() {
-   |
+ on line 62, column 1
 
 error: requires `ResumeTy` lang_item
-  --> $DIR/cannot-be-coroutine.rs:38:19
-   |
-LL |   async fn vanilla(){
-   |  ___________________^
-LL | |
-LL | | }
-   | |_^
+ at $DIR/cannot-be-coroutine.rs:38:19 to 40:2
 
 error: aborting due to 2 previous errors
 

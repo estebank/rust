@@ -1,10 +1,6 @@
 error: expected `:`, found `,`
-  --> $DIR/recovered-struct-variant.rs:2:10
-   |
-LL |     A { a, b: usize }
-   |     -    ^ expected `:`
-   |     |
-   |     while parsing this struct
+ at $DIR/recovered-struct-variant.rs:2:10: expected `:`
+  on line 2: while parsing this struct
 
 error: aborting due to 1 previous error
 

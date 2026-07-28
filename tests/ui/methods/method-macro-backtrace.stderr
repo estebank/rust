@@ -1,10 +1,6 @@
-error[E0592]: duplicate definitions with name `bar`
-  --> $DIR/method-macro-backtrace.rs:22:5
-   |
-LL |     fn bar(&self) { }
-   |     ------------- other definition for `bar`
-LL |     fn bar(&self) { }
-   |     ^^^^^^^^^^^^^ duplicate definitions for `bar`
+error E0592: duplicate definitions with name `bar`
+ at $DIR/method-macro-backtrace.rs:22:5: duplicate definitions for `bar`
+  on line 21: other definition for `bar`
 
 error: aborting due to 1 previous error
 

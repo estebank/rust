@@ -1,15 +1,9 @@
-error[E0521]: borrowed data escapes outside of closure
-  --> $DIR/anonymous-region-in-apit.rs:8:17
-   |
-LL | fn qux(foo: impl Foo<&str>) {
-   |        --- lifetime `'2` appears in the type of `foo`
-LL |     |baz: &str| foo.bar(baz);
-   |      ---  -     ^^^^^^^^^^^^
-   |      |    |     |
-   |      |    |     `baz` escapes the closure body here
-   |      |    |     argument requires that `'1` must outlive `'2`
-   |      |    let's call the lifetime of this reference `'1`
-   |      `baz` is a reference that is only valid in the closure body
+error E0521: borrowed data escapes outside of closure
+ at $DIR/anonymous-region-in-apit.rs:8:17: `baz` escapes the closure body here
+  on line 8, column 17: argument requires that `'1` must outlive `'2`
+  on line 7, column 8: lifetime `'2` appears in the type of `foo`
+  on line 8, column 6: `baz` is a reference that is only valid in the closure body
+  on line 8, column 11: let's call the lifetime of this reference `'1`
 
 error: aborting due to 1 previous error
 

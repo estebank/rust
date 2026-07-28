@@ -1,66 +1,30 @@
 error: expected pattern, found `=`
-  --> $DIR/keyword-box-as-identifier.rs:2:13
-   |
-LL |     let box = 0;
-   |             ^
-   |
+ at $DIR/keyword-box-as-identifier.rs:2:13
 note: `box` is a reserved keyword
-  --> $DIR/keyword-box-as-identifier.rs:2:9
-   |
-LL |     let box = 0;
-   |         ^^^
+ at $DIR/keyword-box-as-identifier.rs:2:9
 help: escape `box` to use it as an identifier
-   |
-LL |     let r#box = 0;
-   |         ++
+ on line 2, column 8, add `r#`
 
 error: expected pattern, found `:`
-  --> $DIR/keyword-box-as-identifier.rs:4:12
-   |
-LL |     let box: bool;
-   |            ^
-   |
+ at $DIR/keyword-box-as-identifier.rs:4:12
 note: `box` is a reserved keyword
-  --> $DIR/keyword-box-as-identifier.rs:4:9
-   |
-LL |     let box: bool;
-   |         ^^^
+ at $DIR/keyword-box-as-identifier.rs:4:9
 help: escape `box` to use it as an identifier
-   |
-LL |     let r#box: bool;
-   |         ++
+ on line 4, column 8, add `r#`
 
 error: expected pattern, found `=`
-  --> $DIR/keyword-box-as-identifier.rs:6:17
-   |
-LL |     let mut box = 0;
-   |                 ^
-   |
+ at $DIR/keyword-box-as-identifier.rs:6:17
 note: `box` is a reserved keyword
-  --> $DIR/keyword-box-as-identifier.rs:6:13
-   |
-LL |     let mut box = 0;
-   |             ^^^
+ at $DIR/keyword-box-as-identifier.rs:6:13
 help: escape `box` to use it as an identifier
-   |
-LL |     let mut r#box = 0;
-   |             ++
+ on line 6, column 12, add `r#`
 
 error: expected pattern, found `,`
-  --> $DIR/keyword-box-as-identifier.rs:8:13
-   |
-LL |     let (box,) = (0,);
-   |             ^
-   |
+ at $DIR/keyword-box-as-identifier.rs:8:13
 note: `box` is a reserved keyword
-  --> $DIR/keyword-box-as-identifier.rs:8:10
-   |
-LL |     let (box,) = (0,);
-   |          ^^^
+ at $DIR/keyword-box-as-identifier.rs:8:10
 help: escape `box` to use it as an identifier
-   |
-LL |     let (r#box,) = (0,);
-   |          ++
+ on line 8, column 9, add `r#`
 
 error: aborting due to 4 previous errors
 

@@ -1,8 +1,5 @@
-error[E0749]: negative impls cannot have any items
-  --> $DIR/impl-reuse-negative-traits.rs:15:1
-   |
-LL | reuse impl !Trait for F { &self.0 }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0749: negative impls cannot have any items
+ at $DIR/impl-reuse-negative-traits.rs:15:1
 
 error: aborting due to 1 previous error
 

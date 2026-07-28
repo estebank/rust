@@ -1,27 +1,14 @@
-error[E0004]: non-exhaustive patterns: `&[]` and `&[_, _, ..]` not covered
-  --> $DIR/incomplete-slice.rs:9:11
-   |
-LL |     match &[][..] {
-   |           ^^^^^^^ patterns `&[]` and `&[_, _, ..]` not covered
-LL |
-LL |         E_SL => {}
-   |         ---- this pattern doesn't introduce a new catch-all binding, but rather pattern matches against the value of constant `E_SL`
-   |
-   = note: the matched value is of type `&[E]`
+error E0004: non-exhaustive patterns: `&[]` and `&[_, _, ..]` not covered
+ at $DIR/incomplete-slice.rs:9:11: patterns `&[]` and `&[_, _, ..]` not covered
+  on line 11: this pattern doesn't introduce a new catch-all binding, but rather pattern matches against the value of constant `E_SL`
+note: the matched value is of type `&[E]`
 note: constant `E_SL` defined here
-  --> $DIR/incomplete-slice.rs:6:1
-   |
-LL | const E_SL: &[E] = &[E::A];
-   | ^^^^^^^^^^^^^^^^
+ at $DIR/incomplete-slice.rs:6:1
 help: if you meant to introduce a binding, use a different name
-   |
-LL |         E_SL_var => {}
-   |             ++++
+ on line 11, column 12, add `_var`
 help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern, a match arm with multiple or-patterns as shown, or multiple match arms
-   |
-LL ~         E_SL => {},
-LL +         &[] | &[_, _, ..] => todo!()
-   |
+ on line 11, column 18, add `,
+        &[] | &[_, _, ..] => todo!()`
 
 error: aborting due to 1 previous error
 

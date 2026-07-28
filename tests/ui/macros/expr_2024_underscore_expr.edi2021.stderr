@@ -1,32 +1,14 @@
 error: no rules expected reserved identifier `_`
-  --> $DIR/expr_2024_underscore_expr.rs:20:12
-   |
-LL | macro_rules! m2021 {
-   | ------------------ when calling this macro
-...
-LL |     m2021!(_);
-   |            ^ no rules expected this token in macro call
-   |
+ at $DIR/expr_2024_underscore_expr.rs:20:12: no rules expected this token in macro call
+  on line 7: when calling this macro
 note: while trying to match meta-variable `$e:expr_2021`
-  --> $DIR/expr_2024_underscore_expr.rs:8:6
-   |
-LL |     ($e:expr_2021) => {
-   |      ^^^^^^^^^^^^
+ at $DIR/expr_2024_underscore_expr.rs:8:6
 
 error: no rules expected reserved identifier `_`
-  --> $DIR/expr_2024_underscore_expr.rs:21:12
-   |
-LL | macro_rules! m2024 {
-   | ------------------ when calling this macro
-...
-LL |     m2024!(_);
-   |            ^ no rules expected this token in macro call
-   |
+ at $DIR/expr_2024_underscore_expr.rs:21:12: no rules expected this token in macro call
+  on line 13: when calling this macro
 note: while trying to match meta-variable `$e:expr`
-  --> $DIR/expr_2024_underscore_expr.rs:14:6
-   |
-LL |     ($e:expr) => {
-   |      ^^^^^^^
+ at $DIR/expr_2024_underscore_expr.rs:14:6
 
 error: aborting due to 2 previous errors
 

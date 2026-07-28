@@ -1,13 +1,7 @@
-error[E0223]: ambiguous associated type
-  --> $DIR/ambiguous-associated-type-with-generics.rs:13:13
-   |
-LL |     let _x: <dyn Trait<i32>>::Ty;
-   |             ^^^^^^^^^^^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/ambiguous-associated-type-with-generics.rs:13:13
 help: use fully-qualified syntax
-   |
-LL |     let _x: <dyn Trait<i32> as Assoc>::Ty;
-   |                             ++++++++
+ on line 13, column 12, replace with `<dyn Trait<i32> as Assoc>::`
 
 error: aborting due to 1 previous error
 

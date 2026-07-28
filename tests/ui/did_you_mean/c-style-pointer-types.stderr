@@ -1,302 +1,127 @@
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:5:15
-   |
-LL | pub const P1: const* u8 = 0 as _;
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:5:15
 help: put the `*` before `const`
-   |
-LL - pub const P1: const* u8 = 0 as _;
-LL + pub const P1: *const u8 = 0 as _;
-   |
+ on line 5, column 14, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:9:15
-   |
-LL | pub const P2: mut* u8 = 1 as _;
-   |               ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:9:15
 help: put the `*` before `mut`
-   |
-LL - pub const P2: mut* u8 = 1 as _;
-LL + pub const P2: *mut u8 = 1 as _;
-   |
+ on line 9, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:13:15
-   |
-LL | pub const P3: const* i32 = std::ptr::null();
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:13:15
 help: put the `*` before `const`
-   |
-LL - pub const P3: const* i32 = std::ptr::null();
-LL + pub const P3: *const i32 = std::ptr::null();
-   |
+ on line 13, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:17:15
-   |
-LL | pub const P4: const* i32 = std::ptr::null();
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:17:15
 help: put the `*` before `const`
-   |
-LL - pub const P4: const* i32 = std::ptr::null();
-LL + pub const P4: *const i32 = std::ptr::null();
-   |
+ on line 17, column 14, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:21:15
-   |
-LL | pub const P5: mut* i32 = std::ptr::null_mut();
-   |               ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:21:15
 help: put the `*` before `mut`
-   |
-LL - pub const P5: mut* i32 = std::ptr::null_mut();
-LL + pub const P5: *mut i32 = std::ptr::null_mut();
-   |
+ on line 21, column 14, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:25:15
-   |
-LL | pub const P6: mut* i32 = std::ptr::null_mut();
-   |               ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:25:15
 help: put the `*` before `mut`
-   |
-LL - pub const P6: mut* i32 = std::ptr::null_mut();
-LL + pub const P6: *mut i32 = std::ptr::null_mut();
-   |
+ on line 25, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:29:15
-   |
-LL | pub const P7: const* Vec<u8> = std::ptr::null();
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:29:15
 help: put the `*` before `const`
-   |
-LL - pub const P7: const* Vec<u8> = std::ptr::null();
-LL + pub const P7: *const Vec<u8> = std::ptr::null();
-   |
+ on line 29, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:33:15
-   |
-LL | pub const P8: const* std::collections::HashMap<String, i32> = std::ptr::null();
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:33:15
 help: put the `*` before `const`
-   |
-LL - pub const P8: const* std::collections::HashMap<String, i32> = std::ptr::null();
-LL + pub const P8: *const std::collections::HashMap<String, i32> = std::ptr::null();
-   |
+ on line 33, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:37:13
-   |
-LL | fn func1(p: const* u8) {}
-   |             ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:37:13
 help: put the `*` before `const`
-   |
-LL - fn func1(p: const* u8) {}
-LL + fn func1(p: *const u8) {}
-   |
+ on line 37, column 12, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:41:13
-   |
-LL | fn func2(p: mut* u8) {}
-   |             ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:41:13
 help: put the `*` before `mut`
-   |
-LL - fn func2(p: mut* u8) {}
-LL + fn func2(p: *mut u8) {}
-   |
+ on line 41, column 12, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:45:15
-   |
-LL | fn func3() -> const* u8 { std::ptr::null() }
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:45:15
 help: put the `*` before `const`
-   |
-LL - fn func3() -> const* u8 { std::ptr::null() }
-LL + fn func3() -> *const u8 { std::ptr::null() }
-   |
+ on line 45, column 14, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:49:15
-   |
-LL | fn func4() -> mut* u8 { std::ptr::null_mut() }
-   |               ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:49:15
 help: put the `*` before `mut`
-   |
-LL - fn func4() -> mut* u8 { std::ptr::null_mut() }
-LL + fn func4() -> *mut u8 { std::ptr::null_mut() }
-   |
+ on line 49, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:54:12
-   |
-LL |     field: const* u8,
-   |            ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:54:12
 help: put the `*` before `const`
-   |
-LL -     field: const* u8,
-LL +     field: *const u8,
-   |
+ on line 54, column 11, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:60:12
-   |
-LL |     field: mut* u8,
-   |            ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:60:12
 help: put the `*` before `mut`
-   |
-LL -     field: mut* u8,
-LL +     field: *mut u8,
-   |
+ on line 60, column 11, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:65:16
-   |
-LL | type Tuple1 = (const* u8, i32);
-   |                ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:65:16
 help: put the `*` before `const`
-   |
-LL - type Tuple1 = (const* u8, i32);
-LL + type Tuple1 = (*const u8, i32);
-   |
+ on line 65, column 15, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:69:16
-   |
-LL | type Tuple2 = (mut* u8, i32);
-   |                ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:69:16
 help: put the `*` before `mut`
-   |
-LL - type Tuple2 = (mut* u8, i32);
-LL + type Tuple2 = (*mut u8, i32);
-   |
+ on line 69, column 15, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:73:16
-   |
-LL | type Array1 = [const* u8; 10];
-   |                ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:73:16
 help: put the `*` before `const`
-   |
-LL - type Array1 = [const* u8; 10];
-LL + type Array1 = [*const u8; 10];
-   |
+ on line 73, column 15, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:77:16
-   |
-LL | type Array2 = [mut* u8; 10];
-   |                ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:77:16
 help: put the `*` before `mut`
-   |
-LL - type Array2 = [mut* u8; 10];
-LL + type Array2 = [*mut u8; 10];
-   |
+ on line 77, column 15, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:81:15
-   |
-LL | type Alias1 = const* u8;
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:81:15
 help: put the `*` before `const`
-   |
-LL - type Alias1 = const* u8;
-LL + type Alias1 = *const u8;
-   |
+ on line 81, column 14, add `*`
 
 error: raw pointer types must be written as `*mut T`
-  --> $DIR/c-style-pointer-types.rs:85:15
-   |
-LL | type Alias2 = mut* u8;
-   |               ^^^
-   |
+ at $DIR/c-style-pointer-types.rs:85:15
 help: put the `*` before `mut`
-   |
-LL - type Alias2 = mut* u8;
-LL + type Alias2 = *mut u8;
-   |
+ on line 85, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:89:15
-   |
-LL | pub const P9: const *u8 = std::ptr::null();
-   |               ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:89:15
 help: put the `*` before `const`
-   |
-LL - pub const P9: const *u8 = std::ptr::null();
-LL + pub const P9: *const u8 = std::ptr::null();
-   |
+ on line 89, column 14, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:93:16
-   |
-LL | pub const P10: const  *  u8 = std::ptr::null();
-   |                ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:93:16
 help: put the `*` before `const`
-   |
-LL - pub const P10: const  *  u8 = std::ptr::null();
-LL + pub const P10: *const    u8 = std::ptr::null();
-   |
+ on line 93, column 15, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:98:27
-   |
-LL |     fn method(self, size: const* u32) {}
-   |                           ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:98:27
 help: put the `*` before `const`
-   |
-LL -     fn method(self, size: const* u32) {}
-LL +     fn method(self, size: *const u32) {}
-   |
+ on line 98, column 26, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:104:18
-   |
-LL |     fn method(p: const* u8);
-   |                  ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:104:18
 help: put the `*` before `const`
-   |
-LL -     fn method(p: const* u8);
-LL +     fn method(p: *const u8);
-   |
+ on line 104, column 17, add `*`
 
 error: raw pointer types must be written as `*const T`
-  --> $DIR/c-style-pointer-types.rs:109:25
-   |
-LL | fn generic_func<T>() -> const* T { std::ptr::null() }
-   |                         ^^^^^
-   |
+ at $DIR/c-style-pointer-types.rs:109:25
 help: put the `*` before `const`
-   |
-LL - fn generic_func<T>() -> const* T { std::ptr::null() }
-LL + fn generic_func<T>() -> *const T { std::ptr::null() }
-   |
+ on line 109, column 24, add `*`
 
 error: aborting due to 25 previous errors
 

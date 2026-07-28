@@ -1,20 +1,11 @@
 error: lang items are not allowed in stable dylibs
-  --> $DIR/lang-item.rs:6:1
-   |
-LL | #[lang = "pointee_sized"]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lang-item.rs:6:1
 
 error: lang items are not allowed in stable dylibs
-  --> $DIR/lang-item.rs:10:1
-   |
-LL | #[lang = "meta_sized"]
-   | ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lang-item.rs:10:1
 
 error: lang items are not allowed in stable dylibs
-  --> $DIR/lang-item.rs:14:1
-   |
-LL | #[lang = "sized"]
-   | ^^^^^^^^^^^^^^^^^
+ at $DIR/lang-item.rs:14:1
 
 error: aborting due to 3 previous errors
 

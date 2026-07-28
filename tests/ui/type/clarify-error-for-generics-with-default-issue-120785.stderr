@@ -1,26 +1,14 @@
-error[E0308]: mismatched types
-  --> $DIR/clarify-error-for-generics-with-default-issue-120785.rs:6:9
-   |
-LL |     let mut b: What<usize> = What(5, vec![1, 2, 3]);
-   |                ----------- expected due to this type
-LL |     let c: What<usize, String> = What(1, String::from("meow"));
-LL |     b = c;
-   |         ^ expected `What`, found `What<usize, String>`
-   |
-   = note: expected struct `What<_, Vec<usize>>`
-              found struct `What<_, String>`
+error E0308: mismatched types
+ at $DIR/clarify-error-for-generics-with-default-issue-120785.rs:6:9: expected `What`, found `What<usize, String>`
+  on line 4, column 16: expected due to this type
+note: expected struct `What<_, Vec<usize>>`
+         found struct `What<_, String>`
 
-error[E0308]: mismatched types
-  --> $DIR/clarify-error-for-generics-with-default-issue-120785.rs:10:9
-   |
-LL |     let mut f: What<usize, Vec<String>> = What(1, vec![String::from("meow")]);
-   |                ------------------------ expected due to this type
-LL |     let e: What<usize> = What(5, vec![1, 2, 3]);
-LL |     f = e;
-   |         ^ expected `What<usize, Vec<String>>`, found `What`
-   |
-   = note: expected struct `What<_, Vec<String>>`
-              found struct `What<_, Vec<usize>>`
+error E0308: mismatched types
+ at $DIR/clarify-error-for-generics-with-default-issue-120785.rs:10:9: expected `What<usize, Vec<String>>`, found `What`
+  on line 8, column 16: expected due to this type
+note: expected struct `What<_, Vec<String>>`
+         found struct `What<_, Vec<usize>>`
 
 error: aborting due to 2 previous errors
 

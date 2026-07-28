@@ -1,428 +1,220 @@
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:22:9
-   |
-LL |     let a @ ref b = U;
-   |         ^   ----- value borrowed here after move
-   |         |
-   |         value moved into `a` here
-   |         move occurs because `a` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:22:9: value moved into `a` here
+  on line 22, column 9: move occurs because `a` has type `U`, which does not implement the `Copy` trait
+  on line 22, column 13: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ ref b = U;
-   |         +++
+ on line 22, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:9
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (U, U);
-   |         ^            ---------      ----- value borrowed here after move
-   |         |            |
-   |         |            value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `(U, U)`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:9: value moved into `a` here
+  on line 24, column 9: move occurs because `a` has type `(U, U)`, which does not implement the `Copy` trait
+  on line 24, column 22: value borrowed here after move
+  on line 24, column 37: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ (mut b @ ref mut c, d @ ref e) = (U, U);
-   |         +++
+ on line 24, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:14
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (U, U);
-   |              ^^^^^   --------- value borrowed here after move
-   |              |
-   |              value moved into `b` here
-   |              move occurs because `b` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:14: value moved into `b` here
+  on line 24, column 14: move occurs because `b` has type `U`, which does not implement the `Copy` trait
+  on line 24, column 22: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let a @ (ref mut b @ ref mut c, d @ ref e) = (U, U);
-   |              +++
+ on line 24, column 13, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:33
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (U, U);
-   |                                 ^   ----- value borrowed here after move
-   |                                 |
-   |                                 value moved into `d` here
-   |                                 move occurs because `d` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:33: value moved into `d` here
+  on line 24, column 33: move occurs because `d` has type `U`, which does not implement the `Copy` trait
+  on line 24, column 37: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let a @ (mut b @ ref mut c, ref d @ ref e) = (U, U);
-   |                                 +++
+ on line 24, column 32, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:29:9
-   |
-LL |     let a @ [ref mut b, ref c] = [U, U];
-   |         ^    ---------  ----- value borrowed here after move
-   |         |    |
-   |         |    value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `[U; 2]`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:29:9: value moved into `a` here
+  on line 29, column 9: move occurs because `a` has type `[U; 2]`, which does not implement the `Copy` trait
+  on line 29, column 14: value borrowed here after move
+  on line 29, column 25: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ [ref mut b, ref c] = [U, U];
-   |         +++
+ on line 29, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:31:9
-   |
-LL |     let a @ ref b = u();
-   |         ^   ----- value borrowed here after move
-   |         |
-   |         value moved into `a` here
-   |         move occurs because `a` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:31:9: value moved into `a` here
+  on line 31, column 9: move occurs because `a` has type `U`, which does not implement the `Copy` trait
+  on line 31, column 13: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ ref b = u();
-   |         +++
+ on line 31, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:9
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (u(), u());
-   |         ^            ---------      ----- value borrowed here after move
-   |         |            |
-   |         |            value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `(U, U)`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:9: value moved into `a` here
+  on line 33, column 9: move occurs because `a` has type `(U, U)`, which does not implement the `Copy` trait
+  on line 33, column 22: value borrowed here after move
+  on line 33, column 37: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ (mut b @ ref mut c, d @ ref e) = (u(), u());
-   |         +++
+ on line 33, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:14
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (u(), u());
-   |              ^^^^^   --------- value borrowed here after move
-   |              |
-   |              value moved into `b` here
-   |              move occurs because `b` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:14: value moved into `b` here
+  on line 33, column 14: move occurs because `b` has type `U`, which does not implement the `Copy` trait
+  on line 33, column 22: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let a @ (ref mut b @ ref mut c, d @ ref e) = (u(), u());
-   |              +++
+ on line 33, column 13, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:33
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (u(), u());
-   |                                 ^   ----- value borrowed here after move
-   |                                 |
-   |                                 value moved into `d` here
-   |                                 move occurs because `d` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:33: value moved into `d` here
+  on line 33, column 33: move occurs because `d` has type `U`, which does not implement the `Copy` trait
+  on line 33, column 37: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let a @ (mut b @ ref mut c, ref d @ ref e) = (u(), u());
-   |                                 +++
+ on line 33, column 32, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:38:9
-   |
-LL |     let a @ [ref mut b, ref c] = [u(), u()];
-   |         ^    ---------  ----- value borrowed here after move
-   |         |    |
-   |         |    value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `[U; 2]`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:38:9: value moved into `a` here
+  on line 38, column 9: move occurs because `a` has type `[U; 2]`, which does not implement the `Copy` trait
+  on line 38, column 14: value borrowed here after move
+  on line 38, column 25: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ [ref mut b, ref c] = [u(), u()];
-   |         +++
+ on line 38, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:42:9
-   |
-LL |         a @ Some(ref b) => {}
-   |         ^        ----- value borrowed here after move
-   |         |
-   |         value moved into `a` here
-   |         move occurs because `a` has type `Option<U>`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:42:9: value moved into `a` here
+  on line 42: move occurs because `a` has type `Option<U>`, which does not implement the `Copy` trait
+  on line 42, column 18: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref a @ Some(ref b) => {}
-   |         +++
+ on line 42, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:9
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |         ^                 ---------      ----- value borrowed here after move
-   |         |                 |
-   |         |                 value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `Option<(U, U)>`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:9: value moved into `a` here
+  on line 47: move occurs because `a` has type `Option<(U, U)>`, which does not implement the `Copy` trait
+  on line 47, column 27: value borrowed here after move
+  on line 47, column 42: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |         +++
+ on line 47, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:19
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |                   ^^^^^   --------- value borrowed here after move
-   |                   |
-   |                   value moved into `b` here
-   |                   move occurs because `b` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:19: value moved into `b` here
+  on line 47, column 19: move occurs because `b` has type `U`, which does not implement the `Copy` trait
+  on line 47, column 27: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         a @ Some((ref mut b @ ref mut c, d @ ref e)) => {}
-   |                   +++
+ on line 47, column 18, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:38
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |                                      ^   ----- value borrowed here after move
-   |                                      |
-   |                                      value moved into `d` here
-   |                                      move occurs because `d` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:38: value moved into `d` here
+  on line 47, column 38: move occurs because `d` has type `U`, which does not implement the `Copy` trait
+  on line 47, column 42: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         a @ Some((mut b @ ref mut c, ref d @ ref e)) => {}
-   |                                      +++
+ on line 47, column 37, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:55:9
-   |
-LL |         mut a @ Some([ref b, ref mut c]) => {}
-   |         ^^^^^         -----  --------- value borrowed here after move
-   |         |             |
-   |         |             value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `Option<[U; 2]>`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:55:9: value moved into `a` here
+  on line 55: move occurs because `a` has type `Option<[U; 2]>`, which does not implement the `Copy` trait
+  on line 55, column 23: value borrowed here after move
+  on line 55, column 30: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref mut a @ Some([ref b, ref mut c]) => {}
-   |         +++
+ on line 55, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:60:9
-   |
-LL |         a @ Some(ref b) => {}
-   |         ^        ----- value borrowed here after move
-   |         |
-   |         value moved into `a` here
-   |         move occurs because `a` has type `Option<U>`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:60:9: value moved into `a` here
+  on line 60: move occurs because `a` has type `Option<U>`, which does not implement the `Copy` trait
+  on line 60, column 18: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref a @ Some(ref b) => {}
-   |         +++
+ on line 60, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:9
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |         ^                 ---------      ----- value borrowed here after move
-   |         |                 |
-   |         |                 value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `Option<(U, U)>`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:9: value moved into `a` here
+  on line 65: move occurs because `a` has type `Option<(U, U)>`, which does not implement the `Copy` trait
+  on line 65, column 27: value borrowed here after move
+  on line 65, column 42: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |         +++
+ on line 65, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:19
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |                   ^^^^^   --------- value borrowed here after move
-   |                   |
-   |                   value moved into `b` here
-   |                   move occurs because `b` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:19: value moved into `b` here
+  on line 65, column 19: move occurs because `b` has type `U`, which does not implement the `Copy` trait
+  on line 65, column 27: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         a @ Some((ref mut b @ ref mut c, d @ ref e)) => {}
-   |                   +++
+ on line 65, column 18, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:38
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |                                      ^   ----- value borrowed here after move
-   |                                      |
-   |                                      value moved into `d` here
-   |                                      move occurs because `d` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:38: value moved into `d` here
+  on line 65, column 38: move occurs because `d` has type `U`, which does not implement the `Copy` trait
+  on line 65, column 42: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         a @ Some((mut b @ ref mut c, ref d @ ref e)) => {}
-   |                                      +++
+ on line 65, column 37, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:73:9
-   |
-LL |         mut a @ Some([ref b, ref mut c]) => {}
-   |         ^^^^^         -----  --------- value borrowed here after move
-   |         |             |
-   |         |             value borrowed here after move
-   |         value moved into `a` here
-   |         move occurs because `a` has type `Option<[U; 2]>`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:73:9: value moved into `a` here
+  on line 73: move occurs because `a` has type `Option<[U; 2]>`, which does not implement the `Copy` trait
+  on line 73, column 23: value borrowed here after move
+  on line 73, column 30: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref mut a @ Some([ref b, ref mut c]) => {}
-   |         +++
+ on line 73, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:9
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (U, U);
-   |         ^                       - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:24:9: value used here after partial move
+  on line 24, column 33: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ (mut b @ ref mut c, ref d @ ref e) = (U, U);
-   |         +++                         +++
+ on line 24, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:9
-   |
-LL |     let a @ (mut b @ ref mut c, d @ ref e) = (u(), u());
-   |         ^                       - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:33:9: value used here after partial move
+  on line 33, column 33: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     let ref a @ (mut b @ ref mut c, ref d @ ref e) = (u(), u());
-   |         +++                         +++
+ on line 33, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:9
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |         ^                            - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:47:9: value used here after partial move
+  on line 47, column 38: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref a @ Some((mut b @ ref mut c, ref d @ ref e)) => {}
-   |         +++                              +++
+ on line 47, column 8, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:9
-   |
-LL |         a @ Some((mut b @ ref mut c, d @ ref e)) => {}
-   |         ^                            - value partially moved here
-   |         |
-   |         value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:65:9: value used here after partial move
+  on line 65, column 38: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |         ref a @ Some((mut b @ ref mut c, ref d @ ref e)) => {}
-   |         +++                              +++
+ on line 65, column 8, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:11:11
-   |
-LL |     fn f1(a @ ref b: U) {}
-   |           ^   ----- value borrowed here after move
-   |           |
-   |           value moved into `a` here
-   |           move occurs because `a` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:11:11: value moved into `a` here
+  on line 11, column 11: move occurs because `a` has type `U`, which does not implement the `Copy` trait
+  on line 11, column 15: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     fn f1(ref a @ ref b: U) {}
-   |           +++
+ on line 11, column 10, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:11
-   |
-LL |     fn f2(mut a @ (b @ ref c, mut d @ ref e): (U, U)) {}
-   |           ^^^^^        -----          ----- value borrowed here after move
-   |           |            |
-   |           |            value borrowed here after move
-   |           value moved into `a` here
-   |           move occurs because `a` has type `(U, U)`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:11: value moved into `a` here
+  on line 14, column 11: move occurs because `a` has type `(U, U)`, which does not implement the `Copy` trait
+  on line 14, column 24: value borrowed here after move
+  on line 14, column 39: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     fn f2(ref mut a @ (b @ ref c, mut d @ ref e): (U, U)) {}
-   |           +++
+ on line 14, column 10, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:20
-   |
-LL |     fn f2(mut a @ (b @ ref c, mut d @ ref e): (U, U)) {}
-   |                    ^   ----- value borrowed here after move
-   |                    |
-   |                    value moved into `b` here
-   |                    move occurs because `b` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:20: value moved into `b` here
+  on line 14, column 20: move occurs because `b` has type `U`, which does not implement the `Copy` trait
+  on line 14, column 24: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     fn f2(mut a @ (ref b @ ref c, mut d @ ref e): (U, U)) {}
-   |                    +++
+ on line 14, column 19, add `ref `
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:31
-   |
-LL |     fn f2(mut a @ (b @ ref c, mut d @ ref e): (U, U)) {}
-   |                               ^^^^^   ----- value borrowed here after move
-   |                               |
-   |                               value moved into `d` here
-   |                               move occurs because `d` has type `U`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:31: value moved into `d` here
+  on line 14, column 31: move occurs because `d` has type `U`, which does not implement the `Copy` trait
+  on line 14, column 39: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     fn f2(mut a @ (b @ ref c, ref mut d @ ref e): (U, U)) {}
-   |                               +++
+ on line 14, column 30, add `ref `
 
-error[E0382]: use of partially moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:11
-   |
-LL |     fn f2(mut a @ (b @ ref c, mut d @ ref e): (U, U)) {}
-   |           ^^^^^               ----- value partially moved here
-   |           |
-   |           value used here after partial move
-   |
-   = note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
+error E0382: use of partially moved value
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:14:11: value used here after partial move
+  on line 14, column 31: value partially moved here
+note: partial move occurs because value has type `U`, which does not implement the `Copy` trait
 
 error: borrow of moved value
-  --> $DIR/borrowck-pat-by-move-and-ref-inverse.rs:19:11
-   |
-LL |     fn f3(a @ [ref mut b, ref c]: [U; 2]) {}
-   |           ^    ---------  ----- value borrowed here after move
-   |           |    |
-   |           |    value borrowed here after move
-   |           value moved into `a` here
-   |           move occurs because `a` has type `[U; 2]`, which does not implement the `Copy` trait
-   |
+ at $DIR/borrowck-pat-by-move-and-ref-inverse.rs:19:11: value moved into `a` here
+  on line 19, column 11: move occurs because `a` has type `[U; 2]`, which does not implement the `Copy` trait
+  on line 19, column 16: value borrowed here after move
+  on line 19, column 27: value borrowed here after move
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     fn f3(ref a @ [ref mut b, ref c]: [U; 2]) {}
-   |           +++
+ on line 19, column 10, add `ref `
 
 error: aborting due to 30 previous errors
 

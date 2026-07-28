@@ -1,48 +1,16 @@
-error[E0072]: recursive types `A` and `B` have infinite size
-  --> $DIR/mutual-struct-recursion.rs:1:1
-   |
-LL | struct A<T> {
-   | ^^^^^^^^^^^
-...
-LL |     y: B<T>,
-   |        ---- recursive without indirection
-...
-LL | struct B<T> {
-   | ^^^^^^^^^^^
-LL |     z: A<T>
-   |        ---- recursive without indirection
-   |
+error E0072: recursive types `A` and `B` have infinite size
+ at $DIR/mutual-struct-recursion.rs:1:1
+  on line 4, column 8: recursive without indirection
+  on line 8, column 8: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL ~     y: Box<B<T>>,
-LL | }
-LL |
-LL | struct B<T> {
-LL ~     z: Box<A<T>>
-   |
+ on line 4, column 7, add `Box<`
 
-error[E0072]: recursive types `C` and `D` have infinite size
-  --> $DIR/mutual-struct-recursion.rs:11:1
-   |
-LL | struct C<T> {
-   | ^^^^^^^^^^^
-...
-LL |     y: Option<Option<D<T>>>,
-   |                      ---- recursive without indirection
-...
-LL | struct D<T> {
-   | ^^^^^^^^^^^
-LL |     z: Option<Option<C<T>>>,
-   |                      ---- recursive without indirection
-   |
+error E0072: recursive types `C` and `D` have infinite size
+ at $DIR/mutual-struct-recursion.rs:11:1
+  on line 14, column 22: recursive without indirection
+  on line 18, column 22: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL ~     y: Option<Option<Box<D<T>>>>,
-LL | }
-LL |
-LL | struct D<T> {
-LL ~     z: Option<Option<Box<C<T>>>>,
-   |
+ on line 14, column 21, add `Box<`
 
 error: aborting due to 2 previous errors
 

@@ -1,24 +1,13 @@
 error: unions cannot have zero fields
-  --> $DIR/debug.rs:84:1
-   |
-LL | union EmptyUnion {}
-   | ^^^^^^^^^^^^^^^^^^^
+ at $DIR/debug.rs:84:1
 
 error: the `rustc_dump_layout` attribute cannot be used on constants
-  --> $DIR/debug.rs:71:3
-   |
-LL | #[rustc_dump_layout(debug)]
-   |   ^^^^^^^^^^^^^^^^^
-   |
-   = help: the `rustc_dump_layout` attribute can be applied to data types and type aliases
+ at $DIR/debug.rs:71:3
+help: the `rustc_dump_layout` attribute can be applied to data types and type aliases
 
 error: the `rustc_dump_layout` attribute cannot be used on associated consts
-  --> $DIR/debug.rs:75:7
-   |
-LL |     #[rustc_dump_layout(debug)]
-   |       ^^^^^^^^^^^^^^^^^
-   |
-   = help: the `rustc_dump_layout` attribute can be applied to data types and type aliases
+ at $DIR/debug.rs:75:7
+help: the `rustc_dump_layout` attribute can be applied to data types and type aliases
 
 error: layout_of(E) = Layout {
            size: Size(12 bytes),
@@ -83,10 +72,7 @@ error: layout_of(E) = Layout {
            unadjusted_abi_align: Align(4 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:8:1
-   |
-LL | enum E { Foo, Bar(!, i32, i32) }
-   | ^^^^^^
+ at $DIR/debug.rs:8:1
 
 error: layout_of(S) = Layout {
            size: Size(8 bytes),
@@ -119,10 +105,7 @@ error: layout_of(S) = Layout {
            unadjusted_abi_align: Align(4 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:11:1
-   |
-LL | struct S { f1: i32, f2: (), f3: i32 }
-   | ^^^^^^^^
+ at $DIR/debug.rs:11:1
 
 error: layout_of(U) = Layout {
            size: Size(8 bytes),
@@ -144,10 +127,7 @@ error: layout_of(U) = Layout {
            unadjusted_abi_align: Align(4 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:14:1
-   |
-LL | union U { f1: (i32, i32), f3: i32 }
-   | ^^^^^^^
+ at $DIR/debug.rs:14:1
 
 error: layout_of(Result<i32, i32>) = Layout {
            size: Size(8 bytes),
@@ -218,10 +198,7 @@ error: layout_of(Result<i32, i32>) = Layout {
            unadjusted_abi_align: Align(4 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:17:1
-   |
-LL | type Test = Result<i32, i32>;
-   | ^^^^^^^^^
+ at $DIR/debug.rs:17:1
 
 error: layout_of(i32) = Layout {
            size: Size(4 bytes),
@@ -241,10 +218,7 @@ error: layout_of(i32) = Layout {
            unadjusted_abi_align: Align(4 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:20:1
-   |
-LL | type T = impl std::fmt::Debug;
-   | ^^^^^^
+ at $DIR/debug.rs:20:1
 
 error: layout_of(V) = Layout {
            size: Size(2 bytes),
@@ -266,10 +240,7 @@ error: layout_of(V) = Layout {
            unadjusted_abi_align: Align(2 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:27:1
-   |
-LL | pub union V {
-   | ^^^^^^^^^^^
+ at $DIR/debug.rs:27:1
 
 error: layout_of(W) = Layout {
            size: Size(2 bytes),
@@ -291,10 +262,7 @@ error: layout_of(W) = Layout {
            unadjusted_abi_align: Align(2 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:33:1
-   |
-LL | pub union W {
-   | ^^^^^^^^^^^
+ at $DIR/debug.rs:33:1
 
 error: layout_of(Y) = Layout {
            size: Size(0 bytes),
@@ -316,10 +284,7 @@ error: layout_of(Y) = Layout {
            unadjusted_abi_align: Align(2 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:39:1
-   |
-LL | pub union Y {
-   | ^^^^^^^^^^^
+ at $DIR/debug.rs:39:1
 
 error: layout_of(P1) = Layout {
            size: Size(4 bytes),
@@ -341,10 +306,7 @@ error: layout_of(P1) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:46:1
-   |
-LL | union P1 { x: u32 }
-   | ^^^^^^^^
+ at $DIR/debug.rs:46:1
 
 error: layout_of(P2) = Layout {
            size: Size(8 bytes),
@@ -366,10 +328,7 @@ error: layout_of(P2) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:50:1
-   |
-LL | union P2 { x: (u32, u32) }
-   | ^^^^^^^^
+ at $DIR/debug.rs:50:1
 
 error: layout_of(P3) = Layout {
            size: Size(16 bytes),
@@ -391,10 +350,7 @@ error: layout_of(P3) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:58:1
-   |
-LL | union P3 { x: F32x4 }
-   | ^^^^^^^^
+ at $DIR/debug.rs:58:1
 
 error: layout_of(P4) = Layout {
            size: Size(12 bytes),
@@ -416,10 +372,7 @@ error: layout_of(P4) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:62:1
-   |
-LL | union P4 { x: E }
-   | ^^^^^^^^
+ at $DIR/debug.rs:62:1
 
 error: layout_of(P5) = Layout {
            size: Size(1 bytes),
@@ -441,10 +394,7 @@ error: layout_of(P5) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:66:1
-   |
-LL | union P5 { zst: [u16; 0], byte: u8 }
-   | ^^^^^^^^
+ at $DIR/debug.rs:66:1
 
 error: layout_of(MaybeUninit<u8>) = Layout {
            size: Size(1 bytes),
@@ -466,31 +416,18 @@ error: layout_of(MaybeUninit<u8>) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:69:1
-   |
-LL | type X = std::mem::MaybeUninit<u8>;
-   | ^^^^^^
+ at $DIR/debug.rs:69:1
 
-error[E0277]: the size for values of type `str` cannot be known at compilation time
-  --> $DIR/debug.rs:80:19
-   |
-LL | type Impossible = (str, str);
-   |                   ^^^^^^^^^^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `str`
-   = note: only the last element of a tuple may have a dynamically sized type
+error E0277: the size for values of type `str` cannot be known at compilation time
+ at $DIR/debug.rs:80:19: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `str`
+note: only the last element of a tuple may have a dynamically sized type
 
 error: the type has an unknown layout
-  --> $DIR/debug.rs:84:1
-   |
-LL | union EmptyUnion {}
-   | ^^^^^^^^^^^^^^^^
+ at $DIR/debug.rs:84:1
 
 error: the type `T` does not have a fixed layout
-  --> $DIR/debug.rs:90:1
-   |
-LL | type TooGeneric<T> = T;
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/debug.rs:90:1
 
 error: layout_of(Option<bool>) = Layout {
            size: Size(1 bytes),
@@ -561,10 +498,7 @@ error: layout_of(Option<bool>) = Layout {
            unadjusted_abi_align: Align(1 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:93:1
-   |
-LL | type OptBool = Option<bool>;
-   | ^^^^^^^^^^^^
+ at $DIR/debug.rs:93:1
 
 error: layout_of(Option<char>) = Layout {
            size: Size(4 bytes),
@@ -635,10 +569,7 @@ error: layout_of(Option<char>) = Layout {
            unadjusted_abi_align: Align(4 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/debug.rs:96:1
-   |
-LL | type OptChar = Option<char>;
-   | ^^^^^^^^^^^^
+ at $DIR/debug.rs:96:1
 
 error: aborting due to 22 previous errors
 

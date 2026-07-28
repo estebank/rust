@@ -1,17 +1,8 @@
-error[E0599]: the associated function or constant `f` exists for struct `Foo<()>`, but its trait bounds were not satisfied
-  --> $DIR/issue-108132-unmet-trait-alias-bound-on-generic-impl.rs:14:16
-   |
-LL | struct Foo<I>(I);
-   | ------------- associated function or constant `f` not found for this struct
-...
-LL |     Foo::<()>::f()
-   |                ^ associated function or constant cannot be called on `Foo<()>` due to unsatisfied trait bounds
-   |
+error E0599: the associated function or constant `f` exists for struct `Foo<()>`, but its trait bounds were not satisfied
+ at $DIR/issue-108132-unmet-trait-alias-bound-on-generic-impl.rs:14:16: associated function or constant cannot be called on `Foo<()>` due to unsatisfied trait bounds
+  on line 7: associated function or constant `f` not found for this struct
 note: trait bound `(): Iterator` was not satisfied
-  --> $DIR/issue-108132-unmet-trait-alias-bound-on-generic-impl.rs:5:23
-   |
-LL | trait IteratorAlias = Iterator;
-   |       -------------   ^^^^^^^^ unsatisfied trait bound introduced here
+ at $DIR/issue-108132-unmet-trait-alias-bound-on-generic-impl.rs:5:23: unsatisfied trait bound introduced here
 
 error: aborting due to 1 previous error
 

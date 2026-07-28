@@ -1,26 +1,13 @@
-error[E0308]: mismatched types
-  --> $DIR/shadowed-lplace-method.rs:9:24
-   |
-LL |     *rc.borrow_mut() = false;
-   |     ----------------   ^^^^^ expected `Rc<RefCell<bool>>`, found `bool`
-   |     |
-   |     expected due to the type of this binding
-   |
-   = note: expected struct `Rc<RefCell<bool>>`
-                found type `bool`
+error E0308: mismatched types
+ at $DIR/shadowed-lplace-method.rs:9:24: expected `Rc<RefCell<bool>>`, found `bool`
+  on line 9: expected due to the type of this binding
+note: expected struct `Rc<RefCell<bool>>`
+           found type `bool`
 note: the `borrow_mut` call is resolved to the method in `std::borrow::BorrowMut`, shadowing the method of the same name on the inherent impl for `std::cell::RefCell<T>`
-  --> $DIR/shadowed-lplace-method.rs:9:9
-   |
-LL | use std::borrow::BorrowMut;
-   |     ---------------------- `std::borrow::BorrowMut` imported here
-...
-LL |     *rc.borrow_mut() = false;
-   |         ^^^^^^^^^^ refers to `std::borrow::BorrowMut::borrow_mut`
+ at $DIR/shadowed-lplace-method.rs:9:9: refers to `std::borrow::BorrowMut::borrow_mut`
+  on line 3, column 5: `std::borrow::BorrowMut` imported here
 help: you might have meant to call the other method; you can use the fully-qualified path to call it explicitly
-   |
-LL -     *rc.borrow_mut() = false;
-LL +     *std::cell::RefCell::<_>::borrow_mut(&rc) = false;
-   |
+ on line 9, column 5, add `std::cell::RefCell::<_>::borrow_mut(&`
 
 error: aborting due to 1 previous error
 

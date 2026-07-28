@@ -1,13 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/mismatched-pointer-type-in-self-7061.rs:7:46
-   |
-LL |     fn foo(&'a mut self) -> Box<BarStruct> { self }
-   |                             --------------   ^^^^ expected `Box<BarStruct>`, found `&mut BarStruct`
-   |                             |
-   |                             expected `Box<BarStruct>` because of return type
-   |
-   = note:         expected struct `Box<BarStruct>`
-           found mutable reference `&'a mut BarStruct`
+error E0308: mismatched types
+ at $DIR/mismatched-pointer-type-in-self-7061.rs:7:46: expected `Box<BarStruct>`, found `&mut BarStruct`
+  on line 7, column 29: expected `Box<BarStruct>` because of return type
+note:         expected struct `Box<BarStruct>`
+      found mutable reference `&'a mut BarStruct`
 
 error: aborting due to 1 previous error
 

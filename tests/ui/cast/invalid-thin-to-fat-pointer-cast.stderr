@@ -1,8 +1,5 @@
-error[E0607]: cannot cast thin pointer `*const ()` to wide pointer `*const [u8]`
-  --> $DIR/invalid-thin-to-fat-pointer-cast.rs:6:5
-   |
-LL |     x as *const [u8];
-   |     ^^^^^^^^^^^^^^^^
+error E0607: cannot cast thin pointer `*const ()` to wide pointer `*const [u8]`
+ at $DIR/invalid-thin-to-fat-pointer-cast.rs:6:5
 
 error: aborting due to 1 previous error
 

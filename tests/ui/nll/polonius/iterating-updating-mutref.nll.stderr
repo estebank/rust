@@ -1,14 +1,7 @@
-error[E0499]: cannot borrow `self.buf_read` as mutable more than once at a time
-  --> $DIR/iterating-updating-mutref.rs:76:23
-   |
-LL |     pub fn next<'a>(&'a mut self) -> &'a str {
-   |                 -- lifetime `'a` defined here
-LL |         loop {
-LL |             let buf = self.buf_read.fill_buf();
-   |                       ^^^^^^^^^^^^^ `self.buf_read` was mutably borrowed here in the previous iteration of the loop
-LL |             if let Some(s) = decode(buf) {
-LL |                 return s;
-   |                        - returning this value requires that `self.buf_read` is borrowed for `'a`
+error E0499: cannot borrow `self.buf_read` as mutable more than once at a time
+ at $DIR/iterating-updating-mutref.rs:76:23: `self.buf_read` was mutably borrowed here in the previous iteration of the loop
+  on line 74, column 17: lifetime `'a` defined here
+  on line 78, column 24: returning this value requires that `self.buf_read` is borrowed for `'a`
 
 error: aborting due to 1 previous error
 

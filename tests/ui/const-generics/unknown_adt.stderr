@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `UnknownStruct` in this scope
-  --> $DIR/unknown_adt.rs:2:12
-   |
-LL |     let _: UnknownStruct<7>;
-   |            ^^^^^^^^^^^^^ not found in this scope
+error E0425: cannot find type `UnknownStruct` in this scope
+ at $DIR/unknown_adt.rs:2:12: not found in this scope
 
 error: aborting due to 1 previous error
 

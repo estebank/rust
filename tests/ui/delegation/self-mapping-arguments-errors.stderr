@@ -1,137 +1,61 @@
 error: attempted to lower target expression with definitions more than once while mapping argument
-  --> $DIR/self-mapping-arguments-errors.rs:14:5
-   |
-LL | /     reuse impl MyAdd for W {
-...  |
-LL | |         self.0
-LL | |     }
-   | |_____^
+ at $DIR/self-mapping-arguments-errors.rs:14:5 to 29:6
 
-error[E0186]: method `add` has a `self` declaration in the trait, but not in the impl
-  --> $DIR/self-mapping-arguments-errors.rs:14:5
-   |
-LL |           fn add(self, other: Self) -> Self;
-   |           ---------------------------------- `self` used in trait
-...
-LL | /     reuse impl MyAdd for W {
-...  |
-LL | |         self.0
-LL | |     }
-   | |_____^ expected `self` in impl
+error E0186: method `add` has a `self` declaration in the trait, but not in the impl
+ at $DIR/self-mapping-arguments-errors.rs:14:5 to 29:6: expected `self` in impl
+  on line 5: `self` used in trait
 
-error[E0277]: the trait bound `(): target_expr_doesnt_relower_when_defs_inside::MyAdd` is not satisfied
-  --> $DIR/self-mapping-arguments-errors.rs:14:5
-   |
-LL | /     reuse impl MyAdd for W {
-...  |
-LL | |         self.0
-LL | |     }
-   | |_____^ the trait `target_expr_doesnt_relower_when_defs_inside::MyAdd` is not implemented for `()`
-   |
+error E0277: the trait bound `(): target_expr_doesnt_relower_when_defs_inside::MyAdd` is not satisfied
+ at $DIR/self-mapping-arguments-errors.rs:14:5 to 29:6: the trait `target_expr_doesnt_relower_when_defs_inside::MyAdd` is not implemented for `()`
 help: the following other types implement trait `target_expr_doesnt_relower_when_defs_inside::MyAdd`
-  --> $DIR/self-mapping-arguments-errors.rs:8:5
-   |
-LL |     impl MyAdd for usize {
-   |     ^^^^^^^^^^^^^^^^^^^^ `usize`
-...
-LL |     reuse impl MyAdd for W {
-   |     ^^^^^^^^^^^^^^^^^^^^^^ `target_expr_doesnt_relower_when_defs_inside::W`
+ at $DIR/self-mapping-arguments-errors.rs:8:5: `usize`
+  on line 14: `target_expr_doesnt_relower_when_defs_inside::W`
 
-error[E0061]: this function takes 2 arguments but 1 argument was supplied
-  --> $DIR/self-mapping-arguments-errors.rs:14:5
-   |
-LL | /     reuse impl MyAdd for W {
-...  |
-LL | |         self.0
-LL | |     }
-   | |     ^
-   | |     |
-   | |_____argument #2 of type `()` is missing
-   |       this implicit `()` return type influences the call expression's return type
-   |
+error E0061: this function takes 2 arguments but 1 argument was supplied
+ at $DIR/self-mapping-arguments-errors.rs:14:5 to 29:6: argument #2 of type `()` is missing
+  on line 14 to line 29: this implicit `()` return type influences the call expression's return type
 note: method defined here
-  --> $DIR/self-mapping-arguments-errors.rs:5:12
-   |
-LL |         fn add(self, other: Self) -> Self;
-   |            ^^^       -----
+ at $DIR/self-mapping-arguments-errors.rs:5:12
 help: provide the argument
-   |
-LL ~     }({
-LL +
-LL +
-LL +
-LL +
-LL +         println!("{self:?}");
-LL +         fn foo() {
-LL +             println!("hello");
-LL +         }
-LL + 
-LL +         reuse foo as bar;
-LL +         bar();
-LL +         bar();
-LL + 
-LL +         self.0
-LL +     }, ())
-   |
+ on line 29, column 5, add `({
+        println!("{self:?}");
+        fn foo() {
+            println!("hello");
+        }
 
-error[E0308]: mismatched types
-  --> $DIR/self-mapping-arguments-errors.rs:43:30
-   |
-LL |     reuse impl MyAdd for W { self.0 }
-   |     -------------------------^^^^^^--
-   |     |                        |
-   |     |                        expected `Box<usize>`, found `usize`
-   |     arguments to this function are incorrect
-   |     this return type influences the call expression's return type
-   |
+        reuse foo as bar;
+        bar();
+        bar();
+
+        self.0
+    }, ())`
+
+error E0308: mismatched types
+ at $DIR/self-mapping-arguments-errors.rs:43:30: expected `Box<usize>`, found `usize`
+  on line 43: arguments to this function are incorrect
+  on line 43: this return type influences the call expression's return type
 note: there is a field `0` on `Box<complex_Self_doesnt_map::W>` with type `std::ptr::Unique<complex_Self_doesnt_map::W>` but it is private; `0` from `complex_Self_doesnt_map::W` was accessed through auto-deref instead
-  --> $SRC_DIR/alloc/src/boxed.rs:LL:COL
-   |
-   = note: in this struct
-  ::: $SRC_DIR/alloc/src/boxed.rs:LL:COL
-   |
-   = note: if this field wasn't private, it would be accessible
-   |
-  ::: $DIR/self-mapping-arguments-errors.rs:42:12
-   |
-LL |     struct W(usize);
-   |            - ----- this is the field that was accessed
-   |            |
-   |            this struct is accessible through auto-deref
-   = note: expected struct `Box<usize>`
-                found type `usize`
-   = note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
+ at $SRC_DIR/alloc/src/boxed.rs:LL:COL
+note: in this struct
+ at $SRC_DIR/alloc/src/boxed.rs:LL:COL
+note: if this field wasn't private, it would be accessible
+ at $DIR/self-mapping-arguments-errors.rs:42:12: this struct is accessible through auto-deref
+  on line 42, column 14: this is the field that was accessed
+note: expected struct `Box<usize>`
+           found type `usize`
+note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
 note: method defined here
-  --> $DIR/self-mapping-arguments-errors.rs:34:12
-   |
-LL |         fn add(self, other: Box<Self>) -> Self;
-   |            ^^^       -----
+ at $DIR/self-mapping-arguments-errors.rs:34:12
 help: store this in the heap by calling `Box::new`
-   |
-LL |     reuse impl MyAdd for W { Box::new(self.0) }
-   |                              +++++++++      +
+ on line 43, column 29, add `Box::new(`
 
-error[E0308]: mismatched types
-  --> $DIR/self-mapping-arguments-errors.rs:60:5
-   |
-LL | /     reuse impl MyAdd for W {
-LL | |         println!("{self:?}");
-LL | |         let _x = 213;
-...  |
-LL | |     }
-   | |_____^ expected `Box<usize>`, found `usize`
-   |
-   = note: expected struct `Box<usize>`
-                found type `usize`
-   = note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
+error E0308: mismatched types
+ at $DIR/self-mapping-arguments-errors.rs:60:5 to 65:6: expected `Box<usize>`, found `usize`
+note: expected struct `Box<usize>`
+           found type `usize`
+note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
 help: store this in the heap by calling `Box::new`
-   |
-LL ~     Box::new(reuse impl MyAdd for W {
-LL |         println!("{self:?}");
-...
-LL |         self.0
-LL ~     })
-   |
+ on line 60, column 4, add `Box::new(`
 
 error: aborting due to 6 previous errors
 

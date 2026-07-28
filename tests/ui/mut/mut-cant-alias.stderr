@@ -1,12 +1,7 @@
-error[E0499]: cannot borrow `b` as mutable more than once at a time
-  --> $DIR/mut-cant-alias.rs:9:20
-   |
-LL |     let b1 = &mut *b;
-   |                    - first mutable borrow occurs here
-LL |     let b2 = &mut *b;
-   |                    ^ second mutable borrow occurs here
-LL |     b1.use_mut();
-   |     -- first borrow later used here
+error E0499: cannot borrow `b` as mutable more than once at a time
+ at $DIR/mut-cant-alias.rs:9:20: second mutable borrow occurs here
+  on line 8, column 20: first mutable borrow occurs here
+  on line 10: first borrow later used here
 
 error: aborting due to 1 previous error
 

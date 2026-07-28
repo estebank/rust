@@ -1,13 +1,8 @@
-error[E0282]: type annotations needed for `&_`
-  --> $DIR/issue-12187-1.rs:6:9
-   |
-LL |     let &v = new();
-   |         ^^   ----- type must be known at this point
-   |
+error E0282: type annotations needed for `&_`
+ at $DIR/issue-12187-1.rs:6:9
+  on line 6, column 14: type must be known at this point
 help: consider giving this pattern a type, where the type for type parameter `T` is specified
-   |
-LL |     let &v: &T = new();
-   |           ++++
+ on line 6, column 10, add `: &T`
 
 error: aborting due to 1 previous error
 

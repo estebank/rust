@@ -1,64 +1,36 @@
 error: expressions must be enclosed in braces to be used as const generic arguments
-  --> $DIR/macro_rules-braces.rs:44:17
-   |
-LL |     let _: baz!(m::P);
-   |                 ^^^^
-   |
+ at $DIR/macro_rules-braces.rs:44:17
 help: enclose the `const` expression in braces
-   |
-LL |     let _: baz!({ m::P });
-   |                 +      +
+ on line 44, column 16, add `{ `
 
 error: expressions must be enclosed in braces to be used as const generic arguments
-  --> $DIR/macro_rules-braces.rs:64:17
-   |
-LL |     let _: baz!(10 + 7);
-   |                 ^^^^^^
-   |
+ at $DIR/macro_rules-braces.rs:64:17
 help: enclose the `const` expression in braces
-   |
-LL |     let _: baz!({ 10 + 7 });
-   |                 +        +
+ on line 64, column 16, add `{ `
 
 error: generic parameters may not be used in const operations
-  --> $DIR/macro_rules-braces.rs:32:20
-   |
-LL |     let _: foo!({{ N }});
-   |                    ^ cannot perform const operation using `N`
-   |
-   = help: const parameters may only be used as standalone arguments here, i.e. `N`
-   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
-   = help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
+ at $DIR/macro_rules-braces.rs:32:20: cannot perform const operation using `N`
+help: const parameters may only be used as standalone arguments here, i.e. `N`
+help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
 
 error: generic parameters may not be used in const operations
-  --> $DIR/macro_rules-braces.rs:36:19
-   |
-LL |     let _: bar!({ N });
-   |                   ^ cannot perform const operation using `N`
-   |
-   = help: const parameters may only be used as standalone arguments here, i.e. `N`
-   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
-   = help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
+ at $DIR/macro_rules-braces.rs:36:19: cannot perform const operation using `N`
+help: const parameters may only be used as standalone arguments here, i.e. `N`
+help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
 
 error: generic parameters may not be used in const operations
-  --> $DIR/macro_rules-braces.rs:41:20
-   |
-LL |     let _: baz!({{ N }});
-   |                    ^ cannot perform const operation using `N`
-   |
-   = help: const parameters may only be used as standalone arguments here, i.e. `N`
-   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
-   = help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
+ at $DIR/macro_rules-braces.rs:41:20: cannot perform const operation using `N`
+help: const parameters may only be used as standalone arguments here, i.e. `N`
+help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
 
 error: generic parameters may not be used in const operations
-  --> $DIR/macro_rules-braces.rs:46:19
-   |
-LL |     let _: biz!({ N });
-   |                   ^ cannot perform const operation using `N`
-   |
-   = help: const parameters may only be used as standalone arguments here, i.e. `N`
-   = help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
-   = help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
+ at $DIR/macro_rules-braces.rs:46:19: cannot perform const operation using `N`
+help: const parameters may only be used as standalone arguments here, i.e. `N`
+help: add `#![feature(generic_const_exprs)]` to allow generic const expressions
+help: alternatively, you can use `#![feature(generic_const_args)]` and extract the expression into a `type const` item
 
 error: aborting due to 6 previous errors
 

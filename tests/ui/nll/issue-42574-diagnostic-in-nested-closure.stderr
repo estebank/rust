@@ -1,27 +1,14 @@
 error: lifetime may not live long enough
-  --> $DIR/issue-42574-diagnostic-in-nested-closure.rs:7:8
-   |
-LL |     || doit(data);
-   |     -- ^^^^^^^^^^ argument requires that `'1` must outlive `'static`
-   |     |
-   |     lifetime `'1` represents this closure's body
-   |
-   = note: closure implements `FnMut`, so references to captured variables can't escape the closure
+ at $DIR/issue-42574-diagnostic-in-nested-closure.rs:7:8: argument requires that `'1` must outlive `'static`
+  on line 7: lifetime `'1` represents this closure's body
+note: closure implements `FnMut`, so references to captured variables can't escape the closure
 
-error[E0597]: `data` does not live long enough
-  --> $DIR/issue-42574-diagnostic-in-nested-closure.rs:7:13
-   |
-LL | fn doit(data: &'static mut ()) {
-   |         ---- binding `data` declared here
-LL |     || doit(data);
-   |     -- -----^^^^-
-   |     |  |    |
-   |     |  |    borrowed value does not live long enough
-   |     |  argument requires that `data` is borrowed for `'static`
-   |     value captured here
-...
-LL | }
-   |  - `data` dropped here while still borrowed
+error E0597: `data` does not live long enough
+ at $DIR/issue-42574-diagnostic-in-nested-closure.rs:7:13: borrowed value does not live long enough
+  on line 6, column 9: binding `data` declared here
+  on line 7: value captured here
+  on line 7, column 8: argument requires that `data` is borrowed for `'static`
+  on line 10, column 2: `data` dropped here while still borrowed
 
 error: aborting due to 2 previous errors
 

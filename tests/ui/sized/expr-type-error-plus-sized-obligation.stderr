@@ -1,18 +1,9 @@
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/expr-type-error-plus-sized-obligation.rs:7:9
-   |
-LL |       let (a, _) = if true {
-   |  __________________-
-LL | |         produce()
-   | |         --------- expected because of this
-LL | |     } else {
-LL | |         (Vec::new(), &[])
-   | |         ^^^^^^^^^^^^^^^^^ expected `(Vec<Foo>, &[Bar])`, found `(Vec<_>, &[_; 0])`
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
-   |
-   = note: expected tuple `(Vec<Foo>, &[Bar])`
-              found tuple `(Vec<_>, &[_; 0])`
+error E0308: `if` and `else` have incompatible types
+ at $DIR/expr-type-error-plus-sized-obligation.rs:7:9: expected `(Vec<Foo>, &[Bar])`, found `(Vec<_>, &[_; 0])`
+  on line 4, column 18 to line 8, column 6: `if` and `else` have incompatible types
+  on line 5: expected because of this
+note: expected tuple `(Vec<Foo>, &[Bar])`
+         found tuple `(Vec<_>, &[_; 0])`
 
 error: aborting due to 1 previous error
 

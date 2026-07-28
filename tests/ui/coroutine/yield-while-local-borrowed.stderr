@@ -1,35 +1,16 @@
-error[E0626]: borrow may still be in use when coroutine yields
-  --> $DIR/yield-while-local-borrowed.rs:13:17
-   |
-LL |     let mut b = #[coroutine] move || {
-   |                              ------- within this coroutine
-LL |         let a = &mut 3;
-   |                 ^^^^^^
-LL |
-LL |         yield ();
-   |         -------- possible yield occurs here
-   |
+error E0626: borrow may still be in use when coroutine yields
+ at $DIR/yield-while-local-borrowed.rs:13:17
+  on line 12, column 30: within this coroutine
+  on line 15: possible yield occurs here
 help: add `static` to mark this coroutine as unmovable
-   |
-LL |     let mut b = #[coroutine] static move || {
-   |                              ++++++
+ on line 12, column 29, add `static `
 
-error[E0626]: borrow may still be in use when coroutine yields
-  --> $DIR/yield-while-local-borrowed.rs:40:21
-   |
-LL |     let mut b = #[coroutine] move || {
-   |                              ------- within this coroutine
-...
-LL |             let b = &a;
-   |                     ^^
-LL |
-LL |             yield ();
-   |             -------- possible yield occurs here
-   |
+error E0626: borrow may still be in use when coroutine yields
+ at $DIR/yield-while-local-borrowed.rs:40:21
+  on line 37, column 30: within this coroutine
+  on line 42: possible yield occurs here
 help: add `static` to mark this coroutine as unmovable
-   |
-LL |     let mut b = #[coroutine] static move || {
-   |                              ++++++
+ on line 37, column 29, add `static `
 
 error: aborting due to 2 previous errors
 

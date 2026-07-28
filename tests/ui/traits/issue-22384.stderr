@@ -1,8 +1,5 @@
-error[E0576]: cannot find associated type `foobar` in trait `Copy`
-  --> $DIR/issue-22384.rs:6:21
-   |
-LL |     <<i32 as Copy>::foobar as Trait>::foo();
-   |                     ^^^^^^ not found in `Copy`
+error E0576: cannot find associated type `foobar` in trait `Copy`
+ at $DIR/issue-22384.rs:6:21: not found in `Copy`
 
 error: aborting due to 1 previous error
 

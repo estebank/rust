@@ -1,8 +1,5 @@
 error: repetition matches empty token tree
-  --> $DIR/vis-repetition-matches-empty.rs:5:7
-   |
-LL |     ($($p:vis)*) => {}
-   |       ^^^^^^^^
+ at $DIR/vis-repetition-matches-empty.rs:5:7
 
 error: aborting due to 1 previous error
 

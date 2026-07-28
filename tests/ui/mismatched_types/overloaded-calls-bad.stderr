@@ -1,65 +1,31 @@
-error[E0308]: mismatched types
-  --> $DIR/overloaded-calls-bad.rs:33:17
-   |
-LL |     let ans = s("what");
-   |               - ^^^^^^ expected `isize`, found `&str`
-   |               |
-   |               arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/overloaded-calls-bad.rs:33:17: expected `isize`, found `&str`
+  on line 33, column 15: arguments to this function are incorrect
 note: implementation defined here
-  --> $DIR/overloaded-calls-bad.rs:10:1
-   |
-LL | impl FnMut<(isize,)> for S {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/overloaded-calls-bad.rs:10:1
 
-error[E0057]: this function takes 1 argument but 0 arguments were supplied
-  --> $DIR/overloaded-calls-bad.rs:35:15
-   |
-LL |     let ans = s();
-   |               ^-- argument #1 of type `isize` is missing
-   |
+error E0057: this function takes 1 argument but 0 arguments were supplied
+ at $DIR/overloaded-calls-bad.rs:35:15
+  on line 35, column 16: argument #1 of type `isize` is missing
 note: implementation defined here
-  --> $DIR/overloaded-calls-bad.rs:10:1
-   |
-LL | impl FnMut<(isize,)> for S {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/overloaded-calls-bad.rs:10:1
 help: provide the argument
-   |
-LL |     let ans = s(/* isize */);
-   |                 +++++++++++
+ on line 35, column 15, replace with `(/* isize */)`
 
-error[E0057]: this function takes 1 argument but 2 arguments were supplied
-  --> $DIR/overloaded-calls-bad.rs:37:15
-   |
-LL |     let ans = s("burma", "shave");
-   |               ^ -------  ------- unexpected argument #2 of type `&'static str`
-   |                 |
-   |                 expected `isize`, found `&str`
-   |
+error E0057: this function takes 1 argument but 2 arguments were supplied
+ at $DIR/overloaded-calls-bad.rs:37:15
+  on line 37, column 17: expected `isize`, found `&str`
+  on line 37, column 26: unexpected argument #2 of type `&'static str`
 note: implementation defined here
-  --> $DIR/overloaded-calls-bad.rs:10:1
-   |
-LL | impl FnMut<(isize,)> for S {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/overloaded-calls-bad.rs:10:1
 help: remove the extra argument
-   |
-LL -     let ans = s("burma", "shave");
-LL +     let ans = s(/* isize */);
-   |
+ on line 37, column 16, replace with `/* isize */`
 
-error[E0308]: mismatched types
-  --> $DIR/overloaded-calls-bad.rs:40:7
-   |
-LL |     F("");
-   |     - ^^ expected `i32`, found `&str`
-   |     |
-   |     arguments to this struct are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/overloaded-calls-bad.rs:40:7: expected `i32`, found `&str`
+  on line 40: arguments to this struct are incorrect
 note: implementation defined here
-  --> $DIR/overloaded-calls-bad.rs:25:1
-   |
-LL | impl FnOnce<(i32,)> for F {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/overloaded-calls-bad.rs:25:1
 
 error: aborting due to 4 previous errors
 

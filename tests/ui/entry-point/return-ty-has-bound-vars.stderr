@@ -1,8 +1,5 @@
-error[E0131]: `main` function return type is not allowed to have generic parameters
-  --> $DIR/return-ty-has-bound-vars.rs:3:28
-   |
-LL | fn main<'a>(_: &'a i32) -> &'a () { &() }
-   |                            ^^^^^^
+error E0131: `main` function return type is not allowed to have generic parameters
+ at $DIR/return-ty-has-bound-vars.rs:3:28
 
 error: aborting due to 1 previous error
 

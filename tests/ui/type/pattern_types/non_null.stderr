@@ -29,10 +29,7 @@ error: layout_of((*const T) is !null) = Layout {
            unadjusted_abi_align: Align(8 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/non_null.rs:11:1
-   |
-LL | type NonNull<T> = pattern_type!(*const T is !null);
-   | ^^^^^^^^^^^^^^^
+ at $DIR/non_null.rs:11:1
 
 error: layout_of(Option<(*const ()) is !null>) = Layout {
            size: Size(8 bytes),
@@ -97,10 +94,7 @@ error: layout_of(Option<(*const ()) is !null>) = Layout {
            unadjusted_abi_align: Align(8 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/non_null.rs:14:1
-   |
-LL | type Test = Option<NonNull<()>>;
-   | ^^^^^^^^^
+ at $DIR/non_null.rs:14:1
 
 error: layout_of((*const [u8]) is !null) = Layout {
            size: Size(16 bytes),
@@ -135,10 +129,7 @@ error: layout_of((*const [u8]) is !null) = Layout {
            unadjusted_abi_align: Align(8 bytes),
            randomization_seed: $SEED,
        }
-  --> $DIR/non_null.rs:17:1
-   |
-LL | type Wide = pattern_type!(*const [u8] is !null);
-   | ^^^^^^^^^
+ at $DIR/non_null.rs:17:1
 
 error: aborting due to 3 previous errors
 

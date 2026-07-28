@@ -1,38 +1,21 @@
-error[E0308]: mismatched types
-  --> $DIR/specialization-transmute.rs:13:9
-   |
-LL | impl<T> Default for T {
-   |      - found this type parameter
-LL |     default type Id = T;
-LL |     fn intu(&self) -> &Self::Id {
-   |                       --------- expected `&<T as Default>::Id` because of return type
-LL |         self
-   |         ^^^^ expected `&<T as Default>::Id`, found `&T`
-   |
-   = note: expected reference `&<T as Default>::Id`
-              found reference `&T`
+error E0308: mismatched types
+ at $DIR/specialization-transmute.rs:13:9: expected `&<T as Default>::Id`, found `&T`
+  on line 10, column 6: found this type parameter
+  on line 12, column 23: expected `&<T as Default>::Id` because of return type
+note: expected reference `&<T as Default>::Id`
+         found reference `&T`
 help: consider restricting type parameter `T` with  `<Id = T>`
-   |
-LL | impl<T: <Id = T>> Default for T {
-   |       ++++++++++
+ on line 10, column 6, add `: <Id = T>`
 
-error[E0271]: type mismatch resolving `<u8 as Default>::Id == Option<NonZero<u8>>`
-  --> $DIR/specialization-transmute.rs:24:50
-   |
-LL |     let s = transmute::<u8, Option<NonZero<u8>>>(0);
-   |             ------------------------------------ ^ expected `Option<NonZero<u8>>`, found associated type
-   |             |
-   |             required by a bound introduced by this call
-   |
-   = note:         expected enum `Option<NonZero<u8>>`
-           found associated type `<u8 as Default>::Id`
-   = help: consider constraining the associated type `<u8 as Default>::Id` to `Option<NonZero<u8>>`
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-03-advanced-traits.html
+error E0271: type mismatch resolving `<u8 as Default>::Id == Option<NonZero<u8>>`
+ at $DIR/specialization-transmute.rs:24:50: expected `Option<NonZero<u8>>`, found associated type
+  on line 24, column 13: required by a bound introduced by this call
+note:         expected enum `Option<NonZero<u8>>`
+      found associated type `<u8 as Default>::Id`
+help: consider constraining the associated type `<u8 as Default>::Id` to `Option<NonZero<u8>>`
+note: for more information, visit https://doc.rust-lang.org/book/ch19-03-advanced-traits.html
 note: required by a bound in `transmute`
-  --> $DIR/specialization-transmute.rs:17:25
-   |
-LL | fn transmute<T: Default<Id = U>, U: Copy>(t: T) -> U {
-   |                         ^^^^^^ required by this bound in `transmute`
+ at $DIR/specialization-transmute.rs:17:25: required by this bound in `transmute`
 
 error: aborting due to 2 previous errors
 

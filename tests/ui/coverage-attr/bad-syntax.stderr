@@ -1,168 +1,88 @@
 error: multiple `coverage` attributes
-  --> $DIR/bad-syntax.rs:10:1
-   |
-LL | #[coverage(off)]
-   | ^^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/bad-syntax.rs:10:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/bad-syntax.rs:9:1
-   |
-LL | #[coverage(off)]
-   | ^^^^^^^^^^^^^^^^
+ at $DIR/bad-syntax.rs:9:1
 
 error: multiple `coverage` attributes
-  --> $DIR/bad-syntax.rs:14:1
-   |
-LL | #[coverage(on)]
-   | ^^^^^^^^^^^^^^^ help: remove this attribute
-   |
+ at $DIR/bad-syntax.rs:14:1: help: remove this attribute
 note: attribute also specified here
-  --> $DIR/bad-syntax.rs:13:1
-   |
-LL | #[coverage(off)]
-   | ^^^^^^^^^^^^^^^^
+ at $DIR/bad-syntax.rs:13:1
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:17:3
-   |
-LL | #[coverage]
-   |   ^^^^^^^^ expected this to be a list
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:17:3: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL | #[coverage(off)]
-   |           +++++
-LL | #[coverage(on)]
-   |           ++++
+ on line 17, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:20:3
-   |
-LL | #[coverage = true]
-   |   ^^^^^^^^^------
-   |            |
-   |            expected this to be a list
-   |
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage = true]
-LL + #[coverage(off)]
-   |
-LL - #[coverage = true]
-LL + #[coverage(on)]
-   |
 
-error[E0805]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:23:3
-   |
-LL | #[coverage()]
-   |   ^^^^^^^^--
-   |           |
-   |           expected an argument here
-   |
+error E0539: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:20:3
+  on line 20, column 12: expected this to be a list
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL | #[coverage(off)]
-   |            +++
-LL | #[coverage(on)]
-   |            ++
+ on line 20, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0805]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:26:3
-   |
-LL | #[coverage(off, off)]
-   |   ^^^^^^^^----------
-   |           |
-   |           expected a single argument here
-   |
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(off, off)]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(off, off)]
-LL + #[coverage(on)]
-   |
 
-error[E0805]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:29:3
-   |
-LL | #[coverage(off, on)]
-   |   ^^^^^^^^---------
-   |           |
-   |           expected a single argument here
-   |
+error E0805: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:23:3
+  on line 23, column 11: expected an argument here
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(off, on)]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(off, on)]
-LL + #[coverage(on)]
-   |
+ on line 23, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0539]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:32:3
-   |
-LL | #[coverage(bogus)]
-   |   ^^^^^^^^^-----^
-   |            |
-   |            valid arguments are `on` or `off`
-   |
-help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(bogus)]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(bogus)]
-LL + #[coverage(on)]
-   |
 
-error[E0805]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:35:3
-   |
-LL | #[coverage(bogus, off)]
-   |   ^^^^^^^^------------
-   |           |
-   |           expected a single argument here
-   |
+error E0805: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:26:3
+  on line 26, column 11: expected a single argument here
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(bogus, off)]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(bogus, off)]
-LL + #[coverage(on)]
-   |
+ on line 26, column 2, replace with one of
+  coverage(off)
+  coverage(on)
 
-error[E0805]: malformed `coverage` attribute input
-  --> $DIR/bad-syntax.rs:38:3
-   |
-LL | #[coverage(off, bogus)]
-   |   ^^^^^^^^------------
-   |           |
-   |           expected a single argument here
-   |
+
+error E0805: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:29:3
+  on line 29, column 11: expected a single argument here
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[coverage(off, bogus)]
-LL + #[coverage(off)]
-   |
-LL - #[coverage(off, bogus)]
-LL + #[coverage(on)]
-   |
+ on line 29, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
+
+error E0539: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:32:3
+  on line 32, column 12: valid arguments are `on` or `off`
+help: try changing it to one of the following valid forms of the attribute
+ on line 32, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
+
+error E0805: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:35:3
+  on line 35, column 11: expected a single argument here
+help: try changing it to one of the following valid forms of the attribute
+ on line 35, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
+
+error E0805: malformed `coverage` attribute input
+ at $DIR/bad-syntax.rs:38:3
+  on line 38, column 11: expected a single argument here
+help: try changing it to one of the following valid forms of the attribute
+ on line 38, column 2, replace with one of
+  coverage(off)
+  coverage(on)
+
 
 error: expected identifier, found `,`
-  --> $DIR/bad-syntax.rs:44:12
-   |
-LL | #[coverage(,off)]
-   |            ^ expected identifier
-   |
+ at $DIR/bad-syntax.rs:44:12: expected identifier
 help: remove this comma
-   |
-LL - #[coverage(,off)]
-LL + #[coverage(off)]
-   |
+ on line 44, column 11
 
 error: aborting due to 11 previous errors
 

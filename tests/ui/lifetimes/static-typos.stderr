@@ -1,25 +1,12 @@
-error[E0261]: use of undeclared lifetime name `'stati`
-  --> $DIR/static-typos.rs:1:13
-   |
-LL | fn stati<T: 'stati>() {}
-   |             ^^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'stati`
+ at $DIR/static-typos.rs:1:13: undeclared lifetime
 help: you may have misspelled the `'static` lifetime
-   |
-LL | fn stati<T: 'static>() {}
-   |                   +
+ on line 1, column 12, replace with `'static`
 
-error[E0261]: use of undeclared lifetime name `'statoc`
-  --> $DIR/static-typos.rs:4:14
-   |
-LL | fn statoc<T: 'statoc>() {}
-   |              ^^^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'statoc`
+ at $DIR/static-typos.rs:4:14: undeclared lifetime
 help: you may have misspelled the `'static` lifetime
-   |
-LL - fn statoc<T: 'statoc>() {}
-LL + fn statoc<T: 'static>() {}
-   |
+ on line 4, column 13, replace with `'static`
 
 error: aborting due to 2 previous errors
 

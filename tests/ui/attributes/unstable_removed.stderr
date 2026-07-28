@@ -1,26 +1,15 @@
-error[E0658]: stability attributes may not be used outside of the standard library
-  --> $DIR/unstable_removed.rs:9:4
-   |
-LL | #![unstable_removed(
-   |    ^^^^^^^^^^^^^^^^
+error E0658: stability attributes may not be used outside of the standard library
+ at $DIR/unstable_removed.rs:9:4
 
-error[E0557]: feature `old_feature` has been removed
-  --> $DIR/unstable_removed.rs:3:12
-   |
-LL | #![feature(old_feature)]
-   |            ^^^^^^^^^^^ feature has been removed
-   |
-   = note: removed in 1.92.0; see <https://github.com/rust-lang/rust/issues/141617> for more information
-   = note: deprecated
+error E0557: feature `old_feature` has been removed
+ at $DIR/unstable_removed.rs:3:12: feature has been removed
+note: removed in 1.92.0; see <https://github.com/rust-lang/rust/issues/141617> for more information
+note: deprecated
 
-error[E0557]: feature `concat_idents` has been removed
-  --> $DIR/unstable_removed.rs:6:12
-   |
-LL | #![feature(concat_idents)]
-   |            ^^^^^^^^^^^^^ feature has been removed
-   |
-   = note: removed in 1.90.0; see <https://github.com/rust-lang/rust/issues/29599#issuecomment-2986866250> for more information
-   = note: Replaced by the macro_metavar_expr_concat feature
+error E0557: feature `concat_idents` has been removed
+ at $DIR/unstable_removed.rs:6:12: feature has been removed
+note: removed in 1.90.0; see <https://github.com/rust-lang/rust/issues/29599#issuecomment-2986866250> for more information
+note: Replaced by the macro_metavar_expr_concat feature
 
 error: aborting due to 3 previous errors
 

@@ -1,30 +1,15 @@
-error[E0792]: expected generic lifetime parameter, found `'static`
-  --> $DIR/non-defining-use-lifetimes.rs:13:16
-   |
-LL |     fn foo<'a>(_: Lt<'a>) -> impl Sized + 'a {
-   |                                           -- cannot use static lifetime; use a bound lifetime instead or remove the lifetime parameter from the opaque type
-LL |         let _: () = foo(Lt::<'static>::None);
-   |                ^^
+error E0792: expected generic lifetime parameter, found `'static`
+ at $DIR/non-defining-use-lifetimes.rs:13:16
+  on line 12, column 43: cannot use static lifetime; use a bound lifetime instead or remove the lifetime parameter from the opaque type
 
-error[E0792]: expected generic lifetime parameter, found `'_`
-  --> $DIR/non-defining-use-lifetimes.rs:22:16
-   |
-LL |     fn foo<'a>(_: Lt<'a>) -> impl Sized + 'a {
-   |                                           -- this generic parameter must be used with a generic lifetime parameter
-LL |         let _: () = foo(Lt::<'_>::None);
-   |                ^^
+error E0792: expected generic lifetime parameter, found `'_`
+ at $DIR/non-defining-use-lifetimes.rs:22:16
+  on line 21, column 43: this generic parameter must be used with a generic lifetime parameter
 
 error: non-defining opaque type use in defining scope
-  --> $DIR/non-defining-use-lifetimes.rs:32:16
-   |
-LL |         let _: () = foo(Lt::<'a>::None, Lt::<'a>::None);
-   |                ^^
-   |
+ at $DIR/non-defining-use-lifetimes.rs:32:16
 note: lifetime used multiple times
-  --> $DIR/non-defining-use-lifetimes.rs:31:58
-   |
-LL |     fn foo<'a, 'b>(_: Lt<'a>, _: Lt<'b>) -> impl Sized + 'a + 'b {
-   |                                                          ^^   ^^
+ at $DIR/non-defining-use-lifetimes.rs:31:58
 
 error: aborting due to 3 previous errors
 

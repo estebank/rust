@@ -1,28 +1,16 @@
-error[E0369]: cannot multiply `bool` by `&mut bool`
-  --> $DIR/nested-assignment-may-be-deref.rs:3:5
-   |
-LL |     if true
-   |        ---- bool
-LL |     *x = true {}
-   |     ^- &mut bool
-   |
+error E0369: cannot multiply `bool` by `&mut bool`
+ at $DIR/nested-assignment-may-be-deref.rs:3:5
+  on line 2, column 8: bool
+  on line 3, column 6: &mut bool
 help: you might have meant to write a semicolon here
-   |
-LL |     if true;
-   |            +
+ on line 2, column 11, add `;`
 
-error[E0369]: cannot multiply `bool` by `&mut bool`
-  --> $DIR/nested-assignment-may-be-deref.rs:10:5
-   |
-LL |     y = true
-   |         ---- bool
-LL |     *x = true;
-   |     ^- &mut bool
-   |
+error E0369: cannot multiply `bool` by `&mut bool`
+ at $DIR/nested-assignment-may-be-deref.rs:10:5
+  on line 9, column 9: bool
+  on line 10, column 6: &mut bool
 help: you might have meant to write a semicolon here
-   |
-LL |     y = true;
-   |             +
+ on line 9, column 12, add `;`
 
 error: aborting due to 2 previous errors
 

@@ -1,10 +1,6 @@
-error[E0515]: cannot return value referencing local variable `x`
-  --> $DIR/gat-hide-lifetime-for-swap.rs:33:5
-   |
-LL |     h.hide_ref(&mut res).swap(h.hide_ref(&mut &x));
-   |                                               -- `x` is borrowed here
-LL |     res
-   |     ^^^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing local variable `x`
+ at $DIR/gat-hide-lifetime-for-swap.rs:33:5: returns a value referencing data owned by the current function
+  on line 32, column 47: `x` is borrowed here
 
 error: aborting due to 1 previous error
 

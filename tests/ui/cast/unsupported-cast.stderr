@@ -1,8 +1,5 @@
-error[E0606]: casting `f64` as `*const A` is invalid
-  --> $DIR/unsupported-cast.rs:4:20
-   |
-LL |   println!("{:?}", 1.0 as *const A);
-   |                    ^^^^^^^^^^^^^^^
+error E0606: casting `f64` as `*const A` is invalid
+ at $DIR/unsupported-cast.rs:4:20
 
 error: aborting due to 1 previous error
 

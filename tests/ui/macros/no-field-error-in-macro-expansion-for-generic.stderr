@@ -1,16 +1,8 @@
-error[E0609]: no field `trace` on type `&T`
-  --> $DIR/no-field-error-in-macro-expansion-for-generic.rs:7:17
-   |
-LL |         if $ctx.trace {
-   |                 ^^^^^ unknown field
-...
-LL | fn wrap<T>(context: &T) -> ()
-   |         - type parameter 'T' declared here
-LL | {
-LL |     log!(context, "entered wrapper");
-   |     -------------------------------- in this macro invocation
-   |
-   = note: this error originates in the macro `log` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0609: no field `trace` on type `&T`
+ at $DIR/no-field-error-in-macro-expansion-for-generic.rs:7:17: unknown field
+  on line 20, column 9: type parameter 'T' declared here
+  on line 22: in this macro invocation
+note: this error originates in the macro `log` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 1 previous error
 

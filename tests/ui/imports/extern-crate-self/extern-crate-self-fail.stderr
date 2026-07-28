@@ -1,19 +1,10 @@
 error: `extern crate self;` requires renaming
-  --> $DIR/extern-crate-self-fail.rs:1:1
-   |
-LL | extern crate self;
-   | ^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/extern-crate-self-fail.rs:1:1
 help: rename the `self` crate to be able to import it
-   |
-LL | extern crate self as name;
-   |                   +++++++
+ on line 1, column 1, replace with `extern crate self as name;`
 
 error: `#[macro_use]` is not supported on `extern crate self`
-  --> $DIR/extern-crate-self-fail.rs:3:1
-   |
-LL | #[macro_use]
-   | ^^^^^^^^^^^^
+ at $DIR/extern-crate-self-fail.rs:3:1
 
 error: aborting due to 2 previous errors
 

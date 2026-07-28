@@ -1,25 +1,12 @@
-error[E0382]: use of moved value: `y`
-  --> $DIR/liveness-move-in-loop.rs:11:25
-   |
-LL |     let y: Box<isize> = 42.into();
-   |         - move occurs because `y` has type `Box<isize>`, which does not implement the `Copy` trait
-...
-LL |     loop {
-   |     ---- inside of this loop
-LL |         println!("{}", y);
-LL |         loop {
-   |         ---- inside of this loop
-LL |             loop {
-   |             ---- inside of this loop
-LL |                 loop {
-   |                 ---- inside of this loop
-LL |                     x = y;
-   |                         ^ value moved here, in previous iteration of loop
-   |
+error E0382: use of moved value: `y`
+ at $DIR/liveness-move-in-loop.rs:11:25: value moved here, in previous iteration of loop
+  on line 3, column 9: move occurs because `y` has type `Box<isize>`, which does not implement the `Copy` trait
+  on line 6: inside of this loop
+  on line 8: inside of this loop
+  on line 9: inside of this loop
+  on line 10: inside of this loop
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |                     x = y.clone();
-   |                          ++++++++
+ on line 11, column 25, add `.clone()`
 
 error: aborting due to 1 previous error
 

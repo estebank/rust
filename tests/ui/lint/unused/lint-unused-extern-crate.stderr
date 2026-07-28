@@ -1,31 +1,14 @@
 error: unused extern crate
-  --> $DIR/lint-unused-extern-crate.rs:11:1
-   |
-LL | extern crate lint_unused_extern_crate5;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused
-   |
+ at $DIR/lint-unused-extern-crate.rs:11:1: unused
 note: the lint level is defined here
-  --> $DIR/lint-unused-extern-crate.rs:7:9
-   |
-LL | #![deny(unused_extern_crates)]
-   |         ^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lint-unused-extern-crate.rs:7:9
 help: remove the unused `extern crate`
-   |
-LL - extern crate lint_unused_extern_crate5;
-LL +
-   |
+ on line 11, column 1
 
 error: unused extern crate
-  --> $DIR/lint-unused-extern-crate.rs:29:5
-   |
-LL |     extern crate lint_unused_extern_crate2;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused
-   |
+ at $DIR/lint-unused-extern-crate.rs:29:5: unused
 help: remove the unused `extern crate`
-   |
-LL -     extern crate lint_unused_extern_crate2;
-LL +
-   |
+ on line 29, column 4
 
 error: aborting due to 2 previous errors
 

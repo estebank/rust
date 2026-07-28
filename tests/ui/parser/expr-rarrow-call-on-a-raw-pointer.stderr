@@ -1,52 +1,24 @@
 error: `->` is not valid syntax for field accesses and method calls
-  --> $DIR/expr-rarrow-call-on-a-raw-pointer.rs:13:10
-   |
-LL |     named->foo += 1;
-   |          ^^
-   |
-   = help: the `.` operator will automatically dereference the value, except if the value is a raw pointer
+ at $DIR/expr-rarrow-call-on-a-raw-pointer.rs:13:10
+help: the `.` operator will automatically dereference the value, except if the value is a raw pointer
 help: try using `.` instead
-   |
-LL -     named->foo += 1;
-LL +     named.foo += 1;
-   |
+ on line 13, column 9, replace with `.`
 
 error: `->` is not valid syntax for field accesses and method calls
-  --> $DIR/expr-rarrow-call-on-a-raw-pointer.rs:18:12
-   |
-LL |     unnamed->0 += 1;
-   |            ^^
-   |
-   = help: the `.` operator will automatically dereference the value, except if the value is a raw pointer
+ at $DIR/expr-rarrow-call-on-a-raw-pointer.rs:18:12
+help: the `.` operator will automatically dereference the value, except if the value is a raw pointer
 help: try using `.` instead
-   |
-LL -     unnamed->0 += 1;
-LL +     unnamed.0 += 1;
-   |
+ on line 18, column 11, replace with `.`
 
-error[E0609]: no field `foo` on type `*mut Named`
-  --> $DIR/expr-rarrow-call-on-a-raw-pointer.rs:13:12
-   |
-LL |     named->foo += 1;
-   |            ^^^ unknown field
-   |
+error E0609: no field `foo` on type `*mut Named`
+ at $DIR/expr-rarrow-call-on-a-raw-pointer.rs:13:12: unknown field
 help: `named` is a raw pointer; try dereferencing it
-   |
-LL -     named->foo += 1;
-LL +     (*named).foo += 1;
-   |
+ on line 13, column 4, add `(*`
 
-error[E0609]: no field `0` on type `*mut Unnamed`
-  --> $DIR/expr-rarrow-call-on-a-raw-pointer.rs:18:14
-   |
-LL |     unnamed->0 += 1;
-   |              ^ unknown field
-   |
+error E0609: no field `0` on type `*mut Unnamed`
+ at $DIR/expr-rarrow-call-on-a-raw-pointer.rs:18:14: unknown field
 help: `unnamed` is a raw pointer; try dereferencing it
-   |
-LL -     unnamed->0 += 1;
-LL +     (*unnamed).0 += 1;
-   |
+ on line 18, column 4, add `(*`
 
 error: aborting due to 4 previous errors
 

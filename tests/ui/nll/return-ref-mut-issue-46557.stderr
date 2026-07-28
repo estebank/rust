@@ -1,10 +1,6 @@
-error[E0515]: cannot return value referencing temporary value
-  --> $DIR/return-ref-mut-issue-46557.rs:5:5
-   |
-LL |     let ref mut x = 1234543;
-   |                     ------- temporary value created here
-LL |     x
-   |     ^ returns a value referencing data owned by the current function
+error E0515: cannot return value referencing temporary value
+ at $DIR/return-ref-mut-issue-46557.rs:5:5: returns a value referencing data owned by the current function
+  on line 4, column 21: temporary value created here
 
 error: aborting due to 1 previous error
 

@@ -1,29 +1,12 @@
-error[E0283]: type annotations needed
-  --> $DIR/issue-80816.rs:50:38
-   |
-LL |     let guard: Guard<Arc<usize>> = s.load();
-   |                                      ^^^^
-   |
+error E0283: type annotations needed
+ at $DIR/issue-80816.rs:50:38
 note: multiple `impl`s satisfying `ArcSwapAny<Arc<usize>>: Access<_>` found
-  --> $DIR/issue-80816.rs:36:1
-   |
-LL | impl<T> Access<T> for ArcSwapAny<T> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-...
-LL | impl<T> Access<T> for ArcSwapAny<Arc<T>> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-80816.rs:36:1
 note: required for `Arc<ArcSwapAny<Arc<usize>>>` to implement `Access<_>`
-  --> $DIR/issue-80816.rs:31:45
-   |
-LL | impl<T, A: Access<T>, P: Deref<Target = A>> Access<T> for P {
-   |            ---------                        ^^^^^^^^^     ^
-   |            |
-   |            unsatisfied trait bound introduced here
+ at $DIR/issue-80816.rs:31:45
+  on line 31, column 12: unsatisfied trait bound introduced here
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     let guard: Guard<Arc<usize>> = s.load();
-LL +     let guard: Guard<Arc<usize>> = <Arc<ArcSwapAny<Arc<usize>>> as Access<T>>::load(&s);
-   |
+ on line 50, column 35, add `<Arc<ArcSwapAny<Arc<usize>>> as Access<T>>::load(&`
 
 error: aborting due to 1 previous error
 

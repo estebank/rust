@@ -1,57 +1,25 @@
-error[E0382]: Foo for Foo
-  --> $DIR/on_move_with_format.rs:28:15
-   |
-LL |     let foo = Foo;
-   |         --- Bar for Foo
-LL |
-LL |     takes_foo(foo);
-   |               --- value moved here
-LL |     let bar = foo;
-   |               ^^^ value used here after move
-   |
+error E0382: Foo for Foo
+ at $DIR/on_move_with_format.rs:28:15: value used here after move
+  on line 25, column 9: Bar for Foo
+  on line 27, column 15: value moved here
 note: consider changing this parameter type in function `takes_foo` to borrow instead if owning the value isn't necessary
-  --> $DIR/on_move_with_format.rs:20:17
-   |
-LL | fn takes_foo(_: Foo) {}
-   |    ---------    ^^^ this parameter takes ownership of the value
-   |    |
-   |    in this function
+ at $DIR/on_move_with_format.rs:20:17: this parameter takes ownership of the value
+  on line 20, column 4: in this function
 note: if `Foo` implemented `Clone`, you could clone the value
-  --> $DIR/on_move_with_format.rs:9:1
-   |
-LL | struct Foo;
-   | ^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     takes_foo(foo);
-   |               --- you could clone this value
+ at $DIR/on_move_with_format.rs:9:1: consider implementing `Clone` for this type
+  on line 27, column 15: you could clone this value
 
-error[E0382]: Foo for i32
-  --> $DIR/on_move_with_format.rs:34:15
-   |
-LL |     let mytype = MyType { _x: 0 };
-   |         ------ Bar for i32
-LL |
-LL |     takes_mytype(mytype);
-   |                  ------ value moved here
-LL |     let baz = mytype;
-   |               ^^^^^^ value used here after move
-   |
-   = note: This is `MyType`
+error E0382: Foo for i32
+ at $DIR/on_move_with_format.rs:34:15: value used here after move
+  on line 31, column 9: Bar for i32
+  on line 33, column 18: value moved here
+note: This is `MyType`
 note: consider changing this parameter type in function `takes_mytype` to borrow instead if owning the value isn't necessary
-  --> $DIR/on_move_with_format.rs:22:23
-   |
-LL | fn takes_mytype<X>(_: MyType<X>) {}
-   |    ------------       ^^^^^^^^^ this parameter takes ownership of the value
-   |    |
-   |    in this function
+ at $DIR/on_move_with_format.rs:22:23: this parameter takes ownership of the value
+  on line 22, column 4: in this function
 note: if `MyType<i32>` implemented `Clone`, you could clone the value
-  --> $DIR/on_move_with_format.rs:16:1
-   |
-LL | struct MyType<X> {
-   | ^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     takes_mytype(mytype);
-   |                  ------ you could clone this value
+ at $DIR/on_move_with_format.rs:16:1: consider implementing `Clone` for this type
+  on line 33, column 18: you could clone this value
 
 error: aborting due to 2 previous errors
 

@@ -1,19 +1,11 @@
-error[E0382]: use of moved value: `x`
-  --> $DIR/non-copy-type-moved.rs:14:14
-   |
-LL | fn foo(x: D) {
-   |        - move occurs because `x` has type `((_, _, _, _), _, _, _)`, which does not implement the `Copy` trait
-LL |     let _a = x;
-   |              - value moved here
-LL |     let _b = x;
-   |              ^ value used here after move
-   |
-   = note: the full name for the type has been written to '$TEST_BUILD_DIR/non-copy-type-moved.long-type-$LONG_TYPE_HASH.txt'
-   = note: consider using `--verbose` to print the full type name to the console
+error E0382: use of moved value: `x`
+ at $DIR/non-copy-type-moved.rs:14:14: value used here after move
+  on line 12, column 8: move occurs because `x` has type `((_, _, _, _), _, _, _)`, which does not implement the `Copy` trait
+  on line 13, column 14: value moved here
+note: the full name for the type has been written to '$TEST_BUILD_DIR/non-copy-type-moved.long-type-$LONG_TYPE_HASH.txt'
+note: consider using `--verbose` to print the full type name to the console
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let _a = x.clone();
-   |               ++++++++
+ on line 13, column 14, add `.clone()`
 
 error: aborting due to 1 previous error
 

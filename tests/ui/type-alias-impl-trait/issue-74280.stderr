@@ -1,11 +1,6 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-74280.rs:10:5
-   |
-LL | fn test() -> Test {
-   |              ---- expected `()` because of return type
-LL |     let y = || -> Test { () };
-LL |     7
-   |     ^ expected `()`, found integer
+error E0308: mismatched types
+ at $DIR/issue-74280.rs:10:5: expected `()`, found integer
+  on line 8, column 14: expected `()` because of return type
 
 error: aborting due to 1 previous error
 

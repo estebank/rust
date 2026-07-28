@@ -1,24 +1,12 @@
-error[E0425]: cannot find value `err` in this scope
-  --> $DIR/issue-103909.rs:5:12
-   |
-LL |     if Err(err) = File::open("hello.txt") {
-   |            ^^^ not found in this scope
-   |
+error E0425: cannot find value `err` in this scope
+ at $DIR/issue-103909.rs:5:12: not found in this scope
 help: you might have meant to use pattern matching
-   |
-LL |     if let Err(err) = File::open("hello.txt") {
-   |        +++
+ on line 5, column 7, add `let `
 
-error[E0308]: mismatched types
-  --> $DIR/issue-103909.rs:5:8
-   |
-LL |     if Err(err) = File::open("hello.txt") {
-   |        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `bool`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/issue-103909.rs:5:8: expected `bool`, found `()`
 help: consider adding `let`
-   |
-LL |     if let Err(err) = File::open("hello.txt") {
-   |        +++
+ on line 5, column 7, add `let `
 
 error: aborting due to 2 previous errors
 

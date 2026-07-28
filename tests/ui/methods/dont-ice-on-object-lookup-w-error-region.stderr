@@ -1,13 +1,7 @@
-error[E0261]: use of undeclared lifetime name `'missing`
-  --> $DIR/dont-ice-on-object-lookup-w-error-region.rs:6:20
-   |
-LL | fn project(x: Pin<&'missing mut dyn Future<Output = ()>>) {
-   |                    ^^^^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'missing`
+ at $DIR/dont-ice-on-object-lookup-w-error-region.rs:6:20: undeclared lifetime
 help: consider introducing lifetime `'missing` here
-   |
-LL | fn project<'missing>(x: Pin<&'missing mut dyn Future<Output = ()>>) {
-   |           ++++++++++
+ on line 6, column 10, add `<'missing>`
 
 error: aborting due to 1 previous error
 

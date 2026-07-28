@@ -1,20 +1,11 @@
-error[E0767]: use of unreachable label `'some_label`
-  --> $DIR/labeled-break-in-async-fn-ice-66702.rs:6:18
-   |
-LL |     'some_label: loop {
-   |     ----------- unreachable label defined here
-LL |         || break 'some_label ();
-   |                  ^^^^^^^^^^^ unreachable label `'some_label`
-   |
-   = note: labels are unreachable through functions, closures, async blocks and modules
+error E0767: use of unreachable label `'some_label`
+ at $DIR/labeled-break-in-async-fn-ice-66702.rs:6:18: unreachable label `'some_label`
+  on line 5: unreachable label defined here
+note: labels are unreachable through functions, closures, async blocks and modules
 
-error[E0267]: `break` inside of a closure
-  --> $DIR/labeled-break-in-async-fn-ice-66702.rs:6:12
-   |
-LL |         || break 'some_label ();
-   |         -- ^^^^^^^^^^^^^^^^^^^^ cannot `break` inside of a closure
-   |         |
-   |         enclosing closure
+error E0267: `break` inside of a closure
+ at $DIR/labeled-break-in-async-fn-ice-66702.rs:6:12: cannot `break` inside of a closure
+  on line 6: enclosing closure
 
 error: aborting due to 2 previous errors
 

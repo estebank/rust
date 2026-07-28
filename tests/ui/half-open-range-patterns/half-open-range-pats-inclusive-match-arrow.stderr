@@ -1,28 +1,15 @@
 error: unexpected `>` after inclusive range
-  --> $DIR/half-open-range-pats-inclusive-match-arrow.rs:8:14
-   |
-LL |         74..=> {},
-   |           ---^
-   |           |
-   |           this is parsed as an inclusive range `..=`
-   |
+ at $DIR/half-open-range-pats-inclusive-match-arrow.rs:8:14
+  on line 8, column 11: this is parsed as an inclusive range `..=`
 help: add a space between the pattern and `=>`
-   |
-LL |         74.. => {},
-   |             +
+ on line 8, column 10, replace with `.. =`
 
-error[E0004]: non-exhaustive patterns: `i32::MIN..=-1_i32` not covered
-  --> $DIR/half-open-range-pats-inclusive-match-arrow.rs:3:11
-   |
-LL |     match x {
-   |           ^ pattern `i32::MIN..=-1_i32` not covered
-   |
-   = note: the matched value is of type `i32`
+error E0004: non-exhaustive patterns: `i32::MIN..=-1_i32` not covered
+ at $DIR/half-open-range-pats-inclusive-match-arrow.rs:3:11: pattern `i32::MIN..=-1_i32` not covered
+note: the matched value is of type `i32`
 help: ensure that all possible cases are being handled by adding a match arm with a wildcard pattern or an explicit pattern as shown
-   |
-LL ~         74..=> {},
-LL ~         i32::MIN..=-1_i32 => todo!(),
-   |
+ on line 8, column 17, add `,
+        i32::MIN..=-1_i32 => todo!()`
 
 error: aborting due to 2 previous errors
 

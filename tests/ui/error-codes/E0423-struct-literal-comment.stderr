@@ -1,43 +1,22 @@
 error: struct literals are not allowed here
-  --> $DIR/E0423-struct-literal-comment.rs:9:8
-   |
-LL |     if T { x: 10 } == T {} {}
-   |        ^^^^^^^^^^^
-   |
+ at $DIR/E0423-struct-literal-comment.rs:9:8
 help: surround the struct literal with parentheses
-   |
-LL |     if (T { x: 10 }) == T {} {}
-   |        +           +
+ on line 9, column 7, add `(`
 
 error: expected expression, found `==`
-  --> $DIR/E0423-struct-literal-comment.rs:15:38
-   |
-LL |     if U { /* keep comment here */ } == U {}
-   |                                      ^^ expected expression
+ at $DIR/E0423-struct-literal-comment.rs:15:38: expected expression
 
-error[E0423]: cannot find value `T` in this scope
-  --> $DIR/E0423-struct-literal-comment.rs:9:23
-   |
-LL |     if T { x: 10 } == T {} {}
-   |                       ^ not found in this scope
-   |
-   = note: a struct named `T` exists in another namespace
+error E0423: cannot find value `T` in this scope
+ at $DIR/E0423-struct-literal-comment.rs:9:23: not found in this scope
+note: a struct named `T` exists in another namespace
 help: surround the struct literal with parentheses
-   |
-LL |     if T { x: 10 } == (T {}) {}
-   |                       +    +
+ on line 9, column 22, add `(`
 
-error[E0423]: cannot find value `U` in this scope
-  --> $DIR/E0423-struct-literal-comment.rs:15:8
-   |
-LL |     if U { /* keep comment here */ } == U {}
-   |        ^ not found in this scope
-   |
-   = note: a struct named `U` exists in another namespace
+error E0423: cannot find value `U` in this scope
+ at $DIR/E0423-struct-literal-comment.rs:15:8: not found in this scope
+note: a struct named `U` exists in another namespace
 help: surround the struct literal with parentheses
-   |
-LL |     if (U { /* keep comment here */ }) == U {}
-   |        +                             +
+ on line 15, column 7, add `(`
 
 error: aborting due to 4 previous errors
 

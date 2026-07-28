@@ -1,36 +1,18 @@
-error[E0063]: missing fields `b` and `d` in initializer of `A`
-  --> $DIR/struct-record-suggestion.rs:10:13
-   |
-LL |     let q = A { c: 5..Default::default() };
-   |             ^ missing `b` and `d`
-   |
+error E0063: missing fields `b` and `d` in initializer of `A`
+ at $DIR/struct-record-suggestion.rs:10:13: missing `b` and `d`
 note: this expression may have been misinterpreted as a `..` range expression
-  --> $DIR/struct-record-suggestion.rs:10:20
-   |
-LL |     let q = A { c: 5..Default::default() };
-   |                    ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/struct-record-suggestion.rs:10:20
 help: to set the remaining fields from `Default::default()`, separate the last named field with a comma
-   |
-LL |     let q = A { c: 5, ..Default::default() };
-   |                     +
+ on line 10, column 20, add `, `
 
-error[E0308]: mismatched types
-  --> $DIR/struct-record-suggestion.rs:23:20
-   |
-LL |     let q = B { b: 1..Default::default() };
-   |                    ^^^^^^^^^^^^^^^^^^^^^ expected `u32`, found `Range<{integer}>`
-   |
-   = note: expected type `u32`
-            found struct `std::ops::Range<{integer}>`
+error E0308: mismatched types
+ at $DIR/struct-record-suggestion.rs:23:20: expected `u32`, found `Range<{integer}>`
+note: expected type `u32`
+       found struct `std::ops::Range<{integer}>`
 note: this expression may have been misinterpreted as a `..` range expression
-  --> $DIR/struct-record-suggestion.rs:23:20
-   |
-LL |     let q = B { b: 1..Default::default() };
-   |                    ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/struct-record-suggestion.rs:23:20
 help: to set the remaining fields from `Default::default()`, separate the last named field with a comma
-   |
-LL |     let q = B { b: 1, ..Default::default() };
-   |                     +
+ on line 23, column 20, add `, `
 
 error: aborting due to 2 previous errors
 

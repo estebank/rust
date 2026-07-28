@@ -1,62 +1,28 @@
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/attempted-access-non-fatal.rs:4:15
-   |
-LL |     let _ = x.foo;
-   |               ^^^
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/attempted-access-non-fatal.rs:4:15
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/attempted-access-non-fatal.rs:5:15
-   |
-LL |     let _ = x.bar;
-   |               ^^^
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/attempted-access-non-fatal.rs:5:15
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/attempted-access-non-fatal.rs:6:15
-   |
-LL |     let _ = 0.f;
-   |               ^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/attempted-access-non-fatal.rs:6:15
 help: if intended to be a floating point literal, consider adding a `0` after the period and a `f32` suffix
-   |
-LL -     let _ = 0.f;
-LL +     let _ = 0.0f32;
-   |
+ on line 6, column 14, replace with `0f32`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/attempted-access-non-fatal.rs:7:15
-   |
-LL |     let _ = 2.l;
-   |               ^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/attempted-access-non-fatal.rs:7:15
 help: if intended to be a floating point literal, consider adding a `0` after the period and a `f64` suffix
-   |
-LL -     let _ = 2.l;
-LL +     let _ = 2.0f64;
-   |
+ on line 7, column 14, replace with `0f64`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/attempted-access-non-fatal.rs:8:16
-   |
-LL |     let _ = 12.F;
-   |                ^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/attempted-access-non-fatal.rs:8:16
 help: if intended to be a floating point literal, consider adding a `0` after the period and a `f32` suffix
-   |
-LL -     let _ = 12.F;
-LL +     let _ = 12.0f32;
-   |
+ on line 8, column 15, replace with `0f32`
 
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/attempted-access-non-fatal.rs:9:16
-   |
-LL |     let _ = 34.L;
-   |                ^
-   |
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/attempted-access-non-fatal.rs:9:16
 help: if intended to be a floating point literal, consider adding a `0` after the period and a `f64` suffix
-   |
-LL -     let _ = 34.L;
-LL +     let _ = 34.0f64;
-   |
+ on line 9, column 15, replace with `0f64`
 
 error: aborting due to 6 previous errors
 

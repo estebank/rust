@@ -1,32 +1,16 @@
-error[E0782]: expected a type, found a trait
-  --> $DIR/issue-116434-2021.rs:5:17
-   |
-LL |     fn foo() -> Clone;
-   |                 ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/issue-116434-2021.rs:5:17
 help: `Clone` is dyn-incompatible, use `impl Clone` to return an opaque type, as long as you return a single underlying type
-   |
-LL |     fn foo() -> impl Clone;
-   |                 ++++
+ on line 5, column 16, add `impl `
 help: there is an associated type with the same name
-   |
-LL |     fn foo() -> Self::Clone;
-   |                 ++++++
+ on line 5, column 16, add `Self::`
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/issue-116434-2021.rs:15:20
-   |
-LL |     fn handle() -> DbHandle;
-   |                    ^^^^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/issue-116434-2021.rs:15:20
 help: `DbHandle` is dyn-incompatible, use `impl DbHandle` to return an opaque type, as long as you return a single underlying type
-   |
-LL |     fn handle() -> impl DbHandle;
-   |                    ++++
+ on line 15, column 19, add `impl `
 help: there is an associated type with the same name
-   |
-LL |     fn handle() -> Self::DbHandle;
-   |                    ++++++
+ on line 15, column 19, add `Self::`
 
 error: aborting due to 2 previous errors
 

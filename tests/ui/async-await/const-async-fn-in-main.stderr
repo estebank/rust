@@ -1,11 +1,6 @@
 error: functions cannot be both `const` and `async`
-  --> $DIR/const-async-fn-in-main.rs:5:5
-   |
-LL |     const async fn a() {}
-   |     ^^^^^-^^^^^----------
-   |     |     |
-   |     |     `async` because of this
-   |     `const` because of this
+ at $DIR/const-async-fn-in-main.rs:5:5: `const` because of this
+  on line 5, column 11: `async` because of this
 
 error: aborting due to 1 previous error
 

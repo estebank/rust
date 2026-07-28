@@ -1,74 +1,32 @@
 error: keyword `type` is written in the wrong case
-  --> $DIR/recovery.rs:6:5
-   |
-LL |     Type Result = u8;
-   |     ^^^^
-   |
+ at $DIR/recovery.rs:6:5
 help: write it in lowercase
-   |
-LL -     Type Result = u8;
-LL +     type Result = u8;
-   |
+ on line 6, column 4, replace with `type`
 
 error: keyword `struct` is written in the wrong case
-  --> $DIR/recovery.rs:10:1
-   |
-LL | Struct Foor {
-   | ^^^^^^
-   |
+ at $DIR/recovery.rs:10:1
 help: write it in lowercase (notice the capitalization)
-   |
-LL - Struct Foor {
-LL + struct Foor {
-   |
+ on line 10, column 1, replace with `struct`
 
 error: keyword `const` is written in the wrong case
-  --> $DIR/recovery.rs:15:1
-   |
-LL | Const A: u8 = 10;
-   | ^^^^^
-   |
+ at $DIR/recovery.rs:15:1
 help: write it in lowercase (notice the capitalization)
-   |
-LL - Const A: u8 = 10;
-LL + const A: u8 = 10;
-   |
+ on line 15, column 1, replace with `const`
 
 error: keyword `fn` is written in the wrong case
-  --> $DIR/recovery.rs:18:1
-   |
-LL | Fn code() {}
-   | ^^
-   |
+ at $DIR/recovery.rs:18:1
 help: write it in lowercase (notice the capitalization)
-   |
-LL - Fn code() {}
-LL + fn code() {}
-   |
+ on line 18, column 1, replace with `fn`
 
 error: keyword `static` is written in the wrong case
-  --> $DIR/recovery.rs:21:1
-   |
-LL | Static a: u8 = 0;
-   | ^^^^^^
-   |
+ at $DIR/recovery.rs:21:1
 help: write it in lowercase (notice the capitalization)
-   |
-LL - Static a: u8 = 0;
-LL + static a: u8 = 0;
-   |
+ on line 21, column 1, replace with `static`
 
 error: expected one of `!` or `::`, found `a`
-  --> $DIR/recovery.rs:24:6
-   |
-LL | usee a::b;
-   |      ^ expected one of `!` or `::`
-   |
+ at $DIR/recovery.rs:24:6: expected one of `!` or `::`
 help: there is a keyword `use` with a similar name
-   |
-LL - usee a::b;
-LL + use a::b;
-   |
+ on line 24, column 1, replace with `use`
 
 error: aborting due to 6 previous errors
 

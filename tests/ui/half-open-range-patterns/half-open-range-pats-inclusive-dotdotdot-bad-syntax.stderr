@@ -1,80 +1,37 @@
 error: range-to patterns with `...` are not allowed
-  --> $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:15:9
-   |
-LL |         ...X => {}
-   |         ^^^
-   |
+ at $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:15:9
 help: use `..=` instead
-   |
-LL -         ...X => {}
-LL +         ..=X => {}
-   |
+ on line 15, column 8, replace with `..=`
 
 error: range-to patterns with `...` are not allowed
-  --> $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:16:9
-   |
-LL |         ...0 => {}
-   |         ^^^
-   |
+ at $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:16:9
 help: use `..=` instead
-   |
-LL -         ...0 => {}
-LL +         ..=0 => {}
-   |
+ on line 16, column 8, replace with `..=`
 
 error: range-to patterns with `...` are not allowed
-  --> $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:17:9
-   |
-LL |         ...'a' => {}
-   |         ^^^
-   |
+ at $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:17:9
 help: use `..=` instead
-   |
-LL -         ...'a' => {}
-LL +         ..='a' => {}
-   |
+ on line 17, column 8, replace with `..=`
 
 error: range-to patterns with `...` are not allowed
-  --> $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:18:9
-   |
-LL |         ...0.0f32 => {}
-   |         ^^^
-   |
+ at $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:18:9
 help: use `..=` instead
-   |
-LL -         ...0.0f32 => {}
-LL +         ..=0.0f32 => {}
-   |
+ on line 18, column 8, replace with `..=`
 
 error: range-to patterns with `...` are not allowed
-  --> $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:25:17
-   |
-LL |             let ...$e;
-   |                 ^^^
-...
-LL |     mac!(0);
-   |     ------- in this macro invocation
-   |
-   = note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:25:17
+  on line 30: in this macro invocation
+note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: use `..=` instead
-   |
-LL -             let ...$e;
-LL +             let ..=$e;
-   |
+ on line 25, column 16, replace with `..=`
 
-error[E0005]: refutable pattern in local binding
-  --> $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:25:17
-   |
-LL |             let ...$e;
-   |                 ^^^^^ pattern `1_i32..=i32::MAX` not covered
-...
-LL |     mac!(0);
-   |     ------- in this macro invocation
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `i32`
-   = note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0005: refutable pattern in local binding
+ at $DIR/half-open-range-pats-inclusive-dotdotdot-bad-syntax.rs:25:17: pattern `1_i32..=i32::MAX` not covered
+  on line 30: in this macro invocation
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `i32`
+note: this error originates in the macro `mac` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 6 previous errors
 

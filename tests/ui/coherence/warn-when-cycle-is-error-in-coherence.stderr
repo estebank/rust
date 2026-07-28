@@ -1,14 +1,6 @@
-error[E0119]: conflicting implementations of trait `PartialEq<Interval<_>>` for type `Interval<_>`
-  --> $DIR/warn-when-cycle-is-error-in-coherence.rs:5:10
-   |
-LL |   #[derive(PartialEq, Default)]
-   |            ^^^^^^^^^ conflicting implementation for `Interval<_>`
-...
-LL | / impl<T, Q> PartialEq<Q> for Interval<T>
-LL | | where
-LL | |     T: Borrow<Q>,
-LL | |     Q: ?Sized + PartialOrd,
-   | |___________________________- first implementation here
+error E0119: conflicting implementations of trait `PartialEq<Interval<_>>` for type `Interval<_>`
+ at $DIR/warn-when-cycle-is-error-in-coherence.rs:5:10: conflicting implementation for `Interval<_>`
+  on line 12 to line 15: first implementation here
 
 error: aborting due to 1 previous error
 

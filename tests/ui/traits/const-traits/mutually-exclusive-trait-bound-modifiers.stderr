@@ -1,74 +1,40 @@
 error: `[const]` trait not allowed with `?` trait polarity modifier
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:3:39
-   |
-LL | const fn maybe_const_maybe<T: [const] ?Sized>() {}
-   |                               ------- ^
-   |                               |
-   |                               there is not a well-defined meaning for a `[const] ?` trait
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:3:39
+  on line 3, column 31: there is not a well-defined meaning for a `[const] ?` trait
 
 error: `const` trait not allowed with `?` trait polarity modifier
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:8:25
-   |
-LL | fn const_maybe<T: const ?Sized>() {}
-   |                   ----- ^
-   |                   |
-   |                   there is not a well-defined meaning for a `const ?` trait
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:8:25
+  on line 8, column 19: there is not a well-defined meaning for a `const ?` trait
 
 error: `[const]` trait not allowed with `!` trait polarity modifier
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:12:42
-   |
-LL | const fn maybe_const_negative<T: [const] !Trait>() {}
-   |                                  ------- ^
-   |                                  |
-   |                                  there is not a well-defined meaning for a `[const] !` trait
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:12:42
+  on line 12, column 34: there is not a well-defined meaning for a `[const] !` trait
 
 error: `const` trait not allowed with `!` trait polarity modifier
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:16:28
-   |
-LL | fn const_negative<T: const !Trait>() {}
-   |                      ----- ^
-   |                      |
-   |                      there is not a well-defined meaning for a `const !` trait
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:16:28
+  on line 16, column 22: there is not a well-defined meaning for a `const !` trait
 
 error: negative bounds are not supported
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:12:42
-   |
-LL | const fn maybe_const_negative<T: [const] !Trait>() {}
-   |                                          ^
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:12:42
 
 error: negative bounds are not supported
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:16:28
-   |
-LL | fn const_negative<T: const !Trait>() {}
-   |                            ^
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:16:28
 
 error: `[const]` can only be applied to `const` traits
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:3:31
-   |
-LL | const fn maybe_const_maybe<T: [const] ?Sized>() {}
-   |                               ^^^^^^^ can't be applied to `Sized`
-   |
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:3:31: can't be applied to `Sized`
 note: `Sized` can't be used with `[const]` because it isn't `const`
-  --> $SRC_DIR/core/src/marker.rs:LL:COL
+ at $SRC_DIR/core/src/marker.rs:LL:COL
 
 error: `[const]` can only be applied to `const` traits
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:3:31
-   |
-LL | const fn maybe_const_maybe<T: [const] ?Sized>() {}
-   |                               ^^^^^^^ can't be applied to `Sized`
-   |
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:3:31: can't be applied to `Sized`
 note: `Sized` can't be used with `[const]` because it isn't `const`
-  --> $SRC_DIR/core/src/marker.rs:LL:COL
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $SRC_DIR/core/src/marker.rs:LL:COL
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: `const` can only be applied to `const` traits
-  --> $DIR/mutually-exclusive-trait-bound-modifiers.rs:8:19
-   |
-LL | fn const_maybe<T: const ?Sized>() {}
-   |                   ^^^^^ can't be applied to `Sized`
-   |
+ at $DIR/mutually-exclusive-trait-bound-modifiers.rs:8:19: can't be applied to `Sized`
 note: `Sized` can't be used with `const` because it isn't `const`
-  --> $SRC_DIR/core/src/marker.rs:LL:COL
+ at $SRC_DIR/core/src/marker.rs:LL:COL
 
 error: aborting due to 9 previous errors
 

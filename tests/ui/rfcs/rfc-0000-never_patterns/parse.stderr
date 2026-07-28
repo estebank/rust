@@ -1,65 +1,32 @@
 error: expected `,` following `match` arm
-  --> $DIR/parse.rs:26:16
-   |
-LL |         Some(!)
-   |                ^
-   |
+ at $DIR/parse.rs:26:16
 help: missing a comma here to end this `match` arm
-   |
-LL |         Some(!),
-   |                +
+ on line 26, column 15, add `,`
 
 error: expected `,` following `match` arm
-  --> $DIR/parse.rs:31:24
-   |
-LL |         Some(!) if true
-   |                        ^
-   |
+ at $DIR/parse.rs:31:24
 help: missing a comma here to end this `match` arm
-   |
-LL |         Some(!) if true,
-   |                        +
+ on line 31, column 23, add `,`
 
 error: expected one of `,`, `=>`, `if`, `|`, or `}`, found `<=`
-  --> $DIR/parse.rs:42:17
-   |
-LL |         Some(!) <=
-   |                 ^^ expected one of `,`, `=>`, `if`, `|`, or `}`
+ at $DIR/parse.rs:42:17: expected one of `,`, `=>`, `if`, `|`, or `}`
 
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/parse.rs:67:9
-   |
-LL |     let Ok(_) | Err(!) = &res; // Disallowed; see #82048.
-   |         ^^^^^^^^^^^^^^
-   |
+ at $DIR/parse.rs:67:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (Ok(_) | Err(!)) = &res; // Disallowed; see #82048.
-   |         +              +
+ on line 67, column 8, add `(`
 
 error: never patterns cannot contain variable bindings
-  --> $DIR/parse.rs:73:9
-   |
-LL |     let y @ ! = x;
-   |         ^ help: use a wildcard `_` instead
+ at $DIR/parse.rs:73:9: help: use a wildcard `_` instead
 
 error: a guard on a never pattern will never be run
-  --> $DIR/parse.rs:31:20
-   |
-LL |         Some(!) if true
-   |                    ^^^^ help: remove this guard
+ at $DIR/parse.rs:31:20: help: remove this guard
 
 error: a guard on a never pattern will never be run
-  --> $DIR/parse.rs:37:20
-   |
-LL |         Some(!) if true,
-   |                    ^^^^ help: remove this guard
+ at $DIR/parse.rs:37:20: help: remove this guard
 
 error: a guard on a never pattern will never be run
-  --> $DIR/parse.rs:49:21
-   |
-LL |         never!() if true,
-   |                     ^^^^ help: remove this guard
+ at $DIR/parse.rs:49:21: help: remove this guard
 
 error: aborting due to 8 previous errors
 

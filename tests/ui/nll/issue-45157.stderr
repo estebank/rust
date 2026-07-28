@@ -1,16 +1,8 @@
-error[E0502]: cannot borrow `u` (via `u.z.c`) as immutable because it is also borrowed as mutable (via `u.s.a`)
-  --> $DIR/issue-45157.rs:27:20
-   |
-LL |         let mref = &mut u.s.a;
-   |                    ---------- mutable borrow occurs here (via `u.s.a`)
-...
-LL |         let nref = &u.z.c;
-   |                    ^^^^^^ immutable borrow of `u.z.c` -- which overlaps with `u.s.a` -- occurs here
-LL |
-LL |         println!("{} {}", mref, nref)
-   |                           ---- mutable borrow later used here
-   |
-   = note: `u.z.c` is a field of the union `U`, so it overlaps the field `u.s.a`
+error E0502: cannot borrow `u` (via `u.z.c`) as immutable because it is also borrowed as mutable (via `u.s.a`)
+ at $DIR/issue-45157.rs:27:20: immutable borrow of `u.z.c` -- which overlaps with `u.s.a` -- occurs here
+  on line 24, column 20: mutable borrow occurs here (via `u.s.a`)
+  on line 29, column 27: mutable borrow later used here
+note: `u.z.c` is a field of the union `U`, so it overlaps the field `u.s.a`
 
 error: aborting due to 1 previous error
 

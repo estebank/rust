@@ -1,8 +1,5 @@
 error: empty list delegation is not supported
-  --> $DIR/empty-list.rs:5:1
-   |
-LL | reuse m::{};
-   | ^^^^^^^^^^^^
+ at $DIR/empty-list.rs:5:1
 
 error: aborting due to 1 previous error
 

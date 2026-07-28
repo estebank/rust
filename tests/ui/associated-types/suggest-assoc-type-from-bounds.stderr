@@ -1,74 +1,40 @@
-error[E0425]: cannot find type `Assoc` in this scope
-  --> $DIR/suggest-assoc-type-from-bounds.rs:6:12
-   |
-LL |     let _: Assoc = todo!();
-   |            ^^^^^
-   |
+error E0425: cannot find type `Assoc` in this scope
+ at $DIR/suggest-assoc-type-from-bounds.rs:6:12
 help: you might have meant to use an associated type of the same name
-   |
-LL |     let _: <U as Trait<i32>>::Assoc = todo!();
-   |            +++++++++++++++++++
-LL |     let _: <U as Trait<u32>>::Assoc = todo!();
-   |            +++++++++++++++++++
+ on line 6, column 11, replace with one of
+  <U as Trait<i32>>::Assoc
+  <U as Trait<u32>>::Assoc
 
-error[E0425]: cannot find type `A` in this scope
-  --> $DIR/suggest-assoc-type-from-bounds.rs:20:12
-   |
-LL |     let _: A = todo!();
-   |            ^
-   |
+
+error E0425: cannot find type `A` in this scope
+ at $DIR/suggest-assoc-type-from-bounds.rs:20:12
 help: you might have meant to use an associated type of the same name
-   |
-LL |     let _: <T as ::Foo<'a>>::A = todo!();
-   |            ++++++++++++++++++
-LL |     let _: <T as inner::Foo<'a>>::A = todo!();
-   |            +++++++++++++++++++++++
+ on line 20, column 11, replace with one of
+  <T as ::Foo<'a>>::A
+  <T as inner::Foo<'a>>::A
 help: you might be missing a type parameter
-   |
-LL | fn g<'a, T: ::Foo<'a> + inner::Foo<'a>, A>() {
-   |                                       +++
+ on line 19, column 38, add `, A`
 
-error[E0425]: cannot find type `Assoc` in this scope
-  --> $DIR/suggest-assoc-type-from-bounds.rs:32:12
-   |
-LL |     let _: Assoc = todo!();
-   |            ^^^^^
-   |
+error E0425: cannot find type `Assoc` in this scope
+ at $DIR/suggest-assoc-type-from-bounds.rs:32:12
 help: you might have meant to use an associated type of the same name
-   |
-LL |     let _: <T as First>::Assoc = todo!();
-   |            ++++++++++++++
-LL |     let _: <T as Second>::Assoc = todo!();
-   |            +++++++++++++++
+ on line 32, column 11, replace with one of
+  <T as First>::Assoc
+  <T as Second>::Assoc
 
-error[E0425]: cannot find type `Assoc` in this scope
-  --> $DIR/suggest-assoc-type-from-bounds.rs:40:12
-   |
-LL |     let _: Assoc = todo!();
-   |            ^^^^^
-   |
+
+error E0425: cannot find type `Assoc` in this scope
+ at $DIR/suggest-assoc-type-from-bounds.rs:40:12
 help: you might have meant to use an associated type of the same name
-   |
-LL -     let _: Assoc = todo!();
-LL +     let _: T::Assoc<'_> = todo!();
-   |
+ on line 40, column 11, replace with `T::Assoc<'_>`
 
-error[E0425]: cannot find type `Assoc` in this scope
-  --> $DIR/suggest-assoc-type-from-bounds.rs:47:20
-   |
-LL |             let _: Assoc = todo!();
-   |                    ^^^^^
-   |
+error E0425: cannot find type `Assoc` in this scope
+ at $DIR/suggest-assoc-type-from-bounds.rs:47:20
 help: you might have meant to use an associated type of the same name
-   |
-LL |             let _: U::Assoc = todo!();
-   |                    +++
+ on line 47, column 19, replace with `U::Assoc`
 
-error[E0425]: cannot find type `Assoc` in this scope
-  --> $DIR/suggest-assoc-type-from-bounds.rs:58:20
-   |
-LL |             let _: Assoc = todo!();
-   |                    ^^^^^ not found in this scope
+error E0425: cannot find type `Assoc` in this scope
+ at $DIR/suggest-assoc-type-from-bounds.rs:58:20: not found in this scope
 
 error: aborting due to 6 previous errors
 

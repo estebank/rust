@@ -1,47 +1,23 @@
-error[E0038]: the trait `Foo` is not dyn compatible
-  --> $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:12:13
-   |
-LL |     fn method(self: &W) {}
-   |                     -- help: consider changing method `method`'s `self` parameter to be `&self`: `&Self`
-...
-LL | fn test(x: &dyn Foo) {
-   |             ^^^^^^^ `Foo` is not dyn compatible
-   |
+error E0038: the trait `Foo` is not dyn compatible
+ at $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:12:13: `Foo` is not dyn compatible
+  on line 8, column 21: help: consider changing method `method`'s `self` parameter to be `&self`: `&Self`
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:8:21
-   |
-LL | trait Foo: Deref<Target = W> {
-   |       --- this trait is not dyn compatible...
-LL |     fn method(self: &W) {}
-   |                     ^^ ...because method `method`'s `self` parameter cannot be dispatched on
+ at $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:8:21: ...because method `method`'s `self` parameter cannot be dispatched on
+  on line 7, column 7: this trait is not dyn compatible...
 
-error[E0307]: invalid `self` parameter type: `&W`
-  --> $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:8:21
-   |
-LL |     fn method(self: &W) {}
-   |                     ^^
-   |
-   = note: type of `self` must be `Self` or a type that dereferences to it
-   = help: consider changing to `self`, `&self`, `&mut self`, `self: Box<Self>`, `self: Rc<Self>`, `self: Arc<Self>`, or `self: Pin<P>` (where P is one of the previous types except `Self`)
+error E0307: invalid `self` parameter type: `&W`
+ at $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:8:21
+note: type of `self` must be `Self` or a type that dereferences to it
+help: consider changing to `self`, `&self`, `&mut self`, `self: Box<Self>`, `self: Rc<Self>`, `self: Arc<Self>`, or `self: Pin<P>` (where P is one of the previous types except `Self`)
 
-error[E0038]: the trait `Foo` is not dyn compatible
-  --> $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:14:5
-   |
-LL |     fn method(self: &W) {}
-   |                     -- help: consider changing method `method`'s `self` parameter to be `&self`: `&Self`
-...
-LL |     x.method();
-   |     ^^^^^^^^^^ `Foo` is not dyn compatible
-   |
+error E0038: the trait `Foo` is not dyn compatible
+ at $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:14:5: `Foo` is not dyn compatible
+  on line 8, column 21: help: consider changing method `method`'s `self` parameter to be `&self`: `&Self`
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:8:21
-   |
-LL | trait Foo: Deref<Target = W> {
-   |       --- this trait is not dyn compatible...
-LL |     fn method(self: &W) {}
-   |                     ^^ ...because method `method`'s `self` parameter cannot be dispatched on
+ at $DIR/dispatch-dyn-incompatible-that-does-not-deref.rs:8:21: ...because method `method`'s `self` parameter cannot be dispatched on
+  on line 7, column 7: this trait is not dyn compatible...
 
 error: aborting due to 3 previous errors
 

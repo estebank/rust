@@ -1,168 +1,76 @@
-error[E0510]: cannot assign `q` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:98:13
-   |
-LL |     match q {
-   |           - value is immutable in match guard
-...
-LL |             q = true;
-   |             ^^^^^^^^ cannot assign
+error E0510: cannot assign `q` in match guard
+ at $DIR/match-guards-partially-borrow.rs:98:13: cannot assign
+  on line 95, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `q` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:109:13
-   |
-LL |     match q {
-   |           - value is immutable in match guard
-...
-LL |             q = true;
-   |             ^^^^^^^^ cannot assign
+error E0510: cannot assign `q` in match guard
+ at $DIR/match-guards-partially-borrow.rs:109:13: cannot assign
+  on line 106, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `r` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:121:13
-   |
-LL |     match r {
-   |           - value is immutable in match guard
-...
-LL |             r = true;
-   |             ^^^^^^^^ cannot assign
+error E0510: cannot assign `r` in match guard
+ at $DIR/match-guards-partially-borrow.rs:121:13: cannot assign
+  on line 117, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `r` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:133:13
-   |
-LL |     match r {
-   |           - value is immutable in match guard
-...
-LL |             r = true;
-   |             ^^^^^^^^ cannot assign
+error E0510: cannot assign `r` in match guard
+ at $DIR/match-guards-partially-borrow.rs:133:13: cannot assign
+  on line 129, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `t` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:170:13
-   |
-LL |     match t {
-   |           - value is immutable in match guard
-...
-LL |             t = true;
-   |             ^^^^^^^^ cannot assign
+error E0510: cannot assign `t` in match guard
+ at $DIR/match-guards-partially-borrow.rs:170:13: cannot assign
+  on line 167, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `t` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:181:13
-   |
-LL |     match t {
-   |           - value is immutable in match guard
-...
-LL |             t = true;
-   |             ^^^^^^^^ cannot assign
+error E0510: cannot assign `t` in match guard
+ at $DIR/match-guards-partially-borrow.rs:181:13: cannot assign
+  on line 178, column 11: value is immutable in match guard
 
-error[E0510]: cannot mutably borrow `x.0` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:195:22
-   |
-LL |     match x {
-   |           - value is immutable in match guard
-...
-LL |                 Some(ref mut r) => *r = None,
-   |                      ^^^^^^^^^ cannot mutably borrow
+error E0510: cannot mutably borrow `x.0` in match guard
+ at $DIR/match-guards-partially-borrow.rs:195:22: cannot mutably borrow
+  on line 190, column 11: value is immutable in match guard
 
-error[E0510]: cannot mutably borrow `x.0` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:211:22
-   |
-LL |     match x {
-   |           - value is immutable in match guard
-...
-LL |                 Some(ref mut r) => *r = None,
-   |                      ^^^^^^^^^ cannot mutably borrow
+error E0510: cannot mutably borrow `x.0` in match guard
+ at $DIR/match-guards-partially-borrow.rs:211:22: cannot mutably borrow
+  on line 206, column 11: value is immutable in match guard
 
-error[E0506]: cannot assign to `t` because it is borrowed
-  --> $DIR/match-guards-partially-borrow.rs:223:13
-   |
-LL |         s if {
-   |         - `t` is borrowed here
-LL |             t = !t;
-   |             ^^^^^^ `t` is assigned to here but it was already borrowed
-LL |             false
-LL |         } => (), // What value should `s` have in the arm?
-   |         - borrow later used here
+error E0506: cannot assign to `t` because it is borrowed
+ at $DIR/match-guards-partially-borrow.rs:223:13: `t` is assigned to here but it was already borrowed
+  on line 222: `t` is borrowed here
+  on line 225: borrow later used here
 
-error[E0506]: cannot assign to `t` because it is borrowed
-  --> $DIR/match-guards-partially-borrow.rs:233:13
-   |
-LL |         s if let Some(()) = {
-   |         - `t` is borrowed here
-LL |             t = !t;
-   |             ^^^^^^ `t` is assigned to here but it was already borrowed
-LL |             None
-LL |         } => (), // What value should `s` have in the arm?
-   |         - borrow later used here
+error E0506: cannot assign to `t` because it is borrowed
+ at $DIR/match-guards-partially-borrow.rs:233:13: `t` is assigned to here but it was already borrowed
+  on line 232: `t` is borrowed here
+  on line 235: borrow later used here
 
-error[E0510]: cannot assign `y` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:244:13
-   |
-LL |     match *y {
-   |           -- value is immutable in match guard
-...
-LL |             y = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `y` in match guard
+ at $DIR/match-guards-partially-borrow.rs:244:13: cannot assign
+  on line 241, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `y` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:255:13
-   |
-LL |     match *y {
-   |           -- value is immutable in match guard
-...
-LL |             y = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `y` in match guard
+ at $DIR/match-guards-partially-borrow.rs:255:13: cannot assign
+  on line 252, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `z` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:266:13
-   |
-LL |     match z {
-   |           - value is immutable in match guard
-...
-LL |             z = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `z` in match guard
+ at $DIR/match-guards-partially-borrow.rs:266:13: cannot assign
+  on line 263, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `z` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:277:13
-   |
-LL |     match z {
-   |           - value is immutable in match guard
-...
-LL |             z = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `z` in match guard
+ at $DIR/match-guards-partially-borrow.rs:277:13: cannot assign
+  on line 274, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `a` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:289:13
-   |
-LL |     match a {
-   |           - value is immutable in match guard
-...
-LL |             a = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `a` in match guard
+ at $DIR/match-guards-partially-borrow.rs:289:13: cannot assign
+  on line 286, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `a` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:301:13
-   |
-LL |     match a {
-   |           - value is immutable in match guard
-...
-LL |             a = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `a` in match guard
+ at $DIR/match-guards-partially-borrow.rs:301:13: cannot assign
+  on line 298, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `b` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:312:13
-   |
-LL |     match b {
-   |           - value is immutable in match guard
-...
-LL |             b = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `b` in match guard
+ at $DIR/match-guards-partially-borrow.rs:312:13: cannot assign
+  on line 309, column 11: value is immutable in match guard
 
-error[E0510]: cannot assign `b` in match guard
-  --> $DIR/match-guards-partially-borrow.rs:323:13
-   |
-LL |     match b {
-   |           - value is immutable in match guard
-...
-LL |             b = &true;
-   |             ^^^^^^^^^ cannot assign
+error E0510: cannot assign `b` in match guard
+ at $DIR/match-guards-partially-borrow.rs:323:13: cannot assign
+  on line 320, column 11: value is immutable in match guard
 
 error: aborting due to 18 previous errors
 

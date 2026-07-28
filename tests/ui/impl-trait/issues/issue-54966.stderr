@@ -1,8 +1,5 @@
-error[E0425]: cannot find type `Oper` in this scope
-  --> $DIR/issue-54966.rs:3:27
-   |
-LL | fn generate_duration() -> Oper<impl FnMut()> {}
-   |                           ^^^^ not found in this scope
+error E0425: cannot find type `Oper` in this scope
+ at $DIR/issue-54966.rs:3:27: not found in this scope
 
 error: aborting due to 1 previous error
 

@@ -1,46 +1,21 @@
-error[E0191]: the value of the associated type `B` in `Foo` must be specified
-  --> $DIR/associated-types-incomplete-object.rs:23:30
-   |
-LL |     type B;
-   |     ------ `B` defined here
-...
-LL |     let b = &42isize as &dyn Foo<A=usize>;
-   |                              ^^^^^^^^^^^^
-   |
+error E0191: the value of the associated type `B` in `Foo` must be specified
+ at $DIR/associated-types-incomplete-object.rs:23:30
+  on line 6: `B` defined here
 help: specify the associated type
-   |
-LL |     let b = &42isize as &dyn Foo<A=usize, B = /* Type */>;
-   |                                         ++++++++++++++++
+ on line 23, column 29, replace with `Foo<A=usize, B = /* Type */>`
 
-error[E0191]: the value of the associated type `A` in `Foo` must be specified
-  --> $DIR/associated-types-incomplete-object.rs:26:30
-   |
-LL |     type A;
-   |     ------ `A` defined here
-...
-LL |     let c = &42isize as &dyn Foo<B=char>;
-   |                              ^^^^^^^^^^^
-   |
+error E0191: the value of the associated type `A` in `Foo` must be specified
+ at $DIR/associated-types-incomplete-object.rs:26:30
+  on line 5: `A` defined here
 help: specify the associated type
-   |
-LL |     let c = &42isize as &dyn Foo<B=char, A = /* Type */>;
-   |                                        ++++++++++++++++
+ on line 26, column 29, replace with `Foo<B=char, A = /* Type */>`
 
-error[E0191]: the value of the associated types `A` and `B` in `Foo` must be specified
-  --> $DIR/associated-types-incomplete-object.rs:29:30
-   |
-LL |     type A;
-   |     ------ `A` defined here
-LL |     type B;
-   |     ------ `B` defined here
-...
-LL |     let d = &42isize as &dyn Foo;
-   |                              ^^^
-   |
+error E0191: the value of the associated types `A` and `B` in `Foo` must be specified
+ at $DIR/associated-types-incomplete-object.rs:29:30
+  on line 5: `A` defined here
+  on line 6: `B` defined here
 help: specify the associated types
-   |
-LL |     let d = &42isize as &dyn Foo<A = /* Type */, B = /* Type */>;
-   |                                 ++++++++++++++++++++++++++++++++
+ on line 29, column 29, replace with `Foo<A = /* Type */, B = /* Type */>`
 
 error: aborting due to 3 previous errors
 

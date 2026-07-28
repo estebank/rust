@@ -1,38 +1,18 @@
-error[E0373]: closure may outlive the current function, but it borrows `x`, which is owned by the current function
-  --> $DIR/region-borrow-params-issue-29793-big.rs:67:26
-   |
-LL |         WrapB::new().set(|t: bool| if t { x } else { y }) // (separate errors for `x` vs `y`)
-   |                          ^^^^^^^^^        - `x` is borrowed here
-   |                          |
-   |                          may outlive borrowed value `x`
-   |
+error E0373: closure may outlive the current function, but it borrows `x`, which is owned by the current function
+ at $DIR/region-borrow-params-issue-29793-big.rs:67:26: may outlive borrowed value `x`
+  on line 67, column 43: `x` is borrowed here
 note: closure is returned here
-  --> $DIR/region-borrow-params-issue-29793-big.rs:67:9
-   |
-LL |         WrapB::new().set(|t: bool| if t { x } else { y }) // (separate errors for `x` vs `y`)
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/region-borrow-params-issue-29793-big.rs:67:9
 help: to force the closure to take ownership of `x` (and any other referenced variables), use the `move` keyword
-   |
-LL |         WrapB::new().set(move |t: bool| if t { x } else { y }) // (separate errors for `x` vs `y`)
-   |                          ++++
+ on line 67, column 25, add `move `
 
-error[E0373]: closure may outlive the current function, but it borrows `y`, which is owned by the current function
-  --> $DIR/region-borrow-params-issue-29793-big.rs:67:26
-   |
-LL |         WrapB::new().set(|t: bool| if t { x } else { y }) // (separate errors for `x` vs `y`)
-   |                          ^^^^^^^^^                   - `y` is borrowed here
-   |                          |
-   |                          may outlive borrowed value `y`
-   |
+error E0373: closure may outlive the current function, but it borrows `y`, which is owned by the current function
+ at $DIR/region-borrow-params-issue-29793-big.rs:67:26: may outlive borrowed value `y`
+  on line 67, column 54: `y` is borrowed here
 note: closure is returned here
-  --> $DIR/region-borrow-params-issue-29793-big.rs:67:9
-   |
-LL |         WrapB::new().set(|t: bool| if t { x } else { y }) // (separate errors for `x` vs `y`)
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/region-borrow-params-issue-29793-big.rs:67:9
 help: to force the closure to take ownership of `y` (and any other referenced variables), use the `move` keyword
-   |
-LL |         WrapB::new().set(move |t: bool| if t { x } else { y }) // (separate errors for `x` vs `y`)
-   |                          ++++
+ on line 67, column 25, add `move `
 
 error: aborting due to 2 previous errors
 

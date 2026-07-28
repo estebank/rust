@@ -1,29 +1,15 @@
-error[E0499]: cannot borrow `*f` as mutable more than once at a time
-  --> $DIR/moves-based-on-type-no-recursive-stack-closure.rs:20:27
-   |
-LL |                     (f.c)(f, true);
-   |                     ----- ^ second mutable borrow occurs here
-   |                     |
-   |                     first mutable borrow occurs here
-   |                     first borrow later used by call
+error E0499: cannot borrow `*f` as mutable more than once at a time
+ at $DIR/moves-based-on-type-no-recursive-stack-closure.rs:20:27: second mutable borrow occurs here
+  on line 20: first mutable borrow occurs here
+  on line 20: first borrow later used by call
 
-error[E0382]: borrow of moved value: `f`
-  --> $DIR/moves-based-on-type-no-recursive-stack-closure.rs:32:5
-   |
-LL | fn conspirator<F>(mut f: F) where F: FnMut(&mut R, bool) {
-   |                   ----- move occurs because `f` has type `F`, which does not implement the `Copy` trait
-LL |     let mut r = R {c: Box::new(f)};
-   |                                - value moved here
-LL |     f(&mut r, false)
-   |     ^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `f`
+ at $DIR/moves-based-on-type-no-recursive-stack-closure.rs:32:5: value borrowed here after move
+  on line 30, column 19: move occurs because `f` has type `F`, which does not implement the `Copy` trait
+  on line 31, column 32: value moved here
 help: if `F` implemented `Clone`, you could clone the value
-  --> $DIR/moves-based-on-type-no-recursive-stack-closure.rs:30:16
-   |
-LL | fn conspirator<F>(mut f: F) where F: FnMut(&mut R, bool) {
-   |                ^ consider constraining this type parameter with `Clone`
-LL |     let mut r = R {c: Box::new(f)};
-   |                                - you could clone this value
+ at $DIR/moves-based-on-type-no-recursive-stack-closure.rs:30:16: consider constraining this type parameter with `Clone`
+  on line 31, column 32: you could clone this value
 
 error: aborting due to 2 previous errors
 

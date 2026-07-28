@@ -1,18 +1,10 @@
-error[E0615]: attempted to take value of method `speak` on type `Cat`
-  --> $DIR/assign-to-method.rs:21:10
-   |
-LL |     nyan.speak = || println!("meow");
-   |          ^^^^^ method, not a field
-   |
-   = help: methods are immutable and cannot be assigned to
+error E0615: attempted to take value of method `speak` on type `Cat`
+ at $DIR/assign-to-method.rs:21:10: method, not a field
+help: methods are immutable and cannot be assigned to
 
-error[E0615]: attempted to take value of method `speak` on type `Cat`
-  --> $DIR/assign-to-method.rs:22:10
-   |
-LL |     nyan.speak += || println!("meow");
-   |          ^^^^^ method, not a field
-   |
-   = help: methods are immutable and cannot be assigned to
+error E0615: attempted to take value of method `speak` on type `Cat`
+ at $DIR/assign-to-method.rs:22:10: method, not a field
+help: methods are immutable and cannot be assigned to
 
 error: aborting due to 2 previous errors
 

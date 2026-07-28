@@ -1,20 +1,11 @@
-error[E0382]: borrow of moved value: `state`
-  --> $DIR/reborrow-sugg-move-then-borrow.rs:20:18
-   |
-LL | fn fill_memory_blocks_mt(state: &mut State) {
-   |                          ----- move occurs because `state` has type `&mut State`, which does not implement the `Copy` trait
-LL |     for _ in state {}
-   |              ----- `state` moved due to this implicit call to `.into_iter()`
-LL |
-LL |     fill_segment(state);
-   |                  ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `state`
+ at $DIR/reborrow-sugg-move-then-borrow.rs:20:18: value borrowed here after move
+  on line 17, column 26: move occurs because `state` has type `&mut State`, which does not implement the `Copy` trait
+  on line 18, column 14: `state` moved due to this implicit call to `.into_iter()`
 note: `into_iter` takes ownership of the receiver `self`, which moves `state`
-  --> $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
+ at $SRC_DIR/core/src/iter/traits/collect.rs:LL:COL
 help: consider creating a fresh reborrow of `state` here
-   |
-LL |     for _ in &mut *state {}
-   |              ++++++
+ on line 18, column 13, add `&mut *`
 
 error: aborting due to 1 previous error
 

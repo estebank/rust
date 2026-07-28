@@ -1,17 +1,9 @@
-error[E0254]: the name `alloc` is defined multiple times
-  --> $DIR/E0254.rs:11:5
-   |
-LL | extern crate alloc;
-   | ------------------- previous import of the extern crate `alloc` here
-...
-LL | use foo::alloc;
-   |     ^^^^^^^^^^ `alloc` reimported here
-   |
-   = note: `alloc` must be defined only once in the type namespace of this module
+error E0254: the name `alloc` is defined multiple times
+ at $DIR/E0254.rs:11:5: `alloc` reimported here
+  on line 3: previous import of the extern crate `alloc` here
+note: `alloc` must be defined only once in the type namespace of this module
 help: you can use `as` to change the binding name of the import
-   |
-LL | use foo::alloc as other_alloc;
-   |                ++++++++++++++
+ on line 11, column 14, add ` as other_alloc`
 
 error: aborting due to 1 previous error
 

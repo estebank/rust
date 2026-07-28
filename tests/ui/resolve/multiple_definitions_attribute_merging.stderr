@@ -1,20 +1,9 @@
-error[E0428]: the name `Dealigned` is defined multiple times
-  --> $DIR/multiple_definitions_attribute_merging.rs:18:1
-   |
-LL | struct Dealigned<T>(u8, T);
-   | --------------------------- previous definition of the type `Dealigned` here
-...
-LL | struct Dealigned<T>(u8, T);
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `Dealigned` redefined here
-   |
-   = error: internal compiler error: compiler/rustc_mir_transform/src/check_packed_ref.rs:LL:CC: builtin derive created an unaligned reference
-  --> $DIR/multiple_definitions_attribute_merging.rs:18:25
-   |
-LL | #[derive(PartialEq)]
-   |          --------- in this derive macro expansion
-LL | #[repr(C)]
-LL | struct Dealigned<T>(u8, T);
-   |                         ^
+error E0428: the name `Dealigned` is defined multiple times
+ at $DIR/multiple_definitions_attribute_merging.rs:18:1: `Dealigned` redefined here
+  on line 14: previous definition of the type `Dealigned` here
+error: internal compiler error: compiler/rustc_mir_transform/src/check_packed_ref.rs:LL:CC: builtin derive created an unaligned reference
+ at $DIR/multiple_definitions_attribute_merging.rs:18:25
+  on line 16, column 10: in this derive macro expansion
 
 
 Box<dyn Any>

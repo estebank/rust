@@ -1,14 +1,7 @@
 error: attempted to repeat an expression containing no syntax variables matched as repeating at this depth
-  --> $DIR/typo-in-repeat-expr.rs:4:11
-   |
-LL |         [$($arg),*]
-   |           ^^^^^^
-   |
+ at $DIR/typo-in-repeat-expr.rs:4:11
 help: there's a macro metavariable with a similar name
-   |
-LL -         [$($arg),*]
-LL +         [$($ard),*]
-   |
+ on line 4, column 12, replace with `ard`
 
 error: aborting due to 1 previous error
 

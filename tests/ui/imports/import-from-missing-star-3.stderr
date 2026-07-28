@@ -1,24 +1,12 @@
-error[E0432]: unresolved import `spam`
-  --> $DIR/import-from-missing-star-3.rs:3:9
-   |
-LL |     use spam::*;
-   |         ^^^^ use of unresolved module or unlinked crate `spam`
-   |
+error E0432: unresolved import `spam`
+ at $DIR/import-from-missing-star-3.rs:3:9: use of unresolved module or unlinked crate `spam`
 help: you might be missing a crate named `spam`, add it to your project and import it in your code
-   |
-LL + extern crate spam;
-   |
+ on line 2, column 1, add `extern crate spam;`
 
-error[E0432]: unresolved import `spam`
-  --> $DIR/import-from-missing-star-3.rs:28:13
-   |
-LL |         use spam::*;
-   |             ^^^^ use of unresolved module or unlinked crate `spam`
-   |
+error E0432: unresolved import `spam`
+ at $DIR/import-from-missing-star-3.rs:28:13: use of unresolved module or unlinked crate `spam`
 help: you might be missing a crate named `spam`, add it to your project and import it in your code
-   |
-LL + extern crate spam;
-   |
+ on line 2, column 1, add `extern crate spam;`
 
 error: aborting due to 2 previous errors
 

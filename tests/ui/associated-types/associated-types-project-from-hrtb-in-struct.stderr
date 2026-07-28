@@ -1,53 +1,22 @@
-error[E0212]: cannot use the associated type of a trait with uninferred generic parameters
-  --> $DIR/associated-types-project-from-hrtb-in-struct.rs:11:12
-   |
-LL |     field: I::A
-   |            ^^^^
-   |
+error E0212: cannot use the associated type of a trait with uninferred generic parameters
+ at $DIR/associated-types-project-from-hrtb-in-struct.rs:11:12
 help: use a fully qualified path with explicit lifetimes
-   |
-LL ~ struct SomeStruct<'a, I: for<'x> Foo<&'x isize>> {
-LL ~     field: <I as Foo<&'a isize>>::A
-   |
+ on line 10, column 18, add `'a, `
 
-error[E0212]: cannot use the associated type of a trait with uninferred generic parameters
-  --> $DIR/associated-types-project-from-hrtb-in-struct.rs:16:18
-   |
-LL |     TupleVariant(I::A),
-   |                  ^^^^
-   |
+error E0212: cannot use the associated type of a trait with uninferred generic parameters
+ at $DIR/associated-types-project-from-hrtb-in-struct.rs:16:18
 help: use a fully qualified path with explicit lifetimes
-   |
-LL ~ enum SomeEnum<'c, 'b, I: for<'a> Foo<&'a isize>> {
-LL ~     TupleVariant(<I as Foo<&'c isize>>::A),
-   |
+ on line 15, column 14, add `'c, `
 
-error[E0212]: cannot use the associated type of a trait with uninferred generic parameters
-  --> $DIR/associated-types-project-from-hrtb-in-struct.rs:18:28
-   |
-LL |     StructVariant { field: I::A },
-   |                            ^^^^
-   |
+error E0212: cannot use the associated type of a trait with uninferred generic parameters
+ at $DIR/associated-types-project-from-hrtb-in-struct.rs:18:28
 help: use a fully qualified path with explicit lifetimes
-   |
-LL ~ enum SomeEnum<'c, 'b, I: for<'a> Foo<&'a isize>> {
-LL |     TupleVariant(I::A),
-LL |
-LL ~     StructVariant { field: <I as Foo<&'c isize>>::A },
-   |
+ on line 15, column 14, add `'c, `
 
-error[E0212]: cannot use the associated type of a trait with uninferred generic parameters
-  --> $DIR/associated-types-project-from-hrtb-in-struct.rs:35:12
-   |
-LL |     field: I::A,
-   |            ^^^^
-   |
+error E0212: cannot use the associated type of a trait with uninferred generic parameters
+ at $DIR/associated-types-project-from-hrtb-in-struct.rs:35:12
 help: use a fully qualified path with explicit lifetimes
-   |
-LL ~ struct Why<'bb, 'a, 'b, 'c, 'd, 'e, 'f, 'g, 'h, 'i, 'j, 'k, 'n, 'o, 'p, 'q, 'r, 's, 't, 'u, 'v, 'w, 'x,
-LL |     'y, 'z, 'aa, I: for<'l, 'm> Foo<&'l &'m isize>> {
-LL ~     field: <I as Foo<&'bb &'bb isize>>::A,
-   |
+ on line 33, column 11, add `'bb, `
 
 error: aborting due to 4 previous errors
 

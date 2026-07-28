@@ -1,14 +1,8 @@
 error: tail calling intrinsics is not allowed
-  --> $DIR/intrinsics.rs:5:14
-   |
-LL |     unsafe { become std::mem::transmute(()) }
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/intrinsics.rs:5:14
 
 error: tail calling intrinsics is not allowed
-  --> $DIR/intrinsics.rs:10:5
-   |
-LL |     become std::intrinsics::ctlz(x)
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/intrinsics.rs:10:5
 
 error: aborting due to 2 previous errors
 

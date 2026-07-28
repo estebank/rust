@@ -1,16 +1,7 @@
 error: type could implement `Copy`; consider adding `impl Copy`
-  --> $DIR/lint-missing-copy-implementations.rs:6:5
-   |
-LL | /     pub struct Foo {
-LL | |         pub field: i32
-LL | |     }
-   | |_____^
-   |
+ at $DIR/lint-missing-copy-implementations.rs:6:5 to 8:6
 note: the lint level is defined here
-  --> $DIR/lint-missing-copy-implementations.rs:3:9
-   |
-LL | #![deny(missing_copy_implementations)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/lint-missing-copy-implementations.rs:3:9
 
 error: aborting due to 1 previous error
 

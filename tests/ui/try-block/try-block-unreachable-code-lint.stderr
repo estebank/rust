@@ -1,40 +1,16 @@
 warning: unreachable expression
-  --> $DIR/try-block-unreachable-code-lint.rs:41:9
-   |
-LL |           return;
-   |           ------ any code following this expression is unreachable
-LL |
-LL | /         try {
-LL | |             loop {
-LL | |                 err()?;
-LL | |             }
-LL | |         }
-   | |_________^ unreachable expression
-   |
+ at $DIR/try-block-unreachable-code-lint.rs:41:9 to 45:10: unreachable expression
+  on line 39: any code following this expression is unreachable
 note: the lint level is defined here
-  --> $DIR/try-block-unreachable-code-lint.rs:6:9
-   |
-LL | #![warn(unreachable_code)]
-   |         ^^^^^^^^^^^^^^^^
+ at $DIR/try-block-unreachable-code-lint.rs:6:9
 
 warning: unreachable call
-  --> $DIR/try-block-unreachable-code-lint.rs:52:9
-   |
-LL |         Err(return)
-   |         ^^^ ------ any code following this expression is unreachable
-   |         |
-   |         unreachable call
+ at $DIR/try-block-unreachable-code-lint.rs:52:9: unreachable call
+  on line 52, column 13: any code following this expression is unreachable
 
 warning: unreachable expression
-  --> $DIR/try-block-unreachable-code-lint.rs:63:9
-   |
-LL | /         loop {
-LL | |             err()?;
-LL | |         }
-   | |_________- any code following this expression is unreachable
-LL |
-LL |           42
-   |           ^^ unreachable expression
+ at $DIR/try-block-unreachable-code-lint.rs:63:9: unreachable expression
+  on line 59 to line 61: any code following this expression is unreachable
 
 warning: 3 warnings emitted
 

@@ -530,6 +530,7 @@ impl AnnotateSnippetEmitter {
         .term_width(width)
         .anonymized_line_numbers(self.ui_testing)
         .decor_style(decor_style)
+        .no_graphics(true)
         .short_message(self.short_message)
     }
 

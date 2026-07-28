@@ -1,52 +1,23 @@
 error: character literal may only contain one codepoint
-  --> $DIR/str-as-char.rs:8:19
-   |
-LL |     let _: &str = '"""';
-   |                   ^^^^^
-   |
+ at $DIR/str-as-char.rs:8:19
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let _: &str = '"""';
-LL +     let _: &str = "\"\"\"";
-   |
+ on line 8, column 18, replace with `"\"\"\""`
 
 error: character literal may only contain one codepoint
-  --> $DIR/str-as-char.rs:9:19
-   |
-LL |     let _: &str = '\"\"\"';
-   |                   ^^^^^^^^
-   |
+ at $DIR/str-as-char.rs:9:19
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let _: &str = '\"\"\"';
-LL +     let _: &str = "\"\"\"";
-   |
+ on line 9, column 18, replace with `"`
 
 error: character literal may only contain one codepoint
-  --> $DIR/str-as-char.rs:10:19
-   |
-LL |     let _: &str = '"\"\"\\"\\"';
-   |                   ^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/str-as-char.rs:10:19
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let _: &str = '"\"\"\\"\\"';
-LL +     let _: &str = "\"\"\\"\\"\\\"";
-   |
+ on line 10, column 18, replace with `"\"\"\\"\\"\\\""`
 
-error[E0308]: mismatched types
-  --> $DIR/str-as-char.rs:7:19
-   |
-LL |     let _: &str = 'a';
-   |            ----   ^^^ expected `&str`, found `char`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/str-as-char.rs:7:19: expected `&str`, found `char`
+  on line 7, column 12: expected due to this
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     let _: &str = 'a';
-LL +     let _: &str = "a";
-   |
+ on line 7, column 18, replace with `"`
 
 error: aborting due to 4 previous errors
 

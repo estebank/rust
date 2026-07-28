@@ -1,24 +1,12 @@
-error[E0282]: type annotations needed
-  --> $DIR/channel.rs:8:9
-   |
-LL |         channel();
-   |         ^^^^^^^ cannot infer type of the type parameter `T` declared on the function `channel`
-   |
+error E0282: type annotations needed
+ at $DIR/channel.rs:8:9: cannot infer type of the type parameter `T` declared on the function `channel`
 help: consider specifying a concrete type for the type parameter `T`
-   |
-LL |         channel::</* Type */>();
-   |                ++++++++++++++
+ on line 8, column 15, add `::</* Type */>`
 
-error[E0282]: type annotations needed
-  --> $DIR/channel.rs:13:9
-   |
-LL |         channel();
-   |         ^^^^^^^ cannot infer type of the type parameter `T` declared on the function `channel`
-   |
+error E0282: type annotations needed
+ at $DIR/channel.rs:13:9: cannot infer type of the type parameter `T` declared on the function `channel`
 help: consider specifying a concrete type for the type parameter `T`
-   |
-LL |         channel::</* Type */>();
-   |                ++++++++++++++
+ on line 13, column 15, add `::</* Type */>`
 
 error: aborting due to 2 previous errors
 

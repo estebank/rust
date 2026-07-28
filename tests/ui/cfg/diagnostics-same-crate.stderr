@@ -1,97 +1,42 @@
-error[E0432]: unresolved import `super::inner::doesnt_exist`
-  --> $DIR/diagnostics-same-crate.rs:32:9
-   |
-LL |     use super::inner::doesnt_exist;
-   |         ^^^^^^^^^^^^^^------------
-   |                       |
-   |                       no `doesnt_exist` in `inner`
-   |
+error E0432: unresolved import `super::inner::doesnt_exist`
+ at $DIR/diagnostics-same-crate.rs:32:9
+  on line 32, column 23: no `doesnt_exist` in `inner`
 note: found an item that was configured out
-  --> $DIR/diagnostics-same-crate.rs:11:13
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-...
-LL |     pub mod doesnt_exist {
-   |             ^^^^^^^^^^^^
+ at $DIR/diagnostics-same-crate.rs:11:13
+  on line 8, column 11: the item is gated here
 
-error[E0432]: unresolved import `super::inner::doesnt_exist`
-  --> $DIR/diagnostics-same-crate.rs:35:23
-   |
-LL |     use super::inner::doesnt_exist::hi;
-   |                       ^^^^^^^^^^^^ could not find `doesnt_exist` in `inner`
-   |
+error E0432: unresolved import `super::inner::doesnt_exist`
+ at $DIR/diagnostics-same-crate.rs:35:23: could not find `doesnt_exist` in `inner`
 note: found an item that was configured out
-  --> $DIR/diagnostics-same-crate.rs:11:13
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-...
-LL |     pub mod doesnt_exist {
-   |             ^^^^^^^^^^^^
+ at $DIR/diagnostics-same-crate.rs:11:13
+  on line 8, column 11: the item is gated here
 
-error[E0433]: cannot find `doesnt_exist` in `inner`
-  --> $DIR/diagnostics-same-crate.rs:53:12
-   |
-LL |     inner::doesnt_exist::hello();
-   |            ^^^^^^^^^^^^ could not find `doesnt_exist` in `inner`
-   |
+error E0433: cannot find `doesnt_exist` in `inner`
+ at $DIR/diagnostics-same-crate.rs:53:12: could not find `doesnt_exist` in `inner`
 note: found an item that was configured out
-  --> $DIR/diagnostics-same-crate.rs:11:13
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-...
-LL |     pub mod doesnt_exist {
-   |             ^^^^^^^^^^^^
+ at $DIR/diagnostics-same-crate.rs:11:13
+  on line 8, column 11: the item is gated here
 
-error[E0425]: cannot find function `uwu` in module `inner`
-  --> $DIR/diagnostics-same-crate.rs:49:12
-   |
-LL |     inner::uwu();
-   |            ^^^ not found in `inner`
-   |
+error E0425: cannot find function `uwu` in module `inner`
+ at $DIR/diagnostics-same-crate.rs:49:12: not found in `inner`
 note: found an item that was configured out
-  --> $DIR/diagnostics-same-crate.rs:5:12
-   |
-LL |     #[cfg(false)]
-   |           ----- the item is gated here
-LL |     pub fn uwu() {}
-   |            ^^^
+ at $DIR/diagnostics-same-crate.rs:5:12
+  on line 4, column 11: the item is gated here
 
-error[E0425]: cannot find function `meow` in module `inner::right`
-  --> $DIR/diagnostics-same-crate.rs:57:19
-   |
-LL |     inner::right::meow();
-   |                   ^^^^ not found in `inner::right`
-   |
+error E0425: cannot find function `meow` in module `inner::right`
+ at $DIR/diagnostics-same-crate.rs:57:19: not found in `inner::right`
 note: found an item that was configured out
-  --> $DIR/diagnostics-same-crate.rs:26:16
-   |
-LL |         #[cfg(feature = "what-a-cool-feature")]
-   |               ------------------------------- the item is gated behind the `what-a-cool-feature` feature
-LL |         pub fn meow() {}
-   |                ^^^^
+ at $DIR/diagnostics-same-crate.rs:26:16
+  on line 25, column 15: the item is gated behind the `what-a-cool-feature` feature
 
-error[E0425]: cannot find function `uwu` in this scope
-  --> $DIR/diagnostics-same-crate.rs:45:5
-   |
-LL |     uwu();
-   |     ^^^ not found in this scope
+error E0425: cannot find function `uwu` in this scope
+ at $DIR/diagnostics-same-crate.rs:45:5: not found in this scope
 
-error[E0425]: cannot find function `vanished` in this scope
-  --> $DIR/diagnostics-same-crate.rs:62:5
-   |
-LL |     vanished();
-   |     ^^^^^^^^ not found in this scope
-   |
+error E0425: cannot find function `vanished` in this scope
+ at $DIR/diagnostics-same-crate.rs:62:5: not found in this scope
 note: found an item that was configured out
-  --> $DIR/diagnostics-same-crate.rs:41:8
-   |
-LL | #[cfg(i_dont_exist_and_you_can_do_nothing_about_it)]
-   |       -------------------------------------------- the item is gated here
-LL | pub fn vanished() {}
-   |        ^^^^^^^^
+ at $DIR/diagnostics-same-crate.rs:41:8
+  on line 40, column 7: the item is gated here
 
 error: aborting due to 7 previous errors
 

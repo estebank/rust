@@ -1,72 +1,33 @@
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:4:24
-   |
-LL | fn f(_: impl Trait<T = Copy>) {}
-   |                        ^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:4:24
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL | fn f(_: impl Trait<T = dyn Copy>) {}
-   |                        +++
+ on line 4, column 23, add `dyn `
 help: you might have meant to write a bound here
-   |
-LL - fn f(_: impl Trait<T = Copy>) {}
-LL + fn f(_: impl Trait<T: Copy>) {}
-   |
+ on line 4, column 20, replace with `: `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:9:24
-   |
-LL | fn g(_: impl Trait<T = std::fmt::Debug + Eq>) {}
-   |                        ^^^^^^^^^^^^^^^^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:9:24
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL | fn g(_: impl Trait<T = dyn std::fmt::Debug + Eq>) {}
-   |                        +++
+ on line 9, column 23, add `dyn `
 help: you might have meant to write a bound here
-   |
-LL - fn g(_: impl Trait<T = std::fmt::Debug + Eq>) {}
-LL + fn g(_: impl Trait<T: std::fmt::Debug + Eq>) {}
-   |
+ on line 9, column 20, replace with `: `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:14:26
-   |
-LL | fn h(_: impl Trait<T<> = 'static + for<'a> Fn(&'a ())>) {}
-   |                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:14:26
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL | fn h(_: impl Trait<T<> = dyn 'static + for<'a> Fn(&'a ())>) {}
-   |                          +++
+ on line 14, column 25, add `dyn `
 help: you might have meant to write a bound here
-   |
-LL - fn h(_: impl Trait<T<> = 'static + for<'a> Fn(&'a ())>) {}
-LL + fn h(_: impl Trait<T<>: 'static + for<'a> Fn(&'a ())>) {}
-   |
+ on line 14, column 22, replace with `: `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:20:26
-   |
-LL | type Obj = dyn Trait<T = Clone>;
-   |                          ^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:20:26
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL | type Obj = dyn Trait<T = dyn Clone>;
-   |                          +++
+ on line 20, column 25, add `dyn `
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:29:22
-   |
-LL | fn i(_: impl Fn() -> std::fmt::Debug) {}
-   |                      ^^^^^^^^^^^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/suggest-assoc-ty-bound-on-eq-bound.rs:29:22
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL | fn i(_: impl Fn() -> dyn std::fmt::Debug) {}
-   |                      +++
+ on line 29, column 21, add `dyn `
 
 error: aborting due to 5 previous errors
 

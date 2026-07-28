@@ -1,11 +1,6 @@
 error: lifetime may not live long enough
-  --> $DIR/check-resume-ty-lifetimes.rs:15:20
-   |
-LL | fn mk_static(s: &str) -> &'static str {
-   |                 - let's call the lifetime of this reference `'1`
-...
-LL |             let x: &'static str = yield ();
-   |                    ^^^^^^^^^^^^ type annotation requires that `'1` must outlive `'static`
+ at $DIR/check-resume-ty-lifetimes.rs:15:20: type annotation requires that `'1` must outlive `'static`
+  on line 9, column 17: let's call the lifetime of this reference `'1`
 
 error: aborting due to 1 previous error
 

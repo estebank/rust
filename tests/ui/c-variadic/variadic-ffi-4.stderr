@@ -1,84 +1,44 @@
 error: lifetime may not live long enough
-  --> $DIR/variadic-ffi-4.rs:7:5
-   |
-LL | pub unsafe extern "C" fn no_escape0<'f>(_: usize, ap: ...) -> VaList<'f> {
-   |                                     --            -- has type `VaList<'1>`
-   |                                     |
-   |                                     lifetime `'f` defined here
-LL |     ap
-   |     ^^ function was supposed to return data with lifetime `'f` but it is returning data with lifetime `'1`
+ at $DIR/variadic-ffi-4.rs:7:5: function was supposed to return data with lifetime `'f` but it is returning data with lifetime `'1`
+  on line 6, column 37: lifetime `'f` defined here
+  on line 6, column 51: has type `VaList<'1>`
 
 error: lifetime may not live long enough
-  --> $DIR/variadic-ffi-4.rs:12:5
-   |
-LL | pub unsafe extern "C" fn no_escape1(_: usize, ap: ...) -> VaList<'static> {
-   |                                               -- has type `VaList<'1>`
-LL |     ap
-   |     ^^ returning this value requires that `'1` must outlive `'static`
+ at $DIR/variadic-ffi-4.rs:12:5: returning this value requires that `'1` must outlive `'static`
+  on line 11, column 47: has type `VaList<'1>`
 
 error: lifetime may not live long enough
-  --> $DIR/variadic-ffi-4.rs:16:5
-   |
-LL | pub unsafe extern "C" fn no_escape3(_: usize, mut ap0: &mut VaList, mut ap1: ...) {
-   |                                               -------               ------- has type `VaList<'1>`
-   |                                               |
-   |                                               has type `&mut VaList<'2>`
-LL |     *ap0 = ap1;
-   |     ^^^^ assignment requires that `'1` must outlive `'2`
+ at $DIR/variadic-ffi-4.rs:16:5: assignment requires that `'1` must outlive `'2`
+  on line 15, column 47: has type `&mut VaList<'2>`
+  on line 15, column 69: has type `VaList<'1>`
 
 error: lifetime may not live long enough
-  --> $DIR/variadic-ffi-4.rs:21:5
-   |
-LL | pub unsafe extern "C" fn no_escape4(_: usize, mut ap0: &mut VaList, mut ap1: ...) {
-   |                                               -------               ------- has type `VaList<'1>`
-   |                                               |
-   |                                               has type `&mut VaList<'2>`
-LL |     ap0 = &mut ap1;
-   |     ^^^^^^^^^^^^^^ assignment requires that `'1` must outlive `'2`
-   |
-   = note: requirement occurs because of a mutable reference to `VaList<'_>`
-   = note: mutable references are invariant over their type parameter
-   = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
+ at $DIR/variadic-ffi-4.rs:21:5: assignment requires that `'1` must outlive `'2`
+  on line 20, column 47: has type `&mut VaList<'2>`
+  on line 20, column 69: has type `VaList<'1>`
+note: requirement occurs because of a mutable reference to `VaList<'_>`
+note: mutable references are invariant over their type parameter
+help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
 
 error: lifetime may not live long enough
-  --> $DIR/variadic-ffi-4.rs:21:5
-   |
-LL | pub unsafe extern "C" fn no_escape4(_: usize, mut ap0: &mut VaList, mut ap1: ...) {
-   |                                               -------               ------- has type `VaList<'1>`
-   |                                               |
-   |                                               has type `&mut VaList<'2>`
-LL |     ap0 = &mut ap1;
-   |     ^^^^^^^^^^^^^^ assignment requires that `'2` must outlive `'1`
-   |
-   = note: requirement occurs because of a mutable reference to `VaList<'_>`
-   = note: mutable references are invariant over their type parameter
-   = help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
+ at $DIR/variadic-ffi-4.rs:21:5: assignment requires that `'2` must outlive `'1`
+  on line 20, column 47: has type `&mut VaList<'2>`
+  on line 20, column 69: has type `VaList<'1>`
+note: requirement occurs because of a mutable reference to `VaList<'_>`
+note: mutable references are invariant over their type parameter
+help: see <https://doc.rust-lang.org/nomicon/subtyping.html> for more information about variance
 
-error[E0597]: `ap1` does not live long enough
-  --> $DIR/variadic-ffi-4.rs:21:11
-   |
-LL | pub unsafe extern "C" fn no_escape4(_: usize, mut ap0: &mut VaList, mut ap1: ...) {
-   |                                                        -            ------- binding `ap1` declared here
-   |                                                        |
-   |                                                        let's call the lifetime of this reference `'3`
-LL |     ap0 = &mut ap1;
-   |     ------^^^^^^^^
-   |     |     |
-   |     |     borrowed value does not live long enough
-   |     assignment requires that `ap1` is borrowed for `'3`
-...
-LL | }
-   | - `ap1` dropped here while still borrowed
+error E0597: `ap1` does not live long enough
+ at $DIR/variadic-ffi-4.rs:21:11: borrowed value does not live long enough
+  on line 20, column 56: let's call the lifetime of this reference `'3`
+  on line 20, column 69: binding `ap1` declared here
+  on line 21: assignment requires that `ap1` is borrowed for `'3`
+  on line 25: `ap1` dropped here while still borrowed
 
 error: lifetime may not live long enough
-  --> $DIR/variadic-ffi-4.rs:28:5
-   |
-LL | pub unsafe extern "C" fn no_escape5(_: usize, mut ap0: &mut VaList, mut ap1: ...) {
-   |                                               -------               ------- has type `VaList<'1>`
-   |                                               |
-   |                                               has type `&mut VaList<'2>`
-LL |     *ap0 = ap1.clone();
-   |     ^^^^ assignment requires that `'1` must outlive `'2`
+ at $DIR/variadic-ffi-4.rs:28:5: assignment requires that `'1` must outlive `'2`
+  on line 27, column 47: has type `&mut VaList<'2>`
+  on line 27, column 69: has type `VaList<'1>`
 
 error: aborting due to 7 previous errors
 

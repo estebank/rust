@@ -1,14 +1,7 @@
 error: expected `:` followed by trait or lifetime
-  --> $DIR/issue-95208-ignore-qself.rs:6:88
-   |
-LL | impl<T: Iterator> Struct<T> where <T as std:: iter::Iterator>::Item:: std::fmt::Display {
-   |                                                                                        ^
-   |
+ at $DIR/issue-95208-ignore-qself.rs:6:88
 help: use single colon
-   |
-LL - impl<T: Iterator> Struct<T> where <T as std:: iter::Iterator>::Item:: std::fmt::Display {
-LL + impl<T: Iterator> Struct<T> where <T as std:: iter::Iterator>::Item: std::fmt::Display {
-   |
+ on line 6, column 67, replace with `: `
 
 error: aborting due to 1 previous error
 

@@ -1,32 +1,16 @@
-error[E0027]: pattern does not mention field `stable2` and inaccessible fields
-  --> $DIR/stable-gated-fields.rs:8:9
-   |
-LL |     let UnstableStruct { stable } = UnstableStruct::default();
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^ missing field `stable2` and inaccessible fields
-   |
+error E0027: pattern does not mention field `stable2` and inaccessible fields
+ at $DIR/stable-gated-fields.rs:8:9: missing field `stable2` and inaccessible fields
 help: include the missing field in the pattern and ignore the inaccessible fields
-   |
-LL |     let UnstableStruct { stable, stable2, .. } = UnstableStruct::default();
-   |                                +++++++++++++
+ on line 8, column 31, replace with `, stable2, .. }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |     let UnstableStruct { stable, stable2: _, .. } = UnstableStruct::default();
-   |                                ++++++++++++++++
+ on line 8, column 31, replace with `, stable2: _, .. }`
 help: or always ignore missing fields here
-   |
-LL |     let UnstableStruct { stable, .. } = UnstableStruct::default();
-   |                                ++++
+ on line 8, column 31, replace with `, .. }`
 
 error: pattern requires `..` due to inaccessible fields
-  --> $DIR/stable-gated-fields.rs:11:9
-   |
-LL |     let UnstableStruct { stable, stable2 } = UnstableStruct::default();
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/stable-gated-fields.rs:11:9
 help: ignore the inaccessible and unused fields
-   |
-LL |     let UnstableStruct { stable, stable2, .. } = UnstableStruct::default();
-   |                                         ++++
+ on line 11, column 40, add `, ..`
 
 error: aborting due to 2 previous errors
 

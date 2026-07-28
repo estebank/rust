@@ -1,20 +1,10 @@
 error: the feature `test_accepted_feature` has been stable since 1.0.0 and no longer requires an attribute to enable
-  --> $DIR/stable-features.rs:6:12
-   |
-LL | #![feature(test_accepted_feature)]
-   |            ^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/stable-features.rs:6:12
 note: the lint level is defined here
-  --> $DIR/stable-features.rs:4:9
-   |
-LL | #![deny(stable_features)]
-   |         ^^^^^^^^^^^^^^^
+ at $DIR/stable-features.rs:4:9
 
 error: the feature `rust1` has been stable since 1.0.0 and no longer requires an attribute to enable
-  --> $DIR/stable-features.rs:9:12
-   |
-LL | #![feature(rust1)]
-   |            ^^^^^
+ at $DIR/stable-features.rs:9:12
 
 error: aborting due to 2 previous errors
 

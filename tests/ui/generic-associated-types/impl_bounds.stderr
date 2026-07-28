@@ -1,78 +1,36 @@
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/impl_bounds.rs:14:39
-   |
-LL |     type A<'a> where Self: 'a;
-   |     ---------- definition of `A` from trait
-...
-LL |     type A<'a> = (&'a ()) where Self: 'static;
-   |                                       ^^^^^^^ impl has extra requirement `T: 'static`
+error E0276: impl has stricter requirements than trait
+ at $DIR/impl_bounds.rs:14:39: impl has extra requirement `T: 'static`
+  on line 4: definition of `A` from trait
 
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/impl_bounds.rs:16:48
-   |
-LL |     type B<'a, 'b> where 'a: 'b;
-   |     -------------- definition of `B` from trait
-...
-LL |     type B<'a, 'b> = (&'a(), &'b ()) where 'b: 'a;
-   |                                                ^^ impl has extra requirement `'b: 'a`
-   |
+error E0276: impl has stricter requirements than trait
+ at $DIR/impl_bounds.rs:16:48: impl has extra requirement `'b: 'a`
+  on line 5: definition of `B` from trait
 help: copy the `where` clause predicates from the trait
-   |
-LL -     type B<'a, 'b> = (&'a(), &'b ()) where 'b: 'a;
-LL +     type B<'a, 'b> = (&'a(), &'b ()) where 'a: 'b;
-   |
+ on line 16, column 37, replace with `where 'a: 'b`
 
-error[E0277]: the trait bound `T: Copy` is not satisfied
-  --> $DIR/impl_bounds.rs:18:33
-   |
-LL |     type C = String where Self: Copy;
-   |                                 ^^^^ the trait `Copy` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Copy` is not satisfied
+ at $DIR/impl_bounds.rs:18:33: the trait `Copy` is not implemented for `T`
 note: required for `Fooy<T>` to implement `Copy`
-  --> $DIR/impl_bounds.rs:11:8
-   |
-LL | #[derive(Copy, Clone)]
-   |          ---- in this derive macro expansion
-LL | struct Fooy<T>(T);
-   |        ^^^^ - type parameter would need to implement `Copy`
+ at $DIR/impl_bounds.rs:11:8
+  on line 10, column 10: in this derive macro expansion
+  on line 11, column 13: type parameter would need to implement `Copy`
 note: the requirement `Fooy<T>: Copy` appears on the `impl`'s associated type `C` but not on the corresponding trait's associated type
-  --> $DIR/impl_bounds.rs:6:10
-   |
-LL | trait Foo {
-   |       --- in this trait
-...
-LL |     type C where Self: Clone;
-   |          ^ this trait's associated type doesn't have the requirement `Fooy<T>: Copy`
+ at $DIR/impl_bounds.rs:6:10: this trait's associated type doesn't have the requirement `Fooy<T>: Copy`
+  on line 3, column 7: in this trait
 help: consider restricting type parameter `T` with trait `Copy`
-   |
-LL | impl<T: std::marker::Copy> Foo for Fooy<T> {
-   |       +++++++++++++++++++
+ on line 13, column 6, add `: std::marker::Copy`
 
-error[E0277]: the trait bound `T: Copy` is not satisfied
-  --> $DIR/impl_bounds.rs:20:24
-   |
-LL |     fn d() where Self: Copy {}
-   |                        ^^^^ the trait `Copy` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Copy` is not satisfied
+ at $DIR/impl_bounds.rs:20:24: the trait `Copy` is not implemented for `T`
 note: required for `Fooy<T>` to implement `Copy`
-  --> $DIR/impl_bounds.rs:11:8
-   |
-LL | #[derive(Copy, Clone)]
-   |          ---- in this derive macro expansion
-LL | struct Fooy<T>(T);
-   |        ^^^^ - type parameter would need to implement `Copy`
+ at $DIR/impl_bounds.rs:11:8
+  on line 10, column 10: in this derive macro expansion
+  on line 11, column 13: type parameter would need to implement `Copy`
 note: the requirement `Fooy<T>: Copy` appears on the `impl`'s associated function `d` but not on the corresponding trait's associated function
-  --> $DIR/impl_bounds.rs:7:8
-   |
-LL | trait Foo {
-   |       --- in this trait
-...
-LL |     fn d() where Self: Clone;
-   |        ^ this trait's associated function doesn't have the requirement `Fooy<T>: Copy`
+ at $DIR/impl_bounds.rs:7:8: this trait's associated function doesn't have the requirement `Fooy<T>: Copy`
+  on line 3, column 7: in this trait
 help: consider restricting type parameter `T` with trait `Copy`
-   |
-LL | impl<T: std::marker::Copy> Foo for Fooy<T> {
-   |       +++++++++++++++++++
+ on line 13, column 6, add `: std::marker::Copy`
 
 error: aborting due to 4 previous errors
 

@@ -1,25 +1,12 @@
-error[E0425]: cannot find function `bar` in module `a`
-  --> $DIR/macro-outer-attributes.rs:19:8
-   |
-LL |     a::bar();
-   |        ^^^ not found in `a`
-   |
+error E0425: cannot find function `bar` in module `a`
+ at $DIR/macro-outer-attributes.rs:19:8: not found in `a`
 note: found an item that was configured out
-  --> $DIR/macro-outer-attributes.rs:10:14
-   |
-LL |       #[cfg(false)],
-   |             ----- the item is gated here
-LL |       pub fn bar() { });
-   |              ^^^
+ at $DIR/macro-outer-attributes.rs:10:14
+  on line 9, column 13: the item is gated here
 help: consider importing this function
-   |
-LL + use b::bar;
-   |
+ on line 4, column 1, add `use b::bar;`
 help: if you import `bar`, refer to it directly
-   |
-LL -     a::bar();
-LL +     bar();
-   |
+ on line 19, column 4
 
 error: aborting due to 1 previous error
 

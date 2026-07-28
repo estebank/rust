@@ -1,49 +1,23 @@
-error[E0309]: the placeholder type `F` may not live long enough
-  --> $DIR/type-match-with-late-bound.rs:8:32
-   |
-LL | async fn walk2<'a, T: 'a>(_: T)
-   |                --              ^ ...so that the type `F` will meet its required lifetime bounds...
-   |                |
-   |                the placeholder type `F` must be valid for the lifetime `'a` as defined here...
-   |
+error E0309: the placeholder type `F` may not live long enough
+ at $DIR/type-match-with-late-bound.rs:8:32: ...so that the type `F` will meet its required lifetime bounds...
+  on line 8, column 16: the placeholder type `F` must be valid for the lifetime `'a` as defined here...
 note: ...that is required by this bound
-  --> $DIR/type-match-with-late-bound.rs:10:15
-   |
-LL |     for<F> F: 'a,
-   |               ^^
+ at $DIR/type-match-with-late-bound.rs:10:15
 help: consider adding an explicit lifetime bound
-   |
-LL |     for<F> F: 'a, F: 'a
-   |                   +++++
+ on line 10, column 16, replace with `, F: 'a`
 
-error[E0309]: the placeholder type `F` may not live long enough
-  --> $DIR/type-match-with-late-bound.rs:11:1
-   |
-LL | async fn walk2<'a, T: 'a>(_: T)
-   |                -- the placeholder type `F` must be valid for the lifetime `'a` as defined here...
-...
-LL | {}
-   | ^^ ...so that the type `F` will meet its required lifetime bounds
-   |
+error E0309: the placeholder type `F` may not live long enough
+ at $DIR/type-match-with-late-bound.rs:11:1: ...so that the type `F` will meet its required lifetime bounds
+  on line 8, column 16: the placeholder type `F` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     for<F> F: 'a, F: 'a
-   |                   +++++
+ on line 10, column 16, replace with `, F: 'a`
 
-error[E0309]: the placeholder type `F` may not live long enough
-  --> $DIR/type-match-with-late-bound.rs:11:1
-   |
-LL | async fn walk2<'a, T: 'a>(_: T)
-   |                -- the placeholder type `F` must be valid for the lifetime `'a` as defined here...
-...
-LL | {}
-   | ^^ ...so that the type `F` will meet its required lifetime bounds
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0309: the placeholder type `F` may not live long enough
+ at $DIR/type-match-with-late-bound.rs:11:1: ...so that the type `F` will meet its required lifetime bounds
+  on line 8, column 16: the placeholder type `F` must be valid for the lifetime `'a` as defined here...
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: consider adding an explicit lifetime bound
-   |
-LL |     for<F> F: 'a, F: 'a
-   |                   +++++
+ on line 10, column 16, replace with `, F: 'a`
 
 error: aborting due to 3 previous errors
 

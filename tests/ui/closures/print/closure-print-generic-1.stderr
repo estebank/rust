@@ -1,19 +1,9 @@
-error[E0382]: use of moved value: `c`
-  --> $DIR/closure-print-generic-1.rs:18:5
-   |
-LL |     let c = to_fn_once(move || {
-   |         - move occurs because `c` has type `{closure@$DIR/closure-print-generic-1.rs:13:24: 13:31}`, which does not implement the `Copy` trait
-...
-LL |     c();
-   |     --- `c` moved due to this call
-LL |     c();
-   |     ^ value used here after move
-   |
+error E0382: use of moved value: `c`
+ at $DIR/closure-print-generic-1.rs:18:5: value used here after move
+  on line 13, column 9: move occurs because `c` has type `{closure@$DIR/closure-print-generic-1.rs:13:24: 13:31}`, which does not implement the `Copy` trait
+  on line 17: `c` moved due to this call
 note: this value implements `FnOnce`, which causes it to be moved when called
-  --> $DIR/closure-print-generic-1.rs:17:5
-   |
-LL |     c();
-   |     ^
+ at $DIR/closure-print-generic-1.rs:17:5
 
 error: aborting due to 1 previous error
 

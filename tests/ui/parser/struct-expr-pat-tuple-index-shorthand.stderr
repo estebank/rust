@@ -1,34 +1,18 @@
 error: expected identifier, found `0`
-  --> $DIR/struct-expr-pat-tuple-index-shorthand.rs:10:15
-   |
-LL |     let Rgb { 0, 1, 2 };
-   |         ---   ^ expected identifier
-   |         |
-   |         while parsing the fields for this pattern
+ at $DIR/struct-expr-pat-tuple-index-shorthand.rs:10:15: expected identifier
+  on line 10, column 9: while parsing the fields for this pattern
 
 error: expected identifier, found `0`
-  --> $DIR/struct-expr-pat-tuple-index-shorthand.rs:13:19
-   |
-LL |     let _ = Rgb { 0, 1, 2 };
-   |             ---   ^ expected identifier
-   |             |
-   |             while parsing this struct
+ at $DIR/struct-expr-pat-tuple-index-shorthand.rs:13:19: expected identifier
+  on line 13, column 13: while parsing this struct
 
 error: expected identifier, found `1`
-  --> $DIR/struct-expr-pat-tuple-index-shorthand.rs:13:22
-   |
-LL |     let _ = Rgb { 0, 1, 2 };
-   |             ---      ^ expected identifier
-   |             |
-   |             while parsing this struct
+ at $DIR/struct-expr-pat-tuple-index-shorthand.rs:13:22: expected identifier
+  on line 13, column 13: while parsing this struct
 
 error: expected identifier, found `2`
-  --> $DIR/struct-expr-pat-tuple-index-shorthand.rs:13:25
-   |
-LL |     let _ = Rgb { 0, 1, 2 };
-   |             ---         ^ expected identifier
-   |             |
-   |             while parsing this struct
+ at $DIR/struct-expr-pat-tuple-index-shorthand.rs:13:25: expected identifier
+  on line 13, column 13: while parsing this struct
 
 error: aborting due to 4 previous errors
 

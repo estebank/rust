@@ -1,24 +1,12 @@
-error[E0228]: cannot deduce the lifetime bound for this trait object type from context
-  --> $DIR/object-lifetime-default-inherent-gat.rs:19:41
-   |
-LL |     fn check<'r>() where Parent::Ty<'r, dyn super::Trait>: {}
-   |                                         ^^^^^^^^^^^^^^^^
-   |
+error E0228: cannot deduce the lifetime bound for this trait object type from context
+ at $DIR/object-lifetime-default-inherent-gat.rs:19:41
 help: please supply an explicit bound
-   |
-LL |     fn check<'r>() where Parent::Ty<'r, dyn super::Trait + /* 'a */>: {}
-   |                                                          ++++++++++
+ on line 19, column 56, add ` + /* 'a */`
 
-error[E0228]: cannot deduce the lifetime bound for this trait object type from context
-  --> $DIR/object-lifetime-default-inherent-gat.rs:32:41
-   |
-LL |     fn check<'r>() where Parent<'r>::Ty<dyn super::Trait>: {}
-   |                                         ^^^^^^^^^^^^^^^^
-   |
+error E0228: cannot deduce the lifetime bound for this trait object type from context
+ at $DIR/object-lifetime-default-inherent-gat.rs:32:41
 help: please supply an explicit bound
-   |
-LL |     fn check<'r>() where Parent<'r>::Ty<dyn super::Trait + /* 'a */>: {}
-   |                                                          ++++++++++
+ on line 32, column 56, add ` + /* 'a */`
 
 error: aborting due to 2 previous errors
 

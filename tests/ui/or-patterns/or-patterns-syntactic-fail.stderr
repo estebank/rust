@@ -1,59 +1,28 @@
 error: expected identifier, found `:`
-  --> $DIR/or-patterns-syntactic-fail.rs:11:19
-   |
-LL |     let _ = |A | B: E| ();
-   |             ----  ^ expected identifier
-   |             |
-   |             while parsing the body of this closure
-   |
+ at $DIR/or-patterns-syntactic-fail.rs:11:19: expected identifier
+  on line 11, column 13: while parsing the body of this closure
 help: you might have meant to open the body of the closure
-   |
-LL |     let _ = |A | { B: E| ();
-   |                  +
+ on line 11, column 16, add ` {`
 
 error: function parameters require top-level or-patterns in parentheses
-  --> $DIR/or-patterns-syntactic-fail.rs:18:13
-   |
-LL |     fn fun1(A | B: E) {}
-   |             ^^^^^
-   |
+ at $DIR/or-patterns-syntactic-fail.rs:18:13
 help: wrap the pattern in parentheses
-   |
-LL |     fn fun1((A | B): E) {}
-   |             +     +
+ on line 18, column 12, add `(`
 
 error: function parameters require top-level or-patterns in parentheses
-  --> $DIR/or-patterns-syntactic-fail.rs:21:13
-   |
-LL |     fn fun2(| A | B: E) {}
-   |             ^^^^^^^
-   |
+ at $DIR/or-patterns-syntactic-fail.rs:21:13
 help: wrap the pattern in parentheses
-   |
-LL |     fn fun2((| A | B): E) {}
-   |             +       +
+ on line 21, column 12, add `(`
 
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/or-patterns-syntactic-fail.rs:26:9
-   |
-LL |     let A | B: E = A;
-   |         ^^^^^
-   |
+ at $DIR/or-patterns-syntactic-fail.rs:26:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (A | B): E = A;
-   |         +     +
+ on line 26, column 8, add `(`
 
 error: `let` bindings require top-level or-patterns in parentheses
-  --> $DIR/or-patterns-syntactic-fail.rs:29:9
-   |
-LL |     let | A | B: E = A;
-   |         ^^^^^^^
-   |
+ at $DIR/or-patterns-syntactic-fail.rs:29:9
 help: wrap the pattern in parentheses
-   |
-LL |     let (| A | B): E = A;
-   |         +       +
+ on line 29, column 8, add `(`
 
 error: aborting due to 5 previous errors
 

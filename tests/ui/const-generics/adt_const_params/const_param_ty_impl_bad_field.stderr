@@ -1,19 +1,11 @@
-error[E0204]: the trait `ConstParamTy_` cannot be implemented for this type
-  --> $DIR/const_param_ty_impl_bad_field.rs:10:37
-   |
-LL | struct CantParam(NotParam);
-   |                  -------- this field does not implement `ConstParamTy_`
-LL |
-LL | impl std::marker::ConstParamTy_ for CantParam {}
-   |                                     ^^^^^^^^^
+error E0204: the trait `ConstParamTy_` cannot be implemented for this type
+ at $DIR/const_param_ty_impl_bad_field.rs:10:37
+  on line 8, column 18: this field does not implement `ConstParamTy_`
 
-error[E0204]: the trait `ConstParamTy_` cannot be implemented for this type
-  --> $DIR/const_param_ty_impl_bad_field.rs:14:8
-   |
-LL | #[derive(std::marker::ConstParamTy, Eq, PartialEq)]
-   |          ------------------------- in this derive macro expansion
-LL | struct CantParamDerive(NotParam);
-   |        ^^^^^^^^^^^^^^^ -------- this field does not implement `ConstParamTy_`
+error E0204: the trait `ConstParamTy_` cannot be implemented for this type
+ at $DIR/const_param_ty_impl_bad_field.rs:14:8
+  on line 13, column 10: in this derive macro expansion
+  on line 14, column 24: this field does not implement `ConstParamTy_`
 
 error: aborting due to 2 previous errors
 

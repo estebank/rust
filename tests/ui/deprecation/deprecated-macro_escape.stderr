@@ -1,8 +1,5 @@
 warning: `#[macro_escape]` is a deprecated synonym for `#[macro_use]`
-  --> $DIR/deprecated-macro_escape.rs:3:1
-   |
-LL | #[macro_escape]
-   | ^^^^^^^^^^^^^^^
+ at $DIR/deprecated-macro_escape.rs:3:1
 
 warning: 1 warning emitted
 

@@ -1,62 +1,26 @@
-error[E0277]: the trait bound `Error: Ord` is not satisfied
-  --> $DIR/derives-span-Ord.rs:10:9
-   |
-LL | #[derive(Ord, Eq, PartialOrd, PartialEq)]
-   |          --- in this derive macro expansion
-...
-LL |         x: Error,
-   |         ^^^^^^^^ the trait `Ord` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Ord` is not satisfied
+ at $DIR/derives-span-Ord.rs:10:9: the trait `Ord` is not implemented for `Error`
+  on line 7, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Ord)]`
-   |
-LL + #[derive(Ord)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(Ord)]`
 
-error[E0277]: the trait bound `Error: Ord` is not satisfied
-  --> $DIR/derives-span-Ord.rs:17:9
-   |
-LL | #[derive(Ord, Eq, PartialOrd, PartialEq)]
-   |          --- in this derive macro expansion
-...
-LL |         Error,
-   |         ^^^^^ the trait `Ord` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Ord` is not satisfied
+ at $DIR/derives-span-Ord.rs:17:9: the trait `Ord` is not implemented for `Error`
+  on line 14, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Ord)]`
-   |
-LL + #[derive(Ord)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(Ord)]`
 
-error[E0277]: the trait bound `Error: Ord` is not satisfied
-  --> $DIR/derives-span-Ord.rs:23:5
-   |
-LL | #[derive(Ord, Eq, PartialOrd, PartialEq)]
-   |          --- in this derive macro expansion
-LL | struct Struct {
-LL |     x: Error,
-   |     ^^^^^^^^ the trait `Ord` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Ord` is not satisfied
+ at $DIR/derives-span-Ord.rs:23:5: the trait `Ord` is not implemented for `Error`
+  on line 21, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Ord)]`
-   |
-LL + #[derive(Ord)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(Ord)]`
 
-error[E0277]: the trait bound `Error: Ord` is not satisfied
-  --> $DIR/derives-span-Ord.rs:28:5
-   |
-LL | #[derive(Ord, Eq, PartialOrd, PartialEq)]
-   |          --- in this derive macro expansion
-LL | struct TupleStruct(
-LL |     Error,
-   |     ^^^^^ the trait `Ord` is not implemented for `Error`
-   |
+error E0277: the trait bound `Error: Ord` is not satisfied
+ at $DIR/derives-span-Ord.rs:28:5: the trait `Ord` is not implemented for `Error`
+  on line 26, column 10: in this derive macro expansion
 help: consider annotating `Error` with `#[derive(Ord)]`
-   |
-LL + #[derive(Ord)]
-LL | struct Error;
-   |
+ on line 5, column 1, add `#[derive(Ord)]`
 
 error: aborting due to 4 previous errors
 

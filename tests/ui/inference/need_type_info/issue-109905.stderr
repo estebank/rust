@@ -1,14 +1,8 @@
-error[E0282]: type annotations needed
-  --> $DIR/issue-109905.rs:13:5
-   |
-LL |     <() as Trait<'static, _>>::m(());
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ cannot infer type of the type parameter `T` declared on the trait `Trait`
+error E0282: type annotations needed
+ at $DIR/issue-109905.rs:13:5: cannot infer type of the type parameter `T` declared on the trait `Trait`
 
-error[E0282]: type annotations needed
-  --> $DIR/issue-109905.rs:20:5
-   |
-LL |     Trait::<'static, _>::m(());
-   |     ^^^^^^^^^^^^^^^^^^^^^^ cannot infer type of the type parameter `T` declared on the trait `Trait`
+error E0282: type annotations needed
+ at $DIR/issue-109905.rs:20:5: cannot infer type of the type parameter `T` declared on the trait `Trait`
 
 error: aborting due to 2 previous errors
 

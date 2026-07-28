@@ -1,68 +1,23 @@
-error[E0515]: cannot return reference to function parameter `a`
-  --> $DIR/generator_returned_from_fn.rs:25:13
-   |
-LL |       iter! { || {
-   |  _____________^
-LL | |         yield *a;
-LL | |         for x in 5..10 {
-LL | |             yield x * 2;
-LL | |         }
-LL | |     } }
-   | |_____^ returns a reference to data owned by the current function
+error E0515: cannot return reference to function parameter `a`
+ at $DIR/generator_returned_from_fn.rs:25:13 to 30:6: returns a reference to data owned by the current function
 
 error: gen closure does not implement `Fn` because it captures state from its environment
-  --> $DIR/generator_returned_from_fn.rs:34:13
-   |
-LL |       iter! { move || {
-   |  _____________-^^^^^^
-LL | |         yield *a;
-LL | |         for x in 5..10 {
-LL | |             yield x * 2;
-LL | |         }
-LL | |     } }
-   | |_____- return type was inferred to be `{gen closure@$DIR/generator_returned_from_fn.rs:34:13: 34:20}` here
+ at $DIR/generator_returned_from_fn.rs:34:13
+  on line 34, column 13 to line 39, column 6: return type was inferred to be `{gen closure@$DIR/generator_returned_from_fn.rs:34:13: 34:20}` here
 
-error[E0700]: hidden type for `impl FnOnce() -> impl Iterator<Item = u32>` captures lifetime that does not appear in bounds
-  --> $DIR/generator_returned_from_fn.rs:43:13
-   |
-LL |   fn capture_move_once(a: &u32) -> impl FnOnce() -> impl Iterator<Item = u32> {
-   |                           ----     ------------------------------------------ opaque type defined here
-   |                           |
-   |                           hidden type `{gen closure@...}` captures the anonymous lifetime defined here
-LL |       iter! { move || {
-   |  _____________^
-LL | |
-LL | |
-LL | |         yield *a;
-...  |
-LL | |     } }
-   | |_____^
-   |
+error E0700: hidden type for `impl FnOnce() -> impl Iterator<Item = u32>` captures lifetime that does not appear in bounds
+ at $DIR/generator_returned_from_fn.rs:43:13 to 50:6
+  on line 42, column 25: hidden type `{gen closure@...}` captures the anonymous lifetime defined here
+  on line 42, column 34: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'_`
-   |
-LL | fn capture_move_once(a: &u32) -> impl FnOnce() -> impl Iterator<Item = u32> + use<'_> {
-   |                                                                             +++++++++
+ on line 42, column 75, add ` + use<'_>`
 
-error[E0700]: hidden type for `impl Iterator<Item = u32>` captures lifetime that does not appear in bounds
-  --> $DIR/generator_returned_from_fn.rs:43:13
-   |
-LL |   fn capture_move_once(a: &u32) -> impl FnOnce() -> impl Iterator<Item = u32> {
-   |                           ----                      ------------------------- opaque type defined here
-   |                           |
-   |                           hidden type `{gen closure body@...}` captures the anonymous lifetime defined here
-LL |       iter! { move || {
-   |  _____________^
-LL | |
-LL | |
-LL | |         yield *a;
-...  |
-LL | |     } }
-   | |_____^
-   |
+error E0700: hidden type for `impl Iterator<Item = u32>` captures lifetime that does not appear in bounds
+ at $DIR/generator_returned_from_fn.rs:43:13 to 50:6
+  on line 42, column 25: hidden type `{gen closure body@...}` captures the anonymous lifetime defined here
+  on line 42, column 51: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'_`
-   |
-LL | fn capture_move_once(a: &u32) -> impl FnOnce() -> impl Iterator<Item = u32> + use<'_> {
-   |                                                                             +++++++++
+ on line 42, column 75, add ` + use<'_>`
 
 error: aborting due to 4 previous errors
 

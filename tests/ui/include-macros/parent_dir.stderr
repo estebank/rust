@@ -1,38 +1,17 @@
 error: couldn't read `$DIR/include-macros/file.txt`: $FILE_NOT_FOUND_MSG
-  --> $DIR/parent_dir.rs:4:13
-   |
-LL |     let _ = include_str!("include-macros/file.txt");
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/parent_dir.rs:4:13
 help: there is a file with the same name in a different directory
-   |
-LL -     let _ = include_str!("include-macros/file.txt");
-LL +     let _ = include_str!("file.txt");
-   |
+ on line 4, column 25, replace with `"file.txt"`
 
 error: couldn't read `$DIR/../../data.bin`: $FILE_NOT_FOUND_MSG
-  --> $DIR/parent_dir.rs:6:13
-   |
-LL |     let _ = include_bytes!("../../data.bin");
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/parent_dir.rs:6:13
 help: there is a file with the same name in a different directory
-   |
-LL -     let _ = include_bytes!("../../data.bin");
-LL +     let _ = include_bytes!("data.bin");
-   |
+ on line 6, column 27, replace with `"data.bin"`
 
 error: couldn't read `$DIR/tests/ui/include-macros/file.txt`: $FILE_NOT_FOUND_MSG
-  --> $DIR/parent_dir.rs:8:13
-   |
-LL |     let _ = include_str!("tests/ui/include-macros/file.txt");
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/parent_dir.rs:8:13
 help: there is a file with the same name in a different directory
-   |
-LL -     let _ = include_str!("tests/ui/include-macros/file.txt");
-LL +     let _ = include_str!("file.txt");
-   |
+ on line 8, column 25, replace with `"file.txt"`
 
 error: aborting due to 3 previous errors
 

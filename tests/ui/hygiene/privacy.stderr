@@ -1,14 +1,7 @@
-error[E0603]: function `f` is private
-  --> $DIR/privacy.rs:17:14
-   |
-LL |         foo::f()
-   |              ^ private function
-   |
+error E0603: function `f` is private
+ at $DIR/privacy.rs:17:14: private function
 note: the function `f` is defined here
-  --> $DIR/privacy.rs:5:5
-   |
-LL |     fn f() {}
-   |     ^^^^^^
+ at $DIR/privacy.rs:5:5
 
 error: aborting due to 1 previous error
 

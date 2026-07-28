@@ -1,150 +1,64 @@
 error: the `#[test]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:5:1
-   |
-LL |   #[test]
-   |   ^^^^^^^ the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL | / mod test {
-LL | |     mod inner { #![test] }
-...  |
-LL | |     impl S { }
-LL | | }
-   | |_- expected a non-associated function, found a module
-   |
+ at $DIR/gating-of-test-attrs.rs:5:1: the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 7 to line 23: expected a non-associated function, found a module
 help: replace with conditional compilation to make the item only exist when tests are being run
-   |
-LL - #[test]
-LL + #[cfg(test)]
-   |
+ on line 5, replace with `#[cfg(test)]`
 
-error[E0658]: inner macro attributes are unstable
-  --> $DIR/gating-of-test-attrs.rs:8:20
-   |
-LL |     mod inner { #![test] }
-   |                    ^^^^
-   |
-   = note: see issue #54726 <https://github.com/rust-lang/rust/issues/54726> for more information
-   = help: add `#![feature(custom_inner_attributes)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: inner macro attributes are unstable
+ at $DIR/gating-of-test-attrs.rs:8:20
+note: see issue #54726 <https://github.com/rust-lang/rust/issues/54726> for more information
+help: add `#![feature(custom_inner_attributes)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error: the `#[test]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:8:17
-   |
-LL |     mod inner { #![test] }
-   |     ------------^^^^^^^^--
-   |     |           |
-   |     |           the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
-   |     expected a non-associated function, found a module
-   |
+ at $DIR/gating-of-test-attrs.rs:8:17: the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 8: expected a non-associated function, found a module
 help: replace with conditional compilation to make the item only exist when tests are being run
-   |
-LL -     mod inner { #![test] }
-LL +     mod inner { #[cfg(test)] }
-   |
+ on line 8, column 16, replace with `#[cfg(test)]`
 
 error: the `#[test]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:12:5
-   |
-LL |     #[test]
-   |     ^^^^^^^ the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL |     struct S;
-   |     --------- expected a non-associated function, found a struct
-   |
+ at $DIR/gating-of-test-attrs.rs:12:5: the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 14: expected a non-associated function, found a struct
 help: replace with conditional compilation to make the item only exist when tests are being run
-   |
-LL -     #[test]
-LL +     #[cfg(test)]
-   |
+ on line 12, replace with `#[cfg(test)]`
 
 error: the `#[test]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:16:5
-   |
-LL |     #[test]
-   |     ^^^^^^^ the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL |     type T = S;
-   |     ----------- expected a non-associated function, found a type alias
-   |
+ at $DIR/gating-of-test-attrs.rs:16:5: the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 18: expected a non-associated function, found a type alias
 help: replace with conditional compilation to make the item only exist when tests are being run
-   |
-LL -     #[test]
-LL +     #[cfg(test)]
-   |
+ on line 16, replace with `#[cfg(test)]`
 
 error: the `#[test]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:20:5
-   |
-LL |     #[test]
-   |     ^^^^^^^ the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL |     impl S { }
-   |     ---------- expected a non-associated function, found an implementation
-   |
+ at $DIR/gating-of-test-attrs.rs:20:5: the `#[test]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 22: expected a non-associated function, found an implementation
 help: replace with conditional compilation to make the item only exist when tests are being run
-   |
-LL -     #[test]
-LL +     #[cfg(test)]
-   |
+ on line 20, replace with `#[cfg(test)]`
 
 error: the `#[bench]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:28:1
-   |
-LL |   #[bench]
-   |   ^^^^^^^^ the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL | / mod bench {
-LL | |     mod inner { #![bench] }
-...  |
-LL | |     impl S { }
-LL | | }
-   | |_- expected a non-associated function, found a module
+ at $DIR/gating-of-test-attrs.rs:28:1: the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 30 to line 46: expected a non-associated function, found a module
 
-error[E0658]: inner macro attributes are unstable
-  --> $DIR/gating-of-test-attrs.rs:31:20
-   |
-LL |     mod inner { #![bench] }
-   |                    ^^^^^
-   |
-   = note: see issue #54726 <https://github.com/rust-lang/rust/issues/54726> for more information
-   = help: add `#![feature(custom_inner_attributes)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: inner macro attributes are unstable
+ at $DIR/gating-of-test-attrs.rs:31:20
+note: see issue #54726 <https://github.com/rust-lang/rust/issues/54726> for more information
+help: add `#![feature(custom_inner_attributes)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error: the `#[bench]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:31:17
-   |
-LL |     mod inner { #![bench] }
-   |     ------------^^^^^^^^^--
-   |     |           |
-   |     |           the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
-   |     expected a non-associated function, found a module
+ at $DIR/gating-of-test-attrs.rs:31:17: the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 31: expected a non-associated function, found a module
 
 error: the `#[bench]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:35:5
-   |
-LL |     #[bench]
-   |     ^^^^^^^^ the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL |     struct S;
-   |     --------- expected a non-associated function, found a struct
+ at $DIR/gating-of-test-attrs.rs:35:5: the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 37: expected a non-associated function, found a struct
 
 error: the `#[bench]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:39:5
-   |
-LL |     #[bench]
-   |     ^^^^^^^^ the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL |     type T = S;
-   |     ----------- expected a non-associated function, found a type alias
+ at $DIR/gating-of-test-attrs.rs:39:5: the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 41: expected a non-associated function, found a type alias
 
 error: the `#[bench]` attribute may only be used on a free function
-  --> $DIR/gating-of-test-attrs.rs:43:5
-   |
-LL |     #[bench]
-   |     ^^^^^^^^ the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
-LL |
-LL |     impl S { }
-   |     ---------- expected a non-associated function, found an implementation
+ at $DIR/gating-of-test-attrs.rs:43:5: the `#[bench]` macro causes a function to be run as a test and has no effect on non-functions
+  on line 45: expected a non-associated function, found an implementation
 
 error: aborting due to 12 previous errors
 

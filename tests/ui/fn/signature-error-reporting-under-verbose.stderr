@@ -1,18 +1,10 @@
-error[E0308]: mismatched types
-  --> $DIR/signature-error-reporting-under-verbose.rs:9:15
-   |
-LL |     needs_ptr(foo);
-   |     --------- ^^^ expected fn pointer, found fn item
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected fn pointer `fn(i32, u32)`
-                 found fn item `fn(i32, i32) {foo}`
+error E0308: mismatched types
+ at $DIR/signature-error-reporting-under-verbose.rs:9:15: expected fn pointer, found fn item
+  on line 9: arguments to this function are incorrect
+note: expected fn pointer `fn(i32, u32)`
+            found fn item `fn(i32, i32) {foo}`
 note: function defined here
-  --> $DIR/signature-error-reporting-under-verbose.rs:5:4
-   |
-LL | fn needs_ptr(_: fn(i32, u32)) {}
-   |    ^^^^^^^^^ ---------------
+ at $DIR/signature-error-reporting-under-verbose.rs:5:4
 
 error: aborting due to 1 previous error
 

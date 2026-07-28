@@ -1,14 +1,8 @@
-error[E0597]: `x` does not live long enough
-  --> $DIR/type_ascription_static_lifetime.rs:6:33
-   |
-LL |     let x = 22_u32;
-   |         - binding `x` declared here
-LL |     let y: &u32 = type_ascribe!(&x, &'static u32);
-   |                                 ^^  ------------ type annotation requires that `x` is borrowed for `'static`
-   |                                 |
-   |                                 borrowed value does not live long enough
-LL | }
-   | - `x` dropped here while still borrowed
+error E0597: `x` does not live long enough
+ at $DIR/type_ascription_static_lifetime.rs:6:33: borrowed value does not live long enough
+  on line 5, column 9: binding `x` declared here
+  on line 6, column 37: type annotation requires that `x` is borrowed for `'static`
+  on line 7: `x` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

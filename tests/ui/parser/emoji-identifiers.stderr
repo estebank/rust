@@ -1,103 +1,42 @@
 error: unknown start of token: \u{2796}
-  --> $DIR/emoji-identifiers.rs:13:33
-   |
-LL |     let _ = i_like_to_😄_a_lot() ➖ 4;
-   |                                  ^^
-   |
+ at $DIR/emoji-identifiers.rs:13:33
 help: Unicode character '➖' (Heavy Minus Sign) looks like '-' (Minus/Hyphen), but it is not
-   |
-LL -     let _ = i_like_to_😄_a_lot() ➖ 4;
-LL +     let _ = i_like_to_😄_a_lot() - 4;
-   |
+ on line 13, column 32, replace with `-`
 
-error: identifiers cannot contain emoji: `ABig👩👩👧👧Family`
-  --> $DIR/emoji-identifiers.rs:1:8
-   |
-LL | struct ABig👩👩👧👧Family;
-   |        ^^^^^^^^^^^^^^^^^^
+error: identifiers cannot contain emoji: `ABig👩‍👩‍👧‍👧Family`
+ at $DIR/emoji-identifiers.rs:1:8
 
 error: identifiers cannot contain emoji: `👀`
-  --> $DIR/emoji-identifiers.rs:2:8
-   |
-LL | struct 👀;
-   |        ^^
-LL | impl 👀 {
-   |      ^^
-LL |     fn full_of_✨() -> 👀 {
-   |                        ^^
-LL |         👀
-   |         ^^
-...
-LL | fn i_like_to_😅_a_lot() -> 👀 {
-   |                            ^^
-LL |     👀::full_of✨()
-   |     ^^
+ at $DIR/emoji-identifiers.rs:2:8
 
 error: identifiers cannot contain emoji: `full_of_✨`
-  --> $DIR/emoji-identifiers.rs:4:8
-   |
-LL |     fn full_of_✨() -> 👀 {
-   |        ^^^^^^^^^^
+ at $DIR/emoji-identifiers.rs:4:8
 
 error: identifiers cannot contain emoji: `i_like_to_😅_a_lot`
-  --> $DIR/emoji-identifiers.rs:8:4
-   |
-LL | fn i_like_to_😅_a_lot() -> 👀 {
-   |    ^^^^^^^^^^^^^^^^^^
+ at $DIR/emoji-identifiers.rs:8:4
 
 error: identifiers cannot contain emoji: `full_of✨`
-  --> $DIR/emoji-identifiers.rs:9:8
-   |
-LL |     👀::full_of✨()
-   |         ^^^^^^^^^
+ at $DIR/emoji-identifiers.rs:9:8
 
 error: identifiers cannot contain emoji: `i_like_to_😄_a_lot`
-  --> $DIR/emoji-identifiers.rs:13:13
-   |
-LL |     let _ = i_like_to_😄_a_lot() ➖ 4;
-   |             ^^^^^^^^^^^^^^^^^^
+ at $DIR/emoji-identifiers.rs:13:13
 
 error: Ferris cannot be used as an identifier
-  --> $DIR/emoji-identifiers.rs:17:9
-   |
-LL |     let 🦀 = 1;
-   |         ^^ help: try using their name instead: `ferris`
-LL |     dbg!(🦀);
-   |          ^^
+ at $DIR/emoji-identifiers.rs:17:9: help: try using their name instead: `ferris`
 
-error[E0599]: no associated function or constant named `full_of✨` found for struct `👀` in the current scope
-  --> $DIR/emoji-identifiers.rs:9:8
-   |
-LL | struct 👀;
-   | --------- associated function or constant `full_of✨` not found for this struct
-...
-LL |     👀::full_of✨()
-   |         ^^^^^^^^^ associated function or constant not found in `👀`
-   |
+error E0599: no associated function or constant named `full_of✨` found for struct `👀` in the current scope
+ at $DIR/emoji-identifiers.rs:9:8: associated function or constant not found in `👀`
+  on line 2: associated function or constant `full_of✨` not found for this struct
 note: if you're trying to build a new `👀`, consider using `👀::full_of_✨` which returns `👀`
-  --> $DIR/emoji-identifiers.rs:4:5
-   |
-LL |     fn full_of_✨() -> 👀 {
-   |     ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/emoji-identifiers.rs:4:5
 help: there is an associated function `full_of_✨` with a similar name
-   |
-LL |     👀::full_of_✨()
-   |                +
+ on line 9, column 7, replace with `full_of_✨`
 
-error[E0425]: cannot find function `i_like_to_😄_a_lot` in this scope
-  --> $DIR/emoji-identifiers.rs:13:13
-   |
-LL | fn i_like_to_😅_a_lot() -> 👀 {
-   | ----------------------------- similarly named function `i_like_to_😅_a_lot` defined here
-...
-LL |     let _ = i_like_to_😄_a_lot() ➖ 4;
-   |             ^^^^^^^^^^^^^^^^^^
-   |
+error E0425: cannot find function `i_like_to_😄_a_lot` in this scope
+ at $DIR/emoji-identifiers.rs:13:13
+  on line 8: similarly named function `i_like_to_😅_a_lot` defined here
 help: a function with a similar name exists
-   |
-LL -     let _ = i_like_to_😄_a_lot() ➖ 4;
-LL +     let _ = i_like_to_😅_a_lot() ➖ 4;
-   |
+ on line 13, column 12, replace with `i_like_to_😅_a_lot`
 
 error: aborting due to 10 previous errors
 

@@ -1,23 +1,12 @@
 error: unexpected `==`
-  --> $DIR/issue-101477-enum.rs:6:7
-   |
-LL |     B == 2
-   |       ^^
-   |
-   = help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
+ at $DIR/issue-101477-enum.rs:6:7
+help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
 help: try using `=` instead
-   |
-LL -     B == 2
-LL +     B = 2
-   |
+ on line 6, column 6, replace with `=`
 
 error: expected item, found `==`
-  --> $DIR/issue-101477-enum.rs:6:7
-   |
-LL |     B == 2
-   |       ^^ expected item
-   |
-   = note: for a full list of items that can appear in modules, see <https://doc.rust-lang.org/reference/items.html>
+ at $DIR/issue-101477-enum.rs:6:7: expected item
+note: for a full list of items that can appear in modules, see <https://doc.rust-lang.org/reference/items.html>
 
 error: aborting due to 2 previous errors
 

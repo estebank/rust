@@ -1,108 +1,52 @@
-error[E0026]: variant `Foo::Bar` does not have a field named `aa`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:10:23
-   |
-LL |         Foo::Bar { a, aa: 1, c } => (),
-   |                       ^^
-   |                       |
-   |                       variant `Foo::Bar` does not have this field
-   |                       help: `Foo::Bar` has a field named `b`
+error E0026: variant `Foo::Bar` does not have a field named `aa`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:10:23: variant `Foo::Bar` does not have this field
+  on line 10, column 23: help: `Foo::Bar` has a field named `b`
 
-error[E0027]: pattern does not mention field `b`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:10:9
-   |
-LL |         Foo::Bar { a, aa: 1, c } => (),
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^ missing field `b`
-   |
+error E0027: pattern does not mention field `b`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:10:9: missing field `b`
 help: include the missing field in the pattern
-   |
-LL |         Foo::Bar { a, aa: 1, c, b } => (),
-   |                               +++
+ on line 10, column 30, replace with `, b }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |         Foo::Bar { a, aa: 1, c, b: _ } => (),
-   |                               ++++++
+ on line 10, column 30, replace with `, b: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Foo::Bar { a, aa: 1, c, .. } => (),
-   |                               ++++
+ on line 10, column 30, replace with `, .. }`
 
-error[E0026]: variant `Foo::Baz` does not have a field named `bb`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:13:20
-   |
-LL |         Foo::Baz { bb: 1.0 } => (),
-   |                    ^^
-   |                    |
-   |                    variant `Foo::Baz` does not have this field
-   |                    help: `Foo::Baz` has a field named `a`
+error E0026: variant `Foo::Baz` does not have a field named `bb`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:13:20: variant `Foo::Baz` does not have this field
+  on line 13, column 20: help: `Foo::Baz` has a field named `a`
 
-error[E0027]: pattern does not mention field `a`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:13:9
-   |
-LL |         Foo::Baz { bb: 1.0 } => (),
-   |         ^^^^^^^^^^^^^^^^^^^^ missing field `a`
-   |
+error E0027: pattern does not mention field `a`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:13:9: missing field `a`
 help: include the missing field in the pattern
-   |
-LL |         Foo::Baz { bb: 1.0, a } => (),
-   |                           +++
+ on line 13, column 26, replace with `, a }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |         Foo::Baz { bb: 1.0, a: _ } => (),
-   |                           ++++++
+ on line 13, column 26, replace with `, a: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Foo::Baz { bb: 1.0, .. } => (),
-   |                           ++++
+ on line 13, column 26, replace with `, .. }`
 
-error[E0026]: variant `Foo::Bar` does not have a field named `aa`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:20:23
-   |
-LL |         Foo::Bar { a, aa: "", c } => (),
-   |                       ^^ variant `Foo::Bar` does not have this field
+error E0026: variant `Foo::Bar` does not have a field named `aa`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:20:23: variant `Foo::Bar` does not have this field
 
-error[E0027]: pattern does not mention field `b`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:20:9
-   |
-LL |         Foo::Bar { a, aa: "", c } => (),
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^ missing field `b`
-   |
+error E0027: pattern does not mention field `b`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:20:9: missing field `b`
 help: include the missing field in the pattern
-   |
-LL |         Foo::Bar { a, aa: "", c, b } => (),
-   |                                +++
+ on line 20, column 31, replace with `, b }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |         Foo::Bar { a, aa: "", c, b: _ } => (),
-   |                                ++++++
+ on line 20, column 31, replace with `, b: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Foo::Bar { a, aa: "", c, .. } => (),
-   |                                ++++
+ on line 20, column 31, replace with `, .. }`
 
-error[E0026]: variant `Foo::Baz` does not have a field named `bb`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:23:20
-   |
-LL |         Foo::Baz { bb: "" } => (),
-   |                    ^^ variant `Foo::Baz` does not have this field
+error E0026: variant `Foo::Baz` does not have a field named `bb`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:23:20: variant `Foo::Baz` does not have this field
 
-error[E0027]: pattern does not mention field `a`
-  --> $DIR/suggest-replacing-field-when-specifying-same-type.rs:23:9
-   |
-LL |         Foo::Baz { bb: "" } => (),
-   |         ^^^^^^^^^^^^^^^^^^^ missing field `a`
-   |
+error E0027: pattern does not mention field `a`
+ at $DIR/suggest-replacing-field-when-specifying-same-type.rs:23:9: missing field `a`
 help: include the missing field in the pattern
-   |
-LL |         Foo::Baz { bb: "", a } => (),
-   |                          +++
+ on line 23, column 25, replace with `, a }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |         Foo::Baz { bb: "", a: _ } => (),
-   |                          ++++++
+ on line 23, column 25, replace with `, a: _ }`
 help: or always ignore missing fields here
-   |
-LL |         Foo::Baz { bb: "", .. } => (),
-   |                          ++++
+ on line 23, column 25, replace with `, .. }`
 
 error: aborting due to 8 previous errors
 

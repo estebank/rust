@@ -1,57 +1,27 @@
-error[E0529]: expected an array or slice, found `Vec<i32>`
-  --> $DIR/pattern-slice-vec.rs:8:12
-   |
-LL |     if let [_, _, _] = foo() {}
-   |            ^^^^^^^^^ pattern cannot match with input type `Vec<i32>`
-   |
+error E0529: expected an array or slice, found `Vec<i32>`
+ at $DIR/pattern-slice-vec.rs:8:12: pattern cannot match with input type `Vec<i32>`
 help: consider slicing here
-   |
-LL |     if let [_, _, _] = foo()[..] {}
-   |                             ++++
+ on line 8, column 28, add `[..]`
 
-error[E0529]: expected an array or slice, found `Vec<i32>`
-  --> $DIR/pattern-slice-vec.rs:12:12
-   |
-LL |     if let [] = &foo() {}
-   |            ^^ pattern cannot match with input type `Vec<i32>`
-   |
+error E0529: expected an array or slice, found `Vec<i32>`
+ at $DIR/pattern-slice-vec.rs:12:12: pattern cannot match with input type `Vec<i32>`
 help: consider slicing here
-   |
-LL |     if let [] = &foo()[..] {}
-   |                       ++++
+ on line 12, column 22, add `[..]`
 
-error[E0529]: expected an array or slice, found `Vec<i32>`
-  --> $DIR/pattern-slice-vec.rs:16:12
-   |
-LL |     if let [] = foo() {}
-   |            ^^ pattern cannot match with input type `Vec<i32>`
-   |
+error E0529: expected an array or slice, found `Vec<i32>`
+ at $DIR/pattern-slice-vec.rs:16:12: pattern cannot match with input type `Vec<i32>`
 help: consider slicing here
-   |
-LL |     if let [] = foo()[..] {}
-   |                      ++++
+ on line 16, column 21, add `[..]`
 
-error[E0529]: expected an array or slice, found `Vec<_>`
-  --> $DIR/pattern-slice-vec.rs:23:9
-   |
-LL |         [5] => {}
-   |         ^^^ pattern cannot match with input type `Vec<_>`
-   |
+error E0529: expected an array or slice, found `Vec<_>`
+ at $DIR/pattern-slice-vec.rs:23:9: pattern cannot match with input type `Vec<_>`
 help: consider slicing here
-   |
-LL |     match &v[..] {
-   |             ++++
+ on line 21, column 12, add `[..]`
 
-error[E0529]: expected an array or slice, found `Vec<{integer}>`
-  --> $DIR/pattern-slice-vec.rs:28:9
-   |
-LL |     let [..] = vec![1, 2, 3];
-   |         ^^^^ pattern cannot match with input type `Vec<{integer}>`
-   |
+error E0529: expected an array or slice, found `Vec<{integer}>`
+ at $DIR/pattern-slice-vec.rs:28:9: pattern cannot match with input type `Vec<{integer}>`
 help: consider slicing here
-   |
-LL |     let [..] = vec![1, 2, 3][..];
-   |                             ++++
+ on line 28, column 28, add `[..]`
 
 error: aborting due to 5 previous errors
 

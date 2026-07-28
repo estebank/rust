@@ -1,70 +1,34 @@
 error: pattern requires `..` due to inaccessible fields
-  --> $DIR/doc-hidden-fields.rs:15:9
-   |
-LL |     let HiddenStruct { one, two } = HiddenStruct::default();
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/doc-hidden-fields.rs:15:9
 help: ignore the inaccessible and unused fields
-   |
-LL |     let HiddenStruct { one, two, .. } = HiddenStruct::default();
-   |                                ++++
+ on line 15, column 31, add `, ..`
 
-error[E0027]: pattern does not mention field `two` and inaccessible fields
-  --> $DIR/doc-hidden-fields.rs:18:9
-   |
-LL |     let HiddenStruct { one } = HiddenStruct::default();
-   |         ^^^^^^^^^^^^^^^^^^^^ missing field `two` and inaccessible fields
-   |
+error E0027: pattern does not mention field `two` and inaccessible fields
+ at $DIR/doc-hidden-fields.rs:18:9: missing field `two` and inaccessible fields
 help: include the missing field in the pattern and ignore the inaccessible fields
-   |
-LL |     let HiddenStruct { one, two, .. } = HiddenStruct::default();
-   |                           +++++++++
+ on line 18, column 26, replace with `, two, .. }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |     let HiddenStruct { one, two: _, .. } = HiddenStruct::default();
-   |                           ++++++++++++
+ on line 18, column 26, replace with `, two: _, .. }`
 help: or always ignore missing fields here
-   |
-LL |     let HiddenStruct { one, .. } = HiddenStruct::default();
-   |                           ++++
+ on line 18, column 26, replace with `, .. }`
 
-error[E0027]: pattern does not mention field `two`
-  --> $DIR/doc-hidden-fields.rs:21:9
-   |
-LL |     let HiddenStruct { one, hide } = HiddenStruct::default();
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^ missing field `two`
-   |
+error E0027: pattern does not mention field `two`
+ at $DIR/doc-hidden-fields.rs:21:9: missing field `two`
 help: include the missing field in the pattern
-   |
-LL |     let HiddenStruct { one, hide, two } = HiddenStruct::default();
-   |                                 +++++
+ on line 21, column 32, replace with `, two }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |     let HiddenStruct { one, hide, two: _ } = HiddenStruct::default();
-   |                                 ++++++++
+ on line 21, column 32, replace with `, two: _ }`
 help: or always ignore missing fields here
-   |
-LL |     let HiddenStruct { one, hide, .. } = HiddenStruct::default();
-   |                                 ++++
+ on line 21, column 32, replace with `, .. }`
 
-error[E0027]: pattern does not mention field `im_hidden`
-  --> $DIR/doc-hidden-fields.rs:24:9
-   |
-LL |     let InCrate { a, b } = InCrate { a: 0, b: false, im_hidden: 0 };
-   |         ^^^^^^^^^^^^^^^^ missing field `im_hidden`
-   |
+error E0027: pattern does not mention field `im_hidden`
+ at $DIR/doc-hidden-fields.rs:24:9: missing field `im_hidden`
 help: include the missing field in the pattern
-   |
-LL |     let InCrate { a, b, im_hidden } = InCrate { a: 0, b: false, im_hidden: 0 };
-   |                       +++++++++++
+ on line 24, column 22, replace with `, im_hidden }`
 help: if you don't care about this missing field, you can explicitly ignore it
-   |
-LL |     let InCrate { a, b, im_hidden: _ } = InCrate { a: 0, b: false, im_hidden: 0 };
-   |                       ++++++++++++++
+ on line 24, column 22, replace with `, im_hidden: _ }`
 help: or always ignore missing fields here
-   |
-LL |     let InCrate { a, b, .. } = InCrate { a: 0, b: false, im_hidden: 0 };
-   |                       ++++
+ on line 24, column 22, replace with `, .. }`
 
 error: aborting due to 4 previous errors
 

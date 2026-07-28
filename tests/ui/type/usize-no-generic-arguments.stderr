@@ -1,16 +1,8 @@
-error[E0109]: const arguments are not allowed on builtin type `usize`
-  --> $DIR/usize-no-generic-arguments.rs:4:18
-   |
-LL |     let x: usize<foo>;
-   |            ----- ^^^ const argument not allowed
-   |            |
-   |            not allowed on builtin type `usize`
-   |
+error E0109: const arguments are not allowed on builtin type `usize`
+ at $DIR/usize-no-generic-arguments.rs:4:18: const argument not allowed
+  on line 4, column 12: not allowed on builtin type `usize`
 help: primitive type `usize` doesn't have generic parameters
-   |
-LL -     let x: usize<foo>;
-LL +     let x: usize;
-   |
+ on line 4, column 16
 
 error: aborting due to 1 previous error
 

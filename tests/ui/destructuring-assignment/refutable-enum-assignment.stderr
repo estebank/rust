@@ -1,20 +1,11 @@
-error[E0005]: refutable pattern in assignment
-  --> $DIR/refutable-enum-assignment.rs:9:5
-   |
-LL |     Foo::One = Foo::One;
-   |     ^^^^^^^^ pattern `Foo::Two` not covered
-   |
-   = note: destructuring assignments require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+error E0005: refutable pattern in assignment
+ at $DIR/refutable-enum-assignment.rs:9:5: pattern `Foo::Two` not covered
+note: destructuring assignments require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
 note: `Foo` defined here
-  --> $DIR/refutable-enum-assignment.rs:3:6
-   |
-LL | enum Foo {
-   |      ^^^
-LL |     One,
-LL |     Two,
-   |     --- not covered
-   = note: the matched value is of type `Foo`
+ at $DIR/refutable-enum-assignment.rs:3:6
+  on line 5: not covered
+note: the matched value is of type `Foo`
 
 error: aborting due to 1 previous error
 

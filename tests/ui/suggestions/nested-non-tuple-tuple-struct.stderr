@@ -1,122 +1,50 @@
-error[E0560]: struct `S` has no field named `x`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:8:19
-   |
-LL | pub struct S(f32, f32);
-   |            - `S` defined here
-...
-LL |     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-   |                   ^ field does not exist
-   |
+error E0560: struct `S` has no field named `x`
+ at $DIR/nested-non-tuple-tuple-struct.rs:8:19: field does not exist
+  on line 1, column 12: `S` defined here
 help: `S` is a tuple struct, use the appropriate syntax
-   |
-LL -     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-LL +     let _x = (S(/* f32 */, /* f32 */), S { x: 3.0, y: 4.0 });
-   |
+ on line 8, column 14, replace with `S(/* f32 */, /* f32 */)`
 
-error[E0560]: struct `S` has no field named `y`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:8:27
-   |
-LL | pub struct S(f32, f32);
-   |            - `S` defined here
-...
-LL |     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-   |                           ^ field does not exist
-   |
+error E0560: struct `S` has no field named `y`
+ at $DIR/nested-non-tuple-tuple-struct.rs:8:27: field does not exist
+  on line 1, column 12: `S` defined here
 help: `S` is a tuple struct, use the appropriate syntax
-   |
-LL -     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-LL +     let _x = (S(/* f32 */, /* f32 */), S { x: 3.0, y: 4.0 });
-   |
+ on line 8, column 14, replace with `S(/* f32 */, /* f32 */)`
 
-error[E0560]: struct `S` has no field named `x`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:8:41
-   |
-LL | pub struct S(f32, f32);
-   |            - `S` defined here
-...
-LL |     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-   |                                         ^ field does not exist
-   |
+error E0560: struct `S` has no field named `x`
+ at $DIR/nested-non-tuple-tuple-struct.rs:8:41: field does not exist
+  on line 1, column 12: `S` defined here
 help: `S` is a tuple struct, use the appropriate syntax
-   |
-LL -     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-LL +     let _x = (S { x: 1.0, y: 2.0 }, S(/* f32 */, /* f32 */));
-   |
+ on line 8, column 36, replace with `S(/* f32 */, /* f32 */)`
 
-error[E0560]: struct `S` has no field named `y`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:8:49
-   |
-LL | pub struct S(f32, f32);
-   |            - `S` defined here
-...
-LL |     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-   |                                                 ^ field does not exist
-   |
+error E0560: struct `S` has no field named `y`
+ at $DIR/nested-non-tuple-tuple-struct.rs:8:49: field does not exist
+  on line 1, column 12: `S` defined here
 help: `S` is a tuple struct, use the appropriate syntax
-   |
-LL -     let _x = (S { x: 1.0, y: 2.0 }, S { x: 3.0, y: 4.0 });
-LL +     let _x = (S { x: 1.0, y: 2.0 }, S(/* f32 */, /* f32 */));
-   |
+ on line 8, column 36, replace with `S(/* f32 */, /* f32 */)`
 
-error[E0559]: variant `E::V` has no field named `x`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:13:22
-   |
-LL |     V(f32, f32),
-   |     - `E::V` defined here
-...
-LL |     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-   |                      ^ field does not exist
-   |
+error E0559: variant `E::V` has no field named `x`
+ at $DIR/nested-non-tuple-tuple-struct.rs:13:22: field does not exist
+  on line 4: `E::V` defined here
 help: `E::V` is a tuple variant, use the appropriate syntax
-   |
-LL -     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-LL +     let _y = (E::V(/* f32 */, /* f32 */), E::V { x: 3.0, y: 4.0 });
-   |
+ on line 13, column 18, replace with `(/* f32 */, /* f32 */)`
 
-error[E0559]: variant `E::V` has no field named `y`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:13:30
-   |
-LL |     V(f32, f32),
-   |     - `E::V` defined here
-...
-LL |     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-   |                              ^ field does not exist
-   |
+error E0559: variant `E::V` has no field named `y`
+ at $DIR/nested-non-tuple-tuple-struct.rs:13:30: field does not exist
+  on line 4: `E::V` defined here
 help: `E::V` is a tuple variant, use the appropriate syntax
-   |
-LL -     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-LL +     let _y = (E::V(/* f32 */, /* f32 */), E::V { x: 3.0, y: 4.0 });
-   |
+ on line 13, column 18, replace with `(/* f32 */, /* f32 */)`
 
-error[E0559]: variant `E::V` has no field named `x`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:13:47
-   |
-LL |     V(f32, f32),
-   |     - `E::V` defined here
-...
-LL |     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-   |                                               ^ field does not exist
-   |
+error E0559: variant `E::V` has no field named `x`
+ at $DIR/nested-non-tuple-tuple-struct.rs:13:47: field does not exist
+  on line 4: `E::V` defined here
 help: `E::V` is a tuple variant, use the appropriate syntax
-   |
-LL -     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-LL +     let _y = (E::V { x: 1.0, y: 2.0 }, E::V(/* f32 */, /* f32 */));
-   |
+ on line 13, column 43, replace with `(/* f32 */, /* f32 */)`
 
-error[E0559]: variant `E::V` has no field named `y`
-  --> $DIR/nested-non-tuple-tuple-struct.rs:13:55
-   |
-LL |     V(f32, f32),
-   |     - `E::V` defined here
-...
-LL |     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-   |                                                       ^ field does not exist
-   |
+error E0559: variant `E::V` has no field named `y`
+ at $DIR/nested-non-tuple-tuple-struct.rs:13:55: field does not exist
+  on line 4: `E::V` defined here
 help: `E::V` is a tuple variant, use the appropriate syntax
-   |
-LL -     let _y = (E::V { x: 1.0, y: 2.0 }, E::V { x: 3.0, y: 4.0 });
-LL +     let _y = (E::V { x: 1.0, y: 2.0 }, E::V(/* f32 */, /* f32 */));
-   |
+ on line 13, column 43, replace with `(/* f32 */, /* f32 */)`
 
 error: aborting due to 8 previous errors
 

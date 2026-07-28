@@ -1,29 +1,15 @@
-error[E0107]: enum takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-65159.rs:5:20
-   |
-LL | async fn copy() -> Result<()>
-   |                    ^^^^^^ -- supplied 1 generic argument
-   |                    |
-   |                    expected 2 generic arguments
-   |
+error E0107: enum takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-65159.rs:5:20: expected 2 generic arguments
+  on line 5, column 27: supplied 1 generic argument
 help: add missing generic argument
-   |
-LL | async fn copy() -> Result<(), E>
-   |                             +++
+ on line 5, column 28, add `, E`
 
-error[E0107]: enum takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-65159.rs:5:20
-   |
-LL | async fn copy() -> Result<()>
-   |                    ^^^^^^ -- supplied 1 generic argument
-   |                    |
-   |                    expected 2 generic arguments
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0107: enum takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-65159.rs:5:20: expected 2 generic arguments
+  on line 5, column 27: supplied 1 generic argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: add missing generic argument
-   |
-LL | async fn copy() -> Result<(), E>
-   |                             +++
+ on line 5, column 28, add `, E`
 
 error: aborting due to 2 previous errors
 

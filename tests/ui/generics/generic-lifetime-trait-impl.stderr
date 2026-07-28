@@ -1,11 +1,6 @@
-error[E0195]: lifetime parameters or bounds on method `bar` do not match the trait declaration
-  --> $DIR/generic-lifetime-trait-impl.rs:19:11
-   |
-LL |     fn bar<'b, T: Bar<'b>>(self) -> &'b str;
-   |           ---------------- lifetimes in impl do not match this method in trait
-...
-LL |     fn bar<T: Bar<'a>>(self) -> &'a str { panic!() }
-   |           ^^^^^^^^^^^^ lifetimes do not match method in trait
+error E0195: lifetime parameters or bounds on method `bar` do not match the trait declaration
+ at $DIR/generic-lifetime-trait-impl.rs:19:11: lifetimes do not match method in trait
+  on line 15, column 11: lifetimes in impl do not match this method in trait
 
 error: aborting due to 1 previous error
 

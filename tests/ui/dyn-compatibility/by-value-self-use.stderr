@@ -1,8 +1,5 @@
-error[E0161]: cannot move a value of type `dyn Bar`
-  --> $DIR/by-value-self-use.rs:15:5
-   |
-LL |     t.bar()
-   |     ^ the size of `dyn Bar` cannot be statically determined
+error E0161: cannot move a value of type `dyn Bar`
+ at $DIR/by-value-self-use.rs:15:5: the size of `dyn Bar` cannot be statically determined
 
 error: aborting due to 1 previous error
 

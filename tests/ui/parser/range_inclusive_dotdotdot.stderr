@@ -1,70 +1,30 @@
 error: unexpected token: `...`
-  --> $DIR/range_inclusive_dotdotdot.rs:6:12
-   |
-LL |     return ...1;
-   |            ^^^
-   |
+ at $DIR/range_inclusive_dotdotdot.rs:6:12
 help: use `..` for an exclusive range
-   |
-LL -     return ...1;
-LL +     return ..1;
-   |
+ on line 6, column 11, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL -     return ...1;
-LL +     return ..=1;
-   |
+ on line 6, column 11, replace with `..=`
 
 error: unexpected token: `...`
-  --> $DIR/range_inclusive_dotdotdot.rs:12:13
-   |
-LL |     let x = ...0;
-   |             ^^^
-   |
+ at $DIR/range_inclusive_dotdotdot.rs:12:13
 help: use `..` for an exclusive range
-   |
-LL -     let x = ...0;
-LL +     let x = ..0;
-   |
+ on line 12, column 12, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL -     let x = ...0;
-LL +     let x = ..=0;
-   |
+ on line 12, column 12, replace with `..=`
 
 error: unexpected token: `...`
-  --> $DIR/range_inclusive_dotdotdot.rs:16:14
-   |
-LL |     let x = 5...5;
-   |              ^^^
-   |
+ at $DIR/range_inclusive_dotdotdot.rs:16:14
 help: use `..` for an exclusive range
-   |
-LL -     let x = 5...5;
-LL +     let x = 5..5;
-   |
+ on line 16, column 13, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL -     let x = 5...5;
-LL +     let x = 5..=5;
-   |
+ on line 16, column 13, replace with `..=`
 
 error: unexpected token: `...`
-  --> $DIR/range_inclusive_dotdotdot.rs:20:15
-   |
-LL |     for _ in 0...1 {}
-   |               ^^^
-   |
+ at $DIR/range_inclusive_dotdotdot.rs:20:15
 help: use `..` for an exclusive range
-   |
-LL -     for _ in 0...1 {}
-LL +     for _ in 0..1 {}
-   |
+ on line 20, column 14, replace with `..`
 help: or `..=` for an inclusive range
-   |
-LL -     for _ in 0...1 {}
-LL +     for _ in 0..=1 {}
-   |
+ on line 20, column 14, replace with `..=`
 
 error: aborting due to 4 previous errors
 

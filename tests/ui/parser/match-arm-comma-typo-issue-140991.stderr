@@ -1,26 +1,12 @@
 error: expected one of `(`, `,`, `.`, `::`, `?`, `}`, or an operator, found `=>`
-  --> $DIR/match-arm-comma-typo-issue-140991.rs:11:11
-   |
-LL |         Y => X,
-   |           ^^ expected one of 7 possible tokens
-   |
+ at $DIR/match-arm-comma-typo-issue-140991.rs:11:11: expected one of 7 possible tokens
 help: you might have meant to write a `,` to end this `match` arm
-   |
-LL -         X => Y.
-LL +         X => Y,
-   |
+ on line 10, column 14, replace with `,`
 
 error: expected one of `!`, `,`, `.`, `::`, `?`, `{`, `}`, or an operator, found `=>`
-  --> $DIR/match-arm-comma-typo-issue-140991.rs:19:11
-   |
-LL |         Y => X,
-   |           ^^ expected one of 8 possible tokens
-   |
+ at $DIR/match-arm-comma-typo-issue-140991.rs:19:11: expected one of 8 possible tokens
 help: you might have meant to write a `,` to end this `match` arm
-   |
-LL -         X => Y/
-LL +         X => Y,
-   |
+ on line 18, column 14, replace with `,`
 
 error: aborting due to 2 previous errors
 

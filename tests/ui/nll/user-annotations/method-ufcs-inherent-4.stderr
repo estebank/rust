@@ -1,34 +1,16 @@
-error[E0597]: `v` does not live long enough
-  --> $DIR/method-ufcs-inherent-4.rs:15:37
-   |
-LL | fn foo<'a>() {
-   |        -- lifetime `'a` defined here
-LL |     let v = 22;
-   |         - binding `v` declared here
-LL |     let x = <A<'a>>::new::<&'a u32>(&v, &v);
-   |             ------------------------^^-----
-   |             |                       |
-   |             |                       borrowed value does not live long enough
-   |             argument requires that `v` is borrowed for `'a`
-...
-LL | }
-   | - `v` dropped here while still borrowed
+error E0597: `v` does not live long enough
+ at $DIR/method-ufcs-inherent-4.rs:15:37: borrowed value does not live long enough
+  on line 13, column 8: lifetime `'a` defined here
+  on line 14, column 9: binding `v` declared here
+  on line 15, column 13: argument requires that `v` is borrowed for `'a`
+  on line 18: `v` dropped here while still borrowed
 
-error[E0597]: `v` does not live long enough
-  --> $DIR/method-ufcs-inherent-4.rs:15:41
-   |
-LL | fn foo<'a>() {
-   |        -- lifetime `'a` defined here
-LL |     let v = 22;
-   |         - binding `v` declared here
-LL |     let x = <A<'a>>::new::<&'a u32>(&v, &v);
-   |             ----------------------------^^-
-   |             |                           |
-   |             |                           borrowed value does not live long enough
-   |             argument requires that `v` is borrowed for `'a`
-...
-LL | }
-   | - `v` dropped here while still borrowed
+error E0597: `v` does not live long enough
+ at $DIR/method-ufcs-inherent-4.rs:15:41: borrowed value does not live long enough
+  on line 13, column 8: lifetime `'a` defined here
+  on line 14, column 9: binding `v` declared here
+  on line 15, column 13: argument requires that `v` is borrowed for `'a`
+  on line 18: `v` dropped here while still borrowed
 
 error: aborting due to 2 previous errors
 

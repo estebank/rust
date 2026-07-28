@@ -1,115 +1,51 @@
-error[E0425]: cannot find const `N` in this scope
-  --> $DIR/missing-type-parameter2.rs:3:8
-   |
-LL | struct X<const N: u8>();
-   |          ----------- corresponding const parameter on the type defined here
-LL |
-LL | impl X<N> {}
-   |        ^ not found in this scope
-   |
+error E0425: cannot find const `N` in this scope
+ at $DIR/missing-type-parameter2.rs:3:8: not found in this scope
+  on line 1, column 10: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `N` on the impl
-   |
-LL | impl<const N: u8> X<N> {}
-   |     +++++++++++++
+ on line 3, column 4, add `<const N: u8>`
 
-error[E0425]: cannot find const `N` in this scope
-  --> $DIR/missing-type-parameter2.rs:6:28
-   |
-LL | struct X<const N: u8>();
-   |          ----------- corresponding const parameter on the type defined here
-...
-LL | impl<T, const A: u8 = 2> X<N> {}
-   |                            ^ not found in this scope
-   |
+error E0425: cannot find const `N` in this scope
+ at $DIR/missing-type-parameter2.rs:6:28: not found in this scope
+  on line 1, column 10: corresponding const parameter on the type defined here
 help: you might have meant to introduce a const parameter `N` on the impl
-   |
-LL | impl<T, const A: u8 = 2, const N: u8> X<N> {}
-   |                        +++++++++++++
+ on line 6, column 23, add `, const N: u8`
 
-error[E0425]: cannot find type `T` in this scope
-  --> $DIR/missing-type-parameter2.rs:11:20
-   |
-LL | struct X<const N: u8>();
-   | ------------------------ similarly named struct `X` defined here
-...
-LL | fn foo(_: T) where T: Send {}
-   |                    ^
-   |
+error E0425: cannot find type `T` in this scope
+ at $DIR/missing-type-parameter2.rs:11:20
+  on line 1: similarly named struct `X` defined here
 help: a struct with a similar name exists
-   |
-LL - fn foo(_: T) where T: Send {}
-LL + fn foo(_: T) where X: Send {}
-   |
+ on line 11, column 19, replace with `X`
 help: you might be missing a type parameter
-   |
-LL | fn foo<T>(_: T) where T: Send {}
-   |       +++
+ on line 11, column 6, add `<T>`
 
-error[E0425]: cannot find type `T` in this scope
-  --> $DIR/missing-type-parameter2.rs:11:11
-   |
-LL | struct X<const N: u8>();
-   | ------------------------ similarly named struct `X` defined here
-...
-LL | fn foo(_: T) where T: Send {}
-   |           ^
-   |
+error E0425: cannot find type `T` in this scope
+ at $DIR/missing-type-parameter2.rs:11:11
+  on line 1: similarly named struct `X` defined here
 help: a struct with a similar name exists
-   |
-LL - fn foo(_: T) where T: Send {}
-LL + fn foo(_: X) where T: Send {}
-   |
+ on line 11, column 10, replace with `X`
 help: you might be missing a type parameter
-   |
-LL | fn foo<T>(_: T) where T: Send {}
-   |       +++
+ on line 11, column 6, add `<T>`
 
-error[E0425]: cannot find type `A` in this scope
-  --> $DIR/missing-type-parameter2.rs:15:24
-   |
-LL | struct X<const N: u8>();
-   | ------------------------ similarly named struct `X` defined here
-...
-LL | fn bar<const N: u8>(_: A) {}
-   |                        ^
-   |
+error E0425: cannot find type `A` in this scope
+ at $DIR/missing-type-parameter2.rs:15:24
+  on line 1: similarly named struct `X` defined here
 help: a struct with a similar name exists
-   |
-LL - fn bar<const N: u8>(_: A) {}
-LL + fn bar<const N: u8>(_: X) {}
-   |
+ on line 15, column 23, replace with `X`
 help: you might be missing a type parameter
-   |
-LL | fn bar<const N: u8, A>(_: A) {}
-   |                   +++
+ on line 15, column 18, add `, A`
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/missing-type-parameter2.rs:3:8
-   |
-LL | impl X<N> {}
-   |        ^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/missing-type-parameter2.rs:3:8
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL | impl X<{ N }> {}
-   |        +   +
+ on line 3, column 7, add `{ `
 
 error: defaults for generic parameters are not allowed here
-  --> $DIR/missing-type-parameter2.rs:6:9
-   |
-LL | impl<T, const A: u8 = 2> X<N> {}
-   |         ^^^^^^^^^^^^^^^
+ at $DIR/missing-type-parameter2.rs:6:9
 
-error[E0747]: unresolved item provided when a constant was expected
-  --> $DIR/missing-type-parameter2.rs:6:28
-   |
-LL | impl<T, const A: u8 = 2> X<N> {}
-   |                            ^
-   |
+error E0747: unresolved item provided when a constant was expected
+ at $DIR/missing-type-parameter2.rs:6:28
 help: if this generic argument was intended as a const parameter, surround it with braces
-   |
-LL | impl<T, const A: u8 = 2> X<{ N }> {}
-   |                            +   +
+ on line 6, column 27, add `{ `
 
 error: aborting due to 8 previous errors
 

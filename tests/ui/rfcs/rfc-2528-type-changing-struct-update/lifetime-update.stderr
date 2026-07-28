@@ -1,17 +1,8 @@
-error[E0597]: `s` does not live long enough
-  --> $DIR/lifetime-update.rs:19:17
-   |
-LL |     let s = String::from("hello");
-   |         - binding `s` declared here
-...
-LL |         lt_str: &s,
-   |                 ^^ borrowed value does not live long enough
-...
-LL |     let m2: Machine<'static, State1> = Machine {
-   |             ------------------------ type annotation requires that `s` is borrowed for `'static`
-...
-LL | }
-   | - `s` dropped here while still borrowed
+error E0597: `s` does not live long enough
+ at $DIR/lifetime-update.rs:19:17: borrowed value does not live long enough
+  on line 16, column 9: binding `s` declared here
+  on line 37, column 13: type annotation requires that `s` is borrowed for `'static`
+  on line 40: `s` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

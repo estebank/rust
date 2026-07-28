@@ -1,20 +1,9 @@
 error: no rules expected `[`
-  --> $DIR/macro-doc-comments-2.rs:6:5
-   |
-LL | macro_rules! inner {
-   | ------------------ when calling this macro
-...
-LL |     /// Outer
-   |     ^^^^^^^^^
-   |     |
-   |     no rules expected this token in macro call
-   |     outer doc comments expand to `#[doc = "..."]`, which is what this macro attempted to match
-   |
+ at $DIR/macro-doc-comments-2.rs:6:5: no rules expected this token in macro call
+  on line 6: outer doc comments expand to `#[doc = "..."]`, which is what this macro attempted to match
+  on line 1: when calling this macro
 note: while trying to match `!`
-  --> $DIR/macro-doc-comments-2.rs:2:7
-   |
-LL |     (#![$inner:meta]) => ()
-   |       ^
+ at $DIR/macro-doc-comments-2.rs:2:7
 
 error: aborting due to 1 previous error
 

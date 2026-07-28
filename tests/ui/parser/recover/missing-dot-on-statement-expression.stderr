@@ -1,46 +1,22 @@
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `map`
-  --> $DIR/missing-dot-on-statement-expression.rs:7:29
-   |
-LL |     let _ = [1, 2, 3].iter()map(|x| x);
-   |                             ^^^ expected one of `.`, `;`, `?`, `else`, or an operator
-   |
+ at $DIR/missing-dot-on-statement-expression.rs:7:29: expected one of `.`, `;`, `?`, `else`, or an operator
 help: you might have meant to write a method call
-   |
-LL |     let _ = [1, 2, 3].iter().map(|x| x);
-   |                             +
+ on line 7, column 28, add `.`
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `else`, `{`, or an operator, found `field`
-  --> $DIR/missing-dot-on-statement-expression.rs:14:17
-   |
-LL |     let _ = baz field;
-   |                 ^^^^^ expected one of 8 possible tokens
-   |
+ at $DIR/missing-dot-on-statement-expression.rs:14:17: expected one of 8 possible tokens
 help: you might have meant to write a field access
-   |
-LL |     let _ = baz.field;
-   |                +
+ on line 14, column 15, add `.`
 
 error: expected one of `.`, `;`, `?`, `}`, or an operator, found `map`
-  --> $DIR/missing-dot-on-statement-expression.rs:19:21
-   |
-LL |     [1, 2, 3].iter()map(|x| x);
-   |                     ^^^ expected one of `.`, `;`, `?`, `}`, or an operator
-   |
+ at $DIR/missing-dot-on-statement-expression.rs:19:21: expected one of `.`, `;`, `?`, `}`, or an operator
 help: you might have meant to write a method call
-   |
-LL |     [1, 2, 3].iter().map(|x| x);
-   |                     +
+ on line 19, column 20, add `.`
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `{`, `}`, or an operator, found `field`
-  --> $DIR/missing-dot-on-statement-expression.rs:26:9
-   |
-LL |     baz field;
-   |         ^^^^^ expected one of 8 possible tokens
-   |
+ at $DIR/missing-dot-on-statement-expression.rs:26:9: expected one of 8 possible tokens
 help: you might have meant to write a field access
-   |
-LL |     baz.field;
-   |        +
+ on line 26, column 7, add `.`
 
 error: aborting due to 4 previous errors
 

@@ -1,16 +1,8 @@
-error[E0599]: no method named `closure` found for struct `Obj<F>` in the current scope
-  --> $DIR/issue-18343.rs:7:7
-   |
-LL | struct Obj<F> where F: FnMut() -> u32 {
-   | ------------- method `closure` not found for this struct
-...
-LL |     o.closure();
-   |       ^^^^^^^ field, not a method
-   |
+error E0599: no method named `closure` found for struct `Obj<F>` in the current scope
+ at $DIR/issue-18343.rs:7:7: field, not a method
+  on line 1: method `closure` not found for this struct
 help: to call the closure stored in `closure`, surround the field access with parentheses
-   |
-LL |     (o.closure)();
-   |     +         +
+ on line 7, column 4, add `(`
 
 error: aborting due to 1 previous error
 

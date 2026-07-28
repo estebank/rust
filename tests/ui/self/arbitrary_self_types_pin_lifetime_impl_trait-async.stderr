@@ -1,16 +1,9 @@
-error[E0700]: hidden type for `impl Clone` captures lifetime that does not appear in bounds
-  --> $DIR/arbitrary_self_types_pin_lifetime_impl_trait-async.rs:8:48
-   |
-LL |     async fn f(self: Pin<&Self>) -> impl Clone { self }
-   |                          -----      ---------- ^^^^^^^^
-   |                          |          |
-   |                          |          opaque type defined here
-   |                          hidden type `Pin<&Foo>` captures the anonymous lifetime defined here
-   |
+error E0700: hidden type for `impl Clone` captures lifetime that does not appear in bounds
+ at $DIR/arbitrary_self_types_pin_lifetime_impl_trait-async.rs:8:48
+  on line 8, column 26: hidden type `Pin<&Foo>` captures the anonymous lifetime defined here
+  on line 8, column 37: opaque type defined here
 help: add a `use<...>` bound to explicitly capture `'_`
-   |
-LL |     async fn f(self: Pin<&Self>) -> impl Clone + use<'_> { self }
-   |                                                +++++++++
+ on line 8, column 46, add ` + use<'_>`
 
 error: aborting due to 1 previous error
 

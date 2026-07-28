@@ -1,8 +1,5 @@
-error[E0720]: cannot resolve opaque type
-  --> $DIR/recursive-fn-tait.rs:15:6
-   |
-LL | ) -> Diff {
-   |      ^^^^
+error E0720: cannot resolve opaque type
+ at $DIR/recursive-fn-tait.rs:15:6
 
 error: aborting due to 1 previous error
 

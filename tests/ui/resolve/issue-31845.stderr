@@ -1,8 +1,5 @@
-error[E0425]: cannot find function `g` in this scope
-  --> $DIR/issue-31845.rs:7:12
-   |
-LL |            g();
-   |            ^ not found in this scope
+error E0425: cannot find function `g` in this scope
+ at $DIR/issue-31845.rs:7:12: not found in this scope
 
 error: aborting due to 1 previous error
 

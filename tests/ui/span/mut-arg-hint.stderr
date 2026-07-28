@@ -1,35 +1,17 @@
-error[E0596]: cannot borrow `*a` as mutable, as it is behind a `&` reference
-  --> $DIR/mut-arg-hint.rs:3:9
-   |
-LL |         a.push_str("bar");
-   |         ^ `a` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*a` as mutable, as it is behind a `&` reference
+ at $DIR/mut-arg-hint.rs:3:9: `a` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL |     fn foo(mut a: &mut String) {
-   |                    +++
+ on line 2, column 18, replace with `&mut `
 
-error[E0596]: cannot borrow `*a` as mutable, as it is behind a `&` reference
-  --> $DIR/mut-arg-hint.rs:8:5
-   |
-LL |     a.push_str("foo");
-   |     ^ `a` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*a` as mutable, as it is behind a `&` reference
+ at $DIR/mut-arg-hint.rs:8:5: `a` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL | pub fn foo<'a>(mut a: &'a mut String) {
-   |                           +++
+ on line 7, column 25, add ` mut`
 
-error[E0596]: cannot borrow `*a` as mutable, as it is behind a `&` reference
-  --> $DIR/mut-arg-hint.rs:15:9
-   |
-LL |         a.push_str("foo");
-   |         ^ `a` is a `&` reference, so it cannot be borrowed as mutable
-   |
+error E0596: cannot borrow `*a` as mutable, as it is behind a `&` reference
+ at $DIR/mut-arg-hint.rs:15:9: `a` is a `&` reference, so it cannot be borrowed as mutable
 help: consider changing this to be a mutable reference
-   |
-LL |     pub fn foo(mut a: &mut String) {
-   |                        +++
+ on line 14, column 22, replace with `&mut `
 
 error: aborting due to 3 previous errors
 

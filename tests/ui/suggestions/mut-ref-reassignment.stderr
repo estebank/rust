@@ -1,54 +1,30 @@
-error[E0308]: mismatched types
-  --> $DIR/mut-ref-reassignment.rs:2:11
-   |
-LL | fn suggestion(opt: &mut Option<String>) {
-   |                    ------------------- expected due to this parameter type
-LL |     opt = None;
-   |           ^^^^ expected `&mut Option<String>`, found `Option<_>`
-   |
-   = note: expected mutable reference `&mut Option<String>`
-                           found enum `Option<_>`
+error E0308: mismatched types
+ at $DIR/mut-ref-reassignment.rs:2:11: expected `&mut Option<String>`, found `Option<_>`
+  on line 1, column 20: expected due to this parameter type
+note: expected mutable reference `&mut Option<String>`
+                      found enum `Option<_>`
 help: consider dereferencing here to assign to the mutably borrowed value
-   |
-LL |     *opt = None;
-   |     +
+ on line 2, column 4, add `*`
 
-error[E0308]: mismatched types
-  --> $DIR/mut-ref-reassignment.rs:6:11
-   |
-LL | fn no_suggestion(opt: &mut Result<String, ()>) {
-   |                       ----------------------- expected due to this parameter type
-LL |     opt = None
-   |           ^^^^ expected `&mut Result<String, ()>`, found `Option<_>`
-   |
-   = note: expected mutable reference `&mut Result<String, ()>`
-                           found enum `Option<_>`
+error E0308: mismatched types
+ at $DIR/mut-ref-reassignment.rs:6:11: expected `&mut Result<String, ()>`, found `Option<_>`
+  on line 5, column 23: expected due to this parameter type
+note: expected mutable reference `&mut Result<String, ()>`
+                      found enum `Option<_>`
 
-error[E0308]: mismatched types
-  --> $DIR/mut-ref-reassignment.rs:10:11
-   |
-LL | fn suggestion2(opt: &mut Option<String>) {
-   |                     ------------------- expected due to this parameter type
-LL |     opt = Some(String::new())
-   |           ^^^^^^^^^^^^^^^^^^^ expected `&mut Option<String>`, found `Option<String>`
-   |
-   = note: expected mutable reference `&mut Option<_>`
-                           found enum `Option<_>`
+error E0308: mismatched types
+ at $DIR/mut-ref-reassignment.rs:10:11: expected `&mut Option<String>`, found `Option<String>`
+  on line 9, column 21: expected due to this parameter type
+note: expected mutable reference `&mut Option<_>`
+                      found enum `Option<_>`
 help: consider dereferencing here to assign to the mutably borrowed value
-   |
-LL |     *opt = Some(String::new())
-   |     +
+ on line 10, column 4, add `*`
 
-error[E0308]: mismatched types
-  --> $DIR/mut-ref-reassignment.rs:14:11
-   |
-LL | fn no_suggestion2(opt: &mut Option<String>) {
-   |                        ------------------- expected due to this parameter type
-LL |     opt = Some(42)
-   |           ^^^^^^^^ expected `&mut Option<String>`, found `Option<{integer}>`
-   |
-   = note: expected mutable reference `&mut Option<String>`
-                           found enum `Option<{integer}>`
+error E0308: mismatched types
+ at $DIR/mut-ref-reassignment.rs:14:11: expected `&mut Option<String>`, found `Option<{integer}>`
+  on line 13, column 24: expected due to this parameter type
+note: expected mutable reference `&mut Option<String>`
+                      found enum `Option<{integer}>`
 
 error: aborting due to 4 previous errors
 

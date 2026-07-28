@@ -1,8 +1,5 @@
 error: compiler/rustc_mir_build/src/thir/cx/expr.rs:LL:CC: splatted FnPtr side-tables are not yet implemented
-  --> $DIR/splat-fn-ptr-tuple-const.rs:29:20
-   |
-LL |     const R2: () = F2(1, 2);
-   |                    ^^^^^^^^
+ at $DIR/splat-fn-ptr-tuple-const.rs:29:20
 
 
 
@@ -24,10 +21,7 @@ query stack during panic:
 #5 [analysis] running analysis passes on crate `splat_fn_ptr_tuple_const`
 end of query stack
 error: compiler/rustc_mir_build/src/thir/cx/expr.rs:LL:CC: splatted FnPtr side-tables are not yet implemented
-  --> $DIR/splat-fn-ptr-tuple-const.rs:33:20
-   |
-LL |     const R1: () = F1((1, 2));
-   |                    ^^^^^^^^^^
+ at $DIR/splat-fn-ptr-tuple-const.rs:33:20
 
 
 

@@ -1,38 +1,20 @@
-error[E0433]: cannot find module or crate `env` in this scope
-  --> $DIR/builtin-prelude-no-accidents.rs:5:5
-   |
-LL |     env::current_dir;
-   |     ^^^ use of unresolved module or unlinked crate `env`
-   |
-   = help: you might be missing a crate named `env`
+error E0433: cannot find module or crate `env` in this scope
+ at $DIR/builtin-prelude-no-accidents.rs:5:5: use of unresolved module or unlinked crate `env`
+help: you might be missing a crate named `env`
 help: consider importing this module
-   |
-LL + use std::env;
-   |
+ on line 4, column 1, add `use std::env;`
 
-error[E0433]: cannot find module or crate `panic` in this scope
-  --> $DIR/builtin-prelude-no-accidents.rs:6:14
-   |
-LL |     type A = panic::PanicInfo;
-   |              ^^^^^ use of unresolved module or unlinked crate `panic`
-   |
-   = help: you might be missing a crate named `panic`
+error E0433: cannot find module or crate `panic` in this scope
+ at $DIR/builtin-prelude-no-accidents.rs:6:14: use of unresolved module or unlinked crate `panic`
+help: you might be missing a crate named `panic`
 help: consider importing this module
-   |
-LL + use std::panic;
-   |
+ on line 4, column 1, add `use std::panic;`
 
-error[E0433]: cannot find module or crate `vec` in this scope
-  --> $DIR/builtin-prelude-no-accidents.rs:7:14
-   |
-LL |     type B = vec::Vec<u8>;
-   |              ^^^ use of unresolved module or unlinked crate `vec`
-   |
-   = help: you might be missing a crate named `vec`
+error E0433: cannot find module or crate `vec` in this scope
+ at $DIR/builtin-prelude-no-accidents.rs:7:14: use of unresolved module or unlinked crate `vec`
+help: you might be missing a crate named `vec`
 help: consider importing this module
-   |
-LL + use std::vec;
-   |
+ on line 4, column 1, add `use std::vec;`
 
 error: aborting due to 3 previous errors
 

@@ -1,24 +1,11 @@
-error[E0034]: multiple applicable items in scope
-  --> $DIR/call-ambig-trait-object-method.rs:19:7
-   |
-LL |     x.foo();
-   |       ^^^ multiple `foo` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/call-ambig-trait-object-method.rs:19:7: multiple `foo` found
 note: candidate #1 is defined in the trait `T`
-  --> $DIR/call-ambig-trait-object-method.rs:6:5
-   |
-LL |     fn foo(&self);
-   |     ^^^^^^^^^^^^^^
+ at $DIR/call-ambig-trait-object-method.rs:6:5
 note: candidate #2 is defined in an impl for the type `(dyn T + 'a)`
-  --> $DIR/call-ambig-trait-object-method.rs:10:5
-   |
-LL |     fn foo(&self) {}
-   |     ^^^^^^^^^^^^^
+ at $DIR/call-ambig-trait-object-method.rs:10:5
 help: disambiguate the method for candidate #1
-   |
-LL -     x.foo();
-LL +     T::foo(&x);
-   |
+ on line 19, column 4, replace with `T::foo(&x)`
 
 error: aborting due to 1 previous error
 

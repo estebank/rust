@@ -1,26 +1,12 @@
 error: expected `:`, found `=`
-  --> $DIR/issue-57684.rs:27:20
-   |
-LL |     let _ = X { f1 = 5 };
-   |                    ^
-   |
+ at $DIR/issue-57684.rs:27:20
 help: replace equals symbol with a colon
-   |
-LL -     let _ = X { f1 = 5 };
-LL +     let _ = X { f1: 5 };
-   |
+ on line 27, column 18, replace with `:`
 
 error: expected `:`, found `=`
-  --> $DIR/issue-57684.rs:32:12
-   |
-LL |         f1 = 5,
-   |            ^
-   |
+ at $DIR/issue-57684.rs:32:12
 help: replace equals symbol with a colon
-   |
-LL -         f1 = 5,
-LL +         f1: 5,
-   |
+ on line 32, column 10, replace with `:`
 
 error: aborting due to 2 previous errors
 

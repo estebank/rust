@@ -1,56 +1,29 @@
 error: `use<...>` precise capturing syntax not allowed in supertrait bounds
-  --> $DIR/illegal-positions.rs:6:12
-   |
-LL | trait Foo: use<> {
-   |            ^^^^^
+ at $DIR/illegal-positions.rs:6:12
 
 error: `use<...>` precise capturing syntax not allowed in bounds
-  --> $DIR/illegal-positions.rs:8:33
-   |
-LL |     type Assoc: use<> where (): use<>;
-   |                                 ^^^^^
+ at $DIR/illegal-positions.rs:8:33
 
 error: `use<...>` precise capturing syntax not allowed in bounds
-  --> $DIR/illegal-positions.rs:8:17
-   |
-LL |     type Assoc: use<> where (): use<>;
-   |                 ^^^^^
+ at $DIR/illegal-positions.rs:8:17
 
 error: `use<...>` precise capturing syntax not allowed in bounds
-  --> $DIR/illegal-positions.rs:14:11
-   |
-LL | fn fun<T: use<>>(_: impl use<>) where (): use<> {}
-   |           ^^^^^
+ at $DIR/illegal-positions.rs:14:11
 
 error: `use<...>` precise capturing syntax not allowed in bounds
-  --> $DIR/illegal-positions.rs:14:43
-   |
-LL | fn fun<T: use<>>(_: impl use<>) where (): use<> {}
-   |                                           ^^^^^
+ at $DIR/illegal-positions.rs:14:43
 
 error: at least one trait must be specified
-  --> $DIR/illegal-positions.rs:14:21
-   |
-LL | fn fun<T: use<>>(_: impl use<>) where (): use<> {}
-   |                     ^^^^^^^^^^
+ at $DIR/illegal-positions.rs:14:21
 
 error: `use<...>` precise capturing syntax not allowed in `dyn` trait object bounds
-  --> $DIR/illegal-positions.rs:21:25
-   |
-LL | fn dynamic() -> Box<dyn use<>> {}
-   |                         ^^^^^
+ at $DIR/illegal-positions.rs:21:25
 
 error: `use<...>` precise capturing syntax not allowed in argument-position `impl Trait`
-  --> $DIR/illegal-positions.rs:14:26
-   |
-LL | fn fun<T: use<>>(_: impl use<>) where (): use<> {}
-   |                          ^^^^^
+ at $DIR/illegal-positions.rs:14:26
 
-error[E0224]: at least one trait is required for an object type
-  --> $DIR/illegal-positions.rs:21:21
-   |
-LL | fn dynamic() -> Box<dyn use<>> {}
-   |                     ^^^^^^^^^
+error E0224: at least one trait is required for an object type
+ at $DIR/illegal-positions.rs:21:21
 
 error: aborting due to 9 previous errors
 

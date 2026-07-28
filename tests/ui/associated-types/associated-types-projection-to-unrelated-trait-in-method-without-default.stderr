@@ -1,13 +1,7 @@
-error[E0277]: the trait bound `Self: Get` is not satisfied
-  --> $DIR/associated-types-projection-to-unrelated-trait-in-method-without-default.rs:11:40
-   |
-LL |     fn okay<U:Get>(&self, foo: U, bar: <Self as Get>::Value);
-   |                                        ^^^^^^^^^^^^^^^^^^^^ the trait `Get` is not implemented for `Self`
-   |
+error E0277: the trait bound `Self: Get` is not satisfied
+ at $DIR/associated-types-projection-to-unrelated-trait-in-method-without-default.rs:11:40: the trait `Get` is not implemented for `Self`
 help: consider further restricting `Self`
-   |
-LL |     fn okay<U:Get>(&self, foo: U, bar: <Self as Get>::Value) where Self: Get;
-   |                                                              +++++++++++++++
+ on line 11, column 60, add ` where Self: Get`
 
 error: aborting due to 1 previous error
 

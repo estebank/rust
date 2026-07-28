@@ -1,19 +1,10 @@
-error[E0428]: the name `A` is defined multiple times
-  --> $DIR/multiple_decls.rs:5:1
-   |
-LL | const A: () = ();
-   | ----------------- previous definition of the value `A` here
-LL | #[eii(A)]
-LL | static A: u64;
-   | ^^^^^^^^^^^^^^ `A` redefined here
-   |
-   = note: `A` must be defined only once in the value namespace of this module
+error E0428: the name `A` is defined multiple times
+ at $DIR/multiple_decls.rs:5:1: `A` redefined here
+  on line 3: previous definition of the value `A` here
+note: `A` must be defined only once in the value namespace of this module
 
-error[E0423]: expected function or static, found constant `A`
-  --> $DIR/multiple_decls.rs:5:8
-   |
-LL | static A: u64;
-   |        ^ not a function or static
+error E0423: expected function or static, found constant `A`
+ at $DIR/multiple_decls.rs:5:8: not a function or static
 
 error: aborting due to 2 previous errors
 

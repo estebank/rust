@@ -1,8 +1,5 @@
-error[E0407]: method `extra` is not a member of trait `extra_item::MyTrait`
-  --> $DIR/extra-item.rs:7:5
-   |
-LL |     fn extra() {}
-   |     ^^^^^^^^^^^^^ not a member of trait `extra_item::MyTrait`
+error E0407: method `extra` is not a member of trait `extra_item::MyTrait`
+ at $DIR/extra-item.rs:7:5: not a member of trait `extra_item::MyTrait`
 
 error: aborting due to 1 previous error
 

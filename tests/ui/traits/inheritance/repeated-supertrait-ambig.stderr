@@ -1,77 +1,34 @@
-error[E0277]: the trait bound `dyn CompareToInts: CompareTo<i32>` is not satisfied
-  --> $DIR/repeated-supertrait-ambig.rs:26:15
-   |
-LL |     c.same_as(22)
-   |       ------- ^^ the trait `CompareTo<i32>` is not implemented for `dyn CompareToInts`
-   |       |
-   |       required by a bound introduced by this call
-   |
+error E0277: the trait bound `dyn CompareToInts: CompareTo<i32>` is not satisfied
+ at $DIR/repeated-supertrait-ambig.rs:26:15: the trait `CompareTo<i32>` is not implemented for `dyn CompareToInts`
+  on line 26, column 7: required by a bound introduced by this call
 help: `i64` implements trait `CompareTo<T>`
-  --> $DIR/repeated-supertrait-ambig.rs:15:1
-   |
-LL | impl CompareTo<i64> for i64 {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CompareTo<i64>`
-...
-LL | impl CompareTo<u64> for i64 {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CompareTo<u64>`
+ at $DIR/repeated-supertrait-ambig.rs:15:1: `CompareTo<i64>`
+  on line 19: `CompareTo<u64>`
 
-error[E0277]: the trait bound `C: CompareTo<i32>` is not satisfied
-  --> $DIR/repeated-supertrait-ambig.rs:30:15
-   |
-LL |     c.same_as(22)
-   |       ------- ^^ the trait `CompareTo<i32>` is not implemented for `C`
-   |       |
-   |       required by a bound introduced by this call
-   |
+error E0277: the trait bound `C: CompareTo<i32>` is not satisfied
+ at $DIR/repeated-supertrait-ambig.rs:30:15: the trait `CompareTo<i32>` is not implemented for `C`
+  on line 30, column 7: required by a bound introduced by this call
 help: consider further restricting type parameter `C` with trait `CompareTo`
-   |
-LL | fn with_trait<C:CompareToInts + CompareTo<i32>>(c: &C) -> bool {
-   |                               ++++++++++++++++
+ on line 29, column 29, add ` + CompareTo<i32>`
 
-error[E0277]: the trait bound `dyn CompareToInts: CompareTo<i32>` is not satisfied
-  --> $DIR/repeated-supertrait-ambig.rs:34:6
-   |
-LL |     <dyn CompareToInts>::same_as(c, 22)
-   |      ^^^^^^^^^^^^^^^^^ the trait `CompareTo<i32>` is not implemented for `dyn CompareToInts`
-   |
+error E0277: the trait bound `dyn CompareToInts: CompareTo<i32>` is not satisfied
+ at $DIR/repeated-supertrait-ambig.rs:34:6: the trait `CompareTo<i32>` is not implemented for `dyn CompareToInts`
 help: `i64` implements trait `CompareTo<T>`
-  --> $DIR/repeated-supertrait-ambig.rs:15:1
-   |
-LL | impl CompareTo<i64> for i64 {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CompareTo<i64>`
-...
-LL | impl CompareTo<u64> for i64 {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CompareTo<u64>`
+ at $DIR/repeated-supertrait-ambig.rs:15:1: `CompareTo<i64>`
+  on line 19: `CompareTo<u64>`
 
-error[E0277]: the trait bound `C: CompareTo<i32>` is not satisfied
-  --> $DIR/repeated-supertrait-ambig.rs:38:24
-   |
-LL |     CompareTo::same_as(c, 22)
-   |     ------------------ ^ the trait `CompareTo<i32>` is not implemented for `C`
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: the trait bound `C: CompareTo<i32>` is not satisfied
+ at $DIR/repeated-supertrait-ambig.rs:38:24: the trait `CompareTo<i32>` is not implemented for `C`
+  on line 38: required by a bound introduced by this call
 help: consider further restricting type parameter `C` with trait `CompareTo`
-   |
-LL | fn with_ufcs2<C:CompareToInts + CompareTo<i32>>(c: &C) -> bool {
-   |                               ++++++++++++++++
+ on line 37, column 29, add ` + CompareTo<i32>`
 
-error[E0277]: the trait bound `i64: CompareTo<i32>` is not satisfied
-  --> $DIR/repeated-supertrait-ambig.rs:42:31
-   |
-LL |     assert_eq!(22_i64.same_as(22), true);
-   |                       ------- ^^ the trait `CompareTo<i32>` is not implemented for `i64`
-   |                       |
-   |                       required by a bound introduced by this call
-   |
+error E0277: the trait bound `i64: CompareTo<i32>` is not satisfied
+ at $DIR/repeated-supertrait-ambig.rs:42:31: the trait `CompareTo<i32>` is not implemented for `i64`
+  on line 42, column 23: required by a bound introduced by this call
 help: `i64` implements trait `CompareTo<T>`
-  --> $DIR/repeated-supertrait-ambig.rs:15:1
-   |
-LL | impl CompareTo<i64> for i64 {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CompareTo<i64>`
-...
-LL | impl CompareTo<u64> for i64 {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^ `CompareTo<u64>`
+ at $DIR/repeated-supertrait-ambig.rs:15:1: `CompareTo<i64>`
+  on line 19: `CompareTo<u64>`
 
 error: aborting due to 5 previous errors
 

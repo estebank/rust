@@ -1,60 +1,27 @@
 error: character constant must be escaped: `'`
-  --> $DIR/bad-char-literals.rs:6:6
-   |
-LL |     ''';
-   |      ^
-   |
+ at $DIR/bad-char-literals.rs:6:6
 help: escape the character
-   |
-LL |     '\'';
-   |      +
+ on line 6, column 5, replace with `\'`
 
 error: character constant must be escaped: `\n`
-  --> $DIR/bad-char-literals.rs:10:6
-   |
-LL |       '
-   |  ______^
-LL | | ';
-   | |_^
-   |
+ at $DIR/bad-char-literals.rs:10:6 to 11:1
 help: escape the character
-   |
-LL |     '\n';
-   |      ++
+ on line 10, column 5, add `\n`
 
 error: character constant must be escaped: `\r`
-  --> $DIR/bad-char-literals.rs:15:6
-   |
-LL |     '␍';
-   |      ^
-   |
+ at $DIR/bad-char-literals.rs:15:6
 help: escape the character
-   |
-LL |     '\r';
-   |      ++
+ on line 15, column 5, add `\r`
 
 error: character literal may only contain one codepoint
-  --> $DIR/bad-char-literals.rs:18:5
-   |
-LL |     '-␀-';
-   |     ^^^^^
-   |
+ at $DIR/bad-char-literals.rs:18:5
 help: if you meant to write a string literal, use double quotes
-   |
-LL -     '-␀-';
-LL +     "-␀-";
-   |
+ on line 18, column 4, replace with `"`
 
 error: character constant must be escaped: `\t`
-  --> $DIR/bad-char-literals.rs:21:6
-   |
-LL |     '    ';
-   |      ^^^^
-   |
+ at $DIR/bad-char-literals.rs:21:6
 help: escape the character
-   |
-LL |     '\t';
-   |      ++
+ on line 21, column 5, add `\t`
 
 error: aborting due to 5 previous errors
 

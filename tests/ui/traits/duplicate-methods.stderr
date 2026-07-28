@@ -1,12 +1,7 @@
-error[E0428]: the name `orange` is defined multiple times
-  --> $DIR/duplicate-methods.rs:3:5
-   |
-LL |     fn orange(&self);
-   |     ----------------- previous definition of the value `orange` here
-LL |     fn orange(&self);
-   |     ^^^^^^^^^^^^^^^^^ `orange` redefined here
-   |
-   = note: `orange` must be defined only once in the value namespace of this trait
+error E0428: the name `orange` is defined multiple times
+ at $DIR/duplicate-methods.rs:3:5: `orange` redefined here
+  on line 2: previous definition of the value `orange` here
+note: `orange` must be defined only once in the value namespace of this trait
 
 error: aborting due to 1 previous error
 

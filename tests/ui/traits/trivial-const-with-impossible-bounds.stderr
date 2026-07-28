@@ -1,8 +1,5 @@
-error[E0080]: entering unreachable code
-  --> $DIR/trivial-const-with-impossible-bounds.rs:5:5
-   |
-LL |     const C: usize = 1;
-   |     ^^^^^^^^^^^^^^^^^^^ evaluation of `Dummy::C` failed here
+error E0080: entering unreachable code
+ at $DIR/trivial-const-with-impossible-bounds.rs:5:5: evaluation of `Dummy::C` failed here
 
 error: aborting due to 1 previous error
 

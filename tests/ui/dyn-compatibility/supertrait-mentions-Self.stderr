@@ -1,42 +1,20 @@
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/supertrait-mentions-Self.rs:8:13
-   |
-LL | trait Baz : Bar<Self> {
-   |             ^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/supertrait-mentions-Self.rs:8:13: doesn't have a size known at compile-time
 note: required by an implicit `Sized` bound in `Bar`
-  --> $DIR/supertrait-mentions-Self.rs:4:11
-   |
-LL | trait Bar<T> {
-   |           ^ required by the implicit `Sized` requirement on this type parameter in `Bar`
+ at $DIR/supertrait-mentions-Self.rs:4:11: required by the implicit `Sized` requirement on this type parameter in `Bar`
 help: consider further restricting `Self`
-   |
-LL | trait Baz : Bar<Self> + Sized {
-   |                       +++++++
+ on line 8, column 21, add ` + Sized`
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL | trait Bar<T: ?Sized> {
-   |            ++++++++
+ on line 4, column 11, add `: ?Sized`
 
-error[E0038]: the trait `Baz` is not dyn compatible
-  --> $DIR/supertrait-mentions-Self.rs:16:35
-   |
-LL | fn make_baz<T:Baz>(t: &T) -> &dyn Baz {
-   |                                   ^^^ `Baz` is not dyn compatible
-   |
+error E0038: the trait `Baz` is not dyn compatible
+ at $DIR/supertrait-mentions-Self.rs:16:35: `Baz` is not dyn compatible
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/supertrait-mentions-Self.rs:8:13
-   |
-LL | trait Baz : Bar<Self> {
-   |       ---   ^^^^^^^^^ ...because it uses `Self` as a type parameter
-   |       |
-   |       this trait is not dyn compatible...
+ at $DIR/supertrait-mentions-Self.rs:8:13: ...because it uses `Self` as a type parameter
+  on line 8, column 7: this trait is not dyn compatible...
 help: consider using an opaque type instead
-   |
-LL - fn make_baz<T:Baz>(t: &T) -> &dyn Baz {
-LL + fn make_baz<T:Baz>(t: &T) -> &impl Baz {
-   |
+ on line 16, column 30, replace with `impl `
 
 error: aborting due to 2 previous errors
 

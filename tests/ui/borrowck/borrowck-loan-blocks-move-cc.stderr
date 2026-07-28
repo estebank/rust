@@ -1,44 +1,20 @@
-error[E0505]: cannot move out of `v` because it is borrowed
-  --> $DIR/borrowck-loan-blocks-move-cc.rs:14:19
-   |
-LL |     let v: Box<_> = Box::new(3);
-   |         - binding `v` declared here
-LL |     let w = &v;
-   |             -- borrow of `v` occurs here
-LL |     thread::spawn(move|| {
-   |                   ^^^^^^ move out of `v` occurs here
-LL |
-LL |         println!("v={}", *v);
-   |                          -- move occurs due to use in closure
-LL |     });
-LL |     w.use_ref();
-   |     - borrow later used here
-   |
+error E0505: cannot move out of `v` because it is borrowed
+ at $DIR/borrowck-loan-blocks-move-cc.rs:14:19: move out of `v` occurs here
+  on line 12, column 9: binding `v` declared here
+  on line 13, column 13: borrow of `v` occurs here
+  on line 16, column 26: move occurs due to use in closure
+  on line 18: borrow later used here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let w = &v.clone();
-   |               ++++++++
+ on line 13, column 14, add `.clone()`
 
-error[E0505]: cannot move out of `v` because it is borrowed
-  --> $DIR/borrowck-loan-blocks-move-cc.rs:24:19
-   |
-LL |     let v: Box<_> = Box::new(3);
-   |         - binding `v` declared here
-LL |     let w = &v;
-   |             -- borrow of `v` occurs here
-LL |     thread::spawn(move|| {
-   |                   ^^^^^^ move out of `v` occurs here
-LL |
-LL |         println!("v={}", *v);
-   |                          -- move occurs due to use in closure
-LL |     });
-LL |     w.use_ref();
-   |     - borrow later used here
-   |
+error E0505: cannot move out of `v` because it is borrowed
+ at $DIR/borrowck-loan-blocks-move-cc.rs:24:19: move out of `v` occurs here
+  on line 22, column 9: binding `v` declared here
+  on line 23, column 13: borrow of `v` occurs here
+  on line 26, column 26: move occurs due to use in closure
+  on line 28: borrow later used here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let w = &v.clone();
-   |               ++++++++
+ on line 23, column 14, add `.clone()`
 
 error: aborting due to 2 previous errors
 

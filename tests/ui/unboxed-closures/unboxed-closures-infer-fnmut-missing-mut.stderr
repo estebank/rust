@@ -1,15 +1,8 @@
-error[E0596]: cannot borrow `tick` as mutable, as it is not declared as mutable
-  --> $DIR/unboxed-closures-infer-fnmut-missing-mut.rs:7:5
-   |
-LL |     let tick = || counter += 1;
-   |                   ------- calling `tick` requires mutable binding due to mutable borrow of `counter`
-LL |     tick();
-   |     ^^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `tick` as mutable, as it is not declared as mutable
+ at $DIR/unboxed-closures-infer-fnmut-missing-mut.rs:7:5: cannot borrow as mutable
+  on line 6, column 19: calling `tick` requires mutable binding due to mutable borrow of `counter`
 help: consider changing this to be mutable
-   |
-LL |     let mut tick = || counter += 1;
-   |         +++
+ on line 6, column 8, add `mut `
 
 error: aborting due to 1 previous error
 

@@ -1,99 +1,54 @@
 error: relaxed bounds are not permitted in trait object types
-  --> $DIR/trait-object-trait-parens.rs:9:24
-   |
-LL |     let _: Box<(Obj) + (?Sized) + (for<'a> Trait<'a>)>;
-   |                        ^^^^^^^^
-   |
-   = note: trait object types are not implicitly bounded by `Sized`, so there is nothing to relax
+ at $DIR/trait-object-trait-parens.rs:9:24
+note: trait object types are not implicitly bounded by `Sized`, so there is nothing to relax
 
 error: relaxed bounds are not permitted in trait object types
-  --> $DIR/trait-object-trait-parens.rs:14:16
-   |
-LL |     let _: Box<?Sized + (for<'a> Trait<'a>) + (Obj)>;
-   |                ^^^^^^
-   |
-   = note: trait object types are not implicitly bounded by `Sized`, so there is nothing to relax
+ at $DIR/trait-object-trait-parens.rs:14:16
+note: trait object types are not implicitly bounded by `Sized`, so there is nothing to relax
 
 error: relaxed bounds are not permitted in trait object types
-  --> $DIR/trait-object-trait-parens.rs:19:44
-   |
-LL |     let _: Box<for<'a> Trait<'a> + (Obj) + (?Sized)>;
-   |                                            ^^^^^^^^
-   |
-   = note: trait object types are not implicitly bounded by `Sized`, so there is nothing to relax
+ at $DIR/trait-object-trait-parens.rs:19:44
+note: trait object types are not implicitly bounded by `Sized`, so there is nothing to relax
 
 warning: trait objects without an explicit `dyn` are deprecated
-  --> $DIR/trait-object-trait-parens.rs:9:16
-   |
-LL |     let _: Box<(Obj) + (?Sized) + (for<'a> Trait<'a>)>;
-   |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
-   = note: `#[warn(bare_trait_objects)]` (part of `#[warn(rust_2021_compatibility)]`) on by default
+ at $DIR/trait-object-trait-parens.rs:9:16
+warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
+note: `#[warn(bare_trait_objects)]` (part of `#[warn(rust_2021_compatibility)]`) on by default
 help: if this is a dyn-compatible trait, use `dyn`
-   |
-LL |     let _: Box<dyn (Obj) + (?Sized) + (for<'a> Trait<'a>)>;
-   |                +++
+ on line 9, column 15, add `dyn `
 
-error[E0225]: only auto traits can be used as additional traits in a trait object
-  --> $DIR/trait-object-trait-parens.rs:9:35
-   |
-LL |     let _: Box<(Obj) + (?Sized) + (for<'a> Trait<'a>)>;
-   |                -----              ^^^^^^^^^^^^^^^^^^^ additional non-auto trait
-   |                |
-   |                first non-auto trait
-   |
-   = help: consider creating a new trait with all of these as supertraits and using that trait here instead: `trait NewTrait: Obj + for<'a> Trait<'a> {}`
-   = note: auto-traits like `Send` and `Sync` are traits that have special properties; for more information on them, visit <https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits>
+error E0225: only auto traits can be used as additional traits in a trait object
+ at $DIR/trait-object-trait-parens.rs:9:35: additional non-auto trait
+  on line 9, column 16: first non-auto trait
+help: consider creating a new trait with all of these as supertraits and using that trait here instead: `trait NewTrait: Obj + for<'a> Trait<'a> {}`
+note: auto-traits like `Send` and `Sync` are traits that have special properties; for more information on them, visit <https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits>
 
 warning: trait objects without an explicit `dyn` are deprecated
-  --> $DIR/trait-object-trait-parens.rs:14:16
-   |
-LL |     let _: Box<?Sized + (for<'a> Trait<'a>) + (Obj)>;
-   |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
+ at $DIR/trait-object-trait-parens.rs:14:16
+warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
 help: if this is a dyn-compatible trait, use `dyn`
-   |
-LL |     let _: Box<dyn ?Sized + (for<'a> Trait<'a>) + (Obj)>;
-   |                +++
+ on line 14, column 15, add `dyn `
 
-error[E0225]: only auto traits can be used as additional traits in a trait object
-  --> $DIR/trait-object-trait-parens.rs:14:47
-   |
-LL |     let _: Box<?Sized + (for<'a> Trait<'a>) + (Obj)>;
-   |                         -------------------   ^^^^^ additional non-auto trait
-   |                         |
-   |                         first non-auto trait
-   |
-   = help: consider creating a new trait with all of these as supertraits and using that trait here instead: `trait NewTrait: for<'a> Trait<'a> + Obj {}`
-   = note: auto-traits like `Send` and `Sync` are traits that have special properties; for more information on them, visit <https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits>
+error E0225: only auto traits can be used as additional traits in a trait object
+ at $DIR/trait-object-trait-parens.rs:14:47: additional non-auto trait
+  on line 14, column 25: first non-auto trait
+help: consider creating a new trait with all of these as supertraits and using that trait here instead: `trait NewTrait: for<'a> Trait<'a> + Obj {}`
+note: auto-traits like `Send` and `Sync` are traits that have special properties; for more information on them, visit <https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits>
 
 warning: trait objects without an explicit `dyn` are deprecated
-  --> $DIR/trait-object-trait-parens.rs:19:16
-   |
-LL |     let _: Box<for<'a> Trait<'a> + (Obj) + (?Sized)>;
-   |                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
-   = note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
+ at $DIR/trait-object-trait-parens.rs:19:16
+warning: this is accepted in the current edition (Rust 2015) but is a hard error in Rust 2021!
+note: for more information, see <https://doc.rust-lang.org/edition-guide/rust-2021/warnings-promoted-to-error.html>
 help: if this is a dyn-compatible trait, use `dyn`
-   |
-LL |     let _: Box<dyn for<'a> Trait<'a> + (Obj) + (?Sized)>;
-   |                +++
+ on line 19, column 15, add `dyn `
 
-error[E0225]: only auto traits can be used as additional traits in a trait object
-  --> $DIR/trait-object-trait-parens.rs:19:36
-   |
-LL |     let _: Box<for<'a> Trait<'a> + (Obj) + (?Sized)>;
-   |                -----------------   ^^^^^ additional non-auto trait
-   |                |
-   |                first non-auto trait
-   |
-   = help: consider creating a new trait with all of these as supertraits and using that trait here instead: `trait NewTrait: for<'a> Trait<'a> + Obj {}`
-   = note: auto-traits like `Send` and `Sync` are traits that have special properties; for more information on them, visit <https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits>
+error E0225: only auto traits can be used as additional traits in a trait object
+ at $DIR/trait-object-trait-parens.rs:19:36: additional non-auto trait
+  on line 19, column 16: first non-auto trait
+help: consider creating a new trait with all of these as supertraits and using that trait here instead: `trait NewTrait: for<'a> Trait<'a> + Obj {}`
+note: auto-traits like `Send` and `Sync` are traits that have special properties; for more information on them, visit <https://doc.rust-lang.org/reference/special-types-and-traits.html#auto-traits>
 
 error: aborting due to 6 previous errors; 3 warnings emitted
 

@@ -1,11 +1,6 @@
-error[E0530]: let bindings cannot shadow tuple structs
-  --> $DIR/enum-in-scope.rs:6:9
-   |
-LL | struct hello(isize);
-   | -------------------- the tuple struct `hello` is defined here
-...
-LL |     let hello = 0;
-   |         ^^^^^ cannot be named the same as a tuple struct
+error E0530: let bindings cannot shadow tuple structs
+ at $DIR/enum-in-scope.rs:6:9: cannot be named the same as a tuple struct
+  on line 3: the tuple struct `hello` is defined here
 
 error: aborting due to 1 previous error
 

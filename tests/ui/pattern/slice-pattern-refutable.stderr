@@ -1,44 +1,20 @@
-error[E0282]: type annotations needed
-  --> $DIR/slice-pattern-refutable.rs:14:28
-   |
-LL |     let [a, b, c] = Zeroes.into() else {
-   |         ---------          ^^^^
-   |         |
-   |         type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/slice-pattern-refutable.rs:14:28
+  on line 14, column 9: type must be known at this point
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     let [a, b, c] = Zeroes.into() else {
-LL +     let [a, b, c] = <Zeroes as Into<T>>::into(Zeroes) else {
-   |
+ on line 14, column 20, add `<Zeroes as Into<T>>::into(`
 
-error[E0282]: type annotations needed
-  --> $DIR/slice-pattern-refutable.rs:21:31
-   |
-LL |     if let [a, b, c] = Zeroes.into() {
-   |            ---------          ^^^^
-   |            |
-   |            type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/slice-pattern-refutable.rs:21:31
+  on line 21, column 12: type must be known at this point
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     if let [a, b, c] = Zeroes.into() {
-LL +     if let [a, b, c] = <Zeroes as Into<T>>::into(Zeroes) {
-   |
+ on line 21, column 23, add `<Zeroes as Into<T>>::into(`
 
-error[E0282]: type annotations needed
-  --> $DIR/slice-pattern-refutable.rs:28:31
-   |
-LL |     if let [a, b, c] = Zeroes.into() {
-   |            ---------          ^^^^
-   |            |
-   |            type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/slice-pattern-refutable.rs:28:31
+  on line 28, column 12: type must be known at this point
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     if let [a, b, c] = Zeroes.into() {
-LL +     if let [a, b, c] = <Zeroes as Into<T>>::into(Zeroes) {
-   |
+ on line 28, column 23, add `<Zeroes as Into<T>>::into(`
 
 error: aborting due to 3 previous errors
 

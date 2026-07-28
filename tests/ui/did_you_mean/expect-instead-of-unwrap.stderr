@@ -1,30 +1,18 @@
-error[E0061]: this method takes 0 arguments but 1 argument was supplied
-  --> $DIR/expect-instead-of-unwrap.rs:2:12
-   |
-LL |     Ok(42).unwrap("wow");
-   |            ^^^^^^ ----- unexpected argument of type `&'static str`
-   |
+error E0061: this method takes 0 arguments but 1 argument was supplied
+ at $DIR/expect-instead-of-unwrap.rs:2:12
+  on line 2, column 19: unexpected argument of type `&'static str`
 note: method defined here
-  --> $SRC_DIR/core/src/result.rs:LL:COL
+ at $SRC_DIR/core/src/result.rs:LL:COL
 help: did you mean to use `expect`?
-   |
-LL -     Ok(42).unwrap("wow");
-LL +     Ok(42).expect("wow");
-   |
+ on line 2, column 11, replace with `expect`
 
-error[E0061]: this method takes 0 arguments but 1 argument was supplied
-  --> $DIR/expect-instead-of-unwrap.rs:4:14
-   |
-LL |     Some(42).unwrap("wow");
-   |              ^^^^^^ ----- unexpected argument of type `&'static str`
-   |
+error E0061: this method takes 0 arguments but 1 argument was supplied
+ at $DIR/expect-instead-of-unwrap.rs:4:14
+  on line 4, column 21: unexpected argument of type `&'static str`
 note: method defined here
-  --> $SRC_DIR/core/src/option.rs:LL:COL
+ at $SRC_DIR/core/src/option.rs:LL:COL
 help: did you mean to use `expect`?
-   |
-LL -     Some(42).unwrap("wow");
-LL +     Some(42).expect("wow");
-   |
+ on line 4, column 13, replace with `expect`
 
 error: aborting due to 2 previous errors
 

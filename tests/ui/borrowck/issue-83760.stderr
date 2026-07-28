@@ -1,77 +1,34 @@
-error[E0382]: use of moved value
-  --> $DIR/issue-83760.rs:10:20
-   |
-LL |     while let Some(foo) = val {
-   |                    ^^^ value moved here, in previous iteration of loop
-LL |         if true {
-LL |             val = None;
-   |             ---------- this reinitialization might get skipped
-   |
-   = note: move occurs because value has type `Struct`, which does not implement the `Copy` trait
+error E0382: use of moved value
+ at $DIR/issue-83760.rs:10:20: value moved here, in previous iteration of loop
+  on line 12: this reinitialization might get skipped
+note: move occurs because value has type `Struct`, which does not implement the `Copy` trait
 help: borrow this binding in the pattern to avoid moving the value
-   |
-LL |     while let Some(ref foo) = val {
-   |                    +++
+ on line 10, column 19, add `ref `
 
-error[E0382]: use of moved value: `foo`
-  --> $DIR/issue-83760.rs:26:14
-   |
-LL |     let mut foo = Some(Struct);
-   |         ------- move occurs because `foo` has type `Option<Struct>`, which does not implement the `Copy` trait
-LL |     let _x = foo.unwrap();
-   |                  -------- `foo` moved due to this method call
-LL |     if true {
-LL |         foo = Some(Struct);
-   |         ------------------ this reinitialization might get skipped
-...
-LL |     let _y = foo;
-   |              ^^^ value used here after move
-   |
+error E0382: use of moved value: `foo`
+ at $DIR/issue-83760.rs:26:14: value used here after move
+  on line 20, column 9: move occurs because `foo` has type `Option<Struct>`, which does not implement the `Copy` trait
+  on line 21, column 18: `foo` moved due to this method call
+  on line 23: this reinitialization might get skipped
 note: `Option::<T>::unwrap` takes ownership of the receiver `self`, which moves `foo`
-  --> $SRC_DIR/core/src/option.rs:LL:COL
+ at $SRC_DIR/core/src/option.rs:LL:COL
 help: you could `clone` the value and consume it, if the `Struct: Clone` trait bound could be satisfied
-   |
-LL |     let _x = foo.clone().unwrap();
-   |                 ++++++++
+ on line 21, column 16, add `.clone()`
 help: consider annotating `Struct` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Struct;
-   |
+ on line 3, column 1, add `#[derive(Clone)]`
 
-error[E0382]: use of moved value: `foo`
-  --> $DIR/issue-83760.rs:42:14
-   |
-LL |     let mut foo = Some(Struct2);
-   |         ------- move occurs because `foo` has type `Option<Struct2>`, which does not implement the `Copy` trait
-LL |     let _x = foo.unwrap();
-   |                  -------- `foo` moved due to this method call
-...
-LL |     let _y = foo;
-   |              ^^^ value used here after move
-   |
+error E0382: use of moved value: `foo`
+ at $DIR/issue-83760.rs:42:14: value used here after move
+  on line 30, column 9: move occurs because `foo` has type `Option<Struct2>`, which does not implement the `Copy` trait
+  on line 31, column 18: `foo` moved due to this method call
 note: these 3 reinitializations and 1 other might get skipped
-  --> $DIR/issue-83760.rs:35:9
-   |
-LL |         foo = Some(Struct2);
-   |         ^^^^^^^^^^^^^^^^^^^
-LL |     } else if true {
-LL |         foo = Some(Struct2);
-   |         ^^^^^^^^^^^^^^^^^^^
-LL |     } else if true {
-LL |         foo = Some(Struct2);
-   |         ^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-83760.rs:35:9
 note: `Option::<T>::unwrap` takes ownership of the receiver `self`, which moves `foo`
-  --> $SRC_DIR/core/src/option.rs:LL:COL
+ at $SRC_DIR/core/src/option.rs:LL:COL
 help: you could `clone` the value and consume it, if the `Struct2: Clone` trait bound could be satisfied
-   |
-LL |     let _x = foo.clone().unwrap();
-   |                 ++++++++
+ on line 31, column 16, add `.clone()`
 help: consider annotating `Struct2` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct Struct2;
-   |
+ on line 4, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 3 previous errors
 

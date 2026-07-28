@@ -1,46 +1,21 @@
-error[E0560]: struct `B` has no field named `aa`
-  --> $DIR/suggest-private-fields.rs:15:9
-   |
-LL |         aa: 20,
-   |         ^^ unknown field
-   |
+error E0560: struct `B` has no field named `aa`
+ at $DIR/suggest-private-fields.rs:15:9: unknown field
 help: a field with a similar name exists
-   |
-LL -         aa: 20,
-LL +         a: 20,
-   |
+ on line 15, column 8, replace with `a`
 
-error[E0560]: struct `B` has no field named `bb`
-  --> $DIR/suggest-private-fields.rs:17:9
-   |
-LL |         bb: 20,
-   |         ^^ `B` does not have this field
-   |
-   = note: available fields are: `a`
+error E0560: struct `B` has no field named `bb`
+ at $DIR/suggest-private-fields.rs:17:9: `B` does not have this field
+note: available fields are: `a`
 
-error[E0560]: struct `A` has no field named `aa`
-  --> $DIR/suggest-private-fields.rs:22:9
-   |
-LL |         aa: 20,
-   |         ^^ unknown field
-   |
+error E0560: struct `A` has no field named `aa`
+ at $DIR/suggest-private-fields.rs:22:9: unknown field
 help: a field with a similar name exists
-   |
-LL -         aa: 20,
-LL +         a: 20,
-   |
+ on line 22, column 8, replace with `a`
 
-error[E0560]: struct `A` has no field named `bb`
-  --> $DIR/suggest-private-fields.rs:24:9
-   |
-LL |         bb: 20,
-   |         ^^ unknown field
-   |
+error E0560: struct `A` has no field named `bb`
+ at $DIR/suggest-private-fields.rs:24:9: unknown field
 help: a field with a similar name exists
-   |
-LL -         bb: 20,
-LL +         b: 20,
-   |
+ on line 24, column 8, replace with `b`
 
 error: aborting due to 4 previous errors
 

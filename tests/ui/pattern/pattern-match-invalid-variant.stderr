@@ -1,11 +1,6 @@
-error[E0599]: no variant, associated function, or constant named `Hsl` found for enum `Color` in the current scope
-  --> $DIR/pattern-match-invalid-variant.rs:14:16
-   |
-LL | enum Color {
-   | ---------- variant, associated function, or constant `Hsl` not found for this enum
-...
-LL |         Color::Hsl(h, s, l) => {
-   |                ^^^ variant, associated function, or constant not found in `Color`
+error E0599: no variant, associated function, or constant named `Hsl` found for enum `Color` in the current scope
+ at $DIR/pattern-match-invalid-variant.rs:14:16: variant, associated function, or constant not found in `Color`
+  on line 3: variant, associated function, or constant `Hsl` not found for this enum
 
 error: aborting due to 1 previous error
 

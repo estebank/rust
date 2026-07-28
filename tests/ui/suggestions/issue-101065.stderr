@@ -1,22 +1,11 @@
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/issue-101065.rs:12:9
-   |
-LL |       let _x = if true {
-   |  ______________-
-LL | |         FakeResult::Ok(FakeResult::Ok(()))
-   | |         ---------------------------------- expected because of this
-LL | |     } else {
-LL | |         FakeResult::Ok(())
-   | |         ^^^^^^^^^^^^^^^^^^ expected `FakeResult<FakeResult<()>>`, found `FakeResult<()>`
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
-   |
-   = note: expected enum `FakeResult<FakeResult<()>>`
-              found enum `FakeResult<()>`
+error E0308: `if` and `else` have incompatible types
+ at $DIR/issue-101065.rs:12:9: expected `FakeResult<FakeResult<()>>`, found `FakeResult<()>`
+  on line 9, column 14 to line 13, column 6: `if` and `else` have incompatible types
+  on line 10: expected because of this
+note: expected enum `FakeResult<FakeResult<()>>`
+         found enum `FakeResult<()>`
 help: try wrapping the expression in `FakeResult::Ok`
-   |
-LL |         FakeResult::Ok(FakeResult::Ok(()))
-   |         +++++++++++++++                  +
+ on line 12, column 8, add `FakeResult::Ok(`
 
 error: aborting due to 1 previous error
 

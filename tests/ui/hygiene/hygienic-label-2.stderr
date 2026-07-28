@@ -1,8 +1,5 @@
-error[E0426]: use of undeclared label `'x`
-  --> $DIR/hygienic-label-2.rs:6:16
-   |
-LL |     foo!(break 'x);
-   |                ^^ undeclared label `'x`
+error E0426: use of undeclared label `'x`
+ at $DIR/hygienic-label-2.rs:6:16: undeclared label `'x`
 
 error: aborting due to 1 previous error
 

@@ -1,52 +1,25 @@
-error[E0107]: missing generics for trait `Supertrait`
-  --> $DIR/missing-generics-issue-151330.rs:6:17
-   |
-LL | trait Trait<P>: Supertrait {}
-   |                 ^^^^^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for trait `Supertrait`
+ at $DIR/missing-generics-issue-151330.rs:6:17: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/missing-generics-issue-151330.rs:4:7
-   |
-LL | trait Supertrait<T> {}
-   |       ^^^^^^^^^^ -
+ at $DIR/missing-generics-issue-151330.rs:4:7
 help: add missing generic argument
-   |
-LL | trait Trait<P>: Supertrait<T> {}
-   |                           +++
+ on line 6, column 26, add `<T>`
 
-error[E0107]: missing generics for trait `Supertrait`
-  --> $DIR/missing-generics-issue-151330.rs:6:17
-   |
-LL | trait Trait<P>: Supertrait {}
-   |                 ^^^^^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for trait `Supertrait`
+ at $DIR/missing-generics-issue-151330.rs:6:17: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/missing-generics-issue-151330.rs:4:7
-   |
-LL | trait Supertrait<T> {}
-   |       ^^^^^^^^^^ -
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/missing-generics-issue-151330.rs:4:7
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: add missing generic argument
-   |
-LL | trait Trait<P>: Supertrait<T> {}
-   |                           +++
+ on line 6, column 26, add `<T>`
 
-error[E0107]: missing generics for trait `Supertrait`
-  --> $DIR/missing-generics-issue-151330.rs:6:17
-   |
-LL | trait Trait<P>: Supertrait {}
-   |                 ^^^^^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for trait `Supertrait`
+ at $DIR/missing-generics-issue-151330.rs:6:17: expected 1 generic argument
 note: trait defined here, with 1 generic parameter: `T`
-  --> $DIR/missing-generics-issue-151330.rs:4:7
-   |
-LL | trait Supertrait<T> {}
-   |       ^^^^^^^^^^ -
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/missing-generics-issue-151330.rs:4:7
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: add missing generic argument
-   |
-LL | trait Trait<P>: Supertrait<T> {}
-   |                           +++
+ on line 6, column 26, add `<T>`
 
 error: aborting due to 3 previous errors
 

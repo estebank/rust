@@ -1,56 +1,28 @@
 error: expected `;`, found `#`
-  --> $DIR/issue-118530-ice.rs:3:21
-   |
-LL |     #[cfg]
-   |     ------ only `;` terminated statements or tail expressions are allowed after this attribute
-LL |     [1, 2, 3].iter()
-   |                     ^ expected `;` here
-LL |     #[feature]
-   |     - unexpected token
-   |
+ at $DIR/issue-118530-ice.rs:3:21: expected `;` here
+  on line 2: only `;` terminated statements or tail expressions are allowed after this attribute
+  on line 4: unexpected token
 help: add `;` here
-   |
-LL |     [1, 2, 3].iter();
-   |                     +
+ on line 3, column 20, add `;`
 help: alternatively, consider surrounding the expression with a block
-   |
-LL |     { [1, 2, 3].iter() }
-   |     +                  +
+ on line 3, column 4, add `{ `
 
 error: expected identifier, found keyword `fn`
-  --> $DIR/issue-118530-ice.rs:5:11
-   |
-LL |     attr::fn bar() -> String {
-   |           ^^ expected identifier, found keyword
+ at $DIR/issue-118530-ice.rs:5:11: expected identifier, found keyword
 
 error: expected `;`, found `bar`
-  --> $DIR/issue-118530-ice.rs:5:13
-   |
-LL |     #[feature]
-   |     ---------- only `;` terminated statements or tail expressions are allowed after this attribute
-LL |     attr::fn bar() -> String {
-   |             ^--- unexpected token
-   |             |
-   |             help: add `;` here
+ at $DIR/issue-118530-ice.rs:5:13: help: add `;` here
+  on line 4: only `;` terminated statements or tail expressions are allowed after this attribute
+  on line 5, column 14: unexpected token
 
 error: `->` is not valid syntax for field accesses and method calls
-  --> $DIR/issue-118530-ice.rs:5:20
-   |
-LL |     attr::fn bar() -> String {
-   |                    ^^
-   |
-   = help: the `.` operator will automatically dereference the value, except if the value is a raw pointer
+ at $DIR/issue-118530-ice.rs:5:20
+help: the `.` operator will automatically dereference the value, except if the value is a raw pointer
 help: try using `.` instead
-   |
-LL -     attr::fn bar() -> String {
-LL +     attr::fn bar() . String {
-   |
+ on line 5, column 19, replace with `.`
 
 error: expected one of `(`, `.`, `::`, `;`, `?`, `}`, or an operator, found `{`
-  --> $DIR/issue-118530-ice.rs:5:30
-   |
-LL |     attr::fn bar() -> String {
-   |                              ^ expected one of 7 possible tokens
+ at $DIR/issue-118530-ice.rs:5:30: expected one of 7 possible tokens
 
 error: aborting due to 5 previous errors
 

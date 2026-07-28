@@ -1,25 +1,13 @@
 warning: unreachable statement
-  --> $DIR/never-assign-dead-code.rs:11:5
-   |
-LL |     let x: ! = panic!("aah");
-   |                ------------- any code following this expression is unreachable
-LL |     drop(x);
-   |     ^^^^^^^^ unreachable statement
-   |
+ at $DIR/never-assign-dead-code.rs:11:5: unreachable statement
+  on line 10, column 16: any code following this expression is unreachable
 note: the lint level is defined here
-  --> $DIR/never-assign-dead-code.rs:7:9
-   |
-LL | #![warn(unused)]
-   |         ^^^^^^
-   = note: `#[warn(unreachable_code)]` implied by `#[warn(unused)]`
+ at $DIR/never-assign-dead-code.rs:7:9
+note: `#[warn(unreachable_code)]` implied by `#[warn(unused)]`
 
 warning: unreachable call
-  --> $DIR/never-assign-dead-code.rs:11:5
-   |
-LL |     drop(x);
-   |     ^^^^ - any code following this expression is unreachable
-   |     |
-   |     unreachable call
+ at $DIR/never-assign-dead-code.rs:11:5: unreachable call
+  on line 11, column 10: any code following this expression is unreachable
 
 warning: 2 warnings emitted
 

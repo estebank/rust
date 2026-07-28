@@ -1,23 +1,11 @@
-error[E0382]: use of moved value: `x`
-  --> $DIR/move-in-guard-2.rs:8:24
-   |
-LL |     let x: Box<_> = Box::new(1);
-   |         - move occurs because `x` has type `Box<i32>`, which does not implement the `Copy` trait
-...
-LL |         (_, 2) if take(x) => (),
-   |                        ^ value used here after move
-   |
+error E0382: use of moved value: `x`
+ at $DIR/move-in-guard-2.rs:8:24: value used here after move
+  on line 2, column 9: move occurs because `x` has type `Box<i32>`, which does not implement the `Copy` trait
 note: consider changing this parameter type in function `take` to borrow instead if owning the value isn't necessary
-  --> $DIR/move-in-guard-2.rs:13:15
-   |
-LL | fn take<T>(_: T) -> bool { false }
-   |    ----       ^ this parameter takes ownership of the value
-   |    |
-   |    in this function
+ at $DIR/move-in-guard-2.rs:13:15: this parameter takes ownership of the value
+  on line 13, column 4: in this function
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         (_, 2) if take(x.clone()) => (),
-   |                         ++++++++
+ on line 8, column 24, add `.clone()`
 
 error: aborting due to 1 previous error
 

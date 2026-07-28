@@ -1,104 +1,46 @@
-error[E0507]: cannot move out of `var`, a captured variable in an `FnMut` closure
-  --> $DIR/option-content-move3.rs:12:9
-   |
-LL |     let var = NotCopyable;
-   |         ---   ----------- move occurs because `var` has type `NotCopyable`, which does not implement the `Copy` trait
-   |         |
-   |         captured outer variable
-LL |     func(|| {
-   |          -- captured by this `FnMut` closure
-LL |         // Shouldn't suggest `move ||.as_ref()` here
-LL |         move || {
-   |         ^^^^^^^ `var` is moved here
-LL |             let x = var;
-   |                     --- variable moved due to use in closure
-   |
+error E0507: cannot move out of `var`, a captured variable in an `FnMut` closure
+ at $DIR/option-content-move3.rs:12:9: `var` is moved here
+  on line 9, column 9: captured outer variable
+  on line 9, column 15: move occurs because `var` has type `NotCopyable`, which does not implement the `Copy` trait
+  on line 10, column 10: captured by this `FnMut` closure
+  on line 13, column 21: variable moved due to use in closure
 help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
-  --> $DIR/option-content-move3.rs:6:12
-   |
-LL | fn func<F: FnMut() -> H, H: FnMut()>(_: F) {}
-   |            ^^^^^^^^^^^^
+ at $DIR/option-content-move3.rs:6:12
 note: if `NotCopyable` implemented `Clone`, you could clone the value
-  --> $DIR/option-content-move3.rs:2:1
-   |
-LL | struct NotCopyable;
-   | ^^^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |             let x = var;
-   |                     --- you could clone this value
+ at $DIR/option-content-move3.rs:2:1: consider implementing `Clone` for this type
+  on line 13, column 21: you could clone this value
 
-error[E0507]: cannot move out of `var`, a captured variable in an `FnMut` closure
-  --> $DIR/option-content-move3.rs:13:21
-   |
-LL |     let var = NotCopyable;
-   |         --- captured outer variable
-...
-LL |         move || {
-   |         ------- captured by this `FnMut` closure
-LL |             let x = var;
-   |                     ^^^ move occurs because `var` has type `NotCopyable`, which does not implement the `Copy` trait
-   |
-   = help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
+error E0507: cannot move out of `var`, a captured variable in an `FnMut` closure
+ at $DIR/option-content-move3.rs:13:21: move occurs because `var` has type `NotCopyable`, which does not implement the `Copy` trait
+  on line 9, column 9: captured outer variable
+  on line 12: captured by this `FnMut` closure
+help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
 note: if `NotCopyable` implemented `Clone`, you could clone the value
-  --> $DIR/option-content-move3.rs:2:1
-   |
-LL | struct NotCopyable;
-   | ^^^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |             let x = var;
-   |                     --- you could clone this value
+ at $DIR/option-content-move3.rs:2:1: consider implementing `Clone` for this type
+  on line 13, column 21: you could clone this value
 help: consider borrowing here
-   |
-LL |             let x = &var;
-   |                     +
+ on line 13, column 20, add `&`
 
-error[E0507]: cannot move out of `var`, a captured variable in an `FnMut` closure
-  --> $DIR/option-content-move3.rs:23:9
-   |
-LL |     let var = NotCopyableButCloneable;
-   |         ---   ----------------------- move occurs because `var` has type `NotCopyableButCloneable`, which does not implement the `Copy` trait
-   |         |
-   |         captured outer variable
-LL |     func(|| {
-   |          -- captured by this `FnMut` closure
-LL |         // Shouldn't suggest `move ||.as_ref()` here
-LL |         move || {
-   |         ^^^^^^^ `var` is moved here
-LL |             let x = var;
-   |                     --- variable moved due to use in closure
-   |
+error E0507: cannot move out of `var`, a captured variable in an `FnMut` closure
+ at $DIR/option-content-move3.rs:23:9: `var` is moved here
+  on line 20, column 9: captured outer variable
+  on line 20, column 15: move occurs because `var` has type `NotCopyableButCloneable`, which does not implement the `Copy` trait
+  on line 21, column 10: captured by this `FnMut` closure
+  on line 24, column 21: variable moved due to use in closure
 help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
-  --> $DIR/option-content-move3.rs:6:12
-   |
-LL | fn func<F: FnMut() -> H, H: FnMut()>(_: F) {}
-   |            ^^^^^^^^^^^^
+ at $DIR/option-content-move3.rs:6:12
 help: consider cloning the value before moving it into the closure
-   |
-LL ~         {
-LL +         let value = var.clone();
-LL ~         move || {
-LL ~             let x = value;
-LL |             println!("{x:?}");
-LL ~         }
-LL +         }
-   |
+ on line 23, add `{
+        let value = var.clone();
+        `
 
-error[E0507]: cannot move out of `var`, a captured variable in an `FnMut` closure
-  --> $DIR/option-content-move3.rs:24:21
-   |
-LL |     let var = NotCopyableButCloneable;
-   |         --- captured outer variable
-...
-LL |         move || {
-   |         ------- captured by this `FnMut` closure
-LL |             let x = var;
-   |                     ^^^ move occurs because `var` has type `NotCopyableButCloneable`, which does not implement the `Copy` trait
-   |
-   = help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
+error E0507: cannot move out of `var`, a captured variable in an `FnMut` closure
+ at $DIR/option-content-move3.rs:24:21: move occurs because `var` has type `NotCopyableButCloneable`, which does not implement the `Copy` trait
+  on line 20, column 9: captured outer variable
+  on line 23: captured by this `FnMut` closure
+help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
 help: consider borrowing here
-   |
-LL |             let x = &var;
-   |                     +
+ on line 24, column 20, add `&`
 
 error: aborting due to 4 previous errors
 

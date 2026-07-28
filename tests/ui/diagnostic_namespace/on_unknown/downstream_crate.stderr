@@ -1,12 +1,7 @@
-error[E0432]: you silly, this module is empty
-  --> $DIR/downstream_crate.rs:6:9
-   |
-LL | pub use ::other::empty::something;
-   |         ^^^^^^^^^^^^^^^^---------
-   |                         |
-   |                         no `something` in `empty`
-   |
-   = note: unresolved import `other::empty::something`
+error E0432: you silly, this module is empty
+ at $DIR/downstream_crate.rs:6:9
+  on line 6, column 25: no `something` in `empty`
+note: unresolved import `other::empty::something`
 
 error: aborting due to 1 previous error
 

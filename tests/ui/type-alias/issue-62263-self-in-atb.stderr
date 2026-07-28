@@ -1,8 +1,5 @@
-error[E0433]: cannot find `Self` in this scope
-  --> $DIR/issue-62263-self-in-atb.rs:5:32
-   |
-LL | pub type Alias = dyn Trait<A = Self::A>;
-   |                                ^^^^ `Self` is only available in impls, traits, and type definitions
+error E0433: cannot find `Self` in this scope
+ at $DIR/issue-62263-self-in-atb.rs:5:32: `Self` is only available in impls, traits, and type definitions
 
 error: aborting due to 1 previous error
 

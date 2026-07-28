@@ -1,14 +1,7 @@
-error[E0191]: the value of the associated type `X` in `Super` must be specified
-  --> $DIR/associated-type-shadowed-from-supertrait.rs:12:27
-   |
-LL |     type X;
-   |     ------ `Super::X` defined here, consider renaming it
-...
-LL |     type X;
-   |     ------ `Super::X` shadowed here, consider renaming it
-...
-LL | impl<T> Clone for Box<dyn Sub<X = T>> {
-   |                           ^^^^^^^^^^ associated type `X` must be specified
+error E0191: the value of the associated type `X` in `Super` must be specified
+ at $DIR/associated-type-shadowed-from-supertrait.rs:12:27: associated type `X` must be specified
+  on line 5: `Super::X` defined here, consider renaming it
+  on line 9: `Super::X` shadowed here, consider renaming it
 
 error: aborting due to 1 previous error
 

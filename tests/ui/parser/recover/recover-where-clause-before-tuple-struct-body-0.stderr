@@ -1,40 +1,16 @@
 error: where clauses are not allowed before tuple struct bodies
-  --> $DIR/recover-where-clause-before-tuple-struct-body-0.rs:7:1
-   |
-LL |   pub struct Example
-   |              ------- while parsing this tuple struct
-LL | / where
-LL | |     (): Sized,
-   | |______________^ unexpected where clause
-LL |   (usize);
-   |   ------- the struct body
-   |
+ at $DIR/recover-where-clause-before-tuple-struct-body-0.rs:7:1 to 8:15: unexpected where clause
+  on line 6, column 12: while parsing this tuple struct
+  on line 9: the struct body
 help: move the body before the where clause
-   |
-LL ~ pub struct Example(usize)
-LL | where
-LL ~     (): Sized;
-   |
+ on line 6, column 18, add `(usize)`
 
 error: where clauses are not allowed before tuple struct bodies
-  --> $DIR/recover-where-clause-before-tuple-struct-body-0.rs:13:1
-   |
-LL |   struct _Demo
-   |          ----- while parsing this tuple struct
-LL | / where
-LL | |     (): Sized,
-LL | |     String: Clone,
-   | |__________________^ unexpected where clause
-LL |   (pub usize, usize);
-   |   ------------------ the struct body
-   |
+ at $DIR/recover-where-clause-before-tuple-struct-body-0.rs:13:1 to 15:19: unexpected where clause
+  on line 12, column 8: while parsing this tuple struct
+  on line 16: the struct body
 help: move the body before the where clause
-   |
-LL ~ struct _Demo(pub usize, usize)
-LL | where
-LL |     (): Sized,
-LL ~     String: Clone;
-   |
+ on line 12, column 12, add `(pub usize, usize)`
 
 error: aborting due to 2 previous errors
 

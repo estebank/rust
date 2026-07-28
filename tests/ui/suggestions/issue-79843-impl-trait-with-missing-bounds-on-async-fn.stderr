@@ -1,42 +1,20 @@
-error[E0277]: `<impl Foo as Foo>::Bar` cannot be sent between threads safely
-  --> $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:14:20
-   |
-LL |     assert_is_send(&bar);
-   |     -------------- ^^^^ `<impl Foo as Foo>::Bar` cannot be sent between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: the trait `Send` is not implemented for `<impl Foo as Foo>::Bar`
+error E0277: `<impl Foo as Foo>::Bar` cannot be sent between threads safely
+ at $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:14:20: `<impl Foo as Foo>::Bar` cannot be sent between threads safely
+  on line 14: required by a bound introduced by this call
+help: the trait `Send` is not implemented for `<impl Foo as Foo>::Bar`
 note: required by a bound in `assert_is_send`
-  --> $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:30:22
-   |
-LL | fn assert_is_send<T: Send>(_: &T) {}
-   |                      ^^^^ required by this bound in `assert_is_send`
+ at $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:30:22: required by this bound in `assert_is_send`
 help: introduce a type parameter with a trait bound instead of using `impl Trait`
-   |
-LL - async fn run(_: &(), foo: impl Foo) -> std::io::Result<()> {
-LL + async fn run<F: Foo>(_: &(), foo: F) -> std::io::Result<()> where <F as Foo>::Bar: Send {
-   |
+ on line 12, column 12, add `<F: Foo>`
 
-error[E0277]: `<impl Foo as Foo>::Bar` cannot be sent between threads safely
-  --> $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:24:20
-   |
-LL |     assert_is_send(&bar);
-   |     -------------- ^^^^ `<impl Foo as Foo>::Bar` cannot be sent between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: the trait `Send` is not implemented for `<impl Foo as Foo>::Bar`
+error E0277: `<impl Foo as Foo>::Bar` cannot be sent between threads safely
+ at $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:24:20: `<impl Foo as Foo>::Bar` cannot be sent between threads safely
+  on line 24: required by a bound introduced by this call
+help: the trait `Send` is not implemented for `<impl Foo as Foo>::Bar`
 note: required by a bound in `assert_is_send`
-  --> $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:30:22
-   |
-LL | fn assert_is_send<T: Send>(_: &T) {}
-   |                      ^^^^ required by this bound in `assert_is_send`
+ at $DIR/issue-79843-impl-trait-with-missing-bounds-on-async-fn.rs:30:22: required by this bound in `assert_is_send`
 help: introduce a type parameter with a trait bound instead of using `impl Trait`
-   |
-LL - async fn run2< >(_: &(), foo: impl Foo) -> std::io::Result<()> {
-LL + async fn run2<F: Foo>(_: &(), foo: F) -> std::io::Result<()> where <F as Foo>::Bar: Send {
-   |
+ on line 22, column 13, replace with `<F: Foo>`
 
 error: aborting due to 2 previous errors
 

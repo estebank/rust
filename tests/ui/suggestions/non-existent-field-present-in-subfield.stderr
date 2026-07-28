@@ -1,24 +1,12 @@
-error[E0609]: no field `c` on type `Foo`
-  --> $DIR/non-existent-field-present-in-subfield.rs:37:24
-   |
-LL |     let _test = &fooer.c;
-   |                        ^ unknown field
-   |
+error E0609: no field `c` on type `Foo`
+ at $DIR/non-existent-field-present-in-subfield.rs:37:24: unknown field
 help: one of the expressions' fields has a field of the same name
-   |
-LL |     let _test = &fooer.first.bar.c;
-   |                        ++++++++++
+ on line 37, column 23, add `first.bar.`
 
-error[E0609]: no field `test` on type `Foo`
-  --> $DIR/non-existent-field-present-in-subfield.rs:40:24
-   |
-LL |     let _test2 = fooer.test;
-   |                        ^^^^ unknown field
-   |
+error E0609: no field `test` on type `Foo`
+ at $DIR/non-existent-field-present-in-subfield.rs:40:24: unknown field
 help: one of the expressions' fields has a field of the same name
-   |
-LL |     let _test2 = fooer.first.bar.c.test;
-   |                        ++++++++++++
+ on line 40, column 23, add `first.bar.c.`
 
 error: aborting due to 2 previous errors
 

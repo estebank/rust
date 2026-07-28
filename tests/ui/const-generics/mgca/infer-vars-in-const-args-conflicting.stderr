@@ -1,20 +1,11 @@
-error[E0741]: `T` can't be used as a const parameter type
-  --> $DIR/infer-vars-in-const-args-conflicting.rs:21:23
-   |
-LL | struct PC<T, const N: T> {
-   |                       ^
+error E0741: `T` can't be used as a const parameter type
+ at $DIR/infer-vars-in-const-args-conflicting.rs:21:23
 
 error: type annotations needed for the literal
-  --> $DIR/infer-vars-in-const-args-conflicting.rs:15:16
-   |
-LL |     foo::<_, { 2 }>();
-   |                ^
+ at $DIR/infer-vars-in-const-args-conflicting.rs:15:16
 
 error: type annotations needed for the literal
-  --> $DIR/infer-vars-in-const-args-conflicting.rs:17:20
-   |
-LL |     let _: PC<_, { 42 }> = PC { a: 1, b: 1 };
-   |                    ^^
+ at $DIR/infer-vars-in-const-args-conflicting.rs:17:20
 
 error: aborting due to 3 previous errors
 

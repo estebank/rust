@@ -1,66 +1,36 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-110017-format-into-help-deletes-macro.rs:5:10
-   |
-LL |      Err(format!("error: {x}"))
-   |          ^^^^^^^^^^^^^^^^^^^^^ expected `Box<dyn Error>`, found `String`
-   |
-   = note: expected struct `Box<dyn std::error::Error>`
-              found struct `String`
+error E0308: mismatched types
+ at $DIR/issue-110017-format-into-help-deletes-macro.rs:5:10: expected `Box<dyn Error>`, found `String`
+note: expected struct `Box<dyn std::error::Error>`
+         found struct `String`
 help: call `Into::into` on this expression to convert `String` into `Box<dyn std::error::Error>`
-   |
-LL |      Err(format!("error: {x}").into())
-   |                               +++++++
+ on line 5, column 30, add `.into()`
 
-error[E0308]: mismatched types
-  --> $DIR/issue-110017-format-into-help-deletes-macro.rs:17:10
-   |
-LL |          format!("error: {}", $x)
-   |          ^^^^^^^^^^^^^^^^^^^^^^^^ expected `Box<dyn Error>`, found `String`
-...
-LL |      Err(outer!(x))
-   |          --------- in this macro invocation
-   |
-   = note: expected struct `Box<dyn std::error::Error>`
-              found struct `String`
-   = note: this error originates in the macro `format` which comes from the expansion of the macro `outer` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0308: mismatched types
+ at $DIR/issue-110017-format-into-help-deletes-macro.rs:17:10: expected `Box<dyn Error>`, found `String`
+  on line 23, column 10: in this macro invocation
+note: expected struct `Box<dyn std::error::Error>`
+         found struct `String`
+note: this error originates in the macro `format` which comes from the expansion of the macro `outer` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: call `Into::into` on this expression to convert `String` into `Box<dyn std::error::Error>`
-   |
-LL |          format!("error: {}", $x).into()
-   |                                  +++++++
+ on line 17, column 33, add `.into()`
 
-error[E0308]: mismatched types
-  --> $DIR/issue-110017-format-into-help-deletes-macro.rs:35:18
-   |
-LL |              Err(format!("error: {x}"))
-   |                  ^^^^^^^^^^^^^^^^^^^^^ expected `Box<dyn Error>`, found `String`
-...
-LL |  entire_fn_outer!();
-   |  ------------------ in this macro invocation
-   |
-   = note: expected struct `Box<dyn std::error::Error>`
-              found struct `String`
-   = note: this error originates in the macro `format` which comes from the expansion of the macro `entire_fn_outer` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0308: mismatched types
+ at $DIR/issue-110017-format-into-help-deletes-macro.rs:35:18: expected `Box<dyn Error>`, found `String`
+  on line 41: in this macro invocation
+note: expected struct `Box<dyn std::error::Error>`
+         found struct `String`
+note: this error originates in the macro `format` which comes from the expansion of the macro `entire_fn_outer` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: call `Into::into` on this expression to convert `String` into `Box<dyn std::error::Error>`
-   |
-LL |              Err(format!("error: {x}").into())
-   |                                       +++++++
+ on line 35, column 38, add `.into()`
 
-error[E0308]: mismatched types
-  --> $DIR/issue-110017-format-into-help-deletes-macro.rs:45:13
-   |
-LL |         Err(format!("error: {}", $x))
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^ expected `Box<dyn Error>`, found `String`
-...
-LL |     nontrivial!(x)
-   |     -------------- in this macro invocation
-   |
-   = note: expected struct `Box<dyn std::error::Error>`
-              found struct `String`
-   = note: this error originates in the macro `format` which comes from the expansion of the macro `nontrivial` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0308: mismatched types
+ at $DIR/issue-110017-format-into-help-deletes-macro.rs:45:13: expected `Box<dyn Error>`, found `String`
+  on line 51: in this macro invocation
+note: expected struct `Box<dyn std::error::Error>`
+         found struct `String`
+note: this error originates in the macro `format` which comes from the expansion of the macro `nontrivial` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: call `Into::into` on this expression to convert `String` into `Box<dyn std::error::Error>`
-   |
-LL |         Err(format!("error: {}", $x).into())
-   |                                     +++++++
+ on line 45, column 36, add `.into()`
 
 error: aborting due to 4 previous errors
 

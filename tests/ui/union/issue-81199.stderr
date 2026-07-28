@@ -1,31 +1,16 @@
-error[E0740]: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
-  --> $DIR/issue-81199.rs:5:5
-   |
-LL |     components: PtrComponents<T>,
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
+error E0740: field must implement `Copy` or be wrapped in `ManuallyDrop<...>` to be used in a union
+ at $DIR/issue-81199.rs:5:5
+note: union fields must not have drop side-effects, which is currently enforced via either `Copy` or `ManuallyDrop<...>`
 help: wrap the field type in `ManuallyDrop<...>`
-   |
-LL |     components: std::mem::ManuallyDrop<PtrComponents<T>>,
-   |                 +++++++++++++++++++++++                +
+ on line 5, column 16, add `std::mem::ManuallyDrop<`
 
-error[E0277]: the trait bound `T: Pointee` is not satisfied
-  --> $DIR/issue-81199.rs:5:17
-   |
-LL |     components: PtrComponents<T>,
-   |                 ^^^^^^^^^^^^^^^^ the trait `Pointee` is not implemented for `T`
-   |
-   = note: `T` implements similarly named trait `std::ptr::Pointee`, but not `Pointee`
+error E0277: the trait bound `T: Pointee` is not satisfied
+ at $DIR/issue-81199.rs:5:17: the trait `Pointee` is not implemented for `T`
+note: `T` implements similarly named trait `std::ptr::Pointee`, but not `Pointee`
 note: required by a bound in `PtrComponents`
-  --> $DIR/issue-81199.rs:11:25
-   |
-LL | struct PtrComponents<T: Pointee + ?Sized> {
-   |                         ^^^^^^^ required by this bound in `PtrComponents`
+ at $DIR/issue-81199.rs:11:25: required by this bound in `PtrComponents`
 help: consider further restricting type parameter `T` with trait `Pointee`
-   |
-LL | union PtrRepr<T: ?Sized + Pointee> {
-   |                         +++++++++
+ on line 2, column 23, add ` + Pointee`
 
 error: aborting due to 2 previous errors
 

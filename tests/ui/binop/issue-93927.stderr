@@ -1,15 +1,9 @@
-error[E0369]: binary operation `==` cannot be applied to type `MyType<T>`
-  --> $DIR/issue-93927.rs:14:9
-   |
-LL |     val == val
-   |     --- ^^ --- MyType<T>
-   |     |
-   |     MyType<T>
-   |
+error E0369: binary operation `==` cannot be applied to type `MyType<T>`
+ at $DIR/issue-93927.rs:14:9
+  on line 14: MyType<T>
+  on line 14, column 12: MyType<T>
 help: consider further restricting type parameter `T` with trait `Eq`
-   |
-LL | fn cond<T: PartialEq + std::cmp::Eq>(val: MyType<T>) -> bool {
-   |                      ++++++++++++++
+ on line 13, column 20, add ` + std::cmp::Eq`
 
 error: aborting due to 1 previous error
 

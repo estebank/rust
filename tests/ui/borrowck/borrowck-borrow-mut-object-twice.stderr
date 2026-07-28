@@ -1,12 +1,7 @@
-error[E0499]: cannot borrow `*x` as mutable more than once at a time
-  --> $DIR/borrowck-borrow-mut-object-twice.rs:13:5
-   |
-LL |     let y = x.f1();
-   |             - first mutable borrow occurs here
-LL |     x.f2();
-   |     ^ second mutable borrow occurs here
-LL |     y.use_ref();
-   |     - first borrow later used here
+error E0499: cannot borrow `*x` as mutable more than once at a time
+ at $DIR/borrowck-borrow-mut-object-twice.rs:13:5: second mutable borrow occurs here
+  on line 12, column 13: first mutable borrow occurs here
+  on line 14: first borrow later used here
 
 error: aborting due to 1 previous error
 

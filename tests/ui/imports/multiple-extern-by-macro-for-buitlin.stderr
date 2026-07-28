@@ -1,21 +1,11 @@
-error[E0259]: the name `core` is defined multiple times
-  --> $DIR/multiple-extern-by-macro-for-buitlin.rs:9:9
-   |
-LL | extern crate core;
-   | ------------------ previous import of the extern crate `core` here
-...
-LL |         extern crate std as core;
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^ `core` reimported here
-...
-LL | m!();
-   | ---- in this macro invocation
-   |
-   = note: `core` must be defined only once in the type namespace of this module
-   = note: this error originates in the macro `m` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0259: the name `core` is defined multiple times
+ at $DIR/multiple-extern-by-macro-for-buitlin.rs:9:9: `core` reimported here
+  on line 5: previous import of the extern crate `core` here
+  on line 14: in this macro invocation
+note: `core` must be defined only once in the type namespace of this module
+note: this error originates in the macro `m` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: you can use `as` to change the binding name of the import
-   |
-LL |         extern crate std as other_core;
-   |                             ++++++
+ on line 9, replace with `extern crate std as other_core;`
 
 error: aborting due to 1 previous error
 

@@ -1,24 +1,13 @@
-error[E0044]: foreign items may not have type parameters
-  --> $DIR/generic-extern.rs:4:5
-   |
-LL |     fn foo<T>();
-   |     ^^^^^^^^^^^^ can't have type parameters
-   |
-   = help: replace the type parameters with concrete types like `u32`
+error E0044: foreign items may not have type parameters
+ at $DIR/generic-extern.rs:4:5: can't have type parameters
+help: replace the type parameters with concrete types like `u32`
 
 error: defaults for generic parameters are not allowed here
-  --> $DIR/generic-extern.rs:9:12
-   |
-LL |     fn bar<T = ()>();
-   |            ^^^^^^
+ at $DIR/generic-extern.rs:9:12
 
-error[E0044]: foreign items may not have type parameters
-  --> $DIR/generic-extern.rs:9:5
-   |
-LL |     fn bar<T = ()>();
-   |     ^^^^^^^^^^^^^^^^^ can't have type parameters
-   |
-   = help: replace the type parameters with concrete types like `u32`
+error E0044: foreign items may not have type parameters
+ at $DIR/generic-extern.rs:9:5: can't have type parameters
+help: replace the type parameters with concrete types like `u32`
 
 error: aborting due to 3 previous errors
 

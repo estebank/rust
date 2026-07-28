@@ -1,12 +1,7 @@
 error: this file contains an unclosed delimiter
-  --> $DIR/issue-91268.rs:6:12
-   |
-LL | fn main() {
-   |           - unclosed delimiter
-LL |     0: u8(ţ
-   |          - ^
-   |          |
-   |          unclosed delimiter
+ at $DIR/issue-91268.rs:6:12
+  on line 5, column 11: unclosed delimiter
+  on line 6, column 10: unclosed delimiter
 
 error: aborting due to 1 previous error
 

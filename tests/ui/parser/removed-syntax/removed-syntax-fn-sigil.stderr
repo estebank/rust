@@ -1,21 +1,11 @@
 error: missing parameters for function definition
-  --> $DIR/removed-syntax-fn-sigil.rs:2:14
-   |
-LL |     let x: fn~() = || ();
-   |              ^
-   |
+ at $DIR/removed-syntax-fn-sigil.rs:2:14
 help: add a parameter list
-   |
-LL |     let x: fn()~() = || ();
-   |              ++
+ on line 2, column 13, add `()`
 
 error: expected one of `->`, `;`, or `=`, found `~`
-  --> $DIR/removed-syntax-fn-sigil.rs:2:14
-   |
-LL |     let x: fn~() = || ();
-   |          -   ^ expected one of `->`, `;`, or `=`
-   |          |
-   |          while parsing the type for `x`
+ at $DIR/removed-syntax-fn-sigil.rs:2:14: expected one of `->`, `;`, or `=`
+  on line 2, column 10: while parsing the type for `x`
 
 error: aborting due to 2 previous errors
 

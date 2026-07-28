@@ -1,8 +1,5 @@
-error[E0599]: no method named `push` found for type `!` in the current scope
-  --> $DIR/never-type-method-call-15207.rs:5:15
-   |
-LL |         break.push(1)
-   |               ^^^^ method not found in `!`
+error E0599: no method named `push` found for type `!` in the current scope
+ at $DIR/never-type-method-call-15207.rs:5:15: method not found in `!`
 
 error: aborting due to 1 previous error
 

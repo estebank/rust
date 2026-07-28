@@ -1,143 +1,72 @@
 error: expected one of `:`, `@`, or `|`, found `)`
-  --> $DIR/anon-params-denied-2018.rs:6:15
-   |
-LL |     fn foo(i32);
-   |               ^ expected one of `:`, `@`, or `|`
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:6:15: expected one of `:`, `@`, or `|`
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: if this is a `self` type, give it a parameter name
-   |
-LL |     fn foo(self: i32);
-   |            +++++
+ on line 6, column 11, add `self: `
 help: if this is a parameter name, give it a type
-   |
-LL |     fn foo(i32: TypeName);
-   |               ++++++++++
+ on line 6, column 14, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL |     fn foo(_: i32);
-   |            ++
+ on line 6, column 11, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `)`
-  --> $DIR/anon-params-denied-2018.rs:9:29
-   |
-LL |     fn foo_with_ref(&mut i32);
-   |                             ^ expected one of `:`, `@`, or `|`
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:9:29: expected one of `:`, `@`, or `|`
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: if this is a `self` type, give it a parameter name
-   |
-LL |     fn foo_with_ref(self: &mut i32);
-   |                     +++++
+ on line 9, column 20, add `self: `
 help: if this is a parameter name, give it a type
-   |
-LL -     fn foo_with_ref(&mut i32);
-LL +     fn foo_with_ref(i32: &mut TypeName);
-   |
+ on line 9, column 20, replace with `i32: &mut TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL |     fn foo_with_ref(_: &mut i32);
-   |                     ++
+ on line 9, column 20, add `_: `
 
 error: expected one of `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/anon-params-denied-2018.rs:12:47
-   |
-LL |     fn foo_with_qualified_path(<Bar as T>::Baz);
-   |                                               ^ expected one of 8 possible tokens
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:12:47: expected one of 8 possible tokens
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: explicitly ignore the parameter name
-   |
-LL |     fn foo_with_qualified_path(_: <Bar as T>::Baz);
-   |                                ++
+ on line 12, column 31, add `_: `
 
 error: expected one of `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/anon-params-denied-2018.rs:15:56
-   |
-LL |     fn foo_with_qualified_path_and_ref(&<Bar as T>::Baz);
-   |                                                        ^ expected one of 8 possible tokens
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:15:56: expected one of 8 possible tokens
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: explicitly ignore the parameter name
-   |
-LL |     fn foo_with_qualified_path_and_ref(_: &<Bar as T>::Baz);
-   |                                        ++
+ on line 15, column 39, add `_: `
 
 error: expected one of `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `,`
-  --> $DIR/anon-params-denied-2018.rs:18:57
-   |
-LL |     fn foo_with_multiple_qualified_paths(<Bar as T>::Baz, <Bar as T>::Baz);
-   |                                                         ^ expected one of 8 possible tokens
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:18:57: expected one of 8 possible tokens
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: explicitly ignore the parameter name
-   |
-LL |     fn foo_with_multiple_qualified_paths(_: <Bar as T>::Baz, <Bar as T>::Baz);
-   |                                          ++
+ on line 18, column 41, add `_: `
 
 error: expected one of `(`, `...`, `..=`, `..`, `::`, `:`, `{`, or `|`, found `)`
-  --> $DIR/anon-params-denied-2018.rs:18:74
-   |
-LL |     fn foo_with_multiple_qualified_paths(<Bar as T>::Baz, <Bar as T>::Baz);
-   |                                                                          ^ expected one of 8 possible tokens
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:18:74: expected one of 8 possible tokens
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: explicitly ignore the parameter name
-   |
-LL |     fn foo_with_multiple_qualified_paths(<Bar as T>::Baz, _: <Bar as T>::Baz);
-   |                                                           ++
+ on line 18, column 58, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `,`
-  --> $DIR/anon-params-denied-2018.rs:22:36
-   |
-LL |     fn bar_with_default_impl(String, String) {}
-   |                                    ^ expected one of `:`, `@`, or `|`
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:22:36: expected one of `:`, `@`, or `|`
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: if this is a `self` type, give it a parameter name
-   |
-LL |     fn bar_with_default_impl(self: String, String) {}
-   |                              +++++
+ on line 22, column 29, add `self: `
 help: if this is a parameter name, give it a type
-   |
-LL |     fn bar_with_default_impl(String: TypeName, String) {}
-   |                                    ++++++++++
+ on line 22, column 35, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL |     fn bar_with_default_impl(_: String, String) {}
-   |                              ++
+ on line 22, column 29, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `)`
-  --> $DIR/anon-params-denied-2018.rs:22:44
-   |
-LL |     fn bar_with_default_impl(String, String) {}
-   |                                            ^ expected one of `:`, `@`, or `|`
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:22:44: expected one of `:`, `@`, or `|`
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: if this is a parameter name, give it a type
-   |
-LL |     fn bar_with_default_impl(String, String: TypeName) {}
-   |                                            ++++++++++
+ on line 22, column 43, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL |     fn bar_with_default_impl(String, _: String) {}
-   |                                      ++
+ on line 22, column 37, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `,`
-  --> $DIR/anon-params-denied-2018.rs:27:22
-   |
-LL |     fn baz(a:usize, b, c: usize) -> usize {
-   |                      ^ expected one of `:`, `@`, or `|`
-   |
-   = note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
+ at $DIR/anon-params-denied-2018.rs:27:22: expected one of `:`, `@`, or `|`
+note: anonymous parameters are removed in the 2018 edition (see RFC 1685)
 help: if this is a parameter name, give it a type
-   |
-LL |     fn baz(a:usize, b: TypeName, c: usize) -> usize {
-   |                      ++++++++++
+ on line 27, column 21, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL |     fn baz(a:usize, _: b, c: usize) -> usize {
-   |                     ++
+ on line 27, column 20, add `_: `
 
 error: aborting due to 9 previous errors
 

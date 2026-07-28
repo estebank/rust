@@ -1,34 +1,20 @@
 error: functions cannot be both `async` and C-variadic
-  --> $DIR/not-async.rs:4:1
-   |
-LL | async unsafe extern "C" fn fn_cannot_be_async(x: isize, _: ...) {}
-   | ^^^^^ `async` because of this                           ^^^^^^ C-variadic because of this
+ at $DIR/not-async.rs:4:1: `async` because of this
+  on line 4, column 57: C-variadic because of this
 
 error: functions cannot be both `async` and C-variadic
-  --> $DIR/not-async.rs:11:5
-   |
-LL |     async unsafe extern "C" fn method_cannot_be_async(x: isize, _: ...) {}
-   |     ^^^^^ `async` because of this                               ^^^^^^ C-variadic because of this
+ at $DIR/not-async.rs:11:5: `async` because of this
+  on line 11, column 65: C-variadic because of this
 
-error[E0700]: hidden type for `impl Future<Output = ()>` captures lifetime that does not appear in bounds
-  --> $DIR/not-async.rs:4:65
-   |
-LL | async unsafe extern "C" fn fn_cannot_be_async(x: isize, _: ...) {}
-   |                                                                -^^
-   |                                                                |
-   |                                                                opaque type defined here
-   |
-   = note: hidden type `{async fn body of fn_cannot_be_async()}` captures lifetime `'_`
+error E0700: hidden type for `impl Future<Output = ()>` captures lifetime that does not appear in bounds
+ at $DIR/not-async.rs:4:65
+  on line 4, column 64: opaque type defined here
+note: hidden type `{async fn body of fn_cannot_be_async()}` captures lifetime `'_`
 
-error[E0700]: hidden type for `impl Future<Output = ()>` captures lifetime that does not appear in bounds
-  --> $DIR/not-async.rs:11:73
-   |
-LL |     async unsafe extern "C" fn method_cannot_be_async(x: isize, _: ...) {}
-   |                                                                        -^^
-   |                                                                        |
-   |                                                                        opaque type defined here
-   |
-   = note: hidden type `{async fn body of S::method_cannot_be_async()}` captures lifetime `'_`
+error E0700: hidden type for `impl Future<Output = ()>` captures lifetime that does not appear in bounds
+ at $DIR/not-async.rs:11:73
+  on line 11, column 72: opaque type defined here
+note: hidden type `{async fn body of S::method_cannot_be_async()}` captures lifetime `'_`
 
 error: aborting due to 4 previous errors
 

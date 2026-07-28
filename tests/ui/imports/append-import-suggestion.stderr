@@ -1,20 +1,10 @@
-error[E0603]: module `sub_mod` is private
-  --> $DIR/append-import-suggestion.rs:14:12
-   |
-LL | use mod2::{sub_mod::TraitA};
-   |            ^^^^^^^ private module
-   |
+error E0603: module `sub_mod` is private
+ at $DIR/append-import-suggestion.rs:14:12: private module
 help: consider importing this trait instead:
       mod1::TraitA
-  --> $DIR/append-import-suggestion.rs:14:12
-   |
-LL | use mod2::{sub_mod::TraitA};
-   |            ^^^^^^^^^^^^^^^
+ at $DIR/append-import-suggestion.rs:14:12
 note: the module `sub_mod` is defined here
-  --> $DIR/append-import-suggestion.rs:9:5
-   |
-LL |     mod sub_mod {
-   |     ^^^^^^^^^^^
+ at $DIR/append-import-suggestion.rs:9:5
 
 error: aborting due to 1 previous error
 

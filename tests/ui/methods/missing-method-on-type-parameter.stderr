@@ -1,18 +1,11 @@
-error[E0599]: no associated function or constant named `try_from` found for type parameter `T` in the current scope
-  --> $DIR/missing-method-on-type-parameter.rs:4:8
-   |
-LL | fn x<T: Copy>() {
-   |      - associated function or constant `try_from` not found for this type parameter
-LL |     T::try_from();
-   |        ^^^^^^^^ associated function or constant not found in `T`
-   |
-   = help: items from traits can only be used if the trait is in scope
+error E0599: no associated function or constant named `try_from` found for type parameter `T` in the current scope
+ at $DIR/missing-method-on-type-parameter.rs:4:8: associated function or constant not found in `T`
+  on line 3, column 6: associated function or constant `try_from` not found for this type parameter
+help: items from traits can only be used if the trait is in scope
 help: there is an associated function `from` with a similar name
-  --> $SRC_DIR/core/src/convert/mod.rs:LL:COL
+ at $SRC_DIR/core/src/convert/mod.rs:LL:COL
 help: trait `TryFrom` which provides `try_from` is implemented but not in scope; perhaps you want to import it
-   |
-LL + use std::convert::TryFrom;
-   |
+ on line 3, column 1, add `use std::convert::TryFrom;`
 
 error: aborting due to 1 previous error
 

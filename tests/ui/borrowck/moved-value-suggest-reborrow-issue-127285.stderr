@@ -1,17 +1,9 @@
-error[E0382]: use of moved value: `self`
-  --> $DIR/moved-value-suggest-reborrow-issue-127285.rs:10:9
-   |
-LL |     fn f(&mut self) {
-   |          --------- move occurs because `self` has type `&mut X`, which does not implement the `Copy` trait
-LL |         generic(self);
-   |                 ---- value moved here
-LL |         self.0 += 1;
-   |         ^^^^^^^^^^^ value used here after move
-   |
+error E0382: use of moved value: `self`
+ at $DIR/moved-value-suggest-reborrow-issue-127285.rs:10:9: value used here after move
+  on line 8, column 10: move occurs because `self` has type `&mut X`, which does not implement the `Copy` trait
+  on line 9, column 17: value moved here
 help: consider creating a fresh reborrow of `self` here
-   |
-LL |         generic(&mut *self);
-   |                 ++++++
+ on line 9, column 16, add `&mut *`
 
 error: aborting due to 1 previous error
 

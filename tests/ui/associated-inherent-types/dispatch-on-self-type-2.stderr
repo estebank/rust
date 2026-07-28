@@ -1,18 +1,10 @@
-error[E0308]: mismatched types
-  --> $DIR/dispatch-on-self-type-2.rs:15:44
-   |
-LL |     let _: Parameterized<(), ()>::Output = String::new();
-   |            -----------------------------   ^^^^^^^^^^^^^ expected `bool`, found `String`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/dispatch-on-self-type-2.rs:15:44: expected `bool`, found `String`
+  on line 15, column 12: expected due to this
 
-error[E0308]: mismatched types
-  --> $DIR/dispatch-on-self-type-2.rs:16:47
-   |
-LL |     let _: Parameterized<bool, u32>::Result = ();
-   |            --------------------------------   ^^ expected `u32`, found `()`
-   |            |
-   |            expected due to this
+error E0308: mismatched types
+ at $DIR/dispatch-on-self-type-2.rs:16:47: expected `u32`, found `()`
+  on line 16, column 12: expected due to this
 
 error: aborting due to 2 previous errors
 

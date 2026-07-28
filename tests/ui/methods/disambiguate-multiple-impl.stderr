@@ -1,67 +1,34 @@
-error[E0034]: multiple applicable items in scope
-  --> $DIR/disambiguate-multiple-impl.rs:29:8
-   |
-LL |     S::foo(&s);
-   |        ^^^ multiple `foo` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/disambiguate-multiple-impl.rs:29:8: multiple `foo` found
 note: candidate #1 is defined in an impl of the trait `A` for the type `S`
-  --> $DIR/disambiguate-multiple-impl.rs:18:5
-   |
-LL |     fn foo(&self) {}
-   |     ^^^^^^^^^^^^^
+ at $DIR/disambiguate-multiple-impl.rs:18:5
 note: candidate #2 is defined in an impl of the trait `B` for the type `S`
-  --> $DIR/disambiguate-multiple-impl.rs:24:5
-   |
-LL |     fn foo(&self) {}
-   |     ^^^^^^^^^^^^^
+ at $DIR/disambiguate-multiple-impl.rs:24:5
 help: use fully-qualified syntax to disambiguate
-   |
-LL -     S::foo(&s);
-LL +     A::foo(&s);
-   |
-LL -     S::foo(&s);
-LL +     B::foo(&s);
-   |
+ on line 29, column 4, replace with one of
+  A::
+  B::
 
-error[E0223]: ambiguous associated type
-  --> $DIR/disambiguate-multiple-impl.rs:32:12
-   |
-LL |     let _: S::Type = ();
-   |            ^^^^^^^
-   |
+
+error E0223: ambiguous associated type
+ at $DIR/disambiguate-multiple-impl.rs:32:12
 help: use fully-qualified syntax
-   |
-LL -     let _: S::Type = ();
-LL +     let _: <S as A>::Type = ();
-   |
-LL -     let _: S::Type = ();
-LL +     let _: <S as B>::Type = ();
-   |
+ on line 32, column 11, replace with one of
+  <S as A>::
+  <S as B>::
 
-error[E0034]: multiple applicable items in scope
-  --> $DIR/disambiguate-multiple-impl.rs:34:16
-   |
-LL |     let _ = S::CONST;
-   |                ^^^^^ multiple `CONST` found
-   |
+
+error E0034: multiple applicable items in scope
+ at $DIR/disambiguate-multiple-impl.rs:34:16: multiple `CONST` found
 note: candidate #1 is defined in an impl of the trait `A` for the type `S`
-  --> $DIR/disambiguate-multiple-impl.rs:17:5
-   |
-LL |     const CONST: usize = 1;
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/disambiguate-multiple-impl.rs:17:5
 note: candidate #2 is defined in an impl of the trait `B` for the type `S`
-  --> $DIR/disambiguate-multiple-impl.rs:23:5
-   |
-LL |     const CONST: usize = 2;
-   |     ^^^^^^^^^^^^^^^^^^
+ at $DIR/disambiguate-multiple-impl.rs:23:5
 help: use fully-qualified syntax to disambiguate
-   |
-LL -     let _ = S::CONST;
-LL +     let _ = <S as A>::CONST;
-   |
-LL -     let _ = S::CONST;
-LL +     let _ = <S as B>::CONST;
-   |
+ on line 34, column 12, replace with one of
+  <S as A>::
+  <S as B>::
+
 
 error: aborting due to 3 previous errors
 

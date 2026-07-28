@@ -1,10 +1,6 @@
-error[E0560]: struct `BuildData` has no field named `bar`
-  --> $DIR/struct-fields-too-many.rs:8:9
-   |
-LL |         bar: 0
-   |         ^^^ `BuildData` does not have this field
-   |
-   = note: all struct fields are already assigned
+error E0560: struct `BuildData` has no field named `bar`
+ at $DIR/struct-fields-too-many.rs:8:9: `BuildData` does not have this field
+note: all struct fields are already assigned
 
 error: aborting due to 1 previous error
 

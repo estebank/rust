@@ -1,20 +1,10 @@
 error: hidden lifetime parameters in types are deprecated
-  --> $DIR/elided-lint-in-mod.rs:7:24
-   |
-LL |     fn test2(_: super::Foo) {}
-   |                 -------^^^
-   |                 |
-   |                 expected lifetime parameter
-   |
+ at $DIR/elided-lint-in-mod.rs:7:24
+  on line 7, column 17: expected lifetime parameter
 note: the lint level is defined here
-  --> $DIR/elided-lint-in-mod.rs:5:8
-   |
-LL | #[deny(elided_lifetimes_in_paths)]
-   |        ^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/elided-lint-in-mod.rs:5:8
 help: indicate the anonymous lifetime
-   |
-LL |     fn test2(_: super::Foo<'_>) {}
-   |                           ++++
+ on line 7, column 26, add `<'_>`
 
 error: aborting due to 1 previous error
 

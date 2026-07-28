@@ -1,8 +1,5 @@
-error[E0572]: return statement outside of function body
-  --> $DIR/issue-86721-return-expr-ice.rs:9:22
-   |
-LL |     const U: usize = return;
-   |                      ^^^^^^
+error E0572: return statement outside of function body
+ at $DIR/issue-86721-return-expr-ice.rs:9:22
 
 error: aborting due to 1 previous error
 

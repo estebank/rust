@@ -1,24 +1,12 @@
 error: expected one of `extern`, `fn`, `safe`, or `unsafe`, found keyword `const`
-  --> $DIR/no-async-const.rs:4:11
-   |
-LL | pub async const fn x() {}
-   |           ^^^^^ expected one of `extern`, `fn`, `safe`, or `unsafe`
-   |
-   = note: keyword order for functions declaration is `pub`, `default`, `const`, `async`, `unsafe`, `extern`
+ at $DIR/no-async-const.rs:4:11: expected one of `extern`, `fn`, `safe`, or `unsafe`
+note: keyword order for functions declaration is `pub`, `default`, `const`, `async`, `unsafe`, `extern`
 help: `const` must come before `async`
-   |
-LL - pub async const fn x() {}
-LL + pub const async fn x() {}
-   |
+ on line 4, column 4, replace with `const async`
 
 error: functions cannot be both `const` and `async`
-  --> $DIR/no-async-const.rs:4:5
-   |
-LL | pub async const fn x() {}
-   | ----^^^^^-^^^^^----------
-   |     |     |
-   |     |     `const` because of this
-   |     `async` because of this
+ at $DIR/no-async-const.rs:4:5: `async` because of this
+  on line 4, column 11: `const` because of this
 
 error: aborting due to 2 previous errors
 

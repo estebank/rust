@@ -1,8 +1,5 @@
-error[E0316]: nested quantification of lifetimes
-  --> $DIR/where-for-self.rs:15:26
-   |
-LL |     where for<'a> &'a T: for<'b> Bar<'b>
-   |                          ^^^^^^^^^^^^^^^
+error E0316: nested quantification of lifetimes
+ at $DIR/where-for-self.rs:15:26
 
 error: aborting due to 1 previous error
 

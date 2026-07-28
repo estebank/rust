@@ -1,11 +1,6 @@
 error: mismatched closing delimiter: `)`
-  --> $DIR/parser-recovery-2.rs:4:14
-   |
-LL |     fn bar() {
-   |              ^ unclosed delimiter
-LL |         let x = foo();
-LL |     )
-   |     ^ mismatched closing delimiter
+ at $DIR/parser-recovery-2.rs:4:14: unclosed delimiter
+  on line 6: mismatched closing delimiter
 
 error: aborting due to 1 previous error
 

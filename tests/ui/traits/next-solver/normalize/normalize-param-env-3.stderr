@@ -1,24 +1,9 @@
-error[E0277]: the trait bound `C: Channel<()>` is not satisfied
-  --> $DIR/normalize-param-env-3.rs:25:5
-   |
-LL | /     fn send<C>()
-LL | |
-LL | |
-LL | |     where
-LL | |         C: Channel<Self::Msg>,
-   | |______________________________^ the trait `Channel<()>` is not implemented for `C`
+error E0277: the trait bound `C: Channel<()>` is not satisfied
+ at $DIR/normalize-param-env-3.rs:25:5 to 29:31: the trait `Channel<()>` is not implemented for `C`
 
-error[E0277]: the trait bound `C: Channel<()>` is not satisfied
-  --> $DIR/normalize-param-env-3.rs:25:5
-   |
-LL | /     fn send<C>()
-LL | |
-LL | |
-LL | |     where
-LL | |         C: Channel<Self::Msg>,
-   | |______________________________^ the trait `Channel<()>` is not implemented for `C`
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0277: the trait bound `C: Channel<()>` is not satisfied
+ at $DIR/normalize-param-env-3.rs:25:5 to 29:31: the trait `Channel<()>` is not implemented for `C`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: aborting due to 2 previous errors
 

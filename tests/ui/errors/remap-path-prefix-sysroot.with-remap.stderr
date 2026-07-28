@@ -1,16 +1,8 @@
-error[E0507]: cannot move out of `self.thread` which is behind a mutable reference
-  --> remapped-tests-ui/errors/remap-path-prefix-sysroot.rs:LL:COL
-   |
-LL |         self.thread.join().unwrap();
-   |         ^^^^^^^^^^^ ------ `self.thread` moved due to this method call
-   |         |
-   |         move occurs because `self.thread` has type `JoinHandle<()>`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of `self.thread` which is behind a mutable reference
+ at remapped-tests-ui/errors/remap-path-prefix-sysroot.rs:LL:COL: move occurs because `self.thread` has type `JoinHandle<()>`, which does not implement the `Copy` trait
+  on line 19, column 21: `self.thread` moved due to this method call
 note: `JoinHandle::<T>::join` takes ownership of the receiver `self`, which moves `self.thread`
-  --> remapped/library/std/src/thread/join_handle.rs:LL:COL
-   |
-LL |     pub fn join(self) -> Result<T> {
-   |                 ^^^^
+ at remapped/library/std/src/thread/join_handle.rs:LL:COL
 
 error: aborting due to 1 previous error
 

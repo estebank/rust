@@ -1,31 +1,14 @@
-error[E0599]: my message
-  --> $DIR/custom-on-unimplemented-diagnostic.rs:19:7
-   |
-LL | struct B;
-   | -------- method `request` not found for this struct because it doesn't satisfy `B: ProviderExt` or `B: ProviderLt`
-...
-LL |     B.request();
-   |       ^^^^^^^ my label
-   |
+error E0599: my message
+ at $DIR/custom-on-unimplemented-diagnostic.rs:19:7: my label
+  on line 16: method `request` not found for this struct because it doesn't satisfy `B: ProviderExt` or `B: ProviderLt`
 note: trait bound `B: ProviderLt` was not satisfied
-  --> $DIR/custom-on-unimplemented-diagnostic.rs:14:18
-   |
-LL | impl<T: ?Sized + ProviderLt> ProviderExt for T {}
-   |                  ^^^^^^^^^^  -----------     -
-   |                  |
-   |                  unsatisfied trait bound introduced here
-   = note: my note
+ at $DIR/custom-on-unimplemented-diagnostic.rs:14:18: unsatisfied trait bound introduced here
+note: my note
 note: the trait `ProviderLt` must be implemented
-  --> $DIR/custom-on-unimplemented-diagnostic.rs:6:1
-   |
-LL | pub trait ProviderLt {}
-   | ^^^^^^^^^^^^^^^^^^^^
-   = help: items from traits can only be used if the trait is implemented and in scope
+ at $DIR/custom-on-unimplemented-diagnostic.rs:6:1
+help: items from traits can only be used if the trait is implemented and in scope
 note: `ProviderExt` defines an item `request`, perhaps you need to implement it
-  --> $DIR/custom-on-unimplemented-diagnostic.rs:8:1
-   |
-LL | pub trait ProviderExt {
-   | ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/custom-on-unimplemented-diagnostic.rs:8:1
 
 error: aborting due to 1 previous error
 

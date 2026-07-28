@@ -1,30 +1,15 @@
 error: functions in `extern` blocks cannot have `const` qualifier
-  --> $DIR/no-const-fn-in-extern-block.rs:2:5
-   |
-LL | extern "C" {
-   | ---------- in this `extern` block
-LL |     const fn foo();
-   |     ^^^^^ help: remove the `const` qualifier
+ at $DIR/no-const-fn-in-extern-block.rs:2:5: help: remove the `const` qualifier
+  on line 1: in this `extern` block
 
 error: functions in `extern` blocks cannot have `const` qualifier
-  --> $DIR/no-const-fn-in-extern-block.rs:4:5
-   |
-LL | extern "C" {
-   | ---------- in this `extern` block
-...
-LL |     const unsafe fn bar();
-   |     ^^^^^ help: remove the `const` qualifier
+ at $DIR/no-const-fn-in-extern-block.rs:4:5: help: remove the `const` qualifier
+  on line 1: in this `extern` block
 
 error: items in `extern` blocks without an `unsafe` qualifier cannot have safety qualifiers
-  --> $DIR/no-const-fn-in-extern-block.rs:4:5
-   |
-LL |     const unsafe fn bar();
-   |     ^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/no-const-fn-in-extern-block.rs:4:5
 help: add `unsafe` to this `extern` block
-   |
-LL | unsafe extern "C" {
-   | ++++++
+ on line 1, column 1, add `unsafe `
 
 error: aborting due to 3 previous errors
 

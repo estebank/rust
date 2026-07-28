@@ -1,10 +1,7 @@
-error[E0369]: cannot add `()` to `()`
-  --> $DIR/for-loop-type-error.rs:4:16
-   |
-LL |     let x = () + ();
-   |             -- ^ -- ()
-   |             |
-   |             ()
+error E0369: cannot add `()` to `()`
+ at $DIR/for-loop-type-error.rs:4:16
+  on line 4, column 13: ()
+  on line 4, column 18: ()
 
 error: aborting due to 1 previous error
 

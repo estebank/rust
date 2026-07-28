@@ -1,13 +1,6 @@
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/remove-invalid-type-bound-suggest-issue-127555.rs:15:22
-   |
-LL | /     fn bar<F>(&mut self, func: F) -> impl std::future::Future<Output = ()> + Send
-LL | |     where
-LL | |         F: FnMut();
-   | |___________________- definition of `bar` from trait
-...
-LL |           F: FnMut() + Send,
-   |                        ^^^^ impl has extra requirement `F: Send`
+error E0276: impl has stricter requirements than trait
+ at $DIR/remove-invalid-type-bound-suggest-issue-127555.rs:15:22: impl has extra requirement `F: Send`
+  on line 5 to line 7: definition of `bar` from trait
 
 error: aborting due to 1 previous error
 

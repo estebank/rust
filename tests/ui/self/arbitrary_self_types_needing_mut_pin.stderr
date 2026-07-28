@@ -1,17 +1,8 @@
-error[E0599]: no method named `x` found for struct `S` in the current scope
-  --> $DIR/arbitrary_self_types_needing_mut_pin.rs:11:7
-   |
-LL | struct S;
-   | -------- method `x` not found for this struct
-...
-LL |     S.x();
-   |       ^ method not found in `S`
-   |
+error E0599: no method named `x` found for struct `S` in the current scope
+ at $DIR/arbitrary_self_types_needing_mut_pin.rs:11:7: method not found in `S`
+  on line 3: method `x` not found for this struct
 help: consider pinning the expression
-   |
-LL ~     let mut pinned = std::pin::pin!(S);
-LL ~     pinned.as_mut().x();
-   |
+ on line 11, column 4, add `let mut pinned = std::pin::pin!(`
 
 error: aborting due to 1 previous error
 

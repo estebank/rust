@@ -1,13 +1,7 @@
 error: expected identifier, found keyword `for`
-  --> $DIR/issue-57198.rs:6:8
-   |
-LL |     m::for();
-   |        ^^^ expected identifier, found keyword
-   |
+ at $DIR/issue-57198.rs:6:8: expected identifier, found keyword
 help: escape `for` to use it as an identifier
-   |
-LL |     m::r#for();
-   |        ++
+ on line 6, column 7, add `r#`
 
 error: aborting due to 1 previous error
 

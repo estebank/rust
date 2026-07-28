@@ -1,59 +1,27 @@
-error[E0533]: expected value, found struct variant `Alias::Braced`
-  --> $DIR/incorrect-variant-form-through-alias-caught.rs:8:5
-   |
-LL |     Alias::Braced;
-   |     ^^^^^^^^^^^^^ not a value
-   |
+error E0533: expected value, found struct variant `Alias::Braced`
+ at $DIR/incorrect-variant-form-through-alias-caught.rs:8:5: not a value
 help: you might have meant to create a new value of the struct
-   |
-LL |     Alias::Braced {};
-   |                   ++
+ on line 8, column 17, add ` {}`
 
-error[E0533]: expected unit struct, unit variant or constant, found struct variant `Alias::Braced`
-  --> $DIR/incorrect-variant-form-through-alias-caught.rs:10:9
-   |
-LL |     let Alias::Braced = panic!();
-   |         ^^^^^^^^^^^^^ not a unit struct, unit variant or constant
-   |
+error E0533: expected unit struct, unit variant or constant, found struct variant `Alias::Braced`
+ at $DIR/incorrect-variant-form-through-alias-caught.rs:10:9: not a unit struct, unit variant or constant
 help: use the struct variant pattern syntax
-   |
-LL |     let Alias::Braced {} = panic!();
-   |                       ++
+ on line 10, column 21, add ` {}`
 
-error[E0164]: expected tuple struct or tuple variant, found struct variant `Alias::Braced`
-  --> $DIR/incorrect-variant-form-through-alias-caught.rs:12:9
-   |
-LL |     let Alias::Braced(..) = panic!();
-   |         ^^^^^^^^^^^^^^^^^ not a tuple struct or tuple variant
-   |
+error E0164: expected tuple struct or tuple variant, found struct variant `Alias::Braced`
+ at $DIR/incorrect-variant-form-through-alias-caught.rs:12:9: not a tuple struct or tuple variant
 help: use the struct variant pattern syntax
-   |
-LL -     let Alias::Braced(..) = panic!();
-LL +     let Alias::Braced {} = panic!();
-   |
+ on line 12, column 21, replace with ` {}`
 
-error[E0618]: expected function, found enum variant `Alias::Unit`
-  --> $DIR/incorrect-variant-form-through-alias-caught.rs:15:5
-   |
-LL | enum Enum { Braced {}, Unit, Tuple() }
-   |                        ---- enum variant `Alias::Unit` defined here
-...
-LL |     Alias::Unit();
-   |     ^^^^^^^^^^^--
-   |     |
-   |     call expression requires function
-   |
+error E0618: expected function, found enum variant `Alias::Unit`
+ at $DIR/incorrect-variant-form-through-alias-caught.rs:15:5
+  on line 4, column 24: enum variant `Alias::Unit` defined here
+  on line 15: call expression requires function
 help: `Alias::Unit` is a unit enum variant, and does not take parentheses to be constructed
-   |
-LL -     Alias::Unit();
-LL +     Alias::Unit;
-   |
+ on line 15, column 15
 
-error[E0164]: expected tuple struct or tuple variant, found unit variant `Alias::Unit`
-  --> $DIR/incorrect-variant-form-through-alias-caught.rs:17:9
-   |
-LL |     let Alias::Unit() = panic!();
-   |         ^^^^^^^^^^^^^ not a tuple struct or tuple variant
+error E0164: expected tuple struct or tuple variant, found unit variant `Alias::Unit`
+ at $DIR/incorrect-variant-form-through-alias-caught.rs:17:9: not a tuple struct or tuple variant
 
 error: aborting due to 5 previous errors
 

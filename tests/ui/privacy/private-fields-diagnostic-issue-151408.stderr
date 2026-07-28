@@ -1,45 +1,22 @@
 error: cannot construct `aux::Named` with struct literal syntax due to private fields
-  --> $DIR/private-fields-diagnostic-issue-151408.rs:8:13
-   |
-LL |     let _ = Named {};
-   |             ^^^^^
-   |
+ at $DIR/private-fields-diagnostic-issue-151408.rs:8:13
 help: you might have meant to use the `new` associated function
-   |
-LL -     let _ = Named {};
-LL +     let _ = Named::new();
-   |
+ on line 8, column 17, replace with `::new()`
 
-error[E0423]: cannot initialize a tuple struct which contains private fields
-  --> $DIR/private-fields-diagnostic-issue-151408.rs:11:13
-   |
-LL |     let _ = PublicTuple();
-   |             ^^^^^^^^^^^
-   |
-   = note: a struct named `PublicTuple` exists in another namespace
+error E0423: cannot initialize a tuple struct which contains private fields
+ at $DIR/private-fields-diagnostic-issue-151408.rs:11:13
+note: a struct named `PublicTuple` exists in another namespace
 note: constructor is not visible here due to private fields
-  --> $DIR/auxiliary/private-fields-diagnostic-aux-issue-151408.rs:18:24
-   |
-LL | pub struct PublicTuple(PrivateInner);
-   |                        ^^^^^^^^^^^^ private field
+ at $DIR/auxiliary/private-fields-diagnostic-aux-issue-151408.rs:18:24: private field
 help: you might have meant to use the `new` associated function
-   |
-LL |     let _ = PublicTuple::new();
-   |                        +++++
+ on line 11, column 23, add `::new`
 
 error: cannot construct `NamedWithMultipleFields` with struct literal syntax due to private fields
-  --> $DIR/private-fields-diagnostic-issue-151408.rs:15:13
-   |
-LL |     let _ = NamedWithMultipleFields { visible: 1 };
-   |             ^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: ...and other private field `hidden` that was not provided
+ at $DIR/private-fields-diagnostic-issue-151408.rs:15:13
+note: ...and other private field `hidden` that was not provided
 
 error: cannot construct `NamedWithMultipleFields` with struct literal syntax due to private fields
-  --> $DIR/private-fields-diagnostic-issue-151408.rs:18:13
-   |
-LL |     let _ = NamedWithMultipleFields {};
-   |             ^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/private-fields-diagnostic-issue-151408.rs:18:13
 
 error: aborting due to 4 previous errors
 

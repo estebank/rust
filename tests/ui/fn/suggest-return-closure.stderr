@@ -1,68 +1,32 @@
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/suggest-return-closure.rs:1:17
-   |
-LL | fn fn_once() -> _ {
-   |                 ^ not allowed in type signatures
-   |
-   = note: for more information on `Fn` traits and closure types, see https://doc.rust-lang.org/book/ch13-01-closures.html
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/suggest-return-closure.rs:1:17: not allowed in type signatures
+note: for more information on `Fn` traits and closure types, see https://doc.rust-lang.org/book/ch13-01-closures.html
 help: replace with an appropriate return type
-   |
-LL - fn fn_once() -> _ {
-LL + fn fn_once() -> impl FnOnce() {
-   |
+ on line 1, column 16, replace with `impl FnOnce()`
 
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/suggest-return-closure.rs:13:16
-   |
-LL | fn fn_mut() -> _ {
-   |                ^ not allowed in type signatures
-   |
-   = note: for more information on `Fn` traits and closure types, see https://doc.rust-lang.org/book/ch13-01-closures.html
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/suggest-return-closure.rs:13:16: not allowed in type signatures
+note: for more information on `Fn` traits and closure types, see https://doc.rust-lang.org/book/ch13-01-closures.html
 help: replace with an appropriate return type
-   |
-LL - fn fn_mut() -> _ {
-LL + fn fn_mut() -> impl FnMut(char) {
-   |
+ on line 13, column 15, replace with `impl FnMut(char)`
 
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/suggest-return-closure.rs:33:13
-   |
-LL | fn fun() -> _ {
-   |             ^ not allowed in type signatures
-   |
-   = note: for more information on `Fn` traits and closure types, see https://doc.rust-lang.org/book/ch13-01-closures.html
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/suggest-return-closure.rs:33:13: not allowed in type signatures
+note: for more information on `Fn` traits and closure types, see https://doc.rust-lang.org/book/ch13-01-closures.html
 help: replace with an appropriate return type
-   |
-LL - fn fun() -> _ {
-LL + fn fun() -> impl Fn() -> i32 {
-   |
+ on line 33, column 12, replace with `impl Fn() -> i32`
 
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/suggest-return-closure.rs:24:9
-   |
-LL |         x.push(c);
-   |         ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/suggest-return-closure.rs:24:9: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     let mut x = String::new();
-   |         +++
+ on line 19, column 8, add `mut `
 
-error[E0597]: `x` does not live long enough
-  --> $DIR/suggest-return-closure.rs:24:9
-   |
-LL |     let x = String::new();
-   |         - binding `x` declared here
-...
-LL |     |c| {
-   |     --- value captured here
-LL |         x.push(c);
-   |         ^ borrowed value does not live long enough
-...
-LL | }
-   | -- borrow later used here
-   | |
-   | `x` dropped here while still borrowed
+error E0597: `x` does not live long enough
+ at $DIR/suggest-return-closure.rs:24:9: borrowed value does not live long enough
+  on line 19, column 9: binding `x` declared here
+  on line 23: value captured here
+  on line 30: `x` dropped here while still borrowed
+  on line 30, column 2: borrow later used here
 
 error: aborting due to 5 previous errors
 

@@ -1,13 +1,7 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-113354.rs:3:24
-   |
-LL |     let _ = || { while Some(_) = Some(1) { } };
-   |                        ^^^^^^^^^^^^^^^^^ expected `bool`, found `()`
-   |
+error E0308: mismatched types
+ at $DIR/issue-113354.rs:3:24: expected `bool`, found `()`
 help: consider adding `let`
-   |
-LL |     let _ = || { while let Some(_) = Some(1) { } };
-   |                        +++
+ on line 3, column 23, add `let `
 
 error: aborting due to 1 previous error
 

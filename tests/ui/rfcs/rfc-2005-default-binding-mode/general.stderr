@@ -1,13 +1,7 @@
 warning: value assigned to `b` is never read
-  --> $DIR/general.rs:60:25
-   |
-LL |         (Some(a), &Some(mut b)) => {
-   |                         ^^^^^ this value is reassigned later and never used
-...
-LL |             b = 7;
-   |             ----- `b` is overwritten here before the previous value is read
-   |
-   = note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
+ at $DIR/general.rs:60:25: this value is reassigned later and never used
+  on line 69: `b` is overwritten here before the previous value is read
+note: `#[warn(unused_assignments)]` (part of `#[warn(unused)]`) on by default
 
 warning: 1 warning emitted
 

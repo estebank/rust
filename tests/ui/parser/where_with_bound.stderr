@@ -1,14 +1,8 @@
 error: generic parameters on `where` clauses are reserved for future use
-  --> $DIR/where_with_bound.rs:2:19
-   |
-LL | fn foo<T>() where <T>::Item: ToString, T: Iterator { }
-   |                   ^^^ currently unsupported
+ at $DIR/where_with_bound.rs:2:19: currently unsupported
 
-error[E0425]: cannot find type `Item` in the crate root
-  --> $DIR/where_with_bound.rs:2:24
-   |
-LL | fn foo<T>() where <T>::Item: ToString, T: Iterator { }
-   |                        ^^^^ not found in the crate root
+error E0425: cannot find type `Item` in the crate root
+ at $DIR/where_with_bound.rs:2:24: not found in the crate root
 
 error: aborting due to 2 previous errors
 

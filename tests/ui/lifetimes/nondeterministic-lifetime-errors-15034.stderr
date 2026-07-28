@@ -1,13 +1,7 @@
-error[E0621]: explicit lifetime required in the type of `lexer`
-  --> $DIR/nondeterministic-lifetime-errors-15034.rs:19:9
-   |
-LL |         Parser { lexer: lexer }
-   |         ^^^^^^^^^^^^^^^^^^^^^^^ lifetime `'a` required
-   |
+error E0621: explicit lifetime required in the type of `lexer`
+ at $DIR/nondeterministic-lifetime-errors-15034.rs:19:9: lifetime `'a` required
 help: add explicit lifetime `'a` to the type of `lexer`
-   |
-LL |     pub fn new(lexer: &'a mut Lexer<'a>) -> Parser<'a> {
-   |                                    ++++
+ on line 18, column 22, replace with `&'a mut Lexer<'a>`
 
 error: aborting due to 1 previous error
 

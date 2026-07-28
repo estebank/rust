@@ -1,66 +1,30 @@
-error[E0107]: struct takes 2 lifetime arguments but 1 lifetime argument was supplied
-  --> $DIR/constructor-lifetime-early-binding-error.rs:13:5
-   |
-LL |     S::<'static>(&0, &0);
-   |     ^   ------- supplied 1 lifetime argument
-   |     |
-   |     expected 2 lifetime arguments
-   |
+error E0107: struct takes 2 lifetime arguments but 1 lifetime argument was supplied
+ at $DIR/constructor-lifetime-early-binding-error.rs:13:5: expected 2 lifetime arguments
+  on line 13, column 9: supplied 1 lifetime argument
 note: struct defined here, with 2 lifetime parameters: `'a`, `'b`
-  --> $DIR/constructor-lifetime-early-binding-error.rs:5:8
-   |
-LL | struct S<'a, 'b>(&'a u8, &'b u8);
-   |        ^ --  --
+ at $DIR/constructor-lifetime-early-binding-error.rs:5:8
 help: add missing lifetime argument
-   |
-LL |     S::<'static, 'static>(&0, &0);
-   |                +++++++++
+ on line 13, column 15, add `, 'static`
 
-error[E0107]: struct takes 2 lifetime arguments but 3 lifetime arguments were supplied
-  --> $DIR/constructor-lifetime-early-binding-error.rs:15:5
-   |
-LL |     S::<'static, 'static, 'static>(&0, &0);
-   |     ^                   --------- help: remove the lifetime argument
-   |     |
-   |     expected 2 lifetime arguments
-   |
+error E0107: struct takes 2 lifetime arguments but 3 lifetime arguments were supplied
+ at $DIR/constructor-lifetime-early-binding-error.rs:15:5: expected 2 lifetime arguments
+  on line 15, column 25: help: remove the lifetime argument
 note: struct defined here, with 2 lifetime parameters: `'a`, `'b`
-  --> $DIR/constructor-lifetime-early-binding-error.rs:5:8
-   |
-LL | struct S<'a, 'b>(&'a u8, &'b u8);
-   |        ^ --  --
+ at $DIR/constructor-lifetime-early-binding-error.rs:5:8
 
-error[E0107]: enum takes 2 lifetime arguments but 1 lifetime argument was supplied
-  --> $DIR/constructor-lifetime-early-binding-error.rs:18:8
-   |
-LL |     E::V::<'static>(&0);
-   |        ^   ------- supplied 1 lifetime argument
-   |        |
-   |        expected 2 lifetime arguments
-   |
+error E0107: enum takes 2 lifetime arguments but 1 lifetime argument was supplied
+ at $DIR/constructor-lifetime-early-binding-error.rs:18:8: expected 2 lifetime arguments
+  on line 18, column 12: supplied 1 lifetime argument
 note: enum defined here, with 2 lifetime parameters: `'a`, `'b`
-  --> $DIR/constructor-lifetime-early-binding-error.rs:6:6
-   |
-LL | enum E<'a, 'b> {
-   |      ^ --  --
+ at $DIR/constructor-lifetime-early-binding-error.rs:6:6
 help: add missing lifetime argument
-   |
-LL |     E::V::<'static, 'static>(&0);
-   |                   +++++++++
+ on line 18, column 18, add `, 'static`
 
-error[E0107]: enum takes 2 lifetime arguments but 3 lifetime arguments were supplied
-  --> $DIR/constructor-lifetime-early-binding-error.rs:20:8
-   |
-LL |     E::V::<'static, 'static, 'static>(&0);
-   |        ^                   --------- help: remove the lifetime argument
-   |        |
-   |        expected 2 lifetime arguments
-   |
+error E0107: enum takes 2 lifetime arguments but 3 lifetime arguments were supplied
+ at $DIR/constructor-lifetime-early-binding-error.rs:20:8: expected 2 lifetime arguments
+  on line 20, column 28: help: remove the lifetime argument
 note: enum defined here, with 2 lifetime parameters: `'a`, `'b`
-  --> $DIR/constructor-lifetime-early-binding-error.rs:6:6
-   |
-LL | enum E<'a, 'b> {
-   |      ^ --  --
+ at $DIR/constructor-lifetime-early-binding-error.rs:6:6
 
 error: aborting due to 4 previous errors
 

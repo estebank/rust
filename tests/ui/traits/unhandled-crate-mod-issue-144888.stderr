@@ -1,187 +1,88 @@
-error[E0271]: type mismatch resolving `<Self as Super>::Assoc == ()`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:20:5
-   |
-LL |     fn transmute(&self) {}
-   |     ^^^^^^^^^^^^^^^^^^^ expected `()`, found type parameter `T`
-   |
-   = note:   expected unit type `()`
-           found type parameter `T`
+error E0271: type mismatch resolving `<Self as Super>::Assoc == ()`
+ at $DIR/unhandled-crate-mod-issue-144888.rs:20:5: expected `()`, found type parameter `T`
+note:   expected unit type `()`
+      found type parameter `T`
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |               ----------   ^^^^^^     ^
-   |               |
-   |               unsatisfied trait bound introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 15: unsatisfied trait bound introduced here
 
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:20:5
-   |
-LL |     fn transmute(&self) {}
-   |     ^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/unhandled-crate-mod-issue-144888.rs:20:5: doesn't have a size known at compile-time
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |      -                     ^^^^^^     ^
-   |      |
-   |      unsatisfied trait bound implicitly introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 6: unsatisfied trait bound implicitly introduced here
 
-error[E0271]: type mismatch resolving `<Self as Super>::Assoc == ()`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:10:1
-   |
-LL | trait Foo<T>: Super<Assoc = T>
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `()`, found type parameter `T`
-   |
-   = note:   expected unit type `()`
-           found type parameter `T`
+error E0271: type mismatch resolving `<Self as Super>::Assoc == ()`
+ at $DIR/unhandled-crate-mod-issue-144888.rs:10:1: expected `()`, found type parameter `T`
+note:   expected unit type `()`
+      found type parameter `T`
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |               ----------   ^^^^^^     ^
-   |               |
-   |               unsatisfied trait bound introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 15: unsatisfied trait bound introduced here
 
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:10:1
-   |
-LL | trait Foo<T>: Super<Assoc = T>
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/unhandled-crate-mod-issue-144888.rs:10:1: doesn't have a size known at compile-time
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |      -                     ^^^^^^     ^
-   |      |
-   |      unsatisfied trait bound implicitly introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 6: unsatisfied trait bound implicitly introduced here
 help: consider further restricting `Self`
-   |
-LL | trait Foo<T>: Super<Assoc = T> + Sized
-   |                                +++++++
+ on line 10, column 30, add ` + Sized`
 
-error[E0271]: type mismatch resolving `<Self as Super>::Assoc == ()`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:14:30
-   |
-LL | trait Foo<T>: Super<Assoc = T>
-   |           - found this type parameter
-...
-LL |     <Self as Mirror>::Assoc: Clone,
-   |                              ^^^^^ expected `()`, found type parameter `T`
-   |
-   = note:   expected unit type `()`
-           found type parameter `T`
+error E0271: type mismatch resolving `<Self as Super>::Assoc == ()`
+ at $DIR/unhandled-crate-mod-issue-144888.rs:14:30: expected `()`, found type parameter `T`
+  on line 10, column 11: found this type parameter
+note:   expected unit type `()`
+      found type parameter `T`
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |               ----------   ^^^^^^     ^
-   |               |
-   |               unsatisfied trait bound introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 15: unsatisfied trait bound introduced here
 
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:14:30
-   |
-LL |     <Self as Mirror>::Assoc: Clone,
-   |                              ^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/unhandled-crate-mod-issue-144888.rs:14:30: doesn't have a size known at compile-time
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |      -                     ^^^^^^     ^
-   |      |
-   |      unsatisfied trait bound implicitly introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 6: unsatisfied trait bound implicitly introduced here
 help: consider further restricting `Self`
-   |
-LL | trait Foo<T>: Super<Assoc = T> + Sized
-   |                                +++++++
+ on line 10, column 30, add ` + Sized`
 
-error[E0046]: not all trait items implemented, missing: `Assoc`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:1
-   |
-LL |     type Assoc;
-   |     ---------- `Assoc` from trait
-...
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `Assoc` in implementation
+error E0046: not all trait items implemented, missing: `Assoc`
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:1: missing `Assoc` in implementation
+  on line 28: `Assoc` from trait
 
-error[E0271]: type mismatch resolving `<Self as Super>::Assoc == ()`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:20:5
-   |
-LL | trait Foo<T>: Super<Assoc = T>
-   |           - found this type parameter
-...
-LL |     fn transmute(&self) {}
-   |     ^^^^^^^^^^^^^^^^^^^ expected `()`, found type parameter `T`
-   |
-   = note:   expected unit type `()`
-           found type parameter `T`
+error E0271: type mismatch resolving `<Self as Super>::Assoc == ()`
+ at $DIR/unhandled-crate-mod-issue-144888.rs:20:5: expected `()`, found type parameter `T`
+  on line 10, column 11: found this type parameter
+note:   expected unit type `()`
+      found type parameter `T`
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |               ----------   ^^^^^^     ^
-   |               |
-   |               unsatisfied trait bound introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 15: unsatisfied trait bound introduced here
 
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:20:5
-   |
-LL |     fn transmute(&self) {}
-   |     ^^^^^^^^^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/unhandled-crate-mod-issue-144888.rs:20:5: doesn't have a size known at compile-time
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |      -                     ^^^^^^     ^
-   |      |
-   |      unsatisfied trait bound implicitly introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 6: unsatisfied trait bound implicitly introduced here
 help: consider further restricting `Self`
-   |
-LL |     fn transmute(&self) where Self: Sized {}
-   |                         +++++++++++++++++
+ on line 20, column 23, add ` where Self: Sized`
 
-error[E0271]: type mismatch resolving `<Self as Super>::Assoc == ()`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:14:30
-   |
-LL | trait Foo<T>: Super<Assoc = T>
-   |           - found this type parameter
-...
-LL |     <Self as Mirror>::Assoc: Clone,
-   |                              ^^^^^ expected `()`, found type parameter `T`
-   |
-   = note:   expected unit type `()`
-           found type parameter `T`
+error E0271: type mismatch resolving `<Self as Super>::Assoc == ()`
+ at $DIR/unhandled-crate-mod-issue-144888.rs:14:30: expected `()`, found type parameter `T`
+  on line 10, column 11: found this type parameter
+note:   expected unit type `()`
+      found type parameter `T`
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |               ----------   ^^^^^^     ^
-   |               |
-   |               unsatisfied trait bound introduced here
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 15: unsatisfied trait bound introduced here
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:14:30
-   |
-LL |     <Self as Mirror>::Assoc: Clone,
-   |                              ^^^^^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/unhandled-crate-mod-issue-144888.rs:14:30: doesn't have a size known at compile-time
 note: required for `Self` to implement `Mirror`
-  --> $DIR/unhandled-crate-mod-issue-144888.rs:31:28
-   |
-LL | impl<T: Super<Assoc = ()>> Mirror for T {}
-   |      -                     ^^^^^^     ^
-   |      |
-   |      unsatisfied trait bound implicitly introduced here
+ at $DIR/unhandled-crate-mod-issue-144888.rs:31:28
+  on line 31, column 6: unsatisfied trait bound implicitly introduced here
 help: consider further restricting `Self`
-   |
-LL |     fn transmute(&self) where Self: Sized {}
-   |                         +++++++++++++++++
+ on line 20, column 23, add ` where Self: Sized`
 
 error: aborting due to 11 previous errors
 

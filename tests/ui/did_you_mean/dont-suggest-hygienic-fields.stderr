@@ -1,52 +1,26 @@
-error[E0609]: no field `field` on type `Compound`
-  --> $DIR/dont-suggest-hygienic-fields.rs:24:16
-   |
-LL |     let _ = ty.field;
-   |                ^^^^^ unknown field
+error E0609: no field `field` on type `Compound`
+ at $DIR/dont-suggest-hygienic-fields.rs:24:16: unknown field
 
-error[E0609]: no field `fieeld` on type `Compound`
-  --> $DIR/dont-suggest-hygienic-fields.rs:25:16
-   |
-LL |     let _ = ty.fieeld;
-   |                ^^^^^^ unknown field
+error E0609: no field `fieeld` on type `Compound`
+ at $DIR/dont-suggest-hygienic-fields.rs:25:16: unknown field
 
-error[E0026]: struct `Compound` does not have a field named `field`
-  --> $DIR/dont-suggest-hygienic-fields.rs:27:20
-   |
-LL |     let Compound { field } = ty;
-   |                    ^^^^^ struct `Compound` does not have this field
+error E0026: struct `Compound` does not have a field named `field`
+ at $DIR/dont-suggest-hygienic-fields.rs:27:20: struct `Compound` does not have this field
 
 error: pattern requires `..` due to inaccessible fields
-  --> $DIR/dont-suggest-hygienic-fields.rs:27:9
-   |
-LL |     let Compound { field } = ty;
-   |         ^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dont-suggest-hygienic-fields.rs:27:9
 help: ignore the inaccessible and unused fields
-   |
-LL |     let Compound { field, .. } = ty;
-   |                         ++++
+ on line 27, column 24, add `, ..`
 
-error[E0609]: no field `0` on type `Component`
-  --> $DIR/dont-suggest-hygienic-fields.rs:34:16
-   |
-LL |     let _ = ty.0;
-   |                ^ unknown field
+error E0609: no field `0` on type `Component`
+ at $DIR/dont-suggest-hygienic-fields.rs:34:16: unknown field
 
-error[E0560]: struct `Crate` has no field named `fiel`
-  --> $DIR/dont-suggest-hygienic-fields.rs:44:34
-   |
-LL | environment!();
-   | -------------- in this macro invocation
-...
-LL |     const CRATE: Crate = Crate { fiel: () };
-   |                                  ^^^^ unknown field
-   |
-   = note: this error originates in the macro `environment` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0560: struct `Crate` has no field named `fiel`
+ at $DIR/dont-suggest-hygienic-fields.rs:44:34: unknown field
+  on line 37: in this macro invocation
+note: this error originates in the macro `environment` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: a field with a similar name exists
-   |
-LL |     const CRATE: Crate = Crate { field: () };
-   |                                      +
+ on line 44, column 33, replace with `field`
 
 error: aborting due to 6 previous errors
 

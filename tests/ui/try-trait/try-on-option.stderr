@@ -1,20 +1,10 @@
-error[E0277]: the `?` operator can only be used on `Result`s, not `Option`s, in a function that returns `Result`
-  --> $DIR/try-on-option.rs:5:6
-   |
-LL | fn foo() -> Result<u32, ()> {
-   | --------------------------- this function returns a `Result`
-LL |     let x: Option<u32> = None;
-LL |     x?;
-   |      ^ use `.ok_or(...)?` to provide an error compatible with `Result<u32, ()>`
+error E0277: the `?` operator can only be used on `Result`s, not `Option`s, in a function that returns `Result`
+ at $DIR/try-on-option.rs:5:6: use `.ok_or(...)?` to provide an error compatible with `Result<u32, ()>`
+  on line 3: this function returns a `Result`
 
-error[E0277]: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
-  --> $DIR/try-on-option.rs:11:6
-   |
-LL | fn bar() -> u32 {
-   | --------------- this function should return `Result` or `Option` to accept `?`
-LL |     let x: Option<u32> = None;
-LL |     x?;
-   |      ^ cannot use the `?` operator in a function that returns `u32`
+error E0277: the `?` operator can only be used in a function that returns `Result` or `Option` (or another type that implements `FromResidual`)
+ at $DIR/try-on-option.rs:11:6: cannot use the `?` operator in a function that returns `u32`
+  on line 9: this function should return `Result` or `Option` to accept `?`
 
 error: aborting due to 2 previous errors
 

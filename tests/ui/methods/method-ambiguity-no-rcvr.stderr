@@ -1,33 +1,15 @@
-error[E0599]: no method named `foo` found for struct `Qux` in the current scope
-  --> $DIR/method-ambiguity-no-rcvr.rs:12:9
-   |
-LL | struct Qux;
-   | ---------- method `foo` not found for this struct
-...
-LL |     Qux.foo();
-   |         ^^^ this is an associated function, not a method
-   |
-   = note: found the following associated functions; to be used as methods, functions must have a `self` parameter
+error E0599: no method named `foo` found for struct `Qux` in the current scope
+ at $DIR/method-ambiguity-no-rcvr.rs:12:9: this is an associated function, not a method
+  on line 1: method `foo` not found for this struct
+note: found the following associated functions; to be used as methods, functions must have a `self` parameter
 note: candidate #1 is defined in the trait `Foo`
-  --> $DIR/method-ambiguity-no-rcvr.rs:4:5
-   |
-LL |     fn foo();
-   |     ^^^^^^^^^
+ at $DIR/method-ambiguity-no-rcvr.rs:4:5
 note: candidate #2 is defined in the trait `FooBar`
-  --> $DIR/method-ambiguity-no-rcvr.rs:8:5
-   |
-LL |     fn foo() {}
-   |     ^^^^^^^^
+ at $DIR/method-ambiguity-no-rcvr.rs:8:5
 help: disambiguate the associated function for candidate #1
-   |
-LL -     Qux.foo();
-LL +     <Qux as Foo>::foo();
-   |
+ on line 12, column 4, replace with `<Qux as Foo>::foo()`
 help: disambiguate the associated function for candidate #2
-   |
-LL -     Qux.foo();
-LL +     <Qux as FooBar>::foo();
-   |
+ on line 12, column 4, replace with `<Qux as FooBar>::foo()`
 
 error: aborting due to 1 previous error
 

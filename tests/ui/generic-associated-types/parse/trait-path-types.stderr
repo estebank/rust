@@ -1,35 +1,17 @@
 error: expected one of `,`, `:`, or `>`, found `=`
-  --> $DIR/trait-path-types.rs:6:37
-   |
-LL |   fn f<'a>(arg : Box<dyn X< [u8; 1] = u32>>) {}
-   |                                     ^ expected one of `,`, `:`, or `>`
-   |
+ at $DIR/trait-path-types.rs:6:37: expected one of `,`, `:`, or `>`
 help: you might have meant to end the type parameters here
-   |
-LL |   fn f<'a>(arg : Box<dyn X< [u8; 1]> = u32>>) {}
-   |                                    +
+ on line 6, column 35, add `>`
 
 error: expected one of `,`, `:`, or `>`, found `=`
-  --> $DIR/trait-path-types.rs:11:37
-   |
-LL |   fn f1<'a>(arg : Box<dyn X<(Y<'a>) = &'a ()>>) {}
-   |                                     ^ expected one of `,`, `:`, or `>`
-   |
+ at $DIR/trait-path-types.rs:11:37: expected one of `,`, `:`, or `>`
 help: you might have meant to end the type parameters here
-   |
-LL |   fn f1<'a>(arg : Box<dyn X<(Y<'a>)> = &'a ()>>) {}
-   |                                    +
+ on line 11, column 35, add `>`
 
 error: expected one of `,`, `:`, or `>`, found `=`
-  --> $DIR/trait-path-types.rs:16:33
-   |
-LL |   fn f1<'a>(arg : Box<dyn X< 'a = u32 >>) {}
-   |                                 ^ expected one of `,`, `:`, or `>`
-   |
+ at $DIR/trait-path-types.rs:16:33: expected one of `,`, `:`, or `>`
 help: you might have meant to end the type parameters here
-   |
-LL |   fn f1<'a>(arg : Box<dyn X< 'a> = u32 >>) {}
-   |                                +
+ on line 16, column 31, add `>`
 
 error: aborting due to 3 previous errors
 

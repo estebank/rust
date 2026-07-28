@@ -1,22 +1,11 @@
-error[E0382]: borrow of moved value: `x`
-  --> $DIR/moves-based-on-type-capture-clause-bad.rs:9:20
-   |
-LL |     let x = "Hello world!".to_string();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |     thread::spawn(move || {
-   |                   ------- value moved into closure here
-LL |         println!("{}", x);
-   |                        - variable moved due to use in closure
-LL |     });
-LL |     println!("{}", x);
-   |                    ^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `x`
+ at $DIR/moves-based-on-type-capture-clause-bad.rs:9:20: value borrowed here after move
+  on line 5, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 6, column 19: value moved into closure here
+  on line 7, column 24: variable moved due to use in closure
 help: consider cloning the value before moving it into the closure
-   |
-LL ~     let value = x.clone();
-LL ~     thread::spawn(move || {
-LL ~         println!("{}", value);
-   |
+ on line 6, add `let value = x.clone();
+    `
 
 error: aborting due to 1 previous error
 

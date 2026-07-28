@@ -1,15 +1,8 @@
-error[E0597]: `x` does not live long enough
-  --> $DIR/implied-bounds-on-trait-hierarchy-1.rs:34:23
-   |
-LL |         let x = "Hello World".to_string();
-   |             - binding `x` declared here
-LL |         subs_to_soup((x.as_str(), &mut d));
-   |                       ^ borrowed value does not live long enough
-LL |
-LL |     }
-   |     - `x` dropped here while still borrowed
-LL |     println!("{}", d);
-   |                    - borrow later used here
+error E0597: `x` does not live long enough
+ at $DIR/implied-bounds-on-trait-hierarchy-1.rs:34:23: borrowed value does not live long enough
+  on line 33, column 13: binding `x` declared here
+  on line 36: `x` dropped here while still borrowed
+  on line 37, column 20: borrow later used here
 
 error: aborting due to 1 previous error
 

@@ -1,26 +1,14 @@
-error[E0046]: not all trait items implemented, missing: `eq`
-  --> $DIR/coherence-impl-trait-for-trait-dyn-compatible.rs:7:1
-   |
-LL | trait DynIncompatible { fn eq(&self, other: Self); }
-   |                         -------------------------- `eq` from trait
-LL | impl DynIncompatible for dyn DynIncompatible { }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ missing `eq` in implementation
+error E0046: not all trait items implemented, missing: `eq`
+ at $DIR/coherence-impl-trait-for-trait-dyn-compatible.rs:7:1: missing `eq` in implementation
+  on line 6, column 25: `eq` from trait
 
-error[E0038]: the trait `DynIncompatible` is not dyn compatible
-  --> $DIR/coherence-impl-trait-for-trait-dyn-compatible.rs:7:26
-   |
-LL | impl DynIncompatible for dyn DynIncompatible { }
-   |                          ^^^^^^^^^^^^^^^^^^^ `DynIncompatible` is not dyn compatible
-   |
+error E0038: the trait `DynIncompatible` is not dyn compatible
+ at $DIR/coherence-impl-trait-for-trait-dyn-compatible.rs:7:26: `DynIncompatible` is not dyn compatible
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/coherence-impl-trait-for-trait-dyn-compatible.rs:6:45
-   |
-LL | trait DynIncompatible { fn eq(&self, other: Self); }
-   |       ---------------                       ^^^^ ...because method `eq` references the `Self` type in this parameter
-   |       |
-   |       this trait is not dyn compatible...
-   = help: consider moving `eq` to another trait
+ at $DIR/coherence-impl-trait-for-trait-dyn-compatible.rs:6:45: ...because method `eq` references the `Self` type in this parameter
+  on line 6, column 7: this trait is not dyn compatible...
+help: consider moving `eq` to another trait
 
 error: aborting due to 2 previous errors
 

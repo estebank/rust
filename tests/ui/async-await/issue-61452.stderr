@@ -1,26 +1,13 @@
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/issue-61452.rs:4:5
-   |
-LL |     x.take();
-   |     ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/issue-61452.rs:4:5: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL | pub async fn f(mut x: Option<usize>) {
-   |                +++
+ on line 3, column 15, add `mut `
 
-error[E0384]: cannot assign twice to immutable variable `x`
-  --> $DIR/issue-61452.rs:9:5
-   |
-LL | pub async fn g(x: usize) {
-   |                - first assignment to `x`
-LL |     x += 1;
-   |     ^^^^^^ cannot assign twice to immutable variable
-   |
+error E0384: cannot assign twice to immutable variable `x`
+ at $DIR/issue-61452.rs:9:5: cannot assign twice to immutable variable
+  on line 8, column 16: first assignment to `x`
 help: consider making this binding mutable
-   |
-LL | pub async fn g(mut x: usize) {
-   |                +++
+ on line 8, column 15, add `mut `
 
 error: aborting due to 2 previous errors
 

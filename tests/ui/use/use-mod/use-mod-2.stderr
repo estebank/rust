@@ -1,24 +1,12 @@
 error: imports need to be explicitly named
-  --> $DIR/use-mod-2.rs:2:16
-   |
-LL |     use self::{self};
-   |                ^^^^
-   |
+ at $DIR/use-mod-2.rs:2:16
 help: try renaming it with a name
-   |
-LL |     use self::{self as name};
-   |                     +++++++
+ on line 2, column 15, replace with `self as name`
 
 error: imports need to be explicitly named
-  --> $DIR/use-mod-2.rs:5:17
-   |
-LL |     use super::{self};
-   |                 ^^^^
-   |
+ at $DIR/use-mod-2.rs:5:17
 help: try renaming it with a name
-   |
-LL |     use super::{self as name};
-   |                      +++++++
+ on line 5, column 16, replace with `self as name`
 
 error: aborting due to 2 previous errors
 

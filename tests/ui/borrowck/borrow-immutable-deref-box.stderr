@@ -1,13 +1,7 @@
-error[E0596]: cannot borrow `*x` as mutable, as `x` is not declared as mutable
-  --> $DIR/borrow-immutable-deref-box.rs:6:7
-   |
-LL |     f(&mut *x);
-   |       ^^^^^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `*x` as mutable, as `x` is not declared as mutable
+ at $DIR/borrow-immutable-deref-box.rs:6:7: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     let mut x = Box::new(3);
-   |         +++
+ on line 5, column 8, add `mut `
 
 error: aborting due to 1 previous error
 

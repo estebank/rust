@@ -1,45 +1,23 @@
-error[E0539]: malformed `rustc_align_static` attribute input
-  --> $DIR/malformed-static-align.rs:4:3
-   |
-LL | #[rustc_align_static = 16]
-   |   ^^^^^^^^^^^^^^^^^^^----
-   |                      |
-   |                      expected this to be a list
-   |
+error E0539: malformed `rustc_align_static` attribute input
+ at $DIR/malformed-static-align.rs:4:3
+  on line 4, column 22: expected this to be a list
 help: must be of the form
-   |
-LL - #[rustc_align_static = 16]
-LL + #[rustc_align_static(<alignment in bytes>)]
-   |
+ on line 4, column 2, replace with `rustc_align_static(<alignment in bytes>)`
 
-error[E0589]: invalid alignment value: not an unsuffixed integer
-  --> $DIR/malformed-static-align.rs:7:22
-   |
-LL | #[rustc_align_static("hello")]
-   |                      ^^^^^^^
+error E0589: invalid alignment value: not an unsuffixed integer
+ at $DIR/malformed-static-align.rs:7:22
 
-error[E0589]: invalid alignment value: not a power of two
-  --> $DIR/malformed-static-align.rs:10:22
-   |
-LL | #[rustc_align_static(0)]
-   |                      ^
+error E0589: invalid alignment value: not a power of two
+ at $DIR/malformed-static-align.rs:10:22
 
 error: the `repr(align(...))` attribute cannot be used on statics
-  --> $DIR/malformed-static-align.rs:13:3
-   |
-LL | #[repr(align(16))]
-   |   ^^^^^^^^^^^^^^^
-   |
-   = help: the `repr(align(...))` attribute can only be applied to data types
-   = help: use `#[rustc_align_static(...)]` instead
+ at $DIR/malformed-static-align.rs:13:3
+help: the `repr(align(...))` attribute can only be applied to data types
+help: use `#[rustc_align_static(...)]` instead
 
 error: the `rustc_align_static` attribute cannot be used on structs
-  --> $DIR/malformed-static-align.rs:16:3
-   |
-LL | #[rustc_align_static(16)]
-   |   ^^^^^^^^^^^^^^^^^^
-   |
-   = help: the `rustc_align_static` attribute can be applied to foreign statics and statics
+ at $DIR/malformed-static-align.rs:16:3
+help: the `rustc_align_static` attribute can be applied to foreign statics and statics
 
 error: aborting due to 5 previous errors
 

@@ -1,16 +1,8 @@
-error[E0432]: unresolved import `module::SomeUsefulType`
-  --> $DIR/unresolved-import-suggest-disambiguated-crate-name.rs:19:9
-   |
-LL | pub use module::SomeUsefulType;
-   |         ^^^^^^^^--------------
-   |                 |
-   |                 no `SomeUsefulType` in `module`
-   |
+error E0432: unresolved import `module::SomeUsefulType`
+ at $DIR/unresolved-import-suggest-disambiguated-crate-name.rs:19:9
+  on line 19, column 17: no `SomeUsefulType` in `module`
 help: consider importing this struct instead
-   |
-LL - pub use module::SomeUsefulType;
-LL + pub use ::library::SomeUsefulType;
-   |
+ on line 19, column 8, replace with `::library::SomeUsefulType`
 
 error: aborting due to 1 previous error
 

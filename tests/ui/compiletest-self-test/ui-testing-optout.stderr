@@ -1,38 +1,17 @@
-error[E0425]: cannot find type `B` in this scope
- --> $DIR/ui-testing-optout.rs:4:10
-  |
-4 | type A = B;
-  |          ^ not found in this scope
+error E0425: cannot find type `B` in this scope
+ at $DIR/ui-testing-optout.rs:4:10: not found in this scope
 
-error[E0425]: cannot find type `D` in this scope
- --> $DIR/ui-testing-optout.rs:7:10
-  |
-4 | type A = B;
-  | ----------- similarly named type alias `A` defined here
-...
-7 | type C = D;
-  |          ^
-  |
+error E0425: cannot find type `D` in this scope
+ at $DIR/ui-testing-optout.rs:7:10
+  on line 4: similarly named type alias `A` defined here
 help: a type alias with a similar name exists
-  |
-7 - type C = D;
-7 + type C = A;
-  |
+ on line 7, column 9, replace with `A`
 
-error[E0425]: cannot find type `F` in this scope
-  --> $DIR/ui-testing-optout.rs:92:10
-   |
- 4 | type A = B;
-   | ----------- similarly named type alias `A` defined here
-...
-92 | type E = F;
-   |          ^
-   |
+error E0425: cannot find type `F` in this scope
+ at $DIR/ui-testing-optout.rs:92:10
+  on line 4: similarly named type alias `A` defined here
 help: a type alias with a similar name exists
-   |
-92 - type E = F;
-92 + type E = A;
-   |
+ on line 92, column 9, replace with `A`
 
 error: aborting due to 3 previous errors
 

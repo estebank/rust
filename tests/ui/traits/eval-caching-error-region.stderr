@@ -1,31 +1,17 @@
-error[E0261]: use of undeclared lifetime name `'missing`
-  --> $DIR/eval-caching-error-region.rs:7:6
-   |
-LL |     &'missing Self: Add<Self>,
-   |      ^^^^^^^^ undeclared lifetime
-   |
-   = note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
+error E0261: use of undeclared lifetime name `'missing`
+ at $DIR/eval-caching-error-region.rs:7:6: undeclared lifetime
+note: for more information on higher-ranked polymorphism, visit https://doc.rust-lang.org/nomicon/hrtb.html
 help: consider making the bound lifetime-generic with a new `'missing` lifetime
-   |
-LL |     for<'missing> &'missing Self: Add<Self>,
-   |     +++++++++++++
+ on line 7, column 4, add `for<'missing> `
 help: consider introducing lifetime `'missing` here
-   |
-LL | pub trait Numoid<'missing>: Sized
-   |                 ++++++++++
+ on line 5, column 16, add `<'missing>`
 
-error[E0369]: cannot add `N` to `&N`
-  --> $DIR/eval-caching-error-region.rs:19:16
-   |
-LL |     let _ = &a + a;
-   |             -- ^ - N
-   |             |
-   |             &N
-   |
+error E0369: cannot add `N` to `&N`
+ at $DIR/eval-caching-error-region.rs:19:16
+  on line 19, column 13: &N
+  on line 19, column 18: N
 help: consider introducing a `where` clause, but there might be an alternative better way to express this requirement
-   |
-LL | pub fn compute<N: Numoid>(a: N) where &N: Add<N> {
-   |                                 ++++++++++++++++
+ on line 18, column 31, add ` where &N: Add<N>`
 
 error: aborting due to 2 previous errors
 

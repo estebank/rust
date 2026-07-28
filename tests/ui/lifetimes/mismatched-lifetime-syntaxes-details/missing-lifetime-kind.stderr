@@ -1,64 +1,32 @@
 error: eliding a lifetime that's named elsewhere is confusing
-  --> $DIR/missing-lifetime-kind.rs:3:32
-   |
-LL | fn ampersand<'a>(x: &'a u8) -> &u8 {
-   |                      --        ^^^ the same lifetime is elided here
-   |                      |
-   |                      the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/missing-lifetime-kind.rs:3:32: the same lifetime is elided here
+  on line 3, column 22: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 note: the lint level is defined here
-  --> $DIR/missing-lifetime-kind.rs:1:9
-   |
-LL | #![deny(mismatched_lifetime_syntaxes)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/missing-lifetime-kind.rs:1:9
 help: consistently use `'a`
-   |
-LL | fn ampersand<'a>(x: &'a u8) -> &'a u8 {
-   |                                 ++
+ on line 3, column 32, add `'a `
 
 error: hiding a lifetime that's named elsewhere is confusing
-  --> $DIR/missing-lifetime-kind.rs:10:31
-   |
-LL | fn brackets<'a>(x: &'a u8) -> Brackets {
-   |                     --        ^^^^^^^^ the same lifetime is hidden here
-   |                     |
-   |                     the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/missing-lifetime-kind.rs:10:31: the same lifetime is hidden here
+  on line 10, column 21: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'a`
-   |
-LL | fn brackets<'a>(x: &'a u8) -> Brackets<'a> {
-   |                                       ++++
+ on line 10, column 38, add `<'a>`
 
 error: hiding a lifetime that's named elsewhere is confusing
-  --> $DIR/missing-lifetime-kind.rs:17:28
-   |
-LL | fn comma<'a>(x: &'a u8) -> Comma<u8> {
-   |                  --        ^^^^^^^^^ the same lifetime is hidden here
-   |                  |
-   |                  the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/missing-lifetime-kind.rs:17:28: the same lifetime is hidden here
+  on line 17, column 18: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'a`
-   |
-LL | fn comma<'a>(x: &'a u8) -> Comma<'a, u8> {
-   |                                  +++
+ on line 17, column 33, add `'a, `
 
 error: eliding a lifetime that's named elsewhere is confusing
-  --> $DIR/missing-lifetime-kind.rs:22:34
-   |
-LL | fn underscore<'a>(x: &'a u8) -> &'_ u8 {
-   |                       --         ^^ the same lifetime is elided here
-   |                       |
-   |                       the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/missing-lifetime-kind.rs:22:34: the same lifetime is elided here
+  on line 22, column 23: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'a`
-   |
-LL - fn underscore<'a>(x: &'a u8) -> &'_ u8 {
-LL + fn underscore<'a>(x: &'a u8) -> &'a u8 {
-   |
+ on line 22, column 33, replace with `'a`
 
 error: aborting due to 4 previous errors
 

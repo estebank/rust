@@ -1,8 +1,5 @@
-error[E0268]: `break` outside of a loop or labeled block
-  --> $DIR/E0268.rs:2:5
-   |
-LL |     break;
-   |     ^^^^^ cannot `break` outside of a loop or labeled block
+error E0268: `break` outside of a loop or labeled block
+ at $DIR/E0268.rs:2:5: cannot `break` outside of a loop or labeled block
 
 error: aborting due to 1 previous error
 

@@ -1,13 +1,7 @@
-error[E0401]: can't reference `Self` constructor from outer item
-  --> $DIR/do-not-ice-on-note_and_explain.rs:6:13
-   |
-LL | impl<B> A<B> {
-   | ------------ the inner item doesn't inherit generics from this impl, so `Self` is invalid to reference
-LL |     fn d() {
-LL |         fn d() {
-   |            - `Self` used in this inner item
-LL |             Self(1)
-   |             ^^^^ help: replace `Self` with the actual type: `A`
+error E0401: can't reference `Self` constructor from outer item
+ at $DIR/do-not-ice-on-note_and_explain.rs:6:13: help: replace `Self` with the actual type: `A`
+  on line 3: the inner item doesn't inherit generics from this impl, so `Self` is invalid to reference
+  on line 5, column 12: `Self` used in this inner item
 
 error: aborting due to 1 previous error
 

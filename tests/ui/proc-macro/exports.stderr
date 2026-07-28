@@ -1,26 +1,14 @@
 error: `proc-macro` crate types currently cannot export any items other than functions tagged with `#[proc_macro]`, `#[proc_macro_derive]`, or `#[proc_macro_attribute]`
-  --> $DIR/exports.rs:7:1
-   |
-LL | pub fn a() {}
-   | ^^^^^^^^^^
+ at $DIR/exports.rs:7:1
 
 error: `proc-macro` crate types currently cannot export any items other than functions tagged with `#[proc_macro]`, `#[proc_macro_derive]`, or `#[proc_macro_attribute]`
-  --> $DIR/exports.rs:8:1
-   |
-LL | pub struct B;
-   | ^^^^^^^^^^^^^
+ at $DIR/exports.rs:8:1
 
 error: `proc-macro` crate types currently cannot export any items other than functions tagged with `#[proc_macro]`, `#[proc_macro_derive]`, or `#[proc_macro_attribute]`
-  --> $DIR/exports.rs:9:1
-   |
-LL | pub enum C {}
-   | ^^^^^^^^^^
+ at $DIR/exports.rs:9:1
 
 error: `proc-macro` crate types currently cannot export any items other than functions tagged with `#[proc_macro]`, `#[proc_macro_derive]`, or `#[proc_macro_attribute]`
-  --> $DIR/exports.rs:10:1
-   |
-LL | pub mod d {}
-   | ^^^^^^^^^
+ at $DIR/exports.rs:10:1
 
 error: aborting due to 4 previous errors
 

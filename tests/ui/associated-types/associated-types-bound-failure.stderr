@@ -1,15 +1,8 @@
-error[E0277]: the trait bound `<G as GetToInt>::R: ToInt` is not satisfied
-  --> $DIR/associated-types-bound-failure.rs:19:19
-   |
-LL |     ToInt::to_int(&g.get())
-   |     ------------- ^^^^^^^^ the trait `ToInt` is not implemented for `<G as GetToInt>::R`
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: the trait bound `<G as GetToInt>::R: ToInt` is not satisfied
+ at $DIR/associated-types-bound-failure.rs:19:19: the trait `ToInt` is not implemented for `<G as GetToInt>::R`
+  on line 19: required by a bound introduced by this call
 help: consider further restricting the associated type
-   |
-LL |     where G : GetToInt, <G as GetToInt>::R: ToInt
-   |                       +++++++++++++++++++++++++++
+ on line 17, column 22, add `, <G as GetToInt>::R: ToInt`
 
 error: aborting due to 1 previous error
 

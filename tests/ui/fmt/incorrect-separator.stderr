@@ -1,44 +1,23 @@
 error: unknown start of token: \u{326}
-  --> $DIR/incorrect-separator.rs:19:28
-   |
-LL |     format!("A number: {}" ̦ iter::once(42).next().unwrap());
-   |                            ^
+ at $DIR/incorrect-separator.rs:19:28
 
 error: expected `,`, found `.`
-  --> $DIR/incorrect-separator.rs:7:27
-   |
-LL |     format!("A number: {}". iter::once(42).next().unwrap());
-   |                           ^ expected `,`
+ at $DIR/incorrect-separator.rs:7:27: expected `,`
 
 error: expected `,`, found `/`
-  --> $DIR/incorrect-separator.rs:12:28
-   |
-LL |     format!("A number: {}" / iter::once(42).next().unwrap());
-   |                            ^ expected `,`
+ at $DIR/incorrect-separator.rs:12:28: expected `,`
 
 error: expected `,`, found `;`
-  --> $DIR/incorrect-separator.rs:15:27
-   |
-LL |     format!("A number: {}"; iter::once(42).next().unwrap());
-   |                           ^ expected `,`
+ at $DIR/incorrect-separator.rs:15:27: expected `,`
 
 error: expected `,`, found `iter`
-  --> $DIR/incorrect-separator.rs:19:30
-   |
-LL |     format!("A number: {}" ̦ iter::once(42).next().unwrap());
-   |                             ^^^^ expected `,`
+ at $DIR/incorrect-separator.rs:19:30: expected `,`
 
 error: expected `,`, found `.`
-  --> $DIR/incorrect-separator.rs:26:17
-   |
-LL |     format!("{}". compile_error!("fail"));
-   |                 ^ expected `,`
+ at $DIR/incorrect-separator.rs:26:17: expected `,`
 
 error: fail
-  --> $DIR/incorrect-separator.rs:26:19
-   |
-LL |     format!("{}". compile_error!("fail"));
-   |                   ^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/incorrect-separator.rs:26:19
 
 error: aborting due to 7 previous errors
 

@@ -1,36 +1,16 @@
-error[E0382]: borrow of moved value: `x`
-  --> $DIR/moves-based-on-type-distribute-copy-over-paren.rs:12:11
-   |
-LL |     let x = "hi".to_string();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |
-LL |     let _y = Foo { f:x };
-   |                      - value moved here
-LL |
-LL |     touch(&x);
-   |           ^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `x`
+ at $DIR/moves-based-on-type-distribute-copy-over-paren.rs:12:11: value borrowed here after move
+  on line 8, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 10, column 22: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let _y = Foo { f:x.clone() };
-   |                       ++++++++
+ on line 10, column 22, add `.clone()`
 
-error[E0382]: borrow of moved value: `x`
-  --> $DIR/moves-based-on-type-distribute-copy-over-paren.rs:21:11
-   |
-LL |     let x = "hi".to_string();
-   |         - move occurs because `x` has type `String`, which does not implement the `Copy` trait
-LL |
-LL |     let _y = Foo { f:(((x))) };
-   |                      ------- value moved here
-LL |
-LL |     touch(&x);
-   |           ^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `x`
+ at $DIR/moves-based-on-type-distribute-copy-over-paren.rs:21:11: value borrowed here after move
+  on line 17, column 9: move occurs because `x` has type `String`, which does not implement the `Copy` trait
+  on line 19, column 22: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let _y = Foo { f:(((x))).clone() };
-   |                             ++++++++
+ on line 19, column 28, add `.clone()`
 
 error: aborting due to 2 previous errors
 

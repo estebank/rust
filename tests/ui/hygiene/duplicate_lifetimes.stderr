@@ -1,30 +1,14 @@
-error[E0403]: the name `'a` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate_lifetimes.rs:8:14
-   |
-LL |     fn g<$a, 'a>() {}
-   |              ^^ already used
-...
-LL | m!('a);
-   | ------
-   | |  |
-   | |  first use of `'a`
-   | in this macro invocation
-   |
-   = note: this error originates in the macro `m` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0403: the name `'a` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate_lifetimes.rs:8:14: already used
+  on line 16: in this macro invocation
+  on line 16, column 4: first use of `'a`
+note: this error originates in the macro `m` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0403]: the name `'a` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/duplicate_lifetimes.rs:13:14
-   |
-LL |     fn h<$a, 'a>() {}
-   |              ^^ already used
-...
-LL | n!('a);
-   | ------
-   | |  |
-   | |  first use of `'a`
-   | in this macro invocation
-   |
-   = note: this error originates in the macro `n` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0403: the name `'a` is already used for a generic parameter in this item's generic parameters
+ at $DIR/duplicate_lifetimes.rs:13:14: already used
+  on line 17: in this macro invocation
+  on line 17, column 4: first use of `'a`
+note: this error originates in the macro `n` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 2 previous errors
 

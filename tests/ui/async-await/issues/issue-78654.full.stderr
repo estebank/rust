@@ -1,22 +1,12 @@
-error[E0573]: cannot find type `feature` in this scope
-  --> $DIR/issue-78654.rs:9:15
-   |
-LL | impl<const H: feature> Foo {
-   |               ^^^^^^^ not found in this scope
-   |
-   = note: a built-in attribute named `feature` exists in another namespace
+error E0573: cannot find type `feature` in this scope
+ at $DIR/issue-78654.rs:9:15: not found in this scope
+note: a built-in attribute named `feature` exists in another namespace
 
-error[E0207]: the const parameter `H` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/issue-78654.rs:9:6
-   |
-LL | impl<const H: feature> Foo {
-   |     -^^^^^^^^^^^^^^^^-
-   |     ||
-   |     |unconstrained const parameter
-   |     help: remove the unused type parameter `H`
-   |
-   = note: expressions using a const parameter must map each value to a distinct output value
-   = note: proving the result of expressions other than the parameter are unique is not supported
+error E0207: the const parameter `H` is not constrained by the impl trait, self type, or predicates
+ at $DIR/issue-78654.rs:9:6: unconstrained const parameter
+  on line 9, column 5: help: remove the unused type parameter `H`
+note: expressions using a const parameter must map each value to a distinct output value
+note: proving the result of expressions other than the parameter are unique is not supported
 
 error: aborting due to 2 previous errors
 

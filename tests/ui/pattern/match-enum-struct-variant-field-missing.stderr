@@ -1,14 +1,7 @@
-error[E0026]: variant `A::A` does not have a field named `fob`
-  --> $DIR/match-enum-struct-variant-field-missing.rs:12:16
-   |
-LL |         A::A { fob } => {
-   |                ^^^ variant `A::A` does not have this field
-   |
+error E0026: variant `A::A` does not have a field named `fob`
+ at $DIR/match-enum-struct-variant-field-missing.rs:12:16: variant `A::A` does not have this field
 help: a field with a similar name exists
-   |
-LL -         A::A { fob } => {
-LL +         A::A { foo } => {
-   |
+ on line 12, column 15, replace with `foo`
 
 error: aborting due to 1 previous error
 

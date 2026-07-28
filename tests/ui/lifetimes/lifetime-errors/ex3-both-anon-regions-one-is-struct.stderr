@@ -1,17 +1,9 @@
 error: lifetime may not live long enough
-  --> $DIR/ex3-both-anon-regions-one-is-struct.rs:7:5
-   |
-LL | fn foo(mut x: Ref, y: &u32) {
-   |        -----          - let's call the lifetime of this reference `'1`
-   |        |
-   |        has type `Ref<'_, '2>`
-LL |     x.b = y;
-   |     ^^^^^^^ assignment requires that `'1` must outlive `'2`
-   |
+ at $DIR/ex3-both-anon-regions-one-is-struct.rs:7:5: assignment requires that `'1` must outlive `'2`
+  on line 6, column 8: has type `Ref<'_, '2>`
+  on line 6, column 23: let's call the lifetime of this reference `'1`
 help: consider introducing a named lifetime parameter
-   |
-LL | fn foo<'a>(mut x: Ref<'a, 'a>, y: &'a u32) {
-   |       ++++           ++++++++      ++
+ on line 6, column 6, add `<'a>`
 
 error: aborting due to 1 previous error
 

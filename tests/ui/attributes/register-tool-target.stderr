@@ -1,16 +1,7 @@
 error: crate-level attribute should be an inner attribute: add an exclamation mark: `#![register_tool]`
-  --> $DIR/register-tool-target.rs:3:1
-   |
-LL | #[register_tool(no_valid_target)]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/register-tool-target.rs:3:1
 note: this attribute does not have an `!`, which means it is applied to this function
-  --> $DIR/register-tool-target.rs:5:1
-   |
-LL | / fn main() {
-LL | |
-LL | | }
-   | |_^
+ at $DIR/register-tool-target.rs:5:1 to 7:2
 
 error: aborting due to 1 previous error
 

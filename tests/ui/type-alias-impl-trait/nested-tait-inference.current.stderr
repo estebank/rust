@@ -1,18 +1,9 @@
-error[E0277]: the trait bound `(): Foo<FooX>` is not satisfied
-  --> $DIR/nested-tait-inference.rs:18:13
-   |
-LL | fn foo() -> impl Foo<FooX> {
-   |             ^^^^^^^^^^^^^^ the trait `Foo<FooX>` is not implemented for `()`
-...
-LL |     ()
-   |     -- return type was inferred to be `()` here
-   |
+error E0277: the trait bound `(): Foo<FooX>` is not satisfied
+ at $DIR/nested-tait-inference.rs:18:13: the trait `Foo<FooX>` is not implemented for `()`
+  on line 21: return type was inferred to be `()` here
 help: the trait `Foo<FooX>` is not implemented for `()`
       but trait `Foo<()>` is implemented for it
-  --> $DIR/nested-tait-inference.rs:15:1
-   |
-LL | impl Foo<()> for () {}
-   | ^^^^^^^^^^^^^^^^^^^
+ at $DIR/nested-tait-inference.rs:15:1
 
 error: aborting due to 1 previous error
 

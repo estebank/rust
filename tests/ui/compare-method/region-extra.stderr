@@ -1,17 +1,8 @@
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/region-extra.rs:9:24
-   |
-LL |     fn foo();
-   |     --------- definition of `foo` from trait
-...
-LL |     fn foo() where 'a: 'b { }
-   |                        ^^ impl has extra requirement `'a: 'b`
-   |
+error E0276: impl has stricter requirements than trait
+ at $DIR/region-extra.rs:9:24: impl has extra requirement `'a: 'b`
+  on line 5: definition of `foo` from trait
 help: remove the `where` clause
-   |
-LL -     fn foo() where 'a: 'b { }
-LL +     fn foo()  { }
-   |
+ on line 9, column 13
 
 error: aborting due to 1 previous error
 

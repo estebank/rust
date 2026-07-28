@@ -1,13 +1,7 @@
 error: allocators cannot be `#[thread_local]`
-  --> $DIR/no-thread-local.rs:7:1
-   |
-LL | #[thread_local]
-   | ---------------
-   | |
-   | marked `#[thread_local]` here
-   | help: remove this attribute
-LL | static A: System = System;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/no-thread-local.rs:7:1
+  on line 6: marked `#[thread_local]` here
+  on line 6: help: remove this attribute
 
 error: aborting due to 1 previous error
 

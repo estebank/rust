@@ -1,13 +1,7 @@
 error: missing `fn` for function definition
-  --> $DIR/missing-fn-issue-65381-1.rs:1:1
-   |
-LL | main() {
-   | ^^^^
-   |
+ at $DIR/missing-fn-issue-65381-1.rs:1:1
 help: add `fn` here to parse `main` as a function
-   |
-LL | fn main() {
-   | ++
+ on line 1, column 1, add `fn `
 
 error: aborting due to 1 previous error
 

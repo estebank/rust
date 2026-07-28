@@ -1,62 +1,30 @@
-error[E0261]: use of undeclared lifetime name `'unpinned`
-  --> $DIR/ice-cast-type-with-error-124848.rs:7:32
-   |
-LL | struct MyType<'a>(Cell<Option<&'unpinned mut MyType<'a>>>, Pin);
-   |                                ^^^^^^^^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'unpinned`
+ at $DIR/ice-cast-type-with-error-124848.rs:7:32: undeclared lifetime
 help: consider introducing lifetime `'unpinned` here
-   |
-LL | struct MyType<'unpinned, 'a>(Cell<Option<&'unpinned mut MyType<'a>>>, Pin);
-   |               ++++++++++
+ on line 7, column 14, add `'unpinned, `
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/ice-cast-type-with-error-124848.rs:14:53
-   |
-LL |     let bad_addr = &unpinned as *const Cell<Option<&'a mut MyType<'a>>> as usize;
-   |                                                     ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/ice-cast-type-with-error-124848.rs:14:53: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | fn main<'a>() {
-   |        ++++
+ on line 11, column 7, add `<'a>`
 
-error[E0261]: use of undeclared lifetime name `'a`
-  --> $DIR/ice-cast-type-with-error-124848.rs:14:67
-   |
-LL |     let bad_addr = &unpinned as *const Cell<Option<&'a mut MyType<'a>>> as usize;
-   |                                                                   ^^ undeclared lifetime
-   |
+error E0261: use of undeclared lifetime name `'a`
+ at $DIR/ice-cast-type-with-error-124848.rs:14:67: undeclared lifetime
 help: consider introducing lifetime `'a` here
-   |
-LL | fn main<'a>() {
-   |        ++++
+ on line 11, column 7, add `<'a>`
 
-error[E0425]: cannot find type `Pin` in this scope
-  --> $DIR/ice-cast-type-with-error-124848.rs:7:60
-   |
-LL | struct MyType<'a>(Cell<Option<&'unpinned mut MyType<'a>>>, Pin);
-   |                                                            ^^^ not found in this scope
-   |
+error E0425: cannot find type `Pin` in this scope
+ at $DIR/ice-cast-type-with-error-124848.rs:7:60: not found in this scope
 help: consider importing this struct
-   |
-LL + use std::pin::Pin;
-   |
+ on line 5, column 1, add `use std::pin::Pin;`
 
-error[E0061]: this struct takes 2 arguments but 1 argument was supplied
-  --> $DIR/ice-cast-type-with-error-124848.rs:12:24
-   |
-LL |     let mut unpinned = MyType(Cell::new(None));
-   |                        ^^^^^^----------------- argument #2 is missing
-   |
+error E0061: this struct takes 2 arguments but 1 argument was supplied
+ at $DIR/ice-cast-type-with-error-124848.rs:12:24
+  on line 12, column 30: argument #2 is missing
 note: tuple struct defined here
-  --> $DIR/ice-cast-type-with-error-124848.rs:7:8
-   |
-LL | struct MyType<'a>(Cell<Option<&'unpinned mut MyType<'a>>>, Pin);
-   |        ^^^^^^
+ at $DIR/ice-cast-type-with-error-124848.rs:7:8
 help: provide the argument
-   |
-LL |     let mut unpinned = MyType(Cell::new(None), /* value */);
-   |                                              +++++++++++++
+ on line 12, column 29, replace with `(Cell::new(None), /* value */)`
 
 error: aborting due to 5 previous errors
 

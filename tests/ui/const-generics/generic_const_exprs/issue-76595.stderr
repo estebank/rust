@@ -1,20 +1,10 @@
-error[E0107]: function takes 2 generic arguments but 1 generic argument was supplied
-  --> $DIR/issue-76595.rs:15:5
-   |
-LL |     test::<2>();
-   |     ^^^^   - supplied 1 generic argument
-   |     |
-   |     expected 2 generic arguments
-   |
+error E0107: function takes 2 generic arguments but 1 generic argument was supplied
+ at $DIR/issue-76595.rs:15:5: expected 2 generic arguments
+  on line 15, column 12: supplied 1 generic argument
 note: function defined here, with 2 generic parameters: `T`, `P`
-  --> $DIR/issue-76595.rs:10:4
-   |
-LL | fn test<T, const P: usize>() where Bool<{core::mem::size_of::<T>() > 4}>: True {
-   |    ^^^^ -  --------------
+ at $DIR/issue-76595.rs:10:4
 help: add missing generic argument
-   |
-LL |     test::<2, P>();
-   |             +++
+ on line 15, column 12, add `, P`
 
 error: aborting due to 1 previous error
 

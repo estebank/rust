@@ -1,14 +1,6 @@
-error[E0119]: conflicting implementations of trait `Overlap<u32>` for type `u32`
-  --> $DIR/trivial-unsized-projection-in-coherence.rs:37:1
-   |
-LL |   impl<T> Overlap<u32> for T {
-   |   -------------------------- first implementation here
-...
-LL | / impl<U> Overlap<U> for u32
-LL | |
-LL | | where
-LL | |     MaybeUnsized<U, u32>: RelateReqSized,
-   | |_________________________________________^ conflicting implementation for `u32`
+error E0119: conflicting implementations of trait `Overlap<u32>` for type `u32`
+ at $DIR/trivial-unsized-projection-in-coherence.rs:37:1 to 40:42: conflicting implementation for `u32`
+  on line 34: first implementation here
 
 error: aborting due to 1 previous error
 

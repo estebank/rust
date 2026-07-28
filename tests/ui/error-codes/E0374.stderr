@@ -1,19 +1,10 @@
-error[E0392]: type parameter `T` is never used
-  --> $DIR/E0374.rs:4:12
-   |
-LL | struct Foo<T: ?Sized> {
-   |            ^ unused type parameter
-   |
-   = help: consider removing `T`, referring to it in a field, or using a marker such as `PhantomData`
+error E0392: type parameter `T` is never used
+ at $DIR/E0374.rs:4:12: unused type parameter
+help: consider removing `T`, referring to it in a field, or using a marker such as `PhantomData`
 
-error[E0374]: implementing `CoerceUnsized` requires a field to be coerced
-  --> $DIR/E0374.rs:8:1
-   |
-LL | / impl<T, U> CoerceUnsized<Foo<U>> for Foo<T>
-LL | |     where T: CoerceUnsized<U> {}
-   | |_____________________________^
-   |
-   = note: expected a single field to be coerced, none found
+error E0374: implementing `CoerceUnsized` requires a field to be coerced
+ at $DIR/E0374.rs:8:1 to 9:30
+note: expected a single field to be coerced, none found
 
 error: aborting due to 2 previous errors
 

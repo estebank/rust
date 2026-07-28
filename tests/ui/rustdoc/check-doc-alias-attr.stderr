@@ -1,112 +1,55 @@
 error: doc alias attribute expects a string `#[doc(alias = "a")]` or a list of strings `#[doc(alias("a", "b"))]`
-  --> $DIR/check-doc-alias-attr.rs:7:7
-   |
-LL | #[doc(alias)]
-   |       ^^^^^
+ at $DIR/check-doc-alias-attr.rs:7:7
 
-error[E0539]: malformed `doc` attribute input
-  --> $DIR/check-doc-alias-attr.rs:8:3
-   |
-LL | #[doc(alias = 0)]
-   |   ^^^^^^^^^^^^-^
-   |               |
-   |               expected a string literal here
+error E0539: malformed `doc` attribute input
+ at $DIR/check-doc-alias-attr.rs:8:3
+  on line 8, column 15: expected a string literal here
 
 error: '"' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:9:15
-   |
-LL | #[doc(alias = "\"")]
-   |               ^^^^
+ at $DIR/check-doc-alias-attr.rs:9:15
 
 error: '\n' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:10:15
-   |
-LL | #[doc(alias = "\n")]
-   |               ^^^^
+ at $DIR/check-doc-alias-attr.rs:10:15
 
 error: '\n' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:11:15
-   |
-LL |   #[doc(alias = "
-   |  _______________^
-LL | | ")]
-   | |_^
+ at $DIR/check-doc-alias-attr.rs:11:15 to 12:2
 
 error: '\t' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:13:15
-   |
-LL | #[doc(alias = "\t")]
-   |               ^^^^
+ at $DIR/check-doc-alias-attr.rs:13:15
 
 error: `#[doc(alias = "...")]` cannot start or end with ' '
-  --> $DIR/check-doc-alias-attr.rs:14:15
-   |
-LL | #[doc(alias = " hello")]
-   |               ^^^^^^^^
+ at $DIR/check-doc-alias-attr.rs:14:15
 
 error: `#[doc(alias = "...")]` cannot start or end with ' '
-  --> $DIR/check-doc-alias-attr.rs:15:15
-   |
-LL | #[doc(alias = "hello ")]
-   |               ^^^^^^^^
+ at $DIR/check-doc-alias-attr.rs:15:15
 
 error: `#[doc(alias = "...")]` attribute cannot have empty value
-  --> $DIR/check-doc-alias-attr.rs:16:15
-   |
-LL | #[doc(alias = "")]
-   |               ^^
+ at $DIR/check-doc-alias-attr.rs:16:15
 
-error[E0539]: malformed `doc` attribute input
-  --> $DIR/check-doc-alias-attr.rs:19:3
-   |
-LL | #[doc(alias(0))]
-   |   ^^^^^^^^^^-^^
-   |             |
-   |             expected a string literal here
+error E0539: malformed `doc` attribute input
+ at $DIR/check-doc-alias-attr.rs:19:3
+  on line 19, column 13: expected a string literal here
 
 error: '"' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:20:13
-   |
-LL | #[doc(alias("\""))]
-   |             ^^^^
+ at $DIR/check-doc-alias-attr.rs:20:13
 
 error: '\n' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:21:13
-   |
-LL | #[doc(alias("\n"))]
-   |             ^^^^
+ at $DIR/check-doc-alias-attr.rs:21:13
 
 error: '\n' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:22:13
-   |
-LL |   #[doc(alias("
-   |  _____________^
-LL | | "))]
-   | |_^
+ at $DIR/check-doc-alias-attr.rs:22:13 to 23:2
 
 error: '\t' character isn't allowed in `#[doc(alias = "...")]`
-  --> $DIR/check-doc-alias-attr.rs:24:13
-   |
-LL | #[doc(alias("\t"))]
-   |             ^^^^
+ at $DIR/check-doc-alias-attr.rs:24:13
 
 error: `#[doc(alias = "...")]` cannot start or end with ' '
-  --> $DIR/check-doc-alias-attr.rs:25:13
-   |
-LL | #[doc(alias(" hello"))]
-   |             ^^^^^^^^
+ at $DIR/check-doc-alias-attr.rs:25:13
 
 error: `#[doc(alias = "...")]` cannot start or end with ' '
-  --> $DIR/check-doc-alias-attr.rs:26:13
-   |
-LL | #[doc(alias("hello "))]
-   |             ^^^^^^^^
+ at $DIR/check-doc-alias-attr.rs:26:13
 
 error: `#[doc(alias = "...")]` attribute cannot have empty value
-  --> $DIR/check-doc-alias-attr.rs:27:13
-   |
-LL | #[doc(alias(""))]
-   |             ^^
+ at $DIR/check-doc-alias-attr.rs:27:13
 
 error: aborting due to 17 previous errors
 

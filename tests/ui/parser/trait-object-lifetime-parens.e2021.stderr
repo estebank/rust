@@ -1,49 +1,23 @@
 error: lifetime bounds may not be parenthesized
-  --> $DIR/trait-object-lifetime-parens.rs:9:21
-   |
-LL | fn f<'a, T: Trait + ('a)>() {}
-   |                     ^^^^
-   |
+ at $DIR/trait-object-lifetime-parens.rs:9:21
 help: remove the parentheses
-   |
-LL - fn f<'a, T: Trait + ('a)>() {}
-LL + fn f<'a, T: Trait + 'a>() {}
-   |
+ on line 9, column 20
 
 error: lifetime bounds may not be parenthesized
-  --> $DIR/trait-object-lifetime-parens.rs:12:24
-   |
-LL |     let _: Box<Trait + ('a)>;
-   |                        ^^^^
-   |
+ at $DIR/trait-object-lifetime-parens.rs:12:24
 help: remove the parentheses
-   |
-LL -     let _: Box<Trait + ('a)>;
-LL +     let _: Box<Trait + 'a>;
-   |
+ on line 12, column 23
 
 error: expected type, found lifetime
-  --> $DIR/trait-object-lifetime-parens.rs:16:17
-   |
-LL |     let _: Box<('a) + Trait>;
-   |                 ^^ expected type
+ at $DIR/trait-object-lifetime-parens.rs:16:17: expected type
 
-error[E0178]: expected a path on the left-hand side of `+`
-  --> $DIR/trait-object-lifetime-parens.rs:16:16
-   |
-LL |     let _: Box<('a) + Trait>;
-   |                ^^^^ expected a path
+error E0178: expected a path on the left-hand side of `+`
+ at $DIR/trait-object-lifetime-parens.rs:16:16: expected a path
 
-error[E0782]: expected a type, found a trait
-  --> $DIR/trait-object-lifetime-parens.rs:12:16
-   |
-LL |     let _: Box<Trait + ('a)>;
-   |                ^^^^^^^^^^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/trait-object-lifetime-parens.rs:12:16
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL |     let _: Box<dyn Trait + ('a)>;
-   |                +++
+ on line 12, column 15, add `dyn `
 
 error: aborting due to 5 previous errors
 

@@ -1,36 +1,19 @@
 error: expected type, found `{`
-  --> $DIR/recover-enum2.rs:6:18
-   |
-LL |         Var3 {
-   |         ---- while parsing this struct
-LL |             abc: {},
-   |                  ^ expected type
+ at $DIR/recover-enum2.rs:6:18: expected type
+  on line 5: while parsing this struct
 
 error: expected one of `!`, `(`, `)`, `+`, `,`, `::`, or `<`, found `{`
-  --> $DIR/recover-enum2.rs:25:22
-   |
-LL |         enum Test4 {
-   |              ----- while parsing this enum
-LL |             Nope(i32 {})
-   |                      ^ expected one of 7 possible tokens
-   |
-   = help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
+ at $DIR/recover-enum2.rs:25:22: expected one of 7 possible tokens
+  on line 24, column 14: while parsing this enum
+help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
 
-error[E0308]: mismatched types
-  --> $DIR/recover-enum2.rs:11:9
-   |
-LL |     let () = 1;
-   |         ^^   - this expression has type `{integer}`
-   |         |
-   |         expected integer, found `()`
+error E0308: mismatched types
+ at $DIR/recover-enum2.rs:11:9: expected integer, found `()`
+  on line 11, column 14: this expression has type `{integer}`
 
-error[E0308]: mismatched types
-  --> $DIR/recover-enum2.rs:27:13
-   |
-LL |         let () = 1;
-   |             ^^   - this expression has type `{integer}`
-   |             |
-   |             expected integer, found `()`
+error E0308: mismatched types
+ at $DIR/recover-enum2.rs:27:13: expected integer, found `()`
+  on line 27, column 18: this expression has type `{integer}`
 
 error: aborting due to 4 previous errors
 

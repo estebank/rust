@@ -1,38 +1,20 @@
-error[E0452]: malformed lint attribute input
-  --> $DIR/deduplicate-diagnostics.rs:10:8
-   |
-LL | #[deny("literal")]
-   |        ^^^^^^^^^ bad attribute argument
+error E0452: malformed lint attribute input
+ at $DIR/deduplicate-diagnostics.rs:10:8: bad attribute argument
 
 error: cannot find derive macro `Unresolved` in this scope
-  --> $DIR/deduplicate-diagnostics.rs:6:10
-   |
-LL | #[derive(Unresolved)]
-   |          ^^^^^^^^^^
+ at $DIR/deduplicate-diagnostics.rs:6:10
 
 error: cannot find derive macro `Unresolved` in this scope
-  --> $DIR/deduplicate-diagnostics.rs:6:10
-   |
-LL | #[derive(Unresolved)]
-   |          ^^^^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/deduplicate-diagnostics.rs:6:10
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0452]: malformed lint attribute input
-  --> $DIR/deduplicate-diagnostics.rs:10:8
-   |
-LL | #[deny("literal")]
-   |        ^^^^^^^^^ bad attribute argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0452: malformed lint attribute input
+ at $DIR/deduplicate-diagnostics.rs:10:8: bad attribute argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0452]: malformed lint attribute input
-  --> $DIR/deduplicate-diagnostics.rs:10:8
-   |
-LL | #[deny("literal")]
-   |        ^^^^^^^^^ bad attribute argument
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0452: malformed lint attribute input
+ at $DIR/deduplicate-diagnostics.rs:10:8: bad attribute argument
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: aborting due to 5 previous errors
 

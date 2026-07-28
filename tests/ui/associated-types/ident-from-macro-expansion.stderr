@@ -1,20 +1,10 @@
-error[E0576]: cannot find associated type `Assoc` in trait `Trait`
-  --> $DIR/ident-from-macro-expansion.rs:17:29
-   |
-LL |         <() as Trait>::$id
-   |                        --- due to this macro variable
-...
-LL |     let x: fully_qualified!(Assoc);
-   |                             ^^^^^ not found in `Trait`
+error E0576: cannot find associated type `Assoc` in trait `Trait`
+ at $DIR/ident-from-macro-expansion.rs:17:29: not found in `Trait`
+  on line 6, column 24: due to this macro variable
 
-error[E0220]: associated type `Assoc` not found for `T`
-  --> $DIR/ident-from-macro-expansion.rs:19:31
-   |
-LL |         T::$id
-   |            --- due to this macro variable
-...
-LL |     let x: type_dependent!(T, Assoc);
-   |                               ^^^^^ associated type `Assoc` not found
+error E0220: associated type `Assoc` not found for `T`
+ at $DIR/ident-from-macro-expansion.rs:19:31: associated type `Assoc` not found
+  on line 12, column 12: due to this macro variable
 
 error: aborting due to 2 previous errors
 

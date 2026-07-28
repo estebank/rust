@@ -1,20 +1,11 @@
 error: lifetime may not live long enough
-  --> $DIR/issue-54124.rs:2:22
-   |
-LL | fn test<'a>() {
-   |         -- lifetime `'a` defined here
-LL |     let _:fn(&()) = |_:&'a ()| {};
-   |                      ^ - let's call the lifetime of this reference `'1`
-   |                      |
-   |                      requires that `'1` must outlive `'a`
+ at $DIR/issue-54124.rs:2:22: requires that `'1` must outlive `'a`
+  on line 1, column 9: lifetime `'a` defined here
+  on line 2, column 24: let's call the lifetime of this reference `'1`
 
 error: lifetime may not live long enough
-  --> $DIR/issue-54124.rs:2:22
-   |
-LL | fn test<'a>() {
-   |         -- lifetime `'a` defined here
-LL |     let _:fn(&()) = |_:&'a ()| {};
-   |                      ^ requires that `'a` must outlive `'static`
+ at $DIR/issue-54124.rs:2:22: requires that `'a` must outlive `'static`
+  on line 1, column 9: lifetime `'a` defined here
 
 error: aborting due to 2 previous errors
 

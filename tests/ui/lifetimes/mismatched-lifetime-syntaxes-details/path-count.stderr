@@ -1,148 +1,75 @@
 error: hiding a lifetime that's elided elsewhere is confusing
-  --> $DIR/path-count.rs:19:15
-   |
-LL | fn missing(_: &str) -> Foo {
-   |               ^^^^     ^^^ the same lifetimes are hidden here
-   |               |
-   |               the lifetime is elided here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:19:15: the lifetime is elided here
+  on line 19, column 24: the same lifetimes are hidden here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 note: the lint level is defined here
-  --> $DIR/path-count.rs:3:9
-   |
-LL | #![deny(mismatched_lifetime_syntaxes)]
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/path-count.rs:3:9
 help: use `'_` for type paths
-   |
-LL | fn missing(_: &str) -> Foo<'_, '_> {
-   |                           ++++++++
+ on line 19, column 26, add `<'_, '_>`
 
 error: hiding a lifetime that's elided elsewhere is confusing
-  --> $DIR/path-count.rs:24:22
-   |
-LL | fn missing_double(_: &str) -> (Foo, Foo) {
-   |                      ^^^^      ^^^  ^^^ the same lifetimes are hidden here
-   |                      |         |
-   |                      |         the same lifetimes are hidden here
-   |                      the lifetime is elided here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:24:22: the lifetime is elided here
+  on line 24, column 32: the same lifetimes are hidden here
+  on line 24, column 37: the same lifetimes are hidden here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: use `'_` for type paths
-   |
-LL | fn missing_double(_: &str) -> (Foo<'_, '_>, Foo<'_, '_>) {
-   |                                   ++++++++     ++++++++
+ on line 24, column 34, add `<'_, '_>`
 
 error: hiding a lifetime that's elided elsewhere is confusing
-  --> $DIR/path-count.rs:29:13
-   |
-LL | fn empty(_: &str) -> Foo<> {
-   |             ^^^^     ^^^^^ the same lifetimes are hidden here
-   |             |
-   |             the lifetime is elided here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:29:13: the lifetime is elided here
+  on line 29, column 22: the same lifetimes are hidden here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: use `'_` for type paths
-   |
-LL | fn empty(_: &str) -> Foo<'_, '_> {
-   |                          ++++++
+ on line 29, column 25, add `'_, '_`
 
 error: hiding a lifetime that's elided elsewhere is confusing
-  --> $DIR/path-count.rs:34:23
-   |
-LL | fn wrapper_missing(_: &str) -> Wrapper<Foo> {
-   |                       ^^^^             ^^^ the same lifetimes are hidden here
-   |                       |
-   |                       the lifetime is elided here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:34:23: the lifetime is elided here
+  on line 34, column 40: the same lifetimes are hidden here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: use `'_` for type paths
-   |
-LL | fn wrapper_missing(_: &str) -> Wrapper<Foo<'_, '_>> {
-   |                                           ++++++++
+ on line 34, column 42, add `<'_, '_>`
 
 error: hiding a lifetime that's elided elsewhere is confusing
-  --> $DIR/path-count.rs:39:23
-   |
-LL | fn missing_generic(_: &str) -> Bar<u8> {
-   |                       ^^^^     ^^^^^^^ the same lifetimes are hidden here
-   |                       |
-   |                       the lifetime is elided here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:39:23: the lifetime is elided here
+  on line 39, column 32: the same lifetimes are hidden here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: use `'_` for type paths
-   |
-LL | fn missing_generic(_: &str) -> Bar<'_, '_, u8> {
-   |                                    +++++++
+ on line 39, column 35, add `'_, '_, `
 
 error: hiding a lifetime that's named elsewhere is confusing
-  --> $DIR/path-count.rs:44:36
-   |
-LL | fn named_missing<'a>(_: &'a u8) -> Foo {
-   |                          --        ^^^ the same lifetimes are hidden here
-   |                          |
-   |                          the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:44:36: the same lifetimes are hidden here
+  on line 44, column 26: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'a`
-   |
-LL | fn named_missing<'a>(_: &'a u8) -> Foo<'a, 'a> {
-   |                                       ++++++++
+ on line 44, column 38, add `<'a, 'a>`
 
 error: hiding a lifetime that's named elsewhere is confusing
-  --> $DIR/path-count.rs:49:34
-   |
-LL | fn named_empty<'a>(_: &'a u8) -> Foo<> {
-   |                        --        ^^^^^ the same lifetimes are hidden here
-   |                        |
-   |                        the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:49:34: the same lifetimes are hidden here
+  on line 49, column 24: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'a`
-   |
-LL | fn named_empty<'a>(_: &'a u8) -> Foo<'a, 'a> {
-   |                                      ++++++
+ on line 49, column 37, add `'a, 'a`
 
 error: hiding a lifetime that's named elsewhere is confusing
-  --> $DIR/path-count.rs:54:38
-   |
-LL | fn static_missing(_: &'static u8) -> Foo {
-   |                       -------        ^^^ the same lifetimes are hidden here
-   |                       |
-   |                       the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:54:38: the same lifetimes are hidden here
+  on line 54, column 23: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'static`
-   |
-LL | fn static_missing(_: &'static u8) -> Foo<'static, 'static> {
-   |                                         ++++++++++++++++++
+ on line 54, column 40, add `<'static, 'static>`
 
 error: hiding a lifetime that's named elsewhere is confusing
-  --> $DIR/path-count.rs:59:36
-   |
-LL | fn static_empty(_: &'static u8) -> Foo<> {
-   |                     -------        ^^^^^ the same lifetimes are hidden here
-   |                     |
-   |                     the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:59:36: the same lifetimes are hidden here
+  on line 59, column 21: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'static`
-   |
-LL | fn static_empty(_: &'static u8) -> Foo<'static, 'static> {
-   |                                        ++++++++++++++++
+ on line 59, column 39, add `'static, 'static`
 
 error: hiding a lifetime that's named elsewhere is confusing
-  --> $DIR/path-count.rs:64:47
-   |
-LL | fn static_missing_generic(_: &'static str) -> Bar<u8> {
-   |                               -------         ^^^^^^^ the same lifetimes are hidden here
-   |                               |
-   |                               the lifetime is named here
-   |
-   = help: the same lifetime is referred to in inconsistent ways, making the signature confusing
+ at $DIR/path-count.rs:64:47: the same lifetimes are hidden here
+  on line 64, column 31: the lifetime is named here
+help: the same lifetime is referred to in inconsistent ways, making the signature confusing
 help: consistently use `'static`
-   |
-LL | fn static_missing_generic(_: &'static str) -> Bar<'static, 'static, u8> {
-   |                                                   +++++++++++++++++
+ on line 64, column 50, add `'static, 'static, `
 
 error: aborting due to 10 previous errors
 

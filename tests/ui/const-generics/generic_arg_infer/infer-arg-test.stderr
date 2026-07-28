@@ -1,37 +1,19 @@
 error: expected identifier, found reserved identifier `_`
-  --> $DIR/infer-arg-test.rs:5:17
-   |
-LL | struct BadInfer<_>;
-   |                 ^ expected identifier, found reserved identifier
+ at $DIR/infer-arg-test.rs:5:17: expected identifier, found reserved identifier
 
 error: expected identifier, found reserved identifier `_`
-  --> $DIR/infer-arg-test.rs:11:17
-   |
-LL | fn bad_infer_fn<_>() {}
-   |                 ^ expected identifier, found reserved identifier
+ at $DIR/infer-arg-test.rs:11:17: expected identifier, found reserved identifier
 
-error[E0392]: type parameter `_` is never used
-  --> $DIR/infer-arg-test.rs:5:17
-   |
-LL | struct BadInfer<_>;
-   |                 ^ unused type parameter
-   |
-   = help: consider removing `_`, referring to it in a field, or using a marker such as `PhantomData`
-   = help: if you intended `_` to be a const parameter, use `const _: /* Type */` instead
+error E0392: type parameter `_` is never used
+ at $DIR/infer-arg-test.rs:5:17: unused type parameter
+help: consider removing `_`, referring to it in a field, or using a marker such as `PhantomData`
+help: if you intended `_` to be a const parameter, use `const _: /* Type */` instead
 
-error[E0107]: struct takes 2 generic arguments but 3 generic arguments were supplied
-  --> $DIR/infer-arg-test.rs:16:10
-   |
-LL |   let a: All<_, _, _>;
-   |          ^^^     --- help: remove the unnecessary generic argument
-   |          |
-   |          expected 2 generic arguments
-   |
+error E0107: struct takes 2 generic arguments but 3 generic arguments were supplied
+ at $DIR/infer-arg-test.rs:16:10: expected 2 generic arguments
+  on line 16, column 18: help: remove the unnecessary generic argument
 note: struct defined here, with 2 generic parameters: `T`, `N`
-  --> $DIR/infer-arg-test.rs:1:8
-   |
-LL | struct All<'a, T, const N: usize> {
-   |        ^^^     -  --------------
+ at $DIR/infer-arg-test.rs:1:8
 
 error: aborting due to 4 previous errors
 

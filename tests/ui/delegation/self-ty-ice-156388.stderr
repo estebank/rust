@@ -1,13 +1,7 @@
-error[E0277]: the trait bound `Self: [const] Default` is not satisfied
-  --> $DIR/self-ty-ice-156388.rs:6:16
-   |
-LL | reuse Default::default;
-   |                ^^^^^^^
-   |
+error E0277: the trait bound `Self: [const] Default` is not satisfied
+ at $DIR/self-ty-ice-156388.rs:6:16
 help: consider restricting type parameter `Self` with trait `Default`
-   |
-LL | reuse Default::default [const] std::default::Default;
-   |                        +++++++++++++++++++++++++++++
+ on line 6, column 22, add ` [const] std::default::Default`
 
 error: aborting due to 1 previous error
 

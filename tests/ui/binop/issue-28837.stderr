@@ -1,260 +1,137 @@
-error[E0369]: cannot add `A` to `A`
-  --> $DIR/issue-28837.rs:6:7
-   |
-LL |     a + a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: cannot add `A` to `A`
+ at $DIR/issue-28837.rs:6:7
+  on line 6: A
+  on line 6, column 9: A
 note: an implementation of `Add` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `Add`
+ at $DIR/issue-28837.rs:1:1: must implement `Add`
 note: the trait `Add` must be implemented
-  --> $SRC_DIR/core/src/ops/arith.rs:LL:COL
+ at $SRC_DIR/core/src/ops/arith.rs:LL:COL
 
-error[E0369]: cannot subtract `A` from `A`
-  --> $DIR/issue-28837.rs:8:7
-   |
-LL |     a - a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: cannot subtract `A` from `A`
+ at $DIR/issue-28837.rs:8:7
+  on line 8: A
+  on line 8, column 9: A
 note: an implementation of `Sub` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `Sub`
+ at $DIR/issue-28837.rs:1:1: must implement `Sub`
 note: the trait `Sub` must be implemented
-  --> $SRC_DIR/core/src/ops/arith.rs:LL:COL
+ at $SRC_DIR/core/src/ops/arith.rs:LL:COL
 
-error[E0369]: cannot multiply `A` by `A`
-  --> $DIR/issue-28837.rs:10:7
-   |
-LL |     a * a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: cannot multiply `A` by `A`
+ at $DIR/issue-28837.rs:10:7
+  on line 10: A
+  on line 10, column 9: A
 note: an implementation of `Mul` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `Mul`
+ at $DIR/issue-28837.rs:1:1: must implement `Mul`
 note: the trait `Mul` must be implemented
-  --> $SRC_DIR/core/src/ops/arith.rs:LL:COL
+ at $SRC_DIR/core/src/ops/arith.rs:LL:COL
 
-error[E0369]: cannot divide `A` by `A`
-  --> $DIR/issue-28837.rs:12:7
-   |
-LL |     a / a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: cannot divide `A` by `A`
+ at $DIR/issue-28837.rs:12:7
+  on line 12: A
+  on line 12, column 9: A
 note: an implementation of `Div` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `Div`
+ at $DIR/issue-28837.rs:1:1: must implement `Div`
 note: the trait `Div` must be implemented
-  --> $SRC_DIR/core/src/ops/arith.rs:LL:COL
+ at $SRC_DIR/core/src/ops/arith.rs:LL:COL
 
-error[E0369]: cannot calculate the remainder of `A` divided by `A`
-  --> $DIR/issue-28837.rs:14:7
-   |
-LL |     a % a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: cannot calculate the remainder of `A` divided by `A`
+ at $DIR/issue-28837.rs:14:7
+  on line 14: A
+  on line 14, column 9: A
 note: an implementation of `Rem` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `Rem`
+ at $DIR/issue-28837.rs:1:1: must implement `Rem`
 note: the trait `Rem` must be implemented
-  --> $SRC_DIR/core/src/ops/arith.rs:LL:COL
+ at $SRC_DIR/core/src/ops/arith.rs:LL:COL
 
-error[E0369]: no implementation for `A & A`
-  --> $DIR/issue-28837.rs:16:7
-   |
-LL |     a & a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: no implementation for `A & A`
+ at $DIR/issue-28837.rs:16:7
+  on line 16: A
+  on line 16, column 9: A
 note: an implementation of `BitAnd` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `BitAnd`
+ at $DIR/issue-28837.rs:1:1: must implement `BitAnd`
 note: the trait `BitAnd` must be implemented
-  --> $SRC_DIR/core/src/ops/bit.rs:LL:COL
+ at $SRC_DIR/core/src/ops/bit.rs:LL:COL
 
-error[E0369]: no implementation for `A | A`
-  --> $DIR/issue-28837.rs:18:7
-   |
-LL |     a | a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: no implementation for `A | A`
+ at $DIR/issue-28837.rs:18:7
+  on line 18: A
+  on line 18, column 9: A
 note: an implementation of `BitOr` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `BitOr`
+ at $DIR/issue-28837.rs:1:1: must implement `BitOr`
 note: the trait `BitOr` must be implemented
-  --> $SRC_DIR/core/src/ops/bit.rs:LL:COL
+ at $SRC_DIR/core/src/ops/bit.rs:LL:COL
 
-error[E0369]: no implementation for `A << A`
-  --> $DIR/issue-28837.rs:20:7
-   |
-LL |     a << a;
-   |     - ^^ - A
-   |     |
-   |     A
-   |
+error E0369: no implementation for `A << A`
+ at $DIR/issue-28837.rs:20:7
+  on line 20: A
+  on line 20, column 10: A
 note: an implementation of `Shl` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `Shl`
+ at $DIR/issue-28837.rs:1:1: must implement `Shl`
 note: the trait `Shl` must be implemented
-  --> $SRC_DIR/core/src/ops/bit.rs:LL:COL
+ at $SRC_DIR/core/src/ops/bit.rs:LL:COL
 
-error[E0369]: no implementation for `A >> A`
-  --> $DIR/issue-28837.rs:22:7
-   |
-LL |     a >> a;
-   |     - ^^ - A
-   |     |
-   |     A
-   |
+error E0369: no implementation for `A >> A`
+ at $DIR/issue-28837.rs:22:7
+  on line 22: A
+  on line 22, column 10: A
 note: an implementation of `Shr` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `Shr`
+ at $DIR/issue-28837.rs:1:1: must implement `Shr`
 note: the trait `Shr` must be implemented
-  --> $SRC_DIR/core/src/ops/bit.rs:LL:COL
+ at $SRC_DIR/core/src/ops/bit.rs:LL:COL
 
-error[E0369]: binary operation `==` cannot be applied to type `A`
-  --> $DIR/issue-28837.rs:24:7
-   |
-LL |     a == a;
-   |     - ^^ - A
-   |     |
-   |     A
-   |
+error E0369: binary operation `==` cannot be applied to type `A`
+ at $DIR/issue-28837.rs:24:7
+  on line 24: A
+  on line 24, column 10: A
 note: an implementation of `PartialEq` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `PartialEq`
+ at $DIR/issue-28837.rs:1:1: must implement `PartialEq`
 help: consider annotating `A` with `#[derive(PartialEq)]`
-   |
-LL + #[derive(PartialEq)]
-LL | struct A;
-   |
+ on line 1, column 1, add `#[derive(PartialEq)]`
 
-error[E0369]: binary operation `!=` cannot be applied to type `A`
-  --> $DIR/issue-28837.rs:26:7
-   |
-LL |     a != a;
-   |     - ^^ - A
-   |     |
-   |     A
-   |
+error E0369: binary operation `!=` cannot be applied to type `A`
+ at $DIR/issue-28837.rs:26:7
+  on line 26: A
+  on line 26, column 10: A
 note: an implementation of `PartialEq` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `PartialEq`
+ at $DIR/issue-28837.rs:1:1: must implement `PartialEq`
 help: consider annotating `A` with `#[derive(PartialEq)]`
-   |
-LL + #[derive(PartialEq)]
-LL | struct A;
-   |
+ on line 1, column 1, add `#[derive(PartialEq)]`
 
-error[E0369]: binary operation `<` cannot be applied to type `A`
-  --> $DIR/issue-28837.rs:28:7
-   |
-LL |     a < a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: binary operation `<` cannot be applied to type `A`
+ at $DIR/issue-28837.rs:28:7
+  on line 28: A
+  on line 28, column 9: A
 note: an implementation of `PartialOrd` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `PartialOrd`
+ at $DIR/issue-28837.rs:1:1: must implement `PartialOrd`
 help: consider annotating `A` with `#[derive(PartialEq, PartialOrd)]`
-   |
-LL + #[derive(PartialEq, PartialOrd)]
-LL | struct A;
-   |
+ on line 1, column 1, add `#[derive(PartialEq, PartialOrd)]`
 
-error[E0369]: binary operation `<=` cannot be applied to type `A`
-  --> $DIR/issue-28837.rs:30:7
-   |
-LL |     a <= a;
-   |     - ^^ - A
-   |     |
-   |     A
-   |
+error E0369: binary operation `<=` cannot be applied to type `A`
+ at $DIR/issue-28837.rs:30:7
+  on line 30: A
+  on line 30, column 10: A
 note: an implementation of `PartialOrd` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `PartialOrd`
+ at $DIR/issue-28837.rs:1:1: must implement `PartialOrd`
 help: consider annotating `A` with `#[derive(PartialEq, PartialOrd)]`
-   |
-LL + #[derive(PartialEq, PartialOrd)]
-LL | struct A;
-   |
+ on line 1, column 1, add `#[derive(PartialEq, PartialOrd)]`
 
-error[E0369]: binary operation `>` cannot be applied to type `A`
-  --> $DIR/issue-28837.rs:32:7
-   |
-LL |     a > a;
-   |     - ^ - A
-   |     |
-   |     A
-   |
+error E0369: binary operation `>` cannot be applied to type `A`
+ at $DIR/issue-28837.rs:32:7
+  on line 32: A
+  on line 32, column 9: A
 note: an implementation of `PartialOrd` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `PartialOrd`
+ at $DIR/issue-28837.rs:1:1: must implement `PartialOrd`
 help: consider annotating `A` with `#[derive(PartialEq, PartialOrd)]`
-   |
-LL + #[derive(PartialEq, PartialOrd)]
-LL | struct A;
-   |
+ on line 1, column 1, add `#[derive(PartialEq, PartialOrd)]`
 
-error[E0369]: binary operation `>=` cannot be applied to type `A`
-  --> $DIR/issue-28837.rs:34:7
-   |
-LL |     a >= a;
-   |     - ^^ - A
-   |     |
-   |     A
-   |
+error E0369: binary operation `>=` cannot be applied to type `A`
+ at $DIR/issue-28837.rs:34:7
+  on line 34: A
+  on line 34, column 10: A
 note: an implementation of `PartialOrd` might be missing for `A`
-  --> $DIR/issue-28837.rs:1:1
-   |
-LL | struct A;
-   | ^^^^^^^^ must implement `PartialOrd`
+ at $DIR/issue-28837.rs:1:1: must implement `PartialOrd`
 help: consider annotating `A` with `#[derive(PartialEq, PartialOrd)]`
-   |
-LL + #[derive(PartialEq, PartialOrd)]
-LL | struct A;
-   |
+ on line 1, column 1, add `#[derive(PartialEq, PartialOrd)]`
 
 error: aborting due to 15 previous errors
 

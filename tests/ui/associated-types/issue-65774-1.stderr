@@ -1,49 +1,22 @@
-error[E0277]: the trait bound `T: MyDisplay` is not satisfied
-  --> $DIR/issue-65774-1.rs:10:33
-   |
-LL |     type MpuConfig: MyDisplay = T;
-   |                                 ^ unsatisfied trait bound
-   |
+error E0277: the trait bound `T: MyDisplay` is not satisfied
+ at $DIR/issue-65774-1.rs:10:33: unsatisfied trait bound
 help: the trait `MyDisplay` is not implemented for `T`
-  --> $DIR/issue-65774-1.rs:7:1
-   |
-LL | struct T;
-   | ^^^^^^^^
+ at $DIR/issue-65774-1.rs:7:1
 help: the trait `MyDisplay` is implemented for `&'a mut T`
-  --> $DIR/issue-65774-1.rs:5:1
-   |
-LL | impl<'a, T: MyDisplay> MyDisplay for &'a mut T { }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-65774-1.rs:5:1
 note: required by a bound in `MPU::MpuConfig`
-  --> $DIR/issue-65774-1.rs:10:21
-   |
-LL |     type MpuConfig: MyDisplay = T;
-   |                     ^^^^^^^^^ required by this bound in `MPU::MpuConfig`
+ at $DIR/issue-65774-1.rs:10:21: required by this bound in `MPU::MpuConfig`
 
-error[E0277]: the trait bound `T: MyDisplay` is not satisfied
-  --> $DIR/issue-65774-1.rs:44:76
-   |
-LL |         let closure = |config: &mut <S as MPU>::MpuConfig| writer.my_write(&config);
-   |                                                                            ^^^^^^^ unsatisfied trait bound
-   |
+error E0277: the trait bound `T: MyDisplay` is not satisfied
+ at $DIR/issue-65774-1.rs:44:76: unsatisfied trait bound
 help: the trait `MyDisplay` is not implemented for `T`
-  --> $DIR/issue-65774-1.rs:7:1
-   |
-LL | struct T;
-   | ^^^^^^^^
+ at $DIR/issue-65774-1.rs:7:1
 help: the trait `MyDisplay` is implemented for `&'a mut T`
-  --> $DIR/issue-65774-1.rs:5:1
-   |
-LL | impl<'a, T: MyDisplay> MyDisplay for &'a mut T { }
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/issue-65774-1.rs:5:1
 note: required for `&mut T` to implement `MyDisplay`
-  --> $DIR/issue-65774-1.rs:5:24
-   |
-LL | impl<'a, T: MyDisplay> MyDisplay for &'a mut T { }
-   |             ---------  ^^^^^^^^^     ^^^^^^^^^
-   |             |
-   |             unsatisfied trait bound introduced here
-   = note: required for the cast from `&&mut T` to `&dyn MyDisplay`
+ at $DIR/issue-65774-1.rs:5:24
+  on line 5, column 13: unsatisfied trait bound introduced here
+note: required for the cast from `&&mut T` to `&dyn MyDisplay`
 
 error: aborting due to 2 previous errors
 

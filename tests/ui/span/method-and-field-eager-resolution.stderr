@@ -1,30 +1,14 @@
-error[E0282]: type annotations needed
-  --> $DIR/method-and-field-eager-resolution.rs:4:9
-   |
-LL |     let mut x = Default::default();
-   |         ^^^^^
-LL |
-LL |     x.0;
-   |     - type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/method-and-field-eager-resolution.rs:4:9
+  on line 6: type must be known at this point
 help: consider giving `x` an explicit type
-   |
-LL |     let mut x: /* Type */ = Default::default();
-   |              ++++++++++++
+ on line 4, column 13, add `: /* Type */`
 
-error[E0282]: type annotations needed
-  --> $DIR/method-and-field-eager-resolution.rs:11:9
-   |
-LL |     let mut x = Default::default();
-   |         ^^^^^
-LL |
-LL |     x[0];
-   |     - type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/method-and-field-eager-resolution.rs:11:9
+  on line 13: type must be known at this point
 help: consider giving `x` an explicit type
-   |
-LL |     let mut x: /* Type */ = Default::default();
-   |              ++++++++++++
+ on line 11, column 13, add `: /* Type */`
 
 error: aborting due to 2 previous errors
 

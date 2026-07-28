@@ -1,10 +1,6 @@
-error[E0559]: variant `Field::Fool` has no field named `joke`
-  --> $DIR/E0559.rs:6:27
-   |
-LL |     let s = Field::Fool { joke: 0 };
-   |                           ^^^^ `Field::Fool` does not have this field
-   |
-   = note: available fields are: `x`
+error E0559: variant `Field::Fool` has no field named `joke`
+ at $DIR/E0559.rs:6:27: `Field::Fool` does not have this field
+note: available fields are: `x`
 
 error: aborting due to 1 previous error
 

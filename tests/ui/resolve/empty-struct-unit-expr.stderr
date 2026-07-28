@@ -1,64 +1,28 @@
-error[E0618]: expected function, found struct `Empty2`
-  --> $DIR/empty-struct-unit-expr.rs:16:14
-   |
-LL | struct Empty2;
-   | ------------- struct `Empty2` defined here
-...
-LL |     let e2 = Empty2();
-   |              ^^^^^^--
-   |              |
-   |              call expression requires function
-   |
+error E0618: expected function, found struct `Empty2`
+ at $DIR/empty-struct-unit-expr.rs:16:14
+  on line 9: struct `Empty2` defined here
+  on line 16, column 14: call expression requires function
 help: `Empty2` is a unit struct, and does not take parentheses to be constructed
-   |
-LL -     let e2 = Empty2();
-LL +     let e2 = Empty2;
-   |
+ on line 16, column 19
 
-error[E0618]: expected function, found enum variant `E::Empty4`
-  --> $DIR/empty-struct-unit-expr.rs:17:14
-   |
-LL |     Empty4,
-   |     ------ enum variant `E::Empty4` defined here
-...
-LL |     let e4 = E::Empty4();
-   |              ^^^^^^^^^--
-   |              |
-   |              call expression requires function
-   |
+error E0618: expected function, found enum variant `E::Empty4`
+ at $DIR/empty-struct-unit-expr.rs:17:14
+  on line 12: enum variant `E::Empty4` defined here
+  on line 17, column 14: call expression requires function
 help: `E::Empty4` is a unit enum variant, and does not take parentheses to be constructed
-   |
-LL -     let e4 = E::Empty4();
-LL +     let e4 = E::Empty4;
-   |
+ on line 17, column 22
 
-error[E0618]: expected function, found struct `XEmpty2`
-  --> $DIR/empty-struct-unit-expr.rs:19:15
-   |
-LL |     let xe2 = XEmpty2();
-   |               ^^^^^^^--
-   |               |
-   |               call expression requires function
-   |
+error E0618: expected function, found struct `XEmpty2`
+ at $DIR/empty-struct-unit-expr.rs:19:15
+  on line 19, column 15: call expression requires function
 help: `XEmpty2` is a unit struct, and does not take parentheses to be constructed
-   |
-LL -     let xe2 = XEmpty2();
-LL +     let xe2 = XEmpty2;
-   |
+ on line 19, column 21
 
-error[E0618]: expected function, found enum variant `XE::XEmpty4`
-  --> $DIR/empty-struct-unit-expr.rs:20:15
-   |
-LL |     let xe4 = XE::XEmpty4();
-   |               ^^^^^^^^^^^--
-   |               |
-   |               call expression requires function
-   |
+error E0618: expected function, found enum variant `XE::XEmpty4`
+ at $DIR/empty-struct-unit-expr.rs:20:15
+  on line 20, column 15: call expression requires function
 help: `XE::XEmpty4` is a unit enum variant, and does not take parentheses to be constructed
-   |
-LL -     let xe4 = XE::XEmpty4();
-LL +     let xe4 = XE::XEmpty4;
-   |
+ on line 20, column 25
 
 error: aborting due to 4 previous errors
 

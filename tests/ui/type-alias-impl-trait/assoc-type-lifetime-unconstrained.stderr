@@ -1,17 +1,9 @@
-error[E0207]: the lifetime parameter `'a` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/assoc-type-lifetime-unconstrained.rs:17:6
-   |
-LL | impl<'a, I> UnwrapItemsExt for I {
-   |      ^^ unconstrained lifetime parameter
+error E0207: the lifetime parameter `'a` is not constrained by the impl trait, self type, or predicates
+ at $DIR/assoc-type-lifetime-unconstrained.rs:17:6: unconstrained lifetime parameter
 
-error[E0792]: expected generic lifetime parameter, found `'_`
-  --> $DIR/assoc-type-lifetime-unconstrained.rs:22:9
-   |
-LL | impl<'a, I> UnwrapItemsExt for I {
-   |      -- this generic parameter must be used with a generic lifetime parameter
-...
-LL |         MyStruct {}
-   |         ^^^^^^^^^^^
+error E0792: expected generic lifetime parameter, found `'_`
+ at $DIR/assoc-type-lifetime-unconstrained.rs:22:9
+  on line 17, column 6: this generic parameter must be used with a generic lifetime parameter
 
 error: aborting due to 2 previous errors
 

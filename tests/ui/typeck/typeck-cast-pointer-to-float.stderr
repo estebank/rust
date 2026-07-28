@@ -1,8 +1,5 @@
-error[E0606]: casting `*const i16` as `f32` is invalid
-  --> $DIR/typeck-cast-pointer-to-float.rs:3:5
-   |
-LL |     ((&x) as *const i16) as f32;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+error E0606: casting `*const i16` as `f32` is invalid
+ at $DIR/typeck-cast-pointer-to-float.rs:3:5
 
 error: aborting due to 1 previous error
 

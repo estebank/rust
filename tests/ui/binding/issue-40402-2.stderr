@@ -1,21 +1,12 @@
-error[E0507]: cannot move out of index of `Vec<(String, String)>`
-  --> $DIR/issue-40402-2.rs:5:18
-   |
-LL |     let (a, b) = x[0];
-   |          -  -    ^^^^
-   |          |  |
-   |          |  ...and here
-   |          data moved here
-   |
-   = note: move occurs because these variables have types that don't implement the `Copy` trait
+error E0507: cannot move out of index of `Vec<(String, String)>`
+ at $DIR/issue-40402-2.rs:5:18
+  on line 5, column 10: data moved here
+  on line 5, column 13: ...and here
+note: move occurs because these variables have types that don't implement the `Copy` trait
 help: consider borrowing the pattern binding
-   |
-LL |     let (ref a, b) = x[0];
-   |          +++
+ on line 5, column 9, add `ref `
 help: consider borrowing the pattern binding
-   |
-LL |     let (a, ref b) = x[0];
-   |             +++
+ on line 5, column 12, add `ref `
 
 error: aborting due to 1 previous error
 

@@ -1,32 +1,16 @@
 error: missing `for` in a trait impl
-  --> $DIR/issue-27255.rs:3:7
-   |
-LL | impl A .. {}
-   |       ^
-   |
+ at $DIR/issue-27255.rs:3:7
 help: add `for` here
-   |
-LL | impl A for .. {}
-   |        +++
+ on line 3, column 6, add ` for `
 
 error: missing `for` in a trait impl
-  --> $DIR/issue-27255.rs:7:7
-   |
-LL | impl A      usize {}
-   |       ^^^^^^
-   |
+ at $DIR/issue-27255.rs:7:7
 help: add `for` here
-   |
-LL | impl A for usize {}
-   |        +++
+ on line 7, column 6, add ` for `
 
 error: `impl Trait for .. {}` is an obsolete syntax
-  --> $DIR/issue-27255.rs:3:1
-   |
-LL | impl A .. {}
-   | ^^^^^^^^^^^^
-   |
-   = help: use `auto trait Trait {}` instead
+ at $DIR/issue-27255.rs:3:1
+help: use `auto trait Trait {}` instead
 
 error: aborting due to 3 previous errors
 

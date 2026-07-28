@@ -1,16 +1,9 @@
-error[E0425]: cannot find type `F` in this scope
-  --> $DIR/late-bound-type-method-probe.rs:8:26
-   |
-LL |     fn t<Tail>(&self, _: F) {}
-   |                          ^
-   |
-  --> $SRC_DIR/core/src/ops/function.rs:LL:COL
-   |
-   = note: similarly named trait `Fn` defined here
+error E0425: cannot find type `F` in this scope
+ at $DIR/late-bound-type-method-probe.rs:8:26
+ at $SRC_DIR/core/src/ops/function.rs:LL:COL
+note: similarly named trait `Fn` defined here
 help: a trait with a similar name exists
-   |
-LL |     fn t<Tail>(&self, _: Fn) {}
-   |                           +
+ on line 8, column 25, replace with `Fn`
 
 error: aborting due to 1 previous error
 

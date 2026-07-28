@@ -1,19 +1,10 @@
 error: labels cannot use keyword names
-  --> $DIR/issue-52437.rs:2:13
-   |
-LL |     [(); &(&'static: loop { |x| {}; }) as *const _ as usize]
-   |             ^^^^^^^
+ at $DIR/issue-52437.rs:2:13
 
-error[E0282]: type annotations needed
-  --> $DIR/issue-52437.rs:2:30
-   |
-LL |     [(); &(&'static: loop { |x| {}; }) as *const _ as usize]
-   |                              ^
-   |
+error E0282: type annotations needed
+ at $DIR/issue-52437.rs:2:30
 help: consider giving this closure parameter an explicit type
-   |
-LL |     [(); &(&'static: loop { |x: /* Type */| {}; }) as *const _ as usize]
-   |                               ++++++++++++
+ on line 2, column 30, add `: /* Type */`
 
 error: aborting due to 2 previous errors
 

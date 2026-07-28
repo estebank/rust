@@ -1,12 +1,7 @@
 error: expected `}`, found `,`
-  --> $DIR/issue-10392-2.rs:8:15
-   |
-LL |     let A { .., } = a();
-   |             --^
-   |             | |
-   |             | expected `}`
-   |             | help: remove this comma
-   |             `..` must be at the end and cannot have a trailing comma
+ at $DIR/issue-10392-2.rs:8:15: expected `}`
+  on line 8, column 15: help: remove this comma
+  on line 8, column 13: `..` must be at the end and cannot have a trailing comma
 
 error: aborting due to 1 previous error
 

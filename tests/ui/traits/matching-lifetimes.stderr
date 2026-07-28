@@ -1,40 +1,20 @@
-error[E0308]: method not compatible with trait
-  --> $DIR/matching-lifetimes.rs:14:5
-   |
-LL |     fn foo(x: Foo<'b,'a>) {
-   |     ^^^^^^^^^^^^^^^^^^^^^ lifetime mismatch
-   |
-   = note: expected signature `fn(Foo<'a, 'b>)`
-              found signature `fn(Foo<'b, 'a>)`
+error E0308: method not compatible with trait
+ at $DIR/matching-lifetimes.rs:14:5: lifetime mismatch
+note: expected signature `fn(Foo<'a, 'b>)`
+         found signature `fn(Foo<'b, 'a>)`
 note: the lifetime `'a` as defined here...
-  --> $DIR/matching-lifetimes.rs:13:6
-   |
-LL | impl<'a,'b> Tr for Foo<'a,'b> {
-   |      ^^
+ at $DIR/matching-lifetimes.rs:13:6
 note: ...does not necessarily outlive the lifetime `'b` as defined here
-  --> $DIR/matching-lifetimes.rs:13:9
-   |
-LL | impl<'a,'b> Tr for Foo<'a,'b> {
-   |         ^^
+ at $DIR/matching-lifetimes.rs:13:9
 
-error[E0308]: method not compatible with trait
-  --> $DIR/matching-lifetimes.rs:14:5
-   |
-LL |     fn foo(x: Foo<'b,'a>) {
-   |     ^^^^^^^^^^^^^^^^^^^^^ lifetime mismatch
-   |
-   = note: expected signature `fn(Foo<'a, 'b>)`
-              found signature `fn(Foo<'b, 'a>)`
+error E0308: method not compatible with trait
+ at $DIR/matching-lifetimes.rs:14:5: lifetime mismatch
+note: expected signature `fn(Foo<'a, 'b>)`
+         found signature `fn(Foo<'b, 'a>)`
 note: the lifetime `'b` as defined here...
-  --> $DIR/matching-lifetimes.rs:13:9
-   |
-LL | impl<'a,'b> Tr for Foo<'a,'b> {
-   |         ^^
+ at $DIR/matching-lifetimes.rs:13:9
 note: ...does not necessarily outlive the lifetime `'a` as defined here
-  --> $DIR/matching-lifetimes.rs:13:6
-   |
-LL | impl<'a,'b> Tr for Foo<'a,'b> {
-   |      ^^
+ at $DIR/matching-lifetimes.rs:13:6
 
 error: aborting due to 2 previous errors
 

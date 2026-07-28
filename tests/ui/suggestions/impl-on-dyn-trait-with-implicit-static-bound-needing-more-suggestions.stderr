@@ -1,72 +1,33 @@
-error[E0515]: cannot return value referencing function parameter `val`
-  --> $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:21:9
-   |
-LL |         val.use_self()
-   |         ---^^^^^^^^^^^
-   |         |
-   |         returns a value referencing data owned by the current function
-   |         `val` is borrowed here
+error E0515: cannot return value referencing function parameter `val`
+ at $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:21:9: returns a value referencing data owned by the current function
+  on line 21: `val` is borrowed here
 
-error[E0515]: cannot return value referencing function parameter `val`
-  --> $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:43:9
-   |
-LL |         val.use_self()
-   |         ---^^^^^^^^^^^
-   |         |
-   |         returns a value referencing data owned by the current function
-   |         `val` is borrowed here
+error E0515: cannot return value referencing function parameter `val`
+ at $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:43:9: returns a value referencing data owned by the current function
+  on line 43: `val` is borrowed here
 
-error[E0515]: cannot return value referencing function parameter `val`
-  --> $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:112:9
-   |
-LL |         val.use_self()
-   |         ---^^^^^^^^^^^
-   |         |
-   |         returns a value referencing data owned by the current function
-   |         `val` is borrowed here
+error E0515: cannot return value referencing function parameter `val`
+ at $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:112:9: returns a value referencing data owned by the current function
+  on line 112: `val` is borrowed here
 
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:66:9
-   |
-LL |     fn use_it<'a>(val: Box<dyn ObjectTrait<Assoc = i32> + 'a>) -> &'a () {
-   |               --  --- `val` is a reference that is only valid in the function body
-   |               |
-   |               lifetime `'a` defined here
-LL |         val.use_self()
-   |         ^^^^^^^^^^^^^^
-   |         |
-   |         `val` escapes the function body here
-   |         argument requires that `'a` must outlive `'static`
-   |
+error E0521: borrowed data escapes outside of function
+ at $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:66:9: `val` escapes the function body here
+  on line 66: argument requires that `'a` must outlive `'static`
+  on line 65, column 15: lifetime `'a` defined here
+  on line 65, column 19: `val` is a reference that is only valid in the function body
 note: the used `impl` has a `'static` requirement
-  --> $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:60:30
-   |
-LL |     impl MyTrait for Box<dyn ObjectTrait<Assoc = i32>> {
-   |                              ^^^^^^^^^^^^^^^^^^^^^^^^ this has an implicit `'static` lifetime requirement
-LL |         fn use_self(&self) -> &() { panic!() }
-   |            -------- calling this method introduces the `impl`'s `'static` requirement
+ at $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:60:30: this has an implicit `'static` lifetime requirement
+  on line 61, column 12: calling this method introduces the `impl`'s `'static` requirement
 help: consider relaxing the implicit `'static` requirement
-   |
-LL |     impl MyTrait for Box<dyn ObjectTrait<Assoc = i32> + '_> {
-   |                                                       ++++
+ on line 60, column 53, add ` + '_`
 
-error[E0515]: cannot return value referencing function parameter `val`
-  --> $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:66:9
-   |
-LL |         val.use_self()
-   |         ---^^^^^^^^^^^
-   |         |
-   |         returns a value referencing data owned by the current function
-   |         `val` is borrowed here
+error E0515: cannot return value referencing function parameter `val`
+ at $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:66:9: returns a value referencing data owned by the current function
+  on line 66: `val` is borrowed here
 
-error[E0515]: cannot return value referencing function parameter `val`
-  --> $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:90:9
-   |
-LL |         val.use_self()
-   |         ---^^^^^^^^^^^
-   |         |
-   |         returns a value referencing data owned by the current function
-   |         `val` is borrowed here
+error E0515: cannot return value referencing function parameter `val`
+ at $DIR/impl-on-dyn-trait-with-implicit-static-bound-needing-more-suggestions.rs:90:9: returns a value referencing data owned by the current function
+  on line 90: `val` is borrowed here
 
 error: aborting due to 6 previous errors
 

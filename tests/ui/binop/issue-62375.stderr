@@ -1,20 +1,11 @@
-error[E0369]: binary operation `==` cannot be applied to type `A`
-  --> $DIR/issue-62375.rs:7:7
-   |
-LL |     a == A::Value;
-   |     - ^^ -------- fn(()) -> A {A::Value}
-   |     |
-   |     A
-   |
+error E0369: binary operation `==` cannot be applied to type `A`
+ at $DIR/issue-62375.rs:7:7
+  on line 7: A
+  on line 7, column 10: fn(()) -> A {A::Value}
 note: an implementation of `PartialEq<fn(()) -> A {A::Value}>` might be missing for `A`
-  --> $DIR/issue-62375.rs:1:1
-   |
-LL | enum A {
-   | ^^^^^^ must implement `PartialEq<fn(()) -> A {A::Value}>`
+ at $DIR/issue-62375.rs:1:1: must implement `PartialEq<fn(()) -> A {A::Value}>`
 help: use parentheses to construct this tuple variant
-   |
-LL |     a == A::Value(/* () */);
-   |                  ++++++++++
+ on line 7, column 17, add `(/* () */)`
 
 error: aborting due to 1 previous error
 

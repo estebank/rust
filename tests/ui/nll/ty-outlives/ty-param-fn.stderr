@@ -1,30 +1,14 @@
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/ty-param-fn.rs:10:5
-   |
-LL | fn no_region<'a, T>(x: Box<T>) -> Box<Debug + 'a>
-   |              -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-...
-LL |     x
-   |     ^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/ty-param-fn.rs:10:5: ...so that the type `T` will meet its required lifetime bounds
+  on line 6, column 14: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     T: Debug + 'a,
-   |              ++++
+ on line 8, column 12, add ` + 'a`
 
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/ty-param-fn.rs:25:5
-   |
-LL | fn wrong_region<'a, 'b, T>(x: Box<T>) -> Box<Debug + 'a>
-   |                 -- the parameter type `T` must be valid for the lifetime `'a` as defined here...
-...
-LL |     x
-   |     ^ ...so that the type `T` will meet its required lifetime bounds
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/ty-param-fn.rs:25:5: ...so that the type `T` will meet its required lifetime bounds
+  on line 21, column 17: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     T: 'b + Debug + 'a,
-   |                   ++++
+ on line 23, column 17, add ` + 'a`
 
 error: aborting due to 2 previous errors
 

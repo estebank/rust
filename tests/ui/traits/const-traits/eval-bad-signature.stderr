@@ -1,21 +1,11 @@
-error[E0053]: method `value` has an incompatible type for trait
-  --> $DIR/eval-bad-signature.rs:16:19
-   |
-LL |     fn value() -> i64 {
-   |                   ^^^ expected `u32`, found `i64`
-   |
+error E0053: method `value` has an incompatible type for trait
+ at $DIR/eval-bad-signature.rs:16:19: expected `u32`, found `i64`
 note: type in trait
-  --> $DIR/eval-bad-signature.rs:6:19
-   |
-LL |     fn value() -> u32;
-   |                   ^^^
-   = note: expected signature `fn() -> u32`
-              found signature `fn() -> i64`
+ at $DIR/eval-bad-signature.rs:6:19
+note: expected signature `fn() -> u32`
+         found signature `fn() -> i64`
 help: change the output type to match the trait
-   |
-LL -     fn value() -> i64 {
-LL +     fn value() -> u32 {
-   |
+ on line 16, column 18, replace with `u32`
 
 error: aborting due to 1 previous error
 

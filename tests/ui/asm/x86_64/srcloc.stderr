@@ -1,332 +1,127 @@
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:19:15
-   |
-LL |         asm!("invalid_instruction");
-   |               ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:19:15
 note: instantiated into assembly here
-  --> <inline asm>:2:2
-   |
-LL |     invalid_instruction
-   |     ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:2:2
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:23:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:23:13
 note: instantiated into assembly here
-  --> <inline asm>:3:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:13
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:28:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:28:13
 note: instantiated into assembly here
-  --> <inline asm>:3:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:13
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:34:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:34:13
 note: instantiated into assembly here
-  --> <inline asm>:4:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:4:13
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:41:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:41:13
 note: instantiated into assembly here
-  --> <inline asm>:4:13
-   |
-LL |             invalid_instruction
-   |             ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:4:13
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:46:14
-   |
-LL |         asm!(concat!("invalid", "_", "instruction"));
-   |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:46:14
 note: instantiated into assembly here
-  --> <inline asm>:2:2
-   |
-LL |     invalid_instruction
-   |     ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:2:2
 
 warning: scale factor without index register is ignored
-  --> $DIR/srcloc.rs:49:15
-   |
-LL |         asm!("movaps %xmm3, (%esi, 2)", options(att_syntax));
-   |               ^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:49:15
 note: instantiated into assembly here
-  --> <inline asm>:1:23
-   |
-LL |     movaps %xmm3, (%esi, 2)
-   |                          ^
+ at <inline asm>:1:23
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:53:14
-   |
-LL |             "invalid_instruction",
-   |              ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:53:14
 note: instantiated into assembly here
-  --> <inline asm>:2:2
-   |
-LL |     invalid_instruction
-   |     ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:2:2
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:59:14
-   |
-LL |             "invalid_instruction",
-   |              ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:59:14
 note: instantiated into assembly here
-  --> <inline asm>:3:1
-   |
-LL | invalid_instruction
-   | ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:1
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:66:14
-   |
-LL |             "invalid_instruction",
-   |              ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:66:14
 note: instantiated into assembly here
-  --> <inline asm>:4:1
-   |
-LL | invalid_instruction
-   | ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:4:1
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:73:13
-   |
-LL |             concat!("invalid", "_", "instruction"),
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:73:13
 note: instantiated into assembly here
-  --> <inline asm>:3:1
-   |
-LL | invalid_instruction
-   | ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:1
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:80:13
-   |
-LL |             concat!("invalid", "_", "instruction"),
-   |             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:80:13
 note: instantiated into assembly here
-  --> <inline asm>:3:1
-   |
-LL | invalid_instruction
-   | ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:1
 
 error: invalid instruction mnemonic 'invalid_instruction1'
-  --> $DIR/srcloc.rs:87:14
-   |
-LL |             "invalid_instruction1",
-   |              ^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:87:14
 note: instantiated into assembly here
-  --> <inline asm>:2:2
-   |
-LL |     invalid_instruction1
-   |     ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:2:2
 
 error: invalid instruction mnemonic 'invalid_instruction2'
-  --> $DIR/srcloc.rs:88:14
-   |
-LL |             "invalid_instruction2",
-   |              ^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:88:14
 note: instantiated into assembly here
-  --> <inline asm>:3:1
-   |
-LL | invalid_instruction2
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:1
 
 error: invalid instruction mnemonic 'invalid_instruction1'
-  --> $DIR/srcloc.rs:94:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction1", "\n",
-LL | |                 "invalid", "_", "instruction2",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:94:13 to 97:14
 note: instantiated into assembly here
-  --> <inline asm>:2:2
-   |
-LL |     invalid_instruction1
-   |     ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:2:2
 
 error: invalid instruction mnemonic 'invalid_instruction2'
-  --> $DIR/srcloc.rs:94:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction1", "\n",
-LL | |                 "invalid", "_", "instruction2",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:94:13 to 97:14
 note: instantiated into assembly here
-  --> <inline asm>:3:1
-   |
-LL | invalid_instruction2
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:1
 
 error: invalid instruction mnemonic 'invalid_instruction1'
-  --> $DIR/srcloc.rs:103:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction1", "\n",
-LL | |                 "invalid", "_", "instruction2",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:103:13 to 106:14
 note: instantiated into assembly here
-  --> <inline asm>:2:2
-   |
-LL |     invalid_instruction1
-   |     ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:2:2
 
 error: invalid instruction mnemonic 'invalid_instruction2'
-  --> $DIR/srcloc.rs:103:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction1", "\n",
-LL | |                 "invalid", "_", "instruction2",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:103:13 to 106:14
 note: instantiated into assembly here
-  --> <inline asm>:3:1
-   |
-LL | invalid_instruction2
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:1
 
 error: invalid instruction mnemonic 'invalid_instruction3'
-  --> $DIR/srcloc.rs:107:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction3", "\n",
-LL | |                 "invalid", "_", "instruction4",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:107:13 to 110:14
 note: instantiated into assembly here
-  --> <inline asm>:4:1
-   |
-LL | invalid_instruction3
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:4:1
 
 error: invalid instruction mnemonic 'invalid_instruction4'
-  --> $DIR/srcloc.rs:107:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction3", "\n",
-LL | |                 "invalid", "_", "instruction4",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:107:13 to 110:14
 note: instantiated into assembly here
-  --> <inline asm>:5:1
-   |
-LL | invalid_instruction4
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:5:1
 
 error: invalid instruction mnemonic 'invalid_instruction1'
-  --> $DIR/srcloc.rs:118:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction1", "\n",
-LL | |                 "invalid", "_", "instruction2", "\n",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:118:13 to 121:14
 note: instantiated into assembly here
-  --> <inline asm>:2:2
-   |
-LL |     invalid_instruction1
-   |     ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:2:2
 
 error: invalid instruction mnemonic 'invalid_instruction2'
-  --> $DIR/srcloc.rs:118:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction1", "\n",
-LL | |                 "invalid", "_", "instruction2", "\n",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:118:13 to 121:14
 note: instantiated into assembly here
-  --> <inline asm>:3:1
-   |
-LL | invalid_instruction2
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:3:1
 
 error: invalid instruction mnemonic 'invalid_instruction3'
-  --> $DIR/srcloc.rs:122:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction3", "\n",
-LL | |                 "invalid", "_", "instruction4", "\n",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:122:13 to 125:14
 note: instantiated into assembly here
-  --> <inline asm>:5:1
-   |
-LL | invalid_instruction3
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:5:1
 
 error: invalid instruction mnemonic 'invalid_instruction4'
-  --> $DIR/srcloc.rs:122:13
-   |
-LL | /             concat!(
-LL | |                 "invalid", "_", "instruction3", "\n",
-LL | |                 "invalid", "_", "instruction4", "\n",
-LL | |             ),
-   | |_____________^
-   |
+ at $DIR/srcloc.rs:122:13 to 125:14
 note: instantiated into assembly here
-  --> <inline asm>:6:1
-   |
-LL | invalid_instruction4
-   | ^^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:6:1
 
 error: invalid instruction mnemonic 'invalid_instruction'
-  --> $DIR/srcloc.rs:135:14
-   |
-LL |             "invalid_instruction"
-   |              ^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/srcloc.rs:135:14
 note: instantiated into assembly here
-  --> <inline asm>:5:1
-   |
-LL | invalid_instruction
-   | ^^^^^^^^^^^^^^^^^^^
+ at <inline asm>:5:1
 
 error: aborting due to 24 previous errors; 1 warning emitted
 

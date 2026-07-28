@@ -1,13 +1,6 @@
-error[E0276]: impl has stricter requirements than trait
-  --> $DIR/issue-18937.rs:20:31
-   |
-LL | /     fn foo<F>(&mut self, f: F)
-LL | |         where F: fmt::Debug + 'a,
-LL | |               Self: Sized;
-   | |__________________________- definition of `foo` from trait
-...
-LL |           where F: fmt::Debug + 'static,
-   |                                 ^^^^^^^ impl has extra requirement `F: 'static`
+error E0276: impl has stricter requirements than trait
+ at $DIR/issue-18937.rs:20:31: impl has extra requirement `F: 'static`
+  on line 13 to line 15: definition of `foo` from trait
 
 error: aborting due to 1 previous error
 

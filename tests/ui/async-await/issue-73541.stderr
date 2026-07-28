@@ -1,13 +1,7 @@
-error[E0767]: use of unreachable label `'a`
-  --> $DIR/issue-73541.rs:4:29
-   |
-LL |     'a: loop {
-   |     -- unreachable label defined here
-LL |         || {
-LL |             loop { continue 'a }
-   |                             ^^ unreachable label `'a`
-   |
-   = note: labels are unreachable through functions, closures, async blocks and modules
+error E0767: use of unreachable label `'a`
+ at $DIR/issue-73541.rs:4:29: unreachable label `'a`
+  on line 2: unreachable label defined here
+note: labels are unreachable through functions, closures, async blocks and modules
 
 error: aborting due to 1 previous error
 

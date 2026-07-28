@@ -1,309 +1,135 @@
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:8:13
-   |
-LL |     let _ = await bar();
-   |             ^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:8:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await bar();
-LL +     let _ = bar().await;
-   |
+ on line 8, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:12:13
-   |
-LL |     let _ = await? bar();
-   |             ^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:12:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await? bar();
-LL +     let _ = bar().await?;
-   |
+ on line 12, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:16:13
-   |
-LL |     let _ = await bar()?;
-   |             ^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:16:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await bar()?;
-LL +     let _ = bar()?.await;
-   |
+ on line 16, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:20:13
-   |
-LL |     let _ = await { bar() };
-   |             ^^^^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:20:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await { bar() };
-LL +     let _ = { bar() }.await;
-   |
+ on line 20, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:24:13
-   |
-LL |     let _ = await(bar());
-   |             ^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:24:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await(bar());
-LL +     let _ = (bar()).await;
-   |
+ on line 24, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:28:13
-   |
-LL |     let _ = await { bar() }?;
-   |             ^^^^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:28:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await { bar() }?;
-LL +     let _ = { bar() }.await?;
-   |
+ on line 28, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:32:14
-   |
-LL |     let _ = (await bar())?;
-   |              ^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:32:14
 help: `await` is a postfix operation
-   |
-LL -     let _ = (await bar())?;
-LL +     let _ = (bar().await)?;
-   |
+ on line 32, column 13
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:36:24
-   |
-LL |     let _ = bar().await();
-   |                        ^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:36:24
 help: `await` is not a method call, remove the parentheses
-   |
-LL -     let _ = bar().await();
-LL +     let _ = bar().await;
-   |
+ on line 36, column 23
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:40:24
-   |
-LL |     let _ = bar().await()?;
-   |                        ^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:40:24
 help: `await` is not a method call, remove the parentheses
-   |
-LL -     let _ = bar().await()?;
-LL +     let _ = bar().await?;
-   |
+ on line 40, column 23
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:52:13
-   |
-LL |     let _ = await bar();
-   |             ^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:52:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await bar();
-LL +     let _ = bar().await;
-   |
+ on line 52, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:56:13
-   |
-LL |     let _ = await? bar();
-   |             ^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:56:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await? bar();
-LL +     let _ = bar().await?;
-   |
+ on line 56, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:60:13
-   |
-LL |     let _ = await bar()?;
-   |             ^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:60:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await bar()?;
-LL +     let _ = bar()?.await;
-   |
+ on line 60, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:64:14
-   |
-LL |     let _ = (await bar())?;
-   |              ^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:64:14
 help: `await` is a postfix operation
-   |
-LL -     let _ = (await bar())?;
-LL +     let _ = (bar().await)?;
-   |
+ on line 64, column 13
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:68:24
-   |
-LL |     let _ = bar().await();
-   |                        ^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:68:24
 help: `await` is not a method call, remove the parentheses
-   |
-LL -     let _ = bar().await();
-LL +     let _ = bar().await;
-   |
+ on line 68, column 23
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:73:24
-   |
-LL |     let _ = bar().await()?;
-   |                        ^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:73:24
 help: `await` is not a method call, remove the parentheses
-   |
-LL -     let _ = bar().await()?;
-LL +     let _ = bar().await?;
-   |
+ on line 73, column 23
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:101:13
-   |
-LL |     let _ = await!(bar());
-   |             ^^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:101:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await!(bar());
-LL +     let _ = bar().await);
-   |
+ on line 101, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:105:13
-   |
-LL |     let _ = await!(bar())?;
-   |             ^^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:105:13
 help: `await` is a postfix operation
-   |
-LL -     let _ = await!(bar())?;
-LL +     let _ = bar().await)?;
-   |
+ on line 105, column 12
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:110:17
-   |
-LL |         let _ = await!(bar())?;
-   |                 ^^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:110:17
 help: `await` is a postfix operation
-   |
-LL -         let _ = await!(bar())?;
-LL +         let _ = bar().await)?;
-   |
+ on line 110, column 16
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:117:17
-   |
-LL |         let _ = await!(bar())?;
-   |                 ^^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:117:17
 help: `await` is a postfix operation
-   |
-LL -         let _ = await!(bar())?;
-LL +         let _ = bar().await)?;
-   |
+ on line 117, column 16
 
 error: expected expression, found `=>`
-  --> $DIR/incorrect-syntax-suggestions.rs:124:25
-   |
-LL |     match await { await => () }
-   |                   ----- ^^ expected expression
-   |                   |
-   |                   while parsing this incorrect await expression
+ at $DIR/incorrect-syntax-suggestions.rs:124:25: expected expression
+  on line 124, column 19: while parsing this incorrect await expression
 
 error: incorrect use of `await`
-  --> $DIR/incorrect-syntax-suggestions.rs:124:11
-   |
-LL |     match await { await => () }
-   |           ^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/incorrect-syntax-suggestions.rs:124:11
 help: `await` is a postfix operation
-   |
-LL -     match await { await => () }
-LL +     match { await => () }.await
-   |
+ on line 124, column 10
 
 error: expected one of `.`, `?`, `{`, or an operator, found `}`
-  --> $DIR/incorrect-syntax-suggestions.rs:127:1
-   |
-LL |     match await { await => () }
-   |     -----                      - expected one of `.`, `?`, `{`, or an operator
-   |     |
-   |     while parsing this `match` expression
-...
-LL | }
-   | ^ unexpected token
+ at $DIR/incorrect-syntax-suggestions.rs:127:1: unexpected token
+  on line 124: while parsing this `match` expression
+  on line 124, column 32: expected one of `.`, `?`, `{`, or an operator
 
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/incorrect-syntax-suggestions.rs:68:19
-   |
-LL | fn foo13() -> Result<(), ()> {
-   | ---------------------------- this is not `async`
-LL |     let _ = bar().await();
-   |                   ^^^^^ only allowed inside `async` functions and blocks
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/incorrect-syntax-suggestions.rs:68:19: only allowed inside `async` functions and blocks
+  on line 67: this is not `async`
 
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/incorrect-syntax-suggestions.rs:73:19
-   |
-LL | fn foo14() -> Result<(), ()> {
-   | ---------------------------- this is not `async`
-LL |     let _ = bar().await()?;
-   |                   ^^^^^ only allowed inside `async` functions and blocks
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/incorrect-syntax-suggestions.rs:73:19: only allowed inside `async` functions and blocks
+  on line 72: this is not `async`
 
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/incorrect-syntax-suggestions.rs:78:19
-   |
-LL | fn foo15() -> Result<(), ()> {
-   | ---------------------------- this is not `async`
-LL |     let _ = bar().await;
-   |                   ^^^^^ only allowed inside `async` functions and blocks
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/incorrect-syntax-suggestions.rs:78:19: only allowed inside `async` functions and blocks
+  on line 77: this is not `async`
 
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/incorrect-syntax-suggestions.rs:82:19
-   |
-LL | fn foo16() -> Result<(), ()> {
-   | ---------------------------- this is not `async`
-LL |     let _ = bar().await?;
-   |                   ^^^^^ only allowed inside `async` functions and blocks
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/incorrect-syntax-suggestions.rs:82:19: only allowed inside `async` functions and blocks
+  on line 81: this is not `async`
 
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/incorrect-syntax-suggestions.rs:87:23
-   |
-LL |     fn foo() -> Result<(), ()> {
-   |     -------------------------- this is not `async`
-LL |         let _ = bar().await?;
-   |                       ^^^^^ only allowed inside `async` functions and blocks
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/incorrect-syntax-suggestions.rs:87:23: only allowed inside `async` functions and blocks
+  on line 86: this is not `async`
 
-error[E0728]: `await` is only allowed inside `async` functions and blocks
-  --> $DIR/incorrect-syntax-suggestions.rs:94:23
-   |
-LL |     let foo = || {
-   |               -- this is not `async`
-LL |         let _ = bar().await?;
-   |                       ^^^^^ only allowed inside `async` functions and blocks
+error E0728: `await` is only allowed inside `async` functions and blocks
+ at $DIR/incorrect-syntax-suggestions.rs:94:23: only allowed inside `async` functions and blocks
+  on line 93, column 15: this is not `async`
 
 error: aborting due to 28 previous errors
 

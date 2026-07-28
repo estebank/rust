@@ -1,13 +1,8 @@
-error[E0072]: recursive type `Bar` has infinite size
-  --> $DIR/issue-3008-2.rs:2:1
-   |
-LL | struct Bar { x: Bar }
-   | ^^^^^^^^^^      --- recursive without indirection
-   |
+error E0072: recursive type `Bar` has infinite size
+ at $DIR/issue-3008-2.rs:2:1
+  on line 2, column 17: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL | struct Bar { x: Box<Bar> }
-   |                 ++++   +
+ on line 2, column 16, add `Box<`
 
 error: aborting due to 1 previous error
 

@@ -1,8 +1,5 @@
-error[E0063]: missing field `bar` in initializer of `BuildData`
-  --> $DIR/struct-fields-missing.rs:7:15
-   |
-LL |     let foo = BuildData {
-   |               ^^^^^^^^^ missing `bar`
+error E0063: missing field `bar` in initializer of `BuildData`
+ at $DIR/struct-fields-missing.rs:7:15: missing `bar`
 
 error: aborting due to 1 previous error
 

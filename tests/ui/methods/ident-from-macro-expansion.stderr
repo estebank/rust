@@ -1,20 +1,10 @@
-error[E0599]: no method named `hello` found for unit type `()` in the current scope
-  --> $DIR/ident-from-macro-expansion.rs:14:10
-   |
-LL |         ().$id();
-   |            --- due to this macro variable
-...
-LL |     dot!(hello);
-   |          ^^^^^ method not found in `()`
+error E0599: no method named `hello` found for unit type `()` in the current scope
+ at $DIR/ident-from-macro-expansion.rs:14:10: method not found in `()`
+  on line 3, column 12: due to this macro variable
 
-error[E0599]: no associated function or constant named `hello` found for unit type `()` in the current scope
-  --> $DIR/ident-from-macro-expansion.rs:16:15
-   |
-LL |         <()>::$id();
-   |               --- due to this macro variable
-...
-LL |     dispatch!(hello);
-   |               ^^^^^ associated function or constant not found in `()`
+error E0599: no associated function or constant named `hello` found for unit type `()` in the current scope
+ at $DIR/ident-from-macro-expansion.rs:16:15: associated function or constant not found in `()`
+  on line 9, column 15: due to this macro variable
 
 error: aborting due to 2 previous errors
 

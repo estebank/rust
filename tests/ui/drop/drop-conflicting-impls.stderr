@@ -1,11 +1,6 @@
-error[E0119]: conflicting implementations of trait `Drop` for type `MyStruct`
-  --> $DIR/drop-conflicting-impls.rs:8:1
-   |
-LL | impl Drop for MyStruct {
-   | ---------------------- first implementation here
-...
-LL | impl Drop for MyStruct {
-   | ^^^^^^^^^^^^^^^^^^^^^^ conflicting implementation for `MyStruct`
+error E0119: conflicting implementations of trait `Drop` for type `MyStruct`
+ at $DIR/drop-conflicting-impls.rs:8:1: conflicting implementation for `MyStruct`
+  on line 4: first implementation here
 
 error: aborting due to 1 previous error
 

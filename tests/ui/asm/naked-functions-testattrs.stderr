@@ -1,34 +1,18 @@
-error[E0736]: cannot use `#[unsafe(naked)]` with testing attributes
-  --> $DIR/naked-functions-testattrs.rs:11:1
-   |
-LL | #[test]
-   | ------- function marked with testing attribute here
-LL | #[unsafe(naked)]
-   | ^^^^^^^^^^^^^^^^ `#[unsafe(naked)]` is incompatible with testing attributes
+error E0736: cannot use `#[unsafe(naked)]` with testing attributes
+ at $DIR/naked-functions-testattrs.rs:11:1: `#[unsafe(naked)]` is incompatible with testing attributes
+  on line 10: function marked with testing attribute here
 
-error[E0736]: cannot use `#[unsafe(naked)]` with testing attributes
-  --> $DIR/naked-functions-testattrs.rs:19:1
-   |
-LL | #[test]
-   | ------- function marked with testing attribute here
-LL | #[unsafe(naked)]
-   | ^^^^^^^^^^^^^^^^ `#[unsafe(naked)]` is incompatible with testing attributes
+error E0736: cannot use `#[unsafe(naked)]` with testing attributes
+ at $DIR/naked-functions-testattrs.rs:19:1: `#[unsafe(naked)]` is incompatible with testing attributes
+  on line 18: function marked with testing attribute here
 
-error[E0736]: cannot use `#[unsafe(naked)]` with testing attributes
-  --> $DIR/naked-functions-testattrs.rs:27:1
-   |
-LL | #[test]
-   | ------- function marked with testing attribute here
-LL | #[unsafe(naked)]
-   | ^^^^^^^^^^^^^^^^ `#[unsafe(naked)]` is incompatible with testing attributes
+error E0736: cannot use `#[unsafe(naked)]` with testing attributes
+ at $DIR/naked-functions-testattrs.rs:27:1: `#[unsafe(naked)]` is incompatible with testing attributes
+  on line 26: function marked with testing attribute here
 
-error[E0736]: cannot use `#[unsafe(naked)]` with testing attributes
-  --> $DIR/naked-functions-testattrs.rs:34:1
-   |
-LL | #[bench]
-   | -------- function marked with testing attribute here
-LL | #[unsafe(naked)]
-   | ^^^^^^^^^^^^^^^^ `#[unsafe(naked)]` is incompatible with testing attributes
+error E0736: cannot use `#[unsafe(naked)]` with testing attributes
+ at $DIR/naked-functions-testattrs.rs:34:1: `#[unsafe(naked)]` is incompatible with testing attributes
+  on line 33: function marked with testing attribute here
 
 error: aborting due to 4 previous errors
 

@@ -1,67 +1,32 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promotion.rs:11:27
-   |
-LL |     let x: &'static () = &foo1();
-   |            -----------    ^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promotion.rs:11:27: creates a temporary value which is freed while still in use
+  on line 11, column 12: type annotation requires that borrow lasts for `'static`
+  on line 17: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promotion.rs:12:28
-   |
-LL |     let y: &'static i32 = &foo2(42);
-   |            ------------    ^^^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promotion.rs:12:28: creates a temporary value which is freed while still in use
+  on line 12, column 12: type annotation requires that borrow lasts for `'static`
+  on line 17: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promotion.rs:13:28
-   |
-LL |     let z: &'static i32 = &foo3();
-   |            ------------    ^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promotion.rs:13:28: creates a temporary value which is freed while still in use
+  on line 13, column 12: type annotation requires that borrow lasts for `'static`
+  on line 17: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promotion.rs:14:34
-   |
-LL |     let a: &'static Cell<i32> = &foo4();
-   |            ------------------    ^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promotion.rs:14:34: creates a temporary value which is freed while still in use
+  on line 14, column 12: type annotation requires that borrow lasts for `'static`
+  on line 17: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promotion.rs:15:42
-   |
-LL |     let a: &'static Option<Cell<i32>> = &foo5();
-   |            --------------------------    ^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-LL |     let a: &'static Option<Cell<i32>> = &foo6();
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promotion.rs:15:42: creates a temporary value which is freed while still in use
+  on line 15, column 12: type annotation requires that borrow lasts for `'static`
+  on line 17: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/promotion.rs:16:42
-   |
-LL |     let a: &'static Option<Cell<i32>> = &foo6();
-   |            --------------------------    ^^^^^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/promotion.rs:16:42: creates a temporary value which is freed while still in use
+  on line 16, column 12: type annotation requires that borrow lasts for `'static`
+  on line 17: temporary value is freed at the end of this statement
 
 error: aborting due to 6 previous errors
 

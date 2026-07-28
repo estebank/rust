@@ -1,15 +1,8 @@
-error[E0597]: `local` does not live long enough
-  --> $DIR/lifetime-failure.rs:10:31
-   |
-LL |     let local = 0;
-   |         ----- binding `local` declared here
-LL |     let _: W<impl Static> = W(&local);
-   |            --------------     ^^^^^^ borrowed value does not live long enough
-   |            |
-   |            type annotation requires that `local` is borrowed for `'static`
-LL |
-LL | }
-   | - `local` dropped here while still borrowed
+error E0597: `local` does not live long enough
+ at $DIR/lifetime-failure.rs:10:31: borrowed value does not live long enough
+  on line 9, column 9: binding `local` declared here
+  on line 10, column 12: type annotation requires that `local` is borrowed for `'static`
+  on line 12: `local` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

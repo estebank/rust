@@ -1,43 +1,23 @@
 error: mismatched closing delimiter: `]`
-  --> $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:5:27
-   |
-LL |         V = [PhantomData; { [ () ].len() ].len() as isize,
-   |             -             ^              ^ mismatched closing delimiter
-   |             |             |
-   |             |             unclosed delimiter
-   |             closing delimiter possibly meant for this
+ at $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:5:27: unclosed delimiter
+  on line 5, column 42: mismatched closing delimiter
+  on line 5, column 13: closing delimiter possibly meant for this
 
 error: mismatched closing delimiter: `]`
-  --> $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:12:24
-   |
-LL |         V = [Vec::new; { [].len()  ].len() as isize,
-   |             -          ^           ^ mismatched closing delimiter
-   |             |          |
-   |             |          unclosed delimiter
-   |             closing delimiter possibly meant for this
+ at $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:12:24: unclosed delimiter
+  on line 12, column 36: mismatched closing delimiter
+  on line 12, column 13: closing delimiter possibly meant for this
 
 error: mismatched closing delimiter: `]`
-  --> $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:19:24
-   |
-LL |         V = [Vec::new; { [0].len() ].len() as isize,
-   |             -          ^           ^ mismatched closing delimiter
-   |             |          |
-   |             |          unclosed delimiter
-   |             closing delimiter possibly meant for this
+ at $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:19:24: unclosed delimiter
+  on line 19, column 36: mismatched closing delimiter
+  on line 19, column 13: closing delimiter possibly meant for this
 
 error: this file contains an unclosed delimiter
-  --> $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:23:65
-   |
-LL | mod c {
-   |       - unclosed delimiter
-LL |     enum Bug {
-   |              - this delimiter might not be properly closed...
-...
-LL | }
-   | - ...as it matches this but it has different indentation
-LL |
-LL | fn main() {}
-   |                                                                ^
+ at $DIR/issue-67377-invalid-syntax-in-enum-discriminant.rs:23:65
+  on line 17, column 7: unclosed delimiter
+  on line 18, column 14: this delimiter might not be properly closed...
+  on line 21: ...as it matches this but it has different indentation
 
 error: aborting due to 4 previous errors
 

@@ -1,71 +1,33 @@
-error[E0277]: `UnsafeCell<MySync<{integer}>>` cannot be shared between threads safely
-  --> $DIR/typeck-unsafe-always-share.rs:19:10
-   |
-LL |     test(us);
-   |     ---- ^^ `UnsafeCell<MySync<{integer}>>` cannot be shared between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: the trait `Sync` is not implemented for `UnsafeCell<MySync<{integer}>>`
+error E0277: `UnsafeCell<MySync<{integer}>>` cannot be shared between threads safely
+ at $DIR/typeck-unsafe-always-share.rs:19:10: `UnsafeCell<MySync<{integer}>>` cannot be shared between threads safely
+  on line 19: required by a bound introduced by this call
+help: the trait `Sync` is not implemented for `UnsafeCell<MySync<{integer}>>`
 note: required by a bound in `test`
-  --> $DIR/typeck-unsafe-always-share.rs:15:12
-   |
-LL | fn test<T: Sync>(s: T) {}
-   |            ^^^^ required by this bound in `test`
+ at $DIR/typeck-unsafe-always-share.rs:15:12: required by this bound in `test`
 
-error[E0277]: `UnsafeCell<NoSync>` cannot be shared between threads safely
-  --> $DIR/typeck-unsafe-always-share.rs:23:10
-   |
-LL |     test(uns);
-   |     ---- ^^^ `UnsafeCell<NoSync>` cannot be shared between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: the trait `Sync` is not implemented for `UnsafeCell<NoSync>`
+error E0277: `UnsafeCell<NoSync>` cannot be shared between threads safely
+ at $DIR/typeck-unsafe-always-share.rs:23:10: `UnsafeCell<NoSync>` cannot be shared between threads safely
+  on line 23: required by a bound introduced by this call
+help: the trait `Sync` is not implemented for `UnsafeCell<NoSync>`
 note: required by a bound in `test`
-  --> $DIR/typeck-unsafe-always-share.rs:15:12
-   |
-LL | fn test<T: Sync>(s: T) {}
-   |            ^^^^ required by this bound in `test`
+ at $DIR/typeck-unsafe-always-share.rs:15:12: required by this bound in `test`
 
-error[E0277]: `UnsafeCell<NoSync>` cannot be shared between threads safely
-  --> $DIR/typeck-unsafe-always-share.rs:27:10
-   |
-LL |     test(ms);
-   |     ---- ^^ `UnsafeCell<NoSync>` cannot be shared between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
-   = help: within `MySync<NoSync>`, the trait `Sync` is not implemented for `UnsafeCell<NoSync>`
+error E0277: `UnsafeCell<NoSync>` cannot be shared between threads safely
+ at $DIR/typeck-unsafe-always-share.rs:27:10: `UnsafeCell<NoSync>` cannot be shared between threads safely
+  on line 27: required by a bound introduced by this call
+help: within `MySync<NoSync>`, the trait `Sync` is not implemented for `UnsafeCell<NoSync>`
 note: required because it appears within the type `MySync<NoSync>`
-  --> $DIR/typeck-unsafe-always-share.rs:8:8
-   |
-LL | struct MySync<T> {
-   |        ^^^^^^
+ at $DIR/typeck-unsafe-always-share.rs:8:8
 note: required by a bound in `test`
-  --> $DIR/typeck-unsafe-always-share.rs:15:12
-   |
-LL | fn test<T: Sync>(s: T) {}
-   |            ^^^^ required by this bound in `test`
+ at $DIR/typeck-unsafe-always-share.rs:15:12: required by this bound in `test`
 
-error[E0277]: `NoSync` cannot be shared between threads safely
-  --> $DIR/typeck-unsafe-always-share.rs:30:10
-   |
-LL |     test(NoSync);
-   |     ---- ^^^^^^ `NoSync` cannot be shared between threads safely
-   |     |
-   |     required by a bound introduced by this call
-   |
+error E0277: `NoSync` cannot be shared between threads safely
+ at $DIR/typeck-unsafe-always-share.rs:30:10: `NoSync` cannot be shared between threads safely
+  on line 30: required by a bound introduced by this call
 help: the trait `Sync` is not implemented for `NoSync`
-  --> $DIR/typeck-unsafe-always-share.rs:12:1
-   |
-LL | struct NoSync;
-   | ^^^^^^^^^^^^^
+ at $DIR/typeck-unsafe-always-share.rs:12:1
 note: required by a bound in `test`
-  --> $DIR/typeck-unsafe-always-share.rs:15:12
-   |
-LL | fn test<T: Sync>(s: T) {}
-   |            ^^^^ required by this bound in `test`
+ at $DIR/typeck-unsafe-always-share.rs:15:12: required by this bound in `test`
 
 error: aborting due to 4 previous errors
 

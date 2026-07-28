@@ -1,28 +1,14 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/lifetime_errors_on_promotion_misusage.rs:11:35
-   |
-LL |     let phantom_pinned = identity(pin!(PhantomPinned));
-   |                                   ^^^^^^^^^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |                                   |
-   |                                   creates a temporary value which is freed while still in use
-LL |
-LL |     stuff(phantom_pinned)
-   |           -------------- borrow later used here
-   |
-   = note: consider using a `let` binding to create a longer lived value
+error E0716: temporary value dropped while borrowed
+ at $DIR/lifetime_errors_on_promotion_misusage.rs:11:35: creates a temporary value which is freed while still in use
+  on line 11, column 55: temporary value is freed at the end of this statement
+  on line 13, column 11: borrow later used here
+note: consider using a `let` binding to create a longer lived value
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/lifetime_errors_on_promotion_misusage.rs:18:30
-   |
-LL |     let phantom_pinned = {
-   |         -------------- borrow later stored here
-LL |         let phantom_pinned = pin!(PhantomPinned);
-   |                              ^^^^^^^^^^^^^^^^^^^ creates a temporary value which is freed while still in use
-...
-LL |     };
-   |     - temporary value is freed at the end of this statement
-   |
-   = note: consider using a `let` binding to create a longer lived value
+error E0716: temporary value dropped while borrowed
+ at $DIR/lifetime_errors_on_promotion_misusage.rs:18:30: creates a temporary value which is freed while still in use
+  on line 17, column 9: borrow later stored here
+  on line 21: temporary value is freed at the end of this statement
+note: consider using a `let` binding to create a longer lived value
 
 error: aborting due to 2 previous errors
 

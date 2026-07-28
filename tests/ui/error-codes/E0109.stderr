@@ -1,16 +1,8 @@
-error[E0109]: type arguments are not allowed on builtin type `u32`
-  --> $DIR/E0109.rs:1:14
-   |
-LL | type X = u32<i32>;
-   |          --- ^^^ type argument not allowed
-   |          |
-   |          not allowed on builtin type `u32`
-   |
+error E0109: type arguments are not allowed on builtin type `u32`
+ at $DIR/E0109.rs:1:14: type argument not allowed
+  on line 1, column 10: not allowed on builtin type `u32`
 help: primitive type `u32` doesn't have generic parameters
-   |
-LL - type X = u32<i32>;
-LL + type X = u32;
-   |
+ on line 1, column 12
 
 error: aborting due to 1 previous error
 

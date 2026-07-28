@@ -1,12 +1,7 @@
-error[E0503]: cannot use `x` because it was mutably borrowed
-  --> $DIR/reference-carried-through-struct-field.rs:6:5
-   |
-LL |     let wrapper = Wrap { w: &mut x };
-   |                             ------ `x` is borrowed here
-LL |     x += 1;
-   |     ^^^^^^ use of borrowed `x`
-LL |     *wrapper.w += 1;
-   |     --------------- borrow later used here
+error E0503: cannot use `x` because it was mutably borrowed
+ at $DIR/reference-carried-through-struct-field.rs:6:5: use of borrowed `x`
+  on line 5, column 29: `x` is borrowed here
+  on line 7: borrow later used here
 
 error: aborting due to 1 previous error
 

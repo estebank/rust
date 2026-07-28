@@ -1,53 +1,28 @@
 error: unknown start of token: \u{20e3}
-  --> $DIR/lex-emoji-identifiers.rs:6:14
-   |
-LL |     let key1️⃣ = "keycap sequence";
-   |             ^
+ at $DIR/lex-emoji-identifiers.rs:6:14
 
 error: identifiers cannot contain emoji: `arrow↔️`
-  --> $DIR/lex-emoji-identifiers.rs:2:9
-   |
-LL |     let arrow↔️ = "basic emoji";
-   |         ^^^^^^
+ at $DIR/lex-emoji-identifiers.rs:2:9
 
 error: identifiers cannot contain emoji: `planet🪐`
-  --> $DIR/lex-emoji-identifiers.rs:3:9
-   |
-LL |     let planet🪐 = "basic emoji";
-   |         ^^^^^^^^
+ at $DIR/lex-emoji-identifiers.rs:3:9
 
 error: identifiers cannot contain emoji: `wireless🛜`
-  --> $DIR/lex-emoji-identifiers.rs:4:9
-   |
-LL |     let wireless🛜 = "basic emoji";
-   |         ^^^^^^^^^^
+ at $DIR/lex-emoji-identifiers.rs:4:9
 
 error: identifiers cannot contain emoji: `flag🇺🇳`
-  --> $DIR/lex-emoji-identifiers.rs:8:9
-   |
-LL |     let flag🇺🇳 = "flag sequence";
-   |         ^^^^^^
+ at $DIR/lex-emoji-identifiers.rs:8:9
 
 error: identifiers cannot contain emoji: `wales🏴`
-  --> $DIR/lex-emoji-identifiers.rs:9:9
-   |
-LL |     let wales🏴 = "tag sequence";
-   |         ^^^^^^^
+ at $DIR/lex-emoji-identifiers.rs:9:9
 
 error: identifiers cannot contain emoji: `folded🙏🏿`
-  --> $DIR/lex-emoji-identifiers.rs:10:9
-   |
-LL |     let folded🙏🏿 = "modifier sequence";
-   |         ^^^^^^^^^^
+ at $DIR/lex-emoji-identifiers.rs:10:9
 
 warning: identifier contains an uncommon character: '\u{fe0f}'
-  --> $DIR/lex-emoji-identifiers.rs:6:9
-   |
-LL |     let key1️⃣ = "keycap sequence";
-   |         ^^^^
-   |
-   = note: this character is included in the Unicode general security profile
-   = note: `#[warn(uncommon_codepoints)]` on by default
+ at $DIR/lex-emoji-identifiers.rs:6:9
+note: this character is included in the Unicode general security profile
+note: `#[warn(uncommon_codepoints)]` on by default
 
 error: aborting due to 7 previous errors; 1 warning emitted
 

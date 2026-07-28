@@ -1,14 +1,8 @@
 error: lifetime may not live long enough
-  --> $DIR/unique-borrows-are-invariant-1.rs:6:31
-   |
-LL | fn extend_lifetime<'a, 'b>(x: &mut (&'a str,), y: &'b str) {
-   |                    --  -- lifetime `'b` defined here
-   |                    |
-   |                    lifetime `'a` defined here
-LL |     let mut closure = |input| x.0 = input;
-   |                               ^^^^^^^^^^^ assignment requires that `'b` must outlive `'a`
-   |
-   = help: consider adding the following bound: `'b: 'a`
+ at $DIR/unique-borrows-are-invariant-1.rs:6:31: assignment requires that `'b` must outlive `'a`
+  on line 5, column 20: lifetime `'a` defined here
+  on line 5, column 24: lifetime `'b` defined here
+help: consider adding the following bound: `'b: 'a`
 
 error: aborting due to 1 previous error
 

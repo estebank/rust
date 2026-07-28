@@ -1,13 +1,7 @@
 error: expected identifier, found keyword `Self`
-  --> $DIR/doc-before-bad-variant.rs:4:5
-   |
-LL | enum TestEnum {
-   |      -------- while parsing this enum
-...
-LL |     Self,
-   |     ^^^^ expected identifier, found keyword
-   |
-   = help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
+ at $DIR/doc-before-bad-variant.rs:4:5: expected identifier, found keyword
+  on line 1, column 6: while parsing this enum
+help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
 
 error: aborting due to 1 previous error
 

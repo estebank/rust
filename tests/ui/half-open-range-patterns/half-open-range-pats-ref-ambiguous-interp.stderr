@@ -1,95 +1,44 @@
 error: the range pattern here has ambiguous interpretation
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:6:10
-   |
-LL |         &0.. | _ => {}
-   |          ^^^
-   |
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:6:10
 help: add parentheses to clarify the precedence
-   |
-LL |         &(0..) | _ => {}
-   |          +   +
+ on line 6, column 9, add `(`
 
-error[E0586]: inclusive range with no end
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:8:11
-   |
-LL |         &0..= | _ => {}
-   |           ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:8:11
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL -         &0..= | _ => {}
-LL +         &0.. | _ => {}
-   |
+ on line 8, column 10, replace with `..`
 
 error: the range pattern here has ambiguous interpretation
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:8:10
-   |
-LL |         &0..= | _ => {}
-   |          ^^^^
-   |
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:8:10
 help: add parentheses to clarify the precedence
-   |
-LL |         &(0..=) | _ => {}
-   |          +    +
+ on line 8, column 9, add `(`
 
-error[E0586]: inclusive range with no end
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:11:11
-   |
-LL |         &0... | _ => {}
-   |           ^^^
-   |
-   = note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
+error E0586: inclusive range with no end
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:11:11
+note: inclusive ranges must be bounded at the end (`..=b` or `a..=b`)
 help: use `..` instead
-   |
-LL -         &0... | _ => {}
-LL +         &0.. | _ => {}
-   |
+ on line 11, column 10, replace with `..`
 
 error: the range pattern here has ambiguous interpretation
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:16:10
-   |
-LL |         &..0 | _ => {}
-   |          ^^^
-   |
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:16:10
 help: add parentheses to clarify the precedence
-   |
-LL |         &(..0) | _ => {}
-   |          +   +
+ on line 16, column 9, add `(`
 
 error: the range pattern here has ambiguous interpretation
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:18:10
-   |
-LL |         &..=0 | _ => {}
-   |          ^^^^
-   |
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:18:10
 help: add parentheses to clarify the precedence
-   |
-LL |         &(..=0) | _ => {}
-   |          +    +
+ on line 18, column 9, add `(`
 
 error: range-to patterns with `...` are not allowed
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:20:10
-   |
-LL |         &...0 | _ => {}
-   |          ^^^
-   |
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:20:10
 help: use `..=` instead
-   |
-LL -         &...0 | _ => {}
-LL +         &..=0 | _ => {}
-   |
+ on line 20, column 9, replace with `..=`
 
 error: the range pattern here has ambiguous interpretation
-  --> $DIR/half-open-range-pats-ref-ambiguous-interp.rs:20:10
-   |
-LL |         &...0 | _ => {}
-   |          ^^^^
-   |
+ at $DIR/half-open-range-pats-ref-ambiguous-interp.rs:20:10
 help: add parentheses to clarify the precedence
-   |
-LL |         &(...0) | _ => {}
-   |          +    +
+ on line 20, column 9, add `(`
 
 error: aborting due to 8 previous errors
 

@@ -1,76 +1,43 @@
-error[E0369]: binary operation `==` cannot be applied to type `(std::io::Error, T1, {integer})`
-  --> $DIR/binary-op-not-allowed-issue-125631.rs:8:48
-   |
-LL |     (Error::new(ErrorKind::Other, "1"), T1, 1) == (Error::new(ErrorKind::Other, "1"), T1, 2);
-   |     ------------------------------------------ ^^ ------------------------------------------ (std::io::Error, T1, {integer})
-   |     |
-   |     (std::io::Error, T1, {integer})
-   |
+error E0369: binary operation `==` cannot be applied to type `(std::io::Error, T1, {integer})`
+ at $DIR/binary-op-not-allowed-issue-125631.rs:8:48
+  on line 8: (std::io::Error, T1, {integer})
+  on line 8, column 51: (std::io::Error, T1, {integer})
 note: an implementation of `PartialEq` might be missing for `T1`
-  --> $DIR/binary-op-not-allowed-issue-125631.rs:4:1
-   |
-LL | struct T1;
-   | ^^^^^^^^^ must implement `PartialEq`
+ at $DIR/binary-op-not-allowed-issue-125631.rs:4:1: must implement `PartialEq`
 note: `std::io::Error` does not implement `PartialEq`
-  --> $SRC_DIR/core/src/io/error.rs:LL:COL
-   |
-   = note: `std::io::Error` is defined in another crate
+ at $SRC_DIR/core/src/io/error.rs:LL:COL
+note: `std::io::Error` is defined in another crate
 help: consider annotating `T1` with `#[derive(PartialEq)]`
-   |
-LL + #[derive(PartialEq)]
-LL | struct T1;
-   |
+ on line 4, column 1, add `#[derive(PartialEq)]`
 
-error[E0369]: binary operation `==` cannot be applied to type `(std::io::Error, Thread)`
-  --> $DIR/binary-op-not-allowed-issue-125631.rs:11:9
-   |
-LL |     (Error::new(ErrorKind::Other, "2"), thread::current())
-   |     ------------------------------------------------------ (std::io::Error, Thread)
-LL |         == (Error::new(ErrorKind::Other, "2"), thread::current());
-   |         ^^ ------------------------------------------------------ (std::io::Error, Thread)
-   |
+error E0369: binary operation `==` cannot be applied to type `(std::io::Error, Thread)`
+ at $DIR/binary-op-not-allowed-issue-125631.rs:11:9
+  on line 10: (std::io::Error, Thread)
+  on line 11, column 12: (std::io::Error, Thread)
 note: `Thread` does not implement `PartialEq`
-  --> $SRC_DIR/std/src/thread/thread.rs:LL:COL
-   |
-   = note: `Thread` is defined in another crate
+ at $SRC_DIR/std/src/thread/thread.rs:LL:COL
+note: `Thread` is defined in another crate
 note: `std::io::Error` does not implement `PartialEq`
-  --> $SRC_DIR/core/src/io/error.rs:LL:COL
-   |
-   = note: `std::io::Error` is defined in another crate
+ at $SRC_DIR/core/src/io/error.rs:LL:COL
+note: `std::io::Error` is defined in another crate
 
-error[E0369]: binary operation `==` cannot be applied to type `(std::io::Error, Thread, T1, T2)`
-  --> $DIR/binary-op-not-allowed-issue-125631.rs:14:9
-   |
-LL |     (Error::new(ErrorKind::Other, "4"), thread::current(), T1, T2)
-   |     -------------------------------------------------------------- (std::io::Error, Thread, T1, T2)
-LL |         == (Error::new(ErrorKind::Other, "4"), thread::current(), T1, T2);
-   |         ^^ -------------------------------------------------------------- (std::io::Error, Thread, T1, T2)
-   |
+error E0369: binary operation `==` cannot be applied to type `(std::io::Error, Thread, T1, T2)`
+ at $DIR/binary-op-not-allowed-issue-125631.rs:14:9
+  on line 13: (std::io::Error, Thread, T1, T2)
+  on line 14, column 12: (std::io::Error, Thread, T1, T2)
 note: the following types would have to `impl` their required traits for this operation to be valid
-  --> $DIR/binary-op-not-allowed-issue-125631.rs:4:1
-   |
-LL | struct T1;
-   | ^^^^^^^^^ must implement `PartialEq`
-LL | struct T2;
-   | ^^^^^^^^^ must implement `PartialEq`
+ at $DIR/binary-op-not-allowed-issue-125631.rs:4:1: must implement `PartialEq`
+  on line 5: must implement `PartialEq`
 note: `Thread` does not implement `PartialEq`
-  --> $SRC_DIR/std/src/thread/thread.rs:LL:COL
-   |
-   = note: `Thread` is defined in another crate
+ at $SRC_DIR/std/src/thread/thread.rs:LL:COL
+note: `Thread` is defined in another crate
 note: `std::io::Error` does not implement `PartialEq`
-  --> $SRC_DIR/core/src/io/error.rs:LL:COL
-   |
-   = note: `std::io::Error` is defined in another crate
+ at $SRC_DIR/core/src/io/error.rs:LL:COL
+note: `std::io::Error` is defined in another crate
 help: consider annotating `T1` with `#[derive(PartialEq)]`
-   |
-LL + #[derive(PartialEq)]
-LL | struct T1;
-   |
+ on line 4, column 1, add `#[derive(PartialEq)]`
 help: consider annotating `T2` with `#[derive(PartialEq)]`
-   |
-LL + #[derive(PartialEq)]
-LL | struct T2;
-   |
+ on line 5, column 1, add `#[derive(PartialEq)]`
 
 error: aborting due to 3 previous errors
 

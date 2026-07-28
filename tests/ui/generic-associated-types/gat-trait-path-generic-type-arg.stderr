@@ -1,32 +1,16 @@
-error[E0403]: the name `T1` is already used for a generic parameter in this item's generic parameters
-  --> $DIR/gat-trait-path-generic-type-arg.rs:9:12
-   |
-LL | impl <T, T1> Foo for T {
-   |          -- first use of `T1`
-LL |
-LL |     type F<T1> = &[u8];
-   |            ^^ already used
+error E0403: the name `T1` is already used for a generic parameter in this item's generic parameters
+ at $DIR/gat-trait-path-generic-type-arg.rs:9:12: already used
+  on line 7, column 10: first use of `T1`
 
-error[E0637]: `&` without an explicit lifetime name cannot be used here
-  --> $DIR/gat-trait-path-generic-type-arg.rs:9:18
-   |
-LL |     type F<T1> = &[u8];
-   |                  ^ explicit lifetime name needed here
+error E0637: `&` without an explicit lifetime name cannot be used here
+ at $DIR/gat-trait-path-generic-type-arg.rs:9:18: explicit lifetime name needed here
 
-error[E0049]: associated type `F` has 1 type parameter but its trait declaration has 0 type parameters
-  --> $DIR/gat-trait-path-generic-type-arg.rs:9:12
-   |
-LL |     type F<'a>;
-   |            -- expected 0 type parameters
-...
-LL |     type F<T1> = &[u8];
-   |            ^^ found 1 type parameter
+error E0049: associated type `F` has 1 type parameter but its trait declaration has 0 type parameters
+ at $DIR/gat-trait-path-generic-type-arg.rs:9:12: found 1 type parameter
+  on line 2, column 12: expected 0 type parameters
 
-error[E0207]: the type parameter `T1` is not constrained by the impl trait, self type, or predicates
-  --> $DIR/gat-trait-path-generic-type-arg.rs:7:10
-   |
-LL | impl <T, T1> Foo for T {
-   |          ^^ unconstrained type parameter
+error E0207: the type parameter `T1` is not constrained by the impl trait, self type, or predicates
+ at $DIR/gat-trait-path-generic-type-arg.rs:7:10: unconstrained type parameter
 
 error: aborting due to 4 previous errors
 

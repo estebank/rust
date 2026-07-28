@@ -1,27 +1,14 @@
 error: expected `,`, or `}`, found keyword `fn`
-  --> $DIR/fn-field-parse-error-ice.rs:5:16
-   |
-LL |     inner : dyn fn ()
-   |                ^ help: try adding a comma: `,`
+ at $DIR/fn-field-parse-error-ice.rs:5:16: help: try adding a comma: `,`
 
 error: expected identifier, found keyword `fn`
-  --> $DIR/fn-field-parse-error-ice.rs:5:17
-   |
-LL | struct Baz {
-   |        --- while parsing this struct
-LL |     inner : dyn fn ()
-   |                 ^^ expected identifier, found keyword
-   |
+ at $DIR/fn-field-parse-error-ice.rs:5:17: expected identifier, found keyword
+  on line 4, column 8: while parsing this struct
 help: escape `fn` to use it as an identifier
-   |
-LL |     inner : dyn r#fn ()
-   |                 ++
+ on line 5, column 16, add `r#`
 
-error[E0425]: cannot find type `dyn` in this scope
-  --> $DIR/fn-field-parse-error-ice.rs:5:13
-   |
-LL |     inner : dyn fn ()
-   |             ^^^ not found in this scope
+error E0425: cannot find type `dyn` in this scope
+ at $DIR/fn-field-parse-error-ice.rs:5:13: not found in this scope
 
 error: aborting due to 3 previous errors
 

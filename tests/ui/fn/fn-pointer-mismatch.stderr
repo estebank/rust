@@ -1,91 +1,53 @@
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/fn-pointer-mismatch.rs:13:43
-   |
-LL |     let g = if n % 2 == 0 { &foo } else { &bar };
-   |                             ----          ^^^^ expected `&fn(u32) -> u32 {foo}`, found `&fn(u32) -> u32 {bar}`
-   |                             |
-   |                             expected because of this
-   |
-   = note: expected reference `&fn(_) -> _ {foo}`
-              found reference `&fn(_) -> _ {bar}`
-   = note: different fn items have unique types, even if their signatures are the same
-   = help: consider casting both fn items to fn pointers using `as fn(u32) -> u32`
+error E0308: `if` and `else` have incompatible types
+ at $DIR/fn-pointer-mismatch.rs:13:43: expected `&fn(u32) -> u32 {foo}`, found `&fn(u32) -> u32 {bar}`
+  on line 13, column 29: expected because of this
+note: expected reference `&fn(_) -> _ {foo}`
+         found reference `&fn(_) -> _ {bar}`
+note: different fn items have unique types, even if their signatures are the same
+help: consider casting both fn items to fn pointers using `as fn(u32) -> u32`
 
-error[E0308]: mismatched types
-  --> $DIR/fn-pointer-mismatch.rs:25:9
-   |
-LL |     let mut a = foo;
-   |                 --- expected due to this value
-LL |     a = bar;
-   |         ^^^ expected fn item, found a different fn item
-   |
-   = note: expected fn item `fn(_) -> _ {foo}`
-              found fn item `fn(_) -> _ {bar}`
-   = note: different fn items have unique types, even if their signatures are the same
-   = help: consider casting both fn items to fn pointers using `as fn(u32) -> u32`
+error E0308: mismatched types
+ at $DIR/fn-pointer-mismatch.rs:25:9: expected fn item, found a different fn item
+  on line 24, column 17: expected due to this value
+note: expected fn item `fn(_) -> _ {foo}`
+         found fn item `fn(_) -> _ {bar}`
+note: different fn items have unique types, even if their signatures are the same
+help: consider casting both fn items to fn pointers using `as fn(u32) -> u32`
 
-error[E0308]: mismatched types
-  --> $DIR/fn-pointer-mismatch.rs:33:18
-   |
-LL |     b = Box::new(bar);
-   |         -------- ^^^ expected fn item, found a different fn item
-   |         |
-   |         arguments to this function are incorrect
-   |
-   = note: expected fn item `fn(_) -> _ {foo}`
-              found fn item `fn(_) -> _ {bar}`
-   = note: different fn items have unique types, even if their signatures are the same
+error E0308: mismatched types
+ at $DIR/fn-pointer-mismatch.rs:33:18: expected fn item, found a different fn item
+  on line 33, column 9: arguments to this function are incorrect
+note: expected fn item `fn(_) -> _ {foo}`
+         found fn item `fn(_) -> _ {bar}`
+note: different fn items have unique types, even if their signatures are the same
 note: associated function defined here
-  --> $SRC_DIR/alloc/src/boxed.rs:LL:COL
-   = help: consider casting both fn items to fn pointers using `as fn(u32) -> u32`
+ at $SRC_DIR/alloc/src/boxed.rs:LL:COL
+help: consider casting both fn items to fn pointers using `as fn(u32) -> u32`
 
-error[E0308]: mismatched types
-  --> $DIR/fn-pointer-mismatch.rs:38:29
-   |
-LL |     let c: fn(u32) -> u32 = &foo;
-   |            --------------   ^^^^ expected fn pointer, found `&fn(u32) -> u32 {foo}`
-   |            |
-   |            expected due to this
-   |
-   = note: expected fn pointer `fn(_) -> _`
-               found reference `&fn(_) -> _ {foo}`
+error E0308: mismatched types
+ at $DIR/fn-pointer-mismatch.rs:38:29: expected fn pointer, found `&fn(u32) -> u32 {foo}`
+  on line 38, column 12: expected due to this
+note: expected fn pointer `fn(_) -> _`
+          found reference `&fn(_) -> _ {foo}`
 help: consider removing the reference
-   |
-LL -     let c: fn(u32) -> u32 = &foo;
-LL +     let c: fn(u32) -> u32 = foo;
-   |
+ on line 38, column 28, replace with `foo`
 
-error[E0308]: mismatched types
-  --> $DIR/fn-pointer-mismatch.rs:44:30
-   |
-LL |     let d: &fn(u32) -> u32 = foo;
-   |            ---------------   ^^^ expected `&fn(u32) -> u32`, found fn item
-   |            |
-   |            expected due to this
-   |
-   = note: expected reference `&fn(_) -> _`
-                found fn item `fn(_) -> _ {foo}`
+error E0308: mismatched types
+ at $DIR/fn-pointer-mismatch.rs:44:30: expected `&fn(u32) -> u32`, found fn item
+  on line 44, column 12: expected due to this
+note: expected reference `&fn(_) -> _`
+           found fn item `fn(_) -> _ {foo}`
 help: consider using a reference
-   |
-LL |     let d: &fn(u32) -> u32 = &foo;
-   |                              +
+ on line 44, column 29, add `&`
 
-error[E0308]: mismatched types
-  --> $DIR/fn-pointer-mismatch.rs:50:30
-   |
-LL |     let e: &fn(u32) -> u32 = &foo;
-   |            ---------------   ^^^^ expected `&fn(u32) -> u32`, found `&fn(u32) -> u32 {foo}`
-   |            |
-   |            expected due to this
-   |
-   = note: expected reference `&fn(_) -> _`
-              found reference `&fn(_) -> _ {foo}`
-   = note: fn items are distinct from fn pointers
+error E0308: mismatched types
+ at $DIR/fn-pointer-mismatch.rs:50:30: expected `&fn(u32) -> u32`, found `&fn(u32) -> u32 {foo}`
+  on line 50, column 12: expected due to this
+note: expected reference `&fn(_) -> _`
+         found reference `&fn(_) -> _ {foo}`
+note: fn items are distinct from fn pointers
 help: consider casting to a fn pointer
-   |
-LL -     let e: &fn(u32) -> u32 = &foo;
-LL +     let e: &fn(u32) -> u32 = &(foo as fn(u32) -> u32);
-   |
+ on line 50, column 29, replace with `&(foo as fn(u32) -> u32)`
 
 error: aborting due to 6 previous errors
 

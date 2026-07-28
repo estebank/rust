@@ -1,30 +1,16 @@
-error[E0053]: method `from` has an incompatible type for trait
-  --> $DIR/issue-90444.rs:3:16
-   |
-LL |     fn from(_: fn((), (), &mut ())) -> Self {
-   |                ^^^^^^^^^^^^^^^^^^^ types differ in mutability
-   |
-   = note: expected signature `fn(for<'a> fn((), (), &'a ())) -> A`
-              found signature `fn(for<'a> fn((), (), &'a mut ())) -> A`
+error E0053: method `from` has an incompatible type for trait
+ at $DIR/issue-90444.rs:3:16: types differ in mutability
+note: expected signature `fn(for<'a> fn((), (), &'a ())) -> A`
+         found signature `fn(for<'a> fn((), (), &'a mut ())) -> A`
 help: change the parameter type to match the trait
-   |
-LL -     fn from(_: fn((), (), &mut ())) -> Self {
-LL +     fn from(_: for<'a> fn((), (), &'a ())) -> Self {
-   |
+ on line 3, column 15, replace with `for<'a> fn((), (), &'a ())`
 
-error[E0053]: method `from` has an incompatible type for trait
-  --> $DIR/issue-90444.rs:11:16
-   |
-LL |     fn from(_: fn((), (), u64)) -> Self {
-   |                ^^^^^^^^^^^^^^^ expected `u32`, found `u64`
-   |
-   = note: expected signature `fn(fn((), (), u32)) -> B`
-              found signature `fn(fn((), (), u64)) -> B`
+error E0053: method `from` has an incompatible type for trait
+ at $DIR/issue-90444.rs:11:16: expected `u32`, found `u64`
+note: expected signature `fn(fn((), (), u32)) -> B`
+         found signature `fn(fn((), (), u64)) -> B`
 help: change the parameter type to match the trait
-   |
-LL -     fn from(_: fn((), (), u64)) -> Self {
-LL +     fn from(_: fn((), (), u32)) -> Self {
-   |
+ on line 11, column 15, replace with `fn((), (), u32)`
 
 error: aborting due to 2 previous errors
 

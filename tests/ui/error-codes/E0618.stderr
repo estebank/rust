@@ -1,29 +1,14 @@
-error[E0618]: expected function, found enum variant `X::Entry`
-  --> $DIR/E0618.rs:6:5
-   |
-LL |     Entry,
-   |     ----- enum variant `X::Entry` defined here
-...
-LL |     X::Entry();
-   |     ^^^^^^^^--
-   |     |
-   |     call expression requires function
-   |
+error E0618: expected function, found enum variant `X::Entry`
+ at $DIR/E0618.rs:6:5
+  on line 2: enum variant `X::Entry` defined here
+  on line 6: call expression requires function
 help: `X::Entry` is a unit enum variant, and does not take parentheses to be constructed
-   |
-LL -     X::Entry();
-LL +     X::Entry;
-   |
+ on line 6, column 12
 
-error[E0618]: expected function, found `i32`
-  --> $DIR/E0618.rs:9:5
-   |
-LL |     let x = 0i32;
-   |         - `x` has type `i32`
-LL |     x();
-   |     ^--
-   |     |
-   |     call expression requires function
+error E0618: expected function, found `i32`
+ at $DIR/E0618.rs:9:5
+  on line 8, column 9: `x` has type `i32`
+  on line 9: call expression requires function
 
 error: aborting due to 2 previous errors
 

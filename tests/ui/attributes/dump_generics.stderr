@@ -1,9 +1,5 @@
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:8:1
-   |
-LL | trait NiceOfTheFoundation<'_a: '_a, '_b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:8:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -91,17 +87,10 @@ note: Generics {
           has_self: true,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:8:1
-   |
-LL | trait NiceOfTheFoundation<'_a: '_a, '_b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:8:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:28:1
-   |
-LL | pub trait IHopeItMadeLotsOfCode<'a, 'b, const N: usize, T, U: Clone>
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:28:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -189,17 +178,10 @@ note: Generics {
           has_self: true,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:28:1
-   |
-LL | pub trait IHopeItMadeLotsOfCode<'a, 'b, const N: usize, T, U: Clone>
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:28:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:33:1
-   |
-LL | struct LookItsFromCorro<'a, 'b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:33:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -273,17 +255,10 @@ note: Generics {
           has_self: false,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:33:1
-   |
-LL | struct LookItsFromCorro<'a, 'b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:33:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:40:1
-   |
-LL | enum HaveTakenOver<'a: 'a, 'b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:40:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -357,17 +332,10 @@ note: Generics {
           has_self: false,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:40:1
-   |
-LL | enum HaveTakenOver<'a: 'a, 'b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:40:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:48:1
-   |
-LL | union TheFoundation<'a: 'a, 'b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:48:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -441,17 +409,10 @@ note: Generics {
           has_self: false,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:48:1
-   |
-LL | union TheFoundation<'a: 'a, 'b, const N: usize, T, U: Clone> {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:48:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:55:1
-   |
-LL | const fn i_dare_you<'a: 'a, 'b, const N: usize, T, U>(you_can: &'a bool, _: &'b [(T, U); N]) {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:55:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -516,17 +477,10 @@ note: Generics {
               $DIR/dump_generics.rs:55:29: 55:31 (#0),
           ),
       }
-  --> $DIR/dump_generics.rs:55:1
-   |
-LL | const fn i_dare_you<'a: 'a, 'b, const N: usize, T, U>(you_can: &'a bool, _: &'b [(T, U); N]) {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:55:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:66:1
-   |
-LL | trait IfYouNeed<'_a: '_a, '_b, const N: usize, T, U: Clone> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:66:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -614,17 +568,10 @@ note: Generics {
           has_self: true,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:66:1
-   |
-LL | trait IfYouNeed<'_a: '_a, '_b, const N: usize, T, U: Clone> {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:66:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:70:1
-   |
-LL | type Instructions<'a: 'a, 'b, const N: usize, T, U: Clone> = dyn IfYouNeed<'a, 'b, N, T, U>;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:70:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -698,17 +645,10 @@ note: Generics {
           has_self: false,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:70:1
-   |
-LL | type Instructions<'a: 'a, 'b, const N: usize, T, U: Clone> = dyn IfYouNeed<'a, 'b, N, T, U>;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:70:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:74:1
-   |
-LL | const ON_HOW_TO_GET: usize = <() as NiceOfTheFoundation::<'static, 'static, 7, (), ()>>::OVER_FOR;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:74:1
 note: Generics {
           parent: None,
           parent_count: 0,
@@ -717,17 +657,10 @@ note: Generics {
           has_self: false,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:74:1
-   |
-LL | const ON_HOW_TO_GET: usize = <() as NiceOfTheFoundation::<'static, 'static, 7, (), ()>>::OVER_FOR;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:74:1
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:12:5
-   |
-LL |     type ToInviteUs<V: PartialEq>;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:12:5
 note: Generics {
           parent: Some(
               DefId(..),
@@ -754,17 +687,10 @@ note: Generics {
           has_self: true,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:12:5
-   |
-LL |     type ToInviteUs<V: PartialEq>;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:12:5
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:16:5
-   |
-LL |     const OVER_FOR: usize;
-   |     ^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/dump_generics.rs:16:5
 note: Generics {
           parent: Some(
               DefId(..),
@@ -775,21 +701,10 @@ note: Generics {
           has_self: true,
           has_late_bound_regions: None,
       }
-  --> $DIR/dump_generics.rs:16:5
-   |
-LL |     const OVER_FOR: usize;
-   |     ^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_generics.rs:16:5
 
 error: rustc_dump_generics: DefId(..)
-  --> $DIR/dump_generics.rs:20:5
-   |
-LL | /     fn a_picnic<const NN: usize>(
-LL | |         &self,
-LL | |         eh: [u8; N],
-LL | |         ferris: [u32; NN]
-LL | |     ) { }
-   | |_____^
-   |
+ at $DIR/dump_generics.rs:20:5 to 24:6
 note: Generics {
           parent: Some(
               DefId(..),
@@ -817,14 +732,7 @@ note: Generics {
               $DIR/dump_generics.rs:21:9: 21:10 (#0),
           ),
       }
-  --> $DIR/dump_generics.rs:20:5
-   |
-LL | /     fn a_picnic<const NN: usize>(
-LL | |         &self,
-LL | |         eh: [u8; N],
-LL | |         ferris: [u32; NN]
-LL | |     ) { }
-   | |_____^
+ at $DIR/dump_generics.rs:20:5 to 24:6
 
 error: aborting due to 12 previous errors
 

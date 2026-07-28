@@ -1,8 +1,5 @@
-error[E0425]: cannot find function `i_am_not` in module `inner`
-  --> $DIR/diagnostics-not-a-def.rs:12:12
-   |
-LL |     inner::i_am_not();
-   |            ^^^^^^^^ not found in `inner`
+error E0425: cannot find function `i_am_not` in module `inner`
+ at $DIR/diagnostics-not-a-def.rs:12:12: not found in `inner`
 
 error: aborting due to 1 previous error
 

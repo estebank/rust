@@ -1,28 +1,14 @@
-error[E0425]: cannot find value `meows` in this scope
-  --> $DIR/class-missing-self.rs:9:7
-   |
-LL |       meows += 1;
-   |       ^^^^^
-   |
+error E0425: cannot find value `meows` in this scope
+ at $DIR/class-missing-self.rs:9:7
 help: you might have meant to use the available field
-   |
-LL |       self.meows += 1;
-   |       +++++
+ on line 9, column 6, add `self.`
 
-error[E0425]: cannot find function `sleep` in this scope
-  --> $DIR/class-missing-self.rs:10:7
-   |
-LL |       sleep();
-   |       ^^^^^ not found in this scope
-   |
+error E0425: cannot find function `sleep` in this scope
+ at $DIR/class-missing-self.rs:10:7: not found in this scope
 help: consider using the method on `Self`
-   |
-LL |       self.sleep();
-   |       +++++
+ on line 10, column 6, add `self.`
 help: consider importing this function
-   |
-LL + use std::thread::sleep;
-   |
+ on line 1, column 1, add `use std::thread::sleep;`
 
 error: aborting due to 2 previous errors
 

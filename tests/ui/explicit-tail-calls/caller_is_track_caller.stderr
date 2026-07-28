@@ -1,20 +1,11 @@
 error: a function marked with `#[track_caller]` cannot perform a tail-call
-  --> $DIR/caller_is_track_caller.rs:6:5
-   |
-LL |     become b();
-   |     ^^^^^^^^^^
+ at $DIR/caller_is_track_caller.rs:6:5
 
 error: a function marked with `#[track_caller]` cannot perform a tail-call
-  --> $DIR/caller_is_track_caller.rs:13:5
-   |
-LL |     become a();
-   |     ^^^^^^^^^^
+ at $DIR/caller_is_track_caller.rs:13:5
 
 error: a function marked with `#[track_caller]` cannot perform a tail-call
-  --> $DIR/caller_is_track_caller.rs:21:9
-   |
-LL |         become self.d();
-   |         ^^^^^^^^^^^^^^^
+ at $DIR/caller_is_track_caller.rs:21:9
 
 error: aborting due to 3 previous errors
 

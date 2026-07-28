@@ -1,13 +1,7 @@
-error[E0782]: expected a type, found a trait
-  --> $DIR/dyn-trait-sugg-2021.rs:10:5
-   |
-LL |     Foo::hi(123);
-   |     ^^^
-   |
+error E0782: expected a type, found a trait
+ at $DIR/dyn-trait-sugg-2021.rs:10:5
 help: you can add the `dyn` keyword if you want a trait object
-   |
-LL |     <dyn Foo>::hi(123);
-   |     ++++    +
+ on line 10, column 4, add `<dyn `
 
 error: aborting due to 1 previous error
 

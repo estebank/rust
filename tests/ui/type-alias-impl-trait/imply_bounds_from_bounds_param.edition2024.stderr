@@ -1,86 +1,38 @@
-error[E0499]: cannot borrow `z` as mutable more than once at a time
-  --> $DIR/imply_bounds_from_bounds_param.rs:36:27
-   |
-LL |     let mut thing = test(&mut z);
-   |                          ------ first mutable borrow occurs here
-LL |     let mut thing2 = test(&mut z);
-   |                           ^^^^^^ second mutable borrow occurs here
-LL |     thing.plus_one();
-   |     ----- first borrow later used here
-   |
+error E0499: cannot borrow `z` as mutable more than once at a time
+ at $DIR/imply_bounds_from_bounds_param.rs:36:27: second mutable borrow occurs here
+  on line 35, column 26: first mutable borrow occurs here
+  on line 37: first borrow later used here
 note: this call may capture more lifetimes than intended, because Rust 2024 has adjusted the `impl Trait` lifetime capture rules
-  --> $DIR/imply_bounds_from_bounds_param.rs:35:21
-   |
-LL |     let mut thing = test(&mut z);
-   |                     ^^^^^^^^^^^^
+ at $DIR/imply_bounds_from_bounds_param.rs:35:21
 help: use the precise capturing `use<...>` syntax to make the captures explicit
-   |
-LL | fn test<'a>(y: &'a mut i32) -> impl PlusOne + use<> {
-   |                                             +++++++
+ on line 28, column 43, add ` + use<>`
 
-error[E0502]: cannot borrow `z` as immutable because it is also borrowed as mutable
-  --> $DIR/imply_bounds_from_bounds_param.rs:38:5
-   |
-LL |     let mut thing = test(&mut z);
-   |                          ------ mutable borrow occurs here
-...
-LL |     assert_eq!(z, 43);
-   |     ^^^^^^^^^^^^^^^^^ immutable borrow occurs here
-...
-LL |     thing.plus_one();
-   |     ----- mutable borrow later used here
-   |
+error E0502: cannot borrow `z` as immutable because it is also borrowed as mutable
+ at $DIR/imply_bounds_from_bounds_param.rs:38:5: immutable borrow occurs here
+  on line 35, column 26: mutable borrow occurs here
+  on line 41: mutable borrow later used here
 note: this call may capture more lifetimes than intended, because Rust 2024 has adjusted the `impl Trait` lifetime capture rules
-  --> $DIR/imply_bounds_from_bounds_param.rs:35:21
-   |
-LL |     let mut thing = test(&mut z);
-   |                     ^^^^^^^^^^^^
+ at $DIR/imply_bounds_from_bounds_param.rs:35:21
 help: use the precise capturing `use<...>` syntax to make the captures explicit
-   |
-LL | fn test<'a>(y: &'a mut i32) -> impl PlusOne + use<> {
-   |                                             +++++++
+ on line 28, column 43, add ` + use<>`
 
-error[E0502]: cannot borrow `z` as immutable because it is also borrowed as mutable
-  --> $DIR/imply_bounds_from_bounds_param.rs:40:5
-   |
-LL |     let mut thing = test(&mut z);
-   |                          ------ mutable borrow occurs here
-...
-LL |     assert_eq!(z, 44);
-   |     ^^^^^^^^^^^^^^^^^ immutable borrow occurs here
-LL |     thing.plus_one();
-   |     ----- mutable borrow later used here
-   |
+error E0502: cannot borrow `z` as immutable because it is also borrowed as mutable
+ at $DIR/imply_bounds_from_bounds_param.rs:40:5: immutable borrow occurs here
+  on line 35, column 26: mutable borrow occurs here
+  on line 41: mutable borrow later used here
 note: this call may capture more lifetimes than intended, because Rust 2024 has adjusted the `impl Trait` lifetime capture rules
-  --> $DIR/imply_bounds_from_bounds_param.rs:35:21
-   |
-LL |     let mut thing = test(&mut z);
-   |                     ^^^^^^^^^^^^
+ at $DIR/imply_bounds_from_bounds_param.rs:35:21
 help: use the precise capturing `use<...>` syntax to make the captures explicit
-   |
-LL | fn test<'a>(y: &'a mut i32) -> impl PlusOne + use<> {
-   |                                             +++++++
+ on line 28, column 43, add ` + use<>`
 
-error[E0502]: cannot borrow `z` as immutable because it is also borrowed as mutable
-  --> $DIR/imply_bounds_from_bounds_param.rs:42:5
-   |
-LL |     let mut thing = test(&mut z);
-   |                          ------ mutable borrow occurs here
-...
-LL |     assert_eq!(z, 45);
-   |     ^^^^^^^^^^^^^^^^^ immutable borrow occurs here
-LL | }
-   | - mutable borrow might be used here, when `thing` is dropped and runs the destructor for type `impl PlusOne`
-   |
+error E0502: cannot borrow `z` as immutable because it is also borrowed as mutable
+ at $DIR/imply_bounds_from_bounds_param.rs:42:5: immutable borrow occurs here
+  on line 35, column 26: mutable borrow occurs here
+  on line 43: mutable borrow might be used here, when `thing` is dropped and runs the destructor for type `impl PlusOne`
 note: this call may capture more lifetimes than intended, because Rust 2024 has adjusted the `impl Trait` lifetime capture rules
-  --> $DIR/imply_bounds_from_bounds_param.rs:35:21
-   |
-LL |     let mut thing = test(&mut z);
-   |                     ^^^^^^^^^^^^
+ at $DIR/imply_bounds_from_bounds_param.rs:35:21
 help: use the precise capturing `use<...>` syntax to make the captures explicit
-   |
-LL | fn test<'a>(y: &'a mut i32) -> impl PlusOne + use<> {
-   |                                             +++++++
+ on line 28, column 43, add ` + use<>`
 
 error: aborting due to 4 previous errors
 

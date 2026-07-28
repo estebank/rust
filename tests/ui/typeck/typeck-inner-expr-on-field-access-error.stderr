@@ -1,16 +1,10 @@
-error[E0610]: `{integer}` is a primitive type and therefore doesn't have fields
-  --> $DIR/typeck-inner-expr-on-field-access-error.rs:4:7
-   |
-LL |     1.create_a_type_error[
-   |       ^^^^^^^^^^^^^^^^^^^
+error E0610: `{integer}` is a primitive type and therefore doesn't have fields
+ at $DIR/typeck-inner-expr-on-field-access-error.rs:4:7
 
-error[E0369]: cannot add `()` to `()`
-  --> $DIR/typeck-inner-expr-on-field-access-error.rs:5:11
-   |
-LL |         ()+()
-   |         --^-- ()
-   |         |
-   |         ()
+error E0369: cannot add `()` to `()`
+ at $DIR/typeck-inner-expr-on-field-access-error.rs:5:11
+  on line 5: ()
+  on line 5, column 12: ()
 
 error: aborting due to 2 previous errors
 

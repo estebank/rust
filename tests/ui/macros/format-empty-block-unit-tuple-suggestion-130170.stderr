@@ -1,56 +1,26 @@
 error: format argument must be a string literal
-  --> $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:5:14
-   |
-LL |     println!({}, "sss", s);
-   |              ^^
-   |
+ at $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:5:14
 help: you might be missing a string literal to format with
-   |
-LL |     println!("{:?} {} {}", {}, "sss", s);
-   |              +++++++++++++
+ on line 5, column 13, add `"{:?} {} {}", `
 help: you might want to enclose `{}` with `""`
-   |
-LL -     println!({}, "sss", s);
-LL +     println!("{}", "sss", s);
-   |
+ on line 5, column 13, replace with `"{}"`
 
 error: format argument must be a string literal
-  --> $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:7:14
-   |
-LL |     println!({});
-   |              ^^
-   |
+ at $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:7:14
 help: you might be missing a string literal to format with
-   |
-LL |     println!("{:?}", {});
-   |              +++++++
+ on line 7, column 13, add `"{:?}", `
 help: you might want to enclose `{}` with `""`
-   |
-LL -     println!({});
-LL +     println!("{}");
-   |
+ on line 7, column 13, replace with `"{}"`
 
 error: format argument must be a string literal
-  --> $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:9:14
-   |
-LL |     println!(s, "sss", s, {});
-   |              ^
-   |
+ at $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:9:14
 help: you might be missing a string literal to format with
-   |
-LL |     println!("{} {} {} {:?}", s, "sss", s, {});
-   |              ++++++++++++++++
+ on line 9, column 13, add `"{} {} {} {:?}", `
 
 error: format argument must be a string literal
-  --> $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:11:14
-   |
-LL |     println!((), s, {});
-   |              ^^
-   |
+ at $DIR/format-empty-block-unit-tuple-suggestion-130170.rs:11:14
 help: you might be missing a string literal to format with
-   |
-LL |     println!("{:?} {} {:?}", (), s, {});
-   |              +++++++++++++++
+ on line 11, column 13, add `"{:?} {} {:?}", `
 
 error: aborting due to 4 previous errors
 

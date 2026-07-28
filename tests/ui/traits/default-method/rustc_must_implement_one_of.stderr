@@ -1,14 +1,7 @@
-error[E0046]: not all trait items implemented, missing one of: `eq`, `neq`
-  --> $DIR/rustc_must_implement_one_of.rs:41:1
-   |
-LL | impl Equal for T3 {}
-   | ^^^^^^^^^^^^^^^^^ missing one of `eq`, `neq` in implementation
-   |
+error E0046: not all trait items implemented, missing one of: `eq`, `neq`
+ at $DIR/rustc_must_implement_one_of.rs:41:1: missing one of `eq`, `neq` in implementation
 note: required because of this annotation
-  --> $DIR/rustc_must_implement_one_of.rs:3:1
-   |
-LL | #[rustc_must_implement_one_of(eq, neq)]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/rustc_must_implement_one_of.rs:3:1
 
 error: aborting due to 1 previous error
 

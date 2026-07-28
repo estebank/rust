@@ -1,18 +1,9 @@
-error[E0382]: borrow of moved value: `s`
-  --> $DIR/poison-copy-via-projection.rs:22:20
-   |
-LL |     let s = "Hello!".to_owned();
-   |         - move occurs because `s` has type `String`, which does not implement the `Copy` trait
-LL |     let mut s_copy = s;
-   |                      - value moved here
-...
-LL |     println!("{}", s);
-   |                    ^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `s`
+ at $DIR/poison-copy-via-projection.rs:22:20: value borrowed here after move
+  on line 18, column 9: move occurs because `s` has type `String`, which does not implement the `Copy` trait
+  on line 19, column 22: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let mut s_copy = s.clone();
-   |                       ++++++++
+ on line 19, column 22, add `.clone()`
 
 error: aborting due to 1 previous error
 

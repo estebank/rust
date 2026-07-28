@@ -1,66 +1,34 @@
-error[E0308]: mismatched types
-  --> $DIR/equality2.rs:27:18
-   |
-LL | fn hide<T: Foo>(x: T) -> impl Foo {
-   |                          -------- the found opaque type
-...
-LL |     let _: u32 = hide(0_u32);
-   |            ---   ^^^^^^^^^^^ expected `u32`, found opaque type
-   |            |
-   |            expected due to this
-   |
-   = note:     expected type `u32`
-           found opaque type `impl Foo`
+error E0308: mismatched types
+ at $DIR/equality2.rs:27:18: expected `u32`, found opaque type
+  on line 9, column 26: the found opaque type
+  on line 27, column 12: expected due to this
+note:     expected type `u32`
+      found opaque type `impl Foo`
 
-error[E0308]: mismatched types
-  --> $DIR/equality2.rs:33:18
-   |
-LL | fn hide<T: Foo>(x: T) -> impl Foo {
-   |                          -------- the found opaque type
-...
-LL |     let _: i32 = Leak::leak(hide(0_i32));
-   |            ---   ^^^^^^^^^^^^^^^^^^^^^^^ expected `i32`, found associated type
-   |            |
-   |            expected due to this
-   |
-   = note:         expected type `i32`
-           found associated type `<impl Foo as Leak>::T`
+error E0308: mismatched types
+ at $DIR/equality2.rs:33:18: expected `i32`, found associated type
+  on line 9, column 26: the found opaque type
+  on line 33, column 12: expected due to this
+note:         expected type `i32`
+      found associated type `<impl Foo as Leak>::T`
 help: consider constraining the associated type `<impl Foo as Leak>::T` to `i32`
-   |
-LL | fn hide<T: Foo>(x: T) -> impl Foo<T = i32> {
-   |                                  +++++++++
+ on line 9, column 33, add `<T = i32>`
 
-error[E0308]: mismatched types
-  --> $DIR/equality2.rs:40:10
-   |
-LL | fn hide<T: Foo>(x: T) -> impl Foo {
-   |                          --------
-   |                          |
-   |                          the expected opaque type
-   |                          the found opaque type
-...
-LL |     x = (x.1,
-   |          ^^^ expected `u32`, found `i32`
-   |
-   = note: expected opaque type `impl Foo` (`u32`)
-              found opaque type `impl Foo` (`i32`)
-   = note: distinct uses of `impl Trait` result in different opaque types
+error E0308: mismatched types
+ at $DIR/equality2.rs:40:10: expected `u32`, found `i32`
+  on line 9, column 26: the expected opaque type
+  on line 9, column 26: the found opaque type
+note: expected opaque type `impl Foo` (`u32`)
+         found opaque type `impl Foo` (`i32`)
+note: distinct uses of `impl Trait` result in different opaque types
 
-error[E0308]: mismatched types
-  --> $DIR/equality2.rs:43:10
-   |
-LL | fn hide<T: Foo>(x: T) -> impl Foo {
-   |                          --------
-   |                          |
-   |                          the expected opaque type
-   |                          the found opaque type
-...
-LL |          x.0);
-   |          ^^^ expected `i32`, found `u32`
-   |
-   = note: expected opaque type `impl Foo` (`i32`)
-              found opaque type `impl Foo` (`u32`)
-   = note: distinct uses of `impl Trait` result in different opaque types
+error E0308: mismatched types
+ at $DIR/equality2.rs:43:10: expected `i32`, found `u32`
+  on line 9, column 26: the expected opaque type
+  on line 9, column 26: the found opaque type
+note: expected opaque type `impl Foo` (`i32`)
+         found opaque type `impl Foo` (`u32`)
+note: distinct uses of `impl Trait` result in different opaque types
 
 error: aborting due to 4 previous errors
 

@@ -1,14 +1,7 @@
 error: expected one of `!` or `::`, found `Human`
-  --> $DIR/impl-block.rs:3:6
-   |
-LL | ipml Human {}
-   |      ^^^^^ expected one of `!` or `::`
-   |
+ at $DIR/impl-block.rs:3:6: expected one of `!` or `::`
 help: there is a keyword `impl` with a similar name
-   |
-LL - ipml Human {}
-LL + impl Human {}
-   |
+ on line 3, column 1, replace with `impl`
 
 error: aborting due to 1 previous error
 

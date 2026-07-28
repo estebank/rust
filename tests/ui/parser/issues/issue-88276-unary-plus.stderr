@@ -1,50 +1,22 @@
 error: leading `+` is not supported
-  --> $DIR/issue-88276-unary-plus.rs:4:13
-   |
-LL |     let _ = +1;
-   |             ^ unexpected `+`
-   |
+ at $DIR/issue-88276-unary-plus.rs:4:13: unexpected `+`
 help: try removing the `+`
-   |
-LL -     let _ = +1;
-LL +     let _ = 1;
-   |
+ on line 4, column 12
 
 error: leading `+` is not supported
-  --> $DIR/issue-88276-unary-plus.rs:5:20
-   |
-LL |     let _ = (1.0 + +2.0) * +3.0;
-   |                    ^ unexpected `+`
-   |
+ at $DIR/issue-88276-unary-plus.rs:5:20: unexpected `+`
 help: try removing the `+`
-   |
-LL -     let _ = (1.0 + +2.0) * +3.0;
-LL +     let _ = (1.0 + 2.0) * +3.0;
-   |
+ on line 5, column 19
 
 error: leading `+` is not supported
-  --> $DIR/issue-88276-unary-plus.rs:5:28
-   |
-LL |     let _ = (1.0 + +2.0) * +3.0;
-   |                            ^ unexpected `+`
-   |
+ at $DIR/issue-88276-unary-plus.rs:5:28: unexpected `+`
 help: try removing the `+`
-   |
-LL -     let _ = (1.0 + +2.0) * +3.0;
-LL +     let _ = (1.0 + +2.0) * 3.0;
-   |
+ on line 5, column 27
 
 error: leading `+` is not supported
-  --> $DIR/issue-88276-unary-plus.rs:7:14
-   |
-LL |     let _ = [+3, 4+6];
-   |              ^ unexpected `+`
-   |
+ at $DIR/issue-88276-unary-plus.rs:7:14: unexpected `+`
 help: try removing the `+`
-   |
-LL -     let _ = [+3, 4+6];
-LL +     let _ = [3, 4+6];
-   |
+ on line 7, column 13
 
 error: aborting due to 4 previous errors
 

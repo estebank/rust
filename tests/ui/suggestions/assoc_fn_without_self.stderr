@@ -1,78 +1,37 @@
-error[E0425]: cannot find function `foo` in this scope
-  --> $DIR/assoc_fn_without_self.rs:16:9
-   |
-LL |         foo();
-   |         ^^^ not found in this scope
-   |
+error E0425: cannot find function `foo` in this scope
+ at $DIR/assoc_fn_without_self.rs:16:9: not found in this scope
 help: consider using the associated function on `Self`
-   |
-LL |         Self::foo();
-   |         ++++++
+ on line 16, column 8, add `Self::`
 
-error[E0425]: cannot find function `bar` in this scope
-  --> $DIR/assoc_fn_without_self.rs:17:9
-   |
-LL |     fn bar(&self) {}
-   |        --- a method by that name is available on `Self` here
-...
-LL |         bar();
-   |         ^^^ not found in this scope
+error E0425: cannot find function `bar` in this scope
+ at $DIR/assoc_fn_without_self.rs:17:9: not found in this scope
+  on line 8, column 8: a method by that name is available on `Self` here
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/assoc_fn_without_self.rs:18:9
-   |
-LL |         baz(2, 3);
-   |         ^^^ not found in this scope
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/assoc_fn_without_self.rs:18:9: not found in this scope
 help: consider using the associated function on `Self`
-   |
-LL |         Self::baz(2, 3);
-   |         ++++++
+ on line 18, column 8, add `Self::`
 
-error[E0425]: cannot find function `foo` in this scope
-  --> $DIR/assoc_fn_without_self.rs:14:13
-   |
-LL |             foo();
-   |             ^^^ not found in this scope
+error E0425: cannot find function `foo` in this scope
+ at $DIR/assoc_fn_without_self.rs:14:13: not found in this scope
 
-error[E0425]: cannot find function `foo` in this scope
-  --> $DIR/assoc_fn_without_self.rs:24:9
-   |
-LL |         foo();
-   |         ^^^ not found in this scope
-   |
+error E0425: cannot find function `foo` in this scope
+ at $DIR/assoc_fn_without_self.rs:24:9: not found in this scope
 help: consider using the associated function on `Self`
-   |
-LL |         Self::foo();
-   |         ++++++
+ on line 24, column 8, add `Self::`
 
-error[E0425]: cannot find function `bar` in this scope
-  --> $DIR/assoc_fn_without_self.rs:25:9
-   |
-LL |         bar();
-   |         ^^^ not found in this scope
-   |
+error E0425: cannot find function `bar` in this scope
+ at $DIR/assoc_fn_without_self.rs:25:9: not found in this scope
 help: consider using the method on `Self`
-   |
-LL |         self.bar();
-   |         +++++
+ on line 25, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/assoc_fn_without_self.rs:26:9
-   |
-LL |         baz(2, 3);
-   |         ^^^ not found in this scope
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/assoc_fn_without_self.rs:26:9: not found in this scope
 help: consider using the associated function on `Self`
-   |
-LL |         Self::baz(2, 3);
-   |         ++++++
+ on line 26, column 8, add `Self::`
 
-error[E0425]: cannot find function `foo` in this scope
-  --> $DIR/assoc_fn_without_self.rs:22:13
-   |
-LL |             foo();
-   |             ^^^ not found in this scope
+error E0425: cannot find function `foo` in this scope
+ at $DIR/assoc_fn_without_self.rs:22:13: not found in this scope
 
 error: aborting due to 8 previous errors
 

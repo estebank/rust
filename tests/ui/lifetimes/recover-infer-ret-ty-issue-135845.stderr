@@ -1,14 +1,7 @@
-error[E0121]: the placeholder `_` is not allowed within types on item signatures for return types
-  --> $DIR/recover-infer-ret-ty-issue-135845.rs:5:15
-   |
-LL | fn b<'a>() -> _ {
-   |               ^ not allowed in type signatures
-   |
+error E0121: the placeholder `_` is not allowed within types on item signatures for return types
+ at $DIR/recover-infer-ret-ty-issue-135845.rs:5:15: not allowed in type signatures
 help: replace with the correct return type
-   |
-LL - fn b<'a>() -> _ {
-LL + fn b<'a>() -> i32 {
-   |
+ on line 5, column 14, replace with `i32`
 
 error: aborting due to 1 previous error
 

@@ -1,103 +1,46 @@
-error[E0505]: cannot move out of `a` because it is borrowed
-  --> $DIR/variance-issue-20533.rs:35:14
-   |
-LL |         let a = AffineU32(1);
-   |             - binding `a` declared here
-LL |         let x = foo(&a);
-   |                     -- borrow of `a` occurs here
-LL |         drop(a);
-   |              ^ move out of `a` occurs here
-LL |         drop(x);
-   |              - borrow later used here
-   |
+error E0505: cannot move out of `a` because it is borrowed
+ at $DIR/variance-issue-20533.rs:35:14: move out of `a` occurs here
+  on line 33, column 13: binding `a` declared here
+  on line 34, column 21: borrow of `a` occurs here
+  on line 36, column 14: borrow later used here
 note: if `AffineU32` implemented `Clone`, you could clone the value
-  --> $DIR/variance-issue-20533.rs:26:1
-   |
-LL | struct AffineU32(u32);
-   | ^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let x = foo(&a);
-   |                      - you could clone this value
+ at $DIR/variance-issue-20533.rs:26:1: consider implementing `Clone` for this type
+  on line 34, column 22: you could clone this value
 
-error[E0505]: cannot move out of `a` because it is borrowed
-  --> $DIR/variance-issue-20533.rs:41:14
-   |
-LL |         let a = AffineU32(1);
-   |             - binding `a` declared here
-LL |         let x = bar(&a);
-   |                     -- borrow of `a` occurs here
-LL |         drop(a);
-   |              ^ move out of `a` occurs here
-LL |         drop(x);
-   |              - borrow later used here
-   |
+error E0505: cannot move out of `a` because it is borrowed
+ at $DIR/variance-issue-20533.rs:41:14: move out of `a` occurs here
+  on line 39, column 13: binding `a` declared here
+  on line 40, column 21: borrow of `a` occurs here
+  on line 42, column 14: borrow later used here
 note: if `AffineU32` implemented `Clone`, you could clone the value
-  --> $DIR/variance-issue-20533.rs:26:1
-   |
-LL | struct AffineU32(u32);
-   | ^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let x = bar(&a);
-   |                      - you could clone this value
+ at $DIR/variance-issue-20533.rs:26:1: consider implementing `Clone` for this type
+  on line 40, column 22: you could clone this value
 
-error[E0505]: cannot move out of `a` because it is borrowed
-  --> $DIR/variance-issue-20533.rs:47:14
-   |
-LL |         let a = AffineU32(1);
-   |             - binding `a` declared here
-LL |         let x = baz(&a);
-   |                     -- borrow of `a` occurs here
-LL |         drop(a);
-   |              ^ move out of `a` occurs here
-LL |         drop(x);
-   |              - borrow later used here
-   |
+error E0505: cannot move out of `a` because it is borrowed
+ at $DIR/variance-issue-20533.rs:47:14: move out of `a` occurs here
+  on line 45, column 13: binding `a` declared here
+  on line 46, column 21: borrow of `a` occurs here
+  on line 48, column 14: borrow later used here
 note: if `AffineU32` implemented `Clone`, you could clone the value
-  --> $DIR/variance-issue-20533.rs:26:1
-   |
-LL | struct AffineU32(u32);
-   | ^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let x = baz(&a);
-   |                      - you could clone this value
+ at $DIR/variance-issue-20533.rs:26:1: consider implementing `Clone` for this type
+  on line 46, column 22: you could clone this value
 
-error[E0505]: cannot move out of `a` because it is borrowed
-  --> $DIR/variance-issue-20533.rs:53:14
-   |
-LL |         let a = AffineU32(1);
-   |             - binding `a` declared here
-LL |         let x = bat(&a);
-   |                     -- borrow of `a` occurs here
-LL |         drop(a);
-   |              ^ move out of `a` occurs here
-LL |         drop(x);
-   |              - borrow later used here
-   |
+error E0505: cannot move out of `a` because it is borrowed
+ at $DIR/variance-issue-20533.rs:53:14: move out of `a` occurs here
+  on line 51, column 13: binding `a` declared here
+  on line 52, column 21: borrow of `a` occurs here
+  on line 54, column 14: borrow later used here
 note: if `AffineU32` implemented `Clone`, you could clone the value
-  --> $DIR/variance-issue-20533.rs:26:1
-   |
-LL | struct AffineU32(u32);
-   | ^^^^^^^^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         let x = bat(&a);
-   |                      - you could clone this value
+ at $DIR/variance-issue-20533.rs:26:1: consider implementing `Clone` for this type
+  on line 52, column 22: you could clone this value
 
-error[E0505]: cannot move out of `a` because it is borrowed
-  --> $DIR/variance-issue-20533.rs:59:14
-   |
-LL |         let a = ClonableAffineU32(1);
-   |             - binding `a` declared here
-LL |         let x = foo(&a);
-   |                     -- borrow of `a` occurs here
-LL |         drop(a);
-   |              ^ move out of `a` occurs here
-LL |         drop(x);
-   |              - borrow later used here
-   |
+error E0505: cannot move out of `a` because it is borrowed
+ at $DIR/variance-issue-20533.rs:59:14: move out of `a` occurs here
+  on line 57, column 13: binding `a` declared here
+  on line 58, column 21: borrow of `a` occurs here
+  on line 60, column 14: borrow later used here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         let x = foo(&a.clone());
-   |                       ++++++++
+ on line 58, column 22, add `.clone()`
 
 error: aborting due to 5 previous errors
 

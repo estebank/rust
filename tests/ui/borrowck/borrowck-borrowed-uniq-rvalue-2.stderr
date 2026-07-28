@@ -1,18 +1,10 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/borrowck-borrowed-uniq-rvalue-2.rs:20:20
-   |
-LL |     let x = defer(&vec!["Goodbye", "world!"]);
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^^^ - temporary value is freed at the end of this statement
-   |                    |
-   |                    creates a temporary value which is freed while still in use
-LL |     x.x[0];
-   |     ------ borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/borrowck-borrowed-uniq-rvalue-2.rs:20:20: creates a temporary value which is freed while still in use
+  on line 20, column 46: temporary value is freed at the end of this statement
+  on line 21: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = vec!["Goodbye", "world!"];
-LL ~     let x = defer(&binding);
-   |
+ on line 20, add `let binding = vec!["Goodbye", "world!"];
+    `
 
 error: aborting due to 1 previous error
 

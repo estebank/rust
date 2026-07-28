@@ -1,91 +1,43 @@
 error: expected one of `:`, `@`, or `|`, found `<`
-  --> $DIR/issue-34264.rs:1:14
-   |
-LL | fn foo(Option<i32>, String) {}
-   |              ^ expected one of `:`, `@`, or `|`
-   |
+ at $DIR/issue-34264.rs:1:14: expected one of `:`, `@`, or `|`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL | fn foo(_: Option<i32>, String) {}
-   |        ++
+ on line 1, column 7, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `)`
-  --> $DIR/issue-34264.rs:1:27
-   |
-LL | fn foo(Option<i32>, String) {}
-   |                           ^ expected one of `:`, `@`, or `|`
-   |
+ at $DIR/issue-34264.rs:1:27: expected one of `:`, `@`, or `|`
 help: if this is a parameter name, give it a type
-   |
-LL | fn foo(Option<i32>, String: TypeName) {}
-   |                           ++++++++++
+ on line 1, column 26, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL | fn foo(Option<i32>, _: String) {}
-   |                     ++
+ on line 1, column 20, add `_: `
 
 error: expected one of `:`, `@`, or `|`, found `,`
-  --> $DIR/issue-34264.rs:3:9
-   |
-LL | fn bar(x, y: usize) {}
-   |         ^ expected one of `:`, `@`, or `|`
-   |
+ at $DIR/issue-34264.rs:3:9: expected one of `:`, `@`, or `|`
 help: if this is a parameter name, give it a type
-   |
-LL | fn bar(x: TypeName, y: usize) {}
-   |         ++++++++++
+ on line 3, column 8, add `: TypeName`
 help: if this is a type, explicitly ignore the parameter name
-   |
-LL | fn bar(_: x, y: usize) {}
-   |        ++
+ on line 3, column 7, add `_: `
 
-error[E0061]: this function takes 2 arguments but 3 arguments were supplied
-  --> $DIR/issue-34264.rs:7:5
-   |
-LL |     foo(Some(42), 2, "");
-   |     ^^^              -- unexpected argument #3 of type `&'static str`
-   |
+error E0061: this function takes 2 arguments but 3 arguments were supplied
+ at $DIR/issue-34264.rs:7:5
+  on line 7, column 22: unexpected argument #3 of type `&'static str`
 note: function defined here
-  --> $DIR/issue-34264.rs:1:4
-   |
-LL | fn foo(Option<i32>, String) {}
-   |    ^^^
+ at $DIR/issue-34264.rs:1:4
 help: remove the extra argument
-   |
-LL -     foo(Some(42), 2, "");
-LL +     foo(Some(42), 2);
-   |
+ on line 7, column 19
 
-error[E0308]: mismatched types
-  --> $DIR/issue-34264.rs:8:13
-   |
-LL |     bar("", "");
-   |     ---     ^^ expected `usize`, found `&str`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/issue-34264.rs:8:13: expected `usize`, found `&str`
+  on line 8: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/issue-34264.rs:3:4
-   |
-LL | fn bar(x, y: usize) {}
-   |    ^^^    --------
+ at $DIR/issue-34264.rs:3:4
 
-error[E0061]: this function takes 2 arguments but 3 arguments were supplied
-  --> $DIR/issue-34264.rs:10:5
-   |
-LL |     bar(1, 2, 3);
-   |     ^^^       - unexpected argument #3 of type `{integer}`
-   |
+error E0061: this function takes 2 arguments but 3 arguments were supplied
+ at $DIR/issue-34264.rs:10:5
+  on line 10, column 15: unexpected argument #3 of type `{integer}`
 note: function defined here
-  --> $DIR/issue-34264.rs:3:4
-   |
-LL | fn bar(x, y: usize) {}
-   |    ^^^
+ at $DIR/issue-34264.rs:3:4
 help: remove the extra argument
-   |
-LL -     bar(1, 2, 3);
-LL +     bar(1, 2);
-   |
+ on line 10, column 12
 
 error: aborting due to 6 previous errors
 

@@ -1,15 +1,10 @@
-error[E0369]: cannot multiply `Vec<isize>` by `{integer}`
-  --> $DIR/pattern-tyvar-2.rs:3:71
-   |
-LL | fn foo(t: Bar) -> isize { match t { Bar::T1(_, Some(x)) => { return x * 3; } _ => { panic!(); } } }
-   |                                                                     - ^ - {integer}
-   |                                                                     |
-   |                                                                     Vec<isize>
-   |
+error E0369: cannot multiply `Vec<isize>` by `{integer}`
+ at $DIR/pattern-tyvar-2.rs:3:71
+  on line 3, column 69: Vec<isize>
+  on line 3, column 73: {integer}
 note: `Vec<isize>` does not implement `Mul<{integer}>`
-  --> $SRC_DIR/alloc/src/vec/mod.rs:LL:COL
-   |
-   = note: `Vec<isize>` is defined in another crate
+ at $SRC_DIR/alloc/src/vec/mod.rs:LL:COL
+note: `Vec<isize>` is defined in another crate
 
 error: aborting due to 1 previous error
 

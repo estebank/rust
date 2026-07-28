@@ -1,16 +1,8 @@
-error[E0308]: mismatched types
-  --> $DIR/array-arg-expected-usize.rs:9:9
-   |
-LL |     bar(foo);
-   |     --- ^^^ expected `usize`, found `[u8; 4]`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/array-arg-expected-usize.rs:9:9: expected `usize`, found `[u8; 4]`
+  on line 9: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/array-arg-expected-usize.rs:5:4
-   |
-LL | fn bar(int_param: usize) {}
-   |    ^^^ ----------------
+ at $DIR/array-arg-expected-usize.rs:5:4
 
 error: aborting due to 1 previous error
 

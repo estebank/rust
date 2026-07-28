@@ -1,26 +1,12 @@
-error[E0277]: expected an `FnOnce(&bool)` closure, found `bool`
-  --> $DIR/block_instead_of_closure_in_arg.rs:3:23
-   |
-LL |        Some(true).filter({
-   |  _________________------_^
-   | |                 |
-   | |                 required by a bound introduced by this call
-LL | |/         if number % 2 == 0 {
-LL | ||             number == 0
-LL | ||         } else {
-LL | ||             number != 0
-LL | ||         }
-   | ||_________- this tail expression is of type `bool`
-LL | |      });
-   | |______^ expected an `FnOnce(&bool)` closure, found `bool`
-   |
-   = help: the trait `for<'a> FnOnce(&'a bool)` is not implemented for `bool`
+error E0277: expected an `FnOnce(&bool)` closure, found `bool`
+ at $DIR/block_instead_of_closure_in_arg.rs:3:23 to 9:6: expected an `FnOnce(&bool)` closure, found `bool`
+  on line 3, column 16: required by a bound introduced by this call
+  on line 4 to line 8: this tail expression is of type `bool`
+help: the trait `for<'a> FnOnce(&'a bool)` is not implemented for `bool`
 note: required by a bound in `Option::<T>::filter`
-  --> $SRC_DIR/core/src/option.rs:LL:COL
+ at $SRC_DIR/core/src/option.rs:LL:COL
 help: you might have meant to create the closure instead of a block
-   |
-LL |     Some(true).filter(|_| {
-   |                       +++
+ on line 3, column 22, add `|_| `
 
 error: aborting due to 1 previous error
 

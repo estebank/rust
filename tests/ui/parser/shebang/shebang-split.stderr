@@ -1,8 +1,5 @@
 error: expected `[`, found `/`
-  --> $DIR/shebang-split.rs:2:4
-   |
-LL | # !/bin/env
-   |    ^ expected `[`
+ at $DIR/shebang-split.rs:2:4: expected `[`
 
 error: aborting due to 1 previous error
 

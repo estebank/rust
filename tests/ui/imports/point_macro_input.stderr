@@ -1,27 +1,12 @@
-error[E0432]: unresolved import `things::what2`
-  --> $DIR/point_macro_input.rs:15:17
-   |
-LL |               use things::$thing;
-   |                   ^^^^^^^^^^^^^^
-...
-LL | /     mac2!(
-LL | |
-LL | |         what2
-   | |         ----- no `what2` in `things`
-LL | |
-LL | |     );
-   | |_____- in this macro invocation
-   |
-   = note: this error originates in the macro `mac2` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0432: unresolved import `things::what2`
+ at $DIR/point_macro_input.rs:15:17
+  on line 31 to line 35, column 6: in this macro invocation
+  on line 33: no `what2` in `things`
+note: this error originates in the macro `mac2` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0425]: cannot find value `what1` in module `things`
-  --> $DIR/point_macro_input.rs:26:9
-   |
-LL |         const _x: u32 = things::$thing;
-   |                                 ------ due to this macro variable
-...
-LL |         what1
-   |         ^^^^^ not found in `things`
+error E0425: cannot find value `what1` in module `things`
+ at $DIR/point_macro_input.rs:26:9: not found in `things`
+  on line 7, column 33: due to this macro variable
 
 error: aborting due to 2 previous errors
 

@@ -1,98 +1,42 @@
 error: trait cannot be implemented outside `external`
-  --> $DIR/impl-restriction-check.rs:11:1
-   |
-LL | impl external::TopLevel for LocalType {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:11:1
 note: trait restricted here
-  --> $DIR/auxiliary/external-impl-restriction.rs:3:5
-   |
-LL | pub impl(crate) trait TopLevel {}
-   |     ^^^^^^^^^^^
+ at $DIR/auxiliary/external-impl-restriction.rs:3:5
 
 error: trait cannot be implemented outside `external`
-  --> $DIR/impl-restriction-check.rs:12:1
-   |
-LL | impl external::inner::Inner for LocalType {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:12:1
 note: trait restricted here
-  --> $DIR/auxiliary/external-impl-restriction.rs:6:9
-   |
-LL |     pub impl(self) trait Inner {}
-   |         ^^^^^^^^^^
+ at $DIR/auxiliary/external-impl-restriction.rs:6:9
 
 error: trait cannot be implemented outside `crate::foo::bar`
-  --> $DIR/impl-restriction-check.rs:29:5
-   |
-LL |     impl bar::Foo for i8 {}
-   |     ^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:29:5
 note: trait restricted here
-  --> $DIR/impl-restriction-check.rs:16:20
-   |
-LL |         pub(crate) impl(self) trait Foo {}
-   |                    ^^^^^^^^^^
+ at $DIR/impl-restriction-check.rs:16:20
 
 error: trait cannot be implemented outside `crate::foo::bar`
-  --> $DIR/impl-restriction-check.rs:38:1
-   |
-LL | impl foo::bar::Foo for u8 {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:38:1
 note: trait restricted here
-  --> $DIR/impl-restriction-check.rs:16:20
-   |
-LL |         pub(crate) impl(self) trait Foo {}
-   |                    ^^^^^^^^^^
+ at $DIR/impl-restriction-check.rs:16:20
 
 error: trait cannot be implemented outside `crate::foo`
-  --> $DIR/impl-restriction-check.rs:40:1
-   |
-LL | impl foo::bar::Bar for u8 {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:40:1
 note: trait restricted here
-  --> $DIR/impl-restriction-check.rs:17:20
-   |
-LL |         pub(crate) impl(super) trait Bar {}
-   |                    ^^^^^^^^^^^
+ at $DIR/impl-restriction-check.rs:17:20
 
 error: trait cannot be implemented outside `crate::foo::bar`
-  --> $DIR/impl-restriction-check.rs:33:5
-   |
-LL |     impl bar::Qux for i8 {}
-   |     ^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:33:5
 note: trait restricted here
-  --> $DIR/impl-restriction-check.rs:19:20
-   |
-LL |         pub(crate) impl(in crate::foo::bar) trait Qux {}
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/impl-restriction-check.rs:19:20
 
 error: trait cannot be implemented outside `crate::foo::bar`
-  --> $DIR/impl-restriction-check.rs:43:1
-   |
-LL | impl foo::bar::Qux for u8 {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:43:1
 note: trait restricted here
-  --> $DIR/impl-restriction-check.rs:19:20
-   |
-LL |         pub(crate) impl(in crate::foo::bar) trait Qux {}
-   |                    ^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/impl-restriction-check.rs:19:20
 
 error: trait cannot be implemented outside `crate::foo`
-  --> $DIR/impl-restriction-check.rs:45:1
-   |
-LL | impl foo::bar::FooBar for u8 {}
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/impl-restriction-check.rs:45:1
 note: trait restricted here
-  --> $DIR/impl-restriction-check.rs:20:20
-   |
-LL |         pub(crate) impl(in crate::foo) trait FooBar {}
-   |                    ^^^^^^^^^^^^^^^^^^^
+ at $DIR/impl-restriction-check.rs:20:20
 
 error: aborting due to 8 previous errors
 

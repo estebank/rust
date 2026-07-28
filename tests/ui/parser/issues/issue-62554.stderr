@@ -1,13 +1,10 @@
 error: this file contains an unclosed delimiter
-  --> $DIR/issue-62554.rs:4:89
-   |
-LL | fn foo(u: u8) { if u8 macro_rules! u8 { (u6) => { fn uuuuuuuuuuu() { use s loo mod u8 {
-   |               -                       -         -                  -                  -^
-   |               |                       |         |                  |                  |
-   |               |                       |         |                  |                  unclosed delimiter
-   |               |                       |         |                  unclosed delimiter
-   |               |                       |         unclosed delimiter
-   |               unclosed delimiter      unclosed delimiter
+ at $DIR/issue-62554.rs:4:89
+  on line 4, column 15: unclosed delimiter
+  on line 4, column 39: unclosed delimiter
+  on line 4, column 49: unclosed delimiter
+  on line 4, column 68: unclosed delimiter
+  on line 4, column 87: unclosed delimiter
 
 error: aborting due to 1 previous error
 

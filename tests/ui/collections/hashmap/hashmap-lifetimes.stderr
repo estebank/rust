@@ -1,12 +1,7 @@
-error[E0502]: cannot borrow `my_stuff` as mutable because it is also borrowed as immutable
-  --> $DIR/hashmap-lifetimes.rs:6:5
-   |
-LL |     let mut it = my_stuff.iter();
-   |                  -------- immutable borrow occurs here
-LL |     my_stuff.insert(1, 43);
-   |     ^^^^^^^^^^^^^^^^^^^^^^ mutable borrow occurs here
-LL |     it;
-   |     -- immutable borrow later used here
+error E0502: cannot borrow `my_stuff` as mutable because it is also borrowed as immutable
+ at $DIR/hashmap-lifetimes.rs:6:5: mutable borrow occurs here
+  on line 5, column 18: immutable borrow occurs here
+  on line 7: immutable borrow later used here
 
 error: aborting due to 1 previous error
 

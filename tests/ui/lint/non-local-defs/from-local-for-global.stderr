@@ -1,16 +1,10 @@
 warning: non-local `impl` definition, `impl` blocks should be written at the same level as their item
-  --> $DIR/from-local-for-global.rs:8:5
-   |
-LL | fn main() {
-   | --------- move the `impl` block outside of this function `main`
-LL |     impl From<Cat> for () {
-   |     ^^^^^----^---^^^^^^^^
-   |          |    |
-   |          |    `Cat` is not local
-   |          `From` is not local
-   |
-   = note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
-   = note: `#[warn(non_local_definitions)]` on by default
+ at $DIR/from-local-for-global.rs:8:5
+  on line 7: move the `impl` block outside of this function `main`
+  on line 8, column 10: `From` is not local
+  on line 8, column 15: `Cat` is not local
+note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
+note: `#[warn(non_local_definitions)]` on by default
 
 warning: 1 warning emitted
 

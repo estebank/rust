@@ -1,16 +1,8 @@
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/issue-44454-2.rs:16:5
-   |
-LL | fn extend_lt<'a>(x: &'a str) -> Box<dyn AsRef<str> + 'static> {
-   |              --  - `x` is a reference that is only valid in the function body
-   |              |
-   |              lifetime `'a` defined here
-LL |     type DynTrait = dyn for<'a> Trait<&'a str, Assoc = &'a str>;
-LL |     hr::<DynTrait, _>(x)
-   |     ^^^^^^^^^^^^^^^^^^^^
-   |     |
-   |     `x` escapes the function body here
-   |     argument requires that `'a` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/issue-44454-2.rs:16:5: `x` escapes the function body here
+  on line 16: argument requires that `'a` must outlive `'static`
+  on line 14, column 14: lifetime `'a` defined here
+  on line 14, column 18: `x` is a reference that is only valid in the function body
 
 error: aborting due to 1 previous error
 

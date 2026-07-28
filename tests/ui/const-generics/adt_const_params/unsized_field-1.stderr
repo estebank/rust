@@ -1,44 +1,23 @@
-error[E0204]: the trait `ConstParamTy_` cannot be implemented for this type
-  --> $DIR/unsized_field-1.rs:9:8
-   |
-LL | #[derive(ConstParamTy, Eq, PartialEq)]
-   |          ------------ in this derive macro expansion
-LL | struct A([u8]);
-   |        ^ ---- this field does not implement `ConstParamTy_`
-   |
+error E0204: the trait `ConstParamTy_` cannot be implemented for this type
+ at $DIR/unsized_field-1.rs:9:8
+  on line 8, column 10: in this derive macro expansion
+  on line 9, column 10: this field does not implement `ConstParamTy_`
 note: the `ConstParamTy_` impl for `[u8]` requires that `feature(unsized_const_params) is enabled`
-  --> $DIR/unsized_field-1.rs:9:10
-   |
-LL | struct A([u8]);
-   |          ^^^^
+ at $DIR/unsized_field-1.rs:9:10
 
-error[E0204]: the trait `ConstParamTy_` cannot be implemented for this type
-  --> $DIR/unsized_field-1.rs:13:8
-   |
-LL | #[derive(ConstParamTy, Eq, PartialEq)]
-   |          ------------ in this derive macro expansion
-LL | struct B(&'static [u8]);
-   |        ^ ------------- this field does not implement `ConstParamTy_`
-   |
+error E0204: the trait `ConstParamTy_` cannot be implemented for this type
+ at $DIR/unsized_field-1.rs:13:8
+  on line 12, column 10: in this derive macro expansion
+  on line 13, column 10: this field does not implement `ConstParamTy_`
 note: the `ConstParamTy_` impl for `&'static [u8]` requires that `feature(unsized_const_params) is enabled`
-  --> $DIR/unsized_field-1.rs:13:10
-   |
-LL | struct B(&'static [u8]);
-   |          ^^^^^^^^^^^^^
+ at $DIR/unsized_field-1.rs:13:10
 
-error[E0204]: the trait `ConstParamTy_` cannot be implemented for this type
-  --> $DIR/unsized_field-1.rs:20:8
-   |
-LL | #[derive(std::marker::ConstParamTy, Eq, PartialEq)]
-   |          ------------------------- in this derive macro expansion
-LL | struct D(unsized_const_param::GenericNotUnsizedParam<&'static [u8]>);
-   |        ^ ---------------------------------------------------------- this field does not implement `ConstParamTy_`
-   |
+error E0204: the trait `ConstParamTy_` cannot be implemented for this type
+ at $DIR/unsized_field-1.rs:20:8
+  on line 19, column 10: in this derive macro expansion
+  on line 20, column 10: this field does not implement `ConstParamTy_`
 note: the `ConstParamTy_` impl for `GenericNotUnsizedParam<&'static [u8]>` requires that `feature(unsized_const_params) is enabled`
-  --> $DIR/unsized_field-1.rs:20:10
-   |
-LL | struct D(unsized_const_param::GenericNotUnsizedParam<&'static [u8]>);
-   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/unsized_field-1.rs:20:10
 
 error: aborting due to 3 previous errors
 

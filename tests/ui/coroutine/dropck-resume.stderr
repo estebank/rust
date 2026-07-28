@@ -1,14 +1,7 @@
-error[E0502]: cannot borrow `y` as immutable because it is also borrowed as mutable
-  --> $DIR/dropck-resume.rs:26:13
-   |
-LL |     let z = &mut y;
-   |             ------ mutable borrow occurs here
-...
-LL |         r = y.as_ref().unwrap();
-   |             ^ immutable borrow occurs here
-LL |
-LL |     }
-   |     - mutable borrow might be used here, when `g` is dropped and runs the destructor for coroutine
+error E0502: cannot borrow `y` as immutable because it is also borrowed as mutable
+ at $DIR/dropck-resume.rs:26:13: immutable borrow occurs here
+  on line 16, column 13: mutable borrow occurs here
+  on line 28: mutable borrow might be used here, when `g` is dropped and runs the destructor for coroutine
 
 error: aborting due to 1 previous error
 

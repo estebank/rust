@@ -1,15 +1,8 @@
-error[E0070]: invalid left-hand side of assignment
-  --> $DIR/failed-to-get-layout-for-type-error-ice-92979.rs:69:39
-   |
-LL |         &mut position[position.len()] = f32::from_be_bytes(demo(p));
-   |         ----------------------------- ^
-   |         |
-   |         cannot assign to this expression
-   |
+error E0070: invalid left-hand side of assignment
+ at $DIR/failed-to-get-layout-for-type-error-ice-92979.rs:69:39
+  on line 69: cannot assign to this expression
 help: consider dereferencing here to assign to the mutably borrowed value
-   |
-LL |         *&mut position[position.len()] = f32::from_be_bytes(demo(p));
-   |         +
+ on line 69, column 8, add `*`
 
 error: aborting due to 1 previous error
 

@@ -1,86 +1,29 @@
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-incompat-type-semi.rs:11:13
-   |
-LL |       let _ = match Some(42) {
-   |  _____________-
-LL | |         Some(x) => {
-LL | |             x
-   | |             - this is found to be of type `{integer}`
-LL | |         },
-LL | |         None => {
-LL | |             0;
-   | |             ^-
-   | |             ||
-   | |             |help: consider removing this semicolon
-   | |             expected integer, found `()`
-...  |
-LL | |         },
-LL | |     };
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/match-incompat-type-semi.rs:11:13: expected integer, found `()`
+  on line 6, column 13 to line 15, column 6: `match` arms have incompatible types
+  on line 8: this is found to be of type `{integer}`
+  on line 11, column 14: help: consider removing this semicolon
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/match-incompat-type-semi.rs:20:9
-   |
-LL |       let _ = if let Some(x) = Some(42) {
-   |  _____________-
-LL | |         x
-   | |         - expected because of this
-LL | |     } else {
-LL | |         0;
-   | |         ^-
-   | |         ||
-   | |         |help: consider removing this semicolon
-   | |         expected integer, found `()`
-...  |
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/match-incompat-type-semi.rs:20:9: expected integer, found `()`
+  on line 17, column 13 to line 23, column 6: `if` and `else` have incompatible types
+  on line 18: expected because of this
+  on line 20, column 10: help: consider removing this semicolon
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-incompat-type-semi.rs:30:13
-   |
-LL |       let _ = match Some(42) {
-   |  _____________-
-LL | |         Some(x) => {
-LL | |             x
-   | |             - this is found to be of type `{integer}`
-LL | |         },
-LL | |         None => {
-LL | |             ();
-   | |             ^^^ expected integer, found `()`
-LL | |
-LL | |         },
-LL | |     };
-   | |_____- `match` arms have incompatible types
+error E0308: `match` arms have incompatible types
+ at $DIR/match-incompat-type-semi.rs:30:13: expected integer, found `()`
+  on line 25, column 13 to line 33, column 6: `match` arms have incompatible types
+  on line 27: this is found to be of type `{integer}`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-incompat-type-semi.rs:39:17
-   |
-LL |       let _ = match Some(42) {
-   |               -------------- `match` arms have incompatible types
-LL |           Some(x) => {
-LL |               x
-   |               - this is found to be of type `{integer}`
-LL |           },
-LL |           None => {
-   |  _________________^
-LL | |         },
-   | |_________^ expected integer, found `()`
+error E0308: `match` arms have incompatible types
+ at $DIR/match-incompat-type-semi.rs:39:17 to 40:10: expected integer, found `()`
+  on line 35, column 13: `match` arms have incompatible types
+  on line 37: this is found to be of type `{integer}`
 
-error[E0308]: `match` arms have incompatible types
-  --> $DIR/match-incompat-type-semi.rs:50:17
-   |
-LL |       let _ = match Some(42) {
-   |               -------------- `match` arms have incompatible types
-LL |           Some(x) => "rust-lang.org"
-   |  ____________________-
-LL | |             .chars()
-LL | |             .skip(1)
-LL | |             .chain(Some(x as u8 as char))
-LL | |             .take(10)
-LL | |             .any(char::is_alphanumeric),
-   | |_______________________________________- this is found to be of type `bool`
-LL |           None => {}
-   |                   ^^ expected `bool`, found `()`
+error E0308: `match` arms have incompatible types
+ at $DIR/match-incompat-type-semi.rs:50:17: expected `bool`, found `()`
+  on line 43, column 13: `match` arms have incompatible types
+  on line 44, column 20 to line 49, column 40: this is found to be of type `bool`
 
 error: aborting due to 5 previous errors
 

@@ -1,49 +1,26 @@
-error[E0637]: `&` without an explicit lifetime name cannot be used here
-  --> $DIR/issue-109071.rs:8:17
-   |
-LL |     type Item = &[T];
-   |                 ^ explicit lifetime name needed here
+error E0637: `&` without an explicit lifetime name cannot be used here
+ at $DIR/issue-109071.rs:8:17: explicit lifetime name needed here
 
-error[E0107]: missing generics for struct `Windows`
-  --> $DIR/issue-109071.rs:7:9
-   |
-LL | impl<T> Windows {
-   |         ^^^^^^^ expected 1 generic argument
-   |
+error E0107: missing generics for struct `Windows`
+ at $DIR/issue-109071.rs:7:9: expected 1 generic argument
 note: struct defined here, with 1 generic parameter: `T`
-  --> $DIR/issue-109071.rs:5:8
-   |
-LL | struct Windows<T> { t: T }
-   |        ^^^^^^^ -
+ at $DIR/issue-109071.rs:5:8
 help: add missing generic argument
-   |
-LL | impl<T> Windows<T> {
-   |                +++
+ on line 7, column 15, add `<T>`
 
-error[E0223]: ambiguous associated type
-  --> $DIR/issue-109071.rs:15:22
-   |
-LL |     fn T() -> Option<Self::Item> {}
-   |                      ^^^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/issue-109071.rs:15:22
 help: use fully-qualified syntax
-   |
-LL -     fn T() -> Option<Self::Item> {}
-LL +     fn T() -> Option<<Windows<T> as IntoAsyncIterator>::Item> {}
-   |
-LL -     fn T() -> Option<Self::Item> {}
-LL +     fn T() -> Option<<Windows<T> as IntoIterator>::Item> {}
-   |
+ on line 15, column 21, replace with one of
+  <Windows<T> as IntoAsyncIterator>::
+  <Windows<T> as IntoIterator>::
 
-error[E0658]: inherent associated types are unstable
-  --> $DIR/issue-109071.rs:8:5
-   |
-LL |     type Item = &[T];
-   |     ^^^^^^^^^^^^^^^^^
-   |
-   = note: see issue #8995 <https://github.com/rust-lang/rust/issues/8995> for more information
-   = help: add `#![feature(inherent_associated_types)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+
+error E0658: inherent associated types are unstable
+ at $DIR/issue-109071.rs:8:5
+note: see issue #8995 <https://github.com/rust-lang/rust/issues/8995> for more information
+help: add `#![feature(inherent_associated_types)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
 error: aborting due to 4 previous errors
 

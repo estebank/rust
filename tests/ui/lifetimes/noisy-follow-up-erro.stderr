@@ -1,28 +1,13 @@
-error[E0107]: struct takes 2 lifetime arguments but 3 lifetime arguments were supplied
-  --> $DIR/noisy-follow-up-erro.rs:12:30
-   |
-LL |     fn boom(&self, foo: &mut Foo<'_, '_, 'a>) -> Result<(), &'a ()> {
-   |                              ^^^       ---- help: remove the lifetime argument
-   |                              |
-   |                              expected 2 lifetime arguments
-   |
+error E0107: struct takes 2 lifetime arguments but 3 lifetime arguments were supplied
+ at $DIR/noisy-follow-up-erro.rs:12:30: expected 2 lifetime arguments
+  on line 12, column 40: help: remove the lifetime argument
 note: struct defined here, with 2 lifetime parameters: `'c`, `'d`
-  --> $DIR/noisy-follow-up-erro.rs:1:8
-   |
-LL | struct Foo<'c, 'd>(&'c (), &'d ());
-   |        ^^^ --  --
+ at $DIR/noisy-follow-up-erro.rs:1:8
 
-error[E0621]: explicit lifetime required in the type of `foo`
-  --> $DIR/noisy-follow-up-erro.rs:14:9
-   |
-LL |         self.bar().map_err(|()| foo.acc(self))?;
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ lifetime `'a` required
-   |
+error E0621: explicit lifetime required in the type of `foo`
+ at $DIR/noisy-follow-up-erro.rs:14:9: lifetime `'a` required
 help: add explicit lifetime `'a` to the type of `foo`
-   |
-LL -     fn boom(&self, foo: &mut Foo<'_, '_, 'a>) -> Result<(), &'a ()> {
-LL +     fn boom(&self, foo: &mut Foo<'_, 'a>) -> Result<(), &'a ()> {
-   |
+ on line 12, column 24, replace with `&mut Foo<'_, 'a>`
 
 error: aborting due to 2 previous errors
 

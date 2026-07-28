@@ -1,41 +1,18 @@
 error: invalid preceding whitespace for frontmatter close
-  --> $DIR/fence-unclosed-3.rs:12:1
-   |
-LL |     ---x
-   | ^^^^^^^^
-   |
+ at $DIR/fence-unclosed-3.rs:12:1
 note: frontmatter close should not be preceded by whitespace
-  --> $DIR/fence-unclosed-3.rs:12:1
-   |
-LL |     ---x
-   | ^^^^
+ at $DIR/fence-unclosed-3.rs:12:1
 
 error: frontmatter close does not match the opening
-  --> $DIR/fence-unclosed-3.rs:1:1
-   |
-LL |   ----cargo
-   |   ^---
-   |   |
-   |  _the opening here has 4 dashes...
-   | |
-...  |
-LL | | fn foo(x: i32) -> i32 {
-LL | |     ---x
-   | |_---____^
-   |   |
-   |   ...while the close has 3 dashes
+ at $DIR/fence-unclosed-3.rs:1:1 to 12:9
+  on line 1: the opening here has 4 dashes...
+  on line 12: ...while the close has 3 dashes
 
 error: extra characters after frontmatter close are not allowed
-  --> $DIR/fence-unclosed-3.rs:12:1
-   |
-LL |     ---x
-   | ^^^^^^^^
+ at $DIR/fence-unclosed-3.rs:12:1
 
 error: unexpected closing delimiter: `}`
-  --> $DIR/fence-unclosed-3.rs:15:1
-   |
-LL | }
-   | ^ unexpected closing delimiter
+ at $DIR/fence-unclosed-3.rs:15:1: unexpected closing delimiter
 
 error: aborting due to 4 previous errors
 

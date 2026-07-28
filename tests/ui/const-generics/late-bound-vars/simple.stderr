@@ -1,19 +1,10 @@
 error: cannot capture late-bound lifetime in constant
-  --> $DIR/simple.rs:20:25
-   |
-LL | fn test<'a>() {
-   |         -- lifetime defined here
-LL |     let _: [u8; inner::<'a>()];
-   |                         ^^
+ at $DIR/simple.rs:20:25
+  on line 19, column 9: lifetime defined here
 
 error: cannot capture late-bound lifetime in constant
-  --> $DIR/simple.rs:21:25
-   |
-LL | fn test<'a>() {
-   |         -- lifetime defined here
-LL |     let _: [u8; inner::<'a>()];
-LL |     let _ = [0; inner::<'a>()];
-   |                         ^^
+ at $DIR/simple.rs:21:25
+  on line 19, column 9: lifetime defined here
 
 error: aborting due to 2 previous errors
 

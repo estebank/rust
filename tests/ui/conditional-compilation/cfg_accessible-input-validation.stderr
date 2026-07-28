@@ -1,55 +1,27 @@
 error: malformed `cfg_accessible` attribute input
-  --> $DIR/cfg_accessible-input-validation.rs:3:1
-   |
-LL | #[cfg_accessible]
-   | ^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/cfg_accessible-input-validation.rs:3:1
 help: must be of the form
-   |
-LL | #[cfg_accessible(path)]
-   |                 ++++++
+ on line 3, column 1, replace with `#[cfg_accessible(path)]`
 
 error: malformed `cfg_accessible` attribute input
-  --> $DIR/cfg_accessible-input-validation.rs:6:1
-   |
-LL | #[cfg_accessible = "value"]
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/cfg_accessible-input-validation.rs:6:1
 help: must be of the form
-   |
-LL - #[cfg_accessible = "value"]
-LL + #[cfg_accessible(path)]
-   |
+ on line 6, column 1, replace with `#[cfg_accessible(path)]`
 
 error: `cfg_accessible` path is not specified
-  --> $DIR/cfg_accessible-input-validation.rs:9:1
-   |
-LL | #[cfg_accessible()]
-   | ^^^^^^^^^^^^^^^^^^^
+ at $DIR/cfg_accessible-input-validation.rs:9:1
 
 error: multiple `cfg_accessible` paths are specified
-  --> $DIR/cfg_accessible-input-validation.rs:12:23
-   |
-LL | #[cfg_accessible(std, core)]
-   |                       ^^^^
+ at $DIR/cfg_accessible-input-validation.rs:12:23
 
 error: `cfg_accessible` path cannot be a literal
-  --> $DIR/cfg_accessible-input-validation.rs:15:18
-   |
-LL | #[cfg_accessible("std")]
-   |                  ^^^^^
+ at $DIR/cfg_accessible-input-validation.rs:15:18
 
 error: `cfg_accessible` path cannot accept arguments
-  --> $DIR/cfg_accessible-input-validation.rs:18:18
-   |
-LL | #[cfg_accessible(std = "value")]
-   |                  ^^^^^^^^^^^^^
+ at $DIR/cfg_accessible-input-validation.rs:18:18
 
 error: `cfg_accessible` path cannot accept arguments
-  --> $DIR/cfg_accessible-input-validation.rs:21:18
-   |
-LL | #[cfg_accessible(std(value))]
-   |                  ^^^^^^^^^^
+ at $DIR/cfg_accessible-input-validation.rs:21:18
 
 error: aborting due to 7 previous errors
 

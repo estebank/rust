@@ -1,16 +1,8 @@
-error[E0282]: type annotations needed
-  --> $DIR/issue-112225-2.rs:13:9
-   |
-LL |     let x = Default::default();
-   |         ^
-...
-LL |         async { x.0; },
-   |                 - type must be known at this point
-   |
+error E0282: type annotations needed
+ at $DIR/issue-112225-2.rs:13:9
+  on line 16, column 17: type must be known at this point
 help: consider giving `x` an explicit type
-   |
-LL |     let x: /* Type */ = Default::default();
-   |          ++++++++++++
+ on line 13, column 9, add `: /* Type */`
 
 error: aborting due to 1 previous error
 

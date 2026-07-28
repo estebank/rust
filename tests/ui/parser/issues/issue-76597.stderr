@@ -1,13 +1,7 @@
 error: expected one of `!`, `(`, `)`, `+`, `,`, `::`, or `<`, found `y`
-  --> $DIR/issue-76597.rs:7:38
-   |
-LL | ...                   x: u8
-   |                            -
-   |                            |
-   |                            expected one of 7 possible tokens
-   |                            help: missing `,`
-LL | ...                   y: u8,
-   |                       ^ unexpected token
+ at $DIR/issue-76597.rs:7:38: unexpected token
+  on line 6, column 43: expected one of 7 possible tokens
+  on line 6, column 43: help: missing `,`
 
 error: aborting due to 1 previous error
 

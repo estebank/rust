@@ -1,61 +1,30 @@
 error: offset_of expects dot-separated field and variant names
-  --> $DIR/offset-of-self.rs:19:26
-   |
-LL |         offset_of!(Self, Self::v);
-   |                          ^^^^^^^
+ at $DIR/offset-of-self.rs:19:26
 
-error[E0425]: cannot find type `S` in module `self`
-  --> $DIR/offset-of-self.rs:33:26
-   |
-LL |         offset_of!(self::S, v);
-   |                          ^ not found in `self`
-   |
+error E0425: cannot find type `S` in module `self`
+ at $DIR/offset-of-self.rs:33:26: not found in `self`
 help: consider importing this struct
-   |
-LL +     use S;
-   |
+ on line 31, column 4, add `use S;`
 help: if you import `S`, refer to it directly
-   |
-LL -         offset_of!(self::S, v);
-LL +         offset_of!(S, v);
-   |
+ on line 33, column 19
 
-error[E0411]: cannot find type `Self` in this scope
-  --> $DIR/offset-of-self.rs:50:16
-   |
-LL | fn main() {
-   |    ---- `Self` not allowed in a function
-LL |     offset_of!(self::S, v);
-LL |     offset_of!(Self, v);
-   |                ^^^^ `Self` is only available in impls, traits, and type definitions
+error E0411: cannot find type `Self` in this scope
+ at $DIR/offset-of-self.rs:50:16: `Self` is only available in impls, traits, and type definitions
+  on line 48, column 4: `Self` not allowed in a function
 
-error[E0609]: no field `Self` on type `S`
-  --> $DIR/offset-of-self.rs:20:23
-   |
-LL |         offset_of!(S, Self);
-   |                       ^^^^
-   |
-   = note: available fields are: `v`, `w`
+error E0609: no field `Self` on type `S`
+ at $DIR/offset-of-self.rs:20:23
+note: available fields are: `v`, `w`
 
-error[E0616]: field `v` of struct `T` is private
-  --> $DIR/offset-of-self.rs:39:30
-   |
-LL |             offset_of!(Self, v)
-   |                              ^ private field
+error E0616: field `v` of struct `T` is private
+ at $DIR/offset-of-self.rs:39:30: private field
 
-error[E0609]: no field `self` on type `S`
-  --> $DIR/offset-of-self.rs:52:19
-   |
-LL |     offset_of!(S, self);
-   |                   ^^^^
-   |
-   = note: available fields are: `v`, `w`
+error E0609: no field `self` on type `S`
+ at $DIR/offset-of-self.rs:52:19
+note: available fields are: `v`, `w`
 
-error[E0609]: no field `self` on type `u8`
-  --> $DIR/offset-of-self.rs:53:21
-   |
-LL |     offset_of!(S, v.self);
-   |                     ^^^^
+error E0609: no field `self` on type `u8`
+ at $DIR/offset-of-self.rs:53:21
 
 error: aborting due to 7 previous errors
 

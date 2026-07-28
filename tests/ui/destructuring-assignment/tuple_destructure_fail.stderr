@@ -1,40 +1,22 @@
 error: `..` can only be used once per tuple pattern
-  --> $DIR/tuple_destructure_fail.rs:5:16
-   |
-LL |     (a, .., b, ..) = (0, 1);
-   |         --     ^^ can only be used once per tuple pattern
-   |         |
-   |         previously used here
+ at $DIR/tuple_destructure_fail.rs:5:16: can only be used once per tuple pattern
+  on line 5, column 9: previously used here
 
-error[E0308]: mismatched types
-  --> $DIR/tuple_destructure_fail.rs:6:5
-   |
-LL |     (a, a, b) = (1, 2);
-   |     ^^^^^^^^^   ------ this expression has type `({integer}, {integer})`
-   |     |
-   |     expected a tuple with 2 elements, found one with 3 elements
-   |
-   = note: expected tuple `({integer}, {integer})`
-              found tuple `(_, _, _)`
+error E0308: mismatched types
+ at $DIR/tuple_destructure_fail.rs:6:5: expected a tuple with 2 elements, found one with 3 elements
+  on line 6, column 17: this expression has type `({integer}, {integer})`
+note: expected tuple `({integer}, {integer})`
+         found tuple `(_, _, _)`
 
-error[E0070]: invalid left-hand side of assignment
-  --> $DIR/tuple_destructure_fail.rs:7:13
-   |
-LL |     (C, ..) = (0,1);
-   |      -      ^
-   |      |
-   |      cannot assign to this expression
+error E0070: invalid left-hand side of assignment
+ at $DIR/tuple_destructure_fail.rs:7:13
+  on line 7, column 6: cannot assign to this expression
 
-error[E0308]: mismatched types
-  --> $DIR/tuple_destructure_fail.rs:8:5
-   |
-LL |     (_,) = (1, 2);
-   |     ^^^^   ------ this expression has type `({integer}, {integer})`
-   |     |
-   |     expected a tuple with 2 elements, found one with 1 element
-   |
-   = note: expected tuple `({integer}, {integer})`
-              found tuple `(_,)`
+error E0308: mismatched types
+ at $DIR/tuple_destructure_fail.rs:8:5: expected a tuple with 2 elements, found one with 1 element
+  on line 8, column 12: this expression has type `({integer}, {integer})`
+note: expected tuple `({integer}, {integer})`
+         found tuple `(_,)`
 
 error: aborting due to 4 previous errors
 

@@ -1,11 +1,6 @@
-error[E0666]: nested `impl Trait` is not allowed
-  --> $DIR/bad-nesting.rs:8:21
-   |
-LL |     let x: impl Foo<impl Sized> = ();
-   |            ---------^^^^^^^^^^-
-   |            |        |
-   |            |        nested `impl Trait` here
-   |            outer `impl Trait`
+error E0666: nested `impl Trait` is not allowed
+ at $DIR/bad-nesting.rs:8:21: nested `impl Trait` here
+  on line 8, column 12: outer `impl Trait`
 
 error: aborting due to 1 previous error
 

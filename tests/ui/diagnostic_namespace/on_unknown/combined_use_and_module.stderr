@@ -1,16 +1,11 @@
-error[E0432]: the message
-  --> $DIR/combined_use_and_module.rs:22:9
-   |
-LL | pub use constants::THREE;
-   |         ^^^^^^^^^^^-----
-   |                    |
-   |                    the label
-   |
-   = note: unresolved import `constants::THREE`
-   = note: use note 1
-   = note: use note 2
-   = note: module note 1
-   = note: module note 2
+error E0432: the message
+ at $DIR/combined_use_and_module.rs:22:9
+  on line 22, column 20: the label
+note: unresolved import `constants::THREE`
+note: use note 1
+note: use note 2
+note: module note 1
+note: module note 2
 
 error: aborting due to 1 previous error
 

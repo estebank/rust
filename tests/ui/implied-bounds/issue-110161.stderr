@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `Ty`
-  --> $DIR/issue-110161.rs:11:1
-   |
-LL |     type Ty;
-   |     ------- `Ty` from trait
-...
-LL | impl LtTrait for () {
-   | ^^^^^^^^^^^^^^^^^^^ missing `Ty` in implementation
+error E0046: not all trait items implemented, missing: `Ty`
+ at $DIR/issue-110161.rs:11:1: missing `Ty` in implementation
+  on line 7: `Ty` from trait
 
 error: aborting due to 1 previous error
 

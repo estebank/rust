@@ -1,12 +1,7 @@
-error[E0502]: cannot borrow `this.x` as mutable because it is also borrowed as immutable
-  --> $DIR/borrowck-closures-unique-imm.rs:12:9
-   |
-LL |         let p = &this.x;
-   |                 ------- immutable borrow occurs here
-LL |         &mut this.x;
-   |         ^^^^^^^^^^^ mutable borrow occurs here
-LL |         p.use_ref();
-   |         - immutable borrow later used here
+error E0502: cannot borrow `this.x` as mutable because it is also borrowed as immutable
+ at $DIR/borrowck-closures-unique-imm.rs:12:9: mutable borrow occurs here
+  on line 11, column 17: immutable borrow occurs here
+  on line 13: immutable borrow later used here
 
 error: aborting due to 1 previous error
 

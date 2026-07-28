@@ -1,74 +1,37 @@
-error[E0499]: cannot borrow `x` as mutable more than once at a time
-  --> $DIR/borrowck-closures-two-mut-fail.rs:17:24
-   |
-LL |     let c1 = to_fn_mut(|| x = 4);
-   |                        -- - first borrow occurs due to use of `x` in closure
-   |                        |
-   |                        first mutable borrow occurs here
-LL |     let c2 = to_fn_mut(|| x = 5);
-   |                        ^^ - second borrow occurs due to use of `x` in closure
-   |                        |
-   |                        second mutable borrow occurs here
-LL |     c1;
-   |     -- first borrow later used here
+error E0499: cannot borrow `x` as mutable more than once at a time
+ at $DIR/borrowck-closures-two-mut-fail.rs:17:24: second mutable borrow occurs here
+  on line 16, column 24: first mutable borrow occurs here
+  on line 16, column 27: first borrow occurs due to use of `x` in closure
+  on line 17, column 27: second borrow occurs due to use of `x` in closure
+  on line 18: first borrow later used here
 
-error[E0499]: cannot borrow `x` as mutable more than once at a time
-  --> $DIR/borrowck-closures-two-mut-fail.rs:28:24
-   |
-LL |     let c1 = to_fn_mut(|| set(&mut x));
-   |                        --          - first borrow occurs due to use of `x` in closure
-   |                        |
-   |                        first mutable borrow occurs here
-LL |     let c2 = to_fn_mut(|| set(&mut x));
-   |                        ^^          - second borrow occurs due to use of `x` in closure
-   |                        |
-   |                        second mutable borrow occurs here
-LL |     c1;
-   |     -- first borrow later used here
+error E0499: cannot borrow `x` as mutable more than once at a time
+ at $DIR/borrowck-closures-two-mut-fail.rs:28:24: second mutable borrow occurs here
+  on line 27, column 24: first mutable borrow occurs here
+  on line 27, column 36: first borrow occurs due to use of `x` in closure
+  on line 28, column 36: second borrow occurs due to use of `x` in closure
+  on line 29: first borrow later used here
 
-error[E0499]: cannot borrow `x` as mutable more than once at a time
-  --> $DIR/borrowck-closures-two-mut-fail.rs:35:24
-   |
-LL |     let c1 = to_fn_mut(|| x = 5);
-   |                        -- - first borrow occurs due to use of `x` in closure
-   |                        |
-   |                        first mutable borrow occurs here
-LL |     let c2 = to_fn_mut(|| set(&mut x));
-   |                        ^^          - second borrow occurs due to use of `x` in closure
-   |                        |
-   |                        second mutable borrow occurs here
-LL |     c1;
-   |     -- first borrow later used here
+error E0499: cannot borrow `x` as mutable more than once at a time
+ at $DIR/borrowck-closures-two-mut-fail.rs:35:24: second mutable borrow occurs here
+  on line 34, column 24: first mutable borrow occurs here
+  on line 34, column 27: first borrow occurs due to use of `x` in closure
+  on line 35, column 36: second borrow occurs due to use of `x` in closure
+  on line 36: first borrow later used here
 
-error[E0499]: cannot borrow `x` as mutable more than once at a time
-  --> $DIR/borrowck-closures-two-mut-fail.rs:42:24
-   |
-LL |     let c1 = to_fn_mut(|| x = 5);
-   |                        -- - first borrow occurs due to use of `x` in closure
-   |                        |
-   |                        first mutable borrow occurs here
-LL |     let c2 = to_fn_mut(|| { let _y = to_fn_mut(|| set(&mut x)); }); // (nested closure)
-   |                        ^^                                  - second borrow occurs due to use of `x` in closure
-   |                        |
-   |                        second mutable borrow occurs here
-LL |
-LL |     c1;
-   |     -- first borrow later used here
+error E0499: cannot borrow `x` as mutable more than once at a time
+ at $DIR/borrowck-closures-two-mut-fail.rs:42:24: second mutable borrow occurs here
+  on line 41, column 24: first mutable borrow occurs here
+  on line 41, column 27: first borrow occurs due to use of `x` in closure
+  on line 42, column 60: second borrow occurs due to use of `x` in closure
+  on line 44: first borrow later used here
 
-error[E0499]: cannot borrow `x` as mutable more than once at a time
-  --> $DIR/borrowck-closures-two-mut-fail.rs:54:24
-   |
-LL |     let c1 = to_fn_mut(|| set(&mut *x.f));
-   |                        --          ---- first borrow occurs due to use of `x` in closure
-   |                        |
-   |                        first mutable borrow occurs here
-LL |     let c2 = to_fn_mut(|| set(&mut *x.f));
-   |                        ^^          ---- second borrow occurs due to use of `x` in closure
-   |                        |
-   |                        second mutable borrow occurs here
-LL |
-LL |     c1;
-   |     -- first borrow later used here
+error E0499: cannot borrow `x` as mutable more than once at a time
+ at $DIR/borrowck-closures-two-mut-fail.rs:54:24: second mutable borrow occurs here
+  on line 53, column 24: first mutable borrow occurs here
+  on line 53, column 36: first borrow occurs due to use of `x` in closure
+  on line 54, column 36: second borrow occurs due to use of `x` in closure
+  on line 56: first borrow later used here
 
 error: aborting due to 5 previous errors
 

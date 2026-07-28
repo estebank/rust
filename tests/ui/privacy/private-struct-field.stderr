@@ -1,8 +1,5 @@
-error[E0616]: field `meows` of struct `Cat` is private
-  --> $DIR/private-struct-field.rs:13:21
-   |
-LL |     assert_eq!(nyan.meows, 52);
-   |                     ^^^^^ private field
+error E0616: field `meows` of struct `Cat` is private
+ at $DIR/private-struct-field.rs:13:21: private field
 
 error: aborting due to 1 previous error
 

@@ -1,46 +1,22 @@
-error[E0308]: mismatched types
-  --> $DIR/loop-no-implicit-break.rs:3:9
-   |
-LL |         1
-   |         ^ expected `()`, found integer
-   |
+error E0308: mismatched types
+ at $DIR/loop-no-implicit-break.rs:3:9: expected `()`, found integer
 help: you might have meant to break the loop with this value
-   |
-LL |         break 1;
-   |         +++++  +
+ on line 3, column 8, add `break `
 
-error[E0308]: mismatched types
-  --> $DIR/loop-no-implicit-break.rs:13:9
-   |
-LL |         1
-   |         ^ expected `()`, found integer
-   |
+error E0308: mismatched types
+ at $DIR/loop-no-implicit-break.rs:13:9: expected `()`, found integer
 help: you might have meant to break the loop with this value
-   |
-LL |         break 1;
-   |         +++++  +
+ on line 13, column 8, add `break `
 
-error[E0308]: mismatched types
-  --> $DIR/loop-no-implicit-break.rs:21:9
-   |
-LL |         1
-   |         ^ expected `()`, found integer
-   |
+error E0308: mismatched types
+ at $DIR/loop-no-implicit-break.rs:21:9: expected `()`, found integer
 help: you might have meant to return this value
-   |
-LL |         return 1;
-   |         ++++++  +
+ on line 21, column 8, add `return `
 
-error[E0308]: mismatched types
-  --> $DIR/loop-no-implicit-break.rs:29:9
-   |
-LL |         1
-   |         ^ expected `()`, found integer
-   |
+error E0308: mismatched types
+ at $DIR/loop-no-implicit-break.rs:29:9: expected `()`, found integer
 help: you might have meant to return this value
-   |
-LL |         return 1;
-   |         ++++++  +
+ on line 29, column 8, add `return `
 
 error: aborting due to 4 previous errors
 

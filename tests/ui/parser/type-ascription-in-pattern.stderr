@@ -1,53 +1,26 @@
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/type-ascription-in-pattern.rs:3:10
-   |
-LL |         x: i32 => x,
-   |          ^ --- specifying the type of a pattern isn't supported
-   |          |
-   |          expected one of `@` or `|`
-   |
+ at $DIR/type-ascription-in-pattern.rs:3:10: expected one of `@` or `|`
+  on line 3, column 12: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         x::i32 => x,
-   |          ~~
+ on line 3, column 9, replace with `::`
 
 error: expected one of `...`, `..=`, `..`, or `|`, found `:`
-  --> $DIR/type-ascription-in-pattern.rs:12:11
-   |
-LL |         42: i32 => (),
-   |           ^ --- specifying the type of a pattern isn't supported
-   |           |
-   |           expected one of `...`, `..=`, `..`, or `|`
+ at $DIR/type-ascription-in-pattern.rs:12:11: expected one of `...`, `..=`, `..`, or `|`
+  on line 12, column 13: specifying the type of a pattern isn't supported
 
 error: expected `|`, found `:`
-  --> $DIR/type-ascription-in-pattern.rs:13:10
-   |
-LL |         _: f64 => (),
-   |          ^ --- specifying the type of a pattern isn't supported
-   |          |
-   |          expected `|`
+ at $DIR/type-ascription-in-pattern.rs:13:10: expected `|`
+  on line 13, column 12: specifying the type of a pattern isn't supported
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/type-ascription-in-pattern.rs:14:10
-   |
-LL |         x: i32 => (),
-   |          ^ --- specifying the type of a pattern isn't supported
-   |          |
-   |          expected one of `@` or `|`
-   |
+ at $DIR/type-ascription-in-pattern.rs:14:10: expected one of `@` or `|`
+  on line 14, column 12: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         x::i32 => (),
-   |          ~~
+ on line 14, column 9, replace with `::`
 
-error[E0308]: mismatched types
-  --> $DIR/type-ascription-in-pattern.rs:3:19
-   |
-LL | fn foo(x: bool) -> i32 {
-   |                    --- expected `i32` because of return type
-LL |     match x {
-LL |         x: i32 => x,
-   |                   ^ expected `i32`, found `bool`
+error E0308: mismatched types
+ at $DIR/type-ascription-in-pattern.rs:3:19: expected `i32`, found `bool`
+  on line 1, column 20: expected `i32` because of return type
 
 error: aborting due to 5 previous errors
 

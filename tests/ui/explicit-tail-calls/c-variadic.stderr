@@ -1,8 +1,5 @@
 error: c-variadic functions can't be tail-called
-  --> $DIR/c-variadic.rs:10:14
-   |
-LL |     unsafe { become foo(1, 2, 3) }
-   |              ^^^^^^^^^^^^^^^^^^^
+ at $DIR/c-variadic.rs:10:14
 
 error: aborting due to 1 previous error
 

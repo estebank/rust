@@ -1,36 +1,20 @@
-error[E0038]: the trait `X` is not dyn compatible
-  --> $DIR/method-with-self-trait-bound-not-dyn-safe.rs:12:16
-   |
-LL | impl Trait for dyn X {}
-   |                ^^^^^ `X` is not dyn compatible
-   |
+error E0038: the trait `X` is not dyn compatible
+ at $DIR/method-with-self-trait-bound-not-dyn-safe.rs:12:16: `X` is not dyn compatible
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/method-with-self-trait-bound-not-dyn-safe.rs:5:8
-   |
-LL | trait X {
-   |       - this trait is not dyn compatible...
-LL |     fn foo(&self) where Self: Trait;
-   |        ^^^ ...because method `foo` references the `Self` type in its `where` clause
-   = help: consider moving `foo` to another trait
-   = help: only type `()` implements `X`; consider using it directly instead.
+ at $DIR/method-with-self-trait-bound-not-dyn-safe.rs:5:8: ...because method `foo` references the `Self` type in its `where` clause
+  on line 4, column 7: this trait is not dyn compatible...
+help: consider moving `foo` to another trait
+help: only type `()` implements `X`; consider using it directly instead.
 
-error[E0038]: the trait `X` is not dyn compatible
-  --> $DIR/method-with-self-trait-bound-not-dyn-safe.rs:17:10
-   |
-LL |     <dyn X as X>::foo(&());
-   |          ^ `X` is not dyn compatible
-   |
+error E0038: the trait `X` is not dyn compatible
+ at $DIR/method-with-self-trait-bound-not-dyn-safe.rs:17:10: `X` is not dyn compatible
 note: for a trait to be dyn compatible it needs to allow building a vtable
       for more information, visit <https://doc.rust-lang.org/reference/items/traits.html#dyn-compatibility>
-  --> $DIR/method-with-self-trait-bound-not-dyn-safe.rs:5:8
-   |
-LL | trait X {
-   |       - this trait is not dyn compatible...
-LL |     fn foo(&self) where Self: Trait;
-   |        ^^^ ...because method `foo` references the `Self` type in its `where` clause
-   = help: consider moving `foo` to another trait
-   = help: only type `()` implements `X`; consider using it directly instead.
+ at $DIR/method-with-self-trait-bound-not-dyn-safe.rs:5:8: ...because method `foo` references the `Self` type in its `where` clause
+  on line 4, column 7: this trait is not dyn compatible...
+help: consider moving `foo` to another trait
+help: only type `()` implements `X`; consider using it directly instead.
 
 error: aborting due to 2 previous errors
 

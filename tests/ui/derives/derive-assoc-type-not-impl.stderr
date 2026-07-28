@@ -1,28 +1,13 @@
-error[E0599]: the method `clone` exists for struct `Bar<NotClone>`, but its trait bounds were not satisfied
-  --> $DIR/derive-assoc-type-not-impl.rs:18:30
-   |
-LL | struct Bar<T: Foo> {
-   | ------------------ method `clone` not found for this struct because it doesn't satisfy `Bar<NotClone>: Clone`
-...
-LL | struct NotClone;
-   | --------------- doesn't satisfy `NotClone: Clone`
-...
-LL |     Bar::<NotClone> { x: 1 }.clone();
-   |                              ^^^^^ method cannot be called on `Bar<NotClone>` due to unsatisfied trait bounds
-   |
+error E0599: the method `clone` exists for struct `Bar<NotClone>`, but its trait bounds were not satisfied
+ at $DIR/derive-assoc-type-not-impl.rs:18:30: method cannot be called on `Bar<NotClone>` due to unsatisfied trait bounds
+  on line 7: method `clone` not found for this struct because it doesn't satisfy `Bar<NotClone>: Clone`
+  on line 11: doesn't satisfy `NotClone: Clone`
 note: trait bound `NotClone: Clone` was not satisfied
-  --> $DIR/derive-assoc-type-not-impl.rs:7:12
-   |
-LL | #[derive(Clone)]
-   |          ----- in this derive macro expansion
-LL | struct Bar<T: Foo> {
-   |            ^ type parameter would need to implement `Clone`
-   = help: consider manually implementing the trait to avoid undesired bounds
+ at $DIR/derive-assoc-type-not-impl.rs:7:12: type parameter would need to implement `Clone`
+  on line 6, column 10: in this derive macro expansion
+help: consider manually implementing the trait to avoid undesired bounds
 help: consider annotating `NotClone` with `#[derive(Clone)]`
-   |
-LL + #[derive(Clone)]
-LL | struct NotClone;
-   |
+ on line 11, column 1, add `#[derive(Clone)]`
 
 error: aborting due to 1 previous error
 

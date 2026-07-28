@@ -1,22 +1,12 @@
-error[E0382]: use of moved value: `src`
-  --> $DIR/borrowck-issue-48962.rs:14:5
-   |
-LL |     let mut src = &mut node;
-   |         ------- move occurs because `src` has type `&mut Node`, which does not implement the `Copy` trait
-LL |     {src};
-   |      --- value moved here
-LL |     src.next = None;
-   |     ^^^^^^^^ value used here after move
+error E0382: use of moved value: `src`
+ at $DIR/borrowck-issue-48962.rs:14:5: value used here after move
+  on line 12, column 9: move occurs because `src` has type `&mut Node`, which does not implement the `Copy` trait
+  on line 13, column 6: value moved here
 
-error[E0382]: use of moved value: `src`
-  --> $DIR/borrowck-issue-48962.rs:20:5
-   |
-LL |     let mut src = &mut (22, 44);
-   |         ------- move occurs because `src` has type `&mut (i32, i32)`, which does not implement the `Copy` trait
-LL |     {src};
-   |      --- value moved here
-LL |     src.0 = 66;
-   |     ^^^^^^^^^^ value used here after move
+error E0382: use of moved value: `src`
+ at $DIR/borrowck-issue-48962.rs:20:5: value used here after move
+  on line 18, column 9: move occurs because `src` has type `&mut (i32, i32)`, which does not implement the `Copy` trait
+  on line 19, column 6: value moved here
 
 error: aborting due to 2 previous errors
 

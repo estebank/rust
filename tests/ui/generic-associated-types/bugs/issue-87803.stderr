@@ -1,11 +1,6 @@
-error[E0195]: lifetime parameters or bounds on method `scan` do not match the trait declaration
-  --> $DIR/issue-87803.rs:20:12
-   |
-LL |     fn scan<'a>(&mut self, i : Self::Input<'a>) -> Self::Token<'a>;
-   |            ---- lifetimes in impl do not match this method in trait
-...
-LL |     fn scan<'a>(&mut self, s : &'a str) -> &'a str {
-   |            ^^^^ lifetimes do not match method in trait
+error E0195: lifetime parameters or bounds on method `scan` do not match the trait declaration
+ at $DIR/issue-87803.rs:20:12: lifetimes do not match method in trait
+  on line 11, column 12: lifetimes in impl do not match this method in trait
 
 error: aborting due to 1 previous error
 

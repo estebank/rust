@@ -1,20 +1,10 @@
-error[E0425]: cannot find type `T` in this scope
-  --> $DIR/ice-bad-input-type-for-cast-83056.rs:5:11
-   |
-LL | struct S([bool; f as usize]);
-   | ----------------------------- similarly named struct `S` defined here
-LL | fn f() -> T {}
-   |           ^
-   |
+error E0425: cannot find type `T` in this scope
+ at $DIR/ice-bad-input-type-for-cast-83056.rs:5:11
+  on line 4: similarly named struct `S` defined here
 help: a struct with a similar name exists
-   |
-LL - fn f() -> T {}
-LL + fn f() -> S {}
-   |
+ on line 5, column 10, replace with `S`
 help: you might be missing a type parameter
-   |
-LL | fn f<T>() -> T {}
-   |     +++
+ on line 5, column 4, add `<T>`
 
 error: aborting due to 1 previous error
 

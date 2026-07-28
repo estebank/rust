@@ -1,22 +1,12 @@
-error[E0805]: malformed `used` attribute input
-  --> $DIR/used_with_multi_args.rs:3:3
-   |
-LL | #[used(compiler, linker)]
-   |   ^^^^------------------
-   |       |
-   |       expected a single argument here
-   |
+error E0805: malformed `used` attribute input
+ at $DIR/used_with_multi_args.rs:3:3
+  on line 3, column 7: expected a single argument here
 help: try changing it to one of the following valid forms of the attribute
-   |
-LL - #[used(compiler, linker)]
-LL + #[used]
-   |
-LL - #[used(compiler, linker)]
-LL + #[used(compiler)]
-   |
-LL - #[used(compiler, linker)]
-LL + #[used(linker)]
-   |
+ on line 3, column 2, replace with one of
+  used
+  used(compiler)
+  used(linker)
+
 
 error: aborting due to 1 previous error
 

@@ -1,21 +1,10 @@
-error[E0432]: unresolved import `crate::two::foo::Foo`
-  --> $DIR/show-private-items-issue-138626.rs:17:13
-   |
-LL |     pub use crate::two::foo::Foo;
-   |             ^^^^^^^^^^^^^^^^^---
-   |                              |
-   |                              no `Foo` in `two::foo`
-   |
+error E0432: unresolved import `crate::two::foo::Foo`
+ at $DIR/show-private-items-issue-138626.rs:17:13
+  on line 17, column 30: no `Foo` in `two::foo`
 note: struct `two::foo::bar::Foo` exists but is inaccessible
-  --> $DIR/show-private-items-issue-138626.rs:13:13
-   |
-LL |             pub struct Foo;
-   |             ^^^^^^^^^^^^^^^ not accessible
+ at $DIR/show-private-items-issue-138626.rs:13:13: not accessible
 help: consider importing this struct through its public re-export instead
-   |
-LL -     pub use crate::two::foo::Foo;
-LL +     pub use one::Foo;
-   |
+ on line 17, column 12, replace with `one::Foo`
 
 error: aborting due to 1 previous error
 

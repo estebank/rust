@@ -1,44 +1,22 @@
-error[E0308]: mismatched types
-  --> $DIR/pattern_type_mismatch.rs:8:41
-   |
-LL | const BAD_NESTING4: pattern_type!(u8 is 'a'..='a') = todo!();
-   |                                   --    ^^^ expected `u8`, found `char`
-   |                                   |
-   |                                   the pattern must match the type
-   |
+error E0308: mismatched types
+ at $DIR/pattern_type_mismatch.rs:8:41: expected `u8`, found `char`
+  on line 8, column 35: the pattern must match the type
 help: if you meant to write a byte literal, prefix with `b`
-   |
-LL | const BAD_NESTING4: pattern_type!(u8 is b'a'..='a') = todo!();
-   |                                         +
+ on line 8, column 40, replace with `b'a'`
 
-error[E0308]: mismatched types
-  --> $DIR/pattern_type_mismatch.rs:8:47
-   |
-LL | const BAD_NESTING4: pattern_type!(u8 is 'a'..='a') = todo!();
-   |                                   --          ^^^ expected `u8`, found `char`
-   |                                   |
-   |                                   the pattern must match the type
-   |
+error E0308: mismatched types
+ at $DIR/pattern_type_mismatch.rs:8:47: expected `u8`, found `char`
+  on line 8, column 35: the pattern must match the type
 help: if you meant to write a byte literal, prefix with `b`
-   |
-LL | const BAD_NESTING4: pattern_type!(u8 is 'a'..=b'a') = todo!();
-   |                                               +
+ on line 8, column 46, replace with `b'a'`
 
-error[E0308]: mismatched types
-  --> $DIR/pattern_type_mismatch.rs:12:43
-   |
-LL | const BAD_NESTING5: pattern_type!(char is 1..=1) = todo!();
-   |                                   ----    ^ expected `char`, found `u8`
-   |                                   |
-   |                                   the pattern must match the type
+error E0308: mismatched types
+ at $DIR/pattern_type_mismatch.rs:12:43: expected `char`, found `u8`
+  on line 12, column 35: the pattern must match the type
 
-error[E0308]: mismatched types
-  --> $DIR/pattern_type_mismatch.rs:12:47
-   |
-LL | const BAD_NESTING5: pattern_type!(char is 1..=1) = todo!();
-   |                                   ----        ^ expected `char`, found `u8`
-   |                                   |
-   |                                   the pattern must match the type
+error E0308: mismatched types
+ at $DIR/pattern_type_mismatch.rs:12:47: expected `char`, found `u8`
+  on line 12, column 35: the pattern must match the type
 
 error: aborting due to 4 previous errors
 

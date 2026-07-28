@@ -1,54 +1,28 @@
 error: relaxed bounds are not permitted in supertrait bounds
-  --> $DIR/feature-gate-more-maybe-bounds.rs:6:15
-   |
-LL | trait Trait3: ?Trait1 {}
-   |               ^^^^^^^
+ at $DIR/feature-gate-more-maybe-bounds.rs:6:15
 
 error: relaxed bounds are not permitted in trait object types
-  --> $DIR/feature-gate-more-maybe-bounds.rs:12:28
-   |
-LL | fn foo(_: Box<dyn Trait1 + ?Trait2>) {}
-   |                            ^^^^^^^
+ at $DIR/feature-gate-more-maybe-bounds.rs:12:28
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/feature-gate-more-maybe-bounds.rs:6:15
-   |
-LL | trait Trait3: ?Trait1 {}
-   |               ^^^^^^^
+ at $DIR/feature-gate-more-maybe-bounds.rs:6:15
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/feature-gate-more-maybe-bounds.rs:6:15
-   |
-LL | trait Trait3: ?Trait1 {}
-   |               ^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/feature-gate-more-maybe-bounds.rs:6:15
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/feature-gate-more-maybe-bounds.rs:6:15
-   |
-LL | trait Trait3: ?Trait1 {}
-   |               ^^^^^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/feature-gate-more-maybe-bounds.rs:6:15
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/feature-gate-more-maybe-bounds.rs:12:28
-   |
-LL | fn foo(_: Box<dyn Trait1 + ?Trait2>) {}
-   |                            ^^^^^^^
+ at $DIR/feature-gate-more-maybe-bounds.rs:12:28
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/feature-gate-more-maybe-bounds.rs:15:11
-   |
-LL | fn bar<T: ?Trait1 + ?Trait2>(_: T) {}
-   |           ^^^^^^^
+ at $DIR/feature-gate-more-maybe-bounds.rs:15:11
 
 error: bound modifier `?` can only be applied to `Sized`
-  --> $DIR/feature-gate-more-maybe-bounds.rs:15:21
-   |
-LL | fn bar<T: ?Trait1 + ?Trait2>(_: T) {}
-   |                     ^^^^^^^
+ at $DIR/feature-gate-more-maybe-bounds.rs:15:21
 
 error: aborting due to 8 previous errors
 

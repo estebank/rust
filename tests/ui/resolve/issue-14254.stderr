@@ -1,241 +1,112 @@
-error[E0425]: cannot find value `a` in this scope
-  --> $DIR/issue-14254.rs:21:9
-   |
-LL |         a;
-   |         ^ not found in this scope
+error E0425: cannot find value `a` in this scope
+ at $DIR/issue-14254.rs:21:9: not found in this scope
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/issue-14254.rs:30:9
-   |
-LL |         x;
-   |         ^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/issue-14254.rs:30:9
 help: you might have meant to use the available field
-   |
-LL |         self.x;
-   |         +++++
+ on line 30, column 8, add `self.`
 
-error[E0425]: cannot find value `y` in this scope
-  --> $DIR/issue-14254.rs:32:9
-   |
-LL |         y;
-   |         ^
-   |
+error E0425: cannot find value `y` in this scope
+ at $DIR/issue-14254.rs:32:9
 help: you might have meant to use the available field
-   |
-LL |         self.y;
-   |         +++++
+ on line 32, column 8, add `self.`
 
-error[E0425]: cannot find value `a` in this scope
-  --> $DIR/issue-14254.rs:34:9
-   |
-LL |         a;
-   |         ^ not found in this scope
+error E0425: cannot find value `a` in this scope
+ at $DIR/issue-14254.rs:34:9: not found in this scope
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/issue-14254.rs:36:9
-   |
-LL |         bah;
-   |         ^^^
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/issue-14254.rs:36:9
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 36, column 8, add `Self::`
 
-error[E0425]: cannot find value `b` in this scope
-  --> $DIR/issue-14254.rs:38:9
-   |
-LL |         b;
-   |         ^ not found in this scope
+error E0425: cannot find value `b` in this scope
+ at $DIR/issue-14254.rs:38:9: not found in this scope
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/issue-14254.rs:47:9
-   |
-LL |         x;
-   |         ^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/issue-14254.rs:47:9
 help: you might have meant to use the available field
-   |
-LL |         self.x;
-   |         +++++
+ on line 47, column 8, add `self.`
 
-error[E0425]: cannot find value `y` in this scope
-  --> $DIR/issue-14254.rs:49:9
-   |
-LL |         y;
-   |         ^
-   |
+error E0425: cannot find value `y` in this scope
+ at $DIR/issue-14254.rs:49:9
 help: you might have meant to use the available field
-   |
-LL |         self.y;
-   |         +++++
+ on line 49, column 8, add `self.`
 
-error[E0425]: cannot find value `a` in this scope
-  --> $DIR/issue-14254.rs:51:9
-   |
-LL |         a;
-   |         ^ not found in this scope
+error E0425: cannot find value `a` in this scope
+ at $DIR/issue-14254.rs:51:9: not found in this scope
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/issue-14254.rs:53:9
-   |
-LL |         bah;
-   |         ^^^
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/issue-14254.rs:53:9
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 53, column 8, add `Self::`
 
-error[E0425]: cannot find value `b` in this scope
-  --> $DIR/issue-14254.rs:55:9
-   |
-LL |         b;
-   |         ^ not found in this scope
+error E0425: cannot find value `b` in this scope
+ at $DIR/issue-14254.rs:55:9: not found in this scope
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/issue-14254.rs:64:9
-   |
-LL |         bah;
-   |         ^^^
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/issue-14254.rs:64:9
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 64, column 8, add `Self::`
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/issue-14254.rs:73:9
-   |
-LL |         bah;
-   |         ^^^
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/issue-14254.rs:73:9
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 73, column 8, add `Self::`
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/issue-14254.rs:82:9
-   |
-LL |         bah;
-   |         ^^^
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/issue-14254.rs:82:9
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 82, column 8, add `Self::`
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/issue-14254.rs:91:9
-   |
-LL |         bah;
-   |         ^^^
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/issue-14254.rs:91:9
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 91, column 8, add `Self::`
 
-error[E0425]: cannot find value `bah` in this scope
-  --> $DIR/issue-14254.rs:100:9
-   |
-LL |         bah;
-   |         ^^^
-   |
+error E0425: cannot find value `bah` in this scope
+ at $DIR/issue-14254.rs:100:9
 help: you might have meant to refer to the associated function
-   |
-LL |         Self::bah;
-   |         ++++++
+ on line 100, column 8, add `Self::`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:19:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:19:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 19, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:28:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:28:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 28, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:45:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:45:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 45, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:62:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:62:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 62, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:71:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:71:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 71, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:80:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:80:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 80, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:89:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:89:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 89, column 8, add `self.`
 
-error[E0425]: cannot find function `baz` in this scope
-  --> $DIR/issue-14254.rs:98:9
-   |
-LL |         baz();
-   |         ^^^
-   |
+error E0425: cannot find function `baz` in this scope
+ at $DIR/issue-14254.rs:98:9
 help: you might have meant to call the method
-   |
-LL |         self.baz();
-   |         +++++
+ on line 98, column 8, add `self.`
 
 error: aborting due to 24 previous errors
 

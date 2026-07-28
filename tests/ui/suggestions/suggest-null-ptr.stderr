@@ -1,86 +1,42 @@
-error[E0308]: mismatched types
-  --> $DIR/suggest-null-ptr.rs:18:13
-   |
-LL |         foo(0);
-   |         --- ^ expected `*const u8`, found `usize`
-   |         |
-   |         arguments to this function are incorrect
-   |
-   = note: expected raw pointer `*const u8`
-                     found type `usize`
+error E0308: mismatched types
+ at $DIR/suggest-null-ptr.rs:18:13: expected `*const u8`, found `usize`
+  on line 18: arguments to this function are incorrect
+note: expected raw pointer `*const u8`
+                found type `usize`
 note: function defined here
-  --> $DIR/suggest-null-ptr.rs:7:8
-   |
-LL |     fn foo(ptr: *const u8);
-   |        ^^^ ---
+ at $DIR/suggest-null-ptr.rs:7:8
 help: if you meant to create a null pointer, use `std::ptr::null()`
-   |
-LL -         foo(0);
-LL +         foo(std::ptr::null());
-   |
+ on line 18, column 12, replace with `std::ptr::null()`
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-null-ptr.rs:21:17
-   |
-LL |         foo_mut(0);
-   |         ------- ^ expected `*mut u8`, found `usize`
-   |         |
-   |         arguments to this function are incorrect
-   |
-   = note: expected raw pointer `*mut u8`
-                     found type `usize`
+error E0308: mismatched types
+ at $DIR/suggest-null-ptr.rs:21:17: expected `*mut u8`, found `usize`
+  on line 21: arguments to this function are incorrect
+note: expected raw pointer `*mut u8`
+                found type `usize`
 note: function defined here
-  --> $DIR/suggest-null-ptr.rs:9:8
-   |
-LL |     fn foo_mut(ptr: *mut u8);
-   |        ^^^^^^^ ---
+ at $DIR/suggest-null-ptr.rs:9:8
 help: if you meant to create a null pointer, use `std::ptr::null_mut()`
-   |
-LL -         foo_mut(0);
-LL +         foo_mut(std::ptr::null_mut());
-   |
+ on line 21, column 16, replace with `std::ptr::null_mut()`
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-null-ptr.rs:24:15
-   |
-LL |         usize(0);
-   |         ----- ^ expected `*const usize`, found `usize`
-   |         |
-   |         arguments to this function are incorrect
-   |
-   = note: expected raw pointer `*const usize`
-                     found type `usize`
+error E0308: mismatched types
+ at $DIR/suggest-null-ptr.rs:24:15: expected `*const usize`, found `usize`
+  on line 24: arguments to this function are incorrect
+note: expected raw pointer `*const usize`
+                found type `usize`
 note: function defined here
-  --> $DIR/suggest-null-ptr.rs:11:8
-   |
-LL |     fn usize(ptr: *const usize);
-   |        ^^^^^ ---
+ at $DIR/suggest-null-ptr.rs:11:8
 help: if you meant to create a null pointer, use `std::ptr::null()`
-   |
-LL -         usize(0);
-LL +         usize(std::ptr::null());
-   |
+ on line 24, column 14, replace with `std::ptr::null()`
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-null-ptr.rs:27:19
-   |
-LL |         usize_mut(0);
-   |         --------- ^ expected `*mut usize`, found `usize`
-   |         |
-   |         arguments to this function are incorrect
-   |
-   = note: expected raw pointer `*mut usize`
-                     found type `usize`
+error E0308: mismatched types
+ at $DIR/suggest-null-ptr.rs:27:19: expected `*mut usize`, found `usize`
+  on line 27: arguments to this function are incorrect
+note: expected raw pointer `*mut usize`
+                found type `usize`
 note: function defined here
-  --> $DIR/suggest-null-ptr.rs:13:8
-   |
-LL |     fn usize_mut(ptr: *mut usize);
-   |        ^^^^^^^^^ ---
+ at $DIR/suggest-null-ptr.rs:13:8
 help: if you meant to create a null pointer, use `std::ptr::null_mut()`
-   |
-LL -         usize_mut(0);
-LL +         usize_mut(std::ptr::null_mut());
-   |
+ on line 27, column 18, replace with `std::ptr::null_mut()`
 
 error: aborting due to 4 previous errors
 

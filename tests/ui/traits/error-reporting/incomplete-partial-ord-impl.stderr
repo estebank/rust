@@ -1,10 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `partial_cmp`
-  --> $DIR/incomplete-partial-ord-impl.rs:6:1
-   |
-LL | impl PartialOrd for Thing {
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^ missing `partial_cmp` in implementation
-   |
-   = help: implement the missing item: `fn partial_cmp(&self, _: &Thing) -> Option<std::cmp::Ordering> { todo!() }`
+error E0046: not all trait items implemented, missing: `partial_cmp`
+ at $DIR/incomplete-partial-ord-impl.rs:6:1: missing `partial_cmp` in implementation
+help: implement the missing item: `fn partial_cmp(&self, _: &Thing) -> Option<std::cmp::Ordering> { todo!() }`
 
 error: aborting due to 1 previous error
 

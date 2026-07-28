@@ -1,12 +1,5 @@
-error[E0282]: type annotations needed
-  --> $DIR/ambiguous-arg.rs:7:25
-   |
-LL |       async |check, a, b| {
-   |  _________________________^
-LL | |
-LL | |         temp.abs_diff(12);
-LL | |     };
-   | |_____^ cannot infer type
+error E0282: type annotations needed
+ at $DIR/ambiguous-arg.rs:7:25 to 10:6: cannot infer type
 
 error: aborting due to 1 previous error
 

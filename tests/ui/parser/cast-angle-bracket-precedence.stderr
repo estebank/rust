@@ -1,86 +1,38 @@
 error: `<` is interpreted as a start of generic arguments for `usize`, not a comparison
-  --> $DIR/cast-angle-bracket-precedence.rs:8:31
-   |
-LL |     println!("{}", a as usize < long_name);
-   |                               ^ --------- interpreted as generic arguments
-   |                               |
-   |                               not interpreted as comparison
-   |
+ at $DIR/cast-angle-bracket-precedence.rs:8:31: not interpreted as comparison
+  on line 8, column 33: interpreted as generic arguments
 help: try comparing the cast value
-   |
-LL |     println!("{}", (a as usize) < long_name);
-   |                    +          +
+ on line 8, column 19, add `(`
 
 error: `<` is interpreted as a start of generic arguments for `usize`, not a comparison
-  --> $DIR/cast-angle-bracket-precedence.rs:9:33
-   |
-LL |     println!("{}{}", a as usize < long_name, long_name);
-   |                                 ^ -------------------- interpreted as generic arguments
-   |                                 |
-   |                                 not interpreted as comparison
-   |
+ at $DIR/cast-angle-bracket-precedence.rs:9:33: not interpreted as comparison
+  on line 9, column 35: interpreted as generic arguments
 help: try comparing the cast value
-   |
-LL |     println!("{}{}", (a as usize) < long_name, long_name);
-   |                      +          +
+ on line 9, column 21, add `(`
 
 error: `<` is interpreted as a start of generic arguments for `usize`, not a comparison
-  --> $DIR/cast-angle-bracket-precedence.rs:11:31
-   |
-LL |     println!("{}", a as usize < 4);
-   |                               ^ - interpreted as generic arguments
-   |                               |
-   |                               not interpreted as comparison
-   |
+ at $DIR/cast-angle-bracket-precedence.rs:11:31: not interpreted as comparison
+  on line 11, column 33: interpreted as generic arguments
 help: try comparing the cast value
-   |
-LL |     println!("{}", (a as usize) < 4);
-   |                    +          +
+ on line 11, column 19, add `(`
 
 error: `<` is interpreted as a start of generic arguments for `usize`, not a comparison
-  --> $DIR/cast-angle-bracket-precedence.rs:16:20
-   |
-LL |                    <
-   |                    ^ not interpreted as comparison
-LL |                    4);
-   |                    - interpreted as generic arguments
-   |
+ at $DIR/cast-angle-bracket-precedence.rs:16:20: not interpreted as comparison
+  on line 17: interpreted as generic arguments
 help: try comparing the cast value
-   |
-LL ~     println!("{}", (a
-LL |                    as
-LL ~                    usize)
-   |
+ on line 13, column 19, add `(`
 
 error: `<` is interpreted as a start of generic arguments for `usize`, not a comparison
-  --> $DIR/cast-angle-bracket-precedence.rs:25:20
-   |
-LL |                    <
-   |                    ^ not interpreted as comparison
-LL |                    5);
-   |                    - interpreted as generic arguments
-   |
+ at $DIR/cast-angle-bracket-precedence.rs:25:20: not interpreted as comparison
+  on line 26: interpreted as generic arguments
 help: try comparing the cast value
-   |
-LL ~     println!("{}", (a
-LL |
-...
-LL |
-LL ~                    usize)
-   |
+ on line 18, column 19, add `(`
 
 error: `<<` is interpreted as a start of generic arguments for `usize`, not a shift
-  --> $DIR/cast-angle-bracket-precedence.rs:28:31
-   |
-LL |     println!("{}", a as usize << long_name);
-   |                               ^^ --------- interpreted as generic arguments
-   |                               |
-   |                               not interpreted as shift
-   |
+ at $DIR/cast-angle-bracket-precedence.rs:28:31: not interpreted as shift
+  on line 28, column 34: interpreted as generic arguments
 help: try shifting the cast value
-   |
-LL |     println!("{}", (a as usize) << long_name);
-   |                    +          +
+ on line 28, column 19, add `(`
 
 error: aborting due to 6 previous errors
 

@@ -1,25 +1,13 @@
-error[E0277]: the trait bound `T: Get` is not satisfied
-  --> $DIR/associated-types-no-suitable-bound.rs:11:21
-   |
-LL |     fn uhoh<T>(foo: <T as Get>::Value) {}
-   |                     ^^^^^^^^^^^^^^^^^ the trait `Get` is not implemented for `T`
-   |
+error E0277: the trait bound `T: Get` is not satisfied
+ at $DIR/associated-types-no-suitable-bound.rs:11:21: the trait `Get` is not implemented for `T`
 help: consider restricting type parameter `T` with trait `Get`
-   |
-LL |     fn uhoh<T: Get>(foo: <T as Get>::Value) {}
-   |              +++++
+ on line 11, column 13, add `: Get`
 
-error[E0277]: the trait bound `T: Get` is not satisfied
-  --> $DIR/associated-types-no-suitable-bound.rs:11:21
-   |
-LL |     fn uhoh<T>(foo: <T as Get>::Value) {}
-   |                     ^^^^^^^^^^^^^^^^^ the trait `Get` is not implemented for `T`
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0277: the trait bound `T: Get` is not satisfied
+ at $DIR/associated-types-no-suitable-bound.rs:11:21: the trait `Get` is not implemented for `T`
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: consider restricting type parameter `T` with trait `Get`
-   |
-LL |     fn uhoh<T: Get>(foo: <T as Get>::Value) {}
-   |              +++++
+ on line 11, column 13, add `: Get`
 
 error: aborting due to 2 previous errors
 

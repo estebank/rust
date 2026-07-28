@@ -1,22 +1,11 @@
-error[E0532]: expected unit struct, unit variant or constant, found tuple variant `MyEnum::Tuple`
-  --> $DIR/unit-pattern-error-on-tuple-and-struct-variants-63983.rs:9:9
-   |
-LL |     Tuple(i32),
-   |     ---------- `MyEnum::Tuple` defined here
-...
-LL |         MyEnum::Tuple => "",
-   |         ^^^^^^^^^^^^^ help: use the tuple variant pattern syntax instead: `MyEnum::Tuple(_)`
+error E0532: expected unit struct, unit variant or constant, found tuple variant `MyEnum::Tuple`
+ at $DIR/unit-pattern-error-on-tuple-and-struct-variants-63983.rs:9:9: help: use the tuple variant pattern syntax instead: `MyEnum::Tuple(_)`
+  on line 3: `MyEnum::Tuple` defined here
 
-error[E0533]: expected unit struct, unit variant or constant, found struct variant `MyEnum::Struct`
-  --> $DIR/unit-pattern-error-on-tuple-and-struct-variants-63983.rs:11:9
-   |
-LL |         MyEnum::Struct => "",
-   |         ^^^^^^^^^^^^^^ not a unit struct, unit variant or constant
-   |
+error E0533: expected unit struct, unit variant or constant, found struct variant `MyEnum::Struct`
+ at $DIR/unit-pattern-error-on-tuple-and-struct-variants-63983.rs:11:9: not a unit struct, unit variant or constant
 help: add the names to match a struct variant's fields
-   |
-LL |         MyEnum::Struct { s: _ } => "",
-   |                        ++++++++
+ on line 11, column 22, add ` { s: _ }`
 
 error: aborting due to 2 previous errors
 

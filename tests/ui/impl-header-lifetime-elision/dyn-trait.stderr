@@ -1,15 +1,8 @@
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/dyn-trait.rs:24:5
-   |
-LL | fn with_dyn_debug_static<'a>(x: Box<dyn Debug + 'a>) {
-   |                          --  - `x` is a reference that is only valid in the function body
-   |                          |
-   |                          lifetime `'a` defined here
-LL |     static_val(x);
-   |     ^^^^^^^^^^^^^
-   |     |
-   |     `x` escapes the function body here
-   |     argument requires that `'a` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/dyn-trait.rs:24:5: `x` escapes the function body here
+  on line 24: argument requires that `'a` must outlive `'static`
+  on line 23, column 26: lifetime `'a` defined here
+  on line 23, column 30: `x` is a reference that is only valid in the function body
 
 error: aborting due to 1 previous error
 

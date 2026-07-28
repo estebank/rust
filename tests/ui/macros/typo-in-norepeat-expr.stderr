@@ -1,18 +1,9 @@
 error: cannot find macro parameter `$arg` in this scope
-  --> $DIR/typo-in-norepeat-expr.rs:4:10
-   |
-LL |         [$arg]
-   |          ^^^^ not found in this scope
-...
-LL |     let _ = m![begin x end];
-   |             --------------- in this macro invocation
-   |
-   = note: this error originates in the macro `m` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/typo-in-norepeat-expr.rs:4:10: not found in this scope
+  on line 12, column 13: in this macro invocation
+note: this error originates in the macro `m` (in Nightly builds, run with -Z macro-backtrace for more info)
 help: there is a macro metavariable with a similar name
-   |
-LL -         [$arg]
-LL +         [$ard]
-   |
+ on line 4, column 10, replace with `ard`
 
 error: aborting due to 1 previous error
 

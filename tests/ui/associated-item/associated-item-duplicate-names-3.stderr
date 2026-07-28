@@ -1,25 +1,12 @@
-error[E0201]: duplicate definitions with name `Bar`:
-  --> $DIR/associated-item-duplicate-names-3.rs:14:5
-   |
-LL |     type Bar;
-   |     --------- item in trait
-...
-LL |     type Bar = i16;
-   |     --------------- previous definition here
-LL |     type Bar = u16;
-   |     ^^^^^^^^^^^^^^^ duplicate definition
+error E0201: duplicate definitions with name `Bar`:
+ at $DIR/associated-item-duplicate-names-3.rs:14:5: duplicate definition
+  on line 7: item in trait
+  on line 13: previous definition here
 
-error[E0223]: ambiguous associated type
-  --> $DIR/associated-item-duplicate-names-3.rs:18:12
-   |
-LL |     let x: Baz::Bar = 5;
-   |            ^^^^^^^^
-   |
+error E0223: ambiguous associated type
+ at $DIR/associated-item-duplicate-names-3.rs:18:12
 help: use fully-qualified syntax
-   |
-LL -     let x: Baz::Bar = 5;
-LL +     let x: <Baz as Foo>::Bar = 5;
-   |
+ on line 18, column 11, replace with `<Baz as Foo>::`
 
 error: aborting due to 2 previous errors
 

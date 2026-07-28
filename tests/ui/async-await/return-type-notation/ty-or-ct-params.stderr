@@ -1,20 +1,10 @@
 error: return type notation is not allowed for functions that have type parameters
-  --> $DIR/ty-or-ct-params.rs:13:12
-   |
-LL |     async fn bar<T>() {}
-   |                  - type parameter declared here
-...
-LL |     T: Foo<bar(..): Send, baz(..): Send>,
-   |            ^^^^^^^^^^^^^
+ at $DIR/ty-or-ct-params.rs:13:12
+  on line 6, column 18: type parameter declared here
 
 error: return type notation is not allowed for functions that have const parameters
-  --> $DIR/ty-or-ct-params.rs:13:27
-   |
-LL |     async fn baz<const N: usize>() {}
-   |                  -------------- const parameter declared here
-...
-LL |     T: Foo<bar(..): Send, baz(..): Send>,
-   |                           ^^^^^^^^^^^^^
+ at $DIR/ty-or-ct-params.rs:13:27
+  on line 8, column 18: const parameter declared here
 
 error: aborting due to 2 previous errors
 

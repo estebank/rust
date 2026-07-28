@@ -1,132 +1,62 @@
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:6:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x += 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:6:5: `x` used here but it isn't initialized
+  on line 5, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 5, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:9:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x -= 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:9:5: `x` used here but it isn't initialized
+  on line 8, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 8, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:12:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x *= 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:12:5: `x` used here but it isn't initialized
+  on line 11, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 11, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:15:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x /= 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:15:5: `x` used here but it isn't initialized
+  on line 14, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 14, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:18:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x %= 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:18:5: `x` used here but it isn't initialized
+  on line 17, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 17, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:21:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x ^= 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:21:5: `x` used here but it isn't initialized
+  on line 20, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 20, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:24:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x &= 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:24:5: `x` used here but it isn't initialized
+  on line 23, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 23, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:27:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x |= 1;
-   |     ^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:27:5: `x` used here but it isn't initialized
+  on line 26, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 26, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:30:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x <<= 1;
-   |     ^^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:30:5: `x` used here but it isn't initialized
+  on line 29, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 29, column 16, add ` = 42`
 
-error[E0381]: used binding `x` isn't initialized
-  --> $DIR/borrowck-uninit-in-assignop.rs:33:5
-   |
-LL |     let x: isize;
-   |         - binding declared here but left uninitialized
-LL |     x >>= 1;
-   |     ^^^^^^^ `x` used here but it isn't initialized
-   |
+error E0381: used binding `x` isn't initialized
+ at $DIR/borrowck-uninit-in-assignop.rs:33:5: `x` used here but it isn't initialized
+  on line 32, column 9: binding declared here but left uninitialized
 help: consider assigning a value
-   |
-LL |     let x: isize = 42;
-   |                  ++++
+ on line 32, column 16, add ` = 42`
 
 error: aborting due to 10 previous errors
 

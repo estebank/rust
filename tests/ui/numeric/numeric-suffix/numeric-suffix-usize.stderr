@@ -1,211 +1,90 @@
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:18:18
-   |
-LL |     foo::<usize>(42_u64);
-   |     ------------ ^^^^^^ expected `usize`, found `u64`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:18:18: expected `usize`, found `u64`
+  on line 18: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `u64` to `usize`
-   |
-LL -     foo::<usize>(42_u64);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 18, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:22:18
-   |
-LL |     foo::<usize>(42_u32);
-   |     ------------ ^^^^^^ expected `usize`, found `u32`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:22:18: expected `usize`, found `u32`
+  on line 22: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `u32` to `usize`
-   |
-LL -     foo::<usize>(42_u32);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 22, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:26:18
-   |
-LL |     foo::<usize>(42_u16);
-   |     ------------ ^^^^^^ expected `usize`, found `u16`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:26:18: expected `usize`, found `u16`
+  on line 26: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `u16` to `usize`
-   |
-LL -     foo::<usize>(42_u16);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 26, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:30:18
-   |
-LL |     foo::<usize>(42_u8);
-   |     ------------ ^^^^^ expected `usize`, found `u8`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:30:18: expected `usize`, found `u8`
+  on line 30: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `u8` to `usize`
-   |
-LL -     foo::<usize>(42_u8);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 30, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:34:18
-   |
-LL |     foo::<usize>(42_isize);
-   |     ------------ ^^^^^^^^ expected `usize`, found `isize`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:34:18: expected `usize`, found `isize`
+  on line 34: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `isize` to `usize`
-   |
-LL -     foo::<usize>(42_isize);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 34, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:38:18
-   |
-LL |     foo::<usize>(42_i64);
-   |     ------------ ^^^^^^ expected `usize`, found `i64`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:38:18: expected `usize`, found `i64`
+  on line 38: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `i64` to `usize`
-   |
-LL -     foo::<usize>(42_i64);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 38, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:42:18
-   |
-LL |     foo::<usize>(42_i32);
-   |     ------------ ^^^^^^ expected `usize`, found `i32`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:42:18: expected `usize`, found `i32`
+  on line 42: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `i32` to `usize`
-   |
-LL -     foo::<usize>(42_i32);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 42, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:46:18
-   |
-LL |     foo::<usize>(42_i16);
-   |     ------------ ^^^^^^ expected `usize`, found `i16`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:46:18: expected `usize`, found `i16`
+  on line 46: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `i16` to `usize`
-   |
-LL -     foo::<usize>(42_i16);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 46, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:50:18
-   |
-LL |     foo::<usize>(42_i8);
-   |     ------------ ^^^^^ expected `usize`, found `i8`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:50:18: expected `usize`, found `i8`
+  on line 50: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `i8` to `usize`
-   |
-LL -     foo::<usize>(42_i8);
-LL +     foo::<usize>(42_usize);
-   |
+ on line 50, column 20, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:54:18
-   |
-LL |     foo::<usize>(42.0_f64);
-   |     ------------ ^^^^^^^^ expected `usize`, found `f64`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:54:18: expected `usize`, found `f64`
+  on line 54: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `f64` to `usize`
-   |
-LL -     foo::<usize>(42.0_f64);
-LL +     foo::<usize>(42usize);
-   |
+ on line 54, column 19, replace with `usize`
 
-error[E0308]: mismatched types
-  --> $DIR/numeric-suffix-usize.rs:58:18
-   |
-LL |     foo::<usize>(42.0_f32);
-   |     ------------ ^^^^^^^^ expected `usize`, found `f32`
-   |     |
-   |     arguments to this function are incorrect
-   |
+error E0308: mismatched types
+ at $DIR/numeric-suffix-usize.rs:58:18: expected `usize`, found `f32`
+  on line 58: arguments to this function are incorrect
 note: function defined here
-  --> $DIR/numeric-suffix-usize.rs:3:4
-   |
-LL | fn foo<N>(_x: N) {}
-   |    ^^^    -----
+ at $DIR/numeric-suffix-usize.rs:3:4
 help: change the type of the numeric literal from `f32` to `usize`
-   |
-LL -     foo::<usize>(42.0_f32);
-LL +     foo::<usize>(42usize);
-   |
+ on line 58, column 19, replace with `usize`
 
 error: aborting due to 11 previous errors
 

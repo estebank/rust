@@ -1,28 +1,13 @@
-error[E0507]: cannot move out of `val`, a captured variable in an `FnMut` closure
-  --> $DIR/issue-87456-point-to-closure.rs:10:28
-   |
-LL |     let val = String::new();
-   |         --- captured outer variable
-LL |
-LL |     take_mut(|| {
-   |              -- captured by this `FnMut` closure
-LL |
-LL |         let _foo: String = val;
-   |                            ^^^ move occurs because `val` has type `String`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of `val`, a captured variable in an `FnMut` closure
+ at $DIR/issue-87456-point-to-closure.rs:10:28: move occurs because `val` has type `String`, which does not implement the `Copy` trait
+  on line 6, column 9: captured outer variable
+  on line 8, column 14: captured by this `FnMut` closure
 help: `Fn` and `FnMut` closures require captured values to be able to be consumed multiple times, but `FnOnce` closures may consume them only once
-  --> $DIR/issue-87456-point-to-closure.rs:3:24
-   |
-LL | fn take_mut(_val: impl FnMut()) {}
-   |                        ^^^^^^^
+ at $DIR/issue-87456-point-to-closure.rs:3:24
 help: consider borrowing here
-   |
-LL |         let _foo: String = &val;
-   |                            +
+ on line 10, column 27, add `&`
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |         let _foo: String = val.clone();
-   |                               ++++++++
+ on line 10, column 30, add `.clone()`
 
 error: aborting due to 1 previous error
 

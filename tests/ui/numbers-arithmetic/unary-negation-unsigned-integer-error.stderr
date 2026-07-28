@@ -1,41 +1,20 @@
-error[E0600]: cannot apply unary operator `-` to type `usize`
-  --> $DIR/unary-negation-unsigned-integer-error.rs:4:13
-   |
-LL |     let x = -1 as usize;
-   |             ^^ cannot apply unary operator `-`
-   |
-   = note: unsigned values cannot be negated
+error E0600: cannot apply unary operator `-` to type `usize`
+ at $DIR/unary-negation-unsigned-integer-error.rs:4:13: cannot apply unary operator `-`
+note: unsigned values cannot be negated
 help: you may have meant the maximum value of `usize`
-   |
-LL -     let x = -1 as usize;
-LL +     let x = usize::MAX;
-   |
+ on line 4, column 12, replace with `usize::MAX`
 
-error[E0600]: cannot apply unary operator `-` to type `usize`
-  --> $DIR/unary-negation-unsigned-integer-error.rs:5:13
-   |
-LL |     let x = (-1) as usize;
-   |             ^^^^ cannot apply unary operator `-`
-   |
-   = note: unsigned values cannot be negated
+error E0600: cannot apply unary operator `-` to type `usize`
+ at $DIR/unary-negation-unsigned-integer-error.rs:5:13: cannot apply unary operator `-`
+note: unsigned values cannot be negated
 help: you may have meant the maximum value of `usize`
-   |
-LL -     let x = (-1) as usize;
-LL +     let x = usize::MAX;
-   |
+ on line 5, column 12, replace with `usize::MAX`
 
-error[E0600]: cannot apply unary operator `-` to type `u32`
-  --> $DIR/unary-negation-unsigned-integer-error.rs:6:18
-   |
-LL |     let x: u32 = -1;
-   |                  ^^ cannot apply unary operator `-`
-   |
-   = note: unsigned values cannot be negated
+error E0600: cannot apply unary operator `-` to type `u32`
+ at $DIR/unary-negation-unsigned-integer-error.rs:6:18: cannot apply unary operator `-`
+note: unsigned values cannot be negated
 help: you may have meant the maximum value of `u32`
-   |
-LL -     let x: u32 = -1;
-LL +     let x: u32 = u32::MAX;
-   |
+ on line 6, column 17, replace with `u32::MAX`
 
 error: aborting due to 3 previous errors
 

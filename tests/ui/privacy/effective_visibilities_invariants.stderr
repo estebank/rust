@@ -1,29 +1,13 @@
-error[E0428]: the name `m` is defined multiple times
-  --> $DIR/effective_visibilities_invariants.rs:7:1
-   |
-LL | pub mod m {}
-   | --------- previous definition of the module `m` here
-LL |
-LL | pub mod m {
-   | ^^^^^^^^^ `m` redefined here
-   |
-   = note: `m` must be defined only once in the type namespace of this module
+error E0428: the name `m` is defined multiple times
+ at $DIR/effective_visibilities_invariants.rs:7:1: `m` redefined here
+  on line 5: previous definition of the module `m` here
+note: `m` must be defined only once in the type namespace of this module
 
 error: module has missing stability attribute
-  --> $DIR/effective_visibilities_invariants.rs:3:1
-   |
-LL | / #![feature(staged_api)]
-LL | |
-LL | | pub mod m {}
-...  |
-LL | | fn main() {}
-   | |____________^
+ at $DIR/effective_visibilities_invariants.rs:3:1 to 12:13
 
 error: module has missing stability attribute
-  --> $DIR/effective_visibilities_invariants.rs:5:1
-   |
-LL | pub mod m {}
-   | ^^^^^^^^^
+ at $DIR/effective_visibilities_invariants.rs:5:1
 
 error: aborting due to 3 previous errors
 

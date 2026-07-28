@@ -1,30 +1,14 @@
-error[E0308]: mismatched types
-  --> $DIR/const-array-oob-arith.rs:5:45
-   |
-LL | const BLUB: [i32; (ARR[0] - 40) as usize] = [5];
-   |             -----------------------------   ^^^ expected an array with a size of 2, found one with a size of 1
-   |             |
-   |             expected because of the type of the constant
-   |
+error E0308: mismatched types
+ at $DIR/const-array-oob-arith.rs:5:45: expected an array with a size of 2, found one with a size of 1
+  on line 5, column 13: expected because of the type of the constant
 help: consider specifying the actual array length
-   |
-LL - const BLUB: [i32; (ARR[0] - 40) as usize] = [5];
-LL + const BLUB: [i32; 1] = [5];
-   |
+ on line 5, column 18, replace with `1`
 
-error[E0308]: mismatched types
-  --> $DIR/const-array-oob-arith.rs:9:44
-   |
-LL | const BOO: [i32; (ARR[0] - 41) as usize] = [5, 99];
-   |            -----------------------------   ^^^^^^^ expected an array with a size of 1, found one with a size of 2
-   |            |
-   |            expected because of the type of the constant
-   |
+error E0308: mismatched types
+ at $DIR/const-array-oob-arith.rs:9:44: expected an array with a size of 1, found one with a size of 2
+  on line 9, column 12: expected because of the type of the constant
 help: consider specifying the actual array length
-   |
-LL - const BOO: [i32; (ARR[0] - 41) as usize] = [5, 99];
-LL + const BOO: [i32; 2] = [5, 99];
-   |
+ on line 9, column 17, replace with `2`
 
 error: aborting due to 2 previous errors
 

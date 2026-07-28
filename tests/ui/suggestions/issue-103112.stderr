@@ -1,14 +1,7 @@
-error[E0433]: cannot find `abort` in `process`
-  --> $DIR/issue-103112.rs:2:19
-   |
-LL |     std::process::abort!();
-   |                   ^^^^^ could not find `abort` in `process`
-   |
+error E0433: cannot find `abort` in `process`
+ at $DIR/issue-103112.rs:2:19: could not find `abort` in `process`
 help: std::process::abort is not a macro, but a function, try to remove `!`
-   |
-LL -     std::process::abort!();
-LL +     std::process::abort();
-   |
+ on line 2, column 23
 
 error: aborting due to 1 previous error
 

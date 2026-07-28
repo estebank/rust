@@ -1,27 +1,13 @@
-error[E0657]: `impl Trait` cannot capture higher-ranked lifetime from `dyn` type
-  --> $DIR/bound-lifetime-through-dyn-trait.rs:6:57
-   |
-LL | fn dyn_hoops<T: Sized>() -> dyn for<'a> Iterator<Item = impl Captures<'a>> {
-   |                                                         ^^^^^^^^^^^^^^--^ `impl Trait` implicitly captures all lifetimes in scope
-   |
+error E0657: `impl Trait` cannot capture higher-ranked lifetime from `dyn` type
+ at $DIR/bound-lifetime-through-dyn-trait.rs:6:57: `impl Trait` implicitly captures all lifetimes in scope
 note: lifetime declared here
-  --> $DIR/bound-lifetime-through-dyn-trait.rs:6:37
-   |
-LL | fn dyn_hoops<T: Sized>() -> dyn for<'a> Iterator<Item = impl Captures<'a>> {
-   |                                     ^^
+ at $DIR/bound-lifetime-through-dyn-trait.rs:6:37
 
 error: item does not constrain `Opaque::{opaque#0}`
-  --> $DIR/bound-lifetime-through-dyn-trait.rs:11:8
-   |
-LL | pub fn main() {
-   |        ^^^^
-   |
-   = note: consider removing `#[define_opaque]` or adding an empty `#[define_opaque()]`
+ at $DIR/bound-lifetime-through-dyn-trait.rs:11:8
+note: consider removing `#[define_opaque]` or adding an empty `#[define_opaque()]`
 note: this opaque type is supposed to be constrained
-  --> $DIR/bound-lifetime-through-dyn-trait.rs:13:19
-   |
-LL |     type Opaque = impl Sized;
-   |                   ^^^^^^^^^^
+ at $DIR/bound-lifetime-through-dyn-trait.rs:13:19
 
 error: aborting due to 2 previous errors
 

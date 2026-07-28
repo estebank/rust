@@ -1,20 +1,10 @@
-error[E0224]: at least one trait is required for an object type
-  --> $DIR/effectively-empty-trait-object-type.rs:13:14
-   |
-LL | trait Empty2 = Empty1;
-   | ------------ this alias does not contain a trait
-...
-LL | type Type0 = dyn Empty2;
-   |              ^^^^^^^^^^
+error E0224: at least one trait is required for an object type
+ at $DIR/effectively-empty-trait-object-type.rs:13:14
+  on line 10: this alias does not contain a trait
 
-error[E0224]: at least one trait is required for an object type
-  --> $DIR/effectively-empty-trait-object-type.rs:18:14
-   |
-LL | trait Empty3 = Empty2 + Empty2;
-   | ------------ this alias does not contain a trait
-LL |
-LL | type Type1 = dyn Empty3;
-   |              ^^^^^^^^^^
+error E0224: at least one trait is required for an object type
+ at $DIR/effectively-empty-trait-object-type.rs:18:14
+  on line 16: this alias does not contain a trait
 
 error: aborting due to 2 previous errors
 

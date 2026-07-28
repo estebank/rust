@@ -1,84 +1,37 @@
 error: expected identifier, found `"macro_use"`
-  --> $DIR/removing-extern-crate-malformed-cfg.rs:8:18
-   |
-LL | #[cfg_attr(test, "macro_use")]
-   |                  ^^^^^^^^^^^ expected identifier
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_attr-attribute>
+ at $DIR/removing-extern-crate-malformed-cfg.rs:8:18: expected identifier
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_attr-attribute>
 help: must be of the form
-   |
-LL - #[cfg_attr(test, "macro_use")]
-LL + #[cfg_attr(predicate, attr1, attr2, ...)]
-   |
+ on line 8, column 2, replace with `cfg_attr(predicate, attr1, attr2, ...)`
 
 error: expected one of `(`, `,`, `::`, or `=`, found `<eof>`
-  --> $DIR/removing-extern-crate-malformed-cfg.rs:13:16
-   |
-LL |     #[cfg_attr(test)]
-   |                ^^^^ expected one of `(`, `,`, `::`, or `=`
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_attr-attribute>
+ at $DIR/removing-extern-crate-malformed-cfg.rs:13:16: expected one of `(`, `,`, `::`, or `=`
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg_attr-attribute>
 help: must be of the form
-   |
-LL -     #[cfg_attr(test)]
-LL +     #[cfg_attr(predicate, attr1, attr2, ...)]
-   |
+ on line 13, column 6, replace with `cfg_attr(predicate, attr1, attr2, ...)`
 
 warning: unused extern crate
-  --> $DIR/removing-extern-crate-malformed-cfg.rs:9:1
-   |
-LL | extern crate remove_extern_crate as foo;
-   | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused
-   |
+ at $DIR/removing-extern-crate-malformed-cfg.rs:9:1: unused
 note: the lint level is defined here
-  --> $DIR/removing-extern-crate-malformed-cfg.rs:6:9
-   |
-LL | #![warn(rust_2018_idioms)]
-   |         ^^^^^^^^^^^^^^^^
-   = note: `#[warn(unused_extern_crates)]` implied by `#[warn(rust_2018_idioms)]`
+ at $DIR/removing-extern-crate-malformed-cfg.rs:6:9
+note: `#[warn(unused_extern_crates)]` implied by `#[warn(rust_2018_idioms)]`
 help: remove the unused `extern crate`
-   |
-LL - #[cfg_attr(test, "macro_use")]
-LL - extern crate remove_extern_crate as foo;
-LL +
-   |
+ on line 8, column 1
 
 warning: unused extern crate
-  --> $DIR/removing-extern-crate-malformed-cfg.rs:10:1
-   |
-LL | extern crate core;
-   | ^^^^^^^^^^^^^^^^^^ unused
-   |
+ at $DIR/removing-extern-crate-malformed-cfg.rs:10:1: unused
 help: remove the unused `extern crate`
-   |
-LL - extern crate core;
-LL +
-   |
+ on line 10, column 1
 
 warning: unused extern crate
-  --> $DIR/removing-extern-crate-malformed-cfg.rs:14:5
-   |
-LL |     extern crate remove_extern_crate as foo;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ unused
-   |
+ at $DIR/removing-extern-crate-malformed-cfg.rs:14:5: unused
 help: remove the unused `extern crate`
-   |
-LL -     #[cfg_attr(test)]
-LL -     extern crate remove_extern_crate as foo;
-LL +
-   |
+ on line 13, column 4
 
 warning: unused extern crate
-  --> $DIR/removing-extern-crate-malformed-cfg.rs:15:5
-   |
-LL |     extern crate core;
-   |     ^^^^^^^^^^^^^^^^^^ unused
-   |
+ at $DIR/removing-extern-crate-malformed-cfg.rs:15:5: unused
 help: remove the unused `extern crate`
-   |
-LL -     extern crate core;
-LL +
-   |
+ on line 15, column 4
 
 error: aborting due to 2 previous errors; 4 warnings emitted
 

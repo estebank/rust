@@ -1,8 +1,5 @@
-error[E0425]: cannot find value `ferris` in this scope
-  --> $DIR/remap-path-prefix.rs:15:5
-   |
-LL |     ferris
-   |     ^^^^^^ not found in this scope
+error E0425: cannot find value `ferris` in this scope
+ at $DIR/remap-path-prefix.rs:15:5: not found in this scope
 
 error: aborting due to 1 previous error
 

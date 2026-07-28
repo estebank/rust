@@ -1,14 +1,7 @@
 error: expected one of `#`, `async`, `auto`, `const`, `default`, `enum`, `extern`, `final`, `fn`, `gen`, `impl`, `macro_rules`, `macro`, `mod`, `pub`, `safe`, `static`, `struct`, `trait`, `type`, `unsafe`, or `use`, found `puB`
-  --> $DIR/pub-fn.rs:1:1
-   |
-LL | puB fn code() {}
-   | ^^^ expected one of 22 possible tokens
-   |
+ at $DIR/pub-fn.rs:1:1: expected one of 22 possible tokens
 help: write keyword `pub` in lowercase
-   |
-LL - puB fn code() {}
-LL + pub fn code() {}
-   |
+ on line 1, column 1, replace with `pub`
 
 error: aborting due to 1 previous error
 

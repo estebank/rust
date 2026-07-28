@@ -1,19 +1,10 @@
-error[E0282]: type annotations needed
-  --> $DIR/empty-array.rs:2:25
-   |
-LL |     const EMPTY_ARRAY = [];
-   |                         ^^ cannot infer type
+error E0282: type annotations needed
+ at $DIR/empty-array.rs:2:25: cannot infer type
 
 error: missing type for `const` item
-  --> $DIR/empty-array.rs:2:22
-   |
-LL |     const EMPTY_ARRAY = [];
-   |                      ^
-   |
+ at $DIR/empty-array.rs:2:22
 help: provide a type for the item
-   |
-LL |     const EMPTY_ARRAY: <type> = [];
-   |                      ++++++++
+ on line 2, column 21, add `: <type>`
 
 error: aborting due to 2 previous errors
 

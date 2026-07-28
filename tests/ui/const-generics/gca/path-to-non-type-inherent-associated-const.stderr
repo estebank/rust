@@ -1,24 +1,12 @@
 error: use of `const` in the type system not defined as `type const`
-  --> $DIR/path-to-non-type-inherent-associated-const.rs:27:24
-   |
-LL |     let _ = Struct::<{ StructImpl::INHERENT }>;
-   |                        ^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/path-to-non-type-inherent-associated-const.rs:27:24
 help: add `type` before `const` for `StructImpl::INHERENT`
-   |
-LL |     type const INHERENT: usize = 1;
-   |     ++++
+ on line 17, column 4, add `type `
 
 error: use of `const` in the type system not defined as `type const`
-  --> $DIR/path-to-non-type-inherent-associated-const.rs:29:24
-   |
-LL |     let _ = Struct::<{ GenericStructImpl::<2>::INHERENT }>;
-   |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/path-to-non-type-inherent-associated-const.rs:29:24
 help: add `type` before `const` for `GenericStructImpl::<A>::INHERENT`
-   |
-LL |     type const INHERENT: usize = A;
-   |     ++++
+ on line 21, column 4, add `type `
 
 error: aborting due to 2 previous errors
 

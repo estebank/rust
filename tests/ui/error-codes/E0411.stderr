@@ -1,10 +1,6 @@
-error[E0411]: cannot find type `Self` in this scope
-  --> $DIR/E0411.rs:2:6
-   |
-LL | fn main() {
-   |    ---- `Self` not allowed in a function
-LL |     <Self>::foo;
-   |      ^^^^ `Self` is only available in impls, traits, and type definitions
+error E0411: cannot find type `Self` in this scope
+ at $DIR/E0411.rs:2:6: `Self` is only available in impls, traits, and type definitions
+  on line 1, column 4: `Self` not allowed in a function
 
 error: aborting due to 1 previous error
 

@@ -1,18 +1,9 @@
 Future incompatibility report: Future breakage diagnostic:
 warning: this function depends on never type fallback being `()`
-  --> $DIR/fallback-closure-ret.rs:21:1
-   |
-LL | fn main() {
-   | ^^^^^^^^^
-   |
-   = help: specify the types explicitly
+ at $DIR/fallback-closure-ret.rs:21:1
+help: specify the types explicitly
 note: in edition 2024, the requirement `!: Bar` will fail
-  --> $DIR/fallback-closure-ret.rs:22:5
-   |
-LL |     foo(|| panic!());
-   |     ^^^^^^^^^^^^^^^^
+ at $DIR/fallback-closure-ret.rs:22:5
 help: use `()` annotations to avoid fallback changes
-   |
-LL |     foo::<()>(|| panic!());
-   |        ++++++
+ on line 22, column 7, add `::<()>`
 

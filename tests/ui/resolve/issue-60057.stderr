@@ -1,22 +1,11 @@
-error[E0425]: cannot find value `banana` in this scope
-  --> $DIR/issue-60057.rs:8:21
-   |
-LL |     banana: u8,
-   |     ------ a field by that name exists in `Self`
-...
-LL |             banana: banana
-   |                     ^^^^^^
+error E0425: cannot find value `banana` in this scope
+ at $DIR/issue-60057.rs:8:21
+  on line 2: a field by that name exists in `Self`
 
-error[E0425]: cannot find value `banana` in this scope
-  --> $DIR/issue-60057.rs:14:21
-   |
-LL |             banana: banana
-   |                     ^^^^^^
-   |
+error E0425: cannot find value `banana` in this scope
+ at $DIR/issue-60057.rs:14:21
 help: you might have meant to use the available field
-   |
-LL |             banana: self.banana
-   |                     +++++
+ on line 14, column 20, add `self.`
 
 error: aborting due to 2 previous errors
 

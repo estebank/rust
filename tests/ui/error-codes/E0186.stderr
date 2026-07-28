@@ -1,11 +1,6 @@
-error[E0186]: method `foo` has a `&self` declaration in the trait, but not in the impl
-  --> $DIR/E0186.rs:8:5
-   |
-LL |     fn foo(&self);
-   |     -------------- `&self` used in trait
-...
-LL |     fn foo() {}
-   |     ^^^^^^^^ expected `&self` in impl
+error E0186: method `foo` has a `&self` declaration in the trait, but not in the impl
+ at $DIR/E0186.rs:8:5: expected `&self` in impl
+  on line 2: `&self` used in trait
 
 error: aborting due to 1 previous error
 

@@ -1,13 +1,8 @@
-error[E0603]: module `sys` is private
-  --> $DIR/stability-in-private-module.rs:2:18
-   |
-LL |     let _ = std::sys::io::errno();
-   |                  ^^^      ----- function `errno` is not publicly re-exported
-   |                  |
-   |                  private module
-   |
+error E0603: module `sys` is private
+ at $DIR/stability-in-private-module.rs:2:18: private module
+  on line 2, column 27: function `errno` is not publicly re-exported
 note: the module `sys` is defined here
-  --> $SRC_DIR/std/src/lib.rs:LL:COL
+ at $SRC_DIR/std/src/lib.rs:LL:COL
 
 error: aborting due to 1 previous error
 

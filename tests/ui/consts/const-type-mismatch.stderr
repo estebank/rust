@@ -1,18 +1,10 @@
-error[E0308]: mismatched types
-  --> $DIR/const-type-mismatch.rs:4:21
-   |
-LL | const TWELVE: u16 = TEN + 2;
-   |               ---   ^^^^^^^ expected `u16`, found `u8`
-   |               |
-   |               expected because of the type of the constant
+error E0308: mismatched types
+ at $DIR/const-type-mismatch.rs:4:21: expected `u16`, found `u8`
+  on line 4, column 15: expected because of the type of the constant
 
-error[E0308]: mismatched types
-  --> $DIR/const-type-mismatch.rs:9:27
-   |
-LL |     const ALSO_TEN: u16 = TEN;
-   |                     ---   ^^^ expected `u16`, found `u8`
-   |                     |
-   |                     expected because of the type of the constant
+error E0308: mismatched types
+ at $DIR/const-type-mismatch.rs:9:27: expected `u16`, found `u8`
+  on line 9, column 21: expected because of the type of the constant
 
 error: aborting due to 2 previous errors
 

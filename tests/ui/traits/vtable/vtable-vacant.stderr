@@ -5,10 +5,7 @@ error: vtable entries: [
            Method(<S as A>::foo_a1),
            Vacant,
        ]
-  --> $DIR/vtable-vacant.rs:20:1
-   |
-LL | impl A for S {}
-   | ^^^^^^^^^^^^
+ at $DIR/vtable-vacant.rs:20:1
 
 error: vtable entries: [
            MetadataDropInPlace,
@@ -19,10 +16,7 @@ error: vtable entries: [
            Method(<S as B>::foo_b1),
            Vacant,
        ]
-  --> $DIR/vtable-vacant.rs:24:1
-   |
-LL | impl B for S {}
-   | ^^^^^^^^^^^^
+ at $DIR/vtable-vacant.rs:24:1
 
 error: aborting due to 2 previous errors
 

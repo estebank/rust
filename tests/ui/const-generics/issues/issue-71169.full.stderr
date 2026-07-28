@@ -1,8 +1,5 @@
-error[E0770]: the type of const parameters must not depend on other generic parameters
-  --> $DIR/issue-71169.rs:5:43
-   |
-LL | fn foo<const LEN: usize, const DATA: [u8; LEN]>() {}
-   |                                           ^^^ the type must not depend on the parameter `LEN`
+error E0770: the type of const parameters must not depend on other generic parameters
+ at $DIR/issue-71169.rs:5:43: the type must not depend on the parameter `LEN`
 
 error: aborting due to 1 previous error
 

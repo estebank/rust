@@ -1,21 +1,11 @@
-error[E0061]: this function takes 3 arguments but 2 arguments were supplied
-  --> $DIR/issue-96638.rs:8:5
-   |
-LL |     f(&x, "");
-   |     ^ --  -- expected `usize`, found `&str`
-   |       |
-   |       argument #1 of type `usize` is missing
-   |
+error E0061: this function takes 3 arguments but 2 arguments were supplied
+ at $DIR/issue-96638.rs:8:5
+  on line 8, column 7: argument #1 of type `usize` is missing
+  on line 8, column 11: expected `usize`, found `&str`
 note: function defined here
-  --> $DIR/issue-96638.rs:1:4
-   |
-LL | fn f(_: usize, _: &usize, _: usize) {}
-   |    ^ --------             --------
+ at $DIR/issue-96638.rs:1:4
 help: provide the argument
-   |
-LL -     f(&x, "");
-LL +     f(/* usize */, &x, /* usize */);
-   |
+ on line 8, column 5, replace with `(/* usize */, &x, /* usize */)`
 
 error: aborting due to 1 previous error
 

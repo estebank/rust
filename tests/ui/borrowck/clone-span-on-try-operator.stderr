@@ -1,21 +1,10 @@
-error[E0507]: cannot move out of `*foo` which is behind a shared reference
-  --> $DIR/clone-span-on-try-operator.rs:10:5
-   |
-LL |     (*foo).foo();
-   |     ^^^^^^ ----- `*foo` moved due to this method call
-   |     |
-   |     move occurs because `*foo` has type `Foo`, which does not implement the `Copy` trait
-   |
+error E0507: cannot move out of `*foo` which is behind a shared reference
+ at $DIR/clone-span-on-try-operator.rs:10:5: move occurs because `*foo` has type `Foo`, which does not implement the `Copy` trait
+  on line 10, column 12: `*foo` moved due to this method call
 note: `Foo::foo` takes ownership of the receiver `self`, which moves `*foo`
-  --> $DIR/clone-span-on-try-operator.rs:6:12
-   |
-LL |     fn foo(self) {}
-   |            ^^^^
+ at $DIR/clone-span-on-try-operator.rs:6:12
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL -     (*foo).foo();
-LL +     foo.clone().foo();
-   |
+ on line 10, column 4
 
 error: aborting due to 1 previous error
 

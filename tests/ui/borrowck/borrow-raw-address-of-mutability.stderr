@@ -1,66 +1,31 @@
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/borrow-raw-address-of-mutability.rs:3:13
-   |
-LL |     let y = &raw mut x;
-   |             ^^^^^^^^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/borrow-raw-address-of-mutability.rs:3:13: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     let mut x = 0;
-   |         +++
+ on line 2, column 8, add `mut `
 
-error[E0596]: cannot borrow `x` as mutable, as it is not declared as mutable
-  --> $DIR/borrow-raw-address-of-mutability.rs:9:17
-   |
-LL |         let y = &raw mut x;
-   |                 ^^^^^^^^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `x` as mutable, as it is not declared as mutable
+ at $DIR/borrow-raw-address-of-mutability.rs:9:17: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     let mut x = 0;
-   |         +++
+ on line 7, column 8, add `mut `
 
-error[E0596]: cannot borrow `f` as mutable, as it is not declared as mutable
-  --> $DIR/borrow-raw-address-of-mutability.rs:19:5
-   |
-LL |         let y = &raw mut x;
-   |                          - calling `f` requires mutable binding due to mutable borrow of `x`
-LL |     };
-LL |     f();
-   |     ^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `f` as mutable, as it is not declared as mutable
+ at $DIR/borrow-raw-address-of-mutability.rs:19:5: cannot borrow as mutable
+  on line 17, column 26: calling `f` requires mutable binding due to mutable borrow of `x`
 help: consider changing this to be mutable
-   |
-LL |     let mut f = || {
-   |         +++
+ on line 16, column 8, add `mut `
 
-error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-raw-address-of-mutability.rs:27:17
-   |
-LL | fn make_fn<F: Fn()>(f: F) -> F { f }
-   |                        - change this to accept `FnMut` instead of `Fn`
-...
-LL |     let mut x = 0;
-   |         ----- `x` declared here, outside the closure
-LL |     let f = make_fn(|| {
-   |             ------- -- in this closure
-   |             |
-   |             expects `Fn` instead of `FnMut`
-LL |         let y = &raw mut x;
-   |                 ^^^^^^^^^^ cannot borrow as mutable
+error E0596: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-raw-address-of-mutability.rs:27:17: cannot borrow as mutable
+  on line 22, column 24: change this to accept `FnMut` instead of `Fn`
+  on line 25, column 9: `x` declared here, outside the closure
+  on line 26, column 13: expects `Fn` instead of `FnMut`
+  on line 26, column 21: in this closure
 
-error[E0596]: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
-  --> $DIR/borrow-raw-address-of-mutability.rs:35:17
-   |
-LL | fn make_fn<F: Fn()>(f: F) -> F { f }
-   |                        - change this to accept `FnMut` instead of `Fn`
-...
-LL |     let f = make_fn(move || {
-   |             ------- ------- in this closure
-   |             |
-   |             expects `Fn` instead of `FnMut`
-LL |         let y = &raw mut x;
-   |                 ^^^^^^^^^^ cannot borrow as mutable
+error E0596: cannot borrow `x` as mutable, as it is a captured variable in a `Fn` closure
+ at $DIR/borrow-raw-address-of-mutability.rs:35:17: cannot borrow as mutable
+  on line 22, column 24: change this to accept `FnMut` instead of `Fn`
+  on line 34, column 13: expects `Fn` instead of `FnMut`
+  on line 34, column 21: in this closure
 
 error: aborting due to 5 previous errors
 

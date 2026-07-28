@@ -1,10 +1,6 @@
-error[E0786]: found invalid metadata files for crate `foo`
-  --> $DIR/invalid-rlib.rs:7:7
-   |
-LL | use ::foo;
-   |       ^^^
-   |
-   = note: failed to mmap file 'auxiliary/libfoo.rlib'
+error E0786: found invalid metadata files for crate `foo`
+ at $DIR/invalid-rlib.rs:7:7
+note: failed to mmap file 'auxiliary/libfoo.rlib'
 
 error: aborting due to 1 previous error
 

@@ -1,10 +1,6 @@
 warning: skipping const checks
-   |
 help: skipping check that does not even have a feature gate
-  --> $DIR/const_fn_ptr_fail.rs:9:5
-   |
-LL |     X(x) // FIXME: this should error someday
-   |     ^^^^
+ at $DIR/const_fn_ptr_fail.rs:9:5
 
 warning: 1 warning emitted
 

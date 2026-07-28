@@ -1,35 +1,17 @@
-error[E0596]: cannot borrow `f.v` as mutable, as `f` is not declared as mutable
-  --> $DIR/issue-35937.rs:7:5
-   |
-LL |     f.v.push("cat".to_string());
-   |     ^^^ cannot borrow as mutable
-   |
+error E0596: cannot borrow `f.v` as mutable, as `f` is not declared as mutable
+ at $DIR/issue-35937.rs:7:5: cannot borrow as mutable
 help: consider changing this to be mutable
-   |
-LL |     let mut f = Foo { v: Vec::new() };
-   |         +++
+ on line 6, column 8, add `mut `
 
-error[E0594]: cannot assign to `s.x`, as `s` is not declared as mutable
-  --> $DIR/issue-35937.rs:16:5
-   |
-LL |     s.x += 1;
-   |     ^^^^^^^^ cannot assign
-   |
+error E0594: cannot assign to `s.x`, as `s` is not declared as mutable
+ at $DIR/issue-35937.rs:16:5: cannot assign
 help: consider changing this to be mutable
-   |
-LL |     let mut s = S { x: 42 };
-   |         +++
+ on line 15, column 8, add `mut `
 
-error[E0594]: cannot assign to `s.x`, as `s` is not declared as mutable
-  --> $DIR/issue-35937.rs:20:5
-   |
-LL |     s.x += 1;
-   |     ^^^^^^^^ cannot assign
-   |
+error E0594: cannot assign to `s.x`, as `s` is not declared as mutable
+ at $DIR/issue-35937.rs:20:5: cannot assign
 help: consider changing this to be mutable
-   |
-LL | fn bar(mut s: S) {
-   |        +++
+ on line 19, column 7, add `mut `
 
 error: aborting due to 3 previous errors
 

@@ -1,87 +1,50 @@
 error: expected one of `!`, `.`, `::`, `;`, `?`, `const`, `else`, `mut`, `{`, or an operator, found `1`
-  --> $DIR/raw-no-const-mut.rs:2:18
-   |
-LL |     let x = &raw 1;
-   |                  ^ expected one of 10 possible tokens
-   |
+ at $DIR/raw-no-const-mut.rs:2:18: expected one of 10 possible tokens
 help: `&raw` must be followed by `const` or `mut` to be a raw reference expression
-   |
-LL |     let x = &raw const 1;
-   |                  +++++
-LL |     let x = &raw mut 1;
-   |                  +++
+ on line 2, column 16, add one of
+   const
+   mut
+
 
 error: expected one of `!`, `,`, `.`, `::`, `?`, `]`, `const`, `mut`, `{`, or an operator, found `2`
-  --> $DIR/raw-no-const-mut.rs:7:25
-   |
-LL |     [&raw const 1, &raw 2]
-   |                         ^ expected one of 10 possible tokens
-   |
+ at $DIR/raw-no-const-mut.rs:7:25: expected one of 10 possible tokens
 help: `&raw` must be followed by `const` or `mut` to be a raw reference expression
-   |
-LL |     [&raw const 1, &raw const 2]
-   |                         +++++
-LL |     [&raw const 1, &raw mut 2]
-   |                         +++
+ on line 7, column 23, add one of
+   const
+   mut
+
 
 error: expected `{`, found `z`
-  --> $DIR/raw-no-const-mut.rs:12:18
-   |
-LL |     if x == &raw z {}
-   |                  ^ expected `{`
-   |
+ at $DIR/raw-no-const-mut.rs:12:18: expected `{`
 note: the `if` expression is missing a block after this condition
-  --> $DIR/raw-no-const-mut.rs:12:8
-   |
-LL |     if x == &raw z {}
-   |        ^^^^^^^^^
+ at $DIR/raw-no-const-mut.rs:12:8
 help: `&raw` must be followed by `const` or `mut` to be a raw reference expression
-   |
-LL |     if x == &raw const z {}
-   |                  +++++
-LL |     if x == &raw mut z {}
-   |                  +++
+ on line 12, column 16, add one of
+   const
+   mut
+
 
 error: expected one of `!`, `)`, `,`, `.`, `::`, `?`, `const`, `mut`, `{`, or an operator, found `2`
-  --> $DIR/raw-no-const-mut.rs:17:12
-   |
-LL |     f(&raw 2);
-   |            ^ expected one of 10 possible tokens
-   |
+ at $DIR/raw-no-const-mut.rs:17:12: expected one of 10 possible tokens
 help: `&raw` must be followed by `const` or `mut` to be a raw reference expression
-   |
-LL |     f(&raw const 2);
-   |            +++++
-LL |     f(&raw mut 2);
-   |            +++
+ on line 17, column 10, add one of
+   const
+   mut
+
 
 error: expected one of `!`, `.`, `::`, `;`, `?`, `const`, `mut`, `{`, `}`, or an operator, found `1`
-  --> $DIR/raw-no-const-mut.rs:24:14
-   |
-LL |     x = &raw 1;
-   |              ^ expected one of 10 possible tokens
-   |
+ at $DIR/raw-no-const-mut.rs:24:14: expected one of 10 possible tokens
 help: `&raw` must be followed by `const` or `mut` to be a raw reference expression
-   |
-LL |     x = &raw const 1;
-   |              +++++
-LL |     x = &raw mut 1;
-   |              +++
+ on line 24, column 12, add one of
+   const
+   mut
 
-error[E0425]: cannot find function `f` in this scope
-  --> $DIR/raw-no-const-mut.rs:17:5
-   |
-LL | fn a() {
-   | ------ similarly named function `a` defined here
-...
-LL |     f(&raw 2);
-   |     ^
-   |
+
+error E0425: cannot find function `f` in this scope
+ at $DIR/raw-no-const-mut.rs:17:5
+  on line 1: similarly named function `a` defined here
 help: a function with a similar name exists
-   |
-LL -     f(&raw 2);
-LL +     a(&raw 2);
-   |
+ on line 17, column 4, replace with `a`
 
 error: aborting due to 6 previous errors
 

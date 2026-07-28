@@ -1,16 +1,10 @@
-error[E0005]: refutable pattern in local binding
-  --> $DIR/feature-gate-exhaustive-patterns.rs:8:9
-   |
-LL |     let Ok(_x) = &foo();
-   |         ^^^^^^ pattern `&Err(_)` not covered
-   |
-   = note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
-   = note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
-   = note: the matched value is of type `&Result<u32, !>`
+error E0005: refutable pattern in local binding
+ at $DIR/feature-gate-exhaustive-patterns.rs:8:9: pattern `&Err(_)` not covered
+note: `let` bindings require an "irrefutable pattern", like a `struct` or an `enum` with only one variant
+note: for more information, visit https://doc.rust-lang.org/book/ch19-02-refutability.html
+note: the matched value is of type `&Result<u32, !>`
 help: you might want to use `let...else` to handle the variant that isn't matched
-   |
-LL |     let Ok(_x) = &foo() else { todo!() };
-   |                         ++++++++++++++++
+ on line 8, column 23, add ` else { todo!() }`
 
 error: aborting due to 1 previous error
 

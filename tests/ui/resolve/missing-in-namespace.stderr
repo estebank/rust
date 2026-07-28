@@ -1,18 +1,9 @@
-error[E0433]: cannot find `hahmap` in `std`
-  --> $DIR/missing-in-namespace.rs:2:21
-   |
-LL |     let _map = std::hahmap::HashMap::new();
-   |                     ^^^^^^ could not find `hahmap` in `std`
-   |
+error E0433: cannot find `hahmap` in `std`
+ at $DIR/missing-in-namespace.rs:2:21: could not find `hahmap` in `std`
 help: consider importing this struct
-   |
-LL + use std::collections::HashMap;
-   |
+ on line 1, column 1, add `use std::collections::HashMap;`
 help: if you import `HashMap`, refer to it directly
-   |
-LL -     let _map = std::hahmap::HashMap::new();
-LL +     let _map = HashMap::new();
-   |
+ on line 2, column 15
 
 error: aborting due to 1 previous error
 

@@ -1,10 +1,6 @@
-error[E0408]: variable `i` is not bound in all patterns
-  --> $DIR/or-pattern-binding-mismatch.rs:6:7
-   |
-LL |       Foo::Alpha | Foo::Beta(i) => {}
-   |       ^^^^^^^^^^             - variable not in all patterns
-   |       |
-   |       pattern doesn't bind `i`
+error E0408: variable `i` is not bound in all patterns
+ at $DIR/or-pattern-binding-mismatch.rs:6:7: pattern doesn't bind `i`
+  on line 6, column 30: variable not in all patterns
 
 error: aborting due to 1 previous error
 

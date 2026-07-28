@@ -1,15 +1,8 @@
 error: expected identifier, found keyword `fn`
-  --> $DIR/incomplete-fn-in-struct-definition.rs:4:5
-   |
-LL | struct S {
-   |        - while parsing this struct
-LL |     fn: u8
-   |     ^^ expected identifier, found keyword
-   |
+ at $DIR/incomplete-fn-in-struct-definition.rs:4:5: expected identifier, found keyword
+  on line 3, column 8: while parsing this struct
 help: escape `fn` to use it as an identifier
-   |
-LL |     r#fn: u8
-   |     ++
+ on line 4, column 4, add `r#`
 
 error: aborting due to 1 previous error
 

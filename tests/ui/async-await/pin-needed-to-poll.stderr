@@ -1,17 +1,8 @@
-error[E0599]: no method named `poll` found for struct `Sleep` in the current scope
-  --> $DIR/pin-needed-to-poll.rs:42:20
-   |
-LL | struct Sleep;
-   | ------------ method `poll` not found for this struct
-...
-LL |         self.sleep.poll(cx)
-   |                    ^^^^ method not found in `Sleep`
-   |
+error E0599: no method named `poll` found for struct `Sleep` in the current scope
+ at $DIR/pin-needed-to-poll.rs:42:20: method not found in `Sleep`
+  on line 7: method `poll` not found for this struct
 help: consider pinning the expression
-   |
-LL ~         let mut pinned = std::pin::pin!(self.sleep);
-LL ~         pinned.as_mut().poll(cx)
-   |
+ on line 42, column 8, add `let mut pinned = std::pin::pin!(`
 
 error: aborting due to 1 previous error
 

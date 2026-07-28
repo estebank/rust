@@ -1,14 +1,8 @@
-error[E0284]: type annotations needed
-  --> $DIR/single-type-generic-suggestion.rs:4:8
-   |
-LL |     "".parse();
-   |        ^^^^^ cannot infer type of the type parameter `F` declared on the method `parse`
-   |
-   = note: cannot satisfy `<_ as FromStr>::Err == _`
+error E0284: type annotations needed
+ at $DIR/single-type-generic-suggestion.rs:4:8: cannot infer type of the type parameter `F` declared on the method `parse`
+note: cannot satisfy `<_ as FromStr>::Err == _`
 help: consider specifying a concrete type for the type parameter `F`
-   |
-LL |     "".parse::</* Type */>();
-   |             ++++++++++++++
+ on line 4, column 12, add `::</* Type */>`
 
 error: aborting due to 1 previous error
 

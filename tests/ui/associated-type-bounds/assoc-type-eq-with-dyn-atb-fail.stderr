@@ -1,14 +1,7 @@
 error: associated type bounds are not allowed in `dyn` types
-  --> $DIR/assoc-type-eq-with-dyn-atb-fail.rs:28:28
-   |
-LL |     type Out = Box<dyn Bar<Assoc: Copy>>;
-   |                            ^^^^^^^^^^^
-   |
+ at $DIR/assoc-type-eq-with-dyn-atb-fail.rs:28:28
 help: use `impl Trait` to introduce a type instead
-   |
-LL -     type Out = Box<dyn Bar<Assoc: Copy>>;
-LL +     type Out = Box<dyn Bar<Assoc = impl Copy>>;
-   |
+ on line 28, column 32, replace with ` = impl`
 
 error: aborting due to 1 previous error
 

@@ -1,44 +1,20 @@
-error[E0565]: malformed `marker` attribute input
-  --> $DIR/marker-attribute-with-values.rs:3:3
-   |
-LL | #[marker(always)]
-   |   ^^^^^^--------
-   |         |
-   |         didn't expect any arguments here
-   |
+error E0565: malformed `marker` attribute input
+ at $DIR/marker-attribute-with-values.rs:3:3
+  on line 3, column 9: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[marker(always)]
-LL + #[marker]
-   |
+ on line 3, column 2, replace with `marker`
 
-error[E0565]: malformed `marker` attribute input
-  --> $DIR/marker-attribute-with-values.rs:6:3
-   |
-LL | #[marker("never")]
-   |   ^^^^^^---------
-   |         |
-   |         didn't expect any arguments here
-   |
+error E0565: malformed `marker` attribute input
+ at $DIR/marker-attribute-with-values.rs:6:3
+  on line 6, column 9: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[marker("never")]
-LL + #[marker]
-   |
+ on line 6, column 2, replace with `marker`
 
-error[E0565]: malformed `marker` attribute input
-  --> $DIR/marker-attribute-with-values.rs:9:3
-   |
-LL | #[marker(key = "value")]
-   |   ^^^^^^---------------
-   |         |
-   |         didn't expect any arguments here
-   |
+error E0565: malformed `marker` attribute input
+ at $DIR/marker-attribute-with-values.rs:9:3
+  on line 9, column 9: didn't expect any arguments here
 help: must be of the form
-   |
-LL - #[marker(key = "value")]
-LL + #[marker]
-   |
+ on line 9, column 2, replace with `marker`
 
 error: aborting due to 3 previous errors
 

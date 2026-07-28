@@ -1,15 +1,9 @@
-error[E0369]: cannot calculate the remainder of `&&{integer}` divided by `{integer}`
-  --> $DIR/binary-op-on-double-ref.rs:5:11
-   |
-LL |         x % 2 == 0
-   |         - ^ - {integer}
-   |         |
-   |         &&{integer}
-   |
+error E0369: cannot calculate the remainder of `&&{integer}` divided by `{integer}`
+ at $DIR/binary-op-on-double-ref.rs:5:11
+  on line 5: &&{integer}
+  on line 5, column 13: {integer}
 help: `%` can be used on `&{integer}` if you dereference the left-hand side
-   |
-LL |         *x % 2 == 0
-   |         +
+ on line 5, column 8, add `*`
 
 error: aborting due to 1 previous error
 

@@ -1,76 +1,40 @@
-error[E0666]: nested `impl Trait` is not allowed
-  --> $DIR/nested_impl_trait.rs:6:56
-   |
-LL | fn bad_in_ret_position(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                              ----------^^^^^^^^^^-
-   |                                              |         |
-   |                                              |         nested `impl Trait` here
-   |                                              outer `impl Trait`
+error E0666: nested `impl Trait` is not allowed
+ at $DIR/nested_impl_trait.rs:6:56: nested `impl Trait` here
+  on line 6, column 46: outer `impl Trait`
 
-error[E0666]: nested `impl Trait` is not allowed
-  --> $DIR/nested_impl_trait.rs:10:42
-   |
-LL | fn bad_in_fn_syntax(x: fn() -> impl Into<impl Debug>) {}
-   |                                ----------^^^^^^^^^^-
-   |                                |         |
-   |                                |         nested `impl Trait` here
-   |                                outer `impl Trait`
+error E0666: nested `impl Trait` is not allowed
+ at $DIR/nested_impl_trait.rs:10:42: nested `impl Trait` here
+  on line 10, column 32: outer `impl Trait`
 
-error[E0666]: nested `impl Trait` is not allowed
-  --> $DIR/nested_impl_trait.rs:14:37
-   |
-LL | fn bad_in_arg_position(_: impl Into<impl Debug>) { }
-   |                           ----------^^^^^^^^^^-
-   |                           |         |
-   |                           |         nested `impl Trait` here
-   |                           outer `impl Trait`
+error E0666: nested `impl Trait` is not allowed
+ at $DIR/nested_impl_trait.rs:14:37: nested `impl Trait` here
+  on line 14, column 27: outer `impl Trait`
 
-error[E0666]: nested `impl Trait` is not allowed
-  --> $DIR/nested_impl_trait.rs:19:44
-   |
-LL |     fn bad(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                  ----------^^^^^^^^^^-
-   |                                  |         |
-   |                                  |         nested `impl Trait` here
-   |                                  outer `impl Trait`
+error E0666: nested `impl Trait` is not allowed
+ at $DIR/nested_impl_trait.rs:19:44: nested `impl Trait` here
+  on line 19, column 34: outer `impl Trait`
 
-error[E0562]: `impl Trait` is not allowed in `fn` pointer return types
-  --> $DIR/nested_impl_trait.rs:10:32
-   |
-LL | fn bad_in_fn_syntax(x: fn() -> impl Into<impl Debug>) {}
-   |                                ^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: `impl Trait` is only allowed in arguments and return types of functions and methods
+error E0562: `impl Trait` is not allowed in `fn` pointer return types
+ at $DIR/nested_impl_trait.rs:10:32
+note: `impl Trait` is only allowed in arguments and return types of functions and methods
 
-error[E0277]: the trait bound `impl Debug: From<impl Into<u32>>` is not satisfied
-  --> $DIR/nested_impl_trait.rs:6:46
-   |
-LL | fn bad_in_ret_position(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                              ^^^^^^^^^^^^^^^^^^^^^   - return type was inferred to be `impl Into<u32>` here
-   |                                              |
-   |                                              the trait `From<impl Into<u32>>` is not implemented for `impl Debug`
-   |
+error E0277: the trait bound `impl Debug: From<impl Into<u32>>` is not satisfied
+ at $DIR/nested_impl_trait.rs:6:46: the trait `From<impl Into<u32>>` is not implemented for `impl Debug`
+  on line 6, column 70: return type was inferred to be `impl Into<u32>` here
 help: the trait `Into<U>` is conditionally implemented for `T`
-  --> $SRC_DIR/core/src/convert/mod.rs:LL:COL
-  ::: $SRC_DIR/core/src/convert/mod.rs:LL:COL
-   |
-   = note: unsatisfied requirement introduced here: `impl Debug: From<impl Into<u32>>`
-   = note: required for `impl Into<u32>` to implement `Into<impl Debug>`
+ at $SRC_DIR/core/src/convert/mod.rs:LL:COL
+ at $SRC_DIR/core/src/convert/mod.rs:LL:COL
+note: unsatisfied requirement introduced here: `impl Debug: From<impl Into<u32>>`
+note: required for `impl Into<u32>` to implement `Into<impl Debug>`
 
-error[E0277]: the trait bound `impl Debug: From<impl Into<u32>>` is not satisfied
-  --> $DIR/nested_impl_trait.rs:19:34
-   |
-LL |     fn bad(x: impl Into<u32>) -> impl Into<impl Debug> { x }
-   |                                  ^^^^^^^^^^^^^^^^^^^^^   - return type was inferred to be `impl Into<u32>` here
-   |                                  |
-   |                                  the trait `From<impl Into<u32>>` is not implemented for `impl Debug`
-   |
+error E0277: the trait bound `impl Debug: From<impl Into<u32>>` is not satisfied
+ at $DIR/nested_impl_trait.rs:19:34: the trait `From<impl Into<u32>>` is not implemented for `impl Debug`
+  on line 19, column 58: return type was inferred to be `impl Into<u32>` here
 help: the trait `Into<U>` is conditionally implemented for `T`
-  --> $SRC_DIR/core/src/convert/mod.rs:LL:COL
-  ::: $SRC_DIR/core/src/convert/mod.rs:LL:COL
-   |
-   = note: unsatisfied requirement introduced here: `impl Debug: From<impl Into<u32>>`
-   = note: required for `impl Into<u32>` to implement `Into<impl Debug>`
+ at $SRC_DIR/core/src/convert/mod.rs:LL:COL
+ at $SRC_DIR/core/src/convert/mod.rs:LL:COL
+note: unsatisfied requirement introduced here: `impl Debug: From<impl Into<u32>>`
+note: required for `impl Into<u32>` to implement `Into<impl Debug>`
 
 error: aborting due to 7 previous errors
 

@@ -1,120 +1,47 @@
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:5:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |         1i32
-   | |         ---- expected because of this
-LL | |     } else {
-LL | |         2u32
-   | |         ^^^^ expected `i32`, found `u32`
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:5:9: expected `i32`, found `u32`
+  on line 2, column 13 to line 6, column 6: `if` and `else` have incompatible types
+  on line 3: expected because of this
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -         2u32
-LL +         2i32
-   |
+ on line 5, column 9, replace with `i32`
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:8:38
-   |
-LL |     let _ = if true { 42i32 } else { 42u32 };
-   |                       -----          ^^^^^ expected `i32`, found `u32`
-   |                       |
-   |                       expected because of this
-   |
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:8:38: expected `i32`, found `u32`
+  on line 8, column 23: expected because of this
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -     let _ = if true { 42i32 } else { 42u32 };
-LL +     let _ = if true { 42i32 } else { 42i32 };
-   |
+ on line 8, column 39, replace with `i32`
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:13:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |         3u32;
-   | |         -----
-   | |         |   |
-   | |         |   help: consider removing this semicolon
-   | |         expected because of this
-LL | |     } else {
-LL | |         4u32
-   | |         ^^^^ expected `()`, found `u32`
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:13:9: expected `()`, found `u32`
+  on line 10, column 13 to line 14, column 6: `if` and `else` have incompatible types
+  on line 11: expected because of this
+  on line 11, column 13: help: consider removing this semicolon
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:19:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |         5u32
-   | |         ---- expected because of this
-LL | |     } else {
-LL | |         6u32;
-   | |         ^^^^-
-   | |         |   |
-   | |         |   help: consider removing this semicolon
-   | |         expected `u32`, found `()`
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:19:9: expected `u32`, found `()`
+  on line 16, column 13 to line 20, column 6: `if` and `else` have incompatible types
+  on line 17: expected because of this
+  on line 19, column 13: help: consider removing this semicolon
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:25:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |         7i32;
-   | |         ----- expected because of this
-LL | |     } else {
-LL | |         8u32
-   | |         ^^^^ expected `()`, found `u32`
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:25:9: expected `()`, found `u32`
+  on line 22, column 13 to line 26, column 6: `if` and `else` have incompatible types
+  on line 23: expected because of this
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:31:9
-   |
-LL |       let _ = if true {
-   |  _____________-
-LL | |         9i32
-   | |         ---- expected because of this
-LL | |     } else {
-LL | |         10u32;
-   | |         ^^^^^^ expected `i32`, found `()`
-LL | |     };
-   | |_____- `if` and `else` have incompatible types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:31:9: expected `i32`, found `()`
+  on line 28, column 13 to line 32, column 6: `if` and `else` have incompatible types
+  on line 29: expected because of this
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:37:9
-   |
-LL |        let _ = if true {
-   |  ______________-       -
-   | | _____________________|
-LL | ||
-LL | ||     } else {
-   | ||_____- expected because of this
-LL | |          11u32
-   | |          ^^^^^ expected `()`, found `u32`
-LL | |      };
-   | |______- `if` and `else` have incompatible types
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:37:9: expected `()`, found `u32`
+  on line 34, column 13 to line 38, column 6: `if` and `else` have incompatible types
+  on line 34, column 21 to line 36, column 6: expected because of this
 
-error[E0308]: `if` and `else` have incompatible types
-  --> $DIR/if-else-type-mismatch.rs:42:12
-   |
-LL |       let _ = if true {
-   |               ------- `if` and `else` have incompatible types
-LL |           12i32
-   |           ----- expected because of this
-LL |       } else {
-   |  ____________^
-LL | |
-LL | |     };
-   | |_____^ expected `i32`, found `()`
+error E0308: `if` and `else` have incompatible types
+ at $DIR/if-else-type-mismatch.rs:42:12 to 44:6: expected `i32`, found `()`
+  on line 40, column 13: `if` and `else` have incompatible types
+  on line 41: expected because of this
 
 error: aborting due to 8 previous errors
 

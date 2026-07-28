@@ -1,18 +1,9 @@
 error: missing `fn` or `struct` for function or struct definition
-  --> $DIR/extern-no-fn.rs:2:5
-   |
-LL | extern "C" {
-   |            - while parsing this item list starting here
-LL |     f();
-   |     ^
-...
-LL | }
-   | - the item list ends here
-   |
+ at $DIR/extern-no-fn.rs:2:5
+  on line 1, column 12: while parsing this item list starting here
+  on line 5: the item list ends here
 help: if you meant to call a macro, try
-   |
-LL |     f!();
-   |      +
+ on line 2, column 4, replace with `f!`
 
 error: aborting due to 1 previous error
 

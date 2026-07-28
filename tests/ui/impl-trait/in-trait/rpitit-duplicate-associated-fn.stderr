@@ -1,82 +1,36 @@
-error[E0428]: the name `method` is defined multiple times
-  --> $DIR/rpitit-duplicate-associated-fn.rs:5:5
-   |
-LL |     fn method() -> impl Sized;
-   |     -------------------------- previous definition of the value `method` here
-LL |     fn method() -> impl Sized;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^ `method` redefined here
-   |
-   = note: `method` must be defined only once in the value namespace of this trait
+error E0428: the name `method` is defined multiple times
+ at $DIR/rpitit-duplicate-associated-fn.rs:5:5: `method` redefined here
+  on line 4: previous definition of the value `method` here
+note: `method` must be defined only once in the value namespace of this trait
 
-error[E0428]: the name `foo` is defined multiple times
-  --> $DIR/rpitit-duplicate-associated-fn.rs:32:5
-   |
-LL |     fn foo();
-   |     --------- previous definition of the value `foo` here
-LL |     fn foo() -> impl Sized;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^ `foo` redefined here
-   |
-   = note: `foo` must be defined only once in the value namespace of this trait
+error E0428: the name `foo` is defined multiple times
+ at $DIR/rpitit-duplicate-associated-fn.rs:32:5: `foo` redefined here
+  on line 31: previous definition of the value `foo` here
+note: `foo` must be defined only once in the value namespace of this trait
 
-error[E0428]: the name `foo` is defined multiple times
-  --> $DIR/rpitit-duplicate-associated-fn.rs:37:5
-   |
-LL |     fn foo() -> impl Sized;
-   |     ----------------------- previous definition of the value `foo` here
-LL |     fn foo();
-   |     ^^^^^^^^^ `foo` redefined here
-   |
-   = note: `foo` must be defined only once in the value namespace of this trait
+error E0428: the name `foo` is defined multiple times
+ at $DIR/rpitit-duplicate-associated-fn.rs:37:5: `foo` redefined here
+  on line 36: previous definition of the value `foo` here
+note: `foo` must be defined only once in the value namespace of this trait
 
-error[E0428]: the name `foo` is defined multiple times
-  --> $DIR/rpitit-duplicate-associated-fn.rs:38:5
-   |
-LL |     fn foo() -> impl Sized;
-   |     ----------------------- previous definition of the value `foo` here
-LL |     fn foo();
-LL |     fn foo() -> impl Sized;
-   |     ^^^^^^^^^^^^^^^^^^^^^^^ `foo` redefined here
-   |
-   = note: `foo` must be defined only once in the value namespace of this trait
+error E0428: the name `foo` is defined multiple times
+ at $DIR/rpitit-duplicate-associated-fn.rs:38:5: `foo` redefined here
+  on line 36: previous definition of the value `foo` here
+note: `foo` must be defined only once in the value namespace of this trait
 
-error[E0201]: duplicate definitions with name `method`:
-  --> $DIR/rpitit-duplicate-associated-fn.rs:12:5
-   |
-LL |       fn method() -> impl Sized;
-   |       -------------------------- item in trait
-...
-LL | /     fn method() -> impl Sized {
-LL | |         42
-LL | |     }
-   | |_____- previous definition here
-LL | /     fn method() -> impl Sized {
-LL | |         42
-LL | |     }
-   | |_____^ duplicate definition
+error E0201: duplicate definitions with name `method`:
+ at $DIR/rpitit-duplicate-associated-fn.rs:12:5 to 14:6: duplicate definition
+  on line 4: item in trait
+  on line 9 to line 11: previous definition here
 
-error[E0201]: duplicate definitions with name `method`:
-  --> $DIR/rpitit-duplicate-associated-fn.rs:25:5
-   |
-LL |       fn method() -> impl Sized;
-   |       -------------------------- item in trait
-...
-LL | /     fn method() -> impl Sized {
-LL | |         42
-LL | |     }
-   | |_____- previous definition here
-LL | /     fn method() -> impl Sized {
-LL | |         42
-LL | |     }
-   | |_____^ duplicate definition
+error E0201: duplicate definitions with name `method`:
+ at $DIR/rpitit-duplicate-associated-fn.rs:25:5 to 27:6: duplicate definition
+  on line 18: item in trait
+  on line 22 to line 24: previous definition here
 
-error[E0046]: not all trait items implemented, missing: `method`
-  --> $DIR/rpitit-duplicate-associated-fn.rs:8:1
-   |
-LL |     fn method() -> impl Sized;
-   |     -------------------------- `method` from trait
-...
-LL | impl Bar for () {
-   | ^^^^^^^^^^^^^^^ missing `method` in implementation
+error E0046: not all trait items implemented, missing: `method`
+ at $DIR/rpitit-duplicate-associated-fn.rs:8:1: missing `method` in implementation
+  on line 5: `method` from trait
 
 error: aborting due to 7 previous errors
 

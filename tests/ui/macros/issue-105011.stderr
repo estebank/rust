@@ -1,8 +1,5 @@
 error: suffixes on string literals are invalid
-  --> $DIR/issue-105011.rs:2:14
-   |
-LL |     println!(""y);
-   |              ^^^ invalid suffix `y`
+ at $DIR/issue-105011.rs:2:14: invalid suffix `y`
 
 error: aborting due to 1 previous error
 

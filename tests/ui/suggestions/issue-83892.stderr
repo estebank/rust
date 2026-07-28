@@ -1,13 +1,7 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-83892.rs:9:15
-   |
-LL | fn main() {
-   |          - expected `()` because of default return type
-LL |     match () {
-LL |         () => func()
-   |               ^^^^^^ expected `()`, found `u8`
-LL |     }
-   |      - help: consider using a semicolon here: `;`
+error E0308: mismatched types
+ at $DIR/issue-83892.rs:9:15: expected `()`, found `u8`
+  on line 7, column 10: expected `()` because of default return type
+  on line 10, column 6: help: consider using a semicolon here: `;`
 
 error: aborting due to 1 previous error
 

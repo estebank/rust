@@ -1,36 +1,18 @@
-error[E0308]: mismatched types
-  --> $DIR/size_of-dyn-trait-2.rs:14:11
-   |
-LL | fn foo(x: A<dyn Send>) {}
-   |           ^^^^^^^^^^^ expected `8`, found `{ std::mem::size_of::<T>() }`
-   |
-   = note: expected constant `8`
-              found constant `{ std::mem::size_of::<T>() }`
+error E0308: mismatched types
+ at $DIR/size_of-dyn-trait-2.rs:14:11: expected `8`, found `{ std::mem::size_of::<T>() }`
+note: expected constant `8`
+         found constant `{ std::mem::size_of::<T>() }`
 note: required by a bound in `A`
-  --> $DIR/size_of-dyn-trait-2.rs:10:13
-   |
-LL | struct A<T: Size<8> + ?Sized> {
-   |             ^^^^^^^ required by this bound in `A`
+ at $DIR/size_of-dyn-trait-2.rs:10:13: required by this bound in `A`
 
-error[E0277]: the size for values of type `(dyn Send + 'static)` cannot be known at compilation time
-  --> $DIR/size_of-dyn-trait-2.rs:14:11
-   |
-LL | fn foo(x: A<dyn Send>) {}
-   |           ^^^^^^^^^^^ doesn't have a size known at compile-time
-   |
-   = help: the trait `Sized` is not implemented for `(dyn Send + 'static)`
+error E0277: the size for values of type `(dyn Send + 'static)` cannot be known at compilation time
+ at $DIR/size_of-dyn-trait-2.rs:14:11: doesn't have a size known at compile-time
+help: the trait `Sized` is not implemented for `(dyn Send + 'static)`
 note: required for `(dyn Send + 'static)` to implement `Size<8>`
-  --> $DIR/size_of-dyn-trait-2.rs:8:16
-   |
-LL | impl<T: Sized> Size<{ std::mem::size_of::<T>() }> for T {}
-   |         -----  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^     ^
-   |         |
-   |         unsatisfied trait bound introduced here
+ at $DIR/size_of-dyn-trait-2.rs:8:16
+  on line 8, column 9: unsatisfied trait bound introduced here
 note: required by a bound in `A`
-  --> $DIR/size_of-dyn-trait-2.rs:10:13
-   |
-LL | struct A<T: Size<8> + ?Sized> {
-   |             ^^^^^^^ required by this bound in `A`
+ at $DIR/size_of-dyn-trait-2.rs:10:13: required by this bound in `A`
 
 error: aborting due to 2 previous errors
 

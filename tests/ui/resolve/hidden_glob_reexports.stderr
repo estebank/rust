@@ -1,54 +1,24 @@
 warning: private item shadows public glob re-export
-  --> $DIR/hidden_glob_reexports.rs:9:5
-   |
-LL |     struct Foo;
-   |     ^^^^^^^^^^^
-   |
+ at $DIR/hidden_glob_reexports.rs:9:5
 note: the name `Foo` in the type namespace is supposed to be publicly re-exported here
-  --> $DIR/hidden_glob_reexports.rs:12:13
-   |
-LL |     pub use self::inner::*;
-   |             ^^^^^^^^^^^^^^
+ at $DIR/hidden_glob_reexports.rs:12:13
 note: but the private item here shadows it
-  --> $DIR/hidden_glob_reexports.rs:9:5
-   |
-LL |     struct Foo;
-   |     ^^^^^^^^^^^
-   = note: `#[warn(hidden_glob_reexports)]` on by default
+ at $DIR/hidden_glob_reexports.rs:9:5
+note: `#[warn(hidden_glob_reexports)]` on by default
 
 warning: private item shadows public glob re-export
-  --> $DIR/hidden_glob_reexports.rs:27:9
-   |
-LL |     use self::other::Foo;
-   |         ^^^^^^^^^^^^^^^^
-   |
+ at $DIR/hidden_glob_reexports.rs:27:9
 note: the name `Foo` in the type namespace is supposed to be publicly re-exported here
-  --> $DIR/hidden_glob_reexports.rs:25:13
-   |
-LL |     pub use self::inner::*;
-   |             ^^^^^^^^^^^^^^
+ at $DIR/hidden_glob_reexports.rs:25:13
 note: but the private item here shadows it
-  --> $DIR/hidden_glob_reexports.rs:27:9
-   |
-LL |     use self::other::Foo;
-   |         ^^^^^^^^^^^^^^^^
+ at $DIR/hidden_glob_reexports.rs:27:9
 
 warning: private item shadows public glob re-export
-  --> $DIR/hidden_glob_reexports.rs:40:9
-   |
-LL |     use std::primitive::u8;
-   |         ^^^^^^^^^^^^^^^^^^
-   |
+ at $DIR/hidden_glob_reexports.rs:40:9
 note: the name `u8` in the type namespace is supposed to be publicly re-exported here
-  --> $DIR/hidden_glob_reexports.rs:38:13
-   |
-LL |     pub use self::no_def_id::*;
-   |             ^^^^^^^^^^^^^^^^^^
+ at $DIR/hidden_glob_reexports.rs:38:13
 note: but the private item here shadows it
-  --> $DIR/hidden_glob_reexports.rs:40:9
-   |
-LL |     use std::primitive::u8;
-   |         ^^^^^^^^^^^^^^^^^^
+ at $DIR/hidden_glob_reexports.rs:40:9
 
 warning: 3 warnings emitted
 

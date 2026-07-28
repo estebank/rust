@@ -1,177 +1,56 @@
 error: rustc_dump_def_parents: DefId(..)
-  --> $DIR/dump_def_parents.rs:7:9
-   |
-LL |         fn baz() {
-   |         ^^^^^^^^
-   |
+ at $DIR/dump_def_parents.rs:7:9
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:5:5
-   |
-LL |     fn foo() {
-   |     ^^^^^^^^
+ at $DIR/dump_def_parents.rs:5:5
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:4:1
-   |
-LL | fn bar() {
-   | ^^^^^^^^
+ at $DIR/dump_def_parents.rs:4:1
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:2:1
-   |
-LL | / #![feature(rustc_attrs)]
-LL | |
-LL | | fn bar() {
-LL | |     fn foo() {
-...  |
-LL | | fn main() {}
-   | |____________^
+ at $DIR/dump_def_parents.rs:2:1 to 35:13
 
 error: rustc_dump_def_parents: DefId(..)
-  --> $DIR/dump_def_parents.rs:11:21
-   |
-LL | /                     {
-LL | |
-LL | |                         fn inhibits_dump() {
-LL | |                             qux::<
-...  |
-LL | |                         1
-LL | |                     },
-   | |_____________________^
-   |
+ at $DIR/dump_def_parents.rs:11:21 to 26:22
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:9:13
-   |
-LL |             || {
-   |             ^^
+ at $DIR/dump_def_parents.rs:9:13
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:7:9
-   |
-LL |         fn baz() {
-   |         ^^^^^^^^
+ at $DIR/dump_def_parents.rs:7:9
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:5:5
-   |
-LL |     fn foo() {
-   |     ^^^^^^^^
+ at $DIR/dump_def_parents.rs:5:5
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:4:1
-   |
-LL | fn bar() {
-   | ^^^^^^^^
+ at $DIR/dump_def_parents.rs:4:1
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:2:1
-   |
-LL | / #![feature(rustc_attrs)]
-LL | |
-LL | | fn bar() {
-LL | |     fn foo() {
-...  |
-LL | | fn main() {}
-   | |____________^
+ at $DIR/dump_def_parents.rs:2:1 to 35:13
 
 error: rustc_dump_def_parents: DefId(..)
-  --> $DIR/dump_def_parents.rs:15:33
-   |
-LL | / ...                   {
-LL | | ...
-LL | | ...                       "hi";
-LL | | ...                       1
-LL | | ...                   },
-   | |_______________________^
-   |
+ at $DIR/dump_def_parents.rs:15:33 to 19:34
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:13:25
-   |
-LL |                         fn inhibits_dump() {
-   |                         ^^^^^^^^^^^^^^^^^^
+ at $DIR/dump_def_parents.rs:13:25
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:11:21
-   |
-LL | /                     {
-LL | |
-LL | |                         fn inhibits_dump() {
-LL | |                             qux::<
-...  |
-LL | |                         1
-LL | |                     },
-   | |_____________________^
+ at $DIR/dump_def_parents.rs:11:21 to 26:22
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:9:13
-   |
-LL |             || {
-   |             ^^
+ at $DIR/dump_def_parents.rs:9:13
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:7:9
-   |
-LL |         fn baz() {
-   |         ^^^^^^^^
+ at $DIR/dump_def_parents.rs:7:9
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:5:5
-   |
-LL |     fn foo() {
-   |     ^^^^^^^^
+ at $DIR/dump_def_parents.rs:5:5
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:4:1
-   |
-LL | fn bar() {
-   | ^^^^^^^^
+ at $DIR/dump_def_parents.rs:4:1
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:2:1
-   |
-LL | / #![feature(rustc_attrs)]
-LL | |
-LL | | fn bar() {
-LL | |     fn foo() {
-...  |
-LL | | fn main() {}
-   | |____________^
+ at $DIR/dump_def_parents.rs:2:1 to 35:13
 
 error: rustc_dump_def_parents: DefId(..)
-  --> $DIR/dump_def_parents.rs:23:31
-   |
-LL |                         qux::<{ 1 + 1 }>();
-   |                               ^^^^^^^^^
-   |
+ at $DIR/dump_def_parents.rs:23:31
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:11:21
-   |
-LL | /                     {
-LL | |
-LL | |                         fn inhibits_dump() {
-LL | |                             qux::<
-...  |
-LL | |                         1
-LL | |                     },
-   | |_____________________^
+ at $DIR/dump_def_parents.rs:11:21 to 26:22
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:9:13
-   |
-LL |             || {
-   |             ^^
+ at $DIR/dump_def_parents.rs:9:13
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:7:9
-   |
-LL |         fn baz() {
-   |         ^^^^^^^^
+ at $DIR/dump_def_parents.rs:7:9
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:5:5
-   |
-LL |     fn foo() {
-   |     ^^^^^^^^
+ at $DIR/dump_def_parents.rs:5:5
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:4:1
-   |
-LL | fn bar() {
-   | ^^^^^^^^
+ at $DIR/dump_def_parents.rs:4:1
 note: DefId(..)
-  --> $DIR/dump_def_parents.rs:2:1
-   |
-LL | / #![feature(rustc_attrs)]
-LL | |
-LL | | fn bar() {
-LL | |     fn foo() {
-...  |
-LL | | fn main() {}
-   | |____________^
+ at $DIR/dump_def_parents.rs:2:1 to 35:13
 
 error: aborting due to 4 previous errors
 

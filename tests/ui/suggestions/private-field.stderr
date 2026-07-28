@@ -1,10 +1,6 @@
-error[E0609]: no field `cap` on type `S`
-  --> $DIR/private-field.rs:7:12
-   |
-LL |     dbg!(s.cap)
-   |            ^^^ unknown field
-   |
-   = note: available field is: `val`
+error E0609: no field `cap` on type `S`
+ at $DIR/private-field.rs:7:12: unknown field
+note: available field is: `val`
 
 error: aborting due to 1 previous error
 

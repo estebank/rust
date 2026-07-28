@@ -1,10 +1,6 @@
 error: lifetime may not live long enough
-  --> $DIR/variance-associated-types2.rs:13:42
-   |
-LL | fn take<'a>(_: &'a u32) {
-   |         -- lifetime `'a` defined here
-LL |     let _: Box<dyn Foo<Bar = &'a u32>> = make();
-   |                                          ^^^^^^ coercion requires that `'a` must outlive `'static`
+ at $DIR/variance-associated-types2.rs:13:42: coercion requires that `'a` must outlive `'static`
+  on line 12, column 9: lifetime `'a` defined here
 
 error: aborting due to 1 previous error
 

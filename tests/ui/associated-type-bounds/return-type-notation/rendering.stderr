@@ -1,11 +1,6 @@
-error[E0046]: not all trait items implemented, missing: `missing`
-  --> $DIR/rendering.rs:10:1
-   |
-LL |     fn missing() -> impl Sized;
-   |     --------------------------- `missing` from trait
-...
-LL | impl Foo for () {
-   | ^^^^^^^^^^^^^^^ missing `missing` in implementation
+error E0046: not all trait items implemented, missing: `missing`
+ at $DIR/rendering.rs:10:1: missing `missing` in implementation
+  on line 7: `missing` from trait
 
 error: aborting due to 1 previous error
 

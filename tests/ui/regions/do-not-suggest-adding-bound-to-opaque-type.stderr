@@ -1,15 +1,8 @@
-error[E0597]: `x` does not live long enough
-  --> $DIR/do-not-suggest-adding-bound-to-opaque-type.rs:9:7
-   |
-LL |     let x = ();
-   |         - binding `x` declared here
-LL |     S(&x)
-   |     --^^-
-   |     | |
-   |     | borrowed value does not live long enough
-   |     opaque type requires that `x` is borrowed for `'static`
-LL | }
-   | - `x` dropped here while still borrowed
+error E0597: `x` does not live long enough
+ at $DIR/do-not-suggest-adding-bound-to-opaque-type.rs:9:7: borrowed value does not live long enough
+  on line 8, column 9: binding `x` declared here
+  on line 9: opaque type requires that `x` is borrowed for `'static`
+  on line 10: `x` dropped here while still borrowed
 
 error: aborting due to 1 previous error
 

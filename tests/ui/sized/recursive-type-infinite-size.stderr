@@ -1,24 +1,9 @@
-error[E0072]: recursive types `Baz` and `Foo` have infinite size
-  --> $DIR/recursive-type-infinite-size.rs:4:1
-   |
-LL | struct Baz {
-   | ^^^^^^^^^^
-LL |
-LL |     q: Option<Foo>,
-   |               --- recursive without indirection
-LL | }
-LL | struct Foo {
-   | ^^^^^^^^^^
-LL |     q: Option<Baz>,
-   |               --- recursive without indirection
-   |
+error E0072: recursive types `Baz` and `Foo` have infinite size
+ at $DIR/recursive-type-infinite-size.rs:4:1
+  on line 6, column 15: recursive without indirection
+  on line 9, column 15: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL ~     q: Option<Box<Foo>>,
-LL | }
-LL | struct Foo {
-LL ~     q: Option<Box<Baz>>,
-   |
+ on line 6, column 14, add `Box<`
 
 error: aborting due to 1 previous error
 

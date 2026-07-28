@@ -1,18 +1,10 @@
-error[E0277]: the size for values of type `Self` cannot be known at compilation time
-  --> $DIR/trait-method-unsized-self-param.rs:5:12
-   |
-LL |     fn foo(self) -> &'static i32 {
-   |            ^^^^ doesn't have a size known at compile-time
-   |
-   = help: unsized fn params are gated as an unstable feature
+error E0277: the size for values of type `Self` cannot be known at compilation time
+ at $DIR/trait-method-unsized-self-param.rs:5:12: doesn't have a size known at compile-time
+help: unsized fn params are gated as an unstable feature
 help: consider further restricting `Self`
-   |
-LL |     fn foo(self) -> &'static i32 where Self: Sized {
-   |                                  +++++++++++++++++
+ on line 5, column 32, add ` where Self: Sized`
 help: function arguments must have a statically known size, borrowed types always have a known size
-   |
-LL |     fn foo(&self) -> &'static i32 {
-   |            +
+ on line 5, column 11, add `&`
 
 error: aborting due to 1 previous error
 

@@ -25,12 +25,8 @@ expected an expression of a different type. It can occur in several cases, the
 most common being when calling a function and passing an argument which has a
 different type than the matching type in the function declaration.
 "},"level":"error","spans":[{"file_name":"$DIR/flag-json.rs","byte_start":244,"byte_end":246,"line_start":7,"line_end":7,"column_start":17,"column_end":19,"is_primary":true,"text":[{"text":"    let _: () = 42;
-  --> $DIR/flag-json.rs:7:17
-   |
-LL | ..._: () = 42; /...
-   |       --   ^^ expected `()`, found integer
-   |       |
-   |       expected due to this
+ at $DIR/flag-json.rs:7:17: expected `()`, found integer
+  on line 7, column 12: expected due to this
 
 "}
 {"$message_type":"diagnostic","message":"aborting due to 1 previous error","code":null,"level":"error","spans":[],"children":[],"rendered":"error: aborting due to 1 previous error

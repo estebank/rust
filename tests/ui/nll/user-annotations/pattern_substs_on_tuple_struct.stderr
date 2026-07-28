@@ -1,29 +1,14 @@
-error[E0597]: `y` does not live long enough
-  --> $DIR/pattern_substs_on_tuple_struct.rs:5:19
-   |
-LL |     let y = 22;
-   |         - binding `y` declared here
-LL |     let foo = Foo(&y);
-   |                   ^^ borrowed value does not live long enough
-LL |
-LL |     let Foo::<'static>(_z) = foo;
-   |         ------------------ type annotation requires that `y` is borrowed for `'static`
-LL | }
-   | - `y` dropped here while still borrowed
+error E0597: `y` does not live long enough
+ at $DIR/pattern_substs_on_tuple_struct.rs:5:19: borrowed value does not live long enough
+  on line 4, column 9: binding `y` declared here
+  on line 7, column 9: type annotation requires that `y` is borrowed for `'static`
+  on line 8: `y` dropped here while still borrowed
 
-error[E0597]: `y` does not live long enough
-  --> $DIR/pattern_substs_on_tuple_struct.rs:12:19
-   |
-LL |     let y = 22;
-   |         - binding `y` declared here
-LL |     let foo = Foo(&y);
-   |                   ^^ borrowed value does not live long enough
-...
-LL |         Foo::<'static>(_z) => {
-   |         ------------------ type annotation requires that `y` is borrowed for `'static`
-...
-LL | }
-   | - `y` dropped here while still borrowed
+error E0597: `y` does not live long enough
+ at $DIR/pattern_substs_on_tuple_struct.rs:12:19: borrowed value does not live long enough
+  on line 11, column 9: binding `y` declared here
+  on line 15: type annotation requires that `y` is borrowed for `'static`
+  on line 18: `y` dropped here while still borrowed
 
 error: aborting due to 2 previous errors
 

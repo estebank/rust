@@ -1,13 +1,7 @@
 error: expected identifier, found `:`
-  --> $DIR/missing-let-in-binding.rs:4:9
-   |
-LL |     _foo: i32 = 4;
-   |         ^ expected identifier
-   |
+ at $DIR/missing-let-in-binding.rs:4:9: expected identifier
 help: you might have meant to introduce a new binding
-   |
-LL |     let _foo: i32 = 4;
-   |     +++
+ on line 4, column 4, add `let `
 
 error: aborting due to 1 previous error
 

@@ -1,25 +1,13 @@
 error: mismatched closing delimiter: `)`
-  --> $DIR/issue-104367.rs:5:15
-   |
-LL |             #![w,)
-   |               ^  ^ mismatched closing delimiter
-   |               |
-   |               unclosed delimiter
+ at $DIR/issue-104367.rs:5:15: unclosed delimiter
+  on line 5, column 18: mismatched closing delimiter
 
 error: this file contains an unclosed delimiter
-  --> $DIR/issue-104367.rs:6:71
-   |
-LL | struct S {
-   |          - unclosed delimiter
-LL |     d: [u32; {
-   |        -     - unclosed delimiter
-   |        |
-   |        unclosed delimiter
-LL |         #![cfg] {
-   |                 - unclosed delimiter
-LL |             #![w,)
-LL |
-   |                                                                      ^
+ at $DIR/issue-104367.rs:6:71
+  on line 2, column 10: unclosed delimiter
+  on line 3, column 8: unclosed delimiter
+  on line 3, column 14: unclosed delimiter
+  on line 4, column 17: unclosed delimiter
 
 error: aborting due to 2 previous errors
 

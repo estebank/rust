@@ -1,32 +1,15 @@
-error[E0380]: auto traits cannot have associated items
-  --> $DIR/assoc-ty.rs:11:10
-   |
-LL | auto trait Trait {
-   |            ----- auto traits cannot have associated items
-...
-LL |     type Output;
-   |          ^^^^^^
+error E0380: auto traits cannot have associated items
+ at $DIR/assoc-ty.rs:11:10
+  on line 8, column 12: auto traits cannot have associated items
 
-error[E0658]: auto traits are experimental and possibly buggy
-  --> $DIR/assoc-ty.rs:8:1
-   |
-LL | / auto trait Trait {
-LL | |
-LL | |
-LL | |     type Output;
-...  |
-LL | | }
-   | |_^
-   |
-   = note: see issue #13231 <https://github.com/rust-lang/rust/issues/13231> for more information
-   = help: add `#![feature(auto_traits)]` to the crate attributes to enable
-   = note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
+error E0658: auto traits are experimental and possibly buggy
+ at $DIR/assoc-ty.rs:8:1 to 14:2
+note: see issue #13231 <https://github.com/rust-lang/rust/issues/13231> for more information
+help: add `#![feature(auto_traits)]` to the crate attributes to enable
+note: this compiler was built on YYYY-MM-DD; consider upgrading it if it is out of date
 
-error[E0271]: type mismatch resolving `<() as Trait>::Output == _`
-  --> $DIR/assoc-ty.rs:17:12
-   |
-LL |     let _: <() as Trait>::Output = ();
-   |            ^^^^^^^^^^^^^^^^^^^^^ types differ
+error E0271: type mismatch resolving `<() as Trait>::Output == _`
+ at $DIR/assoc-ty.rs:17:12: types differ
 
 error: aborting due to 3 previous errors
 

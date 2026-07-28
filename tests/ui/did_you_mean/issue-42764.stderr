@@ -1,35 +1,20 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-42764.rs:11:43
-   |
-LL |     this_function_expects_a_double_option(n);
-   |     ------------------------------------- ^ expected `DoubleOption<_>`, found `usize`
-   |     |
-   |     arguments to this function are incorrect
-   |
-   = note: expected enum `DoubleOption<_>`
-              found type `usize`
+error E0308: mismatched types
+ at $DIR/issue-42764.rs:11:43: expected `DoubleOption<_>`, found `usize`
+  on line 11: arguments to this function are incorrect
+note: expected enum `DoubleOption<_>`
+         found type `usize`
 note: function defined here
-  --> $DIR/issue-42764.rs:7:4
-   |
-LL | fn this_function_expects_a_double_option<T>(d: DoubleOption<T>) {}
-   |    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^    ------------------
+ at $DIR/issue-42764.rs:7:4
 help: try wrapping the expression in a variant of `DoubleOption`
-   |
-LL |     this_function_expects_a_double_option(DoubleOption::FirstSome(n));
-   |                                           ++++++++++++++++++++++++ +
-LL |     this_function_expects_a_double_option(DoubleOption::AlternativeSome(n));
-   |                                           ++++++++++++++++++++++++++++++ +
+ on line 11, column 42, add one of
+  DoubleOption::FirstSome(
+  DoubleOption::AlternativeSome(
 
-error[E0308]: mismatched types
-  --> $DIR/issue-42764.rs:27:33
-   |
-LL |     let _c = Context { wrapper: Payload{} };
-   |                                 ^^^^^^^^^ expected `Wrapper`, found `Payload`
-   |
+
+error E0308: mismatched types
+ at $DIR/issue-42764.rs:27:33: expected `Wrapper`, found `Payload`
 help: try wrapping the expression in `Wrapper`
-   |
-LL |     let _c = Context { wrapper: Wrapper { payload: Payload{} } };
-   |                                 ++++++++++++++++++           +
+ on line 27, column 32, add `Wrapper { payload: `
 
 error: aborting due to 2 previous errors
 

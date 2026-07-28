@@ -1,22 +1,12 @@
 error: missing type for `const` item
-  --> $DIR/type_const-only-in-impl-omitted-type.rs:11:20
-   |
-LL |     type const NUM: = 84;
-   |                    ^ help: provide a type for the associated constant: `usize`
+ at $DIR/type_const-only-in-impl-omitted-type.rs:11:20: help: provide a type for the associated constant: `usize`
 
 error: use of trait associated const not defined as `type const`
-  --> $DIR/type_const-only-in-impl-omitted-type.rs:17:43
-   |
-LL | fn accept_bad_tr<const N: usize, T: BadTr<NUM = { N }>>(_x: &T) {}
-   |                                           ^^^^^^^^^^^
-   |
-   = note: the declaration in the trait must begin with `type const` not just `const` alone
+ at $DIR/type_const-only-in-impl-omitted-type.rs:17:43
+note: the declaration in the trait must begin with `type const` not just `const` alone
 
 error: type annotations needed for the literal
-  --> $DIR/type_const-only-in-impl-omitted-type.rs:11:23
-   |
-LL |     type const NUM: = 84;
-   |                       ^^
+ at $DIR/type_const-only-in-impl-omitted-type.rs:11:23
 
 error: aborting due to 3 previous errors
 

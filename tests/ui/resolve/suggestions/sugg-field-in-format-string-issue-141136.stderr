@@ -1,67 +1,32 @@
 error: invalid format string: expected `}`, found `x`
-  --> $DIR/sugg-field-in-format-string-issue-141136.rs:9:28
-   |
-LL |         let _ = format!("{ x}");
-   |                          - ^ expected `}` in format string
-   |                          |
-   |                          because of this opening brace
-   |
-   = note: if you intended to print `{`, you can escape it using `{{`
+ at $DIR/sugg-field-in-format-string-issue-141136.rs:9:28: expected `}` in format string
+  on line 9, column 26: because of this opening brace
+note: if you intended to print `{`, you can escape it using `{{`
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/sugg-field-in-format-string-issue-141136.rs:7:27
-   |
-LL |         let _ = format!("{x}");
-   |                           ^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/sugg-field-in-format-string-issue-141136.rs:7:27
 help: you might have meant to use the available field
-   |
-LL |         let _ = format!("{self.x}");
-   |                           +++++
+ on line 7, column 26, add `self.`
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/sugg-field-in-format-string-issue-141136.rs:8:27
-   |
-LL |         let _ = format!("{x }");
-   |                           ^^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/sugg-field-in-format-string-issue-141136.rs:8:27
 help: you might have meant to use the available field
-   |
-LL |         let _ = format!("{self.x }");
-   |                           +++++
+ on line 8, column 26, add `self.`
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/sugg-field-in-format-string-issue-141136.rs:10:31
-   |
-LL |         let _ = format!("{}", x);
-   |                               ^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/sugg-field-in-format-string-issue-141136.rs:10:31
 help: you might have meant to use the available field
-   |
-LL |         let _ = format!("{}", self.x);
-   |                               +++++
+ on line 10, column 30, add `self.`
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/sugg-field-in-format-string-issue-141136.rs:11:20
-   |
-LL |         println!("{x}");
-   |                    ^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/sugg-field-in-format-string-issue-141136.rs:11:20
 help: you might have meant to use the available field
-   |
-LL |         println!("{self.x}");
-   |                    +++++
+ on line 11, column 19, add `self.`
 
-error[E0425]: cannot find value `x` in this scope
-  --> $DIR/sugg-field-in-format-string-issue-141136.rs:12:18
-   |
-LL |         let _ = {x};
-   |                  ^
-   |
+error E0425: cannot find value `x` in this scope
+ at $DIR/sugg-field-in-format-string-issue-141136.rs:12:18
 help: you might have meant to use the available field
-   |
-LL |         let _ = {self.x};
-   |                  +++++
+ on line 12, column 17, add `self.`
 
 error: aborting due to 6 previous errors
 

@@ -1,8 +1,5 @@
-error[E0282]: type annotations needed
-  --> $DIR/offset-of-inference.rs:8:35
-   |
-LL |     let _ = core::mem::offset_of!(Foo<_>, x);
-   |                                   ^^^^^^ cannot infer type
+error E0282: type annotations needed
+ at $DIR/offset-of-inference.rs:8:35: cannot infer type
 
 error: aborting due to 1 previous error
 

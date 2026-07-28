@@ -1,11 +1,6 @@
-error[E0599]: no associated function or constant named `method` found for struct `B<for<'a> fn(&'a ())>` in the current scope
-  --> $DIR/receiver-equality.rs:12:30
-   |
-LL | struct B<T>(T);
-   | ----------- associated function or constant `method` not found for this struct
-...
-LL |     B::<for<'a> fn(&'a ())>::method(y);
-   |                              ^^^^^^ associated function or constant not found in `B<for<'a> fn(&'a ())>`
+error E0599: no associated function or constant named `method` found for struct `B<for<'a> fn(&'a ())>` in the current scope
+ at $DIR/receiver-equality.rs:12:30: associated function or constant not found in `B<for<'a> fn(&'a ())>`
+  on line 3: associated function or constant `method` not found for this struct
 
 error: aborting due to 1 previous error
 

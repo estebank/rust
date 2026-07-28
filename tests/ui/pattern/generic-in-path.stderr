@@ -1,13 +1,6 @@
-error[E0158]: constant pattern cannot depend on generic parameters
-  --> $DIR/generic-in-path.rs:12:9
-   |
-LL | impl<const N: usize> Thing<N> {
-   | -----------------------------
-LL |     const A: Self = Thing;
-   |     ------------- constant defined here
-...
-LL |         <Thing<N>>::A => {}
-   |         ^^^^^^^^^^^^^ `const` depends on a generic parameter
+error E0158: constant pattern cannot depend on generic parameters
+ at $DIR/generic-in-path.rs:12:9: `const` depends on a generic parameter
+  on line 7: constant defined here
 
 error: aborting due to 1 previous error
 

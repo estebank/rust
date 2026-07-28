@@ -1,56 +1,27 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/qualif-union.rs:28:26
-   |
-LL |     let _: &'static _ = &C1;
-   |            ----------    ^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/qualif-union.rs:28:26: creates a temporary value which is freed while still in use
+  on line 28, column 12: type annotation requires that borrow lasts for `'static`
+  on line 33: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/qualif-union.rs:29:26
-   |
-LL |     let _: &'static _ = &C2;
-   |            ----------    ^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/qualif-union.rs:29:26: creates a temporary value which is freed while still in use
+  on line 29, column 12: type annotation requires that borrow lasts for `'static`
+  on line 33: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/qualif-union.rs:30:26
-   |
-LL |     let _: &'static _ = &C3;
-   |            ----------    ^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-...
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/qualif-union.rs:30:26: creates a temporary value which is freed while still in use
+  on line 30, column 12: type annotation requires that borrow lasts for `'static`
+  on line 33: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/qualif-union.rs:31:26
-   |
-LL |     let _: &'static _ = &C4;
-   |            ----------    ^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-LL |     let _: &'static _ = &C5;
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/qualif-union.rs:31:26: creates a temporary value which is freed while still in use
+  on line 31, column 12: type annotation requires that borrow lasts for `'static`
+  on line 33: temporary value is freed at the end of this statement
 
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/qualif-union.rs:32:26
-   |
-LL |     let _: &'static _ = &C5;
-   |            ----------    ^^ creates a temporary value which is freed while still in use
-   |            |
-   |            type annotation requires that borrow lasts for `'static`
-LL | }
-   | - temporary value is freed at the end of this statement
+error E0716: temporary value dropped while borrowed
+ at $DIR/qualif-union.rs:32:26: creates a temporary value which is freed while still in use
+  on line 32, column 12: type annotation requires that borrow lasts for `'static`
+  on line 33: temporary value is freed at the end of this statement
 
 error: aborting due to 5 previous errors
 

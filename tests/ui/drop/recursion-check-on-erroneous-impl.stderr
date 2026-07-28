@@ -1,10 +1,6 @@
-error[E0186]: method `drop` has a `&mut self` declaration in the trait, but not in the impl
-  --> $DIR/recursion-check-on-erroneous-impl.rs:8:5
-   |
-LL |     fn drop() {}
-   |     ^^^^^^^^^ expected `&mut self` in impl
-   |
-   = note: `drop` from trait: `fn(&mut Self)`
+error E0186: method `drop` has a `&mut self` declaration in the trait, but not in the impl
+ at $DIR/recursion-check-on-erroneous-impl.rs:8:5: expected `&mut self` in impl
+note: `drop` from trait: `fn(&mut Self)`
 
 error: aborting due to 1 previous error
 

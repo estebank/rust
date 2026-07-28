@@ -1,26 +1,16 @@
-error[E0369]: binary operation `==` cannot be applied to type `fn() {f}`
-  --> $DIR/fn-compare-mismatch.rs:4:15
-   |
-LL |     let x = f == g;
-   |             - ^^ - fn() {g}
-   |             |
-   |             fn() {f}
-   |
+error E0369: binary operation `==` cannot be applied to type `fn() {f}`
+ at $DIR/fn-compare-mismatch.rs:4:15
+  on line 4, column 13: fn() {f}
+  on line 4, column 18: fn() {g}
 help: use parentheses to call these
-   |
-LL |     let x = f() == g();
-   |              ++     ++
+ on line 4, column 13, add `()`
 
-error[E0308]: mismatched types
-  --> $DIR/fn-compare-mismatch.rs:4:18
-   |
-LL |     let x = f == g;
-   |                  ^ expected fn item, found a different fn item
-   |
-   = note: expected fn item `fn() {f}`
-              found fn item `fn() {g}`
-   = note: different fn items have unique types, even if their signatures are the same
-   = help: consider casting both fn items to fn pointers using `as fn()`
+error E0308: mismatched types
+ at $DIR/fn-compare-mismatch.rs:4:18: expected fn item, found a different fn item
+note: expected fn item `fn() {f}`
+         found fn item `fn() {g}`
+note: different fn items have unique types, even if their signatures are the same
+help: consider casting both fn items to fn pointers using `as fn()`
 
 error: aborting due to 2 previous errors
 

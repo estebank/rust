@@ -1,17 +1,9 @@
-error[E0382]: use of moved value: `range`
-  --> $DIR/issue-51512.rs:4:13
-   |
-LL |     let range = 0..1;
-   |         ----- move occurs because `range` has type `std::ops::Range<i32>`, which does not implement the `Copy` trait
-LL |     let r = range;
-   |             ----- value moved here
-LL |     let x = range.start;
-   |             ^^^^^^^^^^^ value used here after move
-   |
+error E0382: use of moved value: `range`
+ at $DIR/issue-51512.rs:4:13: value used here after move
+  on line 2, column 9: move occurs because `range` has type `std::ops::Range<i32>`, which does not implement the `Copy` trait
+  on line 3, column 13: value moved here
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |     let r = range.clone();
-   |                  ++++++++
+ on line 3, column 17, add `.clone()`
 
 error: aborting due to 1 previous error
 

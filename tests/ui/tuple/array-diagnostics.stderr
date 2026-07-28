@@ -1,8 +1,6 @@
-error[E0618]: expected function, found `(&str, {integer})`
-  --> $DIR/array-diagnostics.rs:4:9
-   |
-LL |         ("C200B40A83", 4)
-   |         ^^^^^^^^^^^^^^^^^- help: consider separating array elements with a comma: `,`
+error E0618: expected function, found `(&str, {integer})`
+ at $DIR/array-diagnostics.rs:4:9
+  on line 4, column 26: help: consider separating array elements with a comma: `,`
 
 error: aborting due to 1 previous error
 

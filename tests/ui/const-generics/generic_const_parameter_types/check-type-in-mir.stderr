@@ -1,10 +1,6 @@
 error: lifetime may not live long enough
-  --> $DIR/check-type-in-mir.rs:6:12
-   |
-LL | fn foo<'a, const N: &'a u32>() {
-   |        -- lifetime `'a` defined here
-LL |     let b: &'static u32 = N;
-   |            ^^^^^^^^^^^^ type annotation requires that `'a` must outlive `'static`
+ at $DIR/check-type-in-mir.rs:6:12: type annotation requires that `'a` must outlive `'static`
+  on line 5, column 8: lifetime `'a` defined here
 
 error: aborting due to 1 previous error
 

@@ -1,30 +1,14 @@
-error[E0308]: mismatched types
-  --> $DIR/closure-parameter-type-inference-mismatch.rs:15:22
-   |
-LL |         assert!(i == 3i32);
-   |                 -    ^^^^ expected `u32`, found `i32`
-   |                 |
-   |                 expected because this is `u32`
-   |
+error E0308: mismatched types
+ at $DIR/closure-parameter-type-inference-mismatch.rs:15:22: expected `u32`, found `i32`
+  on line 15, column 17: expected because this is `u32`
 help: change the type of the numeric literal from `i32` to `u32`
-   |
-LL -         assert!(i == 3i32);
-LL +         assert!(i == 3u32);
-   |
+ on line 15, column 22, replace with `u32`
 
-error[E0308]: mismatched types
-  --> $DIR/closure-parameter-type-inference-mismatch.rs:21:22
-   |
-LL |         assert!(i == 3u32);
-   |                 -    ^^^^ expected `i32`, found `u32`
-   |                 |
-   |                 expected because this is `i32`
-   |
+error E0308: mismatched types
+ at $DIR/closure-parameter-type-inference-mismatch.rs:21:22: expected `i32`, found `u32`
+  on line 21, column 17: expected because this is `i32`
 help: change the type of the numeric literal from `u32` to `i32`
-   |
-LL -         assert!(i == 3u32);
-LL +         assert!(i == 3i32);
-   |
+ on line 21, column 22, replace with `i32`
 
 error: aborting due to 2 previous errors
 

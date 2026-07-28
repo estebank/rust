@@ -1,10 +1,6 @@
-error[E0792]: expected generic type parameter, found `&F`
-  --> $DIR/issue-99073.rs:6:13
-   |
-LL | fn fix<F: Fn(G), G: Fn()>(f: F) -> impl Fn() {
-   |        - this generic parameter must be used with a generic type parameter
-LL |   move || f(fix(&f))
-   |             ^^^^^^^
+error E0792: expected generic type parameter, found `&F`
+ at $DIR/issue-99073.rs:6:13
+  on line 5, column 8: this generic parameter must be used with a generic type parameter
 
 error: aborting due to 1 previous error
 

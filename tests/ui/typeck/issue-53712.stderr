@@ -1,14 +1,7 @@
-error[E0609]: no field `0` on type `[{integer}; 5]`
-  --> $DIR/issue-53712.rs:5:9
-   |
-LL |     arr.0;
-   |         ^ unknown field
-   |
+error E0609: no field `0` on type `[{integer}; 5]`
+ at $DIR/issue-53712.rs:5:9: unknown field
 help: instead of using tuple indexing, use array indexing
-   |
-LL -     arr.0;
-LL +     arr[0];
-   |
+ on line 5, column 7, replace with `[`
 
 error: aborting due to 1 previous error
 

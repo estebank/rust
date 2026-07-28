@@ -1,30 +1,16 @@
-error[E0805]: malformed `link_ordinal` attribute input
-  --> $DIR/link-ordinal-missing-argument.rs:3:7
-   |
-LL |     #[link_ordinal()]
-   |       ^^^^^^^^^^^^--
-   |                   |
-   |                   expected an argument here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/items/external-blocks.html#the-link_ordinal-attribute>
+error E0805: malformed `link_ordinal` attribute input
+ at $DIR/link-ordinal-missing-argument.rs:3:7
+  on line 3, column 19: expected an argument here
+note: for more information, visit <https://doc.rust-lang.org/reference/items/external-blocks.html#the-link_ordinal-attribute>
 help: must be of the form
-   |
-LL |     #[link_ordinal(ordinal)]
-   |                    +++++++
+ on line 3, column 6, replace with `link_ordinal(ordinal)`
 
-error[E0805]: malformed `link_ordinal` attribute input
-  --> $DIR/link-ordinal-missing-argument.rs:8:7
-   |
-LL |     #[link_ordinal()]
-   |       ^^^^^^^^^^^^--
-   |                   |
-   |                   expected an argument here
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/items/external-blocks.html#the-link_ordinal-attribute>
+error E0805: malformed `link_ordinal` attribute input
+ at $DIR/link-ordinal-missing-argument.rs:8:7
+  on line 8, column 19: expected an argument here
+note: for more information, visit <https://doc.rust-lang.org/reference/items/external-blocks.html#the-link_ordinal-attribute>
 help: must be of the form
-   |
-LL |     #[link_ordinal(ordinal)]
-   |                    +++++++
+ on line 8, column 6, replace with `link_ordinal(ordinal)`
 
 error: aborting due to 2 previous errors
 

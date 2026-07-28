@@ -1,14 +1,7 @@
-error[E0106]: missing lifetime specifier
-  --> $DIR/item-error.rs:10:8
-   |
-LL |     a: &u64
-   |        ^ expected named lifetime parameter
-   |
+error E0106: missing lifetime specifier
+ at $DIR/item-error.rs:10:8: expected named lifetime parameter
 help: consider introducing a named lifetime parameter
-   |
-LL ~ struct A<'a> {
-LL ~     a: &'a u64
-   |
+ on line 9, column 8, add `<'a>`
 
 error: aborting due to 1 previous error
 

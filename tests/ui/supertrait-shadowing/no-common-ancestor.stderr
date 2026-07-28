@@ -1,77 +1,34 @@
-error[E0034]: multiple applicable items in scope
-  --> $DIR/no-common-ancestor.rs:31:8
-   |
-LL |     ().hello();
-   |        ^^^^^ multiple `hello` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/no-common-ancestor.rs:31:8: multiple `hello` found
 note: candidate #1 is defined in an impl of the trait `A` for the type `T`
-  --> $DIR/no-common-ancestor.rs:7:5
-   |
-LL |     fn hello(&self) -> &'static str {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/no-common-ancestor.rs:7:5
 note: candidate #2 is defined in an impl of the trait `B` for the type `T`
-  --> $DIR/no-common-ancestor.rs:19:5
-   |
-LL |     fn hello(&self) -> &'static str {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/no-common-ancestor.rs:19:5
 help: disambiguate the method for candidate #1
-   |
-LL -     ().hello();
-LL +     A::hello(&());
-   |
+ on line 31, column 4, replace with `A::hello(&())`
 help: disambiguate the method for candidate #2
-   |
-LL -     ().hello();
-LL +     B::hello(&());
-   |
+ on line 31, column 4, replace with `B::hello(&())`
 
-error[E0221]: ambiguous associated type `Assoc` in bounds of `T`
-  --> $DIR/no-common-ancestor.rs:37:23
-   |
-LL |     type Assoc;
-   |     ---------- ambiguous `Assoc` from `A`
-...
-LL |     type Assoc;
-   |     ---------- ambiguous `Assoc` from `B`
-...
-LL |     let _ = size_of::<T::Assoc>();
-   |                       ^^^^^^^^ ambiguous associated type `Assoc`
-   |
+error E0221: ambiguous associated type `Assoc` in bounds of `T`
+ at $DIR/no-common-ancestor.rs:37:23: ambiguous associated type `Assoc`
+  on line 10: ambiguous `Assoc` from `A`
+  on line 22: ambiguous `Assoc` from `B`
 help: use fully-qualified syntax to disambiguate
-   |
-LL -     let _ = size_of::<T::Assoc>();
-LL +     let _ = size_of::<<T as A>::Assoc>();
-   |
+ on line 37, column 22, replace with `<T as A>::`
 help: use fully-qualified syntax to disambiguate
-   |
-LL -     let _ = size_of::<T::Assoc>();
-LL +     let _ = size_of::<<T as B>::Assoc>();
-   |
+ on line 37, column 22, replace with `<T as B>::`
 
-error[E0034]: multiple applicable items in scope
-  --> $DIR/no-common-ancestor.rs:39:16
-   |
-LL |     let _ = T::CONST;
-   |                ^^^^^ multiple `CONST` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/no-common-ancestor.rs:39:16: multiple `CONST` found
 note: candidate #1 is defined in the trait `A`
-  --> $DIR/no-common-ancestor.rs:11:5
-   |
-LL |     const CONST: i32;
-   |     ^^^^^^^^^^^^^^^^
+ at $DIR/no-common-ancestor.rs:11:5
 note: candidate #2 is defined in the trait `B`
-  --> $DIR/no-common-ancestor.rs:23:5
-   |
-LL |     const CONST: i32;
-   |     ^^^^^^^^^^^^^^^^
+ at $DIR/no-common-ancestor.rs:23:5
 help: use fully-qualified syntax to disambiguate
-   |
-LL -     let _ = T::CONST;
-LL +     let _ = <T as A>::CONST;
-   |
-LL -     let _ = T::CONST;
-LL +     let _ = <T as B>::CONST;
-   |
+ on line 39, column 12, replace with one of
+  <T as A>::
+  <T as B>::
+
 
 error: aborting due to 3 previous errors
 

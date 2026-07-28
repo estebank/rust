@@ -1,55 +1,26 @@
-error[E0599]: no method named `method` found for type parameter `T` in the current scope
-  --> $DIR/wrap-dyn-in-suggestion-issue-120223.rs:16:7
-   |
-LL | pub fn in_ty_param<T: Fn() -> dyn std::fmt::Debug> (t: T) {
-   |                    - method `method` not found for this type parameter
-LL |     t.method();
-   |       ^^^^^^ method not found in `T`
-   |
-   = help: items from traits can only be used if the type parameter is bounded by the trait
+error E0599: no method named `method` found for type parameter `T` in the current scope
+ at $DIR/wrap-dyn-in-suggestion-issue-120223.rs:16:7: method not found in `T`
+  on line 15, column 20: method `method` not found for this type parameter
+help: items from traits can only be used if the type parameter is bounded by the trait
 help: the following trait defines an item `method`, perhaps you need to restrict type parameter `T` with it:
-   |
-LL | pub fn in_ty_param<T: Fn() -> (dyn std::fmt::Debug) + Trait> (t: T) {
-   |                               +                   +++++++++
+ on line 15, column 30, add `(`
 
-error[E0277]: the size for values of type `T` cannot be known at compilation time
-  --> $DIR/wrap-dyn-in-suggestion-issue-120223.rs:21:21
-   |
-LL | fn with_sized<T: Fn() -> &'static (dyn std::fmt::Debug) + ?Sized>() {
-   |               - this type parameter needs to be `Sized`
-LL |     without_sized::<T>();
-   |                     ^ doesn't have a size known at compile-time
-   |
+error E0277: the size for values of type `T` cannot be known at compilation time
+ at $DIR/wrap-dyn-in-suggestion-issue-120223.rs:21:21: doesn't have a size known at compile-time
+  on line 20, column 15: this type parameter needs to be `Sized`
 note: required by an implicit `Sized` bound in `without_sized`
-  --> $DIR/wrap-dyn-in-suggestion-issue-120223.rs:25:18
-   |
-LL | fn without_sized<T: Fn() -> &'static dyn std::fmt::Debug>() {}
-   |                  ^ required by the implicit `Sized` requirement on this type parameter in `without_sized`
+ at $DIR/wrap-dyn-in-suggestion-issue-120223.rs:25:18: required by the implicit `Sized` requirement on this type parameter in `without_sized`
 help: consider removing the `?Sized` bound to make the type parameter `Sized`
-   |
-LL - fn with_sized<T: Fn() -> &'static (dyn std::fmt::Debug) + ?Sized>() {
-LL + fn with_sized<T: Fn() -> &'static (dyn std::fmt::Debug)>() {
-   |
+ on line 20, column 55
 help: consider relaxing the implicit `Sized` restriction
-   |
-LL | fn without_sized<T: Fn() -> &'static (dyn std::fmt::Debug) + ?Sized>() {}
-   |                                      +                   ++++++++++
+ on line 25, column 37, add `(`
 
-error[E0310]: the parameter type `impl FnOnce(T) -> dyn Future<Output = ()>` may not live long enough
-  --> $DIR/wrap-dyn-in-suggestion-issue-120223.rs:6:5
-   |
-LL | ) -> Box<dyn FnOnce(T) -> dyn Future<Output = ()>> {
-   |          ---------------------------------------- this `dyn Trait` has an implicit `'static` lifetime bound
-LL |     Box::new(executor)
-   |     ^^^^^^^^^^^^^^^^^^
-   |     |
-   |     the parameter type `impl FnOnce(T) -> dyn Future<Output = ()>` must be valid for the static lifetime...
-   |     ...so that the type `impl FnOnce(T) -> dyn Future<Output = ()>` will meet its required lifetime bounds
-   |
+error E0310: the parameter type `impl FnOnce(T) -> dyn Future<Output = ()>` may not live long enough
+ at $DIR/wrap-dyn-in-suggestion-issue-120223.rs:6:5: the parameter type `impl FnOnce(T) -> dyn Future<Output = ()>` must be valid for the static lifetime...
+  on line 6: ...so that the type `impl FnOnce(T) -> dyn Future<Output = ()>` will meet its required lifetime bounds
+  on line 5, column 10: this `dyn Trait` has an implicit `'static` lifetime bound
 help: consider adding an explicit lifetime bound
-   |
-LL |     executor: impl FnOnce(T) -> (dyn Future<Output = ()>) + 'static,
-   |                                 +                       +++++++++++
+ on line 4, column 32, add `(`
 
 error: aborting due to 3 previous errors
 

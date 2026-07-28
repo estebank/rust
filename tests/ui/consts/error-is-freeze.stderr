@@ -1,13 +1,7 @@
-error[E0425]: cannot find type `UndefinedType` in this scope
-  --> $DIR/error-is-freeze.rs:4:17
-   |
-LL |     foo: Option<UndefinedType>,
-   |                 ^^^^^^^^^^^^^ not found in this scope
-   |
+error E0425: cannot find type `UndefinedType` in this scope
+ at $DIR/error-is-freeze.rs:4:17: not found in this scope
 help: you might be missing a type parameter
-   |
-LL | struct MyStruct<UndefinedType> {
-   |                +++++++++++++++
+ on line 3, column 15, add `<UndefinedType>`
 
 error: aborting due to 1 previous error
 

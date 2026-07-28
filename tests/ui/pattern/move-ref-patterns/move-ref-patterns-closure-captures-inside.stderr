@@ -1,484 +1,191 @@
-error[E0382]: borrow of moved value: `tup0`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:32:10
-   |
-LL |     let mut tup0 = (S, S);
-   |         -------- move occurs because `tup0` has type `(S, S)`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-LL |         // Tuples...
-LL |         let (ref mut borrow, mov) = tup0;
-   |                                     ---- variable moved due to use in closure
-...
-LL |     drop(&tup0);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup0`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:32:10: value borrowed here after move
+  on line 5, column 9: move occurs because `tup0` has type `(S, S)`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 18, column 37: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup1`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:33:10
-   |
-LL |     let mut tup1 = (S, S, S);
-   |         -------- move occurs because `tup1` has type `(S, S, S)`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let (mov, _, ref mut borrow) = tup1;
-   |                                        ---- variable moved due to use in closure
-...
-LL |     drop(&tup1);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup1`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:33:10: value borrowed here after move
+  on line 6, column 9: move occurs because `tup1` has type `(S, S, S)`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 19, column 40: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup2`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:34:10
-   |
-LL |     let tup2 = (S, S);
-   |         ---- move occurs because `tup2` has type `(S, S)`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let (ref borrow, mov) = tup2;
-   |                                 ---- variable moved due to use in closure
-...
-LL |     drop(&tup2);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup2`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:34:10: value borrowed here after move
+  on line 7, column 9: move occurs because `tup2` has type `(S, S)`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 20, column 33: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup3`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:35:10
-   |
-LL |     let tup3 = (S, S, S);
-   |         ---- move occurs because `tup3` has type `(S, S, S)`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let (mov, _, ref borrow) = tup3;
-   |                                    ---- variable moved due to use in closure
-...
-LL |     drop(&tup3);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup3`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:35:10: value borrowed here after move
+  on line 8, column 9: move occurs because `tup3` has type `(S, S, S)`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 21, column 36: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup4`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:40:10
-   |
-LL |     let tup4 = (S, S);
-   |         ---- move occurs because `tup4` has type `(S, S)`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let (ref borrow, mov) = tup4;
-   |                                 ---- variable moved due to use in closure
-...
-LL |     drop(&tup4.0);
-   |          ^^^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup4`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:40:10: value borrowed here after move
+  on line 9, column 9: move occurs because `tup4` has type `(S, S)`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 22, column 33: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr0`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:42:10
-   |
-LL |     let mut arr0 = [S, S, S];
-   |         -------- move occurs because `arr0` has type `[S; 3]`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let [mov @ .., ref borrow] = arr0;
-   |                                      ---- variable moved due to use in closure
-...
-LL |     drop(&arr0);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr0`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:42:10: value borrowed here after move
+  on line 10, column 9: move occurs because `arr0` has type `[S; 3]`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 24, column 38: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr1`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:43:36
-   |
-LL |     let mut arr1 = [S, S, S, S, S];
-   |         -------- move occurs because `arr1` has type `[S; 5]`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let [_, ref mut borrow @ .., _, mov] = arr1;
-   |                                                ---- variable moved due to use in closure
-...
-LL |     let [_, mov1, mov2, mov3, _] = &arr1;
-   |                                    ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr1`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:43:36: value borrowed here after move
+  on line 11, column 9: move occurs because `arr1` has type `[S; 5]`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 25, column 48: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr2`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:44:10
-   |
-LL |     let arr2 = [S, S, S];
-   |         ---- move occurs because `arr2` has type `[S; 3]`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let [mov @ .., ref borrow] = arr2;
-   |                                      ---- variable moved due to use in closure
-...
-LL |     drop(&arr2);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr2`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:44:10: value borrowed here after move
+  on line 12, column 9: move occurs because `arr2` has type `[S; 3]`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 26, column 38: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr3`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:45:36
-   |
-LL |     let arr3 = [S, S, S, S, S];
-   |         ---- move occurs because `arr3` has type `[S; 5]`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         let [_, ref borrow @ .., _, mov] = arr3;
-   |                                            ---- variable moved due to use in closure
-...
-LL |     let [_, mov1, mov2, mov3, _] = &arr3;
-   |                                    ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr3`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:45:36: value borrowed here after move
+  on line 13, column 9: move occurs because `arr3` has type `[S; 5]`, which does not implement the `Copy` trait
+  on line 16, column 23: value moved into closure here
+  on line 27, column 44: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup0`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:76:10
-   |
-LL |     let mut tup0: Option<(S, S)> = None;
-   |         -------- move occurs because `tup0` has type `Option<(S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-LL |         m!((ref mut borrow, mov) = tup0);
-   |                                    ---- variable moved due to use in closure
-...
-LL |     drop(&tup0);
-   |          ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `tup0`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:76:10: value borrowed here after move
+  on line 56, column 9: move occurs because `tup0` has type `Option<(S, S)>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 66, column 36: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!((ref mut borrow, mov) = tup0);
-   |                                    ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 66, column 36: you could clone this value
 
-error[E0382]: borrow of moved value: `tup1`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:77:10
-   |
-LL |     let mut tup1: Option<(S, S, S)> = None;
-   |         -------- move occurs because `tup1` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-LL |         m!((ref mut borrow, mov) = tup0);
-LL |         m!((mov, _, ref mut borrow) = tup1);
-   |                                       ---- variable moved due to use in closure
-...
-LL |     drop(&tup1);
-   |          ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `tup1`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:77:10: value borrowed here after move
+  on line 57, column 9: move occurs because `tup1` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 67, column 39: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!((mov, _, ref mut borrow) = tup1);
-   |                                       ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 67, column 39: you could clone this value
 
-error[E0382]: borrow of moved value: `tup2`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:78:10
-   |
-LL |     let tup2: Option<(S, S)> = None;
-   |         ---- move occurs because `tup2` has type `Option<(S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!((ref borrow, mov) = tup2);
-   |                                ---- variable moved due to use in closure
-...
-LL |     drop(&tup2);
-   |          ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `tup2`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:78:10: value borrowed here after move
+  on line 58, column 9: move occurs because `tup2` has type `Option<(S, S)>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 68, column 32: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!((ref borrow, mov) = tup2);
-   |                                ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 68, column 32: you could clone this value
 
-error[E0382]: borrow of moved value: `tup3`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:79:10
-   |
-LL |     let tup3: Option<(S, S, S)> = None;
-   |         ---- move occurs because `tup3` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!((mov, _, ref borrow) = tup3);
-   |                                   ---- variable moved due to use in closure
-...
-LL |     drop(&tup3);
-   |          ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `tup3`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:79:10: value borrowed here after move
+  on line 59, column 9: move occurs because `tup3` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 69, column 35: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!((mov, _, ref borrow) = tup3);
-   |                                   ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 69, column 35: you could clone this value
 
-error[E0382]: borrow of moved value: `tup4`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:80:21
-   |
-LL |     let tup4: Option<(S, S)> = None;
-   |         ---- move occurs because `tup4` has type `Option<(S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!((ref borrow, mov) = tup4);
-   |                                ---- variable moved due to use in closure
-...
-LL |     m!((ref x, _) = &tup4);
-   |                     ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `tup4`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:80:21: value borrowed here after move
+  on line 60, column 9: move occurs because `tup4` has type `Option<(S, S)>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 70, column 32: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!((ref borrow, mov) = tup4);
-   |                                ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 70, column 32: you could clone this value
 
-error[E0382]: borrow of moved value: `arr0`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:81:10
-   |
-LL |     let mut arr0: Option<[S; 3]> = None;
-   |         -------- move occurs because `arr0` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([mov @ .., ref borrow] = arr0);
-   |                                     ---- variable moved due to use in closure
-...
-LL |     drop(&arr0);
-   |          ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `arr0`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:81:10: value borrowed here after move
+  on line 61, column 9: move occurs because `arr0` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 71, column 37: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!([mov @ .., ref borrow] = arr0);
-   |                                     ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 71, column 37: you could clone this value
 
-error[E0382]: borrow of moved value: `arr1`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:82:35
-   |
-LL |     let mut arr1: Option<[S; 5]> = None;
-   |         -------- move occurs because `arr1` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([_, ref mut borrow @ .., _, mov] = arr1);
-   |                                               ---- variable moved due to use in closure
-...
-LL |     m!([_, mov1, mov2, mov3, _] = &arr1);
-   |                                   ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `arr1`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:82:35: value borrowed here after move
+  on line 62, column 9: move occurs because `arr1` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 72, column 47: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!([_, ref mut borrow @ .., _, mov] = arr1);
-   |                                               ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 72, column 47: you could clone this value
 
-error[E0382]: borrow of moved value: `arr2`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:83:10
-   |
-LL |     let arr2: Option<[S; 3]> = None;
-   |         ---- move occurs because `arr2` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
-LL |     let arr3: Option<[S; 5]> = None;
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([mov @ .., ref borrow] = arr2);
-   |                                     ---- variable moved due to use in closure
-...
-LL |     drop(&arr2);
-   |          ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `arr2`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:83:10: value borrowed here after move
+  on line 63, column 9: move occurs because `arr2` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 73, column 37: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!([mov @ .., ref borrow] = arr2);
-   |                                     ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 73, column 37: you could clone this value
 
-error[E0382]: borrow of moved value: `arr3`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:84:35
-   |
-LL |     let arr3: Option<[S; 5]> = None;
-   |         ---- move occurs because `arr3` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([_, ref borrow @ .., _, mov] = arr3);
-   |                                           ---- variable moved due to use in closure
-...
-LL |     m!([_, mov1, mov2, mov3, _] = &arr3);
-   |                                   ^^^^^ value borrowed here after move
-   |
+error E0382: borrow of moved value: `arr3`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:84:35: value borrowed here after move
+  on line 64, column 9: move occurs because `arr3` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
+  on line 65, column 23: value moved into closure here
+  on line 74, column 43: variable moved due to use in closure
 note: if `S` implemented `Clone`, you could clone the value
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:3:5
-   |
-LL |     struct S; // Not `Copy`.
-   |     ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |         m!([_, ref borrow @ .., _, mov] = arr3);
-   |                                           ---- you could clone this value
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:3:5: consider implementing `Clone` for this type
+  on line 74, column 43: you could clone this value
 
-error[E0382]: borrow of moved value: `tup0`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:112:10
-   |
-LL |     let mut tup0: Option<(S, S)> = None;
-   |         -------- move occurs because `tup0` has type `Option<(S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-LL |         m!((ref mut borrow, mov) = tup0);
-   |                                    ---- variable moved due to use in closure
-...
-LL |     drop(&tup0);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup0`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:112:10: value borrowed here after move
+  on line 92, column 9: move occurs because `tup0` has type `Option<(S, S)>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 102, column 36: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup1`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:113:10
-   |
-LL |     let mut tup1: Option<(S, S, S)> = None;
-   |         -------- move occurs because `tup1` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-LL |         m!((ref mut borrow, mov) = tup0);
-LL |         m!((mov, _, ref mut borrow) = tup1);
-   |                                       ---- variable moved due to use in closure
-...
-LL |     drop(&tup1);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup1`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:113:10: value borrowed here after move
+  on line 93, column 9: move occurs because `tup1` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 103, column 39: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup2`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:114:10
-   |
-LL |     let tup2: Option<(S, S)> = None;
-   |         ---- move occurs because `tup2` has type `Option<(S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!((ref borrow, mov) = tup2);
-   |                                ---- variable moved due to use in closure
-...
-LL |     drop(&tup2);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup2`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:114:10: value borrowed here after move
+  on line 94, column 9: move occurs because `tup2` has type `Option<(S, S)>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 104, column 32: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup3`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:115:10
-   |
-LL |     let tup3: Option<(S, S, S)> = None;
-   |         ---- move occurs because `tup3` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!((mov, _, ref borrow) = tup3);
-   |                                   ---- variable moved due to use in closure
-...
-LL |     drop(&tup3);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup3`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:115:10: value borrowed here after move
+  on line 95, column 9: move occurs because `tup3` has type `Option<(S, S, S)>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 105, column 35: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `tup4`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:116:21
-   |
-LL |     let tup4: Option<(S, S)> = None;
-   |         ---- move occurs because `tup4` has type `Option<(S, S)>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!((ref borrow, mov) = tup4);
-   |                                ---- variable moved due to use in closure
-...
-LL |     m!((ref x, _) = &tup4);
-   |                     ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `tup4`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:116:21: value borrowed here after move
+  on line 96, column 9: move occurs because `tup4` has type `Option<(S, S)>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 106, column 32: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr0`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:117:10
-   |
-LL |     let mut arr0: Option<[S; 3]> = None;
-   |         -------- move occurs because `arr0` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([mov @ .., ref borrow] = arr0);
-   |                                     ---- variable moved due to use in closure
-...
-LL |     drop(&arr0);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr0`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:117:10: value borrowed here after move
+  on line 97, column 9: move occurs because `arr0` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 107, column 37: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr1`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:118:35
-   |
-LL |     let mut arr1: Option<[S; 5]> = None;
-   |         -------- move occurs because `arr1` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
-...
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([_, ref mut borrow @ .., _, mov] = arr1);
-   |                                               ---- variable moved due to use in closure
-...
-LL |     m!([_, mov1, mov2, mov3, _] = &arr1);
-   |                                   ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr1`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:118:35: value borrowed here after move
+  on line 98, column 9: move occurs because `arr1` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 108, column 47: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr2`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:119:10
-   |
-LL |     let arr2: Option<[S; 3]> = None;
-   |         ---- move occurs because `arr2` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
-LL |     let arr3: Option<[S; 5]> = None;
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([mov @ .., ref borrow] = arr2);
-   |                                     ---- variable moved due to use in closure
-...
-LL |     drop(&arr2);
-   |          ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr2`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:119:10: value borrowed here after move
+  on line 99, column 9: move occurs because `arr2` has type `Option<[S; 3]>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 109, column 37: variable moved due to use in closure
 
-error[E0382]: borrow of moved value: `arr3`
-  --> $DIR/move-ref-patterns-closure-captures-inside.rs:120:35
-   |
-LL |     let arr3: Option<[S; 5]> = None;
-   |         ---- move occurs because `arr3` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
-LL |     let mut closure = || {
-   |                       -- value moved into closure here
-...
-LL |         m!([_, ref borrow @ .., _, mov] = arr3);
-   |                                           ---- variable moved due to use in closure
-...
-LL |     m!([_, mov1, mov2, mov3, _] = &arr3);
-   |                                   ^^^^^ value borrowed here after move
+error E0382: borrow of moved value: `arr3`
+ at $DIR/move-ref-patterns-closure-captures-inside.rs:120:35: value borrowed here after move
+  on line 100, column 9: move occurs because `arr3` has type `Option<[S; 5]>`, which does not implement the `Copy` trait
+  on line 101, column 23: value moved into closure here
+  on line 110, column 43: variable moved due to use in closure
 
 error: aborting due to 27 previous errors
 

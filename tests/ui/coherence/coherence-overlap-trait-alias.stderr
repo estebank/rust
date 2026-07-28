@@ -1,10 +1,6 @@
-error[E0119]: conflicting implementations of trait `C` for type `u32`
-  --> $DIR/coherence-overlap-trait-alias.rs:15:1
-   |
-LL | impl<T: AB> C for T {}
-   | ------------------- first implementation here
-LL | impl C for u32 {}
-   | ^^^^^^^^^^^^^^ conflicting implementation for `u32`
+error E0119: conflicting implementations of trait `C` for type `u32`
+ at $DIR/coherence-overlap-trait-alias.rs:15:1: conflicting implementation for `u32`
+  on line 14: first implementation here
 
 error: aborting due to 1 previous error
 

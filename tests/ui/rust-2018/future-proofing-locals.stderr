@@ -1,56 +1,29 @@
 error: imports cannot refer to type parameters
-  --> $DIR/future-proofing-locals.rs:14:9
-   |
-LL |     use T as _;
-   |         ^
+ at $DIR/future-proofing-locals.rs:14:9
 
 error: imports cannot refer to type parameters
-  --> $DIR/future-proofing-locals.rs:15:9
-   |
-LL |     use T::U;
-   |         ^
+ at $DIR/future-proofing-locals.rs:15:9
 
 error: imports cannot refer to type parameters
-  --> $DIR/future-proofing-locals.rs:16:9
-   |
-LL |     use T::*;
-   |         ^
+ at $DIR/future-proofing-locals.rs:16:9
 
 error: imports cannot refer to type parameters
-  --> $DIR/future-proofing-locals.rs:20:9
-   |
-LL |     use T;
-   |         ^
+ at $DIR/future-proofing-locals.rs:20:9
 
 error: imports cannot refer to local variables
-  --> $DIR/future-proofing-locals.rs:26:9
-   |
-LL |     use x as _;
-   |         ^
+ at $DIR/future-proofing-locals.rs:26:9
 
 error: imports cannot refer to local variables
-  --> $DIR/future-proofing-locals.rs:32:9
-   |
-LL |     use x;
-   |         ^
+ at $DIR/future-proofing-locals.rs:32:9
 
 error: imports cannot refer to local variables
-  --> $DIR/future-proofing-locals.rs:38:17
-   |
-LL |             use x;
-   |                 ^
+ at $DIR/future-proofing-locals.rs:38:17
 
 error: imports cannot refer to type parameters
-  --> $DIR/future-proofing-locals.rs:46:10
-   |
-LL |     use {T as _, x};
-   |          ^
+ at $DIR/future-proofing-locals.rs:46:10
 
 error: imports cannot refer to local variables
-  --> $DIR/future-proofing-locals.rs:46:18
-   |
-LL |     use {T as _, x};
-   |                  ^
+ at $DIR/future-proofing-locals.rs:46:18
 
 error: aborting due to 9 previous errors
 

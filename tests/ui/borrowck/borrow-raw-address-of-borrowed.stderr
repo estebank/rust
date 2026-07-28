@@ -1,38 +1,17 @@
-error[E0502]: cannot borrow `x` as mutable because it is also borrowed as immutable
-  --> $DIR/borrow-raw-address-of-borrowed.rs:5:13
-   |
-LL |     let y = &x;
-   |             -- immutable borrow occurs here
-LL |
-LL |     let q = &raw mut x;
-   |             ^^^^^^^^^^ mutable borrow occurs here
-LL |
-LL |     drop(y);
-   |          - immutable borrow later used here
+error E0502: cannot borrow `x` as mutable because it is also borrowed as immutable
+ at $DIR/borrow-raw-address-of-borrowed.rs:5:13: mutable borrow occurs here
+  on line 3, column 13: immutable borrow occurs here
+  on line 7, column 10: immutable borrow later used here
 
-error[E0502]: cannot borrow `x` as immutable because it is also borrowed as mutable
-  --> $DIR/borrow-raw-address-of-borrowed.rs:14:13
-   |
-LL |     let y = &mut x;
-   |             ------ mutable borrow occurs here
-LL |
-LL |     let p = &raw const x;
-   |             ^^^^^^^^^^^^ immutable borrow occurs here
-...
-LL |     drop(y);
-   |          - mutable borrow later used here
+error E0502: cannot borrow `x` as immutable because it is also borrowed as mutable
+ at $DIR/borrow-raw-address-of-borrowed.rs:14:13: immutable borrow occurs here
+  on line 12, column 13: mutable borrow occurs here
+  on line 17, column 10: mutable borrow later used here
 
-error[E0499]: cannot borrow `x` as mutable more than once at a time
-  --> $DIR/borrow-raw-address-of-borrowed.rs:15:13
-   |
-LL |     let y = &mut x;
-   |             ------ first mutable borrow occurs here
-...
-LL |     let q = &raw mut x;
-   |             ^^^^^^^^^^ second mutable borrow occurs here
-LL |
-LL |     drop(y);
-   |          - first borrow later used here
+error E0499: cannot borrow `x` as mutable more than once at a time
+ at $DIR/borrow-raw-address-of-borrowed.rs:15:13: second mutable borrow occurs here
+  on line 12, column 13: first mutable borrow occurs here
+  on line 17, column 10: first borrow later used here
 
 error: aborting due to 3 previous errors
 

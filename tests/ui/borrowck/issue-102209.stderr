@@ -1,22 +1,11 @@
 error: lifetime may not live long enough
-  --> $DIR/issue-102209.rs:10:29
-   |
-LL | impl NfaBuilder<'_> {
-   |                 -- lifetime `'2` appears in the `impl`'s self type
-LL |     pub fn with<R, F: FnOnce(NfaBuilder<'_>) -> R>(f: F) -> R {
-LL |         Brand::with(|brand| {
-   |                      ----- has type `Brand<'1>`
-LL |             f(Self { brand: brand.lt })
-   |                             ^^^^^^^^ this usage requires that `'1` must outlive `'2`
+ at $DIR/issue-102209.rs:10:29: this usage requires that `'1` must outlive `'2`
+  on line 7, column 17: lifetime `'2` appears in the `impl`'s self type
+  on line 9, column 22: has type `Brand<'1>`
 
 error: lifetime may not live long enough
-  --> $DIR/issue-102209.rs:10:29
-   |
-LL | impl NfaBuilder<'_> {
-   |                 -- lifetime `'1` appears in the `impl`'s self type
-...
-LL |             f(Self { brand: brand.lt })
-   |                             ^^^^^^^^ this usage requires that `'1` must outlive `'static`
+ at $DIR/issue-102209.rs:10:29: this usage requires that `'1` must outlive `'static`
+  on line 7, column 17: lifetime `'1` appears in the `impl`'s self type
 
 error: aborting due to 2 previous errors
 

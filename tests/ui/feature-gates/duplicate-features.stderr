@@ -1,16 +1,9 @@
 error: the feature `if_let` has already been enabled
-  --> $DIR/duplicate-features.rs:7:12
-   |
-LL | #![feature(if_let)]
-   |            ^^^^^^
-   |
-   = note: `#[deny(duplicate_features)]` on by default
+ at $DIR/duplicate-features.rs:7:12
+note: `#[deny(duplicate_features)]` on by default
 
 error: the feature `rust1` has already been enabled
-  --> $DIR/duplicate-features.rs:4:12
-   |
-LL | #![feature(rust1)]
-   |            ^^^^^
+ at $DIR/duplicate-features.rs:4:12
 
 error: aborting due to 2 previous errors
 

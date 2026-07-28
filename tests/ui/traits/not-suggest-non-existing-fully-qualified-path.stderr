@@ -1,29 +1,12 @@
-error[E0283]: type annotations needed
-  --> $DIR/not-suggest-non-existing-fully-qualified-path.rs:21:7
-   |
-LL |     a.method();
-   |       ^^^^^^
-   |
+error E0283: type annotations needed
+ at $DIR/not-suggest-non-existing-fully-qualified-path.rs:21:7
 note: multiple `impl`s satisfying `B: I<_>` found
-  --> $DIR/not-suggest-non-existing-fully-qualified-path.rs:5:1
-   |
-LL | impl I<i32> for B {}
-   | ^^^^^^^^^^^^^^^^^
-LL | impl I<u32> for B {}
-   | ^^^^^^^^^^^^^^^^^
+ at $DIR/not-suggest-non-existing-fully-qualified-path.rs:5:1
 note: required for `A<B>` to implement `V<_>`
-  --> $DIR/not-suggest-non-existing-fully-qualified-path.rs:12:12
-   |
-LL | impl<T, U> V<U> for A<T>
-   |            ^^^^     ^^^^
-LL | where
-LL |     T: I<U>,
-   |        ---- unsatisfied trait bound introduced here
+ at $DIR/not-suggest-non-existing-fully-qualified-path.rs:12:12
+  on line 14, column 8: unsatisfied trait bound introduced here
 help: try using a fully qualified path to specify the expected types
-   |
-LL -     a.method();
-LL +     <A<B> as V<U>>::method(a);
-   |
+ on line 21, column 4, add `<A<B> as V<U>>::method(`
 
 error: aborting due to 1 previous error
 

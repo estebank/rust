@@ -1,110 +1,53 @@
 error: expected one of `(`, `,`, `=`, `{`, or `}`, found keyword `const`
-  --> $DIR/tokenstream-ice-issue-149954.rs:6:5
-   |
-LL |     A
-   |      - expected one of `(`, `,`, `=`, `{`, or `}`
-LL |     const A: A = {
-   |     ^^^^^ unexpected token
-   |
-   = help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
+ at $DIR/tokenstream-ice-issue-149954.rs:6:5: unexpected token
+  on line 5, column 6: expected one of `(`, `,`, `=`, `{`, or `}`
+help: enum variants can be `Variant`, `Variant = <integer>`, `Variant(Type, ..., TypeN)` or `Variant { fields: Types }`
 
 error: expected one of `<`, `where`, or `{`, found `}`
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:60
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |                                                         -  ^ expected one of `<`, `where`, or `{`
-   |                                                         |
-   |                                                         while parsing this enum
+ at $DIR/tokenstream-ice-issue-149954.rs:10:60: expected one of `<`, `where`, or `{`
+  on line 10, column 57: while parsing this enum
 
 error: expected one of `<`, `where`, or `{`, found `}`
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:60
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |                                                         -  ^ expected one of `<`, `where`, or `{`
-   |                                                         |
-   |                                                         while parsing this enum
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/tokenstream-ice-issue-149954.rs:10:60: expected one of `<`, `where`, or `{`
+  on line 10, column 57: while parsing this enum
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: expected one of `,`, `>`, or `}`, found `<eof>`
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:60
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |                                                            ^ expected one of `,`, `>`, or `}`
-   |
+ at $DIR/tokenstream-ice-issue-149954.rs:10:60: expected one of `,`, `>`, or `}`
 help: you might have meant to end the type parameters here
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }>
-   |                                                             +
+ on line 10, column 60, add `>`
 
-error[E0539]: malformed `cfg` attribute input
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:38
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |                                      ^^^ expected this to be a list
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+error E0539: malformed `cfg` attribute input
+ at $DIR/tokenstream-ice-issue-149954.rs:10:38: expected this to be a list
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
 help: must be of the form
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg(predicate)] () }>> ; enum A  }
-   |                                         +++++++++++
+ on line 10, column 37, replace with `cfg(predicate)`
 
-error[E0539]: malformed `cfg` attribute input
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:38
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |                                      ^^^ expected this to be a list
-   |
-   = note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0539: malformed `cfg` attribute input
+ at $DIR/tokenstream-ice-issue-149954.rs:10:38: expected this to be a list
+note: for more information, visit <https://doc.rust-lang.org/reference/conditional-compilation.html#the-cfg-attribute>
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 help: must be of the form
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg(predicate)] () }>> ; enum A  }
-   |                                         +++++++++++
+ on line 10, column 37, replace with `cfg(predicate)`
 
-error[E0404]: expected trait, found struct `A`
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:16
-   |
-LL |               A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |  ________________^
-...  |
-LL | |         >;
-   | |_________^ not a trait
+error E0404: expected trait, found struct `A`
+ at $DIR/tokenstream-ice-issue-149954.rs:10:16 to 21:10: not a trait
 
-error[E0404]: expected trait, found type parameter `A`
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:32
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |                             -  ^^^^^^^^^^^^^^^^ not a trait
-   |                             |
-   |                             found this type parameter
+error E0404: expected trait, found type parameter `A`
+ at $DIR/tokenstream-ice-issue-149954.rs:10:32: not a trait
+  on line 10, column 29: found this type parameter
 
-error[E0404]: expected trait, found struct `A`
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:16
-   |
-LL |               A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |  ________________^
-...  |
-LL | |         >;
-   | |_________^ not a trait
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0404: expected trait, found struct `A`
+ at $DIR/tokenstream-ice-issue-149954.rs:10:16 to 21:10: not a trait
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0404]: expected trait, found type parameter `A`
-  --> $DIR/tokenstream-ice-issue-149954.rs:10:32
-   |
-LL |             A: A<{ struct A<A: A<{ #[cfg] () }>> ; enum A  }
-   |                             -  ^^^^^^^^^^^^^^^^ not a trait
-   |                             |
-   |                             found this type parameter
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+error E0404: expected trait, found type parameter `A`
+ at $DIR/tokenstream-ice-issue-149954.rs:10:32: not a trait
+  on line 10, column 29: found this type parameter
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
-error[E0601]: `main` function not found in crate `tokenstream_ice_issue_149954`
-  --> $DIR/tokenstream-ice-issue-149954.rs:22:3
-   |
-LL | };
-   |   ^ consider adding a `main` function to `$DIR/tokenstream-ice-issue-149954.rs`
+error E0601: `main` function not found in crate `tokenstream_ice_issue_149954`
+ at $DIR/tokenstream-ice-issue-149954.rs:22:3: consider adding a `main` function to `$DIR/tokenstream-ice-issue-149954.rs`
 
 error: aborting due to 11 previous errors
 

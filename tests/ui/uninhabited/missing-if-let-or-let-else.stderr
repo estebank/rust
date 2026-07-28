@@ -1,39 +1,19 @@
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `{`
-  --> $DIR/missing-if-let-or-let-else.rs:2:25
-   |
-LL |     let Some(x) = foo() {
-   |                         ^ expected one of `.`, `;`, `?`, `else`, or an operator
-   |
+ at $DIR/missing-if-let-or-let-else.rs:2:25: expected one of `.`, `;`, `?`, `else`, or an operator
 help: you might have meant to use `if let`
-   |
-LL |     if let Some(x) = foo() {
-   |     ++
+ on line 2, column 4, add `if `
 
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `{`
-  --> $DIR/missing-if-let-or-let-else.rs:8:25
-   |
-LL |     let Some(x) = foo() {
-   |                         ^ expected one of `.`, `;`, `?`, `else`, or an operator
-   |
+ at $DIR/missing-if-let-or-let-else.rs:8:25: expected one of `.`, `;`, `?`, `else`, or an operator
 help: you might have meant to use `let...else`
-   |
-LL |     let Some(x) = foo() else {
-   |                         ++++
+ on line 8, column 24, add `else `
 
 error: expected one of `.`, `;`, `?`, `else`, or an operator, found `{`
-  --> $DIR/missing-if-let-or-let-else.rs:14:25
-   |
-LL |     let Some(x) = foo() {
-   |                         ^ expected one of `.`, `;`, `?`, `else`, or an operator
-   |
+ at $DIR/missing-if-let-or-let-else.rs:14:25: expected one of `.`, `;`, `?`, `else`, or an operator
 help: you might have meant to use `if let`
-   |
-LL |     if let Some(x) = foo() {
-   |     ++
+ on line 14, column 4, add `if `
 help: alternatively, you might have meant to use `let...else`
-   |
-LL |     let Some(x) = foo() else {
-   |                         ++++
+ on line 14, column 24, add `else `
 
 error: aborting due to 3 previous errors
 

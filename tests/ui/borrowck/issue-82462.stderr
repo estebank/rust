@@ -1,21 +1,10 @@
-error[E0502]: cannot borrow `v` as mutable because it is also borrowed as immutable
-  --> $DIR/issue-82462.rs:18:9
-   |
-LL |     for x in DroppingSlice(&*v).iter() {
-   |              ------------------
-   |              |               |
-   |              |               immutable borrow occurs here
-   |              a temporary with access to the immutable borrow is created here ...
-LL |         v.push(*x);
-   |         ^^^^^^^^^^ mutable borrow occurs here
-LL |         break;
-LL |     }
-   |     - ... and the immutable borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DroppingSlice`
-   |
+error E0502: cannot borrow `v` as mutable because it is also borrowed as immutable
+ at $DIR/issue-82462.rs:18:9: mutable borrow occurs here
+  on line 17, column 14: a temporary with access to the immutable borrow is created here ...
+  on line 17, column 30: immutable borrow occurs here
+  on line 20: ... and the immutable borrow might be used here, when that temporary is dropped and runs the `Drop` code for type `DroppingSlice`
 help: consider adding semicolon after the expression so its temporaries are dropped sooner, before the local variables declared by the block are dropped
-   |
-LL |     };
-   |      +
+ on line 20, column 5, add `;`
 
 error: aborting due to 1 previous error
 

@@ -1,11 +1,6 @@
-error[E0594]: cannot assign to `*item`, which is behind a `&` reference
-  --> $DIR/issue-69789-iterator-mut-suggestion.rs:7:9
-   |
-LL |     for item in &mut std::iter::empty::<&'static ()>() {
-   |                 -------------------------------------- this iterator yields `&` references
-LL |
-LL |         *item = ();
-   |         ^^^^^^^^^^ `item` is a `&` reference, so it cannot be written to
+error E0594: cannot assign to `*item`, which is behind a `&` reference
+ at $DIR/issue-69789-iterator-mut-suggestion.rs:7:9: `item` is a `&` reference, so it cannot be written to
+  on line 5, column 17: this iterator yields `&` references
 
 error: aborting due to 1 previous error
 

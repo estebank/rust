@@ -1,19 +1,10 @@
-error[E0716]: temporary value dropped while borrowed
-  --> $DIR/issue-36082.rs:9:19
-   |
-LL |     let val: &_ = x.borrow().0;
-   |                   ^^^^^^^^^^  - temporary value is freed at the end of this statement
-   |                   |
-   |                   creates a temporary value which is freed while still in use
-...
-LL |     println!("{}", val);
-   |                    --- borrow later used here
-   |
+error E0716: temporary value dropped while borrowed
+ at $DIR/issue-36082.rs:9:19: creates a temporary value which is freed while still in use
+  on line 9, column 31: temporary value is freed at the end of this statement
+  on line 14, column 20: borrow later used here
 help: consider using a `let` binding to create a longer lived value
-   |
-LL ~     let binding = x.borrow();
-LL ~     let val: &_ = binding.0;
-   |
+ on line 9, add `let binding = x.borrow();
+    `
 
 error: aborting due to 1 previous error
 

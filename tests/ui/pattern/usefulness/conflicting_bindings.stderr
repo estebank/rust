@@ -1,74 +1,38 @@
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:5:9
-   |
-LL |     let ref mut y @ ref mut z = x;
-   |         ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |         |
-   |         value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:5:9: value is mutably borrowed by `y` here
+  on line 5, column 21: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:7:14
-   |
-LL |     let Some(ref mut y @ ref mut z) = x else { return };
-   |              ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |              |
-   |              value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:7:14: value is mutably borrowed by `y` here
+  on line 7, column 26: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:9:17
-   |
-LL |     if let Some(ref mut y @ ref mut z) = x {}
-   |                 ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |                 |
-   |                 value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:9:17: value is mutably borrowed by `y` here
+  on line 9, column 29: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:11:17
-   |
-LL |     if let Some(ref mut y @ ref mut z) = x && true {}
-   |                 ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |                 |
-   |                 value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:11:17: value is mutably borrowed by `y` here
+  on line 11, column 29: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:13:43
-   |
-LL |     if let Some(_) = Some(()) && let Some(ref mut y @ ref mut z) = x && true {}
-   |                                           ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |                                           |
-   |                                           value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:13:43: value is mutably borrowed by `y` here
+  on line 13, column 55: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:15:20
-   |
-LL |     while let Some(ref mut y @ ref mut z) = x {}
-   |                    ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |                    |
-   |                    value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:15:20: value is mutably borrowed by `y` here
+  on line 15, column 32: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:17:20
-   |
-LL |     while let Some(ref mut y @ ref mut z) = x && true {}
-   |                    ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |                    |
-   |                    value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:17:20: value is mutably borrowed by `y` here
+  on line 17, column 32: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:20:9
-   |
-LL |         ref mut y @ ref mut z => {}
-   |         ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |         |
-   |         value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:20:9: value is mutably borrowed by `y` here
+  on line 20, column 21: value is mutably borrowed by `z` here
 
 error: cannot borrow value as mutable more than once at a time
-  --> $DIR/conflicting_bindings.rs:23:24
-   |
-LL |         () if let Some(ref mut y @ ref mut z) = x => {}
-   |                        ^^^^^^^^^   --------- value is mutably borrowed by `z` here
-   |                        |
-   |                        value is mutably borrowed by `y` here
+ at $DIR/conflicting_bindings.rs:23:24: value is mutably borrowed by `y` here
+  on line 23, column 36: value is mutably borrowed by `z` here
 
 error: aborting due to 9 previous errors
 

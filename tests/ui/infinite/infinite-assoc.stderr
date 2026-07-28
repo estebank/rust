@@ -1,25 +1,13 @@
 error: invalid `?` in type
-  --> $DIR/infinite-assoc.rs:12:39
-   |
-LL | struct A((A, <S as Trait>::T<NOT_EXIST?>));
-   |                                       ^ `?` is only allowed on expressions, not types
-   |
+ at $DIR/infinite-assoc.rs:12:39: `?` is only allowed on expressions, not types
 help: if you meant to express that the type might not contain a value, use the `Option` wrapper type
-   |
-LL - struct A((A, <S as Trait>::T<NOT_EXIST?>));
-LL + struct A((A, <S as Trait>::T<Option<NOT_EXIST>>));
-   |
+ on line 12, column 29, add `Option<`
 
-error[E0072]: recursive type `A` has infinite size
-  --> $DIR/infinite-assoc.rs:12:1
-   |
-LL | struct A((A, <S as Trait>::T<NOT_EXIST?>));
-   | ^^^^^^^^  - recursive without indirection
-   |
+error E0072: recursive type `A` has infinite size
+ at $DIR/infinite-assoc.rs:12:1
+  on line 12, column 11: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL | struct A((Box<A>, <S as Trait>::T<NOT_EXIST?>));
-   |           ++++ +
+ on line 12, column 10, add `Box<`
 
 error: aborting due to 2 previous errors
 

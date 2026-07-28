@@ -1,32 +1,16 @@
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/self-hygiene.rs:3:34
-   |
-LL |   macro_rules! emit_self { () => { self } }
-   |                                    ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-...
-LL | /     fn method(self) {
-LL | |         emit_self!();
-   | |         ------------ in this macro invocation
-LL | |     }
-   | |_____- this function has a `self` parameter, but a macro invocation can only access identifiers it receives from parameters
-   |
-   = note: a module named `self` exists in another namespace
-   = note: this error originates in the macro `emit_self` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0424: cannot find value `self` in this scope
+ at $DIR/self-hygiene.rs:3:34: `self` value is a keyword only available in methods with a `self` parameter
+  on line 9 to line 11: this function has a `self` parameter, but a macro invocation can only access identifiers it receives from parameters
+  on line 10: in this macro invocation
+note: a module named `self` exists in another namespace
+note: this error originates in the macro `emit_self` (in Nightly builds, run with -Z macro-backtrace for more info)
 
-error[E0424]: cannot find value `self` in this scope
-  --> $DIR/self-hygiene.rs:3:34
-   |
-LL |   macro_rules! emit_self { () => { self } }
-   |                                    ^^^^ `self` value is a keyword only available in methods with a `self` parameter
-...
-LL | / reuse foo as bar {
-LL | |     emit_self!()
-   | |     ------------ in this macro invocation
-LL | | }
-   | |_- delegation supports a `self` parameter, but a macro invocation can only access identifiers it receives from parameters
-   |
-   = note: a module named `self` exists in another namespace
-   = note: this error originates in the macro `emit_self` (in Nightly builds, run with -Z macro-backtrace for more info)
+error E0424: cannot find value `self` in this scope
+ at $DIR/self-hygiene.rs:3:34: `self` value is a keyword only available in methods with a `self` parameter
+  on line 15 to line 17: delegation supports a `self` parameter, but a macro invocation can only access identifiers it receives from parameters
+  on line 16: in this macro invocation
+note: a module named `self` exists in another namespace
+note: this error originates in the macro `emit_self` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 2 previous errors
 

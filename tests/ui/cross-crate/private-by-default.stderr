@@ -1,132 +1,57 @@
-error[E0603]: static `j` is private
-  --> $DIR/private-by-default.rs:23:29
-   |
-LL |     static_priv_by_default::j;
-   |                             ^ private static
-   |
+error E0603: static `j` is private
+ at $DIR/private-by-default.rs:23:29: private static
 note: the static `j` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:47:1
-   |
-LL | static j: isize = 0;
-   | ^^^^^^^^^^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:47:1
 
-error[E0603]: function `k` is private
-  --> $DIR/private-by-default.rs:25:29
-   |
-LL |     static_priv_by_default::k;
-   |                             ^ private function
-   |
+error E0603: function `k` is private
+ at $DIR/private-by-default.rs:25:29: private function
 note: the function `k` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:48:1
-   |
-LL | fn k() {}
-   | ^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:48:1
 
-error[E0603]: unit struct `l` is private
-  --> $DIR/private-by-default.rs:27:29
-   |
-LL |     static_priv_by_default::l;
-   |                             ^ private unit struct
-   |
+error E0603: unit struct `l` is private
+ at $DIR/private-by-default.rs:27:29: private unit struct
 note: the unit struct `l` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:49:1
-   |
-LL | struct l;
-   | ^^^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:49:1
 
-error[E0603]: enum `m` is private
-  --> $DIR/private-by-default.rs:29:35
-   |
-LL |     foo::<static_priv_by_default::m>();
-   |                                   ^ private enum
-   |
+error E0603: enum `m` is private
+ at $DIR/private-by-default.rs:29:35: private enum
 note: the enum `m` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:50:1
-   |
-LL | enum m {}
-   | ^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:50:1
 
-error[E0603]: type alias `n` is private
-  --> $DIR/private-by-default.rs:31:35
-   |
-LL |     foo::<static_priv_by_default::n>();
-   |                                   ^ private type alias
-   |
+error E0603: type alias `n` is private
+ at $DIR/private-by-default.rs:31:35: private type alias
 note: the type alias `n` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:51:1
-   |
-LL | type n = isize;
-   | ^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:51:1
 
-error[E0603]: module `foo` is private
-  --> $DIR/private-by-default.rs:35:29
-   |
-LL |     static_priv_by_default::foo::a;
-   |                             ^^^  - static `a` is not publicly re-exported
-   |                             |
-   |                             private module
-   |
+error E0603: module `foo` is private
+ at $DIR/private-by-default.rs:35:29: private module
+  on line 35, column 34: static `a` is not publicly re-exported
 note: the module `foo` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:12:1
-   |
-LL | mod foo {
-   | ^^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:12:1
 
-error[E0603]: module `foo` is private
-  --> $DIR/private-by-default.rs:37:29
-   |
-LL |     static_priv_by_default::foo::b;
-   |                             ^^^  - function `b` is not publicly re-exported
-   |                             |
-   |                             private module
-   |
+error E0603: module `foo` is private
+ at $DIR/private-by-default.rs:37:29: private module
+  on line 37, column 34: function `b` is not publicly re-exported
 note: the module `foo` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:12:1
-   |
-LL | mod foo {
-   | ^^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:12:1
 
-error[E0603]: module `foo` is private
-  --> $DIR/private-by-default.rs:39:29
-   |
-LL |     static_priv_by_default::foo::c;
-   |                             ^^^  - unit struct `c` is not publicly re-exported
-   |                             |
-   |                             private module
-   |
+error E0603: module `foo` is private
+ at $DIR/private-by-default.rs:39:29: private module
+  on line 39, column 34: unit struct `c` is not publicly re-exported
 note: the module `foo` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:12:1
-   |
-LL | mod foo {
-   | ^^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:12:1
 
-error[E0603]: module `foo` is private
-  --> $DIR/private-by-default.rs:41:35
-   |
-LL |     foo::<static_priv_by_default::foo::d>();
-   |                                   ^^^  - enum `d` is not publicly re-exported
-   |                                   |
-   |                                   private module
-   |
+error E0603: module `foo` is private
+ at $DIR/private-by-default.rs:41:35: private module
+  on line 41, column 40: enum `d` is not publicly re-exported
 note: the module `foo` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:12:1
-   |
-LL | mod foo {
-   | ^^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:12:1
 
-error[E0603]: module `foo` is private
-  --> $DIR/private-by-default.rs:43:35
-   |
-LL |     foo::<static_priv_by_default::foo::e>();
-   |                                   ^^^  - type alias `e` is not publicly re-exported
-   |                                   |
-   |                                   private module
-   |
+error E0603: module `foo` is private
+ at $DIR/private-by-default.rs:43:35: private module
+  on line 43, column 40: type alias `e` is not publicly re-exported
 note: the module `foo` is defined here
-  --> $DIR/auxiliary/static_priv_by_default.rs:12:1
-   |
-LL | mod foo {
-   | ^^^^^^^
+ at $DIR/auxiliary/static_priv_by_default.rs:12:1
 
 error: aborting due to 10 previous errors
 

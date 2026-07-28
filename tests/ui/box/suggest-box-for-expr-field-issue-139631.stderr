@@ -1,42 +1,23 @@
-error[E0308]: mismatched types
-  --> $DIR/suggest-box-for-expr-field-issue-139631.rs:11:18
-   |
-LL |     let v2 = X { a };
-   |                  ^ expected `Box<u32>`, found integer
-   |
-   = note: expected struct `Box<u32>`
-                found type `{integer}`
-   = note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
+error E0308: mismatched types
+ at $DIR/suggest-box-for-expr-field-issue-139631.rs:11:18: expected `Box<u32>`, found integer
+note: expected struct `Box<u32>`
+           found type `{integer}`
+note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
 help: store this in the heap by calling `Box::new`
-   |
-LL |     let v2 = X { a: Box::new(a) };
-   |                  ++++++++++++ +
+ on line 11, column 17, add `a: Box::new(`
 
-error[E0308]: mismatched types
-  --> $DIR/suggest-box-for-expr-field-issue-139631.rs:12:21
-   |
-LL |     let v3 = Y { y: a };
-   |                     ^ expected `Box<u32>`, found integer
-   |
-   = note: expected struct `Box<u32>`
-                found type `{integer}`
-   = note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
+error E0308: mismatched types
+ at $DIR/suggest-box-for-expr-field-issue-139631.rs:12:21: expected `Box<u32>`, found integer
+note: expected struct `Box<u32>`
+           found type `{integer}`
+note: for more on the distinction between the stack and the heap, read https://doc.rust-lang.org/book/ch15-01-box.html, https://doc.rust-lang.org/rust-by-example/std/box.html, and https://doc.rust-lang.org/std/boxed/index.html
 help: store this in the heap by calling `Box::new`
-   |
-LL |     let v3 = Y { y: Box::new(a) };
-   |                     +++++++++ +
+ on line 12, column 20, add `Box::new(`
 
-error[E0560]: struct `Y` has no field named `a`
-  --> $DIR/suggest-box-for-expr-field-issue-139631.rs:13:18
-   |
-LL |     let v4 = Y { a };
-   |                  ^ unknown field
-   |
+error E0560: struct `Y` has no field named `a`
+ at $DIR/suggest-box-for-expr-field-issue-139631.rs:13:18: unknown field
 help: a field with a similar name exists
-   |
-LL -     let v4 = Y { a };
-LL +     let v4 = Y { y };
-   |
+ on line 13, column 17, replace with `y`
 
 error: aborting due to 3 previous errors
 

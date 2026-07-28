@@ -1,40 +1,18 @@
-error[E0382]: use of moved value: `foo`
-  --> $DIR/matching-partially-moved-value-17385.rs:19:5
-   |
-LL |     let foo = X(1);
-   |         --- move occurs because `foo` has type `X`, which does not implement the `Copy` trait
-LL |     drop(foo);
-   |          --- value moved here
-LL |     match foo {
-   |     ^^^^^^^^^ value used here after move
-   |
+error E0382: use of moved value: `foo`
+ at $DIR/matching-partially-moved-value-17385.rs:19:5: value used here after move
+  on line 17, column 9: move occurs because `foo` has type `X`, which does not implement the `Copy` trait
+  on line 18, column 10: value moved here
 note: if `X` implemented `Clone`, you could clone the value
-  --> $DIR/matching-partially-moved-value-17385.rs:2:1
-   |
-LL | struct X(isize);
-   | ^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     drop(foo);
-   |          --- you could clone this value
+ at $DIR/matching-partially-moved-value-17385.rs:2:1: consider implementing `Clone` for this type
+  on line 18, column 10: you could clone this value
 
-error[E0382]: use of moved value: `e`
-  --> $DIR/matching-partially-moved-value-17385.rs:26:11
-   |
-LL |     let e = Enum::Variant2;
-   |         - move occurs because `e` has type `Enum`, which does not implement the `Copy` trait
-LL |     drop(e);
-   |          - value moved here
-LL |     match e {
-   |           ^ value used here after move
-   |
+error E0382: use of moved value: `e`
+ at $DIR/matching-partially-moved-value-17385.rs:26:11: value used here after move
+  on line 24, column 9: move occurs because `e` has type `Enum`, which does not implement the `Copy` trait
+  on line 25, column 10: value moved here
 note: if `Enum` implemented `Clone`, you could clone the value
-  --> $DIR/matching-partially-moved-value-17385.rs:4:1
-   |
-LL | enum Enum {
-   | ^^^^^^^^^ consider implementing `Clone` for this type
-...
-LL |     drop(e);
-   |          - you could clone this value
+ at $DIR/matching-partially-moved-value-17385.rs:4:1: consider implementing `Clone` for this type
+  on line 25, column 10: you could clone this value
 
 error: aborting due to 2 previous errors
 

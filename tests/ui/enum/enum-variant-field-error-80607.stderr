@@ -1,17 +1,8 @@
-error[E0559]: variant `Enum::V1` has no field named `x`
-  --> $DIR/enum-variant-field-error-80607.rs:8:16
-   |
-LL |     V1(i32),
-   |     -- `Enum::V1` defined here
-...
-LL |     Enum::V1 { x }
-   |                ^ field does not exist
-   |
+error E0559: variant `Enum::V1` has no field named `x`
+ at $DIR/enum-variant-field-error-80607.rs:8:16: field does not exist
+  on line 4: `Enum::V1` defined here
 help: `Enum::V1` is a tuple variant, use the appropriate syntax
-   |
-LL -     Enum::V1 { x }
-LL +     Enum::V1(/* i32 */)
-   |
+ on line 8, column 12, replace with `(/* i32 */)`
 
 error: aborting due to 1 previous error
 

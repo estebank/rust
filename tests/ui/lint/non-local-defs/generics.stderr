@@ -1,44 +1,23 @@
 warning: non-local `impl` definition, `impl` blocks should be written at the same level as their item
-  --> $DIR/generics.rs:9:5
-   |
-LL | fn main() {
-   | --------- move the `impl` block outside of this function `main`
-...
-LL |     impl<T: Local> Global for Vec<T> { }
-   |     ^^^^^^^^^^^^^^^------^^^^^---^^^
-   |                    |          |
-   |                    |          `Vec` is not local
-   |                    `Global` is not local
-   |
-   = note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
-   = note: `#[warn(non_local_definitions)]` on by default
+ at $DIR/generics.rs:9:5
+  on line 6: move the `impl` block outside of this function `main`
+  on line 9, column 20: `Global` is not local
+  on line 9, column 31: `Vec` is not local
+note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
+note: `#[warn(non_local_definitions)]` on by default
 
 warning: non-local `impl` definition, `impl` blocks should be written at the same level as their item
-  --> $DIR/generics.rs:20:5
-   |
-LL | fn bad() {
-   | -------- move the `impl` block outside of this function `bad`
-LL |     struct Local;
-LL |     impl Uto7 for Test where Local: std::any::Any {}
-   |     ^^^^^----^^^^^----
-   |          |        |
-   |          |        `Test` is not local
-   |          `Uto7` is not local
-   |
-   = note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
+ at $DIR/generics.rs:20:5
+  on line 18: move the `impl` block outside of this function `bad`
+  on line 20, column 10: `Uto7` is not local
+  on line 20, column 19: `Test` is not local
+note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
 
 warning: non-local `impl` definition, `impl` blocks should be written at the same level as their item
-  --> $DIR/generics.rs:23:5
-   |
-LL | fn bad() {
-   | -------- move the `impl` block outside of this function `bad`
-...
-LL |     impl<T> Uto8 for T {}
-   |     ^^^^^^^^----^^^^^^
-   |             |
-   |             `Uto8` is not local
-   |
-   = note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
+ at $DIR/generics.rs:23:5
+  on line 18: move the `impl` block outside of this function `bad`
+  on line 23, column 13: `Uto8` is not local
+note: an `impl` is never scoped, even when it is nested inside an item, as it may impact type checking outside of that item, which can be the case if neither the trait or the self type are at the same nesting level as the `impl`
 
 warning: 3 warnings emitted
 

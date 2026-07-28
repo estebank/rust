@@ -1,33 +1,15 @@
-error[E0309]: the parameter type `T` may not live long enough
-  --> $DIR/regionck-1.rs:9:5
-   |
-LL |     type NoTyOutliv<'a, T> = &'a T;
-   |     ^^^^^^^^^^^^^^^^--^^^^
-   |     |               |
-   |     |               the parameter type `T` must be valid for the lifetime `'a` as defined here...
-   |     ...so that the reference type `&'a T` does not outlive the data it points at
-   |
+error E0309: the parameter type `T` may not live long enough
+ at $DIR/regionck-1.rs:9:5: ...so that the reference type `&'a T` does not outlive the data it points at
+  on line 9, column 21: the parameter type `T` must be valid for the lifetime `'a` as defined here...
 help: consider adding an explicit lifetime bound
-   |
-LL |     type NoTyOutliv<'a, T: 'a> = &'a T;
-   |                          ++++
+ on line 9, column 25, add `: 'a`
 
-error[E0491]: in type `&'a &'b ()`, reference has a longer lifetime than the data it references
-  --> $DIR/regionck-1.rs:10:5
-   |
-LL |     type NoReOutliv<'a, 'b> = &'a &'b ();
-   |     ^^^^^^^^^^^^^^^^^^^^^^^
-   |
+error E0491: in type `&'a &'b ()`, reference has a longer lifetime than the data it references
+ at $DIR/regionck-1.rs:10:5
 note: the pointer is valid for the lifetime `'a` as defined here
-  --> $DIR/regionck-1.rs:10:21
-   |
-LL |     type NoReOutliv<'a, 'b> = &'a &'b ();
-   |                     ^^
+ at $DIR/regionck-1.rs:10:21
 note: but the referenced data is only valid for the lifetime `'b` as defined here
-  --> $DIR/regionck-1.rs:10:25
-   |
-LL |     type NoReOutliv<'a, 'b> = &'a &'b ();
-   |                         ^^
+ at $DIR/regionck-1.rs:10:25
 
 error: aborting due to 2 previous errors
 

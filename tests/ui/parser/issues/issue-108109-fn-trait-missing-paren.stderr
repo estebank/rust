@@ -1,11 +1,7 @@
 error: expected one of `(`, `+`, `,`, `::`, `<`, or `{`, found `->`
-  --> $DIR/issue-108109-fn-trait-missing-paren.rs:3:34
-   |
-LL | pub fn func<F>() where F: FnOnce -> () {}
-   |                           -------^^ expected one of `(`, `+`, `,`, `::`, `<`, or `{`
-   |                           |     |
-   |                           |     help: try adding parentheses
-   |                           `Fn` bounds require arguments in parentheses
+ at $DIR/issue-108109-fn-trait-missing-paren.rs:3:34: expected one of `(`, `+`, `,`, `::`, `<`, or `{`
+  on line 3, column 27: `Fn` bounds require arguments in parentheses
+  on line 3, column 33: help: try adding parentheses
 
 error: aborting due to 1 previous error
 

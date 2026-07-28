@@ -1,53 +1,28 @@
-error[E0803]: cannot infer an appropriate lifetime for lifetime parameter 's in generic type due to conflicting requirements
-  --> $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5
-   |
-LL |     fn get<'s>(s: &'s str, _: <&&'s () as Project>::Ty) -> &'static str {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
+error E0803: cannot infer an appropriate lifetime for lifetime parameter 's in generic type due to conflicting requirements
+ at $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5
 note: first, the lifetime cannot outlive the lifetime `'s` as defined here...
-  --> $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:13:12
-   |
-LL |     fn get<'s>(s: &'s str, _: ()) -> &'_ str;
-   |            ^^
+ at $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:13:12
 note: ...so that the method type is compatible with trait
-  --> $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5
-   |
-LL |     fn get<'s>(s: &'s str, _: <&&'s () as Project>::Ty) -> &'static str {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   = note: expected `fn(&'s _, ()) -> &'s _`
-              found `fn(&_, ()) -> &'static _`
-   = note: but, the lifetime must be valid for the static lifetime...
+ at $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5
+note: expected `fn(&'s _, ()) -> &'s _`
+         found `fn(&_, ()) -> &'static _`
+note: but, the lifetime must be valid for the static lifetime...
 note: ...so that the types are compatible
-  --> $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5
-   |
-LL |     fn get<'s>(s: &'s str, _: <&&'s () as Project>::Ty) -> &'static str {
-   |     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   = note: expected `<&&() as Project>`
-              found `<&&'static () as Project>`
+ at $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5
+note: expected `<&&() as Project>`
+         found `<&&'static () as Project>`
 
-error[E0308]: mismatched types
-  --> $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:31
-   |
-LL |     fn get<'s>(s: &'s str, _: <&&'s () as Project>::Ty) -> &'static str {
-   |                               ^^^^^^^^^^^^^^^^^^^^^^^^ lifetime mismatch
-   |
-   = note: expected trait `<&&'s () as Project>`
-              found trait `<&&'static () as Project>`
+error E0308: mismatched types
+ at $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:31: lifetime mismatch
+note: expected trait `<&&'s () as Project>`
+         found trait `<&&'static () as Project>`
 note: the lifetime `'s` as defined here...
-  --> $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:12
-   |
-LL |     fn get<'s>(s: &'s str, _: <&&'s () as Project>::Ty) -> &'static str {
-   |            ^^
-   = note: ...does not necessarily outlive the static lifetime
+ at $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:12
+note: ...does not necessarily outlive the static lifetime
 
 error: lifetime may not live long enough
-  --> $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5
-   |
-LL |     fn get<'s>(s: &'s str, _: <&&'s () as Project>::Ty) -> &'static str {
-   |     ^^^^^^^--^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |     |      |
-   |     |      lifetime `'s` defined here
-   |     requires that `'s` must outlive `'static`
+ at $DIR/compare-impl-item-conflicting-lifetime-requirements.rs:17:5: requires that `'s` must outlive `'static`
+  on line 17, column 12: lifetime `'s` defined here
 
 error: aborting due to 3 previous errors
 

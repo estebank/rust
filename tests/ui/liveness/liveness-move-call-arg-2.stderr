@@ -1,25 +1,12 @@
-error[E0382]: use of moved value: `x`
-  --> $DIR/liveness-move-call-arg-2.rs:9:18
-   |
-LL |         let x: Box<isize> = Box::new(25);
-   |             - move occurs because `x` has type `Box<isize>`, which does not implement the `Copy` trait
-LL |
-LL |         loop {
-   |         ---- inside of this loop
-LL |             take(x);
-   |                  ^ value moved here, in previous iteration of loop
-   |
+error E0382: use of moved value: `x`
+ at $DIR/liveness-move-call-arg-2.rs:9:18: value moved here, in previous iteration of loop
+  on line 6, column 13: move occurs because `x` has type `Box<isize>`, which does not implement the `Copy` trait
+  on line 8: inside of this loop
 note: consider changing this parameter type in function `take` to borrow instead if owning the value isn't necessary
-  --> $DIR/liveness-move-call-arg-2.rs:1:13
-   |
-LL | fn take(_x: Box<isize>) {}
-   |    ----     ^^^^^^^^^^ this parameter takes ownership of the value
-   |    |
-   |    in this function
+ at $DIR/liveness-move-call-arg-2.rs:1:13: this parameter takes ownership of the value
+  on line 1, column 4: in this function
 help: consider cloning the value if the performance cost is acceptable
-   |
-LL |             take(x.clone());
-   |                   ++++++++
+ on line 9, column 18, add `.clone()`
 
 error: aborting due to 1 previous error
 

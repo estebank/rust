@@ -1,45 +1,19 @@
-error[E0732]: `#[repr(inttype)]` must be specified for enums with explicit discriminants and non-unit variants
-  --> $DIR/invalid-niche-discriminant.rs:11:1
-   |
-LL |   enum E {
-   |   ^^^^^^
-...
-LL |       S0 {
-   |       -- non-unit discriminant declared here
-...
-LL |       Bar = {
-   |  ___________-
-LL | |         let x = 1;
-LL | |         3
-LL | |     },
-   | |_____- explicit discriminant specified here
+error E0732: `#[repr(inttype)]` must be specified for enums with explicit discriminants and non-unit variants
+ at $DIR/invalid-niche-discriminant.rs:11:1
+  on line 14: non-unit discriminant declared here
+  on line 17, column 11 to line 20, column 6: explicit discriminant specified here
 
 error: variant 1 has discriminant 3 in niche-encoded type
-  --> $DIR/invalid-niche-discriminant.rs:11:1
-   |
-LL | enum E {
-   | ^^^^^^
+ at $DIR/invalid-niche-discriminant.rs:11:1
 
-error[E0599]: no variant named `S1` found for enum `E`
-  --> $DIR/invalid-niche-discriminant.rs:23:18
-   |
-LL | enum E {
-   | ------ variant `S1` not found here
-...
-LL | static C: E = E::S1 { u: 23 };
-   |                  ^^
-   |
+error E0599: no variant named `S1` found for enum `E`
+ at $DIR/invalid-niche-discriminant.rs:23:18
+  on line 11: variant `S1` not found here
 help: there is a variant with a similar name
-   |
-LL - static C: E = E::S1 { u: 23 };
-LL + static C: E = E::S0 { u: 23 };
-   |
+ on line 23, column 17, replace with `S0`
 
 error: `Res::Err` but no error emitted
-  --> $DIR/invalid-niche-discriminant.rs:23:15
-   |
-LL | static C: E = E::S1 { u: 23 };
-   |               ^^^^^
+ at $DIR/invalid-niche-discriminant.rs:23:15
 
 error: aborting due to 4 previous errors
 

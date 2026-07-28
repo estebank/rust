@@ -1,8 +1,5 @@
-error[E0425]: cannot find value `meta` in this scope
-  --> $DIR/meta-is-not-reserved.rs:5:15
-   |
-LL |     let xyz = meta;
-   |               ^^^^ not found in this scope
+error E0425: cannot find value `meta` in this scope
+ at $DIR/meta-is-not-reserved.rs:5:15: not found in this scope
 
 error: aborting due to 1 previous error
 

@@ -1,30 +1,14 @@
-error[E0603]: module `bar` is private
-  --> $DIR/use-mod-3.rs:1:10
-   |
-LL | use foo::bar::{
-   |          ^^^ private module
-LL |     self
-   |     ---- module `self` is not publicly re-exported
-   |
+error E0603: module `bar` is private
+ at $DIR/use-mod-3.rs:1:10: private module
+  on line 2: module `self` is not publicly re-exported
 note: the module `bar` is defined here
-  --> $DIR/use-mod-3.rs:9:5
-   |
-LL |     mod bar { pub type Bar = isize; }
-   |     ^^^^^^^
+ at $DIR/use-mod-3.rs:9:5
 
-error[E0603]: module `bar` is private
-  --> $DIR/use-mod-3.rs:4:10
-   |
-LL | use foo::bar::{
-   |          ^^^ private module
-LL |     Bar
-   |     --- type alias `Bar` is not publicly re-exported
-   |
+error E0603: module `bar` is private
+ at $DIR/use-mod-3.rs:4:10: private module
+  on line 5: type alias `Bar` is not publicly re-exported
 note: the module `bar` is defined here
-  --> $DIR/use-mod-3.rs:9:5
-   |
-LL |     mod bar { pub type Bar = isize; }
-   |     ^^^^^^^
+ at $DIR/use-mod-3.rs:9:5
 
 error: aborting due to 2 previous errors
 

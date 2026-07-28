@@ -1,28 +1,14 @@
-error[E0599]: no method named `method` found for reference `&impl Sized` in the current scope
-  --> $DIR/would-constrain-opaque.rs:29:11
-   |
-LL |         x.method();
-   |           ^^^^^^ method not found in `&impl Sized`
-   |
-   = help: items from traits can only be used if the trait is implemented and in scope
+error E0599: no method named `method` found for reference `&impl Sized` in the current scope
+ at $DIR/would-constrain-opaque.rs:29:11: method not found in `&impl Sized`
+help: items from traits can only be used if the trait is implemented and in scope
 note: `Trait` defines an item `method`, perhaps you need to implement it
-  --> $DIR/would-constrain-opaque.rs:16:1
-   |
-LL | trait Trait: Sized {
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/would-constrain-opaque.rs:16:1
 
-error[E0599]: no method named `method` found for reference `&impl Sized` in the current scope
-  --> $DIR/would-constrain-opaque.rs:31:11
-   |
-LL |         x.method();
-   |           ^^^^^^ method not found in `&impl Sized`
-   |
-   = help: items from traits can only be used if the trait is implemented and in scope
+error E0599: no method named `method` found for reference `&impl Sized` in the current scope
+ at $DIR/would-constrain-opaque.rs:31:11: method not found in `&impl Sized`
+help: items from traits can only be used if the trait is implemented and in scope
 note: `Trait` defines an item `method`, perhaps you need to implement it
-  --> $DIR/would-constrain-opaque.rs:16:1
-   |
-LL | trait Trait: Sized {
-   | ^^^^^^^^^^^^^^^^^^
+ at $DIR/would-constrain-opaque.rs:16:1
 
 error: aborting due to 2 previous errors
 

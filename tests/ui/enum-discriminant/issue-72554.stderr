@@ -1,16 +1,8 @@
-error[E0072]: recursive type `ElemDerived` has infinite size
-  --> $DIR/issue-72554.rs:4:1
-   |
-LL | pub enum ElemDerived {
-   | ^^^^^^^^^^^^^^^^^^^^
-LL |
-LL |     A(ElemDerived)
-   |       ----------- recursive without indirection
-   |
+error E0072: recursive type `ElemDerived` has infinite size
+ at $DIR/issue-72554.rs:4:1
+  on line 6, column 7: recursive without indirection
 help: insert some indirection (e.g., a `Box`, `Rc`, or `&`) to break the cycle
-   |
-LL |     A(Box<ElemDerived>)
-   |       ++++           +
+ on line 6, column 6, add `Box<`
 
 error: aborting due to 1 previous error
 

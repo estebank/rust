@@ -1,13 +1,7 @@
-error[E0425]: cannot find value `N` in this scope
-  --> $DIR/issue-116186.rs:4:28
-   |
-LL | fn something(path: [usize; N]) -> impl Clone {
-   |                            ^ not found in this scope
-   |
+error E0425: cannot find value `N` in this scope
+ at $DIR/issue-116186.rs:4:28: not found in this scope
 help: you might be missing a const parameter
-   |
-LL | fn something<const N: /* Type */>(path: [usize; N]) -> impl Clone {
-   |             +++++++++++++++++++++
+ on line 4, column 12, add `<const N: /* Type */>`
 
 error: aborting due to 1 previous error
 

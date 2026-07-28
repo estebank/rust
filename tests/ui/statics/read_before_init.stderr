@@ -1,30 +1,16 @@
-error[E0080]: encountered static that tried to access itself during initialization
-  --> $DIR/read_before_init.rs:11:45
-   |
-LL | pub static X: (i32, MaybeUninit<i32>) = (1, foo(&X.0, 1));
-   |                                             ^^^^^^^^^^^^ evaluation of `X` failed inside this call
-   |
+error E0080: encountered static that tried to access itself during initialization
+ at $DIR/read_before_init.rs:11:45: evaluation of `X` failed inside this call
 note: inside `foo`
-  --> $DIR/read_before_init.rs:19:9
-   |
-LL |         std::ptr::copy(x, temp.as_mut_ptr(), num);
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/read_before_init.rs:19:9
 note: inside `std::ptr::copy::<i32>`
-  --> $SRC_DIR/core/src/ptr/mod.rs:LL:COL
+ at $SRC_DIR/core/src/ptr/mod.rs:LL:COL
 
-error[E0080]: encountered static that tried to access itself during initialization
-  --> $DIR/read_before_init.rs:13:45
-   |
-LL | pub static Y: (i32, MaybeUninit<i32>) = (1, foo(&Y.0, 0));
-   |                                             ^^^^^^^^^^^^ evaluation of `Y` failed inside this call
-   |
+error E0080: encountered static that tried to access itself during initialization
+ at $DIR/read_before_init.rs:13:45: evaluation of `Y` failed inside this call
 note: inside `foo`
-  --> $DIR/read_before_init.rs:19:9
-   |
-LL |         std::ptr::copy(x, temp.as_mut_ptr(), num);
-   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ at $DIR/read_before_init.rs:19:9
 note: inside `std::ptr::copy::<i32>`
-  --> $SRC_DIR/core/src/ptr/mod.rs:LL:COL
+ at $SRC_DIR/core/src/ptr/mod.rs:LL:COL
 
 error: aborting due to 2 previous errors
 

@@ -1,24 +1,12 @@
-error[E0214]: parenthesized type parameters may only be used with a `Fn` trait
-  --> $DIR/unboxed-closure-sugar-used-on-struct-1.rs:8:16
-   |
-LL |     let x: Box<Bar()> = panic!();
-   |                ^^^^^ only `Fn` traits may use parentheses
+error E0214: parenthesized type parameters may only be used with a `Fn` trait
+ at $DIR/unboxed-closure-sugar-used-on-struct-1.rs:8:16: only `Fn` traits may use parentheses
 
-error[E0107]: struct takes 1 generic argument but 0 generic arguments were supplied
-  --> $DIR/unboxed-closure-sugar-used-on-struct-1.rs:8:16
-   |
-LL |     let x: Box<Bar()> = panic!();
-   |                ^^^ expected 1 generic argument
-   |
+error E0107: struct takes 1 generic argument but 0 generic arguments were supplied
+ at $DIR/unboxed-closure-sugar-used-on-struct-1.rs:8:16: expected 1 generic argument
 note: struct defined here, with 1 generic parameter: `A`
-  --> $DIR/unboxed-closure-sugar-used-on-struct-1.rs:3:8
-   |
-LL | struct Bar<A> {
-   |        ^^^ -
+ at $DIR/unboxed-closure-sugar-used-on-struct-1.rs:3:8
 help: add missing generic argument
-   |
-LL |     let x: Box<Bar(A)> = panic!();
-   |                    +
+ on line 8, column 19, add `A`
 
 error: aborting due to 2 previous errors
 

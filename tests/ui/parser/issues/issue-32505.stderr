@@ -1,21 +1,11 @@
 error: expected expression, found `)`
-  --> $DIR/issue-32505.rs:2:12
-   |
-LL |     foo(|_|)
-   |         ---^ expected expression
-   |         |
-   |         while parsing the body of this closure
-   |
+ at $DIR/issue-32505.rs:2:12: expected expression
+  on line 2, column 9: while parsing the body of this closure
 help: you might have meant to open the body of the closure
-   |
-LL |     foo(|_| {})
-   |             ++
+ on line 2, column 11, add ` {`
 
-error[E0425]: cannot find function `foo` in this scope
-  --> $DIR/issue-32505.rs:2:5
-   |
-LL |     foo(|_|)
-   |     ^^^ not found in this scope
+error E0425: cannot find function `foo` in this scope
+ at $DIR/issue-32505.rs:2:5: not found in this scope
 
 error: aborting due to 2 previous errors
 

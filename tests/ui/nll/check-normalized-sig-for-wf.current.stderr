@@ -1,45 +1,20 @@
-error[E0597]: `s` does not live long enough
-  --> $DIR/check-normalized-sig-for-wf.rs:11:7
-   |
-LL |     s: String,
-   |     - binding `s` declared here
-...
-LL |     f(&s).0
-   |     --^^-
-   |     | |
-   |     | borrowed value does not live long enough
-   |     argument requires that `s` is borrowed for `'static`
-LL |
-LL | }
-   | - `s` dropped here while still borrowed
+error E0597: `s` does not live long enough
+ at $DIR/check-normalized-sig-for-wf.rs:11:7: borrowed value does not live long enough
+  on line 7: binding `s` declared here
+  on line 11: argument requires that `s` is borrowed for `'static`
+  on line 13: `s` dropped here while still borrowed
 
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/check-normalized-sig-for-wf.rs:19:5
-   |
-LL | fn extend<T>(input: &T) -> &'static T {
-   |              -----  - let's call the lifetime of this reference `'1`
-   |              |
-   |              `input` is a reference that is only valid in the function body
-...
-LL |     n(input).0
-   |     ^^^^^^^^
-   |     |
-   |     `input` escapes the function body here
-   |     argument requires that `'1` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/check-normalized-sig-for-wf.rs:19:5: `input` escapes the function body here
+  on line 19: argument requires that `'1` must outlive `'static`
+  on line 16, column 14: `input` is a reference that is only valid in the function body
+  on line 16, column 21: let's call the lifetime of this reference `'1`
 
-error[E0521]: borrowed data escapes outside of function
-  --> $DIR/check-normalized-sig-for-wf.rs:27:5
-   |
-LL | fn extend_mut<'a, T>(input: &'a mut T) -> &'static mut T {
-   |               --     ----- `input` is a reference that is only valid in the function body
-   |               |
-   |               lifetime `'a` defined here
-...
-LL |     n(input).0
-   |     ^^^^^^^^
-   |     |
-   |     `input` escapes the function body here
-   |     argument requires that `'a` must outlive `'static`
+error E0521: borrowed data escapes outside of function
+ at $DIR/check-normalized-sig-for-wf.rs:27:5: `input` escapes the function body here
+  on line 27: argument requires that `'a` must outlive `'static`
+  on line 24, column 15: lifetime `'a` defined here
+  on line 24, column 22: `input` is a reference that is only valid in the function body
 
 error: aborting due to 3 previous errors
 

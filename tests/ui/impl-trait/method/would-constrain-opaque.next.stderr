@@ -1,26 +1,14 @@
-error[E0599]: no method named `method` found for reference `&_` in the current scope
-  --> $DIR/would-constrain-opaque.rs:29:11
-   |
-LL |         x.method();
-   |           ^^^^^^ method not found in `&_`
-   |
-   = help: items from traits can only be used if the trait is implemented and in scope
+error E0599: no method named `method` found for reference `&_` in the current scope
+ at $DIR/would-constrain-opaque.rs:29:11: method not found in `&_`
+help: items from traits can only be used if the trait is implemented and in scope
 help: trait `Trait` which provides `method` is implemented but not in scope; perhaps you want to import it
-   |
-LL + use Trait;
-   |
+ on line 16, column 1, add `use Trait;`
 
-error[E0599]: no method named `method` found for reference `&_` in the current scope
-  --> $DIR/would-constrain-opaque.rs:31:11
-   |
-LL |         x.method();
-   |           ^^^^^^ method not found in `&_`
-   |
-   = help: items from traits can only be used if the trait is implemented and in scope
+error E0599: no method named `method` found for reference `&_` in the current scope
+ at $DIR/would-constrain-opaque.rs:31:11: method not found in `&_`
+help: items from traits can only be used if the trait is implemented and in scope
 help: trait `Trait` which provides `method` is implemented but not in scope; perhaps you want to import it
-   |
-LL + use Trait;
-   |
+ on line 16, column 1, add `use Trait;`
 
 error: aborting due to 2 previous errors
 

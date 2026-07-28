@@ -1,41 +1,20 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-59819.rs:28:18
-   |
-LL |     let y: i32 = x;
-   |            ---   ^ expected `i32`, found `Foo`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/issue-59819.rs:28:18: expected `i32`, found `Foo`
+  on line 28, column 12: expected due to this
 help: consider dereferencing the type
-   |
-LL |     let y: i32 = *x;
-   |                  +
+ on line 28, column 17, add `*`
 
-error[E0308]: mismatched types
-  --> $DIR/issue-59819.rs:30:18
-   |
-LL |     let b: i32 = a;
-   |            ---   ^ expected `i32`, found `&{integer}`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/issue-59819.rs:30:18: expected `i32`, found `&{integer}`
+  on line 30, column 12: expected due to this
 help: consider dereferencing the borrow
-   |
-LL |     let b: i32 = *a;
-   |                  +
+ on line 30, column 17, add `*`
 
-error[E0308]: mismatched types
-  --> $DIR/issue-59819.rs:34:21
-   |
-LL |     let g: String = f;
-   |            ------   ^ expected `String`, found `Bar`
-   |            |
-   |            expected due to this
-   |
+error E0308: mismatched types
+ at $DIR/issue-59819.rs:34:21: expected `String`, found `Bar`
+  on line 34, column 12: expected due to this
 help: try using a conversion method
-   |
-LL |     let g: String = f.to_string();
-   |                      ++++++++++++
+ on line 34, column 21, add `.to_string()`
 
 error: aborting due to 3 previous errors
 

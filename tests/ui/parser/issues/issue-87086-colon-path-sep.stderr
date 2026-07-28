@@ -1,119 +1,56 @@
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:17:12
-   |
-LL |         Foo:Bar => {}
-   |            ^--- specifying the type of a pattern isn't supported
-   |            |
-   |            expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:17:12: expected one of `@` or `|`
+  on line 17, column 13: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         Foo::Bar => {}
-   |             +
+ on line 17, column 11, replace with `::`
 
 error: expected one of `!`, `(`, `...`, `..=`, `..`, `::`, `{`, or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:23:17
-   |
-LL |         qux::Foo:Bar => {}
-   |                 ^--- specifying the type of a pattern isn't supported
-   |                 |
-   |                 expected one of 8 possible tokens
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:23:17: expected one of 8 possible tokens
+  on line 23, column 18: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         qux::Foo::Bar => {}
-   |                  +
+ on line 23, column 16, replace with `::`
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:29:12
-   |
-LL |         qux:Foo::Baz => {}
-   |            ^-------- specifying the type of a pattern isn't supported
-   |            |
-   |            expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:29:12: expected one of `@` or `|`
+  on line 29, column 13: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         qux::Foo::Baz => {}
-   |             +
+ on line 29, column 11, replace with `::`
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:35:12
-   |
-LL |         qux: Foo::Baz if true => {}
-   |            ^ -------- specifying the type of a pattern isn't supported
-   |            |
-   |            expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:35:12: expected one of `@` or `|`
+  on line 35, column 14: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         qux::Foo::Baz if true => {}
-   |            ~~
+ on line 35, column 11, replace with `::`
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:40:15
-   |
-LL |     if let Foo:Bar = f() {
-   |               ^--- specifying the type of a pattern isn't supported
-   |               |
-   |               expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:40:15: expected one of `@` or `|`
+  on line 40, column 16: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |     if let Foo::Bar = f() {
-   |                +
+ on line 40, column 14, replace with `::`
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:48:16
-   |
-LL |         ref qux: Foo::Baz => {}
-   |                ^ -------- specifying the type of a pattern isn't supported
-   |                |
-   |                expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:48:16: expected one of `@` or `|`
+  on line 48, column 18: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         ref qux::Foo::Baz => {}
-   |                ~~
+ on line 48, column 15, replace with `::`
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:57:16
-   |
-LL |         mut qux: Foo::Baz => {}
-   |                ^ -------- specifying the type of a pattern isn't supported
-   |                |
-   |                expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:57:16: expected one of `@` or `|`
+  on line 57, column 18: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         mut qux::Foo::Baz => {}
-   |                ~~
+ on line 57, column 15, replace with `::`
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:68:12
-   |
-LL |         Foo:Bar::Baz => {}
-   |            ^-------- specifying the type of a pattern isn't supported
-   |            |
-   |            expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:68:12: expected one of `@` or `|`
+  on line 68, column 13: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         Foo::Bar::Baz => {}
-   |             +
+ on line 68, column 11, replace with `::`
 
 error: expected one of `@` or `|`, found `:`
-  --> $DIR/issue-87086-colon-path-sep.rs:74:12
-   |
-LL |         Foo:Bar => {}
-   |            ^--- specifying the type of a pattern isn't supported
-   |            |
-   |            expected one of `@` or `|`
-   |
+ at $DIR/issue-87086-colon-path-sep.rs:74:12: expected one of `@` or `|`
+  on line 74, column 13: specifying the type of a pattern isn't supported
 help: maybe write a path separator here
-   |
-LL |         Foo::Bar => {}
-   |             +
+ on line 74, column 11, replace with `::`
 
 error: aborting due to 9 previous errors
 

@@ -1,10 +1,6 @@
 warning: unexpected `cfg` condition value: `_UNEXPECTED_VALUE`
-  --> $DIR/target_feature.rs:16:10
-   |
-LL |     cfg!(target_feature = "_UNEXPECTED_VALUE");
-   |          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-   |
-   = note: expected values for `target_feature` are: `10e60`
+ at $DIR/target_feature.rs:16:10
+note: expected values for `target_feature` are: `10e60`
 `2e3`
 `32s`
 `3e3r1`
@@ -516,8 +512,8 @@ LL |     cfg!(target_feature = "_UNEXPECTED_VALUE");
 `zvl512b`
 `zvl64b`
 `zvl65536b`, and `zvl8192b`
-   = note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg.html> for more information about checking conditional configuration
-   = note: `#[warn(unexpected_cfgs)]` on by default
+note: see <https://doc.rust-lang.org/nightly/rustc/check-cfg.html> for more information about checking conditional configuration
+note: `#[warn(unexpected_cfgs)]` on by default
 
 warning: 1 warning emitted
 

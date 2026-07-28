@@ -1,29 +1,13 @@
-error[E0034]: multiple applicable items in scope
-  --> $DIR/method-ambig-two-traits-from-bounds.rs:5:7
-   |
-LL |     t.foo();
-   |       ^^^ multiple `foo` found
-   |
+error E0034: multiple applicable items in scope
+ at $DIR/method-ambig-two-traits-from-bounds.rs:5:7: multiple `foo` found
 note: candidate #1 is defined in the trait `A`
-  --> $DIR/method-ambig-two-traits-from-bounds.rs:1:11
-   |
-LL | trait A { fn foo(&self); }
-   |           ^^^^^^^^^^^^^^
+ at $DIR/method-ambig-two-traits-from-bounds.rs:1:11
 note: candidate #2 is defined in the trait `B`
-  --> $DIR/method-ambig-two-traits-from-bounds.rs:2:11
-   |
-LL | trait B { fn foo(&self); }
-   |           ^^^^^^^^^^^^^^
+ at $DIR/method-ambig-two-traits-from-bounds.rs:2:11
 help: disambiguate the method for candidate #1
-   |
-LL -     t.foo();
-LL +     A::foo(&t);
-   |
+ on line 5, column 4, replace with `A::foo(&t)`
 help: disambiguate the method for candidate #2
-   |
-LL -     t.foo();
-LL +     B::foo(&t);
-   |
+ on line 5, column 4, replace with `B::foo(&t)`
 
 error: aborting due to 1 previous error
 

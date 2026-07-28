@@ -1,10 +1,6 @@
-error[E0368]: binary assignment operation `+=` cannot be applied to type `&str`
-  --> $DIR/issue-10401.rs:3:5
-   |
-LL |     a += { "b" };
-   |     -^^^^^^^^^^^
-   |     |
-   |     cannot use `+=` on type `&str`
+error E0368: binary assignment operation `+=` cannot be applied to type `&str`
+ at $DIR/issue-10401.rs:3:5
+  on line 3: cannot use `+=` on type `&str`
 
 error: aborting due to 1 previous error
 

@@ -1,35 +1,17 @@
 error: `rustc_attr` is incompatible with `#[rustc_force_inline]`
-  --> $DIR/early-deny.rs:6:1
-   |
-LL | #[rustc_force_inline]
-   | ^^^^^^^^^^^^^^^^^^^^^
-LL |
-LL | pub fn rustc_attr() {}
-   | ------------------- `rustc_attr` defined here
-   |
-   = note: incompatible due to: #[rustc_no_mir_inline]
+ at $DIR/early-deny.rs:6:1
+  on line 8: `rustc_attr` defined here
+note: incompatible due to: #[rustc_no_mir_inline]
 
 error: `cold` is incompatible with `#[rustc_force_inline]`
-  --> $DIR/early-deny.rs:11:1
-   |
-LL | #[rustc_force_inline]
-   | ^^^^^^^^^^^^^^^^^^^^^
-LL |
-LL | pub fn cold() {}
-   | ------------- `cold` defined here
-   |
-   = note: incompatible due to: cold
+ at $DIR/early-deny.rs:11:1
+  on line 13: `cold` defined here
+note: incompatible due to: cold
 
 error: `variadic` is incompatible with `#[rustc_force_inline]`
-  --> $DIR/early-deny.rs:15:1
-   |
-LL | #[rustc_force_inline]
-   | ^^^^^^^^^^^^^^^^^^^^^
-LL |
-LL | pub unsafe extern "C" fn variadic(args: ...) {}
-   | -------------------------------------------- `variadic` defined here
-   |
-   = note: incompatible due to: C variadic
+ at $DIR/early-deny.rs:15:1
+  on line 17: `variadic` defined here
+note: incompatible due to: C variadic
 
 error: aborting due to 3 previous errors
 

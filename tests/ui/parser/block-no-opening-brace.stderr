@@ -1,73 +1,36 @@
 error: expected `{`, found keyword `let`
-  --> $DIR/block-no-opening-brace.rs:9:9
-   |
-LL |     loop
-   |     ---- while parsing this `loop` expression
-LL |         let x = 0;
-   |         ^^^ expected `{`
-   |
+ at $DIR/block-no-opening-brace.rs:9:9: expected `{`
+  on line 8: while parsing this `loop` expression
 help: you might have meant to write this as part of a block
-   |
-LL |         { let x = 0; }
-   |         +            +
+ on line 9, column 8, add `{ `
 
 error: expected `{`, found keyword `let`
-  --> $DIR/block-no-opening-brace.rs:15:9
-   |
-LL |     while true
-   |     ----- ---- this `while` condition successfully parsed
-   |     |
-   |     while parsing the body of this `while` expression
-LL |         let x = 0;
-   |         ^^^ expected `{`
-   |
+ at $DIR/block-no-opening-brace.rs:15:9: expected `{`
+  on line 14: while parsing the body of this `while` expression
+  on line 14, column 11: this `while` condition successfully parsed
 help: you might have meant to write this as part of a block
-   |
-LL |         { let x = 0; }
-   |         +            +
+ on line 15, column 8, add `{ `
 
 error: expected `{`, found keyword `let`
-  --> $DIR/block-no-opening-brace.rs:20:9
-   |
-LL |         let x = 0;
-   |         ^^^ expected `{`
-   |
+ at $DIR/block-no-opening-brace.rs:20:9: expected `{`
 help: you might have meant to write this as part of a block
-   |
-LL |         { let x = 0; }
-   |         +            +
+ on line 20, column 8, add `{ `
 
 error: expected expression, found reserved keyword `try`
-  --> $DIR/block-no-opening-brace.rs:26:5
-   |
-LL |     try
-   |     ^^^ expected expression
+ at $DIR/block-no-opening-brace.rs:26:5: expected expression
 
 error: expected one of `move`, `use`, `{`, `|`, or `||`, found keyword `let`
-  --> $DIR/block-no-opening-brace.rs:32:9
-   |
-LL |     async
-   |          - expected one of `move`, `use`, `{`, `|`, or `||`
-LL |         let x = 0;
-   |         ^^^ unexpected token
+ at $DIR/block-no-opening-brace.rs:32:9: unexpected token
+  on line 31, column 10: expected one of `move`, `use`, `{`, `|`, or `||`
 
 error: expected expression, found keyword `const`
-  --> $DIR/block-no-opening-brace.rs:38:13
-   |
-LL |     let x = const 2;
-   |             ^^^^^ expected expression
+ at $DIR/block-no-opening-brace.rs:38:13: expected expression
 
 error: expected identifier, found keyword `const`
-  --> $DIR/block-no-opening-brace.rs:45:9
-   |
-LL |         const 2 => {}
-   |         ^^^^^ expected identifier, found keyword
+ at $DIR/block-no-opening-brace.rs:45:9: expected identifier, found keyword
 
 error: expected one of `=>`, `if`, or `|`, found `2`
-  --> $DIR/block-no-opening-brace.rs:45:15
-   |
-LL |         const 2 => {}
-   |               ^ expected one of `=>`, `if`, or `|`
+ at $DIR/block-no-opening-brace.rs:45:15: expected one of `=>`, `if`, or `|`
 
 error: aborting due to 8 previous errors
 

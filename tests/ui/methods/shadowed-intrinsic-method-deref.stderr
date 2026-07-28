@@ -1,19 +1,12 @@
-error[E0277]: the trait bound `Rc<RefCell<S>>: Borrow<S>` is not satisfied
-  --> $DIR/shadowed-intrinsic-method-deref.rs:16:22
-   |
-LL |     let sb : &S = &s.borrow();
-   |                      ^^^^^^ the trait `Borrow<S>` is not implemented for `Rc<RefCell<S>>`
-   |
+error E0277: the trait bound `Rc<RefCell<S>>: Borrow<S>` is not satisfied
+ at $DIR/shadowed-intrinsic-method-deref.rs:16:22: the trait `Borrow<S>` is not implemented for `Rc<RefCell<S>>`
 help: the trait `Borrow<S>` is not implemented for `Rc<RefCell<S>>`
       but trait `Borrow<RefCell<S>>` is implemented for it
-  --> $SRC_DIR/alloc/src/rc.rs:LL:COL
-   = help: for that trait implementation, expected `RefCell<S>`, found `S`
-   = note: there's an inherent method on `RefCell<S>` of the same name, which can be auto-dereferenced from `&RefCell<T>`
+ at $SRC_DIR/alloc/src/rc.rs:LL:COL
+help: for that trait implementation, expected `RefCell<S>`, found `S`
+note: there's an inherent method on `RefCell<S>` of the same name, which can be auto-dereferenced from `&RefCell<T>`
 help: to access the inherent method on `RefCell<S>`, use the fully-qualified path
-   |
-LL -     let sb : &S = &s.borrow();
-LL +     let sb : &S = &RefCell::borrow(&s);
-   |
+ on line 16, column 19, add `RefCell::borrow(&`
 
 error: aborting due to 1 previous error
 

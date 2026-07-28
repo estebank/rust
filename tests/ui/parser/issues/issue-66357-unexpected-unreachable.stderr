@@ -1,11 +1,7 @@
 error: mismatched closing delimiter: `}`
-  --> $DIR/issue-66357-unexpected-unreachable.rs:12:13
-   |
-LL | fn f() { |[](* }
-   |        -    ^  ^ mismatched closing delimiter
-   |        |    |
-   |        |    unclosed delimiter
-   |        closing delimiter possibly meant for this
+ at $DIR/issue-66357-unexpected-unreachable.rs:12:13: unclosed delimiter
+  on line 12, column 16: mismatched closing delimiter
+  on line 12, column 8: closing delimiter possibly meant for this
 
 error: aborting due to 1 previous error
 

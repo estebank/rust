@@ -1,8 +1,5 @@
-error[E0308]: mismatched types
-  --> $DIR/issue-50577.rs:3:16
-   |
-LL |         Drop = assert_eq!(1, 1),
-   |                ^^^^^^^^^^^^^^^^ expected `isize`, found `()`
+error E0308: mismatched types
+ at $DIR/issue-50577.rs:3:16: expected `isize`, found `()`
 
 error: aborting due to 1 previous error
 

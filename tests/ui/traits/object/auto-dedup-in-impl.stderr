@@ -1,11 +1,6 @@
-error[E0592]: duplicate definitions with name `test`
-  --> $DIR/auto-dedup-in-impl.rs:14:5
-   |
-LL |     fn test(&self) { println!("one"); }
-   |     ^^^^^^^^^^^^^^ duplicate definitions for `test`
-...
-LL |     fn test(&self) { println!("two"); }
-   |     -------------- other definition for `test`
+error E0592: duplicate definitions with name `test`
+ at $DIR/auto-dedup-in-impl.rs:14:5: duplicate definitions for `test`
+  on line 18: other definition for `test`
 
 error: aborting due to 1 previous error
 

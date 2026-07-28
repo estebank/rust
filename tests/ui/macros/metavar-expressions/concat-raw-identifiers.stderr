@@ -1,95 +1,48 @@
 error: expected identifier or string literal
-  --> $DIR/concat-raw-identifiers.rs:28:22
-   |
-LL |         let ${concat(r#abc, abc)}: () = ();
-   |                      ^^^^^
+ at $DIR/concat-raw-identifiers.rs:28:22
 
 error: expected identifier or string literal
-  --> $DIR/concat-raw-identifiers.rs:32:27
-   |
-LL |         let ${concat(abc, r#abc)}: () = ();
-   |                           ^^^^^
+ at $DIR/concat-raw-identifiers.rs:32:27
 
 error: expected identifier or string literal
-  --> $DIR/concat-raw-identifiers.rs:35:22
-   |
-LL |         let ${concat(r#abc, r#abc)}: () = ();
-   |                      ^^^^^
+ at $DIR/concat-raw-identifiers.rs:35:22
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:5:28
-   |
-LL |         let ${concat(abc, $rhs)}: () = ();
-   |                            ^^^
+ at $DIR/concat-raw-identifiers.rs:5:28
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:12:23
-   |
-LL |         let ${concat($lhs, abc)}: () = ();
-   |                       ^^^
+ at $DIR/concat-raw-identifiers.rs:12:23
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:19:23
-   |
-LL |         let ${concat($lhs, $rhs)}: () = ();
-   |                       ^^^
+ at $DIR/concat-raw-identifiers.rs:19:23
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:19:29
-   |
-LL |         let ${concat($lhs, $rhs)}: () = ();
-   |                             ^^^
+ at $DIR/concat-raw-identifiers.rs:19:29
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:19:23
-   |
-LL |         let ${concat($lhs, $rhs)}: () = ();
-   |                       ^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/concat-raw-identifiers.rs:19:23
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:42:28
-   |
-LL |         let ${concat(abc, $rhs)}: () = ();
-   |                            ^^^
+ at $DIR/concat-raw-identifiers.rs:42:28
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:49:23
-   |
-LL |         let ${concat($lhs, abc)}: () = ();
-   |                       ^^^
+ at $DIR/concat-raw-identifiers.rs:49:23
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:56:23
-   |
-LL |         let ${concat($lhs, $rhs)}: () = ();
-   |                       ^^^
+ at $DIR/concat-raw-identifiers.rs:56:23
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:56:29
-   |
-LL |         let ${concat($lhs, $rhs)}: () = ();
-   |                             ^^^
+ at $DIR/concat-raw-identifiers.rs:56:29
 
 error: `${concat(..)}` currently does not support raw identifiers
-  --> $DIR/concat-raw-identifiers.rs:56:23
-   |
-LL |         let ${concat($lhs, $rhs)}: () = ();
-   |                       ^^^
-   |
-   = note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
+ at $DIR/concat-raw-identifiers.rs:56:23
+note: duplicate diagnostic emitted due to `-Z deduplicate-diagnostics=no`
 
 error: expected pattern, found `$`
-  --> $DIR/concat-raw-identifiers.rs:28:13
-   |
-LL |         let ${concat(r#abc, abc)}: () = ();
-   |             ^ expected pattern
-...
-LL |     no_params!();
-   |     ------------ in this macro invocation
-   |
-   = note: this error originates in the macro `no_params` (in Nightly builds, run with -Z macro-backtrace for more info)
+ at $DIR/concat-raw-identifiers.rs:28:13: expected pattern
+  on line 80: in this macro invocation
+note: this error originates in the macro `no_params` (in Nightly builds, run with -Z macro-backtrace for more info)
 
 error: aborting due to 14 previous errors
 

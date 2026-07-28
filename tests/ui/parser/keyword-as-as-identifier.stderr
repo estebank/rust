@@ -1,13 +1,7 @@
 error: expected identifier, found keyword `as`
-  --> $DIR/keyword-as-as-identifier.rs:4:9
-   |
-LL |     let as = "foo";
-   |         ^^ expected identifier, found keyword
-   |
+ at $DIR/keyword-as-as-identifier.rs:4:9: expected identifier, found keyword
 help: escape `as` to use it as an identifier
-   |
-LL |     let r#as = "foo";
-   |         ++
+ on line 4, column 8, add `r#`
 
 error: aborting due to 1 previous error
 
