@@ -773,6 +773,8 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
     /// Resolves all imports for the crate. This method performs the fixed-
     /// point iteration.
     pub(crate) fn resolve_imports(&mut self) {
+        // HERE: check if the imported module is marked by mods_with_parse_errors, and if so,
+        // mark_scope_with_compile_error.
         let mut prev_indeterminate_count = usize::MAX;
         let mut indeterminate_count = self.indeterminate_imports.len() * 3;
         while indeterminate_count < prev_indeterminate_count {
@@ -834,6 +836,13 @@ impl<'ra, 'tcx> Resolver<'ra, 'tcx> {
             else {
                 continue;
             };
+            if let ModuleOrUniformRoot::Module(module) = imported_module
+                && self.mods_with_parse_errors.contains(&module.def_id())
+                && let Some(id) = import.id()
+                && let Some(id) = self.owners.get(&id).map(|i| i.def_id)
+            {
+                self.mods_with_parse_errors.insert(id.into());
+            }
 
             match (&import.kind, resolution_kind) {
                 (
